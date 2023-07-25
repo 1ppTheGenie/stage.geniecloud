@@ -1,0 +1,12 @@
+#hometypes-choice {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 50%;
+	margin: 2rem auto;
+}
+@media (max-width: 950px) {
+	#hometypes-choice {
+		flex-direction: column;
+	}
+}

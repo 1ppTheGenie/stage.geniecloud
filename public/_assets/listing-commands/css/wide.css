@@ -1,0 +1,85 @@
+body {
+	font-size: 34px;
+}
+
+h1 {
+	font-size: 72px;
+	line-height: 100px;
+}
+
+h2 {
+	font-size: 60px;
+	line-height: 85px;
+}
+
+h3 {
+	font-size: 45px;
+	line-height: 58px;
+}
+
+div.banner,
+div.advert {
+	padding: 10vh 25vw 15vh;
+	height: 74.6vh;
+}
+
+div.banner div.address,
+div.banner div.address span {
+	flex-direction: row;
+}
+
+/* div.profile {
+	height: 140px;
+	width: 140px;
+	top: 70vh;
+	left: calc(50vw - 10vh);
+} */
+
+div.section {
+	padding-top: 12.5vh;
+	padding-bottom: 12.5vh;
+}
+
+div.section div.section-grid div.post {
+	flex-basis: 25%;
+}
+
+div.section div.section-grid div.post img,
+div.section div.section-grid div.post svg,
+div.section div.section-grid div.post div.overlap {
+	width: auto;
+	height: 12.5vw;
+}
+
+div.section div.section-grid div.post img.icon {
+	height: 4.5vw;
+	margin: 4vw;
+	box-shadow: none;
+}
+
+div.section div.section-grid div.overlap img {
+	height: 7.5vw;
+	max-width: 15vw;
+	max-height: 15vh;
+}
+
+div.section div.section-grid div.post span {
+	width: 2.5vw;
+	height: 2.5vw;
+}
+
+div.advert {
+	height: fit-content;
+	padding-top: 5vh;
+	padding-bottom: 10vh;
+}
+
+footer p {
+	font-size: 50%;
+	flex-basis: 75%;
+}
+
+footer img {
+	flex-basis: 10%;
+	width: 10%;
+}

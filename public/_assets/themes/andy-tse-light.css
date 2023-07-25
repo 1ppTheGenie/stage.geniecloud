@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Andy Tse
+	Theme Style: Light        
+*/
+
+@import url("../_css/helvetica-neue.css");
+@import url("../_css/open-sans.css");
+
+.andy-tse-light {
+	--theme-body-background: #f5f6f6;
+	--theme-heading-color: #fdb913; /* Heading */
+	--theme-sub-heading-color: #2c3740; /* Subtitle */
+	--theme-body-color: #000000; /* Body */
+	--theme-emphasis-color:#2c3740; /* Outline */
+	--theme-body-font:"Open Sans", sans-serif;
+	--theme-heading-font: "Helvetica Neue";
+	--theme-sub-heading-font: "Helvetica Neue";
+}

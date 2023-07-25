@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Glen and Kelly Nelson
+	Theme Style: Light
+*/
+
+@import url("../_css/code-pro.css");
+
+.glen-and-kelly-nelson-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #333333; /* Heading */
+	--theme-sub-heading-color: #d9a329; /* Subtitle */
+	--theme-body-color: #9ba6b2; /* Body */
+	--theme-emphasis-color: #333333; /* Outline */
+	--theme-body-font: "Code Pro";
+	--theme-heading-font: "Code Pro";
+	--theme-sub-heading-font: "Code Pro";
+}

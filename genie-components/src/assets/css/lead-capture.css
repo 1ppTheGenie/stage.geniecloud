@@ -1,0 +1,76 @@
+.lead-capture-form {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.lead-capture-form::before,
+.lead-capture-form::after {
+	display: none;
+}
+
+.lead-capture-form > * {
+	margin: 0.5rem auto;
+}
+
+.lead-capture-form > em {
+	font-size: 80%;
+	flex-basis: 100%;
+}
+
+.lead-capture-form > div {
+	flex-basis: 100%;
+}
+
+.lead-capture-form input[type="text"],
+.lead-capture-form input[type="email"] {
+	flex: 0 0 47.5%;
+	padding: 1rem;
+	box-sizing: border-box;
+	background-color: var(--theme-heading-color);
+	color: var(--theme-body-background);
+	border-style: none;
+	border-radius: 5px;
+	outline: none;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.lead-capture-form input[type="text"]::placeholder,
+.lead-capture-form input[type="email"]::placeholder {
+	color: var(--theme-body-background);
+	opacity: 0.8;
+}
+
+.lead-capture-form button {
+	background-color: var(--theme-heading-color);
+	border-style: none;
+	font-size: 115%;
+	color: var(--theme-body-background);
+	padding: 1rem 3.5rem;
+	border-radius: 35px;
+	font-weight: bold;
+	border: 2px solid var(--theme-body-color);
+	text-transform: uppercase;
+	margin: 0.5rem auto;
+	cursor: pointer;
+	transition: opacity 0.25s linear;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-wrap: nowrap;
+}
+
+.lead-capture-form button svg {
+	--theme-heading-color: var(--theme-body-background);
+}
+
+.lead-capture-form button:hover {
+	opacity: 0.8;
+}
+
+.lead-capture-notify {
+	text-align: left;
+}

@@ -1,0 +1,50 @@
+:root {
+	--theme-body-background: #fff;
+	--theme-heading-color: #e29578;
+	--theme-sub-heading-color: #83c5be;
+	--theme-body-color: #006d77;
+	--theme-emphasis-color: #83c5be;
+	--theme-body-font: "Montserrat", "sans-serif";
+	--theme-heading-font: var(--theme-body-font);
+	--theme-sub-heading-font: var(--theme-body-font);
+	--theme-font-size: 100%;
+
+	--geo-fill: var(--theme-heading-color);
+	--geo-border: var(--theme-heading-color);
+
+	--printers-marks: #000;
+	--genie-chart-stroke: #0003;
+
+	--theme-bold: 700;
+	--theme-super-bold: 900;
+
+	--vivid-banner: #4ee4e5;
+
+	--vivid-color-1: #3a9fd5;
+	--vivid-color-2: #ff5685;
+	--vivid-color-3: #3ee21f;
+	--vivid-color-4: #65c5ff;
+	--vivid-color-5: #eeb84b;
+
+	--vivid-dark-1: #236892;
+	--vivid-dark-2: #bf3e64;
+	--vivid-dark-3: #22b505;
+	--vivid-dark-4: #3c8ebe;
+	--vivid-dark-5: #b07f32;
+
+	--vivid-end-1: #1c6fb1;
+	--vivid-end-2: #ff205f;
+	--vivid-end-3: #23d801;
+	--vivid-end-4: #22b4ff;
+	--vivid-end-5: #e3a035;
+
+	--description-line-limit: 4;
+
+	--pending-yellow: #faac20;
+	--sold-red: #b21f23;
+	--active-green: #6a973e;
+	--new-blue: #1c6fb1;
+
+	--theme-gradient-stop2: var(--theme-sub-heading-color);
+	--theme-gradient-stop3: var(--theme-sub-heading-color);
+}

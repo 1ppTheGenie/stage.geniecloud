@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Douglas Elliman 
+	Theme Style: Dark             
+*/
+
+@import url("../_css/helvetica-neue.css");
+
+.douglas-elliman-dark {
+	--theme-body-background: #53565a;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #009cbd; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #009cbd; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Helvetica Neue", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

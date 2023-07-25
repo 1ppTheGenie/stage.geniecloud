@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Peter Middleton   
+	Theme Style: Dark          
+*/
+
+@import url("../_css/helvetica-neue.css");
+
+.peter-middleton-dark {
+	--theme-body-background: #1a1a1a;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #86764f; /* Subtitle */
+	--theme-body-color: #f0f4f5; /* Body */
+	--theme-emphasis-color: #86764f; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Helvetica Neue", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

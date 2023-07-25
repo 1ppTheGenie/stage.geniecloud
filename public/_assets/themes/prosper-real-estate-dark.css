@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Prosper Real Estate
+	Theme Style: Dark        
+*/
+
+@import url("../_css/myriad-pro-condensed.css");
+@import url("../_css/open-sans.css");
+
+.prosper-real-estate-dark {
+	--theme-body-background: #14334d;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #9ec0e5; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #9ec0e5; /* Outline */
+	--theme-body-font: "Open Sans", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
+}

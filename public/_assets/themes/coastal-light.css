@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Coastal 
+	Theme Style: Light        
+*/
+
+@import url("../_css/lato.css");
+@import url("../_css/myriad-pro-condensed.css");
+
+.coastal-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #3b3d41; /* Heading */
+	--theme-sub-heading-color: #3193c2; /* Subtitle */
+	--theme-body-color: #7d7e81; /* Body */
+	--theme-emphasis-color: #3193c2; /* Outline */	
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+    --theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-body-font: "Lato", sans-serif;
+}

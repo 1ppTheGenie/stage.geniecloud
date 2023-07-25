@@ -1,0 +1,21 @@
+/*
+	Theme Name:	Real
+	Theme Style: Light
+*/
+
+@import url("../_css/din-next-font.css");
+
+.real-light {
+    --theme-body-background: #ffffff;
+    --theme-heading-color: #05C3F9;
+    /* Heading */
+    --theme-sub-heading-color: #F84C6C;
+    /* Subtitle */
+    --theme-body-color: #3E3F3C;
+    /* Body */
+    --theme-emphasis-color: #F84C6C;
+    /* Outline */
+    --theme-body-font: "DINNextLTPro-Regular";
+    --theme-heading-font: "DINNextLTPro-Regular";
+    --theme-sub-heading-font: "DINNextLTPro-Regular";
+}

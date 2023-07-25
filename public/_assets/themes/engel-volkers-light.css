@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Engel & Volkers  
+	Theme Style: Light           
+*/
+
+@import url("../_css/helvetica-neue.css");
+
+.engel-volkers-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #444444; /* Heading */
+	--theme-sub-heading-color: #ff0000; /* Subtitle */
+	--theme-body-color: #666666; /* Body */
+	--theme-emphasis-color: #ff0000; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Helvetica Neue", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

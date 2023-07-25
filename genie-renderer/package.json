@@ -1,0 +1,27 @@
+{
+	"name": "genie-direct",
+	"version": "2.0.0",
+	"description": "Processing script for the creation of image/PDF assets from GenieHub. v2.0.0",
+	"main": "index.js",
+	"scripts": {
+		"preaws": "node build.mjs && tar -a -c -f genie-direct.zip ./build/index.js",
+		"create": "aws lambda create-function --function-name genie-direct --runtime nodejs14.x --zip-file fileb://genie-direct.zip --handler ./build/index.direct ",
+		"add-layers": "aws lambda update-function-configuration --function-name genie-direct ",
+		"aws": "aws lambda update-function-code --function-name genie-direct --zip-file fileb://genie-direct.zip"
+	},
+	"keywords": [],
+	"author": "Dynamic Array Ltd",
+	"license": "ISC",
+	"dependencies": {
+		"@aws-sdk/client-s3": "^3.332.0",
+		"@aws-sdk/client-sqs": "^3.332.0",
+		"pdf-lib": "^1.17.1",
+		"puppeteer-core": "^20.1.0",
+		"sharp": "^0.32.1"
+	},
+	"devDependencies": {
+		"@sparticuz/chromium": "^113.0.1",
+		"esbuild": "^0.17.19",
+		"global": "^4.4.0"
+	}
+}

@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;600&display=swap");
+body {
+	font-family: "Oswald", sans-serif;
+}
+
+body > * {
+	margin: 2rem;
+	background-color: #eee;
+}
+h1 {
+	font-weight: 600;
+	font-size: 110%;
+	margin: 0.1rem;
+}
+p > span {
+	font-weight: 400;
+}
+#genie-themes {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	font-weight: 200;
+}
+#genie-themes > div {
+	flex-basis: 22%;
+	flex-grow: 0;
+	flex-shrink: 0;
+	margin-bottom: 1rem;
+}
+
+.genie-asset-background {
+	width: 380px;
+	padding: 0.5rem 0.25rem;
+	text-align: center;
+	background-color: var(--theme-body-background);
+	color: var(--theme-heading-color);
+	font-family: var(--theme-font-3);
+	font-size: 100%;
+}
+
+.genie-asset-background:hover {
+	filter: grayscale(30%) blur(2px);
+	transition: 0.3s ease-in-out;
+	cursor: pointer;
+}
+.genie-asset-outline {
+	border-style: solid;
+	border-width: 1px;
+	border-color: var(--theme-color-4);
+	margin: 25px;
+	padding: 15px;
+}
+.genie-asset-heading {
+	font-size: 2em;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-family: var(--theme-body-font);
+}
+.genie-asset-subtitle {
+	color: var(--theme-sub-heading-color);
+	text-transform: none;
+	font-weight: 400;
+	font-size: 1.2em;
+	margin: 0.25em 0 0.75em;
+	font-family: var(--theme-sub-heading-font);
+}
+.genie-asset-body {
+	color: var(--theme-body-color);
+}
+
+.genie-asset-body {
+	line-height: 1.6;
+}
+#filter {
+	padding: 0.5rem;
+	min-width: 300px;
+	border-radius: 5px;
+	border: 1px solid #666;
+}

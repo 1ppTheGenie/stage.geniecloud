@@ -1,0 +1,27 @@
+@font-face {
+	font-family: "Conv_MinionPro-ItCapt";
+	src: url("../_fonts/MinionPro-ItCapt.eot");
+	src: local("☺"), url("../_fonts/MinionPro-ItCapt.woff") format("woff"),
+		url("../_fonts/MinionPro-ItCapt.ttf") format("truetype"),
+		url("../_fonts/MinionPro-ItCapt.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Conv_MinionPro-It";
+	src: url("../_fonts/MinionPro-It.eot");
+	src: local("☺"), url("../_fonts/MinionPro-It.woff") format("woff"),
+		url("../_fonts/MinionPro-It.ttf") format("truetype"),
+		url("../_fonts/MinionPro-It.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Conv_MinionPro-BoldCnCapt";
+	src: url("../_fonts/MinionPro-BoldCnCapt.eot");
+	src: local("☺"), url("../_fonts/MinionPro-BoldCnCapt.woff") format("woff"),
+		url("../_fonts/MinionPro-BoldCnCapt.ttf") format("truetype"),
+		url("../_fonts/MinionPro-BoldCnCapt.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}

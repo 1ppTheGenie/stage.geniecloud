@@ -1,0 +1,155 @@
+{
+	"version": 3,
+	"name": "Kitchen Sink Direct Mail",
+	"sections": [
+		{
+			"name": "Direct Mail",
+			"meta": [],
+			"assets": [
+				{ "asset": "direct-mail/ed-kaminsky-combined-1" },
+				{ "asset": "direct-mail/ed-kaminsky-combined-2" },
+				{ "asset": "direct-mail/ed-kaminsky-combined-3" },
+				{ "asset": "direct-mail/ed-kaminsky-combined-4" },
+				{
+					"asset": "direct-mail/ed-kaminsky-postcard-2022-1-postage-side"
+				},
+				{
+					"asset": "direct-mail/ed-kaminsky-postcard-2022-1"
+				},
+				{
+					"asset": "direct-mail/ed-kaminsky-postcard-2022-2"
+				},
+				{
+					"asset": "direct-mail/ed-kaminsky-postcard-2022-3"
+				},
+				{
+					"asset": "direct-mail/ed-kaminsky-postcard-2022-4"
+				},
+				{ "asset": "direct-mail/qr-code-postcard-2022-1" },
+				{ "asset": "direct-mail/qr-code-postcard-2022-2" },
+				{ "asset": "direct-mail/qr-code-postcard-2022-3" },
+				{ "asset": "direct-mail/qr-code-postcard-2022-4" },
+				{ "asset": "direct-mail/qr-code-postcard-2022-5" },
+				{ "asset": "direct-mail/qr-code-postcard-2022-6" },
+				{ "asset": "direct-mail/qr-code-postcard-2022-7" },
+				{
+					"asset": "direct-mail/qr-code-postcard-2022-postage-side-1"
+				},
+				{
+					"asset": "direct-mail/qr-code-postcard-combine-2022-1"
+				},
+				{
+					"asset": "direct-mail/qr-code-postcard-combine-2022-2"
+				},
+				{
+					"asset": "direct-mail/qr-code-postcard-combine-2022-3"
+				},
+				{
+					"asset": "direct-mail/qr-code-postcard-combine-2022-4"
+				},
+				{
+					"asset": "direct-mail/qr-code-postcard-combine-2022-5"
+				},
+				{
+					"asset": "direct-mail/qr-code-postcard-combine-2022-6"
+				},
+				{
+					"asset": "direct-mail/qr-code-postcard-combine-2022-7"
+				},
+				{ "asset": "direct-mail/coit-mailer-combined" },
+				{ "asset": "direct-mail/direct-mail-fun-facts" },
+				{
+					"asset": "direct-mail/direct-mail-whats-trending-postage-light-1"
+				},
+				{
+					"asset": "direct-mail/direct-mail-whats-trending-postage-light-combine"
+				},
+				{
+					"asset": "direct-mail/krg-coming-soon-content-side"
+				},
+				{
+					"asset": "direct-mail/krg-double-photo-content-combine"
+				},
+				{
+					"asset": "direct-mail/krg-double-photo-content-side"
+				},
+				{ "asset": "direct-mail/krg-market-insider-combine" },
+				{
+					"asset": "direct-mail/krg-market-insider-content-side"
+				},
+				{ "asset": "direct-mail/krg-postage-side" },
+				{
+					"asset": "direct-mail/krg-single-photo-content-combine"
+				},
+				{
+					"asset": "direct-mail/krg-single-photo-content-side"
+				},
+				{ "asset": "direct-mail/tracy-phillips-combined" },
+				{
+					"asset": "direct-mail/tracy-phillips-qr-code-content-side"
+				},
+				{
+					"asset": "direct-mail/tracy-phillips-qr-code-postage-side"
+				},
+				{ "asset": "direct-mail/single-listing-1" },
+				{ "asset": "direct-mail/single-listing-2-style-5" },
+				{ "asset": "direct-mail/single-listing-2" },
+				{ "asset": "direct-mail/single-listing-3" },
+				{ "asset": "direct-mail/single-listing-4" },
+				{ "asset": "direct-mail/single-listing-5" },
+				{ "asset": "direct-mail/cush-content-side-combined" },
+				{
+					"asset": "direct-mail/cush-market-insider-combined"
+				},
+				{ "asset": "direct-mail/cush-market-insider-side" },
+				{ "asset": "direct-mail/cush-postage-side" },
+				{ "asset": "direct-mail/cush-single-content-side" },
+				{ "asset": "direct-mail/test" },
+				{ "asset": "direct-mail/test2" },
+				{
+					"asset": "direct-mail/tse-saratoga-sold-cookie-jar-back"
+				},
+				{
+					"asset": "direct-mail/tse-saratoga-sold-cookie-jar-combine"
+				},
+				{
+					"asset": "direct-mail/tse-saratoga-sold-cookie-jar-front"
+				},
+				{ "asset": "direct-mail/would-you-be-seller-mail-1" },
+				{
+					"asset": "direct-mail/would-you-be-seller-mail-test"
+				},
+				{ "asset": "direct-mail/would-you-be-seller-mail" },
+				{ "asset": "direct-mail/your-neighbors-house" },
+				{
+					"asset": "direct-mail/coit-mailer-front"
+				},
+				{
+					"asset": "direct-mail/direct-mail-10"
+				},
+				{
+					"asset": "direct-mail/direct-mail-11"
+				},
+				{
+					"asset": "direct-mail/whats-trending"
+				},
+				{
+					"asset": "direct-mail/single-listing"
+				},
+				{
+					"asset": "direct-mail/your-neighbors-house"
+				},
+				{
+					"asset": "direct-mail/qr-code-postage-card"
+				},
+				{
+					"asset": "direct-mail/coit-mailer-back"
+				},
+				{
+					"asset": "direct-mail/direct-mail-01"
+				}
+			]
+		}
+	],
+	"template": "marketing-steps-lc1"
+}

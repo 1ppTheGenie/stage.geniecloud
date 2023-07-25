@@ -1,0 +1,22 @@
+{
+	"name": "genie-processor",
+	"version": "1.0.1",
+	"description": "XSLT processing of Genie assets",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"preaws": "node build.mjs && tar -a -c -f genie-xslt.zip ./build/index.js",
+		"aws": "aws lambda update-function-code --function-name GenieXSLT --zip-file fileb://genie-xslt.zip"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"saxon-js": "^2.5.0",
+		"@aws-sdk/client-s3": "^3.347.1"
+	},
+	"devDependencies": {
+		"esbuild": "^0.18.4",
+		"esbuild-plugin-alias-path": "^2.0.2",
+		"esbuild-plugin-path-alias": "^1.0.7"
+	}
+}

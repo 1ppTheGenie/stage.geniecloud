@@ -1,0 +1,166 @@
+.selling-info-wraper {
+    background: unset;
+    max-width: 80%;
+    position: relative;
+    border: 0;
+    min-height: unset;
+    box-shadow: 0 0 14px 2px rgb(0 0 0 / 20%);
+    height: auto;
+}
+
+.selling-information h3.home-value-area-info p {
+    font-size: 35px;
+}
+
+.banner-top-section-info section.step1 {
+    padding: 60px 0 150px;
+
+}
+
+h4.home-value-area-price-info {
+    font-size: 6.1em;
+    z-index: 9;
+    position: relative;
+    line-height: 73%;
+}
+
+.selling-information h3.home-value-area-info {
+    font-size: 2.2em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    font-weight: bold;
+    line-height: 120%;
+    text-align: center;
+}
+
+.banner-top-section-info section.step1 > .container {
+    padding-bottom: 5%;
+}
+
+
+.selling-information > svg {
+    max-width: 90px;
+    display: block;
+    margin: 0 auto 25px;
+}
+
+.graph-image img {
+    left: 0;
+    width: 100%;
+    max-width: 410px;
+    bottom: 50px;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    opacity: 0.3;
+}
+
+.home-values-bottom-bar {
+    padding: 20px 18px 10px;
+    border-top: 2px solid #8c0a0e;
+    border-bottom: 2px solid #8c0a0e;
+    position: relative;
+}
+
+.home-values-bottom-bar:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    border-radius: 70px;
+    bottom: 0;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 15%, rgba(255, 255, 255, 0.3533788515406162) 54%, rgba(255, 255, 255, 0.4206057422969187) 62%, rgba(255, 255, 255, 0) 89%);
+}
+
+
+.home-values-bottom-bar h5 {
+    font-size: 2.0em;
+    position: relative;
+}
+
+.angle-group {
+    display: flex;
+    justify-content: space-evenly;
+    z-index: 9;
+    position: relative;
+    max-width: 90%;
+    margin: auto;
+}
+
+.angle-group svg {
+    width: 40px;
+}
+
+h4.home-value-area-price-info span.past-months {
+    font-size: 0.2em;
+    display: block;
+    line-height: 270%;
+    text-align: right;
+    position: relative;
+    vertical-align: text-top;
+    border-bottom: 0;
+}
+
+div a.request-home-value {
+    width: auto;
+}
+
+.home-value-other-text-info .home-value-knowning-info {
+    margin-bottom: 30px;
+}
+@media (max-width:991px){
+    .get-my-report-info-btn a.btn {
+        font-size: 18px;
+        padding: 17px 22px;
+    }
+}
+@media (max-width:768px){
+    h4.home-value-area-price-info{
+        line-height: 120%;
+    }
+}
+    
+
+@media (max-width:767px) {
+
+    .selling-info-wraper {
+        max-width: 90%;
+        margin: 0 auto 30px;
+    }
+}
+
+@media (max-width:575px) {
+
+    .selling-information h3.home-value-area-info,
+    .selling-information h3.home-value-area-info p {
+        font-size: 21px;
+    }
+
+
+    h4.home-value-area-price-info {
+        font-size: 4.1em;
+        margin-bottom: 10px;
+    }
+
+    .banner-top-section-info section.step1 {
+        padding: 60px 0 60px;
+    }
+
+    .funnel-market-insider-instant-download h1.main-title-info p {
+        font-size: 22px;
+    }
+
+    .selling-information > svg {
+        width: 70px;
+    }
+
+    .graph-image img {
+        bottom: 34px;
+    }
+
+    .angle-group svg {
+        width: 26px;
+    }
+}

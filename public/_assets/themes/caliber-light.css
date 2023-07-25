@@ -1,0 +1,19 @@
+/*
+	Theme Name:	Caliber  
+	Theme Style: Light       
+*/
+
+@import url("../_css/helvetica-neue.css");
+@import url("../_css/montserrat.css");
+@import url("../_css/myriad-pro-condensed.css");
+
+.caliber-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #263975; /* Heading */
+	--theme-sub-heading-color: #304c78; /* Subtitle */
+	--theme-body-color: #5e6e8f; /* Body */
+	--theme-emphasis-color: #a0a9c1; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

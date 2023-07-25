@@ -1,0 +1,19 @@
+/*
+	Theme Name:	Spyglass
+	Theme Style: Light     
+*/
+
+@import url("../_css/helvetica-neue.css");
+@import url("../_css/helvetica-neue-condensed.css");
+
+.spyglass-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #f56b00; /* Heading */
+	--theme-sub-heading-color: #252525; /* Subtitle */
+	--theme-body-color: #000000; /* Body */
+	--theme-emphasis-color: #000000; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+	--theme-emphasis-color: #f5b483;
+}

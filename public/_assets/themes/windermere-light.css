@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Windermere
+	Theme Style: Light        
+*/
+
+@import url("../_css/helvetica-neue.css");
+@import url("../_css/helvetica-neue-condensed.css");
+
+.windermere-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #003057; /* Heading */
+	--theme-sub-heading-color: #333333; /* Subtitle */
+	--theme-body-color: #707372; /* Body */
+	--theme-emphasis-color: #003057; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

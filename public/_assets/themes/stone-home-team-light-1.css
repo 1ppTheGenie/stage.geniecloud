@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Stone Home Team
+	Theme Style: Light        
+*/
+
+@import url("../_css/lato.css");
+
+.stone-home-team-light-1 {
+	--theme-body-background: #fff;
+	--theme-heading-color: #b40101; /* Heading */
+	--theme-sub-heading-color: #000000; /* Subtitle */
+	--theme-body-color: #999999; /* Body */
+	--theme-emphasis-color: #cccccc; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

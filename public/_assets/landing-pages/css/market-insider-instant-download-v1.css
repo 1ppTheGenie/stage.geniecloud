@@ -1,0 +1,236 @@
+/*new css for V1*/
+
+.banner-top-section-info section.step1 {
+    padding: 100px 0 0;
+}
+
+
+fl-img-holder img {
+    width: 100%;
+}
+
+.areaname-info {
+    position: absolute;
+    top: 40.4%;
+    left: 0.7%;
+    font-size: 15px;
+    max-width: 21%;
+    min-width: 180px;
+    line-height: 130%;
+    color: #6a963c;
+    transform: rotate(337deg) skew(351deg);
+    -webkit-transform: rotate(337deg) skew(351deg);
+    -moz-transform: rotate(337deg) skew(351deg);
+    -ms-transform: rotate(337deg) skew(351deg);
+    -o-transform: rotate(337deg) skew(351deg);
+    font-weight: bold;
+}
+
+.areaname-info.sold-listing {
+    left: 44.5%;
+    top: 15.5%;
+    color: #ed1d22;
+    transform: rotate(345deg) skew(16deg);
+    -webkit-transform: rotate(345deg) skew(16deg);
+    -moz-transform: rotate(345deg) skew(16deg);
+    -ms-transform: rotate(345deg) skew(16deg);
+    -o-transform: rotate(345deg) skew(16deg);
+    font-size: 14px;
+}
+
+.home-value-request-for-report .call-to-action-content {
+
+    padding: 50px 40px;
+    margin: -50px auto;
+    box-shadow: 0px 50px 50px #0000003d;
+    position: relative;
+    z-index: 9;
+}
+
+.request-home-value-report > a > svg {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 180%;
+    font-size: 17px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 3px;
+}
+
+.request-home-value-report > a .btn-content-info {
+    line-height: 140%;
+}
+
+.home-value-request-for-report {
+    padding: 30px 0 70px;
+}
+
+section#about-section {
+    padding: 60px 0 0;
+}
+
+.funnel-menu ul {
+    margin: 35px auto;
+}
+
+.banner-top-section-info section.step1 > .container {
+    padding-bottom: 15%;
+}
+
+.request-home-value-report > a {
+
+    border: 2px solid;
+
+    text-transform: uppercase;
+
+    padding: 10px 40px;
+
+}
+
+.request-home-value-report > a .btn-content-info {
+    margin-right: 16px;
+}
+
+.request-home-value-report > a:hover {
+    background-color: rgba(181, 37, 41, 0.9);
+    text-decoration: none;
+}
+
+.request-home-value-report > a:hover .btn-content-info {
+    color: #fff;
+}
+
+.request-home-value-report > a > i {
+    height: 30px;
+    width: 30px;
+    background-color: antiquewhite;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 180%;
+    font-size: 17px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+h4.funnel-left-text-info {
+    margin-bottom: 20px;
+    line-height: 140%;
+    font-size: 1.75em;
+}
+
+.fl-img-holder img {
+    max-width: 100%;
+}
+
+.get-my-report-info-btn {
+    margin-bottom: 50px;
+}
+
+a.request-home-value:before {
+    content: none;
+}
+
+@media (max-width: 991px) {
+    .fl-img-holder {
+        margin-bottom: 40px;
+    }
+
+    .home-value-request-for-report .call-to-action-content {
+        -webkit-flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+
+
+@media (max-width:620px) {
+    .banner-top-section-info section.step1 {
+        padding-bottom: 40px;
+    }
+
+    .funnel-header-company-logo {
+        left: 15px;
+    }
+
+    h4.home-value-area-price-info {
+        font-size: 5.6em;
+    }
+
+    .fl-img-holder img {
+        margin-bottom: 0px;
+    }
+
+    .areaname-info {
+        top: 38.4%;
+        left: 8.7%;
+    }
+
+    .home-value-request-for-report .call-to-action-content {
+        margin: auto;
+    }
+
+    .home-value-request-for-report {
+        margin: 0 15px;
+    }
+
+}
+
+@media(max-width: 575px) {
+
+    .home-value-request-for-report .request-home-value-report > a,
+    .request-home-value-report > a p {
+        font-size: 15px;
+    }
+
+    .request-home-value-report > a > svg {
+        margin-bottom: 0;
+        height: 25px;
+        width: 25px;
+        line-height: 156%;
+        font-size: 15px;
+        flex-wrap: nowrap;
+    }
+}
+
+@media (max-width: 375px) and (min-width: 320px) {
+    .areaname-info {
+        font-size: 11px;
+        max-width: 18%;
+        min-width: 98px;
+    }
+
+    .areaname-info.sold-listing {
+        left: 53.2%;
+        top: 10%;
+        font-size: 10px;
+    }
+
+    .home-value-request-for-report .call-to-action-content {
+        padding: 50px 30px;
+    }
+
+    .home-value-request-for-report .request-home-value-report > a {
+        padding: 10px 0;
+    }
+
+
+    .request-home-value-report > a > svg {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+
+    .request-home-value-report > a {
+        display: block;
+    }
+
+}
+
+@media (max-width: 432px) and (min-width: 390px) {
+    .request-home-value-report > a {
+        padding: 10px 25px;
+    }
+}

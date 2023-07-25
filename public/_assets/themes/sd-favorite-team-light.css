@@ -1,0 +1,19 @@
+/*
+	Theme Name:	SD Favorite Team
+	Theme Style: Light      
+*/
+
+@import url("../_css/compass-serif.css");
+@import url("../_css/compass-sans.css");
+
+.sd-favorite-team-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #c49e4d; /* Heading */
+	--theme-sub-heading-color: #33343a; /* Subtitle */
+	--theme-body-color: #000000; /* Body */
+	--theme-emphasis-color: #c49e4d; /* Outline */
+	--theme-body-font: "Compass Sans", sans-serif;
+	--theme-heading-font: "Compass Serif", serif;
+	--theme-sub-heading-font: "Compass Sans", sans-serif;
+	--genie-chart-stroke: #c49e4d;
+}

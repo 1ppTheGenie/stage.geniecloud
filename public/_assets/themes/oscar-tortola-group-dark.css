@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Oscar Tortola Group
+	Theme Style: Dark
+*/
+
+@import url("../_css/oscor-font.css");
+
+.oscar-tortola-group-dark {
+	--theme-body-background: #dc1f26;
+	--theme-heading-color: #ffffff; /* Heading --theme-heading-color */
+	--theme-sub-heading-color: #030202; /* Subtitle --theme-sub-heading-color */
+	--theme-body-color: #dddddd; /* Body --theme-body-color */
+	--theme-emphasis-color: #030202; /* Outline --theme-emphasis-color */
+	--theme-body-font: "BodoniSevITCBoo", sans-serif; /* --theme-body-font */
+	--theme-heading-font: "BodoniSevITCBoo", sans-serif;
+	--theme-sub-heading-font: "BodoniSevITCBoo", sans-serif;
+}

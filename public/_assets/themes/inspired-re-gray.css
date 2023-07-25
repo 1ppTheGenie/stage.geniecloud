@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Inspired.re
+  Theme Style: Gray    
+*/
+
+@import url("../_css/lato.css");
+
+.inspired-re-gray {
+	--theme-body-background:#f1f1f1;
+	--theme-heading-color: #000000; /* Heading */
+	--theme-sub-heading-color: #d0a538; /* Subtitle */
+	--theme-body-color: #000000; /* Body */
+	--theme-emphasis-color:#d0a538; /* Outline */
+	--theme-body-font: 'Lato', sans-serif;
+	--theme-heading-font: 'Lato', sans-serif;
+	--theme-sub-heading-font: 'Lato', sans-serif;
+}

@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Active Realty
+	Theme Style: Dark          
+*/
+
+@import url("../_css/lato.css");
+
+.active-realty-dark {
+    --theme-body-background: #607090;
+    --theme-heading-color: #ffffff; /* Heading */
+    --theme-sub-heading-color: #B3B7C7; /* Subtitle */
+    --theme-body-color: #D1D3D4; /* Body */
+    --theme-emphasis-color: #B3B7C7; /* Outline */
+    --theme-body-font: "Lato", sans-serif;
+    --theme-heading-font: "Lato", sans-serif;
+    --theme-sub-heading-font: "Lato", sans-serif;
+}

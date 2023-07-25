@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Century 21 
+	Theme Style: Dark           
+*/
+
+@import url("../_css/open-sans.css");
+
+.century-21-dark {
+	--theme-body-background: #252526;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #beaf87; /* Subtitle */
+	--theme-body-color: #e6e7e8; /* Body */
+	--theme-emphasis-color: #beaf87; /* Outline */
+	--theme-body-font: "Open Sans", sans-serif;
+	--theme-heading-font: "Open Sans", sans-serif;
+	--theme-sub-heading-font: "Open Sans", sans-serif;
+}

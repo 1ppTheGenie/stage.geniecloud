@@ -1,0 +1,17 @@
+/*
+	Theme Name:	MX Associates Light
+  Theme Style: Light    
+*/
+
+@import url("../_css/lato.css");
+
+.mx-associates-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #3b3d41; /* Heading */
+	--theme-sub-heading-color: #1aa7ec; /* Subtitle */
+	--theme-body-color: #7d7e81; /* Body */
+	--theme-emphasis-color: #1aa7ec; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

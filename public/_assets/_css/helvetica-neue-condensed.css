@@ -1,0 +1,22 @@
+/* --------------------- Helvertica Neue Condensed --------------------- */
+/* Light */
+@font-face {
+    font-family: 'Helvetica Neue Condensed';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../_fonts/Helvetica-Condensed-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Helvetica Neue Condensed';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../_fonts/Helvetica-Neue-Condensed-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Helvetica Neue Condensed';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../_fonts/Helvetica-Neue-Condensed-Bold.ttf');
+}

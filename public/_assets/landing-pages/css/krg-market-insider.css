@@ -1,0 +1,759 @@
+.futura-text {
+  font-family: "Futura";
+}
+/*header start*/
+.navbar {
+  position: absolute;
+  width: 99.9%;
+  margin-top: 24px;
+}
+.navbar .container-fluid {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+.navbar-inverse {
+  background-color: #2220;
+  border-color: #08080800;
+}
+.nav.navbar-nav {
+  list-style: none;
+  display: flex;
+  justify-content: end;
+}
+.navbar li a {
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 18px 12px;
+}
+.nav li a:hover {
+  color: #b5944d !important;
+  transition: 0.2s ease-in-out;
+}
+.navbar-brand img {
+  height: 34px;
+}
+.navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 15px;
+  font-size: 18px;
+  line-height: 20px;
+  margin-left: -15px;
+}
+.navbar-toggle {
+  position: relative;
+  float: right !important;
+  padding: 9px 10px;
+  margin-right: 15px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+body .navbar-inverse .navbar-toggle .icon-bar {
+  background: #fff !important;
+}
+
+/*header end*/
+.home-background {
+  background-image: linear-gradient(#0404047a, #080707c4),
+    url(../../_img/krg-market-insider.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  background-attachment: fixed;
+  color: white;
+  padding: 240px 0px;
+}
+.title h1 {
+  font-weight: 800;
+  font-size: 48px;
+  word-spacing: -10px;
+  margin-top: 15px;
+  line-height: 1.1;
+}
+
+.title button {
+  padding: 9px 30px;
+  font-size: 16px;
+  font-weight: 800;
+  margin-left: 10px;
+  background: #b5944d;
+  color: #fff;
+  border-radius: 10px;
+  border: 2px solid #b5944d;
+  transition: 0.2s ease-in-out;
+}
+.title button:hover {
+  color: #fff;
+}
+.title-button .btn:focus {
+  outline: 0;
+  color: #fff;
+}
+.title .button2 {
+  background: none;
+  color: white;
+  border: 2px solid #b5944d;
+}
+.title-button .button2:hover {
+  background: #b5944d;
+}
+.title-button .button1:hover {
+  background: none;
+}
+.title-button {
+  margin-top: 45px;
+}
+.session {
+  background-image: linear-gradient(#ffffffc7, #ffffffc4),
+    url(../../_img/krg-marketing-section2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 100% !important;
+  padding: 74px 0px 25px;
+  overflow: hidden;
+}
+
+.first-part h1 {
+  font-size: 41px;
+  font-weight: 900;
+  color: #0d0f30;
+  word-spacing: -8px;
+}
+.first-part p {
+  font-size: 28px;
+  letter-spacing: 5px;
+  color: #0d0f30;
+}
+.first-part a,
+.second-part a {
+  background: #801517 !important;
+  border-radius: 14px;
+  color: #fff !important;
+  font-weight: 700;
+  margin-top: 20px;
+  font-size: 18px;
+  padding: 10px 30px;
+  border: none;
+}
+.first-part a i,
+.second-part a i {
+  display: none;
+}
+.first-part a :hover,
+.second-part a:hover {
+  opacity: 0.8;
+}
+.first-part a:focus,
+.second-part a:focus {
+  color: #fff;
+  outline: 0;
+}
+.second-part {
+  margin-top: 78px;
+  margin-bottom: 110px;
+}
+.second-part h3 {
+  font-weight: 800;
+  color: #801517;
+  font-size: 30px;
+  word-spacing: -3px;
+}
+.second-part p {
+  padding: 6px 152px;
+  font-size: 18px;
+  word-spacing: -1px;
+}
+.second-part p span {
+  font-weight: 800;
+  color: #0d0f30;
+}
+.footer {
+  margin-top: 30px;
+}
+.footer p {
+  font-size: 10px;
+  font-weight: 400;
+  text-align: justify;
+  line-height: 10px;
+  color: #000;
+  margin-bottom: 0;
+}
+.logo1 {
+  height: 35px;
+  margin-left: 15px;
+}
+.logo2 {
+  height: 30px;
+}
+
+.top-secret {
+  position: absolute;
+  bottom: -82px;
+  left: -45px;
+  transform: rotate(333deg);
+}
+.worth-tomorrow-modal {
+  background: #00000085;
+}
+
+.worth-tomorrow-modal .modal-dialog {
+  width: 450px;
+  height: 500px;
+  top: 15%;
+  text-align: center;
+  border-radius: 0;
+  margin: 0 auto;
+}
+.worth-tomorrow-modal .modal-body {
+  padding: 35px;
+}
+.worth-tomorrow-modal .modal-dialog h2,
+.modal-dialog p {
+  color: #000;
+}
+.form-control:focus {
+  box-shadow: none;
+  border: 1px solid black;
+  border-radius: 0px;
+  outline: 0;
+}
+.worth-tomorrow-modal h2 {
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 120%;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+  padding: 0;
+  margin-top: 0;
+}
+.worth-tomorrow-modal p {
+  font-size: 15px;
+  line-height: 120%;
+}
+.form-group input {
+  height: 40px;
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid;
+  font-size: 16px;
+  background: transparent;
+}
+.form-group textarea {
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid;
+  font-size: 16px;
+  background: transparent;
+}
+.worth-tomorrow-modal .close {
+  opacity: 0.65;
+  font-size: 30px;
+  position: absolute;
+  top: 0;
+  right: 5px;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  text-shadow: none;
+  box-shadow: none;
+  z-index: 1;
+}
+.worth-tomorrow-modal form#form_step1 {
+  margin-top: 25px;
+  font-family: "futura";
+}
+.btn-value-info.widget {
+  border-radius: 5px;
+  padding: 7px;
+  width: 170px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: #fff;
+  background: #000;
+  font-weight: 700;
+}
+.btn-value-info.widget:focus {
+  outline: 0;
+}
+.funnel-footer-background {
+  padding: 30px 0 !important;
+}
+.first-part a:hover,
+.second-part a:hover {
+  opacity: 0.8;
+}
+.all-astrick-details {
+  color: #000 !important;
+}
+
+.bottom-bar-copyright {
+  background-color: transparent !important;
+}
+.footer-hr {
+  border: 1px solid #b5944d;
+  width: 85%;
+}
+.agent-info-details {
+  margin-top: 60px;
+}
+.agent-info-div {
+  display: flex;
+}
+.agent-info-div .partner_image,
+.agent_image {
+  height: 135px;
+  width: 135px;
+  background-size: cover;
+  background-position: center;
+  background-color: #f3f3f3;
+  border-radius: 50%;
+}
+.agent-info-div h2 {
+  font-size: 33px;
+  font-weight: 700;
+}
+.agent-info-div h2 span {
+  color: #b5944d;
+}
+
+.agent-info-div .info {
+  margin-left: 15px;
+}
+.agent-info-div p {
+  font-size: 15px;
+  line-height: 34px;
+  font-weight: 600;
+  margin-top: -16px;
+  word-spacing: 5px;
+}
+.phone_email {
+  font-size: 15px;
+  line-height: 33px;
+  font-weight: 600;
+  margin-top: -16px;
+  word-spacing: 5px;
+  margin-top: -9px;
+}
+.phone_email a {
+  color: #333;
+  text-decoration: none;
+}
+.footer-style ul li {
+  color: #333333 !important;
+}
+.footer-style p {
+  color: #333333 !important;
+}
+/* modal start */
+/* .modal.contact-modal {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal.contact-modal .modal-content {
+  background: var(--theme-body-background);
+  border-radius: 0;
+}
+
+.modal.contact-modal .modal-body .modal_title {
+  font-size: 25px;
+  text-align: center;
+  font-weight: 600;
+  line-height: 120%;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+  padding: 0;
+}
+
+.modal.contact-modal .modal-body {
+  padding: 35px;
+}
+
+.modal.contact-modal .modal-dialog {
+  width: 450px;
+  height: 500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.modal.contact-modal .modal-body .modal_subtitle {
+  font-size: 15px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.modal.contact-modal form {
+  margin-top: 25px;
+}
+
+.modal.contact-modal .form-group input,
+.modal.contact-modal .form-group textarea {
+  box-shadow: none;
+  border: 1px solid var(--theme-heading-color);
+  border-radius: 0;
+  font-size: 16px;
+  color: var(--theme-heading-color);
+  background: transparent;
+}
+
+.modal.contact-modal .form-group input {
+  height: 40px;
+}
+
+.modal.contact-modal .form-group input::placeholder,
+.modal.contact-modal .form-group textarea::placeholder {
+  color: var(--theme-body-color);
+}
+
+.modal.contact-modal .form-group input:focus,
+.modal.contact-modal .form-group textarea:focus {
+  border: 2px solid var(--theme-heading-color);
+  outline: 0;
+}
+
+.modal.contact-modal .fl-btn-value button {
+  border-radius: 5px;
+  padding: 7px;
+  width: 170px;
+  margin: 0 auto;
+  font-size: 16px;
+}
+
+.modal.contact-modal svg {
+  width: 20px;
+  position: absolute;
+  top: 17px;
+  right: 20px;
+  stroke-width: 25;
+  cursor: pointer;
+  z-index: 1;
+}
+ */
+
+/* modal ends */
+.heading-font {
+  font-family: var(--theme-heading-font) !important;
+}
+
+/*mediaquery start*/
+
+@media only screen and (min-width: 1300px) {
+  .navbar li a {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  body .nav > li,
+  body .nav > li:before {
+    margin: 0px;
+  }
+  body .nav li a {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .logo1,
+  .logo2 {
+    height: 35px;
+    padding: 1px;
+  }
+  .first-part h1 {
+    font-size: 63px;
+  }
+  .home-background {
+    padding: 200px 0;
+  }
+  .first-part h1 {
+    font-size: 63px;
+  }
+  .first-part p {
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .navbar li a {
+    font-size: 11px;
+    padding: 18px 5px;
+  }
+  .navbar-brand img {
+    height: 33px;
+  }
+  .first-part p {
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+  .first-part h1 {
+    font-size: 34px;
+  }
+  .second-part h3 {
+    font-size: 25px;
+  }
+  .second-part p {
+    padding: 6px 47px;
+    font-size: 16px;
+  }
+  .logo1,
+  .logo2 {
+    margin-top: 20px;
+  }
+  .nav > li {
+    text-align: center;
+  }
+  /*.navbar-inverse {
+        background-color: #222;
+        border-color: #080808;
+    }*/
+  .agent-info-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  body .navbar li a {
+    font-size: 11px !important;
+    padding: 18px 5px;
+    margin-right: 0px !important;
+  }
+}
+@media only screen and (max-width: 850px) {
+  .title h1 {
+    font-size: 40px;
+  }
+  .title button {
+    padding: 9px 20px;
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  nav.navbar.navbar-inverse .collapse {
+    display: none !important;
+  }
+  nav.navbar.navbar-inverse .navbar-toggle {
+    display: block;
+  }
+  .active div#myNavbar {
+    display: block !important;
+    transform: translateX(0%);
+    width: 100%;
+    height: 72vh !important;
+    position: relative;
+    z-index: 1;
+    transition: 0.6s;
+  }
+  .active button.navbar-toggle {
+    z-index: 10;
+  }
+  nav.navbar.navbar-inverse {
+/*     background: #222; */
+    top: 0;
+    margin-top: 0;
+    padding: 8px 0;
+  }
+  nav.navbar.navbar-inverse.active {
+    width: 100%;
+  }
+  .active .nav.navbar-nav {
+    display: block;
+    float: left !important;
+    position: absolute;
+    top: 58px;
+    left: 11px;
+    width: 100%;
+
+    text-align: center;
+  }
+  body .active .nav > li,
+  body .nav .active > li:before {
+    margin: 20px !important;
+  }
+  .active a.navbar-brand {
+    z-index: 2;
+    position: relative;
+  }
+  body .navbar-toggle .icon-bar {
+    width: 24px;
+    height: 2px;
+    margin-bottom: 5px;
+  }
+}
+@media (min-width: 768px) {
+  .navbar-right {
+    float: right !important;
+    margin-right: -15px;
+  }
+  body .navbar .container-fluid .navbar-header {
+    float: unset;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .navbar {
+    margin-top: 0;
+    padding: 10px;
+  }
+  .navbar-inverse {
+/*     background-color: #222; */
+    border-color: #080808;
+  }
+  .worth-tomorrow-modal .modal-dialog {
+    max-width: 100%;
+    width: 90%;
+  }
+  .navbar li a {
+    font-size: 12px;
+    padding: 9px;
+    font-weight: 600;
+  }
+  .navbar-collapse {
+    margin-top: 15px;
+  }
+  .title button {
+    margin-top: 18px;
+  }
+}
+@media only screen and (max-width: 680px) {
+  .navbar-inverse {
+/*     background-color: #222; */
+    border-color: #080808;
+  }
+  .navbar {
+    margin-top: 0;
+  }
+  .home-background {
+    padding: 226px 0px;
+  }
+  .title h1 {
+    font-size: 43px;
+  }
+  .title button {
+    font-size: 14px;
+    margin-top: 18px;
+    padding: 8px 15px;
+  }
+  .first-part h1 {
+    font-size: 30px;
+    padding: 20px;
+  }
+  .first-part button,
+  .second-part button {
+    font-size: 24px;
+    padding: 12px 34px;
+  }
+  .second-part h3 {
+    font-size: 24px;
+  }
+  .second-part p {
+    font-size: 15px;
+    text-align: center;
+    padding: 29px;
+  }
+  .logo2 {
+    height: 50px;
+    margin-top: 35px;
+  }
+  .logo1 {
+    height: 75px;
+    margin-top: 25px;
+  }
+  .top-secret {
+    bottom: -44px;
+    left: -30px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .title h1 {
+    font-size: 30px;
+    padding: 0 15px;
+  }
+
+  .top-secret img {
+    width: 250px;
+  }
+  .session {
+    padding: 40px 0px;
+  }
+  .footer {
+    margin-top: 50px;
+  }
+  .first-part button,
+  .second-part button {
+    font-size: 14px;
+    padding: 12px 40px;
+    margin-top: 0;
+  }
+  .second-part {
+    margin-top: 50px;
+    margin-bottom: 60px;
+  }
+  .first-part {
+    margin-top: 20px;
+  }
+  .second-part h3 {
+    font-size: 20px;
+  }
+  .first-part h1 {
+    font-size: 20px;
+    margin-top: 0;
+  }
+  .title button {
+    font-size: 13px;
+    margin-top: 18px;
+    padding: 8px 7px;
+  }
+  .agent-info-div {
+    display: flex;
+    margin-top: 40px;
+    padding: 15px;
+  }
+  .agent-info-div img {
+    height: 110px;
+    width: 110px;
+  }
+  .agent-info-div p {
+    font-size: 10px;
+    font-weight: 600;
+    word-spacing: 5px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    line-height: 4px;
+  }
+  .agent-info-div .partner_image,
+  .agent_image {
+    height: 100px;
+    width: 100px;
+  }
+  .agent-info-div h2 {
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .agent-info-div .dot {
+    display: none;
+  }
+  .phone_email {
+    margin-top: 0px;
+  }
+  .title button {
+    margin-left: 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  nav.navbar.navbar-inverse .navbar-toggle {
+    display: block;
+    margin-right: 20px;
+    position: absolute;
+    /* float: left; */
+    right: 0;
+    /* width: 100%; */
+    z-index: 9999;
+  }
+}

@@ -1,0 +1,16 @@
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+p.asset {
+	display: grid;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	width: 50vw;
+	white-space: nowrap;
+	grid-template-columns: 1fr 2fr 0.5fr 1fr;
+}

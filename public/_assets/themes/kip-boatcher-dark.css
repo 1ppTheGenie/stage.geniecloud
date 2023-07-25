@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Kip Boatcher 
+	Theme Style: Dark
+*/
+
+@import url("../_css/helvetica-neue-condensed.css");
+@import url("../_css/gotham.css");
+
+.kip-boatcher-dark {
+	--theme-body-background: #074360;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #a47f54; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #a47f54; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+    --theme-heading-font: "Gotham", sans-serif;
+    --theme-sub-heading-font: "Gotham", sans-serif;
+}

@@ -1,0 +1,18 @@
+/*
+	Theme Name:	BrokerInTrust 
+	Theme Style: Dark
+*/
+
+@import url("../_css/lato.css");
+@import url("../_css/arial.css");
+
+.brokerintrust-dark {
+	--theme-body-background: #5d2723;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #dddddd; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
+	--theme-body-font: "Arial";
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Arial";
+}

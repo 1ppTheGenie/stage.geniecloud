@@ -1,0 +1,20 @@
+/*
+	Theme Name:	Steve and Shauna
+	Theme Style: Blue
+	Permissions: .*@steveandshauna.com
+*/
+
+@import url("../_css/myriad-pro-condensed.css");
+@import url("../_css/lato.css");
+
+.steve-shauna-blue {
+	--theme-body-background: #3193c2;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #14516f; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+	--active-green: #1b5e20;
+}

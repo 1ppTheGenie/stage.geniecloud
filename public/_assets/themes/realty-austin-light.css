@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Realty Austin
+	Theme Style: Light        
+*/
+
+@import url("../_css/lato.css");
+
+.realty-austin-light {
+	--theme-body-background: #00263a;
+	--theme-heading-color: #e1523d; /* Heading */
+	--theme-sub-heading-color: #ffffff; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #e1523d; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

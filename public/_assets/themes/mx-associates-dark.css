@@ -1,0 +1,17 @@
+/*
+	Theme Name:	MX Associates Dark
+  Theme Style: Dark    
+*/
+
+@import url("../_css/lato.css");
+
+.mx-associates-dark {
+	--theme-body-background: #68a2b8;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #3c342f; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #3c342f; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Gantry Wilson Group 
+	Theme Style: Light       
+*/
+
+@import url("../_css/compass-sans.css");
+
+.gantry-wilson-group-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #1b2428; /* Heading */
+	--theme-sub-heading-color: #3498d8; /* Subtitle */
+	--theme-body-color: #7b97aa; /* Body */
+	--theme-emphasis-color: #3498d8; /* Outline */
+	--theme-body-font: "Compass Sans", sans-serif;
+	--theme-heading-font: "Compass Sans", sans-serif;
+	--theme-sub-heading-font: "Compass Sans", sans-serif;
+}

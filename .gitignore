@@ -1,0 +1,7 @@
+node_modules/
+.env
+.log
+.zip
+package-lock.json
+.yarn
+.yarnrc.yml

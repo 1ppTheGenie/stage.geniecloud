@@ -1,0 +1,21 @@
+/*
+	Theme Name:	Compass
+	Theme Style: Light 
+*/
+
+/* @import url("../_css/helvetica-neue.css");
+@import url("../_css/helvetica-neue-condensed.css"); */
+
+@import url("../_css/compass-sans.css");
+@import url("../_css/compass-serif.css");
+
+.compass-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #000000; /* Heading */
+	--theme-sub-heading-color: #7f7d7e; /* Subtitle */
+	--theme-body-color: #241e20; /* Body */
+	--theme-emphasis-color: #7f7d7e; /* Outline */
+	--theme-body-font: "Compass Sans";
+	--theme-heading-font: "Compass Sans";
+	--theme-sub-heading-font: "Compass Sans";
+}

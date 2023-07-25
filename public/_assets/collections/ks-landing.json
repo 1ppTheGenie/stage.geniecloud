@@ -1,0 +1,74 @@
+{
+	"version": 3,
+	"name": "Kitchen Sink Landing Pages",
+	"template": "marketing-steps-lc1",
+	"sections": [
+		{
+			"meta": [],
+			"assets": [
+				{ "asset": "landing-pages/lc-austin" },
+				{ "asset": "landing-pages/lc-hollywood" },
+				{ "asset": "landing-pages/lc-miami" },
+				{ "asset": "landing-pages/lc-vegas" },
+				{ "asset": "landing-pages/lead-gen" },
+				{
+					"asset": "landing-pages/market-insider-instant-download-v1"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v2"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v3"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v4"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v5"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v6"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v7"
+				},
+				{ "asset": "landing-pages/market-report-instant" },
+
+				{ "asset": "landing-pages/home-value-no-request" },
+				{ "asset": "landing-pages/krg-home-valuation" },
+				{ "asset": "landing-pages/krg-market-insider" },
+				{ "asset": "landing-pages/krg-past-client" },
+				{ "asset": "landing-pages/open-house-guest-book-1" },
+				{ "asset": "landing-pages/open-house-guest-book-2" },
+				{ "asset": "landing-pages/open-house-sneak-peek" },
+				{ "asset": "landing-pages/preview-event" },
+				{
+					"asset": "landing-pages/single-property-website-simple"
+				},
+				{
+					"asset": "landing-pages/cush-single-listing-duplicate"
+				},
+				{ "asset": "landing-pages/property-compare" },
+				{
+					"asset": "landing-pages/home-value-no-request-ver2"
+				},
+				{ "asset": "landing-pages/vegas" },
+				{
+					"asset": "landing-pages/home-compare-search",
+					"lpo": "property-compare",
+					"name": "Home Compare Page"
+				},
+				{
+					"asset": "landing-pages/property-compare",
+					"hide": true
+				},
+				{
+					"asset": "landing-pages/lc-oh-guestbook",
+					"lpo": "lc-austin",
+					"name": "Open House Guestbook"
+				}
+			],
+			"name": "Available Assets"
+		}
+	]
+}

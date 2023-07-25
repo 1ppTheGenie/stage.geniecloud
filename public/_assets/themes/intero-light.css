@@ -1,0 +1,21 @@
+/*
+	Theme Name:	Intero
+	Theme Style: Light
+*/
+
+@import url("../_css/gotham.css");
+
+.intero-light {
+    --theme-body-background: #ffffff;
+    --theme-heading-color: #57002a;
+    /* Heading */
+    --theme-sub-heading-color: #000;
+    /* Subtitle */
+    --theme-body-color: #3E3F3C;
+    /* Body */
+    --theme-emphasis-color: #000;
+    /* Outline */
+    --theme-body-font: "gotham-medium,Arial,Helvetica,sans-serif";
+    --theme-heading-font: "gotham-medium,Arial,Helvetica,sans-serif";
+    --theme-sub-heading-font: "gotham-medium,Arial,Helvetica,sans-serif";
+}

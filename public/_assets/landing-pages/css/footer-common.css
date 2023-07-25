@@ -1,0 +1,419 @@
+/* footer common style */
+a {
+    text-decoration: none;
+    color: #337ab7;
+}
+
+#about-section {
+    padding: 0;
+}
+
+.bottom-bar-copyright {
+    color: #888;
+    font-weight: 500;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, .8);
+    padding: 15px 0
+}
+
+.bottom-bar-copyright p {
+    margin: 0
+}
+
+.footer-style p {
+    font-size: 18px;
+    color: #333333;
+}
+
+.bottom-bar-copyright strong {
+    font-weight: 500;
+    line-height: 210%
+}
+
+.bottom-bar-copyright .col-md-4 > img {
+    width: 90px
+}
+
+.funnel-footer-background {
+    padding: 0;
+    background: var(--theme-body-background);
+}
+
+.bottom-bar-copyright .row .col-md-4 {
+    padding: 0
+}
+
+.term-condition {
+    margin: 20px 0 25px
+}
+
+.footer-style ul li {
+    list-style: none;
+    display: inline-block;
+    border-right: 2px solid;
+    padding-right: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    color: #333333;
+}
+
+.footer-style ul {
+    text-align: center
+}
+
+.footer-area {
+    padding: 10px 0 0;
+    text-align: center
+}
+
+.footer-style ul li:last-child {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0
+}
+
+.term-condition a {
+    text-decoration: underline;
+    font-size: 18px
+}
+
+.term-condition a:hover {
+    text-decoration: none
+}
+
+.funnel-footer-company-logo {
+    width: 100%;
+    margin-bottom: 15px
+}
+
+.funnel-footer-company-logo .funnel-company-logo {
+    height: 80px;
+    width: 408px;
+    margin: auto;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    background-position: center !important
+}
+
+.bottom-bar-copyright #copyright .row {
+    display: flex;
+    justify-content: space-between
+}
+
+.bottom-bar-copyright .row .col-md-4:last-child {
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end
+}
+
+.bottom-bar-copyright #copyright .row .col-md-4 {
+    flex: 1
+}
+
+#copyright .col-md-4:first-child {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    justify-content: flex-end;
+}
+
+
+.funnel-company-logo.your_logo_class {
+    margin: 20px auto
+}
+
+.agent-details .photo,
+.agent-details .details {
+    display: inline-block;
+}
+
+.agent-details .photo img {
+    width: 160px;
+    height: 160px;
+    border-radius: 59%;
+    object-fit: cover;
+    object-position: top;
+
+}
+
+.agent-details .details {
+    vertical-align: top;
+    padding-left: 12px;
+}
+
+.agent-details .details .agent-name {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 24px;
+}
+
+.agent-details .agent-phone {
+    font-size: 26px;
+    line-height: 24px;
+    font-weight: 400;
+    margin: 0;
+    padding: 5px 0;
+}
+
+.agent-details .agent-email,
+.agent-details .agent-code {
+    font-size: 22px;
+    line-height: 22px;
+    font-weight: 500;
+}
+
+.agent-details .details h2 {
+    font-size: 20px;
+    line-height: 110%;
+    font-weight: 700;
+    margin: 0;
+    padding: 1px 0;
+}
+
+.agent-details {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 35px;
+}
+
+
+.team-about-wrapper h4 {
+    padding-top: 30px;
+    font-size: 19px;
+}
+
+.read-more,
+.read-less {
+    color: #33a6dc !important;
+}
+
+.idx_privacy-policy,
+.privacy-policy {
+    padding-bottom: 8px;
+    display: inline-block
+}
+
+
+/* 07/07/2022 */
+
+.agent-details .details h2 {
+    color: var(--theme-sub-heading-color);
+    font-family: var(--theme-sub-heading-font);
+}
+
+.agent-details .agent-phone a {
+    color: var(--theme-heading-color);
+    font-family: var(--theme-sub-heading-font) !important;
+    font-size: 26px;
+}
+
+.agent-details .agent-email,
+.agent-details .agent-code {
+    color: var(--theme-sub-heading-color);
+    font-size: 18px;
+    font-family: var(--theme-body-font);
+    margin: 0;
+    
+}
+
+.agent-details .agent-email a {
+    color: var(--theme-sub-heading-color);
+    font-size: 18px;
+    font-family: var(--theme-body-font);
+}
+button.btn.subtitle-font.background-as-color.contact-me-btn {
+    margin: 0;
+}
+
+.team-about-wrapper h4 {
+    font-size: 22px;
+    font-family: var(--theme-body-font);
+    color: var(--theme-body-color);
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.summary p {
+    font-size: 18px;
+    font-family: var(--theme-body-font);
+    color: var(--theme-body-color);
+}
+
+.footer-style ul li {
+    color: var(--theme-body-color);
+}
+
+.footer-style p {
+    color: var(--theme-body-color);
+    font-family: var(--theme-body-font);
+}
+
+.footer-middle-img {
+    position: relative;
+    top: 4px;
+}
+
+.agent-details .details .agent-name {
+    font-size: 25px;
+    margin: 0;
+    padding: 1px 0;
+}
+
+.agent-details .f-name {
+    color: var(--theme-body-color);
+    font-family: var(--theme-heading-font);
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    display: block;
+    position: absolute;
+    top: -43px;
+}
+#about-section .agent-details .agent-website{
+    margin: 0;
+    padding: 5px 0;
+}
+.agent-details .agent-website a {
+    color: inherit;
+    font-weight: 400;
+    font-size: 18px;
+}
+.agent-details .agent-website a:hover {
+    text-decoration: underline;
+}
+
+/*
+
+.abt-sec {
+    margin: 50px 0px 0;
+}
+*/
+
+#about-section .agent-logo {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 45px;
+    margin-top: 70px;
+}
+
+#about-section .agent-details .agent-logo .funnel-personal-logo {
+    height: 100px;
+    /* width: 280px; */
+    width: 408px;
+    margin: auto;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    background-position: center !important;
+
+}
+
+
+/* 07/07/2022 */
+
+
+@media(max-width:991px) {
+    .bottom-bar-copyright {
+        font-size: 12px
+    }
+}
+
+@media(max-width:768px) {
+    #copyright .col-md-4 {
+        margin-bottom: 10px
+    }
+
+    .bottom-bar-copyright .img-min-height {
+        margin-top: 0 !important
+    }
+
+    .bottom-bar-copyright .row .col-md-4:nth-child(2) strong {
+        line-height: 240%
+    }
+
+    .single-listing-modal-body ul.all-attachments li.attachment-data {
+        width: calc(100%/6) !important
+    }
+
+
+}
+
+@media(max-width:595px) {
+
+    .bottom-bar-copyright .col-md-4 > img {
+        margin: auto !important
+    }
+
+    .bottom-bar-copyright #copyright .row {
+        justify-content: center;
+        flex-direction: column
+    }
+
+    .bottom-bar-copyright .row .col-md-4:last-child {
+        justify-content: center;
+        flex-direction: column;
+        margin: auto
+    }
+
+    .funnel-footer-company-logo .funnel-company-logo {
+        width: 60%
+    }
+
+    .bottom-bar-copyright p {
+        text-align: center
+    }
+
+    #about-section .agent-logo {
+        display: block;
+        /* margin: 0 auto; */
+        margin-top: 50px;
+        margin-left: 0;
+    }
+
+    #about-section .agent-details .agent-logo .funnel-personal-logo {
+        height: 100px;
+        width: 65%;
+    }
+}
+
+@media(max-width:360px) {
+    .footer-style ul li:nth-child(2) {
+        margin: 0 0 5px;
+        padding: 0;
+        border-right: 0
+    }
+
+    .bottom-bar-copyright #copyright .row .col-md-4 {
+        text-align: center
+    }
+
+    .single-listing-modal-body ul.all-attachments li.attachment-data {
+        width: 100% !important
+    }
+
+    .agent-details .agent-email,
+    .agent-details .agent-code {
+        font-size: 18px;
+    }
+
+    .agent-details .agent-phone {
+        font-size: 21px;
+    }
+}
+
+@media(max-width:320px) {
+    .footer-style p {
+        margin-bottom: 40px
+    }
+
+    .funnel-footer-company-logo .funnel-company-logo {
+        height: 70px
+    }
+
+    .footer-style ul li {
+        border: none;
+        display: block;
+        margin: 0;
+        padding: 0;
+        font-size: 16px
+    }
+
+}

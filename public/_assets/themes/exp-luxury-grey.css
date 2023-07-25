@@ -1,0 +1,21 @@
+/*
+	Theme Name:	Exp Luxury   
+	Theme Style: Grey             
+*/
+
+@import url("../_css/roboto.css");
+
+.exp-luxury-grey {
+    --theme-body-background: #3d3d3d;
+    --theme-heading-color: #ffffff;
+    /* Heading */
+    --theme-sub-heading-color: #b19a55;
+    /* Subtitle */
+    --theme-body-color: #ffffff;
+    /* Body */
+    --theme-emphasis-color: #b19a55;
+    /* Outline */
+    --theme-body-font: 'Roboto', sans-serif;
+    --theme-heading-font: 'Roboto', sans-serif;
+    --theme-sub-heading-font: 'Roboto', sans-serif;
+}

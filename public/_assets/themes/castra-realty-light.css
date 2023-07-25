@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Castra Realty
+	Theme Style: Light         
+*/
+
+@import url("../_css/helvetica-neue-condensed.css");
+
+.castra-realty-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #8b0304; /* Heading */
+	--theme-sub-heading-color:#666666; /* Subtitle */
+	--theme-body-color: #000000; /* Body */
+	--theme-emphasis-color: #666666; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue Condensed", sans-serif;
+}

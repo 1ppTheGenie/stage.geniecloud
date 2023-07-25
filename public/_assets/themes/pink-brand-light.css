@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Pink Brand  
+	Theme Style: Light       
+*/
+
+@import url("../_css/helvetica-neue-condensed.css");
+
+.pink-brand-light {
+	--theme-body-background: #fbdbe0;
+	--theme-heading-color: #656769; /* Heading */
+	--theme-sub-heading-color: #656769; /* Subtitle */
+	--theme-body-color: #656769; /* Body */
+	--theme-emphasis-color: #555; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Helvetica Neue", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

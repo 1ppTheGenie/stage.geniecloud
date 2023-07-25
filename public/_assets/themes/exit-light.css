@@ -1,0 +1,17 @@
+/*
+	Theme Name:	EXIT 
+	Theme Style: Light          
+*/
+
+@import url("../_css/helvetica-neue.css");
+
+.exit-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #2c94ab; /* Heading */
+	--theme-sub-heading-color: #159b9b; /* Subtitle */
+	--theme-body-color: #8494a0; /* Body */
+	--theme-emphasis-color: #555; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Helvetica Neue", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

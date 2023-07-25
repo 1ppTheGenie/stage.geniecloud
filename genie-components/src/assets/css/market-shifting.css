@@ -1,0 +1,22 @@
+#market-is-shifting {
+	margin: 20vh auto;
+	max-width: 50vw;
+	padding: 2vh 1vw;
+	position: relative;
+	background-color: var(--theme-body-background);
+}
+#market-is-shifting > div {
+	border: 3px solid var(--theme-body-color);
+	padding: 2vw;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+#market-is-shifting > .close {
+	position: absolute;
+	top: 3vh;
+	right: 2vw;
+	font-size: 130%;
+	font-weight: bold;
+	cursor: pointer;
+}

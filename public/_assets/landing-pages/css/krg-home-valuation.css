@@ -1,0 +1,629 @@
+body {
+  line-height: 1.42857143;
+}
+
+.futura-text {
+  font-family: "Futura";
+}
+
+.banner-img {
+  background-image: linear-gradient(rgba(4, 4, 4, 0.48), rgba(8, 7, 7, 0.77)),
+    url("../../_img/bg-imagenew.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  background-attachment: fixed;
+  color: white;
+  padding: 200px 0px;
+}
+
+.wpcf7 .display-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.footer-logo-text {
+  font-size: 10px;
+  font-weight: 400;
+  text-align: justify;
+  line-height: 11px;
+  color: #000;
+  margin-bottom: 0;
+}
+
+.bg-heading {
+  text-align: center;
+}
+
+.bg-heading h1 {
+  font-weight: 800;
+  font-size: 48px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.3;
+  word-spacing: -10px;
+}
+
+.submit-btn {
+  margin-left: 2rem;
+}
+
+.bg-heading p {
+  font-size: 26px;
+  color: #fff;
+}
+
+.edit {
+  width: 800px !important;
+  padding: 17px 20px !important;
+  border-radius: 14px !important;
+  border: 2px solid #b5944d !important;
+}
+
+.points {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.points p {
+  font-size: 15px;
+  margin-top: 7px;
+
+  font-family: "futura";
+}
+
+.top-space {
+  margin-top: 5rem !important;
+}
+
+.title-button {
+  padding: 13px 20px !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  background: #b5944d;
+  border-radius: 10px !important;
+  border: 2px solid #b5944d !important;
+  transition: 0.2s ease-in-out !important;
+  color: #fff;
+  font-family: helvetica neue, Helvetica, Arial, sans-serif;
+}
+
+.title-button:hover {
+  color: #fff;
+  background: #b5944dd6;
+}
+
+hr {
+  margin-top: 2rem;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+.active {
+  background: #b5944d;
+  padding: 5px;
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+}
+
+/*header start*/
+.navbar {
+  position: absolute;
+  width: 99.9%;
+  margin-top: 40px;
+}
+
+.navbar .container-fluid {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.navbar-inverse {
+  background-color: #2220;
+  border-color: #08080800;
+}
+
+.nav.navbar-nav {
+  list-style: none;
+  display: flex;
+  justify-content: end;
+}
+
+.navbar li a {
+  color: rgb(255, 255, 255) !important;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 18px 10px;
+}
+
+.nav li a:hover {
+  color: #b5944d !important;
+  transition: 0.2s ease-in-out;
+}
+
+.navbar-brand img {
+  height: 34px;
+}
+
+.navbar-brand {
+  float: left;
+  height: 50px;
+
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.navbar-toggle {
+  position: relative;
+  float: right !important;
+  padding: 9px 10px;
+  margin-right: 15px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+body .navbar-inverse .navbar-toggle .icon-bar {
+  background: rgb(255, 255, 255) !important;
+}
+
+/*header end*/
+.home-background {
+  background-image: url(../../_img/bg-img.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left bottom;
+  background-attachment: fixed;
+  color: white;
+  padding: 240px 0px;
+}
+
+.first-part p {
+  font-size: 28px;
+  letter-spacing: 5px;
+  color: #0d0f30;
+}
+
+.first-part h1.first-part-heading {
+  font-size: 41px;
+  font-weight: 900;
+  color: #0d0f30;
+  word-spacing: -8px;
+}
+
+h1.futura-text {
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+.first-part a,
+.first-part button,
+.second-part a {
+  background: #801517 !important;
+  border-radius: 14px;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 19px;
+  font-size: 18px;
+  padding: 8px 29px;
+  font-family: "futura" !important;
+  text-transform: capitalize;
+}
+
+.comprehensive {
+  background: #231f20;
+  padding: 80px 0;
+}
+
+.second-part h3 {
+  font-weight: 800;
+  margin-top: 0;
+  color: #801517;
+  font-size: 30px;
+  word-spacing: -3px;
+  font-family: inherit;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.second-part h3 span {
+  color: #d1232a;
+}
+
+.second-part p {
+  padding: 6px 152px;
+  font-size: 18px;
+  word-spacing: -1px;
+  margin-bottom: 0px;
+}
+
+span.span-text {
+  font-weight: 800;
+  color: #0d0f30;
+}
+
+.first-part p {
+  font-size: 28px;
+  letter-spacing: 5px;
+  color: #0d0f30;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+button.sec-btn {
+  background: #a68b48 !important;
+  border-color: #a68b48 !important;
+}
+
+button.sec-btn:hover {
+  background: #a79059 !important;
+  border-color: #a79059 !important;
+}
+
+.mt-150 {
+  margin-top: 100px;
+}
+
+.footer p {
+  font-size: 10px;
+  font-weight: 400;
+  text-align: justify;
+  /* line-height: 12px; */
+  margin-bottom: 0;
+}
+
+.logo2 {
+  height: 30px;
+}
+
+.logo1 {
+  height: 35px;
+  margin-left: 15px;
+}
+
+div.funnel-footer-background {
+  padding-top: 80px;
+}
+
+.bottom-bar-copyright {
+  color: #888;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 15px 0;
+}
+
+.funnel-footer-background .funnel-footer-company-logo .funnel-company-logo {
+  height: 100px;
+  width: 408px;
+  margin: auto;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  background-position: center !important;
+}
+
+.footer-style p {
+  color: #333333 !important;
+}
+
+.footer-style ul li {
+  list-style: none;
+  display: inline-block;
+  border-right: 2px solid;
+  padding-right: 10px;
+  margin-right: 10px;
+  font-size: 18px;
+  color: #333333 !important;
+}
+
+.session {
+  background-image: linear-gradient(#ffffffc7, #ffffffc4),
+    url(../../_img/sbh-photocopy-noise-textures-prvs-rev.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 100% !important;
+  padding: 65px 0px 0px;
+  overflow: hidden;
+}
+
+.second-part {
+  margin-top: 78px;
+  margin-bottom: 110px;
+}
+
+.footer {
+  margin-top: 10px;
+}
+
+.top-secret {
+  position: absolute;
+  bottom: -82px;
+  left: -45px;
+  transform: rotate(333deg);
+}
+
+.first-part p.first-para {
+  font-size: 28px;
+  text-align: center;
+  color: #0d0f30;
+  font-weight: 500;
+}
+
+/* .container.footer.futura-text .futura-text {
+  text-align: center;
+  font-size: 28px;
+  letter-spacing: 5px;
+  color: #0d0f30;
+} */
+.heading-font {
+  font-family: var(--theme-heading-font) !important;
+}
+
+.bottom-bar-copyright {
+  padding: 15px 0px 40px !important;
+}
+
+
+@media only screen and (max-width: 1199px) {
+
+  body .nav>li,
+  body .nav>li:before {
+    margin: 0px;
+  }
+
+  body .nav li a {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .first-part h1.first-part-heading {
+    font-size: 63px;
+  }
+
+  .home-background {
+    padding: 200px 0;
+  }
+
+  .first-part p.first-para {
+    font-size: 24px;
+    margin-bottom: 0;
+    line-height: 30px;
+  }
+
+  .submit-btn {
+    margin-left: 0;
+  }
+
+  .display-form {
+    flex-wrap: wrap;
+  }
+
+  .title-button {
+    margin-top: 2rem;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  body .navbar li a {
+    font-size: 11px !important;
+    padding: 18px 5px;
+    margin-right: 0px !important;
+  }
+
+  .display-form {
+    flex-wrap: wrap;
+  }
+
+  .wpcf7 .display-form {
+    display: flex;
+    justify-content: unset;
+    margin-top: 40px;
+    display: grid;
+  }
+
+  input.edit {
+    width: 100% !important;
+  }
+
+  .second-part p {
+    padding: 6px 0px;
+  }
+
+  button.navbar-toggle {
+    display: none;
+  }
+
+  .second-part h3 {
+    font-size: 25px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  nav.navbar.navbar-inverse .collapse {
+    display: none !important;
+  }
+
+  nav.navbar.navbar-inverse .navbar-toggle {
+    display: block;
+    margin-right: 20px;
+    position: absolute;
+    /* float: left; */
+    right: 0;
+    /* width: 100%; */
+  }
+
+  .navbar-brand {
+    padding: 1rem;
+  }
+
+  .active div#myNavbar {
+    display: block !important;
+    transform: translateX(0%);
+    background: #fff;
+    width: 100%;
+    height: 72vh !important;
+    position: relative;
+    z-index: 1;
+    transition: 0.6s;
+  }
+
+  .active button.navbar-toggle {
+    z-index: 10;
+  }
+
+  nav.navbar.navbar-inverse {
+    /* background: #222; */
+    top: 0;
+    margin-top: 0;
+    padding: 8px 0;
+  }
+
+  nav.navbar.navbar-inverse.active {
+    width: 100%;
+  }
+
+  .active .nav.navbar-nav {
+    display: block;
+    float: left !important;
+    position: absolute;
+    top: 58px;
+    left: 11px;
+    width: 100%;
+
+    text-align: center;
+  }
+
+  body .active .nav>li,
+  body .nav .active>li:before {
+    margin: 20px !important;
+  }
+
+  .active a.navbar-brand {
+    z-index: 2;
+    position: relative;
+  }
+
+  .navbar-right {
+    float: right !important;
+    margin-right: -15px;
+  }
+
+  body .navbar .container-fluid .navbar-header {
+    float: unset;
+  }
+
+  .display-form {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .edit {
+    width: 300px !important;
+  }
+
+  .bg-heading h1 {
+    font-size: 2rem;
+  }
+
+  .first-part h1.first-part-heading {
+    font-size: 40px;
+    padding: 20px;
+  }
+
+  .home-background {
+    padding: 140px 0px;
+  }
+
+  .row.mt-150 .col-md-3.text-center {
+    margin-top: 30px;
+  }
+
+  .bottom-bar-copyright .col-md-4>img {
+    margin: auto !important;
+    width: 90px;
+  }
+
+  .display-form {
+    flex-wrap: wrap;
+  }
+
+  .navbar-brand {
+    padding: 1rem;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .logo2 {
+    height: 50px;
+    margin-top: 35px;
+  }
+
+  .display-form {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .bg-heading h1 {
+    font-size: 30px;
+  }
+
+
+  .title-button {
+    padding: 11px 100px !important;
+    margin-top: 2rem;
+    width: 100%;
+  }
+
+  .first-part h1.first-part-heading {
+    font-size: 20px;
+  }
+
+  .second-part p {
+    padding: 6px 0px;
+  }
+
+  /* .first-part button,.first-part a, .second-part a {
+    font-size: 11px;
+    padding: 12px 20px;
+    margin-top: 0;
+  } */
+  .funnel-footer-background .funnel-footer-company-logo .funnel-company-logo {
+    width: 26%;
+  }
+
+  .session {
+    padding: 40px 0px;
+  }
+
+  .navbar-brand {
+    padding: 1rem;
+  }
+
+  .banner-img {
+    padding: 100px 0;
+  }
+
+  .second-part h3 {
+    font-size: 20px;
+  }
+
+  .second-part {
+    margin-top: 50px;
+    margin-bottom: 60px;
+  }
+}

@@ -1,0 +1,28 @@
+@font-face {
+	font-family: "Conv_ITCAvantGardeStd-Md";
+	src: url("../_fonts/ITCAvantGardeStd-Md.eot");
+	src: local("☺"), url("../_fonts/ITCAvantGardeStd-Md.woff") format("woff"),
+		url("../_fonts/ITCAvantGardeStd-Md.ttf") format("truetype"),
+		url("../_fonts/ITCAvantGardeStd-Md.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Conv_ITCAvantGardeStd-Demi";
+	src: url("../_fonts/ITCAvantGardeStd-Demi.eot");
+	src: local("☺"), url("../_fonts/ITCAvantGardeStd-Demi.woff") format("woff"),
+		url("../_fonts/ITCAvantGardeStd-Demi.ttf") format("truetype"),
+		url("../_fonts/ITCAvantGardeStd-Demi.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Conv_ITCAvantGardeStd-Bk";
+	src: url("../_fonts/ITCAvantGardeStd-Bk.eot");
+	src: local("☺"), url("../_fonts/ITCAvantGardeStd-Bk.woff") format("woff"),
+		url("../_fonts/ITCAvantGardeStd-Bk.ttf") format("truetype"),
+		url("../_fonts/ITCAvantGardeStd-Bk.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}

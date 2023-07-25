@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" class="genie-landing-page">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#000000" />
+		<link rel="shortcut icon" type="image/ico" href="/src/assets/favicon.ico" />
+		<title>Genie Landing Page & Embed Testing</title>
+		<script>
+			var gg = {};
+			var ggSettings = {
+				agentID: 34,
+				areaID: 11806,
+				leadAreaID: ``,
+				mlsNumber: ``,
+				mlsID: ``,
+				blurPrice: true,
+				requireSignin: true,
+				propertyType: -1,
+				mapKey: "red",
+				noCopyright: false,
+				openHouseTimes: ``,
+				hideAVM: false,
+				downloadUrl: ``,
+				isLeadCapture: true,
+				marketStatus: "sold",
+				lead: { propertyId: null, firstName: ``, lastName: ``, email: `` },
+			};
+			window.ghub_funnel = true;
+			window.ghub = {
+				site_url: "https:\/\/genie.dynamicarray.co.uk",
+				api_url: "https:\/\/localhost:3001/wp-json",
+				build_url:
+					"https:\/\/genie.dynamicarray.co.uk\/wp-content\/plugins\/genie-marketing\/assets\/components\/genie-embed\/build",
+				plugin_url:
+					"https:\/\/genie.dynamicarray.co.uk\/wp-content\/plugins\/genie-marketing\/",
+				mapbox_key:
+					"pk.eyJ1IjoiZHluYW1pY2FycmF5IiwiYSI6ImNrOG90enU1YTA1bzUzaHFwZXp4aWVvOWkifQ.XhNlIBrciFEZX7g7VO6uuw",
+				google_key: "AIzaSyCGSGwWHruU7Y0E8yNoIN-XKeXD-QFSe1Q",
+				SINGLE: 0,
+				CONDO: 1,
+			};
+		</script>
+
+		<link
+			rel="stylesheet"
+			href="https://genie.dynamicarray.co.uk/wp-content/plugins/genie-marketing/assets/landing-pages/css/common.css"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="https://genie.dynamicarray.co.uk/wp-content/plugins/genie-marketing/assets/_css/genie-colors.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://genie.dynamicarray.co.uk/wp-content/plugins/genie-marketing/assets/themes/_default-light.css"
+		/>
+
+		
+		<script type="module" crossorigin src="/_assets/landing-pages/dist/2.0.0e/assets/index.js"></script>
+	</head>
+	<body class="ba-2021-reversed-light">
+		<script>
+			gg.defaults = {
+				createLinkLead: NaN,
+				leadPropertyID: ``,
+				fullName: ``,
+				notePrompt: `New Lead from 12963 Sunderland St Property Site!`,
+				trackingData: {
+					utmSource: `Property (Hwood)`,
+					utmCampaign: `12963 Sunderland St Poway, CA 92064`,
+				},
+			};
+		</script>
+
+		<div class="background">
+			<div
+				class="genie-embed"
+				data-genie-layout="MarketUpdate"
+				data-genie-agentid="34"
+				data-genie-theme="_default-light"
+				data-genie-areaid="11806"
+				data-genie-areaperiod="12"
+				data-genie-propertytype="-1"
+				data-genie-marketstatus="sold"
+				data-genie-mapstyle="satellite-streets-v9"
+				data-genie-mapicon="dot"
+				data-genie-pricepercent="percent"
+			></div>
+			<div
+				class="genie-embed"
+				data-genie-layout="MarketActivity"
+				data-genie-agentid="34"
+				data-genie-theme="_default-light"
+				data-genie-areaid="11806"
+				data-genie-areaperiod="12"
+				data-genie-propertytype="-1"
+				data-genie-marketstatus="sold"
+				data-genie-mapstyle="satellite-streets-v9"
+				data-genie-mapicon="dot"
+				data-genie-pricepercent="percent"
+			></div>
+		</div>
+	</body>
+</html>

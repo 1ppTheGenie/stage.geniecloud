@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Fathom Realty 
+	Theme Style: Light        
+*/
+
+@import url("../_css/open-sans.css");
+@import url("../_css/open-sans.css");
+
+.fathom-realty-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #1e2022; /* Heading */
+	--theme-sub-heading-color: #ce181f; /* Subtitle */
+	--theme-body-color: #828282; /* Body */
+	--theme-emphasis-color: #ce181f; /* Outline */		
+	--theme-heading-font: "Open Sans", sans-serif;
+    --theme-sub-heading-font: "Open Sans", sans-serif;
+	--theme-body-font:"Open Sans", sans-serif;
+}

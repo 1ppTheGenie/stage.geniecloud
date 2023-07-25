@@ -1,0 +1,20 @@
+/*
+	Theme Name:	BH
+	Theme Style: Light   
+*/
+
+@import url("../_css/helvetica-neue.css");
+@import url("../_css/myriad-pro-condensed.css");
+
+.bh-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #4d2645; /* Heading */
+	--theme-sub-heading-color: #d2ac2b; /* Subtitle */
+	--theme-body-color: #808284; /* Body */
+	--theme-emphasis-color: #4d2645; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font:"Myriad Pro Condensed", sans-serif;
+	--pending-yellow: #f57f17;
+	--active-green: #f57f17;
+}

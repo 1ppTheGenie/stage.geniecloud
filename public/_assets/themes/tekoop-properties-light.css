@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Tekoop Properties
+	Theme Style: Light       
+*/
+
+@import url("../_css/lato.css");
+@import url("../_css/myriad-pro-condensed.css");
+
+.tekoop-properties-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #222222; /* Heading */
+	--theme-sub-heading-color: #003da5; /* Subtitle */
+	--theme-body-color: #003da5; /* Body */
+	--theme-emphasis-color: #003da5; /* Outline */
+	--theme-body-font: sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
+}

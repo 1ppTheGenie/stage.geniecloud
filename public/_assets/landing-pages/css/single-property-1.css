@@ -1,0 +1,1013 @@
+@import "open-house.css";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h4 {
+    font-size: 22px;
+}
+
+section#about-section {
+    padding: 110px 0 20px;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+.btn-value-info {
+    display: inline-block;
+    text-align: center;
+    text-shadow: none;
+    -webkit-transition: color 0.2s linear, background 0.2s linear, border-color 0.2s linear,
+        text-shadow 0.2s linear;
+    transition: color 0.2s linear, background 0.2s linear, border-color 0.2s linear,
+        text-shadow 0.2s linear;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    width: 100%;
+    font-weight: 700;
+    padding: 20px;
+    max-width: 472px;
+    border-radius: 0;
+}
+
+.btn-value-info:hover,
+.btn-value-info:focus .btn,
+.btn-value-info:active .btn {
+    opacity: 0.8;
+}
+
+.funnel-template-8 .banner {
+    height: 580px;
+    width: 100%;
+    display: table;
+}
+
+.funnel-template-8 .banner .banner-content {
+    display: table-cell;
+    vertical-align: bottom;
+    background: linear-gradient(0deg, #000, transparent, transparent);
+}
+
+.funnel-template-8 .banner .banner-content h1 {
+    font-size: 62px;
+    color: #fff;
+    margin-bottom: 25px;
+    font-weight: 300;
+    display: inline-block;
+    line-height: 68px;
+}
+
+.funnel-template-8 .banner .banner-content h1 span {
+    font-size: 48px;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+.funnel-template-8 .details-section .col-md-9 h2 {
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 100%;
+    text-transform: uppercase;
+    padding-bottom: 20px;
+    margin: 20px 0;
+}
+
+.funnel-template-8 ul.property-details {
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.funnel-template-8 ul.property-details:before,
+.funnel-template-8 ul.property-details:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.funnel-template-8 .listing-status-sold {
+    background-color: #ec2227 !important;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 0.25em;
+    line-height: 1;
+}
+
+.funnel-template-8 .listing-status,
+.funnel-template-8 .listing-status-sold,
+.funnel-template-8 .listing-status-pending,
+.funnel-template-8 .listing-status-coming-soon {
+    font-size: 20px !important;
+    display: inline-block;
+    padding: 7px 10px;
+    margin: 0 auto 0;
+    font-weight: 400;
+    min-width: 100px;
+    background-color: #8cc640;
+    vertical-align: middle;
+}
+
+.funnel-template-8 .listing-status-sold {
+    background-color: red !important;
+}
+
+.funnel-template-8 .listing-status-pending {
+    background-color: #faac1a !important;
+}
+
+.funnel-template-8 ul.property-details li .content-box {
+    display: flex;
+    align-items: center;
+}
+
+.funnel-template-8 .content-box .icon-box {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.funnel-template-8 ul.property-details li .content-box .title-box {
+    width: calc(100% - 65px);
+    padding-right: 10px;
+    /* white-space: nowrap; */
+}
+
+.funnel-template-8 .content-box .title-box h6,
+.funnel-template-8 ul.property-details li .content-box .title-box>h6>span {
+    font-size: 16px;
+    margin: 0;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-family: var(--theme-heading-font);
+}
+
+.funnel-template-8 .details-section {
+    margin-bottom: 25px;
+    padding: 40px 0 25px;
+}
+
+.funnel-template-8 .details-section .col-md-9 .content-para {
+    margin-bottom: 40px;
+    line-height: 23px;
+}
+
+.funnel-template-8 .details-section .col-md-3 .form-section {
+    margin-top: -40px;
+}
+
+.funnel-template-8 .details-section .col-md-3 .form-section .form-title h4 {
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: 15px;
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+}
+
+.funnel-template-8 .details-section .col-md-3 .form-section .form-fields {
+    background: #e9e9e9;
+    padding: 15px;
+    margin-bottom: 40px;
+}
+
+.funnel-template-8 .details-section .col-md-3 .form-section .form-fields input,
+.funnel-template-8 .details-section .col-md-3 .form-section .form-fields textarea {
+    height: 40px;
+    width: 100%;
+    font-size: 15px;
+    padding: 0 10px;
+    margin-bottom: 12px;
+}
+
+.funnel-template-8 .name-n-other-details .agent-company-logo {
+    height: 50px;
+    width: 120px;
+    margin: auto;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.funnel-template-8 ul.property-details li {
+    list-style: none;
+    width: calc(100% / 3);
+    float: left;
+    margin: 7px 0;
+}
+
+.funnel-template-8 .property-image-show-btn .btn-value-info {
+    width: auto;
+    padding: 0 25px;
+    border-radius: 6px;
+
+}
+
+.owner-details-overlay.heading-color-as-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0.9;
+}
+
+.funnel-template-8 .details-section .col-md-3 .form-section .form-fields textarea {
+    height: 120px;
+    padding: 10px;
+}
+
+.funnel-template-8 .details-section .col-md-3 .form-section .form-fields .btn-value-info,
+.funnel-template-8 .property-image-show-btn .btn-value-info {
+    margin: 0;
+    border-radius: 10px;
+    transition: 0.4s ease-in-out;
+    line-height: 120%;
+    height: 40px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #4d2645;
+}
+
+.funnel-template-8 .owner-details-section .owner-details {
+    padding: 30px 10px;
+    position: relative;
+    height: 370px;
+}
+
+.funnel-template-8 .owner-details-section .owner-details h4 {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.funnel-template-8 .owner-details-section .owner-details .owner-photo {
+    height: 110px;
+    width: 110px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: top center;
+}
+
+.funnel-template-8 .owner-details-section .owner-details .name-n-other-details {
+    text-align: center;
+}
+
+.funnel-template-8 .owner-details-section .owner-details .name-n-other-details h3,
+.funnel-template-8 .owner-details-section .owner-details .name-n-other-details h3 a {
+    text-align: center;
+    font-size: 22px;
+    line-height: 120%;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--theme-body-background);
+}
+
+.funnel-template-8 .owner-details-section .owner-details .name-n-other-details a {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 15px;
+    word-break: break-all;
+}
+
+.funnel-template-8 .banner,
+.funnel-template-8 .owner-details-section {
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+.funnel-template-8 .owner-details-section {
+    position: relative;
+}
+
+.owner-details-overlay.genie-module-heading-color-as-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0.9;
+}
+
+
+.owner-details .contact-me-btn {
+    margin: 0 auto;
+    margin-bottom: 6px;
+    background-color: var(--theme-body-background);
+    color: var(--theme-body-color)
+}
+
+.funnel-template-8 .virtual-tour {
+    display: flex;
+    vertical-align: text-bottom;
+}
+
+.funnel-template-8 .virtual-tour a {
+    font-size: 18px;
+    vertical-align: middle;
+    margin-left: 7px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.funnel-template-8 .virtual-tour a:hover {
+    background-color: #269abc;
+    border-color: #1b6d85;
+}
+
+div#property-gallery {
+    --toggle-height: 330px;
+}
+
+#fl-submit-message .modal-body,
+.f1-home-compare .modal-body {
+    height: 100%;
+    padding: 0;
+}
+
+.funnel-mail-submit .fl-btn-value .btn {
+    border-radius: 5px;
+    padding: 7px;
+    width: 170px;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+.funnel-mail-submit form.funnel_create_lead {
+    padding-top: 19px;
+}
+
+.funnel-mail-submit ul li label {
+    font-weight: normal;
+    font-size: 14px;
+    padding-left: 27px;
+    line-height: 2;
+    cursor: pointer;
+}
+/*
+
+.funnel-mail-submit ul li label:before {
+    position: absolute;
+    content: "";
+    top: 6px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 4px 1px inset rgba(0, 0, 0, 0.1);
+    border-color: #ddd;
+}
+*/
+
+.funnel-mail-submit ul li {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 1.3em;
+    position: relative;
+    /* color: #363753; */
+    display: inline-block;
+    /* width: 46%; */
+}
+
+.funnel-mail-submit ul li:first-child {
+    margin-right: 10px;
+}
+
+/*
+
+.funnel-mail-submit label.selected:after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z'/%3E%3C/svg%3E");
+    ;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    line-height: 40%;
+    padding: 0 2px;
+    font-size: 39px;
+    width: 20px;
+    height: 20px;
+}
+*/
+
+.funnel-mail-submit ul li label input[type="checkbox"] {
+    width: 18px;
+    height: 20px;
+    left: -3px;
+    top: 3px;
+    cursor: pointer;
+}
+
+.funnel-create-lead ul {
+    margin-left: 5px;
+}
+
+.funnel-mail-submit ul {
+    padding: 0;
+}
+
+.funnel-mail-submit .col-md-12 {
+    padding: 0;
+}
+
+#fl-submit-message .modal-body:before,
+#fl-submit-message .modal-body:after,
+.f1-home-compare .modal-body:before,
+.f1-home-compare .modal-body:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+#fl-submit-message .modal-body .funnel-mail-submit .col-md-6:first-child,
+.f1-home-compare .modal-body .funnel-mail-submit .col-md-6:first-child {
+    padding: 0;
+}
+
+#fl-submit-message .modal-body .funnel-mail-submit .col-md-6,
+.f1-home-compare .modal-body .funnel-mail-submit .col-md-6 {
+    display: table;
+    height: 500px;
+    padding: 25px 50px;
+}
+
+#fl-submit-message .modal-body .funnel-mail-submit .col-md-6:first-child .property-bg,
+.f1-home-compare .modal-body .funnel-mail-submit .col-md-6:first-child .property-bg {
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+}
+
+#fl-submit-message .modal-body .modal-side-content,
+.f1-home-compare .modal-body .modal-side-content {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#fl-submit-message .modal-body .modal-side-content .modal_title,
+.f1-home-compare .modal-body .modal-side-content .modal_title {
+    font-size: 25px;
+    text-align: center;
+    font-weight: 600;
+    line-height: 120%;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+    padding: 0;
+}
+
+#fl-submit-message .modal-body .modal-side-content .modal_subtitle,
+.f1-home-compare .modal-body .modal-side-content .modal_subtitle {
+    font-size: 15px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#fl-submit-message .thanks-n-close,
+.f1-home-compare .thanks-n-close {
+    text-align: center;
+    padding-top: 20px;
+}
+
+#fl-submit-message .modal-body .thanks-n-close,
+.f1-home-compare .modal-body .thanks-n-close {
+    text-align: center;
+    padding-top: 20px;
+}
+
+#fl-submit-message .privacy-policy-content,
+.f1-home-compare .privacy-policy-content {
+    font-size: 15px;
+    text-align: center;
+    width: 90%;
+    margin: 10px auto 0px;
+    color: #777;
+}
+
+form.funnel-create-lead .form-group input {
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    font-size: 16px;
+    color: #002b5c;
+    background: transparent;
+    accent-color: inherit;
+}
+
+form.funnel-create-lead .form-group input:focus {
+    border-color: #002b5c;
+    outline: 0;
+}
+
+form.funnel-create-lead {
+    /* padding-top: 19px; */
+}
+
+#fl-submit-message .modal-dialog {
+    width: 850px;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.f1-home-compare .modal-dialog {
+    width: 850px;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+#fl-submit-message,
+.f1-home-compare {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+#fl-submit-message .fl-btn-value,
+.f1-home-compare .fl-btn-value {
+    text-align: center;
+}
+
+#fl-submit-message .close_modal,
+.f1-home-compare .close_modal {
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: underline;
+}
+
+#fl-submit-message .close_modal:hover,
+.f1-home-compare .close_modal:hover {
+    text-decoration: none;
+}
+
+.funnel-template-8 .property-image-show-btn {
+    padding-top: 32px;
+}
+
+.funnel-template-8 .property-image-show-btn .btn-value-info {
+    width: auto;
+    padding: 0 25px;
+    border-radius: 6px;
+    margin: 0 auto;
+}
+
+.funnel-template-8 .property-image-show-btn .btn-value-info:focus {
+    outline: none;
+}
+
+
+#galary-sec:before {
+    content: '';
+    display: block;
+    height: 110px;
+    margin-top: -90px;
+    visibility: hidden;
+}
+
+.funnel-template-8 .form-fields .btn-value-info:hover {
+    background: var(--theme-sub-heading-color);
+}
+
+/* two image maodal start  */
+.modal-left-img {
+    position: relative;
+    width: 100%;
+}
+
+.modal-left-img .one,
+.modal-left-img .two {
+    position: absolute;
+    height: 500px;
+}
+
+.one {
+    left: 0;
+    top: 0;
+    clip-path: polygon(100% 0, 0 100%, 0 0);
+    width: 100%;
+    z-index: 1;
+}
+
+.two {
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+
+.border-right {
+    position: absolute;
+    width: 10px;
+    height: 175%;
+    background: black;
+    transform: rotate(40.2deg);
+    top: -129px;
+    left: 158px;
+    z-index: 99999;
+}
+
+.test1 {
+    width: 100%;
+    background-color: #000;
+    margin: auto;
+    overflow: hidden;
+    height: 500px;
+}
+
+.test1_left {
+    width: 100%;
+    float: left;
+    /* background-image: url(https://english.cdn.zeenews.com/sites/default/files/styles/zm_700x400/public/2020/12/25/907391-housing-pixabat.jpg); */
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+    height: 100%;
+    margin-left: 1px;
+    background-position: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.test1_right {
+    width: 100%;
+    float: revert;
+    /* background-image: url(https://st.depositphotos.com/1194063/2151/i/600/depositphotos_21515189-stock-photo-agent-with-house-model-and.jpg); */
+    clip-path: polygon(0 0, 0% 100%, 100% 0);
+    height: 100%;
+    margin-left: -1px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.test1_left_mobile {
+    display: none;
+
+}
+
+.test1_right_mobile {
+    display: none;
+}
+
+.compare-address {
+    margin: 20px 0;
+}
+#fl-home-compare h1.modal_title.heading-color {
+    font-size: 20px;
+}
+p.compare-now {
+    font-size: 25px;
+    color: var(--theme-body-background);
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: inherit;
+    background: var(--theme-heading-color);
+    padding: 10px 0;
+}
+
+/* two image modal ends */
+@media (min-width: 576px) and (max-width: 768px) {
+    .container {
+        width: 100%;
+    }
+}
+
+@media (min-width: 874px) and (max-width: 991px) {
+    .test1 {
+        height: 386px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 874px) {
+    .test1 {
+        height: 405px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+    .banner-content .container {
+        width: 790px;
+    }
+
+
+}
+
+@media (max-width: 1199px) {
+    .funnel-template-8 .details-section .col-md-3 .form-section .form-fields .btn-value-info {
+        height: 45px;
+    }
+
+    .funnel-template-8 .details-section .col-md-3 .form-section .form-fields .btn-value-info p {
+        font-size: 15px !important;
+        line-height: 100%;
+    }
+
+    .funnel-template-8 .banner .banner-content h1 span {
+        font-size: 40px;
+    }
+
+    .funnel-template-8 .banner .banner-content h1 {
+        font-size: 60px;
+    }
+
+    div#property-gallery {
+        --toggle-height: 610px;
+    }
+
+    .funnel-template-8 .virtual-tour {
+        margin-bottom: 23px;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .funnel-template-8 .banner .banner-content h1 {
+        font-size: 50px;
+    }
+
+    .funnel-template-8 .details-section .col-md-3 .form-section {
+        margin-top: 0;
+    }
+
+    .funnel-template-8 .details-section .col-md-9 {
+        margin-bottom: 40px;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .funnel-template-8 .details-section .col-md-3 {
+        max-width: 60%;
+        margin: 0 auto;
+        flex: 0 0 60%;
+    }
+
+    #fl-submit-message .modal-dialog,
+    .f1-home-compare .modal-dialog {
+        position: relative;
+        width: 85%;
+        height: 100% !important;
+        margin-top: 30px;
+    }
+
+    #fl-submit-message .modal-body .funnel-mail-submit .col-md-6:first-child,
+    .f1-home-compare .modal-body .funnel-mail-submit .col-md-6:first-child {
+        display: block;
+        height: 250px;
+    }
+
+    #fl-submit-message .modal-body .funnel-mail-submit .col-md-6:first-child .property-bg,
+    .f1-home-compare .modal-body .funnel-mail-submit .col-md-6:first-child .property-bg {
+        height: 475px;
+    }
+
+    #fl-submit-message .modal-body .funnel-mail-submit .col-md-6,
+    .f1-home-compare .modal-body .funnel-mail-submit .col-md-6 {
+        display: block;
+        padding: 20px 50px;
+        height: auto;
+    }
+
+    #fl-submit-message .modal-body .modal-side-content,
+    .f1-home-compare .modal-body .modal-side-content {
+        display: block;
+    }
+
+    /*     .border-right {
+        position: absolute;
+        width: 10px;
+        height: 175%;
+        background: black;
+        transform: rotate(41.5deg);
+        top: -145px;
+        left: 158px;
+        z-index: 99999;
+    } */
+}
+
+@media (max-width: 870px) {
+
+    #fl-submit-message .modal-body .funnel-mail-submit .col-md-6:first-child .property-bg,
+    .f1-home-compare .modal-body .funnel-mail-submit .col-md-6:first-child .property-bg {
+        height: 479px;
+    }
+}
+
+@media (max-width: 795px) {
+
+    #fl-submit-message .modal-body .funnel-mail-submit .col-md-6:first-child .property-bg,
+    .f1-home-compare .modal-body .funnel-mail-submit .col-md-6:first-child .property-bg {
+        height: 557px;
+    }
+}
+
+@media (max-width: 768px) {
+    .funnel-template-8 .details-section .col-md-3 .form-section .form-fields .btn-value-info p {
+        font-size: 25px !important;
+    }
+
+    .founel_center-text {
+        text-align: center !important;
+    }
+
+    .funnel-template-8 .details-section .col-md-9 h2.main-title {
+        float: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .funnel-template-8 .banner {
+        height: 75vh;
+    }
+
+    .funnel-template-8 .banner .banner-content h1 {
+        font-size: 40px;
+    }
+
+    .funnel-template-8 .banner .banner-content h1 span {
+        font-size: 31px;
+    }
+
+    .funnel-template-8 .details-section .col-md-9 h2 {
+        font-size: 45px;
+    }
+
+    .funnel-template-8 ul.property-details li {
+        width: calc(100% / 2);
+    }
+
+    .funnel-template-8 .owner-details-section .owner-details .name-n-other-details a {
+        font-size: 15px;
+    }
+    .test1{
+        height: 250px;
+    }
+
+   /*  .test1_left_mobile {
+        display: block;
+        background-image: url(https://english.cdn.zeenews.com/sites/default/files/styles/zm_700x400/public/2020/12/25/907391-housing-pixabat.jpg);
+        width: 100%;
+        height: 25%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    } */
+
+   /*  .test1_left {
+        display: none;
+    }
+
+    .test1_right {
+        display: none;
+    } */
+
+   /*  .test1_right_mobile {
+        display: block;
+        background-image: url(https://st.depositphotos.com/1194063/2151/i/600/depositphotos_21515189-stock-photo-agent-with-house-model-and.jpg);
+        width: 100%;
+        height: 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    } */
+}
+
+@media (max-width: 580px) {
+
+
+    .funnel-template-8 .banner .banner-content h1 {
+        font-size: 40px;
+        line-height: 1.1;
+    }
+
+    .funnel-template-8 .banner .banner-content h1 span {
+        font-size: 33px;
+    }
+
+    .funnel-template-8 .details-section .col-md-9 h2 {
+        font-size: 40px;
+    }
+
+    .funnel-template-8 .details-section .col-md-9 h2.main-title {
+        margin-top: 0 !important;
+    }
+
+    section#about-section {
+        padding: 60px 0 20px;
+    }
+}
+
+@media (max-width: 530px) {
+    .fl-thankyou-modal.modal.fade .modal-dialog {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+
+
+    .funnel-template-8 .banner .banner-content h1 {
+        font-size: 25px;
+    }
+
+    .funnel-template-8 .banner .banner-content h1 span {
+        font-size: 20px;
+    }
+
+    .funnel-template-8 .details-section .col-md-9 h2 {
+        font-size: 36px;
+    }
+
+    .funnel-template-8 .details-section {
+        padding: 30px 0;
+    }
+
+    .funnel-template-8 ul.property-details li {
+        width: 100%;
+    }
+
+    .funnel-template-8 .details-section .col-md-9 {
+        margin-bottom: 30px;
+    }
+
+    .funnel-template-8 .details-section .col-md-3 {
+        max-width: 100%;
+        flex: 0 0 100%;
+        margin-bottom: 30px;
+    }
+
+    .funnel-template-8 .details-section .col-md-3 .form-section .form-fields {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 380px) {
+    .funnel-template-8 .details-section .col-md-3 .form-section .form-fields .btn-value-info p {
+        font-size: 19px !important;
+    }
+}
+
+@media (max-width: 350px) {
+    .funnel-template-8 .listing-status-sold {
+        margin-top: 15px;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 320px) {
+    .funnel-template-8 .banner .banner-content h1 {
+        margin-bottom: 10px;
+    }
+
+    .funnel-template-8 .virtual-tour a {
+        margin-left: 0;
+    }
+}
+
+svg[data-dismiss] {
+    width: 20px;
+    position: absolute;
+    top: 17px;
+    right: 20px;
+    /* fill: #fff; */
+    stroke-width: 25;
+    /* stroke: #fff; */
+    cursor: pointer;
+    z-index: 1;
+}

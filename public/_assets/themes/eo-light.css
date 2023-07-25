@@ -1,0 +1,18 @@
+/*
+	Theme Name:	EO
+	Theme Style: Light        
+*/
+
+@import url("../_css/roboto.css");
+@import url("../_css/barlow.css");
+
+.eo-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #de7fb3; /* Heading */
+	--theme-sub-heading-color: #628cce; /* Subtitle */
+	--theme-body-color: #616972; /* Body */
+	--theme-emphasis-color: #628cce; /* Outline */
+	--theme-body-font: "Barlow", sans-serif;
+	--theme-heading-font: "Roboto", sans-serif;
+	--theme-sub-heading-font: "Barlow", sans-serif;
+}

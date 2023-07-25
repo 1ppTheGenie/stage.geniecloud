@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Lisa Default 
+	Theme Style: Light         
+*/
+
+@import url("../_css/montserrat.css");
+
+.lisa-default-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #2c3740; /* Heading */
+	--theme-sub-heading-color: #2c3740; /* Subtitle */
+	--theme-body-color: #8494a0; /* Body */
+	--theme-emphasis-color: #555; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Montserrat", sans-serif;
+}

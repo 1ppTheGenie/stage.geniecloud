@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Abbott Team
+  Theme Style: Light    
+*/
+
+@import url("../_css/open-sans.css");
+
+.abbott-team-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #333333; /* Heading */
+	--theme-sub-heading-color: #00a3e6; /* Subtitle */
+	--theme-body-color: #333333; /* Body */
+	--theme-emphasis-color: #00a3e6; /* Outline */
+	--theme-body-font: "Open Sans", sans-serif;
+	--theme-heading-font: "Open Sans", sans-serif;
+	--theme-sub-heading-font: "Open Sans", sans-serif;
+}

@@ -1,0 +1,96 @@
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+button {
+	border-style: none;
+	background-color: #3e556a;
+	color: #fff;
+	padding: 0.5rem;
+	border-radius: 5px;
+	font-size: 70%;
+	margin: 0 1rem;
+}
+
+button:disabled {
+	color: #848f98;
+	cursor: not-allowed;
+}
+
+div#sections > * {
+	margin: 0 2rem 0 0;
+}
+
+span[contenteditable="true"] {
+	padding: 0.3rem;
+	display: inline-block;
+}
+
+label {
+	font-size: 135%;
+}
+label input {
+	padding: 0.25rem;
+	font-size: 135%;
+}
+
+.css-setting {
+	font-size: 125%;
+	display: grid;
+	grid-template-columns: 2fr 1fr 2fr;
+	margin: 1rem 0;
+	max-width: 600px;
+}
+
+select {
+	padding: 0.25rem;
+}
+:root {
+	--theme-body-background: #fff;
+	--theme-heading-color: #e29578;
+	--theme-sub-heading-color: #83c5be;
+	--theme-body-color: #006d77;
+	--theme-emphasis-color: #83c5be;
+	--theme-body-font: "Montserrat";
+	--theme-heading-font: var(--theme-body-font);
+	--theme-sub-heading-font: var(--theme-body-font);
+	--theme-font-size: 100%;
+}
+
+.sample {
+	float: right;
+	border: 1px solid var(--theme-emphasis-color);
+	padding: 1rem;
+	text-align: center;
+	color: var(--theme-body-color);
+	font-family: var(--theme-body-font);
+	background-color: var(--theme-body-background);
+}
+
+.sample .genie-asset-background {
+	background-color: var(--theme-body-background);
+	color: var(--theme-body-color);
+}
+
+.sample .genie-asset-outline {
+	border: 1px solid var(--theme-emphasis-color);
+	padding: 1rem;
+}
+
+.sample .genie-asset-heading {
+	color: var(--theme-heading-color);
+	font-family: var(--theme-heading-font);
+}
+
+.sample .genie-asset-subtitle {
+	color: var(--theme-sub-heading-color);
+	font-family: var(--theme-sub-heading-font);
+}

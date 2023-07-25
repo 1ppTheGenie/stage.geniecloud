@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Corcoran Global Living
+  Theme Style: Dark    
+*/
+
+@import url("../_css/open-sans.css");
+@import url("../_css/myriad-pro-condensed.css");
+
+.corcoran-global-living-dark {
+	--theme-body-background:#000000;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #4a769d; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #4a769d; /* Outline */
+	--theme-body-font: "Open Sans", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
+}

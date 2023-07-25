@@ -1,0 +1,19 @@
+/*
+	Theme Name:	Steve and Shauna
+	Theme Style: Dark
+	Roles: Steve and Shauna
+*/
+
+@import url("../_css/myriad-pro-condensed.css");
+@import url("../_css/lato.css");
+
+.steve-shauna-dark {
+	--theme-body-background: #3b3d41;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #3193c2; /* Subtitle */
+	--theme-body-color: #a3a3a3; /* Body */
+	--theme-emphasis-color: #3193c2; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

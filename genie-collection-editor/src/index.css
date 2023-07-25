@@ -1,0 +1,154 @@
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}
+
+button {
+	border-style: 1px solid var(--genie-border);
+	background-color: var(--genie-primary);
+	color: var(--genie-white);
+	padding: 0.5rem;
+	border-radius: 5px;
+	font-size: 70%;
+	cursor: pointer;
+}
+
+#sections {
+	margin-top: 3rem;
+}
+
+#sections h2,#sections h3 {
+	border-bottom: 1px solid var(--genie-dark-grey);
+}
+
+.collection-section {
+	min-width: 200px;
+	padding: 5px;
+	border: 1px solid #3e556a;
+	display: flex;
+	flex-direction: column;
+	margin-top: 0.5rem;
+}
+
+.collection-meta > * {
+	display: block;
+}
+
+.collection-meta input,
+.collection-meta textarea {
+	width: 100%;
+	padding: 3px;
+	border-radius: 3px;
+	border: 1px solid #ddd;
+}
+
+.collection-section-parent.active .collection-section {
+	border-width: 5px;
+}
+
+.collection-section-parent > span:first-child {
+	font-weight: bold;
+	font-size: 120%;
+}
+
+span[contenteditable="true"] {
+	padding: 0.3rem;
+	display: inline-block;
+}
+
+#assets ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#assets li {
+	cursor: pointer;
+	line-height: 160%;
+	background-color: #f0f8ff;
+	margin: 0.25rem;
+	padding: 0.25rem 0.5rem;
+	border: 1px solid #a9a9a9;
+}
+
+#assets li:hover {
+	background-color: #3e556a;
+	color: #fff !important;
+}
+
+#assets li.active {
+	font-weight: bold;
+	color: #3e556a;
+}
+
+td.actions svg {
+	fill: brown;
+	margin: 0 12px;
+	height: 32px;
+	cursor: pointer;
+}
+
+td.actions {
+	display: flex;
+	flex-wrap: nowrap;    
+	padding: 0.25rem 0;
+}
+
+.collection-box {
+	background-color: var(--genie-white);
+	padding: 1rem;
+	margin: 1rem 0;
+	border-radius: 3px;
+	border-top: 3px solid var(--genie-background);
+}
+
+.flex-row {
+	display: inline-flex;
+	justify-content: space-between;
+}
+
+.flex-row > * {
+	margin-right: 1rem;
+}
+
+.focussed {
+	border-radius: 3px;
+	border: 1px solid var(--genie-grey);
+	padding: 0.5rem;
+	box-sizing: border-box;
+}
+.focussed:focus {
+	border: 1px solid var(--genie-border);
+	outline: 0;
+	box-shadow: 0 0 6px 0.25rem rgb(54, 127, 169, 0.15);
+}
+
+select.focussed option {
+	font-size: 125%;
+}
+
+.input-grid span {
+	text-align: right;
+	white-space: nowrap;
+}
+.input-grid {
+	display: grid;
+	grid-template-columns: min-content 6fr;
+	grid-gap: 1rem;    align-items: center;
+}
+
+.choices {
+	max-width: 90%;
+}
+.choices__inner {
+	box-sizing: border-box;
+	background-color: #367fa933;
+}

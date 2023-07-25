@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Better Homes
+	Theme Style: Dark
+*/
+
+@import url("../_css/montserrat.css");
+
+.better-homes-dark {
+	--theme-body-background: #414042;
+	--theme-heading-color: #ffffff; /* Heading --theme-heading-color */
+	--theme-sub-heading-color: #48ab47; /* Subtitle --theme-sub-heading-color */
+	--theme-body-color: #ffffff; /* Body --theme-body-color */
+	--theme-emphasis-color: #48ab47; /* Outline --theme-emphasis-color */
+	--theme-body-font: "Montserrat", sans-serif; /* --theme-body-font */
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Montserrat", sans-serif;
+}

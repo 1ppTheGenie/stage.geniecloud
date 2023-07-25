@@ -1,0 +1,27 @@
+{
+	"name": "Other Listing (Built In)",
+	"sections": [
+		{
+			"name": "Landing Pages",
+			"assets": [
+				{
+					"folder": "landing-pages",
+					"stylesheet": "property-compare"
+				}
+			]
+		},
+		{
+			"name": "Social Graphics",
+			"assets": [
+				{
+					"folder": "social-marketing-graphics",
+					"stylesheet": "open-house-01"
+				},
+				{
+					"folder": "social-marketing-graphics",
+					"stylesheet": "lc-prop-post-03"
+				}
+			]
+		}
+	]
+}

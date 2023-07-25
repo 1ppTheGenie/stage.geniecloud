@@ -1,0 +1,18 @@
+/*
+	Theme Name:	EO
+	Theme Style: Dark        
+*/
+
+@import url("../_css/roboto.css");
+@import url("../_css/barlow.css");
+
+.eo-dark {
+	--theme-body-background: #3f4f73;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #de7fb3; /* Subtitle */
+	--theme-body-color: #cfcac7; /* Body */
+	--theme-emphasis-color: #de7fb3; /* Outline */
+	--theme-body-font: "Barlow", sans-serif;
+	--theme-heading-font: "Roboto", sans-serif;
+	--theme-sub-heading-font: "Barlow", sans-serif;
+}

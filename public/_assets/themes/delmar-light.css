@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Delmar
+	Theme Style: Light
+*/
+
+@import url("../_css/helvetica-neue-condensed.css");
+
+.delmar-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #2c3740; /* Heading */
+	--theme-sub-heading-color: #536776; /* Subtitle */
+	--theme-body-color: #8494a0; /* Body */
+	--theme-emphasis-color: #536776; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue Condensed", sans-serif;
+}

@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Brush Realty 
+	Theme Style: Light        
+*/
+
+@import url("../_css/helvetica-neue.css");
+
+.brush-realty-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #2e3178; /* Heading */
+	--theme-sub-heading-color: #bfa849; /* Subtitle */
+	--theme-body-color: #606060; /* Body */
+	--theme-emphasis-color: #bfa849; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Helvetica Neue", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

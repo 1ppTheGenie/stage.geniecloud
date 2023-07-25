@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Perfect Family Homes
+	Theme Style: Light        
+*/
+
+@import url("../_css/lato.css");
+
+.perfect-family-homes-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #167ba4; /* Heading */
+	--theme-sub-heading-color: #9adbf9; /* Subtitle */
+	--theme-body-color: #167ba4; /* Body */
+	--theme-emphasis-color: #167ba4; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

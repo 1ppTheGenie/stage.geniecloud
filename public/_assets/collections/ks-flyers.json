@@ -1,0 +1,29 @@
+{
+	"version": 3,
+	"name": "Kitchen Sink Flyers",
+	"sections": [
+		{
+			"meta": [],
+			"assets": [
+				{ "asset": "flyers/ed-kaminsky-brochure-01" },
+				{ "asset": "flyers/ed-kaminsky-brochure-02" },
+				{ "asset": "flyers/lc-brochure-01" },
+				{ "asset": "flyers/lc-oh-invite-01" },
+				{ "asset": "flyers/lc-oh-invite-01a" },
+				{ "asset": "flyers/open-house-flyer-copy" },
+				{ "asset": "flyers/open-house-welcome-stand-landscape" },
+				{ "asset": "flyers/open-house-welcome-stand" },
+				{ "asset": "flyers/single-listing-02" },
+				{ "asset": "flyers/single-listing-03" },
+				{ "asset": "flyers/single-listing-04" },
+				{ "asset": "flyers/single-listing-05" },
+				{ "asset": "flyers/single-listing-06" },
+				{ "asset": "flyers/single-listing-07" },
+				{ "asset": "flyers/single-rear-01" },
+				{ "asset": "flyers/cush-single-listing-flyer-1" },
+				{ "asset": "flyers/cush-single-listing-flyer-2" }
+			]
+		}
+	],
+	"template": "marketing-steps-lc1"
+}

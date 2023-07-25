@@ -1,0 +1,225 @@
+/* ----------------25-01-2023--------------- */
+div.banner,
+div.advert {
+    position: relative;
+    padding-top: 150px;
+    height: auto;
+}
+
+div.banner {
+    padding: 120px 0 140px;
+}
+
+div.address {
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin: 0 0 10px;
+}
+
+img.logo-img {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    width: 200px !important;
+}
+
+div.profile {
+    top: unset;
+    bottom: 110px;
+    width: 140px;
+    height: 140px;
+    position: absolute;
+    left: 0px;
+    right: 0;
+    margin: auto;
+}
+
+div.profile img {
+    object-fit: cover;
+    object-position: top;
+}
+
+.powered-label {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: #c7c7c7;
+    position: absolute;
+    top: 25%;
+    right: 18%;
+}
+
+.genie-logo img {
+    position: absolute;
+    right: 3%;
+    width: 200px;
+    height: 200px;
+    top: -4%;
+}
+
+.banner h1 {
+    font-size: 54px;
+    line-height: 60px;
+}
+
+.advert {
+    background: #b0914c;
+}
+
+.advert h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 50px;
+    line-height: 60px;
+    font-weight: 700;
+}
+
+div.advert div.button {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position: relative;
+    font-size: 19px;
+}
+
+.up-arrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 50px;
+    color: white;
+    display: block;
+    width: 2%;
+    margin: 4px auto;
+    cursor: default !important;
+}
+
+.open-house-checklist {
+    background: #0c0e30;
+    padding: 50px;
+    text-align: center;
+    color: #fff;
+}
+
+.text-gold {
+    color: #b0914c;
+}
+
+.open-house-checklist h1 {
+    font-size: 47px;
+    font-weight: 800;
+    line-height: 61px;
+    margin: 0px;
+}
+
+.open-house-checklist svg {
+    color: #b0934c;
+}
+
+.footer-marketing-kit p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #333333;
+}
+
+.footer-marketing-kit-inner {
+    display: flex;
+    padding: 20px 70px;
+    flex-wrap: wrap;
+}
+
+.col-width {
+    width: 33.33%;
+}
+
+div.banner,
+div.advert {
+    border-bottom: 0px;
+}
+
+.connect-community {
+    background: var(--background-grey);
+}
+
+.img-center {
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fff;
+    width: 140px;
+    height: 140px;
+    margin: auto;
+    margin-top: -70px;
+    z-index: 1;
+    position: relative;
+    background: white;
+}
+
+/* --------------- */
+@media (max-width: 900px) {
+    .col-width {
+        width: 100%;
+    }
+
+    div.profile {
+        top: unset;
+        left: calc(50vw - 15vh);
+        bottom: 110px;
+        position: relative;
+    }
+
+    div.banner {
+        width: 100%;
+        height: auto;
+        padding-top: 140px;
+    }
+}
+
+@media (max-width: 800px) {
+    img.logo-img {
+        display: none;
+    }
+
+    .genie-logo {
+        position: relative !important;
+        right: 3%;
+        width: 100px !important;
+        height: 140px !important;
+        top: -4%;
+    }
+
+    div.banner {
+        width: 100%;
+        padding-top: 50px;
+        height: auto;
+    }
+
+
+    div.profile {
+        top: unset;
+        left: calc(50vw - 15vh);
+        bottom: 110px;
+        position: relative;
+    }
+
+    .powered-label {
+        display: none;
+    }
+
+    .advert h1 {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 30px;
+        line-height: initial;
+        font-weight: 700;
+    }
+
+    div.advert div.button {
+        padding: 14px;
+        margin: 0;
+        font-size: 11px;
+        cursor: default !important;
+    }
+
+    .footer-marketing-kit-inner {
+        padding: 20px 24px;
+    }
+
+    .col-width {
+        width: 100%;
+    }
+}

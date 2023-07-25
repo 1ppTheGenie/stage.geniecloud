@@ -1,0 +1,18 @@
+/*
+	Theme Name:	The Complete Real Estate Group Light
+  Theme Style: Light    
+*/
+
+@import url("../_css/myriad-pro-condensed.css");
+@import url("../_css/lato.css");
+
+.the-complete-real-estate-group-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #3b3d41; /* Heading */
+	--theme-sub-heading-color: #1aa7ec; /* Subtitle */
+	--theme-body-color: #7d7e81; /* Body */
+	--theme-emphasis-color: #1aa7ec; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed";
+	--theme-heading-font: "Myriad Pro Condensed";
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

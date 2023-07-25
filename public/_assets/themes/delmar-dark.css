@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Delmar
+	Theme Style: Dark         
+*/
+
+@import url("../_css/helvetica-neue-condensed.css");
+
+.carylee-dark {
+	--theme-body-background: #2c3740;
+	--theme-heading-color: #fff; /* Heading */
+	--theme-sub-heading-color: #8494a0; /* Subtitle */
+	--theme-body-color: #fff; /* Body */
+	--theme-emphasis-color: #8494a0; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue Condensed", sans-serif;
+}

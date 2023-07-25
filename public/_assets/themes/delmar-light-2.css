@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Delmar
+	Theme Style: Light II
+*/
+
+@import url("../_css/myriad-pro-condensed.css");
+@import url("../_css/lato.css");
+
+.carylee-light-2 {
+	--theme-body-background: #ffefef;
+	--theme-heading-color: #3d8fd2; /* Heading */
+	--theme-sub-heading-color: #2c3740; /* Subtitle */
+	--theme-body-color: #5586ab; /* Body */
+	--theme-emphasis-color: #555; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

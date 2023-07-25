@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Greg's 
+	Theme Style: Light        
+*/
+
+@import url("../_css/lato.css");
+
+.gregs-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #175de7; /* Heading */
+	--theme-sub-heading-color: #2c3740; /* Subtitle */
+	--theme-body-color: #8494a0; /* Body */
+	--theme-emphasis-color: #555; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

@@ -1,0 +1,58 @@
+/* open house guest book 1 */
+.funnel-open-houes-guest1 section {
+    padding: 0;
+}
+
+
+
+h3 {
+    font-size: 24px;
+    line-height: 100%;
+}
+
+.open-houes-guest1 .open-house-gust-date h1 {
+    font-size: 41px;
+   
+    line-height: 100%;
+
+}
+
+.open-house-gust-date p {
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+body .funnel-footer-background {
+    padding-top: 50px;
+}
+
+.funnel-footer-background .funnel-company-logo.your_logo_class {
+    margin: 0 auto 20px auto;
+}
+
+.open-houes-guest1 .custom-control ul li {
+    font-size: 17px;
+}
+
+@media (min-width:1200px) {
+    .open-houes-guest1 .open-house-gust-date h1 {
+
+        white-space: nowrap;
+
+    }
+}
+
+@media (max-width:767px) {
+
+
+    .open-houes-guest1 .open-house-gust-date h1 span {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .open-house-gust-from-details button.btn {
+        width: auto;
+    }
+}

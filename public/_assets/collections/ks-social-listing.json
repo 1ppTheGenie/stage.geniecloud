@@ -1,0 +1,52 @@
+{
+	"version": 2,
+	"name": "Kitchen Sink Social-duplicate",
+	"template": "marketing-steps-lc1",
+	"sections": [
+		{
+			"meta": [],
+			"assets": [
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-03"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-brand-post-01-vip"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-01-vip"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-06-vip"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-06"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-vip-fb-prop-ad-1"
+				},
+				{
+					"asset": "social-marketing-graphics/map-listings-active"
+				},
+				{ "asset": "facebook-approved/listing-add-no-2" },
+				{ "asset": "social-marketing-graphics/listing-ad-3" },
+				{ "asset": "social-marketing-graphics/listing-ad-5" },
+				{ "asset": "direct-mail/single-listing-2-style-5" },
+				{
+					"asset": "social-marketing-graphics/single-listing-02"
+				},
+				{ "asset": "direct-mail/single-listing-3" },
+				{ "asset": "direct-mail/single-listing-4" },
+				{
+					"asset": "social-marketing-graphics/single-listing-05"
+				},
+				{
+					"asset": "social-marketing-graphics/single-listing-07"
+				},
+				{
+					"asset": "social-marketing-graphics/just-listed-01"
+				}
+			],
+			"name": "All Social"
+		}
+	]
+}

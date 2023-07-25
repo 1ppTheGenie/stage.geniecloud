@@ -1,0 +1,163 @@
+.banner-section {
+  margin-top: -30px;
+  width: 100%;
+  min-height: 87vh;
+  position: relative;
+  margin-bottom: 100px;
+}
+.top-box {
+  margin-top: -95vh;
+}
+.report-for {
+  background: rgb(255 255 255 / 51%);
+  padding: 20px 50px 10px 50px;
+  border-radius: 20px;
+  border: solid 4px #d0a538;
+}
+.report-for .heading {
+  padding: 6px 30px;
+  background: transparent;
+  color: #000;
+}
+
+.report-for .heading h1 {
+  font-family: Lato !important;
+  font-size: 56px;
+  line-height: 100%;
+}
+.object-pic {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.get-value {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: 30px auto 10px auto;
+  padding: 0px 70px;
+}
+.get-value input[type="text"] {
+  width: 100%;
+  border-radius: 41px;
+  border: 0px;
+  font-size: 16px;
+  padding: 16px 20px;
+  outline: none;
+  border: 3px solid #d0a538;
+}
+.get-value button {
+  border-radius: 0 41px 41px 0;
+  padding: 16px 20px;
+  position: absolute;
+  right: 70px;
+  top: 0;
+  border: 3px solid #d0a538;
+  min-height: 54px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.get-value button:hover {
+  opacity: 0.8;
+}
+.quote-text p {
+  font-family: Lato !important;
+  font-size: 18px;
+  color: #d0a538;
+  margin-bottom: 5px;
+}
+.msg-text {
+  font-family: Lato !important;
+  font-size: 18px;
+  color: #474744;
+  margin-top: -4px;
+}
+.description-text p {
+  font-family: Lato !important;
+  margin: auto !important;
+  line-height: 160%;
+  font-size: 20px;
+  max-width: 472px;
+  text-align: center;
+  color: #474744;
+}
+.top-space {
+  padding-top: 50px !important;
+}
+
+.btn-value-info {
+  background: #d0a538;
+  text-decoration: none;
+  width: 100%;
+  font-weight: bold;
+  padding: 25px;
+  margin: 20px;
+  max-width: 472px;
+  border-radius: 0;
+  font-size: 25px;
+  border: #d0a538;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* =================================== */
+
+@media (max-width: 768px) {
+  .report-for {
+    padding: 10px;
+    /* margin-bottom: 50px; */
+  }
+  .report-for .heading {
+    padding: 6px 5px;
+  }
+  .report-for .heading h1 {
+    font-family: Lato !important;
+    font-size: 34px;
+    line-height: 100%;
+  }
+  .quote-text p {
+    font-size: 17px;
+  }
+
+  .description-text p {
+    font-size: 18px;
+  }
+  .get-value {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0px;
+    padding: 0px 0px;
+  }
+  .get-value input[type="text"] {
+    width: 100%;
+    border-radius: 41px;
+    border: 0px;
+    font-size: 16px;
+    padding: 16px 20px;
+    outline: none;
+    border: 3px solid #d0a538;
+  }
+  .get-value button {
+    position: relative;
+    border-radius: 41px;
+    font-size: 16px;
+    padding: 12px 16px;
+  }
+  .get-value button {
+    right: 0px;
+    top: 5px;
+  }
+  .btn-value-info {
+    width: 100%;
+    font-weight: bold;
+    padding: 18px;
+    margin: 20px 0px;
+    max-width: 472px;
+    border-radius: 0;
+    font-size: 16px;
+  }
+}

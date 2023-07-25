@@ -1,0 +1,45 @@
+{
+	"name": "Listing Command Sample Single Photo",
+	"version": 2,
+	"template": "marketing-steps-lc1",
+	"sections": [
+		{
+			"meta": {
+				"caption": "Automate your Workflow",
+				"description": "These assets are samples of what would be used if you were to run a listing command for this property."
+			},
+			"assets": [
+				{
+					"asset": "direct-mail/krg-single-photo-content-combine",
+					"name": "Postcard 1"
+				},
+				{
+					"asset": "direct-mail/qr-code-postcard-combine-2022-1",
+					"knownAs": "Direct Mail - Sold",
+					"name": "Postcard 2"
+				},
+				{
+					"asset": "area-insider-reports/market-insider",
+					"knownAs": "Market Insider Report",
+					"name": "Market Insider"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-06",
+					"knownAs": "Facebook Ad",
+					"name": "Facebook Ad"
+				},
+				{
+					"asset": "landing-pages/lc-hollywood",
+					"knownAs": "Hollywood Landing Page",
+					"name": "Property Landing"
+				},
+				{
+					"asset": "landing-pages/property-compare",
+					"knownAs": "Property Comparison",
+					"name": "Property Compare"
+				}
+			],
+			"name": "Listing Command Assets"
+		}
+	]
+}

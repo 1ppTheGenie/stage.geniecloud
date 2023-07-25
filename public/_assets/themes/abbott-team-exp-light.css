@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Abbott Team EXp
+  Theme Style: Light    
+*/
+
+@import url("../_css/montserrat.css");
+@import url("../_css/lato.css");
+
+.abbott-team-exp-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #00a2e5; /* Heading */
+	--theme-sub-heading-color: #abe1fa; /* Subtitle */
+	--theme-body-color: #3a3a3a; /* Body */
+	--theme-emphasis-color: #00a2e5; /* Outline */
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+	--theme-body-font: "Lato", sans-serif;
+}

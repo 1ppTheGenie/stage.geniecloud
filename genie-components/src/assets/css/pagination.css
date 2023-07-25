@@ -1,0 +1,22 @@
+ul.pagination {
+	display: flex;
+	list-style: none;
+	margin: 1em;
+	margin-right: 0;
+}
+
+ul.pagination li {
+	padding: 0.25em;
+	font-size: 90%;
+	cursor: pointer;
+	border: 1px solid #ddd;
+	margin: 0.25em;
+	text-align: center;
+	min-width: 22px;
+}
+
+ul.pagination li.active {
+	font-weight: bold;
+	cursor: none;
+	border-style: none;
+}

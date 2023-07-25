@@ -1,0 +1,22 @@
+/*
+	Theme Name:	Equity Union light
+	Theme Style: Light       
+*/
+
+@import url("../_css/bodoni-moda.css");
+@import url("../_css/futura.css");
+
+.equity-union-dark {
+    --theme-body-background: #ffffff;
+    --theme-heading-color: #14467b;
+    /* Heading */
+    --theme-sub-heading-color: #101b43;
+    /* Subtitle */
+    --theme-body-color: #333333;
+    /* Body */
+    --theme-emphasis-color: #101b43;
+    /* Outline */
+    --theme-body-font: "Bodoni Moda", sans-serif;
+    --theme-heading-font: "futura";
+    --theme-sub-heading-font: "futura";
+}

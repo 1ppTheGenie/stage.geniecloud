@@ -1,0 +1,98 @@
+{
+	"version": 2,
+	"name": "Kitchen Sink Social",
+	"template": "marketing-steps-lc1",
+	"sections": [
+		{
+			"meta": [],
+			"assets": [
+				{
+					"asset": "social-marketing-graphics/open-house-01"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-03"
+				},
+				{
+					"asset": "social-marketing-graphics/ed-oh-instagram-story-2"
+				},
+				{
+					"asset": "social-marketing-graphics/ed-oh-instagram-story-3"
+				},
+				{
+					"asset": "social-marketing-graphics/ed-oh-social-templates-2"
+				},
+				{
+					"asset": "social-marketing-graphics/ed-oh-social-templates-3"
+				},
+				{
+					"asset": "social-marketing-graphics/ed-oh-social-templates-4"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-brand-post-01-vip"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-oh-post-02"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-oh-post-03"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-oh-story-01"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-01-vip"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-06-vip"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-06"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-vip-fb-prop-ad-1"
+				},
+				{ "asset": "social-marketing-graphics/nc-discovery" },
+				{ "asset": "social-marketing-graphics/nc-frisco-v2" },
+				{ "asset": "social-marketing-graphics/nc-frisco" },
+				{ "asset": "social-marketing-graphics/nc-news" },
+				{
+					"asset": "social-marketing-graphics/active-listings-satellite-map-with-price"
+				},
+				{
+					"asset": "social-marketing-graphics/map-listings-active"
+				},
+				{
+					"asset": "social-marketing-graphics/market-report-cover"
+				},
+				{
+					"asset": "social-marketing-graphics/market-report-insider-instant-download-v1"
+				},
+				{
+					"asset": "social-marketing-graphics/market-report-insider-instant-download-v2"
+				},
+				{ "asset": "social-marketing-graphics/the-lc-bay" },
+				{ "asset": "social-marketing-graphics/open-house-02" },
+				{ "asset": "facebook-approved/listing-add-no-2" },
+				{ "asset": "social-marketing-graphics/listing-ad-3" },
+				{ "asset": "social-marketing-graphics/lc-oh-post-02" },
+				{ "asset": "social-marketing-graphics/listing-ad-5" },
+				{ "asset": "direct-mail/single-listing-2-style-5" },
+				{ "asset": "social-marketing-graphics/single-listing-02" },
+				{ "asset": "direct-mail/single-listing-3" },
+				{ "asset": "direct-mail/single-listing-4" },
+				{ "asset": "social-marketing-graphics/single-listing-05" },
+				{
+					"asset": "social-marketing-graphics/single-listing-07"
+				},
+				{
+					"asset": "social-marketing-graphics/virtual-open-house-02"
+				},
+				{
+					"asset": "social-marketing-graphics/just-listed-01"
+				},
+				{ "asset": "social-marketing-graphics/just-sold-01" }
+			],
+			"name": "All Social"
+		}
+	]
+}

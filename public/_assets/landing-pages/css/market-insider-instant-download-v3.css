@@ -1,0 +1,82 @@
+/* market-insider-instant-download-v3  */
+.banner-top-section-info section.step1 > .container {
+    padding-bottom: 10%;
+}
+
+h4.home-value-area-price-info {
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 1) 12%,
+            rgba(255, 255, 255, 0.9) 31%,
+            rgba(255, 255, 255, 0.7) 56%,
+            rgba(255, 255, 255, 0.8) 76%,
+            rgba(255, 255, 255, 1) 91%,
+            rgba(255, 255, 255, 1) 100%);
+    /*  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4c4c4c', endColorstr='#131313', GradientType=0); */
+    font-weight: 500;
+    -webkit-background-clip: text;
+    /* -webkit-text-fill-color: transparent; */
+    line-height: 140%;
+}
+
+h4.home-value-area-price-info > strong {
+    font-size: 0.6em;
+    vertical-align: text-top;
+    line-height: 140%;
+}
+
+a.request-home-value {
+    width: auto;
+}
+
+.home-value-other-text-info .home-value-knowning-info {
+    margin-bottom: 30px;
+}
+
+
+.selling-information h3.home-value-area-info {
+    font-size: 3.0em;
+}
+
+.selling-information h3.home-value-area-info p {
+    font-size: 48px
+}
+
+.price_info_with_icon span.past-months {
+    border: none;
+    text-align: right;
+    display: block;
+    line-height: 100%;
+    margin-top: -30px;
+}
+
+@media (min-width:767px) {
+    .wave-design > img {
+        transform: scale(0.9) translate(-58px, 10px);
+    }
+}
+
+@media (max-width:1200px){
+ .wave-design > img    {
+         transform: scale(1) translate(-16px, 10px);
+        width: 100%;
+    }
+}
+
+@media (max-width: 575px) {
+
+    .selling-information h3.home-value-area-info p {
+        font-size: 25px;
+        line-height: 1.4;
+    }
+
+    h4.home-value-area-price-info {
+        font-size: 4.2em;
+    }
+}
+
+@media (max-width: 320px) {
+    .price_info_with_icon span.past-months {
+        margin-top: -27px;
+    }
+}

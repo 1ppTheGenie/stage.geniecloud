@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Filkey 
+	Theme Style: Light           
+	Roles: Filkey
+*/
+
+@import url("../_css/montserrat.css");
+
+.filkey-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #0082ac; /* Heading */
+	--theme-sub-heading-color: #000000; /* Subtitle */
+	--theme-body-color: #182d45; /* Body */
+	--theme-emphasis-color: #0082ac; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Montserrat", sans-serif;
+}

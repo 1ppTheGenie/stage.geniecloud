@@ -1,0 +1,22 @@
+/*
+	Theme Name:	OC
+	Theme Style: Light        
+*/
+
+@import url("../_css/playfair-display.css");
+@import url("../_css/work-sans.css");
+
+.oc-light {
+    --theme-body-background: #ffffff;
+    --theme-heading-color: #103458;
+    /* Heading */
+    --theme-sub-heading-color: #123159;
+    /* Subtitle */
+    --theme-body-color: #353535;
+    /* Body */
+    --theme-emphasis-color: #0000002B;
+    /* Outline */
+    --theme-heading-font: "Playfair Display";
+    --theme-sub-heading-font: "Playfair Display";
+    --theme-body-font: "Work Sans";
+}

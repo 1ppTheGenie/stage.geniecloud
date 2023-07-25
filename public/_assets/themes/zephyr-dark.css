@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Zephyr
+	Theme Style: Dark       
+*/
+
+@import url("../_css/helvetica-neue.css");
+@import url("../_css/helvetica-neue-condensed.css");
+
+.zephyr-dark {
+	--theme-body-background: #000000;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #b0bc22; /* Subtitle */
+	--theme-body-color: #d7d7d7; /* Body */
+	--theme-emphasis-color: #d7d7d7; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

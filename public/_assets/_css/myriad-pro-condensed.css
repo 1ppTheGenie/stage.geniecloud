@@ -1,0 +1,25 @@
+/* --------------------- Myriad Pro Condensed --------------------- */
+
+@font-face {
+    font-family: 'Myriad Pro Condensed';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../_fonts/Myriad-Pro-Light-Condensed.otf');
+}
+
+@font-face {
+    font-family: 'Myriad Pro Condensed';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../_fonts/Myriad-Pro-Condensed.ttf');
+}
+
+@font-face {
+    font-family: 'Myriad Pro Condensed';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../_fonts/Myriad-Pro-Bold-Condensed.ttf');
+}
+
+
+/* --------------------- Myriad Pro Condensed --------------------- */

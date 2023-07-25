@@ -1,0 +1,62 @@
+/* market-insider-instant-download-v4  */
+section.home-value-request-for-report {
+    padding: 70px 0;
+}
+
+/*
+h4.home-value-area-price-info{
+    float: right;
+}
+*/
+
+section#about-section {
+    padding-top: 60px;
+}
+
+.home-value-area-price-info sup {
+    font-size: 60%;
+}
+
+.selling-information h3.home-value-area-info {
+    font-size: 2.5em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+div a.request-home-value{
+    width: 100%;
+}
+
+
+h4.home-value-area-price-info span.past-months {
+    font-size: 17px;
+    text-align: right;
+    display: block;
+    line-height: 130%;
+    vertical-align: text-top;
+    border-bottom: 0;
+    position: relative;
+}
+.selling-information > svg{
+    margin-top: 0;
+}
+@media (max-width:1200px) {
+
+    .selling-information h3.home-value-area-info,
+    .selling-information h3.home-value-area-info p {
+        font-size: 32.5px;
+    }
+}
+
+@media (max-width:991px) {
+    .get-my-report-info-btn a.btn {
+        display: initial;
+    }
+}
+
+@media (max-width:575px) {
+    .selling-information h3.home-value-area-info {
+        font-size: 2.15em;
+    }
+   
+}

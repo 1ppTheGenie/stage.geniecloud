@@ -1,0 +1,48 @@
+{
+	"version": 3,
+	"name": "Market-Report-Kit",
+	"template": "marketing-steps-lc1",
+	"sections": [
+		{
+			"meta": { "caption": "Become the Local Expert!" },
+			"assets": [
+				{
+					"asset": "area-insider-reports/market-insider",
+					"knownAs": "Insider Report",
+					"name": "Market Insider"
+				},
+				{
+					"asset": "facebook-approved/market-insider-download-01",
+					"knownAs": "Market Insider Download Ad",
+					"name": "Social Story 1"
+				},
+				{
+					"asset": "social-marketing-graphics/nc-frisco",
+					"knownAs": "Neighborhood Ad",
+					"name": "Social Story 2"
+				},
+				{
+					"asset": "social-marketing-graphics/neighborhood-market-report-ad-03",
+					"knownAs": "Market Report Ad",
+					"name": "Social Story 3"
+				},
+				{
+					"asset": "charts/sales-to-list-price-chart",
+					"knownAs": "Sales to List Price Infographic",
+					"name": "Social Story 4"
+				},
+				{
+					"asset": "report-pages-letter/market-snapshot-letter",
+					"knownAs": "Market Snapshot Infographic",
+					"name": "Market Snapshot"
+				},
+				{
+					"asset": "report-pages-letter/fast-facts-style-letter-1",
+					"knownAs": "Fast Facts Infographic",
+					"name": "Fast Facts"
+				}
+			],
+			"name": "Area Market Reports"
+		}
+	]
+}

@@ -1,0 +1,21 @@
+/*
+	Theme Name:	Hilary Blaha
+	Theme Style: Light        
+*/
+
+@import url("../_css/roboto.css");
+
+.hilary-blaha-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #70a8b7;
+	/* Heading */
+	--theme-sub-heading-color: #3d1d1e;
+	/* Subtitle */
+	--theme-body-color: #3d1d1e;
+	/* Body */
+	--theme-emphasis-color: #6c3536;
+	/* Outline */
+	--theme-body-font: "roboto";
+	--theme-heading-font: "roboto";
+	--theme-sub-heading-font: "roboto";
+}

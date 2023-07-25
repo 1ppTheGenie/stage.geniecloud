@@ -1,0 +1,5 @@
+<svg width="100%" height="100%" viewBox="0 0 55 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 0.5V43H55" stroke="var(--theme-body-background)" stroke-width="2"/>
+<path d="M6.5 9L18.5 21L29 15L47.5 34" stroke="var(--theme-body-background)" stroke-width="2"/>
+<path d="M48.5 25C48.5 25.8 48.1667 31.6667 48 34.5L39 35" stroke="var(--theme-body-background)" stroke-width="2"/>
+</svg>

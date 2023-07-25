@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Sartoris Realty Group
+	Theme Style: Light        
+*/
+
+@import url("../_css/montserrat.css");
+
+.sartoris-realty-group-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #00205b; /* Heading */
+	--theme-sub-heading-color: #00205b; /* Subtitle */
+	--theme-body-color: #333333; /* Body */
+	--theme-emphasis-color: #00205b; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Montserrat", sans-serif;
+}

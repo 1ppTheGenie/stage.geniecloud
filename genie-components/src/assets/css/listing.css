@@ -1,0 +1,127 @@
+#listing-hero {
+	width: 100%;
+	min-height: 570px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: flex-end;
+	position: relative;
+}
+
+#listing-title {
+	background: linear-gradient(0deg, #000d, #0005, #0000);
+	padding-bottom: 1rem;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+}
+
+#listing-title > div {
+	color: var(--theme-body-background);
+	padding-top: 14rem;
+}
+
+#listing-title > div h1 {
+	font-size: 270%;
+	font-weight: 100;
+}
+
+#listing-title > div h2 {
+	font-size: 180%;
+	font-weight: 100;
+}
+
+.listing-state {
+	border-radius: 4px;
+	padding: 0.25rem 1rem;
+	color: #fff;
+	text-transform: capitalize;
+	margin-left: 1rem;
+	font-size: 70%;
+}
+
+#listing-grid {
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+	grid-gap: 20px;
+	margin-top: 80px;
+	position: relative;
+}
+
+#listing-grid .icons {
+	display: flex;
+	flex-wrap: wrap;
+	clear: both;
+}
+
+#listing-grid > * {
+	position: relative;
+}
+
+#listing-grid p {
+	line-height: 135%;
+}
+
+#listing-grid .icons > * {
+	flex-basis: 33.3%;
+	padding: 1rem;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: left;
+}
+
+#listing-grid .icons div > div {
+	box-sizing: border-box;
+	padding: 0.5rem;
+	border-radius: 33px;
+	height: 56px;
+	width: 56px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--theme-heading-color);
+	margin-right: 1rem;
+}
+
+#listing-grid .icons svg {
+	fill: var(--theme-body-background);
+	color: var(--theme-body-background);
+	height: 32px;
+}
+
+@media screen and (max-width: 768px) {
+	#listing-hero {
+		min-height: 290px;
+	}
+	#listing-title {
+		padding-left: 2.5vw;
+	}
+	#listing-title > div h1 {
+		font-size: 175%;
+	}
+	#listing-title > div h2 {
+		font-size: 140%;
+	}
+
+	#listing-grid {
+		display: flex;
+		flex-direction: column;
+		padding: 0 5vw;
+	}
+	#listing-grid p {
+		margin-bottom: 1rem;
+	}
+
+	#listing-grid .icons {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	#contact-us {
+		position: relative;
+		margin-top: auto;
+	}
+}

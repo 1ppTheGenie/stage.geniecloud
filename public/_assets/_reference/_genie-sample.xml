@@ -1,0 +1,136 @@
+<renderRoot>
+    <output apiUrl="https://dqohcd54xpkdwnueu2wn2nkxge0aboae.lambda-url.eu-west-2.on.aws/" siteUrl="https://genie-hub-2.s3.eu-west-2.amazonaws.com/" year="2023" reportDate="1689599076" sinceDate="1680134340" collectionId="9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c" mapboxKey="pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJ0VnNHQ0o4In0.Ju1ET8Y81mGY1Eu0l5DfRQ" googleKey="AIzaSyCGSGwWHruU7Y0E8yNoIN-XKeXD-QFSe1Q" areaIndex="1" areaPeriod="3" userId="4865455f-29a0-4c8f-9938-8c4bab261ef6" version="2.0.0b" size="facebook" theme="kw-light" additionalAgents="null" propertyType="0" mapStyle="satellite-streets-v9" mapIcon="dot" mapKey="false" pricePercent="percent" listingStatus="all" listingCount="10" withBleed="false" withCrops="false" blurPrice="false" hideAVM="false" requireSignin="false" customerName="null" isLeadCapture="false" downloadUrl="" openHouseTimes="null" propertyCaption="null" propertyCaptionSingular="null"/>
+    <date period="3/29/2023 to 6/29/2023" previousPeriod="12/29/2022 to 3/29/2023"/>
+    <overrides/>
+    <agents>
+        <agent>
+            <firstName>Ed</firstName>
+            <lastName>Kaminsky</lastName>
+            <photo>https://myneighborhood.re/wp-content/uploads/2022/12/Ed-Kaminsky-Profile-Image-Transparent-cropped-Dec-2022-v2-removebg-preview.png</photo>
+            <personalLogoLight>https://myneighborhood.re/wp-content/uploads/2022/07/ed-dark-logo-300x67-1.png</personalLogoLight>
+            <personalLogoDark>https://myneighborhood.re/wp-content/uploads/2022/07/light01.png</personalLogoDark>
+            <companyLogoLight>https://myneighborhood.re/wp-content/uploads/2022/06/Brokered-by-eXp-golden.png</companyLogoLight>
+            <companyLogoDark>https://myneighborhood.re/wp-content/uploads/2022/06/Brokered-by-eXp-White-3.png</companyLogoDark>
+            <marketingName>Ed Kaminsky</marketingName>
+            <marketingTitle>President &amp; CEO</marketingTitle>
+            <marketingEmail>EK@itzsold.com</marketingEmail>
+            <marketingAbout><![CDATA[Ed Kaminsky is the founder of Kaminsky Real Estate Group and SportStar Relocation. With an annual sales volume of over $300M, the Kaminsky Real Estate Group is the leading team in the South Bay. SportStar Relocation helps professional athletes and their families with relocation through a robust, nationwide network of vetted, top-producing real estate professionals. &#10;&#10; &#10;&#10;Ed's Awards: #1 Agent in the South Bay #13 Agent in California, Real Trends&#10;&#10;#50 Agent in America, The Wall Street Journal&#10;&#10;Excellence in Marketing Award, Los Angeles Business Journal&#10;&#10;100 Most Influential SoCal Agents, Real Estate Executive&#10;&#10;Best Marketing Campaign Institute for Luxury Home Marketing]]></marketingAbout>
+            <marketingLicense>CA DRE# 00958114</marketingLicense>
+            <privacySource>https://www.itzsold.com/privacy-policy</privacySource>
+            <privacyPolicy>External Link</privacyPolicy>
+            <disclaimerOptin>We are committed to keeping your e-mail address and phone number confidential. We do not sell, rent, or lease our lists to third parties, and we will not provide your personal information to any third party individual, government agency, or company at any time unless compelled to do so by law, but you would have to have done something pretty bad for us to give anything to the government. We will use your e-mail address solely to administer content and provide timely information about our awesomeness and the real estate services we provide. We merely send periodic emails you agree to receive about real estate topics we think will interest you. We do not share this information with outside parties except to the extent necessary to provide the service. If at any time you would like to unsubscribe from receiving future emails, we would be devastated beyond words and seek appropriate therapy.</disclaimerOptin>disclaimerExtradisclaimerIDX<pronoun>singular</pronoun>
+            <timezone>PT</timezone>
+            <mobile>310-307-2224</mobile>
+            <website>www.itzsold.com</website>
+            <email>EK@itzsold.com</email>
+            <agentId>4865455f-29a0-4c8f-9938-8c4bab261ef6</agentId>
+            <address>
+                <company/>
+                <street>440 Pacific Coast Hwy.</street>
+                <address2/>
+                <city>Hermosa Beach</city>
+                <state>CA</state>
+                <zip>90254</zip>
+            </address>
+        </agent>
+    </agents>
+    <areas>
+        <area>
+            <id>6766</id>
+            <name>Mission Beach</name>
+            <geojson><![CDATA[
+{
+    "type": "Polygon",
+    "coordinates": [
+        [
+            [
+                -117.25283,
+                32.76679
+            ],
+            [
+                -117.25343,
+                32.77933
+            ],
+            [
+                -117.25363,
+                32.78154
+            ],
+        ]
+    ]
+}
+]]>            </geojson>
+            <centerLat>32.77360010975722</centerLat>
+            <centerLng>-117.24824358954075</centerLng>
+            <image/>
+            <listings>
+                <listing lat="32.78297" lon="-117.25341" state="sold" address="3725 Ocean Front Walk" beds="5" baths="6" size="2716" listPrice="6390000" salePrice="6350000" listedDate="1686700800" soldDate="1689206400" dom="9" thumb="https://sdmls-media.cdn-connectmls.com/20230618T164932197/Property_230011495_Photo_1.JPEG"/>
+                <listing lat="32.78848" lon="-117.25357" state="sold" address="747 Windemere" beds="2" baths="2" size="990" listPrice="1375000" salePrice="1475000" listedDate="1686182400" soldDate="1689120000" dom="2" thumb="https://sdmls-media.cdn-connectmls.com/20230607T174629770/Property_230010848_Photo_1.JPEG"/>
+                <listing lat="32.78871" lon="-117.2531" state="active" address="3949 Mission Boulevard" beds="2" baths="2" size="800" listPrice="1900000" salePrice="" listedDate="1689033600" soldDate="null" dom="6" thumb="https://media.crmls.org/mediaz/35aff5d5-237a-430f-ac04-83210ccd8b16.jpg"/>
+                <listing lat="32.78183" lon="-117.2522" state="active" address="805 Ostend Court" beds="3" baths="2" size="1204" listPrice="1675000" salePrice="" listedDate="1688083200" soldDate="null" dom="17" thumb="https://sdmls-media.cdn-connectmls.com/20230710T160612337/Property_230012718_Photo_1.JPEG"/>
+                <listing lat="32.77689" lon="-117.25277" state="active" address="714 Lido Ct" beds="4" baths="4" size="2023" listPrice="3250000" salePrice="" listedDate="1688083200" soldDate="null" dom="16" thumb="https://sdmls-media.cdn-connectmls.com/20230630T150658595/Property_230012609_Photo_1.JPEG"/>
+                <listing lat="32.78661" lon="-117.25277" state="sold" address="824 Toulon Ct." beds="3" baths="4" size="1474" listPrice="2550000" salePrice="2550000" listedDate="1682899200" soldDate="1685923200" dom="17" thumb="https://sdmls-media.cdn-connectmls.com/20230518T191450618/Property_230007956_Photo_1.JPEG"/>
+                <listing lat="32.78571" lon="-117.25293" state="sold" address="809 Sunset Ct" beds="2" baths="1" size="624" listPrice="1250000" salePrice="1200000" listedDate="1678147200" soldDate="1683849600" dom="30" thumb="https://sdmls-media.cdn-connectmls.com/20230307T091018657/Property_230004332_Photo_1.JPEG"/>
+                <listing lat="32.76025" lon="-117.25023" state="active" address="2623 Ocean Front Walk" beds="4" baths="5" size="2809" listPrice="5275000" salePrice="" listedDate="1682899200" soldDate="null" dom="77" thumb="https://media.crmls.org/mediaz/27abae85-829a-4d60-91ca-187b0e82ef9c.jpg"/>
+                <listing lat="32.78661" lon="-117.25416" state="active" address="3879 Ocean Front Walk" beds="5" baths="5" size="2830" listPrice="6750000" salePrice="" listedDate="1680566400" soldDate="null" dom="104" thumb="https://sdmls-media.cdn-connectmls.com/20230404T134320426/Property_230006190_Photo_1.JPEG"/>
+                <listing lat="32.78003" lon="-117.25274" state="pending" address="722 Nantasket Ct" beds="2" baths="1" size="900" listPrice="1699900" salePrice="" listedDate="1675382400" soldDate="null" dom="4" thumb="https://sdmls-media.cdn-connectmls.com/20230207T014455420/Property_230002359_Photo_1.JPEG"/>
+            </listings>
+            <statistics lookbackMonths="3" propertyType="0" averageDaysOnMarket="28" averageListPrice="3358317" averageSalePrice="2893750" medianSalePrice="2012500" activePropertyTypeCount="5" averageListPriceForSold="2891250" avgPricePerSqFtSold="1870" avgPricePerSqFtList="1868" soldPropertyTypeCount="4" taxrollCount="556" turnOver="0.02886" maxSalePrice="6350000" minSalePrice="1200000" marketTotalSoldVolume="23150000" averageYearsInHome="15" ownerOccupancy="0.30576">
+                <previous totalSold="2" turnOver="0.01475" avgPricePerSqFtSold="1318" avgPricePerSqFtList="1400" averageListPriceForSold="2772500" averageSalePrice="2581500" averageDaysOnMarket="34" medianSalePrice="2581500" maxSalePrice="3650000" minSalePrice="1513000"/>
+                <byBedroom>
+                    <bedroom number="0" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+                    <bedroom number="1" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+                    <bedroom number="2" sold="2" active="1" pending="1" averageSalePrice="1337500" averageListPrice="1799950" averageListPriceForSold="1312500"/>
+                    <bedroom number="3" sold="1" active="1" pending="0" averageSalePrice="2550000" averageListPrice="1675000" averageListPriceForSold="2550000"/>
+                    <bedroom number="4" sold="0" active="2" pending="0" averageSalePrice="0" averageListPrice="4062500" averageListPriceForSold="0"/>
+                    <bedroom number="5" sold="1" active="1" pending="0" averageSalePrice="6350000" averageListPrice="6750000" averageListPriceForSold="6390000"/>
+                </byBedroom>
+                <bySize>
+                    <size min="0" max="1000" sold="2" active="1" pending="1" averageSalePrice="1337500" averageListPrice="1799950" averageListPriceForSold="1312500"/>
+                    <size min="1001" max="2000" sold="1" active="1" pending="0" averageSalePrice="2550000" averageListPrice="1675000" averageListPriceForSold="2550000"/>
+                    <size min="2001" max="3000" sold="1" active="3" pending="0" averageSalePrice="6350000" averageListPrice="4958333" averageListPriceForSold="6390000"/>
+                    <size min="3001" max="4000" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+                    <size min="4001" max="5000" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+                    <size min="5001" max="null" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+                </bySize>
+                <byValue>
+                    <range value="$2m" sold="2"/>
+                    <range value="$2m / $3m" sold="1"/>
+                    <range value="$3m" sold="1"/>
+                </byValue>
+            </statistics>
+        </area>
+    </areas>
+    <collection id="9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c" file="" title="" assembled="1689599075.781">
+        <sections>
+            <section name="Available Assets" caption="" description="">
+                <asset stylesheet="area-insider-reports/market-insider-letter" size="US Letter" name="THEGENIE.AI Market Insider Letter" version="1" renderKey="genie-files/9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c/kw-light/market-insider-letter.pdf" qrUrl="null">
+                    <tag name="Report"/>
+                </asset>
+                <asset stylesheet="area-insider-reports/market-insider" size="Facebook" name="THEGENIE.AI Market Insider" version="1" renderKey="genie-files/9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c/kw-light/TheGenie-Market-Insider-Mission-Beach-Homes-Jan-1970.pdf" qrUrl="null">
+                    <tag name="Report"/>
+                </asset>
+                <asset stylesheet="report-pages-letter/about-us-letter" size="US Letter" name="About Us Letter" version="1" renderKey="genie-files/9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c/kw-light/about-us-letter.png" qrUrl="null">
+                    <tag name="Text"/>
+                </asset>
+                <asset stylesheet="report-pages/listings-table-pending" size="Facebook" name="Pending Listings Table" version="1" renderKey="genie-files/9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c/kw-light/listings-table-pending.png" qrUrl="null">
+                    <tag name="Table"/>
+                </asset>
+                <asset stylesheet="report-pages-letter/listing-thumbnails-pending-letter" size="US Letter" name="Listing Thumbnails - Pending Letter" version="1" renderKey="genie-files/9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c/kw-light/listing-thumbnails-pending-letter.png" qrUrl="null">
+                    <tag name="Thumbnails"/>
+                </asset>
+                <asset stylesheet="report-pages/single-listing-04" size="Facebook" name="Single Listing No.4" version="1" renderKey="genie-files/9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c/kw-light/single-listing-04.png" qrUrl="null">
+                    <tag name="Social Marketing Ad"/>
+                </asset>
+                <asset stylesheet="report-pages/price-per-square-foot" size="Facebook" name="Price Per Square Foot" version="1" renderKey="genie-files/9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c/kw-light/price-per-square-foot.png" qrUrl="null">
+                    <tag name="Social Marketing Ad"/>
+                </asset>
+                <asset stylesheet="report-pages/text-or-call-me" size="Facebook" name="Text or Call Me" version="1" renderKey="genie-files/9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c/kw-light/text-or-call-me.png" qrUrl="null">
+                    <tag name="Text"/>
+                </asset>
+                <asset stylesheet="report-pages/sold-listing-table" size="Facebook" name="Sold Listings Table" version="1" renderKey="genie-files/9a5e167c-5c6f-4697-9cf1-4d5e1fa5633c/kw-light/sold-listing-table.png" qrUrl="null">
+                    <tag name="Table"/>
+                </asset>
+            </section>
+        </sections>
+    </collection>
+</renderRoot>

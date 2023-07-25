@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Coastal 
+	Theme Style: Blue        
+*/
+
+@import url("../_css/lato.css");
+@import url("../_css/myriad-pro-condensed.css");
+
+.coastal-blue {
+	--theme-body-background: #3193c2;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #14516f; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

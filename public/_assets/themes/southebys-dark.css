@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Sothebys
+	Theme Style: Dark    
+*/
+
+@import url("../_css/helvetica-neue-condensed.css");
+@import url("../_css/helvetica-neue.css");
+
+.southebys-dark {
+	--theme-body-background: #002b5c;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #cfdee7; /* Subtitle */
+	--theme-body-color: #baced9; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

@@ -1,0 +1,468 @@
+.futura-text {
+  font-family: "Futura";
+}
+
+/*header start*/
+.navbar {
+  position: absolute;
+  width: 99.9%;
+  margin-top: 24px;
+}
+
+.navbar .container-fluid {
+  padding-left: 2% !important;
+  padding-right: 4% !important;
+}
+
+.navbar-inverse {
+  background-color: #2220;
+  border-color: #08080800;
+}
+
+.nav.navbar-nav {
+  list-style: none;
+  display: flex;
+  justify-content: end;
+}
+
+.navbar li a {
+  color: #000 !important;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 18px 13px;
+}
+
+.nav li a:hover {
+  color: #b5944d !important;
+  transition: 0.2s ease-in-out;
+}
+
+.navbar-brand img {
+  height: 33px;
+}
+
+.navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 15px;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.navbar-toggle {
+  position: relative;
+  float: right !important;
+  padding: 9px 10px;
+  margin-right: 15px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+body .navbar-inverse .navbar-toggle .icon-bar {
+  background: #000 !important;
+}
+
+/*header end*/
+.home-background {
+  background-image: url(../../_img/bg-img.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left bottom;
+  background-attachment: fixed;
+  color: white;
+  padding: 240px 0px;
+}
+
+.first-part p {
+  font-size: 28px;
+  letter-spacing: 5px;
+  color: #0d0f30;
+}
+
+.first-part h1 {
+  font-size: 70px;
+  font-weight: 900;
+  color: #0d0f30;
+  word-spacing: -8px;
+  line-height: 1.1;
+  margin-top: 23px;
+  margin-bottom: 10px;
+}
+
+.first-part a,
+.first-part button,
+.second-part a {
+  background: #801517 !important;
+  border-radius: 14px;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 20px;
+  font-size: 18px;
+  padding: 10px 30px;
+  font-family: "futura" !important;
+}
+
+.comprehensive {
+  background: #231f20;
+  padding: 80px 0;
+}
+
+.second-part h3 {
+  font-weight: 800;
+  font-size: 30px;
+  margin-top: 0;
+  font-family: "futura" !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.second-part h3 span {
+  color: #d1232a;
+}
+
+.second-part p {
+  padding: 6px 62px;
+  font-size: 18px;
+  word-spacing: -1px;
+}
+
+.session {
+  background-image: url(../../_img/footer-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  padding: 80px 0px;
+}
+
+.first-part p {
+  font-size: 28px;
+  letter-spacing: 5.5px;
+  color: #0d0f30;
+  margin-bottom: 10px;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+button.sec-btn {
+  background: #a68b48 !important;
+  border-color: #a68b48 !important;
+}
+
+button.sec-btn:hover {
+  background: #a79059 !important;
+  border-color: #a79059 !important;
+}
+
+.mt-150 {
+  margin-top: 100px;
+}
+
+.footer p {
+  font-size: 10px;
+  font-weight: 400;
+  text-align: justify;
+  line-height: 10px;
+  margin-bottom: 0;
+}
+
+.logo2 {
+  height: 30px;
+}
+
+.logo1 {
+  height: 35px;
+  margin-left: 15px;
+}
+
+div.funnel-footer-background {
+  padding-top: 80px;
+  background: #fff;
+}
+
+.bottom-bar-copyright {
+  color: #888;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 15px 0;
+}
+
+.funnel-footer-background .funnel-footer-company-logo .funnel-company-logo {
+  height: 100px;
+/*   width: 408px; */
+  width: 100%;
+  margin: auto;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  background-position: center !important;
+}
+
+.funnel-footer-background .footer-style ul li {
+  list-style: none;
+  display: inline-block;
+  border-right: 2px solid;
+  padding-right: 10px;
+  margin-right: 10px;
+  font-size: 18px;
+  color: #333333;
+}
+
+.footer-style p {
+  color: #333333 !important;
+}
+.heading-font {
+  font-family: var(--theme-heading-font) !important;
+}
+
+@media only screen and (max-width: 1199px) {
+
+  body .nav>li,
+  body .nav>li:before {
+    margin: 0px;
+  }
+
+  body .nav li a {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .first-part h1 {
+    font-size: 66px;
+    padding-top: 20px;
+  }
+
+  .home-background {
+    padding: 200px 0;
+  }
+
+  .first-part p {
+    font-size: 24px;
+    /* margin-bottom: 0; */
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  body .navbar li a {
+    font-size: 12px !important;
+    padding: 18px 5px;
+    margin-right: 0px !important;
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  nav.navbar.navbar-inverse .collapse {
+    display: none !important;
+  }
+
+  nav.navbar.navbar-inverse .navbar-toggle {
+    display: block;
+  }
+
+  .active div#myNavbar {
+    display: block !important;
+    transform: translateX(0%);
+    background: #fff;
+    width: 100%;
+    height: 72vh !important;
+    position: relative;
+    z-index: 1;
+    transition: 0.6s;
+  }
+
+  .active button.navbar-toggle {
+    z-index: 10;
+  }
+
+  nav.navbar.navbar-inverse {
+    background: #fff;
+    top: 0;
+    margin-top: 0;
+    padding: 0px 0;
+  }
+
+  nav.navbar.navbar-inverse.active {
+    width: 100%;
+  }
+
+  .active .nav.navbar-nav {
+    display: block;
+    float: left !important;
+    position: absolute;
+    top: 58px;
+    left: 11px;
+    width: 100%;
+
+    text-align: center;
+  }
+
+  body .active .nav>li,
+  body .nav .active>li:before {
+    margin: 20px !important;
+  }
+
+  .active a.navbar-brand {
+    z-index: 2;
+    position: relative;
+  }
+
+  nav.navbar.navbar-inverse .navbar-toggle {
+    display: block;
+    margin-right: 37px;
+    position: absolute;
+    right: 0;
+    z-index: 9999;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-right {
+    float: right !important;
+    margin-right: -15px;
+  }
+
+  body .navbar .container-fluid .navbar-header {
+    float: unset;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .first-part h1 {
+    font-size: 40px;
+    padding: 20px 0;
+  }
+
+  .home-background {
+    padding: 140px 0px;
+  }
+
+  .row.mt-150 .col-md-3.text-center {
+    margin-top: 30px;
+  }
+
+  .bottom-bar-copyright .col-md-4>img {
+    margin: auto !important;
+    width: 90px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .second-part p {
+    padding: 6px 13px;
+  }
+
+  .first-part button,
+  .first-part a,
+  .second-part a {
+    font-size: 11px;
+    padding: 12px 20px;
+    margin-top: 0;
+  }
+
+  /* .funnel-footer-background .funnel-footer-company-logo .funnel-company-logo {
+    width: 26%;
+  } */
+}
+
+@media only screen and (max-width: 320px) {
+  .first-part h1 {
+    font-size: 28px;
+  }
+
+  .first-part p {
+    font-size: 26px;
+  }
+}
+
+/* --------------Responsive Menu Code------------------ */
+@media only screen and (max-width: 768px) {
+  .navbar-header .navbar-toggle .icon-bar {
+    width: 22px;
+    height: 2px;
+    margin-bottom: 0px;
+    border-radius: 1px;
+  }
+
+  nav.navbar.navbar-inverse .collapse {
+    display: block !important;
+    transform: translateX(0%) !important;
+    position: relative;
+    z-index: 999;
+  }
+
+  nav.navbar.navbar-inverse {
+    z-index: 999;
+  }
+
+  #mobileNave {
+    display: none;
+    width: 100%;
+    background-color: white;
+    margin-top: 55px;
+    text-align: center;
+  }
+
+  .navbar-nav,
+  .navbar-nav>li {
+    padding: 9px;
+  }
+
+  .navbar li a {
+    font-size: 12px;
+    padding: 9px;
+    font-weight: 600;
+  }
+
+  .first-part p {
+    margin-top: 20px;
+    letter-spacing: 6px;
+  }
+
+  .first-part h1 {
+    font-size: 29px;
+    word-spacing: 0px;
+    margin-bottom: 0px;
+  }
+
+  .second-part h3 {
+    font-size: 24px;
+    padding: 0px 20px;
+    line-height: 26px;
+  }
+
+  .second-part p {
+    font-size: 15px;
+    word-spacing: -1px;
+    line-height: 22px;
+  }
+
+  .session {
+    padding: 40px 0px;
+  }
+
+  .mt-150 {
+    margin-top: 40px;
+  }
+
+  .footer p {
+    font-size: 6px;
+  }
+
+  .footer-style p {
+    font-size: 18px;
+    color: #333333 !important;
+  }
+
+  #mls-disclaimer p {
+    text-align: center !important;
+  }
+}

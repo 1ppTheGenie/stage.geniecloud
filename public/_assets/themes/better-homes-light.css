@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Better Homes
+	Theme Style: Light          
+*/
+
+@import url("../_css/montserrat.css");
+
+.better-homes-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #2d862d; /* Heading */
+	--theme-sub-heading-color: #414042; /* Subtitle */
+	--theme-body-color: #636466; /* Body */
+	--theme-emphasis-color: #1a4d1a; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Montserrat", sans-serif;
+}

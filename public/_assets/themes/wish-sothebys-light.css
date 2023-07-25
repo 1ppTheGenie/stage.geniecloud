@@ -1,0 +1,15 @@
+/*
+	Theme Name:	Wish Sothebys
+	Theme Style: Dark           
+*/
+
+.wish-sothebys-light {
+	--theme-body-background: #002349;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #999999; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
+	--theme-body-font: Arial, sans-serif;
+	--theme-heading-font: Arial, sans-serif;
+	--theme-sub-heading-font: Arial, sans-serif;
+}

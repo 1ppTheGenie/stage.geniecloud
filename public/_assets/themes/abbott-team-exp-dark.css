@@ -1,0 +1,19 @@
+/*
+  Theme Name:  Abbott Team Exp
+  Theme Style: Dark    
+*/
+
+@import url("../_css/montserrat.css");
+@import url("../_css/lato.css");
+@import url("../_css/helvetica-neue.css");
+
+.abbott-team-exp-dark {
+	--theme-body-background: #00a2e5;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #ffffff; /* Subtitle */
+	--theme-body-color: #e8e8e8; /* Body */
+	--theme-emphasis-color: #cfedfc; /* Outline */
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+	--theme-body-font: "Helvetica Neue", sans-serif;
+}

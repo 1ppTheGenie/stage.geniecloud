@@ -1,0 +1,94 @@
+{
+	"version": 2,
+	"name": "Listing Default",
+	"template": "marketing-steps-lc1",
+	"sections": [
+		{
+			"meta": {
+				"caption": "Become the Social Media Expert for your Neighborhood",
+				"description": ""
+			},
+			"assets": [
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-01-vip",
+					"name": "Social Story 1"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-03",
+					"name": "Social Story 2"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-06",
+					"name": "Social Story 3"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-06-vip",
+					"name": "Social Story 4"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-brand-post-01-vip",
+					"name": "Social Story 5"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-oh-post-02",
+					"name": "Social Story 6"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-vip-fb-prop-ad-1",
+					"name": "Social Story 7"
+				}
+			],
+			"name": "Available Assets"
+		},
+		{
+			"meta": {
+				"caption": "Generate Interest with Online Destinations",
+				"description": ""
+			},
+			"assets": [
+				{
+					"asset": "landing-pages/lc-austin",
+					"name": "Austin Property Site"
+				},
+				{
+					"asset": "landing-pages/lc-hollywood",
+					"name": "Hollywood Property Site"
+				},
+				{
+					"asset": "landing-pages/home-compare-search",
+					"lpo": "property-compare",
+					"name": "Home Compare Page"
+				},
+				{
+					"asset": "landing-pages/property-compare",
+					"hide": true
+				},
+				{
+					"asset": "landing-pages/lc-oh-guestbook",
+					"lpo": "lc-austin",
+					"name": "Open House Guestbook"
+				}
+			],
+			"name": "New Section"
+		},
+		{
+			"meta": {
+				"caption": "Direct Mail and Listing Flyers to use at your next event",
+				"description": ""
+			},
+			"assets": [
+				{
+					"asset": "flyers/open-house-welcome-stand",
+					"qrUrl": "lc-oh-guestbook",
+					"qrDestination": "http://www.1parkplace.com"
+				},
+				{
+					"asset": "direct-mail/qr-code-postcard-2022-2",
+					"qrUrl": "lc-hollywood",
+					"name": "Austin Postcard"
+				}
+			],
+			"name": "New Section - 2"
+		}
+	]
+}

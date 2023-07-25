@@ -1,0 +1,49 @@
+{
+	"name": "John's Testing Kit",
+	"version": 3,
+	"template": "marketing-steps-lc1",
+	"sections": [
+		{
+			"name": "Direct Mail",
+			"assets": [
+				{ "asset": "direct-mail/coit-mailer-combined" },
+				{ "asset": "direct-mail/ed-kaminsky-combined-1" },
+				{ "asset": "direct-mail/ed-kaminsky-combined-2" }
+			]
+		},
+		{
+			"name": "Flyers",
+			"assets": [
+				{ "asset": "flyers/open-house-welcome-stand-landscape" },
+				{ "asset": "flyers/open-house-welcome-stand" }
+			]
+		},
+		{
+			"name": "Report Pages",
+			"assets": [
+				{ "asset": "report-pages/map-listings-table" },
+				{ "asset": "report-pages/market-update" },
+				{
+					"asset": "report-pages-letter/recent-sales-breakdown-letter"
+				}
+			]
+		},
+		{
+			"name": "Landing Pages",
+			"assets": [
+				{
+					"asset": "landing-pages/market-insider-instant-download-v3"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v4"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v5"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v6"
+				}
+			]
+		}
+	]
+}

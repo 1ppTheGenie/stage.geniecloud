@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Coldwell Banker
+	Theme Style: Dark
+*/
+
+@import url("../_css/helvetica-neue.css");
+@import url("../_css/helvetica-neue-condensed.css");
+
+.coldwellbanker-dark {
+	--theme-body-background: #012169;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #cf7c0c; /* Subtitle */
+	--theme-body-color: #7ea6cd; /* Body */
+	--theme-emphasis-color: #7ea6cd; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

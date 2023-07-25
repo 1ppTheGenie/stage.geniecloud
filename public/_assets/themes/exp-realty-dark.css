@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Exp Realty   
+	Theme Style: Dark             
+*/
+
+@import url("../_css/roboto.css");
+
+.exp-realty-dark {
+	--theme-body-background: #1b1e2a;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #f5821f; /* Subtitle */
+	--theme-body-color: #e2e3e4; /* Body */
+	--theme-emphasis-color: #f5821f; /* Outline */
+	--theme-body-font: 'Roboto', sans-serif;
+	--theme-heading-font: 'Roboto', sans-serif;
+	--theme-sub-heading-font: 'Roboto', sans-serif;
+}

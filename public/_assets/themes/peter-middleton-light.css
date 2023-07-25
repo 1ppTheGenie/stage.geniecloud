@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Peter Middleton   
+	Theme Style: Light          
+*/
+
+@import url("../_css/helvetica-neue.css");
+
+.peter-middleton-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #000000; /* Heading */
+	--theme-sub-heading-color: #86764f; /* Subtitle */
+	--theme-body-color: #323232; /* Body */
+	--theme-emphasis-color: #86764f; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Helvetica Neue", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

@@ -1,0 +1,183 @@
+{
+	"version": 3,
+	"name": "Kitchen Sink Report Pages",
+	"sections": [
+		{
+			"assets": [
+				{
+					"asset": "area-insider-reports/market-insider-letter"
+				},
+				{ "asset": "area-insider-reports/market-insider" },
+				{ "asset": "area-insider-reports/kip-market-insider-report" },
+				{
+					"asset": "area-insider-reports/pre-listing-market-insider"
+				},
+				{
+					"asset": "area-insider-reports/cush-insider-report"
+				},
+				{
+					"asset": "area-insider-reports/top-secret-market-insider"
+				},
+				{
+					"asset": "report-pages-letter/agent-info-style-letter-1"
+				},
+				{
+					"asset": "report-pages-letter/agent-info-style-letter-3"
+				},
+				{ "asset": "report-pages-letter/about-us-letter" },
+				{ "asset": "report-pages-letter/fast-facts-style-letter-1" },
+				{
+					"asset": "report-pages-letter/fast-facts-style-letter-2"
+				},
+				{
+					"asset": "report-pages-letter/recent-sales-breakdown-letter"
+				},
+				{
+					"asset": "report-pages-letter/recent-sales-letter"
+				},
+				{
+					"asset": "report-pages-letter/average-days-on-market-letter"
+				},
+				{
+					"asset": "report-pages-letter/average-sales-price-letter"
+				},
+				{
+					"asset": "report-pages-letter/map-listings-active-letter"
+				},
+				{
+					"asset": "report-pages-letter/map-listings-pending-letter"
+				},
+				{
+					"asset": "report-pages-letter/map-listings-sold-letter"
+				},
+				{
+					"asset": "report-pages-letter/market-snapshot-letter"
+				},
+				{
+					"asset": "report-pages-letter/sales-to-list-price-letter"
+				},
+				{
+					"asset": "report-pages-letter/sales-to-list-price-table-letter"
+				},
+				{
+					"asset": "report-pages-letter/what-does-this-mean-letter"
+				},
+				{
+					"asset": "report-pages-letter/what-people-are-buying-bedroom-count-letter"
+				},
+				{
+					"asset": "report-pages-letter/home-prices-style-letter-4"
+				},
+				{
+					"asset": "report-pages-letter/home-value-higher-letter"
+				},
+				{ "asset": "report-pages-letter/cover-letter-01" },
+				{ "asset": "report-pages-letter/listing-thumbnails-active-letter" },
+				{
+					"asset": "report-pages-letter/listing-thumbnails-pending-letter"
+				},
+				{
+					"asset": "report-pages-letter/listing-thumbnails-sold-letter"
+				},
+				{
+					"asset": "report-pages-letter/text-or-call-me-letter"
+				},
+				{
+					"asset": "report-pages-letter/street-map-style-letter-1"
+				},
+				{
+					"asset": "report-pages/ed-kaminsky-accept-mission"
+				},
+				{
+					"asset": "report-pages/ed-kaminsky-currently-for-sale"
+				},
+				{ "asset": "report-pages/ed-kaminsky-fast-fact-1" },
+				{ "asset": "report-pages/ed-kaminsky-fast-fact-2" },
+				{ "asset": "report-pages/ed-kaminsky-great-intel" },
+				{ "asset": "report-pages/ed-kaminsky-info" },
+				{ "asset": "report-pages/ed-kaminsky-market-insider-report-4" },
+				{
+					"asset": "report-pages/ed-kaminsky-pending-listing"
+				},
+				{ "asset": "report-pages/ed-kaminsky-report-cover" },
+				{ "asset": "report-pages/ed-kaminsky-sold-listing" },
+				{ "asset": "report-pages/ed-kaminsky-testimonials" },
+				{ "asset": "report-pages/ed-kaminsky-vip-entry-2" },
+				{ "asset": "report-pages/ed-kaminsky-vip-entry-3" },
+				{ "asset": "report-pages/ed-kaminsky-vip-entry-4" },
+				{ "asset": "report-pages/ed-kaminsky-vip-entry-5" },
+				{ "asset": "report-pages/ed-kaminsky-vip-entry-6" },
+				{ "asset": "report-pages/ed-kaminsky-vip-entry" },
+				{ "asset": "report-pages/agent-info-style-1" },
+				{ "asset": "report-pages/agent-info-style-2" },
+				{ "asset": "report-pages/agent-info-style-3" },
+				{ "asset": "report-pages/agent-info-style-letter-3" },
+				{ "asset": "report-pages/agent-profile" },
+				{ "asset": "report-pages/agent-quote" },
+				{ "asset": "report-pages/blank-style-1" },
+				{ "asset": "report-pages/check-your-home-value" },
+				{ "asset": "report-pages/about-this-area" },
+				{ "asset": "report-pages/about-us" },
+				{ "asset": "report-pages/image-in-center-style-1" },
+				{ "asset": "report-pages/image-on-left-style-1" },
+				{ "asset": "report-pages/image-on-right-style-1" },
+				{ "asset": "report-pages/fast-facts-style-1" },
+				{ "asset": "report-pages/fast-facts-style-2" },
+				{ "asset": "report-pages/recent-sales-breakdown" },
+				{ "asset": "report-pages/recent-sales" },
+				{ "asset": "report-pages/average-days-on-market" },
+				{ "asset": "report-pages/average-sales-price" },
+				{ "asset": "report-pages/map-listings-active" },
+				{ "asset": "report-pages/map-listings-pending" },
+				{ "asset": "report-pages/map-listings-sold" },
+				{ "asset": "report-pages/map-listings-table" },
+				{ "asset": "report-pages/competitive-market-analysis" },
+				{
+					"asset": "report-pages/market-insider-video-section"
+				},
+				{ "asset": "report-pages/market-shifting" },
+				{ "asset": "report-pages/market-snapshot" },
+				{ "asset": "report-pages/market-update" },
+				{ "asset": "report-pages/sales-to-list-price-table" },
+				{ "asset": "report-pages/sales-to-list-price" },
+				{ "asset": "report-pages/what-does-this-mean" },
+				{ "asset": "report-pages/what-people-are-buying-bedroom-count" },
+				{ "asset": "report-pages/pending-sales" },
+				{ "asset": "report-pages/home-prices-style-1" },
+				{ "asset": "report-pages/home-prices-style-2" },
+				{ "asset": "report-pages/home-prices-style-3" },
+				{ "asset": "report-pages/home-prices-style-4" },
+				{ "asset": "report-pages/home-prices-style-5" },
+				{ "asset": "report-pages/home-sold-by-bedroom" },
+				{ "asset": "report-pages/home-value-higher" },
+				{ "asset": "report-pages/good-time-to-sell" },
+				{ "asset": "report-pages/social-ads-by-bedroom" },
+				{ "asset": "report-pages/cover-01" },
+				{ "asset": "report-pages/cover-02" },
+				{ "asset": "report-pages/listing-thumbnails-active" },
+				{ "asset": "report-pages/listing-thumbnails-pending" },
+				{ "asset": "report-pages/listing-thumbnails-sold" },
+				{ "asset": "report-pages/listings-on-market" },
+				{ "asset": "report-pages/listings-table-active" },
+				{ "asset": "report-pages/listings-table-pending" },
+				{ "asset": "report-pages/listings-table-sold" },
+				{ "asset": "report-pages/download-home-value-report" },
+				{
+					"asset": "report-pages/look-at-what-people-are-buying"
+				},
+				{ "asset": "report-pages/single-listing-03" },
+				{ "asset": "report-pages/single-listing-04" },
+				{ "asset": "report-pages/single-listing-2-style-1" },
+				{ "asset": "report-pages/single-listing-2-style-2" },
+				{ "asset": "report-pages/single-listing-2-style-5" },
+				{ "asset": "report-pages/price-per-square-foot" },
+				{ "asset": "report-pages/sold-listing-table" },
+				{ "asset": "report-pages/most-in-demand" },
+				{ "asset": "report-pages/text-or-call-me" },
+				{ "asset": "report-pages/street-map-style-1" }
+			],
+			"name": "Available Assets"
+		}
+	],
+	"template": "marketing-steps-lc1"
+}

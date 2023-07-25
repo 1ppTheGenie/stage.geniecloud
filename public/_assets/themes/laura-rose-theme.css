@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Laura Rose
+  Theme Style: Dark    
+*/
+
+@import url("../_css/arial.css");
+
+.laura-rose-theme {
+	--theme-body-background: #3be8ea;
+	--theme-heading-color:#ffffff; /* Heading */
+	--theme-sub-heading-color: #000000; /* Subtitle */
+	--theme-body-color: #000000; /* Body */
+	--theme-emphasis-color: #555555; /* Outline */
+	--theme-body-font: "Arial";
+	--theme-heading-font: "Arial";
+	--theme-sub-heading-font: "Arial";
+}

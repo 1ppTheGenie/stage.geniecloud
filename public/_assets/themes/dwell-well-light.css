@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Dwell Well 
+	Theme Style: Light         
+*/
+
+@import url("../_css/lato.css");
+
+.dwell-well-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #0094ca; /* Heading */
+	--theme-sub-heading-color: #90c441; /* Subtitle */
+	--theme-body-color: #272727; /* Body */
+	--theme-emphasis-color: #272727; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

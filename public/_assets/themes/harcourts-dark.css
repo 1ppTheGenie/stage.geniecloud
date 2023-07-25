@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Harcourts
+	Theme Style: Dark 
+*/
+
+@import url("../_css/lato.css");
+@import url("../_css/myriad-pro-condensed.css");
+
+.harcourts-dark {
+	--theme-body-background: #002b49;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #00adef; /* Subtitle */
+	--theme-body-color: #eeeeee; /* Body */
+	--theme-emphasis-color: #00adef; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

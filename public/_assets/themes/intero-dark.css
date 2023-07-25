@@ -1,0 +1,21 @@
+/*
+	Theme Name:	Intero
+	Theme Style: Dark
+*/
+
+@import url("../_css/gotham.css");
+
+.intero-dark {
+    --theme-body-background: #57002a;
+    --theme-heading-color: #ffffff;
+    /* Heading */
+    --theme-sub-heading-color: #919191;
+    /* Subtitle */
+    --theme-body-color: #ffffff;
+    /* Body */
+    --theme-emphasis-color: #919191;
+    /* Outline */
+    --theme-body-font: "gotham-medium,Arial,Helvetica,sans-serif";
+    --theme-heading-font: "gotham-medium,Arial,Helvetica,sans-serif";
+    --theme-sub-heading-font: "gotham-medium,Arial,Helvetica,sans-serif";
+}

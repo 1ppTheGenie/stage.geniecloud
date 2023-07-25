@@ -1,0 +1,412 @@
+.lc-miami .banner {
+	height: 550px;
+	width: 100%;
+	display: table;
+	background-position: center;
+	background-size: cover;
+}
+
+.lc-miami .banner .banner-content {
+	display: table-cell;
+	vertical-align: bottom;
+	padding-bottom: 65px;
+	text-align: center;
+	background: linear-gradient(0deg, black, transparent, transparent);
+}
+
+.lc-miami .banner .banner-content h1 {
+	font-size: 50px;
+	color: #fff;
+	font-weight: 600;
+	line-height: 100%;
+	margin-bottom: 0px;
+	text-transform: uppercase;
+}
+
+.lc-miami .banner .banner-content h1 span {
+	font-size: 35px;
+}
+
+.lc-miami .virtual-tour {
+	line-height: 90%;
+	margin: 15px 0 28px;
+}
+
+.lc-miami .virtual-tour a {
+	font-size: 18px;
+	vertical-align: middle;
+	margin-left: 7px;
+	text-decoration: none;
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+	display: inline-flex;
+}
+
+.banner-content img {
+	width: 250px;
+	margin-bottom: -7px;
+}
+
+.lc-miami ul.property-details {
+	width: 100%;
+	margin: -65px auto 40px;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	padding: 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.lc-miami ul.property-details li {
+	list-style: none;
+	width: 14.2%;
+	position: relative;
+	padding: 20px 0px;
+	border-right: 2px solid var(--theme-body-background);
+	backdrop-filter: brightness(0.4);
+}
+
+.lc-miami ul.property-details li:last-child {
+	border: none;
+}
+
+.lc-miami ul.property-details li .content-box {
+	text-align: center;
+}
+
+.lc-miami .content-box .icon-box {
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	text-align: center;
+	display: table;
+	margin: 0px auto;
+}
+
+.lc-miami .content-box .icon-box i,
+.lc-miami .content-box .icon-box svg {
+	/* width: 22px; */
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.lc-miami ul.property-details li .content-box .title-box {
+	width: 100%;
+	padding: 7px 0px;
+}
+
+.lc-miami .content-box .title-box h6 {
+	font-size: 16px;
+	margin: 0;
+	line-height: 120%;
+	padding: 0px 5px;
+}
+
+.lc-miami .blur-text {
+	text-shadow: 0 0 9px #333;
+	color: transparent !important;
+	user-select: none;
+	margin-top: 0;
+}
+
+h3.listing_status_price {
+	font-size: 20px;
+}
+
+.blur-text {
+	cursor: pointer !important;
+	user-select: none;
+}
+
+.lc-miami .panel-adjustment {
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.lc-miami .content-box .title-box h6 {
+	font-size: 13px;
+}
+
+.lc-miami .form-section {
+	width: 70%;
+	margin: 0 auto;
+	padding-bottom: 40px;
+}
+
+.lc-miami .form-section .form-title h4 {
+	font-size: 24px;
+	text-transform: uppercase;
+	padding: 15px;
+	margin: 0;
+}
+
+.lc-miami .form-section form {
+	margin: 0px;
+}
+
+.lc-miami .form-section .form-fields input.col-half {
+	width: 49%;
+}
+
+.lc-miami .form-section .form-fields input.col-half:first-child {
+	margin-right: 15px;
+}
+
+.lc-miami .form-section .form-fields input.col-half:last-child {
+	width: 49%;
+}
+
+.lc-miami .form-section .form-fields input,
+.lc-miami .form-section .form-fields textarea {
+	height: 40px;
+	width: 100%;
+	font-size: 18px;
+	padding: 0px 10px;
+	margin-bottom: 15px;
+	border: none;
+	border-bottom: 1px solid #000 !important;
+}
+
+.lc-miami .form-section .form-fields textarea {
+	height: 120px;
+	padding: 10px;
+}
+
+.lc-miami .form-section .form-group {
+	margin: 0;
+}
+
+.lc-miami .form-section .form-fields .btn-value-info,
+.lc-miami .property-image-show-btn .btn-value-info {
+	margin: 0;
+	transition: 0.4s ease-in-out;
+	line-height: 120%;
+	height: 40px;
+	width: 212px;
+	padding: 8px 8px;
+	border: 1px solid #4d2645;
+	font-size: 18px;
+	font-weight: 400;
+	border-radius: 0;
+}
+
+.lc-miami .form-section .form-fields input:focus,
+.lc-miami .form-section .form-fields textarea:focus {
+	outline: none;
+	border-color: #002b5c !important;
+}
+
+.lc-miami .content-para {
+	font-size: 18px;
+	line-height: 26px;
+}
+
+section.presented-bg {
+	background: #f6f6f6;
+	padding: 60px 0px;
+	position: relative;
+}
+
+.lc-miami .owner-details-section .owner-details {
+	position: relative;
+	padding: 14px 18px;
+}
+
+.lc-miami .owner-details-section .owner-details .name-n-other-details {
+	padding-left: 115px;
+}
+
+.lc-miami .owner-details-section .owner-details .name-n-other-details h3 {
+	font-size: 18px;
+	line-height: 120%;
+	margin: 6px 0px;
+}
+
+.lc-miami
+	.owner-details-section
+	.owner-details
+	.name-n-other-details
+	h3.agent-phone {
+	margin-bottom: 0px !important;
+}
+
+.lc-miami .owner-details-section .single-agent-info {
+	position: absolute;
+	bottom: 0;
+	z-index: 9;
+	left: 50px;
+	width: auto;
+	top: 0;
+	margin: 0 auto;
+	height: 300px;
+	max-width: 600px;
+	padding-top: 32px;
+	min-width: 300px;
+	display: inline-block;
+	white-space: nowrap;
+}
+
+.lc-miami .name-n-other-details img {
+	width: 80px;
+	margin-top: 10px;
+}
+
+.lc-miami .owner-details-section .owner-details svg {
+	padding-right: 3px;
+	top: 3px;
+	position: relative;
+}
+
+.agent-email span,
+.agent-phone span {
+	word-break: break-all;
+	margin-left: 5px;
+}
+
+.agent-phone i {
+	padding-right: 5px;
+	float: left;
+	top: 3px;
+	position: relative;
+}
+
+.lc-miami .owner-details-section .owner-details .name-n-other-details a {
+	font-size: 16px;
+	line-height: 120%;
+}
+
+.lc-miami .owner-details-section .owner-details .owner-photo {
+	height: 98px;
+	width: 98px;
+	border-radius: 50%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	left: 12px;
+	background-size: cover !important;
+	background-position: center !important;
+}
+
+.lc-miami .owner-details-section h4 {
+	font-size: 20px;
+	color: #000;
+	text-transform: uppercase;
+	margin-bottom: 15px;
+	font-weight: 500;
+}
+
+.lc-miami .presented-bg .owner-details-section .col-md-3 {
+	position: relative;
+}
+@media (max-width: 1200px) {
+	.lc-miami .form-section .form-fields input.col-half:first-child {
+		margin-right: 10px;
+	}
+}
+@media (max-width: 768px) {
+	.lc-miami ul.property-details li {
+		width: 25%;
+		border-bottom: 1px solid #fff !important;
+	}
+}
+
+@media (max-width: 767px) {
+	.lc-miami .owner-details-section .single-agent-info {
+		position: relative !important;
+		width: 80% !important;
+	}
+	.lc-miami .form-section .form-fields input.col-half:first-child {
+		margin-right: 5px;
+	}
+}
+
+@media (max-width: 480px) {
+	.lc-miami .owner-details-section h4 {
+		text-align: center;
+	}
+
+	.lc-miami .owner-details-section .owner-details {
+		padding: 30px 18px;
+	}
+
+	.lc-miami .owner-details-section .owner-details {
+		margin-top: 80px;
+	}
+
+	.lc-miami .owner-details-section .owner-details .owner-photo {
+		height: 110px;
+		width: 110px;
+	}
+
+	.lc-miami .owner-details-section .owner-details .owner-photo {
+		right: 0;
+		left: 0;
+		top: -206px;
+	}
+
+	.lc-miami .owner-details-section .owner-details .name-n-other-details {
+		padding-left: 0;
+		text-align: center;
+	}
+
+	.lc-miami .owner-details-section .owner-details .name-n-other-details {
+		/* padding-top: 30px; */
+	}
+
+	.lc-miami .owner-details-section .owner-details .name-n-other-details h3 {
+		font-size: 22px;
+	}
+
+	.lc-miami .owner-details-section .single-agent-info {
+		width: 0% !important;
+	}
+
+	.lc-miami .form-section .form-fields input.col-half,
+	.lc-miami .form-section .form-fields input.col-half:last-child {
+		width: 100%;
+	}
+	.lc-miami #genie-map {
+		margin-top: 70px;
+	}
+}
+
+@media (max-width: 360px) {
+	.lc-miami ul.property-details li {
+		width: 50%;
+		border: 1px solid #fff;
+		border-top: none;
+	}
+
+	.lc-miami .pd-right-0 {
+		padding-right: 15px;
+	}
+
+	.lc-miami .owner-details-section .single-agent-info {
+		position: static !important;
+		display: block;
+	}
+
+	.lc-miami .banner .banner-content h1 {
+		font-size: 42px;
+	}
+
+	.lc-miami .banner .banner-content h1 span {
+		font-size: 30px;
+	}
+
+	.lc-miami .virtual-tour a {
+		font-size: 17px;
+	}
+	.lc-miami .owner-details-section .owner-details .name-n-other-details a {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 320px) {
+	.lc-miami .owner-details-section .single-agent-info {
+		min-width: 268px;
+	}
+}

@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Zephyr
+	Theme Style: Light      
+*/
+
+@import url("../_css/helvetica-neue.css");
+@import url("../_css/helvetica-neue-condensed.css");
+
+.zephyr-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #000000; /* Heading */
+	--theme-sub-heading-color: #b0bc22; /* Subtitle */
+	--theme-body-color: #808080; /* Body */
+	--theme-emphasis-color: #000000; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}

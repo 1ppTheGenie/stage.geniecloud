@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Genie Universal!
+	Theme Style: Light
+*/
+
+@import url("../_css/montserrat.css");
+@import url("../_css/myriad-pro-condensed.css");
+
+._default-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #0082ac;
+	--theme-sub-heading-color: #000;
+	--theme-body-color: #182d45;
+    --theme-heading-font: "Myriad Pro Condensed", sans-serif;
+    --theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-font-size: 90%;
+}

@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Asante Realty
+	Theme Style: Dark
+*/
+
+@import url("../_css/compass-sans.css");
+
+.asante-realty-dark {
+	--theme-body-background: #373c60;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #3498d8; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
+	--theme-body-font: "Compass Sans", sans-serif;
+	--theme-heading-font: "Compass Sans", sans-serif;
+	--theme-sub-heading-font: "Compass Sans", sans-serif;
+}

@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Debbiegates 
+	Theme Style: Dark       
+*/
+
+@import url("../_css/montserrat.css");
+
+.debbiegates-dark {
+	--theme-body-background: #414141;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #24ada8; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #24ada8; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Montserrat", sans-serif;
+}

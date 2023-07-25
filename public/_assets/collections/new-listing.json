@@ -1,0 +1,28 @@
+{
+	"name": "Laguna Listing (Built In)",
+	"sections": [
+		{
+			"name": "Landing Pages",
+			"assets": [
+				{
+					"asset": "landing-pages/property-compare"
+				}
+			]
+		},
+		{
+			"name": "Social Graphics",
+			"assets": [
+				{
+					"asset": "social-marketing-graphics/open-house-01"
+				},
+				{
+					"asset": "social-marketing-graphics/open-house-01",
+					"size": "Instagram Ad"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-03"
+				}
+			]
+		}
+	]
+}

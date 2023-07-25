@@ -1,0 +1,149 @@
+/* market-insider-instant-download-v6  */
+div.banner-top-section-info section.step1 {
+    padding: 0;
+    position: relative;
+}
+
+.selling-info-wraper .selling-information h3.home-value-area-info,
+.selling-information h4.home-value-area-price-info {
+    line-height: 120%;
+}
+
+.selling-info-wraper .selling-information h3.home-value-area-info {
+    margin-bottom: 40px;
+}
+
+section.home-value-request-for-report {
+    padding: 70px 0;
+}
+
+.graph-image.price_rise img {
+    left: 0;
+    width: 100%;
+    max-width: 410px;
+    bottom: 60px;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    opacity: 0.3;
+}
+.selling-information h3.home-value-area-info {
+    font-size: 2.7em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    font-weight: bold;
+    line-height: 120%;
+}
+h4.home-value-area-price-info span.past-months {
+    font-size: 17px;
+    text-align: right;
+    display: block;
+    line-height: 0%;
+}
+h4.home-value-area-price-info {
+    font-size: 5.5em;
+    z-index: 9;
+    position: relative;
+    line-height: 60%;
+    top: -20px;
+}
+
+.selling-information > svg {
+    max-width: 130px;
+    display: block;
+    margin: 0 auto 45px;
+}
+
+.fl-listing-wrapper {
+    padding: 90px 0 65px;
+}
+
+.home-value-other-text-info a.request-home-value {
+    width: auto;
+    padding: 40px 100px;
+}
+
+.home-value-other-text-info .home-value-knowning-info {
+    margin-bottom: 30px;
+}
+.selling-information {
+    padding: 31px 15px 0px;
+    position: relative;
+    height: 100%;
+}
+#about-section{
+    margin-top: -1px;
+}
+.selling-info-wraper {
+    box-shadow: 0 0 14px 2px rgb(0 0 0 / 20%);
+    max-width: 80%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background-color: white;
+    z-index: 999;
+    min-height: 610px;
+    border: 6px solid;
+    border-top: 0;
+}
+@media (max-width: 991px){
+    .selling-info-wraper {
+        max-width: 95%;
+        min-height: 547px;
+    }
+    .fl-listing-wrapper ul li {
+        font-size: 17px;
+    }
+}
+@media (max-width: 768px)
+{
+    /* .container {
+        width: 600px;
+    } */
+    .heading-color-as-bg {
+        margin-top: 40px;
+    }
+}
+@media (max-width:620px) {
+    /* .container{
+        width: 540px;
+    } */
+    .full-width {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+    .fl-listing-wrapper {
+        padding: 45px 0;
+    }
+    .selling-info-wraper {
+        max-width: 100%;
+        min-height: auto;
+        position: relative;
+        margin: 40px 0 0;
+        border-top: 6px solid;
+    }
+
+    .home-value-other-text-info a.request-home-value {
+        padding: 25px 40px;
+        font-size: 1.5em;
+    }
+}
+@media (max-width: 575px) {
+    h4.home-value-area-price-info span.past-months {
+        font-size: 15px;
+        line-height: 150%;   
+    }
+}
+@media (max-width: 320px)
+{
+    .selling-info-wraper .home-value-area-price-info {
+        font-size: 4.5em;
+    }
+    .selling-information > svg {
+    max-width: 100px;
+    margin: 0 auto 50px;
+    }
+}
