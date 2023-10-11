@@ -31,12 +31,27 @@
 			</image>
 			<rect x="0" y="0" width="100%" height="28%" style="fill:var(--theme-body-color);" fill-opacity="0.01"/>
 			<text x="50%" y="1.5%" class="upper center sub-heading" style="font-size: 220%;font-weight: 600;" data-max-width="40%">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'areanamemarket'" />
-					<xsl:with-param name="default" select="concat( 'Coming Soon in', '&#160;', //area/name )"/>
-				</xsl:call-template>
+<xsl:variable name="customListingStatus">
+	<xsl:choose>
+		<xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
+			<xsl:value-of select="'In Escrow'" />
+		</xsl:when>
+		<xsl:when test="number(//single/statusTypeID)=2">
+			<xsl:value-of select="'Just Sold'" />
+		</xsl:when>
+		<xsl:when test="number(//single/statusTypeID)=14">
+			<xsl:value-of select="'Coming Soon'" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="'Just Listed'" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+<xsl:value-of select="concat( $customListingStatus, ' in &#160;', //area[1]/name )"/>
+
 			</text>
 		</g>
+
 		<g style="transform: translate(0%,28%);">
 			<rect x="0" y="0" width="100%" height="9%" style="fill:var(--theme-sub-heading-color);"/>
 			<text x="35%" y="1.5%" class="normal" style="font-weight: 600;" fill="var(--theme-body-background)">
@@ -145,14 +160,14 @@
 						<xsl:with-param name="default" select="//agent[1]/mobile" />
 					</xsl:call-template>
 				</tspan>
-				<tspan> | </tspan>
+<tspan> &#124; </tspan>
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmarketingEmail'" />
 						<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 					</xsl:call-template>
 				</tspan>
-				<tspan> | </tspan>
+<tspan> &#124; </tspan>
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentwebsite'" />

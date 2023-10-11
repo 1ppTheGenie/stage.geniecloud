@@ -156,7 +156,8 @@
 				<xsl:value-of select="concat( //agent[1]/marketingName, '&#160;')" />
 			</text>
 			<text x="10%" y="5.5%" class="center" fill="var(--theme-sub-heading-color)">
-				<xsl:value-of select="concat( 'Realtor | ', //agent[1]/marketingLicense )" />
+<xsl:value-of select="concat( 'Realtor &#124; ', //agent[1]/marketingLicense )" />
+
 			</text>
 			<text x="10%" y="9.2%" class="center medium" fill="var(--theme-sub-heading-color)" style="font-weight:600;">
 				<xsl:value-of select="//agent[1]/mobile" />

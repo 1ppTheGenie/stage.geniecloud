@@ -81,7 +81,8 @@
 				<tspan dx="1%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'SqFt'" />
-						<xsl:with-param name="default" select="'Sq.Ft. | '" />
+<xsl:with-param name="default" select="'Sq.Ft. &#124; '" />
+
 					</xsl:call-template>
 				</tspan>
 				<tspan>

@@ -36,6 +36,7 @@ Version:	1.1
 		</div>
 	</xsl:template>
 
+
 	<xsl:template name="listing-command">
 		<xsl:variable name="description">
 			<xsl:call-template name="overridable">
@@ -49,10 +50,10 @@ Version:	1.1
 			<xsl:with-param name="title">
 				<xsl:choose>
 					<xsl:when test="not(//single)">
-						<xsl:value-of select="concat( //areas/area[1]/name, ' | ' ,//agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
+						<xsl:value-of select="concat( //areas/area[1]/name, ' &#124; ' ,//agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat( $listingAddressLine1, ', ' , $listingAddressLine2, ' | ' , //agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
+						<xsl:value-of select="concat( $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ' , //agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:with-param>
@@ -97,7 +98,7 @@ Version:	1.1
 							<xsl:attribute name="src">
 								<xsl:value-of select="concat( '/_assets/landing-pages/dist/', $buildVersion, '/assets/index.js' )" />
 							</xsl:attribute>
-							<xsl:text>;</xsl:text>
+							<xsl:comment />
 						</script>
 						<style>
 							<xsl:value-of select="'div.banner span.overlay {z-index: 10!important;}'"/>
@@ -119,7 +120,7 @@ Version:	1.1
 						<br/>
 						<xsl:call-template name="overridable">
 							<xsl:with-param name="id" select="'page-title'" />
-							<xsl:with-param name="default" select="'Marketing Domination Kit'" />
+							<xsl:with-param name="default" select="'Marketing Toolkit'" />
 						</xsl:call-template>
 					</h1>
 					<xsl:if test="$listingAddressLine1 !=''">
@@ -192,7 +193,8 @@ Version:	1.1
 
 						<div class="section-grid">
 							<xsl:for-each select="./asset">
-								<xsl:sort select="@name"/>
+<xsl:sort select="if (matches(@name, '(\d+)')) then format-number(number(regex-group(1)), '000000') else @name" data-type="text"/>
+
 								<xsl:call-template name="asset-box">
 									<xsl:with-param name="asset" select="."/>
 								</xsl:call-template>
@@ -315,7 +317,8 @@ Version:	1.1
 							<b>Re-render this kit:&#160;</b>
 							<a>
 								<xsl:attribute name="href">
-									<xsl:value-of select="concat( //output/@siteUrl, 'genie-collection/', //output/@collectionKey, '?re-render=true' )" />
+<xsl:value-of select="concat( //output/@apiUrl, 're-render/?renderId=', //collection/@id )" />
+
 								</xsl:attribute>
 								<xsl:text>Click to re-render</xsl:text>
 							</a>
@@ -326,16 +329,20 @@ Version:	1.1
 		</body>
 
 		<footer>
-			<img>
-				<xsl:attribute name="src">
-					<xsl:value-of select="$personalLogoInverse" />
-				</xsl:attribute>
-			</img>
-			<img>
-				<xsl:attribute name="src">
-					<xsl:value-of select="$companyLogoInverse" />
-				</xsl:attribute>
-			</img>
+<xsl:if test="$personalLogo!=''">
+<img>
+	<xsl:attribute name="src">
+<xsl:value-of select="$personalLogo" />
+</xsl:attribute>
+</img>
+</xsl:if>
+<xsl:if test="$companyLogo!=''">
+<img>
+	<xsl:attribute name="src">
+<xsl:value-of select="$companyLogo" />
+</xsl:attribute>
+</img>
+</xsl:if>
 		</footer>
 	</xsl:template>
 </xsl:stylesheet>												

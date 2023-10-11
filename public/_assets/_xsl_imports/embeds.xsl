@@ -41,13 +41,13 @@
 				</link>
 
 				<script>
-					<xsl:value-of select="concat( 'window.ghub = { SINGLE:  0, CONDO: 1, site_url: `', //output/@siteUrl, '`, api_url: `', //output/@apiUrl, '`, google_key: `', //output/@googleKey, '`, mapbox_key: `', //output/@mapboxKey, '` };')" />
+					<xsl:value-of select="concat( 'window.ghub = { SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
 				</script>
 
 				<script>
 					<xsl:value-of select="'
-					ghub.api = ghub.api_url;
-					ghub.build_url = ghub.site_url;
+					ghub.api = ghub.apiUrl;
+					ghub.build_url = ghub.siteUrl;
 
 					ghub.addlink = function (href, rel) {
 						let sheet = document.createElement(`link`);

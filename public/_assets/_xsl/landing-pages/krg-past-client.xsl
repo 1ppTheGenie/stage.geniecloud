@@ -103,7 +103,7 @@
 									<br/>
 									<xsl:text>Guard this data with your life.</xsl:text>
 								</h1>
-								<a href="https://myneighborhood.re/wp-content/uploads/2022/10/TheGenie.ai-market-insider-report-for-homes-1665722047.pdf" download="TheGenie.ai-market-insider-report.pdf" class="js-download-report btn btn-primary genie-module-subtitle-color-as-bg genie-module-background-as-color  genie-module-heading-font">MARKET INSIDER | DOWNLOAD NOW</a>
+<a href="https://myneighborhood.re/wp-content/uploads/2022/10/TheGenie.ai-market-insider-report-for-homes-1665722047.pdf" download="TheGenie.ai-market-insider-report.pdf" class="js-download-report btn btn-primary genie-module-subtitle-color-as-bg genie-module-background-as-color  genie-module-heading-font">MARKET INSIDER &#124; DOWNLOAD NOW</a>
 							</div>
 						</div>
 					</div>
@@ -124,7 +124,7 @@
 									</strong>
 									<xsl:text> • Median sale price • Average sale price • Avg. sale price per square foot High sale price • Number of homes sold • Number of homes for sale • Maps of current, pending, sold homes Details of all currently-listed homes • Details of recently sold homes • Details of currently pending homes Avg. days on market • Avg. length of ownership • 12-month turn over rate</xsl:text>
 
-									<a href="https://myneighborhood.re/wp-content/uploads/2022/10/TheGenie.ai-market-insider-report-for-homes-1665722047.pdf" download="TheGenie.ai-market-insider-report.pdf" class="js-download-report btn btn-primary genie-module-subtitle-color-as-bg genie-module-background-as-color  genie-module-heading-font">MARKET INSIDER | DOWNLOAD NOW</a>
+<a href="https://myneighborhood.re/wp-content/uploads/2022/10/TheGenie.ai-market-insider-report-for-homes-1665722047.pdf" download="TheGenie.ai-market-insider-report.pdf" class="js-download-report btn btn-primary genie-module-subtitle-color-as-bg genie-module-background-as-color  genie-module-heading-font">MARKET INSIDER &#124; DOWNLOAD NOW</a>
 								</p>
 							</div>
 						</div>
@@ -150,7 +150,8 @@
 					<div class="row mt-150">
 						<div class="col-md-9 footer">
 							<p class="text-white">
-								<xsl:value-of select="concat( //agent[1]/marketingName, ' CALIFORNIA DEPARTMENT OF REAL ESTATE ', //agent[1]/marketingLicense, ' | EXP REALTY OF CALIFORNIA, INC. CALIFORNIA DEPARTMENT OF REAL ESTATE #01878277. THE INFORMATION CONTAINED IN THIS DOCUMENT, INCLUDING, BUT NOT LIMITED TO, SQUARE FOOTAGE AND/OR ACREAGE, HAS BEEN PROVIDED BY VARIOUS SOURCES WHICH MAY INCLUDE THE SELLER, PUBLIC RECORDS, THE MULTIPLE LISTING SERVICE OR OTHER SOURCES. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.' )"/>
+<xsl:value-of select="concat( //agent[1]/marketingName, ' CALIFORNIA DEPARTMENT OF REAL ESTATE ', //agent[1]/marketingLicense, ' &#124; EXP REALTY OF CALIFORNIA, INC. CALIFORNIA DEPARTMENT OF REAL ESTATE #01878277. THE INFORMATION CONTAINED IN THIS DOCUMENT, INCLUDING, BUT NOT LIMITED TO, SQUARE FOOTAGE AND/OR ACREAGE, HAS BEEN PROVIDED BY VARIOUS SOURCES WHICH MAY INCLUDE THE SELLER, PUBLIC RECORDS, THE MULTIPLE LISTING SERVICE OR OTHER SOURCES. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.' )"/>
+
 							</p>
 						</div>
 						<div class="col-md-3 text-center">

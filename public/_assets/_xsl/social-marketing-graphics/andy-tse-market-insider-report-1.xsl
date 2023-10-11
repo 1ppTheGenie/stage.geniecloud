@@ -177,7 +177,8 @@
 			<tspan class='center'>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'areaname '" />
-					<xsl:with-param name="default" select="concat( //area/name, ' #1 agent | 2018 | 2019 | 2020 | 2021 ' )" />
+<xsl:with-param name="default" select="concat( //area/name, ' #1 agent &#124; 2018 &#124; 2019 &#124; 2020 &#124; 2021 ' )" />
+
 				</xsl:call-template>
 			</tspan>
 		</text>

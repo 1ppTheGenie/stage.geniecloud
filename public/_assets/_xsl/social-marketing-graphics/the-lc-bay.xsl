@@ -123,7 +123,7 @@
 				<xsl:value-of select="$listingAddressLine1" />
 			</tspan>
 			<tspan font-weight="100">
-				<xsl:text> | </xsl:text>
+<xsl:text> &#124; </xsl:text>
 			</tspan>
 			<tspan>
 				<xsl:value-of select="//single/address/city" />

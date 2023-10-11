@@ -36,7 +36,7 @@
 
 		<xsl:variable name="finalR">
 			<xsl:choose>
-				<xsl:when test="$r > $size">
+<xsl:when test="$r > $assetSize">
 					<xsl:value-of select="$default * -1" />
 				</xsl:when>
 				<xsl:otherwise>

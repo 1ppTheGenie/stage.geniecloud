@@ -254,7 +254,8 @@
 									</div>
 									<div class="title-box">
 										<h6 class="background-as-color">
-											<xsl:value-of select="//single/type"/>
+<xsl:value-of select="$propertyType"/>
+
 										</h6>
 									</div>
 								</div>

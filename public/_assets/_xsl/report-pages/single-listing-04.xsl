@@ -78,7 +78,7 @@
 			<text x="1%" y="34%" class="heading">
 				<tspan>Type:  </tspan>
 				<tspan>
-					<xsl:value-of select="//single/type"/>
+					<xsl:value-of select="$singularPropertyType"/>
 				</tspan>
 			</text>
 

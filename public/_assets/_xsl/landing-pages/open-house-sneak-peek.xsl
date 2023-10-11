@@ -96,11 +96,11 @@
 								<div class="v-align">
 									<div class="image-container">
 										<div>
-											<image width="100%" height="290" style="object-fit:cover;filter: blur(8px);-webkit-filter: blur(8px);" preserveAspectRatio="xMidYMid meet">
+											<img width="100%" height="290" style="object-fit:cover;filter: blur(8px);-webkit-filter: blur(8px);" alt="Open House">
 												<xsl:attribute name="src">
 													<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/open-house-1.jpg' )" />
 												</xsl:attribute>
-											</image>
+											</img>
 										</div>
 									</div>
 
@@ -155,11 +155,11 @@
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-12 pd-40  min-height banner-img position-relative">
-								<image width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+								<img width="100%" height="100%" alt="Open House">
 									<xsl:attribute name="src">
 										<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/open-house-2.jpg' )" />
 									</xsl:attribute>
-								</image>
+								</img>
 								<div class="open-house-form-overlay heading-color-as-bg">
 									<xsl:comment/>
 								</div>

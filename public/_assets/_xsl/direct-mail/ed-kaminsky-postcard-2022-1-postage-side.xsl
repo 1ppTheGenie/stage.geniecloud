@@ -196,7 +196,7 @@ Sizes:		Postcard, QRCode
 			<p style="margin: 0;font-size: 6.5px;text-align:justify;opacity:0.5;font-weight: 300;font-family:'futura';color:#fff;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'discription'" />
-					<xsl:with-param name="default" select="'ED KAMINSKY DRE #00958114 | EXP REALTY OF CALIFORNIA, INC. DRE #01878277. THE INFORMATION CONTAINED IN THIS DOCUMENT, INCLUDING, BUT
+<xsl:with-param name="default" select="'ED KAMINSKY DRE #00958114 &#124; EXP REALTY OF CALIFORNIA, INC. DRE #01878277. THE INFORMATION CONTAINED IN THIS DOCUMENT, INCLUDING, BUT
 					NOT LIMITED TO, SQUARE FOOTAGE AND/OR ACREAGE, HAS BEEN PROVIDED BY VARIOUS SOURCES WHICH MAY INCLUDE THE SELLER, PUBLIC RECORDS,
 					THE MULTIPLE LISTING SERVICE OR OTHER SOURCES. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.'" />
 				</xsl:call-template>

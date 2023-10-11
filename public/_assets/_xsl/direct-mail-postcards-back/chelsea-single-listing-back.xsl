@@ -177,7 +177,8 @@
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentname'" />
-					<xsl:with-param name="default" select="'Owned by a subsidiary of NRT LLC. | CalDRE #: 01416035'" />
+<xsl:with-param name="default" select="'Owned by a subsidiary of NRT LLC. &#124; CalDRE #: 01416035'" />
+
 				</xsl:call-template>
 			</tspan>
 		</text>

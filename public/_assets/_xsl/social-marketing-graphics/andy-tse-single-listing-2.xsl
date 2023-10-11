@@ -63,7 +63,8 @@
 				<tspan dx="1%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'bed'" />
-						<xsl:with-param name="default" select="'Bed | '" />
+<xsl:with-param name="default" select="'Bed &#124; '" />
+
 					</xsl:call-template>
 				</tspan>
 				<tspan dx="1%">
@@ -75,7 +76,8 @@
 				<tspan dx="1%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'bath'" />
-						<xsl:with-param name="default" select="'Bath | '" />
+<xsl:with-param name="default" select="'Bath &#124; '" />
+
 					</xsl:call-template>
 				</tspan>
 				<tspan dx="1%">

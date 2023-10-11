@@ -58,6 +58,8 @@
 										<xsl:value-of select="concat( 'background-image: url(', $companyLogo, ')' )" />
 									</xsl:attribute>
 								</div>
+<xsl:comment/>
+
 							</a>
 						</div>
 						<nav class="navbar header-navigation">
@@ -261,7 +263,8 @@
 											<xsl:text>Type</xsl:text>
 										</strong>
 										<span>
-											<xsl:value-of select="//single/type"/>
+<xsl:value-of select="$propertyType"/>
+
 										</span>
 									</li>
 								</ul>

@@ -40,11 +40,11 @@
 								<div class="v-align">
 									<div class="image-container">
 										<div>
-											<image width="100%" height="290" style="object-fit:cover" preserveAspectRatio="xMidYMid meet">
+											<img width="100%" height="290px" style="object-fit:cover">
 												<xsl:attribute name="src">
 													<xsl:value-of select="$primaryImage"/>
 												</xsl:attribute>
-											</image>
+											</img>
 										</div>
 									</div>
 
@@ -93,14 +93,14 @@
 							</div>
 
 							<div class="col-md-6 col-sm-12 pd-40  min-height banner-img position-relative">
-								<image width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+								<img width="100%" height="100%">
 									<xsl:attribute name="src">
 										<xsl:call-template name="listing-image">
 											<xsl:with-param name="index" select="number(2)" />
 											<xsl:with-param name="preferPrimary" select="'true'" />
 										</xsl:call-template>
 									</xsl:attribute>
-								</image>
+								</img>
 								<div class="open-house-form-overlay heading-color-as-bg">
 									<xsl:comment/>
 								</div>
@@ -208,7 +208,7 @@
 				<xsl:attribute name="src">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/oh-guestbook.js' )" />
 				</xsl:attribute>
-				<xsl:text>;</xsl:text>
+				<xsl:comment />
 			</script>
 		</body>
 	</xsl:template>

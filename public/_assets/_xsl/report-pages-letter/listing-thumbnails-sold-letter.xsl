@@ -58,7 +58,8 @@
 
 							<image width="43%" height="16.5%" preserveAspectRatio="xMinYMid slice">
 								<xsl:attribute name="href">
-									<xsl:value-of select="concat( //output/@siteUrl, 'thumbnail?url=', @thumb )" />
+<xsl:value-of select="@thumb" />
+
 								</xsl:attribute>
 							</image>
 
@@ -96,11 +97,11 @@
 								<tspan>
 									<xsl:value-of select="@beds" />
 								</tspan>
-								<tspan> BR | </tspan>
+<tspan> BR &#124; </tspan>
 								<tspan>
 									<xsl:value-of select="@baths" />
 								</tspan>
-								<tspan> BA | </tspan>
+<tspan> BA &#124; </tspan>
 								<xsl:value-of select="format-number(@size, '###,###')" />
 								<tspan> SQFT</tspan>
 							</text>

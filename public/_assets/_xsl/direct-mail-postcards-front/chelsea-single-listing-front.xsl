@@ -90,7 +90,8 @@
 		<text x="50%" y="81.5%" class="center middle" style="font-size:180%; font-weight:500" fill="#000" data-max-width="30%" font-family="Futura Condensed">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'agentname'" />
-				<xsl:with-param name="default" select="concat( //agent[1]/mobile, '&#160;|&#160;', //agent[1]/website )" />
+<xsl:with-param name="default" select="concat( //agent[1]/mobile, '&#160;&#124;&#160;', //agent[1]/website )" />
+
 			</xsl:call-template>
 		</text>
 
@@ -103,7 +104,8 @@
 		<text x="50%" y="91%" class="center" font-family="Futura Condensed" fill="#444" style="font-size:90%;">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'agent-ownership'" />
-				<xsl:with-param name="default" select="'Owned by a subsidiary of NRT LLC. | CalDRE #: 01416035'" />
+<xsl:with-param name="default" select="'Owned by a subsidiary of NRT LLC. &#124; CalDRE #: 01416035'" />
+
 			</xsl:call-template>
 		</text>
 

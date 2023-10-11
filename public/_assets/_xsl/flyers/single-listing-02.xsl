@@ -89,13 +89,9 @@
 		</g>
 
 		<g style="fill: var(--theme-body-color);transform: translate(58%,55%);">
-
 			<text >
 				<tspan class="bold sub-heading" style="font-size: 250%;">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'singletype'" />
-						<xsl:with-param name="default" select="//single/type" />
-					</xsl:call-template>
+					<xsl:value-of select="$singularPropertyType"/>
 				</tspan>
 			</text>
 

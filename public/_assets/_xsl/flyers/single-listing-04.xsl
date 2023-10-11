@@ -30,7 +30,8 @@
 					<tspan class="sub-heading bold upper" style="font-size:500%;">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'singletype'" />
-							<xsl:with-param name="default" select="//single/type" />
+<xsl:with-param name="default" select="$propertyType" />
+
 						</xsl:call-template>
 					</tspan>
 				</text>
@@ -225,7 +226,7 @@
 							<xsl:with-param name="default" select="//agent[1]/mobile" />
 						</xsl:call-template>
 					</tspan>
-					<tspan> | </tspan>
+<tspan> &#124; </tspan>
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentmarketingEmail'" />

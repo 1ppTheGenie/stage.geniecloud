@@ -73,7 +73,10 @@
 				<text class="bold" font-size="140%" font-family="var(--theme-body-font)" fill="var(--theme-body-color)">
 					<tspan x="0" y="0">Type: </tspan>
 					<tspan dx="0.1%" y="0" font-weight="400">
-						<xsl:value-of select="//single/type" />
+						<xsl:value-of select="$singularPropertyType"/>
+
+						Z<xsl:value-of select="//output/@propertyCaption"/>
+Z
 					</tspan>
 
 					<tspan x="0" dy="2%">Bedrooms:</tspan>
@@ -204,19 +207,14 @@
 										</xsl:call-template>
 									</tspan>
 									<tspan x="16%">
-										<xsl:call-template name="editable">
-											<xsl:with-param name="id" select="concat( 'dimensions-size-', position() )" />
-											<xsl:with-param name="default">
-												<xsl:choose>
-													<xsl:when test="@size!='0x0'">
-														<xsl:value-of select="@size" />
-													</xsl:when>
-													<xsl:otherwise>
-														<xsl:value-of select="'Enquire'" />
-													</xsl:otherwise>
-												</xsl:choose>
-											</xsl:with-param>
-										</xsl:call-template>
+										<xsl:choose>
+											<xsl:when test="@size!='0x0'">
+												<xsl:value-of select="@size" />
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="'Enquire'" />
+											</xsl:otherwise>
+										</xsl:choose>
 									</tspan>
 								</text>
 							</g>
@@ -382,7 +380,7 @@
 			</xsl:attribute>
 		</image>
 
-		<text x="84.5%" y="78.3%" class="heading center" font-size="190%">
+		<text x="84.5%" y="78.3%" class="heading center" font-size="190%" data-max-width="16%">
 			<tspan font-weight="700">
 				<xsl:value-of select="$listingAddressLine1" />
 			</tspan>
@@ -391,13 +389,12 @@
 			</tspan>
 		</text>
 
-		<rect x="80.4%" y="83%" width="8%" rx="5px" ry="5px" height="2.5%" stroke-width="1" style="fill:#6A953E;" />
-		<text x="82%" y="83.5%" class=" upper" font-size="150%" font-family="var(--theme-heading-font)" fill="#fff">
+		<rect x="80.5%" y="83%" width="8%" rx="5px" ry="5px" height="2.5%" stroke-width="1" fill="#6A953E" />
+		<text x="84.5%" y="83.5%" class="upper center" font-size="150%" font-family="var(--theme-heading-font)" fill="#fff">
 			<tspan>DETAILS</tspan>
 		</text>
 
-		<!-- FOOTER SECTION START -->
 		<xsl:call-template name="flyer-footer" />
-		<!-- FOOTER SECTION  END -->
+
 	</xsl:template>
 </xsl:stylesheet>

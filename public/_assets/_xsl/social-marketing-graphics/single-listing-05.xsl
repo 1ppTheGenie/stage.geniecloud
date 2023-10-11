@@ -45,6 +45,7 @@
 			</xsl:attribute>
 		</image>
 		<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" width="98%" height="96%" x="1%" y="1%"/>
+
 		<g style="transform: translate(65%,76%);">
 			<svg width="33%" height="17.5%">
 				<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%"/>
@@ -99,7 +100,6 @@
 		</g>
 
 		<g style="transform:translate(1%,2%)">
-
 			<xsl:choose>
 				<xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
 					<text x="1%" y="10%" style="dominant-baseline: alphabetic;" class="super-large bold" fill="var(--theme-sub-heading-color)">
@@ -151,14 +151,14 @@
 				<xsl:call-template name="soldListedPrice" />
 			</text>
 			<text x="1%" y="32%" fill="var(--theme-sub-heading-color)">
-				<tspan>Type:  </tspan>
+				<tspan>Type: </tspan>
 				<tspan>
-					<xsl:value-of select="//single/type"/>
+					<xsl:value-of select="$singularPropertyType"/>
 				</tspan>
 			</text>
 
 			<foreignObject x="1%" y="34%" width="35%" height="24%">
-				<p style="color:var(--theme-body-color);-webkit-line-clamp:6; text-align: justify;">
+				<p style="color:var(--theme-body-color);-webkit-line-clamp:6; text-align: justify; overflow: visible;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'singledescription'" />
 						<xsl:with-param name="default" select="substring(//single/description, 1, 300)" />

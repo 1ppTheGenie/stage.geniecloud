@@ -20,10 +20,7 @@
 				<rect width="70%" height="35%" fill="var(--theme-body-background)" fill-opacity="1" />
 				<text x="35%" y="2%" class="heading center" style="font-size: 170%;">
 					<tspan>
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'singletype'" />
-							<xsl:with-param name="default" select="//single/type" />
-						</xsl:call-template>
+						<xsl:value-of select="$singularPropertyType"/>
 					</tspan>
 				</text>
 				<text x="35%" y="8.5%" class="upper heading center" style="font-size: 270%">

@@ -89,11 +89,11 @@
 
                         <div class="col-md-5">
                             <div class="object-pic">
-                                <image>
+                                <img>
                                     <xsl:attribute name="src">
                                         <xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/new-funnel-home-price-icon.png' )" />
                                     </xsl:attribute>
-                                </image>
+                                </img>
                             </div>
                         </div>
 

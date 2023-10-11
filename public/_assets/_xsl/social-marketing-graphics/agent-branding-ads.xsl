@@ -40,7 +40,8 @@
 				</svg>
 				<text x="42%" y="8%" class="upper large bold center">
 					<tspan>
-						<xsl:value-of select="concat('Call ', //agent[1]/firstName, ' | ',//agent[1]/mobile )" />
+<xsl:value-of select="concat('Call ', //agent[1]/firstName, ' &#124; ',//agent[1]/mobile )" />
+
 					</tspan>
 				</text>
 				<image x="0" y="16%" width="84%" height="9%" id="logo" preserveAspectRatio="xMidYMid meet">

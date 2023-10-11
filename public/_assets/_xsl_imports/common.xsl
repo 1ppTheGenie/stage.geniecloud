@@ -903,12 +903,12 @@
 				<xsl:value-of select="//agent[1]/mobile" />
 
 			</tspan>
-			<tspan> | </tspan>
+<tspan> &#124; </tspan>
 			<tspan>
 				<xsl:value-of select="//agent[1]/marketingEmail" />
 
 			</tspan>
-			<tspan> | </tspan>
+<tspan> &#124; </tspan>
 			<tspan>
 				<xsl:value-of select="//agent[1]/website" />
 
@@ -1903,26 +1903,28 @@
 			<xsl:variable name="stylesheet" select="//output/@stylesheet" />
 
 			<xsl:choose>
-				<xsl:when test="//overrides/QRUrl!=''">
-					<xsl:value-of select="//overrides/QRUrl" />
+<xsl:when test="//overrides/qrUrl!=''">
+	<xsl:value-of select="//overrides/qrUrl" />
+
 				</xsl:when>
 				<xsl:when test="//collection/folders/folder/asset[@folder=$folder and @stylesheet=$stylesheet and @qrUrl!='']">
 					<xsl:value-of select="//collection/folders/folder/asset[@folder=$folder and @stylesheet=$stylesheet]/@qrUrl" />
 				</xsl:when>
-				<xsl:when test="//output/@QRUrl!=''">
-					<xsl:value-of select="//output/@QRUrl" />
+<xsl:when test="//output/@qrUrl!=''">
+	<xsl:value-of select="//output/@qrUrl" />
+
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="''" />
 				</xsl:otherwise>
 			</xsl:choose>
-		</xsl:param>
-		<xsl:param name="qrTarget" select="concat( 'https://chart.googleapis.com/chart?chs=300x300&amp;cht=qr&amp;choe=UTF-8&amp;chl=', $url )" />
+</xsl:param>
 
-		<xsl:if test="//output/@isEditing or //output/@isImageGen or $url!=''">
+<xsl:if test="$url!=''">
 			<image preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
-					<xsl:value-of select="$qrTarget" />
+<xsl:value-of select="$url" />
+
 				</xsl:attribute>
 				<xsl:attribute name="width">
 					<xsl:value-of select="$width" />

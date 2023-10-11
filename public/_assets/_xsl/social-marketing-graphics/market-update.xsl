@@ -31,7 +31,7 @@
 		</g>
 
 		<xsl:variable name="maxAllPrices">
-			<xsl:for-each select="//previous/@averageSalePrice | //statistics/@averageListPrice | //statistics/@averageSalePrice | //previous/@averageListPriceForSold">
+<xsl:for-each select="//previous/@averageSalePrice &#124; //statistics/@averageListPrice &#124; //statistics/@averageSalePrice &#124; //previous/@averageListPriceForSold">
 				<xsl:sort select="." order="descending" data-type="number"/>
 				<xsl:if test="position() = 1">
 					<xsl:value-of select="."/>

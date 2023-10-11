@@ -59,12 +59,11 @@
 
                         <div class="report-for">
                             <div class="client-pic">
-                                <image x="1.6%" y="8%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+                                <img width="100%" height="100%">
                                     <xsl:attribute name="src">
                                         <xsl:value-of select="//agent[1]/photo" />
-
                                     </xsl:attribute>
-                                </image>
+                                </img>
                             </div>
                             <div class="heading">
                                 <h1>What’s My 34102 Home Value?</h1>

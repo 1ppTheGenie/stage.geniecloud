@@ -65,10 +65,7 @@
 						</svg>
 
 						<h2 contenteditable="true" class="bold" style="font-family:var(--theme-heading-font);color:var(--theme-sub-heading-color);font-size:43px;text-align:center;margin:0;">
-							<xsl:call-template name="editable">
-								<xsl:with-param name="id" select="'singletype'" />
-								<xsl:with-param name="default" select="//single/type" />
-							</xsl:call-template>
+							<xsl:value-of select="$propertyType"/>
 						</h2>
 
 						<svg height="13" width="60" style="flex-grow:0; margin-left: 5%">

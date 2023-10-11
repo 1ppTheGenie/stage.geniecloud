@@ -236,7 +236,8 @@
 			</xsl:attribute>
 
 			<xsl:call-template name="editable">
-				<xsl:with-param name="default" select="concat( 'Call ', //agent[1]/firstName ,' | ', //agent[1]/mobile ) " />
+<xsl:with-param name="default" select="concat( 'Call ', //agent[1]/firstName ,' &#124; ', //agent[1]/mobile ) " />
+
 			</xsl:call-template>
 		</text>
 		<xsl:choose>

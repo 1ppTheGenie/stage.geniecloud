@@ -129,14 +129,14 @@
 	<!-- $propertyType -->
 	<xsl:variable name="propertyType">
 		<xsl:choose>
-			<xsl:when test="//output/@propertyCaption!='' and //output/@propertyCaptionSingular!='null'">
+			<xsl:when test="//output/@propertyCaption!=''">
 				<xsl:value-of select="//output/@propertyCaption"/>
 			</xsl:when>
-			<xsl:when test="(//single/type = 'Condo') or (number(//areas/area[1]/statistics/@propertyType) = 1)">
+			<xsl:when test="(//single/type = 'Condo') or (//single/type = '' and number(//areas/area[1]/statistics/@propertyType) = 1)">
 				<xsl:text>Condos</xsl:text>
 			</xsl:when>
-			<xsl:when test="(//single/type = 'Townhome') or (number(//areas/area[1]/statistics/@propertyType) = 9)">
-				<xsl:text>Townhome</xsl:text>
+			<xsl:when test="(//single/type = 'Townhome') or (//single/type = '' and number(//areas/area[1]/statistics/@propertyType) = 9)">
+				<xsl:text>Townhomes</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:text>Homes</xsl:text>
@@ -205,7 +205,7 @@
 		<dims width="1200" height="628" />
 	</xsl:variable>
 
-	<xsl:variable name="size">
+	<xsl:variable name="assetSize">
 		<xsl:value-of select="//output/@size"/>
 	</xsl:variable>
 
@@ -216,8 +216,9 @@
 		<xsl:choose>
 			<xsl:when test="$withBleed">
 				<xsl:choose>
-					<xsl:when test="$dims/dims[@name=$size]">
-						<xsl:value-of select="number($dims/dims[@name=$size]/@width) + 25" />
+					<xsl:when test="$dims/dims[@name=$assetSize]">
+						<xsl:value-of select="number($dims/dims[@name=$assetSize]/@width) + 25" />
+
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="number( $dims/dims[last()]/@width ) + 25" />
@@ -226,8 +227,9 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:choose>
-					<xsl:when test="$dims/dims[@name=$size]">
-						<xsl:value-of select="number($dims/dims[@name=$size]/@width)" />
+					<xsl:when test="$dims/dims[@name=$assetSize]">
+						<xsl:value-of select="number($dims/dims[@name=$assetSize]/@width)" />
+
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="number( $dims/dims[last()]/@width )" />
@@ -242,8 +244,9 @@
 		<xsl:choose>
 			<xsl:when test="$withBleed">
 				<xsl:choose>
-					<xsl:when test="$dims/dims[@name=$size]">
-						<xsl:value-of select="number($dims/dims[@name=$size]/@height) + 25" />
+					<xsl:when test="$dims/dims[@name=$assetSize]">
+						<xsl:value-of select="number($dims/dims[@name=$assetSize]/@height) + 25" />
+
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="number( $dims/dims[last()]/@height ) + 25" />
@@ -252,8 +255,9 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:choose>
-					<xsl:when test="$dims/dims[@name=$size]">
-						<xsl:value-of select="number($dims/dims[@name=$size]/@height)" />
+					<xsl:when test="$dims/dims[@name=$assetSize]">
+						<xsl:value-of select="number($dims/dims[@name=$assetSize]/@height)" />
+
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="number( $dims/dims[last()]/@height )" />
@@ -568,5 +572,16 @@
 
 	<xsl:template name="listing-address-line-two">
 		<xsl:value-of select="$listingAddressLine2" />
+	</xsl:template>
+
+	<xsl:template name="lot-size">
+		<xsl:choose>
+			<xsl:when test="//single/lotSize castable as xs:double">
+				<xsl:value-of select="format-number( //single/lotSize, '###,###')"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="//single/lotSize"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 </xsl:stylesheet>

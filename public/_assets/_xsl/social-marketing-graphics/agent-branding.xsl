@@ -15,7 +15,8 @@
 			<text class="sub-heading bold" style="font-size:200%;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'areanamemarket'" />
-					<xsl:with-param name="default" select="concat( 'Single Family | ', //area/name)"/>
+<xsl:with-param name="default" select="concat( 'Single Family &#124; ', //area/name)"/>
+
 				</xsl:call-template>
 			</text>
 			<text y="8%" fill="var(--theme-body-color)" style="font-size:140%;">
@@ -24,14 +25,14 @@
  Beds
 				</tspan>
 				<tspan>
-						|
+&#124;
 				</tspan>
 				<tspan>
 					<xsl:value-of select="$listingTotalBathrooms" />
  Bath
 				</tspan>
 				<tspan>
-						|
+&#124;
 				</tspan>
 				<tspan>
 					<xsl:value-of select="format-number( //single/price div //single/squareFeet, '$###,###' )" />

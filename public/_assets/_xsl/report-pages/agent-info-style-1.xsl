@@ -104,27 +104,14 @@ Supports: Agent
 			<text x="50%" y="92.5%" class="center" style="fill:var(--theme-body-color); font-size:110%;">
 				<xsl:if test="//agent[1]/marketingEmail!='' ">
 					<tspan>
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'agentmarketingEmail'" />
-							<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
-						</xsl:call-template>
+						<xsl:value-of select="concat( //agent[1]/marketingEmail, ' &#124; ' )" />
 					</tspan>
-
-					<tspan> | </tspan>
 				</xsl:if>
 				<tspan>
 					<xsl:if test="//agent[1]/address/street !='' ">
-						<xsl:value-of select="//agent[1]/address/street" />
-
-						<xsl:text> | </xsl:text>
+						<xsl:value-of select="concat( //agent[1]/address/street, ' &#124; ' )" />
 					</xsl:if>
-					<xsl:value-of select="//agent[1]/address/city" />
-
-					<xsl:text>, </xsl:text>
-					<xsl:value-of select="//agent[1]/address/state" />
-
-					<xsl:text></xsl:text>
-					<xsl:value-of select="//agent[1]/address/zip" />
+					<xsl:value-of select="concat( //agent[1]/address/city, ', ', //agent[1]/address/state, ' ', //agent[1]/address/zip )" />
 				</tspan>
 			</text>
 		</g>

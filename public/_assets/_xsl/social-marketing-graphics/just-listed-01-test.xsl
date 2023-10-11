@@ -54,7 +54,8 @@
 		<text x="10%" y="74%" class="upper" style="font-family:var(--theme-heading-font); font-size:300%;font-weight:700;" fill="#000">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="' MARKET INSIDER REPORT'" />
-				<xsl:with-param name="default" select="' call sally  sells | (888) 425-2300'" />
+<xsl:with-param name="default" select="' call sally  sells &#124; (888) 425-2300'" />
+
 			</xsl:call-template>
 		</text>
 

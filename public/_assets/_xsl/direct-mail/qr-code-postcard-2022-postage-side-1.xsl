@@ -73,29 +73,17 @@
 			</xsl:attribute>
 		</image>
 		<text x="16%" y="57.5%" class="upper" style="font-weight:600;font-size:175%;letter-spacing:1px;font-family:var(--theme-body-font);" fill="var(--theme-heading-color)" data-max-width="25%">
-			<xsl:call-template name="editable">
-				<xsl:with-param name="id" select="'agentname'" />
-				<xsl:with-param name="default" select="concat( //agent[1]/marketingName,'')" />
-			</xsl:call-template>
+			<xsl:value-of select="//agent[1]/marketingName" />
 		</text>
 		<text x="16%" y="57%">
 			<tspan x="16%" dy="5.3%" fill="var(--theme-heading-color)" style="font-size:110%;font-family:var(--theme-body-font);">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'agentmobile'" />
-					<xsl:with-param name="default" select="concat( 'Luxury Real Estate Specialist' , '')" />
-				</xsl:call-template>
+				<xsl:value-of select="//agent[1]/marketingTitle" />
 			</tspan>
 			<tspan x="16%" dy="3.8%" fill="var(--theme-heading-color)" style="font-size:110%;font-family:var(--theme-body-font);">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'agentmarketingEmail'" />
-					<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
-				</xsl:call-template>
+				<xsl:value-of select="//agent[1]/marketingEmail" />
 			</tspan>
 			<tspan x="16%" dy="3.7%" class="bold" fill="var(--theme-sub-heading-color)" style="font-size:255%;font-family:var(--theme-body-font);">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'agentmobile'" />
-					<xsl:with-param name="default" select="//agent[1]/mobile" />
-				</xsl:call-template>
+				<xsl:value-of select="//agent[1]/mobile" />
 			</tspan>
 		</text>
 

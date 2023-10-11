@@ -136,11 +136,11 @@
 							<div class="col-lg-6 text-center pr-50">
 								<div class="image-information">
 									<div>
-										<image width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+										<img width="100%" height="100%">
 											<xsl:attribute name="src">
 												<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/default-area-image.jpg' )" />
 											</xsl:attribute>
-										</image>
+										</img>
 									</div>
 								</div>
 							</div>

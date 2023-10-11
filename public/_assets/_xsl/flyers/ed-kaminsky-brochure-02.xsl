@@ -67,7 +67,7 @@
 
 		<text x="9.5%" y="72.3%" class="center futura-text">
 			<tspan x="9.5%" dy="1%" font-size="250%" class="bold" fill="#e1e1e1">
-				<xsl:value-of select="genie:maybe-not-number( //single/lotSize )" />
+				<xsl:call-template name="lot-size" />
 			</tspan>
 			<tspan x="9.5%" dy="3.2%" fill="#b0934c" font-size="160%">
 				<xsl:value-of select="'sq ft lot'" />

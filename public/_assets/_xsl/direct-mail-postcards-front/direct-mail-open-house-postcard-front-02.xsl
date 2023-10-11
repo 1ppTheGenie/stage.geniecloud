@@ -40,10 +40,7 @@
 
 		<text x="28.5%" y="70%" class="center narrow" fill="var(--theme-body-background)" style="font-size:160%;">
 			<tspan class="center">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'singletype'" />
-					<xsl:with-param name="default" select="//single/type" />
-				</xsl:call-template>
+				<xsl:value-of select="$singularPropertyType"/>
 			</tspan>
 		</text>
 

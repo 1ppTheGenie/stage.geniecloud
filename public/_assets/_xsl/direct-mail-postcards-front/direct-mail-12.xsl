@@ -120,7 +120,8 @@ The<xsl:value-of select="//agent[1]/marketingName" />
 &#160;
 		</text>
 		<text x="10%" y="6%" class="capitalize center" fill="var(--theme-sub-heading-color)">
-realtor |<xsl:value-of select="//agent[1]/marketingLicense" />
+realtor &#124;<xsl:value-of select="//agent[1]/marketingLicense" />
+
 		</text>
 		<text x="10%" y="10%" class="capitalize center medium" fill="var(--theme-sub-heading-color)" style="font-weight:600;">
 			<xsl:value-of select="//agent[1]/mobile" />

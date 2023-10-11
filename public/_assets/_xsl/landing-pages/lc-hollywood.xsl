@@ -39,7 +39,8 @@
 
 		<body>
 			<xsl:attribute name="class">
-				<xsl:value-of select="concat( 'funnel-lc-hollywood ', //output/@theme )" />
+<xsl:value-of select="concat( 'lc-hollywood ', //output/@theme )" />
+
 			</xsl:attribute>
 
 			<div id="step1" class="steps banner-top-section-info section background">
@@ -124,6 +125,7 @@
 								</h4>
 							</div>
 						</div>
+
 						<div class="nav-hamburger">
 							<div class="svg_icon">
 								<svg width="33" height="26" viewBox="0 0 33 26" fill="#fff"
@@ -134,15 +136,20 @@
 							</div>
 						</div>
 
-						<div class="header-logo">
-							<a href="#">
-								<div class="agent-company-logo">
-									<xsl:attribute name="style">
-										<xsl:value-of select="concat( 'background-image: url(', $personalLogoInverse, ')' )" />
-									</xsl:attribute>
-								</div>
-							</a>
-						</div>
+<xsl:if test="$personalLogoInverse!=''">
+<div class="header-logo">
+	<a href="#">
+		<div class="agent-company-logo">
+			<xsl:attribute name="style">
+				<xsl:value-of select="concat( 'background-image: url(', $personalLogoInverse, ')' )" />
+
+</xsl:attribute>&#160;
+</div>
+<xsl:comment/>
+
+</a>
+</div>
+</xsl:if>
 
 						<div class="navigation-links">
 							<nav class="navbar header-navigation">
@@ -214,13 +221,12 @@
 									</a>
 								</h3>
 							</div>
-							<div class="agnt-photo">
-
-								<image x="1.6%" y="8%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+<div class="agent-photo">
+	<img style="max-height: 100px;" title="Agent Photo" alt="Agent Photo">
 									<xsl:attribute name="src">
 										<xsl:value-of select="//agent[1]/photo" />
 									</xsl:attribute>
-								</image>
+</img>
 							</div>
 						</div>
 					</div>
@@ -383,14 +389,16 @@
 											<xsl:value-of select="//single/bathrooms/@half"/>
 										</span>
 									</li>
-									<li class="body-color">
-										<strong>
-											<xsl:text>LOT SQ. FT.</xsl:text>
-										</strong>
-										<span>
-											<xsl:value-of select="genie:maybe-not-number( //single/lotSize )" />
-										</span>
-									</li>
+									<xsl:if test="//single/lotSize!=''">
+										<li class="body-color">
+											<strong>
+												<xsl:text>LOT SQ. FT.</xsl:text>
+											</strong>
+											<span>
+												<xsl:call-template name="lot-size" />
+											</span>
+										</li>
+									</xsl:if>
 									<li class="body-color">
 										<strong>
 											<xsl:text>Garage Spaces</xsl:text>
@@ -420,7 +428,7 @@
 											<xsl:text>Type</xsl:text>
 										</strong>
 										<span>
-											<xsl:value-of select="//single/type"/>
+											<xsl:value-of select="$singularPropertyType"/>
 										</span>
 									</li>
 									<li class="body-color">
@@ -707,7 +715,7 @@
 									&#160;</textarea>
 							</div>
 							<div class="col-md-12">
-								<input type="submit" value="Send" class="submit-btn step1-button" id="request-modal-btn"/>
+								<input type="submit" value="Send" class="submit-btn"/>
 							</div>
 						</form>
 					</div>
@@ -780,12 +788,14 @@
 				<xsl:attribute name="src">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.js' )" />
 				</xsl:attribute>
+				<xsl:comment/>
 			</script>
 
 			<link rel="stylesheet">
 				<xsl:attribute name="href">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.css' )" />
 				</xsl:attribute>
+				<xsl:comment/>
 			</link>
 		</body>
 	</xsl:template>

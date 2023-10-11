@@ -13,7 +13,8 @@
 	<xsl:template name="social-caption">
 
 		<xsl:if test="number(//single/statusTypeID) = 1">
-			<xsl:value-of select="concat('NEW TO MARKET in ', //area/name , ' | This ' , //single/bedrooms/@count , ' BR, ', $listingTotalBathrooms, ' BA, ', format-number( //single/squareFeet, '###,###' ), ' SF ' , $singularPropertyType , ' is it! ' )" />
+<xsl:value-of select="concat('NEW TO MARKET in ', //area/name , ' &#124; This ' , //single/bedrooms/@count , ' BR, ', $listingTotalBathrooms, ' BA, ', format-number( //single/squareFeet, '###,###' ), ' SF ' , $singularPropertyType , ' is it! ' )" />
+
 			<xsl:value-of select="substring-before(//single/description, '.')"/>
 			<xsl:value-of select="'. Click the LEARN button: for photos, details, pricing and more.'"/>
 		</xsl:if>

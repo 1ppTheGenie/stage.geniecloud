@@ -239,7 +239,8 @@ Supports:	Area, QRCode
 					<tspan style="font-size:100%;" fill="var(--theme-body-background)">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentmobile'" />
-							<xsl:with-param name="default" select="concat( //agent[1]/mobile , ' | ')" />
+<xsl:with-param name="default" select="concat( //agent[1]/mobile , ' &#124; ')" />
+
 						</xsl:call-template>
 					</tspan>
 					<tspan x="59%" y="0%" class="upper" style="font-size:100%;" fill="var(--theme-body-background)">

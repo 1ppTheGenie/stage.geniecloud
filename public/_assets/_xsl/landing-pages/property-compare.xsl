@@ -43,7 +43,7 @@
 			<xsl:attribute name="src">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/property-compare.js' )" />
 			</xsl:attribute>
-			<xsl:text>;</xsl:text>
+			<xsl:comment />
 		</script>
 
 		<body style="scroll-behavior: smooth;">
@@ -123,6 +123,7 @@
 								</img>
 
 								<div class="listing_property" style="display:none;"> 1 </div>
+								
 								<div class="property-img-contact-part text-center text-uppercase">
 									<p class="property-house-text body-color subtitle-color mb-0 heading-font">
 										<xsl:choose>

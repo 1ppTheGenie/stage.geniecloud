@@ -176,11 +176,11 @@
 					<div class="container custom-container">
 						<div class="mob-user-deta">
 							<div class="mob-user-deta-img">
-								<image width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+<img width="100%" height="100%">
 									<xsl:attribute name="src">
 										<xsl:value-of select="//agent[1]/photo" />
 									</xsl:attribute>
-								</image>
+</img>
 							</div>
 							<div class="mob-user-deta-content">
 								<h3>Presented By</h3>
@@ -198,15 +198,20 @@
 								</svg>
 							</div>
 						</div>
-						<div class="header-logo">
-							<a href="#">
-								<div class="agent-company-logo">
-									<xsl:attribute name="style">
-										<xsl:value-of select="concat( 'background-image: url(', $personalLogoInverse, ')' )" />
-									</xsl:attribute>
-								</div>
-							</a>
-						</div>
+<xsl:if test="$personalLogoInverse!=''">
+<div class="header-logo">
+	<a href="#">
+		<div class="agent-company-logo">
+			<xsl:attribute name="style">
+				<xsl:value-of select="concat( 'background-image: url(', $personalLogoInverse, ')' )" />
+
+</xsl:attribute>&#160;
+</div>
+<xsl:comment/>
+
+</a>
+</div>
+</xsl:if>
 
 						<div class="navigation-links">
 							<nav class="navbar header-navigation">
@@ -272,13 +277,12 @@
 									</a>
 								</h3>
 							</div>
-							<div class="agnt-photo">
-
-								<image x="1.6%" y="8%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+<div class="agent-photo">
+	<img width="100%" height="100%" title="Agent Photo" alt="Agent Photo">
 									<xsl:attribute name="src">
 										<xsl:value-of select="//agent[1]/photo" />
 									</xsl:attribute>
-								</image>
+</img>
 							</div>
 						</div>
 					</div>
@@ -408,7 +412,8 @@
 												<h6>
 													<xsl:text>Type:&#160;</xsl:text>
 													<span>
-														<xsl:value-of select="//single/type"/>
+<xsl:value-of select="$singularPropertyType"/>
+
 													</span>
 												</h6>
 											</div>
@@ -467,7 +472,7 @@
 										</div>
 									</li>
 
-									<xsl:if test="//single/LotSize">
+									<xsl:if test="//single/lotSize">
 										<li>
 											<div class="content-box">
 												<div class="icon-box heading-color-as-bg">
@@ -480,7 +485,7 @@
 													<h6>
 														<xsl:text>Lot Size:&#160;</xsl:text>
 														<span>
-															<xsl:value-of select="format-number(//single/LotSize, '###,###')"/>
+															<xsl:call-template name="lot-size" />
 														</span>
 													</h6>
 												</div>
@@ -685,11 +690,11 @@
 
 						<div class="row">
 							<div class="col-md-9">
-								<div id="genie-map" style="height:370px;" />
+<div id="genie-map" style="height:370px;">&#160;</div>
 							</div>
 							<div class="col-md-3">
 								<div class="owner-details-section banner-img position-relative">
-									<img width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+<img width="100%" height="100%" preserveAspectRatio="xMidYMid meet" alt="Photo of property">
 										<xsl:attribute name="src">
 											<xsl:value-of select="$primaryImage" />
 										</xsl:attribute>
@@ -703,6 +708,8 @@
 											<xsl:attribute name="style">
 												<xsl:value-of select="concat( 'background-image: url(', //agent[1]/photo, ')' )" />
 											</xsl:attribute>
+<xsl:comment/>
+
 										</div>
 										<div class="name-n-other-details">
 											<h3 class="heading-font background-as-color">
@@ -716,7 +723,7 @@
 													<xsl:value-of select="//agent[1]/mobile" />
 												</a>
 											</h3>
-											<button class="btn subtitle-font background-as-color contact-me-btn">
+<button class="btn subtitle-font background-as-color contact-me-btn" type="submit">
 												<span class="contact-svg">
 													<svg xmlns="http://www.w3.org/2000/svg"
 														xmlns:xlink="http://www.w3.org/1999/xlink" version="3.0" id="Capa_1" x="0px" y="0px" viewBox="0 0 469.2 469.2" style="enable-background:new 0 0 469.2 469.2;" xml:space="preserve" fill="var(--theme-body-color)">
@@ -829,7 +836,11 @@
 										<xsl:attribute name="style">
 											<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )"/>
 										</xsl:attribute>
+<xsl:comment/>
+
 									</div>
+<xsl:comment/>
+
 								</div>
 								<div class="col-md-6 col-sm-6 background">
 									<div class="modal-side-content">
@@ -837,13 +848,16 @@
 										<p class="modal_subtitle body-font body-color">Fill in your details below and our team will get in touch with you within 24 hours.</p>
 										<form class="wpcf7-form funnel-create-lead">
 											<div class="form-group">
-												<input type="text" placeholder="Enter Name*" name="fullName" class="form-control heading-font heading-color" />
+<input type="text" placeholder="Enter Name*" autocomplete="on" name="fullName" class="form-control heading-font heading-color" />
+
 											</div>
 											<div class="form-group">
-												<input type="text" placeholder="Enter Phone*" name="phoneNumber" class="form-control heading-font heading-color phone" id="phonenumber" />
+<input type="text" placeholder="Enter Phone*" autocomplete="tel" name="phoneNumber" class="form-control heading-font heading-color phone" id="phonenumber" />
+
 											</div>
 											<div class="form-group">
-												<input type="email" placeholder="Enter Email*" name="emailAddress" class="form-control heading-font heading-color step1-input" id="email" />
+<input type="email" placeholder="Enter Email*" autocomplete="email" name="emailAddress" class="form-control heading-font heading-color step1-input" id="email" />
+
 											</div>
 											<div class="form-group">
 												<ul class="theme-option-form heading-font heading-color">
@@ -870,6 +884,8 @@
 											</div>
 										</form>
 									</div>
+<xsl:comment/>
+
 								</div>
 							</div>
 						</div>
@@ -1034,7 +1050,7 @@
 			   	document.addEventListener(`DOMContentLoaded`, function () {
 				  	document.querySelector(`.nav-hamburger`).addEventListener(`click`, function() {
 				  		var menu = document.querySelector(`.navigation-links`);
-					  	if(menu.style.display === `none` || menu.style.display === `) {
+if(menu.style.display === `none` &#124;&#124; menu.style.display === `) {
 					  		menu.style.display = `block`;
 					  	} else {
 					  		menu.style.display = `none`;

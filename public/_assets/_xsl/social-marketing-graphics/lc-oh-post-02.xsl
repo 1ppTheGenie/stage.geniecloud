@@ -58,7 +58,7 @@
 		<xsl:choose>
 			<xsl:when test="count(//openHouse/session) = 1">
 				<rect x="12.5%" y="46%" width="75%" height="10%" fill="var(--theme-body-color)" />
-				<text x="50%" y="51%" class="center middle bold" font-size="120%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="70%">
+				<text x="50%" y="51%" class="center middle bold" font-size="120%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="58%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'LC-OH-POST-02-01'" />
 						<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
@@ -67,13 +67,13 @@
 			</xsl:when>
 			<xsl:when test="count(//openHouse/session) &gt; 1">
 				<rect x="20%" y="45%" width="60%" height="10%" fill="var(--theme-body-color)" />
-				<text x="50%" y="47.5%" class="center middle bold" font-size="115%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="70%">
+				<text x="50%" y="47.5%" class="center middle bold" font-size="115%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="58%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'LC-OH-POST-02-01'" />
 						<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
 					</xsl:call-template>
 				</text>
-				<text x="50%" y="52.5%" class="center middle bold" font-size="115%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="70%">
+				<text x="50%" y="52.5%" class="center middle bold" font-size="115%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="58%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'LC-OH-POST-02-02'" />
 						<xsl:with-param name="default" select="concat( //openHouse/session[2]/@dow, ', ', //openHouse/session[2]/@month, ' ', //openHouse/session[2]/@date, ' - ', //openHouse/session[2]/@starts, ' to ',//openHouse/session[2]/@ends)" />

@@ -38,7 +38,6 @@
 							<img>
 								<xsl:attribute name="src">
 									<xsl:value-of select="//agent[1]/photo" />
-
 								</xsl:attribute>
 							</img>
 						</div>
@@ -135,7 +134,6 @@
 					<img style="width: 16px; height: 16px">
 						<xsl:attribute name="src">
 							<xsl:value-of select="//agent[1]/photo" />
-
 						</xsl:attribute>
 					</img>
 					<span class="caret">

@@ -53,7 +53,6 @@
 		</image>
 
 		<g style="transform:translate(62%,2%)">
-
 			<xsl:choose>
 				<xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
 					<text x="1%" y="0" class="heading super-large bold">
@@ -93,10 +92,10 @@
 				<xsl:value-of select="//single/address/city" />
 				<xsl:text> area</xsl:text>
 			</text>
-			<text x="1%" y="16%" class="large heading">
+			<text x="1%" y="16%" class="large heading" data-max-width="37.5%">
 				<xsl:call-template name="listing-address-line-one"/>
 			</text>
-			<text x="1%" y="21%" class="large heading">
+			<text x="1%" y="21%" class="large heading" data-max-width="37.5%">
 				<xsl:call-template name="listing-address-line-two"/>
 			</text>
 			<text x="1%" y="28%" class="medium bold">
@@ -105,7 +104,7 @@
 			<text x="1%" y="34%" class="heading">
 				<tspan>Type:  </tspan>
 				<tspan>
-					<xsl:value-of select="//single/type"/>
+					<xsl:value-of select="$singularPropertyType"/>
 				</tspan>
 			</text>
 

@@ -190,7 +190,7 @@
 			<text x="0" y="38%">
 				<tspan class="bold" fill="var(--theme-sub-heading-color)">Type:  </tspan>
 				<tspan class="narrow" fill="var(--theme-sub-heading-color)">
-					<xsl:value-of select="//single/type"/>
+					<xsl:value-of select="$singularPropertyType"/>
 				</tspan>
 			</text>
 

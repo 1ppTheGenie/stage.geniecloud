@@ -124,7 +124,7 @@
 			<text x="1%" y="32%" fill="var(--theme-sub-heading-color)">
 				<tspan>Type:  </tspan>
 				<tspan>
-					<xsl:value-of select="//single/type"/>
+					<xsl:value-of select="$singularPropertyType"/>
 				</tspan>
 			</text>
 

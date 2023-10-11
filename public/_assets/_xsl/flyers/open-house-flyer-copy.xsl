@@ -129,14 +129,14 @@
 								<xsl:with-param name="default" select="//agent[1]/mobile" />
 							</xsl:call-template>
 						</tspan>
-						<tspan> | </tspan>
+<tspan> &#124; </tspan>
 						<tspan>
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentmarketingEmail'" />
 								<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 							</xsl:call-template>
 						</tspan>
-						<tspan> | </tspan>
+<tspan> &#124; </tspan>
 						<tspan>
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentwebsite'" />

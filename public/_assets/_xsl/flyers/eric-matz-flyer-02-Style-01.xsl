@@ -55,16 +55,16 @@
 						<xsl:value-of select="//single/bedrooms/@count"/>
 						<xsl:text>BR</xsl:text>
 					</tspan>
-					<tspan dx="1%">|</tspan>
+<tspan dx="1%">&#124;</tspan>
 					<tspan dx="1%">
 						<xsl:value-of select="$listingTotalBathrooms"/>
 						<xsl:text>BA</xsl:text>
 					</tspan>
-					<tspan dx="1%">|</tspan>
+<tspan dx="1%">&#124;</tspan>
 					<tspan dx="1%">
 						<xsl:value-of select="format-number( //single/squareFeet, '###,###' )"/>
 					</tspan>
-					<tspan dx="1%">|</tspan>
+<tspan dx="1%">&#124;</tspan>
 					<xsl:choose>
 						<xsl:when test="//single/soldDate!=''">
 							<tspan dx="1%">Sold For </tspan>

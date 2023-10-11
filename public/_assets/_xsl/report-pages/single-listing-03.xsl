@@ -153,7 +153,7 @@
 			<text x="16%" y="5%" class="sub-heading align-center">
 				<tspan class="bold">Type:  </tspan>
 				<tspan class="narrow">
-					<xsl:value-of select="//single/type"/>
+					<xsl:value-of select="concat( 'CC ', $singularPropertyType, ' DD')"/>
 				</tspan>
 			</text>
 

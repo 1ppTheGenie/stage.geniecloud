@@ -14,8 +14,8 @@
 			</xsl:attribute>
 
 			<script>
-				<xsl:value-of select="concat( 'window.gg = {}; let ggSettings = { agentID:`', //output/@userId, '`, areaID:', number(//area/id), ', mlsNumber:`', //single/mlsNumber, '`, mlsID:`', //single/mlsID, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(//output/@hideAVM='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', lead: { propertyId:', number(//lead/property_id), ', firstName:`', //lead/property/firstName, '`, lastName:`', //lead/property/lastName, '`, email:`', //lead/property/emailAddress, '`}};' )" />
-				<xsl:value-of select="concat( 'window.ghub = { SINGLE:  0, CONDO: 1, site_url: `', //output/@siteUrl, '`, api_url: `', //output/@apiUrl, '`, mapStyle: `satellite-v9`, google_key: `', //output/@googleKey, '`, mapbox_key: `', //output/@mapboxKey, '` };')" />
+				<xsl:value-of select="concat( 'window.gg = {}; let ggSettings = { agentId:`', //output/@userId, '`, areaId:', number(//area/id), ', mlsNumber:`', //single/mlsNumber, '`, mlsId:`', //single/mlsId, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(//output/@hideAVM='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', lead: { propertyId:', number(//lead/property_id), ', firstName:`', //lead/property/firstName, '`, lastName:`', //lead/property/lastName, '`, email:`', //lead/property/emailAddress, '`}};' )" />
+				<xsl:value-of select="concat( 'window.ghub = { SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, mapStyle: `satellite-v9`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
 			</script>
 
 			<xsl:call-template name="listing-command" />
@@ -56,7 +56,8 @@
 	</xsl:template>
 
 	<xsl:template name="standard-header">
-		<xsl:param name="title" select="concat( $listingAddressLine1, ', ' , $listingAddressLine2, ' | ', //agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
+<xsl:param name="title" select="concat( $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ', //agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
+
 
 		<xsl:param name="description" select="substring(concat( 'View details, pricing, photos, floorplan, for ',  $listingAddressLine1, '. ' , //single/description, '...') ,0, 373 )" />
 

@@ -52,7 +52,7 @@
 		</g>
 
 		<xsl:variable name="maxAllPrices">
-			<xsl:for-each select="//previous/@medianSalePrice | //statistics/@medianSalePrice">
+<xsl:for-each select="//previous/@medianSalePrice &#124; //statistics/@medianSalePrice">
 				<xsl:sort select="." order="descending" data-type="number"/>
 				<xsl:if test="position() = 1">
 					<xsl:value-of select="."/>

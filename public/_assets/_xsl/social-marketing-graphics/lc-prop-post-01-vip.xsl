@@ -24,7 +24,8 @@
                        <p style="font-weight:600; font-size:150%; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; text-overflow: ellipsis;" class="heading">
                             <xsl:call-template name="editable">
                     <xsl:with-param name="id" select="'yourneighborhood'" />
-                    <xsl:with-param name="default" select="concat( $singularPropertyType,' | ', //area/name)" />
+<xsl:with-param name="default" select="concat( $singularPropertyType,' &#124; ', //area/name)" />
+
                 </xsl:call-template> 
                        </p>
             </foreignObject>
@@ -47,7 +48,8 @@
 				<tspan dx="1%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'beds'" />
-						<xsl:with-param name="default" select="'Beds | '" />
+<xsl:with-param name="default" select="'Beds &#124; '" />
+
 					</xsl:call-template>
 				</tspan>
 				<tspan dx="1%">
@@ -59,7 +61,8 @@
 				<tspan dx="1%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'baths'" />
-						<xsl:with-param name="default" select="'Baths | '" />
+<xsl:with-param name="default" select="'Baths &#124; '" />
+
 					</xsl:call-template>
 				</tspan>
 				<tspan dx="1%">
@@ -94,33 +97,6 @@
 			</xsl:choose>
 		</text>
 
-		<text x="2.5%" y="1%" font-size="63%" font-family="var(--theme-heading-font)" fill="var(--theme-body-color)" data-max-width="95%" class="left align-left upper">
-			<xsl:call-template name="editable">
-				<xsl:with-param name="id" select="'licenseno'" />
-				<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
-			</xsl:call-template>
-		</text>
-
-		<!-- <text x="15%" y="21%" class="normal" style="dominant-baseline: alphabetic;">
-			<tspan>
-				<xsl:choose>
-                    <xsl:when test="//single/soldDate!=''">
-                        Sold For 
-                        <tspan class="bold">
-                            <xsl:value-of select="format-number( //single/salePrice, '$###,###')"/>
-                        </tspan>                        
-                    </xsl:when>
-                    <xsl:otherwise>
-                        Asking 
-                        <tspan class="bold">
-                             <xsl:value-of select="format-number( //single/price, '$###,###')"/>
-                        </tspan>
-                       
-                    </xsl:otherwise>
-                </xsl:choose>
-			</tspan>
-		</text> -->
-
 		<text x="15%" y="20%" data-max-width="60%" fill="var(--theme-sub-heading-color)" font-weight="600" font-size="140%" font-family="var(--theme-sub-heading-font)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="concat( genie:indefinite-article( string(//area/name) ), ' ', //area/name, ' Gem')" />
@@ -147,6 +123,10 @@
 				<xsl:with-param name="default" select="translate(//agent[1]/mobile, '-', '.')" />
 			</xsl:call-template>
 		</text>
+
+<text x="65%" y="19%" font-size="63%" font-family="var(--theme-heading-font)" fill="var(--theme-body-color)" data-max-width="25%" class="left align-left upper">
+	<xsl:value-of select="//agent[1]/marketingLicense" />
+</text>
 
 		<image x="83%" y="11%" width="14%" height="16%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">

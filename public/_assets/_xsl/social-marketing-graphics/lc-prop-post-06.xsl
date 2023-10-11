@@ -29,14 +29,11 @@
 
         <text x="5%" y="75%" class="bold upper" font-size="160%" font-family="var(--theme-heading-font)" fill="var(--theme-sub-heading-color)">
             <xsl:choose>
-                <xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
+                <xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12) or number(//single/statusTypeID)=14">
                     <xsl:value-of select="'NOW PENDING'" />
                 </xsl:when>
                 <xsl:when test="number(//single/statusTypeID)=2">
                     <xsl:value-of select="'Just Sold'" />
-                </xsl:when>
-                <xsl:when test="number(//single/statusTypeID)=14">
-                    <xsl:value-of select="'NOW PENDING'" />
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="'Just Listed'" />
@@ -45,7 +42,7 @@
         </text>
 
         <text x="5%" y="80%" class="bold  heading" data-max-width="60%" font-size= "200%">
-            <xsl:value-of select="//single/type" />
+			<xsl:value-of select="$singularPropertyType"/>
         </text>
 
         <text x="5%" y="87.9%" class="" font-family="var(--theme-heading-font)" font-size="70%" font-weight="300" fill="var(--theme-heading-color)">

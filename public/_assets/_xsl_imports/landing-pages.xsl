@@ -11,12 +11,12 @@
 	<xsl:template match="/">
 		<html lang="en">
 			<xsl:attribute name="class">
-				<xsl:value-of select="concat( 'genie-landing-page ', //output/@theme, ' plugin-v', //output/@version,' asset-v', //output/@assetVersion )" />
+				<xsl:value-of select="concat( 'genie-landing-page ', //output/@theme, ' asset-v', //output/@assetVersion )" />
 			</xsl:attribute>
 
 			<script>
-				<xsl:value-of select="concat( 'window.gg = {}; let ggSettings = { agentID:`', //output/@userId, '`, areaID:', number(//area/id), ', leadAreaID:`', //output/@leadAreaID, '`, mlsNumber:`', //single/mlsNumber, '`, mlsID:`', //single/mlsID, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(//output/@hideAVM='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', lead: { propertyId:', number(//lead/property_id), ', firstName:`', //lead/property/firstName, '`, lastName:`', //lead/property/lastName, '`, email:`', //lead/property/emailAddress, '`}};' )" />
-				<xsl:value-of select="concat( 'window.ghub = { SINGLE:  0, CONDO: 1, site_url: `', //output/@siteUrl, '`, api_url: `', //output/@apiUrl, '`, mapStyle: `satellite-v9`, google_key: `', //output/@googleKey, '`, mapbox_key: `', //output/@mapboxKey, '` };')" />
+				<xsl:value-of select="concat( 'window.gg = {}; let ggSettings = { agentId:`', //output/@userId, '`, areaId:', number(//area/id), ', leadAreaId:`', //output/@leadAreaId, '`, mlsNumber:`', //single/mlsNumber, '`, mlsId:`', //single/mlsId, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(//output/@hideAVM='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', lead: { propertyId:', number(//lead/property_id), ', firstName:`', //lead/property/firstName, '`, lastName:`', //lead/property/lastName, '`, email:`', //lead/property/emailAddress, '`}};' )" />
+				<xsl:value-of select="concat( 'window.ghub = { SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, mapStyle: `satellite-v9`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
 			</script>
 			<xsl:call-template name="landing-page" />
 		</html>
@@ -126,11 +126,9 @@
 								<img>
 									<xsl:attribute name="alt">
 										<xsl:value-of select="//agent[1]/marketingName" />
-
 									</xsl:attribute>
 									<xsl:attribute name="src">
 										<xsl:value-of select="//agent[1]/photo" />
-
 									</xsl:attribute>
 								</img>
 							</div>
@@ -142,7 +140,6 @@
 								</h3>
 								<h2 class=" body-font">
 									<xsl:value-of select="//agent[1]/marketingTitle" />
-
 								</h2>
 
 								<h3 class="agent-phone">
@@ -155,18 +152,7 @@
 
 									</a>
 								</h3>
-								<!--
-								<h4 class="agent-email">
-									<a class="heading-font">
-										<xsl:attribute name="href">
-<xsl:value-of select="concat( 'mailto:', //agent[1]/marketingEmail )" />
 
-										</xsl:attribute>
-<xsl:value-of select="//agent[1]/marketingEmail" />
-
-									</a>
-								</h4>
--->
 								<button class="btn subtitle-font background-as-color contact-me-btn">
 									<span class="contact-svg">
 										<svg xmlns="http://www.w3.org/2000/svg"
@@ -178,6 +164,7 @@
 									</span>
                                         Contact Me
 								</button>
+
 								<h2 class="agent-website body-color body-font">
 									<a target="_blank">
 										<xsl:attribute name="href">
@@ -211,11 +198,6 @@
 									<div class="summary">
 										<p class="body-font body-color">
 											<xsl:copy-of select="$marketingAboutWithBreaks" />
-											<!--
-											<span class="read-more">
-												<a href="#">Read More (+)</a>
-											</span>
-											-->
 										</p>
 									</div>
 								</div>
@@ -225,6 +207,7 @@
 				</div>
 			</div>
 		</section>
+
 		<div class="modal fade contact-modal" id="contact-me" tabindex="-1" role="dialog" aria-labelledby="fl-thankyou-message" aria-hidden="false">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490" data-dismiss="modal">
@@ -269,13 +252,6 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="footer-style footer-area">
-						<!-- <div class="funnel-footer-company-logo">
-							<div class="funnel-company-logo your_logo_class editable">
-								<xsl:attribute name="style">
-									<xsl:value-of select="concat( 'background: url(', $personalLogo, ')' )" />
-								</xsl:attribute>
-							</div>
-						</div> -->
 						<div class="funnel-footer-company-logo">
 							<div class="funnel-company-logo your_logo_class editable">
 								<xsl:attribute name="style">
@@ -287,7 +263,6 @@
 						<ul class="heading-font outline" style="padding: 0;">
 							<li>
 								<xsl:value-of select="//agent[1]/marketingName" />
-
 							</li>
 							<li>
 								<xsl:attribute name="href">
@@ -297,15 +272,11 @@
 								<xsl:value-of select="//agent[1]/mobile" />
 
 							</li>
-							<!--							<li>Exp Realty Of California Inc</li>-->
-
 							<li>
 								<xsl:value-of select="//agent[1]/address/company" />
-
 							</li>
 							<li>
 								<xsl:value-of select="//agent[1]/marketingLicense" />
-
 							</li>
 						</ul>
 						<p class="heading-font">
@@ -315,7 +286,6 @@
 
 								</xsl:attribute>
 								<xsl:value-of select="//agent[1]/website" />
-
 							</a>
 						</p>
 						<p class="heading-font">
@@ -329,7 +299,7 @@
 					<div class="term-condition text-center heading-font">
 						<xsl:if test="//mlsDisplay/disclaimer!=''">
 							<a href="#" class="heading-font toggle" data-container="#mls-disclaimer">MLS/IDX Disclaimer</a>
-							<xsl:text>&#160;|&#160;</xsl:text>
+							<xsl:text>&#160;&#124;&#160;</xsl:text>
 						</xsl:if>
 						<a class="privacy-policy heading-font" target="_blank">
 							<xsl:if test="//agent[1]/privacySource='external'">
@@ -409,7 +379,8 @@
 	</xsl:template>
 
 	<xsl:template name="standard-header">
-		<xsl:param name="title" select="concat(  $listingAddressLine1, ', ' , $listingAddressLine2, ' | ' ,//agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
+		<xsl:param name="title" select="concat(  $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ' ,//agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
+
 
 		<xsl:param name="description" select="substring(concat( 'View details, pricing, photos, floorplan, for ', $listingAddressLine1, '. ' , //single/description, '...') ,0, 373 )" />
 
@@ -539,7 +510,8 @@
 				<xsl:attribute name="src">
 					<xsl:value-of select="concat( '/_assets/landing-pages/dist/', $buildVersion, '/assets/index.js' )" />
 				</xsl:attribute>
-				<xsl:text>;</xsl:text>
+				<xsl:comment />
+
 			</script>
 
 			<link rel="stylesheet">
@@ -699,11 +671,10 @@
 				<xsl:value-of select="//output/@theme" />
 			</xsl:attribute>
 
-			<xsl:if test="//output/@areaID!=''">
-				<xsl:attribute name="data-genie-areaid">
-					<xsl:value-of select="//output/@areaID" />
-				</xsl:attribute>
-			</xsl:if>
+			<xsl:attribute name="data-genie-areaid">
+				<xsl:value-of select="//areas/area[1]/id" />
+			</xsl:attribute>
+
 			<xsl:if test="//output/@areaPeriod!=''">
 				<xsl:attribute name="data-genie-areaperiod">
 					<xsl:value-of select="//output/@areaPeriod" />
@@ -715,7 +686,7 @@
 					<xsl:value-of select="//single/@mlsNumber" />
 				</xsl:attribute>
 				<xsl:attribute name="data-genie-mlsid">
-					<xsl:value-of select="//single/@mlsID" />
+					<xsl:value-of select="//single/@mlsId" />
 				</xsl:attribute>
 			</xsl:if>
 
