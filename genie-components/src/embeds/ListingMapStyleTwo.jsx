@@ -175,7 +175,7 @@ export default () => {
 						borderRadius: "15px",
 					}}>
 					<GeoArea
-						areaID={settings.areaid}
+						areaId={settings.areaid}
 						style={{
 							color: "#feff00",
 							fillOpacity: 0,

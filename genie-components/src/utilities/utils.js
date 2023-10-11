@@ -188,8 +188,8 @@ export const useAreaMonthly = () => {
 		loading: true,
 	});
 
-	const [areaData] = createResource(settings.areaID, async areaId =>
-		getAreaMonthly(areaId, settings.agentID)
+	const [areaData] = createResource(settings.areaId, async areaId =>
+		getAreaMonthly(areaId, settings.agentId)
 	);
 
 	createEffect(() => {
@@ -201,7 +201,7 @@ export const useAreaMonthly = () => {
 				),
 				propertyTypeID: sharedEmbedStore.propertyType,
 				propertyTypeCaption: propertyTypeCaption(sharedEmbedStore.propertyType),
-				areaID: settings.areaID,
+				areaId: settings.areaId,
 				areaPeriod: sharedEmbedStore.period,
 				loading: false,
 			});
@@ -212,8 +212,8 @@ export const useAreaMonthly = () => {
 };
 
 export const useAgentData = () => {
-	const { agentID } = useSettings();
-	const [agent] = createResource(agentID, getAgentData);
+	const { agentId } = useSettings();
+	const [agent] = createResource(agentId, getAgentData);
 
 	return agent;
 };
@@ -238,7 +238,7 @@ export const useAgentData = () => {
 				this.stats && this.stats.avgSalePrice / this.stats.previousPeriod.avgSalePrice - 1
 			);
 		},
-		areaID,
+		areaId,
 		areaPeriod,
 	});
 

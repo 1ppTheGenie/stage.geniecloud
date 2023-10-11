@@ -13,24 +13,25 @@ const cssRootOverrides = {
 
 const DATASTUB = "data-genie-";
 const CAMELCASE = {
-	agentid: "agentID",
-	renderid: "renderID",
+	agentid: "agentId",
+	renderid: "renderId",
 	layout: "layout",
 	theme: "theme",
+	areaid: "areaId",
 	areaid: "areaID",
 	areaperiod: "areaPeriod",
 	period: "areaPeriod",
-	leadareaid: "leadAreaID",
+	leadareaid: "leadAreaId",
 	mode: "mode",
 	mapstyle: "mapStyle",
 	mapicon: "mapIcon",
 	mapkey: "mapKey",
 	mlsnumber: "mlsNumber",
-	mlsid: "mlsID",
+	mlsid: "mlsId",
 	blurprice: "blurPrice",
 	signin: "signIn",
 	pricepercent: "pricePercent",
-	propertytype: "propertyTypeID",
+	propertytype: "propertyTypeId",
 	nocopyright: "noCopyright",
 	openhouse: "openHouseTimes",
 	hideavm: "hideAVM",
@@ -86,14 +87,14 @@ export default () => {
 
 			if (queryParams.shorturldataid) {
 				(async () => {
-					const agentID = document
+					const agentId = document
 						.querySelector(`div[${DATASTUB}agentid]`)
 						?.getAttribute(`${DATASTUB}agentid`);
-					if (agentID) {
+					if (agentId) {
 						const r = await getShortData({
 							shortID: queryParams.shorturldataid,
 							token: queryParams.token,
-							agentID,
+							agentId,
 						});
 
 						let ov = Object.fromEntries(
@@ -123,7 +124,7 @@ export default () => {
 				var link = document.createElement("link");
 				link.rel = "stylesheet";
 				link.type = "text/css";
-				link.href = `${window.ghub.site_url}_assets/themes/${settings.theme}.css`;
+				link.href = `${window.ghub.siteUrl}_assets/themes/${settings.theme}.css`;
 				document.head.appendChild(link);
 			}
 
@@ -161,9 +162,7 @@ const Genie = ({ layout, nocopyright, nomargin, isLast, ...props }) => {
 
 	onCleanup(() => window.removeEventListener("message", msgListener));
 
-	const Layout = lazy(() =>
-		import(/* @vite-ignore */ `../embeds/${layout}.jsx`)
-	);
+	const Layout = lazy(() => import(`../embeds/${layout}.jsx`));
 
 	return (
 		<div

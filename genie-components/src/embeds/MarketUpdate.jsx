@@ -50,7 +50,7 @@ export default () => {
 
 					<HomeTypes
 						/*showPeriod={parseInt(settings.period) === -1}*/
-						container={`MarketSnapshot-${areaDataStore.areaID}`}
+						container={`MarketSnapshot-${areaDataStore.areaId}`}
 						style="width:100%"
 					/>
 
@@ -117,7 +117,7 @@ export default () => {
 						cssClasses="genie-map"
 						id="market-update-map">
 						<GeoArea
-							areaID={areaDataStore.areaID}
+							areaId={areaDataStore.areaId}
 							style="color:#feff00;fill-Opacity: 0;"
 						/>
 						<Show when={areaDataStore.propertyStats}>

@@ -23,8 +23,8 @@ export const propertyTypeCaption = (type, count = 0, abbr = false) => {
 	return caption;
 };
 
-const areaId = ggSettings.areaID;
-const agentId = ggSettings.agentID;
+const areaId = ggSettings.areaId;
+const agentId = ggSettings.agentId;
 
 const defaultPropertyType = Math.max(
 	parseInt(
@@ -52,8 +52,9 @@ const [area, areaMonthly, areaListings, setPeriod] = createRoot(() => {
 	const [areaMonthly] = createResource(areaId, aID =>
 		getAreaMonthly({ areaId: aID, agentId })
 	);
-	const [areaListings] = createResource(period, p =>
-		getAreaProperties(areaId, p, agentId)
+	const [areaListings] = createResource(
+		period,
+		async p => await getAreaProperties(areaId, p, agentId)
 	);
 
 	return [area, areaMonthly, areaListings, setPeriod];

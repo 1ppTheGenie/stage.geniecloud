@@ -15,7 +15,7 @@ import "@/assets/css/home-value.css";
 
 export default props => {
 	const { withCopy = false, buttonCaption = "Get your Value!" } = props;
-	const { areaID, mapStyle, withLeadCapture } = useSettings();
+	const { areaId, mapStyle, withLeadCapture } = useSettings();
 
 	const [showResult, setShowResult] = createSignal(false);
 	const [place, setPlace] = createSignal();
@@ -25,7 +25,11 @@ export default props => {
 	return (
 		<>
 			<Show when={showResult() === true}>
-				<HomeValuationResult place={place} property={property} withLeadCapture={true} />
+				<HomeValuationResult
+					place={place}
+					property={property}
+					withLeadCapture={true}
+				/>
 			</Show>
 
 			<Show when={showResult() === false}>
@@ -41,7 +45,7 @@ export default props => {
 						zoom={18}>
 						<>
 							<Suspense>
-								<GeoArea areaID={areaID} fillColor="var (--theme-color)" />
+								<GeoArea areaId={areaId} fillColor="var (--theme-color)" />
 							</Suspense>
 
 							<LeafletPane>

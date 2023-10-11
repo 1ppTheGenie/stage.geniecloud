@@ -1,7 +1,7 @@
 export const initAutocomplete = callback => {
 	if (!document.getElementById("google-maps-script")) {
 		var js = document.createElement("script");
-		js.src = `https://maps.googleapis.com/maps/api/js?key=${window.ghub.google_key}&libraries=places`;
+		js.src = `https://maps.googleapis.com/maps/api/js?key=${window.ghub.googleKey}&libraries=places`;
 		js.id = "google-maps-script";
 		js.onload = () => callback();
 
@@ -18,11 +18,13 @@ export const initMaps = async () => {
 			var link = document.createElement("link");
 			link.rel = "stylesheet";
 			link.type = "text/css";
-			link.href = "https://unpkg.com/leaflet@1.8.0/dist/leaflet.css";
+			link.href =
+				"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
 			document.head.appendChild(link);
 
 			var script = document.createElement("script");
-			script.src = "https://unpkg.com/leaflet@1.8.0/dist/leaflet.js";
+			script.src =
+				"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js";
 			script.id = "leaflet-script";
 			script.onload = () => resolve(true);
 			document.head.appendChild(script);
@@ -43,9 +45,10 @@ export const buildMap = (container, options = {}) => {
 		const mapStyle = options.mapStyle || window.ghub.mapStyle;
 
 		const mapboxTiles = window.L.tileLayer(
-			`https://api.mapbox.com/styles/v1/mapbox/${mapStyle}/tiles/{z}/{x}/{y}?access_token=${window.ghub.mapbox_key}`,
+			`https://api.mapbox.com/styles/v1/mapbox/${mapStyle}/tiles/{z}/{x}/{y}?access_token=${window.ghub.mapboxKey}`,
 			{
-				attribution: '&copy; <a href="https://www.mapbox.com/feedback/">Mapbox</a>',
+				attribution:
+					'&copy; <a href="https://www.mapbox.com/feedback/">Mapbox</a>',
 				tileSize: 512,
 				zoomOffset: -1,
 			}

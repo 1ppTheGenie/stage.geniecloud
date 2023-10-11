@@ -27,19 +27,22 @@ export default () => {
 
 	return (
 		<div id="padded" style="padding: 1rem 0; width: 100%">
-			<h1>
-				LIVE HOT LIST OF HOMES FOR SALE
-			</h1>
-			
-			<p class="current-date">- as of <span>{date_time_text}</span></p>
-			
-           
+			<h1>LIVE HOT LIST OF HOMES FOR SALE</h1>
+
+			<p class="current-date">
+				- as of <span>{date_time_text}</span>
+			</p>
+
 			<HomeTypes
 				container={`ListingMapStyleOne-${settings.marketstatus}-${settings.areaid}`}
 				showPeriod={settings.marketstatus === "sold"}
 			/>
 			<Show when={listingsStore.listings.length > 0}>
-				<MapListings listings={currentListings()} style="margin-top: 30px" />
+				<MapListings
+					id="listing-map-style-one"
+					listings={currentListings()}
+					style="margin-top: 30px"
+				/>
 
 				<p class="filterTxt" style="font-size:13px; color: #fff;">
 					<ListingsShowing
@@ -56,7 +59,6 @@ export default () => {
 					currentPage={currentPage()}
 					pageChange={page => setPage(page)}
 				/>
-
 			</Show>
 		</div>
 	);

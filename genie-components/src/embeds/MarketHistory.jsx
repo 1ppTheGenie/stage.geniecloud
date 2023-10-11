@@ -24,12 +24,17 @@ export default () => {
 	const [low, setLow] = createSignal();
 
 	createEffect(() => {
-		if (!areaMonthlyStore.loading) {
+		console.log("areaMonthlyStore", areaMonthlyStore);
+	});
+
+	createEffect(() => {
+		if (areaMonthlyStore.loading == false) {
 			const stats = [
 				...areaMonthlyStore.stats.filter(
 					stats => stats.propertyTypeId === areaDataStore.propertyTypeID
 				),
 			];
+			console.log("stats", areaMonthlyStore);
 			setLabels(
 				stats
 					.slice(Math.max(stats.length - areaDataStore.areaPeriod, 1))

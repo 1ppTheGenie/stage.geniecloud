@@ -73,7 +73,7 @@ export default () => {
 				<h1>{areaDataStore.areaName} Fast&#160;Facts</h1>
 			</Editable>
 
-			<HomeTypes container={`FastFacts-${areaDataStore.areaID}`} />
+			<HomeTypes container={`FastFacts-${areaDataStore.areaId}`} />
 			<Show when={typeof areaDataStore.propertyStats === "undefined"}>
 				<p>Sorry, but we have no data for that period.</p>
 			</Show>

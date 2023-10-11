@@ -25,9 +25,12 @@ export default () => {
 	const [sortBy, setSortBy] = createSignal("Most Recent");
 	const [view, setView] = createSignal("List");
 
-	const { currentPage, setPage, pageOffset, pageSize, setPageSize } = usePagination({});
+	const { currentPage, setPage, pageOffset, pageSize, setPageSize } =
+		usePagination({});
 	const [status, setStatus] = createSignal(
-		settings.mode ? settings.mode.charAt(0).toUpperCase() + settings.mode.slice(1) : ""
+		settings.mode
+			? settings.mode.charAt(0).toUpperCase() + settings.mode.slice(1)
+			: ""
 	);
 	const [expanded] = createSignal(false);
 
@@ -38,27 +41,38 @@ export default () => {
 		status,
 		sortBy
 	);
-	const visibleListings = currentListings.slice(pageOffset, pageOffset + pageSize);
-	const color = getCssVar(`--${status.toLowerCase()}`, document.body).trim();
+	const visibleListings =
+		currentListings && currentListings.slice(pageOffset, pageOffset + pageSize);
+	const color = getCssVar(`--${status().toLowerCase()}`, document.body).trim();
 
 	return (
 		<>
 			<h4 class="center upper" style="margin-bottom:0.5rem">
-				{areaDataStore.areaName} {propertyTypeID === 0 ? "Homes" : "Condos"}
+				{areaDataStore.areaName}{" "}
+				{areaDataStore.propertyTypeID === 0 ? "Homes" : "Condos"}
 			</h4>
 			<h1 class="center upper" style="margin:0.5rem 0">
 				Market Activity
 			</h1>
 
-			<HomeTypes container={`MarketActivity-${settings.areaid}`} style="margin:0.5rem" />
+			<HomeTypes
+				container={`MarketActivity-${settings.areaid}`}
+				style="margin:0.5rem"
+			/>
 
-			<div style={`position:relative;width:100%;height:${expanded ? "650px" : `400px`}`}>
+			<div
+				style={`position:relative;width:100%;height:${
+					expanded ? "650px" : `400px`
+				}`}>
 				<StatusKey setStatus={setStatus} />
 				<LeafletMap
 					mapStyle={settings.mapstyle || "satellite-streets-v11"}
 					zoomControl={true}
 					style="width:100%;height:100%;">
-					<GeoArea areaID={settings.areaid} style="color:#feff00;fill-opacity:0" />
+					<GeoArea
+						areaId={settings.areaid}
+						style="color:#feff00;fill-opacity:0"
+					/>
 					{visibleListings &&
 						visibleListings.map((l, i) => (
 							<CircleMarker
@@ -71,7 +85,7 @@ export default () => {
 				</LeafletMap>
 			</div>
 
-			{listings.length > 0 && (
+			{visibleListings && visibleListings.length > 0 && (
 				<div style="display: flex; flex-direction: row; justify-content: space-between; margin: 0; font-size: 85%; align-items: center; width: 100%">
 					<span>View Option</span>
 
@@ -113,11 +127,13 @@ export default () => {
 							setSortBy(e.target.value);
 						}}
 						style="padding:0.25rem 0.5rem">
-						{["Most Recent", "Price High", "Price Low", "Days on Market"].map(key => (
-							<option key={key} style="text-transform:capitalize">
-								{key}
-							</option>
-						))}
+						{["Most Recent", "Price High", "Price Low", "Days on Market"].map(
+							key => (
+								<option key={key} style="text-transform:capitalize">
+									{key}
+								</option>
+							)
+						)}
 					</select>
 
 					<span>
@@ -149,7 +165,7 @@ export default () => {
 			)}
 
 			<Pagination
-				totalItems={currentListings.length}
+				totalItems={currentListings?.length}
 				currentPage={currentPage}
 				pageChange={page => setPage(page)}
 				style="align-self: flex-end"
@@ -159,13 +175,24 @@ export default () => {
 };
 
 const StatusKey = ({ setStatus }) => {
-	const { areaName, overall } = useAreaData();
-
+	console.log("areaDataStore", { ...areaDataStore });
 	const labels = [
-		{ total: overall.new, label: "New (active)", status: "new" },
-		{ total: overall.active, label: "Active", status: "active" },
-		{ total: overall.pending, label: "Pending", status: "pending" },
-		{ total: overall.sold, label: "Sold", status: "sold" },
+		{
+			total: areaDataStore?.overall?.new,
+			label: "New (active)",
+			status: "new",
+		},
+		{
+			total: areaDataStore?.overall?.active,
+			label: "Active",
+			status: "active",
+		},
+		{
+			total: areaDataStore?.overall?.pending,
+			label: "Pending",
+			status: "pending",
+		},
+		{ total: areaDataStore.overall?.sold, label: "Sold", status: "sold" },
 	];
 
 	return (
@@ -179,7 +206,7 @@ const StatusKey = ({ setStatus }) => {
 					style="font-size: 150%"
 					fill="var(--theme-body-color)"
 					dominantBaseline="hanging">
-					{areaName}
+					{areaDataStore.areaName}
 				</text>
 				<g style="transform: translate(20px, 70px)">
 					{labels.map((l, i) => (

@@ -43,15 +43,15 @@ const getAreaPolygon = async area_id => {
 	return r.success ? r.result.polygon : {};
 };
 
-const getListingData = async (mlsNo, mlsID = 0) =>
-	await apiCall("get-listing-data", { mlsID, mlsNo });
+const getListingData = async (mlsNo, mlsId = 0) =>
+	await apiCall("get-listing-data", { mlsId, mlsNo });
 
-const getMlsDisplay = async (mlsID = 0) =>
-	await apiCall("get-mls-display", { mlsID });
+const getMlsDisplay = async (mlsId = 0) =>
+	await apiCall("get-mls-display", { mlsId });
 
-const createLead = async data => await apiCall(`add-lead`, data);
+const createLead = async data => await apiCall(`add-lead`, data, "POST");
 
-const updateLead = async data => await apiCall(`update-lead`, data);
+const updateLead = async data => await apiCall(`update-lead`, data, "POST");
 
 const landingPageData = async data => await apiCall(`get-landing-data`, data);
 
@@ -92,7 +92,7 @@ export {
 };
 
 async function apiCall(endpoint, data = null, method = "GET") {
-	let url = `${window.ghub.api_url}${GENIE}${endpoint}`;
+	let url = `${window.ghub.apiUrl}${GENIE}${endpoint}`;
 
 	const headers = new Headers();
 	headers.append("Content-Type", "application/json");
@@ -111,8 +111,6 @@ async function apiCall(endpoint, data = null, method = "GET") {
 	} else if (data) {
 		url += `?${new URLSearchParams(Object.entries(data)).toString()}`;
 	}
-
-	console.log(url, method);
 
 	const response = await fetch(url, args);
 

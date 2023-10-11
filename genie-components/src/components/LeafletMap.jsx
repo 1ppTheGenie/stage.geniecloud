@@ -55,7 +55,7 @@ export const LeafletMap = props => {
 };
 
 export const GeoArea = props => {
-	const [polygon] = createResource(props.areaID, getAreaPolygon);
+	const [polygon] = createResource(props.areaId, getAreaPolygon);
 
 	return <Geo polygon={polygon()} color={props.color} />;
 };

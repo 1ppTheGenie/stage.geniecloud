@@ -18,13 +18,12 @@ import "@/assets/css/market-trending.css";
 export default () => {
 	return (
 		<>
-       
 			<h1 class="center upper">
 				{areaDataStore.areaName} {areaDataStore.propertyTypeCaption}
-			</h1>			
-            <h4 class="center upper">Market Trending</h4>
+			</h1>
+			<h4 class="center upper">Market Trending</h4>
 
-			<HomeTypes container={`MarketTrends-${areaDataStore.areaID}`} />
+			<HomeTypes container={`MarketTrends-${areaDataStore.areaId}`} />
 
 			<Show when={!areaDataStore.propertyStats && !areaDataStore.loading}>
 				<p>Sorry, but we have no data for that period.</p>

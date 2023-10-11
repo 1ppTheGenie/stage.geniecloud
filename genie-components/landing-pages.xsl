@@ -137,7 +137,6 @@
 									</xsl:attribute>
 									<xsl:attribute name="src">
 										<xsl:value-of select="//agent[1]/photo" />
-
 									</xsl:attribute>
 								</img>
 							</div>
@@ -558,6 +557,7 @@
 				<xsl:attribute name="src">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/dist/', $buildVersion, '/assets/index.js' )" />
 				</xsl:attribute>
+				<xsl:comment />
 			</script>
 
 			<link rel="stylesheet">
