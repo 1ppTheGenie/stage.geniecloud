@@ -1,0 +1,77 @@
+{
+	"name": "Open House Marketing Kit",
+	"template": "marketing-steps-lc1",
+	"version": 3,
+	"sections": [
+		{
+			"meta": { "caption": "", "description": "" },
+			"assets": [
+				{
+					"asset": "social-marketing-graphics/lc-oh-post-02",
+					"name": "Social Story 1"
+				},
+				{
+					"asset": "social-marketing-graphics/open-house-02",
+					"name": "Social Story 2"
+				},
+				{
+					"asset": "social-marketing-graphics/open-house-03",
+					"name": "Social Story 3"
+				}
+			],
+			"name": "Social Stories"
+		},
+		{
+			"meta": { "caption": "", "description": "" },
+			"assets": [
+				{
+					"asset": "flyers/lc-brochure-01",
+					"name": "Open House Brochure",
+					"qrUrl": "lc-hollywood"
+				},
+				{
+					"asset": "flyers/lc-oh-invite-01a",
+					"name": "Open House Invite",
+					"qrUrl": "lc-hollywood"
+				},
+				{
+					"asset": "flyers/open-house-flyer-copy",
+					"name": "Open House Flyer"
+				},
+				{
+					"asset": "flyers/open-house-welcome-stand",
+					"name": "Welcome Stand",
+					"qrUrl": "lc-oh-guestbook"
+				},
+				{
+					"asset": "area-insider-reports/market-insider",
+					"name": "Market Insider"
+				},
+				{
+					"asset": "landing-pages/lc-hollywood",
+					"name": "Property Website"
+				},
+				{
+					"asset": "landing-pages/lc-oh-guestbook",
+					"name": "Open House Guestbook",
+					"lpo": "lc-hollywood"
+				},
+				{
+					"asset": "landing-pages/home-compare-search",
+					"lpo": "property-compare",
+					"name": "Home Compare Page"
+				},
+				{
+					"asset": "landing-pages/property-compare",
+					"hide": true
+				},
+				{
+					"asset": "landing-pages/lc-oh-guestbook",
+					"lpo": "lc-austin",
+					"name": "Open House Guestbook"
+				}
+			],
+			"name": "Flyers & Websites"
+		}
+	]
+}

@@ -1,0 +1,76 @@
+{
+	"version": 3,
+	"name": "Market Report Kit Paisley Plus",
+	"template": "marketing-steps-lc1",
+	"sections": [
+		{
+			"meta": { "caption": "Become the Local Expert!" },
+			"assets": [
+				{
+					"asset": "area-insider-reports/market-insider",
+					"knownAs": "Insider Report",
+					"name": "Market Insider"
+				},
+				{
+					"asset": "facebook-approved/market-insider-download-01",
+					"knownAs": "Market Insider Download Ad",
+					"name": "Social Story 1"
+				},
+				{
+					"asset": "social-marketing-graphics/nc-frisco",
+					"knownAs": "Neighborhood Ad",
+					"name": "Social Story 2"
+				},
+				{
+					"asset": "social-marketing-graphics/neighborhood-market-report-ad-03",
+					"knownAs": "Market Report Ad",
+					"name": "Social Story 3"
+				},
+				{
+					"asset": "charts/sales-to-list-price-chart",
+					"knownAs": "Sales to List Price Infographic",
+					"name": "Social Story 4"
+				},
+				{
+					"asset": "report-pages-letter/market-snapshot-letter",
+					"knownAs": "Market Snapshot Infographic",
+					"name": "Market Snapshot"
+				},
+				{
+					"asset": "report-pages-letter/fast-facts-style-letter-1",
+					"knownAs": "Fast Facts Infographic",
+					"name": "Fast Facts"
+				},
+				{
+					"asset": "landing-pages/market-report-instant",
+					"name": "Market Insider Landing Page"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v1",
+					"name": "Market Insider Download 1"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v3",
+					"name": "Market Insider Download 3"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v4",
+					"name": "Market Insider Download 4"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v5",
+					"name": "Market Insider Download 5"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v6",
+					"name": "Market Insider Download 6"
+				},
+				{
+					"asset": "landing-pages/market-insider-instant-download-v7",
+					"name": "Market Insider Download 7"
+				}
+			],
+			"name": "Area Market Reports"
+		}
+	]
+}
