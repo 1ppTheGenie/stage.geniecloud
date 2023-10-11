@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<xsl:call-template name="listings-header">
 			<xsl:with-param name="title" select="'Sold Listings'" />
@@ -96,7 +97,8 @@
 		</xsl:variable>
 
 		<xsl:call-template name="listings-footer">
-			<xsl:with-param name="nodes" select="$listingsTotalSold"/>
+<xsl:with-param name="nodes" select="$listingsTotalSold" />
+
 			<xsl:with-param name="summary" select="concat( ' listings sold in the last ', $periodName, '.' )" />
 		</xsl:call-template>
 

@@ -1,13 +1,15 @@
 <svg version="1.1"
 	xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
 
-	<circle stroke="#8bad57" stroke-width="60" stroke-miter-limit="10" cx="250" cy="250" r="203.04" fill-opacity="0"/>
+<circle stroke="#8bad57" stroke-width="60" stroke-miter-limit="10" cx="250" cy="250" r="203.04" fill-opacity="0" />
+
 
 	<path fill="#8bad57" d="M250,147.6l-89.29,119.34h42.84v92.16c16.03,0,32.06,0,48.09,0c14.96,0,29.92,0,44.88,0
-	c0-30.36,0-60.72,0-91.08h46.44L250,147.6z"/>
+c0-30.36,0-60.72,0-91.08h46.44L250,147.6z" />
 
-	<rect x="203.4" y="376.96" fill="#8bad57" width="93" height="19.08"/>
+<rect x="203.4" y="376.96" fill="#8bad57" width="93" height="19.08" />
+
 
 	<path fill="#8bad57" d="M203.4,410.12c0.07,2.92,0.15,5.84,0.22,8.76c17.84,6.36,42.13,6.36,42.13,6.36s23.58,1.41,50.64-6.11
-	c0-3,0-6,0-9H203.4z"/>
+c0-3,0-6,0-9H203.4z" />
 </svg>

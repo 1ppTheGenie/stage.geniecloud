@@ -7,7 +7,8 @@
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'text {dominant-baseline: middle;}'" />
@@ -58,7 +59,8 @@
 			<text x="50%" y="35.5%" class="center lower sub-heading" style="font-size: 450%;fill:var(--theme-sub-heading-color)">
 				<tspan>
 					<xsl:call-template name="format-price">
-						<xsl:with-param name="price" select="//statistics/@averageSalePrice"/>
+<xsl:with-param name="price" select="//statistics/@averageSalePrice" />
+
 					</xsl:call-template>
 				</tspan>
 			</text>
@@ -69,7 +71,8 @@
 				</tspan>
 				<tspan class="lower">
 					<xsl:call-template name="format-price">
-						<xsl:with-param name="price" select="//statistics/previous/@averageSalePrice"/>
+<xsl:with-param name="price" select="//statistics/previous/@averageSalePrice" />
+
 					</xsl:call-template>
 				</tspan>
 			</text>

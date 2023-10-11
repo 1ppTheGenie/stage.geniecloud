@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
@@ -77,12 +78,14 @@
 
 			<g style="transform:translate(8.5%,36%)">
 				<text class="sub-heading large bold">
-					<tspan class="upper" tabindex="1">Just <xsl:value-of select="$soldListed"/>
+<tspan class="upper" tabindex="1">Just <xsl:value-of select="$soldListed" />
+
 					</tspan>
 				</text>
 
 				<text y="7%" class="upper medium">
-					<xsl:call-template name="listing-address"/>
+<xsl:call-template name="listing-address" />
+
 				</text>
 			</g>
 		</g>
@@ -153,7 +156,8 @@
 			<text x="16%" y="5%" class="sub-heading align-center">
 				<tspan class="bold">Type:  </tspan>
 				<tspan class="narrow">
-					<xsl:value-of select="concat( 'CC ', $singularPropertyType, ' DD')"/>
+<xsl:value-of select="concat( 'CC ', $singularPropertyType, ' DD')" />
+
 				</tspan>
 			</text>
 

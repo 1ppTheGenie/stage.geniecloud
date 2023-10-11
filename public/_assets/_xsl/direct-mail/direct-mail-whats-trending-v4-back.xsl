@@ -8,7 +8,8 @@ Supports:	Area, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:import href="icons.xsl" />
 
 	<xsl:template name="body">
@@ -21,7 +22,8 @@ Supports:	Area, QRCode
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing">
-				<xsl:sort order="ascending" select="@state"/>
+<xsl:sort order="ascending" select="@state" />
+
 				<xsl:if test="position() &lt;= 50">
 					<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
 				</xsl:if>
@@ -31,8 +33,9 @@ Supports:	Area, QRCode
 	</xsl:template>
 
 	<xsl:template name="svg-body">
-		<rect x="63.5%" y="0%" width="36.5%" height="100%" fill="#fff"/>
-		<rect x="63.5%" y="3%" stroke-width="1" fill-opacity="1" width="0.1%" height="93%" fill="var(--theme-body-color)"/>
+<rect x="63.5%" y="0%" width="36.5%" height="100%" fill="#fff" />
+<rect x="63.5%" y="3%" stroke-width="1" fill-opacity="1" width="0.1%" height="93%" fill="var(--theme-body-color)" />
+
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
@@ -124,7 +127,8 @@ Supports:	Area, QRCode
 				<tspan x="41%" y="13%" fill="var(--theme-heading-color)" style="font-size:100%;" class="upper">
 					<xsl:choose>
 						<xsl:when test="$min_sale_price_change > 0">
-							<xsl:value-of select="concat( 'upto ',  format-number( $min_sale_price_change, '#.00') , '% in the ' )"/>
+<xsl:value-of select="concat( 'upto ',  format-number( $min_sale_price_change, '#.00') , '% in the ' )" />
+
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:call-template name="editable">
@@ -140,7 +144,8 @@ Supports:	Area, QRCode
 							<xsl:text>Last Month</xsl:text>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')"/>
+<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 				</tspan>
@@ -214,13 +219,15 @@ Supports:	Area, QRCode
 			</text>
 		</g>
 
-		<rect x="1%" y="60%" width="42%" height="27%" fill="var(--theme-heading-color)"/>
+<rect x="1%" y="60%" width="42%" height="27%" fill="var(--theme-heading-color)" />
+
 
 		<g style="transform:translate(8%,64.7%)">
 			<svg width="35%" height="17.5%">
 
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".2500" cx=".5" cy=".5"/>
+<circle r=".2500" cx=".5" cy=".5" />
+
 				</clipPath>
 
 				<image x="-6.7%" y="-22%" width="27.5%" height="99%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)" style="transform: scale(1.85);">
@@ -268,19 +275,23 @@ Supports:	Area, QRCode
 			</svg>
 		</g>
 
-		<rect x="0" y="89%" stroke-width="1" fill-opacity="1" width="63%" height=".1%" fill="var(--theme-body-color)"/>
+<rect x="0" y="89%" stroke-width="1" fill-opacity="1" width="63%" height=".1%" fill="var(--theme-body-color)" />
+
 		<foreignObject x="2%" y="91%" width="60%" height="4%" style="color:var(--theme-heading-color);font-size:60%;">
 
-			<xsl:call-template name="solicitation-disclaimer"/>
+<xsl:call-template name="solicitation-disclaimer" />
+
 		</foreignObject>
 
 		<text class="small" fill="#000" style="font-weight:600;font-size:100%;">
 			<tspan x="65.5%" y="7%">
-				<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 				<xsl:text>,</xsl:text>
 			</tspan>
 			<tspan x="65.5%" y="10%">
-				<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 			</tspan>
 		</text>
 

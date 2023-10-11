@@ -7,26 +7,32 @@
 	.st3{fill:url(#SVGID_4_);}
 	</style>
 	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="483.04" y1="250" x2="16.96" y2="250" gradientTransform="matrix(1 0 0 -1 0 500)">
-		<stop offset="0" style="stop-color:#EE493C"/>
-		<stop offset="1" style="stop-color:#DA2728"/>
+<stop offset="0" style="stop-color:#EE493C" />
+<stop offset="1" style="stop-color:#DA2728" />
+
 	</linearGradient>
-	<circle class="st0" cx="250" cy="250" r="203.04"/>
+<circle class="st0" cx="250" cy="250" r="203.04" />
+
 	<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="160.71" y1="253.35" x2="342.96" y2="253.35" gradientTransform="matrix(1 0 0 -1 0 500)">
-		<stop offset="0" style="stop-color:#DB2929"/>
-		<stop offset="1" style="stop-color:#ED463B"/>
+<stop offset="0" style="stop-color:#DB2929" />
+<stop offset="1" style="stop-color:#ED463B" />
+
 	</linearGradient>
 	<path class="st1" d="M250,352.4l-89.29-119.34h42.84V140.9c16.03,0,32.06,0,48.09,0c14.96,0,29.92,0,44.88,0
-	c0,30.36,0,60.72,0,91.08h46.44L250,352.4z"/>
+c0,30.36,0,60.72,0,91.08h46.44L250,352.4z" />
 	<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="203.4" y1="386.5" x2="296.4" y2="386.5" gradientTransform="matrix(1 0 0 -1 0 500)">
-		<stop offset="0" style="stop-color:#DB2929"/>
-		<stop offset="1" style="stop-color:#ED483B"/>
+<stop offset="0" style="stop-color:#DB2929" />
+<stop offset="1" style="stop-color:#ED483B" />
+
 	</linearGradient>
-	<rect x="203.4" y="103.96" class="st2" width="93" height="19.08"/>
+<rect x="203.4" y="103.96" class="st2" width="93" height="19.08" />
+
 	<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="203.4" y1="417.729" x2="296.4" y2="417.729" gradientTransform="matrix(1 0 0 -1 0 500)">
-		<stop offset="0" style="stop-color:#DB2929"/>
-		<stop offset="0.9693" style="stop-color:#ED483B"/>
-		<stop offset="1" style="stop-color:#EBA123"/>
+<stop offset="0" style="stop-color:#DB2929" />
+<stop offset="0.9693" style="stop-color:#ED483B" />
+<stop offset="1" style="stop-color:#EBA123" />
+
 	</linearGradient>
 	<path class="st3" d="M203.4,89.88c0.07-2.92,0.15-5.84,0.22-8.76c17.84-6.36,42.13-6.36,42.13-6.36s23.58-1.41,50.64,6.11
-	c0,3,0,6,0,9H203.4z"/>
+c0,3,0,6,0,9H203.4z" />
 </svg>

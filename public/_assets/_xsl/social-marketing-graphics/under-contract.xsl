@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<text x="2%" y="8%" class="upper" fill="var(--theme-heading-color)" style="font-size: 350%;letter-spacing: 2%;">
 			<xsl:call-template name="editable">
@@ -16,14 +17,17 @@
 			</xsl:call-template>
 		</text>
 
-		<rect width="36%" height="0.5%" fill="var(--theme-body-color)" fill-opacity="100%" y="20%" x="2%"/>
+<rect width="36%" height="0.5%" fill="var(--theme-body-color)" fill-opacity="100%" y="20%" x="2%" />
+
 
 		<text x="2%" y="25%" class="large">
-			<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 		</text>
 
 		<text x="2%" y="32%" class="large">
-			<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 		</text>
 
 		<image x="50%" y="3%" width="48%" height="52%" preserveAspectRatio="xMidYMid slice">

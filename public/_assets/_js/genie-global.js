@@ -158,17 +158,19 @@ gg.circleURI = (color, caption = "", size = 12) => {
 			: `<text x="12" y="16" fill="#fff" text-anchor="middle" style="font-family:sans-serif;font-weight:800;font-size:12px">${caption}</text>`;
 
 	const svg = `
-	<svg xmlns="http://www.w3.org/2000/svg" width="${size * 2 + 4}" height="${size * 2 + 4}">
+	<svg xmlns="http://www.w3.org/2000/svg" width="${size * 2 + 4}" height="${
+		size * 2 + 4
+	}">
 		<defs>
 			<filter id="shadow" x="0" y="0" width="${size}" height="${size}">
-				<feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 
-				<feOffset dx="2" dy="2" result="offsetblur"/>
+				<feGaussianBlur in="SourceAlpha" stdDeviation="3" /> 
+				<feOffset dx="2" dy="2" result="offsetblur" />
 				<feComponentTransfer>
-					<feFuncA type="linear" slope="0.5"/>
+					<feFuncA type="linear" slope="0.5" />
 				</feComponentTransfer>
 				<feMerge> 
 					<feMergeNode/> 
-					<feMergeNode in="SourceGraphic"/> 
+					<feMergeNode in="SourceGraphic" /> 
 				</feMerge>
 			</filter>
 		</defs>
@@ -184,18 +186,18 @@ gg.flagURI = (color, price) => {
 	<svg xmlns="http://www.w3.org/2000/svg" width="11" height="7.5" viewBox="0 0 110 75">
 		<defs>
 			<filter id="f1" x="0" y="0" width="12" height="12">
-			<feGaussianBlur in="SourceAlpha" stdDeviation="5"/> 
-			<feOffset dx="2" dy="2" result="offsetblur"/>
+			<feGaussianBlur in="SourceAlpha" stdDeviation="5" /> 
+			<feOffset dx="2" dy="2" result="offsetblur" />
 			<feComponentTransfer>
-			<feFuncA type="linear" slope="0.5"/>
+			<feFuncA type="linear" slope="0.5" />
 			</feComponentTransfer>
 			<feMerge> 
 			<feMergeNode/> 
-			<feMergeNode in="SourceGraphic"/> 
+			<feMergeNode in="SourceGraphic" /> 
 			</feMerge>
 			</filter>
 		</defs>
-		<path fill="${color}" stroke="#fff" stroke-width="3" filter="url(#f1)" d="M105.333,0.5H5.5c-2.75,0-5,2.25-5,5v38.333c0,2.75,2.25,5,5,5h38.733l10.101,20.834l12.152-20.834h38.848c2.75,0,5-2.25,5-5V5.5C110.333,2.75,108.083,0.5,105.333,0.5z"/>
+		<path fill="${color}" stroke="#fff" stroke-width="3" filter="url(#f1)" d="M105.333,0.5H5.5c-2.75,0-5,2.25-5,5v38.333c0,2.75,2.25,5,5,5h38.733l10.101,20.834l12.152-20.834h38.848c2.75,0,5-2.25,5-5V5.5C110.333,2.75,108.083,0.5,105.333,0.5z" />
 
 		<text x="55" y="35" style="font-size:28px;font-weight:bold;font-family:sans-serif" text-anchor="middle" fill="#FFFFFF">${price}</text>
 	</svg>`;

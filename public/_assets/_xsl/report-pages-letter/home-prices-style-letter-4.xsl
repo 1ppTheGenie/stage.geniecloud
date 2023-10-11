@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="change">
 		<xsl:param name="value" />
@@ -39,21 +40,24 @@
 				</xsl:if>
 
 				<text x="65%" y="31.6%" font-size="135%" font-family="var(--theme-body-font)" fill="var(--theme-body-color)">
-					<xsl:value-of select="format-number( abs( number($value) ), '#.0%' )"/>
+<xsl:value-of select="format-number( abs( number($value) ), '#.0%' )" />
+
 				</text>
 			</xsl:otherwise>
 		</xsl:choose>
 
 		<text x="63%" y="40%" font-size="135%" font-family="var(--theme-body-font)" fill="var(--theme-body-color)">
 			<xsl:call-template name="view-period">
-				<xsl:with-param name="prefix" select="'Last '"/>
+<xsl:with-param name="prefix" select="'Last '" />
+
 			</xsl:call-template>
 		</text>
 	</xsl:template>
 
 	<xsl:template name="svg-body">
 		<style>
-			<xsl:value-of select="'text{ dominant-baseline:middle; }'"/>
+<xsl:value-of select="'text{ dominant-baseline:middle; }'" />
+
 		</style>
 
 		<xsl:call-template name="letter-report-header">
@@ -108,21 +112,25 @@
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="number($priceChange) > 0">
-								<xsl:value-of select="'#up-icon'"/>
+<xsl:value-of select="'#up-icon'" />
+
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="'#down-icon'"/>
+<xsl:value-of select="'#down-icon'" />
+
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
 				</use>
 				<text x="63%" y="9%" class="sub-heading" font-size="130%">Highest Sales Price</text>
 				<text x="63%" y="21%" class="heading" font-size="310%" font-weight="500">
-					<xsl:value-of select="format-number( //statistics/@maxSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@maxSalePrice, '$###,###')" />
+
 				</text>
 
 				<xsl:call-template name="change">
-					<xsl:with-param name="value" select="( //statistics/@maxSalePrice div //statistics/previous/@maxSalePrice ) - 1"/>
+<xsl:with-param name="value" select="( //statistics/@maxSalePrice div //statistics/previous/@maxSalePrice ) - 1" />
+
 				</xsl:call-template>
 			</svg>
 		</g>
@@ -132,17 +140,20 @@
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="number($priceChange) > 0">
-								<xsl:value-of select="'#up-icon'"/>
+<xsl:value-of select="'#up-icon'" />
+
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="'#down-icon'"/>
+<xsl:value-of select="'#down-icon'" />
+
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
 				</use>
 				<text x="63%" y="9%" class="sub-heading" font-size="130%">Median Sales Price</text>
 				<text x="63%" y="21%" class="heading" font-size="310%" font-weight="500">
-					<xsl:value-of select="format-number( //statistics/@medianSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@medianSalePrice, '$###,###')" />
+
 				</text>
 
 				<xsl:call-template name="change">
@@ -156,21 +167,25 @@
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1 > 0">
-								<xsl:value-of select="'#up-icon'"/>
+<xsl:value-of select="'#up-icon'" />
+
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="'#down-icon'"/>
+<xsl:value-of select="'#down-icon'" />
+
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
 				</use>
 				<text x="63%" y="9%" class="sub-heading" font-size="130%">Lowest Sales Price</text>
 				<text x="63%" y="21%" class="heading" font-size="310%" font-weight="500">
-					<xsl:value-of select="format-number( //statistics/@minSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@minSalePrice, '$###,###')" />
+
 				</text>
 
 				<xsl:call-template name="change">
-					<xsl:with-param name="value" select="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1"/>
+<xsl:with-param name="value" select="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1" />
+
 				</xsl:call-template>
 			</svg>
 		</g>

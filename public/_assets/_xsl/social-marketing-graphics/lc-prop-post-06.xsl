@@ -7,8 +7,9 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-    <xsl:import href="common.xsl"/>
-    <xsl:import href="lc-social-media.xsl"/>
+<xsl:import href="common.xsl" />
+<xsl:import href="lc-social-media.xsl" />
+
 
     <xsl:template name="svg-body">
         <clipPath id="polyClip1" clipPathUnits="objectBoundingBox">
@@ -23,7 +24,8 @@
         </image>
 
         <filter x="-0.1" y="-0.4" width="1.2" height="1.8" id="solid">
-            <feFlood flood-color="var(--theme-sub-heading-color)"/>
+<feFlood flood-color="var(--theme-sub-heading-color)" />
+
             <feComposite in="SourceGraphic" operator="xor" />
         </filter>
 
@@ -42,7 +44,8 @@
         </text>
 
         <text x="5%" y="80%" class="bold  heading" data-max-width="60%" font-size= "200%">
-			<xsl:value-of select="$singularPropertyType"/>
+<xsl:value-of select="$singularPropertyType" />
+
         </text>
 
         <text x="5%" y="87.9%" class="" font-family="var(--theme-heading-font)" font-size="70%" font-weight="300" fill="var(--theme-heading-color)">

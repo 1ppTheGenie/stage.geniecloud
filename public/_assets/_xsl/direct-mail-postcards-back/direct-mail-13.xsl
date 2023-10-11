@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<image x="20%" y="0" width="80%" height="75%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -91,7 +92,8 @@
 			</text>
 
 			<text x="50%" y="82%" class="upper center" fill="var(--theme-body-background)" style="font-size:200%;">
-				<xsl:call-template name="listing-address"/>
+<xsl:call-template name="listing-address" />
+
 			</text>
 
 			<text x="50%" y="92%" class="medium center" fill="var(--theme-body-background)">

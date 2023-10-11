@@ -7,14 +7,16 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing[@salePrice!='']">
-				<xsl:sort select="@salePrice" data-type="number" order="descending"/>
+<xsl:sort select="@salePrice" data-type="number" order="descending" />
+
 				<xsl:if test="position()=1">
 					<xsl:value-of select="concat( &quot;{caption: 'HH', state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
 				</xsl:if>
@@ -25,7 +27,8 @@
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 
 		<image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">

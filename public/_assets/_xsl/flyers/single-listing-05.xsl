@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
@@ -27,10 +28,12 @@
 		</style>
 
 		<g>
-			<rect x="0" y="0" width="100%" height="7%" style="fill:var(--theme-body-color);"/>
+<rect x="0" y="0" width="100%" height="7%" style="fill:var(--theme-body-color);" />
+
 			<text x="3%" y="2.5%" class="theme-body" style="font-size:250%;">
 				<tspan class="bold upper">
-					<xsl:value-of select="concat(//agent/address/company, ' ', //area[1]/name )"/>
+<xsl:value-of select="concat(//agent/address/company, ' ', //area[1]/name )" />
+
 				</tspan>
 			</text>
 			<image x="88%" y="1%" width="11%" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
@@ -50,7 +53,8 @@
 		<g style="transform:translate(0%,46%)">
 			<text x="3%" y="0.5%" class="">
 				<tspan class="sub-heading bold upper" style="font-size: 300%;" y="1%">
-					<xsl:value-of select="$singularPropertyType"/>
+<xsl:value-of select="$singularPropertyType" />
+
 
 				</tspan>
 				<tspan x="3%" y="4.5%" class="theme-invert-body" style="font-size: 275%;">
@@ -60,13 +64,16 @@
 		</g>
 
 		<g style="transform:translate(0%,56.7%)">
-			<rect x="0" y="0" width="60%" height="21%" class="sub-heading"/>
+<rect x="0" y="0" width="60%" height="21%" class="sub-heading" />
+
 			<foreignObject x="3%" y="1.7%" width="52.5%" height="17%" style="color:var(--theme-body-background);-webkit-line-clamp:6; line-height: 2.5rem; font-size: 180%;">
-				<xsl:call-template name="listing-description"/>
+<xsl:call-template name="listing-description" />
+
 			</foreignObject>
 		</g>
 
-		<rect x="0" y="77.7%" width="60%" height="22.5%" style="fill:var(--theme-heading-color);"/>
+<rect x="0" y="77.7%" width="60%" height="22.5%" style="fill:var(--theme-heading-color);" />
+
 		<g style="transform:translate(0%,79.7%)">
 			<svg width="100%" height="100%">
 				<use x="16.5%" y="4.5%" width="2%" height="2%" fill="var(--theme-body-background)" style="transform: rotate(95deg) translate(-8%, -22.4%);">
@@ -129,7 +136,8 @@
 		</g>
 
 		<g style="transform:translate(59.9%,45.2%)">
-			<rect x="0" y="0" width="40.2%" height="100%" style="fill:var(--theme-body-color);"/>
+<rect x="0" y="0" width="40.2%" height="100%" style="fill:var(--theme-body-color);" />
+
 			<g class="upper sub-heading bold" style="font-size: 250%;fill: var(--theme-body-background);transform: translate(3%,1.2%);">
 				<text x="0" y="0" data-max-width="42.5%">
 					<tspan>

@@ -17,17 +17,21 @@
 			</xsl:attribute>
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-sans.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-sans.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-serif.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-serif.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')" />
+
 		</link>
 
 		<style>
-			<xsl:value-of select="'text {dominant-baseline: middle;}'"/>
+<xsl:value-of select="'text {dominant-baseline: middle;}'" />
+
 		</style>
 
 		<rect x="0" y="0" width="100%" height="100%" fill="#fff" />
@@ -59,7 +63,8 @@
 		</text>
 		<text x="25%" y="14%" class="center sans" style="font-size: 130%;letter-spacing: 2px;font-weight: 600;fill:white;">
 			<tspan>
-				<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')"/>
+<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
+
 			</tspan>
 			<tspan>
 				<xsl:call-template name="editable">

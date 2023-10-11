@@ -7,7 +7,8 @@ Supports:	Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 
 		<rect x="0" y="0" width="51%" height="100%" fill="#fff"></rect>
@@ -25,13 +26,15 @@ Supports:	Area, Print, Listing, QRCode
 				<stop offset="100%" style="stop-color:var(--theme-body-background);stop-opacity:1.00" />
 			</linearGradient>
 		</defs>
-		<rect x="0" y="0" width="50%" height="100%" fill="var(--theme-heading-color)"/>
+<rect x="0" y="0" width="50%" height="100%" fill="var(--theme-heading-color)" />
+
 		<image x="0%" y="0%" width="50%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/krg-single-listing.jpg' )" />
 			</xsl:attribute>
 		</image>
-		<rect x="0" y="0" width="51%" height="100%" fill="url(#lgrad)"/>
+<rect x="0" y="0" width="51%" height="100%" fill="url(#lgrad)" />
+
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
@@ -66,8 +69,9 @@ Supports:	Area, Print, Listing, QRCode
 		</text>
 
 		<svg x="-0.8%" y="42%" width="50%" height="48%" viewBox="0 0 1289 757" style="enable-background:new 0 0 1289 757;" xml:space="preserve">
-			<rect fill="var(--theme-sub-heading-color)" x="47.7" y="367.12" class="st0" width="1169.3" height="7.88"/>
-			<polygon fill="var(--theme-sub-heading-color)" points="1199.21,346 1194.02,351.93 1215.49,370.71 1194.5,390 1199.83,395.81 1227.3,370.57 "/>
+<rect fill="var(--theme-sub-heading-color)" x="47.7" y="367.12" class="st0" width="1169.3" height="7.88" />
+<polygon fill="var(--theme-sub-heading-color)" points="1199.21,346 1194.02,351.93 1215.49,370.71 1194.5,390 1199.83,395.81 1227.3,370.57 " />
+
 		</svg>
 
 		<text x="4%" y="68.2%" class="middle" fill="var(--theme-body-font)" style="font-family:var(--theme-body-font);font-size:96%;font-weight:500;">

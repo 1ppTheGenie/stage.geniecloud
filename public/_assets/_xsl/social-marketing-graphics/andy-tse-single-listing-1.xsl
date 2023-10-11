@@ -9,7 +9,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800" />
 
@@ -17,7 +18,7 @@
 			<xsl:value-of select="'
 			text { dominant-baseline: middle; }
 			.open-sans{ font-family: &quot;Open Sans&quot;, sans-serif !important; }
-			'"/>
+'" />
 		</style>
 
 		<rect xmlns="" x="0%" y="0%" width="100%" height="100%" fill="#fff">
@@ -30,11 +31,13 @@
 					<xsl:choose>
 						<xsl:when test="//single/sale-price!=''">
 							<tspan class="bold">Sold for  </tspan>
-							<xsl:value-of select="format-number( //single/sale-price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/sale-price, '$###,###')" />
+
 						</xsl:when>
 						<xsl:otherwise>
 							<tspan class="bold">Asking </tspan>
-							<xsl:value-of select="format-number( //single/price , '$###,###')"/>
+<xsl:value-of select="format-number( //single/price , '$###,###')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 				</tspan>
@@ -114,7 +117,8 @@
 				</xsl:call-template>
 			</text>
 		</g>
-		<rect xmlns="" x="0%" y="77%" width="100%" height="12%" fill="#2c3740"/>
+<rect xmlns="" x="0%" y="77%" width="100%" height="12%" fill="#2c3740" />
+
 		<image x="2%" y="78%" width="27%" height="6%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/tgs-logo.png' )" />
@@ -151,7 +155,8 @@
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/andy-tse.png' )" />
 			</xsl:attribute>
 		</image>
-		<rect xmlns="" x="0%" y="90.5%" width="100%" height="10%" fill="#2c3740" stroke="#2c3740"/>
+<rect xmlns="" x="0%" y="90.5%" width="100%" height="10%" fill="#2c3740" stroke="#2c3740" />
+
 		<text x="50%" y="95.5%" style="font-size:110%;" fill="#fff" class="open-sans upper bold center" data-max-width="95%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'areaname'" />

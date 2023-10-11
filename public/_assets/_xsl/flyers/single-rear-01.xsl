@@ -8,8 +8,9 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
-	<xsl:import href="flyers.xsl"/>
+<xsl:import href="common.xsl" />
+<xsl:import href="flyers.xsl" />
+
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
@@ -59,11 +60,13 @@
 					<xsl:choose>
 						<xsl:when test="//single/soldDate!=''">
 							<tspan class="">Sold For </tspan>
-							<xsl:value-of select="format-number( //single/salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+
 						</xsl:when>
 						<xsl:otherwise>
 							<tspan class="">Asking </tspan>
-							<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 				</tspan>
@@ -73,9 +76,11 @@
 				<text class="bold" font-size="140%" font-family="var(--theme-body-font)" fill="var(--theme-body-color)">
 					<tspan x="0" y="0">Type: </tspan>
 					<tspan dx="0.1%" y="0" font-weight="400">
-						<xsl:value-of select="$singularPropertyType"/>
+<xsl:value-of select="$singularPropertyType" />
 
-						Z<xsl:value-of select="//output/@propertyCaption"/>
+
+Z<xsl:value-of select="//output/@propertyCaption" />
+
 Z
 					</tspan>
 
@@ -197,7 +202,8 @@ Z
 									<xsl:value-of select="concat( 'transform: translate(', $xpos, ', ', (round( position() div 2 ) - 1) * 4.5, '%')" />
 								</xsl:attribute>
 
-								<rect x="0" y="0" width="22.5%" height="3.75%" stroke-width="1" stroke="var(--theme-sub-heading-color)" fill="none"/>
+<rect x="0" y="0" width="22.5%" height="3.75%" stroke-width="1" stroke="var(--theme-sub-heading-color)" fill="none" />
+
 
 								<text x="1%" y="1.25%" font-family="var(--theme-heading-font)" fill="var(--theme-body-color)" font-size="160%" dominant-baseline="middle">
 									<tspan class="bold">

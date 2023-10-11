@@ -8,8 +8,9 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
-	<xsl:import href="lc-social-media.xsl"/>
+<xsl:import href="common.xsl" />
+<xsl:import href="lc-social-media.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<image x="0%" y="0%" width="50%" height="50%" preserveAspectRatio="xMidYMid slice">
@@ -51,7 +52,8 @@
 			<tspan x="15.4%" class="futura-text upper" y="75.5%" font-size="95%" font-weight="800">1pm - 4pm</tspan>
 		</text>
 
-		<rect fill="#fff" stroke-width="0" fill-opacity="1" x="49.5%" y="0" width="0.7%" height="100%"/>
-		<rect fill="#fff" stroke-width="0" fill-opacity="1" x="0%" y="49.5%" width="100%" height="0.7%"/>
+<rect fill="#fff" stroke-width="0" fill-opacity="1" x="49.5%" y="0" width="0.7%" height="100%" />
+<rect fill="#fff" stroke-width="0" fill-opacity="1" x="0%" y="49.5%" width="100%" height="0.7%" />
+
 	</xsl:template>
 </xsl:stylesheet>

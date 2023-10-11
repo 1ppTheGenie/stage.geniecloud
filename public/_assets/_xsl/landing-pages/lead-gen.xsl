@@ -12,8 +12,9 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="landing-pages.xsl"/>
-	<xsl:import href="landing-pages-market-insider.xsl"/>
+<xsl:import href="landing-pages.xsl" />
+<xsl:import href="landing-pages-market-insider.xsl" />
+
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="head-description">
@@ -69,19 +70,23 @@
 								<div class="col-sm-6">
 									<form id="form_step1" class="funnel-create-lead fl-thankyou-modal">
 										<div class="form-group">
-											<input type="text" class="form-control reset-form contact_name heading-font" id="clientName" name="fullName" placeholder="NAME*" required="required"/>
+<input type="text" class="form-control reset-form contact_name heading-font" id="clientName" name="fullName" placeholder="NAME*" required="required" />
+
 										</div>
 										<div class="form-group">
-											<input type="email" class="form-control reset-form contact_email heading-font " id="email" name="emailAddress" placeholder="EMAIL*" required="required"/>
+<input type="email" class="form-control reset-form contact_email heading-font " id="email" name="emailAddress" placeholder="EMAIL*" required="required" />
+
 										</div>
 										<div class="form-group">
-											<input type="tel" class="form-control phone reset-form heading-font" id="phoneNumber" name="phoneNumber" placeholder="PHONE NUMBER*" required="required"/>
+<input type="tel" class="form-control phone reset-form heading-font" id="phoneNumber" name="phoneNumber" placeholder="PHONE NUMBER*" required="required" />
+
 										</div>
 										<div class="form-group form-buttons heading-font">
 											<div class="checkbox-data">
 												<p class="heading-font">How would you like to receive your RSVP confirmation:</p>
 												<label>
-													<input type="checkbox" name="" value="yes"/>
+<input type="checkbox" name="" value="yes" />
+
 													<xsl:text>Text</xsl:text>
 												</label>
 												<label>
@@ -91,7 +96,7 @@
 											</div>
 											<div class="button-data">
 
-												<!-- <input type="submit" value="Send" class="wpcf7-submit"/> -->
+<!-- <input type="submit" value="Send" class="wpcf7-submit" /> -->
 												<button class="btn btn-primary subtitle-color-as-bg heading-color btn-submit step1-button heading-font">
 													<xsl:text>Sign IN</xsl:text>
 												</button>
@@ -174,9 +179,10 @@
 																	xmlns="http://www.w3.org/2000/svg"
 																	xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 485 485" style="enable-background:new 0 0 485 485;" xml:space="preserve" class="heading-svg">
 																	<g>
-																		<polygon points="380.926,115.57 321.93,115.57 321.93,0 163.07,0 163.07,115.57 104.074,115.57 242.5,267.252"/>
+<polygon points="380.926,115.57 321.93,115.57 321.93,0 163.07,0 163.07,115.57 104.074,115.57 242.5,267.252" />
+
 																		<path d="M0,310v175h485V310H0z M330,412.5c-8.284,0-15-6.716-15-15s6.716-15,15-15c8.284,0,15,6.716,15,15S338.284,412.5,330,412.5
-																			z M400,412.5c-8.284,0-15-6.716-15-15s6.716-15,15-15c8.284,0,15,6.716,15,15S408.284,412.5,400,412.5z"/>
+z M400,412.5c-8.284,0-15-6.716-15-15s6.716-15,15-15c8.284,0,15,6.716,15,15S408.284,412.5,400,412.5z" />
 																	</g>
 																</svg>
 															</button>
@@ -218,7 +224,7 @@
 				}
 				.agent-details{
 					border-bottom:none;
-				}'"/>
+}'" />
 			</style>
 			<script>
 				<xsl:value-of select="'
@@ -228,7 +234,7 @@
                 }
 
 				document.addEventListener( `genie-lead-created`, function (lead) { gg.redirectToParentAsset( { lead_id: lead.detail.key } ); } );
-				'"/>
+'" />
 			</script>
 		</body>
 	</xsl:template>

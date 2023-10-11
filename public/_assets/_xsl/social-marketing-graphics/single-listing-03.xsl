@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
@@ -67,7 +68,8 @@
 			</text>
 
 			<text class="upper medium" style="transform:translate(8%,43%)">
-				<xsl:call-template name="listing-address"/>
+<xsl:call-template name="listing-address" />
+
 			</text>
 		</g>
 
@@ -101,7 +103,8 @@
 			<text x="16%" y="5%" class="sub-heading align-center">
 				<tspan class="bold">Type:  </tspan>
 				<tspan class="narrow">
-					<xsl:value-of select="$singularPropertyType"/>
+<xsl:value-of select="$singularPropertyType" />
+
 				</tspan>
 			</text>
 

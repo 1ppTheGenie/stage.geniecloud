@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 
 		<rect x="0%" y="0%" width="100%" height="100%" fill="var(--theme-sub-heading-color)" />
@@ -23,10 +24,12 @@
 
 		<text class="center sub-heading" x="50%" y="16.2%" font-size="240%">
 			<tspan class="sub-heading" x="50%" dy="3%">
-				<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 			</tspan>
 			<tspan class="sub-heading" x="50%" dy="3.5%">
-				<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 			</tspan>
 		</text>
 

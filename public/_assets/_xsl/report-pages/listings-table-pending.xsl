@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<!-- Exclude from render if there are no pending properties -->
 	<xsl:template name="include-in-render">
 		<xsl:choose>
@@ -100,7 +101,8 @@
 				</xsl:for-each>
 			</g>
 			<xsl:call-template name="listings-footer">
-				<xsl:with-param name="nodes" select="$listingsTotalPending"/>
+<xsl:with-param name="nodes" select="$listingsTotalPending" />
+
 				<xsl:with-param name="summary" select="' pending listings.'" />
 			</xsl:call-template>
 		</xsl:if>

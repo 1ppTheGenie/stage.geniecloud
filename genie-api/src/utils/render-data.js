@@ -163,6 +163,7 @@ export const getRenderJSON = async params => {
 		root.collection = await processCollection(params);
 	}
 
+	console.log("gRoot", root);
 	return root;
 };
 
@@ -358,7 +359,7 @@ const processAgents = async agentIds => {
 					img => img.marketingImageTypeId == id
 				);
 
-				return image ? image.url : null;
+				return image ? image.url : "";
 			};
 
 			const getDisclaimer = id => {
@@ -368,8 +369,8 @@ const processAgents = async agentIds => {
 
 				return (
 					disclaimer ?? {
-						text: null,
-						url: null,
+						text: "",
+						url: "",
 					}
 				);
 			};

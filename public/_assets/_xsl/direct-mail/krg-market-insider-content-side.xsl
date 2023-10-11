@@ -7,7 +7,8 @@ Supports:	Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 		<xsl:variable name="mapListingNodes" select="//listings/listing[@state='sold']" />
@@ -36,13 +37,15 @@ Supports:	Area, Print, Listing, QRCode
 				<stop offset="100%" style="stop-color:var(--theme-body-background);stop-opacity:1.00" />
 			</linearGradient>
 		</defs>
-		<rect x="0" y="0" width="50%" height="100%" fill="var(--theme-heading-color)"/>
+<rect x="0" y="0" width="50%" height="100%" fill="var(--theme-heading-color)" />
+
 		<image x="0%" y="0%" width="50%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/krg-single-listing.jpg' )" />
 			</xsl:attribute>
 		</image>
-		<rect x="0" y="0" width="50%" height="100%" fill="url(#lgrad)"/>
+<rect x="0" y="0" width="50%" height="100%" fill="url(#lgrad)" />
+
 		<image x="36.5%" y="75%" width="13.5%" height="28.1%" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="//agent[1]/photo" />
@@ -80,7 +83,8 @@ Supports:	Area, Print, Listing, QRCode
 			</text>
 			<text x="4%" y="25%" class="middle lower" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font); letter-spacing: 1px; font-size:285%; font-weight:800;">
 				<tspan>
-					<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')"/>
+<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
+
 				</tspan>
 				<tspan>
 					<xsl:call-template name="editable">
@@ -113,7 +117,8 @@ Supports:	Area, Print, Listing, QRCode
 							<xsl:text>LAST 30 DAYS.</xsl:text>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')"/>
+<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 				</tspan>
@@ -137,8 +142,9 @@ Supports:	Area, Print, Listing, QRCode
 			<svg width="41%" height="22%" x="0.8%" y="48%" version="3.0" id="Layer_1" viewBox="0 0 2000 452" style="enable-background:new 0 0 2000 452;" xml:space="preserve">
 				<g>
 					<path fill="var(--theme-sub-heading-color)" d="M1757.79,75.26c-58.07,0-105.31,47.24-105.31,105.31v117.14c0,42.23-34.36,76.59-76.59,76.59H136.91v11.53
-                        h1438.98c48.59,0,88.12-39.53,88.12-88.12V180.57c0-51.71,42.07-93.78,93.78-93.78h114.2V75.26H1757.79z"/>
-					<polygon fill="var(--theme-sub-heading-color)" points="1841.9,44.98 1834.31,53.66 1865.73,81.13 1835.02,109.35 1842.82,117.84 1883,80.92     "/>
+h1438.98c48.59,0,88.12-39.53,88.12-88.12V180.57c0-51.71,42.07-93.78,93.78-93.78h114.2V75.26H1757.79z" />
+<polygon fill="var(--theme-sub-heading-color)" points="1841.9,44.98 1834.31,53.66 1865.73,81.13 1835.02,109.35 1842.82,117.84 1883,80.92     " />
+
 				</g>
 			</svg>
 		</g>

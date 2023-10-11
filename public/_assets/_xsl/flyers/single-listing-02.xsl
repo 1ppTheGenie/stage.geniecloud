@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
@@ -62,11 +63,13 @@
 					<xsl:choose>
 						<xsl:when test="//single/soldDate!=''">
 							<tspan class="">Sold For </tspan>
-							<xsl:value-of select="format-number( //single/salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+
 						</xsl:when>
 						<xsl:otherwise>
 							<tspan class="">Asking </tspan>
-							<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 				</tspan>
@@ -84,14 +87,16 @@
 			</g>
 
 			<foreignObject x="0" y="11%" width="50%" height="15%" style="color:var(--theme-body-color);-webkit-line-clamp:6; font-size: 180%; line-height: 160%;">
-				<xsl:call-template name="listing-description"/>
+<xsl:call-template name="listing-description" />
+
 			</foreignObject>
 		</g>
 
 		<g style="fill: var(--theme-body-color);transform: translate(58%,55%);">
 			<text >
 				<tspan class="bold sub-heading" style="font-size: 250%;">
-					<xsl:value-of select="$singularPropertyType"/>
+<xsl:value-of select="$singularPropertyType" />
+
 				</tspan>
 			</text>
 

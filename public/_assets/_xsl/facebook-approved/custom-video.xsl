@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="body">
 		<xsl:call-template name="svg-wrapper">
 			<xsl:with-param name="nobg" select="'true'" />
@@ -26,7 +27,8 @@
 					<xsl:attribute name="src">
 						<xsl:choose>
 							<xsl:when test="//overrides/fb-video-url">
-								<xsl:value-of select="//overrides/fb-video-url"/>
+<xsl:value-of select="//overrides/fb-video-url" />
+
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/sample-video.mp4' )" />

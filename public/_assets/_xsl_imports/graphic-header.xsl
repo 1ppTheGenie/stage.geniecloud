@@ -19,23 +19,27 @@
 			<xsl:if test="number(//single/statusTypeID) = 1">
 <xsl:value-of select="concat('NEW TO MARKET in ', //area/name , ' &#124; This ' , //single/bedrooms/@count , ' BR, ', $listingTotalBathrooms, ' BA, ', $singularPropertyType , '  is it!' )" />
 
-				<xsl:value-of select="substring-before(substring-after(//single/description, '.'), '.')"/>
-				<xsl:value-of select="'Click the LEARN button: for photos, details, pricing and more'"/>
+<xsl:value-of select="substring-before(substring-after(//single/description, '.'), '.')" />
+<xsl:value-of select="'Click the LEARN button: for photos, details, pricing and more'" />
+
 			</xsl:if>
 
 			<xsl:if test="number(//single/statusTypeID) = 2">
 				<xsl:value-of select="concat('Sold for ', $listingPrice , ' OVER Listing Price in ' , //single/daysOnMarket, ' days on market!!')" />
 
-				<xsl:value-of select="'If you’re looking to sell, there is no question that your real estate team matters. Work with a team who has proven success in the Crest market.'"/>
+<xsl:value-of select="'If you’re looking to sell, there is no question that your real estate team matters. Work with a team who has proven success in the Crest market.'" />
+
 			</xsl:if>
 
 			<xsl:if test="(//single/statusTypeID=3) or (//single/statusTypeID=4) or (//single/statusTypeID=12)">
-				<xsl:value-of select="'Now Pending! If you’re looking to sell, there is no question that your real estate team matters. Work with a team who has proven success in the Crest market.'"/>
+<xsl:value-of select="'Now Pending! If you’re looking to sell, there is no question that your real estate team matters. Work with a team who has proven success in the Crest market.'" />
+
 			</xsl:if>
 
-			<xsl:value-of select="concat(' Call/Text:',//agent[1]/mobile , ' for all your Real Estate Needs')"/>
-			<xsl:value-of select="concat('',//agent[1]/marketingName, ', ' , //agent[1]/marketingTitles)"/>
-			<xsl:value-of select="concat('',//agent[1]/marketingLicense)"/>
+<xsl:value-of select="concat(' Call/Text:',//agent[1]/mobile , ' for all your Real Estate Needs')" />
+<xsl:value-of select="concat('',//agent[1]/marketingName, ', ' , //agent[1]/marketingTitles)" />
+<xsl:value-of select="concat('',//agent[1]/marketingLicense)" />
+
 
 		</xsl:template>
 
@@ -72,12 +76,14 @@
 			</xsl:if>
 
 			<text>
-				<xsl:value-of select="' Click the LEARN button to access the full details and more.'"/>
+<xsl:value-of select="' Click the LEARN button to access the full details and more.'" />
+
 			</text>
 
-			<xsl:value-of select="concat(' Call/Text:',//agent[1]/mobile , ' for all your Real Estate Needs')"/>
-			<xsl:value-of select="concat('',//agent[1]/marketingName, ', ' , //agent[1]/marketingTitles)"/>
-			<xsl:value-of select="concat('',//agent[1]/marketingLicense)"/>
+<xsl:value-of select="concat(' Call/Text:',//agent[1]/mobile , ' for all your Real Estate Needs')" />
+<xsl:value-of select="concat('',//agent[1]/marketingName, ', ' , //agent[1]/marketingTitles)" />
+<xsl:value-of select="concat('',//agent[1]/marketingLicense)" />
+
 
 		</xsl:template>
 

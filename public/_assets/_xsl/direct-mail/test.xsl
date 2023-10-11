@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<rect x="0%" y="0%" height="100%" width="40%" fill="var(--theme-body-background)"></rect>
 		<text x="8%" y="8%" font-style="futura" font-weight="900" fill="var(--theme-heading-color)" font-size="300%">JUST SOLD</text>

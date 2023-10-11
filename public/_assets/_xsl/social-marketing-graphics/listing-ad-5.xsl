@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<text x="50%" y="3%" class="sub-heading large center bold">
 			<xsl:choose>
@@ -32,7 +33,8 @@
 				<xsl:with-param name="idx" select="1" />
 			</xsl:call-template>
 		</image>
-		<rect stroke="var(--theme-body-color)" stroke-width="6" fill-opacity="0" x="4%" y="12%" width="92%" height="32%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="6" fill-opacity="0" x="4%" y="12%" width="92%" height="32%" />
+
 
 		<image x="40%" y="42%" width="52%" height="36%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -40,7 +42,8 @@
 				<xsl:with-param name="idx" select="2" />
 			</xsl:call-template>
 		</image>
-		<rect stroke="var(--theme-body-color)" stroke-width="6" fill-opacity="0" x="40%" y="42%" width="52%" height="36%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="6" fill-opacity="0" x="40%" y="42%" width="52%" height="36%" />
+
 
 		<image x="9%" y="39%" width="35%" height="30%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -48,7 +51,8 @@
 				<xsl:with-param name="idx" select="3" />
 			</xsl:call-template>
 		</image>
-		<rect stroke="var(--theme-body-color)" stroke-width="6" fill-opacity="0" x="9%" y="39%" width="35%" height="30%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="6" fill-opacity="0" x="9%" y="39%" width="35%" height="30%" />
+
 
 		<g style="transform: translate(9%, 64%);">
 			<text x="0%" y="7%" style="font-size:90%;">

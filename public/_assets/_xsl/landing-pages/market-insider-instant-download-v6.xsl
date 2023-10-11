@@ -12,9 +12,10 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="landing-pages.xsl"/>
-	<xsl:import href="landing-pages-market-insider.xsl"/>
-	<xsl:import href="genie-functions.xsl"/>
+<xsl:import href="landing-pages.xsl" />
+<xsl:import href="landing-pages-market-insider.xsl" />
+<xsl:import href="genie-functions.xsl" />
+
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="description">
@@ -82,7 +83,8 @@
 
 									<div class="selling-information background price_rise">
 										<h3 class="home-value-area-info heading-font heading-color editable">
-											<xsl:value-of select="concat( //area/name, ' ', $singularPropertyType, '&#160;Values' )"/>
+<xsl:value-of select="concat( //area/name, ' ', $singularPropertyType, '&#160;Values' )" />
+
 											<br/>
 											<xsl:text>Have&#160;</xsl:text>
 											<xsl:choose>
@@ -123,10 +125,10 @@
 													xmlns="http://www.w3.org/2000/svg"
 													xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
 													<path d="M382.2,255.5c-7-7-18.3-7-25.3,0l-84.8,84.6V110.9c0-9.8-8-17.8-17.9-17.8c-9.9,0-17.9,8-17.9,17.8v229.3
-                                                    l-84.8-84.7c-7-7-18.3-7-25.3,0c-7,7-7,18.2,0,25.2l128,127.7l128-127.7C389.1,273.7,389.1,262.4,382.2,255.5L382.2,255.5z"/>
+l-84.8-84.7c-7-7-18.3-7-25.3,0c-7,7-7,18.2,0,25.2l128,127.7l128-127.7C389.1,273.7,389.1,262.4,382.2,255.5L382.2,255.5z" />
 													<path d="M250,478.7c-126.6,0-229.5-102.7-229.5-229s103-229,229.5-229c126.6,0,229.5,102.7,229.5,229
                                                     C479.5,375.9,376.5,478.7,250,478.7L250,478.7z M250,49.2c-110.7,0-200.8,89.9-200.8,200.4S139.3,450,250,450
-                                                    s200.8-89.9,200.8-200.4S360.7,49.2,250,49.2L250,49.2z"/>
+s200.8-89.9,200.8-200.4S360.7,49.2,250,49.2L250,49.2z" />
 												</svg>
 											</xsl:otherwise>
 										</xsl:choose>
@@ -155,7 +157,8 @@
 														<xsl:text>30 days</xsl:text>
 													</xsl:when>
 													<xsl:otherwise>
-														<xsl:value-of select="concat( //areas/area[1]/statistics/@lookbackMonths, ' months')"/>
+<xsl:value-of select="concat( //areas/area[1]/statistics/@lookbackMonths, ' months')" />
+
 													</xsl:otherwise>
 												</xsl:choose>
 											</span>

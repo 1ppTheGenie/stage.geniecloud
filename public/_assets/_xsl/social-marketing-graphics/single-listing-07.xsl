@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
@@ -36,7 +37,7 @@
 					width: 34%;
 					height: 38.75%;			
 				}
-				'"/>
+'" />
 		</style>
 		<rect width="100%" height="100%" fill="var(--theme-body-background)" />
 
@@ -74,40 +75,48 @@
 
 		<g transform="translate(60 482)">
 			<filter x="-0.1" y="-0.3" width="1.2" height="1.6" id="transparent">
-				<feFlood flood-color="var(--theme-body-background)" flood-opacity="0.6"/>
+<feFlood flood-color="var(--theme-body-background)" flood-opacity="0.6" />
+
 				<feComposite in="SourceGraphic" operator="xor" />
 			</filter>
 			<text x="0" y="0" filter="url(#transparent)">
 				<tspan x="1%" y="2%" class="medium sub-heading">
-					<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 				</tspan>
 				<tspan x="1%" y="7%" class="medium sub-heading">
-					<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 				</tspan>
 			</text>
 			<text x="0" y="0">
 				<tspan x="1%" y="2%" class="medium sub-heading">
-					<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 				</tspan>
 				<tspan x="1%" y="7%" class="medium sub-heading">
-					<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 				</tspan>
 			</text>
 		</g>
 		<g style="transform:translate(93%,80%)">
 			<filter x="-0.1" y="-0.3" width="1.2" height="1.7" id="solid">
-				<feFlood flood-color="var(--theme-body-background)" flood-opacity="0.6"/>
+<feFlood flood-color="var(--theme-body-background)" flood-opacity="0.6" />
+
 				<feComposite in="SourceGraphic" operator="xor" />
 			</filter>
 			<text x="1%" y="3%" filter="url(#solid)" class="medium align-right upper sub-heading">
 				<xsl:choose>
 					<xsl:when test="//single/soldDate!=''">
 						<tspan class="">Sold For </tspan>
-						<xsl:value-of select="format-number( //single/salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+
 					</xsl:when>
 					<xsl:otherwise>
 						<tspan class="">Asking </tspan>
-						<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>
@@ -115,11 +124,13 @@
 				<xsl:choose>
 					<xsl:when test="//single/soldDate!=''">
 						<tspan class="">Sold For </tspan>
-						<xsl:value-of select="format-number( //single/salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+
 					</xsl:when>
 					<xsl:otherwise>
 						<tspan class="">Asking </tspan>
-						<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>

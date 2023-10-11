@@ -23,7 +23,7 @@
 			}
 			.icon-stat tspan:first-child {
 				font-size: 125%;
-			}'"/>
+}'" />
 		</style>
 
 		<image x="1%" y="2%" width="31%" height="35%" preserveAspectRatio="xMidYMid slice">
@@ -93,7 +93,8 @@
 			</text>
 
 			<text class="upper medium" style="transform:translate(8%,47%)">
-				<xsl:call-template name="listing-address"/>
+<xsl:call-template name="listing-address" />
+
 			</text>
 		</g>
 
@@ -108,7 +109,8 @@
 
 		<g style="transform:translate(0%,81.5%)">
 			<svg width="35%" height="17.5%">
-				<use href="#phone-icon" x="17.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-14.3%, -116.5%);"/>
+<use href="#phone-icon" x="17.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-14.3%, -116.5%);" />
+
 				<use x="19%" y="50%" fill="var(--theme-sub-heading-color)" width="10%" height="10%">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#globe-icon' )" />
 				</use>
@@ -164,7 +166,8 @@
 			<text x="16%" y="10%" class="sub-heading align-center">
 				<tspan class="bold">Type:  </tspan>
 				<tspan class="narrow">
-					<xsl:value-of select="//single/type"/>
+<xsl:value-of select="//single/type" />
+
 				</tspan>
 			</text>
 

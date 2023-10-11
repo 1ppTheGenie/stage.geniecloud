@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:variable name="mapListingNodes" select="//listings/listing[@state='sold']" />
 
 	<xsl:template name="svg-scripts">
@@ -31,7 +32,8 @@
 			</xsl:call-template>
 		</image>
 
-		<rect x="0%" y="0%" width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="0.8"/>
+<rect x="0%" y="0%" width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="0.8" />
+
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
@@ -148,7 +150,8 @@
 			</text>
 
 			<text x="80%" y="50%" data-max-width="30%" class="center upper bold" fill="var(--theme-body-color)" style="font-size: 160%;font-family:var(--theme-heading-font); letter-spacing: 1px; ">
-				<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 			</text>
 
 			<text x="50%" y="75%" class="center upper" fill="var(--theme-body-color)" style="font-size: 410%;font-family:var(--theme-sub-heading-font); letter-spacing: 1px;font-weight:600 ">

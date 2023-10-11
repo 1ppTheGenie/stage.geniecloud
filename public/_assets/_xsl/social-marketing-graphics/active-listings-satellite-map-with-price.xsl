@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="body">
 		<xsl:call-template name="svg-wrapper" />
 	</xsl:template>
@@ -18,7 +19,8 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing[@state='active']">
-				<xsl:sort order="ascending" select="@state"/>
+<xsl:sort order="ascending" select="@state" />
+
 				<xsl:if test="position() &lt;= 50">
 					<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;', dom:&quot;, @dom, &quot;},&quot; )" />
 				</xsl:if>

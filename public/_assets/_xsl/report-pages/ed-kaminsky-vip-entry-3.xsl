@@ -8,13 +8,15 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<!-- just sold case start -->
 	<xsl:template name="just-sold">
 		<text x="50%" y="34%" class="futura-text upper center" fill="#fff" font-size="1150%" font-weight="700">
 	   		JUST SOLD
 		</text>
-		<line xmlns="" x1="10%" y1="41.8%" x2="22%" y2="41.8%" stroke="#b0934c" stroke-width="0.2%"/>
+<line xmlns="" x1="10%" y1="41.8%" x2="22%" y2="41.8%" stroke="#b0934c" stroke-width="0.2%" />
+
 
 		<text x="50%" y="40.9%" class="caslon-text center" fill="#fff" font-size="420%" font-weight="400">
 		    your neighbor’s home at
@@ -140,13 +142,16 @@
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/caslon.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/caslon.css')" />
+
 		</link>
 
 		<rect x="0" y="0" width="100%" height="100%" fill="#0d0f30	" style="background: #0d0f30;"></rect>

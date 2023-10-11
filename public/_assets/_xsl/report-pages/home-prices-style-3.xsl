@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
@@ -16,7 +17,8 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing[@salePrice!='']">
-				<xsl:sort select="@salePrice" data-type="number" order="descending"/>
+<xsl:sort select="@salePrice" data-type="number" order="descending" />
+
 				<xsl:if test="position()=1">
 					<xsl:value-of select="concat( &quot;{caption: 'HH', state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
 				</xsl:if>
@@ -30,7 +32,8 @@
 		<xsl:variable name="formattedChange" select="format-number( abs( $change ), '#.0%' )" />
 
 		<text x="3%" y="5%" class="upper" font-size="270%" fill="var(--theme-heading-color)" data-max-width="42.5%" style="letter-spacing:2.5px;">
-			<xsl:value-of select="$areaWithPropertyType"/>
+<xsl:value-of select="$areaWithPropertyType" />
+
 		</text>
 
 		<text x="3%" y="14%" font-size="170%" fill="var(--theme-sub-heading-color)" class="upper">
@@ -66,9 +69,11 @@
 		<text x="3%" y="43.5%" font-size="200%" fill="var(--theme-heading-color)">
 			<tspan>
 				<xsl:for-each select="//listings/listing[@salePrice!='']">
-					<xsl:sort select="@salePrice" data-type="number" order="descending"/>
+<xsl:sort select="@salePrice" data-type="number" order="descending" />
+
 					<xsl:if test="position()=1">
-						<xsl:value-of select="format-number( @salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( @salePrice, '$###,###')" />
+
 					</xsl:if>
 				</xsl:for-each>
 			</tspan>
@@ -76,7 +81,8 @@
 		<text x="3%" y="50%" class="normal">
 			<tspan>Sold on 
 				<xsl:for-each select="//listings/listing[@salePrice!='']">
-					<xsl:sort select="@salePrice" data-type="number" order="descending"/>
+<xsl:sort select="@salePrice" data-type="number" order="descending" />
+
 					<xsl:if test="position()=1">
 						<xsl:value-of select="genie:format-date( @soldDate, '[MNn] [D], [Y0001]')" />
 					</xsl:if>
@@ -93,7 +99,8 @@
 
 		<text x="3%" y="60.5%" font-size="200%" fill="var(--theme-heading-color)">
 			<tspan>
-				<xsl:value-of select="format-number( //statistics/@averageSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@averageSalePrice, '$###,###')" />
+
 			</tspan>
 		</text>
 
@@ -127,9 +134,11 @@
 
 		<text x="3%" y="72.5%" font-size="200%" fill="var(--theme-heading-color)">
 			<xsl:for-each select="//listings/listing[@salePrice!='']">
-				<xsl:sort select="@salePrice" data-type="number" order="descending"/>
+<xsl:sort select="@salePrice" data-type="number" order="descending" />
+
 				<xsl:if test="position()=round( count(//listings/listing[@salePrice!='']) div 2 )">
-					<xsl:value-of select="format-number( @salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( @salePrice, '$###,###')" />
+
 				</xsl:if>
 			</xsl:for-each>
 		</text>
@@ -138,7 +147,8 @@
 			<tspan>
 				<xsl:text>Sold on </xsl:text>
 				<xsl:for-each select="//listings/listing[@salePrice!='']">
-					<xsl:sort select="@salePrice" data-type="number" order="descending"/>
+<xsl:sort select="@salePrice" data-type="number" order="descending" />
+
 					<xsl:if test="position()=round( count(//listings/listing[@salePrice!='']) div 2 )">
 						<xsl:value-of select="genie:format-date( @soldDate, '[MNn] [D], [Y0001]')" />
 					</xsl:if>

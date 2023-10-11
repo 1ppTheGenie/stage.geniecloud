@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<g>
@@ -30,7 +31,8 @@
 					<xsl:text>As of </xsl:text>
 					<xsl:value-of select="genie:format-date( //output/@reportDate, '[MNn] [D], [Y0001]')" />
 					<xsl:text>, the average </xsl:text>
-					<xsl:value-of select="//areas/area[1]/name"/>
+<xsl:value-of select="//areas/area[1]/name" />
+
 					<xsl:text> sales price for </xsl:text>
 					<xsl:call-template name="property-type-caption" />
 				</tspan>
@@ -41,7 +43,8 @@
 							<xsl:text>last month</xsl:text>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="concat( 'last ', //areas/area[1]/statistics/@lookbackMonths, ' months')"/>
+<xsl:value-of select="concat( 'last ', //areas/area[1]/statistics/@lookbackMonths, ' months')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 					<xsl:text>. Take a look at the details below!</xsl:text>
@@ -57,7 +60,8 @@
 					<text x="50%" y="30%" width="" class="align-center">Higest Sales Prices</text>
 					<text x="50%" y="38%" class="align-center sub-heading large" style="font-size: 230%;">
 
-						<xsl:value-of select="format-number(//statistics/@maxSalePrice,  '$###,###')"/>
+<xsl:value-of select="format-number(//statistics/@maxSalePrice,  '$###,###')" />
+
 					</text>
 					<text x="50%" y="55%" class="align-center">
 						<tspan class="super-bold">&#8595;</tspan> TODO%
@@ -73,7 +77,8 @@
 					</use>
 					<text x="50%" y="30%" width="" class="align-center">average Sales Prices</text>
 					<text x="50%" y="38%" class="align-center sub-heading large" style="font-size: 230%;">
-						<xsl:value-of select="format-number(//statistics/@averageSalePrice,  '$###,###')"/>
+<xsl:value-of select="format-number(//statistics/@averageSalePrice,  '$###,###')" />
+
 					</text>
 					<text x="50%" y="55%" class="align-center">
 						<tspan class="super-bold">&#8595;</tspan> TODO%
@@ -84,7 +89,8 @@
 								<xsl:text>Last Month</xsl:text>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' months')"/>
+<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' months')" />
+
 							</xsl:otherwise>
 						</xsl:choose>
 					</text>
@@ -96,7 +102,8 @@
 					</use>
 					<text x="50%" y="30%" width="" class="align-center">lowest Sales Prices</text>
 					<text x="50%" y="38%" class="align-center sub-heading large" style="font-size: 230%;">
-						<xsl:value-of select="format-number(//statistics/@minSalePrice,  '$###,###')"/>
+<xsl:value-of select="format-number(//statistics/@minSalePrice,  '$###,###')" />
+
 					</text>
 					<text x="50%" y="55%" class="align-center">
 						<tspan class="super-bold">&#8595;</tspan> TODO%
@@ -107,7 +114,8 @@
 								<xsl:text>Last Month</xsl:text>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' months')"/>
+<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' months')" />
+
 							</xsl:otherwise>
 						</xsl:choose>
 					</text>

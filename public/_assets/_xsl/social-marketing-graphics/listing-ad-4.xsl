@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-    <xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
     <xsl:template name="svg-body">
 
         <clipPath id="clipCircle">
@@ -19,7 +20,8 @@
             </xsl:call-template>
         </image>
 
-        <rect x="72%" y="0" width="22%" height="17%" fill="var(--theme-heading-color)"/>
+<rect x="72%" y="0" width="22%" height="17%" fill="var(--theme-heading-color)" />
+
         <g style="transform: translate(79%, 0);">
 
             <text x="4%" y="3%" class="medium center bold theme-body">
@@ -66,7 +68,8 @@
             </xsl:attribute>
         </image>
 
-        <rect x="3%" y="78%" width="13%" height="13%" fill="var(--theme-heading-color)"/>
+<rect x="3%" y="78%" width="13%" height="13%" fill="var(--theme-heading-color)" />
+
         <image x="4%" y="79%" width="13%" height="13%" preserveAspectRatio="xMidYMid slice">
             <xsl:attribute name="href">
                 <xsl:value-of select="//agent[1]/photo" />

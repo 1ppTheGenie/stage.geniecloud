@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<xsl:variable name="min_sale_price" select="number( //area/statistics/@minSalePrice )" />
 		<xsl:variable name="prev_min_sale_price" select="number( //area/statistics/previous/@medianSalePrice )" />
@@ -20,7 +21,8 @@
 			</xsl:call-template>
 		</image>
 
-		<rect fill="var(--theme-body-background)" x="9%" y="42%" width="91%" height="20%"/>
+<rect fill="var(--theme-body-background)" x="9%" y="42%" width="91%" height="20%" />
+
 		<g style="transform:translate(9%, 44%);">
 			<text x="5%" fill="var(--theme-emphasis-color)" style="font-size:175%;line-height:120%;color:var(--theme-emphasis-color)" data-max-width="50%">
 				<xsl:call-template name="editable">
@@ -32,7 +34,8 @@
 				<tspan>
 					<xsl:choose>
 						<xsl:when test="$min_sale_price_change > 0">
-							<xsl:value-of select="concat( ' ',  format-number( $min_sale_price_change, '#0.00' ), '%' )"/>
+<xsl:value-of select="concat( ' ',  format-number( $min_sale_price_change, '#0.00' ), '%' )" />
+
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:call-template name="editable">

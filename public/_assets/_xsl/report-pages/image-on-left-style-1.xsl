@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<text x="3%" y="5%" class="large upper" fill="var(--theme-sub-heading-color)">
 			<tspan>
@@ -29,8 +30,9 @@
 
 		<image x="3%" y="18%" width="48%" height="77%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="id" select="'placeholder'"/>
-				<xsl:with-param name="default" select="'https://place-hold.it/600x420/.png'"/>
+<xsl:with-param name="id" select="'placeholder'" />
+<xsl:with-param name="default" select="'https://place-hold.it/600x420/.png'" />
+
 			</xsl:call-template>
 		</image>
 

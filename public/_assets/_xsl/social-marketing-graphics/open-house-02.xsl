@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="social-ad-name">
 		<xsl:value-of select="concat( 'OH', genie:format-date( //output/@reportDate, '[MNn]' ), ' ', //single/address/street )" />
 	</xsl:template>
@@ -20,14 +21,17 @@
 				<xsl:with-param name="idx" select="1" />
 			</xsl:call-template>
 		</image>
-		<rect stroke="var(--theme-body-color)" stroke-width="5" fill-opacity="0" x="3.2%" y="5%" width="93%" height="87%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="5" fill-opacity="0" x="3.2%" y="5%" width="93%" height="87%" />
+
 		<g style="transform:translateY(35%)">
 			<rect width="100%" height="27%" fill="var(--theme-body-background)" fill-opacity="0.7" />
 			<text x="50%" y="1%" class="large medium sub-heading upper center" style="font-size: 300%; font-weight:600;">
-				<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 			</text>
 			<text x="50%" y="11%" class="large medium sub-heading upper center" style="font-size: 300%; font-weight:600;">
-				<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 			</text>
 
 			<!-- Open House Example -->
@@ -46,7 +50,8 @@
 		</image>
 
 		<filter x="-0.35" y="-0.7" width="1.7" height="2.4" id="solid">
-			<feFlood flood-color="var(--theme-body-background)"/>
+<feFlood flood-color="var(--theme-body-background)" />
+
 			<feComposite in="SourceGraphic" operator="xor" />
 		</filter>
 

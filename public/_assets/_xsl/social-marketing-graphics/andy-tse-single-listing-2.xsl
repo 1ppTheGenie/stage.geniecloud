@@ -9,8 +9,9 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
-	<xsl:param name="status" select="'all'"/>
+<xsl:import href="common.xsl" />
+<xsl:param name="status" select="'all'" />
+
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800" />
@@ -19,12 +20,14 @@
 			<xsl:value-of select="'
 			text { dominant-baseline: middle; }
 			.open-sans{ font-family: &quot;Open Sans&quot;, sans-serif !important; }
-			'"/>
+'" />
 		</style>
 
-		<rect xmlns="" x="0%" y="0%" width="100%" height="100%" fill="#fff"/>
+<rect xmlns="" x="0%" y="0%" width="100%" height="100%" fill="#fff" />
 
-		<rect xmlns="" x="0%" y="0%" width="100%" height="13%" fill="#fdb913"/>
+
+<rect xmlns="" x="0%" y="0%" width="100%" height="13%" fill="#fdb913" />
+
 
 		<g>
 			<text x="50%" y="7%" width="100%" fill="#fff" height="10%" class="upper open-sans center" style="font-size:260%;">
@@ -32,11 +35,13 @@
 					<xsl:choose>
 						<xsl:when test="//single/sale-price!=''">
 							<tspan class="bold">Sold for  </tspan>
-							<xsl:value-of select="format-number( //single/sale-price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/sale-price, '$###,###')" />
+
 						</xsl:when>
 						<xsl:otherwise>
 							<tspan class="bold">Asking </tspan>
-							<xsl:value-of select="format-number( //single/price , '$###,###')"/>
+<xsl:value-of select="format-number( //single/price , '$###,###')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 				</tspan>
@@ -116,7 +121,8 @@
 				</xsl:call-template>
 			</text>
 		</g>
-		<rect xmlns="" x="0%" y="77%" width="100%" height="12%" fill="#2c3740"/>
+<rect xmlns="" x="0%" y="77%" width="100%" height="12%" fill="#2c3740" />
+
 		<image x="2%" y="78%" width="27%" height="6%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/tgs-logo.png' )" />
@@ -153,7 +159,8 @@
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/andy-tse.png' )" />
 			</xsl:attribute>
 		</image>
-		<rect xmlns="" x="0%" y="90.5%" width="100%" height="10%" fill="#1c447c" stroke="#1c447c"/>
+<rect xmlns="" x="0%" y="90.5%" width="100%" height="10%" fill="#1c447c" stroke="#1c447c" />
+
 		<image x="2%" y="93%" width="25%" height="4.5%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/real-trend-logo1.jpg' )" />

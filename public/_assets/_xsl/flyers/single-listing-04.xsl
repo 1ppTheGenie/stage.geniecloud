@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
@@ -17,7 +18,8 @@
 
 		<g>
 			<g>
-				<rect fill="var(--theme-body-color)" width="100%" height="9%"/>
+<rect fill="var(--theme-body-color)" width="100%" height="9%" />
+
 				<image x="43%" y="0" class="center" width="16%" height="8.7%" id="logo" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
 						<xsl:value-of select="$companyLogo" />
@@ -37,7 +39,8 @@
 				</text>
 			</g>
 			<g style="transform:translate(0%,21%)">
-				<rect fill="var(--theme-body-color)" width="100%" height="5%"/>
+<rect fill="var(--theme-body-color)" width="100%" height="5%" />
+
 				<g class="icon-stat" style="transform:translate(16%, -0.2%)">
 					<use x="0.5%" y="1.4%" width="2%" height="3%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#tag-icon' )" />
@@ -106,7 +109,8 @@
 					<tspan class="upper bold" style="font-size:250%;">Key facts</tspan>
 				</text>
 
-				<rect x="3%" y="4%" stroke="var(--theme-body-color)" stroke-width="3" fill-opacity="1" width="25%" height="2" fill="var(--theme-body-background)"/>
+<rect x="3%" y="4%" stroke="var(--theme-body-color)" stroke-width="3" fill-opacity="1" width="25%" height="2" fill="var(--theme-body-background)" />
+
 
 				<g style="fill: var(--theme-body-color);transform: translate(3%,1%);">
 
@@ -185,10 +189,12 @@
 				<tspan class="upper bold" style="font-size:250%;">The property</tspan>
 			</text>
 
-			<rect x="3%" y="59%" stroke="var(--theme-body-color)" stroke-width="3" fill-opacity="1" width="25%" height="2" fill="var(--theme-body-background)"/>
+<rect x="3%" y="59%" stroke="var(--theme-body-color)" stroke-width="3" fill-opacity="1" width="25%" height="2" fill="var(--theme-body-background)" />
+
 
 			<foreignObject x="3%" y="61%" width="28%" height="25%" style="color:var(--theme-body-color);-webkit-line-clamp:6; line-height: 2.5rem; font-size: 180%;">
-				<xsl:call-template name="listing-description"/>
+<xsl:call-template name="listing-description" />
+
 			</foreignObject>
 
 			<image x="33.33%" y="54%" width="33.33%" height="17.5%" preserveAspectRatio="xMidYMid slice">
@@ -205,7 +211,8 @@
 			</image>
 
 			<g style="transform: translate(0%, 89%);">
-				<rect x="0" y="0" width="100%" height="11%" fill="var(--theme-sub-heading-color)"/>
+<rect x="0" y="0" width="100%" height="11%" fill="var(--theme-sub-heading-color)" />
+
 				<image x="16%" y="1%" width="12%" height="9%" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:value-of select="//agent[1]/photo" />

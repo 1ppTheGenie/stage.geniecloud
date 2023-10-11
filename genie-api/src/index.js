@@ -270,7 +270,7 @@ export const api = async event => {
 						case "/process":
 							if (params) {
 								const r = await processAsset(params);
-
+								console.log("xml5", r);
 								if (r) {
 									let { sourceKey, ...reducedParams } = params;
 
@@ -451,6 +451,9 @@ const processAsset = async params => {
 				{
 					attributeFilter: (key, val) => val === null,
 					attributeExplicitTrue: true,
+					contentMap: content => {
+						return content === null ? "" : content;
+					},
 				}
 			),
 			transformXsl: (await fromS3(`_assets/_xsl/${params.asset}.xsl`))

@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<g transform="translate(0 -20)">
@@ -81,7 +82,8 @@
 			</tspan>
 		</text>
 
-		<rect x="0" y="75%" width="40%" height="1%" fill="var(--theme-body-color)"/>
+<rect x="0" y="75%" width="40%" height="1%" fill="var(--theme-body-color)" />
+
 
 		<image x="0" y="78%" width="14%" height="10%" id="logo" preserveAspectRatio="xMidYMid meet">
 			<xsl:attribute name="href">
@@ -90,11 +92,13 @@
 		</image>
 
 		<text x="2%" y="89%" style="font-size:100%;">
-			<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 		</text>
 
 		<text x="2%" y="92%" style="font-size:100%;">
-			<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 		</text>
 
 		<g style="transform:translate(58%, 22%);">

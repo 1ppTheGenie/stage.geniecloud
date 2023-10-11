@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<image preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
 			<xsl:call-template name="switch-image">
@@ -22,7 +23,8 @@
 	<xsl:template name="cropped-content">
 		<xsl:if test="number(//single/statusTypeID)=2">
 			<g style="transform:translate(0%,23%);fill:var(--theme-body-background);">
-				<rect width="30%" height="55%" y="11%" fill="var(--theme-body-background)" fill-opacity="80%"/>
+<rect width="30%" height="55%" y="11%" fill="var(--theme-body-background)" fill-opacity="80%" />
+
 
 				<g style="transform:translate(2.5%,2%);">
 					<text x="0" y="12%" class="sub-heading medium" style="font-weight:600;">
@@ -72,7 +74,8 @@
 		</xsl:if>
 		<xsl:if test="number(//single/statusTypeID)=1">
 			<g style="transform:translate(0%,23%);fill:var(--theme-body-background);">
-				<rect width="30%" height="55%" y="11%" fill="var(--theme-body-background)" fill-opacity="80%"/>
+<rect width="30%" height="55%" y="11%" fill="var(--theme-body-background)" fill-opacity="80%" />
+
 
 				<g style="transform:translate(2.5%,2%);">
 					<text x="0" y="12%" class="sub-heading medium" style="font-weight:600;">
@@ -121,7 +124,8 @@
 		</xsl:if>
 		<xsl:if test="number(//single/statusTypeID)=3">
 			<g style="transform:translate(0%,21%);fill:var(--theme-body-background);">
-				<rect width="40%" height="50%" y="21%" fill="var(--theme-body-background)" fill-opacity="80%"/>
+<rect width="40%" height="50%" y="21%" fill="var(--theme-body-background)" fill-opacity="80%" />
+
 
 				<g style="transform:translate(2.5%,2%);">
 					<text x="0" y="22%" class="sub-heading bold medium">

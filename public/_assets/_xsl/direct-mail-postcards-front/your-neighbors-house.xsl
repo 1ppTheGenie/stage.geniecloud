@@ -7,7 +7,8 @@ Supports:	Listing, Print, ListingCount, Map, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
@@ -33,7 +34,7 @@ Supports:	Listing, Print, ListingCount, Map, QRCode
 			ul.marketing {list-style:none;margin:0;padding:0;} 
 			ul.marketing li {margin-bottom:2%;padding:0;display:inline-flex;flex-direction:row;height:1rem;align-items:center;}
 			svg.bullet { margin-right:1%;height: 100%;}
-			'"/>
+'" />
 		</style>
 
 		<rect x="-2%" y="-2%" width="32%" height="104%" fill="var(--theme-sub-heading-color)" fill-opacity="10%" />
@@ -47,7 +48,8 @@ Supports:	Listing, Print, ListingCount, Map, QRCode
 
 		<g style="transform: translate(45%, 3%);text-transform: capitalize;">
 			<text x="20%" y="2%" fill="var(--theme-body-color)" font-size="87.5%" font-weight="600">
-				<xsl:value-of select="//agent[1]/address/street"/>
+<xsl:value-of select="//agent[1]/address/street" />
+
 			</text>
 			<xsl:if test="$agent2LineAddress='true'">
 				<text x="20%" y="4.5%" fill="var(--theme-body-color)" font-size="87.5%" font-weight="600">
@@ -69,7 +71,8 @@ Supports:	Listing, Print, ListingCount, Map, QRCode
 				<xsl:value-of select="concat( //agent[1]/address/city, ', ' )" />
 
 				<tspan style="text-transform: uppercase;">
-					<xsl:value-of select="concat( //agent[1]/address/state, ' ', //agent[1]/address/zip )"/>
+<xsl:value-of select="concat( //agent[1]/address/state, ' ', //agent[1]/address/zip )" />
+
 				</tspan>
 			</text>
 		</g>
@@ -85,7 +88,8 @@ Supports:	Listing, Print, ListingCount, Map, QRCode
 		</foreignObject>
 
 		<foreignObject x="2%" y="92%" width="26%" height="8%" style="color:var(--theme-sub-heading-color);-webkit-line-clamp:1;line-clamp:1; text-overflow: ellipsis;display: -webkit-box; font-size: 60%;line-height: 120%;">
-			<xsl:call-template name="solicitation-disclaimer"/>
+<xsl:call-template name="solicitation-disclaimer" />
+
 		</foreignObject>
 
 		<rect x="4%" y="6%" width="23%" height="44%" rx="1%" fill-opacity="0" stroke="var(--theme-heading-color)" stroke-width="1.25%" style="pointer-events: none;" />
@@ -292,9 +296,11 @@ Supports:	Listing, Print, ListingCount, Map, QRCode
 			</text>
 		</g>
 
-		<rect x="63.5%" y="18%" width="37%" height="84%" fill="#fff"/>
+<rect x="63.5%" y="18%" width="37%" height="84%" fill="#fff" />
 
-		<line x1="63.5%" x2="102%" y1="18%" y2="18%" stroke="var(--theme-heading-color)" stroke-width="1"/>
+
+<line x1="63.5%" x2="102%" y1="18%" y2="18%" stroke="var(--theme-heading-color)" stroke-width="1" />
+
 
 		<line x1="63.5%" x2="63.5%" y1="-2%" y2="102%" stroke="var(--theme-heading-color)" stroke-width="1" />
 

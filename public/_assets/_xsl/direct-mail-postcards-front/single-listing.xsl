@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<g>
@@ -19,7 +20,8 @@
 			</image>
 			<g transform="translate(47 47)">
 				<rect width="92%" height="535" fill="var(--theme-body-background)" fill-opacity="0.7" />
-				<rect x="1.7%" y="12%" width="88.5%" height="1.2%" fill="var(--theme-body-color)"/>
+<rect x="1.7%" y="12%" width="88.5%" height="1.2%" fill="var(--theme-body-color)" />
+
 			</g>
 			<g style="transform: translate(50%, -14%);">
 
@@ -67,7 +69,8 @@
 			</g>
 		</g>
 		<g style="transform: translate(4%, 64%);">
-			<rect x="1.7%" y="12%" width="88.5%" height="1.2%" fill="var(--theme-body-color)"/>
+<rect x="1.7%" y="12%" width="88.5%" height="1.2%" fill="var(--theme-body-color)" />
+
 			<image x="0%" y="14.5%" width="92%" height="12%" id="logo" preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
 					<xsl:value-of select="$companyLogo" />

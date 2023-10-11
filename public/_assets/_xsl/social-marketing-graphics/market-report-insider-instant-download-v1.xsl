@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="body">
 		<xsl:call-template name="svg-wrapper" />
@@ -58,15 +59,20 @@
 
 		<rect x="0" y="80%" width="100%" height="20%" fill="var(--theme-heading-color)"></rect>
 		<g style="transform: translate(28%, 91%);">
-			<use href="#double-arrow-down" class="center theme-body" x="0" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)"/>
+<use href="#double-arrow-down" class="center theme-body" x="0" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)" />
 
-			<use href="#double-arrow-down" class="center theme-body" x="10%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)"/>
 
-			<use href="#double-arrow-down" class="center theme-body" x="20%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)"/>
+<use href="#double-arrow-down" class="center theme-body" x="10%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)" />
 
-			<use href="#double-arrow-down" class="center theme-body" x="30%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)"/>
 
-			<use href="#double-arrow-down" class="center theme-body" x="40%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)"/>
+<use href="#double-arrow-down" class="center theme-body" x="20%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)" />
+
+
+<use href="#double-arrow-down" class="center theme-body" x="30%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)" />
+
+
+<use href="#double-arrow-down" class="center theme-body" x="40%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)" />
+
 		</g>
 		<g style="transform: translate(0, 83%);">
 			<text x="50%" y="0" class="center upper theme-body" style="font-size: 160%;">

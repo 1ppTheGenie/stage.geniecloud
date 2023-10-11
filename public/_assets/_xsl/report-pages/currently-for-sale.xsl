@@ -8,7 +8,8 @@
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<g style="transform:translateY(12%)">
 			<text x="50%" y="2%" class="align-center upper" style="font-size:180%">
@@ -24,7 +25,8 @@
 				<tspan> for sale</tspan>
 			</text>
 			<g style="transform:translate(44%,29%)">
-				<rect width="13%" height="23%" rx="10" fill="#6c824b" fill-opacity="100%"/>
+<rect width="13%" height="23%" rx="10" fill="#6c824b" fill-opacity="100%" />
+
 				<text x="6.5%" y="6%" class="bold center" style="fill:var(--theme-body-background); font-size: 350%; ">
 					<xsl:value-of select="//statistics/@activePropertyTypeCount" />
 				</text>

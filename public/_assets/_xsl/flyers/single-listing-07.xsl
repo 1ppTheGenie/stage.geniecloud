@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 
@@ -29,7 +30,8 @@
 					<xsl:with-param name="idx" select="1" />
 				</xsl:call-template>
 			</image>
-			<rect x="0" y="0" width="100%" height="28%" style="fill:var(--theme-body-color);" fill-opacity="0.01"/>
+<rect x="0" y="0" width="100%" height="28%" style="fill:var(--theme-body-color);" fill-opacity="0.01" />
+
 			<text x="50%" y="1.5%" class="upper center sub-heading" style="font-size: 220%;font-weight: 600;" data-max-width="40%">
 <xsl:variable name="customListingStatus">
 	<xsl:choose>
@@ -47,19 +49,23 @@
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:variable>
-<xsl:value-of select="concat( $customListingStatus, ' in &#160;', //area[1]/name )"/>
+<xsl:value-of select="concat( $customListingStatus, ' in &#160;', //area[1]/name )" />
+
 
 			</text>
 		</g>
 
 		<g style="transform: translate(0%,28%);">
-			<rect x="0" y="0" width="100%" height="9%" style="fill:var(--theme-sub-heading-color);"/>
+<rect x="0" y="0" width="100%" height="9%" style="fill:var(--theme-sub-heading-color);" />
+
 			<text x="35%" y="1.5%" class="normal" style="font-weight: 600;" fill="var(--theme-body-background)">
 				<tspan dy="0" style="font-size:300%">
-					<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 				</tspan>
 				<tspan x="35%" dy="3.5%" style="font-size:230%">
-					<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 				</tspan>
 			</text>
 		</g>
@@ -72,10 +78,12 @@
 			</image>
 			<text x="12%" y="13%" class="center bold" fill="var(--theme-body-color)" style="font-size:240%" data-max-width="20%">
 				<tspan x="12%" dy="0">
-					<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 				</tspan>
 				<tspan x="12%" dy="2.5%">
-					<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 				</tspan>
 			</text>
 			<text x="12%" y="19%" class="center" fill="var(--theme-sub-heading-color)" style="font-size:240%" data-max-width="11%">
@@ -92,21 +100,27 @@
 			</text>
 		</g>
 		<g style="transform: translate(34%,37%);">
-			<rect x="0" y="0" width="66%" height="28%" style="fill:var(--theme-body-color);"/>
+<rect x="0" y="0" width="66%" height="28%" style="fill:var(--theme-body-color);" />
+
 			<g style="transform: translate(2%,1%);">
 				<text class="center" x="6%" y="3%" fill="var(--theme-body-background)" style="font-size:230%">$2,188,000</text>
-				<rect x="0" y="6%" width="15%" height="3%" style="fill:var(--theme-body-background);"/>
+<rect x="0" y="6%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
+
 				<text x="1%" y="7%" class="sub-heading" style="font-size:110%">ACTIVE</text>
-				<rect x="0" y="10%" width="15%" height="3%" style="fill:var(--theme-body-background);"/>
+<rect x="0" y="10%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
+
 				<text x="1%" y="11%" class="sub-heading" style="font-size:110%">3,861 SQ. FT.</text>
-				<rect x="0" y="14%" width="15%" height="3%" style="fill:var(--theme-body-background);"/>
+<rect x="0" y="14%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
+
 				<text x="1%" y="15%" class="sub-heading" style="font-size:110%">5 BED</text>
-				<rect x="0" y="18%" width="15%" height="3%" style="fill:var(--theme-body-background);"/>
+<rect x="0" y="18%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
+
 				<text x="1%" y="19%" class="sub-heading" style="font-size:110%">3 BATH</text>
 			</g>
 			<foreignObject x="22%" y="2%" width="40%" height="25%">
 				<p style="-webkit-line-clamp:13; line-height: 1.7rem; font-size:140%; color:var(--theme-body-background)">
-					<xsl:call-template name="listing-description"/>
+<xsl:call-template name="listing-description" />
+
 				</p>
 			</foreignObject>
 		</g>
@@ -132,7 +146,8 @@
 		</g>
 
 		<g style="transform: translate(0, 85%)">
-			<rect x="0" y="0" width="100%" height="15%" style="fill:var(--theme-sub-heading-color);"/>
+<rect x="0" y="0" width="100%" height="15%" style="fill:var(--theme-sub-heading-color);" />
+
 			<clipPath id="clipCircle">
 				<circle r="6%" cx="12%" cy="7.5%"></circle>
 			</clipPath>

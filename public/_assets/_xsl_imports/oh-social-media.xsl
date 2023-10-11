@@ -22,21 +22,26 @@
 		<xsl:text>&#xa;</xsl:text>
 		<xsl:text>&#xa;</xsl:text>
 
-		<xsl:value-of select="'Click the LEARN button to access the full details and more.'"/>
+<xsl:value-of select="'Click the LEARN button to access the full details and more.'" />
+
 
 		<xsl:text>&#xa;</xsl:text>
 		<xsl:text>&#xa;</xsl:text>
 
-		<xsl:value-of select="concat('Call/Text &#128241; ',//agent[1]/mobile , ' for all your Real Estate Needs') "/>
+<xsl:value-of select="concat('Call/Text &#128241; ',//agent[1]/mobile , ' for all your Real Estate Needs') " />
+
 
 		<xsl:text>. &#xa;</xsl:text>
-		<xsl:value-of select="//agent[1]/marketingName"/>
+<xsl:value-of select="//agent[1]/marketingName" />
+
 		<xsl:if test="//agent[1]/address/company">
-			<xsl:value-of select="concat(', ',//agent[1]/address/company)"/>
+<xsl:value-of select="concat(', ',//agent[1]/address/company)" />
+
 
 		</xsl:if>
 		<xsl:text>&#xa;</xsl:text>
-		<xsl:value-of select="//agent[1]/marketingLicense"/>
+<xsl:value-of select="//agent[1]/marketingLicense" />
+
 
 	</xsl:template>
 

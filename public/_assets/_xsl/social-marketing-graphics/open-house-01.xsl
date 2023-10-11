@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<image preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
 			<xsl:call-template name="switch-image">
@@ -17,7 +18,8 @@
 		</image>
 
 		<g style="transform:translate(0%,20%);fill:var(--theme-body-background);">
-			<rect width="40%" height="61%" y="11%" fill="var(--theme-body-background)" fill-opacity="80%"/>
+<rect width="40%" height="61%" y="11%" fill="var(--theme-body-background)" fill-opacity="80%" />
+
 			<g style="transform:translate(2.5%,0%);">
 				<text x="0" y="13.5%" class="heading upper" font-size="110%" font-weight="700" style="letter-spacing:1px;" data-max-width="50%">
 					<tspan>

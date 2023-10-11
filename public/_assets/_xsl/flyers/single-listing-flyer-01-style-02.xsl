@@ -9,7 +9,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 
@@ -22,7 +23,8 @@
 		</g>
 
 		<g style="transform: translate(0%, 12%);">
-			<rect width="36%" height="9%" fill="var(--theme-body-color)"/>
+<rect width="36%" height="9%" fill="var(--theme-body-color)" />
+
 			<text x="18%" y="1%" class="align-center large" fill="var(--theme-body-background)">
 				<tspan>
 					<xsl:value-of select="//agent[1]/mobile" />
@@ -47,11 +49,14 @@
 		</g>
 
 		<g style="transform: translate(2%,30%)">
-			<rect x="-2%" y="-7.5%" width="100%" height="0.5%" fill="var(--theme-sub-heading-color)"/>
+<rect x="-2%" y="-7.5%" width="100%" height="0.5%" fill="var(--theme-sub-heading-color)" />
 
-			<rect x="-2%" y="-7%" width="100%" height="70%" fill="var(--theme-heading-color)"/>
 
-			<rect x="-2%" y="62.5%" width="100%" height="0.5%" fill="var(--theme-sub-heading-color)"/>
+<rect x="-2%" y="-7%" width="100%" height="70%" fill="var(--theme-heading-color)" />
+
+
+<rect x="-2%" y="62.5%" width="100%" height="0.5%" fill="var(--theme-sub-heading-color)" />
+
 
 			<text x="0" y="-5%" class="upper" fill="var(--theme-body-background)" style="font-size: 300%;">
 				<xsl:call-template name="editable">

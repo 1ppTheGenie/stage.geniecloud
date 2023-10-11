@@ -8,23 +8,27 @@ Supports:	Area, Print, Listing, QRCode
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
-		<rect x="63.5%" y="0%" width="36.5%" height="100%" fill="#fff"/>
-		<rect x="43.5%" y="0%" width="20%" height="100%" fill="#f6f6f6"/>
-		<rect x="0%" y="80%" width="63.5%" height="20%" fill="#434c50"/>
+<rect x="63.5%" y="0%" width="36.5%" height="100%" fill="#fff" />
+<rect x="43.5%" y="0%" width="20%" height="100%" fill="#f6f6f6" />
+<rect x="0%" y="80%" width="63.5%" height="20%" fill="#434c50" />
+
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
 
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/premium-ultra.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/premium-ultra.css')" />
+
 		</link>
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800" />
 
 		<style>
-			<xsl:value-of select="'	.open-sans{ font-family: &quot;Open Sans&quot;, sans-serif !important; }'"/>
+<xsl:value-of select="'	.open-sans{ font-family: &quot;Open Sans&quot;, sans-serif !important; }'" />
+
 		</style>
 
 		<xsl:variable name="textSize">
@@ -53,7 +57,8 @@ Supports:	Area, Print, Listing, QRCode
 			xmlns="http://www.w3.org/2000/svg"
 			xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 472.615 472.615" style="enable-background:new 0 0 472.615 472.615;" xml:space="preserve">
 			<g>
-				<polygon points="332.955,266.833 332.955,0 139.662,0 139.662,266.833 30.525,266.833 236.308,472.615 442.09,266.833 		"/>
+<polygon points="332.955,266.833 332.955,0 139.662,0 139.662,266.833 30.525,266.833 236.308,472.615 442.09,266.833 		" />
+
 			</g>
 		</svg>
 
@@ -99,7 +104,8 @@ Supports:	Area, Print, Listing, QRCode
 					</xsl:choose>
 				</span>
 				<span class="bold">
-					<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 				</span>
 				<span>
 					<xsl:call-template name="editable">
@@ -168,7 +174,8 @@ Supports:	Area, Print, Listing, QRCode
 				<xsl:value-of select="//agent[1]/address/zip" />
 			</tspan>
 		</text>
-		<rect x="65.5%" y="21.5%" width="32%" height="0.1%" fill="#434c50"/>
+<rect x="65.5%" y="21.5%" width="32%" height="0.1%" fill="#434c50" />
+
 		<text x="81.5%" y="22.5%" class="small center open-sans" fill="#000" style="font-weight:400;font-size:40%;font-style: italic;">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'homealready'" />

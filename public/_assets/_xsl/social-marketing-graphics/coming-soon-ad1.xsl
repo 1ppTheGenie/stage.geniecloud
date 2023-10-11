@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<g>
@@ -29,7 +30,8 @@
 			</text>
 
 			<g style="transform: skew(0deg, -29deg) translate(0, 70%);">
-				<rect fill-opacity="0.7" fill="var(--theme-sub-heading-color)" y="0" class="" x="0" height="12%" width="100%"/>
+<rect fill-opacity="0.7" fill="var(--theme-sub-heading-color)" y="0" class="" x="0" height="12%" width="100%" />
+
 			</g>
 			<g style="transform: rotate(-29deg) translate(0, 54.5%);">
 				<text style="font-weight:600; font-size:450%;" fill="var(--theme-body-background)" fill-opacity="0.8" class="center upper" y="8%" x="23%">
@@ -40,7 +42,8 @@
 				</text>
 			</g>
 			<g style="transform: translate(0%, 82%);">
-				<rect width="100%" height="150" fill="var(--theme-body-background)" fill-opacity="70%"/>
+<rect width="100%" height="150" fill="var(--theme-body-background)" fill-opacity="70%" />
+
 				<text x="50%" y="1%" class="center" style="font-size: 340%;" fill="var(--theme-body-color)">
 					<tspan>
 						<xsl:call-template name="editable">

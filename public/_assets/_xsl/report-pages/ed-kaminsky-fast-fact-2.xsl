@@ -7,10 +7,12 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 
 		<xsl:variable name="salesCountChange" select="//statistics/@soldPropertyTypeCount div //previous/@totalSold" />
@@ -53,7 +55,8 @@
 			<tspan fill="#b2934e">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'Performance'" />
-					<xsl:with-param name="default" select="'Performance'"/>
+<xsl:with-param name="default" select="'Performance'" />
+
 				</xsl:call-template>
 			</tspan>
 		</text>
@@ -90,13 +93,15 @@
 			<tspan class="bold" x="50%" dy="4%">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'Sales Text'" />
-					<xsl:with-param name="default" select="concat(format-number( $salesCountPercent, '#%' ),' ')"/>
+<xsl:with-param name="default" select="concat(format-number( $salesCountPercent, '#%' ),' ')" />
+
 				</xsl:call-template>
 			</tspan>
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'Compared Text'" />
-					<xsl:with-param name="default" select="'when compared to the same '"/>
+<xsl:with-param name="default" select="'when compared to the same '" />
+
 				</xsl:call-template>
 			</tspan>
 			<tspan>
@@ -107,7 +112,8 @@
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'Year Text'" />
-					<xsl:with-param name="default" select="' period in 2022.'"/>
+<xsl:with-param name="default" select="' period in 2022.'" />
+
 				</xsl:call-template>
 			</tspan>
 			<tspan>
@@ -124,10 +130,12 @@
 				</image>
 				<text x="2%" y="0" fill="#0d0f30">
 					<tspan x="10%" dy="2%" font-size="250%" class="super-bold">
-						<xsl:value-of select="concat(count(//listings/listing[@state='sold']),' homes' )"/>
+<xsl:value-of select="concat(count(//listings/listing[@state='sold']),' homes' )" />
+
 					</tspan>
 					<tspan x="10%" dy="7%" font-size="100%" font-weight="600">
-						<xsl:value-of select="'sold in past 12-month'"/>
+<xsl:value-of select="'sold in past 12-month'" />
+
 					</tspan>
 				</text>
 			</g>
@@ -140,10 +148,12 @@
 				</image>
 				<text x="2%" y="0%" fill="#0d0f30">
 					<tspan x="11%" dy="2%" font-size="250%" class="super-bold">
-						<xsl:value-of select="concat(count(//listings/listing[@state='active']),' homes' )"/>
+<xsl:value-of select="concat(count(//listings/listing[@state='active']),' homes' )" />
+
 					</tspan>
 					<tspan x="11%" dy="7%" font-size="100%" font-weight="600">
-						<xsl:value-of select="'currently for sale'"/>
+<xsl:value-of select="'currently for sale'" />
+
 					</tspan>
 				</text>
 			</g>
@@ -157,10 +167,12 @@
 
 				<text x="2%" y="0%" fill="#0d0f30">
 					<tspan x="11%" dy="2%" font-size="250%" class="super-bold">
-						<xsl:value-of select="concat(count(//listings/listing[@state='pending']),' homes' )"/>
+<xsl:value-of select="concat(count(//listings/listing[@state='pending']),' homes' )" />
+
 					</tspan>
 					<tspan x="11%" dy="7%" font-size="100%" font-weight="600">
-						<xsl:value-of select="'currently in escrow'"/>
+<xsl:value-of select="'currently in escrow'" />
+
 					</tspan>
 				</text>
 			</g>
@@ -177,10 +189,12 @@
 				</image>
 				<text x="2%" y="0" fill="#0d0f30">
 					<tspan x="9%" dy="1%" font-size="250%" class="super-bold">
-						<xsl:value-of select="format-number(//statistics/@taxrollCount, '###,###')"/>
+<xsl:value-of select="format-number(//statistics/@taxrollCount, '###,###')" />
+
 					</tspan>
 					<tspan x="9%" dy="7%" font-size="100%" font-weight="600">
-						<xsl:value-of select="concat('total ',translate($propertyType,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), ' in area')"/>
+<xsl:value-of select="concat('total ',translate($propertyType,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), ' in area')" />
+
 					</tspan>
 				</text>
 			</g>
@@ -193,10 +207,12 @@
 				</image>
 				<text x="2%" y="0%" fill="#0d0f30">
 					<tspan x="9%" dy="1%" font-size="250%" class="super-bold">
-						<xsl:value-of select="format-number(//statistics/@turnOver, '#.0%')"/>
+<xsl:value-of select="format-number(//statistics/@turnOver, '#.0%')" />
+
 					</tspan>
 					<tspan x="9%" dy="7%" font-size="100%" font-weight="600">
-						<xsl:value-of select="'12-mo turn over rate'"/>
+<xsl:value-of select="'12-mo turn over rate'" />
+
 					</tspan>
 				</text>
 			</g>
@@ -210,10 +226,12 @@
 
 				<text x="2%" y="0%" fill="#0d0f30">
 					<tspan x="9%" dy="1%" font-size="250%" class="super-bold">
-						<xsl:value-of select="//statistics/@averageDaysOnMarket"/>
+<xsl:value-of select="//statistics/@averageDaysOnMarket" />
+
 					</tspan>
 					<tspan x="9%" dy="7%" font-size="100%" font-weight="600">
-						<xsl:value-of select="'avg. days on market'"/>
+<xsl:value-of select="'avg. days on market'" />
+
 					</tspan>
 				</text>
 			</g>
@@ -227,11 +245,13 @@
 
 				<text x="2%" y="0%" fill="#0d0f30">
 					<tspan x="9%" dy="1%" font-size="250%" class="super-bold">
-						<xsl:value-of select="//statistics/@averageYearsInHome"/>
+<xsl:value-of select="//statistics/@averageYearsInHome" />
+
 					</tspan>
 					<tspan x="9%" dy="7%" font-size="100%" font-weight="600">
-						<!-- <xsl:value-of select="'avg. years in home'"/> -->
-						<xsl:value-of select="concat('avg. years in ',translate($singularPropertyType,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'))"/>
+<!-- <xsl:value-of select="'avg. years in home'" /> -->
+<xsl:value-of select="concat('avg. years in ',translate($singularPropertyType,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'))" />
+
 					</tspan>
 				</text>
 			</g>

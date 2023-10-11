@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 
@@ -18,7 +19,8 @@
 
 	<xsl:template name="svg-body">
 		<style>
-			<xsl:value-of select="'text {dominant-baseline: middle;}.leaflet-interactive {fill:#3388ff;stroke:#3388ff;fill-opacity:0.2;}'"/>
+<xsl:value-of select="'text {dominant-baseline: middle;}.leaflet-interactive {fill:#3388ff;stroke:#3388ff;fill-opacity:0.2;}'" />
+
 		</style>
 
 		<rect xmlns="" x="0%" y="0%" width="100%" height="16%" fill="var(--theme-body-background)"></rect>
@@ -50,8 +52,9 @@
 
 			<svg x="2%" y="36%" width="10%" height="9%" viewBox="0 0 313 348" fill="none"
 				xmlns="http://www.w3.org/2000/svg">
-				<rect x="15.5" y="71.0069" width="259" height="261" style="stroke: var(--theme-sub-heading-color); opacity: 0.3;" stroke-width="31"/>
-				<path d="M256.222 8.50694C217.822 30.5069 161.555 133.34 138.222 182.007C127.422 167.607 111.722 156.34 105.222 152.507C89.7221 143.366 72.7221 155.007 62.7222 164.507C52.7222 175.007 57.8888 187.174 62.7222 192.507C77.5222 208.907 94.5555 232.84 101.722 243.007C111.222 257.507 117.222 259.507 121.722 260.507C133.722 262.507 146.556 260.507 152.222 259.507C165.022 257.507 169.722 241.007 173.222 233.507C208.022 139.507 273.055 59.0069 301.222 30.5069C313.722 19.5069 312.722 16.5069 312.222 8.50694C308.222 -6.49306 268.44 1.50695 256.222 8.50694Z" fill="#c23434"/>
+<rect x="15.5" y="71.0069" width="259" height="261" style="stroke: var(--theme-sub-heading-color); opacity: 0.3;" stroke-width="31" />
+<path d="M256.222 8.50694C217.822 30.5069 161.555 133.34 138.222 182.007C127.422 167.607 111.722 156.34 105.222 152.507C89.7221 143.366 72.7221 155.007 62.7222 164.507C52.7222 175.007 57.8888 187.174 62.7222 192.507C77.5222 208.907 94.5555 232.84 101.722 243.007C111.222 257.507 117.222 259.507 121.722 260.507C133.722 262.507 146.556 260.507 152.222 259.507C165.022 257.507 169.722 241.007 173.222 233.507C208.022 139.507 273.055 59.0069 301.222 30.5069C313.722 19.5069 312.722 16.5069 312.222 8.50694C308.222 -6.49306 268.44 1.50695 256.222 8.50694Z" fill="#c23434" />
+
 			</svg>
 			<text class="upper bold" fill="var(--theme-heading-color)" style="font-family:var(--theme-body-font); font-size:100%;">
 				<tspan x="13%" y="38%">AVERAGE</tspan>
@@ -64,8 +67,9 @@
 
 			<svg x="2%" y="36%" width="10%" height="9%" viewBox="0 0 313 348" fill="none"
 				xmlns="http://www.w3.org/2000/svg">
-				<rect x="15.5" y="71.0069" width="259" height="261" style="stroke: var(--theme-sub-heading-color); opacity: 0.3;" stroke-width="31"/>
-				<path d="M256.222 8.50694C217.822 30.5069 161.555 133.34 138.222 182.007C127.422 167.607 111.722 156.34 105.222 152.507C89.7221 143.366 72.7221 155.007 62.7222 164.507C52.7222 175.007 57.8888 187.174 62.7222 192.507C77.5222 208.907 94.5555 232.84 101.722 243.007C111.222 257.507 117.222 259.507 121.722 260.507C133.722 262.507 146.556 260.507 152.222 259.507C165.022 257.507 169.722 241.007 173.222 233.507C208.022 139.507 273.055 59.0069 301.222 30.5069C313.722 19.5069 312.722 16.5069 312.222 8.50694C308.222 -6.49306 268.44 1.50695 256.222 8.50694Z" fill="#c23434"/>
+<rect x="15.5" y="71.0069" width="259" height="261" style="stroke: var(--theme-sub-heading-color); opacity: 0.3;" stroke-width="31" />
+<path d="M256.222 8.50694C217.822 30.5069 161.555 133.34 138.222 182.007C127.422 167.607 111.722 156.34 105.222 152.507C89.7221 143.366 72.7221 155.007 62.7222 164.507C52.7222 175.007 57.8888 187.174 62.7222 192.507C77.5222 208.907 94.5555 232.84 101.722 243.007C111.222 257.507 117.222 259.507 121.722 260.507C133.722 262.507 146.556 260.507 152.222 259.507C165.022 257.507 169.722 241.007 173.222 233.507C208.022 139.507 273.055 59.0069 301.222 30.5069C313.722 19.5069 312.722 16.5069 312.222 8.50694C308.222 -6.49306 268.44 1.50695 256.222 8.50694Z" fill="#c23434" />
+
 			</svg>
 			<text class="upper bold" fill="var(--theme-heading-color)" style="font-family:var(--theme-body-font);font-size:100%;">
 				<tspan x="13%" y="38%">
@@ -83,8 +87,9 @@
 
 			<svg x="2%" y="36%" width="10%" height="9%" viewBox="0 0 313 348" fill="none"
 				xmlns="http://www.w3.org/2000/svg">
-				<rect x="15.5" y="71.0069" width="259" height="261" style="stroke: var(--theme-sub-heading-color); opacity: 0.3;" stroke-width="31"/>
-				<path d="M256.222 8.50694C217.822 30.5069 161.555 133.34 138.222 182.007C127.422 167.607 111.722 156.34 105.222 152.507C89.7221 143.366 72.7221 155.007 62.7222 164.507C52.7222 175.007 57.8888 187.174 62.7222 192.507C77.5222 208.907 94.5555 232.84 101.722 243.007C111.222 257.507 117.222 259.507 121.722 260.507C133.722 262.507 146.556 260.507 152.222 259.507C165.022 257.507 169.722 241.007 173.222 233.507C208.022 139.507 273.055 59.0069 301.222 30.5069C313.722 19.5069 312.722 16.5069 312.222 8.50694C308.222 -6.49306 268.44 1.50695 256.222 8.50694Z" fill="#c23434"/>
+<rect x="15.5" y="71.0069" width="259" height="261" style="stroke: var(--theme-sub-heading-color); opacity: 0.3;" stroke-width="31" />
+<path d="M256.222 8.50694C217.822 30.5069 161.555 133.34 138.222 182.007C127.422 167.607 111.722 156.34 105.222 152.507C89.7221 143.366 72.7221 155.007 62.7222 164.507C52.7222 175.007 57.8888 187.174 62.7222 192.507C77.5222 208.907 94.5555 232.84 101.722 243.007C111.222 257.507 117.222 259.507 121.722 260.507C133.722 262.507 146.556 260.507 152.222 259.507C165.022 257.507 169.722 241.007 173.222 233.507C208.022 139.507 273.055 59.0069 301.222 30.5069C313.722 19.5069 312.722 16.5069 312.222 8.50694C308.222 -6.49306 268.44 1.50695 256.222 8.50694Z" fill="#c23434" />
+
 			</svg>
 
 			<text class="upper bold" fill="var(--theme-heading-color)" style="font-family:var(--theme-body-font);font-size:100%;">
@@ -134,7 +139,8 @@
 			</text>
 		</g>
 
-		<rect xmlns="" x="0%" y="79%" width="100%" height="12%" fill="var(--theme-body-background)"/>
+<rect xmlns="" x="0%" y="79%" width="100%" height="12%" fill="var(--theme-body-background)" />
+
 
 		<xsl:choose>
 			<xsl:when test="$companyLogo='' or $personalLogo=''">
@@ -189,7 +195,8 @@
 			</xsl:attribute>
 		</image>
 
-		<rect xmlns="" x="0%" y="92%" width="100%" height="8%" fill="var(--theme-sub-heading-color)" fill-opacity="0.8"/>
+<rect xmlns="" x="0%" y="92%" width="100%" height="8%" fill="var(--theme-sub-heading-color)" fill-opacity="0.8" />
+
 		<text x="50%" y="96.5%" font-size="120%" font-family="var(--theme-body-font)" fill="var(--theme-heading-color)" class="upper bold center" data-max-width="65%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'areaname '" />

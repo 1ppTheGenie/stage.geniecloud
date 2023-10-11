@@ -7,7 +7,8 @@ Supports:	Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:variable name="mapListingNodes" select="//listings/listing[@state='sold']" />
 
 	<xsl:template name="svg-scripts">
@@ -59,7 +60,8 @@ Supports:	Area, Print, Listing, QRCode
 				<div style="width: 90%;height: 90%;background: var(--theme-body-color); border:4px solid var(--theme-sub-heading-color); border-radius:50%">
 					<p style="font-size: 250%; font-weight: 900; color: var(--theme-sub-heading-color); margin: 0 auto;
                         text-align: center; line-height: 200%; font-family:var(--theme-sub-heading-font)">
-						<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')"/>
+<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
+
 					</p>
 				</div>
 			</foreignObject>
@@ -106,7 +108,8 @@ Supports:	Area, Print, Listing, QRCode
 						<xsl:text>LAST 30 DAYS</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')"/>
+<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
+
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>

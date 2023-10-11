@@ -9,7 +9,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:variable name="mapListingNodes" select="//listings/listing[@state='active']" />
 
@@ -28,33 +29,40 @@
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')" />
+
 		</link>
 
 		<defs>
 			<linearGradient id="leftRightShadow">
-				<stop offset="0" stop-color="#000" stop-opacity="10%"/>
-				<stop offset="20%" stop-color="#000" stop-opacity="0"/>
+<stop offset="0" stop-color="#000" stop-opacity="10%" />
+<stop offset="20%" stop-color="#000" stop-opacity="0" />
 
-				<stop offset="80%" stop-color="#000" stop-opacity="0"/>
-				<stop offset="100%" stop-color="#000" stop-opacity="10%"/>
+
+<stop offset="80%" stop-color="#000" stop-opacity="0" />
+<stop offset="100%" stop-color="#000" stop-opacity="10%" />
+
 			</linearGradient>
 
 			<linearGradient id="topBottomShadow" gradientTransform="rotate(90)">
-				<stop offset="0" stop-color="#000" stop-opacity="10%"/>
-				<stop offset="20%" stop-color="#000" stop-opacity="0"/>
+<stop offset="0" stop-color="#000" stop-opacity="10%" />
+<stop offset="20%" stop-color="#000" stop-opacity="0" />
 
-				<stop offset="80%" stop-color="#000" stop-opacity="0"/>
-				<stop offset="100%" stop-color="#000" stop-opacity="10%"/>
+
+<stop offset="80%" stop-color="#000" stop-opacity="0" />
+<stop offset="100%" stop-color="#000" stop-opacity="10%" />
+
 			</linearGradient>
 
 			<filter id="inset-shadow">
 				<feComponentTransfer in="SourceAlpha" result="inset-selection">
-					<feFuncA type="discrete" tableValues="0 1 1 1 1 1"/>
+<feFuncA type="discrete" tableValues="0 1 1 1 1 1" />
+
 				</feComponentTransfer>
 
 				<feComponentTransfer in="SourceGraphic" result="original-no-fill">
-					<feFuncA type="discrete" tableValues="0 0 1"/>
+<feFuncA type="discrete" tableValues="0 0 1" />
+
 				</feComponentTransfer>
 				<feColorMatrix type="matrix" in="original-no-fill" result="new-source-alpha" values="0 0 0 0 0
                       0 0 0 0 0
@@ -64,14 +72,17 @@
 				<feGaussianBlur in="new-source-alpha" result="blur2" stdDeviation="10" />
 				<feGaussianBlur in="new-source-alpha" result="blur3" stdDeviation="15" />
 				<feMerge result="blur">
-					<feMergeNode in="blur" mode="normal"/>
-					<feMergeNode in="blur2" mode="normal"/>
-					<feMergeNode in="blur3" mode="normal"/>
+<feMergeNode in="blur" mode="normal" />
+<feMergeNode in="blur2" mode="normal" />
+<feMergeNode in="blur3" mode="normal" />
+
 				</feMerge>
 
-				<feComposite operator="in" in="inset-selection" in2="blur" result="inset-blur"/>
+<feComposite operator="in" in="inset-selection" in2="blur" result="inset-blur" />
 
-				<feComposite operator="over" in="original-no-fill" in2="inset-blur"/>
+
+<feComposite operator="over" in="original-no-fill" in2="inset-blur" />
+
 			</filter>
 		</defs>
 
@@ -81,7 +92,8 @@
 			</xsl:attribute>
 		</image>
 
-		<rect fill="#fff" x="12%" y="80%" width="25%" height="12%"/>
+<rect fill="#fff" x="12%" y="80%" width="25%" height="12%" />
+
 
 		<image x="12.5%" y="79.5%" width="9.5%" height="13%" preserveAspectRatio="xMidYMid meet">
 			<xsl:attribute name="href">
@@ -89,7 +101,8 @@
 			</xsl:attribute>
 		</image>
 
-		<rect fill="#006a64" x="22.5%" y="81%" rx="10" ry="10" width="15%" height="10%"/>
+<rect fill="#006a64" x="22.5%" y="81%" rx="10" ry="10" width="15%" height="10%" />
+
 
 		<text x="23%" y="82.5%" class="upper" fill="#fff" font-size="105%" data-max-width="22%" style="font-family:Futura Condensed;">
 			<xsl:call-template name="editable">
@@ -105,11 +118,13 @@
 			</xsl:call-template>
 		</text>
 
-		<rect x="36.5%" y="0" width="27%" height="100%" fill="#fff"/>
-		<rect x="36.5%" y="0%" width="27%" height="80%" stroke="#fff" stroke-width="0.5" fill-opacity="40%" filter="url(#inset-shadow)"/>
-		<rect x="36.5%" y="80%" width="27%" height="20%" stroke="#fff" stroke-width="0.5" fill-opacity="40%" filter="url(#inset-shadow)"/>
+<rect x="36.5%" y="0" width="27%" height="100%" fill="#fff" />
+<rect x="36.5%" y="0%" width="27%" height="80%" stroke="#fff" stroke-width="0.5" fill-opacity="40%" filter="url(#inset-shadow)" />
+<rect x="36.5%" y="80%" width="27%" height="20%" stroke="#fff" stroke-width="0.5" fill-opacity="40%" filter="url(#inset-shadow)" />
 
-		<rect x="63.5%" y="30%" width="40%" height="19%" fill="#006a64"/>
+
+<rect x="63.5%" y="30%" width="40%" height="19%" fill="#006a64" />
+
 
 		<xsl:call-template name="cropped-container" />
 
@@ -133,7 +148,8 @@
 			<use x="2%" y="29.5%" width="10%" height="7.5%">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#arrow-down-bg-shape' )" />
 			</use>
-			<rect stroke="#006a64" stroke-width="12" rx="20" ry="20" fill-opacity="0" x="-0.5%" y="0.2%" width="27%" height="29.2%"/>
+<rect stroke="#006a64" stroke-width="12" rx="20" ry="20" fill-opacity="0" x="-0.5%" y="0.2%" width="27%" height="29.2%" />
+
 		</g>
 
 		<foreignObject x="37.5%" y="4%" width="25%" height="50%">
@@ -144,11 +160,13 @@
 				</xsl:call-template>
 				<br/>
 				<span class="bold">
-					<xsl:value-of select="'Just'"/>
+<xsl:value-of select="'Just'" />
+
 				</span>
 				<br/>
 				<span class="bold">
-					<xsl:value-of select="concat($soldListed, '!')"/>
+<xsl:value-of select="concat($soldListed, '!')" />
+
 				</span>
 			</p>
 		</foreignObject>

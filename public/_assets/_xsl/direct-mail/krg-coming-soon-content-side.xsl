@@ -7,7 +7,8 @@ Supports:   Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 
 		<defs>
@@ -21,13 +22,15 @@ Supports:   Area, Print, Listing, QRCode
 				<stop offset="100%" style="stop-color:var(--theme-body-background);stop-opacity:1.00" />
 			</linearGradient>
 		</defs>
-		<rect x="0" y="0" width="50%" height="100%" fill="var(--theme-heading-color)"/>
+<rect x="0" y="0" width="50%" height="100%" fill="var(--theme-heading-color)" />
+
 		<image x="0%" y="0%" width="50%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/krg-single-listing.jpg' )" />
 			</xsl:attribute>
 		</image>
-		<rect x="0" y="0" width="50%" height="100%" fill="url(#lgrad)"/>
+<rect x="0" y="0" width="50%" height="100%" fill="url(#lgrad)" />
+
 
 		<image x="36.5%" y="75%" width="13.5%" height="28.1%" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
@@ -148,8 +151,9 @@ Supports:   Area, Print, Listing, QRCode
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 398.62 113.47" fill="var(--theme-heading-color)">
 				<defs></defs>
 				<title>arrow 3</title>
-				<polygon class="cls-1" points="61.38 113.47 75.03 98.82 29.37 56.41 75.63 14.65 61.99 0 0 56.41 61.38 113.47"/>
-				<rect class="cls-1" x="28.81" y="46.73" width="369.82" height="20"/>
+<polygon class="cls-1" points="61.38 113.47 75.03 98.82 29.37 56.41 75.63 14.65 61.99 0 0 56.41 61.38 113.47" />
+<rect class="cls-1" x="28.81" y="46.73" width="369.82" height="20" />
+
 			</svg>
 		</g>
 

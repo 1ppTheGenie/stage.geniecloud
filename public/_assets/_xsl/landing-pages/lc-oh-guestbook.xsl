@@ -11,7 +11,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="landing-pages.xsl"/>
+<xsl:import href="landing-pages.xsl" />
+
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="head-description">
@@ -42,7 +43,8 @@
 										<div>
 											<img width="100%" height="290px" style="object-fit:cover">
 												<xsl:attribute name="src">
-													<xsl:value-of select="$primaryImage"/>
+<xsl:value-of select="$primaryImage" />
+
 												</xsl:attribute>
 											</img>
 										</div>
@@ -64,7 +66,8 @@
 
 										<h3 class="subtitle-font heading-color">
 											<strong>
-												<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 											</strong>
 										</h3>
 
@@ -114,20 +117,24 @@
 									<h4 class="background-as-color editable">
 										<p>
 											<!-- Sunday, March 13th<br/> 12 pm - 2 pm -->
-											<xsl:value-of select="//single/openHouse"/>
+<xsl:value-of select="//single/openHouse" />
+
 										</p>
 									</h4>
 								</div>
 								<div class="open-house-gust-from-details body-font">
 									<form id="form_step1" class="funnel-create-lead fl-thankyou-modal">
 										<div class="form-group">
-											<input type="text" name="fullName" class="form-control reset-form contact_name" placeholder="Full Name" required="required"/>
+<input type="text" name="fullName" class="form-control reset-form contact_name" placeholder="Full Name" required="required" />
+
 										</div>
 										<div class="form-group">
-											<input type="email" name="emailAddress" class="form-control reset-form contact_email" placeholder="Email Address" required="required"/>
+<input type="email" name="emailAddress" class="form-control reset-form contact_email" placeholder="Email Address" required="required" />
+
 										</div>
 										<div class="form-group">
-											<input type="tel" name="phoneNumber" class="form-control phone reset-form" placeholder="Phone Number" required="required"/>
+<input type="tel" name="phoneNumber" class="form-control phone reset-form" placeholder="Phone Number" required="required" />
+
 										</div>
 										<div class="form-group">
 											<h4 class="background-as-color heading-font" style="font-weight:400;">
@@ -137,26 +144,30 @@
 												<ul class="background-as-color heading-font">
 													<li>
 														<label class="custom-control-label heading-font" for="customCheck1">
-															<input type="checkbox" class="custom-control-input reset-form market-insider-report" id="customCheck1" name="meta[market-insider-report]" value="Yes"/>
-															<xsl:copy-of select="concat( 'The latest Market insider report for ', //area/name )"/>
+<input type="checkbox" class="custom-control-input reset-form market-insider-report" id="customCheck1" name="meta[market-insider-report]" value="Yes" />
+<xsl:copy-of select="concat( 'The latest Market insider report for ', //area/name )" />
+
 														</label>
 													</li>
 													<li>
 														<label class="custom-control-label heading-font" for="customCheck2">
-															<input type="checkbox" class="custom-control-input reset-form" id="customCheck2" name="meta[notification]" value="Yes"/>
+<input type="checkbox" class="custom-control-input reset-form" id="customCheck2" name="meta[notification]" value="Yes" />
+
 															<xsl:text>First notification when similar properties hit the market</xsl:text>
 														</label>
 													</li>
 													<li>
 														<label class="custom-control-label property heading-font" for="customCheck3">
-															<input type="checkbox" class="custom-control-input reset-form" onclick="showAddressInput()" id="customCheck3" name="meta[value-assesment]" value="Yes"/>
+<input type="checkbox" class="custom-control-input reset-form" onclick="showAddressInput()" id="customCheck3" name="meta[value-assesment]" value="Yes" />
+
 															<xsl:text>A TODAY VALUE assessment of my home</xsl:text>
 														</label>
 													</li>
 												</ul>
 											</div>
 											<div class="form-group property-address" style="display: none;">
-												<input type="text" name="meta[propertyAddress]" class="form-control reset-form" placeholder="Address"/>
+<input type="text" name="meta[propertyAddress]" class="form-control reset-form" placeholder="Address" />
+
 											</div>
 										</div>
 										<div class="form-group">
@@ -173,7 +184,8 @@
 											</span>
 										</div>
 									</form>
-									<xsl:call-template name="flyer-download-popup"/>
+<xsl:call-template name="flyer-download-popup" />
+
 								</div>
 							</div>
 						</div>
@@ -200,7 +212,7 @@
 				}
 				.agent-details{
 					border-bottom:none;
-				}'"/>
+}'" />
 			</style>
 
 

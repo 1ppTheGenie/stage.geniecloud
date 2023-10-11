@@ -6,7 +6,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<rect x="7%" y="30%" width="85%" height="40%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" />
 		<rect x="10%" y="35%" width="79%" height="30%" fill="var(--theme-body-color)" />

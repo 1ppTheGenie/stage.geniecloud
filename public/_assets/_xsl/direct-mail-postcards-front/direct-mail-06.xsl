@@ -9,7 +9,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<image x="20%" y="28.5%" width="37%" height="50%" preserveAspectRatio="xMidYMid slice" style="transform:skew(-13deg, 15deg)translate(-8%, -21%)">
@@ -53,7 +54,8 @@
 
 			<g style="transform: translate(8.6%, -3.2%);">
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".3500" cx=".5" cy=".5"/>
+<circle r=".3500" cx=".5" cy=".5" />
+
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
@@ -122,10 +124,12 @@
 				</xsl:call-template>
 			</text>
 			<text x="25%" y="50%" class="center" style="font-size:100%;">
-				<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 			</text>
 			<text x="25%" y="54%" class="center" style="font-size:100%;">
-				<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 			</text>
 			<text x="25%" y="58%" class="center" style="font-size:100%;text-transform: capitalize;">
 				<xsl:call-template name="editable">

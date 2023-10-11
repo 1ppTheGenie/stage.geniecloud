@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 
 		<text x="50%" y="5%" class="large upper center" fill="var(--theme-heading-color)" style="font-weight:600;letter-spacing:1px;">

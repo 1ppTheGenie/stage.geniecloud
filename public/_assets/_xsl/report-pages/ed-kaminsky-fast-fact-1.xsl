@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-scripts"></xsl:template>
 
 	<xsl:template name="svg-body">
@@ -74,7 +75,8 @@
 		</xsl:variable>
 
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 		<image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -85,7 +87,8 @@
 
 		<svg class="background-shape">
 			<clipPath id="myPolygon">
-				<polygon points="0,0 540,0 840,630 0,630" fill="#12142d"/>
+<polygon points="0,0 540,0 840,630 0,630" fill="#12142d" />
+
 			</clipPath>
 
 			<image x="0" y="0" width="100%" height="100%" clip-path="url(#myPolygon)" preserveAspectRatio="xMidYMin slice">
@@ -182,10 +185,12 @@
 				<text x="0" y="0" class="align-center futura-text" fill="#0d0f30">
 					<tspan x="10.5%" y="20%" font-size="218%" class="super-bold">
 						<!-- <xsl:value-of select="'$4,250,000'" /> -->
-						<xsl:value-of select="format-number( //statistics/@maxSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@maxSalePrice, '$###,###')" />
+
 					</tspan>
 					<tspan x="10%" y="26.5%" font-size="108%">
-						<xsl:value-of select="concat('Highest ', $singularPropertyTypeChangesName, ' sale')"/>
+<xsl:value-of select="concat('Highest ', $singularPropertyTypeChangesName, ' sale')" />
+
 					</tspan>
 				</text>
 			</g>
@@ -201,10 +206,12 @@
 				</text>
 				<text x="0" y="20%" class="align-center futura-text" fill="#0d0f30">
 					<tspan x="13%" y="20%" font-size="218%" class="super-bold">
-						<xsl:value-of select="format-number( //statistics/@medianSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@medianSalePrice, '$###,###')" />
+
 					</tspan>
 					<tspan x="13%" y="26.5%" font-size="108%">
-						<xsl:value-of select="concat('Median ', $singularPropertyTypeChangesName, ' sale')"/>
+<xsl:value-of select="concat('Median ', $singularPropertyTypeChangesName, ' sale')" />
+
 					</tspan>
 				</text>
 			</g>
@@ -215,10 +222,12 @@
 				<text x="0" y="0" class="align-center futura-text" fill="#0d0f30">
 					<tspan x="10%" y="20%" font-size="218%" class="super-bold">
 						<!-- <xsl:value-of select="'$2,520,500'" /> -->
-						<xsl:value-of select="format-number( //statistics/@averageSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@averageSalePrice, '$###,###')" />
+
 					</tspan>
 					<tspan x="10%" y="26.5%" font-size="108%">
-						<xsl:value-of select="concat('Average ', $singularPropertyTypeChangesName, ' sale')"/>
+<xsl:value-of select="concat('Average ', $singularPropertyTypeChangesName, ' sale')" />
+
 					</tspan>
 				</text>
 			</g>
@@ -234,11 +243,13 @@
 				</text>
 				<text x="0" y="20%" class="align-center futura-text" fill="#0d0f30">
 					<tspan x="13%" y="20%" font-size="218%" class="super-bold">
-						<xsl:value-of select="format-number( //statistics/@avgPricePerSqFtSold, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@avgPricePerSqFtSold, '$###,###')" />
+
 					</tspan>
 
 					<tspan x="13%" y="26.5%" font-size="108%">
-						<xsl:value-of select="'Average sale price per square foot'"/>
+<xsl:value-of select="'Average sale price per square foot'" />
+
 					</tspan>
 				</text>
 			</g>

@@ -8,7 +8,8 @@ Supports:	Area, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<xsl:call-template name="cropped-container" />
@@ -48,7 +49,7 @@ Supports:	Area, QRCode
 			}
 			table.listings td, table.listings td, table.listings th{
 				padding:0;
-			}'"/>
+}'" />
 		</style>
 		<g>
 
@@ -77,8 +78,9 @@ Supports:	Area, QRCode
 				</text>
 			</g>
 			<g style="transform: translate(2%, 16%);">
-				<rect x="0" y="0" width="96%" height="68%" fill="var(--theme-body-background)"/>
-				<rect stroke="var(--theme-body-color)" stroke-width="2" fill-opacity="0" x="1.5%" y="3%" width="93%" height="62%"/>
+<rect x="0" y="0" width="96%" height="68%" fill="var(--theme-body-background)" />
+<rect stroke="var(--theme-body-color)" stroke-width="2" fill-opacity="0" x="1.5%" y="3%" width="93%" height="62%" />
+
 				<foreignObject x="3%" y="5%" width="90%" height="60%">
 					<table class="listings" style="height: 100%; width: 100%;">
 						<thead class="Capitalize">

@@ -7,9 +7,10 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
-	<xsl:import href="map-listings-active.xsl"/>
-	<xsl:import href="map-listings-table.xsl"/>
+<xsl:import href="common.xsl" />
+<xsl:import href="map-listings-active.xsl" />
+<xsl:import href="map-listings-table.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>

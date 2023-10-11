@@ -7285,6 +7285,7 @@ var getRenderJSON = async (params) => {
   if (params?.collection) {
     root.collection = await processCollection(params);
   }
+  console.log("gRoot", root);
   return root;
 };
 var processOutput = async (userId, datePeriod, renderId, renderSettings) => {
@@ -7428,15 +7429,15 @@ var processAgents = async (agentIds) => {
         const image = marketingSettings.images.find(
           (img) => img.marketingImageTypeId == id
         );
-        return image ? image.url : null;
+        return image ? image.url : "";
       };
       const getDisclaimer = (id) => {
         const disclaimer = marketingSettings.disclaimers.find(
           (d) => d.marketingDisclaimerTypeId == id
         );
         return disclaimer ?? {
-          text: null,
-          url: null
+          text: "",
+          url: ""
         };
       };
       let timezone;
@@ -9059,6 +9060,7 @@ var api = async (event) => {
             case "/process":
               if (params) {
                 const r = await processAsset(params);
+                console.log("xml5", r);
                 if (r) {
                   let { sourceKey, ...reducedParams } = params;
                   await toS3(
@@ -9196,7 +9198,10 @@ var processAsset = async (params) => {
         { renderRoot },
         {
           attributeFilter: (key, val) => val === null,
-          attributeExplicitTrue: true
+          attributeExplicitTrue: true,
+          contentMap: (content) => {
+            return content === null ? "" : content;
+          }
         }
       ),
       transformXsl: (await fromS3(`_assets/_xsl/${params.asset}.xsl`)).toString().replaceAll(/[\t|\n|\t]/g, "")

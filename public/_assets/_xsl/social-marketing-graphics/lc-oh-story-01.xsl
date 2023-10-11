@@ -8,12 +8,14 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
-	<xsl:import href="lc-social-media.xsl"/>
+<xsl:import href="common.xsl" />
+<xsl:import href="lc-social-media.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 
 		<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
@@ -74,7 +76,8 @@
 			<tspan x="50%" dy="4.3%" style="font-weight:700;">OPEN HOUSE</tspan>
 		</text>
 
-		<rect stroke="#fff" stroke-width="0" x="38%" y="28.8%" width="24%" height="0.2%"/>
+<rect stroke="#fff" stroke-width="0" x="38%" y="28.8%" width="24%" height="0.2%" />
+
 
 		<!-- <text class="capitalize center" x="50%" y="36.3%" font-family="var(theme-subtitle-font)" fill="var(theme-heading-color)" font-weight="700" font-size="400%" style="word-spacing:-7px">			
 			<xsl:call-template name="editable">

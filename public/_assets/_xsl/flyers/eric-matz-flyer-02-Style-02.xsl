@@ -9,11 +9,13 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
-			<xsl:value-of select="'foreignObject p {margin: 8px 0;}'"/>
+<xsl:value-of select="'foreignObject p {margin: 8px 0;}'" />
+
 		</style>
 
 		<g>
@@ -46,7 +48,8 @@
 				<xsl:value-of select="//agent[1]/marketingLicense" />
 			</text>
 
-			<rect x="0" y="25%" width="100%" height="8%" fill="var(--theme-emphasis-color)"/>
+<rect x="0" y="25%" width="100%" height="8%" fill="var(--theme-emphasis-color)" />
+
 			<text x="50%" y="26%" class="center upper" fill="var(--theme-body-background)">
 				<tspan>we consistently receive multiple offers, meaning</tspan>
 				<tspan x="50%" dy="3%" style="font-weight:600;font-size:120%;">we have qualified buyers in your area!</tspan>
@@ -128,7 +131,8 @@
 			</foreignObject>
 
 			<g style="transform: translate(52%, 3%);">
-				<rect x="0" width="42%" height="30%" fill="var(--theme-emphasis-color)"/>
+<rect x="0" width="42%" height="30%" fill="var(--theme-emphasis-color)" />
+
 				<svg width="90%" x="2.5%" y="1%">
 					<image x="0" y="1%" width="7%" height="7%" preserveAspectRatio="xMidYMid meet">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/flyer-price-icon.png' )" />

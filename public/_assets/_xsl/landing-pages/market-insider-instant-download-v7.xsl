@@ -12,8 +12,9 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="landing-pages.xsl"/>
-	<xsl:import href="landing-pages-market-insider.xsl"/>
+<xsl:import href="landing-pages.xsl" />
+<xsl:import href="landing-pages-market-insider.xsl" />
+
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="description">
@@ -82,7 +83,8 @@
 								</div>
 								<h1 class="agent-info-title heading-font background-as-color">
 									<xsl:value-of select="concat( //area/name, ' Market&#160;Report Instant&#160;Download ' )" />
-									<xsl:copy-of select="concat( 'courtesy of ', //agent[1]/marketingName )"/>
+<xsl:copy-of select="concat( 'courtesy of ', //agent[1]/marketingName )" />
+
 								</h1>
 							</div>
 							<div class="col-md-5 col-sm-6 col-xs-12 full-width">

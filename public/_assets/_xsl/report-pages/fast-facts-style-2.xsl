@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'
@@ -17,7 +18,7 @@
 			}
 			text.center.central {
 			    transform: translateY(-4px);
-			}'"/>
+}'" />
 		</style>
 		<g>
 			<text x="50%" y="5%" class="sub-heading center upper" font-size="180%" style="letter-spacing:2.5px;" data-max-width="90%">
@@ -39,9 +40,11 @@
 					<xsl:with-param name="icon" select="'home-plus'" />
 					<xsl:with-param name="icon-fill" select="'#40719b'" />
 					<xsl:with-param name="broder-stroke-color" select="'#414c56'" />
-					<xsl:with-param name="caption" select="'New'"/>
+<xsl:with-param name="caption" select="'New'" />
+
 					<xsl:with-param name="count" select="$listingsTotalNew" />
-					<xsl:with-param name="description" select="'0-30 DAYS'"/>
+<xsl:with-param name="description" select="'0-30 DAYS'" />
+
 				</xsl:call-template>
 
 				<xsl:call-template name="property-count">
@@ -51,7 +54,8 @@
 
 					<xsl:with-param name="icon" select="'home-speaker-icon'" />
 					<xsl:with-param name="caption" select="'Active'" />
-					<xsl:with-param name="count" select="$listingsTotalActive"/>
+<xsl:with-param name="count" select="$listingsTotalActive" />
+
 					<xsl:with-param name="description" select="'TOTAL'" />
 				</xsl:call-template>
 
@@ -61,7 +65,8 @@
 					<xsl:with-param name="icon-fill" select="'#fad542'" />
 					<xsl:with-param name="broder-stroke-color" select="'#d5952a'" />
 					<xsl:with-param name="caption" select="'Pending'" />
-					<xsl:with-param name="count" select="$listingsTotalPending"/>
+<xsl:with-param name="count" select="$listingsTotalPending" />
+
 					<xsl:with-param name="description">
 						<xsl:call-template name="view-period" />
 					</xsl:with-param>
@@ -73,7 +78,8 @@
 					<xsl:with-param name="icon-fill" select="'#ed8571'" />
 					<xsl:with-param name="broder-stroke-color" select="'#bd3927'" />
 					<xsl:with-param name="caption" select="'Sold'" />
-					<xsl:with-param name="count" select="$listingsTotalSold"/>
+<xsl:with-param name="count" select="$listingsTotalSold" />
+
 					<xsl:with-param name="description">
 						<xsl:call-template name="view-period" />
 					</xsl:with-param>
@@ -106,17 +112,20 @@
 						<tspan x="10%" y="10%" class="upper " style="font-size:120%;">Average List Price</tspan>
 						<tspan x="10%" y="14.5%" class="upper " style="font-size:120%;">Per Square Foot</tspan>
 						<tspan x="10%" y="19%" class="heading" style="font-size:240%;">
-							<xsl:value-of select="format-number(//statistics/@avgPricePerSqFtList, '$###,###')"/>
+<xsl:value-of select="format-number(//statistics/@avgPricePerSqFtList, '$###,###')" />
+
 						</tspan>
 						<tspan x="10%" y="27%" style="font-size:100%;">
 							<xsl:variable name="prevValue" select="number(//statistics/previous/@avgPricePerSqFtList)" />
 							<xsl:variable name="direction">
 								<xsl:choose>
 									<xsl:when test="$prevValue > number(//statistics/@avgPricePerSqFtList)">
-										<xsl:value-of select="'Down'"/>
+<xsl:value-of select="'Down'" />
+
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:value-of select="'Up'"/>
+<xsl:value-of select="'Up'" />
+
 									</xsl:otherwise>
 								</xsl:choose>
 							</xsl:variable>
@@ -135,17 +144,20 @@
 						<tspan x="10%" y="10%" class="upper " style="font-size:120%;">Average Sold Price</tspan>
 						<tspan x="10%" y="14.5%" class="upper " style="font-size:120%;">Per Square Foot</tspan>
 						<tspan x="10%" y="19%" class="heading" style="font-size:240%;">
-							<xsl:value-of select="format-number(//statistics/@avgPricePerSqFtSold,  '$###,###')"/>
+<xsl:value-of select="format-number(//statistics/@avgPricePerSqFtSold,  '$###,###')" />
+
 						</tspan>
 						<tspan x="10%" y="27%" style="font-size:100%;">
 							<xsl:variable name="prevValue" select="number(//statistics/previous/@avgPricePerSqFtSold)" />
 							<xsl:variable name="direction">
 								<xsl:choose>
 									<xsl:when test="$prevValue > number(//statistics/@avgPricePerSqFtSold)">
-										<xsl:value-of select="'Down'"/>
+<xsl:value-of select="'Down'" />
+
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:value-of select="'Up'"/>
+<xsl:value-of select="'Up'" />
+
 									</xsl:otherwise>
 								</xsl:choose>
 							</xsl:variable>
@@ -166,7 +178,8 @@
 						<tspan x="10%" y="10%" class="upper " style="font-size:120%;">Average Sale Price</tspan>
 						<tspan x="10%" y="14.5%" class="upper " style="font-size:120%;">To List Price</tspan>
 						<tspan x="10%" y="19%" class="heading" style="font-size:240%;">
-							<xsl:value-of select="format-number( //statistics/@averageSalePrice div //statistics/@averageListPriceForSold, '#.0%')"/>
+<xsl:value-of select="format-number( //statistics/@averageSalePrice div //statistics/@averageListPriceForSold, '#.0%')" />
+
 						</tspan>
 					</text>
 				</g>

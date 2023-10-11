@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 		<xsl:variable name="mapListingNodes" select="//listings/listing[@state='sold']" />
@@ -46,7 +47,8 @@
 
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')" />
+
 		</link>
 
 		<style>
@@ -62,7 +64,7 @@
 				}
 				g.agent-detail {
 					transform: translateY(-2%);
-				}'"/>
+}'" />
 		</style>
 
 		<g style="transform:translate(35%, 21%)">
@@ -75,7 +77,8 @@
 		<g>
 			<text x="4%" y="26%" class="bold middle" fill="#fff" style="letter-spacing: 1px;font-size:280%;font-family:var(--theme-heading-font)">
 				<tspan>
-					<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')"/>
+<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
+
 				</tspan>
 				<tspan>
 					<xsl:call-template name="editable">
@@ -108,7 +111,8 @@
 							<xsl:text>last 30 days.</xsl:text>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="concat( 'last ', //areas/area[1]/statistics/@lookbackMonths, ' months.')"/>
+<xsl:value-of select="concat( 'last ', //areas/area[1]/statistics/@lookbackMonths, ' months.')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 				</tspan>
@@ -187,8 +191,9 @@
 			<svg width="41%" class="scan-svg-icon" height="22%" x="0.8%" y="47%" version="3.0" viewBox="0 0 2000 452" style="enable-background:new 0 0 2000 452;" xml:space="preserve">
 				<g>
 					<path fill="#eeac27" d="M1757.79,75.26c-58.07,0-105.31,47.24-105.31,105.31v117.14c0,42.23-34.36,76.59-76.59,76.59H136.91v11.53
-							h1438.98c48.59,0,88.12-39.53,88.12-88.12V180.57c0-51.71,42.07-93.78,93.78-93.78h114.2V75.26H1757.79z"/>
-					<polygon fill="#eeac27" points="1841.9,44.98 1834.31,53.66 1865.73,81.13 1835.02,109.35 1842.82,117.84 1883,80.92 	"/>
+h1438.98c48.59,0,88.12-39.53,88.12-88.12V180.57c0-51.71,42.07-93.78,93.78-93.78h114.2V75.26H1757.79z" />
+<polygon fill="#eeac27" points="1841.9,44.98 1834.31,53.66 1865.73,81.13 1835.02,109.35 1842.82,117.84 1883,80.92 	" />
+
 				</g>
 			</svg>
 		</g>

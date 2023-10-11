@@ -7,7 +7,8 @@
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<g style="transform:translateY(12%)">
@@ -26,7 +27,8 @@
 				<tspan>Price Per Square Foot</tspan>
 			</text>
 			<text x="50%" y="43%" class="center" style="font-size: 550%;">
-				<tspan>$					<xsl:value-of select="//single/squareFeet"/>
+<tspan>$	<xsl:value-of select="//single/squareFeet" />
+
 				</tspan>
 			</text>
 			<text x="50%" y="61%" class="center bold medium sub-heading">

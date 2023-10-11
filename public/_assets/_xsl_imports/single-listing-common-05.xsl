@@ -27,7 +27,7 @@
 			}
 			g#listing-room-details {
 			    transform: translate(5%, 59.5%);
-			}'"/>
+}'" />
 		</style>
 
 		<image x="40%" y="2%" width="58%" height="94%" preserveAspectRatio="xMidYMid slice">
@@ -65,11 +65,13 @@
 			</xsl:otherwise>
 		</xsl:choose>
 
-		<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" width="98%" height="96%" x="1%" y="1%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" width="98%" height="96%" x="1%" y="1%" />
+
 		<g style="transform: translate(65%,76%);">
 			<svg width="33%" height="17.5%">
-				<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%"/>
-				<use href="#phone-icon" x="18.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-15.4%, -144.5%);"/>
+<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%" />
+<use href="#phone-icon" x="18.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-15.4%, -144.5%);" />
+
 				<use x="28%" y="50%" fill="var(--theme-sub-heading-color)" width="10%" height="10%">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#globe-icon' )" />
 				</use>
@@ -77,7 +79,8 @@
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#email-icon' )" />
 				</use>
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".3500" cx=".5" cy=".35"/>
+<circle r=".3500" cx=".5" cy=".35" />
+
 				</clipPath>
 				<xsl:if test="//agent[1]/photo">
 					<image x="-2%" y="0.2%" width="35%" height="120%" clip-path="url(#clipCircle)">
@@ -156,11 +159,13 @@
 			</text>
 
 			<text x="1%" y="16%" class="medium bold" fill="var(--theme-sub-heading-color)">
-				<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 			</text>
 
 			<text x="1%" y="21%" class="medium" fill="var(--theme-sub-heading-color)">
-				<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 			</text>
 
 			<text x="1%" y="27%" class="medium upper bold" fill="var(--theme-sub-heading-color)">
@@ -169,7 +174,8 @@
 			<text x="1%" y="32%" fill="var(--theme-sub-heading-color)">
 				<tspan>Type:  </tspan>
 				<tspan>
-					<xsl:value-of select="//single/type"/>
+<xsl:value-of select="//single/type" />
+
 				</tspan>
 			</text>
 

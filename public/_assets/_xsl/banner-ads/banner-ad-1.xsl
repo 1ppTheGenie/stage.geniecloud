@@ -7,10 +7,12 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<g>
-			<rect stroke="var(--theme-emphasis-color)" stroke-width="6" fill-opacity="0" x="2.5%" y="4%" width="95%" height="90%"/>
+<rect stroke="var(--theme-emphasis-color)" stroke-width="6" fill-opacity="0" x="2.5%" y="4%" width="95%" height="90%" />
+
 
 			<g class="align-center" style="transform: translate(10.2%,27%);">
 				<text x="16%" y="6%" width="25%" height="20%" class="heading upper" style="font-size:250%; font-weight:600;">

@@ -7,11 +7,13 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
-			<xsl:value-of select="'text{ dominant-baseline:middle; }'"/>
+<xsl:value-of select="'text{ dominant-baseline:middle; }'" />
+
 		</style>
 
 		<!-- <text x="50%" y="9%" class="sub-heading center upper" font-size="180%" style="letter-spacing:2px;" data-max-width="80%">
@@ -70,7 +72,8 @@
 				<text x="0%" y="12%" class="align-center">
 					<tspan x="19%" dy="6%" font-size="130%">Active</tspan>
 					<tspan x="19%" dy="3%" class="super-bold" fill="var(--theme-sub-heading-color)" font-size="110%">
-						<xsl:value-of select="count(//listings/listing[@state='active'])"/>
+<xsl:value-of select="count(//listings/listing[@state='active'])" />
+
 					</tspan>
 				</text>
 			</g>
@@ -85,7 +88,8 @@
 				<text x="0%" y="12%" class="align-center">
 					<tspan x="9%" dy="6%" font-size="130%">Pending</tspan>
 					<tspan x="9%" dy="3%" class="super-bold" fill="var(--theme-sub-heading-color)" font-size="110%">
-						<xsl:value-of select="count(//listings/listing[@state='pending'])"/>
+<xsl:value-of select="count(//listings/listing[@state='pending'])" />
+
 					</tspan>
 				</text>
 			</g>
@@ -98,10 +102,12 @@
 				</image>
 				<text class="align-center" x="0%" y="12%">
 					<tspan x="23%" dy="6%" font-size="130%">
-						<xsl:value-of select="concat('Sold in ',//output/@areaPeriod, ' MOs ' )"/>
+<xsl:value-of select="concat('Sold in ',//output/@areaPeriod, ' MOs ' )" />
+
 					</tspan>
 					<tspan x="23%" dy="3%" class="super-bold" fill="var(--theme-sub-heading-color)" font-size="110%">
-						<xsl:value-of select="count(//listings/listing[@state='sold'])"/>
+<xsl:value-of select="count(//listings/listing[@state='sold'])" />
+
 					</tspan>
 				</text>
 			</g>
@@ -117,7 +123,8 @@
 						<xsl:value-of select="concat( 'Total Individual ', $propertyType, ' in Area' )" />
 					</tspan>
 					<tspan x="10%" y="18%" fill="var(--theme-sub-heading-color)" class="bold" font-size="110%">
-						<xsl:value-of select="format-number(//statistics/@taxrollCount, '###,###')"/>
+<xsl:value-of select="format-number(//statistics/@taxrollCount, '###,###')" />
+
 					</tspan>
 				</text>
 			</g>
@@ -129,7 +136,8 @@
 				<text x="0" y="20%" class="align-center">
 					<tspan x="10%" y="15%" font-size="130%">12 Month Turn Over Rate</tspan>
 					<tspan x="10%" y="18%" fill="var(--theme-sub-heading-color)" class="bold" font-size="110%">
-						<xsl:value-of select="format-number(//statistics/@turnOver, '#.0%')"/>
+<xsl:value-of select="format-number(//statistics/@turnOver, '#.0%')" />
+
 					</tspan>
 				</text>
 			</g>
@@ -141,7 +149,8 @@
 				<text x="0" y="20%" class="align-center">
 					<tspan x="10%" y="15%" font-size="130%">Average Days on Market</tspan>
 					<tspan x="10%" y="18%" fill="var(--theme-sub-heading-color)" class="bold" font-size="110%">
-						<xsl:value-of select="//statistics/@averageDaysOnMarket"/>
+<xsl:value-of select="//statistics/@averageDaysOnMarket" />
+
 					</tspan>
 				</text>
 			</g>
@@ -155,7 +164,8 @@
 						<xsl:value-of select="$singularPropertyType" />
 					</tspan>
 					<tspan x="10%" y="18%" fill="var(--theme-sub-heading-color)" class="bold" font-size="110%">
-						<xsl:value-of select="//statistics/@averageYearsInHome"/>
+<xsl:value-of select="//statistics/@averageYearsInHome" />
+
 					</tspan>
 				</text>
 			</g>

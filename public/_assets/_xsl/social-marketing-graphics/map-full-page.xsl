@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 
@@ -38,7 +39,8 @@
 
 		<xsl:if test="//output/@mapKey='true' or //output/@listingStatus='all'">
 			<svg x="0%" y="10%" height="25%" width="25%">
-				<xsl:call-template name="map-key"/>
+<xsl:call-template name="map-key" />
+
 			</svg>
 		</xsl:if>
 

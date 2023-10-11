@@ -494,62 +494,72 @@ const _LandingPages = (() => {
     });
   };
   window.gg.spinner = (fill, style = "") => {
-    let petals = "";
-    for (let i = 0; i < 12; i++) {
-      petals += `<g transform="rotate(${i * 30} 50 50)"><rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="white"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="${-0.9166 - i * -0.08333}s" repeatCount="indefinite"></animate></rect></g>`;
-    }
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="${style}"><circle cx="50" cy="50" r="47" fill="${fill}"/>${petals}</svg>`;
-  };
-  window.gg.getCssVar = (name, el) => getComputedStyle(el ?? document.body).getPropertyValue(name);
-  window.gg.hex2rgba = (hex, alpha = 1) => {
-    const re = hex.length === 6 || hex.length === 8 ? /\w\w/g : /\w/g;
-    const [r, g, b] = hex.match(re).map(x => parseInt(x, 16));
-    return `rgba(${r},${g},${b},${alpha})`;
-  };
-  window.gg.circleURI = (color, caption = "", size = 12) => {
-    const text = caption === "" ? "" : `<text x="12" y="16" fill="#fff" text-anchor="middle" style="font-family:sans-serif;font-weight:800;font-size:12px">${caption}</text>`;
-    const svg = `
-	<svg xmlns="http://www.w3.org/2000/svg" width="${size * 2 + 4}" height="${size * 2 + 4}">
+		let petals = "";
+		for (let i = 0; i < 12; i++) {
+			petals += `<g transform="rotate(${
+				i * 30
+			} 50 50)"><rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="white"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="${
+				-0.9166 - i * -0.08333
+			}s" repeatCount="indefinite"></animate></rect></g>`;
+		}
+		return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="${style}"><circle cx="50" cy="50" r="47" fill="${fill}" />${petals}</svg>`;
+	};
+	window.gg.getCssVar = (name, el) =>
+		getComputedStyle(el ?? document.body).getPropertyValue(name);
+	window.gg.hex2rgba = (hex, alpha = 1) => {
+		const re = hex.length === 6 || hex.length === 8 ? /\w\w/g : /\w/g;
+		const [r, g, b] = hex.match(re).map(x => parseInt(x, 16));
+		return `rgba(${r},${g},${b},${alpha})`;
+	};
+	window.gg.circleURI = (color, caption = "", size = 12) => {
+		const text =
+			caption === ""
+				? ""
+				: `<text x="12" y="16" fill="#fff" text-anchor="middle" style="font-family:sans-serif;font-weight:800;font-size:12px">${caption}</text>`;
+		const svg = `
+	<svg xmlns="http://www.w3.org/2000/svg" width="${size * 2 + 4}" height="${
+			size * 2 + 4
+		}">
 		<defs>
 			<filter id="shadow" x="0" y="0" width="${size}" height="${size}">
-				<feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 
-				<feOffset dx="2" dy="2" result="offsetblur"/>
+				<feGaussianBlur in="SourceAlpha" stdDeviation="3" /> 
+				<feOffset dx="2" dy="2" result="offsetblur" />
 				<feComponentTransfer>
-					<feFuncA type="linear" slope="0.5"/>
+					<feFuncA type="linear" slope="0.5" />
 				</feComponentTransfer>
 				<feMerge> 
 					<feMergeNode/> 
-					<feMergeNode in="SourceGraphic"/> 
+					<feMergeNode in="SourceGraphic" /> 
 				</feMerge>
 			</filter>
 		</defs>
 		<circle fill="${color}" cx="${size}" cy="${size}" r="${size}" filter="url(#shadow)" />
 		${text}
 	</svg>`;
-    return "data:image/svg+xml," + encodeURIComponent(svg);
-  };
-  window.gg.flagURI = (color, price) => {
-    const svg = `
+		return "data:image/svg+xml," + encodeURIComponent(svg);
+	};
+	window.gg.flagURI = (color, price) => {
+		const svg = `
 	<svg xmlns="http://www.w3.org/2000/svg" width="11" height="7.5" viewBox="0 0 110 75">
 		<defs>
 			<filter id="f1" x="0" y="0" width="12" height="12">
-			<feGaussianBlur in="SourceAlpha" stdDeviation="5"/> 
-			<feOffset dx="2" dy="2" result="offsetblur"/>
+			<feGaussianBlur in="SourceAlpha" stdDeviation="5" /> 
+			<feOffset dx="2" dy="2" result="offsetblur" />
 			<feComponentTransfer>
-			<feFuncA type="linear" slope="0.5"/>
+			<feFuncA type="linear" slope="0.5" />
 			</feComponentTransfer>
 			<feMerge> 
 			<feMergeNode/> 
-			<feMergeNode in="SourceGraphic"/> 
+			<feMergeNode in="SourceGraphic" /> 
 			</feMerge>
 			</filter>
 		</defs>
-		<path fill="${color}" stroke="#fff" stroke-width="3" filter="url(#f1)" d="M105.333,0.5H5.5c-2.75,0-5,2.25-5,5v38.333c0,2.75,2.25,5,5,5h38.733l10.101,20.834l12.152-20.834h38.848c2.75,0,5-2.25,5-5V5.5C110.333,2.75,108.083,0.5,105.333,0.5z"/>
+		<path fill="${color}" stroke="#fff" stroke-width="3" filter="url(#f1)" d="M105.333,0.5H5.5c-2.75,0-5,2.25-5,5v38.333c0,2.75,2.25,5,5,5h38.733l10.101,20.834l12.152-20.834h38.848c2.75,0,5-2.25,5-5V5.5C110.333,2.75,108.083,0.5,105.333,0.5z" />
 
 		<text x="55" y="35" style="font-size:28px;font-weight:bold;font-family:sans-serif" text-anchor="middle" fill="#FFFFFF">${price}</text>
 	</svg>`;
-    return "data:image/svg+xml," + encodeURIComponent(svg);
-  };
+		return "data:image/svg+xml," + encodeURIComponent(svg);
+	};
   window.gg.redirectToParentAsset = (additionalParams = {}) => {
     const url = `${window.location.origin}${window.location.pathname.replace("/index.html", "").split("/").slice(0, -1).join("/")}/index.html`;
     const urlParams = new URLSearchParams(window.location.search);

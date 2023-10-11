@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'
@@ -74,11 +75,13 @@
 					<xsl:choose>
 						<xsl:when test="//single/soldDate!=''">
 							<tspan class="">Sold For </tspan>
-							<xsl:value-of select="format-number( //single/salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+
 						</xsl:when>
 						<xsl:otherwise>
 							<tspan class="">Asking </tspan>
-							<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 				</tspan>

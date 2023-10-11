@@ -9,7 +9,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
@@ -44,7 +45,8 @@
 
 		<rect x="6.7%" y="81.3%" width="41.8%" height="14.8%" fill="var(--theme-sub-heading-color)" />
 		<text x="27.5%" y="84%" class="center" fill="var(--theme-body-background)" style="font-size:100%;">
-			<xsl:call-template name="listing-address"/>
+<xsl:call-template name="listing-address" />
+
 		</text>
 		<text x="27.5%" y="86.3%" class="center upper bold" fill="var(--theme-body-background)" style="font-size:250%;" data-max-width="40%">
 			<xsl:call-template name="editable">
@@ -63,7 +65,8 @@
 
 			<g style="transform: translate(8.6%, -2%);">
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".4700" cx="0.45" cy="0.3"/>
+<circle r=".4700" cx="0.45" cy="0.3" />
+
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">

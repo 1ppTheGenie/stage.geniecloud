@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<g>
 			<image x="2%" y="2%" width="70%" height="35%" preserveAspectRatio="xMidYMid slice">
@@ -20,7 +21,8 @@
 				<rect width="70%" height="35%" fill="var(--theme-body-background)" fill-opacity="1" />
 				<text x="35%" y="2%" class="heading center" style="font-size: 170%;">
 					<tspan>
-						<xsl:value-of select="$singularPropertyType"/>
+<xsl:value-of select="$singularPropertyType" />
+
 					</tspan>
 				</text>
 				<text x="35%" y="8.5%" class="upper heading center" style="font-size: 270%">

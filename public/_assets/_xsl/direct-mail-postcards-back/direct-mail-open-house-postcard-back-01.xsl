@@ -8,10 +8,12 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
-		<rect x="25%" width="75%" height="100%" fill="var(--theme-sub-heading-color)"/>
+<rect x="25%" width="75%" height="100%" fill="var(--theme-sub-heading-color)" />
+
 
 		<image x="2%" y="2%" width="50%" height="96%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">

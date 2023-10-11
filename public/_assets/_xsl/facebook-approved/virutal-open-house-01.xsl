@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<image preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
 			<xsl:call-template name="switch-image">
@@ -17,7 +18,8 @@
 		</image>
 
 		<g style="transform:translate(0%,23%);fill:var(--theme-body-background);">
-			<rect width="30%" height="65%" fill="var(--theme-body-background)" fill-opacity="80%"/>
+<rect width="30%" height="65%" fill="var(--theme-body-background)" fill-opacity="80%" />
+
 
 			<g style="transform:translate(2.5%,2%);">
 				<text x="0" y="2%" class="sub-heading medium bold" data-max-width="20%">
@@ -35,7 +37,8 @@
 						<xsl:with-param name="default" select="concat( //single/address/city, '&#160; ', //single/address/zip )" />
 					</xsl:call-template>
 				</text>
-				<rect x="0" y="15%" width="25%" height="39%" fill="#0000" stroke-width="4" stroke="var(--theme-emphasis-color)"/>
+<rect x="0" y="15%" width="25%" height="39%" fill="#0000" stroke-width="4" stroke="var(--theme-emphasis-color)" />
+
 				<text x="2%" y="21%" class="sub-heading super-large upper bold" data-max-width="20%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'voh-title'" />

@@ -7,9 +7,11 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
-		<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-heading-color)"/>
+<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-heading-color)" />
+
 		<rect width="100%" height="17%" fill="var(--printers-marks)" fill-opacity="0.7" />
 		<g transform="translate(0 0)">
 
@@ -79,7 +81,8 @@
 				<xsl:value-of select="//agent[1]/photo" />
 			</xsl:attribute>
 		</image>
-		<rect xmlns="" x="85%" y="21%" width="15%" height="7%" fill="red"/>
+<rect xmlns="" x="85%" y="21%" width="15%" height="7%" fill="red" />
+
 
 		<text x="92.5%" y="22%" style="font-size:300%; font-family:var(--theme-body-font);" fill="var(--theme-heading-color)" class="upper bold" data-max-width="65%">
 			<tspan class='center upper'>
@@ -90,7 +93,8 @@
 			</tspan>
 		</text>
 
-		<rect xmlns="" x="0%" y="92%" width="100%" height="8%" fill="var(--printers-marks)"/>
+<rect xmlns="" x="0%" y="92%" width="100%" height="8%" fill="var(--printers-marks)" />
+
 		<text x="50%" y="93%" style="font-size:300%; font-family:var(--theme-body-font);" fill="var(--theme-heading-color)" class="upper bold" data-max-width="65%">
 			<tspan class='center upper'>
 				<xsl:call-template name="editable">

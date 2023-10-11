@@ -3,7 +3,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 
 	<xsl:template name="flyer-footer">
-		<rect x="0" y="87%" width="100%" height="9.9%" fill="var(--theme-heading-color)"/>
+<rect x="0" y="87%" width="100%" height="9.9%" fill="var(--theme-heading-color)" />
+
 
 		<g style="transform:translate(0%,87.9%)">
 			<text x="2%" y="0.6%" class="theme-body schedule" font-family="var(--theme-heading-font)" font-size="140%" font-weight="300">

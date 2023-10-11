@@ -10,7 +10,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="landing-pages.xsl"/>
+<xsl:import href="landing-pages.xsl" />
+
 
 	<xsl:template name="landing-page">
 		<xsl:call-template name="standard-header">
@@ -27,7 +28,8 @@
 
 			<xsl:with-param name="defaultUtmSource" select="'Property Compare'" />
 			<xsl:with-param name="defaultUtmCampaign" select="concat( $listingAddressLine1, ', ', $listingAddressLine2 )" />
-			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', //single/address/street, ' Property Comparison Site!')"/>
+<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', //single/address/street, ' Property Comparison Site!')" />
+
 		</xsl:call-template>
 
 		<body style="scroll-behavior: smooth;">
@@ -43,10 +45,12 @@
 
 			<section class="banner-section market-report-instant-banner" style="position:relative; display:block; background-color: var(--theme-body-background);">
 				<xsl:attribute name="style">
-					<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )"/>
+<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
+
 				</xsl:attribute>
 
-				<div class="banner-section" id="compare-header-map" style="z-index: 0;"/>
+<div class="banner-section" id="compare-header-map" style="z-index: 0;" />
+
 
 				<div class="container banner-content-box-temp-11">
 					<div class="row">
@@ -150,7 +154,8 @@
 
 			<xsl:call-template name="agent-about" />
 
-			<xsl:call-template name="default-thank-you-popup"/>
+<xsl:call-template name="default-thank-you-popup" />
+
 
 			<div class="funnel-footer-background">
 				<xsl:call-template name="agent-details" />
@@ -202,7 +207,7 @@
 							).addTo(leadMap);
 						}
 					}
-				});'"/>
+});'" />
 		</script>
 		<script>
 			<xsl:value-of select="'
@@ -213,13 +218,13 @@
 			function closeNavFunction() {
 			var element = document.querySelector(`.navbar-collapse`);
 			element.classList.toggle(`mystyle`);
-			}'"/>
+}'" />
 		</script>
 		<style>
 			<xsl:value-of select="'
 			.mystyle{ transform: translateX(0px); }
 			.close-nav-btn{ transform: translateX(100%); }
-			'"/>
+'" />
 		</style>
 	</xsl:template>
 </xsl:stylesheet>

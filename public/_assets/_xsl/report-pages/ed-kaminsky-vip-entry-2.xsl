@@ -7,10 +7,12 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 
 		<rect x="0" y="0" width="100%" height="100%" fill="#0d0f30" style="background: #0d0f30;" />
@@ -28,7 +30,8 @@
 		<svg height="100%" width="100%">
 			<circle cx="50%" cy="21.5%" r="12%" fill="#282843" />
 		</svg>
-		<line xmlns="" x1="70%" y1="22.5%" x2="100%" y2="22.5%" stroke="#282843" stroke-width="0.3%"/>
+<line xmlns="" x1="70%" y1="22.5%" x2="100%" y2="22.5%" stroke="#282843" stroke-width="0.3%" />
+
 
 		<text x="50%" y="33%" class="futura-text center" fill="#fff" font-weight="700" font-size="480%">
 			<tspan x="50%" dy="2.8%">Are you as</tspan>
@@ -42,8 +45,9 @@
 			<tspan x="50%" dy="3%">We don’t even</tspan>
 			<tspan x="50%" dy="3%">read our own.</tspan>
 		</text>
-		<line xmlns="" x1="25%" y1="54%" x2="75%" y2="54%" stroke="red" stroke-width="0.3%"/>
-		<line xmlns="" x1="25%" y1="57.2%" x2="75%" y2="57.2%" stroke="red" stroke-width="0.3%"/>
+<line xmlns="" x1="25%" y1="54%" x2="75%" y2="54%" stroke="red" stroke-width="0.3%" />
+<line xmlns="" x1="25%" y1="57.2%" x2="75%" y2="57.2%" stroke="red" stroke-width="0.3%" />
+
 
 		<image x="36.5% " y="66%" width="26%" height="10%" preserveAspectRatio="xMidYMin slice">
 			<xsl:attribute name="href">
@@ -55,7 +59,8 @@
 			<tspan font-style="italic">Market Insider </tspan>
 		</text>
 
-		<line xmlns="" x1="9%" y1="86%" x2="91%" y2="86%" stroke="#b0934c" stroke-width="0.1%"/>
+<line xmlns="" x1="9%" y1="86%" x2="91%" y2="86%" stroke="#b0934c" stroke-width="0.1%" />
+
 
 		<text x="13%" y="86%" class="futura-text " font-weight="500" font-size="240%" style="text-anchor: inherit;text-align: right;">
 			<tspan x="14%" dy="1.5%" fill="#fff">ALL-DIGITAL <tspan fill="#a18d4c">•</tspan> THE INFO YOU NEED, UPDATED DAILY</tspan>

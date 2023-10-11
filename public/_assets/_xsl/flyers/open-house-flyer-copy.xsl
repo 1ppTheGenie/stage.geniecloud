@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<g>
@@ -18,10 +19,12 @@
 				</xsl:call-template>
 			</image>
 
-			<rect x="0" y="45%" fill="var(--theme-sub-heading-color)" width="100%" height="2%"/>
+<rect x="0" y="45%" fill="var(--theme-sub-heading-color)" width="100%" height="2%" />
+
 
 			<g style="transform:translate(0%,43%)">
-				<rect x="13%" y="-3%" fill="var(--theme-sub-heading-color)" width="75%" height="13.5%"/>
+<rect x="13%" y="-3%" fill="var(--theme-sub-heading-color)" width="75%" height="13.5%" />
+
 				<text x="50%" y="-2%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="370%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'openhouse'" />
@@ -66,7 +69,8 @@
 			</g>
 
 			<g style="transform:translate(0%,83%)">
-				<rect fill="var(--theme-body-color)" width="100%" height="5%"/>
+<rect fill="var(--theme-body-color)" width="100%" height="5%" />
+
 				<g class="icon-stat" style="transform:translate(16%, -0.4%)">
 					<use x="1%" y="1.4%" width="2%" height="3%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#tag-icon' )" />
@@ -109,7 +113,8 @@
 			</g>
 
 			<g style="transform:translate(0%,88%)">
-				<rect fill="var(--theme-sub-heading-color)" width="100%" height="12%"/>
+<rect fill="var(--theme-sub-heading-color)" width="100%" height="12%" />
+
 				<g style="transform:translatex(2%)">
 					<image x="0" y="1%" width="12%" height="8%">
 						<xsl:attribute name="href">

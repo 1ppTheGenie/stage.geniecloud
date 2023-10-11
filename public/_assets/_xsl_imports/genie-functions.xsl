@@ -6,8 +6,9 @@
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
 
 	<xsl:function name="genie:pick">
-		<xsl:param name="default"/>
-		<xsl:param name="choices"/>
+<xsl:param name="default" />
+<xsl:param name="choices" />
+
 		<xsl:param name="size" />
 
 		<xsl:variable name="choicesArray">
@@ -62,10 +63,12 @@
 		-->
 		<xsl:choose>
 			<xsl:when test="number($var) > 0">
-				<xsl:value-of select="format-number($var, '###,###')"/>
+<xsl:value-of select="format-number($var, '###,###')" />
+
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="$var"/>
+<xsl:value-of select="$var" />
+
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -127,16 +130,19 @@
 	</xsl:function>
 
 	<xsl:function name="genie:currency-format">
-		<xsl:param name="value" as="xs:double"/>
-		<xsl:param name="precision" as="xs:integer"/>
-		<xsl:variable name="suffixes" select="('', 'k', 'm')"/>
-		<xsl:variable name="base" select="math:log($value) div math:log(1000)"/>
+<xsl:param name="value" as="xs:double" />
+<xsl:param name="precision" as="xs:integer" />
+<xsl:variable name="suffixes" select="('', 'k', 'm')" />
+<xsl:variable name="base" select="math:log($value) div math:log(1000)" />
+
 		<xsl:choose>
 			<xsl:when test="string(number($base)) = 'NaN'">
-				<xsl:value-of select="$value"/>
+<xsl:value-of select="$value" />
+
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="concat('$', round(math:pow(1000, $base - floor($base)) * 100, $precision), $suffixes[floor($base)])"/>
+<xsl:value-of select="concat('$', round(math:pow(1000, $base - floor($base)) * 100, $precision), $suffixes[floor($base)])" />
+
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -154,7 +160,8 @@
 					<xsl:value-of select="xs:dateTime('1970-01-01T00:00:00Z') + xs:dayTimeDuration(concat('PT', $date, 'S'))" />
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="xs:dateTime($date)"/>
+<xsl:value-of select="xs:dateTime($date)" />
+
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>

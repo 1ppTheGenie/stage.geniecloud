@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 
@@ -41,9 +42,11 @@
 
 	<xsl:template name="map-overlay">
 		<svg style="position: absolute;top: 0;left: 0;z-index: 9999;width:100%;height:100%;">
-			<rect x="3%" y="5%" width="94%" height="90%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2"/>
+<rect x="3%" y="5%" width="94%" height="90%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2" />
 
-			<rect x="4%" y="8%" width="92%" height="84%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2"/>
+
+<rect x="4%" y="8%" width="92%" height="84%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2" />
+
 
 			<xsl:if test="//output/@customerName!=''">
 				<rect x="5%" y="13%" width="90%" height="74%" fill-opacity="75%" fill="var(--theme-body-background)" />
@@ -90,7 +93,8 @@
 					<text x="50%" y="39%" class="narrow center" font-size="125%">
 						<tspan style="fill:var(--theme-heading-color);">Prepared exclusively for</tspan>
 						<tspan x="50%" dy="6%" font-size="150%">
-							<xsl:value-of select="//output/@customerName"/>
+<xsl:value-of select="//output/@customerName" />
+
 						</tspan>
 					</text>
 				</xsl:if>

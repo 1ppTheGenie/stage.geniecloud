@@ -8,14 +8,17 @@ Supports:	Area, Multi-Listing, Print, PricePercent, QRCode
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-serif.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-serif.css')" />
+
 		</link>
 
 		<style>

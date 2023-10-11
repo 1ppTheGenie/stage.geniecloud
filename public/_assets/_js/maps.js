@@ -13,21 +13,25 @@ gg.circleURI = (color, caption = "", size = 12) => {
 			: `<text x="14" y="18" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="12px">${caption}</text>`;
 
 	const svg = `
-	<svg xmlns="http://www.w3.org/2000/svg" width="${size * 2 + 8}" height="${size * 2 + 8}">
+	<svg xmlns="http://www.w3.org/2000/svg" width="${size * 2 + 8}" height="${
+		size * 2 + 8
+	}">
 		<defs>
 			<filter id="shadow" x="-2" y="-2" width="${size + 2}" height="${size + 2}">
-				<feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 
-				<feOffset dx="1.5" dy="1.5" result="offsetblur"/>
+				<feGaussianBlur in="SourceAlpha" stdDeviation="3" /> 
+				<feOffset dx="1.5" dy="1.5" result="offsetblur" />
 				<feComponentTransfer>
-					<feFuncA type="linear" slope="0.5"/>
+					<feFuncA type="linear" slope="0.5" />
 				</feComponentTransfer>
 				<feMerge> 
 					<feMergeNode/> 
-					<feMergeNode in="SourceGraphic"/> 
+					<feMergeNode in="SourceGraphic" /> 
 				</feMerge>
 			</filter>
 		</defs>
-		<circle fill="${color}" cx="${size + 2}" cy="${size + 2}" r="${size}" filter="url(#shadow)" />
+		<circle fill="${color}" cx="${size + 2}" cy="${
+		size + 2
+	}" r="${size}" filter="url(#shadow)" />
 		${text}
 	</svg>`;
 
@@ -39,18 +43,18 @@ gg.flagURI = (color, price) => {
 	<svg xmlns="http://www.w3.org/2000/svg" width="11" height="7.5" viewBox="0 0 110 75">
 		<defs>
 			<filter id="f1" x="0" y="0" width="12" height="12">
-			<feGaussianBlur in="SourceAlpha" stdDeviation="5"/> 
-			<feOffset dx="2" dy="2" result="offsetblur"/>
+			<feGaussianBlur in="SourceAlpha" stdDeviation="5" /> 
+			<feOffset dx="2" dy="2" result="offsetblur" />
 			<feComponentTransfer>
-			<feFuncA type="linear" slope="0.5"/>
+			<feFuncA type="linear" slope="0.5" />
 			</feComponentTransfer>
 			<feMerge> 
 			<feMergeNode/> 
-			<feMergeNode in="SourceGraphic"/> 
+			<feMergeNode in="SourceGraphic" /> 
 			</feMerge>
 			</filter>
 		</defs>
-		<path fill="${color}" stroke="#fff" stroke-width="3" filter="url(#f1)" d="M105.333,0.5H5.5c-2.75,0-5,2.25-5,5v38.333c0,2.75,2.25,5,5,5h38.733l10.101,20.834l12.152-20.834h38.848c2.75,0,5-2.25,5-5V5.5C110.333,2.75,108.083,0.5,105.333,0.5z"/>
+		<path fill="${color}" stroke="#fff" stroke-width="3" filter="url(#f1)" d="M105.333,0.5H5.5c-2.75,0-5,2.25-5,5v38.333c0,2.75,2.25,5,5,5h38.733l10.101,20.834l12.152-20.834h38.848c2.75,0,5-2.25,5-5V5.5C110.333,2.75,108.083,0.5,105.333,0.5z" />
 
 		<text x="55" y="35" style="font-size:28px;font-weight:bold;font-family:sans-serif" text-anchor="middle" fill="#FFFFFF">${price}</text>
 	</svg>`;
@@ -73,7 +77,8 @@ function drawMap(
 			const mapboxTiles = L.tileLayer(
 				`https://api.mapbox.com/styles/v1/mapbox/${map_type}/tiles/{z}/{x}/{y}?access_token=${accessToken}`,
 				{
-					attribution: '&copy; <a href="https://www.mapbox.com/feedback/">Mapbox</a>',
+					attribution:
+						'&copy; <a href="https://www.mapbox.com/feedback/">Mapbox</a>',
 					tileSize: 512,
 					zoomOffset: -1,
 				}
@@ -127,7 +132,9 @@ function drawMap(
 						lat += parseFloat(listings[i].lat);
 						lng += parseFloat(listings[i].lng);
 					}
-					gg.map.panTo(new L.LatLng(lat / listings.length, lng / listings.length));
+					gg.map.panTo(
+						new L.LatLng(lat / listings.length, lng / listings.length)
+					);
 				}
 			}
 		}
@@ -155,7 +162,9 @@ function drawMap(
 						? "--new"
 						: `--${listings[i].state.toLowerCase()}`;
 
-				const color = gg.getCssVar(cssVar, document.getElementById("genie-wrapper")).trim();
+				const color = gg
+					.getCssVar(cssVar, document.getElementById("genie-wrapper"))
+					.trim();
 
 				switch (listings[i].iconType || iconType) {
 					case "flag":
@@ -209,8 +218,8 @@ gg.addListingPopup = (lat, lon, imageUrl, pinX, pinY, popupWidth = 200) => {
 			html: `<svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
 						<path d="m250,375l50,125l50,-125z" fill="var(--theme-body-background)" />
 						<image x="2.5%" y="2%" width="95%" height="74%" preserveAspectRatio="xMidYMid slice" href="${imageUrl}" />
-						<rect stroke="var(--theme-heading-color)" stroke-width="5%" rx="5%" ry="5%" fill-opacity="0" x="3.5%" y="2.5%" width="93%" height="73%"/>
-						<rect stroke="var(--theme-body-background)" stroke-width="5%" rx="5%" ry="5%" fill-opacity="0" x="2.5%" y="1.5%" width="95%" height="75%"/>
+						<rect stroke="var(--theme-heading-color)" stroke-width="5%" rx="5%" ry="5%" fill-opacity="0" x="3.5%" y="2.5%" width="93%" height="73%" />
+						<rect stroke="var(--theme-body-background)" stroke-width="5%" rx="5%" ry="5%" fill-opacity="0" x="2.5%" y="1.5%" width="95%" height="75%" />
 					</svg>`,
 			className: "",
 			iconSize: [popupWidth, popupHeight],
@@ -225,7 +234,10 @@ gg.addListingPopup = (lat, lon, imageUrl, pinX, pinY, popupWidth = 200) => {
 		const moveMapToArrow = function () {
 			const propertyPixel = gg.map.latLngToContainerPoint([lat, lon]);
 
-			gg.map.panBy([propertyPixel.x - arrowPoint.x, propertyPixel.y - arrowPoint.y]);
+			gg.map.panBy([
+				propertyPixel.x - arrowPoint.x,
+				propertyPixel.y - arrowPoint.y,
+			]);
 		};
 		map.addEventListener("zoomend", moveMapToArrow);
 		map.addEventListener("dragend", moveMapToArrow);

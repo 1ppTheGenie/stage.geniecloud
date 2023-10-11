@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
@@ -38,7 +39,8 @@
 		</image>
 
 		<text class="large bold" style="transform:translate(8%,2%)" fill="var(--theme-sub-heading-color)">
-		Just <xsl:value-of select="$soldListed"/>
+Just<xsl:value-of select="$soldListed" />
+
 		</text>
 		<text x="8%" y="8%" class="medium bold" fill="var(--theme-sub-heading-color)">
 			<tspan>in </tspan>
@@ -56,7 +58,8 @@
 
 		<g style="transform:translate(1%,75%)">
 			<svg width="33%" height="17.5%">
-				<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%"/>
+<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%" />
+
 				<use x="18.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-15.4%, -144.5%);">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#phone-icon' )" />
 				</use>
@@ -67,7 +70,8 @@
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#email-icon' )" />
 				</use>
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".3500" cx=".5" cy=".5"/>
+<circle r=".3500" cx=".5" cy=".5" />
+
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
@@ -112,7 +116,8 @@
 
 			<text x="0" y="12%" class="bold" style="font-size:110%;">
 				<tspan>
-					<xsl:call-template name="soldListedPrice"/>
+<xsl:call-template name="soldListedPrice" />
+
 				</tspan>
 			</text>
 
@@ -190,7 +195,8 @@
 			<text x="0" y="38%">
 				<tspan class="bold" fill="var(--theme-sub-heading-color)">Type:  </tspan>
 				<tspan class="narrow" fill="var(--theme-sub-heading-color)">
-					<xsl:value-of select="$singularPropertyType"/>
+<xsl:value-of select="$singularPropertyType" />
+
 				</tspan>
 			</text>
 

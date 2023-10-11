@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="social-cta">
 		<xsl:value-of select="'Override this value'" />
 	</xsl:template>
@@ -43,7 +44,8 @@
 
 			<xsl:if test="//output/@mapKey='true'">
 				<svg x="2%" y="2%" height="30%" width="27.5%">
-					<xsl:call-template name="map-key"/>
+<xsl:call-template name="map-key" />
+
 				</svg>
 			</xsl:if>
 		</foreignObject>

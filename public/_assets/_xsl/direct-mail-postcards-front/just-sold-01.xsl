@@ -8,14 +8,16 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<image preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
 			<xsl:call-template name="switch-image">
 				<xsl:with-param name="idx" select="1" />
 			</xsl:call-template>
 		</image>
-		<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="30%"/>
+<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="30%" />
+
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
@@ -30,7 +32,8 @@
 
 			<g style="transform:translate(26%,22%);position:absolute;">
 				<filter x="-0.05" y="-0.16" width="1.1" height="1.4" id="solid">
-					<feFlood flood-color="var(--theme-body-background)"/>
+<feFlood flood-color="var(--theme-body-background)" />
+
 					<feComposite in="SourceGraphic" operator="xor" />
 				</filter>
 				<text x="0" y="0%" filter="url(#solid)" class="upper" style="fill:var(--theme-body-color); font-size: 150%;">
@@ -42,7 +45,8 @@
 			</g>
 			<g style="transform:translate(25%,30%);position:absolute;">
 				<filter x="-0.05" y="-0.16" width="1.1" height="1.4" id="solid">
-					<feFlood flood-color="var(--theme-body-background)"/>
+<feFlood flood-color="var(--theme-body-background)" />
+
 					<feComposite in="SourceGraphic" operator="xor" />
 				</filter>
 				<text x="0" y="0%" filter="url(#solid)" class="upper" style="fill:var(--theme-body-color); font-size: 150%;">

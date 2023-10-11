@@ -8,11 +8,13 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<link xmlns="http://www.w3.org/1999/xhtml" rel="stylesheet" type="text/css">
 			<xsl:attribute name="href">
-				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css' )"/>
+<xsl:value-of select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css' )" />
+
 			</xsl:attribute>
 		</link>
 
@@ -142,8 +144,9 @@
 	</xsl:template>
 
 	<xsl:template name="custom-agent-details">
-		<xsl:param name="agent"/>
-		<xsl:param name="idx" select="'1'"/>
+<xsl:param name="agent" />
+<xsl:param name="idx" select="'1'" />
+
 
 		<image x="12.5% " y="82.1%" width="17.5%" height="8.8%" preserveAspectRatio="xMidYMin slice">
 			<xsl:attribute name="href">

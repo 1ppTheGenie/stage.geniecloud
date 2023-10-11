@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<!-- Exclude from render if there are no sold properties -->
 	<xsl:template name="include-in-render">
 		<xsl:choose>
@@ -22,7 +23,8 @@
 
 	<xsl:template name="svg-body">
 		<style>
-			<xsl:value-of select="'text {dominant-baseline:middle;}'"/>
+<xsl:value-of select="'text {dominant-baseline:middle;}'" />
+
 		</style>
 
 		<xsl:call-template name="listings-header">
@@ -45,7 +47,8 @@
 							</xsl:attribute>
 						</image>
 
-						<circle cx="1.5%" cy="2.5%" r="1%" fill="var(--sold-red)" fill-opacity="0.75"/>
+<circle cx="1.5%" cy="2.5%" r="1%" fill="var(--sold-red)" fill-opacity="0.75" />
+
 						<text style="font-size:70%">
 							<tspan x="1.5%" y="2.5%" class="align-center" fill="#fff">
 								<xsl:value-of select="position()" />
@@ -96,7 +99,8 @@
 
 		<xsl:call-template name="listings-footer">
 			<xsl:with-param name="min" select="number(8)" />
-			<xsl:with-param name="nodes" select="$listingsTotalSold"/>
+<xsl:with-param name="nodes" select="$listingsTotalSold" />
+
 			<xsl:with-param name="summary" select="concat( ' listings sold in the last ',$periodName,'.' )" />
 		</xsl:call-template>
 

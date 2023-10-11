@@ -11,8 +11,9 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="landing-pages.xsl"/>
-	<xsl:import href="landing-pages-market-insider.xsl"/>
+<xsl:import href="landing-pages.xsl" />
+<xsl:import href="landing-pages-market-insider.xsl" />
+
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="description">
@@ -66,7 +67,8 @@
 							</xsl:call-template>
 						</p>
 						<form id="search-address-form" class="search" method="post">
-							<input type="text" id="search-address" size="30" placeholder="Enter your address to see your comparison" required="required"/>
+<input type="text" id="search-address" size="30" placeholder="Enter your address to see your comparison" required="required" />
+
 							<input type="image" name="submit" id="search-address-button" width="70" height="70" alt="submit">
 								<xsl:attribute name="src">
 									<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/home-compare-button.svg' )" />

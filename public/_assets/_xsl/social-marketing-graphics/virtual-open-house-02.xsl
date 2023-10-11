@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'
@@ -21,7 +22,7 @@
 					background: var(--theme-body-background);
 					z-index: -1;
 					opacity: 80%;
-				}'"/>
+}'" />
 		</style>
 
 		<image x="0.5%" y="0.5%" width="49.25%" height="49.25%" preserveAspectRatio="xMidYMid slice">
@@ -76,11 +77,13 @@
 
 				<div style="font-family:var(--theme-sub-heading-font);text-transform:uppercase;display:inline-block;">
 					<div style="font-size:13px;color:var(--theme-heading-color);display:block;margin-top:5px;font-weight:700;white-space:nowrap;">
-						<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 					</div>
 
 					<span style="font-size:15px;color:var(--theme-heading-color);display:block;">
-						<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 					</span>
 				</div>
 			</div>

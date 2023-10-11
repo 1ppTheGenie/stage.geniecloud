@@ -9,7 +9,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<rect x="0" width="50%" height="75%" fill="var(--theme-sub-heading-color)" />
@@ -40,7 +41,8 @@
 		</foreignObject>
 
 		<svg x="2.5%" y="38%" width="21.5%" height="30%" viewBox="0 0 600 200">
-			<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100"/>
+<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100" />
+
 			<use x="1%" y="15%" width="25%" height="18%" fill="var(--theme-sub-heading-color)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#house-icon' )" />
 			</use>
@@ -50,7 +52,8 @@
 		</svg>
 
 		<svg x="25%" y="38%" width="21.5%" height="30%" viewBox="0 0 600 200">
-			<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100"/>
+<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100" />
+
 			<use x="1%" y="15%" width="25%" height="18%" fill="var(--theme-sub-heading-color)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#map-pin-icon' )" />
 			</use>
@@ -60,7 +63,8 @@
 		</svg>
 
 		<svg x="2.5%" y="48%" width="21.5%" height="30%" viewBox="0 0 600 200">
-			<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100"/>
+<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100" />
+
 			<use x="1%" y="15%" width="25%" height="18%" fill="var(--theme-sub-heading-color)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#dollar-icon' )" />
 			</use>
@@ -73,7 +77,8 @@
 		</svg>
 
 		<svg x="25%" y="48%" width="21.5%" height="30%" viewBox="0 0 600 200">
-			<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100"/>
+<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100" />
+
 			<use x="1%" y="15%" width="25%" height="18%" fill="var(--theme-sub-heading-color)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#tag-icon' )" />
 			</use>
@@ -83,7 +88,8 @@
 		</svg>
 
 		<svg x="2.5%" y="58%" width="21.5%" height="30%" viewBox="0 0 600 200">
-			<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100"/>
+<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100" />
+
 			<use x="1%" y="15%" width="25%" height="18%" fill="var(--theme-sub-heading-color)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#calendar-icon' )" />
 			</use>
@@ -95,13 +101,15 @@
 			</text>
 		</svg>
 		<svg x="25%" y="58%" width="21.5%" height="30%" viewBox="0 0 600 200">
-			<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100"/>
+<rect width="100%" height="50%" fill="var(--theme-body-background)" rx="45" ry="100" />
+
 			<use x="1%" y="15%" width="25%" height="18%" fill="var(--theme-sub-heading-color)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#barchart-icon' )" />
 			</use>
 			<text class="bold medium" dx="25%" dy="11%">
 				<tspan>
-					<xsl:value-of select="format-number(//statistics/@turnOver, '#.0%')"/>
+<xsl:value-of select="format-number(//statistics/@turnOver, '#.0%')" />
+
 				</tspan>
 				<tspan x="25%" y="26%">Turn Over Rate</tspan>
 			</text>
@@ -146,7 +154,8 @@
 
 			<g style="transform: translate(5%, 0);">
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".3500" cx=".5" cy=".35"/>
+<circle r=".3500" cx=".5" cy=".35" />
+
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
@@ -217,11 +226,13 @@
 			</text>
 
 			<text x="25%" y="52%" class="center" style="font-size:145%;">
-				<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 			</text>
 
 			<text x="25%" y="56.5%" class="center" style="font-size:145%;">
-				<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 			</text>
 
 			<text x="25%" y="69%" class="center" style="font-size:118%;font-weight:600;">

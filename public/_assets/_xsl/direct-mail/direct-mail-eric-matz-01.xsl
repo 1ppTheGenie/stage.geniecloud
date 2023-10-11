@@ -9,9 +9,11 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
-		<rect x="0" y="0" width="100%" height="25%" fill="var(--theme-sub-heading-color)"/>
+<rect x="0" y="0" width="100%" height="25%" fill="var(--theme-sub-heading-color)" />
+
 		<svg height="80" width="100%" y="22%" x="0">
 			<path stroke-linecap="butt" d="M0 20 l3375 0" fill="none" stroke="var(--vivid-color-5)" stroke-width="5"></path>
 		</svg>
@@ -69,23 +71,27 @@
 							<xsl:value-of select="@address" />
 						</text>
 						<text class="center upper" x="50%" y="70%" fill="var(--theme-body-color)" style="font-size:120%">
-							<xsl:value-of select="concat( @beds, ' BR &#8226; ', @baths,' BA &#8226; ', format-number( @size, '###,###' ), ' SF' )"/>
+<xsl:value-of select="concat( @beds, ' BR &#8226; ', @baths,' BA &#8226; ', format-number( @size, '###,###' ), ' SF' )" />
+
 						</text>
 						<text class="upper center bold" x="50%" y="78%" fill="var(--theme-body-color)" style="font-size:120%;">
 							<xsl:choose>
 								<xsl:when test="@state='sold'">
 									<tspan>Sold For </tspan>
-									<xsl:value-of select="format-number( @salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( @salePrice, '$###,###')" />
+
 								</xsl:when>
 								<xsl:otherwise>
 									<tspan>Asking </tspan>
-									<xsl:value-of select="format-number( @listPrice, '$###,###')"/>
+<xsl:value-of select="format-number( @listPrice, '$###,###')" />
+
 								</xsl:otherwise>
 							</xsl:choose>
 						</text>
 						<g style="transform:translate(4%,35%)">
 							<filter x="-0.1" y="-0.3" width="1.2" height="1.7" id="solid">
-								<feFlood flood-color="var(--theme-body-color)"/>
+<feFlood flood-color="var(--theme-body-color)" />
+
 								<feComposite in="SourceGraphic" operator="xor" />
 							</filter>
 							<text y="0%" filter="url(#solid)" class="upper" style="fill:var(--theme-body-background); font-size: 100%;">
@@ -105,7 +111,8 @@
 				</xsl:if>
 			</xsl:for-each>
 
-			<rect x="2.5%" y="46%" width="63%" height="13%" fill="var(--theme-sub-heading-color)"/>
+<rect x="2.5%" y="46%" width="63%" height="13%" fill="var(--theme-sub-heading-color)" />
+
 			<text x="35%" y="48%" class="center bold capitalize" fill="var(--theme-body-background)" fontWeight="600" style="font-size:150%;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'sellinganywhere'" />

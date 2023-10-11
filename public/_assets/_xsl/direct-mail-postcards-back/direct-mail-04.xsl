@@ -9,7 +9,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
@@ -17,7 +18,8 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing">
-				<xsl:sort order="ascending" select="@state"/>
+<xsl:sort order="ascending" select="@state" />
+
 				<xsl:if test="position() &lt;= 50">
 					<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
 				</xsl:if>
@@ -37,7 +39,8 @@
 
 			<svg width="100%" height="20%">
 				<g style="transform: translate(0%, 0%);">
-					<rect x="0" y="0%" width="100%" height="25%" fill="var(--theme-sub-heading-color)"/>
+<rect x="0" y="0%" width="100%" height="25%" fill="var(--theme-sub-heading-color)" />
+
 					<text x="2%" y="8%" class="upper" fill="var(--theme-body-background)" style="font-weight:600;font-size:100%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'becomeyour'" />
@@ -55,7 +58,8 @@
 			<g style="position:absolute;top:-10px;left:-15px;z-index:999;height:38%;">
 				<svg x="0" height="100%" width="900">
 					<filter x="-7%" y="-0.5" width="1.6" height="10" id="solid">
-						<feFlood flood-color="var(--theme-sub-heading-color)" flood-opacity="0.7"/>
+<feFlood flood-color="var(--theme-sub-heading-color)" flood-opacity="0.7" />
+
 						<feComposite in="SourceGraphic" operator="xor" />
 					</filter>
 
@@ -120,7 +124,8 @@
 
 	<xsl:template name="cropped-content">
 		<style>
-			<xsl:value-of select="'foreignObject p {margin:0;}'"/>
+<xsl:value-of select="'foreignObject p {margin:0;}'" />
+
 		</style>
 
 		<svg width="60%" height="100%" x="40%" y="2%"
@@ -134,7 +139,8 @@
 				</text>
 
 				<svg x="5%" y="0%" width="100%" height="22%">
-					<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
+
 					<circle cx="5%" cy="61.5%" r="30" fill="var(--theme-sub-heading-color)"></circle>
 
 					<foreignObject x="10%" y="47%" width="75%" height="30%" style="font-size:80%;">
@@ -148,7 +154,8 @@
 				</svg>
 
 				<svg x="5%" y="12%" width="100%" height="22%">
-					<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
+
 					<circle cx="5%" cy="61.5%" r="30" fill="var(--theme-sub-heading-color)"></circle>
 					<text x="4.8%" y="50%" class="center" fill="var(--theme-body-background)" style="font-size:200%;">
 								2
@@ -163,7 +170,8 @@
 					</foreignObject>
 				</svg>
 				<svg x="5%" y="24%" width="100%" height="22%">
-					<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
+
 					<circle cx="5%" cy="61.5%" r="30" fill="var(--theme-sub-heading-color)"></circle>
 					<text x="4.8%" y="50%" class="center" fill="var(--theme-body-background)" style="font-size:200%;">
 								3
@@ -179,7 +187,8 @@
 				</svg>
 
 				<svg x="5%" y="36%" width="100%" height="22%">
-					<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
+
 					<circle cx="5%" cy="61.5%" r="30" fill="var(--theme-sub-heading-color)"></circle>
 					<text x="4.8%" y="50%" class="center" fill="var(--theme-body-background)" style="font-size:200%;">
 								4
@@ -195,7 +204,8 @@
 				</svg>
 
 				<svg x="5%" y="48%" width="100%" height="22%">
-					<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
+
 					<circle cx="5%" cy="61.5%" r="30" fill="var(--theme-sub-heading-color)"></circle>
 					<text x="4.8%" y="50%" class="center" fill="var(--theme-body-background)" style="font-size:200%;">
 								5

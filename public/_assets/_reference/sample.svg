@@ -7,21 +7,26 @@
 		<style>@import url(https://genie-hub-2.s3.eu-west-2.amazonaws.com/_assets/_css/svg.css);\n\t\t\t\t\t@import url(https://genie-hub-2.s3.eu-west-2.amazonaws.com/_assets/themes/kw-light.css);</style>
 	</defs>
 	<script href="https://genie-hub-2.s3.eu-west-2.amazonaws.com/_assets/_js/genie-global.js">;</script>
-	<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)"/>
+<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)" />
+
 	<style> text.listing-address-two-line tspan.heading { font-weight: bold!important; font-size: 200%!important; } text.listing-address-two-line tspan:last-child { transform: translateY(6%); font-size: 150%!important; }  .icon-stat tspan { font-size: 75%; }  .icon-stat tspan:first-child { font-size: 125%; } g#listing-room-details {     transform: translate(5%, 59.5%); }</style>
-	<image x="40%" y="2%" width="58%" height="94%" preserveAspectRatio="xMidYMid slice" href="https://sdmls-media.cdn-connectmls.com/20230713T095801375/Property_230013480_Photo_1.JPEG"/>
-	<image x="90%" y="0" width="5.5%" height="12.5%" preserveAspectRatio="xMidYMid meet" href="https://genie-hub-2.s3.eu-west-2.amazonaws.com/_assets/_img/active-tag.png"/>
-	<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" width="98%" height="96%" x="1%" y="1%"/>
+<image x="40%" y="2%" width="58%" height="94%" preserveAspectRatio="xMidYMid slice" href="https://sdmls-media.cdn-connectmls.com/20230713T095801375/Property_230013480_Photo_1.JPEG" />
+<image x="90%" y="0" width="5.5%" height="12.5%" preserveAspectRatio="xMidYMid meet" href="https://genie-hub-2.s3.eu-west-2.amazonaws.com/_assets/_img/active-tag.png" />
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" width="98%" height="96%" x="1%" y="1%" />
+
 	<g style="transform: translate(65%,76%);">
 		<svg width="33%" height="17.5%">
-			<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%"/>
-			<use href="#phone-icon" x="18.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-15.4%, -144.5%);"/>
-			<use href="#globe-icon" x="28%" y="50%" fill="var(--theme-sub-heading-color)" width="10%" height="10%"/>
-			<use href="#email-icon" x="28%" y="65%" fill="var(--theme-sub-heading-color)" width="10%" height="10%"/>
+<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%" />
+<use href="#phone-icon" x="18.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-15.4%, -144.5%);" />
+<use href="#globe-icon" x="28%" y="50%" fill="var(--theme-sub-heading-color)" width="10%" height="10%" />
+<use href="#email-icon" x="28%" y="65%" fill="var(--theme-sub-heading-color)" width="10%" height="10%" />
+
 			<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-				<circle r=".3500" cx=".5" cy=".5"/>
+<circle r=".3500" cx=".5" cy=".5" />
+
 			</clipPath>
-			<image x="-2%" y="-10.5%" width="35%" height="120%" clip-path="url(#clipCircle)" href="https://myneighborhood.re/wp-content/uploads/2022/12/Ed-Kaminsky-Profile-Image-Transparent-cropped-Dec-2022-v2-removebg-preview.png"/>
+<image x="-2%" y="-10.5%" width="35%" height="120%" clip-path="url(#clipCircle)" href="https://myneighborhood.re/wp-content/uploads/2022/12/Ed-Kaminsky-Profile-Image-Transparent-cropped-Dec-2022-v2-removebg-preview.png" />
+
 			<text x="31.5%" y="7%" font-size="145%" fill="var(--theme-body-color)">Ed Kaminsky</text>
 			<text x="37%" y="32%" fill="var(--theme-sub-heading-color)" style="font-size:90%;">310-307-2224</text>
 			<text x="37%" y="47%" fill="var(--theme-sub-heading-color)" style="font-size:90%;">www.itzsold.com</text>
@@ -47,48 +52,54 @@
 		</foreignObject>
 		<g id="listing-room-details">
 			<svg viewBox="0 0 100 100" x="-4%">
-				<circle cx="-38" cy="5%" r="4.5" fill="var(--theme-sub-heading-color)"/>
-				<use href="#bed-icon" x="-50.2%" y="2.8%" width="25%" height="4" fill="var(--theme-body-background)"/>
+<circle cx="-38" cy="5%" r="4.5" fill="var(--theme-sub-heading-color)" />
+<use href="#bed-icon" x="-50.2%" y="2.8%" width="25%" height="4" fill="var(--theme-body-background)" />
+
 				<text x="-32%" y="3%" style="font-size: 17%;">
 					<tspan fill="var(--theme-sub-heading-color)">n/a</tspan>
 					<tspan fill="var(--theme-sub-heading-color)" dx="1%">Beds</tspan>
 				</text>
 			</svg>
 			<svg viewBox="0 0 100 100" x="-4%">
-				<circle cx="-38" cy="15%" r="4.5" fill="var(--theme-sub-heading-color)"/>
-				<use href="#bath-icon" x="-50.2%" y="12.8%" width="25%" height="4" fill="var(--theme-body-background)"/>
+<circle cx="-38" cy="15%" r="4.5" fill="var(--theme-sub-heading-color)" />
+<use href="#bath-icon" x="-50.2%" y="12.8%" width="25%" height="4" fill="var(--theme-body-background)" />
+
 				<text x="-32%" y="13%" style="font-size: 17%;">
 					<tspan fill="var(--theme-sub-heading-color)">3</tspan>
 					<tspan fill="var(--theme-sub-heading-color)" dx="1%">Baths</tspan>
 				</text>
 			</svg>
 			<svg viewBox="0 0 100 100" x="-4%">
-				<circle cx="-38" cy="25%" r="4.5" fill="var(--theme-sub-heading-color)"/>
-				<use href="#dom-icon" x="-50.4%" y="22.9%" width="25%" height="4" fill="var(--theme-body-background)"/>
+<circle cx="-38" cy="25%" r="4.5" fill="var(--theme-sub-heading-color)" />
+<use href="#dom-icon" x="-50.4%" y="22.9%" width="25%" height="4" fill="var(--theme-body-background)" />
+
 				<text x="-32%" y="24%" style="font-size: 17%;">
 					<tspan fill="var(--theme-sub-heading-color)">0</tspan>
 					<tspan fill="var(--theme-sub-heading-color)" dx="1%">DOM</tspan>
 				</text>
 			</svg>
 			<svg x="-6%" viewBox="0 0 100 100">
-				<circle cx="0" cy="5%" r="4.5" fill="var(--theme-sub-heading-color)"/>
-				<use href="#size-icon" x="-12%" y="2.5%" width="25%" height="4" fill="var(--theme-body-background)"/>
+<circle cx="0" cy="5%" r="4.5" fill="var(--theme-sub-heading-color)" />
+<use href="#size-icon" x="-12%" y="2.5%" width="25%" height="4" fill="var(--theme-body-background)" />
+
 				<text x="6%" y="3%" style="font-size: 17%;">
 					<tspan fill="var(--theme-sub-heading-color)">2,869</tspan>
 					<tspan fill="var(--theme-sub-heading-color)" dx="1%">Sq.Ft.</tspan>
 				</text>
 			</svg>
 			<svg x="-6%" viewBox="0 0 100 100">
-				<circle cx="-0" cy="15%" r="4.5" fill="var(--theme-sub-heading-color)"/>
-				<use href="#psf-icon" x="-12.2%" y="13.2%" width="25%" height="4" fill="var(--theme-body-background)"/>
+<circle cx="-0" cy="15%" r="4.5" fill="var(--theme-sub-heading-color)" />
+<use href="#psf-icon" x="-12.2%" y="13.2%" width="25%" height="4" fill="var(--theme-body-background)" />
+
 				<text x="6%" y="12%" style="font-size: 17%;">
 					<tspan data-name="square-foot-price" data-default="My default string" fill="var(--theme-sub-heading-color)">$557</tspan>
 					<tspan x="5.5%" y="15%" data-name="sqf-caption-1" data-default=" Price per Sq.Ft." fill="var(--theme-sub-heading-color)">Price per Sq.Ft</tspan>
 				</text>
 			</svg>
 			<svg x="-6%" viewBox="0 0 100 100">
-				<circle cx="-0" cy="25%" r="4.5" fill="var(--theme-sub-heading-color)"/>
-				<use href="#calendar-icon" x="-12.3%" y="22.7%" width="25%" height="4" fill="var(--theme-body-background)"/>
+<circle cx="-0" cy="25%" r="4.5" fill="var(--theme-sub-heading-color)" />
+<use href="#calendar-icon" x="-12.3%" y="22.7%" width="25%" height="4" fill="var(--theme-body-background)" />
+
 				<text x="6%" y="22%" style="font-size: 17%;">
 					<tspan fill="var(--theme-sub-heading-color)">Listed On</tspan>
 					<tspan x="5.5%" y="25%" fill="var(--theme-sub-heading-color)">7/13/2023</tspan>

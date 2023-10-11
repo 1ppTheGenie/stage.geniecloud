@@ -7,7 +7,8 @@ Sizes:		Postcard, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<rect x="0" y="0" width="51%" height="100%" fill="#fff"></rect>
 		<line xmlns="" stroke="#fff" stroke-width="0.8%" x1="51%" x2="51%" y1="0" y2="100%"></line>
@@ -29,17 +30,20 @@ Sizes:		Postcard, QRCode
 				<stop offset="100%" style="stop-color:#0e1232;stop-opacity:1.00" />
 			</linearGradient>
 		</defs>
-		<rect x="0" y="0" width="51%" height="100%" fill="url(#lgrad)"/>
+<rect x="0" y="0" width="51%" height="100%" fill="url(#lgrad)" />
+
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
 
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet" type="text/css">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 		<link rel="stylesheet" type="text/css">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/smooch.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/smooch.css')" />
+
 		</link>
 
 		<g style="transform:translate(45.2%, 55.5%)">
@@ -77,8 +81,9 @@ Sizes:		Postcard, QRCode
 		</text>
 
 		<svg x="-0.8%" y="42%" width="50%" height="48%" viewBox="0 0 1289 757" style="enable-background:new 0 0 1289 757;" xml:space="preserve">
-			<rect fill="#b2934e" x="47.7" y="367.12" class="st0" width="1169.3" height="7.88"/>
-			<polygon fill="#b2934e" points="1199.21,346 1194.02,351.93 1215.49,370.71 1194.5,390 1199.83,395.81 1227.3,370.57 "/>
+<rect fill="#b2934e" x="47.7" y="367.12" class="st0" width="1169.3" height="7.88" />
+<polygon fill="#b2934e" points="1199.21,346 1194.02,351.93 1215.49,370.71 1194.5,390 1199.83,395.81 1227.3,370.57 " />
+
 		</svg>
 
 		<text x="4%" y="68.2%" class="middle" fill="#fff" style="font-family:'futura';font-size:96%;font-weight:500;word-spacing:-2px;">

@@ -8,7 +8,8 @@ Supports:	Area, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<xsl:call-template name="cropped-container" />
@@ -34,8 +35,9 @@ Supports:	Area, QRCode
 			</xsl:attribute>
 		</image>
 
-		<rect x="0%" y="88%" width="20%" height="12%" fill="var(--theme-body-background)"/>
-		<rect x="20%" y="88%" width="80%" height="12%" class="heading"/>
+<rect x="0%" y="88%" width="20%" height="12%" fill="var(--theme-body-background)" />
+<rect x="20%" y="88%" width="80%" height="12%" class="heading" />
+
 
 		<text x="2%" y="90.5%" class="upper" style="font-weight:600;font-size:150%;font-family:Helvetica,Arial,sans-serif;" fill="var(--theme-heading-color)">
 			<xsl:call-template name="editable">
@@ -94,7 +96,8 @@ Supports:	Area, QRCode
 			<tspan x="90%" y="93.5%">More...</tspan>
 		</text>
 
-		<rect x="29%" y="73%" width="60%" height="11%" class="heading"/>
+<rect x="29%" y="73%" width="60%" height="11%" class="heading" />
+
 
 		<g style="transform:translate(82.58%, 64.5%)">
 			<xsl:call-template name="qr-code">
@@ -130,7 +133,8 @@ Supports:	Area, QRCode
 				<text class="upper" fill="var(--theme-heading-color)" style="font-weight:600;font-size:130%;font-family: Lato;">
 					<tspan >View a sample report or get a free up to the Minute</tspan>
 					<tspan x="0%" dy="30%">
-						<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 						<xsl:text> market insider report</xsl:text>
 					</tspan>
 				</text>
@@ -162,7 +166,8 @@ Supports:	Area, QRCode
 						</xsl:call-template>
 					</tspan>
 					<tspan x="0%" dy="50%">
-						<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 					</tspan>
 				</text>
 			</svg>

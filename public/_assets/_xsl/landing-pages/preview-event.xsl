@@ -11,7 +11,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="landing-pages.xsl"/>
+<xsl:import href="landing-pages.xsl" />
+
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="head-description">
@@ -71,19 +72,23 @@
 						<div class="preview-form-details heading-font">
 							<form class="funnel-create-lead">
 								<div class="form-group">
-									<input type="text" name="fullName" class="form-control reset-form contact_name heading-font" placeholder="Full Name" required="required"/>
+<input type="text" name="fullName" class="form-control reset-form contact_name heading-font" placeholder="Full Name" required="required" />
+
 								</div>
 								<div class="form-group">
-									<input type="email" name="emailAddress" class="form-control reset-form contact_email heading-font" placeholder="Email Address" required="required"/>
+<input type="email" name="emailAddress" class="form-control reset-form contact_email heading-font" placeholder="Email Address" required="required" />
+
 								</div>
 								<div class="form-group">
-									<input type="tel" name="phoneNumber" class="form-control phone reset-form heading-font" placeholder="Phone Number" required="required"/>
+<input type="tel" name="phoneNumber" class="form-control phone reset-form heading-font" placeholder="Phone Number" required="required" />
+
 								</div>
 								<div class="form-group form-buttons heading-font">
 									<div class="checkbox-data">
 										<p class="heading-font">How would you like to receive your RSVP confirmation:</p>
 										<label>
-											<input type="checkbox" name="meta[confirmViaText]" value="yes"/>
+<input type="checkbox" name="meta[confirmViaText]" value="yes" />
+
 											<xsl:text>Text</xsl:text>
 										</label>
 										<label>
@@ -161,9 +166,10 @@
 										<a class="btn heading-font subtitle-color-as-bg" target="_blank" href="https://myneighborhood.re/wp-content/uploads/2022/09/1400-19th-Brochure.pdf">Download
 											<svg width="15" height="15"
 												xmlns="http://www.w3.org/2000/svg" viewBox="0 0 485 485" class="heading-svg">
-												<polygon points="380.926,115.57 321.93,115.57 321.93,0 163.07,0 163.07,115.57 104.074,115.57 242.5,267.252"/>
+<polygon points="380.926,115.57 321.93,115.57 321.93,0 163.07,0 163.07,115.57 104.074,115.57 242.5,267.252" />
+
 												<path d="M0,310v175h485V310H0z M330,412.5c-8.284,0-15-6.716-15-15s6.716-15,15-15c8.284,0,15,6.716,15,15S338.284,412.5,330,412.5
-													z M400,412.5c-8.284,0-15-6.716-15-15s6.716-15,15-15c8.284,0,15,6.716,15,15S408.284,412.5,400,412.5z"/>
+z M400,412.5c-8.284,0-15-6.716-15-15s6.716-15,15-15c8.284,0,15,6.716,15,15S408.284,412.5,400,412.5z" />
 											</svg>
 										</a>
 									</div>
@@ -203,7 +209,7 @@
 
 					document.getElementById(`call-to-action`).style.display = `none`;
 					document.getElementById(`custom-thank-you`).style.display = `block`;
-				});'"/>
+});'" />
 			</script>
 		</body>
 	</xsl:template>

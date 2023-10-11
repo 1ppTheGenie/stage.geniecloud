@@ -7,7 +7,8 @@ Supports: Agent
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<g style="transform: translate(50%, 20%);fill:var(--theme-body-color);font-family:var(--theme-body-font)">
 			<text class="heading center" x="0" y="0" font-weight="500" font-size="380%" data-max-width="90%">

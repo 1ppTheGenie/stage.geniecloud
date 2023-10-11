@@ -7,10 +7,12 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<g>
-			<rect stroke="var(--theme-emphasis-color)" stroke-width="6" fill-opacity="0" x="2.5%" y="4.5%" width="95%" height="90%"/>
+<rect stroke="var(--theme-emphasis-color)" stroke-width="6" fill-opacity="0" x="2.5%" y="4.5%" width="95%" height="90%" />
+
 
 			<rect x="34%" y="2%" width="32%" height="3%" fill="var(--theme-body-background)" fill-opacity="1" />
 			<text class="bold medium center" x="50%" y="2.5%">
@@ -44,7 +46,8 @@
 
 			<g style="transform: translate(0%, 92.75%);">
 				<filter x="-0.1" y="-0.1" width="1.2" height="1.2" id="solid">
-					<feFlood flood-color="var(--theme-body-background)"/>
+<feFlood flood-color="var(--theme-body-background)" />
+
 					<feComposite in="SourceGraphic" operator="xor" />
 				</filter>
 				<text x="50%" y="0" class="center" fill="var(--theme-body-color);">

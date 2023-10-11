@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 
@@ -24,17 +25,23 @@
 	</xsl:template>
 
 	<xsl:template name="svg-body">
-		<rect x="0" y="54.5%" stroke="#000" stroke-width="1" fill-opacity="1" width="100%" height=".5" fill="#000"/>
+<rect x="0" y="54.5%" stroke="#000" stroke-width="1" fill-opacity="1" width="100%" height=".5" fill="#000" />
 
-		<rect x="35%" y="18.5%" stroke="#000" stroke-width="1" fill-opacity="1" width="65%" height=".5" fill="#000"/>
 
-		<rect x="75.9%" y="0%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="18.5%" fill="#000"/>
+<rect x="35%" y="18.5%" stroke="#000" stroke-width="1" fill-opacity="1" width="65%" height=".5" fill="#000" />
 
-		<rect x="63%" y="54.5%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="45%" fill="#000"/>
 
-		<rect x="34.9%" y="0%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="54.5%" fill="#000"/>
+<rect x="75.9%" y="0%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="18.5%" fill="#000" />
 
-		<rect x="63.1%" y="54.7%" width="36.8%" height="45%" fill="#fff"/>
+
+<rect x="63%" y="54.5%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="45%" fill="#000" />
+
+
+<rect x="34.9%" y="0%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="54.5%" fill="#000" />
+
+
+<rect x="63.1%" y="54.7%" width="36.8%" height="45%" fill="#fff" />
+
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
@@ -45,7 +52,8 @@
 			<xsl:value-of select="'font-weight-normal {font-weight: 600;}'" />
 		</style>
 
-		<rect x="76.1%" y="0%" width="23.8%" height="18.2%" fill="#fff"/>
+<rect x="76.1%" y="0%" width="23.8%" height="18.2%" fill="#fff" />
+
 		<g style="transform: translate(57%, 3%);">
 			<text x="20%" y="3%" fill="#000" style="font-size:120%">
 				<xsl:value-of select="//agent[1]/address/street" />
@@ -92,7 +100,8 @@
 		</text>
 		<g style="transform: translate(0, 6%);">
 			<text x="36%" y="0" class="bold" fill="var(--theme-sub-heading-color)" style="font-size:150%;">
-				<xsl:value-of select="$propertyType"/>
+<xsl:value-of select="$propertyType" />
+
 
 				<tspan x="36%" y="4%">Values</tspan>
 			</text>
@@ -114,7 +123,8 @@
 						<xsl:text>Last Month</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')"/>
+<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
+
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>
@@ -160,7 +170,8 @@
 				<div style="position:absolute;top:0;left:0;z-index:999;height:60%;width:60%;">
 					<svg height="100%" width="100%">
 						<filter x="-7%" y="-0.5" width="1.6" height="8.5" id="solid">
-							<feFlood flood-color="var((--theme-body-color)" flood-opacity="0.2"/>
+<feFlood flood-color="var((--theme-body-color)" flood-opacity="0.2" />
+
 							<feComposite in="SourceGraphic" operator="xor" />
 						</filter>
 
@@ -212,7 +223,8 @@
 			<g style="transform: translate(3%, 44%);">
 				<g>
 					<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-						<circle r=".3185" cx=".5" cy=".5"/>
+<circle r=".3185" cx=".5" cy=".5" />
+
 					</clipPath>
 
 					<xsl:if test="//agent[1]/photo">
@@ -263,7 +275,8 @@
 				</g>
 				<g style="transform: translate(17%, 0);">
 					<foreignObject x="0%" y="46%" width="76%" height="4%" style="color:var(--theme-sub-heading-color);-webkit-line-clamp:6; font-size: 70%;line-height: 120%;">
-						<xsl:call-template name="solicitation-disclaimer"/>
+<xsl:call-template name="solicitation-disclaimer" />
+
 					</foreignObject>
 				</g>
 			</g>

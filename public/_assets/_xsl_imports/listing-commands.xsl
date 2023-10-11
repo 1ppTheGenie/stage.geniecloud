@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0">
-	<xsl:include href="global-variables.xsl"/>
+<xsl:include href="global-variables.xsl" />
+
 
 	<xsl:preserve-space elements="*" />
 
@@ -79,7 +80,8 @@
 					<xsl:value-of select="$description" />
 				</xsl:attribute>
 			</meta>
-			<meta charset="utf-8"/>
+<meta charset="utf-8" />
+
 
 			<title>
 				<xsl:value-of select="$title" />

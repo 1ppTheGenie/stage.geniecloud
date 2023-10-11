@@ -8,7 +8,8 @@ Supports:	Area, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 
@@ -29,8 +30,9 @@ Supports:	Area, QRCode
 			</xsl:attribute>
 		</image>
 
-		<rect x="0.5%" y="62%" width="15%" height="38%" class="heading"/>
-		<rect x="0.5%" y="50%" width="67%" height="12%" fill="var(--theme-body-color)"/>
+<rect x="0.5%" y="62%" width="15%" height="38%" class="heading" />
+<rect x="0.5%" y="50%" width="67%" height="12%" fill="var(--theme-body-color)" />
+
 		<g style="transform:translate(2%,52%)">
 			<text x="1%" y="0%" class="upper" fill="var(--theme-heading-color)" style="font-weight:300;font-size:200%;font-family: Lato;">
 				<xsl:call-template name="editable">
@@ -86,7 +88,8 @@ Supports:	Area, QRCode
 						</xsl:call-template>
 					</tspan>
 					<tspan x="0" dy="50%" style="font-weight:600;">
-						<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 					</tspan>
 				</text>
 			</svg>

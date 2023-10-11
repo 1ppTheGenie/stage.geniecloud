@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
@@ -58,7 +59,8 @@
 				<tspan class="upper narrow">Just</tspan>
 				<xsl:text>&#160;</xsl:text>
 				<tspan class="upper bold">
-					<xsl:value-of select="$soldListed"/>
+<xsl:value-of select="$soldListed" />
+
 				</tspan>
 			</text>
 			<text x="1%" y="12%">
@@ -67,18 +69,22 @@
 				<xsl:text> area</xsl:text>
 			</text>
 			<text x="1%" y="16%" class="large heading">
-				<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 			</text>
 			<text x="1%" y="21%" class="large heading">
-				<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 			</text>
 			<text x="1%" y="28%" class="medium bold">
-				<xsl:call-template name="soldListedPrice"/>
+<xsl:call-template name="soldListedPrice" />
+
 			</text>
 			<text x="1%" y="34%" class="heading">
 				<tspan>Type:  </tspan>
 				<tspan>
-					<xsl:value-of select="$singularPropertyType"/>
+<xsl:value-of select="$singularPropertyType" />
+
 				</tspan>
 			</text>
 

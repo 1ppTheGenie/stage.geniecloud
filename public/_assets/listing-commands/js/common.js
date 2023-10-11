@@ -154,7 +154,7 @@ const downloadFile = url => {
 };
 
 /*			<h4>
-				<xsl:value-of select="@name"/>
+				<xsl:value-of select="@name" />
 				<xsl:if test="count($asset/image/@rendering) &gt; 0">
 					<span class="rendering-spinner" />
 				</xsl:if>

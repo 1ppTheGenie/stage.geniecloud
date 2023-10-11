@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="map-output-letter">
 		<!-- 
 			Valid styles are (April 2020):
@@ -36,7 +37,8 @@
 
 			<div class="leaflet-overlay-pane" style="position: absolute;z-index:9999999999;width:100%;height:100%;">
 				<svg style="width: 100%; height: 100%; point-events:none;">
-					<xsl:call-template name="map-overlay"/>
+<xsl:call-template name="map-overlay" />
+
 				</svg>
 			</div>
 		</div>
@@ -53,7 +55,8 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing[@salePrice!='']">
-				<xsl:sort select="@salePrice" data-type="number" order="descending"/>
+<xsl:sort select="@salePrice" data-type="number" order="descending" />
+
 				<xsl:if test="position()=1">
 					<xsl:value-of select="concat( &quot;{caption: 'HH', state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
 				</xsl:if>
@@ -64,7 +67,8 @@
 
 	<xsl:template name="svg-body">
 		<style>
-			<xsl:value-of select="'text {dominant-baseline:middle;}'"/>
+<xsl:value-of select="'text {dominant-baseline:middle;}'" />
+
 		</style>
 		<symbol id="up-icon" class="stat-icon">
 			<svg aria-hidden="true" focusable="false"
@@ -84,7 +88,8 @@
 		<xsl:variable name="formattedChange" select="format-number( abs( 1 - $change ), '#.0%' )" />
 
 		<!-- <text x="50%" y="53%" class="upper center heading" font-size="180%" data-max-width="80%">
-			<xsl:value-of select="$areaWithPropertyType"/>
+<xsl:value-of select="$areaWithPropertyType" />
+
 		</text>
 
 		<text x="50%" y="56%" class="upper center sub-heading" font-size="320%">
@@ -124,14 +129,16 @@
 
 		<text x="50%" y="32%" font-size="240%" class="center heading">
 			<tspan>
-				<xsl:value-of select="format-number( //statistics/@maxSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@maxSalePrice, '$###,###')" />
+
 			</tspan>
 		</text>
 
 		<text x="50%" y="35%" class="center " font-size="105%" font-family="var(--theme-body-font)" fill="var(--theme-body-color)">
 			<tspan>Sold on 
 				<xsl:for-each select="//listings/listing[@salePrice!='']">
-					<xsl:sort select="@salePrice" data-type="number" order="descending"/>
+<xsl:sort select="@salePrice" data-type="number" order="descending" />
+
 					<xsl:if test="position()=1">
 						<xsl:value-of select="genie:format-date( //output/@sinceDate, '[MNn] [D], [Y0001]')" />
 					</xsl:if>
@@ -146,7 +153,8 @@
 
 		<text x="50%" y="42%" font-size="240%" class="center heading">
 			<tspan>
-				<xsl:value-of select="format-number( //statistics/@averageSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@averageSalePrice, '$###,###')" />
+
 			</tspan>
 		</text>
 
@@ -207,7 +215,8 @@
 
 		<text x="50%" y="49.5%" font-size="240%" class="center heading">
 			<tspan>
-				<xsl:value-of select="format-number( //statistics/@medianSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@medianSalePrice, '$###,###')" />
+
 			</tspan>
 		</text>
 

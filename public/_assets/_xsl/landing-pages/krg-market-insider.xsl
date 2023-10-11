@@ -10,8 +10,9 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="landing-pages.xsl"/>
-	<xsl:import href="landing-pages-market-insider.xsl"/>
+<xsl:import href="landing-pages.xsl" />
+<xsl:import href="landing-pages-market-insider.xsl" />
+
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="description">
@@ -19,10 +20,12 @@
 		</xsl:variable>
 
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/landing-pages/css/krg-market-insider.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/landing-pages/css/krg-market-insider.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 
 		<xsl:call-template name="standard-header">
@@ -137,7 +140,8 @@
 				<div class="modal fade contact-modal" id="contact-me" tabindex="-1" role="dialog" aria-labelledby="fl-thankyou-message" aria-hidden="false">
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490" data-dismiss="modal">
-							<polygon fill="#000" stroke-width="40px" stroke="#000" points="11.387,490 245,255.832 478.613,490 489.439,479.174 255.809,244.996 489.439,10.811 478.613,0 245,234.161 11.387,0 0.561,10.811 234.191,244.996 0.561,479.174 "/>
+<polygon fill="#000" stroke-width="40px" stroke="#000" points="11.387,490 245,255.832 478.613,490 489.439,479.174 255.809,244.996 489.439,10.811 478.613,0 245,234.161 11.387,0 0.561,10.811 234.191,244.996 0.561,479.174 " />
+
 						</svg>
 
 						<div class="modal-content">
@@ -146,19 +150,23 @@
 									<h1 class="modal_title futura-text">FILL YOUR DETAILS BELOW</h1>
 									<p class="modal_subtitle futura-text">Our team will get in touch with you within 24 hours</p>
 									<form class="funnel-create-lead futura-text">
-										<input type="hidden" name="genieTags" value="ClickCta,RequestMoreInfo"/>
+<input type="hidden" name="genieTags" value="ClickCta,RequestMoreInfo" />
+
 
 										<div class="form-group">
-											<input type="text" placeholder="NAME*" name="fullName" class="form-control phone" id="name" required=""/>
+<input type="text" placeholder="NAME*" name="fullName" class="form-control phone" id="name" required="" />
+
 										</div>
 										<div class="form-group">
 											<input type="email" placeholder="EMAIL*" name="emailAddress" class="form-control step1-input" id="email" />
 										</div>
 										<div class="form-group">
-											<input type="text" placeholder="PHONE NUMBER*" name="phoneNumber" class="form-control step1-input" id="phonenumber" required=""/>
+<input type="text" placeholder="PHONE NUMBER*" name="phoneNumber" class="form-control step1-input" id="phonenumber" required="" />
+
 										</div>
 										<div class="form-group">
-											<input type="text" placeholder="HOME ADDRESS*" name="propertyAddress" class="form-control step1-input" id="propertyAddress" required=""/>
+<input type="text" placeholder="HOME ADDRESS*" name="propertyAddress" class="form-control step1-input" id="propertyAddress" required="" />
+
 										</div>
 										<div class="modal-checkbox">
 											<div class="spn">
@@ -166,11 +174,13 @@
 											</div>
 											<div class="che_box receive-type">
 												<label class="futura-text">
-													<input type="checkbox" name="preferred_contact" value="text"/>
+<input type="checkbox" name="preferred_contact" value="text" />
+
 													<xsl:text>Text</xsl:text>
 												</label>
 												<label>
-													<input type="checkbox" class="futura-text" name="preferred_contact" value="email"/>
+<input type="checkbox" class="futura-text" name="preferred_contact" value="email" />
+
 													<xsl:text>Email</xsl:text>
 												</label>
 											</div>
@@ -275,7 +285,7 @@
 						body .navbar li a{
     						font-size:16px !important;
 						}
-					}'"/>
+}'" />
 			</style>
 			<script>
 				<xsl:value-of select="'
@@ -297,7 +307,7 @@
 	                document.querySelector(`#contact-me svg`).addEventListener(`click`, function() {
 	                     document.querySelector(`#contact-me`).style.display = `none`;
 	                      document.querySelector(`#contact-me`).classList.remove(`in`);
-	                });'"/>
+});'" />
 			</script>
 		</body>
 	</xsl:template>

@@ -8,8 +8,9 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
-	<xsl:import href="lc-social-media.xsl"/>
+<xsl:import href="common.xsl" />
+<xsl:import href="lc-social-media.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<image x="15%" y="27%" width="85%" height="58%" preserveAspectRatio="xMidYMid slice">

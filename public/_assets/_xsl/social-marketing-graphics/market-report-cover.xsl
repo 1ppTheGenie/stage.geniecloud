@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<g style="transform: rotate(-24deg)  translate(-13%, 32%) skew(4deg, 3deg);">
 			<image x="15%" y="15%" width="60%" height="60%" preserveAspectRatio="xMidYMid slice">

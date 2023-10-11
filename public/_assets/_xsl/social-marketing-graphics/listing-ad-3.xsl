@@ -8,8 +8,9 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
-	<xsl:import href="genie-functions.xsl"/>
+<xsl:import href="common.xsl" />
+<xsl:import href="genie-functions.xsl" />
+
 
 	<xsl:template name="social-button-caption">
 		<div class="fa-button">
@@ -23,23 +24,27 @@
 		<xsl:if test="number(//single/statusTypeID) = 1">
 <xsl:value-of select="concat('NEW TO MARKET in ', //area/name , ' &#124; This ' , //single/bedrooms/@count , ' BR, ', $listingTotalBathrooms, ' BA, ', $singularPropertyType , '  is it!' )" />
 
-			<xsl:value-of select="substring-before(substring-after(//single/description, '.'), '.')"/>
-			<xsl:value-of select="'Click the LEARN button: for photos, details, pricing and more'"/>
+<xsl:value-of select="substring-before(substring-after(//single/description, '.'), '.')" />
+<xsl:value-of select="'Click the LEARN button: for photos, details, pricing and more'" />
+
 		</xsl:if>
 
 		<xsl:if test="number(//single/statusTypeID) = 2">
 			<xsl:value-of select="concat('Sold for ', $listingPrice , ' OVER Listing Price in ' , //single/daysOnMarket, ' days on market!!')" />
 
-			<xsl:value-of select="'If you’re looking to sell, there is no question that your real estate team matters. Work with a team who has proven success in the Crest market.'"/>
+<xsl:value-of select="'If you’re looking to sell, there is no question that your real estate team matters. Work with a team who has proven success in the Crest market.'" />
+
 		</xsl:if>
 
 		<xsl:if test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
-			<xsl:value-of select="'Now Pending! If you’re looking to sell, there is no question that your real estate team matters. Work with a team who has proven success in the Crest market.'"/>
+<xsl:value-of select="'Now Pending! If you’re looking to sell, there is no question that your real estate team matters. Work with a team who has proven success in the Crest market.'" />
+
 		</xsl:if>
 
-		<xsl:value-of select="concat(' Call/Text:',//agent[1]/mobile , ' for all your Real Estate Needs')"/>
-		<xsl:value-of select="concat('',//agent[1]/marketingName, ', ' , //agent[1]/marketingTitles)"/>
-		<xsl:value-of select="concat('',//agent[1]/marketingLicense)"/>
+<xsl:value-of select="concat(' Call/Text:',//agent[1]/mobile , ' for all your Real Estate Needs')" />
+<xsl:value-of select="concat('',//agent[1]/marketingName, ', ' , //agent[1]/marketingTitles)" />
+<xsl:value-of select="concat('',//agent[1]/marketingLicense)" />
+
 	</xsl:template>
 
 	<xsl:template name="svg-body">
@@ -50,13 +55,15 @@
 			</xsl:call-template>
 		</image>
 
-		<rect stroke="var(--theme-body-color)" stroke-width="0" fill-opacity="1" x="5%" y="66%" width="90%" height="8%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="0" fill-opacity="1" x="5%" y="66%" width="90%" height="8%" />
+
 
 		<text x="50%" y="70%" class="upper center middle" fill="var(--theme-body-background)" font-size="110%">
 			<tspan>
 				<xsl:choose>
 					<xsl:when test="number(//single/statusTypeID) = 2">
-						<xsl:value-of select="concat( 'Just Sold! ', ' CLICK TO SEE MORE DETAILS' )"/>
+<xsl:value-of select="concat( 'Just Sold! ', ' CLICK TO SEE MORE DETAILS' )" />
+
 					</xsl:when>
 					<xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
 						<xsl:value-of select="concat( 'Entered Escrow Listed at ', genie:currency-format( number(//single/price), 2 ) )" />
@@ -86,10 +93,12 @@
 		</text>
 
 		<text x="50%" y="85.5%" class="upper center" style="font-weight:600;font-size:125%;">
-			<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 		</text>
 		<text x="50%" y="90%" class="upper center" style="font-weight:600;font-size:125%;">
-			<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 		</text>
 
 		<xsl:call-template name="copyright" />

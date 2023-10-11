@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="body">
 		<xsl:call-template name="svg-wrapper">
 			<xsl:with-param name="nobg" select="'false'" />
@@ -56,8 +57,9 @@
 				<tspan>
 					<xsl:text>&#160;</xsl:text>
 					<xsl:call-template name="property-type-caption">
-						<xsl:with-param name="short" select="'true'"/>
-						<xsl:with-param name="singular" select="'true'"/>
+<xsl:with-param name="short" select="'true'" />
+<xsl:with-param name="singular" select="'true'" />
+
 					</xsl:call-template>
 				</tspan>
 				<tspan> values have </tspan>
@@ -94,14 +96,16 @@
 						<xsl:text>in the last 30 days</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat( 'in the last ', //areas/area[1]/statistics/@lookbackMonths, ' months')"/>
+<xsl:value-of select="concat( 'in the last ', //areas/area[1]/statistics/@lookbackMonths, ' months')" />
+
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>
 		</g>
 
 		<g style="transform:translateY(80%)">
-			<rect x="25%" y="0" rx="30" ry="30" width="50%" height="10%" fill="var(--theme-sub-heading-color)"/>
+<rect x="25%" y="0" rx="30" ry="30" width="50%" height="10%" fill="var(--theme-sub-heading-color)" />
+
 
 			<text x="50%" y="5%" class="upper bold center middle" fill="var(--theme-body-color)" font-size="110%">
 				Download My Report &#8594;

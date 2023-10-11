@@ -9,13 +9,16 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')" />
+
 		</link>
 
 		<xsl:value-of select="'
@@ -27,7 +30,7 @@
     			line-height: 118%;
 				margin-top: 0px;
     			margin-bottom: 14px;
-			}'"/>
+}'" />
 
 		<rect x="0%" y="0%" width="100%" height="100%" fill="#ffffff" />
 		<rect x="2%" y="2.5%" width="96%" height="97.5%" fill="#13182f" />
@@ -106,7 +109,8 @@
 		</text>
 
 		<foreignObject width="50%" height="50%" x="20%" y="53.5%" class="futura-text" style="color:#3e3e3f;font-size:21px; line-height:120%; height:40%;">
-			<xsl:variable name="paras" select="genie:split-to-paras( string(//single/description) )"/>
+<xsl:variable name="paras" select="genie:split-to-paras( string(//single/description) )" />
+
 			<xsl:copy-of select="$paras/root" />
 		</foreignObject>
 

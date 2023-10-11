@@ -10,7 +10,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-    <xsl:import href="landing-pages.xsl"/>
+<xsl:import href="landing-pages.xsl" />
+
 
     <xsl:template name="landing-page">
         <xsl:call-template name="standard-header">
@@ -44,10 +45,12 @@
 
             <section class="banner-section market-report-instant-banner" style="position:relative; display:block; background-color: var(--theme-body-background); background-repeat: no-repeat; background-size: cover;">
                 <xsl:attribute name="style">
-                    <xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )"/>
+<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
+
                 </xsl:attribute>
 
-                <div class="banner-section" id="compare-header-map" style="z-index: 0;"/>
+<div class="banner-section" id="compare-header-map" style="z-index: 0;" />
+
 
                 <!-- Start -->
                 <div class="container banner-content-box-temp-11">
@@ -155,7 +158,7 @@
                                 ).addTo(leadMap);
                             }
                         }
-                    });'"/>
+});'" />
         </script>
     </xsl:template>
 </xsl:stylesheet>

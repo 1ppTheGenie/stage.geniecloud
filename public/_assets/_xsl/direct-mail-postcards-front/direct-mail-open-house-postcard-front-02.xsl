@@ -9,7 +9,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<image x="0" y="0" width="57%" height="100%" preserveAspectRatio="xMidYMid slice">
@@ -18,19 +19,23 @@
 				<xsl:with-param name="idx" select="1" />
 			</xsl:call-template>
 		</image>
-		<rect x="0" width="57%" height="100%" fill-opacity="0.8" fill="var(--theme-sub-heading-color)"/>
+<rect x="0" width="57%" height="100%" fill-opacity="0.8" fill="var(--theme-sub-heading-color)" />
+
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
 
 	<xsl:template name="cropped-content">
 		<text x="28.5%" y="10.5%" class="upper center narrow" fill="var(--theme-body-background)" style="font-size:150%;">
-			<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 			<xsl:text>, </xsl:text>
-			<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 		</text>
 
-		<rect stroke="var(--theme-body-background)" stroke-width="2" fill-opacity="0" x="4%" y="19%" width="49%" height="47%"/>
+<rect stroke="var(--theme-body-background)" stroke-width="2" fill-opacity="0" x="4%" y="19%" width="49%" height="47%" />
+
 
 		<image x="4.12%" y="19.2%" width="48.8%" height="46.7%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -40,7 +45,8 @@
 
 		<text x="28.5%" y="70%" class="center narrow" fill="var(--theme-body-background)" style="font-size:160%;">
 			<tspan class="center">
-				<xsl:value-of select="$singularPropertyType"/>
+<xsl:value-of select="$singularPropertyType" />
+
 			</tspan>
 		</text>
 
@@ -117,7 +123,8 @@
 
 			<g style="transform: translate(8.6%, -2%);">
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".3500" cx=".5" cy=".5"/>
+<circle r=".3500" cx=".5" cy=".5" />
+
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">

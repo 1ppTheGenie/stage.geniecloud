@@ -6,13 +6,15 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<g>
 			<svg width="100%" viewBox="0 0 100 100" opacity="0.8"
 				xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-				<rect width="100%" height="18%" fill="var(--theme-sub-heading-color)" fill-opacity="70%"/>
+<rect width="100%" height="18%" fill="var(--theme-sub-heading-color)" fill-opacity="70%" />
+
 			</svg>
 			<foreignObject x="15%" y="2%" width="70%" height="18%">
 				<p class="upper" style="color:var(--theme-body-color);-webkit-line-clamp:10; line-height:150%; text-align:center; font-size:172%; margin:0" data-max-width="45%">
@@ -36,7 +38,8 @@
 					</xsl:call-template>
 				</text>
 				<svg xmlns="http://www.w3.org/2000/svg" width="100%" y="7%" x="0" viewBox="0 0 100 100" opacity="1" preserveAspectRatio="none">
-					<rect width="84%" height="8%" fill="var(--theme-sub-heading-color)" fill-opacity="100%"/>
+<rect width="84%" height="8%" fill="var(--theme-sub-heading-color)" fill-opacity="100%" />
+
 				</svg>
 				<text x="42%" y="8%" class="upper large bold center">
 					<tspan>
@@ -56,7 +59,8 @@
 			<g style="transform: translate(84%, -49%);">
 				<svg width="100%" y="100%" x="-0.8%" viewBox="0 0 100 100" opacity="1"
 					xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-					<rect width="100%" height="38.7%" fill="var(--theme-body-color)" fill-opacity="100%"/>
+<rect width="100%" height="38.7%" fill="var(--theme-body-color)" fill-opacity="100%" />
+
 				</svg>
 				<image width="18%" height="100%" x="0" y="70%" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
@@ -65,11 +69,13 @@
 				</image>
 			</g>
 			<g style="transform: translate(0, 89%);">
-				<rect width="100%" height="11%" fill="var(--theme-sub-heading-color)"/>
+<rect width="100%" height="11%" fill="var(--theme-sub-heading-color)" />
+
 				<text x="50%" y="1%" class="center large bold" data-max-width="80%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'1areaname'" />
-						<xsl:with-param name="default" select="concat( '#1', '&#160;', //area/name)"/>
+<xsl:with-param name="default" select="concat( '#1', '&#160;', //area/name)" />
+
 					</xsl:call-template>
 				</text>
 			</g>

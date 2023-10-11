@@ -9,11 +9,13 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="chelsea-checkbox">
-		<xsl:param name="line1"/>
-		<xsl:param name="line2"/>
+<xsl:param name="line1" />
+<xsl:param name="line2" />
+
 
 		<svg height="20%" width="20%">
 			<use x="15%" y="20%" width="60%" height="60%">
@@ -43,21 +45,25 @@
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')" />
+
 		</link>
 
 		<defs>
 			<linearGradient id="bottomShadow" gradientTransform="rotate(90)">
-				<stop offset="80%" stop-color="#000" stop-opacity="0"/>
-				<stop offset="100%" stop-color="#000" stop-opacity="10%"/>
+<stop offset="80%" stop-color="#000" stop-opacity="0" />
+<stop offset="100%" stop-color="#000" stop-opacity="10%" />
+
 			</linearGradient>
 
 			<linearGradient id="topBottomShadow" gradientTransform="rotate(90)">
-				<stop offset="0" stop-color="#000" stop-opacity="10%"/>
-				<stop offset="20%" stop-color="#000" stop-opacity="0"/>
+<stop offset="0" stop-color="#000" stop-opacity="10%" />
+<stop offset="20%" stop-color="#000" stop-opacity="0" />
 
-				<stop offset="80%" stop-color="#000" stop-opacity="0"/>
-				<stop offset="100%" stop-color="#000" stop-opacity="10%"/>
+
+<stop offset="80%" stop-color="#000" stop-opacity="0" />
+<stop offset="100%" stop-color="#000" stop-opacity="10%" />
+
 			</linearGradient>
 		</defs>
 
@@ -147,7 +153,8 @@
 			</text>
 		</g>
 
-		<use href="#barcode-hand" fill="#b31f24" x="61%" y="51%" width="5%" height="9%"/>
+<use href="#barcode-hand" fill="#b31f24" x="61%" y="51%" width="5%" height="9%" />
+
 
 		<g style="transform:translate(1%,22%)">
 			<xsl:call-template name="chelsea-checkbox">

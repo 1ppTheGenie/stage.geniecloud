@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<style>
@@ -44,11 +45,13 @@
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/active-tag.png' )" />
 			</xsl:attribute>
 		</image>
-		<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" width="98%" height="96%" x="1%" y="1%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" width="98%" height="96%" x="1%" y="1%" />
+
 
 		<g style="transform: translate(65%,76%);">
 			<svg width="33%" height="17.5%">
-				<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%"/>
+<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%" />
+
 				<use x="18.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-15.4%, -144.5%);">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#phone-icon' )" />
 				</use>
@@ -59,7 +62,8 @@
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#email-icon' )" />
 				</use>
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".3500" cx=".5" cy=".5"/>
+<circle r=".3500" cx=".5" cy=".5" />
+
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
@@ -140,11 +144,13 @@
 			</text>
 
 			<text x="1%" y="16%" class="medium bold" fill="var(--theme-sub-heading-color)">
-				<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 			</text>
 
 			<text x="1%" y="21%" class="medium" fill="var(--theme-sub-heading-color)">
-				<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 			</text>
 
 			<text x="1%" y="30%" class="medium upper bold" fill="var(--theme-sub-heading-color)" style="dominant-baseline: alphabetic;">
@@ -153,7 +159,8 @@
 			<text x="1%" y="32%" fill="var(--theme-sub-heading-color)">
 				<tspan>Type: </tspan>
 				<tspan>
-					<xsl:value-of select="$singularPropertyType"/>
+<xsl:value-of select="$singularPropertyType" />
+
 				</tspan>
 			</text>
 

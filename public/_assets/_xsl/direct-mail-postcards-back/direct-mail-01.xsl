@@ -10,7 +10,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<xsl:call-template name="cropped-container" />
@@ -18,7 +19,8 @@
 
 	<xsl:template name="cropped-content">
 		<style>
-			<xsl:value-of select="'foreignObject p { margin:0; }'"/>
+<xsl:value-of select="'foreignObject p { margin:0; }'" />
+
 		</style>
 
 		<g style="transform: translate(2.5%, 5%);">
@@ -32,7 +34,8 @@
 				</tspan>
 			</text>
 			<svg x="0" y="1%" width="36%" height="30%">
-				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#house-icon' )" />
@@ -42,7 +45,8 @@
 				</text>
 			</svg>
 			<svg x="0" y="11%" width="36%" height="30%">
-				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#map-pin-icon' )" />
@@ -52,7 +56,8 @@
 				</text>
 			</svg>
 			<svg x="0" y="21%" width="36%" height="30%">
-				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#dollar-icon' )" />
@@ -62,7 +67,8 @@
 				</text>
 			</svg>
 			<svg x="0" y="31%" width="36%" height="30%">
-				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#tag-icon' )" />
@@ -72,7 +78,8 @@
 				</text>
 			</svg>
 			<svg x="0" y="41%" width="36%" height="30%">
-				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#calendar-icon' )" />
@@ -82,7 +89,8 @@
 				</text>
 			</svg>
 			<svg x="0" y="51%" width="36%" height="30%">
-				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#barchart-icon' )" />
@@ -120,7 +128,8 @@
 				</xsl:call-template>
 			</text>
 			<svg x="-3%" y="0" width="62%" height="32%">
-				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="8%" y="40%" width="83%" height="47%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="8%" y="40%" width="83%" height="47%" />
+
 				<circle cx="8%" r="8%" fill="var(--theme-sub-heading-color)" cy="64%"></circle>
 				<text x="8%" y="65%" class="large center middle" fill="var(--theme-body-background)" style="font-size:360%;">
 						1
@@ -128,7 +137,8 @@
 				<text x="14%" y="44%" fill="var(--theme-sub-heading-color)" style="font-size:125%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'upgradedkitchen'" />
-						<xsl:with-param name="default" select="concat( 'Upgraded Kitchen and bathrooms sells',' ', lower-case( $singularPropertyType )"/>
+<xsl:with-param name="default" select="concat( 'Upgraded Kitchen and bathrooms sells',' ', lower-case( $singularPropertyType )" />
+
 					</xsl:call-template>
 				</text>
 				<foreignObject x="15%" y="58%" width="75%" height="20%" style="font-size:90%;">
@@ -143,7 +153,8 @@
 			</svg>
 
 			<svg x="-3%" y="17%" width="62%" height="32%">
-				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="8%" y="40%" width="83%" height="47%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="8%" y="40%" width="83%" height="47%" />
+
 				<circle cx="8%" r="8%" fill="var(--theme-sub-heading-color)" cy="64%"></circle>
 				<text x="8%" y="65%" class="large center middle" fill="var(--theme-body-background)" style="font-size:360%;">
 					2
@@ -166,7 +177,8 @@
 			</svg>
 
 			<svg y="34%" x="-3%" width="62%" height="32%">
-				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="8%" y="40%" width="83%" height="47%"/>
+<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="8%" y="40%" width="83%" height="47%" />
+
 				<circle cx="8%" r="8%" fill="var(--theme-sub-heading-color)" cy="64%"></circle>
 				<text x="8%" y="65%" class="large center middle" fill="var(--theme-body-background)" style="font-size:360%;">
 					3
@@ -174,7 +186,8 @@
 				<text x="14%" y="44%" fill="var(--theme-sub-heading-color)" style="font-size:125%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'upgradedkitchenbathrooms'" />
-						<xsl:with-param name="default" select="concat( 'Upgraded Kitchen and bathrooms sells',' ', lower-case( $singularPropertyType )"/>
+<xsl:with-param name="default" select="concat( 'Upgraded Kitchen and bathrooms sells',' ', lower-case( $singularPropertyType )" />
+
 					</xsl:call-template>
 				</text>
 				<foreignObject x="15%" y="58%" width="75%" height="30%" style="font-size:90%;">

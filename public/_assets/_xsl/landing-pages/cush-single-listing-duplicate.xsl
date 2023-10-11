@@ -10,8 +10,9 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="landing-pages.xsl"/>
-	<xsl:import href="landing-pages-market-insider.xsl"/>
+<xsl:import href="landing-pages.xsl" />
+<xsl:import href="landing-pages-market-insider.xsl" />
+
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="description">
@@ -148,9 +149,11 @@
 							</xsl:attribute>
 						</img>
 						<div class="address-1 container">
-							<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 							<span>
-								<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 							</span>
 							<xsl:choose>
 								<xsl:when test="number(//single/statusTypeID) = 2">
@@ -173,20 +176,24 @@
 						<div class="heading-color-as-bg hero-details-inner">
 							<div class="hero-price">
 								<span class="gradient-color">
-									<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 								</span>
 							</div>
 							<div class="hero-amenities subtitle-color">
 								<span>
-									<xsl:value-of select="//single/bedrooms/@count"/>
+<xsl:value-of select="//single/bedrooms/@count" />
+
 									<xsl:text> Beds</xsl:text>
 								</span>
 								<span>
-									<xsl:value-of select="$listingTotalBathrooms"/>
+<xsl:value-of select="$listingTotalBathrooms" />
+
 									<xsl:text> Baths</xsl:text>
 								</span>
 								<span>
-									<xsl:value-of select="//single/squareFeet"/>
+<xsl:value-of select="//single/squareFeet" />
+
 									<xsl:text> sq. ft</xsl:text>
 								</span>
 							</div>
@@ -219,7 +226,8 @@
 											<xsl:text>Beds</xsl:text>
 										</strong>
 										<span>
-											<xsl:value-of select="//single/bedrooms/@count"/>
+<xsl:value-of select="//single/bedrooms/@count" />
+
 										</span>
 									</li>
 
@@ -228,7 +236,8 @@
 											<xsl:text>sq. ft</xsl:text>
 										</strong>
 										<span>
-											<xsl:value-of select="//single/squareFeet"/>
+<xsl:value-of select="//single/squareFeet" />
+
 										</span>
 									</li>
 
@@ -237,7 +246,8 @@
 											<xsl:text>Baths</xsl:text>
 										</strong>
 										<span>
-											<xsl:value-of select="$listingTotalBathrooms"/>
+<xsl:value-of select="$listingTotalBathrooms" />
+
 										</span>
 									</li>
 									<li class="body-color">
@@ -245,7 +255,8 @@
 											<xsl:text>Status</xsl:text>
 										</strong>
 										<span>
-											<xsl:value-of select="//single/listingStatus"/>
+<xsl:value-of select="//single/listingStatus" />
+
 										</span>
 									</li>
 
@@ -254,7 +265,8 @@
 											<xsl:text>Garage</xsl:text>
 										</strong>
 										<span>
-											<xsl:value-of select="(//single/parking/@spaces+//single/parking/@garage)"/>
+<xsl:value-of select="(//single/parking/@spaces+//single/parking/@garage)" />
+
 										</span>
 									</li>
 
@@ -263,7 +275,8 @@
 											<xsl:text>Type</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="$propertyType"/>
+<xsl:value-of select="$propertyType" />
+
 
 										</span>
 									</li>
@@ -371,7 +384,8 @@
 									<xsl:text>Interested In</xsl:text>
 								</em>
 								<span class="gradient-color">
-									<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 								</span>
 							</h2>
 							<div role="form" class="wpcf7" id="wpcf7-f194-o1" lang="en-US" dir="ltr">
@@ -526,7 +540,8 @@
 							</div>
 							<div class="col-md-12">
 
-								<input type="submit" value="Send" class="submit-btn step1-button" id="request-modal-btn"/>
+<input type="submit" value="Send" class="submit-btn step1-button" id="request-modal-btn" />
+
 							</div>
 						</form>
 					</div>
@@ -548,27 +563,33 @@
 							</p>
 							<div class="awu-field col-md-6">
 								<label for="">First Name*</label>
-								<input type="text" name="firstName" class="form-control"/>
+<input type="text" name="firstName" class="form-control" />
+
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Last Name*</label>
-								<input type="text" name="lastName" class="form-control"/>
+<input type="text" name="lastName" class="form-control" />
+
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Email Address*</label>
-								<input type="text" name="emailAddress" class="form-control"/>
+<input type="text" name="emailAddress" class="form-control" />
+
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Phone Number*</label>
-								<input type="text" name="phoneNumber" class="form-control"/>
+<input type="text" name="phoneNumber" class="form-control" />
+
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">When are you available?</label>
-								<input type="date" class="form-control" name="meta[availableDate]" placeholder="MM/DD/YYYY"/>
+<input type="date" class="form-control" name="meta[availableDate]" placeholder="MM/DD/YYYY" />
+
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Are you available at another time?</label>
-								<input type="date" name="meta[alternativeDate]" class="form-control" placeholder="MM/DD/YYYY"/>
+<input type="date" name="meta[alternativeDate]" class="form-control" placeholder="MM/DD/YYYY" />
+
 							</div>
 							<div class="awu-field col-md-12">
 								<label for="">Your Message</label>
@@ -576,7 +597,8 @@
 															&#160;</textarea>
 							</div>
 							<div class="col-md-12">
-								<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn"/>
+<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />
+
 							</div>
 						</form>
 					</div>
@@ -651,7 +673,7 @@
 						} else {
 							logoContainer.classList.remove(`fixed`);
 						}
-					});'"/>
+});'" />
 			</script>
 
 			<xsl:call-template name="agent-about" />

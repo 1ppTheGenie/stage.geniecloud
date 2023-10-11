@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<image x="0" y="0%" width="63.5%" height="100%" preserveAspectRatio="xMidYMid slice">
@@ -17,7 +18,8 @@
 				<xsl:with-param name="preferPrimary" select="'true'" />
 			</xsl:call-template>
 		</image>
-		<rect x="0%" y="0%" width="63.5%" height="100%" fill-opacity="0.8" fill="var(--theme-body-background)"/>
+<rect x="0%" y="0%" width="63.5%" height="100%" fill-opacity="0.8" fill="var(--theme-body-background)" />
+
 		<rect x="63.5%" y="0%" width="36.5%" height="100%" fill="#fff" />
 
 		<xsl:call-template name="cropped-container" />
@@ -31,10 +33,11 @@
 	            line-height:140%;
 	            overflow: unset;
                 -webkit-line-clamp: unset;
-	        }'"/>
+}'" />
 		</style>
 
-		<rect x="3%" y="5%" width="58%" height="39%" fill="var(--theme-body-background)"/>
+<rect x="3%" y="5%" width="58%" height="39%" fill="var(--theme-body-background)" />
+
 		<image x="3.5%" y="6%" width="28%" height="36.6%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
 				<xsl:with-param name="idx" select="2" />
@@ -52,7 +55,8 @@
 				<foreignObject x="5%" y="20%" width="85%" height="40%" style="font-weight:600;font-size:180%;line-height:1.5; color:var(--theme-heading-color)">
 					<p>
 						<xsl:text>JUST SOLD – But </xsl:text>
-						<xsl:value-of select="$agentIWe"/>
+<xsl:value-of select="$agentIWe" />
+
 						<xsl:text> still have buyers who want YOUR home!</xsl:text>
 					</p>
 				</foreignObject>
@@ -173,8 +177,9 @@
 			</svg>
 		</g>
 
-		<rect x="64%" y="17%" stroke="#E6EAEB" stroke-width="1" fill-opacity="1" width="35%" height=".2" fill="#E6EAEB"/>
-		<rect x="63.5%" y="0" stroke="#E6EAEB" stroke-width="1" fill-opacity="1" width=".2" height="100%" fill="#E6EAEB"/>
+<rect x="64%" y="17%" stroke="#E6EAEB" stroke-width="1" fill-opacity="1" width="35%" height=".2" fill="#E6EAEB" />
+<rect x="63.5%" y="0" stroke="#E6EAEB" stroke-width="1" fill-opacity="1" width=".2" height="100%" fill="#E6EAEB" />
+
 
 		<text class="small" fill="#8494a0" style="font-weight:600;font-size:100%;">
 			<tspan x="67.5%" y="5%">
@@ -192,7 +197,8 @@
 		</text>
 
 		<foreignObject x="3%" y="94%" width="55%" height="5%" style="color:var(--theme-sub-heading-color);-webkit-line-clamp:1;line-clamp:1; text-overflow: ellipsis;display: -webkit-box; font-size: 60%;line-height: 120%;">
-			<xsl:call-template name="solicitation-disclaimer"/>
+<xsl:call-template name="solicitation-disclaimer" />
+
 		</foreignObject>
 
 		<xsl:call-template name="copyright">

@@ -8,26 +8,31 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 
 		<script>
-			<xsl:value-of select="'var listings=['"/>
+<xsl:value-of select="'var listings=['" />
+
 			<xsl:for-each select="//listings/listing">
-				<xsl:sort order="ascending" select="@state"/>
+<xsl:sort order="ascending" select="@state" />
+
 				<xsl:if test="position() &lt;= 100">
 					<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
 				</xsl:if>
 			</xsl:for-each>
-			<xsl:value-of select="'];'"/>
+<xsl:value-of select="'];'" />
+
 		</script>
 	</xsl:template>
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-serif.css') "/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-serif.css') " />
+
 		</link>
 
 		<style>
@@ -45,18 +50,22 @@
 
 			<div style="position:absolute;top:0;left:0;z-index:999;height:55%;width:45%;">
 				<svg height="100%" width="100%">
-					<xsl:call-template name="map-key"/>
+<xsl:call-template name="map-key" />
+
 				</svg>
 			</div>
 		</foreignObject>
 
-		<rect x="63%" y="55%" width="37%" height="45%" fill="#fff"/>
+<rect x="63%" y="55%" width="37%" height="45%" fill="#fff" />
 
-		<line x1="35%" x2="100%" y1="20.5%" y2="20.5%" stroke="var(--theme-emphasis-color)" stroke-width="1"/>
+
+<line x1="35%" x2="100%" y1="20.5%" y2="20.5%" stroke="var(--theme-emphasis-color)" stroke-width="1" />
+
 
 		<line x1="73.5%" x2="73.5%" y1="0" y2="20.5%" stroke="var(--theme-emphasis-color)" stroke-width="1" />
 
-		<line x1="63%" x2="63%" y1="55%" y2="100%" stroke="var(--theme-emphasis-color)" stroke-width="1"/>
+<line x1="63%" x2="63%" y1="55%" y2="100%" stroke="var(--theme-emphasis-color)" stroke-width="1" />
+
 
 		<line x1="35%" x2="35%" y1="0" y2="55%" stroke="var(--theme-emphasis-color)" stroke-width="1" />
 
@@ -64,7 +73,8 @@
 	</xsl:template>
 
 	<xsl:template name="cropped-content">
-		<rect x="73.5%" y="0%" width="25%" height="19.5%" fill="#fff"/>
+<rect x="73.5%" y="0%" width="25%" height="19.5%" fill="#fff" />
+
 
 		<g style="transform: translate(54.5%, 1.5%);">
 			<text x="20%" y="3%" fill="#000" font-weight="600" style="font-size:80%;">
@@ -129,8 +139,9 @@
 			<text x="36.5%" y="0" fill="var(--theme-heading-color)" style="font-size:180%;font-weight:800;">
 				<tspan>
 					<xsl:call-template name="property-type-caption">
-						<xsl:with-param name="short" select="'true'"/>
-						<xsl:with-param name="singular" select="'true'"/>
+<xsl:with-param name="short" select="'true'" />
+<xsl:with-param name="singular" select="'true'" />
+
 					</xsl:call-template>
 				</tspan>
 				<tspan x="36.5%" y="4.7%">Values</tspan>
@@ -180,7 +191,8 @@
 						<xsl:text>Last 30 days</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')"/>
+<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
+
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>

@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 
@@ -15,7 +16,8 @@
 			<text class="sub-heading bold" style="font-size:200%;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'areanamemarket'" />
-<xsl:with-param name="default" select="concat( 'Single Family &#124; ', //area/name)"/>
+<xsl:with-param name="default" select="concat( 'Single Family &#124; ', //area/name)" />
+
 
 				</xsl:call-template>
 			</text>
@@ -55,11 +57,13 @@
 				<xsl:choose>
 					<xsl:when test="//single/soldDate!=''">
 						<tspan class="narrow">Sold For </tspan>
-						<xsl:value-of select="format-number( //single/salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+
 					</xsl:when>
 					<xsl:otherwise>
 						<tspan class="narrow">Listed </tspan>
-						<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>

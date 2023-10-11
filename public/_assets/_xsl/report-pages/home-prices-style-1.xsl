@@ -8,7 +8,8 @@ Supports:	Area
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<g>
 
@@ -28,7 +29,8 @@ Supports:	Area
 							<xsl:text>last Month</xsl:text>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="concat( 'last ', //areas/area[1]/statistics/@lookbackMonths, ' months')"/>
+<xsl:value-of select="concat( 'last ', //areas/area[1]/statistics/@lookbackMonths, ' months')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 					<xsl:text>. Take a look at the details below!</xsl:text>

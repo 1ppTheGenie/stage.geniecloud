@@ -7,7 +7,8 @@ Supports:	Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 
 		<rect x="0" y="0" width="51%" height="100%" fill="#fff"></rect>
@@ -24,7 +25,8 @@ Supports:	Area, Print, Listing, QRCode
 
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')" />
+
 		</link>
 
 		<g style="transform:translate(45.2%, 55.5%)">
@@ -55,8 +57,9 @@ Supports:	Area, Print, Listing, QRCode
 		</text>
 
 		<svg x="-0.8%" y="42%" width="50%" height="48%" viewBox="0 0 1289 757" style="enable-background:new 0 0 1289 757;" xml:space="preserve">
-			<rect fill="#eeac27" x="47.7" y="367.12" class="st0" width="1169.3" height="7.88"/>
-			<polygon fill="#eeac27" points="1199.21,346 1194.02,351.93 1215.49,370.71 1194.5,390 1199.83,395.81 1227.3,370.57 "/>
+<rect fill="#eeac27" x="47.7" y="367.12" class="st0" width="1169.3" height="7.88" />
+<polygon fill="#eeac27" points="1199.21,346 1194.02,351.93 1215.49,370.71 1194.5,390 1199.83,395.81 1227.3,370.57 " />
+
 		</svg>
 
 		<text x="4%" y="68.2%" class="middle" fill="#fff" style="font-family:'Gotham';font-size:96%;word-spacing:-2px;">

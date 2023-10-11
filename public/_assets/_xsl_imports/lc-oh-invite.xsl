@@ -16,7 +16,8 @@
 			<g style="transform:translate(80%, 0%)">
 				<svg width="10%" x="-0.3%" y="-44.5%" viewBox="0 0 68 100" fill="var(--theme-body-background)"
 					xmlns="http://www.w3.org/2000/svg">
-					<path d="M0 82.5V0H67.5V82.5L33.5 100L0 82.5Z"/>
+<path d="M0 82.5V0H67.5V82.5L33.5 100L0 82.5Z" />
+
 				</svg>
 
 				<xsl:call-template name="qr-code">
@@ -34,10 +35,12 @@
 				</text>
 			</g>
 
-			<rect x="0" y="45%" fill="var(--theme-sub-heading-color)" width="100%" height="2%"/>
+<rect x="0" y="45%" fill="var(--theme-sub-heading-color)" width="100%" height="2%" />
+
 
 			<g style="transform:translate(0%,43%)">
-				<rect x="13%" y="-3%" fill="var(--theme-sub-heading-color)" width="75%" height="13.5%"/>
+<rect x="13%" y="-3%" fill="var(--theme-sub-heading-color)" width="75%" height="13.5%" />
+
 				<text x="50%" y="-2%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="370%" font-weight="200">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'openhouse'" />
@@ -89,7 +92,8 @@
 			</g>
 
 			<g style="transform:translate(0%,83%)">
-				<rect fill="var(--theme-body-color)" width="100%" height="5%"/>
+<rect fill="var(--theme-body-color)" width="100%" height="5%" />
+
 				<g class="icon-stat" style="transform:translate(26.5%, -0.9%)">
 					<use x="0" y="1%" width="3%" height="4%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#bed-icon' )" />

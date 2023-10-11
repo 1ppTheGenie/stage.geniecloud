@@ -8,11 +8,14 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
-	<xsl:template name="svg-body">
-		<rect x="3%" y="4.8%" width="94%" height="90%" fill-opacity="0" stroke="var(--theme-body-color)" stroke-width="2"/>
+<xsl:import href="common.xsl" />
 
-		<rect x="5%" y="9%" width="90%" height="81%" fill="var(--theme-body-background)" stroke="var(--theme-body-color)" stroke-width="2"/>
+	<xsl:template name="svg-body">
+<rect x="3%" y="4.8%" width="94%" height="90%" fill-opacity="0" stroke="var(--theme-body-color)" stroke-width="2" />
+
+
+<rect x="5%" y="9%" width="90%" height="81%" fill="var(--theme-body-background)" stroke="var(--theme-body-color)" stroke-width="2" />
+
 
 		<g style="transform:translateY(-8%)">
 			<svg height="80" width="300" x="37%" y="34.2%">

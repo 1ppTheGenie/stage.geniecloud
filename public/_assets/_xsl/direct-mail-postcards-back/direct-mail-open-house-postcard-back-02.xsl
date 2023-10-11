@@ -9,19 +9,23 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<image x="0" y="0" width="50%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="idx" select="genie:pick( 0, string(//output/@imageIndex), count(//single/images/image), '', '' )"/>
+<xsl:with-param name="idx" select="genie:pick( 0, string(//output/@imageIndex), count(//single/images/image), '', '' )" />
+
 			</xsl:call-template>
 		</image>
 
-		<rect x="0" width="50%" height="100%" fill-opacity="0.8" fill="var(--theme-sub-heading-color)"/>
+<rect x="0" width="50%" height="100%" fill-opacity="0.8" fill="var(--theme-sub-heading-color)" />
+
 
 		<image x="50.4%" y="0" width="49.6%" height="49.6%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="idx" select="genie:pick( ( 1, string(//output/@imageIndex), count(//single/images/image) ) )"/>
+<xsl:with-param name="idx" select="genie:pick( ( 1, string(//output/@imageIndex), count(//single/images/image) ) )" />
+
 			</xsl:call-template>
 		</image>
 

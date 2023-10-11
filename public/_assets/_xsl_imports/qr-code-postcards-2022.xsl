@@ -86,11 +86,13 @@
 
 			<xsl:if test="//single/statusTypeID!=14">
 				<text x="18%" y="54%" class="center upper" fill="var(--theme-body-color)" style="font-size:100%;font-weight:600;font-family:var(--theme-sub-heading-font);">
-					<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 				</text>
 
 				<text x="18%" y="58%" class="center upper" fill="var(--theme-body-color)" style="font-size:100%;font-weight:600;font-family:var(--theme-sub-heading-font);">
-					<xsl:call-template name="listing-address-line-two"/>
+<xsl:call-template name="listing-address-line-two" />
+
 				</text>
 			</xsl:if>
 

@@ -8,7 +8,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'
@@ -16,10 +17,11 @@
 			    font-size: 6px;
 			    padding-top: 30px; 
 			    transform: translate(2.5%, 98.3%);
-			}'"/>
+}'" />
 		</style>
 
-		<rect xmlns="" x="0%" y="0%" width="100%" height="13%" fill="var(--theme-sub-heading-color)"/>
+<rect xmlns="" x="0%" y="0%" width="100%" height="13%" fill="var(--theme-sub-heading-color)" />
+
 
 		<image x="25%" y="13%" width="75%" height="53%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -45,11 +47,13 @@
 				</xsl:choose>
 			</tspan>
 			<tspan dominant-baseline="middle">
-				<xsl:value-of select="concat(' in ', //area/name)"/>
+<xsl:value-of select="concat(' in ', //area/name)" />
+
 			</tspan>
 		</text>
 
-		<rect xmlns="" x="0%" y="13%" width="25%" height="53%" fill="var(--theme-heading-color)"/>
+<rect xmlns="" x="0%" y="13%" width="25%" height="53%" fill="var(--theme-heading-color)" />
+
 
 		<g style="transform-origin: 0; transform: rotate(-90deg) translate(34%, 58%)">
 			<text font-size="120%" font-weight="600" class="align-right sub-heading" data-max-height="40%">
@@ -112,7 +116,8 @@
 			</text>
 		</g>
 
-		<rect xmlns="" x="0%" y="79%" width="100%" height="12%" fill="var(--theme-heading-color)"/>
+<rect xmlns="" x="0%" y="79%" width="100%" height="12%" fill="var(--theme-heading-color)" />
+
 
 		<xsl:choose>
 			<xsl:when test="$companyLogo!=''">
@@ -158,7 +163,8 @@
 			</xsl:attribute>
 		</image>
 
-		<rect xmlns="" x="0%" y="91%" width="100%" height="9%" fill="var(--theme-sub-heading-color)" fill-opacity="0.8"/>
+<rect xmlns="" x="0%" y="91%" width="100%" height="9%" fill="var(--theme-sub-heading-color)" fill-opacity="0.8" />
+
 		<text x="50%" y="93.6%" font-size="120%" font-family="var(--theme-body-font)" fill="var(--theme-body-color)" class="upper bold center" data-max-width="65%" dominant-baseline="middle">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'areaname '" />

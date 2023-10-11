@@ -34,10 +34,12 @@
 				</script>
 
 				<link rel="stylesheet" type="text/css">
-					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/genie-colors.css') "/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/genie-colors.css') " />
+
 				</link>
 				<link rel="manifest">
-					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/components/genie-embed/build/manifest.json') "/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/components/genie-embed/build/manifest.json') " />
+
 				</link>
 
 				<script>
@@ -102,11 +104,13 @@
 
 	<xsl:template name="embed">
 		<xsl:param name="component" />
-		<xsl:param name="variation" select="''"/>
-		<xsl:param name="mode" select="''"/>
-		<xsl:param name="nocopyright" select="''"/>
+<xsl:param name="variation" select="''" />
+<xsl:param name="mode" select="''" />
+<xsl:param name="nocopyright" select="''" />
+
 		<xsl:param name="mapStyle" select="//output/@mapStyle" />
-		<xsl:param name="renderAs" select="'html'"/>
+<xsl:param name="renderAs" select="'html'" />
+
 
 		<xsl:if test="$renderAs='html'">
 			<div style="width:100%;" data-genie-xsl-output="true">
@@ -222,7 +226,7 @@
 				font-size: 150%;
 				background-color: #eee;
 				white-space: break-spaces;
-			}'"/>
+}'" />
 		</style>
 
 		<h1>Genie Embeds</h1>
@@ -233,16 +237,11 @@
 		<p>The first code is only required once, regardless of how many Genie Embeds you have on the page:</p>
 
 		<pre class="formatted-html" id="genie-script">
-			<xsl:value-of select="concat( '&lt;script src=&quot;', //output/@siteUrl,'embed-handler?v=3.1&quot;&gt;&lt;/script&gt;' )"/>
+<xsl:value-of select="concat( '&lt;script src=&quot;', //output/@siteUrl,'embed-handler?v=3.1&quot;&gt;&lt;/script&gt;' )" />
+
 		</pre>
 
 		<p>For this specific embed, copy the following to your web page in the place you wish it to appear:</p>
-
-		<pre class="formatted-html">
-			<xsl:call-template name="body">
-				<xsl:with-param name="renderAs" select="'text'"/>
-			</xsl:call-template>
-		</pre>
 
 		<p>That's it!</p>
 	</xsl:template>

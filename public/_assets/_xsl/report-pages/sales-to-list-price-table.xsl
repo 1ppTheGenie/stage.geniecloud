@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<g style="transform:translate(0,5%)">
 			<text x="50%" y="0" class="align-center upper" style="font-size:180%">
@@ -31,7 +32,8 @@
 			</text>
 
 			<xsl:for-each select="//statistics/history/period">
-				<xsl:sort select="@period" data-type="number" order="descending"/>
+<xsl:sort select="@period" data-type="number" order="descending" />
+
 				<xsl:if test="position() &lt; 7">
 					<line x1="2%" x2="94%" stroke="var(--vivid-color-1)">
 						<xsl:attribute name="y1">
@@ -53,19 +55,23 @@
 						</tspan >
 						<tspan x="38%">
 							<xsl:call-template name="format-price">
-								<xsl:with-param name="price" select="@averageListPrice"/>
+<xsl:with-param name="price" select="@averageListPrice" />
+
 							</xsl:call-template>
 						</tspan>
 						<tspan x="58%">
 							<xsl:call-template name="format-price">
-								<xsl:with-param name="price" select="@averageSalePrice"/>
+<xsl:with-param name="price" select="@averageSalePrice" />
+
 							</xsl:call-template>
 						</tspan>
 						<tspan x="74%">
-							<xsl:value-of select="@averageDaysOnMarket"/>
+<xsl:value-of select="@averageDaysOnMarket" />
+
 						</tspan>
 						<tspan x="86%">
-							<xsl:value-of select="format-number( @averageSalePrice div @averageListPrice, '#.00%' )"/>
+<xsl:value-of select="format-number( @averageSalePrice div @averageListPrice, '#.00%' )" />
+
 						</tspan>
 					</text>
 				</xsl:if>

@@ -7,7 +7,8 @@ Supports:	Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 		<xsl:variable name="mapListingNodes" select="//listings/listing[@state='sold']" />
@@ -42,7 +43,8 @@ Supports:	Area, Print, Listing, QRCode
 				<stop offset="100%" style="stop-color:#0e1232;stop-opacity:1.00" />
 			</linearGradient>
 		</defs>
-		<rect x="0" y="0" width="50%" height="100%" fill="url(#lgrad)"/>
+<rect x="0" y="0" width="50%" height="100%" fill="url(#lgrad)" />
+
 
 		<image x="39.5%" y="73.2%" width="13.5%" height="26.8%" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
@@ -72,10 +74,12 @@ Supports:	Area, Print, Listing, QRCode
 
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet" type="text/css">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 		<link rel="stylesheet" type="text/css">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/smooch.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/smooch.css')" />
+
 		</link>
 
 		<g>
@@ -89,7 +93,8 @@ Supports:	Area, Print, Listing, QRCode
 			</foreignObject>
 			<text x="4%" y="25%" class="middle lower" fill="#fff" style="font-family:'futura'; letter-spacing: 1px; font-size:285%; font-weight:800;">
 				<tspan>
-					<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')"/>
+<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
+
 				</tspan>
 				<tspan>
 					<xsl:call-template name="editable">
@@ -122,7 +127,8 @@ Supports:	Area, Print, Listing, QRCode
 							<xsl:text>LAST 30 DAYS.</xsl:text>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')"/>
+<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 				</tspan>
@@ -146,8 +152,9 @@ Supports:	Area, Print, Listing, QRCode
 			<svg width="41%" height="22%" x="0.8%" y="46%" version="3.0" id="Layer_1" viewBox="0 0 2000 452" style="enable-background:new 0 0 2000 452;" xml:space="preserve">
 				<g>
 					<path fill="#b2934e" d="M1757.79,75.26c-58.07,0-105.31,47.24-105.31,105.31v117.14c0,42.23-34.36,76.59-76.59,76.59H136.91v11.53
-                        h1438.98c48.59,0,88.12-39.53,88.12-88.12V180.57c0-51.71,42.07-93.78,93.78-93.78h114.2V75.26H1757.79z"/>
-					<polygon fill="#b2934e" points="1841.9,44.98 1834.31,53.66 1865.73,81.13 1835.02,109.35 1842.82,117.84 1883,80.92     "/>
+h1438.98c48.59,0,88.12-39.53,88.12-88.12V180.57c0-51.71,42.07-93.78,93.78-93.78h114.2V75.26H1757.79z" />
+<polygon fill="#b2934e" points="1841.9,44.98 1834.31,53.66 1865.73,81.13 1835.02,109.35 1842.82,117.84 1883,80.92     " />
+
 				</g>
 			</svg>
 		</g>

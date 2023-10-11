@@ -8,7 +8,8 @@ Supports:	Area, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<rect x="63.5%" y="0%" width="36.5%" height="100%" fill="#fff" />
 
@@ -17,7 +18,8 @@ Supports:	Area, QRCode
 
 	<xsl:template name="cropped-content">
 		<g style="transform: translate(0%, 51.5%);">
-			<rect fill-opacity="1" width="28%" height="38%" class="heading"/>
+<rect fill-opacity="1" width="28%" height="38%" class="heading" />
+
 		</g>
 		<g style="transform: translate(14%, 72%);">
 			<text class="center bold sub-heading" style="font-size:90%;">
@@ -67,7 +69,8 @@ Supports:	Area, QRCode
 		</g>
 
 		<g style="transform: translate(28%, 51.5%);">
-			<rect fill-opacity="1" width="35.5%" height="38%" fill="var(--theme-body-color)"/>
+<rect fill-opacity="1" width="35.5%" height="38%" fill="var(--theme-body-color)" />
+
 		</g>
 
 		<foreignObject y="57%" x="30%" width="15%" height="28%" style="font-size:125%;color:var(--theme-body-background);">
@@ -82,7 +85,8 @@ Supports:	Area, QRCode
 				<xsl:with-param name="idx" select="1" />
 			</xsl:call-template>
 		</image>
-		<rect x="0%" y="0%" fill-opacity="1" width="63.5%" height="51.5%" opacity="0.5" fill="var(--theme-heading-color)"/>
+<rect x="0%" y="0%" fill-opacity="1" width="63.5%" height="51.5%" opacity="0.5" fill="var(--theme-heading-color)" />
+
 
 		<g style="transform:translate(3%,18%)">
 			<svg width="50%" height="28%" style="font-size:110%;">
@@ -93,7 +97,8 @@ Supports:	Area, QRCode
 					</xsl:call-template>
 				</text>
 				<text x="" y="35%" class="upper sub-heading bold" style="font-size:280%;color:var(--theme-sub-heading-color);" tabindex="1">Just 
-					<xsl:value-of select="$soldListed"/>
+<xsl:value-of select="$soldListed" />
+
 				</text>
 			</svg>
 			<svg y="22%" width="50%" height="5%">
@@ -106,7 +111,8 @@ Supports:	Area, QRCode
 						</xsl:call-template>
 					</tspan>
 					<tspan>
-						<xsl:call-template name="listing-address-line-one"/>
+<xsl:call-template name="listing-address-line-one" />
+
 					</tspan>
 					<tspan>
 					was just listed.
@@ -128,7 +134,8 @@ Supports:	Area, QRCode
 			</xsl:attribute>
 		</image>
 
-		<rect x="0%" y="89%" fill-opacity="1" width="63.5%" height="11%" opacity="0.2" fill="var(--theme-body-color)"/>
+<rect x="0%" y="89%" fill-opacity="1" width="63.5%" height="11%" opacity="0.2" fill="var(--theme-body-color)" />
+
 		<g style="transform:translate(3%,86%)">
 			<svg width="35%" height="17.5%">
 				<image x="0" y="0" width="20%" height="80%" preserveAspectRatio="xMidYMid slice">

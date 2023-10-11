@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="body">
 		<xsl:call-template name="svg-wrapper" />
@@ -80,7 +81,8 @@
 		</image>
 
 		<foreignObject x="2%" y="93.5%" width="31%" height="7%" style="color:var(--theme-sub-heading-color);-webkit-line-clamp:1;line-clamp:1; text-overflow: ellipsis;display: -webkit-box; font-size: 60%;line-height: 120%;">
-			<xsl:call-template name="solicitation-disclaimer"/>
+<xsl:call-template name="solicitation-disclaimer" />
+
 		</foreignObject>
 
 		<rect stroke="var(--theme-heading-color)" stroke-width="15" rx="20" ry="20" fill-opacity="0" x="5.3%" y="10.8%" width="23.5%" height="34%"></rect>
@@ -422,7 +424,8 @@
 				<xsl:value-of select="//agent[1]/address/zip" />
 			</text>
 		</g>
-		<rect x="63.5%" y="0" stroke="#E6EAEB" stroke-width="1" fill-opacity="1" width=".2" height="100%" fill="#E6EAEB"/>
+<rect x="63.5%" y="0" stroke="#E6EAEB" stroke-width="1" fill-opacity="1" width=".2" height="100%" fill="#E6EAEB" />
+
 
 		<xsl:call-template name="copyright">
 			<xsl:with-param name="disclaimer" select="'direct-mail'" />

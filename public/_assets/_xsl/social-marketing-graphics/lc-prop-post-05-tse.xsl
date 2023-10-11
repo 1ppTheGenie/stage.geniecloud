@@ -9,10 +9,12 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<style>
-			<xsl:value-of select="'text { dominant-baseline: middle;}'"/>
+<xsl:value-of select="'text { dominant-baseline: middle;}'" />
+
 		</style>
 
 		<rect xmlns="" x="0%" y="0%" width="100%" height="100%" fill="#fff">
@@ -25,12 +27,14 @@
 				<xsl:choose>
 					<xsl:when test="//single/sale-price!=''">
 						<tspan class="bold">Sold for  </tspan>
-						<xsl:value-of select="format-number( //single/sale-price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/sale-price, '$###,###')" />
+
 					</xsl:when>
 					<xsl:otherwise>
 						<tspan class="bold">Just Listed </tspan>
 						<tspan>
-							<xsl:value-of select="format-number( //single/price , '$###,###')"/>
+<xsl:value-of select="format-number( //single/price , '$###,###')" />
+
 						</tspan>
 					</xsl:otherwise>
 				</xsl:choose>
@@ -104,7 +108,8 @@
 				</xsl:call-template>
 			</text>
 		</g>
-		<rect xmlns="" x="0%" y="77%" width="100%" height="12%" fill="var(--theme-sub-heading-color)"/>
+<rect xmlns="" x="0%" y="77%" width="100%" height="12%" fill="var(--theme-sub-heading-color)" />
+
 
 		<!-- logos condition wise -->
 		<xsl:choose>

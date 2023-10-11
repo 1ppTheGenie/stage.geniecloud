@@ -8,11 +8,13 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<g>
-			<rect x="0" y="0" width="100%" height="25%" fill="var(--theme-sub-heading-color)"/>
+<rect x="0" y="0" width="100%" height="25%" fill="var(--theme-sub-heading-color)" />
+
 			<svg height="80" width="100%" y="22%" x="0">
 				<path stroke-linecap="butt" d="M0 20 l1200 0" fill="none" stroke="var(--vivid-color-5)" stroke-width="6"></path>
 			</svg>
@@ -57,33 +59,39 @@ and let's talk!
 					<xsl:call-template name="listing-address-line-one" />
 				</text>
 				<text class="center upper" x="50%" y="70%" fill="var(--theme-body-color)" style="font-size:90%">
-					<xsl:value-of select="//single/bedrooms/@count"/>
-				 BR &#8226; <xsl:value-of select="(//single/bathrooms/@full+//single/bathrooms/@half)"/>
-				 BA &#8226; <xsl:value-of select="format-number( //single/squareFeet, '###,###' )"/>
+<xsl:value-of select="//single/bedrooms/@count" />
+				 BR &#8226; <xsl:value-of select="(//single/bathrooms/@full+//single/bathrooms/@half)" />
+				 BA &#8226; <xsl:value-of select="format-number( //single/squareFeet, '###,###' )" />
+
 				 ESF
 			</text>
 			<text class="upper center bold" x="50%" y="78%" fill="var(--theme-body-color)" style="font-size:110%;">
 				<xsl:choose>
 					<xsl:when test="//single/soldDate!=''">
 						<tspan>Sold For </tspan>
-						<xsl:value-of select="format-number( //single/salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+
 					</xsl:when>
 					<xsl:otherwise>
 						<tspan>Asking </tspan>
-						<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>
 			<g style="transform:translate(4%,35%)">
 				<filter x="-0.1" y="-0.3" width="1.2" height="1.7" id="solid">
-					<feFlood flood-color="var(--theme-sub-heading-color)"/>
+<feFlood flood-color="var(--theme-sub-heading-color)" />
+
 					<feComposite in="SourceGraphic" operator="xor" />
 				</filter>
 				<text y="0" filter="url(#solid)" class="upper" style="fill:var(--theme-body-background); font-size: 90%;">
-					Just <xsl:value-of select="$soldListed"/>
+Just<xsl:value-of select="$soldListed" />
+
 				</text>
 				<text y="0" fill="#fff" class="upper" style="fill:var(--theme-body-background); font-size: 90%;">
-					Just <xsl:value-of select="$soldListed"/>
+Just<xsl:value-of select="$soldListed" />
+
 				</text>
 			</g>
 		</svg>
@@ -101,33 +109,39 @@ and let's talk!
 				<xsl:call-template name="listing-address-line-one" />
 			</text>
 			<text class="center upper" x="50%" y="70%" fill="var(--theme-body-color)" style="font-size:90%">
-				<xsl:value-of select="//single/bedrooms/@count"/>
-				 BR &#8226; <xsl:value-of select="(//single/bathrooms/@full+//single/bathrooms/@half)"/>
-				 BA &#8226; <xsl:value-of select="format-number( //single/squareFeet, '###,###' )"/>
+<xsl:value-of select="//single/bedrooms/@count" />
+				 BR &#8226; <xsl:value-of select="(//single/bathrooms/@full+//single/bathrooms/@half)" />
+				 BA &#8226; <xsl:value-of select="format-number( //single/squareFeet, '###,###' )" />
+
 				 ESF
 		</text>
 		<text class="upper center bold" x="50%" y="78%" fill="var(--theme-body-color)" style="font-size:110%;">
 			<xsl:choose>
 				<xsl:when test="//single/soldDate!=''">
 					<tspan>Sold For </tspan>
-					<xsl:value-of select="format-number( //single/salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+
 				</xsl:when>
 				<xsl:otherwise>
 					<tspan>Asking </tspan>
-					<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 				</xsl:otherwise>
 			</xsl:choose>
 		</text>
 		<g style="transform:translate(4%,35%)">
 			<filter x="-0.1" y="-0.3" width="1.2" height="1.7" id="solid">
-				<feFlood flood-color="var(--theme-sub-heading-color)"/>
+<feFlood flood-color="var(--theme-sub-heading-color)" />
+
 				<feComposite in="SourceGraphic" operator="xor" />
 			</filter>
 			<text y="0" filter="url(#solid)" class="upper" style="fill:var(--theme-body-background); font-size: 90%;">
-					Just <xsl:value-of select="$soldListed"/>
+Just<xsl:value-of select="$soldListed" />
+
 			</text>
 			<text y="0" fill="#fff" class="upper" style="fill:var(--theme-body-background); font-size: 90%;">
-					Just <xsl:value-of select="$soldListed"/>
+Just<xsl:value-of select="$soldListed" />
+
 			</text>
 		</g>
 	</svg>
@@ -145,33 +159,39 @@ and let's talk!
 			<xsl:call-template name="listing-address-line-one" />
 		</text>
 		<text class="center upper" x="50%" y="70%" fill="var(--theme-body-color)" style="font-size:90%">
-			<xsl:value-of select="//single/bedrooms/@count"/>
-				 BR &#8226; <xsl:value-of select="(//single/bathrooms/@full+//single/bathrooms/@half)"/>
-				 BA &#8226; <xsl:value-of select="format-number( //single/squareFeet, '###,###' )"/>
+<xsl:value-of select="//single/bedrooms/@count" />
+				 BR &#8226; <xsl:value-of select="(//single/bathrooms/@full+//single/bathrooms/@half)" />
+				 BA &#8226; <xsl:value-of select="format-number( //single/squareFeet, '###,###' )" />
+
 				 ESF
 	</text>
 	<text class="upper center bold" x="50%" y="78%" fill="var(--theme-body-color)" style="font-size:110%;">
 		<xsl:choose>
 			<xsl:when test="//single/soldDate!=''">
 				<tspan>Sold For </tspan>
-				<xsl:value-of select="format-number( //single/salePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+
 			</xsl:when>
 			<xsl:otherwise>
 				<tspan>Asking </tspan>
-				<xsl:value-of select="format-number( //single/price, '$###,###')"/>
+<xsl:value-of select="format-number( //single/price, '$###,###')" />
+
 			</xsl:otherwise>
 		</xsl:choose>
 	</text>
 	<g style="transform:translate(4%,35%)">
 		<filter x="-0.1" y="-0.3" width="1.2" height="1.7" id="solid">
-			<feFlood flood-color="var(--theme-sub-heading-color)"/>
+<feFlood flood-color="var(--theme-sub-heading-color)" />
+
 			<feComposite in="SourceGraphic" operator="xor" />
 		</filter>
 		<text y="0" filter="url(#solid)" class="upper" style="fill:var(--theme-body-background); font-size: 90%;">
-            Just <xsl:value-of select="$soldListed"/>
+Just<xsl:value-of select="$soldListed" />
+
 		</text>
 		<text y="0" fill="#fff" class="upper" style="fill:var(--theme-body-background); font-size: 90%;">
-            Just <xsl:value-of select="$soldListed"/>
+Just<xsl:value-of select="$soldListed" />
+
 		</text>
 	</g>
 </svg>
@@ -184,7 +204,8 @@ and let's talk!
 	</image>
 </xsl:if>
 
-<rect x="2.5%" y="46%" width="63%" height="13%" fill="var(--theme-sub-heading-color)"/>
+<rect x="2.5%" y="46%" width="63%" height="13%" fill="var(--theme-sub-heading-color)" />
+
 <text x="35%" y="48%" class="center bold" fill="var(--theme-body-background)" style="    font-size: 140%;font-weight: 600;">
 	<tspan class="capitalize">Buying Or Selling Anywhere In <xsl:value-of select="//single/address/city" />
 ...

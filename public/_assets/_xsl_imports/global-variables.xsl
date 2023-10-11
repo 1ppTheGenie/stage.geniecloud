@@ -13,7 +13,8 @@
 		<xsl:param name="default" />
 		<xsl:choose>
 			<xsl:when test="//overrides/*[name()=$id][1]">
-				<xsl:value-of select="//overrides/*[name()=$id][1]"/>
+<xsl:value-of select="//overrides/*[name()=$id][1]" />
+
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="$default" />
@@ -28,10 +29,12 @@
 
 		<xsl:choose>
 			<xsl:when test="//overrides/primaryImage">
-				<xsl:value-of select="//overrides/primaryImage"/>
+<xsl:value-of select="//overrides/primaryImage" />
+
 			</xsl:when>
 			<xsl:when test="//overrides/*[name()=concat('LImage',$index)][1]">
-				<xsl:value-of select="//overrides/*[name()=concat('LImage',$index)][1]"/>
+<xsl:value-of select="//overrides/*[name()=concat('LImage',$index)][1]" />
+
 			</xsl:when>
 			<xsl:when test="$index=1 and $preferPrimary='true' and //single/photoPrimary!=''">
 				<xsl:value-of select="//single/photoPrimary" />
@@ -49,18 +52,21 @@
 	</xsl:template>
 
 	<xsl:template name="break">
-		<xsl:param name="text" select="string(.)"/>
+<xsl:param name="text" select="string(.)" />
+
 
 		<xsl:choose>
 			<xsl:when test="contains($text, '&#10;')">
-				<xsl:value-of select="substring-before($text, '&#10;')"/>
+<xsl:value-of select="substring-before($text, '&#10;')" />
+
 				<br/>
 				<xsl:call-template name="break">
 					<xsl:with-param name="text" select="substring-after($text, '&#10;')" />
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="$text"/>
+<xsl:value-of select="$text" />
+
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -76,7 +82,8 @@
 
 		<xsl:choose>
 			<xsl:when test="$price">
-				<xsl:value-of select="format-number( $price, '$###,###')"/>
+<xsl:value-of select="format-number( $price, '$###,###')" />
+
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="'$TBC'" />
@@ -121,7 +128,8 @@
 				<xsl:text>last month</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="concat( 'last ', //areas/area[1]/statistics/@lookbackMonths, ' months')"/>
+<xsl:value-of select="concat( 'last ', //areas/area[1]/statistics/@lookbackMonths, ' months')" />
+
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
@@ -130,7 +138,8 @@
 	<xsl:variable name="propertyType">
 		<xsl:choose>
 			<xsl:when test="//output/@propertyCaption!=''">
-				<xsl:value-of select="//output/@propertyCaption"/>
+<xsl:value-of select="//output/@propertyCaption" />
+
 			</xsl:when>
 			<xsl:when test="(//single/type = 'Condo') or (//single/type = '' and number(//areas/area[1]/statistics/@propertyType) = 1)">
 				<xsl:text>Condos</xsl:text>
@@ -148,10 +157,12 @@
 	<xsl:variable name="singularPropertyType">
 		<xsl:choose>
 			<xsl:when test="//output/@propertyCaptionSingular!='' and //output/@propertyCaptionSingular!='null'">
-				<xsl:value-of select="//output/@propertyCaptionSingular"/>
+<xsl:value-of select="//output/@propertyCaptionSingular" />
+
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="substring( $propertyType, 1, string-length($propertyType) - 1 )"/>
+<xsl:value-of select="substring( $propertyType, 1, string-length($propertyType) - 1 )" />
+
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
@@ -197,7 +208,8 @@
 		<dims name="a4" width="827" height="1169" />
 		<!-- For sizes going to print, values should be inches * 100, eg 11" x 6" = 1100 x 600 -->
 		<!-- DO NOT CHANGE these values -->
-		<dims name="postcard" width="1100" height="600"/>
+<dims name="postcard" width="1100" height="600" />
+
 		<dims name="facebook-ad" width="555" height="555" />
 		<dims name="facebook-post" width="555" height="555" />
 		<dims name="facebook-video-ad" width="555" height="555" />
@@ -206,7 +218,8 @@
 	</xsl:variable>
 
 	<xsl:variable name="assetSize">
-		<xsl:value-of select="//output/@size"/>
+<xsl:value-of select="//output/@size" />
+
 	</xsl:variable>
 
 	<!-- Dims for print should always be "inches * 100" Thus a 0.125" bleed, adds 0.25" in total (* 100 = 25) -->
@@ -577,10 +590,12 @@
 	<xsl:template name="lot-size">
 		<xsl:choose>
 			<xsl:when test="//single/lotSize castable as xs:double">
-				<xsl:value-of select="format-number( //single/lotSize, '###,###')"/>
+<xsl:value-of select="format-number( //single/lotSize, '###,###')" />
+
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="//single/lotSize"/>
+<xsl:value-of select="//single/lotSize" />
+
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>

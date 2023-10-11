@@ -7,7 +7,8 @@
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-scripts">
 		<xsl:if test="//output/@mapStyle!='no-map'">
 			<xsl:call-template name="map-files" />
@@ -20,7 +21,8 @@
 
 	<xsl:template name="svg-body">
 		<style>
-			<xsl:value-of select="'.leaflet-interactive {fill:#3388ff;stroke:#3388ff;fill-opacity:0.2;}'"/>
+<xsl:value-of select="'.leaflet-interactive {fill:#3388ff;stroke:#3388ff;fill-opacity:0.2;}'" />
+
 		</style>
 		<xsl:choose>
 			<xsl:when test="//output/@mapStyle!='no-map' or //area/image=''">
@@ -60,7 +62,8 @@
 		</text>
 
 		<g style="transform: translate(0,78%)">
-			<rect width="100%" height="20%" fill="var(--theme-body-background)" fill-opacity="80%"/>
+<rect width="100%" height="20%" fill="var(--theme-body-background)" fill-opacity="80%" />
+
 			<text x="50%" y="4%" class="center" style="font-size:27px;line-height:7%;font-family: var(--theme-body-font);letter-spacing:4px;" fill="var(--theme-body-color)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'marketreport'" />

@@ -9,7 +9,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<g>
 			<text x="50%" y="29%" class="bold center super-large">
@@ -27,12 +28,14 @@
 						</xsl:call-template>
 					</xsl:attribute>
 				</image>
-				<rect stroke="#f6cc45" stroke-width="4" fill-opacity="0" x="0.4%" y="-0.3%" width="99.4%" height="1"/>
-				<rect stroke="#f6cc45" stroke-width="4" fill-opacity="0" x="0.4%" y="30%" width="99.4%" height="1"/>
+<rect stroke="#f6cc45" stroke-width="4" fill-opacity="0" x="0.4%" y="-0.3%" width="99.4%" height="1" />
+<rect stroke="#f6cc45" stroke-width="4" fill-opacity="0" x="0.4%" y="30%" width="99.4%" height="1" />
+
 			</g>
 
 			<g style="transform: translate(0%, 58%);">
-				<rect stroke="var(--theme-body-color)" stroke-width="4" fill-opacity="1" x="30%" y="0" width="40%" height="15%" fill="var(--theme-body-background)"/>
+<rect stroke="var(--theme-body-color)" stroke-width="4" fill-opacity="1" x="30%" y="0" width="40%" height="15%" fill="var(--theme-body-background)" />
+
 				<image x="40%" y="2%" width="20%" height="10%" id="logo" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
 						<xsl:value-of select="$companyLogo" />
@@ -41,9 +44,11 @@
 			</g>
 
 			<g style="transform: translate(3%, 97%);">
-				<rect stroke="var(--theme-body-color)" stroke-width="3" fill-opacity="1" x="0" y="0" width="25%" height="1" fill="var(--theme-body-background)"/>
+<rect stroke="var(--theme-body-color)" stroke-width="3" fill-opacity="1" x="0" y="0" width="25%" height="1" fill="var(--theme-body-background)" />
 
-				<rect stroke="var(--theme-body-color)" stroke-width="3" fill-opacity="1" x="70%" y="0" width="25%" height="1" fill="var(--theme-body-background)"/>
+
+<rect stroke="var(--theme-body-color)" stroke-width="3" fill-opacity="1" x="70%" y="0" width="25%" height="1" fill="var(--theme-body-background)" />
+
 			</g>
 
 			<g style="transform: translate(0%, 95.5%);">

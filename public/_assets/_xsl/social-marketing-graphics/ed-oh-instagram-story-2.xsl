@@ -9,15 +9,18 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 
-	<xsl:import href="common.xsl"/>
-	<xsl:import href="lc-social-media.xsl"/>
+<xsl:import href="common.xsl" />
+<xsl:import href="lc-social-media.xsl" />
+
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 
-		<rect x="0%" y="0%" width="100%" height="100%" fill="#fff"/>
+<rect x="0%" y="0%" width="100%" height="100%" fill="#fff" />
+
 
 		<image x="2.5%" y="1%" width="95%" height="35.5%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -26,7 +29,8 @@
 			</xsl:call-template>
 		</image>
 
-		<rect x="2.5%" y="37.1%" width="95%" height="26%" fill="var(--theme-body-background)"/>
+<rect x="2.5%" y="37.1%" width="95%" height="26%" fill="var(--theme-body-background)" />
+
 
 		<text class="futura-text capitalize center" x="50%" y="43.2%" fill="var(--theme-heading-color)" font-weight="700" font-size="400%">Open 1-4pm</text>
 

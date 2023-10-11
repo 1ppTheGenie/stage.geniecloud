@@ -8,10 +8,12 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')" />
+
 		</link>
 
 		<style>
@@ -64,7 +66,8 @@
 
 			<svg class="background-shape" x="15.2%" y="12.2%">
 
-				<polygon points="0,0 585,0 805,280 0,290" fill="var(--theme-drk)"/>
+<polygon points="0,0 585,0 805,280 0,290" fill="var(--theme-drk)" />
+
 				<rect style="transform: rotate(321.4deg);" x="31%" y="22.5%" width="4px" height="19%" fill="white"></rect>
 			</svg>
 			<text x="5%" y="18%" font-size="30px" class="gotham" font-weight="400" style="line-height:7%;" fill="#edaa2a">
@@ -113,7 +116,8 @@
 					<xsl:with-param name="idx" select="3" />
 				</xsl:call-template>
 			</image>
-			<rect x="0%" y="56.1%" width="100%" height="4%" fill="#000" fill-opacity="60%"/>
+<rect x="0%" y="56.1%" width="100%" height="4%" fill="#000" fill-opacity="60%" />
+
 			<text x="95%" y="56.8%" class="align-right" font-size="46px" font-family="var(--theme-body-font)" style="line-height:7%;letter-spacing:4px;" fill="#edaa2a">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'marketreport'" />
@@ -123,7 +127,8 @@
 
 			<foreignObject x="5%" y="60%" width="70%" height="25%">
 				<p style="color:var(theme-colr);-webkit-line-clamp:11;font-size:140%;line-height: 135%;text-align:justify;">
-					<xsl:call-template name="listing-description"/>
+<xsl:call-template name="listing-description" />
+
 				</p>
 			</foreignObject>
 
@@ -285,7 +290,8 @@
 		</g>
 		<!-- <svg class="background-shape" x="21%" y="19.7%">
 			
-		<polygon points="0,0 606,0 816,250 0,250" fill="#074360"/>
+<polygon points="0,0 606,0 816,250 0,250" fill="#074360" />
+
 		  <rect style="transform: rotate(321deg);" x="32.2%" y="22.5%" width=".4%" height="15.2%" fill="white"></rect>
             </svg> -->
 

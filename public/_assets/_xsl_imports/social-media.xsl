@@ -82,7 +82,8 @@
 				<xsl:if test="//output/@isSimulator='facebook-ad'">
 					<div class="facebook-ad-simulator">
 						<span style="display:none;" data-msg="social-post" data-name="adName">
-							<xsl:call-template name="social-ad-name"/>
+<xsl:call-template name="social-ad-name" />
+
 						</span>
 						<h2 class="facebook-title">
 							<xsl:call-template name="editable">
@@ -120,15 +121,18 @@
 				</div>
 				<div class="facebook-share-like-comment-icon">
 					<span>
-						<img src="/_assets/_img/like-icon.webp"/>
+<img src="/_assets/_img/like-icon.webp" />
+
 						<xsl:text>&#160;Like</xsl:text>
 					</span>
 					<span>
-						<img src="/_assets/_img/comment-icon.webp"/>
+<img src="/_assets/_img/comment-icon.webp" />
+
 						<xsl:text>&#160;Comment</xsl:text>
 					</span>
 					<span>
-						<img src="/_assets/_img/share-icon.webp"/>
+<img src="/_assets/_img/share-icon.webp" />
+
 						<xsl:text>&#160;Share</xsl:text>
 					</span>
 					<img style="width: 16px; height: 16px">

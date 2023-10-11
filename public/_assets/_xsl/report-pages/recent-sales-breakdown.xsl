@@ -7,7 +7,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'
@@ -17,7 +18,7 @@
 			text.upper.rsb { transform: translateY(-2%); }
 			.map-marker .banner svg{ transform: translateY(2px); }
 			foreignObject.map-marker { transform: translateY(2%); }
-			'"/>
+'" />
 		</style>
 
 		<xsl:call-template name="svg-defs" />
@@ -35,11 +36,13 @@
 			</xsl:call-template>
 		</text>
 
-		<xsl:variable name="totalSales" select="sum(//statistics/byValue/range/@sold)"/>
+<xsl:variable name="totalSales" select="sum(//statistics/byValue/range/@sold)" />
+
 
 		<xsl:variable name="maxSales">
 			<xsl:for-each select="//statistics/byValue/range">
-				<xsl:sort select="@sold" data-type="number" order="descending"/>
+<xsl:sort select="@sold" data-type="number" order="descending" />
+
 				<xsl:if test="position() = 1">
 					<xsl:value-of select="@sold" />
 				</xsl:if>
@@ -61,7 +64,8 @@
 					</xsl:with-param>
 					<xsl:with-param name="width" select="//statistics/byValue/range[1]/@sold div $maxSales" />
 					<xsl:with-param name="diamond-caption" select="format-number( //statistics/byValue/range[1]/@sold div $totalSales, '#%' )" />
-					<xsl:with-param name="value" select="concat( //statistics/byValue/range[1]/@sold, ' sales' )"/>
+<xsl:with-param name="value" select="concat( //statistics/byValue/range[1]/@sold, ' sales' )" />
+
 				</xsl:call-template>
 			</g>
 
@@ -79,7 +83,8 @@
 					</xsl:with-param>
 					<xsl:with-param name="width" select="//statistics/byValue/range[2]/@sold div $maxSales" />
 					<xsl:with-param name="diamond-caption" select="format-number( //statistics/byValue/range[2]/@sold div $totalSales, '#%' )" />
-					<xsl:with-param name="value" select="concat( //statistics/byValue/range[2]/@sold, ' sales' )"/>
+<xsl:with-param name="value" select="concat( //statistics/byValue/range[2]/@sold, ' sales' )" />
+
 				</xsl:call-template>
 			</g>
 
@@ -97,13 +102,15 @@
 					</xsl:with-param>
 					<xsl:with-param name="width" select="//statistics/byValue/range[3]/@sold div $maxSales" />
 					<xsl:with-param name="diamond-caption" select="format-number( //statistics/byValue/range[3]/@sold div $totalSales, '#%' )" />
-					<xsl:with-param name="value" select="concat( //statistics/byValue/range[3]/@sold, ' sales' )"/>
+<xsl:with-param name="value" select="concat( //statistics/byValue/range[3]/@sold, ' sales' )" />
+
 				</xsl:call-template>
 			</g>
 		</g>
 
 		<g style="transform: translate(81%, 45%);">
-			<polyline style="fill:#fff; filter: drop-shadow(2px 3px 9px var(--theme-body-color)); transform: rotate(180deg); transform-origin: 8% 10%;" points="-20,60 0,40 0,0 200,0 200,120 0,120 0,80"/>
+<polyline style="fill:#fff; filter: drop-shadow(2px 3px 9px var(--theme-body-color)); transform: rotate(180deg); transform-origin: 8% 10%;" points="-20,60 0,40 0,0 200,0 200,120 0,120 0,80" />
+
 
 			<text x="8%" y="11%" class="center" style="font-size:420%" font-weight="bold" fill="#000">
 				<xsl:value-of select="//statistics/@averageDaysOnMarket" />

@@ -8,7 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
@@ -16,7 +17,8 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing[@salePrice!='']">
-				<xsl:sort select="@salePrice" data-type="number" order="descending"/>
+<xsl:sort select="@salePrice" data-type="number" order="descending" />
+
 				<xsl:if test="position()=1">
 					<xsl:value-of select="concat( &quot;{caption: 'HH', state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
 				</xsl:if>
@@ -32,7 +34,8 @@
 		<xsl:variable name="formattedChange" select="format-number( abs( 1 - $change ), '#.0%' )" />
 
 		<text x="3%" y="6%" class="upper heading" font-size="270%" data-max-width="45%">
-			<xsl:value-of select="$areaWithPropertyType"/>
+<xsl:value-of select="$areaWithPropertyType" />
+
 		</text>
 
 		<text x="3%" y="12.5%" class="upper sub-heading" font-size="180%">
@@ -66,14 +69,16 @@
 
 		<text x="3%" y="48.3%" font-size="240%" class="heading">
 			<tspan>
-				<xsl:value-of select="format-number( //statistics/@maxSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@maxSalePrice, '$###,###')" />
+
 			</tspan>
 		</text>
 
 		<text x="3%" y="55%" class="" font-size="105%" font-family="var(--theme-body-font)" fill="var(--theme-body-color)">
 			<tspan>Sold on 
 				<xsl:for-each select="//listings/listing[@salePrice!='']">
-					<xsl:sort select="@salePrice" data-type="number" order="descending"/>
+<xsl:sort select="@salePrice" data-type="number" order="descending" />
+
 					<xsl:if test="position()=1">
 						<xsl:value-of select="genie:format-date( @soldDate, '[MNn] [D], [Y0001]' )" />
 					</xsl:if>
@@ -88,7 +93,8 @@
 
 		<text x="3%" y="65.2%" font-size="240%" class="heading">
 			<tspan>
-				<xsl:value-of select="format-number( //statistics/@averageSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@averageSalePrice, '$###,###')" />
+
 			</tspan>
 		</text>
 
@@ -139,7 +145,8 @@
 
 		<text x="3%" y="78.5%" font-size="240%" class="heading">
 			<tspan>
-				<xsl:value-of select="format-number( //statistics/@medianSalePrice, '$###,###')"/>
+<xsl:value-of select="format-number( //statistics/@medianSalePrice, '$###,###')" />
+
 			</tspan>
 		</text>
 

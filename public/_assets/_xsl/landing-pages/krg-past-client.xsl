@@ -11,9 +11,11 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="landing-pages.xsl"/>
+<xsl:import href="landing-pages.xsl" />
 
-	<xsl:import href="landing-pages-market-insider.xsl"/>
+
+<xsl:import href="landing-pages-market-insider.xsl" />
+
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="description">
@@ -21,13 +23,16 @@
 		</xsl:variable>
 
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/landing-pages/css/krg-past-client.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/landing-pages/css/krg-past-client.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/landing-pages/css/market-insider-common.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/landing-pages/css/market-insider-common.css')" />
+
 		</link>
 
 		<xsl:call-template name="standard-header">
@@ -120,7 +125,8 @@
 								</h3>
 								<p class="text-white">
 									<strong>
-										<xsl:value-of select="concat( 'Video intro from Security Chief ', //agent[1]/marketingName )"/>
+<xsl:value-of select="concat( 'Video intro from Security Chief ', //agent[1]/marketingName )" />
+
 									</strong>
 									<xsl:text> • Median sale price • Average sale price • Avg. sale price per square foot High sale price • Number of homes sold • Number of homes for sale • Maps of current, pending, sold homes Details of all currently-listed homes • Details of recently sold homes • Details of currently pending homes Avg. days on market • Avg. length of ownership • 12-month turn over rate</xsl:text>
 
@@ -150,7 +156,8 @@
 					<div class="row mt-150">
 						<div class="col-md-9 footer">
 							<p class="text-white">
-<xsl:value-of select="concat( //agent[1]/marketingName, ' CALIFORNIA DEPARTMENT OF REAL ESTATE ', //agent[1]/marketingLicense, ' &#124; EXP REALTY OF CALIFORNIA, INC. CALIFORNIA DEPARTMENT OF REAL ESTATE #01878277. THE INFORMATION CONTAINED IN THIS DOCUMENT, INCLUDING, BUT NOT LIMITED TO, SQUARE FOOTAGE AND/OR ACREAGE, HAS BEEN PROVIDED BY VARIOUS SOURCES WHICH MAY INCLUDE THE SELLER, PUBLIC RECORDS, THE MULTIPLE LISTING SERVICE OR OTHER SOURCES. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.' )"/>
+<xsl:value-of select="concat( //agent[1]/marketingName, ' CALIFORNIA DEPARTMENT OF REAL ESTATE ', //agent[1]/marketingLicense, ' &#124; EXP REALTY OF CALIFORNIA, INC. CALIFORNIA DEPARTMENT OF REAL ESTATE #01878277. THE INFORMATION CONTAINED IN THIS DOCUMENT, INCLUDING, BUT NOT LIMITED TO, SQUARE FOOTAGE AND/OR ACREAGE, HAS BEEN PROVIDED BY VARIOUS SOURCES WHICH MAY INCLUDE THE SELLER, PUBLIC RECORDS, THE MULTIPLE LISTING SERVICE OR OTHER SOURCES. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.' )" />
+
 
 							</p>
 						</div>
@@ -184,7 +191,7 @@
 					} else {
 						mbtn.style.display = `block`;
 					}
-				}'"/>
+}'" />
 			</script>
 		</body>
 	</xsl:template>

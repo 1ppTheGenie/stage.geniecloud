@@ -7,9 +7,11 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
-		<xsl:value-of select="'text {dominant-baseline: auto;}'"/>
+<xsl:value-of select="'text {dominant-baseline: auto;}'" />
+
 
 		<g style="transform: translate(0%, 30%);">
 			<text x="50%" y="8%" class="large upper center" font-size="" font-family="var(--theme-heading-font)" style="font-size:50px; fill: var(--theme-heading-color);">

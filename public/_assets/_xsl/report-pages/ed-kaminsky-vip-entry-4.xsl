@@ -7,16 +7,20 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-	<xsl:import href="common.xsl"/>
+<xsl:import href="common.xsl" />
+
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')" />
+
 		</link>
 		<link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/caslon.css')"/>
+<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/caslon.css')" />
+
 		</link>
 
 		<rect x="0" y="0" width="100%" height="100%" fill="#0d0f30" style="background: #0d0f30;"></rect>
@@ -36,7 +40,8 @@
 		<svg height="100%" width="100%">
 			<circle cx="50%" cy="20.5%" r="12%" fill="#282843" />
 		</svg>
-		<line xmlns="" x1="0%" y1="20.6%" x2="50%" y2="20.6%" stroke="#282843" stroke-width="0.3%"/>
+<line xmlns="" x1="0%" y1="20.6%" x2="50%" y2="20.6%" stroke="#282843" stroke-width="0.3%" />
+
 
 		<text x="50%" y="38.1%" class="futura-text center" fill="#fff" font-size="420%" font-weight="700" style="letter-spacing:1.5px;">
 		    Want the inside scoop
