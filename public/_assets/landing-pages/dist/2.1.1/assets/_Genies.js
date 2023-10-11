@@ -22,24 +22,25 @@ const cssRootOverrides = {
 };
 const DATASTUB = "data-genie-";
 const CAMELCASE = {
-  agentid: "agentID",
-  renderid: "renderID",
+  agentid: "agentId",
+  renderid: "renderId",
   layout: "layout",
   theme: "theme",
+  areaid: "areaId",
   areaid: "areaID",
   areaperiod: "areaPeriod",
   period: "areaPeriod",
-  leadareaid: "leadAreaID",
+  leadareaid: "leadAreaId",
   mode: "mode",
   mapstyle: "mapStyle",
   mapicon: "mapIcon",
   mapkey: "mapKey",
   mlsnumber: "mlsNumber",
-  mlsid: "mlsID",
+  mlsid: "mlsId",
   blurprice: "blurPrice",
   signin: "signIn",
   pricepercent: "pricePercent",
-  propertytype: "propertyTypeID",
+  propertytype: "propertyTypeId",
   nocopyright: "noCopyright",
   openhouse: "openHouseTimes",
   hideavm: "hideAVM",
@@ -83,12 +84,12 @@ const _Genies = (() => {
     });
     if (queryParams.shorturldataid) {
       (async () => {
-        const agentID = document.querySelector(`div[${DATASTUB}agentid]`)?.getAttribute(`${DATASTUB}agentid`);
-        if (agentID) {
+        const agentId = document.querySelector(`div[${DATASTUB}agentid]`)?.getAttribute(`${DATASTUB}agentid`);
+        if (agentId) {
           const r = await getShortData({
             shortID: queryParams.shorturldataid,
             token: queryParams.token,
-            agentID
+            agentId
           });
           let ov = Object.fromEntries(Object.entries(r.result.property).map(([k, v]) => [k.toLowerCase(), v]));
 
@@ -108,7 +109,7 @@ const _Genies = (() => {
       var link = document.createElement("link");
       link.rel = "stylesheet";
       link.type = "text/css";
-      link.href = `${window.ghub.site_url}_assets/themes/${settings.theme}.css`;
+      link.href = `${window.ghub.siteUrl}_assets/themes/${settings.theme}.css`;
       document.head.appendChild(link);
     }
     genies.push(createComponent(Portal, {

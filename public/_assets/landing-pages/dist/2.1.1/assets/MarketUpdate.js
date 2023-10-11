@@ -249,7 +249,7 @@ const MarketUpdate = (() => {
     insert(_el$2, createComponent(HomeTypes
     /*showPeriod={parseInt(settings.period) === -1}*/, {
       get container() {
-        return `MarketSnapshot-${areaDataStore.areaID}`;
+        return `MarketSnapshot-${areaDataStore.areaId}`;
       },
       style: "width:100%"
     }), _el$9);
@@ -316,8 +316,8 @@ const MarketUpdate = (() => {
       id: "market-update-map",
       get children() {
         return [createComponent(GeoArea, {
-          get areaID() {
-            return areaDataStore.areaID;
+          get areaId() {
+            return areaDataStore.areaId;
           },
           style: "color:#feff00;fill-Opacity: 0;"
         }), createComponent(Show, {

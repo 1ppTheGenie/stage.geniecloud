@@ -312,7 +312,7 @@ const HomeValuation = (props => {
     buttonCaption = "Get your Value!"
   } = props;
   const {
-    areaID,
+    areaId,
     mapStyle,
     withLeadCapture
   } = useSettings();
@@ -347,7 +347,7 @@ const HomeValuation = (props => {
             return [createComponent(Suspense, {
               get children() {
                 return createComponent(GeoArea, {
-                  areaID: areaID,
+                  areaId: areaId,
                   fillColor: "var (--theme-color)"
                 });
               }
@@ -563,24 +563,24 @@ const _LandingPages = (() => {
   };
   document.addEventListener("trigger-update-lead", async e => {
     const settings = useSettings();
-    if (settings.leadID || settings.genieLeadID || window.gg.leadID) {
+    if (settings.leadId || settings.genieLeadId || window.gg.leadId) {
       await updateLead({
-        genieLeadId: settings.leadID || settings.genieLeadID || window.gg.leadID,
+        genieLeadId: settings.leadId || settings.genieLeadId || window.gg.leadId,
         ...e.detail
       });
     }
   });
   window.gg.getLandingPageData = async () => {
     const urlParams = Object.fromEntries(new URLSearchParams(window.location.search));
-    urlParams.agentId = ggSettings.agentID;
+    urlParams.agentId = ggSettings.agentId;
     return await landingPageData(urlParams);
   };
   window.gg.addLead = async (note, data = null) => {
     const settings = useSettings();
     window.gg.defaults = window.gg.defaults || {};
     let postedData = {
-      agentID: settings.agentID,
-      areaID: settings.leadareaID || settings.areaID,
+      agentId: settings.agentId,
+      areaId: settings.leadareaId || settings.areaId,
       propertyID: settings.propertyID ?? window.gg.defaults.leadPropertyID ?? null,
       firstName: settings.firstname ?? null,
       lastName: settings.lastname ?? null,
@@ -589,9 +589,9 @@ const _LandingPages = (() => {
       note: note,
       ...data
     };
-    if (settings.leadID || settings.genieLeadID || window.gg.leadID) {
+    if (settings.leadId || settings.genieLeadId || window.gg.leadId) {
       if (note !== VIEWED) {
-        postedData.genieLeadId = settings.leadID || settings.genieLeadID || window.gg.leadID;
+        postedData.genieLeadId = settings.leadId || settings.genieLeadId || window.gg.leadId;
         postedData.email = postedData.emailAddress;
         await updateLead(postedData);
       }
@@ -599,7 +599,7 @@ const _LandingPages = (() => {
       postedData.referringUrl = `${window.location.origin}${window.location.pathname}?referral=true`;
       postedData.referringUrl += postedData.propertyID ? `&propertyId=${postedData.propertyID}` : "";
       postedData.referringUrl += settings.mlsNumber ? `&mlsNumber=${settings.mlsNumber}` : "";
-      postedData.referringUrl += settings.mlsID ? `&mlsId=${settings.mlsID}` : "";
+      postedData.referringUrl += settings.mlsId ? `&mlsId=${settings.mlsId}` : "";
       if (settings.trackingdata) {
         postedData.trackingData = Object.keys(settings.trackingdata).reduce((destination, key) => {
           destination[key.toLowerCase().replace("utm", "utm_")] = settings.trackingdata[key];
@@ -620,7 +620,7 @@ const _LandingPages = (() => {
       }
       const r = await createLead(postedData);
       if (r.result?.key) {
-        window.gg.leadID = r.result.key;
+        window.gg.leadId = r.result.key;
       }
       return r.result;
     }

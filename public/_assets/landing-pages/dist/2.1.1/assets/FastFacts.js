@@ -121,7 +121,7 @@ const FastFacts = (() => {
     }
   }), createComponent(HomeTypes, {
     get container() {
-      return `FastFacts-${areaDataStore.areaID}`;
+      return `FastFacts-${areaDataStore.areaId}`;
     }
   }), createComponent(Show, {
     get when() {

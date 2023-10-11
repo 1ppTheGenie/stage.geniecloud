@@ -98,7 +98,7 @@ const MarketTrending = (() => {
     return _el$;
   })(), _tmpl$2(), createComponent(HomeTypes, {
     get container() {
-      return `MarketTrends-${areaDataStore.areaID}`;
+      return `MarketTrends-${areaDataStore.areaId}`;
     }
   }), createComponent(Show, {
     get when() {

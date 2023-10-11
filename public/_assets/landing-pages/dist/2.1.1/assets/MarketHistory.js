@@ -23,7 +23,7 @@ const loadCharts = () => new Promise(resolve => {
     script.id = "chartist-script";
     script.onload = () => {
       var gScript = document.createElement("script");
-      gScript.src = `/_assets/_js/charts.js?v=3`;
+      gScript.src = `https://cloud.thegenie.ai/_assets/_js/charts.js?v=3`;
       gScript.id = "genie-charts";
       gScript.onload = () => {
         genieCharts = initCharts();
@@ -54,8 +54,12 @@ const MarketHistory = (() => {
   const [high, setHigh] = createSignal();
   const [low, setLow] = createSignal();
   createEffect(() => {
-    if (!areaMonthlyStore.loading) {
+    console.log("areaMonthlyStore", areaMonthlyStore);
+  });
+  createEffect(() => {
+    if (areaMonthlyStore.loading == false) {
       const stats = [...areaMonthlyStore.stats.filter(stats => stats.propertyTypeId === areaDataStore.propertyTypeID)];
+      console.log("stats", areaMonthlyStore);
       setLabels(stats.slice(Math.max(stats.length - areaDataStore.areaPeriod, 1)).map(m => format(new Date(m.yearPart, m.monthPart - 1, 1), "MMM yy")));
       const series = stats.slice(Math.max(stats.length - areaDataStore.areaPeriod, 1)).map(m => ({
         name: format(new Date(m.yearPart, m.monthPart - 1, 1), "MMM yy"),

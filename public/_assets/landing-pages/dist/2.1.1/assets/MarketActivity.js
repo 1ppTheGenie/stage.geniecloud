@@ -135,13 +135,13 @@ const MarketActivity = (() => {
   const [status, setStatus] = createSignal(settings.mode ? settings.mode.charAt(0).toUpperCase() + settings.mode.slice(1) : "");
   const [expanded] = createSignal(false);
   const currentListings = filterListings(listingsStore.listings, areaDataStore.propertyTypeID, areaDataStore.areaPeriod, status);
-  const visibleListings = currentListings.slice(pageOffset, pageOffset + pageSize);
-  const color = getCssVar(`--${status.toLowerCase()}`, document.body).trim();
+  const visibleListings = currentListings && currentListings.slice(pageOffset, pageOffset + pageSize);
+  const color = getCssVar(`--${status().toLowerCase()}`, document.body).trim();
   return [(() => {
     const _el$ = _tmpl$(),
       _el$2 = _el$.firstChild;
     insert(_el$, () => areaDataStore.areaName, _el$2);
-    insert(_el$, propertyTypeID === 0 ? "Homes" : "Condos", null);
+    insert(_el$, () => areaDataStore.propertyTypeID === 0 ? "Homes" : "Condos", null);
     return _el$;
   })(), _tmpl$2(), createComponent(HomeTypes, {
     get container() {
@@ -161,7 +161,7 @@ const MarketActivity = (() => {
       style: "width:100%;height:100%;",
       get children() {
         return [createComponent(GeoArea, {
-          get areaID() {
+          get areaId() {
             return settings.areaid;
           },
           style: "color:#feff00;fill-opacity:0"
@@ -178,7 +178,7 @@ const MarketActivity = (() => {
     createRenderEffect(_$p => style(_el$4, `position:relative;width:100%;height:${expanded ? "650px" : `400px`}`, _$p));
     return _el$4;
   })(), createMemo((() => {
-    const _c$ = createMemo(() => listings.length > 0);
+    const _c$ = createMemo(() => !!(visibleListings && visibleListings.length > 0));
     return () => _c$() && (() => {
       const _el$5 = _tmpl$4(),
         _el$6 = _el$5.firstChild,
@@ -246,7 +246,7 @@ const MarketActivity = (() => {
     style: "width: 100%; color: var(--theme-body-color)"
   }), createComponent(Pagination, {
     get totalItems() {
-      return currentListings.length;
+      return currentListings?.length;
     },
     currentPage: currentPage,
     pageChange: page => setPage(page),
@@ -256,24 +256,23 @@ const MarketActivity = (() => {
 const StatusKey = ({
   setStatus
 }) => {
-  const {
-    areaName,
-    overall
-  } = useAreaData();
+  console.log("areaDataStore", {
+    ...areaDataStore
+  });
   const labels = [{
-    total: overall.new,
+    total: areaDataStore?.overall?.new,
     label: "New (active)",
     status: "new"
   }, {
-    total: overall.active,
+    total: areaDataStore?.overall?.active,
     label: "Active",
     status: "active"
   }, {
-    total: overall.pending,
+    total: areaDataStore?.overall?.pending,
     label: "Pending",
     status: "pending"
   }, {
-    total: overall.sold,
+    total: areaDataStore.overall?.sold,
     label: "Sold",
     status: "sold"
   }];
@@ -284,7 +283,7 @@ const StatusKey = ({
       _el$17 = _el$16.nextSibling,
       _el$18 = _el$17.nextSibling,
       _el$19 = _el$18.nextSibling;
-    insert(_el$18, areaName);
+    insert(_el$18, () => areaDataStore.areaName);
     insert(_el$19, () => labels.map((l, i) => (() => {
       const _el$20 = _tmpl$7(),
         _el$21 = _el$20.firstChild,

@@ -42,7 +42,7 @@ true&&(function polyfill() {
     }
 }());
 
-const scriptRel = 'modulepreload';const assetsURL = function(dep) { return "/_assets/landing-pages/dist/2.0.0e/"+dep };const seen = {};const __vitePreload = function preload(baseModule, deps, importerUrl) {
+const scriptRel = 'modulepreload';const assetsURL = function(dep) { return "/_assets/landing-pages/dist/2.1.1/"+dep };const seen = {};const __vitePreload = function preload(baseModule, deps, importerUrl) {
     // @ts-expect-error true will be replaced with boolean later
     if (!true || !deps || deps.length === 0) {
         return baseModule();
@@ -87,7 +87,17 @@ const scriptRel = 'modulepreload';const assetsURL = function(dep) { return "/_as
                 link.addEventListener('error', () => rej(new Error(`Unable to preload CSS for ${dep}`)));
             });
         }
-    })).then(() => baseModule());
+    }))
+        .then(() => baseModule())
+        .catch((err) => {
+        const e = new Event('vite:preloadError', { cancelable: true });
+        // @ts-expect-error custom payload
+        e.payload = err;
+        window.dispatchEvent(e);
+        if (!e.defaultPrevented) {
+            throw err;
+        }
+    });
 };
 
 const sharedConfig = {
@@ -124,11 +134,12 @@ function createRoot(fn, detachedOwner) {
   const listener = Listener,
     owner = Owner,
     unowned = fn.length === 0,
+    current = detachedOwner === undefined ? owner : detachedOwner,
     root = unowned ? UNOWNED : {
       owned: null,
       cleanups: null,
-      context: null,
-      owner: detachedOwner === undefined ? owner : detachedOwner
+      context: current ? current.context : null,
+      owner: current
     },
     updateFn = unowned ? fn : () => fn(() => untrack(() => cleanNode(root)));
   Owner = root;
@@ -167,7 +178,7 @@ function createRenderEffect(fn, value, options) {
 function createEffect(fn, value, options) {
   runEffects = runUserEffects;
   const c = createComputation(fn, value, false, STALE),
-    s = SuspenseContext && lookup(Owner, SuspenseContext.id);
+    s = SuspenseContext && useContext(SuspenseContext);
   if (s) c.suspense = s;
   if (!options || !options.render) c.user = true;
   Effects ? Effects.push(c) : updateComputation(c);
@@ -235,7 +246,7 @@ function createResource(pSource, pFetcher, pOptions) {
     }, false);
   }
   function read() {
-    const c = SuspenseContext && lookup(Owner, SuspenseContext.id),
+    const c = SuspenseContext && useContext(SuspenseContext),
       v = value(),
       err = error();
     if (err !== undefined && !pr) throw err;
@@ -359,8 +370,7 @@ function createContext(defaultValue, options) {
   };
 }
 function useContext(context) {
-  let ctx;
-  return (ctx = lookup(Owner, context.id)) !== undefined ? ctx : context.defaultValue;
+  return Owner && Owner.context && Owner.context[context.id] !== undefined ? Owner.context[context.id] : context.defaultValue;
 }
 function children(fn) {
   const children = createMemo(fn);
@@ -373,7 +383,7 @@ function children(fn) {
 }
 let SuspenseContext;
 function getSuspenseContext() {
-  return SuspenseContext || (SuspenseContext = createContext({}));
+  return SuspenseContext || (SuspenseContext = createContext());
 }
 function readSignal() {
   if (this.sources && (this.state)) {
@@ -473,7 +483,7 @@ function createComputation(fn, init, pure, state = STALE, options) {
     cleanups: null,
     value: init,
     owner: Owner,
-    context: null,
+    context: Owner ? Owner.context : null,
     pure
   };
   if (Owner === null) ;else if (Owner !== UNOWNED) {
@@ -539,7 +549,18 @@ function runUserEffects(queue) {
     const e = queue[i];
     if (!e.user) runTop(e);else queue[userLength++] = e;
   }
-  if (sharedConfig.context) setHydrateContext();
+  if (sharedConfig.context) {
+    if (sharedConfig.count) {
+      sharedConfig.effects || (sharedConfig.effects = []);
+      sharedConfig.effects.push(...queue.slice(0, userLength));
+      return;
+    } else if (sharedConfig.effects) {
+      queue = [...sharedConfig.effects, ...queue];
+      userLength += sharedConfig.effects.length;
+      delete sharedConfig.effects;
+    }
+    setHydrateContext();
+  }
   for (i = 0; i < userLength; i++) runTop(queue[i]);
 }
 function lookUpstream(node, ignore) {
@@ -591,7 +612,6 @@ function cleanNode(node) {
     node.cleanups = null;
   }
   node.state = 0;
-  node.context = null;
 }
 function castError(err) {
   if (err instanceof Error) return err;
@@ -602,9 +622,6 @@ function castError(err) {
 function handleError(err, owner = Owner) {
   const error = castError(err);
   throw error;
-}
-function lookup(owner, key) {
-  return owner ? owner.context && owner.context[key] !== undefined ? owner.context[key] : lookup(owner.owner, key) : undefined;
 }
 function resolveChildren(children) {
   if (typeof children === "function" && !children.length) return resolveChildren(children());
@@ -623,6 +640,7 @@ function createProvider(id, options) {
     let res;
     createRenderEffect(() => res = untrack(() => {
       Owner.context = {
+        ...Owner.context,
         [id]: props.value
       };
       return children(() => props.children);
@@ -911,8 +929,11 @@ function lazy(fn) {
     const ctx = sharedConfig.context;
     if (ctx) {
       const [s, set] = createSignal();
+      sharedConfig.count || (sharedConfig.count = 0);
+      sharedConfig.count++;
       (p || (p = fn())).then(mod => {
         setHydrateContext(ctx);
+        sharedConfig.count--;
         set(() => mod.default);
         setHydrateContext();
       });

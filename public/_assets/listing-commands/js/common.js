@@ -101,7 +101,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
 							a.classList.add("download");
 							a.onclick = e => {
 								e.preventDefault();
-								console.log("File download", linkUrl);
+								downloadFile(linkUrl);
+								//console.log("File download", linkUrl);
 							};
 							a.href = "#";
 							div.appendChild(a);
@@ -136,16 +137,18 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	getRenderUpdate();
 });
 
-const downloadFile = (url, fileName) => {
+const downloadFile = url => {
 	fetch(url, { method: "get", mode: "no-cors", referrerPolicy: "no-referrer" })
 		.then(res => res.blob())
 		.then(res => {
 			const aElement = document.createElement("a");
-			aElement.setAttribute("download", fileName);
 			const href = URL.createObjectURL(res);
+
 			aElement.href = href;
+			aElement.setAttribute("download", url.split("/").reverse()[0]);
 			aElement.setAttribute("target", "_blank");
 			aElement.click();
+
 			URL.revokeObjectURL(href);
 		});
 };

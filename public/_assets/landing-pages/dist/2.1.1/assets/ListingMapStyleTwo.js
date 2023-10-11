@@ -111,7 +111,7 @@ const ListingMapStyleTwo = (() => {
       },
       get children() {
         return [createComponent(GeoArea, {
-          get areaID() {
+          get areaId() {
             return settings.areaid;
           },
           style: {

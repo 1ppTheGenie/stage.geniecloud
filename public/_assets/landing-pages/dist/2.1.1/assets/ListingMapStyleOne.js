@@ -40,13 +40,16 @@ const MapListings = props => {
       _el$6 = _el$5.firstChild,
       _el$7 = _el$5.nextSibling;
     insert(_el$, createComponent(LeafletMap, {
+      get id() {
+        return props.id || "genie-embed-map";
+      },
       get mapStyle() {
         return settings.mapstyle || "streets-v11";
       },
       style: " width: 100%; min-height: 370px",
       get children() {
         return [createComponent(GeoArea, {
-          get areaID() {
+          get areaId() {
             return settings.areaid;
           },
           style: " color: #feff00; fill-opacity: 0"
@@ -110,7 +113,7 @@ const MapListings = props => {
               return () => _c$() && format(Date.parse(l.soldDate), "M-d-y");
             })());
             insert(_el$17, () => currency(l.salePrice / l.sqft));
-            insert(_el$18, () => l.daysOnMarket == 1 ? 'Day' : 'Days');
+            insert(_el$18, () => l.daysOnMarket == 1 ? "Day" : "Days");
             createRenderEffect(() => setAttribute(_el$9, "key", `tr${l.streetNumber}:${l.latitude}:${l.longitude}`));
             return _el$9;
           })()
@@ -149,7 +152,7 @@ const MapListings = props => {
               const _c$3 = createMemo(() => l.sqft > 0);
               return () => _c$3() ? currency(l.priceHigh / l.sqft) : "-";
             })());
-            insert(_el$27, () => l.daysOnMarket > 0 ? l.daysOnMarket + ' Days' : "Today!");
+            insert(_el$27, () => l.daysOnMarket > 0 ? l.daysOnMarket + " Days" : "Today!");
             createRenderEffect(() => setAttribute(_el$19, "key", `tr${l.streetNumber}:${l.latitude}:${l.longitude}`));
             return _el$19;
           })()
@@ -222,6 +225,7 @@ const ListingMapStyleOne = (() => {
       },
       get children() {
         return [createComponent(MapListings, {
+          id: "listing-map-style-one",
           get listings() {
             return currentListings();
           },

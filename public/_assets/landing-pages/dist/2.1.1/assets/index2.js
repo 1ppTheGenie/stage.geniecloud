@@ -45,9 +45,9 @@ const getAreaPolygon = async area_id => {
 	return r.success ? r.result.polygon : {};
 };
 
-const createLead = async data => await apiCall(`add-lead`, data);
+const createLead = async data => await apiCall(`add-lead`, data, "POST");
 
-const updateLead = async data => await apiCall(`update-lead`, data);
+const updateLead = async data => await apiCall(`update-lead`, data, "POST");
 
 const landingPageData = async data => await apiCall(`get-landing-data`, data);
 
@@ -64,7 +64,7 @@ const searchAddress = async place_id => {
 };
 
 async function apiCall(endpoint, data = null, method = "GET") {
-	let url = `${window.ghub.api_url}${GENIE}${endpoint}`;
+	let url = `${window.ghub.apiUrl}${GENIE}${endpoint}`;
 
 	const headers = new Headers();
 	headers.append("Content-Type", "application/json");
@@ -92,7 +92,9 @@ async function apiCall(endpoint, data = null, method = "GET") {
 }
 
 const $RAW = Symbol("store-raw"),
-  $NODE = Symbol("store-node");
+  $NODE = Symbol("store-node"),
+  $HAS = Symbol("store-has"),
+  $SELF = Symbol("store-self");
 function wrap$1(value) {
   let p = value[$PROXY];
   if (!p) {
@@ -142,15 +144,21 @@ function unwrap(item, set = new Set()) {
   }
   return item;
 }
-function getDataNodes(target) {
-  let nodes = target[$NODE];
-  if (!nodes) Object.defineProperty(target, $NODE, {
+function getNodes(target, symbol) {
+  let nodes = target[symbol];
+  if (!nodes) Object.defineProperty(target, symbol, {
     value: nodes = Object.create(null)
   });
   return nodes;
 }
-function getDataNode(nodes, property, value) {
-  return nodes[property] || (nodes[property] = createDataNode(value));
+function getNode(nodes, property, value) {
+  if (nodes[property]) return nodes[property];
+  const [s, set] = createSignal(value, {
+    equals: false,
+    internal: true
+  });
+  s.$ = set;
+  return nodes[property] = s;
 }
 function proxyDescriptor$1(target, property) {
   const desc = Reflect.getOwnPropertyDescriptor(target, property);
@@ -161,22 +169,11 @@ function proxyDescriptor$1(target, property) {
   return desc;
 }
 function trackSelf(target) {
-  if (getListener()) {
-    const nodes = getDataNodes(target);
-    (nodes._ || (nodes._ = createDataNode()))();
-  }
+  getListener() && getNode(getNodes(target, $NODE), $SELF)();
 }
 function ownKeys(target) {
   trackSelf(target);
   return Reflect.ownKeys(target);
-}
-function createDataNode(value) {
-  const [s, set] = createSignal(value, {
-    equals: false,
-    internal: true
-  });
-  s.$ = set;
-  return s;
 }
 const proxyTraps$1 = {
   get(target, property, receiver) {
@@ -186,19 +183,19 @@ const proxyTraps$1 = {
       trackSelf(target);
       return receiver;
     }
-    const nodes = getDataNodes(target);
+    const nodes = getNodes(target, $NODE);
     const tracked = nodes[property];
     let value = tracked ? tracked() : target[property];
-    if (property === $NODE || property === "__proto__") return value;
+    if (property === $NODE || property === $HAS || property === "__proto__") return value;
     if (!tracked) {
       const desc = Object.getOwnPropertyDescriptor(target, property);
-      if (getListener() && (typeof value !== "function" || target.hasOwnProperty(property)) && !(desc && desc.get)) value = getDataNode(nodes, property, value)();
+      if (getListener() && (typeof value !== "function" || target.hasOwnProperty(property)) && !(desc && desc.get)) value = getNode(nodes, property, value)();
     }
     return isWrappable(value) ? wrap$1(value) : value;
   },
   has(target, property) {
-    if (property === $RAW || property === $PROXY || property === $TRACK || property === $NODE || property === "__proto__") return true;
-    this.get(target, property, target);
+    if (property === $RAW || property === $PROXY || property === $TRACK || property === $NODE || property === $HAS || property === "__proto__") return true;
+    getListener() && getNode(getNodes(target, $HAS), property)();
     return property in target;
   },
   set() {
@@ -214,15 +211,21 @@ function setProperty(state, property, value, deleting = false) {
   if (!deleting && state[property] === value) return;
   const prev = state[property],
     len = state.length;
-  if (value === undefined) delete state[property];else state[property] = value;
-  let nodes = getDataNodes(state),
+  if (value === undefined) {
+    delete state[property];
+    if (state[$HAS] && state[$HAS][property] && prev !== undefined) state[$HAS][property].$();
+  } else {
+    state[property] = value;
+    if (state[$HAS] && state[$HAS][property] && prev === undefined) state[$HAS][property].$();
+  }
+  let nodes = getNodes(state, $NODE),
     node;
-  if (node = getDataNode(nodes, property, prev)) node.$(() => value);
+  if (node = getNode(nodes, property, prev)) node.$(() => value);
   if (Array.isArray(state) && state.length !== len) {
     for (let i = state.length; i < len; i++) (node = nodes[i]) && node.$();
-    (node = getDataNode(nodes, "length", len)) && node.$(state.length);
+    (node = getNode(nodes, "length", len)) && node.$(state.length);
   }
-  (node = nodes._) && node.$();
+  (node = nodes[$SELF]) && node.$();
 }
 function mergeStoreNode(state, value) {
   const keys = Object.keys(value);
@@ -321,8 +324,8 @@ const propertyTypeCaption = (type, count = 0, abbr = false) => {
 	return caption;
 };
 
-const areaId = ggSettings.areaID;
-const agentId = ggSettings.agentID;
+const areaId = ggSettings.areaId;
+const agentId = ggSettings.agentId;
 
 const defaultPropertyType = Math.max(
 	parseInt(
@@ -350,8 +353,9 @@ const [area, areaMonthly, areaListings, setPeriod] = createRoot(() => {
 	const [areaMonthly] = createResource(areaId, aID =>
 		getAreaMonthly({ areaId: aID, agentId })
 	);
-	const [areaListings] = createResource(period, p =>
-		getAreaProperties(areaId, p, agentId)
+	const [areaListings] = createResource(
+		period,
+		async p => await getAreaProperties(areaId, p, agentId)
 	);
 
 	return [area, areaMonthly, areaListings, setPeriod];
@@ -814,8 +818,8 @@ const filterListings = (
 };
 
 const useAgentData = () => {
-	const { agentID } = useSettings();
-	const [agent] = createResource(agentID, getAgentData);
+	const { agentId } = useSettings();
+	const [agent] = createResource(agentId, getAgentData);
 
 	return agent;
 };
@@ -840,7 +844,7 @@ const useAgentData = () => {
 				this.stats && this.stats.avgSalePrice / this.stats.previousPeriod.avgSalePrice - 1
 			);
 		},
-		areaID,
+		areaId,
 		areaPeriod,
 	});
 
