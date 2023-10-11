@@ -2280,12 +2280,12 @@ h3.agent-phone {
 	display: none;
 }
 
-.agnt-photo {
+.agent-photo {
 	width: 70px;
 	height: 70px;
 }
 
-.agnt-photo img {
+.agent-photo img {
 	border-radius: 50%;
 	background: #fff;
 	width: 70px;
