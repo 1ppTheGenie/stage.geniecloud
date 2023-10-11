@@ -1,5 +1,4 @@
 "use strict";
-import { dirname } from "path";
 import { PDFDocument } from "pdf-lib";
 import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
@@ -18,12 +17,11 @@ const BUCKET = process.env.BUCKET;
 const SQS_QUEUE =
 	process.env.SQS_QUEUE ??
 	"https://sqs.eu-west-2.amazonaws.com/584678469437/genie-renders";
-
 const region = process.env.REGION ?? "eu-west-2";
 
 const s3Client = new S3Client({});
 
-export const direct = async params => {
+export const renderer = async params => {
 	let batch = [],
 		failures = [],
 		browser = null,
@@ -42,12 +40,15 @@ export const direct = async params => {
 		for (const record of params.Records) {
 			let s3Key = "";
 			if (record.s3) {
-				console.log("record.s3", record.s3);
 				s3Key = record.s3.object.key;
-				batch.push(
-					await jsonFromS3(record.s3.object.key, record.s3.bucket.name)
+				const json = await jsonFromS3(
+					record.s3.object.key,
+					record.s3.bucket.name
 				);
-				console.log("yeah", batch);
+				json.sourceS3Bucket = record.s3.bucket.name;
+				json.sourceS3Key = record.s3.object.key;
+
+				batch.push(json);
 			} else if (record.sqs) {
 				if (record.sqs.body == "genie-retry") {
 					s3Key = `${record.sqs.messageAttributes.S3Key.stringValue} (retry)`;
@@ -59,12 +60,11 @@ export const direct = async params => {
 					);
 				}
 			}
-			console.log(`From s3: ${s3Key}`);
 		}
 	} else {
 		batch.push(params);
 	}
-	console.log("batch", batch);
+
 	//try {
 	browser = await puppeteer.launch({
 		args: [
@@ -87,8 +87,6 @@ export const direct = async params => {
 	const waitUntil = ["networkidle0", "load", "domcontentloaded"];
 
 	for (const render of batch) {
-		console.log("#render", render);
-
 		const isWebp = render.suffix == "webp";
 		response.tempKey = render.s3Key;
 
@@ -217,7 +215,6 @@ export const direct = async params => {
 						const mergedPdf = await PDFDocument.create();
 
 						for (const interimKey of sortedKeys) {
-							console.log("interimKey2", render.bucket, interimKey);
 							let buffer = await fromS3(interimKey, render.bucket);
 
 							const pdf = await PDFDocument.load(buffer);
@@ -248,7 +245,6 @@ export const direct = async params => {
 					}
 				}
 
-				/*
 				if (render.sourceS3Key) {
 					await s3Client.send(
 						new DeleteObjectCommand({
@@ -256,7 +252,7 @@ export const direct = async params => {
 							Key: render.sourceS3Key,
 						})
 					);
-				}*/
+				}
 				/// just return the response otherwise
 			} else {
 				failures.push({

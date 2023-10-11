@@ -52321,6 +52321,7 @@ var xslt = async (event) => {
         ).then(
           (buffer) => buffer && buffer.length > 0 ? JSON.parse(buffer) : null
         );
+        console.log("params", params);
         const transformedXML = transform(
           transformXml,
           transformXsl,
@@ -52359,38 +52360,37 @@ var xslt = async (event) => {
                 "application/json"
               );
             }
-            if (params.noPuppeteer || params.isCollection && params.suffix == "pdf" && params.pageIndex <= 2) {
-              const revisedSuffix = `${params.noPuppeteer ? "" : "-"}grab-${params.pageIndex}.webp`;
-              const width = params.noPuppeteer ? 800 : params.dims.width;
-              const height = params.noPuppeteer ? 1200 : params.dims.height;
-              await toS3(
-                r.s3.object.key.replace(
-                  "xslt.json",
-                  `grab-${params.pageIndex}-puppeteer.json`
-                ),
-                JSON.stringify({
-                  url: params.url,
-                  bucket: params.bucket,
-                  width,
-                  height,
-                  webp: true,
-                  s3Key: params.s3Key.replace(
-                    /(index\.html|\.pdf)/g,
-                    revisedSuffix
-                  )
-                }),
-                null,
-                "application/json"
-              );
-            }
-            if (!params.isDebug) {
-              await s3Client.send(
-                new import_client_s3.DeleteObjectCommand({
-                  Bucket: BUCKET,
-                  Key: r.s3.object.key
-                })
-              );
-            }
+            if (
+							params.noPuppeteer ||
+							(params.isCollection &&
+								params.suffix == "pdf" &&
+								params.pageIndex <= 2)
+						) {
+							const revisedSuffix = `${params.noPuppeteer ? "" : "-"}grab-${
+								params.pageIndex
+							}.webp`;
+							const width = params.noPuppeteer ? 800 : params.dims.width;
+							const height = params.noPuppeteer ? 1200 : params.dims.height;
+							await toS3(
+								r.s3.object.key.replace(
+									"xslt.json",
+									`grab-${params.pageIndex}-puppeteer.json`
+								),
+								JSON.stringify({
+									url: params.url,
+									bucket: params.bucket,
+									width,
+									height,
+									webp: true,
+									s3Key: params.s3Key.replace(
+										/(index\.html|\.pdf)/g,
+										revisedSuffix
+									),
+								}),
+								null,
+								"application/json"
+							);
+						}
           }
         } else {
           console.log("Failed on ", params.asset);

@@ -95,6 +95,7 @@ export const xslt = async event => {
 				).then(buffer =>
 					buffer && buffer.length > 0 ? JSON.parse(buffer) : null
 				);
+				console.log("params", params);
 
 				const transformedXML = transform(
 					transformXml,
@@ -174,7 +175,7 @@ export const xslt = async event => {
 								"application/json"
 							);
 						}
-
+ 
 						if (!params.isDebug) {
 							await s3Client.send(
 								new DeleteObjectCommand({
@@ -262,9 +263,9 @@ const testXSL = async testKey => {
 
 	console.log(r);
 };
-
-await testXSL("direct-mail-postcards-back/coit-mailer-back");
 /*
+await testXSL("direct-mail-postcards-back/coit-mailer-back");
+
 let r = await xslt({
 	Records: [
 		{

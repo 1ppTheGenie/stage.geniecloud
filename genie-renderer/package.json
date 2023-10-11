@@ -1,13 +1,16 @@
 {
-	"name": "genie-direct",
+	"name": "genie-renderer",
 	"version": "2.0.0",
 	"description": "Processing script for the creation of image/PDF assets from GenieHub. v2.0.0",
 	"main": "index.js",
 	"scripts": {
-		"preaws": "node build.mjs && tar -a -c -f genie-direct.zip ./build/index.js",
-		"create": "aws lambda create-function --function-name genie-direct --runtime nodejs14.x --zip-file fileb://genie-direct.zip --handler ./build/index.direct ",
-		"add-layers": "aws lambda update-function-configuration --function-name genie-direct ",
-		"aws": "aws lambda update-function-code --function-name genie-direct --zip-file fileb://genie-direct.zip"
+		"preaws": "node build.mjs && tar -a -c -f genie-renderer.zip ./build/index.js",
+		"preaws-us": "node build.mjs && tar -a -c -f genie-renderer.zip ./build/index.js",
+		"create": "aws lambda create-function --function-name genie-renderer --runtime nodejs18.x --zip-file fileb://genie-renderer.zip --handler ./build/index.renderer ",
+		"add-layers": "aws lambda update-function-configuration --function-name genie-renderer ",
+		"aws": "aws lambda update-function-code --function-name genie-renderer --zip-file fileb://genie-renderer.zip",
+		"aws-us": "aws lambda update-function-code --function-name GenieRenderer --zip-file fileb://genie-renderer.zip --profile genie-hub-active --region us-west-1",
+		"create-us": "aws lambda create-function --function-name GenieRenderer --runtime nodejs18.x --zip-file fileb://genie-renderer.zip --handler ./build/index.js --profile genie-hub-active --role arn:aws:iam::199352526440:role/genie_renderer --region us-west-1"
 	},
 	"keywords": [],
 	"author": "Dynamic Array Ltd",

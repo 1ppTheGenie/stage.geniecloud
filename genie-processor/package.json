@@ -6,7 +6,10 @@
 	"type": "module",
 	"scripts": {
 		"preaws": "node build.mjs && tar -a -c -f genie-xslt.zip ./build/index.js",
-		"aws": "aws lambda update-function-code --function-name GenieXSLT --zip-file fileb://genie-xslt.zip"
+		"preaws-us": "node build.mjs && tar -a -c -f genie-xslt.zip ./build/index.js",
+		"aws": "aws lambda update-function-code --function-name GenieXSLT --zip-file fileb://genie-xslt.zip",
+		"aws-us": "aws lambda update-function-code --function-name GenieXSLT --zip-file fileb://genie-xslt.zip --profile genie-hub-active  --region us-west-1",
+		"create-us": "aws lambda create-function --function-name GenieXSLT --runtime nodejs18.x --zip-file fileb://genie-xslt.zip --handler ./build/index.api --profile genie-hub-active --role arn:aws:iam::199352526440:role/genie_renderer --region us-west-1"
 	},
 	"author": "",
 	"license": "ISC",
