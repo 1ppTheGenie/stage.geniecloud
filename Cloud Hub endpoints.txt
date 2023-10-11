@@ -1,0 +1,105 @@
+Key API endpoints
+
+Note that GET or POST calls are treated interchangably. So, a GET request with a userId query param is regarded as the equivalent of a POST call with a JSON body containing a property of the same name.
+
+Failed responses willl always look like:
+{
+		success: false, 
+		error: {string}		// Details of the error encountered
+}
+
+
+{domain}/create // Creates a render
+Params:
+{
+	userId: null,				// REQUIRED Genie AI user id
+	areaId: null,				// REQUIRED if no [mlsNumber] is provided, defaults to areaId of mlsListing otherwise
+	mlsNumber: null,			// REQUIRED if no [areaId] is provided
+	mlsId: 0,
+
+	asset: null,				// {folder}/{filename-without-suffix} REQUIRED if [collection] or [pages] not set
+	collection:	null,			// Slug of collection name REQUIRED if [asset] or [pages] not set
+	pages: null,				// Array of assets which will be combined into a PDF output. REQUIRED if [asset] or [collection] not set
+
+	skipCache: false			// Make new Genie API calls for all required data rather than using any local cached version
+	debug: false				// Causes some additional logging during execution to assist with debugging
+
+	// Additional override params (with default)
+	ignoreBoundaryError: false			// Skip failure if area boundary data is too large
+	
+	size: "facebook",				// Set to default size for each asset rendered or this if no size available
+	theme: "_default-light",		// Set to agent theme if one is available
+	additionalAgents: null,			// Array of user Ids (Genie ID) of additional agents to display info for in supporting assets
+	propertyType: 0,				// Set to mlsListing propertyTypeId if mlsNumber passed as param
+	mapStyle: "satellite-streets-v9",
+	mapIcon: "dot",
+	mapKey: false,
+	pricePercent: "percent",
+	listingStatus: "all",
+	listingCount: 10,
+	withBleed: false,
+	withCrops: false,
+	blurPrice: false,
+	hideAVM: false,
+	requireSignin: false,
+	customerName: null,
+	isLeadCapture: false,
+	downloadUrl: "",				// Set to asset-specified default for assets with download support
+	openHouseTimes: null,
+	propertyCaption: null,			// Override caption used for property type (eg Homes - 0, Condos - 1)
+	propertyCaptionSingular: null, 	// Override caption used for singular property type (eg Home - 0, Condo - 1)
+	reRenderUntil: null					// Long-stop date for auto-rerendering.
+}
+Successful Response
+{
+	success: true,
+	availableAt: { url },	// Url of asset or collection
+	reRender: { url },		// Link to trigger a rerender
+	renderId:	{string},	// Unique identifier for this render
+}
+
+
+{domain}/re-render		// Triggers re-rendering of a render, or multiple renders depending on params sent. Note that if the initial render contains a reRenderUntil date earlier than the current time, it will be skipped.
+Params:
+{
+	renderId: {guid}				// Re-renders that specific render
+	userId:  {guid}					// Re-renders all this users content
+	assetId: {folder/file-slug}		// Re-renders all matching assets
+	areaId: {int}					// Re-renders all renders with that areaId
+	mlsNumber: {string}				// Re-renders all renders with that mlsNumber
+}
+Successful response:
+{ 
+	success: true,
+	msg: `${reRenders.length} re-renders under way`
+}
+
+
+{domain}/get-themes		// List of available CSS themes and their associated meta data
+Successful response:
+{
+	success: true, 
+	themes: [array of objects] 
+}
+
+{domain}/get-collection-templates		// List of current collection templates
+Successful response:
+{
+	success: true, 
+	templates: [array of objects] 
+}
+
+
+{domain}/get-collections		// List of current collections and their associated meta data
+Successful response:
+{
+	success: true, 
+	collections: [array of objects] 
+}
+
+{domain}/get-assets		// List of current assets and their associated meta data
+Successful response:
+{
+	success: true, 
+	assets: [array of objects] 
+}
