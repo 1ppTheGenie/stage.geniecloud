@@ -1,6 +1,7 @@
 import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
 import {
 	S3Client,
+	DeleteObjectCommand,
 	ListObjectsV2Command,
 	GetObjectCommand,
 	PutObjectCommand,
@@ -39,7 +40,7 @@ export const copyObject = async (
 	return await s3Client.send(new CopyObjectCommand(args));
 };
 
-export const listS3Folder = async (folderPath, bucket = null) => {
+export const listS3Folder = async (folderPath = "", bucket = null) => {
 	try {
 		const listParams = {
 			Bucket: bucket ?? BUCKET,
@@ -53,6 +54,14 @@ export const listS3Folder = async (folderPath, bucket = null) => {
 		console.error("Error:", err);
 	}
 };
+
+export const deleteObject = async (Key, Bucket = null) =>
+	await s3Client.send(
+		new DeleteObjectCommand({
+			Bucket: Bucket || BUCKET,
+			Key,
+		})
+	);
 
 export const headObject = async (key, since = null, bucket = null) => {
 	return await s3Client.send(
@@ -130,6 +139,7 @@ export const toS3 = async (
 };
 
 export const queueMsg = async (body, attributes) => {
+	console.log("SQS", SQS_QUEUE, process.env);
 	const sqsMessage = {
 		QueueUrl: SQS_QUEUE,
 		MessageAttributes: attributes,

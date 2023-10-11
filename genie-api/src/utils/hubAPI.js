@@ -1,3 +1,4 @@
+import QRCode from "qrcode-svg";
 import { fromS3, getFileData, listS3Folder, toS3 } from "./index.js";
 export const ASSET_HEADERS = {
 	name: "Asset Name",
@@ -96,8 +97,4 @@ export const getCollections = async () =>
 /**
  * generate_qr
  */
-export const generateQR = async params => {
-	if (params.genie_url) {
-		return { code: GenieQR.render(params.genie_url) };
-	}
-};
+export const generateQR = async url => new QRCode(url).svg();

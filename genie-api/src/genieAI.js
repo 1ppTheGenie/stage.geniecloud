@@ -29,7 +29,7 @@ const to_cache = async (data, endpoint, key, timeout_hours = 4) => {
 
 	if (timeout > 0) {
 		await toS3(`_cache/${key}`, Buffer.from(data), {
-			genieCache: endpoint,
+			genieCache: endpoint?.toString(),
 			timeout,
 		});
 	}
@@ -145,8 +145,8 @@ export const available_areas = async agent_id =>
 		"POST"
 	);
 
-export const getAreaBoundary = async area_id =>
-	await call_api(`GetAreaBoundary/${area_id}`, null, "POST");
+export const getAreaBoundary = async areaId =>
+	areaId && (await call_api(`GetAreaBoundary/${areaId}`, null, "POST"));
 
 export const getListing = async (user_id, mls_number, mls_id = -1) => {
 	let listing;
@@ -177,6 +177,9 @@ export const getListing = async (user_id, mls_number, mls_id = -1) => {
 		return listing;
 	}
 };
+
+export const mlsListingLastUpdate = async data =>
+	await call_api(`GetMlsListingLastUpdate`, data, "POST");
 
 export const mlsDisplaySettings = async mls_id =>
 	await call_api(`GetMlsDisplaySettings/${mls_id}`, null, "POST");
@@ -332,14 +335,8 @@ export const getPropertyFromId = async (property_id, agent_id) => {
 	}
 };
 
-export const createLead = async (user_id, args) => {
-	args.userId = user_id;
-
-	// This one needs renaming
-	if (args.propertyID) {
-		args.propertyId = args.propertyID;
-		delete args.propertyID;
-	}
+export const createLead = async (userId, args) => {
+	args.userId = userId;
 
 	const r = await call_api("CreateNewLead", args, "POST");
 
@@ -350,8 +347,8 @@ export const createLead = async (user_id, args) => {
 	return r;
 };
 
-export const updateLead = async (user_id, args) =>
-	await call_api("UpdateLead", { ...args, userId: user_id }, "POST");
+export const updateLead = async (userId, args) =>
+	await call_api("UpdateLead", { ...args, userId }, "POST");
 
 export const getQRProperty = async (qrID, token) => {
 	const lead = await getQRCodeLead(qrID, token);

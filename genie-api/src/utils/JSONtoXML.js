@@ -1,6 +1,4 @@
-import { toXML } from "jstoxml";
-
-const xmlOptions = {
+export const xmlOptions = {
 	attributeReplacements: {
 		"<": "&lt;",
 		">": "&gt;",
@@ -266,5 +264,3 @@ const xmlOptions = {
 		"&euro;": "&#8364;", // euro sign, U+20AC NEW
 	},
 };
-
-export const JSON2XML = jsObj => toXML(jsObj, xmlOptions);

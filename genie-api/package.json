@@ -6,9 +6,12 @@
 	"type": "module",
 	"scripts": {
 		"preaws": "node build.mjs && tar -a -c -f genie-api.zip ./build/index.js",
+		"preaws-us": "node build.mjs && tar -a -c -f genie-api.zip ./build/index.js",
 		"create": "aws lambda create-function --function-name GenieAPI --runtime nodejs18.x --zip-file fileb://genie-api.zip --handler ./build/index.api ",
 		"add-layers": "aws lambda update-function-configuration --function-name GenieAPI ",
-		"aws": "aws lambda update-function-code --function-name GenieAPI --zip-file fileb://genie-api.zip"
+		"aws": "aws lambda update-function-code --function-name GenieAPI --zip-file fileb://genie-api.zip",
+		"aws-us": "aws lambda update-function-code --function-name GenieAPI --zip-file fileb://genie-api.zip --profile genie-hub-active --region us-west-1",
+		"create-us": "aws lambda create-function --function-name GenieAPI --runtime nodejs18.x --zip-file fileb://genie-api.zip --handler ./build/index.api --profile genie-hub-active --role arn:aws:iam::199352526440:role/genie_renderer --region us-west-1"
 	},
 	"keywords": [],
 	"author": "Dynamic Array Ltd",
@@ -16,9 +19,9 @@
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.347.1",
 		"@aws-sdk/client-sqs": "^3.347.1",
-		"@qrcode-js/node": "^1.1.0",
 		"jstoxml": "^3.2.7",
-		"luxon": "^3.3.0"
+		"luxon": "^3.3.0",
+		"qrcode-svg": "^1.1.0"
 	},
 	"devDependencies": {
 		"esbuild": "^0.18.4",

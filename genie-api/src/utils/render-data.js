@@ -1,8 +1,21 @@
 import { DateTime } from "luxon";
 // prettier-ignore
-import { currencyFormat, endOfLastMonth, genieGlobals, MINUTE_IN_SECONDS, NOW, dateAdd, timeAgo, jsonFromS3, listS3Folder, assetSetting } from "./index.js";
+import {
+	generateQR,
+	currencyFormat,
+	endOfLastMonth,
+	genieGlobals,
+	MINUTE_IN_SECONDS,
+	NOW,
+	dateAdd,
+	timeAgo,
+	toS3,
+	jsonFromS3,
+	listS3Folder,
+	assetSetting,
+} from "./index.js";
 // prettier-ignore
-import { areaName,openhouseByMlsNumber, getListing, agentProperties, mlsProperties, areaStatisticsMonthly, areaStatisticsWithPrevious, propertySurroundingAreas, getUser, getAreaBoundary, mlsDisplaySettings, } from "./../genieAI.js";
+import {  areaName,openhouseByMlsNumber, getListing, agentProperties, mlsProperties, areaStatisticsMonthly, areaStatisticsWithPrevious, propertySurroundingAreas, getUser, getAreaBoundary, mlsDisplaySettings, } from "./../genieAI.js";
 import { getS3Key } from "../index.js";
 
 export const getRenderJSON = async params => {
@@ -10,16 +23,28 @@ export const getRenderJSON = async params => {
 		throw new Exception("Empty render param set is not supported");
 	}
 
+	// Additional params
+	if (!params.offsetDate) {
+		params.offsetDate = endOfLastMonth();
+	}
+
 	const warnings = [];
 	const datePeriod2 = params.datePeriod * 2;
 	//	const dateFormat = { year: "numeric", month: "short" };
 
 	// propertyType should never be -1 here, so set a default
-	if (params.propertyType !== 0 && params.propertyType !== 1) {
+	if (params.propertyType === null || parseInt(params.propertyType) < 0) {
+		const propertyTypeId = params.mlsNumber
+			? await listingPropertyTypeId(params)
+			: 0;
+
+		console.log(
+			`Forced propertyType switch from ${params.propertyType} to ${propertyTypeId}.`
+		);
 		warnings.push({
-			warning: `Forced propertyType switch from ${params.propertyType}.`,
+			warning: `Forced propertyType switch from ${params.propertyType} to ${propertyTypeId}.`,
 		});
-		params.propertyType = 0;
+		params.propertyType = propertyTypeId;
 	}
 
 	let renderSettings = filteredMerge(defaultRenderSettings, params);
@@ -35,7 +60,7 @@ export const getRenderJSON = async params => {
 			_attrs: await processOutput(
 				params.userId,
 				params.datePeriod,
-				params.collectionId,
+				params.renderId,
 				renderSettings
 			),
 		},
@@ -78,7 +103,41 @@ export const getRenderJSON = async params => {
 			: await processAreas(params),
 	};
 
+	// Slightly weird place for this code, but...generate QR image
+	let qrUrl = params.customizations?.qrUrl || root.agents[0].agent.website;
+
+	if (!qrUrl.startsWith("http")) qrUrl = `https://${qrUrl}`;
+	const qrSVG = await generateQR(qrUrl);
+
+	await toS3(
+		`genie-files/${params.renderId}/qr.svg`,
+		Buffer.from(qrSVG),
+		null,
+		"image/svg+xml"
+	);
+
+	root.output._attrs.qrUrl = `${genieGlobals.GENIE_HOST}genie-files/${params.renderId}/qr.svg`;
+
 	if (params.mlsNumber) {
+		// ** OPEN HOUSE TIMES
+		let times = [];
+
+		if (params.openHouseTimes) {
+			params.openHouseTimes.forEach(t => {
+				// Support timestamps and formatted date/time strings
+				times.push(typeof t == "string" ? DateTime.fromISO(t) : t);
+			});
+		} else {
+			const r = await openhouseByMlsNumber(params.mlsId, params.mlsNumber);
+			if (r.openHouses && Array.isArray(r.openHouses)) {
+				r.openHouses.forEach(t => {
+					times.push(DateTime.fromISO(t.startDateUtc).toMillis());
+					times.push(DateTime.fromISO(t.endDateUtc).toMillis());
+				});
+			}
+		}
+		params.openHouseTimes = times;
+
 		root.single = await processListing(params);
 
 		if (
@@ -107,12 +166,7 @@ export const getRenderJSON = async params => {
 	return root;
 };
 
-const processOutput = async (
-	userId,
-	datePeriod,
-	collectionId,
-	renderSettings
-) => {
+const processOutput = async (userId, datePeriod, renderId, renderSettings) => {
 	const now = new Date();
 	const offsetDate = endOfLastMonth();
 
@@ -122,7 +176,7 @@ const processOutput = async (
 		year: now.getFullYear(),
 		reportDate: Math.round(now.getTime() / 1000),
 		sinceDate: dateAdd(offsetDate, { months: -datePeriod }).toSeconds(),
-		collectionId,
+		renderId,
 		mapboxKey: genieGlobals.MAPBOX_KEY,
 		googleKey: genieGlobals.GOOGLE_KEY,
 		areaIndex: 1,
@@ -169,37 +223,50 @@ const defaultRenderSettings = {
 	openHouseTimes: null,
 	propertyCaption: null,
 	propertyCaptionSingular: null,
+	reRenderUntil: null,
 };
 
 export const areaFromMlsNumber = async (mlsNumber, mlsId, userId) => {
 	const listing = await getListing(userId, mlsNumber, mlsId);
 
+	//console.log("areaFromMlsNumber 1,", mlsNumber, userId);
 	if (listing.preferredAreaId) {
+		//console.log("areaFromMlsNumber 2,", listing.preferredAreaId);
 		return await areaName(userId, listing.preferredAreaId);
 	}
 
 	const areas = await propertySurroundingAreas(mlsNumber, mlsId, userId);
+
+	//console.log("areaFromMlsNumber 3", areas);
 
 	if (Array.isArray(areas) && areas.length > 0) {
 		const limitApnCount = area =>
 			area.areaApnCount >= 1000 && area.areaApnCount <= 3000;
 
 		let subset = areas.filter(
-			area => area.areaType == "ZipCode" && limitApnCount(area)
+			area =>
+				!["City", "CarrierRoute", "School"].includes(area.areaType) &&
+				limitApnCount(area)
 		);
 
 		if (subset && subset.length) {
+			//console.log("areaFromMlsNumber 4", subset[0]);
 			return subset[0];
 		} else {
 			subset = areas.filter(limitApnCount);
 
 			if (subset && subset.length) {
+				//console.log("areaFromMlsNumber 5", subset[0]);
 				return subset[0];
 			} else {
-				return areas.pop();
+				let a = areas.pop();
+				//	console.log("areaFromMlsNumber 6", a);
+				return a;
 			}
 		}
 	}
+
+	//console.log("areaFromMlsNumber 10");
 };
 
 const agentMlsNumbers = async userId => {
@@ -230,6 +297,24 @@ export const setRenderDefaults = async params => {
 		params.mlsId = 0;
 	}
 
+	if (params.mlsNumber) {
+		if (!params.propertyType || !params.areaId) {
+			const listing = await getListing(
+				params.userId,
+				params.mlsNumber,
+				params.mlsId
+			);
+
+			if (!params.areaId && listing.preferedAreaId) {
+				params.areaId = listing.preferedAreaId;
+			}
+
+			if (!params.propertyType) {
+				params.propertyType = parseInt(listing.propertyTypeID ?? 0);
+			}
+		}
+	}
+
 	// ** AREA(s)
 	if (params.areaId && !params.areaIds) {
 		params.areaIds = [params.areaId];
@@ -245,18 +330,6 @@ export const setRenderDefaults = async params => {
 		if (params.area) {
 			params.areaIds = [params.area.areaId];
 		}
-	}
-
-	// ** OPEN HOUSE TIMES
-	if (params.openHouseTimes) {
-		let times = [];
-
-		params.openHouseTimes.forEach(t => {
-			// Support timestamps and formatted date/time strings
-			times.push(typeof t == "string" ? DateTime.fromISO(t) : t);
-		});
-
-		params.openHouseTimes = times;
 	}
 
 	return params;
@@ -405,7 +478,7 @@ const processAreas = async params => {
 			});
 
 			const defaultJSON = '{"type": "FeatureCollection","features": []}';
-			let geoJSON = boundary.mapArea.geoJSON ?? defaultJSON;
+			let geoJSON = boundary?.mapArea?.geoJSON ?? defaultJSON;
 			if (geoJSON.length > 200000) {
 				geoJSON = defaultJSON;
 			}
@@ -416,8 +489,8 @@ const processAreas = async params => {
 					{ id: areaId },
 					{ name: areaName ?? params?.area?.name ?? "NOT SET" },
 					{ geojson: `<![CDATA[${geoJSON}]]>` },
-					{ centerLat: boundary.mapArea.centerLatitude },
-					{ centerLng: boundary.mapArea.centerLongitude },
+					{ centerLat: boundary?.mapArea?.centerLatitude ?? 32.71 },
+					{ centerLng: boundary?.mapArea?.centerLongitude ?? -117.16 },
 					{ image: areaImage ?? "" },
 				],
 			};
@@ -431,24 +504,28 @@ const processAreas = async params => {
 						prevData = propertyTypeData.previousPeriod;
 					}
 				});
-
-				// Split median/lower and median/highest
-				lowerByValue =
-					propertyTypeData.minSale.salePrice +
-					(propertyTypeData.medSalePrice - propertyTypeData.minSale.salePrice) /
-						2;
-				upperByValue =
-					propertyTypeData.maxSale.salePrice -
-					(propertyTypeData.maxSale.salePrice - propertyTypeData.medSalePrice) /
-						1.25;
-				lowerByValue = Math.floor(
-					parseFloat(lowerByValue) +
-						(25000 - (parseFloat(lowerByValue) % 25000))
-				);
-				upperByValue = Math.floor(
-					parseFloat(upperByValue) +
-						(25000 - (parseFloat(upperByValue) % 25000))
-				);
+				//console.log("params.propertyType", params.propertyType);
+				if (propertyTypeData) {
+					// Split median/lower and median/highest
+					lowerByValue =
+						propertyTypeData.minSale.salePrice +
+						(propertyTypeData.medSalePrice -
+							propertyTypeData.minSale.salePrice) /
+							2;
+					upperByValue =
+						propertyTypeData.maxSale.salePrice -
+						(propertyTypeData.maxSale.salePrice -
+							propertyTypeData.medSalePrice) /
+							1.25;
+					lowerByValue = Math.floor(
+						parseFloat(lowerByValue) +
+							(25000 - (parseFloat(lowerByValue) % 25000))
+					);
+					upperByValue = Math.floor(
+						parseFloat(upperByValue) +
+							(25000 - (parseFloat(upperByValue) % 25000))
+					);
+				}
 
 				// **** LISTINGS
 				const mls_properties = await mlsProperties(
@@ -529,16 +606,16 @@ const processAreas = async params => {
 						{
 							_name: "previous",
 							_attrs: {
-								totalSold: prevData.sold,
-								turnOver: prevData.turnOver,
-								avgPricePerSqFtSold: prevData.avgPricePerSqFt,
-								avgPricePerSqFtList: prevData.avgSoldListingsListPricePerSqFt,
-								averageListPriceForSold: prevData.avgListPriceForSold,
-								averageSalePrice: prevData.avgSalePrice,
-								averageDaysOnMarket: prevData.avgDaysOnMarket,
+								totalSold: prevData?.sold,
+								turnOver: prevData?.turnOver,
+								avgPricePerSqFtSold: prevData?.avgPricePerSqFt,
+								avgPricePerSqFtList: prevData?.avgSoldListingsListPricePerSqFt,
+								averageListPriceForSold: prevData?.avgListPriceForSold,
+								averageSalePrice: prevData?.avgSalePrice,
+								averageDaysOnMarket: prevData?.avgDaysOnMarket,
 								medianSalePrice: prevData.medSalePrice,
-								maxSalePrice: prevData.maxSale.salePrice,
-								minSalePrice: prevData.minSale.salePrice,
+								maxSalePrice: prevData?.maxSale?.salePrice,
+								minSalePrice: prevData?.minSale?.salePrice,
 							},
 						},
 					];
@@ -657,11 +734,11 @@ const processAreas = async params => {
 							soldPropertyTypeCount: propertyTypeData.sold,
 							taxrollCount: propertyTypeData.taxroll,
 							turnOver: propertyTypeData.turnOver,
-							maxSalePrice: propertyTypeData.maxSale.salePrice,
-							minSalePrice: propertyTypeData.minSale.salePrice,
-							marketTotalSoldVolume: propertyTypeData.marketTotalSoldVolume,
-							averageYearsInHome: propertyTypeData.avgYearsInHome,
-							ownerOccupancy: propertyTypeData.ownerOccupancy,
+							maxSalePrice: propertyTypeData?.maxSale?.salePrice,
+							minSalePrice: propertyTypeData?.minSale?.salePrice,
+							marketTotalSoldVolume: propertyTypeData?.marketTotalSoldVolume,
+							averageYearsInHome: propertyTypeData?.avgYearsInHome,
+							ownerOccupancy: propertyTypeData?.ownerOccupancy,
 						},
 						_content: statistics,
 					});
@@ -673,6 +750,16 @@ const processAreas = async params => {
 	);
 
 	return areas;
+};
+
+const listingPropertyTypeId = async params => {
+	const listing = await getListing(
+		params.userId,
+		params.mlsNumber,
+		params.mlsId
+	);
+
+	return listing.propertyTypeID;
 };
 
 const processListing = async params => {
@@ -712,7 +799,8 @@ const processListing = async params => {
 			{ soldDate: listing.soldDate ?? "" },
 			{ daysOnMarket: listing.daysOnMarket ?? "" },
 
-			{ type: listing.propertyType ?? 0 },
+			{ type: listing.propertyType },
+
 			{ listingStatus: listing.listingStatus ?? "" },
 			{ listingAgent: listing.listingAgentName ?? "" },
 			{ statusTypeID: listing.statusTypeID ?? "" },
@@ -739,88 +827,49 @@ const processListing = async params => {
 			{ city: listing.city ?? "" },
 		];
 
-		/*
-		openHouse: [],
-		listings: [],
-		images: [],
-		features: [],
-		dimensions: [],*/
-		if (params?.renderSettings?.openHouseTimes) {
+		/*	Open House */
+		console.log("paramsopenHouseTimes2", params.openHouseTimes);
+		if (params.openHouseTimes) {
 			//$tz = new DateTimeZone(Users.timezone(userId));
+			const tz = { zone: "PST" };
+			const oh = {
+				_name: "openHouse",
+				_content: [],
+			};
 
-			for (let i = 0; i < renderSettings.openHouseTimes.length; i += 2) {
-				const ts1 = renderSettings.openHouseTimes[i];
-				const ts2 = renderSettings.openHouseTimes[i + 1];
+			const timeAttrbs = {
+				dow: "EEEE",
+				date: "d",
+				month: "MMMM",
+				year: "y",
+				starts: "t",
+			};
+
+			for (let i = 0; i < params.openHouseTimes.length; i += 2) {
+				const ts1 = params.openHouseTimes[i];
+				const ts2 = params.openHouseTimes[i + 1];
 
 				if (ts2 > NOW && ts1 < timeAgo({ days: 7 })) {
 					let session = { _name: "session", _attrs: {} };
 
-					/*
-					const starts = new DateTime("@$ts1");
-					$starts->setTimezone($tz);
-					foreach (array(
-						'dow'    => 'l',
-						'date'   => 'j',
-						'month'  => 'F',
-						'year'   => 'Y',
-						'starts' => 'g:ia',
-					) as $key => $format) {
-						session._attrs[key] = starts->format($format).replaceAll(':00', '');
-					}
+					Object.keys(timeAttrbs).forEach(
+						key =>
+							(session._attrs[key] = DateTime.fromMillis(ts1, tz).toFormat(
+								timeAttrbs[key]
+							))
+					);
+					session._attrs["ends"] = DateTime.fromMillis(ts2, tz).toFormat("t");
 
-					$ends = new DateTime("@$ts2");
-					$ends->setTimezone($tz);
-					$session->setAttribute('ends', str_replace(':00', '', $ends->format('g:ia')));
-					*/
-
-					single.openHouse.push(session);
+					oh._content.push(session);
 				}
 			}
-		} else {
-			const openHouseData = openhouseByMlsNumber(
-				listing.mlsID,
-				listing.mlsNumber
-			);
-			if (openHouseData.openHouses) {
-				// Make sure we add them in time ascending
-				openHouseData.openHouses.sort((a, b) =>
-					DateTime.fromISO(a.startDateUtc) > DateTime.fromISO(b.startDateUtc)
-						? 1
-						: -1
-				);
 
-				//const tz = new DateTimeZone(Users.timezone(userId));
-				openHouseData.openHouses.forEach(oh => {
-					/*
-					if (DateTime.fromISO(a.endDateUtc) > NOW && DateTime.fromISO(b.startDateUtc) < strToTime('+7 days')) {
-						$session = $dom->createElement('session');
-
-						$starts = new DateTime(areads.startDateUtc);
-						$starts->setTimezone($tz);
-
-						foreach (array(
-							'dow'    => 'l',
-							'date'   => 'j',
-							'month'  => 'F',
-							'year'   => 'Y',
-							'starts' => 'g:ia',
-						) as $key => $format) {
-							$session->setAttribute($key, str_replace(':00', '', $starts->format($format)));
-						}
-
-						$ends = new DateTime(oh.endDateUtc);
-						$ends->setTimezone($tz);
-						$session->setAttribute('ends', str_replace(':00', '', $ends->format('g:ia')));
-
-						single.openHouse.push(session);
-					}*/
-				});
-			}
+			single.push(oh);
 		}
 
 		single.push({
 			_name: "bedrooms",
-			_attrs: { count: listing?.bedrooms?.length || "n/a" },
+			_attrs: { count: listing?.bedrooms || "n/a" },
 		});
 		single.push({
 			_name: "bathrooms",
@@ -836,6 +885,7 @@ const processListing = async params => {
 				garage: listing.garageSpaces,
 			},
 		});
+
 		// *** SINGLE ADDRESS
 		single.push({
 			_name: "address",
@@ -899,7 +949,7 @@ const processCollection = async params => {
 	if (collectionData) {
 		const collection = {
 			_attrs: {
-				id: params.collectionId,
+				id: params.renderId,
 				file: params.collection.file,
 				title: params.collection.title,
 				assembled: Date.now() / 1000,
@@ -950,7 +1000,7 @@ const processCollection = async params => {
 										/*
 										const rdata = get_collection_render_data(
 											linkAsset,
-											params.collectionId
+											params.renderId
 										);
 	
 										if (rdata?.id) {

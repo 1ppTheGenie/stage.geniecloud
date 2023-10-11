@@ -1,10 +1,21 @@
 // prettier-ignore
-import {getUser, areaStatisticsMonthly, getShortData, areaStatisticsWithPrevious ,mlsProperties, getAssessorPropertiesDetail, getQRProperty, getPropertyFromId, createLead, updateLead } from "../genieAI.js";
+import {
+	getUser,
+	areaStatisticsMonthly,
+	getShortData,
+	areaStatisticsWithPrevious,
+	mlsProperties,
+	getAreaBoundary,
+	getAssessorPropertiesDetail,
+	getQRProperty,
+	getPropertyFromId,
+	createLead,
+	updateLead,
+} from "../genieAI.js";
 
 export const embedsAPI = async (route, params) => {
-	//console.log("embdedsAPI", route, params);
-
 	let result;
+
 	switch (route) {
 		case "get-landing-data":
 			result = await getLandingPageData(params);
@@ -50,6 +61,8 @@ export const embedsAPI = async (route, params) => {
 			result = await get_mls_display(params);
 			break;
 	}
+
+	result.route = `Embed: ${route}`;
 
 	return result;
 };
@@ -153,12 +166,13 @@ const add_lead = async params => {
 			"phone",
 			"referringUrl",
 			"note",
-			"areaID",
-			"propertyID",
+			"areaId",
+			"propertyId",
 			"leadInquiryType",
 			"trackingData",
 		];
 
+		let argsKey;
 		for (var i = 0; i < keys.length; i++) {
 			var key = keys[i];
 
@@ -217,12 +231,15 @@ const add_lead = async params => {
 
 		for (var j = 0; j < meta_keys.length; j++) {
 			var key = meta_keys[j];
-			args["note"] += "\n" + key + ": " + params.meta[" + key + "];
+
+			if (!args.note) args.note = "";
+
+			args["note"] += `\n${key}: ${params[`meta[${key}]`]}`;
 		}
 
 		if (Object.keys(args).length > 0) {
-			var lead = createLead(agentId, args);
-			//: { key: "testing", args: args };
+			const lead = await createLead(agentId, args);
+
 			return success(lead);
 		} else {
 			return error("No lead arguments");
@@ -395,16 +412,16 @@ const get_area_data = async params => {
 
 const get_area_polygon = async params => {
 	var area_id = params.id;
-	var r = await genie_area_boundary(area_id);
+	var r = await getAreaBoundary(area_id);
 
-	if (r.success === true) {
+	if (r?.success === true) {
 		return success({
 			polygon: r.mapArea,
 		});
 	}
 
 	console.error("Get Area Polygon failed:", r);
-	return error("Unknown Error");
+	return error("getAreaBoundary failed");
 };
 
 const error = msg => ({ success: false, error: msg });

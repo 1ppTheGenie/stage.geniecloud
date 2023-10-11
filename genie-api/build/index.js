@@ -414,6 +414,807 @@ var require_jstoxml = __commonJS({
   }
 });
 
+// node_modules/qrcode-svg/lib/qrcode.js
+var require_qrcode = __commonJS({
+  "node_modules/qrcode-svg/lib/qrcode.js"(exports, module2) {
+    function QR8bitByte(data) {
+      this.mode = QRMode.MODE_8BIT_BYTE;
+      this.data = data;
+      this.parsedData = [];
+      for (var i2 = 0, l2 = this.data.length; i2 < l2; i2++) {
+        var byteArray = [];
+        var code = this.data.charCodeAt(i2);
+        if (code > 65536) {
+          byteArray[0] = 240 | (code & 1835008) >>> 18;
+          byteArray[1] = 128 | (code & 258048) >>> 12;
+          byteArray[2] = 128 | (code & 4032) >>> 6;
+          byteArray[3] = 128 | code & 63;
+        } else if (code > 2048) {
+          byteArray[0] = 224 | (code & 61440) >>> 12;
+          byteArray[1] = 128 | (code & 4032) >>> 6;
+          byteArray[2] = 128 | code & 63;
+        } else if (code > 128) {
+          byteArray[0] = 192 | (code & 1984) >>> 6;
+          byteArray[1] = 128 | code & 63;
+        } else {
+          byteArray[0] = code;
+        }
+        this.parsedData.push(byteArray);
+      }
+      this.parsedData = Array.prototype.concat.apply([], this.parsedData);
+      if (this.parsedData.length != this.data.length) {
+        this.parsedData.unshift(191);
+        this.parsedData.unshift(187);
+        this.parsedData.unshift(239);
+      }
+    }
+    QR8bitByte.prototype = {
+      getLength: function(buffer) {
+        return this.parsedData.length;
+      },
+      write: function(buffer) {
+        for (var i2 = 0, l2 = this.parsedData.length; i2 < l2; i2++) {
+          buffer.put(this.parsedData[i2], 8);
+        }
+      }
+    };
+    function QRCodeModel(typeNumber, errorCorrectLevel) {
+      this.typeNumber = typeNumber;
+      this.errorCorrectLevel = errorCorrectLevel;
+      this.modules = null;
+      this.moduleCount = 0;
+      this.dataCache = null;
+      this.dataList = [];
+    }
+    QRCodeModel.prototype = { addData: function(data) {
+      var newData = new QR8bitByte(data);
+      this.dataList.push(newData);
+      this.dataCache = null;
+    }, isDark: function(row, col) {
+      if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+        throw new Error(row + "," + col);
+      }
+      return this.modules[row][col];
+    }, getModuleCount: function() {
+      return this.moduleCount;
+    }, make: function() {
+      this.makeImpl(false, this.getBestMaskPattern());
+    }, makeImpl: function(test, maskPattern) {
+      this.moduleCount = this.typeNumber * 4 + 17;
+      this.modules = new Array(this.moduleCount);
+      for (var row = 0; row < this.moduleCount; row++) {
+        this.modules[row] = new Array(this.moduleCount);
+        for (var col = 0; col < this.moduleCount; col++) {
+          this.modules[row][col] = null;
+        }
+      }
+      this.setupPositionProbePattern(0, 0);
+      this.setupPositionProbePattern(this.moduleCount - 7, 0);
+      this.setupPositionProbePattern(0, this.moduleCount - 7);
+      this.setupPositionAdjustPattern();
+      this.setupTimingPattern();
+      this.setupTypeInfo(test, maskPattern);
+      if (this.typeNumber >= 7) {
+        this.setupTypeNumber(test);
+      }
+      if (this.dataCache == null) {
+        this.dataCache = QRCodeModel.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+      }
+      this.mapData(this.dataCache, maskPattern);
+    }, setupPositionProbePattern: function(row, col) {
+      for (var r = -1; r <= 7; r++) {
+        if (row + r <= -1 || this.moduleCount <= row + r)
+          continue;
+        for (var c = -1; c <= 7; c++) {
+          if (col + c <= -1 || this.moduleCount <= col + c)
+            continue;
+          if (0 <= r && r <= 6 && (c == 0 || c == 6) || 0 <= c && c <= 6 && (r == 0 || r == 6) || 2 <= r && r <= 4 && 2 <= c && c <= 4) {
+            this.modules[row + r][col + c] = true;
+          } else {
+            this.modules[row + r][col + c] = false;
+          }
+        }
+      }
+    }, getBestMaskPattern: function() {
+      var minLostPoint = 0;
+      var pattern = 0;
+      for (var i2 = 0; i2 < 8; i2++) {
+        this.makeImpl(true, i2);
+        var lostPoint = QRUtil.getLostPoint(this);
+        if (i2 == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i2;
+        }
+      }
+      return pattern;
+    }, createMovieClip: function(target_mc, instance_name, depth) {
+      var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+      var cs = 1;
+      this.make();
+      for (var row = 0; row < this.modules.length; row++) {
+        var y = row * cs;
+        for (var col = 0; col < this.modules[row].length; col++) {
+          var x = col * cs;
+          var dark = this.modules[row][col];
+          if (dark) {
+            qr_mc.beginFill(0, 100);
+            qr_mc.moveTo(x, y);
+            qr_mc.lineTo(x + cs, y);
+            qr_mc.lineTo(x + cs, y + cs);
+            qr_mc.lineTo(x, y + cs);
+            qr_mc.endFill();
+          }
+        }
+      }
+      return qr_mc;
+    }, setupTimingPattern: function() {
+      for (var r = 8; r < this.moduleCount - 8; r++) {
+        if (this.modules[r][6] != null) {
+          continue;
+        }
+        this.modules[r][6] = r % 2 == 0;
+      }
+      for (var c = 8; c < this.moduleCount - 8; c++) {
+        if (this.modules[6][c] != null) {
+          continue;
+        }
+        this.modules[6][c] = c % 2 == 0;
+      }
+    }, setupPositionAdjustPattern: function() {
+      var pos = QRUtil.getPatternPosition(this.typeNumber);
+      for (var i2 = 0; i2 < pos.length; i2++) {
+        for (var j = 0; j < pos.length; j++) {
+          var row = pos[i2];
+          var col = pos[j];
+          if (this.modules[row][col] != null) {
+            continue;
+          }
+          for (var r = -2; r <= 2; r++) {
+            for (var c = -2; c <= 2; c++) {
+              if (r == -2 || r == 2 || c == -2 || c == 2 || r == 0 && c == 0) {
+                this.modules[row + r][col + c] = true;
+              } else {
+                this.modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    }, setupTypeNumber: function(test) {
+      var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+      for (var i2 = 0; i2 < 18; i2++) {
+        var mod = !test && (bits >> i2 & 1) == 1;
+        this.modules[Math.floor(i2 / 3)][i2 % 3 + this.moduleCount - 8 - 3] = mod;
+      }
+      for (var i2 = 0; i2 < 18; i2++) {
+        var mod = !test && (bits >> i2 & 1) == 1;
+        this.modules[i2 % 3 + this.moduleCount - 8 - 3][Math.floor(i2 / 3)] = mod;
+      }
+    }, setupTypeInfo: function(test, maskPattern) {
+      var data = this.errorCorrectLevel << 3 | maskPattern;
+      var bits = QRUtil.getBCHTypeInfo(data);
+      for (var i2 = 0; i2 < 15; i2++) {
+        var mod = !test && (bits >> i2 & 1) == 1;
+        if (i2 < 6) {
+          this.modules[i2][8] = mod;
+        } else if (i2 < 8) {
+          this.modules[i2 + 1][8] = mod;
+        } else {
+          this.modules[this.moduleCount - 15 + i2][8] = mod;
+        }
+      }
+      for (var i2 = 0; i2 < 15; i2++) {
+        var mod = !test && (bits >> i2 & 1) == 1;
+        if (i2 < 8) {
+          this.modules[8][this.moduleCount - i2 - 1] = mod;
+        } else if (i2 < 9) {
+          this.modules[8][15 - i2 - 1 + 1] = mod;
+        } else {
+          this.modules[8][15 - i2 - 1] = mod;
+        }
+      }
+      this.modules[this.moduleCount - 8][8] = !test;
+    }, mapData: function(data, maskPattern) {
+      var inc = -1;
+      var row = this.moduleCount - 1;
+      var bitIndex = 7;
+      var byteIndex = 0;
+      for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+        if (col == 6)
+          col--;
+        while (true) {
+          for (var c = 0; c < 2; c++) {
+            if (this.modules[row][col - c] == null) {
+              var dark = false;
+              if (byteIndex < data.length) {
+                dark = (data[byteIndex] >>> bitIndex & 1) == 1;
+              }
+              var mask = QRUtil.getMask(maskPattern, row, col - c);
+              if (mask) {
+                dark = !dark;
+              }
+              this.modules[row][col - c] = dark;
+              bitIndex--;
+              if (bitIndex == -1) {
+                byteIndex++;
+                bitIndex = 7;
+              }
+            }
+          }
+          row += inc;
+          if (row < 0 || this.moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    } };
+    QRCodeModel.PAD0 = 236;
+    QRCodeModel.PAD1 = 17;
+    QRCodeModel.createData = function(typeNumber, errorCorrectLevel, dataList) {
+      var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+      var buffer = new QRBitBuffer();
+      for (var i2 = 0; i2 < dataList.length; i2++) {
+        var data = dataList[i2];
+        buffer.put(data.mode, 4);
+        buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber));
+        data.write(buffer);
+      }
+      var totalDataCount = 0;
+      for (var i2 = 0; i2 < rsBlocks.length; i2++) {
+        totalDataCount += rsBlocks[i2].dataCount;
+      }
+      if (buffer.getLengthInBits() > totalDataCount * 8) {
+        throw new Error("code length overflow. (" + buffer.getLengthInBits() + ">" + totalDataCount * 8 + ")");
+      }
+      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+        buffer.put(0, 4);
+      }
+      while (buffer.getLengthInBits() % 8 != 0) {
+        buffer.putBit(false);
+      }
+      while (true) {
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(QRCodeModel.PAD0, 8);
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(QRCodeModel.PAD1, 8);
+      }
+      return QRCodeModel.createBytes(buffer, rsBlocks);
+    };
+    QRCodeModel.createBytes = function(buffer, rsBlocks) {
+      var offset2 = 0;
+      var maxDcCount = 0;
+      var maxEcCount = 0;
+      var dcdata = new Array(rsBlocks.length);
+      var ecdata = new Array(rsBlocks.length);
+      for (var r = 0; r < rsBlocks.length; r++) {
+        var dcCount = rsBlocks[r].dataCount;
+        var ecCount = rsBlocks[r].totalCount - dcCount;
+        maxDcCount = Math.max(maxDcCount, dcCount);
+        maxEcCount = Math.max(maxEcCount, ecCount);
+        dcdata[r] = new Array(dcCount);
+        for (var i2 = 0; i2 < dcdata[r].length; i2++) {
+          dcdata[r][i2] = 255 & buffer.buffer[i2 + offset2];
+        }
+        offset2 += dcCount;
+        var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+        var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+        var modPoly = rawPoly.mod(rsPoly);
+        ecdata[r] = new Array(rsPoly.getLength() - 1);
+        for (var i2 = 0; i2 < ecdata[r].length; i2++) {
+          var modIndex = i2 + modPoly.getLength() - ecdata[r].length;
+          ecdata[r][i2] = modIndex >= 0 ? modPoly.get(modIndex) : 0;
+        }
+      }
+      var totalCodeCount = 0;
+      for (var i2 = 0; i2 < rsBlocks.length; i2++) {
+        totalCodeCount += rsBlocks[i2].totalCount;
+      }
+      var data = new Array(totalCodeCount);
+      var index = 0;
+      for (var i2 = 0; i2 < maxDcCount; i2++) {
+        for (var r = 0; r < rsBlocks.length; r++) {
+          if (i2 < dcdata[r].length) {
+            data[index++] = dcdata[r][i2];
+          }
+        }
+      }
+      for (var i2 = 0; i2 < maxEcCount; i2++) {
+        for (var r = 0; r < rsBlocks.length; r++) {
+          if (i2 < ecdata[r].length) {
+            data[index++] = ecdata[r][i2];
+          }
+        }
+      }
+      return data;
+    };
+    var QRMode = { MODE_NUMBER: 1 << 0, MODE_ALPHA_NUM: 1 << 1, MODE_8BIT_BYTE: 1 << 2, MODE_KANJI: 1 << 3 };
+    var QRErrorCorrectLevel = { L: 1, M: 0, Q: 3, H: 2 };
+    var QRMaskPattern = { PATTERN000: 0, PATTERN001: 1, PATTERN010: 2, PATTERN011: 3, PATTERN100: 4, PATTERN101: 5, PATTERN110: 6, PATTERN111: 7 };
+    var QRUtil = { PATTERN_POSITION_TABLE: [[], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54], [6, 32, 58], [6, 34, 62], [6, 26, 46, 66], [6, 26, 48, 70], [6, 26, 50, 74], [6, 30, 54, 78], [6, 30, 56, 82], [6, 30, 58, 86], [6, 34, 62, 90], [6, 28, 50, 72, 94], [6, 26, 50, 74, 98], [6, 30, 54, 78, 102], [6, 28, 54, 80, 106], [6, 32, 58, 84, 110], [6, 30, 58, 86, 114], [6, 34, 62, 90, 118], [6, 26, 50, 74, 98, 122], [6, 30, 54, 78, 102, 126], [6, 26, 52, 78, 104, 130], [6, 30, 56, 82, 108, 134], [6, 34, 60, 86, 112, 138], [6, 30, 58, 86, 114, 142], [6, 34, 62, 90, 118, 146], [6, 30, 54, 78, 102, 126, 150], [6, 24, 50, 76, 102, 128, 154], [6, 28, 54, 80, 106, 132, 158], [6, 32, 58, 84, 110, 136, 162], [6, 26, 54, 82, 110, 138, 166], [6, 30, 58, 86, 114, 142, 170]], G15: 1 << 10 | 1 << 8 | 1 << 5 | 1 << 4 | 1 << 2 | 1 << 1 | 1 << 0, G18: 1 << 12 | 1 << 11 | 1 << 10 | 1 << 9 | 1 << 8 | 1 << 5 | 1 << 2 | 1 << 0, G15_MASK: 1 << 14 | 1 << 12 | 1 << 10 | 1 << 4 | 1 << 1, getBCHTypeInfo: function(data) {
+      var d = data << 10;
+      while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+        d ^= QRUtil.G15 << QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15);
+      }
+      return (data << 10 | d) ^ QRUtil.G15_MASK;
+    }, getBCHTypeNumber: function(data) {
+      var d = data << 12;
+      while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+        d ^= QRUtil.G18 << QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18);
+      }
+      return data << 12 | d;
+    }, getBCHDigit: function(data) {
+      var digit = 0;
+      while (data != 0) {
+        digit++;
+        data >>>= 1;
+      }
+      return digit;
+    }, getPatternPosition: function(typeNumber) {
+      return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    }, getMask: function(maskPattern, i2, j) {
+      switch (maskPattern) {
+        case QRMaskPattern.PATTERN000:
+          return (i2 + j) % 2 == 0;
+        case QRMaskPattern.PATTERN001:
+          return i2 % 2 == 0;
+        case QRMaskPattern.PATTERN010:
+          return j % 3 == 0;
+        case QRMaskPattern.PATTERN011:
+          return (i2 + j) % 3 == 0;
+        case QRMaskPattern.PATTERN100:
+          return (Math.floor(i2 / 2) + Math.floor(j / 3)) % 2 == 0;
+        case QRMaskPattern.PATTERN101:
+          return i2 * j % 2 + i2 * j % 3 == 0;
+        case QRMaskPattern.PATTERN110:
+          return (i2 * j % 2 + i2 * j % 3) % 2 == 0;
+        case QRMaskPattern.PATTERN111:
+          return (i2 * j % 3 + (i2 + j) % 2) % 2 == 0;
+        default:
+          throw new Error("bad maskPattern:" + maskPattern);
+      }
+    }, getErrorCorrectPolynomial: function(errorCorrectLength) {
+      var a = new QRPolynomial([1], 0);
+      for (var i2 = 0; i2 < errorCorrectLength; i2++) {
+        a = a.multiply(new QRPolynomial([1, QRMath.gexp(i2)], 0));
+      }
+      return a;
+    }, getLengthInBits: function(mode, type) {
+      if (1 <= type && type < 10) {
+        switch (mode) {
+          case QRMode.MODE_NUMBER:
+            return 10;
+          case QRMode.MODE_ALPHA_NUM:
+            return 9;
+          case QRMode.MODE_8BIT_BYTE:
+            return 8;
+          case QRMode.MODE_KANJI:
+            return 8;
+          default:
+            throw new Error("mode:" + mode);
+        }
+      } else if (type < 27) {
+        switch (mode) {
+          case QRMode.MODE_NUMBER:
+            return 12;
+          case QRMode.MODE_ALPHA_NUM:
+            return 11;
+          case QRMode.MODE_8BIT_BYTE:
+            return 16;
+          case QRMode.MODE_KANJI:
+            return 10;
+          default:
+            throw new Error("mode:" + mode);
+        }
+      } else if (type < 41) {
+        switch (mode) {
+          case QRMode.MODE_NUMBER:
+            return 14;
+          case QRMode.MODE_ALPHA_NUM:
+            return 13;
+          case QRMode.MODE_8BIT_BYTE:
+            return 16;
+          case QRMode.MODE_KANJI:
+            return 12;
+          default:
+            throw new Error("mode:" + mode);
+        }
+      } else {
+        throw new Error("type:" + type);
+      }
+    }, getLostPoint: function(qrCode) {
+      var moduleCount = qrCode.getModuleCount();
+      var lostPoint = 0;
+      for (var row = 0; row < moduleCount; row++) {
+        for (var col = 0; col < moduleCount; col++) {
+          var sameCount = 0;
+          var dark = qrCode.isDark(row, col);
+          for (var r = -1; r <= 1; r++) {
+            if (row + r < 0 || moduleCount <= row + r) {
+              continue;
+            }
+            for (var c = -1; c <= 1; c++) {
+              if (col + c < 0 || moduleCount <= col + c) {
+                continue;
+              }
+              if (r == 0 && c == 0) {
+                continue;
+              }
+              if (dark == qrCode.isDark(row + r, col + c)) {
+                sameCount++;
+              }
+            }
+          }
+          if (sameCount > 5) {
+            lostPoint += 3 + sameCount - 5;
+          }
+        }
+      }
+      for (var row = 0; row < moduleCount - 1; row++) {
+        for (var col = 0; col < moduleCount - 1; col++) {
+          var count = 0;
+          if (qrCode.isDark(row, col))
+            count++;
+          if (qrCode.isDark(row + 1, col))
+            count++;
+          if (qrCode.isDark(row, col + 1))
+            count++;
+          if (qrCode.isDark(row + 1, col + 1))
+            count++;
+          if (count == 0 || count == 4) {
+            lostPoint += 3;
+          }
+        }
+      }
+      for (var row = 0; row < moduleCount; row++) {
+        for (var col = 0; col < moduleCount - 6; col++) {
+          if (qrCode.isDark(row, col) && !qrCode.isDark(row, col + 1) && qrCode.isDark(row, col + 2) && qrCode.isDark(row, col + 3) && qrCode.isDark(row, col + 4) && !qrCode.isDark(row, col + 5) && qrCode.isDark(row, col + 6)) {
+            lostPoint += 40;
+          }
+        }
+      }
+      for (var col = 0; col < moduleCount; col++) {
+        for (var row = 0; row < moduleCount - 6; row++) {
+          if (qrCode.isDark(row, col) && !qrCode.isDark(row + 1, col) && qrCode.isDark(row + 2, col) && qrCode.isDark(row + 3, col) && qrCode.isDark(row + 4, col) && !qrCode.isDark(row + 5, col) && qrCode.isDark(row + 6, col)) {
+            lostPoint += 40;
+          }
+        }
+      }
+      var darkCount = 0;
+      for (var col = 0; col < moduleCount; col++) {
+        for (var row = 0; row < moduleCount; row++) {
+          if (qrCode.isDark(row, col)) {
+            darkCount++;
+          }
+        }
+      }
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+      return lostPoint;
+    } };
+    var QRMath = { glog: function(n2) {
+      if (n2 < 1) {
+        throw new Error("glog(" + n2 + ")");
+      }
+      return QRMath.LOG_TABLE[n2];
+    }, gexp: function(n2) {
+      while (n2 < 0) {
+        n2 += 255;
+      }
+      while (n2 >= 256) {
+        n2 -= 255;
+      }
+      return QRMath.EXP_TABLE[n2];
+    }, EXP_TABLE: new Array(256), LOG_TABLE: new Array(256) };
+    for (i = 0; i < 8; i++) {
+      QRMath.EXP_TABLE[i] = 1 << i;
+    }
+    var i;
+    for (i = 8; i < 256; i++) {
+      QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4] ^ QRMath.EXP_TABLE[i - 5] ^ QRMath.EXP_TABLE[i - 6] ^ QRMath.EXP_TABLE[i - 8];
+    }
+    var i;
+    for (i = 0; i < 255; i++) {
+      QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]] = i;
+    }
+    var i;
+    function QRPolynomial(num, shift) {
+      if (num.length == void 0) {
+        throw new Error(num.length + "/" + shift);
+      }
+      var offset2 = 0;
+      while (offset2 < num.length && num[offset2] == 0) {
+        offset2++;
+      }
+      this.num = new Array(num.length - offset2 + shift);
+      for (var i2 = 0; i2 < num.length - offset2; i2++) {
+        this.num[i2] = num[i2 + offset2];
+      }
+    }
+    QRPolynomial.prototype = { get: function(index) {
+      return this.num[index];
+    }, getLength: function() {
+      return this.num.length;
+    }, multiply: function(e) {
+      var num = new Array(this.getLength() + e.getLength() - 1);
+      for (var i2 = 0; i2 < this.getLength(); i2++) {
+        for (var j = 0; j < e.getLength(); j++) {
+          num[i2 + j] ^= QRMath.gexp(QRMath.glog(this.get(i2)) + QRMath.glog(e.get(j)));
+        }
+      }
+      return new QRPolynomial(num, 0);
+    }, mod: function(e) {
+      if (this.getLength() - e.getLength() < 0) {
+        return this;
+      }
+      var ratio = QRMath.glog(this.get(0)) - QRMath.glog(e.get(0));
+      var num = new Array(this.getLength());
+      for (var i2 = 0; i2 < this.getLength(); i2++) {
+        num[i2] = this.get(i2);
+      }
+      for (var i2 = 0; i2 < e.getLength(); i2++) {
+        num[i2] ^= QRMath.gexp(QRMath.glog(e.get(i2)) + ratio);
+      }
+      return new QRPolynomial(num, 0).mod(e);
+    } };
+    function QRRSBlock(totalCount, dataCount) {
+      this.totalCount = totalCount;
+      this.dataCount = dataCount;
+    }
+    QRRSBlock.RS_BLOCK_TABLE = [[1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9], [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16], [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13], [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9], [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12], [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15], [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14], [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15], [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13], [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16], [4, 101, 81], [1, 80, 50, 4, 81, 51], [4, 50, 22, 4, 51, 23], [3, 36, 12, 8, 37, 13], [2, 116, 92, 2, 117, 93], [6, 58, 36, 2, 59, 37], [4, 46, 20, 6, 47, 21], [7, 42, 14, 4, 43, 15], [4, 133, 107], [8, 59, 37, 1, 60, 38], [8, 44, 20, 4, 45, 21], [12, 33, 11, 4, 34, 12], [3, 145, 115, 1, 146, 116], [4, 64, 40, 5, 65, 41], [11, 36, 16, 5, 37, 17], [11, 36, 12, 5, 37, 13], [5, 109, 87, 1, 110, 88], [5, 65, 41, 5, 66, 42], [5, 54, 24, 7, 55, 25], [11, 36, 12], [5, 122, 98, 1, 123, 99], [7, 73, 45, 3, 74, 46], [15, 43, 19, 2, 44, 20], [3, 45, 15, 13, 46, 16], [1, 135, 107, 5, 136, 108], [10, 74, 46, 1, 75, 47], [1, 50, 22, 15, 51, 23], [2, 42, 14, 17, 43, 15], [5, 150, 120, 1, 151, 121], [9, 69, 43, 4, 70, 44], [17, 50, 22, 1, 51, 23], [2, 42, 14, 19, 43, 15], [3, 141, 113, 4, 142, 114], [3, 70, 44, 11, 71, 45], [17, 47, 21, 4, 48, 22], [9, 39, 13, 16, 40, 14], [3, 135, 107, 5, 136, 108], [3, 67, 41, 13, 68, 42], [15, 54, 24, 5, 55, 25], [15, 43, 15, 10, 44, 16], [4, 144, 116, 4, 145, 117], [17, 68, 42], [17, 50, 22, 6, 51, 23], [19, 46, 16, 6, 47, 17], [2, 139, 111, 7, 140, 112], [17, 74, 46], [7, 54, 24, 16, 55, 25], [34, 37, 13], [4, 151, 121, 5, 152, 122], [4, 75, 47, 14, 76, 48], [11, 54, 24, 14, 55, 25], [16, 45, 15, 14, 46, 16], [6, 147, 117, 4, 148, 118], [6, 73, 45, 14, 74, 46], [11, 54, 24, 16, 55, 25], [30, 46, 16, 2, 47, 17], [8, 132, 106, 4, 133, 107], [8, 75, 47, 13, 76, 48], [7, 54, 24, 22, 55, 25], [22, 45, 15, 13, 46, 16], [10, 142, 114, 2, 143, 115], [19, 74, 46, 4, 75, 47], [28, 50, 22, 6, 51, 23], [33, 46, 16, 4, 47, 17], [8, 152, 122, 4, 153, 123], [22, 73, 45, 3, 74, 46], [8, 53, 23, 26, 54, 24], [12, 45, 15, 28, 46, 16], [3, 147, 117, 10, 148, 118], [3, 73, 45, 23, 74, 46], [4, 54, 24, 31, 55, 25], [11, 45, 15, 31, 46, 16], [7, 146, 116, 7, 147, 117], [21, 73, 45, 7, 74, 46], [1, 53, 23, 37, 54, 24], [19, 45, 15, 26, 46, 16], [5, 145, 115, 10, 146, 116], [19, 75, 47, 10, 76, 48], [15, 54, 24, 25, 55, 25], [23, 45, 15, 25, 46, 16], [13, 145, 115, 3, 146, 116], [2, 74, 46, 29, 75, 47], [42, 54, 24, 1, 55, 25], [23, 45, 15, 28, 46, 16], [17, 145, 115], [10, 74, 46, 23, 75, 47], [10, 54, 24, 35, 55, 25], [19, 45, 15, 35, 46, 16], [17, 145, 115, 1, 146, 116], [14, 74, 46, 21, 75, 47], [29, 54, 24, 19, 55, 25], [11, 45, 15, 46, 46, 16], [13, 145, 115, 6, 146, 116], [14, 74, 46, 23, 75, 47], [44, 54, 24, 7, 55, 25], [59, 46, 16, 1, 47, 17], [12, 151, 121, 7, 152, 122], [12, 75, 47, 26, 76, 48], [39, 54, 24, 14, 55, 25], [22, 45, 15, 41, 46, 16], [6, 151, 121, 14, 152, 122], [6, 75, 47, 34, 76, 48], [46, 54, 24, 10, 55, 25], [2, 45, 15, 64, 46, 16], [17, 152, 122, 4, 153, 123], [29, 74, 46, 14, 75, 47], [49, 54, 24, 10, 55, 25], [24, 45, 15, 46, 46, 16], [4, 152, 122, 18, 153, 123], [13, 74, 46, 32, 75, 47], [48, 54, 24, 14, 55, 25], [42, 45, 15, 32, 46, 16], [20, 147, 117, 4, 148, 118], [40, 75, 47, 7, 76, 48], [43, 54, 24, 22, 55, 25], [10, 45, 15, 67, 46, 16], [19, 148, 118, 6, 149, 119], [18, 75, 47, 31, 76, 48], [34, 54, 24, 34, 55, 25], [20, 45, 15, 61, 46, 16]];
+    QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+      var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+      if (rsBlock == void 0) {
+        throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+      }
+      var length = rsBlock.length / 3;
+      var list = [];
+      for (var i2 = 0; i2 < length; i2++) {
+        var count = rsBlock[i2 * 3 + 0];
+        var totalCount = rsBlock[i2 * 3 + 1];
+        var dataCount = rsBlock[i2 * 3 + 2];
+        for (var j = 0; j < count; j++) {
+          list.push(new QRRSBlock(totalCount, dataCount));
+        }
+      }
+      return list;
+    };
+    QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+      switch (errorCorrectLevel) {
+        case QRErrorCorrectLevel.L:
+          return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+        case QRErrorCorrectLevel.M:
+          return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+        case QRErrorCorrectLevel.Q:
+          return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+        case QRErrorCorrectLevel.H:
+          return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+        default:
+          return void 0;
+      }
+    };
+    function QRBitBuffer() {
+      this.buffer = [];
+      this.length = 0;
+    }
+    QRBitBuffer.prototype = { get: function(index) {
+      var bufIndex = Math.floor(index / 8);
+      return (this.buffer[bufIndex] >>> 7 - index % 8 & 1) == 1;
+    }, put: function(num, length) {
+      for (var i2 = 0; i2 < length; i2++) {
+        this.putBit((num >>> length - i2 - 1 & 1) == 1);
+      }
+    }, getLengthInBits: function() {
+      return this.length;
+    }, putBit: function(bit) {
+      var bufIndex = Math.floor(this.length / 8);
+      if (this.buffer.length <= bufIndex) {
+        this.buffer.push(0);
+      }
+      if (bit) {
+        this.buffer[bufIndex] |= 128 >>> this.length % 8;
+      }
+      this.length++;
+    } };
+    var QRCodeLimitLength = [[17, 14, 11, 7], [32, 26, 20, 14], [53, 42, 32, 24], [78, 62, 46, 34], [106, 84, 60, 44], [134, 106, 74, 58], [154, 122, 86, 64], [192, 152, 108, 84], [230, 180, 130, 98], [271, 213, 151, 119], [321, 251, 177, 137], [367, 287, 203, 155], [425, 331, 241, 177], [458, 362, 258, 194], [520, 412, 292, 220], [586, 450, 322, 250], [644, 504, 364, 280], [718, 560, 394, 310], [792, 624, 442, 338], [858, 666, 482, 382], [929, 711, 509, 403], [1003, 779, 565, 439], [1091, 857, 611, 461], [1171, 911, 661, 511], [1273, 997, 715, 535], [1367, 1059, 751, 593], [1465, 1125, 805, 625], [1528, 1190, 868, 658], [1628, 1264, 908, 698], [1732, 1370, 982, 742], [1840, 1452, 1030, 790], [1952, 1538, 1112, 842], [2068, 1628, 1168, 898], [2188, 1722, 1228, 958], [2303, 1809, 1283, 983], [2431, 1911, 1351, 1051], [2563, 1989, 1423, 1093], [2699, 2099, 1499, 1139], [2809, 2213, 1579, 1219], [2953, 2331, 1663, 1273]];
+    function QRCode2(options) {
+      var instance = this;
+      this.options = {
+        padding: 4,
+        width: 256,
+        height: 256,
+        typeNumber: 4,
+        color: "#000000",
+        background: "#ffffff",
+        ecl: "M"
+      };
+      if (typeof options === "string") {
+        options = {
+          content: options
+        };
+      }
+      if (options) {
+        for (var i2 in options) {
+          this.options[i2] = options[i2];
+        }
+      }
+      if (typeof this.options.content !== "string") {
+        throw new Error("Expected 'content' as string!");
+      }
+      if (this.options.content.length === 0) {
+        throw new Error("Expected 'content' to be non-empty!");
+      }
+      if (!(this.options.padding >= 0)) {
+        throw new Error("Expected 'padding' value to be non-negative!");
+      }
+      if (!(this.options.width > 0) || !(this.options.height > 0)) {
+        throw new Error("Expected 'width' or 'height' value to be higher than zero!");
+      }
+      function _getErrorCorrectLevel(ecl2) {
+        switch (ecl2) {
+          case "L":
+            return QRErrorCorrectLevel.L;
+          case "M":
+            return QRErrorCorrectLevel.M;
+          case "Q":
+            return QRErrorCorrectLevel.Q;
+          case "H":
+            return QRErrorCorrectLevel.H;
+          default:
+            throw new Error("Unknwon error correction level: " + ecl2);
+        }
+      }
+      function _getTypeNumber(content2, ecl2) {
+        var length = _getUTF8Length(content2);
+        var type2 = 1;
+        var limit = 0;
+        for (var i3 = 0, len = QRCodeLimitLength.length; i3 <= len; i3++) {
+          var table = QRCodeLimitLength[i3];
+          if (!table) {
+            throw new Error("Content too long: expected " + limit + " but got " + length);
+          }
+          switch (ecl2) {
+            case "L":
+              limit = table[0];
+              break;
+            case "M":
+              limit = table[1];
+              break;
+            case "Q":
+              limit = table[2];
+              break;
+            case "H":
+              limit = table[3];
+              break;
+            default:
+              throw new Error("Unknwon error correction level: " + ecl2);
+          }
+          if (length <= limit) {
+            break;
+          }
+          type2++;
+        }
+        if (type2 > QRCodeLimitLength.length) {
+          throw new Error("Content too long");
+        }
+        return type2;
+      }
+      function _getUTF8Length(content2) {
+        var result = encodeURI(content2).toString().replace(/\%[0-9a-fA-F]{2}/g, "a");
+        return result.length + (result.length != content2 ? 3 : 0);
+      }
+      var content = this.options.content;
+      var type = _getTypeNumber(content, this.options.ecl);
+      var ecl = _getErrorCorrectLevel(this.options.ecl);
+      this.qrcode = new QRCodeModel(type, ecl);
+      this.qrcode.addData(content);
+      this.qrcode.make();
+    }
+    QRCode2.prototype.svg = function(opt) {
+      var options = this.options || {};
+      var modules = this.qrcode.modules;
+      if (typeof opt == "undefined") {
+        opt = { container: options.container || "svg" };
+      }
+      var pretty = typeof options.pretty != "undefined" ? !!options.pretty : true;
+      var indent = pretty ? "  " : "";
+      var EOL = pretty ? "\r\n" : "";
+      var width = options.width;
+      var height = options.height;
+      var length = modules.length;
+      var xsize = width / (length + 2 * options.padding);
+      var ysize = height / (length + 2 * options.padding);
+      var join = typeof options.join != "undefined" ? !!options.join : false;
+      var swap = typeof options.swap != "undefined" ? !!options.swap : false;
+      var xmlDeclaration = typeof options.xmlDeclaration != "undefined" ? !!options.xmlDeclaration : true;
+      var predefined = typeof options.predefined != "undefined" ? !!options.predefined : false;
+      var defs = predefined ? indent + '<defs><path id="qrmodule" d="M0 0 h' + ysize + " v" + xsize + ' H0 z" style="fill:' + options.color + ';shape-rendering:crispEdges;" /></defs>' + EOL : "";
+      var bgrect = indent + '<rect x="0" y="0" width="' + width + '" height="' + height + '" style="fill:' + options.background + ';shape-rendering:crispEdges;"/>' + EOL;
+      var modrect = "";
+      var pathdata = "";
+      for (var y = 0; y < length; y++) {
+        for (var x = 0; x < length; x++) {
+          var module3 = modules[x][y];
+          if (module3) {
+            var px = x * xsize + options.padding * xsize;
+            var py = y * ysize + options.padding * ysize;
+            if (swap) {
+              var t = px;
+              px = py;
+              py = t;
+            }
+            if (join) {
+              var w = xsize + px;
+              var h = ysize + py;
+              px = Number.isInteger(px) ? Number(px) : px.toFixed(2);
+              py = Number.isInteger(py) ? Number(py) : py.toFixed(2);
+              w = Number.isInteger(w) ? Number(w) : w.toFixed(2);
+              h = Number.isInteger(h) ? Number(h) : h.toFixed(2);
+              pathdata += "M" + px + "," + py + " V" + h + " H" + w + " V" + py + " H" + px + " Z ";
+            } else if (predefined) {
+              modrect += indent + '<use x="' + px.toString() + '" y="' + py.toString() + '" href="#qrmodule" />' + EOL;
+            } else {
+              modrect += indent + '<rect x="' + px.toString() + '" y="' + py.toString() + '" width="' + xsize + '" height="' + ysize + '" style="fill:' + options.color + ';shape-rendering:crispEdges;"/>' + EOL;
+            }
+          }
+        }
+      }
+      if (join) {
+        modrect = indent + '<path x="0" y="0" style="fill:' + options.color + ';shape-rendering:crispEdges;" d="' + pathdata + '" />';
+      }
+      var svg = "";
+      switch (opt.container) {
+        case "svg":
+          if (xmlDeclaration) {
+            svg += '<?xml version="1.0" standalone="yes"?>' + EOL;
+          }
+          svg += '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="' + width + '" height="' + height + '">' + EOL;
+          svg += defs + bgrect + modrect;
+          svg += "</svg>";
+          break;
+        case "svg-viewbox":
+          if (xmlDeclaration) {
+            svg += '<?xml version="1.0" standalone="yes"?>' + EOL;
+          }
+          svg += '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ' + width + " " + height + '">' + EOL;
+          svg += defs + bgrect + modrect;
+          svg += "</svg>";
+          break;
+        case "g":
+          svg += '<g width="' + width + '" height="' + height + '">' + EOL;
+          svg += defs + bgrect + modrect;
+          svg += "</g>";
+          break;
+        default:
+          svg += (defs + bgrect + modrect).replace(/^\s+/, "");
+          break;
+      }
+      return svg;
+    };
+    QRCode2.prototype.save = function(file, callback) {
+      var data = this.svg();
+      if (typeof callback != "function") {
+        callback = function(error2, result) {
+        };
+      }
+      try {
+        var fs = require("fs");
+        fs.writeFile(file, data, callback);
+      } catch (e) {
+        callback(e);
+      }
+    };
+    if (typeof module2 != "undefined") {
+      module2.exports = QRCode2;
+    }
+  }
+});
+
 // src/index.js
 var src_exports = {};
 __export(src_exports, {
@@ -6291,7 +7092,7 @@ var copyObject = async (sourceKey, destinationKey, bucket = null, cache = null) 
   };
   return await s3Client.send(new import_client_s3.CopyObjectCommand(args));
 };
-var listS3Folder = async (folderPath, bucket = null) => {
+var listS3Folder = async (folderPath = "", bucket = null) => {
   try {
     const listParams = {
       Bucket: bucket ?? BUCKET,
@@ -6303,6 +7104,12 @@ var listS3Folder = async (folderPath, bucket = null) => {
     console.error("Error:", err);
   }
 };
+var deleteObject = async (Key, Bucket = null) => await s3Client.send(
+  new import_client_s3.DeleteObjectCommand({
+    Bucket: Bucket || BUCKET,
+    Key
+  })
+);
 var headObject = async (key, since = null, bucket = null) => {
   return await s3Client.send(
     new import_client_s3.HeadObjectCommand({
@@ -6361,6 +7168,7 @@ var toS3 = async (key, buffer, tags = null, mimeType = null, bucket = null) => {
   }
 };
 var queueMsg = async (body, attributes) => {
+  console.log("SQS", SQS_QUEUE, process.env);
   const sqsMessage = {
     QueueUrl: SQS_QUEUE,
     MessageAttributes: attributes,
@@ -6387,17 +7195,24 @@ var getRenderJSON = async (params) => {
   if (typeof params != "object" || Object.keys(params).length == 0) {
     throw new Exception("Empty render param set is not supported");
   }
+  if (!params.offsetDate) {
+    params.offsetDate = endOfLastMonth();
+  }
   const warnings = [];
   const datePeriod2 = params.datePeriod * 2;
-  if (params.propertyType !== 0 && params.propertyType !== 1) {
+  if (params.propertyType === null || parseInt(params.propertyType) < 0) {
+    const propertyTypeId = params.mlsNumber ? await listingPropertyTypeId(params) : 0;
+    console.log(
+      `Forced propertyType switch from ${params.propertyType} to ${propertyTypeId}.`
+    );
     warnings.push({
-      warning: `Forced propertyType switch from ${params.propertyType}.`
+      warning: `Forced propertyType switch from ${params.propertyType} to ${propertyTypeId}.`
     });
-    params.propertyType = 0;
+    params.propertyType = propertyTypeId;
   }
-  let renderSettings2 = filteredMerge(defaultRenderSettings, params);
+  let renderSettings = filteredMerge(defaultRenderSettings, params);
   if (params.downloadUrl) {
-    renderSettings2.downloadUrl = params.downloadUrl;
+    renderSettings.downloadUrl = params.downloadUrl;
   }
   const root = {
     // *** Output
@@ -6405,8 +7220,8 @@ var getRenderJSON = async (params) => {
       _attrs: await processOutput(
         params.userId,
         params.datePeriod,
-        params.collectionId,
-        renderSettings2
+        params.renderId,
+        renderSettings
       )
     },
     // *** Dates
@@ -6432,7 +7247,33 @@ var getRenderJSON = async (params) => {
     // *** Areas
     areas: params.isEmbed ? params.areaIds.map((id) => ({ id })) : await processAreas(params)
   };
+  let qrUrl = params.customizations?.qrUrl || root.agents[0].agent.website;
+  if (!qrUrl.startsWith("http"))
+    qrUrl = `https://${qrUrl}`;
+  const qrSVG = await generateQR(qrUrl);
+  await toS3(
+    `genie-files/${params.renderId}/qr.svg`,
+    Buffer.from(qrSVG),
+    null,
+    "image/svg+xml"
+  );
+  root.output._attrs.qrUrl = `${genieGlobals.GENIE_HOST}genie-files/${params.renderId}/qr.svg`;
   if (params.mlsNumber) {
+    let times = [];
+    if (params.openHouseTimes) {
+      params.openHouseTimes.forEach((t) => {
+        times.push(typeof t == "string" ? DateTime.fromISO(t) : t);
+      });
+    } else {
+      const r = await openhouseByMlsNumber(params.mlsId, params.mlsNumber);
+      if (r.openHouses && Array.isArray(r.openHouses)) {
+        r.openHouses.forEach((t) => {
+          times.push(DateTime.fromISO(t.startDateUtc).toMillis());
+          times.push(DateTime.fromISO(t.endDateUtc).toMillis());
+        });
+      }
+    }
+    params.openHouseTimes = times;
     root.single = await processListing(params);
     if (params.asset && params.asset.startsWith("landing-pages") && params.mlsId) {
       let mlsDisplay = mlsDisplaySettings(params.mlsId);
@@ -6446,7 +7287,7 @@ var getRenderJSON = async (params) => {
   }
   return root;
 };
-var processOutput = async (userId, datePeriod, collectionId, renderSettings2) => {
+var processOutput = async (userId, datePeriod, renderId, renderSettings) => {
   const now2 = /* @__PURE__ */ new Date();
   const offsetDate = endOfLastMonth();
   return {
@@ -6455,7 +7296,7 @@ var processOutput = async (userId, datePeriod, collectionId, renderSettings2) =>
     year: now2.getFullYear(),
     reportDate: Math.round(now2.getTime() / 1e3),
     sinceDate: dateAdd(offsetDate, { months: -datePeriod }).toSeconds(),
-    collectionId,
+    renderId,
     mapboxKey: genieGlobals.MAPBOX_KEY,
     googleKey: genieGlobals.GOOGLE_KEY,
     areaIndex: 1,
@@ -6463,7 +7304,7 @@ var processOutput = async (userId, datePeriod, collectionId, renderSettings2) =>
     userId,
     version: await buildVersion(),
     // ToDo isGenieTeam: user_params.roles.includes("genie_client_team" ),
-    ...renderSettings2
+    ...renderSettings
   };
 };
 var filteredMerge = (...objects) => {
@@ -6496,7 +7337,8 @@ var defaultRenderSettings = {
   downloadUrl: "",
   openHouseTimes: null,
   propertyCaption: null,
-  propertyCaptionSingular: null
+  propertyCaptionSingular: null,
+  reRenderUntil: null
 };
 var areaFromMlsNumber = async (mlsNumber, mlsId, userId) => {
   const listing = await getListing(userId, mlsNumber, mlsId);
@@ -6507,7 +7349,7 @@ var areaFromMlsNumber = async (mlsNumber, mlsId, userId) => {
   if (Array.isArray(areas) && areas.length > 0) {
     const limitApnCount = (area) => area.areaApnCount >= 1e3 && area.areaApnCount <= 3e3;
     let subset = areas.filter(
-      (area) => area.areaType == "ZipCode" && limitApnCount(area)
+      (area) => !["City", "CarrierRoute", "School"].includes(area.areaType) && limitApnCount(area)
     );
     if (subset && subset.length) {
       return subset[0];
@@ -6516,7 +7358,8 @@ var areaFromMlsNumber = async (mlsNumber, mlsId, userId) => {
       if (subset && subset.length) {
         return subset[0];
       } else {
-        return areas.pop();
+        let a = areas.pop();
+        return a;
       }
     }
   }
@@ -6538,6 +7381,21 @@ var setRenderDefaults = async (params) => {
   if (params.mlsNumber && !params.mlsId) {
     params.mlsId = 0;
   }
+  if (params.mlsNumber) {
+    if (!params.propertyType || !params.areaId) {
+      const listing = await getListing(
+        params.userId,
+        params.mlsNumber,
+        params.mlsId
+      );
+      if (!params.areaId && listing.preferedAreaId) {
+        params.areaId = listing.preferedAreaId;
+      }
+      if (!params.propertyType) {
+        params.propertyType = parseInt(listing.propertyTypeID ?? 0);
+      }
+    }
+  }
   if (params.areaId && !params.areaIds) {
     params.areaIds = [params.areaId];
   }
@@ -6550,13 +7408,6 @@ var setRenderDefaults = async (params) => {
     if (params.area) {
       params.areaIds = [params.area.areaId];
     }
-  }
-  if (params.openHouseTimes) {
-    let times = [];
-    params.openHouseTimes.forEach((t) => {
-      times.push(typeof t == "string" ? DateTime.fromISO(t) : t);
-    });
-    params.openHouseTimes = times;
   }
   return params;
 };
@@ -6683,7 +7534,7 @@ var processAreas = async (params) => {
         }
       });
       const defaultJSON = '{"type": "FeatureCollection","features": []}';
-      let geoJSON = boundary.mapArea.geoJSON ?? defaultJSON;
+      let geoJSON = boundary?.mapArea?.geoJSON ?? defaultJSON;
       if (geoJSON.length > 2e5) {
         geoJSON = defaultJSON;
       }
@@ -6693,8 +7544,8 @@ var processAreas = async (params) => {
           { id: areaId },
           { name: areaName2 ?? params?.area?.name ?? "NOT SET" },
           { geojson: `<![CDATA[${geoJSON}]]>` },
-          { centerLat: boundary.mapArea.centerLatitude },
-          { centerLng: boundary.mapArea.centerLongitude },
+          { centerLat: boundary?.mapArea?.centerLatitude ?? 32.71 },
+          { centerLng: boundary?.mapArea?.centerLongitude ?? -117.16 },
           { image: areaImage ?? "" }
         ]
       };
@@ -6706,14 +7557,16 @@ var processAreas = async (params) => {
             prevData = propertyTypeData.previousPeriod;
           }
         });
-        lowerByValue = propertyTypeData.minSale.salePrice + (propertyTypeData.medSalePrice - propertyTypeData.minSale.salePrice) / 2;
-        upperByValue = propertyTypeData.maxSale.salePrice - (propertyTypeData.maxSale.salePrice - propertyTypeData.medSalePrice) / 1.25;
-        lowerByValue = Math.floor(
-          parseFloat(lowerByValue) + (25e3 - parseFloat(lowerByValue) % 25e3)
-        );
-        upperByValue = Math.floor(
-          parseFloat(upperByValue) + (25e3 - parseFloat(upperByValue) % 25e3)
-        );
+        if (propertyTypeData) {
+          lowerByValue = propertyTypeData.minSale.salePrice + (propertyTypeData.medSalePrice - propertyTypeData.minSale.salePrice) / 2;
+          upperByValue = propertyTypeData.maxSale.salePrice - (propertyTypeData.maxSale.salePrice - propertyTypeData.medSalePrice) / 1.25;
+          lowerByValue = Math.floor(
+            parseFloat(lowerByValue) + (25e3 - parseFloat(lowerByValue) % 25e3)
+          );
+          upperByValue = Math.floor(
+            parseFloat(upperByValue) + (25e3 - parseFloat(upperByValue) % 25e3)
+          );
+        }
         const mls_properties = await mlsProperties(
           params.mlsID ?? 0,
           areaId,
@@ -6777,16 +7630,16 @@ var processAreas = async (params) => {
             {
               _name: "previous",
               _attrs: {
-                totalSold: prevData.sold,
-                turnOver: prevData.turnOver,
-                avgPricePerSqFtSold: prevData.avgPricePerSqFt,
-                avgPricePerSqFtList: prevData.avgSoldListingsListPricePerSqFt,
-                averageListPriceForSold: prevData.avgListPriceForSold,
-                averageSalePrice: prevData.avgSalePrice,
-                averageDaysOnMarket: prevData.avgDaysOnMarket,
+                totalSold: prevData?.sold,
+                turnOver: prevData?.turnOver,
+                avgPricePerSqFtSold: prevData?.avgPricePerSqFt,
+                avgPricePerSqFtList: prevData?.avgSoldListingsListPricePerSqFt,
+                averageListPriceForSold: prevData?.avgListPriceForSold,
+                averageSalePrice: prevData?.avgSalePrice,
+                averageDaysOnMarket: prevData?.avgDaysOnMarket,
                 medianSalePrice: prevData.medSalePrice,
-                maxSalePrice: prevData.maxSale.salePrice,
-                minSalePrice: prevData.minSale.salePrice
+                maxSalePrice: prevData?.maxSale?.salePrice,
+                minSalePrice: prevData?.minSale?.salePrice
               }
             }
           ];
@@ -6890,11 +7743,11 @@ var processAreas = async (params) => {
               soldPropertyTypeCount: propertyTypeData.sold,
               taxrollCount: propertyTypeData.taxroll,
               turnOver: propertyTypeData.turnOver,
-              maxSalePrice: propertyTypeData.maxSale.salePrice,
-              minSalePrice: propertyTypeData.minSale.salePrice,
-              marketTotalSoldVolume: propertyTypeData.marketTotalSoldVolume,
-              averageYearsInHome: propertyTypeData.avgYearsInHome,
-              ownerOccupancy: propertyTypeData.ownerOccupancy
+              maxSalePrice: propertyTypeData?.maxSale?.salePrice,
+              minSalePrice: propertyTypeData?.minSale?.salePrice,
+              marketTotalSoldVolume: propertyTypeData?.marketTotalSoldVolume,
+              averageYearsInHome: propertyTypeData?.avgYearsInHome,
+              ownerOccupancy: propertyTypeData?.ownerOccupancy
             },
             _content: statistics
           });
@@ -6904,6 +7757,14 @@ var processAreas = async (params) => {
     })
   );
   return areas;
+};
+var listingPropertyTypeId = async (params) => {
+  const listing = await getListing(
+    params.userId,
+    params.mlsNumber,
+    params.mlsId
+  );
+  return listing.propertyTypeID;
 };
 var processListing = async (params) => {
   let single = [];
@@ -6930,7 +7791,7 @@ var processListing = async (params) => {
       { listed: listing.listedOn ?? Date.now() / 1e3 },
       { soldDate: listing.soldDate ?? "" },
       { daysOnMarket: listing.daysOnMarket ?? "" },
-      { type: listing.propertyType ?? 0 },
+      { type: listing.propertyType },
       { listingStatus: listing.listingStatus ?? "" },
       { listingAgent: listing.listingAgentName ?? "" },
       { statusTypeID: listing.statusTypeID ?? "" },
@@ -6952,31 +7813,39 @@ var processListing = async (params) => {
       { longitude: listing.longitude ?? 0 },
       { city: listing.city ?? "" }
     ];
-    if (params?.renderSettings?.openHouseTimes) {
-      for (let i = 0; i < renderSettings.openHouseTimes.length; i += 2) {
-        const ts1 = renderSettings.openHouseTimes[i];
-        const ts2 = renderSettings.openHouseTimes[i + 1];
+    console.log("paramsopenHouseTimes2", params.openHouseTimes);
+    if (params.openHouseTimes) {
+      const tz = { zone: "PST" };
+      const oh = {
+        _name: "openHouse",
+        _content: []
+      };
+      const timeAttrbs = {
+        dow: "EEEE",
+        date: "d",
+        month: "MMMM",
+        year: "y",
+        starts: "t"
+      };
+      for (let i = 0; i < params.openHouseTimes.length; i += 2) {
+        const ts1 = params.openHouseTimes[i];
+        const ts2 = params.openHouseTimes[i + 1];
         if (ts2 > NOW && ts1 < timeAgo({ days: 7 })) {
           let session = { _name: "session", _attrs: {} };
-          single.openHouse.push(session);
+          Object.keys(timeAttrbs).forEach(
+            (key) => session._attrs[key] = DateTime.fromMillis(ts1, tz).toFormat(
+              timeAttrbs[key]
+            )
+          );
+          session._attrs["ends"] = DateTime.fromMillis(ts2, tz).toFormat("t");
+          oh._content.push(session);
         }
       }
-    } else {
-      const openHouseData = openhouseByMlsNumber(
-        listing.mlsID,
-        listing.mlsNumber
-      );
-      if (openHouseData.openHouses) {
-        openHouseData.openHouses.sort(
-          (a, b) => DateTime.fromISO(a.startDateUtc) > DateTime.fromISO(b.startDateUtc) ? 1 : -1
-        );
-        openHouseData.openHouses.forEach((oh) => {
-        });
-      }
+      single.push(oh);
     }
     single.push({
       _name: "bedrooms",
-      _attrs: { count: listing?.bedrooms?.length || "n/a" }
+      _attrs: { count: listing?.bedrooms || "n/a" }
     });
     single.push({
       _name: "bathrooms",
@@ -7047,7 +7916,7 @@ var processCollection = async (params) => {
   if (collectionData) {
     const collection = {
       _attrs: {
-        id: params.collectionId,
+        id: params.renderId,
         file: params.collection.file,
         title: params.collection.title,
         assembled: Date.now() / 1e3
@@ -7169,6 +8038,7 @@ var buildVersion = async () => {
 };
 
 // src/utils/hubAPI.js
+var import_qrcode_svg = __toESM(require_qrcode(), 1);
 var ASSET_HEADERS = {
   name: "Asset Name",
   knownAs: "Known As",
@@ -7224,11 +8094,7 @@ var getCollectionTemplates = async () => {
   return { templates };
 };
 var getCollections = async () => await listS3Folder("_assets/collections");
-var generateQR = async (params) => {
-  if (params.genie_url) {
-    return { code: GenieQR.render(params.genie_url) };
-  }
-};
+var generateQR = async (url) => new import_qrcode_svg.default(url).svg();
 
 // src/utils/embedsAPI.js
 var embedsAPI = async (route, params) => {
@@ -7277,6 +8143,7 @@ var embedsAPI = async (route, params) => {
       result = await get_mls_display(params);
       break;
   }
+  result.route = `Embed: ${route}`;
   return result;
 };
 var getLandingPageData = async (params) => {
@@ -7361,31 +8228,32 @@ var add_lead = async (params) => {
       "phone",
       "referringUrl",
       "note",
-      "areaID",
-      "propertyID",
+      "areaId",
+      "propertyId",
       "leadInquiryType",
       "trackingData"
     ];
+    let argsKey2;
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
       if (params.hasOwnProperty(key)) {
         var value = null;
         switch (key) {
           case "genieTags":
-            argsKey = "tags";
+            argsKey2 = "tags";
             value = params[key].split(",");
             break;
           case "email":
-            argsKey = "emailAddress";
+            argsKey2 = "emailAddress";
             break;
           case "phone":
-            argsKey = "phoneNumber";
+            argsKey2 = "phoneNumber";
             break;
           default:
-            argsKey = key;
+            argsKey2 = key;
             break;
         }
-        args[argsKey] = value !== null ? value : params[key];
+        args[argsKey2] = value !== null ? value : params[key];
       }
     }
     if (params.hasOwnProperty("fullName")) {
@@ -7412,10 +8280,13 @@ var add_lead = async (params) => {
     }, []);
     for (var j = 0; j < meta_keys.length; j++) {
       var key = meta_keys[j];
-      args["note"] += "\n" + key + ": " + params.meta[" + key + "];
+      if (!args.note)
+        args.note = "";
+      args["note"] += `
+${key}: ${params[`meta[${key}]`]}`;
     }
     if (Object.keys(args).length > 0) {
-      var lead2 = createLead(agentId, args);
+      const lead2 = await createLead(agentId, args);
       return success(lead2);
     } else {
       return error("No lead arguments");
@@ -7542,14 +8413,14 @@ var get_area_data = async (params) => {
 };
 var get_area_polygon = async (params) => {
   var area_id = params.id;
-  var r = await genie_area_boundary(area_id);
-  if (r.success === true) {
+  var r = await getAreaBoundary(area_id);
+  if (r?.success === true) {
     return success({
       polygon: r.mapArea
     });
   }
   console.error("Get Area Polygon failed:", r);
-  return error("Unknown Error");
+  return error("getAreaBoundary failed");
 };
 var error = (msg) => ({ success: false, error: msg });
 var success = async (params) => ({ success: true, result: params });
@@ -7748,7 +8619,7 @@ var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
   const timeout = CACHE_FOR[endpoint.split("/")[0]] ?? timeout_hours;
   if (timeout > 0) {
     await toS3(`_cache/${key}`, Buffer.from(data), {
-      genieCache: endpoint,
+      genieCache: endpoint?.toString(),
       timeout
     });
   }
@@ -7799,7 +8670,7 @@ var getAssessorProperty = async (property_id, agent_id) => await call_api("GetAs
   userId: agent_id
 });
 var getAssessorPropertiesDetail = async (address_id) => await call_api(`GetAssessorPropertiesDetail/${address_id}`);
-var getAreaBoundary = async (area_id) => await call_api(`GetAreaBoundary/${area_id}`, null, "POST");
+var getAreaBoundary = async (areaId) => areaId && await call_api(`GetAreaBoundary/${areaId}`, null, "POST");
 var getListing = async (user_id, mls_number, mls_id = -1) => {
   let listing;
   if (mls_id > -1) {
@@ -7912,19 +8783,15 @@ var getPropertyFromId = async (property_id, agent_id) => {
     return r.property;
   }
 };
-var createLead = async (user_id, args) => {
-  args.userId = user_id;
-  if (args.propertyID) {
-    args.propertyId = args.propertyID;
-    delete args.propertyID;
-  }
+var createLead = async (userId, args) => {
+  args.userId = userId;
   const r = await call_api("CreateNewLead", args, "POST");
   if (!r) {
     console.log("Failed to create new lead: ", r);
   }
   return r;
 };
-var updateLead = async (user_id, args) => await call_api("UpdateLead", { ...args, userId: user_id }, "POST");
+var updateLead = async (userId, args) => await call_api("UpdateLead", { ...args, userId }, "POST");
 var getQRProperty = async (qrID, token) => {
   const lead2 = await getQRCodeLead(qrID, token);
   if (lead2.property) {
@@ -7995,6 +8862,7 @@ var call_api = async (endpoint, params, verb = "POST", pre_cache = null) => {
 
 // src/index.js
 var { toXML } = import_jstoxml.default;
+var CLOUDFLARE_KEY = process.env.GENIE_USER ?? "genieApiHub2";
 var JSON_MIME = "application/json";
 var api = async (event) => {
   let routes = [], routeParams = [];
@@ -8009,11 +8877,26 @@ var api = async (event) => {
     for (const record of event.Records) {
       if (record.eventSource == "aws:sqs") {
         switch (record.body) {
+          case "clear-cache":
+            let tempParams = {};
+            routes.push("/clear-cache");
+            Object.keys(record.messageAttributes).map((key) => {
+              if (["tags", "prefixes", "hosts"].includes(key)) {
+                tempParams[key] = record.messageAttributes[key].dataType == "String" ? record.messageAttributes[key].stringValue : "";
+              }
+            });
+            routeParams.push(tempParams);
+            break;
           case "prepare":
             routes.push("/prepare");
-            const processKey = `_processing/${record.messageAttributes.collectionId.stringValue}/prepare.json`;
+            const processKey = `_processing/${record.messageAttributes.renderId.stringValue}/prepare.json`;
             let s3Params = await jsonFromS3(processKey);
             if (s3Params) {
+              Object.keys(record.messageAttributes).map((key) => {
+                if (key !== "renderId") {
+                  s3Params[key] = record.messageAttributes[key].dataType == "String" ? record.messageAttributes[key].stringValue : "";
+                }
+              });
               routeParams.push(s3Params);
             } else {
               console.log(`Failed to get ${processKey}`);
@@ -8028,7 +8911,10 @@ var api = async (event) => {
           let s3Params = await fromS3(record.s3.object.key).then(
             (buffer) => buffer && buffer.length > 0 ? JSON.parse(buffer) : null
           );
-          routeParams.push({ ...s3Params, sourceKey: record.s3.object.key });
+          routeParams.push({
+            ...s3Params,
+            sourceKey: record.s3.object.key
+          });
         }
       }
     }
@@ -8064,7 +8950,18 @@ var api = async (event) => {
               break;
             case "/get-collections":
               const collections = await getCollections();
-              response.body = { success: true, ...collections };
+              const processedCollections = {};
+              for (const index in collections) {
+                if (collections[index].Key.endsWith("json")) {
+                  processedCollections[(0, import_path.basename)(collections[index].Key)] = JSON.parse(
+                    (await fromS3(collections[index].Key)).toString()
+                  );
+                }
+              }
+              response.body = {
+                success: true,
+                collections: processedCollections
+              };
               break;
             case "/make-qrcode":
               const qr = await generateQR();
@@ -8075,28 +8972,88 @@ var api = async (event) => {
               response.body = { success: true, ...assets };
               break;
             case "/clear-cache":
+              if (CLOUDFLARE_KEY && Array.isArray(params.prefixes)) {
+                const url = "https://api.cloudflare.com/client/v4/zones/identifier/purge_cache";
+                const options = {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-Auth-Key": CLOUDFLARE_KEY
+                  },
+                  body: `{"prefixes": ["${params.prefixes.join('","')}"}`
+                };
+                await fetch(url, options);
+              }
+              break;
+            case "/log":
+              if (params.renderId && params.assetId) {
+                await toS3(
+                  `genie-pages/${params.renderId}/${params.assetId}/access.json`,
+                  Buffer.from(JSON.stringify({ accessed: Date.now() })),
+                  null,
+                  JSON_MIME
+                );
+                const json = await jsonFromS3(
+                  `_processing/${params.renderId}}/prepare.json`
+                );
+                if (json.mlsNumber) {
+                  const updated = await mlsListingLastUpdate({
+                    mlsId: json.mlsId,
+                    mlsNumber: json.mlsNumber,
+                    userId: json.userId
+                  });
+                  console.log(updated.key);
+                }
+                response.body = {
+                  success: true,
+                  renderId: params.renderId
+                };
+              }
               break;
             case "/re-render":
-              if (params.collectionId) {
-                const collectionExists = await headObject(
-                  `_processing/${params.collectionId}/prepare.json`
-                );
-                if (collectionExists) {
-                  await queueMsg("prepare", {
-                    collectionId: {
-                      DataType: "String",
-                      StringValue: params.collectionId
-                    }
-                  });
-                  response.body.success = true;
-                  response.body.msg = `${params.collectionId} re-render under way`;
-                } else {
-                  throw new Error(
-                    `${params.collectionId}: no such collection exists`
-                  );
+              if (params.renderId) {
+                if (params.renderId) {
+                  const r = await reRenderCollection(params.renderId);
+                  if (r) {
+                    response.body.success = true;
+                    response.body.msg = `${params.renderId} re-render under way`;
+                  }
                 }
+              } else if (params.assetId || params.userId || params.mlsNumber || params.areaId) {
+                let reRenders = [];
+                const r = await listS3Folder("_processing");
+                await Promise.all(
+                  r.map(async (t) => {
+                    if (t.Key.endsWith("prepare.json") && t.Size > 0) {
+                      const json = await jsonFromS3(t.Key);
+                      if (params.assetId) {
+                      } else if (
+                        // ToDo mlsId must match as well as as mlsNumber
+                        (!params.userId || params.userId == json.userId) && (!params.mlsNumber || params.mlsNumber == json.mlsNumber) && (!params.areaId || json.areaIds.includes(params.areaId))
+                      ) {
+                        reRenders.push(r.Key.split("/")[1]);
+                      }
+                    }
+                  })
+                );
+                if (reRenders.length > 0) {
+                  reRenders = reRenders.filter(
+                    (value, index, array) => array.indexOf(value) === index
+                  );
+                  for (const index in reRenders) {
+                    const r2 = await reRenderCollection(
+                      reRenders[index],
+                      params.assetId ?? null
+                    );
+                  }
+                  response.body.success = true;
+                  response.body.msg = `${reRenders.length} re-renders under way`;
+                }
+                break;
               } else {
-                throw new Error("[collectionId] is required for a re-render");
+                throw new Error(
+                  "[renderId] or [userId] or [mlsNumber] is required for a re-render"
+                );
               }
               break;
             case "/process":
@@ -8110,6 +9067,7 @@ var api = async (event) => {
                     null,
                     JSON_MIME
                   );
+                  await deleteObject(sourceKey);
                 }
               }
               break;
@@ -8132,7 +9090,8 @@ var api = async (event) => {
                             asset: asset.asset,
                             size: asset.size,
                             lpo: asset.lpo,
-                            qrUrl: asset.qrDestination ?? asset.qrUrl
+                            qrDestination: asset.qrDestination,
+                            qrUrl: asset.qrUrl
                           };
                           return await prepareAsset(asset.asset, assetParams);
                         })
@@ -8147,7 +9106,7 @@ var api = async (event) => {
             case "/create":
               try {
                 await validateRenderParams(params);
-                params.collectionId = (0, import_crypto2.randomUUID)();
+                params.renderId = (0, import_crypto2.randomUUID)();
                 params.theme = params.theme ?? await userSetting(params.userId, "theme");
                 const { s3Key } = await getS3Key(
                   params.asset || params.collection && "collection",
@@ -8156,15 +9115,15 @@ var api = async (event) => {
                 params.s3Key = s3Key;
                 params = await setRenderDefaults(params);
                 const r = await toS3(
-                  `_processing/${params.collectionId}/prepare.json`,
+                  `_processing/${params.renderId}/prepare.json`,
                   Buffer.from(JSON.stringify(params)),
                   null,
                   JSON_MIME
                 );
                 await queueMsg("prepare", {
-                  collectionId: {
+                  renderId: {
                     DataType: "String",
-                    StringValue: params.collectionId
+                    StringValue: params.renderId
                   }
                 });
                 if (params.collection || params.asset.startsWith("landing-pages")) {
@@ -8176,7 +9135,8 @@ var api = async (event) => {
                 if (s3Key) {
                   response.body.success = true;
                   response.body.availableAt = `${genieGlobals.GENIE_HOST}${s3Key}`;
-                  response.body.reRender = `${genieGlobals.GENIE_API}re-render?collectionId=${params.collectionId}`;
+                  response.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
+                  response.body.renderId = params.renderId;
                 }
               } catch (e) {
                 response.body.error = e.message;
@@ -8218,7 +9178,7 @@ var renderKeyParams = async (params) => {
   }
   const area = await areaName(params.userId, areaId);
   return {
-    reportDate: (/* @__PURE__ */ new Date()).getTime() / 1e3,
+    reportDate: Math.round((/* @__PURE__ */ new Date()).getTime() / 1e3),
     areaName: area?.areaName ?? "unknown",
     propertyType,
     propertyCaption: params.propertyCaption ?? "",
@@ -8227,14 +9187,17 @@ var renderKeyParams = async (params) => {
   };
 };
 var processAsset = async (params) => {
-  const prepareKey = `_processing/${params.collectionId}/prepare.json`;
+  const prepareKey = `_processing/${params.renderId}/prepare.json`;
   let s3Params = await jsonFromS3(prepareKey);
   if (s3Params) {
     const renderRoot = await getRenderJSON({ ...s3Params, ...params });
     return {
       transformXml: toXML(
         { renderRoot },
-        { attributeFilter: (key, val) => val === null }
+        {
+          attributeFilter: (key, val) => val === null,
+          attributeExplicitTrue: true
+        }
       ),
       transformXsl: (await fromS3(`_assets/_xsl/${params.asset}.xsl`)).toString().replaceAll(/[\t|\n|\t]/g, "")
     };
@@ -8300,9 +9263,9 @@ var prepareAsset = async (asset, params) => {
         const width = suffix === "pdf" ? isA5 ? "216mm" : `${Math.round(dims.width) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.width);
         const height = suffix === "pdf" ? isA5 ? "279mm" : `${Math.round(dims.height) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.height);
         const render = {
-          s3Key,
+          s3Key: params.overrideKey ?? s3Key,
           bucket: BUCKET,
-          collectionId: params.collectionId,
+          renderId: params.renderId,
           suffix,
           size,
           landscape: isA5 || dims.height < dims.width ? true : false,
@@ -8330,6 +9293,12 @@ var prepareAsset = async (asset, params) => {
           totalPages: params.totalPages ?? pages.length,
           asset: pageParams.asset
         };
+        if (params.qrDestination || params.qrUrl) {
+          let qrUrl = params.qrDestination ?? await getLandingQrCodeUrl(params.qrUrl, params.renderId);
+          if (!qrUrl.startsWith("http"))
+            qrUrl = `https://${qrUrl}`;
+          render.customizations = { qrUrl };
+        }
         if (suffix === "mp4") {
           render.music = params.music ?? null;
           render.slideLength = params?.page?.slideLength ?? 5;
@@ -8340,9 +9309,9 @@ var prepareAsset = async (asset, params) => {
           } else {
             let overrideKey = s3Key.replace(
               "index.html",
-              `${(0, import_path.basename)(pageParams.asset)}-download`
+              `${(0, import_path.basename)(pageParams.asset)}-download.pdf`
             );
-            render.downloadUrl = `${overrideKey}.pdf`;
+            render.downloadUrl = `/${overrideKey}`;
             const downloadSize = await assetSetting(
               settings.defaultDownload,
               "size"
@@ -8356,11 +9325,12 @@ var prepareAsset = async (asset, params) => {
         }
         const cleanKey = (0, import_path.basename)(render.s3Key).replaceAll(/[.\/]/g, "-");
         await toS3(
-          `_processing/${params.collectionId}/${cleanKey}${pageParams.asset.startsWith("landing-pages") ? `-${(0, import_path.basename)(pageParams.asset)}` : ""}-p${i}-prep.json`,
+          `_processing/${params.renderId}/${cleanKey}${pageParams.asset.startsWith("landing-pages") ? `-${(0, import_path.basename)(pageParams.asset)}` : ""}-p${i}-prep.json`,
           Buffer.from(JSON.stringify(render)),
           null,
           JSON_MIME
         );
+        console.log("colAsset", asset, params.overrideKey ?? s3Key);
       })
     );
   }
@@ -8373,6 +9343,29 @@ var getPropertyCaption = (id, custom = null) => {
       return "Condos";
     default:
       return "Homes";
+  }
+};
+var reRenderCollection = async (renderId, assetId = null) => {
+  const collectionExists = await headObject(
+    `_processing/${renderId}/prepare.json`
+  );
+  if (collectionExists) {
+    let msgAttrbs = {
+      renderId: {
+        DataType: "String",
+        StringValue: renderId
+      }
+    };
+    if (assetId) {
+      msgAttrbs.assetId = {
+        DataType: "String",
+        StringValue: assetId
+      };
+    }
+    await queueMsg("prepare", msgAttrbs);
+    return true;
+  } else {
+    throw new Error(`${renderId}: no such collection exists`);
   }
 };
 var validateRenderParams = async (args) => {
@@ -8392,7 +9385,7 @@ var validateRenderParams = async (args) => {
     }
     if (args.areaId && !args.ignoreBoundaryError) {
       let boundary = await getAreaBoundary(args.areaId);
-      if ((boundary.mapArea.geoJSON ?? "").length > 2e5) {
+      if ((boundary?.mapArea?.geoJSON ?? "").length > 2e5) {
         const errMsg = "Area boundary size risks render fail";
         if (!args.ignoreBoundaryFail) {
           errors.push(errMsg);
@@ -8413,6 +9406,8 @@ var validateRenderParams = async (args) => {
       }
       if (!a) {
         errors.push(`Asset '${args.asset}' does not exist`);
+      } else {
+        console.log(args, a);
       }
     }
     if (args.collection) {
@@ -8434,14 +9429,21 @@ var validateRenderParams = async (args) => {
   }
   return msgs;
 };
+var getLandingQrCodeUrl = async (asset, renderId) => {
+  let s3Key = `genie-files/${renderId}/${asset}-qr.svg`;
+  const qrKey = await getS3Key(`landing-pages/${asset}`, { renderId });
+  const qrSVG = await generateQR(`${genieGlobals.GENIE_HOST}/${qrKey}`);
+  await toS3(s3Key, Buffer.from(qrSVG), null, "image/svg+xml");
+  return `${genieGlobals.GENIE_HOST}/${s3Key}`;
+};
 var getS3Key = async (asset, params) => {
-  let s3Key = `failed/${params.collectionId}.png`;
+  let s3Key = `failed/${params.renderId}.png`;
   try {
     if (asset.startsWith("collection")) {
-      s3Key = `genie-collection/${params.collectionId}/index.html`;
+      s3Key = `genie-collection/${params.renderId}/index.html`;
     } else if (asset.startsWith("landing-pages")) {
       const base = typeof params.lpo !== "undefined" ? `${(0, import_path.basename)(params.lpo)}/${(0, import_path.basename)(asset)}` : (0, import_path.basename)(asset);
-      s3Key = `genie-pages/${params.collectionId}/${base}/index.html`;
+      s3Key = `genie-pages/${params.renderId}/${base}/index.html`;
     } else {
       const fileExtension = params?.asPDF ? "pdf" : params?.webp ? "webp" : null;
       const keyParams = await renderKeyParams(params);
@@ -8451,7 +9453,7 @@ var getS3Key = async (asset, params) => {
       ]);
       const hasPages2 = params.pages || Array.isArray(pages) && pages.length > 0;
       const replaces = {
-        REPORTDATE: DateTime.fromMillis(keyParams.reportDate).toFormat(
+        REPORTDATE: DateTime.fromSeconds(keyParams.reportDate).toFormat(
           "LLL-yyyy"
         ),
         PROPTYPE: getPropertyCaption(
@@ -8466,7 +9468,7 @@ var getS3Key = async (asset, params) => {
       Object.keys(replaces).map(
         (key) => renderKey2 = renderKey2.replace(key, replaces[key])
       );
-      s3Key = `genie-files/${params.collectionId}/${params.theme}/${renderKey2}.${fileExtension || hasPages2 && "pdf" || "png"}`;
+      s3Key = `genie-files/${params.renderId}/${params.theme}/${renderKey2}.${fileExtension || hasPages2 && "pdf" || "png"}`;
     }
   } catch {
   }
