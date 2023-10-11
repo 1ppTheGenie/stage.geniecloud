@@ -1,0 +1,7 @@
+- name: Upload to Genie Cloud S3
+  run: |
+    aws s3 sync ./public/_assets s3://$GENIE_CLOUD_BUCKET/_assets/ --delete --cache-control max-age=3600
+  env:
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    AWS_DEFAULT_REGION: 'us-west-1'
