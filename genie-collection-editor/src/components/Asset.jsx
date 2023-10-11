@@ -9,8 +9,9 @@ import EyeSlash from "@/assets/eye-slash.svg";
 
 export const Asset = props => {
 	const asset =
-		app.store.allAssets[props.asset.folder][props.asset.stylesheet + ".xsl"];
-
+		app.store.allAssets[`${props.asset.folder}/${props.asset.stylesheet}`];
+	//
+	console.log("@", asset);
 	return (
 		<Show when={asset}>
 			<tr>

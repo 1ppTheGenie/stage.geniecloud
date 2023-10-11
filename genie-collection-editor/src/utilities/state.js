@@ -1,9 +1,45 @@
 import { createStore } from "solid-js/store";
 import { createRoot, createSignal, createEffect } from "solid-js";
-
-import { getAssets, getCollections } from "@/utilities";
-
 export const view = { COLLECTIONS: 0, ASSETS: 1 };
+
+const GENIE = "genie/v1/";
+
+const settings = await (async () => {
+	const data = await fetch("/settings.json");
+
+	return await data.json();
+})();
+
+const getAssets = async () => await apiCall(`get-assets`);
+const getCollections = async () => await apiCall(`get-collections`);
+const saveCollection = async data =>
+	await apiCall(`update-collection`, data, "POST");
+
+export { getCollections, getAssets, saveCollection };
+
+async function apiCall(endpoint, data = null, method = "POST") {
+	const url = `${settings.endpoint}${endpoint}`;
+
+	const headers = new Headers();
+	headers.append("Content-Type", "application/json");
+	headers.append("Accept", "application/json");
+
+	const args = {
+		method: method,
+		mode: "cors",
+		cache: "no-cache",
+		headers: headers,
+		referrerPolicy: "no-referrer",
+	};
+
+	if (method === "POST") {
+		args.body = data && JSON.stringify(data);
+	}
+
+	const response = await fetch(url, args);
+
+	return response.json();
+}
 
 export const app = createRoot(() => {
 	const [store, setStore] = createStore({
@@ -49,20 +85,18 @@ export const app = createRoot(() => {
 	};
 });
 
-window.onload = () => {
-	(async () => {
-		const collections = await getCollections();
-		app.setStore("allCollections", collections.result);
+(async () => {
+	let result = await getCollections();
+	app.setStore("allCollections", result.collections);
 
-		const assets = await getAssets();
+	result = await getAssets();
 
-		// Some assets are not available for collections
-		["cush", "funnels", "embeds"].forEach(
-			folder => delete assets.result.assets[folder]
-		);
+	const excludes = ["cush", "funn", "embe"];
+	Object.keys(result.assets).map(asset => {
+		if (excludes.includes(asset.substring(0, 4))) {
+			delete result.assets[asset];
+		}
+	});
 
-		app.setStore("allAssets", assets.result.assets);
-	})();
-};
-
-
+	app.setStore("allAssets", result.assets);
+})();

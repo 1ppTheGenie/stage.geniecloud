@@ -111,11 +111,12 @@ export const Collection = props => {
 						onChange={e => updateCollection("template", e.target.value)}
 						default="default"
 						value={collection().template}>
-						<For each={Object.keys(app.store.allAssets?.collections)}>
+						{console.log("app.store.allAssets", app.store.allAssets)}
+						<For each={Object.keys(app.store.allAssets)}>
 							{a => (
-								<option value={a.replace(".xsl", "")}>
-									{app.store.allAssets.collections[a].name}
-								</option>
+								<Show when={a.startsWith("collection")}>
+									<option value={a}>{app.store.allAssets[a].name}</option>
+								</Show>
 							)}
 						</For>
 					</select>

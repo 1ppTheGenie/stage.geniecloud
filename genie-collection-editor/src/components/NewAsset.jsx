@@ -32,6 +32,7 @@ export const NewAsset = props => {
 							stylesheet: names[1].replace(".xsl", ""),
 						});
 					}}>
+					{/*
 					<For each={Object.keys(app.store.allAssets)}>
 						{key => (
 							<optgroup label={key}>
@@ -43,6 +44,12 @@ export const NewAsset = props => {
 									)}
 								</For>
 							</optgroup>
+						)}
+					</For>
+					*/}
+					<For each={Object.keys(app.store.allAssets)}>
+						{key => (
+							<option value={key}>{app.store.allAssets[key].name}</option>
 						)}
 					</For>
 				</select>
