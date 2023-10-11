@@ -9,7 +9,6 @@ Version:	1.1
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0">
-
 <xsl:import href="listing-commands.xsl" />
 
 
@@ -64,6 +63,7 @@ Version:	1.1
 <link href="https://fonts.googleapis.com" rel="preconnect" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
 
+
 			<link rel="stylesheet">
 				<xsl:attribute name="href">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/listing-commands/css/marketing-steps-lc1.css' )" />
@@ -90,6 +90,7 @@ Version:	1.1
 						<!-- Is Area Command -->
 <xsl:variable name="arrow" select="'=>'" />
 
+
 						<script>
 							<xsl:value-of select="concat('const polygon =', //area[1]/geojson,';' )" />
 							<xsl:value-of select="concat('const options = { mapStyle: `', //output/@mapStyle,'`, zoom: 17 };' )" />
@@ -106,6 +107,7 @@ Version:	1.1
 						<style>
 <xsl:value-of select="'div.banner span.overlay {z-index: 10!important;}'" />
 
+
 						</style>
 					</xsl:if>
 
@@ -121,6 +123,7 @@ Version:	1.1
 						<span>
 <xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
 
+
 						</span>
 						<br/>
 						<xsl:call-template name="overridable">
@@ -132,6 +135,7 @@ Version:	1.1
 						<div class="address">
 							<span>
 <xsl:value-of select="$listingAddressLine1" />
+
 
 							</span>
 						</div>
@@ -170,10 +174,12 @@ Version:	1.1
 				<xsl:for-each select="//collection/sections/section">
 <xsl:sort select="@name" />
 
+
 					<div class="section">
 						<div class="section-heading">
 							<h3 class="light">
 <xsl:value-of select="@name" />
+
 
 							</h3>
 
@@ -181,12 +187,14 @@ Version:	1.1
 								<h2>
 <xsl:value-of select="@caption" />
 
+
 								</h2>
 							</xsl:if>
 
 							<xsl:if test="@description!=''">
 								<p>
 <xsl:value-of select="@description" />
+
 
 								</p>
 							</xsl:if>
@@ -206,8 +214,10 @@ Version:	1.1
 <xsl:sort select="if (matches(@name, '(\d+)')) then format-number(number(regex-group(1)), '000000') else @name" data-type="text" />
 
 
+
 								<xsl:call-template name="asset-box">
 <xsl:with-param name="asset" select="." />
+
 
 								</xsl:call-template>
 							</xsl:for-each>
@@ -215,6 +225,7 @@ Version:	1.1
 							<xsl:for-each select="./doc">
 								<xsl:call-template name="asset-box">
 <xsl:with-param name="asset" select="." />
+
 
 								</xsl:call-template>
 							</xsl:for-each>
@@ -234,9 +245,11 @@ Version:	1.1
 									<xsl:when test="//single/mlsNumber != ''">
 <xsl:value-of select="'Want to engage tons of homeowners without lifting a finger? Click below to speak with your consultant today!'" />
 
+
 									</xsl:when>
 									<xsl:otherwise>
 <xsl:value-of select="'Want `Done For You` Facebook ads for your area? Click below to speak with your consultant today!'" />
+
 
 									</xsl:otherwise>
 								</xsl:choose>
@@ -254,9 +267,11 @@ Version:	1.1
 											<xsl:when test="//single/mlsNumber != ''">
 <xsl:value-of select="'https://1parkplace.as.me/schedule.php?appointmentType=43561933'" />
 
+
 											</xsl:when>
 											<xsl:otherwise>
 <xsl:value-of select="'https://1parkplace.as.me/schedule.php?appointmentType=43562134'" />
+
 
 											</xsl:otherwise>
 										</xsl:choose>
@@ -270,9 +285,11 @@ Version:	1.1
 										<xsl:when test="//single/mlsNumber != ''">
 <xsl:value-of select="'Schedule your Meeting Today'" />
 
+
 										</xsl:when>
 										<xsl:otherwise>
 <xsl:value-of select="'Schedule your Campaign Today!'" />
+
 
 										</xsl:otherwise>
 									</xsl:choose>
@@ -337,6 +354,7 @@ Version:	1.1
 							<a>
 								<xsl:attribute name="href">
 <xsl:value-of select="concat( //output/@apiUrl, 're-render/?renderId=', //collection/@id )" />
+
 
 								</xsl:attribute>
 								<xsl:text>Click to re-render</xsl:text>

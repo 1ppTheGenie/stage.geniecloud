@@ -1,20 +1,15 @@
 <?xml version="1.0"?>
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:math="http://www.w3.org/2005/xpath-functions/math"
-	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="global-variables.xsl" />
-<xsl:import href="genie-functions.xsl" />
-<xsl:import href="printers-marks.xsl" />
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:math="http://www.w3.org/2005/xpath-functions/math" xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
+	<xsl:import href="global-variables.xsl" />
+	<xsl:import href="genie-functions.xsl" />
+	<xsl:import href="printers-marks.xsl" />
 
 	<xsl:preserve-space elements="*" />
 
-<xsl:output method="xml" />
+	<xsl:output method="xml" />
 
-
-<xsl:template match="/">
+	<xsl:template match="/">
 		<xsl:call-template name="svg-wrapper" />
 	</xsl:template>
 
@@ -23,14 +18,14 @@
 			<xsl:attribute name="transform">
 				<xsl:value-of select="concat( 'translate(', $cropSize, ',', $cropSize, ') scale(', ($svgWidth - ($cropSize * 2) ) div $svgWidth, ',', ($svgHeight - ($cropSize * 2) ) div $svgHeight, ')' )" />
 			</xsl:attribute>
-<xsl:call-template name="cropped-content" />
+			<xsl:call-template name="cropped-content" />
 
 		</g>
 	</xsl:template>
 
-<xsl:template name="cropped-content" />
+	<xsl:template name="cropped-content" />
 
-<xsl:template name="svg-body" />
+	<xsl:template name="svg-body" />
 
 
 	<xsl:template name="empty-listing-text">
@@ -87,7 +82,7 @@
 				<feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
 			</filter>
 
-<xsl:variable name="count" select="number(5)" />
+			<xsl:variable name="count" select="number(5)" />
 
 			<xsl:for-each select="(//*)[position()&lt;=$count]">
 				<linearGradient>
@@ -139,7 +134,7 @@
 					</xsl:attribute>
 
 					<xsl:attribute name="viewBox">
-<xsl:value-of select="concat( '0 0 ', $svgWidth, ' ', $svgHeight )" />
+						<xsl:value-of select="concat( '0 0 ', $svgWidth, ' ', $svgHeight )" />
 
 					</xsl:attribute>
 
@@ -161,7 +156,7 @@
 					</defs>
 
 					<script>
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/genie-global.js') " />
+						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/genie-global.js') " />
 
 						<xsl:text>;</xsl:text>
 					</script>
@@ -172,7 +167,7 @@
 						<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)" />
 					</xsl:if>
 
-<xsl:call-template name="svg-body" />
+					<xsl:call-template name="svg-body" />
 
 
 					<xsl:if test="//output/@pageIndex and number(//output/@pageIndex) > 1">
@@ -224,7 +219,7 @@
 			<foreignObject width="50%" height="50" x="0" y="60" class="map-marker">
 				<span class="banner" style="background-color:var(--vivid-banner);color:var(--printers-marks);font-family: var(--theme-sub-heading-font);">
 					<use href="#map-pin-icon" />
-<xsl:value-of select="$areaWithPropertyType" />
+					<xsl:value-of select="$areaWithPropertyType" />
 
 				</span>
 			</foreignObject>
@@ -238,7 +233,7 @@
 	</xsl:template>
 
 	<xsl:template name="lozenge">
-<xsl:param name="width" />
+		<xsl:param name="width" />
 
 		<xsl:param name="fill-id" />
 		<xsl:param name="price-type" select="''" />
@@ -251,26 +246,26 @@
 		<xsl:param name="available-space" select="number(0.50)" />
 
 		<xsl:variable name="percent-width">
-<xsl:value-of select="format-number( number($width) * $available-space, '#.00%')" />
+			<xsl:value-of select="format-number( number($width) * $available-space, '#.00%')" />
 
 		</xsl:variable>
 
 		<xsl:variable name="max-width">
-<xsl:value-of select="format-number( number($width) * $available-space * 0.65, '#.00%')" />
+			<xsl:value-of select="format-number( number($width) * $available-space * 0.65, '#.00%')" />
 
 		</xsl:variable>
 
 		<xsl:variable name="left-max-width">
-<xsl:value-of select="format-number( number($width) * $available-space * 0.175, '#.00%')" />
+			<xsl:value-of select="format-number( number($width) * $available-space * 0.175, '#.00%')" />
 
 		</xsl:variable>
 
 		<xsl:variable name="fill">
-<xsl:value-of select="concat( 'var(--vivid-color-', $fill-id, ')' )" />
+			<xsl:value-of select="concat( 'var(--vivid-color-', $fill-id, ')' )" />
 
 		</xsl:variable>
 		<xsl:variable name="dark-fill">
-<xsl:value-of select="concat( 'var(--vivid-end-', $fill-id, ')')" />
+			<xsl:value-of select="concat( 'var(--vivid-end-', $fill-id, ')')" />
 
 		</xsl:variable>
 
@@ -339,7 +334,7 @@
 			<xsl:if test="$left-caption!=''">
 				<text x="1%" y="5.5%" text-anchor="start" dominant-baseline="hanging" font-size="100%">
 					<xsl:attribute name="data-max-width">
-<xsl:value-of select="$left-max-width" />
+						<xsl:value-of select="$left-max-width" />
 
 					</xsl:attribute>
 					<xsl:attribute name="fill">
@@ -352,14 +347,14 @@
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
-<xsl:value-of select="$left-caption" />
+					<xsl:value-of select="$left-caption" />
 
 				</text>
 			</xsl:if>
 
 			<text y="5.5%" text-anchor="end" dominant-baseline="hanging" font-size="150%">
 				<xsl:attribute name="data-max-width">
-<xsl:value-of select="$max-width" />
+					<xsl:value-of select="$max-width" />
 
 				</xsl:attribute>
 
@@ -469,7 +464,7 @@
 			<foreignObject width="55%" height="10%" x="0%" y="8%" class="map-marker">
 				<span class="banner" style="background-color:var(--vivid-banner);color:var(--printers-marks);font-family: var(--theme-sub-heading-font);">
 					<use href="#map-pin-icon" />
-<xsl:value-of select="$areaWithPropertyType" />
+					<xsl:value-of select="$areaWithPropertyType" />
 
 				</span>
 			</foreignObject>
@@ -483,7 +478,7 @@
 	</xsl:template>
 
 	<xsl:template name="lozenge-letter">
-<xsl:param name="width" />
+		<xsl:param name="width" />
 
 		<xsl:param name="fill-id" />
 		<xsl:param name="price-type" select="''" />
@@ -496,26 +491,26 @@
 		<xsl:param name="available-space" select="number(0.50)" />
 
 		<xsl:variable name="percent-width">
-<xsl:value-of select="format-number( $width * $available-space, '#.00%')" />
+			<xsl:value-of select="format-number( $width * $available-space, '#.00%')" />
 
 		</xsl:variable>
 
 		<xsl:variable name="max-width">
-<xsl:value-of select="format-number( $width * $available-space * 0.65, '#.00%')" />
+			<xsl:value-of select="format-number( $width * $available-space * 0.65, '#.00%')" />
 
 		</xsl:variable>
 
 		<xsl:variable name="left-max-width">
-<xsl:value-of select="format-number( $width * $available-space * 0.175, '#.00%')" />
+			<xsl:value-of select="format-number( $width * $available-space * 0.175, '#.00%')" />
 
 		</xsl:variable>
 
 		<xsl:variable name="fill">
-<xsl:value-of select="concat( 'var(--vivid-color-', $fill-id, ')' )" />
+			<xsl:value-of select="concat( 'var(--vivid-color-', $fill-id, ')' )" />
 
 		</xsl:variable>
 		<xsl:variable name="dark-fill">
-<xsl:value-of select="concat( 'var(--vivid-end-', $fill-id, ')')" />
+			<xsl:value-of select="concat( 'var(--vivid-end-', $fill-id, ')')" />
 
 		</xsl:variable>
 
@@ -586,7 +581,7 @@
 			<xsl:if test="$left-caption!=''">
 				<text x="1%" y="5.5%" text-anchor="start" dominant-baseline="hanging" font-size="100%">
 					<xsl:attribute name="data-max-width">
-<xsl:value-of select="$left-max-width" />
+						<xsl:value-of select="$left-max-width" />
 
 					</xsl:attribute>
 					<xsl:attribute name="fill">
@@ -599,14 +594,14 @@
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
-<xsl:value-of select="$left-caption" />
+					<xsl:value-of select="$left-caption" />
 
 				</text>
 			</xsl:if>
 
 			<text y="6.3%" text-anchor="end" dominant-baseline="hanging" font-size="150%">
 				<xsl:attribute name="data-max-width">
-<xsl:value-of select="$max-width" />
+					<xsl:value-of select="$max-width" />
 
 				</xsl:attribute>
 				<xsl:attribute name="fill">
@@ -841,7 +836,7 @@
 		<xsl:param name="circle-image" select="'yes'" />
 		<g id="agent-box-style">
 			<clipPath id="clipCircle">
-<circle r="13%" cx="12.5%" cy="50%" />
+				<circle r="13%" cx="12.5%" cy="50%" />
 
 			</clipPath>
 			<image x="2%" y="10%" width="20%" height="80%" preserveAspectRatio="xMidYMid slice">
@@ -914,12 +909,12 @@
 				<xsl:value-of select="//agent[1]/mobile" />
 
 			</tspan>
-<tspan> &#124; </tspan>
+			<tspan> &#124; </tspan>
 			<tspan>
 				<xsl:value-of select="//agent[1]/marketingEmail" />
 
 			</tspan>
-<tspan> &#124; </tspan>
+			<tspan> &#124; </tspan>
 			<tspan>
 				<xsl:value-of select="//agent[1]/website" />
 
@@ -933,7 +928,7 @@
 
 		<g>
 			<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-<circle r=".3185" cx=".5" cy=".5" />
+				<circle r=".3185" cx=".5" cy=".5" />
 
 			</clipPath>
 
@@ -981,7 +976,7 @@
 	</xsl:template>
 
 	<xsl:template name="view-period">
-<xsl:param name="prefix" />
+		<xsl:param name="prefix" />
 
 
 		<xsl:choose>
@@ -989,7 +984,7 @@
 				<xsl:value-of select="concat( $prefix, '30 Days')" />
 			</xsl:when>
 			<xsl:otherwise>
-<xsl:value-of select="concat( $prefix, //areas/area[1]/statistics/@lookbackMonths, ' months')" />
+				<xsl:value-of select="concat( $prefix, //areas/area[1]/statistics/@lookbackMonths, ' months')" />
 
 			</xsl:otherwise>
 		</xsl:choose>
@@ -1012,11 +1007,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'25%'" />
+							<xsl:value-of select="'25%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'14%'" />
+							<xsl:value-of select="'14%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1044,11 +1039,11 @@
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'305%'" />
+							<xsl:value-of select="'305%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'305%'" />
+							<xsl:value-of select="'305%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1057,11 +1052,11 @@
 				<xsl:attribute name="data-max-width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'7.3%'" />
+							<xsl:value-of select="'7.3%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'7.3%'" />
+							<xsl:value-of select="'7.3%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1079,11 +1074,11 @@
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'16.5%'" />
+							<xsl:value-of select="'16.5%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'8%'" />
+							<xsl:value-of select="'8%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1091,11 +1086,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'8%'" />
+							<xsl:value-of select="'8%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'5.5%'" />
+							<xsl:value-of select="'5.5%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1110,11 +1105,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'23%'" />
+							<xsl:value-of select="'23%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'12%'" />
+							<xsl:value-of select="'12%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1125,11 +1120,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'25%'" />
+							<xsl:value-of select="'25%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'12%'" />
+							<xsl:value-of select="'12%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1142,11 +1137,11 @@
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'12.5%'" />
+							<xsl:value-of select="'12.5%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'7%'" />
+							<xsl:value-of select="'7%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1154,11 +1149,11 @@
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'120%'" />
+							<xsl:value-of select="'120%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'100%'" />
+							<xsl:value-of select="'100%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1185,11 +1180,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'25%'" />
+							<xsl:value-of select="'25%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'18%'" />
+							<xsl:value-of select="'18%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1217,11 +1212,11 @@
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'240%'" />
+							<xsl:value-of select="'240%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'240%'" />
+							<xsl:value-of select="'240%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1230,11 +1225,11 @@
 				<xsl:attribute name="data-max-width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'7.3%'" />
+							<xsl:value-of select="'7.3%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'7.3%'" />
+							<xsl:value-of select="'7.3%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1252,11 +1247,11 @@
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'16.5%'" />
+							<xsl:value-of select="'16.5%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'10%'" />
+							<xsl:value-of select="'10%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1264,11 +1259,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'8%'" />
+							<xsl:value-of select="'8%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'6%'" />
+							<xsl:value-of select="'6%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1283,11 +1278,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'23%'" />
+							<xsl:value-of select="'23%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'16%'" />
+							<xsl:value-of select="'16%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1298,11 +1293,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'25%'" />
+							<xsl:value-of select="'25%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'16%'" />
+							<xsl:value-of select="'16%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1315,11 +1310,11 @@
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'12.5%'" />
+							<xsl:value-of select="'12.5%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'8.8%'" />
+							<xsl:value-of select="'8.8%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1327,11 +1322,11 @@
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'120%'" />
+							<xsl:value-of select="'120%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'100%'" />
+							<xsl:value-of select="'100%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1358,11 +1353,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'25%'" />
+							<xsl:value-of select="'25%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'23%'" />
+							<xsl:value-of select="'23%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1390,11 +1385,11 @@
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'340%'" />
+							<xsl:value-of select="'340%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'340%'" />
+							<xsl:value-of select="'340%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1403,11 +1398,11 @@
 				<xsl:attribute name="data-max-width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'7.3%'" />
+							<xsl:value-of select="'7.3%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'7.3%'" />
+							<xsl:value-of select="'7.3%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1425,11 +1420,11 @@
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'16.5%'" />
+							<xsl:value-of select="'16.5%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'14.5%'" />
+							<xsl:value-of select="'14.5%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1437,11 +1432,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'8%'" />
+							<xsl:value-of select="'8%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'7%'" />
+							<xsl:value-of select="'7%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1455,11 +1450,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'23%'" />
+							<xsl:value-of select="'23%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'21%'" />
+							<xsl:value-of select="'21%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1470,11 +1465,11 @@
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'23%'" />
+							<xsl:value-of select="'23%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'21%'" />
+							<xsl:value-of select="'21%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1484,11 +1479,11 @@
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'12.5%'" />
+							<xsl:value-of select="'12.5%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'11%'" />
+							<xsl:value-of select="'11%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1496,11 +1491,11 @@
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'120%'" />
+							<xsl:value-of select="'120%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'130%'" />
+							<xsl:value-of select="'130%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1574,7 +1569,7 @@
 					<xsl:text>Last Month</xsl:text>
 				</xsl:when>
 				<xsl:otherwise>
-<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' months')" />
+					<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' months')" />
 
 				</xsl:otherwise>
 			</xsl:choose>
@@ -1620,7 +1615,7 @@
 	</xsl:template>
 
 	<xsl:template name="solicitation-disclaimer">
-<xsl:value-of select="concat( 'Neighborhood Market Trends Information provided by third-party sources is deemed reliable, but not guaranteed. If your home is currently listed for sale, this is not intended to be a solicitation. &#169; ', //output/@year )" />
+		<xsl:value-of select="concat( 'Neighborhood Market Trends Information provided by third-party sources is deemed reliable, but not guaranteed. If your home is currently listed for sale, this is not intended to be a solicitation. &#169; ', //output/@year )" />
 
 	</xsl:template>
 
@@ -1632,7 +1627,7 @@
 			<text>
 				<tspan fill="var(--theme-heading-color)">
 					<xsl:text>SOURCE: theGenie.ai  Copyright &#169; </xsl:text>
-<xsl:value-of select="//output/@year" />
+					<xsl:value-of select="//output/@year" />
 
 				</tspan>
 				<tspan>
@@ -1658,12 +1653,12 @@
 		<xsl:choose>
 			<xsl:when test="//single/soldDate!=''">
 				<tspan class="narrow">Sold For </tspan>
-<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+				<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
 
 			</xsl:when>
 			<xsl:otherwise>
 				<tspan class="narrow">Asking </tspan>
-<xsl:value-of select="format-number( //single/price, '$###,###')" />
+				<xsl:value-of select="format-number( //single/price, '$###,###')" />
 
 			</xsl:otherwise>
 		</xsl:choose>
@@ -1772,9 +1767,9 @@
 	</xsl:template>
 
 	<xsl:template name="listing-icon">
-<xsl:param name="icon" />
-<xsl:param name="caption" />
-<xsl:param name="value" />
+		<xsl:param name="icon" />
+		<xsl:param name="caption" />
+		<xsl:param name="value" />
 
 
 		<g class="listing-icon">
@@ -1783,11 +1778,11 @@
 			</g>
 			<text>
 				<tspan>
-<xsl:value-of select="$caption" />
+					<xsl:value-of select="$caption" />
 
 				</tspan>
 				<tspan>
-<xsl:value-of select="$value" />
+					<xsl:value-of select="$value" />
 
 				</tspan>
 			</text>
@@ -1810,7 +1805,7 @@
 			<xsl:text>;</xsl:text>
 		</script>
 		<script>
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/charts.js') " />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/charts.js') " />
 
 			<xsl:text>;</xsl:text>
 		</script>
@@ -1825,15 +1820,15 @@
 			<xsl:text>;</xsl:text>
 		</script>
 		<script >
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/maps.js') " />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/maps.js') " />
 
 			<xsl:text>;</xsl:text>
 		</script>
 	</xsl:template>
 
 	<xsl:template name="mixed-listings">
-<xsl:param name="limit" select="10" />
-<xsl:param name="status" select="'all'" />
+		<xsl:param name="limit" select="10" />
+		<xsl:param name="status" select="'all'" />
 
 
 		<script>
@@ -1868,16 +1863,16 @@
 
 
 	<xsl:template name="map-key">
-<xsl:param name="status" select="'all'" />
+		<xsl:param name="status" select="'all'" />
 
 
 		<filter x="-8%" y="-1%" width="115%" height="8.5" id="solid">
-<feFlood flood-color="var(--theme-sub-heading-color)" flood-opacity="0.5" />
+			<feFlood flood-color="var(--theme-sub-heading-color)" flood-opacity="0.5" />
 
 			<feComposite in="SourceGraphic" operator="xor" />
 		</filter>
 
-<rect width="100%" height="100%" fill="var(--theme-sub-heading-color)" fill-opacity="0.5" />
+		<rect width="100%" height="100%" fill="var(--theme-sub-heading-color)" fill-opacity="0.5" />
 
 
 		<xsl:if test="$status='all' or $status='active'">
@@ -1915,7 +1910,7 @@
 					</xsl:choose>
 				</xsl:variable>
 				<xsl:attribute name="y">
-<xsl:value-of select="concat( $y, '%')" />
+					<xsl:value-of select="concat( $y, '%')" />
 
 				</xsl:attribute>
 
@@ -1942,7 +1937,7 @@
 					</xsl:choose>
 				</xsl:variable>
 				<xsl:attribute name="y">
-<xsl:value-of select="concat( $y, '%')" />
+					<xsl:value-of select="concat( $y, '%')" />
 
 				</xsl:attribute>
 
@@ -1959,7 +1954,7 @@
 
 	<xsl:template name="coming-soon">
 		<svg x="30%" y="5%" width="40%" height="40%">
-<use href="#pending-icon" />
+			<use href="#pending-icon" />
 
 
 		</svg>
@@ -1982,34 +1977,34 @@
 
 	<xsl:template name="qr-code">
 		<xsl:param name="width" />
-<xsl:param name="height" />
+		<xsl:param name="height" />
 
 		<xsl:param name="url">
 			<xsl:variable name="folder" select="//output/@folder" />
 			<xsl:variable name="stylesheet" select="//output/@stylesheet" />
 
 			<xsl:choose>
-<xsl:when test="//overrides/qrUrl!=''">
-	<xsl:value-of select="//overrides/qrUrl" />
+				<xsl:when test="//overrides/qrUrl!=''">
+					<xsl:value-of select="//overrides/qrUrl" />
 
 				</xsl:when>
 				<xsl:when test="//collection/folders/folder/asset[@folder=$folder and @stylesheet=$stylesheet and @qrUrl!='']">
 					<xsl:value-of select="//collection/folders/folder/asset[@folder=$folder and @stylesheet=$stylesheet]/@qrUrl" />
 				</xsl:when>
-<xsl:when test="//output/@qrUrl!=''">
-	<xsl:value-of select="//output/@qrUrl" />
+				<xsl:when test="//output/@qrUrl!=''">
+					<xsl:value-of select="//output/@qrUrl" />
 
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="''" />
 				</xsl:otherwise>
 			</xsl:choose>
-</xsl:param>
+		</xsl:param>
 
-<xsl:if test="$url!=''">
+		<xsl:if test="$url!=''">
 			<image preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
-<xsl:value-of select="$url" />
+					<xsl:value-of select="$url" />
 
 				</xsl:attribute>
 				<xsl:attribute name="width">
@@ -2024,10 +2019,10 @@
 
 	<xsl:template name="switch-image">
 		<xsl:param name="idx" />
-<xsl:param name="id" select="concat('LImage', $idx)" />
+		<xsl:param name="id" select="concat('LImage', $idx)" />
 
 		<xsl:param name="preferPrimary" select="'false'" />
-<xsl:param name="preferArea" select="'false'" />
+		<xsl:param name="preferArea" select="'false'" />
 
 		<xsl:param name="default">
 			<xsl:call-template name="listing-image">
@@ -2048,15 +2043,15 @@
 		<xsl:attribute name="href">
 			<xsl:choose>
 				<xsl:when test="//overrides/*[name()=$id][1]">
-<xsl:value-of select="//overrides/*[name()=$id][1]" />
+					<xsl:value-of select="//overrides/*[name()=$id][1]" />
 
 				</xsl:when>
 				<xsl:when test="$preferArea='true' and //area/image!=''">
-<xsl:value-of select="//area/image" />
+					<xsl:value-of select="//area/image" />
 
 				</xsl:when>
 				<xsl:when test="$default">
-<xsl:value-of select="$default" />
+					<xsl:value-of select="$default" />
 
 				</xsl:when>
 				<xsl:otherwise>
@@ -2135,7 +2130,7 @@
 		<xsl:param name="index" select="1" />
 
 		<xsl:variable name="imageIndex">
-<!-- TODO port "pick" function? <xsl:value-of select="version="3.0":function('Genie\XSL::pick', number($index), string(//output/@imageIndex), count(//single/images/image) )" /> -->
+			<!-- TODO port "pick" function? <xsl:value-of select="version="3.0":function('Genie\XSL::pick', number($index), string(//output/@imageIndex), count(//single/images/image) )" /> -->
 			<xsl:value-of select="number($index)" />
 		</xsl:variable>
 
@@ -2156,7 +2151,7 @@
 
 				<xsl:call-template name="switch-image">
 					<xsl:with-param name="id" select="concat( 'image-', $imageIndex )" />
-<xsl:with-param name="idx" select="$imageIndex" />
+					<xsl:with-param name="idx" select="$imageIndex" />
 
 				</xsl:call-template>
 			</image>
@@ -2224,7 +2219,7 @@
 
 			<div class="leaflet-overlay-pane" style="position: absolute;z-index:9999999999;width:100%;height:100%;">
 				<svg style="width: 100%; height: 100%; point-events:none;">
-<xsl:call-template name="map-overlay" />
+					<xsl:call-template name="map-overlay" />
 
 				</svg>
 			</div>
@@ -2236,7 +2231,7 @@
 		</script>
 	</xsl:template>
 
-<xsl:template name="map-overlay" />
+	<xsl:template name="map-overlay" />
 
 
 	<xsl:template name="listings-header">
@@ -2288,7 +2283,7 @@
 					<xsl:text>Showing the most recent </xsl:text>
 					<xsl:value-of select="fn:min( ( $min, number(count($nodes)) ))" />
 					<xsl:text> of a total of </xsl:text>
-<xsl:value-of select="number(count($nodes))" />
+					<xsl:value-of select="number(count($nodes))" />
 
 					<xsl:value-of select="$summary" />
 				</tspan>
@@ -2310,10 +2305,10 @@
 			<text x="50%" y="29%" fill="#b0934c" class="center futura-text" style="word-spacing:5px; text-transform: uppercase;">
 				<tspan x="50%" font-size="110%">
 					<xsl:text>Showing </xsl:text>
-<!-- <xsl:value-of select="version="3.0":function('Genie\XSL::min', $min, number(count($nodes)) )" /> -->
+					<!-- <xsl:value-of select="version="3.0":function('Genie\XSL::min', $min, number(count($nodes)) )" /> -->
 					<xsl:value-of select="'XSL::min'" />
 					<xsl:text> of </xsl:text>
-<xsl:value-of select="number(count($nodes))" />
+					<xsl:value-of select="number(count($nodes))" />
 
 
 					<xsl:text> TOTAL LISTINGS</xsl:text>

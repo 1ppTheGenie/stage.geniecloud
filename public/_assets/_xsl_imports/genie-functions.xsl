@@ -1,13 +1,10 @@
 <?xml version="1.0"?>
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:math="http://www.w3.org/2005/xpath-functions/math"
-	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:math="http://www.w3.org/2005/xpath-functions/math" xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
 
 	<xsl:function name="genie:pick">
-<xsl:param name="default" />
-<xsl:param name="choices" />
+		<xsl:param name="default" />
+		<xsl:param name="choices" />
 
 		<xsl:param name="size" />
 

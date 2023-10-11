@@ -1,15 +1,12 @@
 <?xml version="1.0"?>
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:math="http://www.w3.org/2005/xpath-functions/math"
-	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:math="http://www.w3.org/2005/xpath-functions/math" xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="lc-prop-vip-common">
 		<xsl:param name="status" select="'true'" />
 
-<rect fill="var(--theme-sub-heading-color)" stroke-width="0" fill-opacity="1" x="0" y="0" width="100%" height="18%" />
+		<rect fill="var(--theme-sub-heading-color)" stroke-width="0" fill-opacity="1" x="0" y="0" width="100%" height="18%" />
 
 
 		<text class="upper center" font-family="var(--theme-body-font)" fill="var(--theme-body-background)" x="50%" y="2.5%" font-size="200%" data-max-width="90%" font-weight="300">
@@ -48,25 +45,25 @@
 		<xsl:choose>
 			<xsl:when test="//agent[1]/photo">
 				<xsl:call-template name="agentAd1-NumberAndLogo">
-<xsl:with-param name="readyX" select="'50%'" />
-<xsl:with-param name="boxWidth" select="'100%'" />
-<xsl:with-param name="agentX" select="'38%'" />
-<xsl:with-param name="logoWidth" select="'70%'" />
+					<xsl:with-param name="readyX" select="'50%'" />
+					<xsl:with-param name="boxWidth" select="'100%'" />
+					<xsl:with-param name="agentX" select="'38%'" />
+					<xsl:with-param name="logoWidth" select="'70%'" />
 
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="agentAd1-NumberAndLogo">
-<xsl:with-param name="readyX" select="'50%'" />
-<xsl:with-param name="boxWidth" select="'100%'" />
-<xsl:with-param name="agentX" select="'50%'" />
-<xsl:with-param name="logoWidth" select="'98%'" />
+					<xsl:with-param name="readyX" select="'50%'" />
+					<xsl:with-param name="boxWidth" select="'100%'" />
+					<xsl:with-param name="agentX" select="'50%'" />
+					<xsl:with-param name="logoWidth" select="'98%'" />
 
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
 
-<rect fill="var(--theme-sub-heading-color)" stroke-width="0" fill-opacity="1" x="0%" y="92%" width="100%" height="10%" />
+		<rect fill="var(--theme-sub-heading-color)" stroke-width="0" fill-opacity="1" x="0%" y="92%" width="100%" height="10%" />
 
 		<text class="upper center" x="50%" y="92.5%" fill="var(--theme-body-background)" font-weight="600" font-size="130%" data-max-width="80%" font-family="var(--theme-body-font)">
 			<xsl:call-template name="editable">
@@ -84,25 +81,25 @@
 	</xsl:template>
 
 	<xsl:function name="genie:round-currency">
-<xsl:param name="value" />
+		<xsl:param name="value" />
 
 		<xsl:choose>
 			<xsl:when test="$value &lt; 1000000">
-<xsl:value-of select="format-number($value, '###,###')" />
+				<xsl:value-of select="format-number($value, '###,###')" />
 
 			</xsl:when>
 			<xsl:otherwise>
-<xsl:value-of select="format-number($value div 100000, '0.1f')" />
+				<xsl:value-of select="format-number($value div 100000, '0.1f')" />
 
 				<xsl:text>M</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
 	<xsl:template name="lc-prop-post-03-common">
-<xsl:param name="status" select="'true'" />
+		<xsl:param name="status" select="'true'" />
 
 
-<rect stroke="var(--theme-body-color)" stroke-width="0" fill-opacity="1" x="0" y="0" width="100%" height="17%" />
+		<rect stroke="var(--theme-body-color)" stroke-width="0" fill-opacity="1" x="0" y="0" width="100%" height="17%" />
 
 
 		<text class="upper center" font-family="var(--theme-body-font)" fill="var(--theme-body-color)" font-weight="400" font-size="130%">
@@ -186,25 +183,25 @@
 		<xsl:choose>
 			<xsl:when test="//agent[1]/photo">
 				<xsl:call-template name="agentAd1-NumberAndLogo">
-<xsl:with-param name="readyX" select="'40%'" />
-<xsl:with-param name="boxWidth" select="'100%'" />
-<xsl:with-param name="agentX" select="'38.5%'" />
-<xsl:with-param name="logoWidth" select="'75%'" />
+					<xsl:with-param name="readyX" select="'40%'" />
+					<xsl:with-param name="boxWidth" select="'100%'" />
+					<xsl:with-param name="agentX" select="'38.5%'" />
+					<xsl:with-param name="logoWidth" select="'75%'" />
 
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="agentAd1-NumberAndLogo">
-<xsl:with-param name="readyX" select="'50%'" />
-<xsl:with-param name="boxWidth" select="'100%'" />
-<xsl:with-param name="agentX" select="'50%'" />
-<xsl:with-param name="logoWidth" select="'98%'" />
+					<xsl:with-param name="readyX" select="'50%'" />
+					<xsl:with-param name="boxWidth" select="'100%'" />
+					<xsl:with-param name="agentX" select="'50%'" />
+					<xsl:with-param name="logoWidth" select="'98%'" />
 
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
 
-<rect stroke="var(--theme-body-color)" stroke-width="0" fill-opacity="1" x="0%" y="92%" width="100%" height="10%" />
+		<rect stroke="var(--theme-body-color)" stroke-width="0" fill-opacity="1" x="0%" y="92%" width="100%" height="10%" />
 
 		<text class="upper center" x="50%" y="93.5%" fill="var(--theme-body-background)" font-weight="600" font-size="130%" data-max-width="80%" font-family="var(--theme-body-font)">
 			<xsl:call-template name="editable">
@@ -222,10 +219,10 @@
 	</xsl:template>
 
 	<xsl:template name="agentAd1-NumberAndLogo">
-<xsl:param name="readyX" />
-<xsl:param name="boxWidth" />
-<xsl:param name="agentX" />
-<xsl:param name="logoWidth" />
+		<xsl:param name="readyX" />
+		<xsl:param name="boxWidth" />
+		<xsl:param name="agentX" />
+		<xsl:param name="logoWidth" />
 
 
 		<text class="upper center" font-family="var(--theme-body-font)" fill="var(--theme-heading-color)" y="67%" font-weight="400" font-size="140%" data-max-width="90%">
@@ -250,7 +247,7 @@
 			</xsl:attribute>
 
 			<xsl:call-template name="editable">
-<xsl:with-param name="default" select="concat( 'Call ', //agent[1]/firstName ,' &#124; ', //agent[1]/mobile ) " />
+				<xsl:with-param name="default" select="concat( 'Call ', //agent[1]/firstName ,' &#124; ', //agent[1]/mobile ) " />
 
 			</xsl:call-template>
 		</text>
