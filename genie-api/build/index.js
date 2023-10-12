@@ -7168,7 +7168,6 @@ var toS3 = async (key, buffer, tags = null, mimeType = null, bucket = null) => {
   }
 };
 var queueMsg = async (body, attributes) => {
-  console.log("SQS", SQS_QUEUE, process.env);
   const sqsMessage = {
     QueueUrl: SQS_QUEUE,
     MessageAttributes: attributes,
@@ -8149,18 +8148,18 @@ var embedsAPI = async (route, params) => {
 };
 var getLandingPageData = async (params) => {
   let { propertyId, qrId, shortUrlDataId, token, agentId } = { ...params };
-  let property = null, lead2 = null;
+  let property = null, lead = null;
   if (token) {
     if (typeof qrId !== "undefined") {
       property = await getQRProperty(qrId, token);
-      lead2 = {
+      lead = {
         genieLeadId: property.genieLeadId,
         salutation: property.ownerDisplayName
       };
     } else if (typeof shortUrlDataId !== "undefined") {
-      lead2 = await getShortData(parseInt(shortUrlDataId), token, agentId);
+      lead = await getShortData(parseInt(shortUrlDataId), token, agentId);
       if (!propertyId) {
-        propertyId = lead2.propertyId;
+        propertyId = lead.propertyId;
       }
     }
   }
@@ -8168,7 +8167,7 @@ var getLandingPageData = async (params) => {
     property = await getPropertyFromId(propertyId, agentId);
   }
   if (property) {
-    property.lead = lead2;
+    property.lead = lead;
     return {
       id: property.propertyID,
       firstName: property.firstName,
@@ -8287,8 +8286,8 @@ var add_lead = async (params) => {
 ${key}: ${params[`meta[${key}]`]}`;
     }
     if (Object.keys(args).length > 0) {
-      const lead2 = await createLead(agentId, args);
-      return success(lead2);
+      const lead = await createLead(agentId, args);
+      return success(lead);
     } else {
       return error("No lead arguments");
     }
@@ -8734,40 +8733,39 @@ var propertySurroundingAreas = async (mls_number, mls_id, user_id, fips = "", pr
   });
   return r.success && r.areas;
 };
-var getShortData = async (shortUrlDataId, token, agentID = null) => {
+var getShortData = async (shortUrlDataId, token, agentId = null) => {
   const r = await call_api(
     "GetShortUrlData",
     { shortUrlDataId, token },
     "POST"
   );
   if (r.data) {
-    if (agentID) {
+    if (agentId) {
       const capture = r.data;
       capture.shortUrlDataId = shortUrlDataId;
-      capture.trackingData = new stdClass();
-      capture.trackingData.utmSource = capture.utm_source ?? null;
-      capture.trackingData.utmMedium = capture.utm_medium ?? null;
-      capture.trackingData.utmCampaign = capture.utm_campaign ?? null;
-      capture.trackingData.utmTerm = capture.utm_term ?? null;
-      capture.trackingData.utmContent = capture.utm_content ?? null;
-      unset(capture.mlsId);
-      unset(capture.mlsNumber);
-      unset(capture.phoneNumbers);
-      unset(capture.emailAddresses);
-      unset(capture.inquiryType);
-      unset(capture.utm_source);
-      unset(capture.utm_medium);
-      unset(capture.utm_campaign);
-      unset(capture.utm_term);
-      unset(capture.utm_content);
-      agentID = strpos(agentID, "-") === false ? Users.api_user_id(parseInt(agentID)) : agentID;
-      $lead = create_lead(agentID, capture);
-      if (!is_wp_error(lead)) {
+      capture.trackingData = {
+        utmSource: capture.utm_source ?? null,
+        utmMedium: capture.utm_medium ?? null,
+        utmCampaign: capture.utm_campaign ?? null,
+        utmTerm: capture.utm_term ?? null,
+        utmContent: capture.utm_content ?? null
+      };
+      delete capture.mlsId;
+      delete capture.mlsNumber;
+      delete capture.phoneNumbers;
+      delete capture.emailAddresses;
+      delete capture.inquiryType;
+      delete capture.utm_source;
+      delete capture.utm_medium;
+      delete capture.utm_campaign;
+      delete capture.utm_term;
+      delete capture.utm_content;
+      const lead = await createLead(agentId, capture);
+      if (typeof lead == "object" && typeof lead.key !== "undefined") {
         r.data.genieLeadId = lead.key;
-      } else {
       }
     }
-    r.data.salutation = implode(" ", [$r.data.firstName, r.data.lastName]);
+    r.data.salutation = [r.data.firstName, r.data.lastName].join(" ");
     return r.data;
   }
 };
@@ -8794,10 +8792,10 @@ var createLead = async (userId, args) => {
 };
 var updateLead = async (userId, args) => await call_api("UpdateLead", { ...args, userId }, "POST");
 var getQRProperty = async (qrID, token) => {
-  const lead2 = await getQRCodeLead(qrID, token);
-  if (lead2.property) {
-    const property = lead3.property;
-    property.salutation = `${lead3.firstName} ${lead3.lastName}`;
+  const lead = await getQRCodeLead(qrID, token);
+  if (lead.property) {
+    const property = lead2.property;
+    property.salutation = `${lead2.firstName} ${lead2.lastName}`;
     property.boundary = property_boundary(
       null,
       null,
@@ -8805,15 +8803,15 @@ var getQRProperty = async (qrID, token) => {
       property.propertyID
     );
     const capture = {
-      email: lead3.email ?? null,
-      phoneNumber: lead3.phoneNumber ?? null,
-      trackingData: lead3.trackingData ?? null,
+      email: lead2.email ?? null,
+      phoneNumber: lead2.phoneNumber ?? null,
+      trackingData: lead2.trackingData ?? null,
       qrCodeId: qrID,
       token
     };
-    const lead3 = createQRCodeLead(capture);
-    if (lead3.success) {
-      property.genieLeadId = lead3.key;
+    const lead2 = createQRCodeLead(capture);
+    if (lead2.success) {
+      property.genieLeadId = lead2.key;
     }
     return property;
   }
@@ -8863,7 +8861,7 @@ var call_api = async (endpoint, params, verb = "POST", pre_cache = null) => {
 
 // src/index.js
 var { toXML } = import_jstoxml.default;
-var CLOUDFLARE_KEY = process.env.GENIE_USER ?? "genieApiHub2";
+var CLOUDFLARE_KEY = process.env?.CLOUDFLARE_KEY;
 var JSON_MIME = "application/json";
 var api = async (event) => {
   let routes = [], routeParams = [];
@@ -8882,7 +8880,7 @@ var api = async (event) => {
             let tempParams = {};
             routes.push("/clear-cache");
             Object.keys(record.messageAttributes).map((key) => {
-              if (["tags", "prefixes", "hosts"].includes(key)) {
+              if (["tags", "prefixes", "hosts", "renderId"].includes(key)) {
                 tempParams[key] = record.messageAttributes[key].dataType == "String" ? record.messageAttributes[key].stringValue : "";
               }
             });
@@ -8973,17 +8971,29 @@ var api = async (event) => {
               response.body = { success: true, ...assets };
               break;
             case "/clear-cache":
-              if (CLOUDFLARE_KEY && Array.isArray(params.prefixes)) {
-                const url = "https://api.cloudflare.com/client/v4/zones/identifier/purge_cache";
-                const options = {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                    "X-Auth-Key": CLOUDFLARE_KEY
-                  },
-                  body: `{"prefixes": ["${params.prefixes.join('","')}"}`
-                };
-                await fetch(url, options);
+              if (CLOUDFLARE_KEY) {
+                const prefixes = [];
+                if (params.renderId) {
+                  const host = genieGlobals.GENIE_HOST.replace("https://", "");
+                  prefixes.push(`${host}genie-collection/${params.renderId}`);
+                  prefixes.push(`${host}genie-pages/${params.renderId}`);
+                  prefixes.push(`${host}genie-files/${params.renderId}`);
+                }
+                if (prefixes.length > 0) {
+                  const options = {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      "X-Auth-Key": CLOUDFLARE_KEY
+                    },
+                    body: `{"prefixes": ["${prefixes}"}`
+                  };
+                  const r = await fetch(
+                    "https://api.cloudflare.com/client/v4/zones/identifier/purge_cache",
+                    options
+                  );
+                  console.log("prefixes2", prefixes, r);
+                }
               }
               break;
             case "/log":
@@ -9019,6 +9029,12 @@ var api = async (event) => {
                     response.body.success = true;
                     response.body.msg = `${params.renderId} re-render under way`;
                   }
+                  await queueMsg("clear-cache", {
+                    renderId: {
+                      DataType: "String",
+                      StringValue: params.renderId
+                    }
+                  });
                 }
               } else if (params.assetId || params.userId || params.mlsNumber || params.areaId) {
                 let reRenders = [];
@@ -9060,7 +9076,6 @@ var api = async (event) => {
             case "/process":
               if (params) {
                 const r = await processAsset(params);
-                console.log("xml5", r);
                 if (r) {
                   let { sourceKey, ...reducedParams } = params;
                   await toS3(
@@ -9204,7 +9219,7 @@ var processAsset = async (params) => {
           }
         }
       ),
-      transformXsl: (await fromS3(`_assets/_xsl/${params.asset}.xsl`)).toString().replaceAll(/[\t|\n|\t]/g, "")
+      transformXsl: (await fromS3(`_assets/_xsl/${params.asset}.xsl`)).toString().replaceAll(/[\t|\n]/g, " ")
     };
   } else {
     console.log(`processAsset failed for ${prepareKey}`);
