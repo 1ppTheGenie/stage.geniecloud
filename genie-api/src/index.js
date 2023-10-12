@@ -479,7 +479,7 @@ const processAsset = async params => {
 			),
 			transformXsl: (await fromS3(`_assets/_xsl/${params.asset}.xsl`))
 				.toString()
-				.replaceAll(/[\t|\n|\t]/g, ""),
+				.replaceAll(/[\t|\n]/g, " "),
 		};
 	} else {
 		console.log(`processAsset failed for ${prepareKey}`);
