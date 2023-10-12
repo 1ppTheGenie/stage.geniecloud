@@ -253,7 +253,7 @@ export const propertySurroundingAreas = async (
 export const savedSearches = async (userId, areaId) =>
 	await call_api("GetSavedSearches", { userId, areaId });
 
-export const getShortData = async (shortUrlDataId, token, agentID = null) => {
+export const getShortData = async (shortUrlDataId, token, agentId = null) => {
 	const r = await call_api(
 		"GetShortUrlData",
 		{ shortUrlDataId: shortUrlDataId, token: token },
@@ -261,44 +261,38 @@ export const getShortData = async (shortUrlDataId, token, agentID = null) => {
 	);
 
 	if (r.data) {
-		if (agentID) {
+		if (agentId) {
 			const capture = r.data;
 
 			capture.shortUrlDataId = shortUrlDataId;
 
-			capture.trackingData = new stdClass();
-			capture.trackingData.utmSource = capture.utm_source ?? null;
-			capture.trackingData.utmMedium = capture.utm_medium ?? null;
-			capture.trackingData.utmCampaign = capture.utm_campaign ?? null;
-			capture.trackingData.utmTerm = capture.utm_term ?? null;
-			capture.trackingData.utmContent = capture.utm_content ?? null;
+			capture.trackingData = {
+				utmSource: capture.utm_source ?? null,
+				utmMedium: capture.utm_medium ?? null,
+				utmCampaign: capture.utm_campaign ?? null,
+				utmTerm: capture.utm_term ?? null,
+				utmContent: capture.utm_content ?? null,
+			};
 
-			unset(capture.mlsId);
-			unset(capture.mlsNumber);
-			unset(capture.phoneNumbers);
-			unset(capture.emailAddresses);
-			unset(capture.inquiryType);
-			unset(capture.utm_source);
-			unset(capture.utm_medium);
-			unset(capture.utm_campaign);
-			unset(capture.utm_term);
-			unset(capture.utm_content);
+			delete capture.mlsId;
+			delete capture.mlsNumber;
+			delete capture.phoneNumbers;
+			delete capture.emailAddresses;
+			delete capture.inquiryType;
+			delete capture.utm_source;
+			delete capture.utm_medium;
+			delete capture.utm_campaign;
+			delete capture.utm_term;
+			delete capture.utm_content;
 
-			agentID =
-				strpos(agentID, "-") === false
-					? Users.api_user_id(parseInt(agentID))
-					: agentID;
+			const lead = await createLead(agentId, capture);
 
-			$lead = create_lead(agentID, capture);
-
-			if (!is_wp_error(lead)) {
+			if (typeof lead == "object" && typeof lead.key !== "undefined") {
 				r.data.genieLeadId = lead.key;
-			} else {
-				//error_log( '*** Failed to create lead' );
 			}
 		}
 
-		r.data.salutation = implode(" ", [$r.data.firstName, r.data.lastName]);
+		r.data.salutation = [r.data.firstName, r.data.lastName].join(" ");
 
 		return r.data;
 	}
