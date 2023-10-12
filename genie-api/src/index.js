@@ -36,7 +36,7 @@ export const api = async event => {
 						routes.push("/clear-cache");
 
 						Object.keys(record.messageAttributes).map(key => {
-							if (["tags", "prefixes", "hosts"].includes(key)) {
+							if (["tags", "prefixes", "hosts", "renderId"].includes(key)) {
 								tempParams[key] =
 									record.messageAttributes[key].dataType == "String"
 										? record.messageAttributes[key].stringValue
@@ -151,20 +151,33 @@ export const api = async event => {
 							break;
 
 						case "/clear-cache":
-							if (CLOUDFLARE_KEY && Array.isArray(params.prefixes)) {
-								const url =
-									"https://api.cloudflare.com/client/v4/zones/identifier/purge_cache";
+							if (CLOUDFLARE_KEY) {
+								const prefixes = [];
 
-								const options = {
-									method: "POST",
-									headers: {
-										"Content-Type": "application/json",
-										"X-Auth-Key": CLOUDFLARE_KEY,
-									},
-									body: `{"prefixes": ["${params.prefixes.join('","')}"}`,
-								};
+								if (params.renderId) {
+									const host = genieGlobals.GENIE_HOST.replace("https://", "");
 
-								await fetch(url, options);
+									prefixes.push(`${host}genie-collection/${params.renderId}`);
+									prefixes.push(`${host}genie-pages/${params.renderId}`);
+									prefixes.push(`${host}genie-files/${params.renderId}`);
+								}
+
+								if (prefixes.length > 0) {
+									const options = {
+										method: "POST",
+										headers: {
+											"Content-Type": "application/json",
+											"X-Auth-Key": CLOUDFLARE_KEY,
+										},
+										body: `{"prefixes": ["${prefixes}"}`,
+									};
+
+									const r = await fetch(
+										"https://api.cloudflare.com/client/v4/zones/identifier/purge_cache",
+										options
+									);
+									console.log("prefixes2", prefixes, r);
+								}
 							}
 
 							break;
@@ -208,6 +221,14 @@ export const api = async event => {
 										response.body.success = true;
 										response.body.msg = `${params.renderId} re-render under way`;
 									}
+
+									// Get CloudFlare to empty itself
+									await queueMsg("clear-cache", {
+										renderId: {
+											DataType: "String",
+											StringValue: params.renderId,
+										},
+									});
 								}
 							} else if (
 								params.assetId ||
