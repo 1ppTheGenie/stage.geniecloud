@@ -139,7 +139,6 @@ export const toS3 = async (
 };
 
 export const queueMsg = async (body, attributes) => {
-	console.log("SQS", SQS_QUEUE, process.env);
 	const sqsMessage = {
 		QueueUrl: SQS_QUEUE,
 		MessageAttributes: attributes,

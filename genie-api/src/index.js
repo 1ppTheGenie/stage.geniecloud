@@ -291,7 +291,7 @@ export const api = async event => {
 						case "/process":
 							if (params) {
 								const r = await processAsset(params);
-								console.log("xml5", r);
+
 								if (r) {
 									let { sourceKey, ...reducedParams } = params;
 

@@ -20,7 +20,6 @@ export const embedsAPI = async (route, params) => {
 		case "get-landing-data":
 			result = await getLandingPageData(params);
 			break;
-
 		case "add-lead":
 			result = await add_lead(params);
 			break;
