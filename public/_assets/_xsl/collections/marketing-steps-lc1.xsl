@@ -7,10 +7,8 @@ Supports:	Collection
 Version:	1.1
 -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:genie="https://theGenie.ai/hub" version="3.0">
-<xsl:import href="listing-commands.xsl" />
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:genie="https://theGenie.ai/hub" version="3.0">
+	<xsl:import href="listing-commands.xsl" />
 
 	<xsl:template name="template-folders">
 		<xsl:value-of select="'[`Step One`, `Step Two`]'" />

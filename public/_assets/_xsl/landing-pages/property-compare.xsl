@@ -11,12 +11,10 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-
 	<xsl:output method="html" encoding="utf-8" indent="no" omit-xml-declaration="yes" doctype-public="html" />
 
-<xsl:import href="landing-pages.xsl" />
-<xsl:import href="genie-functions.xsl" />
-
+	<xsl:import href="landing-pages.xsl" />
+	<xsl:import href="genie-functions.xsl" />
 
 	<xsl:template name="landing-page">
 		<xsl:call-template name="standard-header">
@@ -83,12 +81,10 @@
 
 			<section class="banner-section" style="position:relative; display:block; background-color: var(--theme-body-background);">
 				<xsl:attribute name="style">
-<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
-
+					<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
 				</xsl:attribute>
 
-<div class="banner-section" id="compare-header-map" style="z-index: 0;" />
-
+				<div class="banner-section" id="compare-header-map" style="z-index: 0;" />
 
 				<div class="container banner-content-box-temp-11">
 					<div class="row">
@@ -126,7 +122,7 @@
 								</img>
 
 								<div class="listing_property" style="display:none;"> 1 </div>
-								
+
 								<div class="property-img-contact-part text-center text-uppercase">
 									<p class="property-house-text body-color subtitle-color mb-0 heading-font">
 										<xsl:choose>
@@ -167,7 +163,7 @@
 												<xsl:comment/>
 											</span>
 										</span>
-<xsl:element name="br" />
+										<xsl:element name="br" />
 
 										<span data-lead="city">
 											<xsl:comment/>
@@ -219,8 +215,7 @@
 							<div class="property-detail">
 								<div class="property-detail-part text-center">
 									<p class="heading-color body-font mb-0">
-<xsl:value-of select="$listingTotalBathrooms" />
-
+										<xsl:value-of select="$listingTotalBathrooms" />
 									</p>
 								</div>
 								<div class="property-detail-icon-width-part text-center">
@@ -278,8 +273,7 @@
 							<div class="property-detail">
 								<div class="property-detail-part text-center">
 									<p class="heading-color body-font mb-0">
-<xsl:value-of select="//single/built" />
-
+										<xsl:value-of select="//single/built" />
 									</p>
 								</div>
 								<div class="property-detail-icon-width-part text-center">
@@ -409,8 +403,7 @@
 						<div class="col-6 col-md-6 col-lg-3 text-center">
 							<div class="average-count-part">
 								<p class="avg-count-number heading-font heading-color">
-<xsl:value-of select="format-number(//statistics/@avgPricePerSqFtList, '$###,###')" />
-
+									<xsl:value-of select="format-number(//statistics/@avgPricePerSqFtList, '$###,###')" />
 								</p>
 								<p class="avg-count-text text-uppercast body-font body-color">
 									<xsl:text>AVERAGE LIST PRICE PER SQUARE FOOT</xsl:text>
@@ -420,9 +413,8 @@
 						<div class="col-6 col-md-6 col-lg-3 text-center">
 							<div class="average-count-part">
 								<p class="avg-count-number heading-font heading-color">
-<xsl:value-of select="format-number(//statistics/@avgPricePerSqFtSold,  '$###,###')" />
-
-								</p>
+									<xsl:value-of select="format-number(//statistics/@avgPricePerSqFtSold,  '$###,###')" />
+								</p>								
 								<p class="avg-count-text text-uppercast body-font body-color">
 									<xsl:text>AVERAGE SOLD PRICE PER SQUARE FOOT</xsl:text>
 								</p>
@@ -431,8 +423,7 @@
 						<div class="col-6 col-md-6 col-lg-3 text-center">
 							<div class="average-count-part">
 								<p class="avg-count-number heading-font heading-color">
-<xsl:value-of select="format-number( //statistics/@averageSalePrice div //statistics/@averageListPriceForSold, '#.0%')" />
-
+									<xsl:value-of select="format-number( //statistics/@averageSalePrice div //statistics/@averageListPriceForSold, '#.0%')" />
 								</p>
 								<p class="avg-count-text text-uppercast body-font body-color">
 									<xsl:text>AVERAGE SALE PRICE TO LIST PRICE</xsl:text>
@@ -450,8 +441,7 @@
 										</xsl:attribute>
 										<xsl:text>Get Full Report&#160;</xsl:text>
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="14" height="14" fill="var(--theme-body-background)">
-<path d="M313.941 216H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12h301.941v46.059c0 21.382 25.851 32.09 40.971 16.971l86.059-86.059c9.373-9.373 9.373-24.569 0-33.941l-86.059-86.059c-15.119-15.119-40.971-4.411-40.971 16.971V216z" />
-
+											<path d="M313.941 216H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12h301.941v46.059c0 21.382 25.851 32.09 40.971 16.971l86.059-86.059c9.373-9.373 9.373-24.569 0-33.941l-86.059-86.059c-15.119-15.119-40.971-4.411-40.971 16.971V216z" />
 										</svg>
 									</a>
 								</div>
@@ -463,7 +453,7 @@
 
 			<section id="lead-form" class="form-section form-section-box">
 				<xsl:attribute name="style">
-					<xsl:value-of select="concat( 'background-image: url(', //output/@siteUrl, '_assets/_img/form-bg-img.webp')" />
+					<xsl:value-of select="concat( 'background-image: url(', //output/@siteUrl, '_assets/_img/form-bg-img.webp)')" />
 				</xsl:attribute>
 				<div class="form-section-overlay heading-color-as-bg">
 					<xsl:comment/>
@@ -488,8 +478,7 @@
 					<div class="row">
 						<div class="col-md-8 mx-auto form-section-form-part">
 							<form class="funnel-create-lead">
-<input type="hidden" name="genieTags" value="RequestMoreInfo" />
-
+								<input type="hidden" name="genieTags" value="RequestMoreInfo" />
 
 								<input type="hidden" name="agent">
 									<xsl:attribute name="value">
@@ -533,8 +522,7 @@
 						</div>
 					</div>
 				</div>
-<xsl:call-template name="default-thank-you-popup" />
-
+				<xsl:call-template name="default-thank-you-popup" />
 			</section>
 
 			<xsl:call-template name="agent-about" />
