@@ -131,7 +131,7 @@
 .banner-content-box-temp-11 {
 	position: absolute;
 	top: 30%;
-	z-index: 99;
+	z-index: 999;
 	left: 0;
 	right: 0;
 }
