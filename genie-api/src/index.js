@@ -11,7 +11,7 @@ import { getAreaBoundary, getUser, impersonater, getListing, areaName } from "./
 // prettier-ignore
 import { userSetting,embedsAPI, getRenderJSON, listS3Folder,toS3, getCollection, setRenderDefaults, genieGlobals, copyObject, headObject, jsonFromS3, fromS3, queueMsg, getAssets, getThemes, getCollections, getCollectionTemplates, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset, BUCKET, deleteObject  } from "./utils/index.js";
 
-const CLOUDFLARE_KEY = process.env.GENIE_USER ?? "genieApiHub2";
+const CLOUDFLARE_KEY = process.env?.CLOUDFLARE_KEY;
 
 export const JSON_MIME = "application/json";
 
