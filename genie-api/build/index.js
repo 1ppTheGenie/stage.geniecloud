@@ -7911,7 +7911,7 @@ var processListing = async (params) => {
 };
 var processCollection = async (params) => {
   const collectionData = await jsonFromS3(
-    `_assets/collections/${params.collection}.json`
+    `genie-tools/collections/${params.collection}.json`
   );
   if (collectionData) {
     const collection = {
@@ -8093,7 +8093,14 @@ var getCollectionTemplates = async () => {
   templates.filter((t) => true);
   return { templates };
 };
-var getCollections = async () => await listS3Folder("_assets/collections");
+var getCollections = async () => await listS3Folder("genie-tools/collections");
+var saveCollection = async (data) => {
+  await toS3(
+    `genie-tools/collections/${data.template}.json`,
+    Buffer.from(JSON.stringify(data.collection))
+  );
+  return true;
+};
 var generateQR = async (url) => new import_qrcode_svg.default(url).svg();
 
 // src/utils/embedsAPI.js
@@ -8457,7 +8464,7 @@ var getAsset = async (asset, headOnly = false) => {
   return headOnly ? await headObject(fullKey) : await fromS3(fullKey);
 };
 var getCollection = async (collection, headOnly = false) => {
-  const fullKey = `_assets/collections/${collection}.json`;
+  const fullKey = `genie-tools/collections/${collection}.json`;
   return headOnly ? await headObject(fullKey) : await jsonFromS3(fullKey);
 };
 var assetSetting = async (assetKey, setting = null) => {
@@ -8794,24 +8801,24 @@ var updateLead = async (userId, args) => await call_api("UpdateLead", { ...args,
 var getQRProperty = async (qrID, token) => {
   const lead = await getQRCodeLead(qrID, token);
   if (lead.property) {
-    const property = lead2.property;
-    property.salutation = `${lead2.firstName} ${lead2.lastName}`;
-    property.boundary = property_boundary(
+    const property = lead.property;
+    property.salutation = `${lead.firstName} ${lead.lastName}`;
+    property.boundary = await getPropertyBoundary(
       null,
       null,
       property.fips,
       property.propertyID
     );
     const capture = {
-      email: lead2.email ?? null,
-      phoneNumber: lead2.phoneNumber ?? null,
-      trackingData: lead2.trackingData ?? null,
+      email: lead.email ?? null,
+      phoneNumber: lead.phoneNumber ?? null,
+      trackingData: lead.trackingData ?? null,
       qrCodeId: qrID,
       token
     };
-    const lead2 = createQRCodeLead(capture);
-    if (lead2.success) {
-      property.genieLeadId = lead2.key;
+    const leadCreate = await createQRCodeLead(capture);
+    if (typeof leadCreate == "object" && leadCreate.success) {
+      property.genieLeadId = leadCreate.key;
     }
     return property;
   }
@@ -8960,6 +8967,13 @@ var api = async (event) => {
               response.body = {
                 success: true,
                 collections: processedCollections
+              };
+              break;
+            case "/save-collection":
+              const collectionSaved = await saveCollection(params);
+              response.body = {
+                success: true,
+                collection: collectionSaved
               };
               break;
             case "/make-qrcode":
@@ -9151,7 +9165,7 @@ var api = async (event) => {
                 }
                 if (s3Key) {
                   response.body.success = true;
-                  response.body.availableAt = `${genieGlobals.GENIE_HOST}${s3Key}`;
+                  response.body.availableAt = `${genieGlobals.GENIE_HOST}${s3Key.replace("/index.html", "")}`;
                   response.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
                   response.body.renderId = params.renderId;
                 }

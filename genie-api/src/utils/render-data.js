@@ -944,7 +944,7 @@ const processListing = async params => {
 
 const processCollection = async params => {
 	const collectionData = await jsonFromS3(
-		`_assets/collections/${params.collection}.json`
+		`genie-tools/collections/${params.collection}.json`
 	);
 
 	if (collectionData) {

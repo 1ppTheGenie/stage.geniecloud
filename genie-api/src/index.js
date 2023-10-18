@@ -9,7 +9,9 @@ const { toXML } = pkg;
 // prettier-ignore
 import { getAreaBoundary, getUser, impersonater, getListing, areaName } from "./genieAI.js";
 // prettier-ignore
-import { userSetting,embedsAPI, getRenderJSON, listS3Folder,toS3, getCollection, setRenderDefaults, genieGlobals, copyObject, headObject, jsonFromS3, fromS3, queueMsg, getAssets, getThemes, getCollections, getCollectionTemplates, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset, BUCKET, deleteObject  } from "./utils/index.js";
+import { userSetting, embedsAPI, getRenderJSON, getCollection, setRenderDefaults, genieGlobals, queueMsg, getAssets, getThemes, getCollections, saveCollection, getCollectionTemplates, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset } from "./utils/index.js";
+// prettier-ignore
+import { listS3Folder,toS3, copyObject, headObject, jsonFromS3, fromS3, BUCKET, deleteObject  } from "./utils/index.js";
 
 const CLOUDFLARE_KEY = process.env?.CLOUDFLARE_KEY;
 
@@ -137,6 +139,14 @@ export const api = async event => {
 							response.body = {
 								success: true,
 								collections: processedCollections,
+							};
+							break;
+
+						case "/save-collection":
+							const collectionSaved = await saveCollection(params);
+							response.body = {
+								success: true,
+								collection: collectionSaved,
 							};
 							break;
 
@@ -393,7 +403,9 @@ export const api = async event => {
 								if (s3Key) {
 									response.body.success = true;
 									// Remove trailing index.html if it exists: S3 routing will default to that file on a folder request
-									response.body.availableAt = `${genieGlobals.GENIE_HOST}${s3Key}`; //.replace(										"/index.html",										""										);
+									response.body.availableAt = `${
+										genieGlobals.GENIE_HOST
+									}${s3Key.replace("/index.html", "")}`;
 									response.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
 									response.body.renderId = params.renderId;
 								}

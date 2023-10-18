@@ -352,7 +352,7 @@ export const getQRProperty = async (qrID, token) => {
 
 		property.salutation = `${lead.firstName} ${lead.lastName}`;
 
-		property.boundary = property_boundary(
+		property.boundary = await getPropertyBoundary(
 			null,
 			null,
 			property.fips,
@@ -367,10 +367,10 @@ export const getQRProperty = async (qrID, token) => {
 			token: token,
 		};
 
-		const lead = createQRCodeLead(capture);
+		const leadCreate = await createQRCodeLead(capture);
 
-		if (lead.success) {
-			property.genieLeadId = lead.key;
+		if (typeof leadCreate == "object" && leadCreate.success) {
+			property.genieLeadId = leadCreate.key;
 		}
 
 		return property;

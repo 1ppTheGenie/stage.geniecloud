@@ -1,5 +1,6 @@
 import QRCode from "qrcode-svg";
 import { fromS3, getFileData, listS3Folder, toS3 } from "./index.js";
+
 export const ASSET_HEADERS = {
 	name: "Asset Name",
 	knownAs: "Known As",
@@ -92,7 +93,21 @@ export const getCollectionTemplates = async () => {
  * @return array
  */
 export const getCollections = async () =>
-	await listS3Folder("_assets/collections");
+	await listS3Folder("genie-tools/collections");
+
+/**
+ * save_collections
+ *
+ * @return array
+ */
+export const saveCollection = async data => {
+	await toS3(
+		`genie-tools/collections/${data.template}.json`,
+		Buffer.from(JSON.stringify(data.collection))
+	);
+
+	return true;
+};
 
 /**
  * generate_qr

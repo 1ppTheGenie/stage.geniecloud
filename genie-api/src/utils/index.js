@@ -47,7 +47,7 @@ export const getAsset = async (asset, headOnly = false) => {
 };
 
 export const getCollection = async (collection, headOnly = false) => {
-	const fullKey = `_assets/collections/${collection}.json`;
+	const fullKey = `genie-tools/collections/${collection}.json`;
 
 	return headOnly ? await headObject(fullKey) : await jsonFromS3(fullKey);
 };
