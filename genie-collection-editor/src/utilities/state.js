@@ -13,7 +13,7 @@ const settings = await (async () => {
 const getAssets = async () => await apiCall(`get-assets`);
 const getCollections = async () => await apiCall(`get-collections`);
 const saveCollection = async data =>
-	await apiCall(`update-collection`, data, "POST");
+	await apiCall(`save-collection`, data, "POST");
 
 export { getCollections, getAssets, saveCollection };
 

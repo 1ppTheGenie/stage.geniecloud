@@ -84,7 +84,7 @@ export const Collection = props => {
 		delete data.unsaved;
 		delete data.folders;
 
-		await saveCollection({ file: filename(), data });
+		await saveCollection({ template: filename(), collection: data });
 
 		vNotify.success({ text: message });
 

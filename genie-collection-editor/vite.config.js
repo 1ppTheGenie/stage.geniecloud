@@ -17,8 +17,8 @@ const appendVersion = () => {
 		transformIndexHtml(html) {
 			["js", "css"].forEach(suffix => {
 				html = html.replace(
-					`/collections/dist/assets/index.${suffix}`,
-					`/collections/dist/assets/index.${suffix}?v=${__BUILD_VERSION__}`
+					`/genie-tools/collection-editor/index.${suffix}`,
+					`/genie-tools/collection-editor/index.${suffix}?v=${__BUILD_VERSION__}`
 				);
 			});
 
@@ -39,6 +39,7 @@ export default defineConfig({
 	},
 	base: __BASE__,
 	build: {
+		outDir: `../public/genie-tools/collection-editor/`,
 		sourcemap: true,
 		minify: false,
 		target: "esnext",
