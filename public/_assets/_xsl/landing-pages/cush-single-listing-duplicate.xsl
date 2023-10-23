@@ -59,8 +59,7 @@
 										<xsl:value-of select="concat( 'background-image: url(', $companyLogo, ')' )" />
 									</xsl:attribute>
 								</div>
-<xsl:comment/>
-
+								<xsl:comment/>
 							</a>
 						</div>
 						<nav class="navbar header-navigation">

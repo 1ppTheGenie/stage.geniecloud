@@ -298,17 +298,15 @@
 							</a>
 						</p>
 						<p class="heading-font">
-<xsl:call-template name="agent-address-line-one" />
-
+							<xsl:call-template name="agent-address-line-one" />
 							<br/>
-<xsl:call-template name="agent-address-line-two" />
-
+							<xsl:call-template name="agent-address-line-two" />
 						</p>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="term-condition text-center heading-font">
-						<xsl:if test="//mlsDisplay/disclaimer!=''">
+						<xsl:if test="string(//mlsDisplay/disclaimer)!=''">
 							<a href="#" class="heading-font toggle" data-container="#mls-disclaimer">MLS/IDX Disclaimer</a>
 							<xsl:text>&#160;&#124;&#160;</xsl:text>
 						</xsl:if>
