@@ -681,7 +681,6 @@ const prepareAsset = async (asset, params) => {
 					JSON_MIME
 				);
 
-				console.log("colAsset", asset, params.overrideKey ?? s3Key);
 			})
 		);
 	}

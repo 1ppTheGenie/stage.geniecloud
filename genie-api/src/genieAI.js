@@ -399,11 +399,10 @@ const call_api = async ( endpoint, params, verb = "POST", pre_cache = null ) => 
 		params.ImpersonatedByAspNetUserId = impersonater.id;
 	}
 
-	//console.log( 'endpoint', endpoint, params );
 	const cacheKey = cache_key( endpoint, params, verb );
 
-	let result = await from_cache(cacheKey, endpoint);
-
+	let result = await from_cache( cacheKey, endpoint );
+	
 	if (!result) {
 		// Flag the API call as coming from Hub2
 		params.consumer = 2;
