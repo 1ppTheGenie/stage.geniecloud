@@ -59,6 +59,7 @@
 									<xsl:attribute name="style">
 										<xsl:value-of select="concat( 'background: url(', $companyLogo, ');background-size:contain;background-repeat:no-repeat;background-position:center;' )" />
 									</xsl:attribute>
+									<xsl:comment/>
 								</div>
 							</div>
 						</div>
