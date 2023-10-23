@@ -42,22 +42,19 @@
 
 	<xsl:template name="map-overlay">
 		<svg style="position: absolute;top: 0;left: 0;z-index: 9999;width:100%;height:100%;">
-<rect x="3%" y="5%" width="94%" height="90%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2" />
+			<rect x="3%" y="5%" width="94%" height="90%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2" />
+			<rect x="4%" y="8%" width="92%" height="84%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2" />
 
-
-<rect x="4%" y="8%" width="92%" height="84%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2" />
-
-
-			<xsl:if test="//output/@customerName!=''">
+			<xsl:if test="string(//output/@customerName)!=''">
 				<rect x="5%" y="13%" width="90%" height="74%" fill-opacity="75%" fill="var(--theme-body-background)" />
 			</xsl:if>
 
-			<xsl:if test="//output/@customerName=''">
+			<xsl:if test="string(//output/@customerName)=''">
 				<rect x="5%" y="18%" width="90%" height="60%" fill-opacity="75%" fill="var(--theme-body-background)"></rect>
 			</xsl:if>
 
 			<g>
-				<xsl:if test="//output/@customerName!=''">
+				<xsl:if test="string(//output/@customerName)!=''">
 					<foreignObject x="20%" y="14%" height="10%" width="60%">
 						<div style="display:flex;justify-content:center;align-items:center;">
 							<svg height="10" width="30" style="flex-grow:0; margin-right: 2%">
@@ -73,7 +70,7 @@
 					</foreignObject>
 				</xsl:if>
 
-				<xsl:if test="//output/@customerName=''">
+				<xsl:if test="string(//output/@customerName)=''">
 					<foreignObject x="20%" y="19.5%" height="10%" width="60%">
 						<div style="display:flex;justify-content:center;align-items:center;">
 							<svg height="10" width="30" style="flex-grow:0; margin-right: 2%">
@@ -89,17 +86,13 @@
 					</foreignObject>
 				</xsl:if>
 
-				<xsl:if test="//output/@customerName!=''">
+				<xsl:if test="string(//output/@customerName)!=''">
 					<text x="50%" y="39%" class="narrow center" font-size="125%">
 						<tspan style="fill:var(--theme-heading-color);">Prepared exclusively for</tspan>
 						<tspan x="50%" dy="6%" font-size="150%">
-<xsl:value-of select="//output/@customerName" />
-
+							<xsl:value-of select="string(//output/@customerName)" />
 						</tspan>
 					</text>
-				</xsl:if>
-
-				<xsl:if test="//output/@customerName!=''">
 					<text x="50%" y="26%" data-max-width="80%" class="heading center upper" style="font-size:350%;fill:var(--theme-body-color);font-weight:500;">
 						<xsl:value-of select="//area/name" />
 						<xsl:value-of select="concat( ' ', $propertyType )" />
@@ -121,7 +114,7 @@
 					</image>
 				</xsl:if>
 
-				<xsl:if test="//output/@customerName=''">
+				<xsl:if test="string(//output/@customerName)=''">
 					<text x="50%" y="31%" data-max-width="80%" class="heading center upper" style="font-size:350%;fill:var(--theme-body-color);font-weight:500;">
 						<xsl:value-of select="//area/name" />
 						<xsl:value-of select="concat( ' ', $propertyType )" />
