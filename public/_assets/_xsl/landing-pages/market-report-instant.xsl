@@ -96,11 +96,13 @@
 				</div>
 			</section>
 
+<!-- DevDsiabled
 			<div class="container">
 				<xsl:call-template name="add-genie-embed">
 					<xsl:with-param name="embed" select="'MarketActivity'" />
 				</xsl:call-template>
 			</div>
+-->
 
 			<section class="dark-bg">
 				<div class="container">
