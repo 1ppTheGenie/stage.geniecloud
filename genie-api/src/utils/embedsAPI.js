@@ -45,7 +45,7 @@ export const embedsAPI = async (route, params) => {
 			result = await get_area_polygon(params);
 			break;
 		case "get-listing-data":
-			result = await get_listing_data(params);
+			result = await get_listing_details(params);
 			break;
 		case "get-qr-property":
 			result = await get_qr_property(params);
