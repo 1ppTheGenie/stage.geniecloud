@@ -140,22 +140,19 @@ export const getRenderJSON = async params => {
 
 		root.single = await processListing(params);
 
-		if (
-			params.asset &&
-			params.asset.startsWith("landing-pages") &&
-			params.mlsId
-		) {
-			let mlsDisplay = mlsDisplaySettings(params.mlsId);
+		let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0);
 
+		if (mlsDisplay) {
 			/* TODO!
 			let html_node = Utilities.html_2_xml(
 				mlsDisplay.mlsGroupDisplaySettings.listingPageDisclaimer,
 				"disclaimer"
 			);
 			*/
-			if (mlsDisplay) {
-				root.mlsDisplay = `<![CDATA[${mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer}]]>`; // { html_node }; // ToDo?	$mlsDisplay->appendChild($dom->importNode($html_node, true));
-			}
+			console.log("mlsDisplay", mlsDisplay);
+			root.mlsDisplay = `<![CDATA[${
+				mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ""
+			}]]>`; // { html_node }; // ToDo?	$mlsDisplay->appendChild($dom->importNode($html_node, true));
 		}
 	}
 
@@ -291,7 +288,7 @@ const singleAddress = listing => {
 export const setRenderDefaults = async params => {
 	// ** DATES
 	params.offsetDate = endOfLastMonth();
-	params.datePeriod = params.datePeriod || 3;
+	params.datePeriod = params.datePeriod || params.areaPeriod || 12;
 
 	// ** MLS ID
 	if (params.mlsNumber && !params.mlsId) {
