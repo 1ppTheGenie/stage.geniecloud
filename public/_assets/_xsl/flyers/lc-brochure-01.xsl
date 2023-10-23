@@ -106,17 +106,14 @@
 					<circle cx="5" cy="8" r="5" fill="black" />
 				</svg>
 				<text x="1.8%" y="19%" class="heading" font-size="165%" font-weight="400">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'Get the FULL DESCRIPTION and DETAILS by Scanning QR-CODE above.'" />
-						<xsl:with-param name="default" select="'Get the FULL DESCRIPTION and DETAILS by Scanning QR-CODE above.'" />
-					</xsl:call-template>
+					Get the FULL DESCRIPTION and DETAILS by Scanning QR-CODE above
 				</text>
 			</g>
 
-			<g style="transform:translate(72.5%, 9.5%)">
+			<g style="transform:translate(72.5%, 11.5%)">
 				<xsl:call-template name="qr-code">
 					<xsl:with-param name="width" select="'14.5%'" />
-					<xsl:with-param name="height" select="'14%'" />
+					<xsl:with-param name="height" select="'12%'" />
 				</xsl:call-template>
 			</g>
 
