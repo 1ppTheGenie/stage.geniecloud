@@ -37,8 +37,8 @@ const getAreaMonthly = async area_settings => {
 	};
 };
 
-const getAreaPolygon = async area_id => {
-	const r = await apiCall("get-area-polygon", { area_id });
+const getAreaPolygon = async areaId => {
+	const r = await apiCall("get-area-polygon", { areaId });
 
 	return r.success ? r.result.polygon : {};
 };

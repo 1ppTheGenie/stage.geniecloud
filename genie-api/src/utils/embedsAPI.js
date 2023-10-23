@@ -410,8 +410,7 @@ const get_area_data = async params => {
 };
 
 const get_area_polygon = async params => {
-	var area_id = params.id;
-	var r = await getAreaBoundary(area_id);
+	const r = await getAreaBoundary(params.areaId);
 
 	if (r?.success === true) {
 		return success({
@@ -419,7 +418,6 @@ const get_area_polygon = async params => {
 		});
 	}
 
-	console.error("Get Area Polygon failed:", r);
 	return error("getAreaBoundary failed");
 };
 
