@@ -146,7 +146,7 @@ export const available_areas = async agent_id =>
 	);
 
 export const getAreaBoundary = async areaId =>
-	areaId && (await call_api(`GetAreaBoundary/${areaId}`, null, "POST"));
+	await call_api(`GetAreaBoundary/${areaId}`, null, "POST");
 
 export const getListing = async (user_id, mls_number, mls_id = -1) => {
 	let listing;
