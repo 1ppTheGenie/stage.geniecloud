@@ -1,51 +1,90 @@
 {
 	"name": "Listing Command Sample",
-	"version": 2,
+	"version": 3,
 	"template": "marketing-steps-lc1",
 	"sections": [
 		{
 			"meta": {
-				"caption": "Automate your Workflow",
-				"description": "These assets are samples of what would be used if you were to run a listing command for this property."
+				"caption": "Automating your Listing Marketing Workflow!",
+				"description": "You can choose any one of the postcards below. QR Code will lead to the QR Property Compare below."
 			},
 			"assets": [
 				{
 					"asset": "direct-mail/qr-code-postcard-combine-2022-2",
 					"knownAs": "Direct Mail - Active",
-					"name": "Just Listed Postcard"
+					"name": "Stats & Pics Postcard"
 				},
 				{
 					"asset": "direct-mail/krg-double-photo-content-combine",
 					"knownAs": "Direct Mail Pending",
-					"name": "In Escrow Postcard"
+					"name": "Hungry Buyers Postcard"
 				},
 				{
 					"asset": "direct-mail/qr-code-postcard-combine-2022-1",
 					"knownAs": "Direct Mail - Sold",
-					"name": "Just Sold Postcard"
+					"name": "Stats & Map Postcard"
 				},
 				{
-					"asset": "area-insider-reports/market-insider",
-					"knownAs": "Market Insider Report",
-					"name": "Market Insider"
-				},
+					"asset": "direct-mail/krg-single-photo-content-combine",
+					"name": "Single Photo Postcard"
+				}
+			],
+			"name": "Listing Command Proof Kit"
+		},
+		{
+			"name": "Social Media Assets",
+			"meta": {
+				"caption": "Superpower your Social Media Marketing",
+				"description": "If you choose the Socials channel - You can choose any one of these social graphics."
+			},
+			"assets": [
 				{
 					"asset": "social-marketing-graphics/lc-prop-post-06",
-					"knownAs": "Facebook Ad",
-					"name": "Facebook Ad"
+					"name": "Simple"
 				},
 				{
+					"asset": "social-marketing-graphics/lc-prop-post-06-vip",
+					"name": "Ready to Sell"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-03",
+					"name": "Cash Buyers"
+				},
+				{
+					"asset": "social-marketing-graphics/lc-prop-post-01-vip",
+					"name": "Modern"
+				}
+			]
+		},
+		{
+			"name": "Landing Pages",
+			"meta": {
+				"caption": "Move your Engagements through the Funnel",
+				"description": "With powerful Calls to Action, these landing pages will entice your audience to engage"
+			},
+			"assets": [
+				{
 					"asset": "landing-pages/lc-hollywood",
-					"knownAs": "Hollywood Landing Page",
-					"name": "Property Landing"
+					"name": "FB/IG Property Landing"
 				},
 				{
 					"asset": "landing-pages/property-compare",
-					"knownAs": "Property Comparison",
-					"name": "Property Compare"
+					"name": "QR Property Compare"
 				}
-			],
-			"name": "Listing Command Assets"
+			]
+		},
+		{
+			"name": "Deliverables",
+			"meta": {
+				"caption": "Leave a Lasting Impression",
+				"description": "When your audience engages, they are given a PDF Market Insider report rich in valuable neighborhood insights positioning you as the expert!"
+			},
+			"assets": [
+				{
+					"asset": "area-insider-reports/market-insider",
+					"name": "Market Insider Report"
+				}
+			]
 		}
 	]
 }
