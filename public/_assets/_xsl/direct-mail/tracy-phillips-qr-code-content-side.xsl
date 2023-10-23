@@ -3,41 +3,34 @@
 	Asset Name: Tracy Phillips Qr Code Content Side
 	Tags: 		Direct Mail
 	Sizes:		Postcard
-Supports:	Area, Print, Listing, QRCode
+	Supports:	Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-sans.css')" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-sans.css')" />
 
 		</link>
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-serif.css')" />
-
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-serif.css')" />
 		</link>
 
 		<style>
-<xsl:value-of select="'text { dominant-baseline: central; }'" />
-
+			<xsl:value-of select="'text { dominant-baseline: central; }'" />
 		</style>
 
-<rect x="0" y="0" width="100%" height="100%" fill="#fff" />
+		<rect x="0" y="0" width="100%" height="100%" fill="#fff" />
 
+		<rect x="0" y="0" width="50%" height="20%" fill="#000" />
 
-<rect x="0" y="0" width="50%" height="20%" fill="#000" />
+		<rect x="0" y="90%" width="50%" height="10%" fill="#000" />
 
+		<rect x="0.8%" y="63%" width="49%" height="8%" fill="#f2f3f4" />
 
-<rect x="0" y="90%" width="50%" height="10%" fill="#000" />
-
-
-<rect x="0.8%" y="63%" width="49%" height="8%" fill="#f2f3f4" />
-
-
-<rect x="0.8%" y="80%" width="49%" height="8%" fill="#f2f3f4" />
-
+		<rect x="0.8%" y="80%" width="49%" height="8%" fill="#f2f3f4" />
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
@@ -45,8 +38,8 @@ Supports:	Area, Print, Listing, QRCode
 	<xsl:template name="cropped-content">
 		<g style="transform:translate(35%, 21%)">
 			<xsl:call-template name="qr-code">
-				<xsl:with-param name="width" select="'30%'" />
-				<xsl:with-param name="height" select="'35%'" />
+				<xsl:with-param name="width" select="'25%'" />
+				<xsl:with-param name="height" select="'45%'" />
 			</xsl:call-template>
 		</g>
 
