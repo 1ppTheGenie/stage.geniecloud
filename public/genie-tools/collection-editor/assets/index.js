@@ -1175,7 +1175,7 @@ const settings = await (async () => {
 const getAssets = async () => await apiCall(`get-assets`);
 const getCollections = async () => await apiCall(`get-collections`);
 const saveCollection = async data =>
-	await apiCall(`update-collection`, data, "POST");
+	await apiCall(`save-collection`, data, "POST");
 
 async function apiCall(endpoint, data = null, method = "POST") {
 	const url = `${settings.endpoint}${endpoint}`;
@@ -1569,8 +1569,8 @@ const Collection = props => {
     delete data.unsaved;
     delete data.folders;
     await saveCollection({
-      file: filename(),
-      data
+      template: filename(),
+      collection: data
     });
     vNotify.success({
       text: message
@@ -1674,7 +1674,7 @@ delegateEvents(["click"]);
 const _tmpl$$b = /*#__PURE__*/template(`<div><h1>Genie Collections</h1><ul id="collections"><li><em>Create New Collection`),
   _tmpl$2$4 = /*#__PURE__*/template(`<li>`);
 const Collections = () => {
-  const selectCollection = id => app.setStore("collectionIndex", id);
+  const selectCollection = id => app.store.allAssets != null && app.setStore("collectionIndex", id);
   return (() => {
     const _el$ = _tmpl$$b(),
       _el$2 = _el$.firstChild,
@@ -1694,6 +1694,7 @@ const Collections = () => {
             const _el$5 = _tmpl$2$4();
             _el$5.$$click = () => selectCollection(key);
             insert(_el$5, () => app.store.allCollections[key].name);
+            createRenderEffect(() => _el$5.classList.toggle("inactive", !!(app.store.allAssets == null)));
             return _el$5;
           })()
         });
@@ -8877,7 +8878,7 @@ function App() {
       _el$2 = _el$.firstChild,
       _el$3 = _el$2.nextSibling,
       _el$4 = _el$3.firstChild;
-    insert(_el$2, `v${"1.2.11"}`);
+    insert(_el$2, `v${"1.2.12"}`);
     insert(_el$3, createComponent(Show, {
       get when() {
         return app.store.currentView !== view.COLLECTIONS;

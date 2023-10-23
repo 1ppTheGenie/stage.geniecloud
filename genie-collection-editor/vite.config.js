@@ -7,7 +7,7 @@ import path from "path";
 
 const __BASE__ =
 	process.env.NODE_ENV === "production"
-		? "/wp-content/plugins/genie-marketing/assets/components/collections/dist/"
+		? "/genie-tools/collection-editor/"
 		: "";
 const __BUILD_VERSION__ = process.env.npm_package_version;
 

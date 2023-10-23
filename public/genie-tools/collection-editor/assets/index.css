@@ -250,3 +250,16 @@ select.focussed option {
 	box-sizing: border-box;
 	background-color: #367fa933;
 }
+#collections li {
+	cursor: pointer;
+	margin: 1rem 0;
+}
+
+#collections li:hover {
+	color: var(--genie-primary);
+}
+
+#collections li.inactive {
+	opacity: 0.5 ;
+	cursor:not-allowed;
+}

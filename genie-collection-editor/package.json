@@ -1,6 +1,6 @@
 {
 	"name": "genie-collection-editor",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"description": "Back-end tool for creating Genie-compatible collection files",
 	"scripts": {
 		"start": "vite",
