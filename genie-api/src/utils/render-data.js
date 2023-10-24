@@ -149,7 +149,7 @@ export const getRenderJSON = async params => {
 				"disclaimer"
 			);
 			*/
-			console.log("mlsDisplay", mlsDisplay);
+			//			console.log("mlsDisplay", mlsDisplay);
 			root.mlsDisplay = `<![CDATA[${
 				mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ""
 			}]]>`; // { html_node }; // ToDo?	$mlsDisplay->appendChild($dom->importNode($html_node, true));
@@ -160,7 +160,7 @@ export const getRenderJSON = async params => {
 		root.collection = await processCollection(params);
 	}
 
-	console.log("gRoot", root);
+	//	console.log("gRoot", root);
 	return root;
 };
 
