@@ -7274,17 +7274,14 @@ var getRenderJSON = async (params) => {
     }
     params.openHouseTimes = times;
     root.single = await processListing(params);
-    if (params.asset && params.asset.startsWith("landing-pages") && params.mlsId) {
-      let mlsDisplay = mlsDisplaySettings(params.mlsId);
-      if (mlsDisplay) {
-        root.mlsDisplay = `<![CDATA[${mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer}]]>`;
-      }
+    let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0);
+    if (mlsDisplay) {
+      root.mlsDisplay = `<![CDATA[${mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ""}]]>`;
     }
   }
   if (params?.collection) {
     root.collection = await processCollection(params);
   }
-  console.log("gRoot", root);
   return root;
 };
 var processOutput = async (userId, datePeriod, renderId, renderSettings) => {
@@ -7377,7 +7374,7 @@ var singleAddress = (listing) => {
 };
 var setRenderDefaults = async (params) => {
   params.offsetDate = endOfLastMonth();
-  params.datePeriod = params.datePeriod || 3;
+  params.datePeriod = params.datePeriod || params.areaPeriod || 12;
   if (params.mlsNumber && !params.mlsId) {
     params.mlsId = 0;
   }
@@ -8135,7 +8132,7 @@ var embedsAPI = async (route, params) => {
       result = await get_area_polygon(params);
       break;
     case "get-listing-data":
-      result = await get_listing_data(params);
+      result = await get_listing_details(params);
       break;
     case "get-qr-property":
       result = await get_qr_property(params);
@@ -8366,6 +8363,20 @@ var get_agent_data = async (params) => {
   delete profile.user.reuse;
   return success({ agent: profile });
 };
+var get_listing_details = async (params) => {
+  var result = await genie_mls_get_by_number(params.mlsid, params.slug);
+  {
+  }
+  if (!result.photoPrimary || result.photoPrimary === "") {
+    result.boundary = genie_property_boundary(
+      params.id,
+      params.slug,
+      null,
+      null
+    );
+  }
+  return success({ listing: result });
+};
 var get_mls_display = async (params) => {
   return success(genie_mls_display_settings(parseInt(params.id)));
 };
@@ -8419,14 +8430,12 @@ var get_area_data = async (params) => {
   return statistics.success ? success(statistics) : error(statistics);
 };
 var get_area_polygon = async (params) => {
-  var area_id = params.id;
-  var r = await getAreaBoundary(area_id);
+  const r = await getAreaBoundary(params.areaId);
   if (r?.success === true) {
     return success({
       polygon: r.mapArea
     });
   }
-  console.error("Get Area Polygon failed:", r);
   return error("getAreaBoundary failed");
 };
 var error = (msg) => ({ success: false, error: msg });
@@ -8677,7 +8686,7 @@ var getAssessorProperty = async (property_id, agent_id) => await call_api("GetAs
   userId: agent_id
 });
 var getAssessorPropertiesDetail = async (address_id) => await call_api(`GetAssessorPropertiesDetail/${address_id}`);
-var getAreaBoundary = async (areaId) => areaId && await call_api(`GetAreaBoundary/${areaId}`, null, "POST");
+var getAreaBoundary = async (areaId) => await call_api(`GetAreaBoundary/${areaId}`, null, "POST");
 var getListing = async (user_id, mls_number, mls_id = -1) => {
   let listing;
   if (mls_id > -1) {
@@ -9300,6 +9309,7 @@ var prepareAsset = async (asset, params) => {
           s3Key: params.overrideKey ?? s3Key,
           bucket: BUCKET,
           renderId: params.renderId,
+          isDebug: params.isDebug,
           suffix,
           size,
           landscape: isA5 || dims.height < dims.width ? true : false,
@@ -9364,7 +9374,6 @@ var prepareAsset = async (asset, params) => {
           null,
           JSON_MIME
         );
-        console.log("colAsset", asset, params.overrideKey ?? s3Key);
       })
     );
   }
