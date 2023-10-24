@@ -597,6 +597,7 @@ const prepareAsset = async (asset, params) => {
 					s3Key: params.overrideKey ?? s3Key,
 					bucket: BUCKET,
 					renderId: params.renderId,
+					isDebug: params.isDebug,
 					suffix,
 
 					size,
