@@ -306,7 +306,7 @@
 				</div>
 				<div class="col-md-12">
 					<div class="term-condition text-center heading-font">
-						<xsl:if test="string(//mlsDisplay/disclaimer)!=''">
+						<xsl:if test="string(//mlsDisplay/text())!=''">
 							<a href="#" class="heading-font toggle" data-container="#mls-disclaimer">MLS/IDX Disclaimer</a>
 							<xsl:text>&#160;&#124;&#160;</xsl:text>
 						</xsl:if>
@@ -314,7 +314,6 @@
 							<xsl:if test="//agent[1]/privacySource='external'">
 								<xsl:attribute name="href">
 									<xsl:value-of select="//agent[1]/privacyPolicy" />
-
 								</xsl:attribute>
 							</xsl:if>
 
@@ -336,16 +335,17 @@
 						</a>
 					</div>
 
-					<xsl:if test="//mlsDisplay/disclaimer!='external'">
+					<xsl:if test="string(//mlsDisplay/text())!='external'">
 						<div id="mls-disclaimer">
-							<xsl:copy-of select="//mlsDisplay/disclaimer/*" />
+							<xsl:copy-of select="//mlsDisplay/text()" />
+							<xsl:comment/>
 						</div>
 					</xsl:if>
 
 					<xsl:if test="//agent[1]/privacySource!='external'">
 						<div id="privacy-policy">
 							<xsl:copy-of select="//agent[1]/privacyPolicy/text()" />
-
+							<xsl:comment/>
 						</div>
 					</xsl:if>
 				</div>

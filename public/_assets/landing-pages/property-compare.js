@@ -17,7 +17,10 @@ document.addEventListener(`genie-landing-loaded`, async () => {
 
 		document.querySelector("section.banner-section").style.backgroundImage = "";
 
-		if (lpData.boundaryJSON !== "") {
+		if (
+			typeof lpData.boundaryJSON !== "undefined" &&
+			lpData.boundaryJSON !== ""
+		) {
 			const leadMap = await gg.makeMap("lead-property-map", {});
 
 			document.getElementById("lead-property-map").style.filter = "";
