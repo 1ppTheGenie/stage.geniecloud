@@ -1,0 +1,18 @@
+/* 
+	Theme Name:	Beverly
+	Theme Style: Dark  
+*/
+
+@import url("../_css/cinzel.css");
+@import url("../_css/poppins.css");
+
+.beverly-dark {
+	--theme-body-background: #000000;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #c45105; /* Subtitle */
+	--theme-body-color: #e1e1e1; /* Body */
+	--theme-emphasis-color: #c45105; /* Outline */
+	--theme-body-font: "Cinzel", sans-serif;
+	--theme-heading-font: "Poppins", sans-serif;
+	--theme-sub-heading-font: "Cinzel", sans-serif;
+}

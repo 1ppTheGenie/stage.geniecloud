@@ -1,0 +1,16 @@
+/*
+	Theme Name: Aviara Real Estate
+	Theme Style: Light  
+*/
+@import url("../_css/poppins.css");
+
+.aviara-realestate-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #064d8a; /* Heading */
+	--theme-sub-heading-color: #adacb3; /* Subtitle */
+	--theme-body-color: #064d8a; /* Body */
+	--theme-emphasis-color: #adacb3; /* Outline */
+	--theme-body-font: "Poppins", sans-serif;
+	--theme-heading-font: "Poppins", sans-serif;
+	--theme-sub-heading-font: "Poppins", sans-serif;
+}

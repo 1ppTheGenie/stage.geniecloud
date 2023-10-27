@@ -1,0 +1,18 @@
+/*
+	Theme Name:	The Agency
+	Theme Style: Dark
+*/
+
+@import url("../_css/open-sans.css");
+@import url("../_css/myriad-pro-condensed.css");
+
+.the-agency-dark {
+	--theme-body-background: #d2232a;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #ffffff; /* Subtitle */
+	--theme-body-color: #8494a0; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
+	--theme-body-font: "Open Sans", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
+}

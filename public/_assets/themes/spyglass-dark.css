@@ -3,19 +3,19 @@
 	Theme Style: Dark      
 */
 
-@import url("../_css/helvetica-neue-condensed.css");
+/* @import url("../_css/helvetica-neue-condensed.css"); */
+@import url("../_css/myriad-pro-condensed.css");
 @import url("../_css/helvetica-neue.css");
 
 .spyglass-dark {
 	--theme-body-background: #000000;
 	--theme-heading-color: #ffffff; /* Heading */
-	--theme-sub-heading-color: #f56b00; /* Subtitle */
+	--theme-sub-heading-color: #fa4614; /* Subtitle */
 	--theme-body-color: #ced1d6; /* Body */
-	--theme-emphasis-color: #f56b00; /* Outline */
-	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
-	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
-	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+	--theme-emphasis-color: #fa4614; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
 	--printers-marks: #f56b00;
-	--theme-emphasis-color: #f56b00;
 	--genie-chart-stroke: #fff6;
 }

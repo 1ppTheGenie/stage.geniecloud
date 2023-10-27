@@ -16,3 +16,15 @@
 	--theme-body-font: "Montserrat", sans-serif;
 	--theme-font-size: 90%;
 }
+
+div.banner span.overlay {
+	background-color: var(--white);
+}
+
+div.banner h1 {
+	color: var(--theme-body-color);
+}
+
+div.banner div.address {
+	color: var(--theme-body-color);
+}

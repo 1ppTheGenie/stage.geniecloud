@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Rodeo Realty
+	Theme Style: Dark  
+*/
+
+@import url("../_css/times-new-roman.css");
+@import url("../_css/roboto.css");
+
+.rodeo-realty-dark {
+	--theme-body-background: #011d35;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #c7cfd9; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #c7cfd9; /* Outline */
+	--theme-body-font: 'Roboto', sans-serif;
+	--theme-heading-font: 'Times New Roman', serif;
+	--theme-sub-heading-font: 'Roboto', sans-serif;
+}

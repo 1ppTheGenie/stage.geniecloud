@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Mission Realty
+	Theme Style: Dark  
+*/
+
+@import url("../_css/work-sans.css");
+
+
+.mission-realty-dark {
+	--theme-body-background: #b40101;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #d2b788; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #d2b788; /* Outline */
+	--theme-body-font: 'Work Sans', sans-serif;
+	--theme-heading-font: 'Work Sans', sans-serif;
+	--theme-sub-heading-font: 'Work Sans', sans-serif;
+}

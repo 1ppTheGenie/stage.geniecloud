@@ -4,16 +4,15 @@
 */
 
 @import url("../_css/helvetica-neue.css");
-@import url("../_css/helvetica-neue-condensed.css");
+@import url("../_css/myriad-pro-condensed.css");
 
 .spyglass-light {
 	--theme-body-background: #fff;
-	--theme-heading-color: #f56b00; /* Heading */
-	--theme-sub-heading-color: #252525; /* Subtitle */
+	--theme-heading-color: #252525; /* Heading */
+	--theme-sub-heading-color: #fa4614; /* Subtitle */
 	--theme-body-color: #000000; /* Body */
 	--theme-emphasis-color: #000000; /* Outline */
-	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
-	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
-	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
-	--theme-emphasis-color: #f5b483;
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
 }

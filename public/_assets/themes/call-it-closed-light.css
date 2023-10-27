@@ -1,0 +1,18 @@
+/*
+	Theme Name:	Call It Closed
+	Theme Style: Light  
+*/
+
+@import url("../_css/montserrat.css");
+
+
+.call-it-closed-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #000000; /* Heading */
+	--theme-sub-heading-color: #cd0e0e; /* Subtitle */
+	--theme-body-color: #1a1a1a; /* Body */
+	--theme-emphasis-color: #cd0e0e; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Montserrat", sans-serif;
+}

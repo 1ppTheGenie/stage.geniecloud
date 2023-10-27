@@ -1,0 +1,16 @@
+/*
+	Theme Name:	Sync Brokerage
+	Theme Style: Dark  
+*/
+@import url("../_css/lato.css");
+
+.sync-brokerage-dark {
+	--theme-body-background: #000000;
+	--theme-heading-color: #6fbf65; /* Heading */
+	--theme-sub-heading-color: #ffffff; /* Subtitle */
+	--theme-body-color: #e1e1e1; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

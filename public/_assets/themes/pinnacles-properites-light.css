@@ -1,0 +1,17 @@
+/*
+	Theme Name: Pinnacles Properites
+	Theme Style: Light  
+*/
+@import url("../_css/raleway.css");
+@import url("../_css/montserrat.css");
+
+.pinnacles-properites-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #163055; /* Heading */
+	--theme-sub-heading-color: #00559b; /* Subtitle */
+	--theme-body-color: #002355; /* Body */
+	--theme-emphasis-color: #00559b; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Raleway", sans-serif;
+	--theme-sub-heading-font: "Raleway", sans-serif;
+}

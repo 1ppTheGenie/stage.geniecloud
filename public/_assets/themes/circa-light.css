@@ -1,0 +1,17 @@
+/* 
+	Theme Name:	Circa
+	Theme Style: Light  
+*/
+
+@import url("../_css/raleway.css");
+
+.circa-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #372675; /* Heading */
+	--theme-sub-heading-color: #73a1eb; /* Subtitle */
+	--theme-body-color: #250d7a; /* Body */
+	--theme-emphasis-color: #73a1eb; /* Outline */
+	--theme-body-font: "Raleway", sans-serif;
+	--theme-heading-font: "Raleway", sans-serif;
+	--theme-sub-heading-font: "Raleway", sans-serif;
+}
