@@ -54,6 +54,8 @@ export const getRenderJSON = async params => {
 		renderSettings.downloadUrl = params.downloadUrl;
 	}
 
+	const periodFormat = "LLL `yy";
+
 	const root = {
 		// *** Output
 		output: {
@@ -71,18 +73,18 @@ export const getRenderJSON = async params => {
 				period:
 					dateAdd(params.offsetDate + MINUTE_IN_SECONDS, {
 						months: -params.datePeriod,
-					}).toLocaleString() +
+					}).toFormat(periodFormat) +
 					" to " +
-					DateTime.fromMillis(params.offsetDate).toLocaleString(),
+					DateTime.fromMillis(params.offsetDate).toFormat(periodFormat),
 
 				previousPeriod:
 					dateAdd(params.offsetDate + MINUTE_IN_SECONDS, {
 						months: -datePeriod2,
-					}).toLocaleString() +
+					}).toFormat(periodFormat) +
 					" to " +
 					dateAdd(params.offsetDate + MINUTE_IN_SECONDS, {
 						months: -params.datePeriod,
-					}).toLocaleString(),
+					}).toFormat(periodFormat),
 			},
 		},
 
