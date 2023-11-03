@@ -106,19 +106,22 @@ export const getRenderJSON = async params => {
 	};
 
 	// Slightly weird place for this code, but...generate QR image
-	let qrUrl = params.customizations?.qrUrl || root.agents[0].agent.website;
+	let qrUrl =
+		(params.customizations?.qrUrl || root.agents[0].agent.website) ?? "";
 
-	if (!qrUrl.startsWith("http")) qrUrl = `https://${qrUrl}`;
-	const qrSVG = await generateQR(qrUrl);
+	if (qrUrl && qrUrl !== "") {
+		if (!qrUrl.startsWith("http")) qrUrl = `https://${qrUrl}`;
+		const qrSVG = await generateQR(qrUrl);
 
-	await toS3(
-		`genie-files/${params.renderId}/qr.svg`,
-		Buffer.from(qrSVG),
-		null,
-		"image/svg+xml"
-	);
+		await toS3(
+			`genie-files/${params.renderId}/qr.svg`,
+			Buffer.from(qrSVG),
+			null,
+			"image/svg+xml"
+		);
 
-	root.output._attrs.qrUrl = `${genieGlobals.GENIE_HOST}genie-files/${params.renderId}/qr.svg`;
+		root.output._attrs.qrUrl = `${genieGlobals.GENIE_HOST}genie-files/${params.renderId}/qr.svg`;
+	}
 
 	if (params.mlsNumber) {
 		// ** OPEN HOUSE TIMES
