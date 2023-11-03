@@ -466,6 +466,10 @@ const processAreas = async params => {
 				areaId,
 				params.datePeriod
 			);
+
+			params.isDebug &&
+				debugLog("areaStatisticsWithPrevious", params, statsData);
+
 			const areaName = statsData.areaName; // ToDo? Utilities::clean_html_entities(statsData.areaName);
 
 			let areaImage = null;
@@ -536,6 +540,8 @@ const processAreas = async params => {
 					areaId,
 					NOW.plus({ months: params.datePeriod * -1 }).toISO()
 				);
+
+				params.isDebug && debugLog("mlsProperties", params, mls_properties);
 
 				if (mls_properties && Array.isArray(mls_properties)) {
 					const agentListings = await agentMlsNumbers(params.userId);
@@ -773,6 +779,8 @@ const processListing = async params => {
 		params.mlsNumber,
 		params.mlsId
 	);
+
+	params.isDebug && debugLog("getListing", params, listing);
 
 	if (listing) {
 		let primaryPhoto = null;
@@ -1138,4 +1146,8 @@ const buildVersion = async () => {
 		.Key.replace("_assets/landing-pages/dist/", "")
 		.split("/")
 		.shift();
+};
+
+const debugLog = async (source, params, data) => {
+	console.log("debugLog", source, params, data);
 };
