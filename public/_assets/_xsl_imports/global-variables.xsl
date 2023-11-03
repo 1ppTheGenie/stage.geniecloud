@@ -533,16 +533,16 @@
 
 	<!-- Listing totals -->
 	<xsl:variable name="listingsTotalNew">
-		<xsl:value-of select="count(//listings/listing[@state = 'active' and @dom &lt;= $domNew])" />
+		<xsl:value-of select="//listings/listing[@state = 'active' and number(@dom)&lt;=$domNew]" />
 	</xsl:variable>
 	<xsl:variable name="listingsTotalActive">
-		<xsl:value-of select="count(//listings/listing[@state='active' and @dom &gt; $domNew])" />
+		<xsl:value-of select="//listings/listing[@state='active' and number(@dom)&gt;$domNew]" />
 	</xsl:variable>
 	<xsl:variable name="listingsTotalPending">
-		<xsl:value-of select="count(//listings/listing[@state='pending'])" />
+		<xsl:value-of select="//listings/listing[@state='pending']" />
 	</xsl:variable>
 	<xsl:variable name="listingsTotalSold">
-		<xsl:value-of select="count(//listings/listing[@state='sold'])" />
+		<xsl:value-of select="//listings/listing[@state='sold']" />
 	</xsl:variable>
 
 	<!-- agent2LineAddress -->
