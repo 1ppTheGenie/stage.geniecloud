@@ -1,0 +1,21 @@
+{
+	"name": "genie-error-viewer",
+	"version": "0.0.1",
+	"description": "Back-end tool for quick view of render/xsl errors",
+	"scripts": {
+		"start": "vite",
+		"dev": "vite",
+		"build": "vite build --emptyOutDir",
+		"serve": "vite preview"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"vite": "^4.5.0",
+		"vite-plugin-solid": "^2.7.2",
+		"vite-plugin-solid-svg": "^0.7.0"
+	},
+	"dependencies": {
+		"@vitejs/plugin-basic-ssl": "^1.0.1",
+		"solid-js": "^1.8.4"
+	}
+}

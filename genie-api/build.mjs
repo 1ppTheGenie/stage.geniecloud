@@ -15,7 +15,12 @@ esbuild
 		entryPoints: [resolve(SRC_DIR, "index.js")],
 		outdir: OUT_DIR,
 		platform: "node",
-		external: ["@aws-sdk/client-s3", "@aws-sdk/client-sqs", "node-fetch"],
+		external: [
+			"@aws-sdk/client-s3",
+			"@aws-sdk/client-sqs",
+			"node-fetch",
+			"sharp",
+		],
 		minify: false,
 		bundle: true,
 		loader: {
