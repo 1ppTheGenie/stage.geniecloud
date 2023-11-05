@@ -52260,11 +52260,9 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 var import_fs = __toESM(require("fs"), 1);
-var import_util = __toESM(require("util"), 1);
 var import_path = require("path");
 var import_SaxonJS2N = __toESM(require_SaxonJS2N(), 1);
 var import_client_s3 = require("@aws-sdk/client-s3");
-var makeDir = import_util.default.promisify(import_fs.default.mkdir);
 var REGION = process.env.REGION ?? "eu-west-2";
 var BUCKET = process.env.BUCKET ?? "genie-hub-2";
 var GENIE_URL = process.env.GENIE_URL ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/";
@@ -52292,6 +52290,7 @@ var transform = (xml, xslt2, xsltBaseUri) => {
         }
       }
     );
+    console.log("carrots", result.output);
     return import_SaxonJS2N.default.serialize(result.output, { method: "xml" });
   } catch (error) {
     return { failed: true, msg: error.message };
@@ -52321,7 +52320,6 @@ var xslt = async (event) => {
         ).then(
           (buffer) => buffer && buffer.length > 0 ? JSON.parse(buffer) : null
         );
-        console.log("params", params);
         const transformedXML = transform(
           transformXml,
           transformXsl,
@@ -52329,6 +52327,19 @@ var xslt = async (event) => {
         );
         if (transformedXML) {
           if (typeof transformedXML == "object" && transformedXML.failed) {
+            await toS3(
+              `_errors/${params.renderId}-${Date.now()}-api.json`,
+              Buffer.from(
+                JSON.stringify({
+                  error: transformedXML.msg,
+                  params,
+                  transformXml,
+                  transformXsl
+                })
+              ),
+              null,
+              JSON_MIME
+            );
             console.log(
               "XSLT failed:",
               params.asset,
@@ -52360,37 +52371,38 @@ var xslt = async (event) => {
                 "application/json"
               );
             }
-            if (
-							params.noPuppeteer ||
-							(params.isCollection &&
-								params.suffix == "pdf" &&
-								params.pageIndex <= 2)
-						) {
-							const revisedSuffix = `${params.noPuppeteer ? "" : "-"}grab-${
-								params.pageIndex
-							}.webp`;
-							const width = params.noPuppeteer ? 800 : params.dims.width;
-							const height = params.noPuppeteer ? 1200 : params.dims.height;
-							await toS3(
-								r.s3.object.key.replace(
-									"xslt.json",
-									`grab-${params.pageIndex}-puppeteer.json`
-								),
-								JSON.stringify({
-									url: params.url,
-									bucket: params.bucket,
-									width,
-									height,
-									webp: true,
-									s3Key: params.s3Key.replace(
-										/(index\.html|\.pdf)/g,
-										revisedSuffix
-									),
-								}),
-								null,
-								"application/json"
-							);
-						}
+            if (params.noPuppeteer || params.isCollection && params.suffix == "pdf" && params.pageIndex <= 2) {
+              const revisedSuffix = `${params.noPuppeteer ? "" : "-"}grab-${params.pageIndex}.webp`;
+              const width = params.noPuppeteer ? 800 : params.dims.width;
+              const height = params.noPuppeteer ? 1200 : params.dims.height;
+              await toS3(
+                r.s3.object.key.replace(
+                  "xslt.json",
+                  `grab-${params.pageIndex}-puppeteer.json`
+                ),
+                JSON.stringify({
+                  url: params.url,
+                  bucket: params.bucket,
+                  width,
+                  height,
+                  webp: true,
+                  s3Key: params.s3Key.replace(
+                    /(index\.html|\.pdf)/g,
+                    revisedSuffix
+                  )
+                }),
+                null,
+                "application/json"
+              );
+            }
+            if (!params.isDebug) {
+              await s3Client.send(
+                new import_client_s3.DeleteObjectCommand({
+                  Bucket: BUCKET,
+                  Key: r.s3.object.key
+                })
+              );
+            }
           }
         } else {
           console.log("Failed on ", params.asset);

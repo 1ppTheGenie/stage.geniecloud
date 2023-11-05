@@ -1,12 +1,9 @@
 import fs from "fs";
-import util from "util";
 import { basename } from "path";
 import SaxonJS from "saxon-js/SaxonJS2N.js";
 
 // prettier-ignore
 import { S3Client,DeleteObjectCommand, GetObjectCommand, PutObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
-
-const makeDir = util.promisify(fs.mkdir);
 
 const REGION = process.env.REGION ?? "eu-west-2";
 const BUCKET = process.env.BUCKET ?? "genie-hub-2";
@@ -43,23 +40,20 @@ const transform = (xml, xslt, xsltBaseUri) => {
 			}
 		);
 
+		console.log("carrots", result.output);
+
 		return SaxonJS.serialize(result.output, { method: "xml" });
 	} catch (error) {
 		return { failed: true, msg: error.message };
-		//console.error(`Transform err: ${error.message}`);
 	}
 };
 
 const copyFilesToLocal = async () => {
-	//const iconsPath = `${TEMP_DIR}icons`;
-
 	// Files imported via xsl:import have to exist on a "local" drive
 	if (
 		TEMP_DIR !==
 		"D:/Dropbox/development/genie-marketing-hub-master/GenieHub/genie-hub-cloud/public/_assets/_xsl_imports/" // &&!fs.existsSync(iconsPath) might want this on there to avoid doing this each time
 	) {
-		//if (!fs.existsSync(iconsPath)) await makeDir(iconsPath);
-
 		const imports = await listS3Folder("_assets/_xsl_imports/");
 		await Promise.all(
 			imports.map(async s3File => {
@@ -69,16 +63,6 @@ const copyFilesToLocal = async () => {
 				fs.writeFileSync(tempFile, fileData);
 			})
 		);
-		/*
-		const icons = await listS3Folder("_assets/_img/icons");
-		await Promise.all(
-			icons.map(async s3File => {
-				const fileData = await fromS3(s3File.Key);
-				const tempFile = `${TEMP_DIR}${basename(s3File.Key)}`;
-				fs.writeFileSync(tempFile, fileData);
-			})
-		);
-*/
 	}
 };
 
@@ -95,7 +79,6 @@ export const xslt = async event => {
 				).then(buffer =>
 					buffer && buffer.length > 0 ? JSON.parse(buffer) : null
 				);
-				console.log("params", params);
 
 				const transformedXML = transform(
 					transformXml,
@@ -105,6 +88,20 @@ export const xslt = async event => {
 
 				if (transformedXML) {
 					if (typeof transformedXML == "object" && transformedXML.failed) {
+						await toS3(
+							`_errors/${params.renderId}-${Date.now()}-api.json`,
+							Buffer.from(
+								JSON.stringify({
+									error: transformedXML.msg,
+									params,
+									transformXml,
+									transformXsl,
+								})
+							),
+							null,
+							JSON_MIME
+						);
+
 						console.log(
 							"XSLT failed:",
 							params.asset,
@@ -175,7 +172,7 @@ export const xslt = async event => {
 								"application/json"
 							);
 						}
- 
+
 						if (!params.isDebug) {
 							await s3Client.send(
 								new DeleteObjectCommand({
