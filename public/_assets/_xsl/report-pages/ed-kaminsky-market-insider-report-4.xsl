@@ -7,13 +7,13 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
 		</link>
 		<script>
@@ -31,8 +31,7 @@
 
 	<xsl:template name="svg-body">
 		<style>
-<xsl:value-of select="'text {dominant-baseline:middle;}'" />
-
+			<xsl:value-of select="'text {dominant-baseline:middle;}'" />
 		</style>
 
 		<foreignObject x="0" y="0" width="100%" height="100%">
@@ -64,7 +63,7 @@
 			<svg x="6%" y="44%">
 				<circle cy="6%" r="16" fill="var(--new)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" style="font-size:92%;" fill="#fff">
-					<xsl:value-of select="$listingsTotalNew" />
+					<xsl:value-of select="count($listingsTotalNew)" />
 				</text>
 				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="600" fill="#fff">
 					<xsl:call-template name="view-period">
@@ -75,7 +74,7 @@
 			<svg x="6%" y="56%">
 				<circle cy="6%" r="16" fill="var(--active-green)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" style="font-size:92%;" fill="#fff">
-					<xsl:value-of select="$listingsTotalActive" />
+					<xsl:value-of select="count($listingsTotalActive)" />
 				</text>
 				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="600" fill="#fff">
 						Currently for sale
@@ -84,7 +83,7 @@
 			<svg x="6%" y="68%">
 				<circle cy="6%" r="16" fill="var(--pending-yellow)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" style="font-size:92%;" fill="#fff">
-					<xsl:value-of select="$listingsTotalPending" />
+					<xsl:value-of select="count($listingsTotalPending)" />
 				</text>
 				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="600" fill="#fff">
 						Pending
@@ -93,7 +92,7 @@
 			<svg x="6%" y="80%">
 				<circle cy="6%" r="16" fill="var(--sold-red)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" style="font-size:92%;" fill="#fff">
-					<xsl:value-of select="$listingsTotalSold" />
+					<xsl:value-of select="count($listingsTotalSold)" />
 				</text>
 				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="600" fill="#fff">
 					<xsl:call-template name="view-period">

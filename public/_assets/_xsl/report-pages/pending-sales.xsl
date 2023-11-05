@@ -7,8 +7,7 @@
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<g style="transform:translateY(12%)">
@@ -22,7 +21,7 @@
 				<tspan>Pending Sales</tspan>
 			</text>
 			<text x="50%" y="43%" class="center" style="font-size: 550%">
-				<xsl:value-of select="$listingsTotalPending" />
+				<xsl:value-of select="count($listingsTotalPending)" />
 			</text>
 			<text x="50%" y="58%" class="center bold medium sub-heading">
 				<xsl:text>As of </xsl:text>

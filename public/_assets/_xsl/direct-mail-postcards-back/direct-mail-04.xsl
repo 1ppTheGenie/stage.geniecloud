@@ -9,8 +9,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
@@ -18,8 +17,7 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing">
-<xsl:sort order="ascending" select="@state" />
-
+				<xsl:sort order="ascending" select="@state" />
 				<xsl:if test="position() &lt;= 50">
 					<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
 				</xsl:if>
@@ -39,7 +37,7 @@
 
 			<svg width="100%" height="20%">
 				<g style="transform: translate(0%, 0%);">
-<rect x="0" y="0%" width="100%" height="25%" fill="var(--theme-sub-heading-color)" />
+					<rect x="0" y="0%" width="100%" height="25%" fill="var(--theme-sub-heading-color)" />
 
 					<text x="2%" y="8%" class="upper" fill="var(--theme-body-background)" style="font-weight:600;font-size:100%">
 						<xsl:call-template name="editable">
@@ -58,8 +56,7 @@
 			<g style="position:absolute;top:-10px;left:-15px;z-index:999;height:38%;">
 				<svg x="0" height="100%" width="900">
 					<filter x="-7%" y="-0.5" width="1.6" height="10" id="solid">
-<feFlood flood-color="var(--theme-sub-heading-color)" flood-opacity="0.7" />
-
+						<feFlood flood-color="var(--theme-sub-heading-color)" flood-opacity="0.7" />
 						<feComposite in="SourceGraphic" operator="xor" />
 					</filter>
 
@@ -83,7 +80,7 @@
 					<svg x="1%" y="31%">
 						<circle cy="6%" r="12" fill="var(--theme-emphasis-color)" cx="3%"></circle>
 						<text x="3%" y="2.8%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-							<xsl:value-of select="$listingsTotalNew" />
+							<xsl:value-of select="count($listingsTotalNew)" />
 						</text>
 						<text x="6%" y="1%" fill="var(--theme-body-background)" style="font-size:120%;">
 								New (Active)
@@ -92,7 +89,7 @@
 					<svg x="1%" y="45%">
 						<circle cy="6%" r="12" fill="var(--active-green)" cx="3%"></circle>
 						<text x="3%" y="2.8%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-							<xsl:value-of select="$listingsTotalActive" />
+							<xsl:value-of select="count($listingsTotalActive)" />
 						</text>
 						<text x="6%" y="1%" fill="var(--theme-body-background)" style="font-size:120%;">
 								Active
@@ -101,7 +98,7 @@
 					<svg x="1%" y="59%">
 						<circle cy="6%" r="12" fill="var(--pending-yellow)" cx="3%"></circle>
 						<text x="3%" y="2.8%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-							<xsl:value-of select="$listingsTotalPending" />
+							<xsl:value-of select="count($listingsTotalPending)" />
 						</text>
 						<text x="6%" y="1%" fill="var(--theme-body-background)" style="font-size:120%;">
 								Pending
@@ -110,7 +107,7 @@
 					<svg x="1%" y="72.5%">
 						<circle cy="6%" r="12" fill="var(--sold-red)" cx="3%"></circle>
 						<text x="3%" y="2.8%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-							<xsl:value-of select="$listingsTotalSold" />
+							<xsl:value-of select="count($listingsTotalSold)" />
 						</text>
 						<text x="6%" y="1%" fill="var(--theme-body-background)" style="font-size:120%;">
 								Sold
@@ -124,8 +121,7 @@
 
 	<xsl:template name="cropped-content">
 		<style>
-<xsl:value-of select="'foreignObject p {margin:0;}'" />
-
+			<xsl:value-of select="'foreignObject p {margin:0;}'" />
 		</style>
 
 		<svg width="60%" height="100%" x="40%" y="2%"
@@ -139,7 +135,7 @@
 				</text>
 
 				<svg x="5%" y="0%" width="100%" height="22%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
+					<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
 
 					<circle cx="5%" cy="61.5%" r="30" fill="var(--theme-sub-heading-color)"></circle>
 
@@ -154,7 +150,7 @@
 				</svg>
 
 				<svg x="5%" y="12%" width="100%" height="22%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
+					<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
 
 					<circle cx="5%" cy="61.5%" r="30" fill="var(--theme-sub-heading-color)"></circle>
 					<text x="4.8%" y="50%" class="center" fill="var(--theme-body-background)" style="font-size:200%;">
@@ -170,7 +166,7 @@
 					</foreignObject>
 				</svg>
 				<svg x="5%" y="24%" width="100%" height="22%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
+					<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
 
 					<circle cx="5%" cy="61.5%" r="30" fill="var(--theme-sub-heading-color)"></circle>
 					<text x="4.8%" y="50%" class="center" fill="var(--theme-body-background)" style="font-size:200%;">
@@ -187,7 +183,7 @@
 				</svg>
 
 				<svg x="5%" y="36%" width="100%" height="22%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
+					<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
 
 					<circle cx="5%" cy="61.5%" r="30" fill="var(--theme-sub-heading-color)"></circle>
 					<text x="4.8%" y="50%" class="center" fill="var(--theme-body-background)" style="font-size:200%;">
@@ -204,7 +200,7 @@
 				</svg>
 
 				<svg x="5%" y="48%" width="100%" height="22%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
+					<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="4%" y="40%" width="84%" height="43%" />
 
 					<circle cx="5%" cy="61.5%" r="30" fill="var(--theme-sub-heading-color)"></circle>
 					<text x="4.8%" y="50%" class="center" fill="var(--theme-body-background)" style="font-size:200%;">

@@ -8,7 +8,7 @@ Supports:	Area, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
@@ -26,23 +26,23 @@ Supports:	Area, QRCode
 
 	<xsl:template name="svg-body">
 
-<rect x="0" y="54.5%" stroke="#000" stroke-width="1" fill-opacity="1" width="100%" height=".5" fill="#000" />
+		<rect x="0" y="54.5%" stroke="#000" stroke-width="1" fill-opacity="1" width="100%" height=".5" fill="#000" />
 
 
-<rect x="35%" y="18.5%" stroke="#000" stroke-width="1" fill-opacity="1" width="65%" height=".5" fill="#000" />
+		<rect x="35%" y="18.5%" stroke="#000" stroke-width="1" fill-opacity="1" width="65%" height=".5" fill="#000" />
 
 
-<rect x="75.9%" y="0%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="18.5%" fill="#000" />
+		<rect x="75.9%" y="0%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="18.5%" fill="#000" />
 
 
-<rect x="63%" y="54.5%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="45%" fill="#000" />
+		<rect x="63%" y="54.5%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="45%" fill="#000" />
 
 
-<rect x="34.9%" y="0%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="54.5%" fill="#000" />
+		<rect x="34.9%" y="0%" stroke="#000" stroke-width="1" fill-opacity="1" width=".5" height="54.5%" fill="#000" />
 
 
-<rect x="63.1%" y="54.7%" width="36.8%" height="45%" fill="#fff" />
-<rect x="76.1%" y="0%" width="23.8%" height="18.2%" fill="#fff" />
+		<rect x="63.1%" y="54.7%" width="36.8%" height="45%" fill="#fff" />
+		<rect x="76.1%" y="0%" width="23.8%" height="18.2%" fill="#fff" />
 
 
 		<xsl:call-template name="cropped-container" />
@@ -123,7 +123,7 @@ Supports:	Area, QRCode
 						<xsl:text>Last Month</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
+						<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
 
 					</xsl:otherwise>
 				</xsl:choose>
@@ -171,8 +171,7 @@ Supports:	Area, QRCode
 				<div style="position:absolute;top:0;left:0;z-index:999;height:60%;width:58%;">
 					<svg height="100%" width="100%">
 						<filter x="-7%" y="-0.5" width="1.6" height="8.5" id="solid">
-<feFlood flood-color="var((--theme-body-color)" flood-opacity="0.2" />
-
+							<feFlood flood-color="var((--theme-body-color)" flood-opacity="0.2" />
 							<feComposite in="SourceGraphic" operator="xor" />
 						</filter>
 
@@ -181,7 +180,7 @@ Supports:	Area, QRCode
 							<svg x="3%" y="9%">
 								<circle cy="10%" r="12" fill="var(--theme-emphasis-color)" cx="7%"></circle>
 								<text x="7%" y="5%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-									<xsl:value-of select="$listingsTotalNew" />
+									<xsl:value-of select="count($listingsTotalNew)" />
 								</text>
 								<text x="15%" y="3%" fill="var(--theme-body-background)" style="font-size:100%;">
 								New (Active)
@@ -190,7 +189,7 @@ Supports:	Area, QRCode
 							<svg x="3%" y="32%">
 								<circle cy="10%" r="12" fill="var(--active-green)" cx="7%"></circle>
 								<text x="7%" y="5%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-									<xsl:value-of select="$listingsTotalActive" />
+									<xsl:value-of select="count($listingsTotalActive)" />
 								</text>
 								<text x="15%" y="4%" fill="var(--theme-body-background)" style="font-size:100%;">
 								Active
@@ -199,7 +198,7 @@ Supports:	Area, QRCode
 							<svg x="3%" y="54%">
 								<circle cy="10%" r="12" fill="var(--pending-yellow)" cx="7%"></circle>
 								<text x="7%" y="5%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-									<xsl:value-of select="$listingsTotalPending" />
+									<xsl:value-of select="count($listingsTotalPending)" />
 								</text>
 								<text x="15%" y="4%" fill="var(--theme-body-background)" style="font-size:100%;">
 								Pending
@@ -208,7 +207,7 @@ Supports:	Area, QRCode
 							<svg x="3%" y="78%">
 								<circle cy="10%" r="12" fill="var(--sold-red)" cx="7%"></circle>
 								<text x="7%" y="5%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-									<xsl:value-of select="$listingsTotalSold" />
+									<xsl:value-of select="count($listingsTotalSold)" />
 								</text>
 								<text x="15%" y="4%" fill="var(--theme-body-background)" style="font-size:100%;">
 								Sold
@@ -225,8 +224,7 @@ Supports:	Area, QRCode
 
 				<g>
 					<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-<circle r=".3185" cx=".5" cy=".5" />
-
+						<circle r=".3185" cx=".5" cy=".5" />
 					</clipPath>
 
 					<xsl:if test="//agent[1]/photo">
@@ -276,8 +274,7 @@ Supports:	Area, QRCode
 				</g>
 				<g style="transform: translate(17%, 0);">
 					<foreignObject x="0%" y="46%" width="76%" height="4%" style="color:var(--theme-sub-heading-color);-webkit-line-clamp:6; font-size: 70%;line-height: 120%;">
-<xsl:call-template name="solicitation-disclaimer" />
-
+						<xsl:call-template name="solicitation-disclaimer" />
 					</foreignObject>
 				</g>
 			</g>

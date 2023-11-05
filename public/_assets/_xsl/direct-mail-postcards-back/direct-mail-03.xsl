@@ -9,8 +9,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
@@ -18,8 +17,7 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing">
-<xsl:sort order="ascending" select="@state" />
-
+				<xsl:sort order="ascending" select="@state" />
 				<xsl:if test="position() &lt;= 50">
 					<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
 				</xsl:if>
@@ -54,7 +52,7 @@
 					<svg x="1%" y="30%">
 						<circle cy="7%" r="12" fill="var(--theme-emphasis-color)" cx="3%"></circle>
 						<text x="3%" y="3.3%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-							<xsl:value-of select="$listingsTotalNew" />
+							<xsl:value-of select="count($listingsTotalNew)" />
 						</text>
 						<text x="6%" y="1%" fill="var(--theme-body-background)" style="font-size:120%;">
 								New (Active)
@@ -63,7 +61,7 @@
 					<svg x="1%" y="46%">
 						<circle cy="7%" r="12" fill="var(--active-green)" cx="3%"></circle>
 						<text x="3%" y="3.3%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-							<xsl:value-of select="$listingsTotalActive" />
+							<xsl:value-of select="count($listingsTotalActive)" />
 						</text>
 						<text x="6%" y="1%" fill="var(--theme-body-background)" style="font-size:120%;">
 								Active
@@ -72,7 +70,7 @@
 					<svg x="1%" y="62.5%">
 						<circle cy="7%" r="12" fill="var(--pending-yellow)" cx="3%"></circle>
 						<text x="3%" y="3.3%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-							<xsl:value-of select="$listingsTotalPending" />
+							<xsl:value-of select="count($listingsTotalPending)" />
 						</text>
 						<text x="6%" y="1%" fill="var(--theme-body-background)" style="font-size:120%;">
 								Pending
@@ -81,7 +79,7 @@
 					<svg x="1%" y="78%">
 						<circle cy="7%" r="12" fill="var(--sold-red)" cx="3%"></circle>
 						<text x="3%" y="3.3%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-							<xsl:value-of select="$listingsTotalSold" />
+							<xsl:value-of select="count($listingsTotalSold)" />
 						</text>
 						<text x="6%" y="1%" fill="var(--theme-body-background)" style="font-size:120%;">
 								Sold
@@ -94,8 +92,7 @@
 	</xsl:template>
 	<xsl:template name="cropped-content">
 		<style>
-<xsl:value-of select="'foreignObject p {margin:0;}'" />
-
+			<xsl:value-of select="'foreignObject p {margin:0;}'" />
 		</style>
 
 		<g style="transform: translate(2.5%, 5%);">
@@ -109,7 +106,7 @@
 				</tspan>
 			</text>
 			<svg x="0" y="1%" width="36%" height="30%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
 
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
@@ -120,7 +117,7 @@
 				</text>
 			</svg>
 			<svg x="0" y="11%" width="36%" height="30%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
 
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
@@ -131,7 +128,7 @@
 				</text>
 			</svg>
 			<svg x="0" y="21%" width="36%" height="30%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
 
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
@@ -142,7 +139,7 @@
 				</text>
 			</svg>
 			<svg x="0" y="31%" width="36%" height="30%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
 
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
@@ -153,7 +150,7 @@
 				</text>
 			</svg>
 			<svg x="0" y="41%" width="36%" height="30%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
 
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
@@ -164,15 +161,14 @@
 				</text>
 			</svg>
 			<svg x="0" y="51%" width="36%" height="30%">
-<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
+				<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" x="1%" y="40%" width="90%" height="30%" />
 
 				<rect x="1%" y="40%" width="15%" height="30%" fill="var(--theme-sub-heading-color)" />
 				<use x="-4%" y="48%" width="25%" height="15%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#barchart-icon' )" />
 				</use>
 				<text class="capitalize" dx="20%" dy="50%" fill="var(--theme-sub-heading-color)" style="font-size:100%;">
-<xsl:value-of select="concat( format-number(//statistics/@turnOver, '#.0%'), ' turnover rate' )" />
-
+					<xsl:value-of select="concat( format-number(//statistics/@turnOver, '#.0%'), ' turnover rate' )" />
 				</text>
 			</svg>
 		</g>

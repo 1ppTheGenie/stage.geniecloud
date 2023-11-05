@@ -102,20 +102,17 @@
 					<xsl:with-param name="caption-width" select="'16'" />
 					<xsl:with-param name="caption-align" select="'middle'" />
 					<xsl:with-param name="caption">
-<xsl:value-of select="//date/@previousPeriod" />
-
+						<xsl:value-of select="//date/@previousPeriod" />
 					</xsl:with-param>
 					<xsl:with-param name="left-caption">
-<xsl:value-of select="concat( //statistics/previous/@totalSold, ' sales' )" />
-
+						<xsl:value-of select="concat( //statistics/previous/@totalSold, ' sales' )" />
 					</xsl:with-param>
-<xsl:with-param name="width" select="//statistics/previous/@medianSalePrice div $maxAllPrices" />
+					<xsl:with-param name="width" select="//statistics/previous/@medianSalePrice div $maxAllPrices" />
 
 					<xsl:with-param name="value">
 						<xsl:variable name="formattedPrice">
 							<xsl:call-template name="format-price">
-<xsl:with-param name="price" select="//statistics/previous/@medianSalePrice" />
-
+								<xsl:with-param name="price" select="//statistics/previous/@medianSalePrice" />
 							</xsl:call-template>
 						</xsl:variable>
 
@@ -153,7 +150,7 @@
 					</image>
 
 					<text x="9%" y="0" class="bold super-large">
-						<xsl:value-of select="$listingsTotalActive" />
+						<xsl:value-of select="count($listingsTotalActive)" />
 					</text>
 
 					<g style="transform:translateX(2%)">

@@ -7,7 +7,7 @@ Supports: 	Area, Multi-Listing
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<image preserveAspectRatio="xMidYMid slice" width="100%" opacity="0.4" height="100%">
@@ -32,7 +32,7 @@ Supports: 	Area, Multi-Listing
 					</image>
 					<text x="0" y="20%" class="upper">
 						<tspan x="14%" y="0" class="bold super-large">
-							<xsl:value-of select="$listingsTotalNew" />
+							<xsl:value-of select="count($listingsTotalNew)" />
 						</tspan>
 						<tspan x="14%" y="13%">
 							new listings
@@ -49,7 +49,7 @@ Supports: 	Area, Multi-Listing
 
 					<text x="0" y="20%" class="upper">
 						<tspan x="14%" y="0" class="bold super-large">
-							<xsl:value-of select="$listingsTotalActive" />
+							<xsl:value-of select="count($listingsTotalActive)" />
 						</tspan>
 						<tspan x="14%" y="13%">
 							active listings
@@ -65,7 +65,7 @@ Supports: 	Area, Multi-Listing
 					</image>
 					<text x="0" y="20%" class="upper">
 						<tspan x="14%" y="0" class="bold super-large">
-							<xsl:value-of select="$listingsTotalPending" />
+							<xsl:value-of select="count($listingsTotalPending)" />
 						</tspan>
 						<tspan x="14%" y="13%">
 							pending listings

@@ -12,8 +12,7 @@
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 		</link>
 
 		<image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
@@ -25,8 +24,7 @@
 
 		<svg class="background-shape">
 			<clipPath id="myPolygon">
-<polygon points="0,0 540,0 840,630 0,630" fill="#12142d" />
-
+				<polygon points="0,0 540,0 840,630 0,630" fill="#12142d" />
 			</clipPath>
 
 			<image x="0" y="0" width="100%" height="100%" clip-path="url(#myPolygon)" preserveAspectRatio="xMidYMin slice">
@@ -37,20 +35,6 @@
 
 			<rect style="transform: rotate(334deg);" x="40%" y="35%" width=".5%" height="117%" fill="#fff"></rect>
 		</svg>
-
-		<!-- without use of polygon -->
-		<!-- <image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-			<xsl:call-template name="switch-image">
-				<xsl:with-param name="id" select="'image-1'" />
-				<xsl:with-param name="idx" select="1" />
-			</xsl:call-template>
-		</image>
-
-		<image x="0" y="0" width="70%" height="100%" preserveAspectRatio="xMidYMin slice">
-            <xsl:attribute name="href">
-                <xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/left-bg-6.png' )" />
-            </xsl:attribute>
-        </image> -->
 
 		<image x="4.5%" y="15%" width="27%" height="13%" preserveAspectRatio="xMidYMid meet">
 			<xsl:attribute name="href">

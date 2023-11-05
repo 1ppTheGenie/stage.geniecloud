@@ -10,7 +10,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 
 	<xsl:template name="svg-scripts">
@@ -19,7 +19,7 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing">
-<xsl:sort order="ascending" select="@state" />
+				<xsl:sort order="ascending" select="@state" />
 
 				<xsl:if test="position() &lt;= 50">
 					<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
@@ -59,7 +59,7 @@
 						<svg x="1%" y="32%">
 							<circle cy="5%" r="10" fill="var(--theme-emphasis-color)" cx="5%"></circle>
 							<text x="5%" y="1.7%" class="center" fill="var(--theme-body-background)" style="font-size:90%;">
-								<xsl:value-of select="$listingsTotalNew" />
+								<xsl:value-of select="count($listingsTotalNew)" />
 							</text>
 							<text x="13%" y="1.4%" fill="var(--theme-body-background)" style="font-size:100%;">
 								New (Active)
@@ -68,7 +68,7 @@
 						<svg x="1%" y="46%">
 							<circle cy="5%" r="10" fill="var(--active-green)" cx="5%"></circle>
 							<text x="5%" y="1.7%" class="center" fill="var(--theme-body-background)" style="font-size:90%;">
-								<xsl:value-of select="$listingsTotalActive" />
+								<xsl:value-of select="count($listingsTotalActive)" />
 							</text>
 							<text x="13%" y="1.4%" fill="var(--theme-body-background)" style="font-size:100%;">
 								Active
@@ -77,7 +77,7 @@
 						<svg x="1%" y="60%">
 							<circle cy="5%" r="10" fill="var(--pending-yellow)" cx="5%"></circle>
 							<text x="5%" y="1.7%" class="center" fill="var(--theme-body-background)" style="font-size:90%;">
-								<xsl:value-of select="$listingsTotalPending" />
+								<xsl:value-of select="count($listingsTotalPending)" />
 							</text>
 							<text x="13%" y="1.4%" fill="var(--theme-body-background)" style="font-size:100%;">
 								Pending
@@ -86,7 +86,7 @@
 						<svg x="1%" y="74%">
 							<circle cy="5%" r="10" fill="var(--sold-red)" cx="5%"></circle>
 							<text x="5%" y="1.7%" class="center" fill="var(--theme-body-background)" style="font-size:90%;">
-								<xsl:value-of select="$listingsTotalSold" />
+								<xsl:value-of select="count($listingsTotalSold)" />
 							</text>
 							<text x="13%" y="1.4%" fill="var(--theme-body-background)" style="font-size:100%;">
 								Sold
@@ -97,8 +97,7 @@
 
 				<div style="position:fixed;top:85%;left:0;z-index: 9991;height:12%;width:50%;">
 					<svg width="100%" height="100%">
-<rect x="0" y="0%" width="100%" height="100%" fill="var(--theme-sub-heading-color)" />
-
+						<rect x="0" y="0%" width="100%" height="100%" fill="var(--theme-sub-heading-color)" />
 
 						<text x="50%" y="10%" class="center upper bold" fill="var(--theme-body-background)" style="font-size:160%;font-weight:600;" data-max-width="45%">
 							<tspan class="capitalize">
@@ -132,8 +131,7 @@
 
 			<g style="transform: translate(8.6%, -3.2%);">
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-<circle r=".4700" cx="0.45" cy="0.3" />
-
+					<circle r=".4700" cx="0.45" cy="0.3" />
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
@@ -202,12 +200,10 @@
 				</xsl:call-template>
 			</text>
 			<text x="25%" y="50%" class="center" style="font-size:100%;">
-<xsl:call-template name="listing-address-line-one" />
-
+				<xsl:call-template name="listing-address-line-one" />
 			</text>
 			<text x="25%" y="54%" class="center" style="font-size:100%;">
-<xsl:call-template name="listing-address-line-two" />
-
+				<xsl:call-template name="listing-address-line-two" />
 			</text>
 			<text x="25%" y="58%" class="center" style="font-size:100%;text-transform: capitalize;">
 				<xsl:call-template name="editable">

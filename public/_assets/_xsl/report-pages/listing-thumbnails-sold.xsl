@@ -42,12 +42,11 @@
 
 						<image width="22.5%" height="29.5%" preserveAspectRatio="xMinYMid slice">
 							<xsl:attribute name="href">
-<xsl:value-of select="@thumb" />
-
+								<xsl:value-of select="concat( 'https://hlstwykrw3gkmc6lx4zhe534ma0kuumg.lambda-url.us-west-1.on.aws/thumbnail?width=600&amp;url=', encode-for-uri( @thumb ) )" />
 							</xsl:attribute>
 						</image>
 
-<circle cx="1.5%" cy="2.5%" r="1%" fill="var(--sold-red)" fill-opacity="0.75" />
+						<circle cx="1.5%" cy="2.5%" r="1%" fill="var(--sold-red)" fill-opacity="0.75" />
 
 						<text style="font-size:70%">
 							<tspan x="1.5%" y="2.5%" class="align-center" fill="#fff">
@@ -80,11 +79,11 @@
 							<tspan>
 								<xsl:value-of select="@beds" />
 							</tspan>
-<tspan> BR &#124; </tspan>
+							<tspan> BR &#124; </tspan>
 							<tspan>
 								<xsl:value-of select="@baths" />
 							</tspan>
-<tspan> BA &#124; </tspan>
+							<tspan> BA &#124; </tspan>
 							<xsl:value-of select="format-number(@size, '###,###')" />
 							<tspan> SQFT</tspan>
 						</text>
@@ -99,9 +98,8 @@
 
 		<xsl:call-template name="listings-footer">
 			<xsl:with-param name="min" select="number(8)" />
-<xsl:with-param name="nodes" select="$listingsTotalSold" />
-
-			<xsl:with-param name="summary" select="concat( ' listings sold in the last ',$periodName,'.' )" />
+			<xsl:with-param name="nodes" select="$listingsTotalSold" />
+			<xsl:with-param name="summary" select="concat( ' listings sold in the last ', $periodName, '.' )" />
 		</xsl:call-template>
 
 		<xsl:call-template name="copyright" />

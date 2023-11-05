@@ -7,7 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<!-- Exclude from render if there are no active properties -->
 	<xsl:template name="include-in-render">
@@ -23,8 +23,7 @@
 
 	<xsl:template name="svg-body">
 		<style>
-<xsl:value-of select="'text {dominant-baseline:middle;}'" />
-
+			<xsl:value-of select="'text {dominant-baseline:middle;}'" />
 		</style>
 
 		<xsl:call-template name="listings-header">
@@ -35,6 +34,7 @@
 		<xsl:if test="count(//listings/listing[@state='active']) = 0">
 			<xsl:call-template name="empty-listing-text" />
 		</xsl:if>
+
 		<xsl:if test="count(//listings/listing[@state='active']) != 0">
 			<g style="transform: translate(3.7%,27.5%)">
 				<xsl:for-each select="//listings/listing[@state='active']">
@@ -46,12 +46,11 @@
 
 							<image width="22.5%" height="29.5%" preserveAspectRatio="xMinYMid slice">
 								<xsl:attribute name="href">
-									<!-- <xsl:val ue-of select="concat( //output/@siteUrl, 'thumbnail?url=', @thumb )" /> -->
-									<xsl:value-of select="@thumb" />
+									<xsl:value-of select="concat( 'https://hlstwykrw3gkmc6lx4zhe534ma0kuumg.lambda-url.us-west-1.on.aws/thumbnail?width=600&amp;url=', encode-for-uri( @thumb ) )" />
 								</xsl:attribute>
 							</image>
 
-<circle cx="1.5%" cy="2.5%" r="1%" fill="var(--active-green)" fill-opacity="0.75" />
+							<circle cx="1.5%" cy="2.5%" r="1%" fill="var(--active-green)" fill-opacity="0.75" />
 
 							<text style="font-size:70%">
 								<tspan x="1.5%" y="2.5%" class="align-center" fill="#fff">
@@ -102,11 +101,11 @@
 								<tspan>
 									<xsl:value-of select="@beds" />
 								</tspan>
-<tspan> BR &#124; </tspan>
+								<tspan> BR &#124; </tspan>
 								<tspan>
 									<xsl:value-of select="@baths" />
 								</tspan>
-<tspan> BA &#124; </tspan>
+								<tspan> BA &#124; </tspan>
 								<xsl:value-of select="format-number(@size, '###,###')" />
 								<tspan> SQFT</tspan>
 							</text>
@@ -115,10 +114,10 @@
 				</xsl:for-each>
 			</g>
 		</xsl:if>
+
 		<xsl:call-template name="listings-footer">
 			<xsl:with-param name="min" select="number(8)" />
-<xsl:with-param name="nodes" select="$listingsTotalActive" />
-
+			<xsl:with-param name="nodes" select="$listingsTotalActive" />
 			<xsl:with-param name="summary" select="' active listings.'" />
 		</xsl:call-template>
 
