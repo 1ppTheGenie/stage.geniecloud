@@ -192,7 +192,7 @@ Supports:	Area, QRCode
 			</text>
 		</svg>
 		<use x="46%" y="46%" width="9%" height="9%" stroke="var(--theme-sub-heading-color)">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#arrow-down' )" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#arrow-down-icon' )" />
 		</use>
 
 		<g style="transform:translate(42%, 55.5%)">

@@ -160,7 +160,7 @@
 		<xsl:if test="number(//single/statusTypeID)=2">
 			<g style="transform: translate(34.5%, 40%);">
 				<use x="0" y="0" width="3%" height="3%">
-					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#pin' )" />
+					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#pin-icon' )" />
 				</use>
 				<use x="0" y="5%" width="3%" height="3%">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#email-new' )" />
@@ -226,7 +226,7 @@
 		<xsl:if test="number(//single/statusTypeID)=1">
 			<g style="transform: translate(34.5%, 40%);">
 				<use x="0" y="0" width="3%" height="3%">
-					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#pin' )" />
+					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#pin-icon' )" />
 				</use>
 				<use x="0" y="5%" width="3%" height="3%">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#email-new' )" />
@@ -291,7 +291,7 @@
 		<xsl:if test="number(//single/statusTypeID)=3">
 			<g style="transform: translate(34.5%, 40%);">
 				<use x="0" y="0" width="3%" height="3%">
-					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#pin' )" />
+					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#pin-icon' )" />
 				</use>
 				<use x="0" y="5%" width="3%" height="3%">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#email-new' )" />

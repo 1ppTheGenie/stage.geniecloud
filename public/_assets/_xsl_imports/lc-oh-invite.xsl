@@ -118,7 +118,7 @@
 				</g>
 				<g class="icon-stat" style="transform:translate(62%, -0.7%)">
 					<use x="1%" y="1.3%" width="3%" height="3%" fill="var(--theme-body-background)">
-						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#object-ungroup' )" />
+						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#object-ungroup-icon' )" />
 					</use>
 					<text x="4.5%" y="1.7%" class="narrow" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="180%">
 						<xsl:call-template name="editable">
