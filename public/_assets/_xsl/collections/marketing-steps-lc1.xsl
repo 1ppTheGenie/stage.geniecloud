@@ -58,10 +58,8 @@ Version:	1.1
 		</xsl:call-template>
 
 		<body>
-<link href="https://fonts.googleapis.com" rel="preconnect" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
-
-
+			<link href="https://fonts.googleapis.com" rel="preconnect" />
+			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
 			<link rel="stylesheet">
 				<xsl:attribute name="href">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/listing-commands/css/marketing-steps-lc1.css' )" />
@@ -86,15 +84,15 @@ Version:	1.1
 
 					<xsl:if test="not(//single)">
 						<!-- Is Area Command -->
-<xsl:variable name="arrow" select="'=>'" />
-
-
+						<xsl:variable name="arrow" select="'=>'" />
 						<script>
 							<xsl:value-of select="concat('const polygon =', //area[1]/geojson,';' )" />
 							<xsl:value-of select="concat('const options = { mapStyle: `', //output/@mapStyle,'`, zoom: 17 };' )" />
 							<xsl:value-of disable-output-escaping="yes" select="'document.addEventListener( `genie-landing-loaded`, function() { return window.gg.makeMap( `genie-map`, options, { geoJson: polygon } ); })'" />
 						</script>
-						<div id="genie-map" style="width:100vw;height:100%;position:absolute;top:0;"></div>
+						<div id="genie-map" style="width:100vw;height:100%;position:absolute;top:0;">
+							<xsl:comment />
+						</div>
 
 						<script type="module" crossorigin="crossorigin">
 							<xsl:attribute name="src">
@@ -103,15 +101,14 @@ Version:	1.1
 							<xsl:comment />
 						</script>
 						<style>
-<xsl:value-of select="'div.banner span.overlay {z-index: 10!important;}'" />
-
-
+							<xsl:value-of select="'div.banner span.overlay {z-index: 10!important;}'" />
 						</style>
 					</xsl:if>
 
 					<span class="overlay">
 						<xsl:comment/>
 					</span>
+
 					<img class="logo-img" title="Company Logo">
 						<xsl:attribute name="src">
 							<xsl:value-of select="$companyLogo" />
