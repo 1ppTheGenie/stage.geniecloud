@@ -30,7 +30,6 @@ export const getRenderJSON = async params => {
 
 	const warnings = [];
 	const datePeriod2 = params.datePeriod * 2;
-	//	const dateFormat = { year: "numeric", month: "short" };
 
 	// propertyType should never be -1 here, so set a default
 	if (params.propertyType === null || parseInt(params.propertyType) < 0) {
@@ -506,12 +505,12 @@ const processAreas = async params => {
 				let propertyTypeData, prevData, lowerByValue, upperByValue;
 
 				statsData.statistics.propertyTypeData.forEach(pData => {
-					if (pData.type == params.propertyType) {
+					if (pData.type == (params.propertyType ?? 0)) {
 						propertyTypeData = pData.statistics;
 						prevData = propertyTypeData.previousPeriod;
 					}
 				});
-				//console.log("params.propertyType", params.propertyType);
+
 				if (propertyTypeData) {
 					// Split median/lower and median/highest
 					lowerByValue =
@@ -562,7 +561,10 @@ const processAreas = async params => {
 					});
 
 					mls_properties.forEach(p => {
-						if (p.propertyTypeID == params.propertyType) {
+						if (
+							p.propertyTypeID ==
+							(params.propertyType ?? params.propertyTypeID ?? 0)
+						) {
 							const state =
 								parseInt(p.statusTypeID) == 4 || parseInt(p.statusTypeID) == 12
 									? "pending"
@@ -839,7 +841,6 @@ const processListing = async params => {
 		];
 
 		/*	Open House */
-		console.log("paramsopenHouseTimes2", params.openHouseTimes);
 		if (params.openHouseTimes) {
 			//$tz = new DateTimeZone(Users.timezone(userId));
 			const tz = { zone: "PST" };

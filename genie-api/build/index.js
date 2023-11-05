@@ -1224,6 +1224,8 @@ __export(src_exports, {
   validateRenderParams: () => validateRenderParams
 });
 module.exports = __toCommonJS(src_exports);
+var import_sharp = __toESM(require("sharp"), 1);
+var import_stream = require("stream");
 
 // node_modules/luxon/src/errors.js
 var LuxonError = class extends Error {
@@ -7213,6 +7215,7 @@ var getRenderJSON = async (params) => {
   if (params.downloadUrl) {
     renderSettings.downloadUrl = params.downloadUrl;
   }
+  const periodFormat = "LLL `yy";
   const root = {
     // *** Output
     output: {
@@ -7228,12 +7231,12 @@ var getRenderJSON = async (params) => {
       _attrs: {
         period: dateAdd(params.offsetDate + MINUTE_IN_SECONDS, {
           months: -params.datePeriod
-        }).toLocaleString() + " to " + DateTime.fromMillis(params.offsetDate).toLocaleString(),
+        }).toFormat(periodFormat) + " to " + DateTime.fromMillis(params.offsetDate).toFormat(periodFormat),
         previousPeriod: dateAdd(params.offsetDate + MINUTE_IN_SECONDS, {
           months: -datePeriod2
-        }).toLocaleString() + " to " + dateAdd(params.offsetDate + MINUTE_IN_SECONDS, {
+        }).toFormat(periodFormat) + " to " + dateAdd(params.offsetDate + MINUTE_IN_SECONDS, {
           months: -params.datePeriod
-        }).toLocaleString()
+        }).toFormat(periodFormat)
       }
     },
     // *** Overrides
@@ -7246,17 +7249,19 @@ var getRenderJSON = async (params) => {
     // *** Areas
     areas: params.isEmbed ? params.areaIds.map((id) => ({ id })) : await processAreas(params)
   };
-  let qrUrl = params.customizations?.qrUrl || root.agents[0].agent.website;
-  if (!qrUrl.startsWith("http"))
-    qrUrl = `https://${qrUrl}`;
-  const qrSVG = await generateQR(qrUrl);
-  await toS3(
-    `genie-files/${params.renderId}/qr.svg`,
-    Buffer.from(qrSVG),
-    null,
-    "image/svg+xml"
-  );
-  root.output._attrs.qrUrl = `${genieGlobals.GENIE_HOST}genie-files/${params.renderId}/qr.svg`;
+  let qrUrl = (params.customizations?.qrUrl || root.agents[0].agent.website) ?? "";
+  if (qrUrl && qrUrl !== "") {
+    if (!qrUrl.startsWith("http"))
+      qrUrl = `https://${qrUrl}`;
+    const qrSVG = await generateQR(qrUrl);
+    await toS3(
+      `genie-files/${params.renderId}/qr.svg`,
+      Buffer.from(qrSVG),
+      null,
+      "image/svg+xml"
+    );
+    root.output._attrs.qrUrl = `${genieGlobals.GENIE_HOST}genie-files/${params.renderId}/qr.svg`;
+  }
   if (params.mlsNumber) {
     let times = [];
     if (params.openHouseTimes) {
@@ -7520,6 +7525,7 @@ var processAreas = async (params) => {
         areaId,
         params.datePeriod
       );
+      params.isDebug && debugLog("areaStatisticsWithPrevious", params, statsData);
       const areaName2 = statsData.areaName;
       let areaImage = null;
       const area_images = [];
@@ -7549,7 +7555,7 @@ var processAreas = async (params) => {
       if (statsData.statistics) {
         let propertyTypeData, prevData, lowerByValue, upperByValue;
         statsData.statistics.propertyTypeData.forEach((pData) => {
-          if (pData.type == params.propertyType) {
+          if (pData.type == (params.propertyType ?? 0)) {
             propertyTypeData = pData.statistics;
             prevData = propertyTypeData.previousPeriod;
           }
@@ -7569,6 +7575,7 @@ var processAreas = async (params) => {
           areaId,
           NOW.plus({ months: params.datePeriod * -1 }).toISO()
         );
+        params.isDebug && debugLog("mlsProperties", params, mls_properties);
         if (mls_properties && Array.isArray(mls_properties)) {
           const agentListings = await agentMlsNumbers(params.userId);
           const listings = [];
@@ -7582,7 +7589,7 @@ var processAreas = async (params) => {
             }
           });
           mls_properties.forEach((p) => {
-            if (p.propertyTypeID == params.propertyType) {
+            if (p.propertyTypeID == (params.propertyType ?? params.propertyTypeID ?? 0)) {
               const state = parseInt(p.statusTypeID) == 4 || parseInt(p.statusTypeID) == 12 ? "pending" : p.statusType.toLowerCase();
               listings.push({
                 _name: "listing",
@@ -7770,6 +7777,7 @@ var processListing = async (params) => {
     params.mlsNumber,
     params.mlsId
   );
+  params.isDebug && debugLog("getListing", params, listing);
   if (listing) {
     let primaryPhoto = null;
     let listingBoundary = null;
@@ -7810,7 +7818,6 @@ var processListing = async (params) => {
       { longitude: listing.longitude ?? 0 },
       { city: listing.city ?? "" }
     ];
-    console.log("paramsopenHouseTimes2", params.openHouseTimes);
     if (params.openHouseTimes) {
       const tz = { zone: "PST" };
       const oh = {
@@ -8032,6 +8039,9 @@ var processCollection = async (params) => {
 var buildVersion = async () => {
   const files = await listS3Folder("_assets/landing-pages/dist");
   return files.pop().Key.replace("_assets/landing-pages/dist/", "").split("/").shift();
+};
+var debugLog = async (source, params, data) => {
+  console.log("debugLog", source, params, data);
 };
 
 // src/utils/hubAPI.js
@@ -8955,6 +8965,69 @@ var api = async (event) => {
           );
         } else {
           switch (route) {
+            case "/thumbnail":
+              if (params.url) {
+                if (params.width) {
+                  params.width = parseInt(params.width);
+                } else {
+                  params.width = typeof params.height == "undefined" ? 300 : null;
+                }
+                if (typeof params.height != "undefined") {
+                  params.height = parseInt(params.height);
+                }
+                try {
+                  const image = await fetch(params.url);
+                  if (image.ok) {
+                    const imageBuffer = await image.arrayBuffer();
+                    const bytes = new Uint8Array(imageBuffer);
+                    const imageStream = new import_stream.Readable();
+                    imageStream.push(bytes);
+                    imageStream.push(null);
+                    const resizedImage = imageStream.pipe(
+                      (0, import_sharp.default)().resize({ width: params.width, height: params.height }).webp({ effort: 3, quality: params.quality ?? 90 })
+                    );
+                    const resizedImageBuffer = await resizedImage.toBuffer();
+                    response = {
+                      statusCode: 200,
+                      headers: {
+                        "Content-Type": "image/webp"
+                      },
+                      isBase64Encoded: true,
+                      body: resizedImageBuffer.toString("base64")
+                    };
+                  } else {
+                    response.body = {
+                      success: false,
+                      error: `Failed to fetch image: HTTP status ${image.status}`
+                    };
+                  }
+                } catch (error2) {
+                  response.body = {
+                    success: false,
+                    error: `Error: ${error2.message}`
+                  };
+                }
+              } else {
+                response.body = {
+                  success: false,
+                  error: "`url` is a required parameter"
+                };
+              }
+              break;
+            case "/render-errors":
+              const errors = [];
+              const rErrors = await listS3Folder("_errors");
+              await Promise.all(
+                rErrors.map(async (e) => {
+                  if (e.Size > 0) {
+                    const json = JSON.parse((await fromS3(e.Key)).toString());
+                    json.key = e.Key;
+                    errors.push(json);
+                  }
+                })
+              );
+              response.body = { success: true, ...errors };
+              break;
             case "/get-themes":
               const themes = await getThemes();
               response.body = { success: true, ...themes };
@@ -9015,7 +9088,6 @@ var api = async (event) => {
                     "https://api.cloudflare.com/client/v4/zones/identifier/purge_cache",
                     options
                   );
-                  console.log("prefixes2", prefixes, r);
                 }
               }
               break;
@@ -9139,6 +9211,12 @@ var api = async (event) => {
                     })
                   );
                 }
+              } else if (params.assets) {
+                await Promise.all(
+                  params.assets.map(async (asset) => {
+                    return await prepareAsset(asset, params);
+                  })
+                );
               } else {
                 await prepareAsset(params.asset, params);
               }
@@ -9149,7 +9227,7 @@ var api = async (event) => {
                 params.renderId = (0, import_crypto2.randomUUID)();
                 params.theme = params.theme ?? await userSetting(params.userId, "theme");
                 const { s3Key } = await getS3Key(
-                  params.asset || params.collection && "collection",
+                  params.asset || params.assets && params.assets[0] || params.collection && "collection",
                   params
                 );
                 params.s3Key = s3Key;
@@ -9166,15 +9244,28 @@ var api = async (event) => {
                     StringValue: params.renderId
                   }
                 });
-                if (params.collection || params.asset.startsWith("landing-pages")) {
+                if (params.collection || params.asset?.startsWith("landing-pages")) {
                   await copyObject(
                     "_assets/_reference/collection-rendering.html",
                     s3Key
                   );
+                } else if (params.assets) {
+                  const availableAt = [];
+                  Promise.all(
+                    params.assets.map(async (asset) => {
+                      const assetS3Key = await getS3Key(asset, params);
+                      availableAt.push(assetS3Key);
+                    })
+                  );
+                  response.body.availableAt = availableAt;
                 }
                 if (s3Key) {
                   response.body.success = true;
-                  response.body.availableAt = `${genieGlobals.GENIE_HOST}${s3Key.replace("/index.html", "")}`;
+                  response.body.availableAt = response.body.availableAt ?? // Allows earlier code to set custom version of this
+                  `${genieGlobals.GENIE_HOST}${s3Key.replace(
+                    "/index.html",
+                    ""
+                  )}`;
                   response.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
                   response.body.renderId = params.renderId;
                 }
@@ -9186,9 +9277,22 @@ var api = async (event) => {
         }
       } catch (error2) {
         console.log("GenieAPI failed: ", error2);
+        await toS3(
+          `_errors/${params.renderId}-${Date.now()}-api.json`,
+          Buffer.from(
+            JSON.stringify({
+              params,
+              error: error2
+            })
+          ),
+          null,
+          JSON_MIME
+        );
         response.body.error = error2;
       } finally {
-        response.body = JSON.stringify(response.body);
+        if (!response.isBase64Encoded) {
+          response.body = JSON.stringify(response.body);
+        }
       }
     }
   }
@@ -9300,7 +9404,7 @@ var prepareAsset = async (asset, params) => {
           pageParams.isSample = !user.permissions.includes(settings.permission);
         }
         const isA5 = ["landing-pages", "funnels", "embeds"].find(
-          (start) => params.asset.startsWith(start)
+          (start) => asset.startsWith(start)
         );
         const withBleed = params?.renderSettings?.withBleed ?? false;
         const width = suffix === "pdf" ? isA5 ? "216mm" : `${Math.round(dims.width) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.width);
@@ -9437,8 +9541,10 @@ var validateRenderParams = async (args) => {
         }
       }
     }
-    if (!args.asset && !args.collection && !args.pages) {
-      errors.push("One of [asset] or [collection] or [pages] is required");
+    if (!args.asset && !args.collection && !args.pages && !args.assets) {
+      errors.push(
+        "One of [asset] or [collection] or [pages] or [assets] is required"
+      );
     }
     if (args.asset) {
       let a;

@@ -1,4 +1,6 @@
 "use strict";
+import sharp from "sharp";
+import { Readable } from "stream";
 
 import { DateTime } from "luxon";
 import { randomUUID } from "crypto";
@@ -113,6 +115,86 @@ export const api = async event => {
 					);
 				} else {
 					switch (route) {
+						case "/thumbnail":
+							if (params.url) {
+								if (params.width) {
+									params.width = parseInt(params.width);
+								} else {
+									params.width =
+										typeof params.height == "undefined" ? 300 : null;
+								}
+
+								if (typeof params.height != "undefined") {
+									params.height = parseInt(params.height);
+								}
+
+								try {
+									const image = await fetch(params.url);
+									if (image.ok) {
+										// Create a readable stream from the response body
+										const imageBuffer = await image.arrayBuffer();
+										const bytes = new Uint8Array(imageBuffer);
+										const imageStream = new Readable();
+										imageStream.push(bytes);
+										imageStream.push(null);
+
+										// Resize the image using sharp
+										const resizedImage = imageStream.pipe(
+											sharp()
+												.resize({ width: params.width, height: params.height })
+												.webp({ effort: 3, quality: params.quality ?? 90 })
+										);
+
+										// Convert the resized image to a buffer
+										const resizedImageBuffer = await resizedImage.toBuffer();
+
+										response = {
+											statusCode: 200,
+											headers: {
+												"Content-Type": "image/webp",
+											},
+											isBase64Encoded: true,
+											body: resizedImageBuffer.toString("base64"),
+										};
+									} else {
+										response.body = {
+											success: false,
+											error: `Failed to fetch image: HTTP status ${image.status}`,
+										};
+									}
+								} catch (error) {
+									response.body = {
+										success: false,
+										error: `Error: ${error.message}`,
+									};
+								}
+							} else {
+								response.body = {
+									success: false,
+									error: "`url` is a required parameter",
+								};
+							}
+							break;
+
+						case "/render-errors":
+							const errors = [];
+							const rErrors = await listS3Folder("_errors");
+
+							await Promise.all(
+								rErrors.map(async e => {
+									if (e.Size > 0) {
+										const json = JSON.parse((await fromS3(e.Key)).toString());
+
+										json.key = e.Key;
+
+										errors.push(json);
+									}
+								})
+							);
+
+							response.body = { success: true, ...errors };
+							break;
+
 						case "/get-themes":
 							const themes = await getThemes();
 							response.body = { success: true, ...themes };
@@ -186,7 +268,6 @@ export const api = async event => {
 										"https://api.cloudflare.com/client/v4/zones/identifier/purge_cache",
 										options
 									);
-									console.log("prefixes2", prefixes, r);
 								}
 							}
 
@@ -350,6 +431,12 @@ export const api = async event => {
 										})
 									);
 								}
+							} else if (params.assets) {
+								await Promise.all(
+									params.assets.map(async asset => {
+										return await prepareAsset(asset, params);
+									})
+								);
 							} else {
 								await prepareAsset(params.asset, params);
 							}
@@ -366,7 +453,9 @@ export const api = async event => {
 									params.theme ?? (await userSetting(params.userId, "theme"));
 
 								const { s3Key } = await getS3Key(
-									params.asset || (params.collection && "collection"),
+									params.asset ||
+										(params.assets && params.assets[0]) ||
+										(params.collection && "collection"),
 									params
 								);
 
@@ -391,21 +480,36 @@ export const api = async event => {
 
 								if (
 									params.collection ||
-									params.asset.startsWith("landing-pages")
+									params.asset?.startsWith("landing-pages")
 								) {
 									// Create a holding page - should have a cache max-age set to 0
 									await copyObject(
 										"_assets/_reference/collection-rendering.html",
 										s3Key
 									);
+								} else if (params.assets) {
+									const availableAt = [];
+
+									Promise.all(
+										params.assets.map(async asset => {
+											const assetS3Key = await getS3Key(asset, params);
+
+											availableAt.push(assetS3Key);
+										})
+									);
+
+									response.body.availableAt = availableAt;
 								}
 
 								if (s3Key) {
 									response.body.success = true;
 									// Remove trailing index.html if it exists: S3 routing will default to that file on a folder request
-									response.body.availableAt = `${
-										genieGlobals.GENIE_HOST
-									}${s3Key.replace("/index.html", "")}`;
+									response.body.availableAt =
+										response.body.availableAt ?? // Allows earlier code to set custom version of this
+										`${genieGlobals.GENIE_HOST}${s3Key.replace(
+											"/index.html",
+											""
+										)}`;
 									response.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
 									response.body.renderId = params.renderId;
 								}
@@ -417,9 +521,24 @@ export const api = async event => {
 				}
 			} catch (error) {
 				console.log("GenieAPI failed: ", error);
+
+				await toS3(
+					`_errors/${params.renderId}-${Date.now()}-api.json`,
+					Buffer.from(
+						JSON.stringify({
+							params,
+							error,
+						})
+					),
+					null,
+					JSON_MIME
+				);
+
 				response.body.error = error;
 			} finally {
-				response.body = JSON.stringify(response.body);
+				if (!response.isBase64Encoded) {
+					response.body = JSON.stringify(response.body);
+				}
 			}
 		}
 	}
@@ -576,7 +695,7 @@ const prepareAsset = async (asset, params) => {
 				}
 
 				const isA5 = ["landing-pages", "funnels", "embeds"].find(start =>
-					params.asset.startsWith(start)
+					asset.startsWith(start)
 				); // The rendered output of funnels and embeds is an A5 PDF
 
 				const withBleed = params?.renderSettings?.withBleed ?? false;
@@ -681,7 +800,6 @@ const prepareAsset = async (asset, params) => {
 					null,
 					JSON_MIME
 				);
-
 			})
 		);
 	}
@@ -765,8 +883,10 @@ export const validateRenderParams = async args => {
 		}
 
 		// ToDO support folder/stylesheet params
-		if (!args.asset && !args.collection && !args.pages) {
-			errors.push("One of [asset] or [collection] or [pages] is required");
+		if (!args.asset && !args.collection && !args.pages && !args.assets) {
+			errors.push(
+				"One of [asset] or [collection] or [pages] or [assets] is required"
+			);
 		}
 
 		if (args.asset) {
