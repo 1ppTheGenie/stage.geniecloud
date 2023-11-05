@@ -7,7 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<style>
@@ -43,7 +43,7 @@
 				<g style="transform:translate(16%)">
 					<text>
 						<tspan class="super-large bold">
-							<xsl:value-of select="$listingsTotalNew" />
+							<xsl:value-of select="count($listingsTotalNew)" />
 						</tspan>
 						<tspan x="0" y="70" class="upper">New Listings</tspan>
 					</text>
@@ -58,7 +58,7 @@
 				<g style="transform:translate(16%)">
 					<text style="dominate">
 						<tspan class="super-large bold">
-							<xsl:value-of select="$listingsTotalActive" />
+							<xsl:value-of select="count($listingsTotalActive)" />
 						</tspan>
 						<tspan x="0" y="70" class="upper">Active Listings</tspan>
 					</text>
@@ -73,7 +73,7 @@
 				<g style="transform:translate(16%)">
 					<text>
 						<tspan class="super-large bold">
-							<xsl:value-of select="$listingsTotalPending" />
+							<xsl:value-of select="count($listingsTotalPending)" />
 						</tspan>
 						<tspan x="0" y="70" class="upper">Pending Listings</tspan>
 					</text>

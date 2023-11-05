@@ -170,8 +170,7 @@
 				<div style="position:absolute;top:0;left:0;z-index:999;height:60%;width:60%;">
 					<svg height="100%" width="100%">
 						<filter x="-7%" y="-0.5" width="1.6" height="8.5" id="solid">
-<feFlood flood-color="var((--theme-body-color)" flood-opacity="0.2" />
-
+							<feFlood flood-color="var((--theme-body-color)" flood-opacity="0.2" />
 							<feComposite in="SourceGraphic" operator="xor" />
 						</filter>
 
@@ -180,7 +179,7 @@
 							<svg x="3%" y="9%">
 								<circle cy="10%" r="12" fill="var(--theme-emphasis-color)" cx="7%"></circle>
 								<text x="7%" y="5%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-									<xsl:value-of select="$listingsTotalNew" />
+									<xsl:value-of select="count($listingsTotalNew)" />
 								</text>
 								<text x="15%" y="3%" fill="var(--theme-body-background)" style="font-size:100%;">
                                 New (Active)
@@ -189,7 +188,7 @@
 							<svg x="3%" y="32%">
 								<circle cy="10%" r="12" fill="var(--active-green)" cx="7%"></circle>
 								<text x="7%" y="5%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-									<xsl:value-of select="$listingsTotalActive" />
+									<xsl:value-of select="count($listingsTotalActive)" />
 								</text>
 								<text x="15%" y="4%" fill="var(--theme-body-background)" style="font-size:100%;">
                                 Active
@@ -198,7 +197,7 @@
 							<svg x="3%" y="54%">
 								<circle cy="10%" r="12" fill="var(--pending-yellow)" cx="7%"></circle>
 								<text x="7%" y="5%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-									<xsl:value-of select="$listingsTotalPending" />
+									<xsl:value-of select="count($listingsTotalPending)" />
 								</text>
 								<text x="15%" y="4%" fill="var(--theme-body-background)" style="font-size:100%;">
                                 Pending
@@ -207,7 +206,7 @@
 							<svg x="3%" y="78%">
 								<circle cy="10%" r="12" fill="var(--sold-red)" cx="7%"></circle>
 								<text x="7%" y="5%" class="center" fill="var(--theme-body-background)" style="font-size:80%;">
-									<xsl:value-of select="$listingsTotalSold" />
+									<xsl:value-of select="count($listingsTotalSold)" />
 								</text>
 								<text x="15%" y="4%" fill="var(--theme-body-background)" style="font-size:100%;">
                                 Sold
@@ -223,8 +222,7 @@
 			<g style="transform: translate(3%, 44%);">
 				<g>
 					<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-<circle r=".3185" cx=".5" cy=".5" />
-
+						<circle r=".3185" cx=".5" cy=".5" />
 					</clipPath>
 
 					<xsl:if test="//agent[1]/photo">
@@ -275,8 +273,7 @@
 				</g>
 				<g style="transform: translate(17%, 0);">
 					<foreignObject x="0%" y="46%" width="76%" height="4%" style="color:var(--theme-sub-heading-color);-webkit-line-clamp:6; font-size: 70%;line-height: 120%;">
-<xsl:call-template name="solicitation-disclaimer" />
-
+						<xsl:call-template name="solicitation-disclaimer" />
 					</foreignObject>
 				</g>
 			</g>

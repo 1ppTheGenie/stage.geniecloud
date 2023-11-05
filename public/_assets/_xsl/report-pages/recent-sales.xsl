@@ -7,12 +7,11 @@
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<style>
-<xsl:value-of select="'text { dominant-baseline: middle;}'" />
-
+			<xsl:value-of select="'text { dominant-baseline: middle;}'" />
 		</style>
 
 		<g style="transform:translateY(12%)">
@@ -29,11 +28,10 @@
 				<tspan style="fill:var(--theme-body-color)">Sales</tspan>
 			</text>
 			<g style="transform:translate(43%,31%)">
-<rect width="14%" height="24%" rx="10" fill="#cc5541" fill-opacity="100%" />
+				<rect width="14%" height="24%" rx="10" fill="#cc5541" fill-opacity="100%" />
 
 				<text x="7%" y="12.5%" class="bold align-center" fill="#fff" font-size="430%">
-<xsl:value-of select="$listingsTotalSold" />
-
+					<xsl:value-of select="count($listingsTotalSold)" />
 				</text>
 			</g>
 			<text x="50%" y="60%" class="center bold medium" style="fill:var(--theme-body-color);">

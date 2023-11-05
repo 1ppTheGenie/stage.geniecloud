@@ -7,7 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 
 	<xsl:template name="svg-body">
@@ -32,11 +32,11 @@
 		</g>
 
 		<xsl:variable name="maxAllPrices">
-<xsl:for-each select="//previous/@averageSalePrice &#124; //statistics/@averageListPrice &#124; //statistics/@averageSalePrice &#124; //previous/@averageListPriceForSold">
-<xsl:sort select="." order="descending" data-type="number" />
+			<xsl:for-each select="//previous/@averageSalePrice &#124; //statistics/@averageListPrice &#124; //statistics/@averageSalePrice &#124; //previous/@averageListPriceForSold">
+				<xsl:sort select="." order="descending" data-type="number" />
 
 				<xsl:if test="position() = 1">
-<xsl:value-of select="." />
+					<xsl:value-of select="." />
 
 				</xsl:if>
 			</xsl:for-each>
@@ -49,14 +49,14 @@
 					<xsl:with-param name="caption-width" select="'16'" />
 					<xsl:with-param name="caption-align" select="'dominant-baseline: auto;'" />
 					<xsl:with-param name="caption">
-<xsl:value-of select="//date/@period" />
+						<xsl:value-of select="//date/@period" />
 
 					</xsl:with-param>
-<xsl:with-param name="width" select="//statistics/@averageListPrice div $maxAllPrices" />
+					<xsl:with-param name="width" select="//statistics/@averageListPrice div $maxAllPrices" />
 
 					<xsl:with-param name="value">
 						<xsl:call-template name="format-price">
-<xsl:with-param name="price" select="//statistics/@averageListPrice" />
+							<xsl:with-param name="price" select="//statistics/@averageListPrice" />
 
 						</xsl:call-template>
 					</xsl:with-param>
@@ -68,15 +68,14 @@
 					<xsl:with-param name="caption-width" select="'16'" />
 					<xsl:with-param name="caption-align" select="'dominant-baseline: auto;'" />
 					<xsl:with-param name="caption">
-<xsl:value-of select="//date/@period" />
+						<xsl:value-of select="//date/@period" />
 
 					</xsl:with-param>
-<xsl:with-param name="width" select="//statistics/@averageSalePrice div $maxAllPrices" />
+					<xsl:with-param name="width" select="//statistics/@averageSalePrice div $maxAllPrices" />
 
 					<xsl:with-param name="value">
 						<xsl:call-template name="format-price">
-<xsl:with-param name="price" select="//statistics/@averageSalePrice" />
-
+							<xsl:with-param name="price" select="//statistics/@averageSalePrice" />
 						</xsl:call-template>
 					</xsl:with-param>
 				</xsl:call-template>
@@ -91,7 +90,7 @@
 
 					<text x="0" y="20%">
 						<tspan x="9%" y="0" class="bold super-large upper">
-							<xsl:value-of select="$listingsTotalNew" />
+							<xsl:value-of select="count($listingsTotalNew)" />
 						</tspan>
 					</text>
 					<g style="transform: translate(3%, -10.5%);">
@@ -114,7 +113,7 @@
 					</image>
 					<text x="0" y="20%">
 						<tspan x="9%" y="0" class="bold super-large">
-							<xsl:value-of select="$listingsTotalActive" />
+							<xsl:value-of select="count($listingsTotalActive)" />
 						</tspan>
 					</text>
 					<g style="transform: translate(3%, -10.5%);">

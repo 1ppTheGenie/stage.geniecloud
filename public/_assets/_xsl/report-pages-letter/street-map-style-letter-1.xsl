@@ -43,7 +43,7 @@
 			<svg x="4%" y="17%">
 				<circle cy="6%" r="13" fill="var(--new)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" font-size="85%" fill="#fff">
-					<xsl:value-of select="$listingsTotalNew" />
+					<xsl:value-of select="count($listingsTotalNew)" />
 				</text>
 				<text x="12%" y="6.6%" class="upper" font-weight="800" fill="var(--theme-body-background)">
 				    New (Active)
@@ -52,7 +52,7 @@
 			<svg x="4%" y="28%">
 				<circle cy="6%" r="13" fill="var(--active-green)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" font-size="85%" fill="#fff">
-					<xsl:value-of select="$listingsTotalActive" />
+					<xsl:value-of select="count($listingsTotalActive)" />
 				</text>
 				<text x="12%" y="6.6%" class="upper" font-weight="800" fill="var(--theme-body-background)">
 				    Active
@@ -61,7 +61,7 @@
 			<svg x="4%" y="39%">
 				<circle cy="6%" r="13" fill="var(--pending-yellow)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" font-size="85%" fill="#fff">
-					<xsl:value-of select="$listingsTotalPending" />
+					<xsl:value-of select="count($listingsTotalPending)" />
 				</text>
 				<text x="12%" y="6.6%" class="upper" font-weight="800" fill="var(--theme-body-background)">
 				    Pending
@@ -70,7 +70,7 @@
 			<svg x="4%" y="50%">
 				<circle cy="6%" r="13" fill="var(--sold-red)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" font-size="85%" fill="#fff">
-					<xsl:value-of select="$listingsTotalSold" />
+					<xsl:value-of select="count($listingsTotalSold)" />
 				</text>
 				<text x="12%" y="6.6%" class="upper" font-weight="800" fill="var(--theme-body-background)">
 				    Sold

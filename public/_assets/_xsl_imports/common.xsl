@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:math="http://www.w3.org/2005/xpath-functions/math" xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:math="http://www.w3.org/2005/xpath-functions/math"
+	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
 	<xsl:import href="global-variables.xsl" />
 	<xsl:import href="genie-functions.xsl" />
 	<xsl:import href="printers-marks.xsl" />
@@ -1035,6 +1038,7 @@
 			<text x="1%" y="3%" class="upper" fill="#fff" style="letter-spacing:2px; font-size:160%;font-weight:800;">
 				<xsl:value-of select="$caption" />
 			</text>
+
 			<text x="1%" y="8%" fill="#fff" style="font-weight:800;">
 				<xsl:attribute name="font-size">
 					<xsl:choose>
@@ -1101,7 +1105,6 @@
 			</use>
 
 			<rect id="rounded-rect" height="5%" fill="var(--theme-heading-color)" fill-opacity="0.1" y="19%" x="1%" rx="0.5%">
-
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
@@ -1115,7 +1118,7 @@
 					</xsl:choose>
 				</xsl:attribute>
 			</rect>
-			<!-- rect is here -->
+
 			<rect height="0.2%" y="18%" x="1%">
 				<xsl:attribute name="width">
 					<xsl:choose>
@@ -1133,7 +1136,18 @@
 					<xsl:value-of select="$broder-stroke-color" />
 				</xsl:attribute>
 			</rect>
-			<text class="center central" y="21.5%" fill="#fff" style="font-size:115%; font-weight:800;">
+			<text class="center central" y="21.5%" fill="#fff" font-weight="800">
+				<xsl:attribute name="data-max-width">
+					<xsl:choose>
+						<xsl:when test="$isFBAd='true'">
+							<xsl:value-of select="'22%'" />
+
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="'11%'" />
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:attribute>
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
@@ -1865,7 +1879,6 @@
 	<xsl:template name="map-key">
 		<xsl:param name="status" select="'all'" />
 
-
 		<filter x="-8%" y="-1%" width="115%" height="8.5" id="solid">
 			<feFlood flood-color="var(--theme-sub-heading-color)" flood-opacity="0.5" />
 
@@ -1874,12 +1887,11 @@
 
 		<rect width="100%" height="100%" fill="var(--theme-sub-heading-color)" fill-opacity="0.5" />
 
-
 		<xsl:if test="$status='all' or $status='active'">
 			<svg x="5%" y="6%">
 				<circle cx="9%" fill="var(--new-blue)" r="12" cy="10%"></circle>
 				<text x="9%" y="10%" class="small center central" fill="#fff" font-size="100%" font-weight="bold">
-					<xsl:value-of select="$listingsTotalNew" />
+					<xsl:value-of select="count($listingsTotalNew)" />
 				</text>
 				<text x="20%" y="8" fill="var(--theme-body-background)" font-size="100%" font-weight="bold">
 					<xsl:value-of select="concat( 'New (Active)', '')" />
@@ -1889,7 +1901,7 @@
 			<svg x="5%" y="29.5%">
 				<circle cy="9%" r="12" fill="var(--active-green)" cx="10%"></circle>
 				<text x="10%" y="10%" class="small center central" fill="#fff" font-size="100%" font-weight="bold">
-					<xsl:value-of select="$listingsTotalActive" />
+					<xsl:value-of select="count(Active)" />
 				</text>
 				<text x="20%" y="5%" fill="var(--theme-body-background)" font-size="100%" font-weight="bold">
 						Active
@@ -1916,7 +1928,7 @@
 
 				<circle cy="9%" r="12" fill="var(--pending-yellow)" cx="10%"></circle>
 				<text x="10%" y="10%" class="small center central" fill="#fff" font-size="100%" font-weight="bold">
-					<xsl:value-of select="$listingsTotalPending" />
+					<xsl:value-of select="count($listingsTotalPending)" />
 				</text>
 				<text x="20%" y="5%" fill="var(--theme-body-background)" font-size="100%" font-weight="bold">
 						Pending
@@ -1943,7 +1955,7 @@
 
 				<circle cy="9%" r="12" fill="var(--sold-red)" cx="10%"></circle>
 				<text x="10%" y="10%" class="small center central" fill="#fff" font-size="90%" font-weight="bold">
-					<xsl:value-of select="$listingsTotalSold" />
+					<xsl:value-of select="count($listingsTotalSold)" />
 				</text>
 				<text x="20%" y="5%" fill="var(--theme-body-background)" font-size="100%" font-weight="bold">
 						Sold
@@ -2280,20 +2292,24 @@
 		<xsl:if test="$isFBAd!='true'">
 			<text y="92%" class="align-center" style="font-size:80%" data-max-width="98%">
 				<tspan x="50%" style="font-size:75%">
-					<xsl:text>Showing the most recent </xsl:text>
-					<xsl:value-of select="fn:min( ( $min, number(count($nodes)) ))" />
-					<xsl:text> of a total of </xsl:text>
-					<xsl:value-of select="number(count($nodes))" />
-
-					<xsl:value-of select="$summary" />
+					<xsl:value-of select="concat( 'Showing the most recent ', fn:min(( $min, count($nodes) )), ' of a total of ', count($nodes), $summary )" />
 				</tspan>
 
 				<tspan x="50%" dy="2.5%" style="font-size:90%">
 					<xsl:call-template name="agent-contact" />
 				</tspan>
-
 			</text>
 		</xsl:if>
+
+		<text style="font-size:70%">
+			<xsl:for-each select="$nodes">
+				<xsl:if test="position() &lt;= 8">
+					<tspan x="1.5%" dy="1%" class="align-center" fill="#fff">
+						<xsl:value-of select="concat( position(), ' - ', @thumb )" />
+					</tspan>
+				</xsl:if>
+			</xsl:for-each>
+		</text>
 	</xsl:template>
 
 	<xsl:template name="ed-showing-listing">
