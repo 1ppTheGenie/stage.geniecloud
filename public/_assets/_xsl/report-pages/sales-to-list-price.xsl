@@ -7,17 +7,18 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
+		<xsl:call-template name="svg-defs" />
+
 		<style>
 			<xsl:value-of select="'
 			.banner{ min-width:35%; }
 			text { dominant-baseline: middle; }
 			text.h1.upper{ transform: translateY(6.5%); }
 			.map-marker .banner svg{ transform: translateY(2px); }
-			foreignObject.map-marker { transform: translateY(2%); }
-'" />
+			foreignObject.map-marker { transform: translateY(2%); }'" />
 		</style>
 
 		<xsl:call-template name="area-heading">
@@ -26,25 +27,13 @@
 		</xsl:call-template>
 
 		<xsl:variable name="maxAllPrices">
-<xsl:for-each select="//previous/@averageSalePrice &#124; //statistics/@averageListPriceForSold &#124; //statistics/@averageSalePrice &#124; //previous/@averageListPriceForSold">
-<xsl:sort select="." order="descending" data-type="number" />
-
+			<xsl:for-each select="//previous/@averageSalePrice &#124; //statistics/@averageListPriceForSold &#124; //statistics/@averageSalePrice &#124; //previous/@averageListPriceForSold">
+				<xsl:sort select="." order="descending" data-type="number" />
 				<xsl:if test="position() = 1">
-<xsl:value-of select="." />
-
+					<xsl:value-of select="." />
 				</xsl:if>
 			</xsl:for-each>
 		</xsl:variable>
-
-<xsl:for-each select="//previous/@averageSalePrice &#124; //statistics/@averageListPriceForSold &#124; //statistics/@averageSalePrice &#124; //previous/@averageListPriceForSold">
-<xsl:sort select="." order="descending" data-type="number" />
-
-
-			<text>
-<xsl:value-of select="concat( position(), ':', . )" />
-
-			</text>
-		</xsl:for-each>
 
 		<g style="transform:translate(2.5%,26%);">
 			<g style="transform:translateX(2.5%)">
@@ -54,15 +43,12 @@
 					<xsl:with-param name="caption-width" select="number(16)" />
 					<xsl:with-param name="caption-align" select="'middle'" />
 					<xsl:with-param name="caption">
-<xsl:value-of select="//date/@period" />
-
-					</xsl:with-param>
-
-<!-- <xsl:with-param name="width" select="//statistics/@averageListPriceForSold div $maxAllPrices" /> -->
+					 	<xsl:value-of select="//date/@period" />
+					 </xsl:with-param>
+					<xsl:with-param name="width" select="number(//statistics/@averageListPriceForSold) div $maxAllPrices" />
 					<xsl:with-param name="value">
 						<xsl:call-template name="format-price">
-<xsl:with-param name="price" select="//statistics/@averageListPriceForSold" />
-
+							<xsl:with-param name="price" select="//statistics/@averageListPriceForSold" />
 						</xsl:call-template>
 					</xsl:with-param>
 				</xsl:call-template>
@@ -74,14 +60,12 @@
 					<xsl:with-param name="caption-width" select="number(16)" />
 					<xsl:with-param name="caption-align" select="'middle'" />
 					<xsl:with-param name="caption">
-<xsl:value-of select="//date/@period" />
-
+						<xsl:value-of select="//date/@period" />
 					</xsl:with-param>
-<!--<xsl:with-param name="width" select="//statistics/@averageSalePrice div $maxAllPrices" /> -->
+					<xsl:with-param name="width" select="number(//statistics/@averageSalePrice) div $maxAllPrices" />
 					<xsl:with-param name="value">
 						<xsl:call-template name="format-price">
-<xsl:with-param name="price" select="//statistics/@averageSalePrice" />
-
+							<xsl:with-param name="price" select="//statistics/@averageSalePrice" />
 						</xsl:call-template>
 					</xsl:with-param>
 				</xsl:call-template>
@@ -94,18 +78,17 @@
 					<xsl:with-param name="caption-width" select="number(16)" />
 					<xsl:with-param name="caption-align" select="'middle'" />
 					<xsl:with-param name="caption">
-<xsl:value-of select="//date/@previousPeriod" />
-
+						<xsl:value-of select="//date/@previousPeriod" />
 					</xsl:with-param>
-<!--<xsl:with-param name="width" select="//previous/@averageListPriceForSold div $maxAllPrices" /> -->
+					<xsl:with-param name="width" select="number(//previous/@averageListPriceForSold) div $maxAllPrices" />
 					<xsl:with-param name="value">
 						<xsl:call-template name="format-price">
-<xsl:with-param name="price" select="number( //previous/@averageListPriceForSold  )" />
-
+							<xsl:with-param name="price" select="number( //previous/@averageListPriceForSold  )" />
 						</xsl:call-template>
 					</xsl:with-param>
 				</xsl:call-template>
 			</g>
+
 			<g style="transform:translate(2.5%, 45%)">
 				<xsl:call-template name="lozenge">
 					<xsl:with-param name="fill-id" select="'2'" />
@@ -113,14 +96,12 @@
 					<xsl:with-param name="caption-align" select="'middle'" />
 					<xsl:with-param name="price-type" select="'AVG. SALE PRICE'" />
 					<xsl:with-param name="caption">
-<xsl:value-of select="//date/@previousPeriod" />
-
+						<xsl:value-of select="//date/@previousPeriod" />
 					</xsl:with-param>
-<!--<xsl:with-param name="width" select="//previous/@averageSalePrice div $maxAllPrices" /> -->
+					<xsl:with-param name="width" select="number(//previous/@averageSalePrice) div $maxAllPrices" />
 					<xsl:with-param name="value">
 						<xsl:call-template name="format-price">
-<xsl:with-param name="price" select="number( //previous/@averageSalePrice )" />
-
+							<xsl:with-param name="price" select="number( //previous/@averageSalePrice )" />
 						</xsl:call-template>
 					</xsl:with-param>
 				</xsl:call-template>
@@ -128,12 +109,9 @@
 		</g>
 
 		<g>
-<rect x="7%" y="85%" width="60" height="25" stroke-width="2" fill="url(#main-bar-5)" />
-
+			<rect x="7%" y="85%" width="60" height="25" stroke-width="2" fill="url(#main-bar-5)" />
 			<text x="13%" y="87.4%" class="normal upper">Avg. List Price</text>
-
-<rect x="27%" y="85%" width="60" height="25" stroke-width="2" fill="url(#main-bar-2)" />
-
+			<rect x="27%" y="85%" width="60" height="25" stroke-width="2" fill="url(#main-bar-2)" />
 			<text x="33%" y="87.4%" class="normal upper">Avg. Sold Price</text>
 		</g>
 
@@ -146,8 +124,7 @@
 						<xsl:text>Last Month</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
-
+						<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>
@@ -163,7 +140,7 @@
 		</g>
 
 		<g style="transform: translate(75%, 62%);">
-<polyline style="fill:#fff; filter: drop-shadow(2px 3px 9px var(--theme-body-color));" points="-20,55 0,40 0,0 250,0 250,110 0,110 0,70" />
+			<polyline style="fill:#fff; filter: drop-shadow(2px 3px 9px var(--theme-body-color));" points="-20,55 0,40 0,0 250,0 250,110 0,110 0,70" />
 
 			<text x="10%" y="4.5%" class="center" fill="#000" style="font-size:140%;">
 				<xsl:choose>
@@ -171,8 +148,7 @@
 						<xsl:text>Previous Month</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-<xsl:value-of select="concat( 'Previous ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
-
+						<xsl:value-of select="concat( 'Previous ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>
