@@ -221,7 +221,9 @@
 
 			<foreignObject width="50%" height="50" x="0" y="60" class="map-marker">
 				<span class="banner" style="background-color:var(--vivid-banner);color:var(--printers-marks);font-family: var(--theme-sub-heading-font);">
-					<use href="#map-pin-icon" />
+					<use>
+						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#map-pin-icon' )" />
+					</use>
 					<xsl:value-of select="$areaWithPropertyType" />
 
 				</span>
@@ -466,9 +468,10 @@
 
 			<foreignObject width="55%" height="10%" x="0%" y="8%" class="map-marker">
 				<span class="banner" style="background-color:var(--vivid-banner);color:var(--printers-marks);font-family: var(--theme-sub-heading-font);">
-					<use href="#map-pin-icon" />
+					<use>
+						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#map-pin-icon' )" />
+					</use>
 					<xsl:value-of select="$areaWithPropertyType" />
-
 				</span>
 			</foreignObject>
 
@@ -1785,10 +1788,11 @@
 		<xsl:param name="caption" />
 		<xsl:param name="value" />
 
-
 		<g class="listing-icon">
 			<g class="round">
-				<xsl:copy-of select="document(concat('../_img/icons/',$icon,'.svg'))" />
+				<use>
+					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#', $icon )" />
+				</use>
 			</g>
 			<text>
 				<tspan>
@@ -1966,9 +1970,9 @@
 
 	<xsl:template name="coming-soon">
 		<svg x="30%" y="5%" width="40%" height="40%">
-			<use href="#pending-icon" />
-
-
+			<use>
+				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#pending-icon' )" />
+			</use>
 		</svg>
 
 		<text x="50%" y="50%" class="h1 center bold" style="font-size:450%">Coming Soon!</text>
@@ -2130,7 +2134,9 @@
 			<xsl:attribute name="style">
 				<xsl:value-of select="$style" />
 			</xsl:attribute>
-			<xsl:copy-of select="document(concat( '../_img/icons/',$icon,'.svg') )" />
+			<use>
+				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#', $icon )" />
+			</use>
 		</div>
 	</xsl:template>
 

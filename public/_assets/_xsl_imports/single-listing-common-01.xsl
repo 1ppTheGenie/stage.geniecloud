@@ -68,9 +68,10 @@
 
 		<g style="transform:translate(1%,75%)">
 			<svg width="33%" height="17.5%">
-<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%" />
-<use href="#phone-icon" x="18.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-15.4%, -144.5%);" />
-
+				<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%" />
+				<use x="18.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-15.4%, -144.5%);">
+					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#phone-icon' )" />
+				</use>
 				<use x="28%" y="50%" fill="var(--theme-sub-heading-color)" width="10%" height="10%">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#globe-icon' )" />
 				</use>
@@ -79,8 +80,7 @@
 				</use>
 
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-<circle r=".3500" cx=".5" cy=".35" />
-
+					<circle r=".3500" cx=".5" cy=".35" />
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
@@ -126,8 +126,7 @@
 
 			<text x="0" y="12%" class="bold" style="font-size:110%;">
 				<tspan>
-<xsl:call-template name="soldListedPrice" />
-
+					<xsl:call-template name="soldListedPrice" />
 				</tspan>
 			</text>
 
@@ -205,7 +204,7 @@
 			<text x="0" y="38%">
 				<tspan class="bold" fill="var(--theme-sub-heading-color)">Type:  </tspan>
 				<tspan class="narrow" fill="var(--theme-sub-heading-color)">
-<xsl:value-of select="//single/type" />
+					<xsl:value-of select="//single/type" />
 
 				</tspan>
 			</text>

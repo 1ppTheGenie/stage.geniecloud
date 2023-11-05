@@ -9,12 +9,12 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 
 	<xsl:template name="chelsea-checkbox">
-<xsl:param name="line1" />
-<xsl:param name="line2" />
+		<xsl:param name="line1" />
+		<xsl:param name="line2" />
 
 
 		<svg height="20%" width="20%">
@@ -45,24 +45,24 @@
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css')" />
 
 		</link>
 
 		<defs>
 			<linearGradient id="bottomShadow" gradientTransform="rotate(90)">
-<stop offset="80%" stop-color="#000" stop-opacity="0" />
-<stop offset="100%" stop-color="#000" stop-opacity="10%" />
+				<stop offset="80%" stop-color="#000" stop-opacity="0" />
+				<stop offset="100%" stop-color="#000" stop-opacity="10%" />
 
 			</linearGradient>
 
 			<linearGradient id="topBottomShadow" gradientTransform="rotate(90)">
-<stop offset="0" stop-color="#000" stop-opacity="10%" />
-<stop offset="20%" stop-color="#000" stop-opacity="0" />
+				<stop offset="0" stop-color="#000" stop-opacity="10%" />
+				<stop offset="20%" stop-color="#000" stop-opacity="0" />
 
 
-<stop offset="80%" stop-color="#000" stop-opacity="0" />
-<stop offset="100%" stop-color="#000" stop-opacity="10%" />
+				<stop offset="80%" stop-color="#000" stop-opacity="0" />
+				<stop offset="100%" stop-color="#000" stop-opacity="10%" />
 
 			</linearGradient>
 		</defs>
@@ -96,7 +96,7 @@
 		<text x="50%" y="81.5%" class="center middle" style="font-size:180%; font-weight:500" fill="#000" data-max-width="30%" font-family="Futura Condensed">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'agentname'" />
-<xsl:with-param name="default" select="concat( //agent[1]/mobile, '&#160;&#124;&#160;', //agent[1]/website )" />
+				<xsl:with-param name="default" select="concat( //agent[1]/mobile, '&#160;&#124;&#160;', //agent[1]/website )" />
 
 			</xsl:call-template>
 		</text>
@@ -110,7 +110,7 @@
 		<text x="50%" y="91%" class="center" font-family="Futura Condensed" fill="#444" style="font-size:90%;">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'agent-ownership'" />
-<xsl:with-param name="default" select="'Owned by a subsidiary of NRT LLC. &#124; CalDRE #: 01416035'" />
+				<xsl:with-param name="default" select="'Owned by a subsidiary of NRT LLC. &#124; CalDRE #: 01416035'" />
 
 			</xsl:call-template>
 		</text>
@@ -153,8 +153,9 @@
 			</text>
 		</g>
 
-<use href="#barcode-hand" fill="#b31f24" x="61%" y="51%" width="5%" height="9%" />
-
+		<use fill="#b31f24" x="61%" y="51%" width="5%" height="9%">
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#barcode-hand' )" />
+		</use>
 
 		<g style="transform:translate(1%,22%)">
 			<xsl:call-template name="chelsea-checkbox">

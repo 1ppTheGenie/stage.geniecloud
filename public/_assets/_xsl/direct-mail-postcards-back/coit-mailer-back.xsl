@@ -265,7 +265,7 @@
 					<xsl:with-param name="height" select="'20%'" />
 				</xsl:call-template>
 
-				<use href="#qr-code-svg" x="12%" y="2%" width="7.5%" height="15%">
+				<use x="12%" y="2%" width="7.5%" height="15%">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/qr.svg#qr-code' )" />
 				</use>
 

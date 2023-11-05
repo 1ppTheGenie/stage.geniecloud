@@ -7,8 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<style>
@@ -94,22 +93,18 @@
 				<xsl:text> area</xsl:text>
 			</text>
 			<text x="1%" y="16%" class="large heading" data-max-width="37.5%">
-<xsl:call-template name="listing-address-line-one" />
-
+				<xsl:call-template name="listing-address-line-one" />
 			</text>
 			<text x="1%" y="21%" class="large heading" data-max-width="37.5%">
-<xsl:call-template name="listing-address-line-two" />
-
+				<xsl:call-template name="listing-address-line-two" />
 			</text>
 			<text x="1%" y="28%" class="medium bold">
-<xsl:call-template name="soldListedPrice" />
-
+				<xsl:call-template name="soldListedPrice" />
 			</text>
 			<text x="1%" y="34%" class="heading">
 				<tspan>Type:  </tspan>
 				<tspan>
-<xsl:value-of select="$singularPropertyType" />
-
+					<xsl:value-of select="$singularPropertyType" />
 				</tspan>
 			</text>
 
@@ -125,8 +120,7 @@
 			<g style="transform:translateY(74%)">
 				<svg width="35%" height="17.5%">
 					<use x="17.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-14.3%, -116.5%);">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons/phone.svg' )" />
-
+						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#phone-icon' )" />
 					</use>
 					<use x="19%" y="50%" fill="var(--theme-sub-heading-color)" width="10%" height="10%">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#globe-icon' )" />

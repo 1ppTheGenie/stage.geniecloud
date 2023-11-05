@@ -109,8 +109,9 @@
 
 		<g style="transform:translate(0%,81.5%)">
 			<svg width="35%" height="17.5%">
-<use href="#phone-icon" x="17.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-14.3%, -116.5%);" />
-
+				<use x="17.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-14.3%, -116.5%);">
+					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#phone-icon' )" />
+				</use>
 				<use x="19%" y="50%" fill="var(--theme-sub-heading-color)" width="10%" height="10%">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#globe-icon' )" />
 				</use>
