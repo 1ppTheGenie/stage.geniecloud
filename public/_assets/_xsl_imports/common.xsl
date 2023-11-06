@@ -221,11 +221,12 @@
 
 			<foreignObject width="50%" height="50" x="0" y="60" class="map-marker">
 				<span class="banner" style="background-color:var(--vivid-banner);color:var(--printers-marks);font-family: var(--theme-sub-heading-font);">
-					<use>
-						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#map-pin-icon' )" />
-					</use>
+					<svg style="width: 15px">
+						<use>
+							<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#map-pin-icon' )" />
+						</use>
+					</svg>
 					<xsl:value-of select="$areaWithPropertyType" />
-
 				</span>
 			</foreignObject>
 
@@ -239,7 +240,6 @@
 
 	<xsl:template name="lozenge">
 		<xsl:param name="width" />
-
 		<xsl:param name="fill-id" />
 		<xsl:param name="price-type" select="''" />
 		<xsl:param name="left-caption" />
