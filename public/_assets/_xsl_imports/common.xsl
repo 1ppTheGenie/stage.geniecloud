@@ -2002,14 +2002,12 @@
 			<xsl:choose>
 				<xsl:when test="//overrides/qrUrl!=''">
 					<xsl:value-of select="//overrides/qrUrl" />
-
 				</xsl:when>
 				<xsl:when test="//collection/folders/folder/asset[@folder=$folder and @stylesheet=$stylesheet and @qrUrl!='']">
 					<xsl:value-of select="//collection/folders/folder/asset[@folder=$folder and @stylesheet=$stylesheet]/@qrUrl" />
 				</xsl:when>
 				<xsl:when test="//output/@qrUrl!=''">
 					<xsl:value-of select="//output/@qrUrl" />
-
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="''" />
@@ -2017,18 +2015,23 @@
 			</xsl:choose>
 		</xsl:param>
 
-		<xsl:if test="$url!=''">
+		<xsl:if test="$url!='' and $url!='skip'">
 			<image preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
 					<xsl:value-of select="$url" />
+				</xsl:attribute>
 
-				</xsl:attribute>
-				<xsl:attribute name="width">
-					<xsl:value-of select="$width" />
-				</xsl:attribute>
-				<xsl:attribute name="height">
-					<xsl:value-of select="$height" />
-				</xsl:attribute>
+				<xsl:if test="string($width)!=''">
+					<xsl:attribute name="width">
+						<xsl:value-of select="$width" />
+					</xsl:attribute>
+				</xsl:if>
+
+				<xsl:if test="string($height)!=''">
+					<xsl:attribute name="height">
+						<xsl:value-of select="$height" />
+					</xsl:attribute>
+				</xsl:if>
 			</image>
 		</xsl:if>
 	</xsl:template>
