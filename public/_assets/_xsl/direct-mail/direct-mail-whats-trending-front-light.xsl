@@ -111,7 +111,7 @@
 			</xsl:call-template>
 		</image>
 
-<rect x="61.5%" y="23%" width="24%" height="26.5%" fill="#fff" />
+		<rect x="61.5%" y="23%" width="24%" height="26.5%" fill="#fff" />
 
 		<image x="62.2%" y="24.1%" width="22.5%" height="24%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -119,7 +119,7 @@
 			</xsl:call-template>
 		</image>
 
-<rect x="61.5%" y="51.2%" width="24%" height="26.5%" fill="#fff" />
+		<rect x="61.5%" y="51.2%" width="24%" height="26.5%" fill="#fff" />
 
 		<image x="62.2%" y="52.3%" width="22.5%" height="24%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
