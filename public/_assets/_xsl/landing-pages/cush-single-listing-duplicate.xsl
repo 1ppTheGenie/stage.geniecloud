@@ -454,7 +454,7 @@
 							<div class="awu-box">
 								<!-- <img alt="Bar chart" width="100%" height="100%">
                             <xsl:attribute name="src">
-                                <xsl:value-of select="concat( //output/@siteUrl, '/assets/_img/cush-form-bg.jpg')" />
+                                <xsl:value-of select="concat( //output/@siteUrl, '/_assets/_img/cush-form-bg.jpg')" />
                             </xsl:attribute>
                         </img> -->
 								<div class="overlay-bg background">
