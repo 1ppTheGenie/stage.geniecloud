@@ -7249,8 +7249,10 @@ var getRenderJSON = async (params) => {
     // *** Areas
     areas: params.isEmbed ? params.areaIds.map((id) => ({ id })) : await processAreas(params)
   };
-  let qrUrl = (params.customizations?.qrUrl || root.agents[0].agent.website) ?? "";
-  if (qrUrl && qrUrl !== "") {
+  let qrUrl = params.qrCode ?? (params.customizations?.qrUrl || root.agents[0].agent.website) ?? "";
+  if (qrUrl == "skip") {
+    root.output._attrs.qrUrl = "skip";
+  } else if (qrUrl && qrUrl !== "") {
     if (!qrUrl.startsWith("http"))
       qrUrl = `https://${qrUrl}`;
     const qrSVG = await generateQR(qrUrl);
