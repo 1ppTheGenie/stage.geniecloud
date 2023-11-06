@@ -106,9 +106,13 @@ export const getRenderJSON = async params => {
 
 	// Slightly weird place for this code, but...generate QR image
 	let qrUrl =
-		(params.customizations?.qrUrl || root.agents[0].agent.website) ?? "";
+		params.qrCode ??
+		(params.customizations?.qrUrl || root.agents[0].agent.website) ??
+		"";
 
-	if (qrUrl && qrUrl !== "") {
+	if (qrUrl == "skip") {
+		root.output._attrs.qrUrl = "skip";
+	} else if (qrUrl && qrUrl !== "") {
 		if (!qrUrl.startsWith("http")) qrUrl = `https://${qrUrl}`;
 		const qrSVG = await generateQR(qrUrl);
 
