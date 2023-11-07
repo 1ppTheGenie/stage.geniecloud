@@ -64,12 +64,10 @@ export const api = async event => {
 											record.messageAttributes["override"].stringValue
 										);
 
-										console.log("@a", s3Params, override);
 										s3Params = {
 											...s3Params,
 											...override,
 										};
-										console.log("@b", s3Params);
 									} else {
 										s3Params[key] =
 											record.messageAttributes[key].dataType == "String"
@@ -323,6 +321,10 @@ export const api = async event => {
 								if (r) {
 									response.body.success = true;
 									response.body.msg = `${params.renderId} re-render under way`;
+
+									if (Object.keys(params).length > 1) {
+										response.body.msg += " (with override params)";
+									}
 								}
 
 								// Get CloudFlare to empty itself
@@ -721,6 +723,7 @@ const prepareAsset = async (asset, params) => {
 						: Math.round(dims.height);
 
 				const render = {
+					...params,
 					s3Key: params.overrideKey ?? s3Key,
 					bucket: BUCKET,
 					renderId: params.renderId,

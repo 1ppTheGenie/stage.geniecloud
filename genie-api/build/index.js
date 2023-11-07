@@ -8925,12 +8925,10 @@ var api = async (event) => {
                     const override = JSON.parse(
                       record.messageAttributes["override"].stringValue
                     );
-                    console.log("@a", s3Params, override);
                     s3Params = {
                       ...s3Params,
                       ...override
                     };
-                    console.log("@b", s3Params);
                   } else {
                     s3Params[key] = record.messageAttributes[key].dataType == "String" ? record.messageAttributes[key].stringValue : "";
                   }
@@ -9136,6 +9134,9 @@ var api = async (event) => {
                 if (r) {
                   response.body.success = true;
                   response.body.msg = `${params.renderId} re-render under way`;
+                  if (Object.keys(params).length > 1) {
+                    response.body.msg += " (with override params)";
+                  }
                 }
                 await queueMsg("clear-cache", {
                   renderId: {
@@ -9419,6 +9420,7 @@ var prepareAsset = async (asset, params) => {
         const width = suffix === "pdf" ? isA5 ? "216mm" : `${Math.round(dims.width) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.width);
         const height = suffix === "pdf" ? isA5 ? "279mm" : `${Math.round(dims.height) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.height);
         const render = {
+          ...params,
           s3Key: params.overrideKey ?? s3Key,
           bucket: BUCKET,
           renderId: params.renderId,
