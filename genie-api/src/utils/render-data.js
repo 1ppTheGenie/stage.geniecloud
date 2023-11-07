@@ -114,7 +114,7 @@ export const getRenderJSON = async params => {
 		root.output._attrs.qrUrl = "skip";
 	} else if (qrUrl && qrUrl !== "") {
 		if (!qrUrl.startsWith("http")) qrUrl = `https://${qrUrl}`;
-		const qrSVG = await generateQR(qrUrl);
+		const qrSVG = await generateQR(decodeURI(qrUrl));
 
 		await toS3(
 			`genie-files/${params.renderId}/qr.svg`,
