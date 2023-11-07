@@ -2018,10 +2018,6 @@
 			</xsl:choose>
 		</xsl:param>
 
-		<xsl:comment>
-			DEBUG: <xsl:value-of select="$url" />
-		</xsl:comment>
-
 		<xsl:if test="$url!='' and $url!='skip'">
 			<image preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
