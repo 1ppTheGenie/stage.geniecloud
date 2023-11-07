@@ -2000,6 +2000,9 @@
 			<xsl:variable name="stylesheet" select="//output/@stylesheet" />
 
 			<xsl:choose>
+				<xsl:when test="string(//output/@qrUrl)='skip'">
+					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/blank-qr.svg' )" />
+				</xsl:when>
 				<xsl:when test="//overrides/qrUrl!=''">
 					<xsl:value-of select="//overrides/qrUrl" />
 				</xsl:when>
@@ -2009,14 +2012,15 @@
 				<xsl:when test="//output/@qrUrl!=''">
 					<xsl:value-of select="//output/@qrUrl" />
 				</xsl:when>
-				<xsl:when test="string(//output/@qrUrl)='skip'">
-					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/blank-qr.svg' )" />
-				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="''" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:param>
+
+		<xsl:comment>
+			DEBUG: <xsl:value-of select="$url" />
+		</xsl:comment>
 
 		<xsl:if test="$url!='' and $url!='skip'">
 			<image preserveAspectRatio="xMidYMid meet">
