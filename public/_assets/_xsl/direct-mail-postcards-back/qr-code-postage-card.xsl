@@ -61,7 +61,6 @@ Supports: 	Area, Print, QRCode
 			<g style="transform:translate(35%, 10%)">
 				<xsl:call-template name="qr-code">
 					<xsl:with-param name="width" select="'30%'" />
-					<xsl:with-param name="height" select="'35%'" />
 				</xsl:call-template>
 
 				<use x="35%" width="15%" height="25%">
