@@ -2009,6 +2009,9 @@
 				<xsl:when test="//output/@qrUrl!=''">
 					<xsl:value-of select="//output/@qrUrl" />
 				</xsl:when>
+				<xsl:when test="string(//output/@qrUrl)='skip'">
+					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/blank-qr.svg' )" />
+				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="''" />
 				</xsl:otherwise>
