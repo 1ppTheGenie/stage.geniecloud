@@ -30,7 +30,6 @@ Supports:	Area, Print, Listing, QRCode
 
 		<rect x="0" y="0" width="50%" height="100%" fill="url(#lgrad)" />
 
-
 		<image x="39.5%" y="73.2%" width="13.5%" height="26.8%" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="//agent[1]/photo" />
@@ -60,7 +59,6 @@ Supports:	Area, Print, Listing, QRCode
 		<g style="transform:translate(35%, 21%)">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'30%'" />
-				<xsl:with-param name="height" select="'35%'" />
 			</xsl:call-template>
 		</g>
 

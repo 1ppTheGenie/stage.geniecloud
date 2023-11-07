@@ -55,7 +55,6 @@ Supports:	Area, Print, Listing, QRCode
 		<g style="transform:translate(35%, 21%)">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'30%'" />
-				<xsl:with-param name="height" select="'35%'" />
 			</xsl:call-template>
 		</g>
 		<image x="4%" y="5%" width="16%" height="13%" id="logo" preserveAspectRatio="xMinYMid meet">

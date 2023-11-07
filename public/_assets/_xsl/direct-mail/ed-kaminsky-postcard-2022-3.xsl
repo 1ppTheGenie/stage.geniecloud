@@ -7,7 +7,7 @@ Supports:   Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 
@@ -30,7 +30,7 @@ Supports:   Area, Print, Listing, QRCode
 					<stop offset="100%" style="stop-color:#0e1232;stop-opacity:1.00" />
 				</linearGradient>
 			</defs>
-<rect x="0" y="0" width="100%" height="100%" fill="url(#lgrad)" />
+			<rect x="0" y="0" width="100%" height="100%" fill="url(#lgrad)" />
 
 		</svg>
 		<image x="39.5%" y="73.2%" width="13.5%" height="26.8%" preserveAspectRatio="xMinYMid meet">
@@ -50,11 +50,11 @@ Supports:   Area, Print, Listing, QRCode
 
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet" type="text/css">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
 		</link>
 		<link rel="stylesheet" type="text/css">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/smooch.css')" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/smooch.css')" />
 
 		</link>
 
@@ -177,13 +177,9 @@ Supports:   Area, Print, Listing, QRCode
 				</tspan>
 			</text>
 
-			<svg id="Layer_1" width="7%" height="11%" x="61.3%" y="33%" data-name="Layer 1"
-				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 398.62 113.47" fill="#ffffff">
-				<defs></defs>
-				<title>arrow 3</title>
-<polygon class="cls-1" points="61.38 113.47 75.03 98.82 29.37 56.41 75.63 14.65 61.99 0 0 56.41 61.38 113.47" />
-<rect class="cls-1" x="28.81" y="46.73" width="369.82" height="20" />
-
+			<svg width="7%" height="11%" x="61.3%" y="33%" viewBox="0 0 398.62 113.47" fill="#ffffff">
+				<polygon class="cls-1" points="61.38 113.47 75.03 98.82 29.37 56.41 75.63 14.65 61.99 0 0 56.41 61.38 113.47" />
+				<rect class="cls-1" x="28.81" y="46.73" width="369.82" height="20" />
 			</svg>
 
 			<image x="69%" y="84%" width="19%" height="10%" class="center" id="logo" preserveAspectRatio="xMinYMid meet">
@@ -201,7 +197,6 @@ Supports:   Area, Print, Listing, QRCode
 		<g style="transform:translate(35%, 21%)">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'30%'" />
-				<xsl:with-param name="height" select="'35%'" />
 			</xsl:call-template>
 		</g>
 	</xsl:template>
