@@ -62,7 +62,6 @@ Supports:	Area, Multi-Listing, Print, PricePercent, QRCode
 		<g style="transform: translate(40%, 65%);">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'12%'" />
-				<xsl:with-param name="height" select="'20%'" />
 			</xsl:call-template>
 
 			<use x="0%" y="2%" width="7.5%" height="15%">

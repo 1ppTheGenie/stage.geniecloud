@@ -282,7 +282,6 @@
 		<g x="41.58%" y="55.5%">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'19.5%'" />
-				<xsl:with-param name="height" select="'19.5%'" />
 			</xsl:call-template>
 		</g>
 

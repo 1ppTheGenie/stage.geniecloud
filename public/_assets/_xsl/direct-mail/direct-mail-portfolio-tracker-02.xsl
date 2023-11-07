@@ -220,7 +220,6 @@ Supports:	Area, QRCode
 			<g style="transform:translate(31%, 87%)">
 				<xsl:call-template name="qr-code">
 					<xsl:with-param name="width" select="'6%'" />
-					<xsl:with-param name="height" select="'11%'" />
 				</xsl:call-template>
 			</g>
 

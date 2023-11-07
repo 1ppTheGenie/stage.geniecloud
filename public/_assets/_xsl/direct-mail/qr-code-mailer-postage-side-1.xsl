@@ -283,9 +283,9 @@ Supports:	Area, QRCode
 		<g style="transform:translate(41.58%, 55.5%)">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'19.5%'" />
-				<xsl:with-param name="height" select="'19.5%'" />
 			</xsl:call-template>
 		</g>
+
 		<image x="56%" y="58%" width="6.5%" height="12%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/scan-qr.svg' )" />

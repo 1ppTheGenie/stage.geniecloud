@@ -260,8 +260,8 @@ Supports:	Area, Multi-Listing, Print, PricePercent, QRCode
 			<g style="transform: translate(41%, 3%);">
 				<xsl:call-template name="qr-code">
 					<xsl:with-param name="width" select="'12%'" />
-					<xsl:with-param name="height" select="'20%'" />
 				</xsl:call-template>
+
 				<use x="12%" y="2%" width="7.5%" height="15%">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/qr.svg#qr-code' )" />
 				</use>

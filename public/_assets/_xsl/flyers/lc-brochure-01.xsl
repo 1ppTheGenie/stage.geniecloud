@@ -113,7 +113,6 @@
 			<g style="transform:translate(72.5%, 11.5%)">
 				<xsl:call-template name="qr-code">
 					<xsl:with-param name="width" select="'14.5%'" />
-					<xsl:with-param name="height" select="'12%'" />
 				</xsl:call-template>
 			</g>
 

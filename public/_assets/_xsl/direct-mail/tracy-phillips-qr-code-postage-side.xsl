@@ -17,20 +17,20 @@
 			</xsl:attribute>
 		</link>
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-sans.css')" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-sans.css')" />
 
 		</link>
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-serif.css')" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/compass-serif.css')" />
 
 		</link>
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')" />
 
 		</link>
 
 		<style>
-<xsl:value-of select="'text {dominant-baseline: middle;}'" />
+			<xsl:value-of select="'text {dominant-baseline: middle;}'" />
 
 		</style>
 
@@ -46,11 +46,9 @@
 	</xsl:template>
 
 	<xsl:template name="cropped-content">
-
 		<g style="transform:translate(45.2%, 55.5%)">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'11.5%'" />
-				<xsl:with-param name="height" select="'19.5%'" />
 			</xsl:call-template>
 		</g>
 
@@ -63,7 +61,7 @@
 		</text>
 		<text x="25%" y="14%" class="center sans" style="font-size: 130%;letter-spacing: 2px;font-weight: 600;fill:white;">
 			<tspan>
-<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
+				<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
 
 			</tspan>
 			<tspan>

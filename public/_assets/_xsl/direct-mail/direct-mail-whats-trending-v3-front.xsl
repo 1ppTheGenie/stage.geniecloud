@@ -96,13 +96,11 @@ Supports:	Area, QRCode
 			<tspan x="90%" y="93.5%">More...</tspan>
 		</text>
 
-<rect x="29%" y="73%" width="60%" height="11%" class="heading" />
-
+		<rect x="29%" y="73%" width="60%" height="11%" class="heading" />
 
 		<g style="transform:translate(82.58%, 64.5%)">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'19.5%'" />
-				<xsl:with-param name="height" select="'19.5%'" />
 			</xsl:call-template>
 		</g>
 

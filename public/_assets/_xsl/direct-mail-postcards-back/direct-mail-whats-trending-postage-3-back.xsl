@@ -8,7 +8,7 @@ Supports:	Area, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<rect x="63.5%" y="0%" width="36.5%" height="100%" fill="#fff" />
@@ -18,7 +18,7 @@ Supports:	Area, QRCode
 
 	<xsl:template name="cropped-content">
 		<g style="transform: translate(0%, 51.5%);">
-<rect fill-opacity="1" width="28%" height="38%" class="heading" />
+			<rect fill-opacity="1" width="28%" height="38%" class="heading" />
 
 		</g>
 		<g style="transform: translate(14%, 72%);">
@@ -69,7 +69,7 @@ Supports:	Area, QRCode
 		</g>
 
 		<g style="transform: translate(28%, 51.5%);">
-<rect fill-opacity="1" width="35.5%" height="38%" fill="var(--theme-body-color)" />
+			<rect fill-opacity="1" width="35.5%" height="38%" fill="var(--theme-body-color)" />
 
 		</g>
 
@@ -85,7 +85,7 @@ Supports:	Area, QRCode
 				<xsl:with-param name="idx" select="1" />
 			</xsl:call-template>
 		</image>
-<rect x="0%" y="0%" fill-opacity="1" width="63.5%" height="51.5%" opacity="0.5" fill="var(--theme-heading-color)" />
+		<rect x="0%" y="0%" fill-opacity="1" width="63.5%" height="51.5%" opacity="0.5" fill="var(--theme-heading-color)" />
 
 
 		<g style="transform:translate(3%,18%)">
@@ -97,7 +97,7 @@ Supports:	Area, QRCode
 					</xsl:call-template>
 				</text>
 				<text x="" y="35%" class="upper sub-heading bold" style="font-size:280%;color:var(--theme-sub-heading-color);" tabindex="1">Just 
-<xsl:value-of select="$soldListed" />
+					<xsl:value-of select="$soldListed" />
 
 				</text>
 			</svg>
@@ -111,7 +111,7 @@ Supports:	Area, QRCode
 						</xsl:call-template>
 					</tspan>
 					<tspan>
-<xsl:call-template name="listing-address-line-one" />
+						<xsl:call-template name="listing-address-line-one" />
 
 					</tspan>
 					<tspan>
@@ -124,7 +124,6 @@ Supports:	Area, QRCode
 		<g style="transform:translate(41.58%, 55.5%)">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'19.5%'" />
-				<xsl:with-param name="height" select="'19.5%'" />
 			</xsl:call-template>
 		</g>
 
@@ -134,7 +133,7 @@ Supports:	Area, QRCode
 			</xsl:attribute>
 		</image>
 
-<rect x="0%" y="89%" fill-opacity="1" width="63.5%" height="11%" opacity="0.2" fill="var(--theme-body-color)" />
+		<rect x="0%" y="89%" fill-opacity="1" width="63.5%" height="11%" opacity="0.2" fill="var(--theme-body-color)" />
 
 		<g style="transform:translate(3%,86%)">
 			<svg width="35%" height="17.5%">

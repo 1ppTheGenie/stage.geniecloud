@@ -49,7 +49,6 @@ Sizes:		Postcard, QRCode
 		<g style="transform:translate(45.2%, 55.5%)">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'11.5%'" />
-				<xsl:with-param name="height" select="'19.5%'" />
 			</xsl:call-template>
 		</g>
 

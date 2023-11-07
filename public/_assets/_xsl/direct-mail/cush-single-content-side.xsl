@@ -68,7 +68,6 @@ Supports:	Area, Print, Listing, QRCode
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet">
 			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')" />
-
 		</link>
 		<style>
 			<xsl:value-of select="'	g.agent-detail { transform: translateY(-13%); }'" />
@@ -77,8 +76,6 @@ Supports:	Area, Print, Listing, QRCode
 		<g style="transform:translate(35%, 21%)">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'25%'" />
-				<xsl:with-param name="height" select="'45%'" />
-
 			</xsl:call-template>
 		</g>
 

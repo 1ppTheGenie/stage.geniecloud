@@ -251,7 +251,6 @@ Supports:	Listing, Print, ListingCount, Map, QRCode
 			<g style="transform: translate(7%,47.5%);">
 				<xsl:call-template name="qr-code">
 					<xsl:with-param name="width" select="'20%'" />
-					<xsl:with-param name="height" select="'27%'" />
 				</xsl:call-template>
 
 				<use x="18%" y="10%" width="6.5%" height="13%">
