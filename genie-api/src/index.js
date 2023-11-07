@@ -59,10 +59,23 @@ export const api = async event => {
 						if (s3Params) {
 							Object.keys(record.messageAttributes).map(key => {
 								if (key !== "renderId") {
-									s3Params[key] =
-										record.messageAttributes[key].dataType == "String"
-											? record.messageAttributes[key].stringValue
-											: "";
+									if (key == "override") {
+										const override = JSON.parse(
+											record.messageAttributes["override"].stringValue
+										);
+
+										console.log("@a", s3Params, override);
+										s3Params = {
+											...s3Params,
+											...override,
+										};
+										console.log("@b", s3Params);
+									} else {
+										s3Params[key] =
+											record.messageAttributes[key].dataType == "String"
+												? record.messageAttributes[key].stringValue
+												: "";
+									}
 								}
 							});
 
@@ -305,22 +318,20 @@ export const api = async event => {
 
 						case "/re-render":
 							if (params.renderId) {
-								if (params.renderId) {
-									const r = await reRenderCollection(params.renderId);
+								const r = await reRender(params.renderId, { ...params });
 
-									if (r) {
-										response.body.success = true;
-										response.body.msg = `${params.renderId} re-render under way`;
-									}
-
-									// Get CloudFlare to empty itself
-									await queueMsg("clear-cache", {
-										renderId: {
-											DataType: "String",
-											StringValue: params.renderId,
-										},
-									});
+								if (r) {
+									response.body.success = true;
+									response.body.msg = `${params.renderId} re-render under way`;
 								}
+
+								// Get CloudFlare to empty itself
+								await queueMsg("clear-cache", {
+									renderId: {
+										DataType: "String",
+										StringValue: params.renderId,
+									},
+								});
 							} else if (
 								params.assetId ||
 								params.userId ||
@@ -362,10 +373,7 @@ export const api = async event => {
 									);
 
 									for (const index in reRenders) {
-										const r = await reRenderCollection(
-											reRenders[index],
-											params.assetId ?? null
-										);
+										const r = await reRender(reRenders[index], params);
 									}
 
 									response.body.success = true;
@@ -817,7 +825,7 @@ const getPropertyCaption = (id, custom = null) => {
 	}
 };
 
-const reRenderCollection = async (renderId, assetId = null) => {
+const reRender = async (renderId, params = null) => {
 	// Save to the processing folder for onward processing and final render
 	const collectionExists = await headObject(
 		`_processing/${renderId}/prepare.json`
@@ -831,11 +839,25 @@ const reRenderCollection = async (renderId, assetId = null) => {
 			},
 		};
 
-		if (assetId) {
+		if (params.assetId) {
 			msgAttrbs.assetId = {
 				DataType: "String",
-				StringValue: assetId,
+				StringValue: params.assetId,
 			};
+		}
+
+		if (params) {
+			delete params.renderId;
+			delete params.assetId;
+
+			const override = JSON.stringify(params);
+
+			if (override !== "{}") {
+				msgAttrbs.override = {
+					DataType: "String",
+					StringValue: override,
+				};
+			}
 		}
 
 		await queueMsg("prepare", msgAttrbs);
