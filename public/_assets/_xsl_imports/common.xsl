@@ -2306,16 +2306,6 @@
 				</tspan>
 			</text>
 		</xsl:if>
-
-		<text style="font-size:70%">
-			<xsl:for-each select="$nodes">
-				<xsl:if test="position() &lt;= 8">
-					<tspan x="1.5%" dy="1%" class="align-center" fill="#fff">
-						<xsl:value-of select="concat( position(), ' - ', @thumb )" />
-					</tspan>
-				</xsl:if>
-			</xsl:for-each>
-		</text>
 	</xsl:template>
 
 	<xsl:template name="ed-showing-listing">
