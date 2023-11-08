@@ -15,7 +15,11 @@ svg#genie-wrapper {
 svg :not([fill]), use :not([fill]), text :not([fill]) {
 	fill: var(--theme-body-color);
 }
- 
+
+text[fill] > tspan:not([fill]) {
+	fill: inherit;
+}
+
 @media print {
 	svg#genie-wrapper {
 		font-size: 16px;
