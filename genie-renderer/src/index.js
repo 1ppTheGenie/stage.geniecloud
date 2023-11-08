@@ -17,6 +17,7 @@ const BUCKET = process.env.BUCKET;
 const SQS_QUEUE =
 	process.env.SQS_QUEUE ??
 	"https://sqs.eu-west-2.amazonaws.com/584678469437/genie-renders";
+
 const region = process.env.REGION ?? "eu-west-2";
 
 const s3Client = new S3Client({});
@@ -41,6 +42,7 @@ export const renderer = async params => {
 			let s3Key = "";
 			if (record.s3) {
 				s3Key = record.s3.object.key;
+
 				const json = await jsonFromS3(
 					record.s3.object.key,
 					record.s3.bucket.name
@@ -88,7 +90,7 @@ export const renderer = async params => {
 
 	for (const render of batch) {
 		const isWebp = render.suffix == "webp";
-		response.tempKey = render.s3Key;
+		response.tempKey = render.s3Key ?? render.s3key;
 
 		if (render.url && render.url.length > 10) {
 			await page.goto(render.url, { waitUntil, timeout: 90000 });
@@ -183,7 +185,7 @@ export const renderer = async params => {
 				render.bucket || BUCKET,
 				render.totalPages > 1
 					? `${render.s3Key}/interim/page-${render.pageIndex}.pdf`
-					: render.s3Key,
+					: render.s3Key ?? render.s3key,
 				output,
 				mimeType
 			);
@@ -196,7 +198,7 @@ export const renderer = async params => {
 
 				if (render.totalPages && render.totalPages > 1) {
 					const interims = await listS3Folder(
-						`${render.s3Key}/interim/`,
+						`${render.s3Key ?? render.s3key}/interim/`,
 						render.bucket
 					);
 
@@ -238,13 +240,14 @@ export const renderer = async params => {
 
 						await s3_upload(
 							render.bucket || BUCKET,
-							render.s3Key,
+							render.s3Key ?? render.s3key,
 							output,
 							"application/pdf"
 						);
 					}
 				}
 
+				/*
 				if (render.sourceS3Key) {
 					await s3Client.send(
 						new DeleteObjectCommand({
@@ -252,7 +255,7 @@ export const renderer = async params => {
 							Key: render.sourceS3Key,
 						})
 					);
-				}
+				}*/
 				/// just return the response otherwise
 			} else {
 				failures.push({
@@ -308,7 +311,6 @@ export const renderer = async params => {
 const s3_upload = async (bucket, key, file, mimeType = null) => {
 	key = key || "failed/no-key-given.png";
 
-	console.log("Bucket:", bucket, "Key:", key);
 	const command = new PutObjectCommand({
 		Bucket: bucket,
 		Key: key,
@@ -334,7 +336,6 @@ export const jsonFromS3 = async (key, bucket = null) => {
 		const r = await fromS3(key, bucket);
 
 		if (r) {
-			console.log("parse", JSON.parse(r));
 			return JSON.parse(r);
 		}
 	} catch (err) {

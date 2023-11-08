@@ -52266,6 +52266,7 @@ var import_client_s3 = require("@aws-sdk/client-s3");
 var REGION = process.env.REGION ?? "eu-west-2";
 var BUCKET = process.env.BUCKET ?? "genie-hub-2";
 var GENIE_URL = process.env.GENIE_URL ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/";
+var JSON_MIME = "application/json";
 var s3Client = new import_client_s3.S3Client({ region: REGION });
 var TEMP_DIR = process.env.TEMP_DIR ?? "D:/Dropbox/development/genie-marketing-hub-master/GenieHub/genie-hub-cloud/public/_assets/_xsl_imports/";
 var transform = (xml, xslt2, xsltBaseUri) => {

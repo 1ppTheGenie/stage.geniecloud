@@ -8726,13 +8726,18 @@ var getListing = async (user_id, mls_number, mls_id = -1) => {
 var mlsDisplaySettings = async (mls_id) => await call_api(`GetMlsDisplaySettings/${mls_id}`, null, "POST");
 var mlsProperties = async (mlsGroupID, area_id, startDate = null, include_open_houses = false) => {
   startDate = startDate ?? dateFormat(timeAgo({ months: -1 }));
-  const r = await call_api("GetMlsProperties", {
-    mlsGroupID,
-    areaID: area_id,
-    startDate,
-    includeOpenHouses: include_open_houses
-  });
-  return r?.properties ?? { success: false };
+  let r;
+  try {
+    r = await call_api("GetMlsProperties", {
+      mlsGroupID,
+      areaID: area_id,
+      startDate,
+      includeOpenHouses: include_open_houses
+    });
+  } catch (err) {
+    console.log("GetMlsProperties failed", err);
+  }
+  return r ? r?.properties ?? { success: false } : { success: false };
 };
 var openhouseByMlsNumber = async (mlsID, mlsNumber) => await call_api("GetOpenHouseByMlsNumber", { mlsID, mlsNumber });
 var getPropertyBoundary = async (mls_id, mls_number, fips, property_id) => {
@@ -8929,6 +8934,9 @@ var api = async (event) => {
                       ...s3Params,
                       ...override
                     };
+                    if (override.areaId) {
+                      s3Params.areaIds = [override.areaId];
+                    }
                   } else {
                     s3Params[key] = record.messageAttributes[key].dataType == "String" ? record.messageAttributes[key].stringValue : "";
                   }

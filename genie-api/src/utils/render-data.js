@@ -486,7 +486,7 @@ const processAreas = async params => {
 					areaImage = image.image;
 				}
 			});
-
+			
 			const defaultJSON = '{"type": "FeatureCollection","features": []}';
 			let geoJSON = boundary?.mapArea?.geoJSON ?? defaultJSON;
 			if (geoJSON.length > 200000) {
