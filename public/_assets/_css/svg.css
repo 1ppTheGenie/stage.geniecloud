@@ -4,7 +4,7 @@
 
 svg#genie-wrapper {
 	font-family: var(--theme-body-font);
-	fill: var(--theme-body-color);
+	fill: transparent;
 	color: var(--theme-body-color);
 	width: 100%;
 	height: 100%;
@@ -12,6 +12,10 @@ svg#genie-wrapper {
 	font-size: var(--theme-font-size);
 }
 
+svg :not([fill]), use :not([fill]), text :not([fill]) {
+	fill: var(--theme-body-color);
+}
+ 
 @media print {
 	svg#genie-wrapper {
 		font-size: 16px;
@@ -47,11 +51,11 @@ text.lower {
 
 .heading {
 	font-family: var(--theme-heading-font);
-	fill: var(--theme-heading-color);
+	fill: var(--theme-heading-color)!important;
 }
 .sub-heading {
 	font-family: var(--theme-sub-heading-font);
-	fill: var(--theme-sub-heading-color);
+	fill: var(--theme-sub-heading-color)!important;
 }
 
 .tiny {
@@ -129,14 +133,14 @@ g#footer text:last-child {
 .theme-body {
 	fill: var(--theme-body-background);
 }
-.theme-body text {
-	fill: var(--theme-body-color);
+.theme-body text :not([fill]) {
+	fill: var(--theme-body-color)!important;
 }
 .theme-invert-body {
-	fill: var(--theme-body-color);
+	fill: var(--theme-body-color)!important;
 }
-.theme-invert-body text {
-	fill: var(--theme-body-background);
+.theme-invert-body text :not([fill]) {
+	fill: var(--theme-body-background)!important;
 }
 
 .banner {
