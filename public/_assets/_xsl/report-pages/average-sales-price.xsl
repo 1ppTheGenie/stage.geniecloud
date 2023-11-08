@@ -7,12 +7,12 @@
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 
 	<xsl:template name="svg-body">
 		<style>
-<xsl:value-of select="'text {dominant-baseline: middle}'" />
+			<xsl:value-of select="'text {dominant-baseline: middle}'" />
 
 		</style>
 
@@ -50,9 +50,7 @@
 			</text>
 
 			<use x="42%" y="15%" width="16%" height="16%" fill="var(--theme-sub-heading-color)">
-				<xsl:attribute name="href">
-					<xsl:value-of select="concat( '#', $icon )" />
-				</xsl:attribute>
+				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#', $icon )" />
 			</use>
 
 			<text x="50%" y="36%" class="center upper" font-family="var(--theme-heading-font)" style="font-size: 275%;fill:var(--theme-body-color)">
@@ -61,8 +59,7 @@
 			<text x="50%" y="48%" class="center lower sub-heading" style="font-size: 450%;fill:var(--theme-sub-heading-color)">
 				<tspan>
 					<xsl:call-template name="format-price">
-<xsl:with-param name="price" select="//statistics/@averageSalePrice" />
-
+						<xsl:with-param name="price" select="//statistics/@averageSalePrice" />
 					</xsl:call-template>
 				</tspan>
 			</text>
@@ -73,7 +70,7 @@
 				</tspan>
 				<tspan class="lower">
 					<xsl:call-template name="format-price">
-<xsl:with-param name="price" select="//statistics/previous/@averageSalePrice" />
+						<xsl:with-param name="price" select="//statistics/previous/@averageSalePrice" />
 
 					</xsl:call-template>
 				</tspan>

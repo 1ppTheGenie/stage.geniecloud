@@ -217,7 +217,6 @@
 
 	<xsl:variable name="assetSize">
 		<xsl:value-of select="//output/@size" />
-
 	</xsl:variable>
 
 	<!-- Dims for print should always be "inches * 100" Thus a 0.125" bleed, adds 0.25" in total (* 100 = 25) -->

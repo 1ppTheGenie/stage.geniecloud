@@ -130,18 +130,18 @@
 
 		<html>
 			<body>
+				<xsl:attribute name="class">
+					<xsl:value-of select="concat( //output/@size, ' ', //output/@theme )" />
+				</xsl:attribute>
+
 				<svg id="genie-wrapper"
 					xmlns="http://www.w3.org/2000/svg">
-					<xsl:attribute name="class">
-						<xsl:value-of select="concat( //output/@size, ' ', //output/@theme )" />
-					</xsl:attribute>
 
 					<xsl:attribute name="viewBox">
 						<xsl:value-of select="concat( '0 0 ', $svgWidth, ' ', $svgHeight )" />
-
 					</xsl:attribute>
 
-					<xsl:if test="//output/@isSample">
+					<xsl:if test="number(//output/@isSample)=1">
 						<xsl:comment>
 							<xsl:text>IsSample:</xsl:text>
 							<xsl:value-of select="//output/@isSample" />
@@ -160,8 +160,7 @@
 
 					<script>
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/genie-global.js') " />
-
-						<xsl:text>;</xsl:text>
+						<xsl:comment />
 					</script>
 
 					<xsl:call-template name="svg-scripts" />
@@ -171,7 +170,6 @@
 					</xsl:if>
 
 					<xsl:call-template name="svg-body" />
-
 
 					<xsl:if test="//output/@pageIndex and number(//output/@pageIndex) > 1">
 						<circle cx="98%" cy="4%" r="1%" fill="var(--theme-heading-color)" />
@@ -220,9 +218,9 @@
 			</text>
 
 			<foreignObject width="50%" height="50" x="0" y="60" class="map-marker">
-				<span class="banner" style="background-color:var(--vivid-banner);color:var(--printers-marks);font-family: var(--theme-sub-heading-font);">
-					<svg style="width: 15px">
-						<use>
+				<span class="banner" style="background-color:var(--vivid-banner); color:var(--theme-body-background); font-family: var(--theme-sub-heading-font);">
+					<svg width="15px">
+						<use fill="var(--theme-body-background)">
 							<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#map-pin-icon' )" />
 						</use>
 					</svg>
@@ -1102,9 +1100,7 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
-				<xsl:attribute name="href">
-					<xsl:value-of select="concat( '#', $icon )" />
-				</xsl:attribute>
+				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#', $icon )" />
 			</use>
 
 			<rect id="rounded-rect" height="5%" fill="var(--theme-heading-color)" fill-opacity="0.1" y="19%" x="1%" rx="0.5%">
@@ -1458,9 +1454,7 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
-				<xsl:attribute name="href">
-					<xsl:value-of select="concat( '#', $icon )" />
-				</xsl:attribute>
+				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#', $icon )" />
 			</use>
 
 			<rect id="rounded-rect" height="3.7%" fill="var(--theme-heading-color)" fill-opacity="0.1" y="12.5%" x="1%" rx="0.5%">
