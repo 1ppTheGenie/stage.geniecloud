@@ -66,7 +66,7 @@
 				    line-height: 15px;
 			    }
 				table.listings td:first-child span.new {
-					background-color: var(--new);
+background-color: var(--new-blue);
 				}
 			    table.listings th, table.listings td {
 				    border-bottom: 1px solid var(--color-scheme);
@@ -254,7 +254,7 @@
 				    line-height: 15px;
 			    }
 				table.listings td:first-child span.new {
-					background-color: var(--new);
+background-color: var(--new-blue);
 				}
 			    table.listings th, table.listings td {
 				    border-bottom: 1px solid var(--color-scheme);

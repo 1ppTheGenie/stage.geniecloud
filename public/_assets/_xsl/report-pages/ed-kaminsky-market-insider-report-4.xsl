@@ -61,7 +61,7 @@
 			<line x1="5%" y1="35%" x2="56%" y2="35%" style="stroke:red;stroke-width:3" />
 
 			<svg x="6%" y="44%">
-				<circle cy="6%" r="16" fill="var(--new)" cx="5%"></circle>
+<circle cy="6%" r="16" fill="var(--new-blue)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" style="font-size:92%;" fill="#fff">
 					<xsl:value-of select="count($listingsTotalNew)" />
 				</text>

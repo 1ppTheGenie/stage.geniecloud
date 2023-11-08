@@ -54,7 +54,7 @@
 					</rect>
 
 					<xsl:if test="@dom &lt;= $domNew">
-						<circle cx="3.5%" r="1.2%" style="fill:var(--new);">
+<circle cx="3.5%" r="1.2%" style="fill:var(--new-blue);">
 							<xsl:attribute name="cy">
 								<xsl:value-of select="concat( 2.1 + ( position() * 6 ), '%' )" />
 							</xsl:attribute>
