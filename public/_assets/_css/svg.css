@@ -12,7 +12,9 @@ svg#genie-wrapper {
 	font-size: var(--theme-font-size);
 }
 
-svg :not([fill]), use :not([fill]), text :not([fill]) {
+svg :not([fill]),
+use :not([fill]),
+text :not([fill]) {
 	fill: var(--theme-body-color);
 }
 
@@ -55,11 +57,11 @@ text.lower {
 
 .heading {
 	font-family: var(--theme-heading-font);
-	fill: var(--theme-heading-color)!important;
+	fill: var(--theme-heading-color) !important;
 }
 .sub-heading {
 	font-family: var(--theme-sub-heading-font);
-	fill: var(--theme-sub-heading-color)!important;
+	fill: var(--theme-sub-heading-color) !important;
 }
 
 .tiny {
@@ -138,18 +140,25 @@ g#footer text:last-child {
 	fill: var(--theme-body-background);
 }
 .theme-body text :not([fill]) {
-	fill: var(--theme-body-color)!important;
+	fill: var(--theme-body-color) !important;
 }
 .theme-invert-body {
-	fill: var(--theme-body-color)!important;
+	fill: var(--theme-body-color) !important;
 }
 .theme-invert-body text :not([fill]) {
-	fill: var(--theme-body-background)!important;
+	fill: var(--theme-body-background) !important;
 }
 
 .banner {
 	background-color: var(--vivid-banner);
-	clip-path: polygon(0 0, 1rem 50%, 0 100%, 100% 100%, calc(100% - 1rem) 50%, 100% 0);
+	clip-path: polygon(
+		0 0,
+		1rem 50%,
+		0 100%,
+		100% 100%,
+		calc(100% - 1rem) 50%,
+		100% 0
+	);
 	text-align: center;
 	padding: 0.5rem 2rem;
 	display: inline-block;
@@ -352,7 +361,7 @@ svg#genie-wrapper .ct-grid {
 	display: block !important;
 }
 #genie-map.leaflet-container {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
 }
