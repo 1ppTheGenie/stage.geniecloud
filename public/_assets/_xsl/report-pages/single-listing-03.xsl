@@ -78,14 +78,11 @@
 
 			<g style="transform:translate(8.5%,36%)">
 				<text class="sub-heading large bold">
-<tspan class="upper" tabindex="1">Just <xsl:value-of select="$soldListed" />
-
-					</tspan>
+					<tspan class="upper" tabindex="1">Just <xsl:value-of select="$soldListed" />
 				</text>
 
 				<text y="7%" class="upper medium">
-<xsl:call-template name="listing-address" />
-
+					<xsl:call-template name="listing-address" />
 				</text>
 			</g>
 		</g>

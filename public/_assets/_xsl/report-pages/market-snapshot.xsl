@@ -103,10 +103,12 @@
 				<xsl:attribute name="href">
 					<xsl:choose>
 						<xsl:when test="$change > 1">
-							<xsl:value-of select="'#up-icon'" />
+<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-icon' )" />
+
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="'#down-icon'" />
+<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
+
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>

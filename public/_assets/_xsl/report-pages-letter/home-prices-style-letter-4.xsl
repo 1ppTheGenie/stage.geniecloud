@@ -112,11 +112,13 @@
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="number($priceChange) > 0">
-<xsl:value-of select="'#up-icon'" />
+<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-icon' )" />
+
 
 							</xsl:when>
 							<xsl:otherwise>
-<xsl:value-of select="'#down-icon'" />
+<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
+
 
 							</xsl:otherwise>
 						</xsl:choose>
@@ -140,11 +142,13 @@
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="number($priceChange) > 0">
-<xsl:value-of select="'#up-icon'" />
+<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-icon' )" />
+
 
 							</xsl:when>
 							<xsl:otherwise>
-<xsl:value-of select="'#down-icon'" />
+<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
+
 
 							</xsl:otherwise>
 						</xsl:choose>
@@ -167,11 +171,13 @@
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1 > 0">
-<xsl:value-of select="'#up-icon'" />
+<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-icon' )" />
+
 
 							</xsl:when>
 							<xsl:otherwise>
-<xsl:value-of select="'#down-icon'" />
+<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
+
 
 							</xsl:otherwise>
 						</xsl:choose>
