@@ -191,15 +191,20 @@ export const mlsProperties = async (
 	include_open_houses = false
 ) => {
 	startDate = startDate ?? dateFormat(timeAgo({ months: -1 }));
+	let r;
 
-	const r = await call_api("GetMlsProperties", {
-		mlsGroupID: mlsGroupID,
-		areaID: area_id,
-		startDate: startDate,
-		includeOpenHouses: include_open_houses,
-	});
+	try {
+		r = await call_api("GetMlsProperties", {
+			mlsGroupID: mlsGroupID,
+			areaID: area_id,
+			startDate: startDate,
+			includeOpenHouses: include_open_houses,
+		});
+	} catch (err) {
+		console.log("GetMlsProperties failed", err);
+	}
 
-	return r?.properties ?? { success: false };
+	return r ? r?.properties ?? { success: false } : { success: false };
 };
 
 export const openhouseByMlsNumber = async (mlsID, mlsNumber) =>
