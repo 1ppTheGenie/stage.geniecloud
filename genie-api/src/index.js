@@ -68,6 +68,10 @@ export const api = async event => {
 											...s3Params,
 											...override,
 										};
+
+										if (override.areaId) {
+											s3Params.areaIds = [override.areaId];
+										}
 									} else {
 										s3Params[key] =
 											record.messageAttributes[key].dataType == "String"
