@@ -10,6 +10,8 @@ const BUCKET = process.env.BUCKET ?? "genie-hub-2";
 const GENIE_URL =
 	process.env.GENIE_URL ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/";
 
+const JSON_MIME = "application/json";
+
 // Set up the S3 client
 const s3Client = new S3Client({ region: REGION });
 
