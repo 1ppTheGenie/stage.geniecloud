@@ -12,7 +12,6 @@
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'text{ dominant-baseline:middle; }'" />
-
 		</style>
 
 		<xsl:call-template name="letter-report-header">

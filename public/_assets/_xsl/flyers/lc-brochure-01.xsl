@@ -65,8 +65,7 @@
 						</svg>
 
 						<h2 contenteditable="true" class="bold" style="font-family:var(--theme-heading-font);color:var(--theme-sub-heading-color);font-size:43px;text-align:center;margin:0;">
-<xsl:value-of select="$propertyType" />
-
+							<xsl:value-of select="$propertyType" />
 						</h2>
 
 						<svg height="13" width="60" style="flex-grow:0; margin-left: 5%">
@@ -78,20 +77,14 @@
 
 			<g style="transform:translate(4%, 25.5%)">
 				<text x="0" y="0" class="heading bold" font-size="280%">
-					<tspan>
-						<xsl:choose>
-							<xsl:when test="//single/soldDate!=''">
-								<tspan class="">Sold For </tspan>
-<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
-
-							</xsl:when>
-							<xsl:otherwise>
-								<tspan class="">Asking </tspan>
-<xsl:value-of select="format-number( //single/price, '$###,###')" />
-
-							</xsl:otherwise>
-						</xsl:choose>
-					</tspan>
+					<xsl:choose>
+						<xsl:when test="//single/soldDate!=''">
+							<xsl:value-of select="concat( 'Sold For ', format-number( //single/salePrice, '$###,###') )" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="concat( 'Asking ', format-number( //single/price, '$###,###') )" />
+						</xsl:otherwise>
+					</xsl:choose>
 				</text>
 
 				<foreignObject y="3.5%" width="60%" height="15%" id="lineDescription">
@@ -170,8 +163,7 @@
 				<svg width="88%" height="50%" x="-9%" y="18%">
 					<!-- <use x="3" y="2.8%" width="57%" height="121" fill="var(theme-heading-color)"><xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#park-icon' )" /></use> -->
 					<svg x="21%" y="2.8%" width="12%" height="12%" viewBox="-86 -66 512 512" fill="var(--theme-heading-color)">
-<path d="M39.61 196.8L74.8 96.29C88.27 57.78 124.6 32 165.4 32H346.6C387.4 32 423.7 57.78 437.2 96.29L472.4 196.8C495.6 206.4 512 229.3 512 256V448C512 465.7 497.7 480 480 480H448C430.3 480 416 465.7 416 448V400H96V448C96 465.7 81.67 480 64 480H32C14.33 480 0 465.7 0 448V256C0 229.3 16.36 206.4 39.61 196.8V196.8zM109.1 192H402.9L376.8 117.4C372.3 104.6 360.2 96 346.6 96H165.4C151.8 96 139.7 104.6 135.2 117.4L109.1 192zM96 256C78.33 256 64 270.3 64 288C64 305.7 78.33 320 96 320C113.7 320 128 305.7 128 288C128 270.3 113.7 256 96 256zM416 320C433.7 320 448 305.7 448 288C448 270.3 433.7 256 416 256C398.3 256 384 270.3 384 288C384 305.7 398.3 320 416 320z" />
-
+						<path d="M39.61 196.8L74.8 96.29C88.27 57.78 124.6 32 165.4 32H346.6C387.4 32 423.7 57.78 437.2 96.29L472.4 196.8C495.6 206.4 512 229.3 512 256V448C512 465.7 497.7 480 480 480H448C430.3 480 416 465.7 416 448V400H96V448C96 465.7 81.67 480 64 480H32C14.33 480 0 465.7 0 448V256C0 229.3 16.36 206.4 39.61 196.8V196.8zM109.1 192H402.9L376.8 117.4C372.3 104.6 360.2 96 346.6 96H165.4C151.8 96 139.7 104.6 135.2 117.4L109.1 192zM96 256C78.33 256 64 270.3 64 288C64 305.7 78.33 320 96 320C113.7 320 128 305.7 128 288C128 270.3 113.7 256 96 256zM416 320C433.7 320 448 305.7 448 288C448 270.3 433.7 256 416 256C398.3 256 384 270.3 384 288C384 305.7 398.3 320 416 320z" />
 					</svg>
 
 					<xsl:if test="//single/parking/@spaces='' or //single/parking/@garage=''">
