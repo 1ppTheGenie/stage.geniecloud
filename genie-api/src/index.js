@@ -541,7 +541,7 @@ export const api = async event => {
 					Buffer.from(
 						JSON.stringify({
 							params,
-							error,
+							error: error.toString(),
 						})
 					),
 					null,
@@ -764,12 +764,23 @@ const prepareAsset = async (asset, params) => {
 					asset: pageParams.asset,
 				};
 
-				if (params.qrDestination || params.qrUrl) {
-					let qrUrl =
-						params.qrDestination ??
-						(await getLandingQrCodeUrl(params.qrUrl, params.renderId));
-					if (!qrUrl.startsWith("http")) qrUrl = `https://${qrUrl}`;
+				let qrUrl;
+				if (params?.qrDestination) {
+					render.qrUrl = params.qrDestination;
 
+					if (!params.qrDestination.startsWith("http"))
+						params.qrDestination = `https://${qrUrl}`;
+
+					qrUrl = await getLandingQrCodeUrl(
+						params?.parentAsset,
+						params.renderId,
+						params.qrDestination
+					);
+				} else if (params?.qrUrl) {
+					qrUrl = await getLandingQrCodeUrl(qrUrl, params.renderId);
+				}
+
+				if (qrUrl) {
 					render.customizations = { qrUrl };
 				}
 
@@ -798,10 +809,11 @@ const prepareAsset = async (asset, params) => {
 							...params,
 							overrideKey,
 							size: downloadSize,
-							qrCode: `${genieGlobals.GENIE_HOST}${s3Key.s3Key.replace(
+							qrDestination: `${genieGlobals.GENIE_HOST}${render.s3Key.replace(
 								"/index.html",
 								""
 							)}`,
+							parentAsset: pageParams.asset,
 						});
 					}
 				}
@@ -959,18 +971,20 @@ export const validateRenderParams = async args => {
 	return msgs;
 };
 
-const getLandingQrCodeUrl = async (asset, renderId) => {
+const getLandingQrCodeUrl = async (asset, renderId, qrUrl = null) => {
 	let s3Key = `genie-files/${renderId}/${asset}-qr.svg`;
 
 	// Saving location of the rendered landing page
-	const qrKey = await getS3Key(`landing-pages/${asset}`, { renderId });
+	qrUrl =
+		qrUrl ??
+		`${genieGlobals.GENIE_HOST}/` +
+			(await getS3Key(`landing-pages/${asset}`, { renderId }));
 
 	// S3 url of the rendered landing page
-	const qrSVG = await generateQR(`${genieGlobals.GENIE_HOST}/${qrKey}`);
-
+	const qrSVG = await generateQR(qrUrl);
 	await toS3(s3Key, Buffer.from(qrSVG), null, "image/svg+xml");
 
-	return `${genieGlobals.GENIE_HOST}/${s3Key}`;
+	return `${genieGlobals.GENIE_HOST}${s3Key}`;
 };
 
 export const getS3Key = async (asset, params) => {

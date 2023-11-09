@@ -1,4 +1,5 @@
 import { DateTime } from "luxon";
+import { basename } from "path";
 // prettier-ignore
 import {
 	generateQR,
@@ -105,15 +106,15 @@ export const getRenderJSON = async params => {
 	};
 
 	// Slightly weird place for this code, but...generate QR image
-	let qrUrl =
-		params.qrCode ??
-		(params.customizations?.qrUrl || root.agents[0].agent.website) ??
-		"";
+	let qrUrl = params.qrCode ?? root.agents[0].agent.website ?? "";
 
 	if (qrUrl == "skip") {
 		root.output._attrs.qrUrl = "skip";
+	} else if (params.customizations?.qrUrl) {
+		root.output._attrs.qrUrl = params.customizations?.qrUrl;
 	} else if (qrUrl && qrUrl !== "") {
 		if (!qrUrl.startsWith("http")) qrUrl = `https://${qrUrl}`;
+
 		const qrSVG = await generateQR(decodeURI(qrUrl));
 
 		await toS3(

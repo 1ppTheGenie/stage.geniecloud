@@ -7249,9 +7249,11 @@ var getRenderJSON = async (params) => {
     // *** Areas
     areas: params.isEmbed ? params.areaIds.map((id) => ({ id })) : await processAreas(params)
   };
-  let qrUrl = params.qrCode ?? (params.customizations?.qrUrl || root.agents[0].agent.website) ?? "";
+  let qrUrl = params.qrCode ?? root.agents[0].agent.website ?? "";
   if (qrUrl == "skip") {
     root.output._attrs.qrUrl = "skip";
+  } else if (params.customizations?.qrUrl) {
+    root.output._attrs.qrUrl = params.customizations?.qrUrl;
   } else if (qrUrl && qrUrl !== "") {
     if (!qrUrl.startsWith("http"))
       qrUrl = `https://${qrUrl}`;
@@ -9309,7 +9311,7 @@ var api = async (event) => {
           Buffer.from(
             JSON.stringify({
               params,
-              error: error2
+              error: error2.toString()
             })
           ),
           null,
@@ -9469,10 +9471,20 @@ var prepareAsset = async (asset, params) => {
           totalPages: params.totalPages ?? pages.length,
           asset: pageParams.asset
         };
-        if (params.qrDestination || params.qrUrl) {
-          let qrUrl = params.qrDestination ?? await getLandingQrCodeUrl(params.qrUrl, params.renderId);
-          if (!qrUrl.startsWith("http"))
-            qrUrl = `https://${qrUrl}`;
+        let qrUrl;
+        if (params?.qrDestination) {
+          render.qrUrl = params.qrDestination;
+          if (!params.qrDestination.startsWith("http"))
+            params.qrDestination = `https://${qrUrl}`;
+          qrUrl = await getLandingQrCodeUrl(
+            params?.parentAsset,
+            params.renderId,
+            params.qrDestination
+          );
+        } else if (params?.qrUrl) {
+          qrUrl = await getLandingQrCodeUrl(qrUrl, params.renderId);
+        }
+        if (qrUrl) {
           render.customizations = { qrUrl };
         }
         if (suffix === "mp4") {
@@ -9496,10 +9508,11 @@ var prepareAsset = async (asset, params) => {
               ...params,
               overrideKey,
               size: downloadSize,
-              qrCode: `${genieGlobals.GENIE_HOST}${s3Key.s3Key.replace(
+              qrDestination: `${genieGlobals.GENIE_HOST}${render.s3Key.replace(
                 "/index.html",
                 ""
-              )}`
+              )}`,
+              parentAsset: pageParams.asset
             });
           }
         }
@@ -9621,12 +9634,12 @@ var validateRenderParams = async (args) => {
   }
   return msgs;
 };
-var getLandingQrCodeUrl = async (asset, renderId) => {
+var getLandingQrCodeUrl = async (asset, renderId, qrUrl = null) => {
   let s3Key = `genie-files/${renderId}/${asset}-qr.svg`;
-  const qrKey = await getS3Key(`landing-pages/${asset}`, { renderId });
-  const qrSVG = await generateQR(`${genieGlobals.GENIE_HOST}/${qrKey}`);
+  qrUrl = qrUrl ?? `${genieGlobals.GENIE_HOST}/` + await getS3Key(`landing-pages/${asset}`, { renderId });
+  const qrSVG = await generateQR(qrUrl);
   await toS3(s3Key, Buffer.from(qrSVG), null, "image/svg+xml");
-  return `${genieGlobals.GENIE_HOST}/${s3Key}`;
+  return `${genieGlobals.GENIE_HOST}${s3Key}`;
 };
 var getS3Key = async (asset, params) => {
   let s3Key = `failed/${params.renderId}.png`;
