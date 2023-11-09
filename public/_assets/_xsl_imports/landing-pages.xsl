@@ -276,10 +276,8 @@
 							<li>
 								<xsl:attribute name="href">
 									<xsl:value-of select="concat( 'tel:',//agent[1]/mobile )" />
-
 								</xsl:attribute>
 								<xsl:value-of select="//agent[1]/mobile" />
-
 							</li>
 							<li>
 								<xsl:value-of select="//agent[1]/address/company" />
@@ -292,7 +290,6 @@
 							<a target="_blank">
 								<xsl:attribute name="href">
 									<xsl:value-of select="concat( 'https://', //agent[1]/website )" />
-
 								</xsl:attribute>
 								<xsl:value-of select="//agent[1]/website" />
 							</a>
@@ -316,21 +313,17 @@
 									<xsl:value-of select="//agent[1]/privacyPolicy" />
 								</xsl:attribute>
 							</xsl:if>
-
 							<xsl:if test="//agent[1]/privacySource!='external'">
 								<xsl:attribute name="href">
 									<xsl:value-of select="'#'" />
 								</xsl:attribute>
-
 								<xsl:attribute name="class">
 									<xsl:value-of select="'privacy-policy heading-font toggle'" />
 								</xsl:attribute>
-
 								<xsl:attribute name="data-container">
 									<xsl:value-of select="'#privacy-policy'" />
 								</xsl:attribute>
 							</xsl:if>
-
 							<xsl:text>Privacy Policy</xsl:text>
 						</a>
 					</div>
@@ -389,17 +382,12 @@
 
 	<xsl:template name="standard-header">
 		<xsl:param name="title" select="concat(  $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ' ,//agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
-
-
 		<xsl:param name="description" select="substring(concat( 'View details, pricing, photos, floorplan, for ', $listingAddressLine1, '. ' , //single/description, '...') ,0, 373 )" />
-
 		<xsl:param name="site_name" select="concat( 'Presented by ', //agent[1]/marketingName, ' ' , //agent[1]/address/company  )" />
-
 		<xsl:param name="seoImage" select="$primaryImage" />
 		<xsl:param name="primaryCSS" select="'common'" />
 		<xsl:param name="secondaryCSS" select="''" />
 		<xsl:param name="includeFooterCSS" select="'true'" />
-
 		<xsl:param name="defaultUtmSource" select="''" />
 		<xsl:param name="defaultUtmCampaign" select="''" />
 		<xsl:param name="leadNotePrompt" select="''" />
@@ -407,8 +395,7 @@
 		<xsl:variable name="seoTitle">
 			<xsl:choose>
 				<xsl:when test="//overrides/seo-title">
-<xsl:value-of select="//overrides/seo-title" />
-
+					<xsl:value-of select="//overrides/seo-title" />	
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="$title" />
@@ -419,8 +406,7 @@
 		<xsl:variable name="seoDescription">
 			<xsl:choose>
 				<xsl:when test="//overrides/seo-description">
-<xsl:value-of select="//overrides/seo-description" />
-
+					<xsl:value-of select="//overrides/seo-description" />
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="$description" />
@@ -492,9 +478,8 @@
 
 			<meta property="og:type" content="'website'" />
 			<meta name="twitter:card" content="summary_large_image" />
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 			<title>
 				<xsl:value-of select="$seoTitle" />
@@ -523,7 +508,6 @@
 					<xsl:value-of select="concat( '/_assets/landing-pages/dist/', $buildVersion, '/assets/index.js' )" />
 				</xsl:attribute>
 				<xsl:comment />
-
 			</script>
 
 			<link rel="stylesheet">
@@ -539,14 +523,8 @@
 	</xsl:template>
 
 	<xsl:template name="market-comment">
-		<xsl:variable name="totalSold">
-<xsl:value-of select="//areas/area[1]/statistics/@soldPropertyTypeCount" />
-
-		</xsl:variable>
-		<xsl:variable name="totalSoldLastPeriod">
-<xsl:value-of select="//areas/area[1]/statistics/previous/@totalSold" />
-
-		</xsl:variable>
+		<xsl:variable name="totalSold" select="//areas/area[1]/statistics/@soldPropertyTypeCount" />
+		<xsl:variable name="totalSoldLastPeriod" select="//areas/area[1]/statistics/previous/@totalSold" />
 		<xsl:variable name="soldDelta">
 			<xsl:choose>
 				<xsl:when test="number($totalSold) > 0 and number($totalSoldLastPeriod) > 0">
@@ -621,8 +599,7 @@
 							<div class="fl-thumb-icon text-center subtitle-color-as-bg">
 								<div class="circle-icon background close-popup">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="var(--theme-sub-heading-color)">
-<path d="M128 447.1V223.1c0-17.67-14.33-31.1-32-31.1H32c-17.67 0-32 14.33-32 31.1v223.1c0 17.67 14.33 31.1 32 31.1h64C113.7 479.1 128 465.6 128 447.1zM512 224.1c0-26.5-21.48-47.98-48-47.98h-146.5c22.77-37.91 34.52-80.88 34.52-96.02C352 56.52 333.5 32 302.5 32c-63.13 0-26.36 76.15-108.2 141.6L178 186.6C166.2 196.1 160.2 210 160.1 224c-.0234 .0234 0 0 0 0L160 384c0 15.1 7.113 29.33 19.2 38.39l34.14 25.59C241 468.8 274.7 480 309.3 480H368c26.52 0 48-21.47 48-47.98c0-3.635-.4805-7.143-1.246-10.55C434 415.2 448 397.4 448 376c0-9.148-2.697-17.61-7.139-24.88C463.1 347 480 327.5 480 304.1c0-12.5-4.893-23.78-12.72-32.32C492.2 270.1 512 249.5 512 224.1z" fill="var(--theme-sub-heading-color)" />
-
+										<path d="M128 447.1V223.1c0-17.67-14.33-31.1-32-31.1H32c-17.67 0-32 14.33-32 31.1v223.1c0 17.67 14.33 31.1 32 31.1h64C113.7 479.1 128 465.6 128 447.1zM512 224.1c0-26.5-21.48-47.98-48-47.98h-146.5c22.77-37.91 34.52-80.88 34.52-96.02C352 56.52 333.5 32 302.5 32c-63.13 0-26.36 76.15-108.2 141.6L178 186.6C166.2 196.1 160.2 210 160.1 224c-.0234 .0234 0 0 0 0L160 384c0 15.1 7.113 29.33 19.2 38.39l34.14 25.59C241 468.8 274.7 480 309.3 480H368c26.52 0 48-21.47 48-47.98c0-3.635-.4805-7.143-1.246-10.55C434 415.2 448 397.4 448 376c0-9.148-2.697-17.61-7.139-24.88C463.1 347 480 327.5 480 304.1c0-12.5-4.893-23.78-12.72-32.32C492.2 270.1 512 249.5 512 224.1z" fill="var(--theme-sub-heading-color)" />
 									</svg>
 								</div>
 							</div>
@@ -653,15 +630,13 @@
 							<div class="text-center mb-3 download-assets">
 								<a href="" target="_blank" class="btn heading-font subtitle-color-as-bg background-as-color btn-submit download-flyer"> Download Flyer&#160;
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="var(--theme-body-background)">
-<path d="M480 352h-133.5l-45.25 45.25C289.2 409.3 273.1 416 256 416s-33.16-6.656-45.25-18.75L165.5 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32v-96C512 366.3 497.7 352 480 352zM432 456c-13.2 0-24-10.8-24-24c0-13.2 10.8-24 24-24s24 10.8 24 24C456 445.2 445.2 456 432 456zM233.4 374.6C239.6 380.9 247.8 384 256 384s16.38-3.125 22.62-9.375l128-128c12.49-12.5 12.49-32.75 0-45.25c-12.5-12.5-32.76-12.5-45.25 0L288 274.8V32c0-17.67-14.33-32-32-32C238.3 0 224 14.33 224 32v242.8L150.6 201.4c-12.49-12.5-32.75-12.5-45.25 0c-12.49 12.5-12.49 32.75 0 45.25L233.4 374.6z" />
-
+										<path d="M480 352h-133.5l-45.25 45.25C289.2 409.3 273.1 416 256 416s-33.16-6.656-45.25-18.75L165.5 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32v-96C512 366.3 497.7 352 480 352zM432 456c-13.2 0-24-10.8-24-24c0-13.2 10.8-24 24-24s24 10.8 24 24C456 445.2 445.2 456 432 456zM233.4 374.6C239.6 380.9 247.8 384 256 384s16.38-3.125 22.62-9.375l128-128c12.49-12.5 12.49-32.75 0-45.25c-12.5-12.5-32.76-12.5-45.25 0L288 274.8V32c0-17.67-14.33-32-32-32C238.3 0 224 14.33 224 32v242.8L150.6 201.4c-12.49-12.5-32.75-12.5-45.25 0c-12.49 12.5-12.49 32.75 0 45.25L233.4 374.6z" />
 									</svg>
 								</a>
 								<span class="body-font subtitle-color">or</span>
 								<a href="" target="_blank" class="btn heading-font subtitle-color-as-bg background-as-color btn-submit ">View Listing Details 
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="16" height="16" fill="var(--theme-body-background)">
-<path d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z" />
-
+										<path d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z" />
 									</svg>
 								</a>
 							</div>
@@ -755,8 +730,9 @@
 	<xsl:template name="gallery">
 		<xsl:if test="count(//single/images/image)&gt;1">
 			<div id="property-gallery-container">
-<div id="property-gallery" class="property-gallery lightgallery" />
-
+				<div id="property-gallery" class="property-gallery lightgallery">
+					<xsl:comment />
+				</div>
 			</div>
 
 			<div class="property-image-show-btn text-center">
@@ -771,11 +747,13 @@
 					<xsl:value-of select="concat( &quot;'&quot;, @src, &quot;', &quot; )" />
 				</xsl:for-each>
 				<xsl:value-of select="']; 
+				
 				document.addEventListener(`genie-landing-loaded`, function () {
 					window.gg.galleryButton( 
 						document.querySelector(`.property-image-show-btn button`), 
 						document.getElementById(`property-gallery`) 
-); } );'" />
+					); 
+				});'" />
 			</script>
 		</xsl:if>
 	</xsl:template>

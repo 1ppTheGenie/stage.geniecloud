@@ -9,20 +9,15 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 	<xsl:import href="common.xsl" />
 
-
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'
-			rect#rounded-rect {
-			    transform: translateY(-4px);
-			}
-			text.center.central {
-			    transform: translateY(-4px);
-			}
-            text{
-	           dominant-baseline:middle;	      
-}'" />
+rect#rounded-rect { transform: translateY(-4px); }
+				text.center.central { transform: translateY(-4px); }
+            	text{ dominant-baseline:middle; }
+			'" />
 		</style>
+
 		<g>
 			<xsl:call-template name="letter-report-header">
 				<xsl:with-param name="title" select="'Fast Facts'" />
@@ -44,14 +39,12 @@
 					<xsl:with-param name="caption" select="'New'" />
 					<xsl:with-param name="count" select="count($listingsTotalNew)" />
 					<xsl:with-param name="description" select="'0-30 DAYS'" />
-
 				</xsl:call-template>
 
 				<xsl:call-template name="property-count-letter">
 					<xsl:with-param name="transform" select="'transform:translateX(10.2%)'" />
 					<xsl:with-param name="icon-fill" select="'#8dc641'" />
 					<xsl:with-param name="broder-stroke-color" select="'#517134'" />
-
 					<xsl:with-param name="icon" select="'home-speaker-icon'" />
 					<xsl:with-param name="caption" select="'Active'" />
 					<xsl:with-param name="count" select="count($listingsTotalActive)" />
@@ -85,7 +78,6 @@
 
 			<g style="transform:translate(5%,47%)">
 				<g style="transform:translateX(20.5%)">
-
 					<image x="1%" y="0" width="15%" height="7%" preserveAspectRatio="xMidYMid meet">
 						<xsl:attribute name="href">
 							<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons/clock-green.svg' )" />
@@ -99,6 +91,7 @@
 						</tspan>
 					</text>
 				</g>
+
 				<g style="transform:translateX(52.5%)">
 					<image x="2.5%" y="0" width="15%" height="7%" preserveAspectRatio="xMidYMid meet">
 						<xsl:attribute name="href">
@@ -128,6 +121,7 @@
 						</tspan>
 					</text>
 				</g>
+
 				<g style="transform: translate(20%,25%)">
 					<image x="2.5%" y="0" width="15%" height="7%" preserveAspectRatio="xMidYMid meet">
 						<xsl:attribute name="href">
@@ -157,8 +151,8 @@
 						</tspan>
 					</text>
 				</g>
-				<g style="transform: translate(52.5%,25%);">
 
+				<g style="transform: translate(52.5%,25%);">
 					<image x="2.5%" y="0" width="15%" height="7%" preserveAspectRatio="xMidYMid meet">
 						<xsl:attribute name="href">
 							<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons/price-level.svg' )" />
