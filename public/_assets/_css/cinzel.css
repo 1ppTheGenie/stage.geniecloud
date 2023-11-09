@@ -1,34 +1,34 @@
 @font-face {
-    font-family: 'Cinzel';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../_fonts/Cinzel-Regular.ttf');
+	font-family: "Cinzel";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../_fonts/Cinzel-Regular.ttf");
 }
 
 @font-face {
-    font-family: 'Cinzel';
-    font-style: normal;
-    font-weight: 500;
-    src: url('../_fonts/Cinzel-Medium.ttf');
+	font-family: "Cinzel";
+	font-style: normal;
+	font-weight: 500;
+	src: url("../_fonts/Cinzel-Medium.ttf");
 }
 
 @font-face {
-    font-family: 'Cinzel';
-    font-style: normal;
-    font-weight: 600;
-    src: url('../_fonts/Cinzel-SemiBold.ttf');
+	font-family: "Cinzel";
+	font-style: normal;
+	font-weight: 600;
+	src: url("../_fonts/Cinzel-SemiBold.ttf");
 }
 
 @font-face {
-    font-family: 'Cinzel';
-    font-style: normal;
-    font-weight: 700;
-    src: url('../_fonts/Cinzel-Bold.ttf');
+	font-family: "Cinzel";
+	font-style: normal;
+	font-weight: 700;
+	src: url("../_fonts/Cinzel-Bold.ttf");
 }
 
 @font-face {
-    font-family: 'Cinzel';
-    font-style: normal;
-    font-weight: 800;
-    src: url('../_fonts/Cinzel-ExtraBold.ttf');
+	font-family: "Cinzel";
+	font-style: normal;
+	font-weight: 800;
+	src: url("../_fonts/Cinzel-ExtraBold.ttf");
 }
