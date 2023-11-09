@@ -748,7 +748,7 @@
 					<xsl:value-of select="//output/@requireSignin" />
 				</xsl:attribute>
 			</xsl:if>
-			&#160;
+			<xsl:comment />
 		</div>
 	</xsl:template>
 
