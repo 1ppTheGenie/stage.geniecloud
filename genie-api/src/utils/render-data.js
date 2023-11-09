@@ -804,6 +804,20 @@ const processListing = async params => {
 		}
 
 		// **** SINGLE LISTING
+		if (listing.virtualTourUrl) {
+			listing.virtualTourUrl = listing.virtualTourUrl.replaceAll(
+				"http:",
+				"https:"
+			);
+
+			if (listing.virtualTourUrl.indexOf("youtube.com/watch")) {
+				listing.virtualTourUrl = listing.virtualTourUrl.replace(
+					/https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
+					"https://www.youtube.com/embed/$1"
+				);
+			}
+		}
+
 		single = [
 			{ mlsNumber: listing.mlsNumber ?? "" },
 			{ mlsID: listing.mlsID ?? "" },
@@ -833,10 +847,7 @@ const processListing = async params => {
 			{ built: listing.yearBuilt ?? "Enquire" },
 
 			{
-				virtualTourUrl: (listing.virtualTourUrl ?? "").replaceAll(
-					"http:",
-					"https:"
-				),
+				virtualTourUrl: listing.virtualTourUrl,
 			},
 
 			{ latitude: listing.latitude ?? 0 },
