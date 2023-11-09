@@ -76,12 +76,7 @@
 				<text class="bold" font-size="140%" font-family="var(--theme-body-font)" fill="var(--theme-body-color)">
 					<tspan x="0" y="0">Type: </tspan>
 					<tspan dx="0.1%" y="0" font-weight="400">
-<xsl:value-of select="$singularPropertyType" />
-
-
-Z<xsl:value-of select="//output/@propertyCaption" />
-
-Z
+						<xsl:value-of select="$singularPropertyType" />
 					</tspan>
 
 					<tspan x="0" dy="2%">Bedrooms:</tspan>
