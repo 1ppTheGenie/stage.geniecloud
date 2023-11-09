@@ -10,7 +10,9 @@
 	Render Key:			landing-page/TheGenie-Hollywood-MLSNUMBER
 -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
 	<xsl:import href="landing-pages.xsl" />
 	<xsl:import href="landing-pages-market-insider.xsl" />
 
@@ -37,7 +39,7 @@
 
 		<body>
 			<xsl:attribute name="class">
-<xsl:value-of select="concat( 'lc-hollywood ', //output/@theme )" />
+				<xsl:value-of select="concat( 'lc-hollywood ', //output/@theme )" />
 
 			</xsl:attribute>
 
@@ -59,7 +61,7 @@
 										<div class="phone-btn mobile-icon">
 											<a>
 												<xsl:attribute name="href">
-<xsl:value-of select="concat('tel:' , translate(//agent[1]/mobile , '.', '') )" />
+													<xsl:value-of select="concat('tel:' , translate(//agent[1]/mobile , '.', '') )" />
 
 												</xsl:attribute>
 
@@ -83,10 +85,8 @@ c0,0,0,0,0.001,0c3.72,0,7.188-1.581,10.305-4.698l2.537-2.537C54.033,45.163,54.38
 													<xsl:value-of select="concat( 'mailto:', //agent[1]/marketingEmail )" />
 												</xsl:attribute>
 
-												<svg 
-													xmlns="http://www.w3.org/2000/svg"
-													width="469.2px" height="469.2px" viewBox="0 0 469.2 469.2" style="enable-background:new 0 0 469.2 469.2;" fill="var(--theme-heading-color)">
-														<path d="M22.202,77.023C25.888,75.657,29.832,74.8,34,74.8h401.2c4.168,0,8.112,0.857,11.798,2.224L267.24,246.364
+												<svg xmlns="http://www.w3.org/2000/svg" width="469.2px" height="469.2px" viewBox="0 0 469.2 469.2" style="enable-background:new 0 0 469.2 469.2;" fill="var(--theme-heading-color)">
+													<path d="M22.202,77.023C25.888,75.657,29.832,74.8,34,74.8h401.2c4.168,0,8.112,0.857,11.798,2.224L267.24,246.364
                                                 c-18.299,17.251-46.975,17.251-65.28,0L22.202,77.023z M464.188,377.944c3.114-5.135,5.012-11.098,5.012-17.544V108.8
                                                 c0-4.569-0.932-8.915-2.57-12.899L298.411,254.367L464.188,377.944z M283.2,268.464c-13.961,11.961-31.253,18.027-48.6,18.027
                                                 c-17.347,0-34.64-6.06-48.6-18.027L20.692,391.687c4.094,1.741,8.582,2.714,13.308,2.714h401.2c4.726,0,9.214-0.973,13.308-2.714
@@ -133,20 +133,20 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 							</div>
 						</div>
 
-<xsl:if test="$personalLogoInverse!=''">
-<div class="header-logo">
-	<a href="#">
-		<div class="agent-company-logo">
-			<xsl:attribute name="style">
-				<xsl:value-of select="concat( 'background-image: url(', $personalLogoInverse, ')' )" />
+						<xsl:if test="$personalLogoInverse!=''">
+							<div class="header-logo">
+								<a href="#">
+									<div class="agent-company-logo">
+										<xsl:attribute name="style">
+											<xsl:value-of select="concat( 'background-image: url(', $personalLogoInverse, ')' )" />
 
-</xsl:attribute>&#160;
-</div>
-<xsl:comment/>
+										</xsl:attribute>&#160;
+									</div>
+									<xsl:comment/>
 
-</a>
-</div>
-</xsl:if>
+								</a>
+							</div>
+						</xsl:if>
 
 						<div class="navigation-links">
 							<nav class="navbar header-navigation">
@@ -212,19 +212,18 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								<h3 class="agent-phone">
 									<a>
 										<xsl:attribute name="href">
-<xsl:value-of select="concat('tel:' , translate(//agent[1]/mobile , '.', '') )" />
-
+											<xsl:value-of select="concat('tel:' , translate(//agent[1]/mobile , '.', '') )" />
 										</xsl:attribute>
 										<xsl:value-of select="//agent[1]/mobile" />
 									</a>
 								</h3>
 							</div>
-<div class="agent-photo">
-	<img style="max-height: 100px;" title="Agent Photo" alt="Agent Photo">
+							<div class="agent-photo">
+								<img style="max-height: 100px;" title="Agent Photo" alt="Agent Photo">
 									<xsl:attribute name="src">
 										<xsl:value-of select="//agent[1]/photo" />
 									</xsl:attribute>
-</img>
+								</img>
 							</div>
 						</div>
 					</div>
@@ -238,10 +237,10 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 							</xsl:attribute>
 						</img>
 						<div class="address-1 container">
-<xsl:call-template name="listing-address-line-one" />
+							<xsl:call-template name="listing-address-line-one" />
 
 							<span>
-<xsl:call-template name="listing-address-line-two" />
+								<xsl:call-template name="listing-address-line-two" />
 
 							</span>
 							<span>
@@ -278,14 +277,14 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 						<div class="heading-color-as-bg hero-details-inner">
 							<div class="hero-price">
 								<span class="gradient-color">
-<!-- <xsl:value-of select="format-number( //single/price, '$###,###')" /> -->
+									<!-- <xsl:value-of select="format-number( //single/price, '$###,###')" /> -->
 									<xsl:choose>
 										<xsl:when test="//single/soldDate!=''">
-<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+											<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
 
 										</xsl:when>
 										<xsl:otherwise>
-<xsl:value-of select="format-number( //single/price, '$###,###')" />
+											<xsl:value-of select="format-number( //single/price, '$###,###')" />
 
 										</xsl:otherwise>
 									</xsl:choose>
@@ -293,17 +292,17 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 							</div>
 							<div class="hero-amenities">
 								<span>
-<xsl:value-of select="//single/bedrooms/@count" />
+									<xsl:value-of select="//single/bedrooms/@count" />
 
 									<xsl:text> Beds</xsl:text>
 								</span>
 								<span>
-<xsl:value-of select="$listingTotalBathrooms" />
+									<xsl:value-of select="$listingTotalBathrooms" />
 
 									<xsl:text> Baths</xsl:text>
 								</span>
 								<span>
-<xsl:value-of select="//single/squareFeet" />
+									<xsl:value-of select="//single/squareFeet" />
 
 									<xsl:text> sq. ft</xsl:text>
 								</span>
@@ -341,7 +340,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								</span>
 							</h2>
 							<div class="body-color">
-<!-- TODO port PHP function <xsl:variable name="paras" select="genie:split-to-paras( //single/description )" /> -->
+								<!-- TODO port PHP function <xsl:variable name="paras" select="genie:split-to-paras( //single/description )" /> -->
 								<xsl:copy-of select="//single/description" />
 							</div>
 						</div>
@@ -358,7 +357,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>YEAR BUILT</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="//single/built" />
+											<xsl:value-of select="//single/built" />
 
 										</span>
 									</li>
@@ -367,7 +366,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>sq. ft</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="format-number(//single/squareFeet, '###,###')" />
+											<xsl:value-of select="format-number(//single/squareFeet, '###,###')" />
 
 										</span>
 									</li>
@@ -377,7 +376,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>Beds</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="//single/bedrooms/@count" />
+											<xsl:value-of select="//single/bedrooms/@count" />
 
 										</span>
 									</li>
@@ -386,7 +385,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>BATHROOM FULL</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="//single/bathrooms/@full" />
+											<xsl:value-of select="//single/bathrooms/@full" />
 
 										</span>
 									</li>
@@ -395,7 +394,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>BATHROOM HALF</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="//single/bathrooms/@half" />
+											<xsl:value-of select="//single/bathrooms/@half" />
 
 										</span>
 									</li>
@@ -414,7 +413,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>Garage Spaces</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="(//single/parking/@garage)" />
+											<xsl:value-of select="(//single/parking/@garage)" />
 
 										</span>
 									</li>
@@ -423,7 +422,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>PARKING SPACES</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="//single/parking/@spaces" />
+											<xsl:value-of select="//single/parking/@spaces" />
 
 										</span>
 									</li>
@@ -432,7 +431,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>PRICE PER SQ. FT.</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="format-number( //single/price div //single/squareFeet, '$###,###')" />
+											<xsl:value-of select="format-number( //single/price div //single/squareFeet, '$###,###')" />
 
 										</span>
 									</li>
@@ -441,7 +440,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>Type</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="$singularPropertyType" />
+											<xsl:value-of select="$singularPropertyType" />
 
 										</span>
 									</li>
@@ -450,7 +449,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>Status</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="//single/listingStatus" />
+											<xsl:value-of select="//single/listingStatus" />
 
 										</span>
 									</li>
@@ -459,7 +458,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>MLS #</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="//single/mlsNumber" />
+											<xsl:value-of select="//single/mlsNumber" />
 
 										</span>
 									</li>
@@ -499,7 +498,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 									<div class="map-iframe">
 										<iframe id="vt-iframe" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
 											<xsl:attribute name="src">
-<xsl:value-of select="//single/virtualTourUrl" />
+												<xsl:value-of select="//single/virtualTourUrl" />
 
 											</xsl:attribute>
 											<xsl:comment/>
@@ -555,7 +554,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 									<xsl:text>I'm interested in</xsl:text>
 								</em>
 								<span class="gradient-color">
-<xsl:call-template name="listing-address-line-one" />
+									<xsl:call-template name="listing-address-line-one" />
 
 								</span>
 							</h2>
@@ -573,12 +572,12 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 									</div>
 									<div class="form-field numberform">
 										<span class="wpcf7-form-control-wrap your-message">
-<input type="text" name="contact_phone" class="form-control" placeholder="Phone" />
+											<input type="text" name="contact_phone" class="form-control" placeholder="Phone" />
 
 										</span>
-<input type="hidden" name="lead_id" value="0" class="lead-id" />
-<input type="hidden" name="send_email" value="1" />
-<input type="hidden" name="funnel_id" value="131730" />
+										<input type="hidden" name="lead_id" value="0" class="lead-id" />
+										<input type="hidden" name="send_email" value="1" />
+										<input type="hidden" name="funnel_id" value="131730" />
 
 									</div>
 
@@ -586,18 +585,18 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 										<div class="che_box body-font">
 											<label class="spn" for="">Preferred contact*:</label>
 											<label>
-<input type="checkbox" name="preferred_contact" />
+												<input type="checkbox" name="preferred_contact" />
 
 												<xsl:text>Text</xsl:text>
 											</label>
 											<label>
-<input type="checkbox" name="preferred_contact" required="" checked="" />
+												<input type="checkbox" name="preferred_contact" required="" checked="" />
 
 												<xsl:text>Phone</xsl:text>
 											</label>
 										</div>
 										<div class="che_box submit-btn">
-<input type="submit" value="Send" class="wpcf7-submit" />
+											<input type="submit" value="Send" class="wpcf7-submit" />
 
 										</div>
 									</div>
@@ -608,12 +607,12 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 					<script>
 						<xsl:value-of select="concat( &quot;const listings = [{caption: 'H', state:'&quot;, //single/listingStatus, &quot;',lat:&quot;, //single/latitude, &quot;,lng:&quot;, //single/longitude, &quot;}]; &quot; )" />
 						<xsl:value-of select="concat( &quot;const options = { dragPan: false, mapStyle: `&quot;, 'streets-v11', &quot;`, zoom: 21, center: { lat:&quot;, //single/latitude, &quot;,lng:&quot;, //single/longitude, &quot;}}; &quot; )" />
-<xsl:value-of select="concat( &quot;document.addEventListener( `genie-landing-loaded`, function() { window.gg.makeMap( `genie-map`, options,&quot;, &quot; { listings } ); })&quot; )" />
+						<xsl:value-of select="concat( &quot;document.addEventListener( `genie-landing-loaded`, function() { window.gg.makeMap( `genie-map`, options,&quot;, &quot; { listings } ); })&quot; )" />
 
 					</script>
 					<div class="map-embed">
 						<div class="map-embed-inner mapboxgl-map" id="map">
-<div id="genie-map" />
+							<div id="genie-map" />
 
 						</div>
 					</div>
@@ -701,7 +700,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 						<h5 class="modal-title">
 							<xsl:text>Request Info</xsl:text>
 						</h5>
-						<!-- Lead Form Example -->
+						<!-- Lead Form -->
 						<form id="form_step1" class="funnel-create-lead">
 							<p>
 								<xsl:text>Tell us how to reach you and we'll get back in touch.</xsl:text>
@@ -740,8 +739,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 									&#160;</textarea>
 							</div>
 							<div class="col-md-12">
-<input type="submit" value="Send" class="submit-btn" />
-
+								<input type="submit" value="Send" class="submit-btn" />
 							</div>
 						</form>
 					</div>
@@ -757,39 +755,39 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 						<h5 class="modal-title">
 							<xsl:text>Schedule A Showing</xsl:text>
 						</h5>
-						<!-- Lead Form Example -->
+						<!-- Lead Form -->
 						<form id="form_step1" class="funnel-create-lead">
 							<p>
 								<xsl:text>Tell us how to reach you and we'll get back in touch.</xsl:text>
 							</p>
 							<div class="awu-field col-md-6">
 								<label for="">First Name*</label>
-<input type="text" name="firstName" class="form-control" />
+								<input type="text" name="firstName" class="form-control" />
 
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Last Name*</label>
-<input type="text" name="lastName" class="form-control" />
+								<input type="text" name="lastName" class="form-control" />
 
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Email Address*</label>
-<input type="text" name="emailAddress" class="form-control" />
+								<input type="text" name="emailAddress" class="form-control" />
 
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Phone Number*</label>
-<input type="text" name="phoneNumber" class="form-control" />
+								<input type="text" name="phoneNumber" class="form-control" />
 
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">When are you available?</label>
-<input type="date" class="form-control" name="meta[availableDate]" placeholder="MM/DD/YYYY" />
+								<input type="date" class="form-control" name="meta[availableDate]" placeholder="MM/DD/YYYY" />
 
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Are you available at another time?</label>
-<input type="date" name="meta[alternativeDate]" class="form-control" placeholder="MM/DD/YYYY" />
+								<input type="date" name="meta[alternativeDate]" class="form-control" placeholder="MM/DD/YYYY" />
 
 							</div>
 							<div class="awu-field col-md-12">
@@ -798,7 +796,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											&#160;</textarea>
 							</div>
 							<div class="col-md-12">
-<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />
+								<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />
 
 							</div>
 						</form>
@@ -810,8 +808,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 				<xsl:comment/>
 			</div>
 
-<xsl:call-template name="default-thank-you-popup" />
-
+			<xsl:call-template name="default-thank-you-popup" />
 
 			<div class="funnel-footer-background">
 				<xsl:call-template name="agent-details" />
