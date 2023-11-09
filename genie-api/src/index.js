@@ -638,7 +638,6 @@ const prepareAsset = async (asset, params) => {
 		let pages, suffix, dims, size;
 
 		const { s3Key } = await getS3Key(asset, params);
-		//console.log("lpo", params.lpo, s3Key);
 
 		if (params.pages) {
 			pages = params.pages;
@@ -799,6 +798,10 @@ const prepareAsset = async (asset, params) => {
 							...params,
 							overrideKey,
 							size: downloadSize,
+							qrCode: `${genieGlobals.GENIE_HOST}${s3Key.s3Key.replace(
+								"/index.html",
+								""
+							)}`,
 						});
 					}
 				}

@@ -85,7 +85,9 @@ export default () => {
 						status="new"
 						propertyType={settings.propertyTypeID}
 						propertyView={sharedEmbedStore.propertyType}
-						showProperties={showProperties}
+						showProperties={(propertyTypeID, statusType) =>
+							showProperties(propertyTypeID, statusType)
+						}
 					/>
 				</div>
 				<div>
@@ -95,7 +97,9 @@ export default () => {
 						status="active"
 						propertyType={settings.propertyTypeID}
 						propertyView={sharedEmbedStore.propertyType}
-						showProperties={showProperties}
+						showProperties={(propertyTypeID, statusType) =>
+							showProperties(propertyTypeID, statusType)
+						}
 					/>
 				</div>
 				<div>
@@ -105,7 +109,9 @@ export default () => {
 						status="pending"
 						propertyType={settings.propertyTypeID}
 						propertyView={sharedEmbedStore.propertyType}
-						showProperties={showProperties}
+						showProperties={(propertyTypeID, statusType) =>
+							showProperties(propertyTypeID, statusType)
+						}
 					/>
 				</div>
 
@@ -116,7 +122,9 @@ export default () => {
 						status="sold"
 						propertyType={settings.propertyTypeID}
 						propertyView={sharedEmbedStore.propertyType}
-						showProperties={showProperties}
+						showProperties={(propertyTypeID, statusType) =>
+							showProperties(propertyTypeID, statusType)
+						}
 					/>
 				</div>
 			</div>
@@ -206,6 +214,7 @@ const ListingTableLinks = props => {
 			<Show when={props.propertyType !== -1}>
 				<span
 					onClick={() =>
+						areaDataStore.propertyStats[props.status] > 0 &&
 						props.showProperties(props.propertyView, props.status)
 					}>
 					{props.title + ": "}

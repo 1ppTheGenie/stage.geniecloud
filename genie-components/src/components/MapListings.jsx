@@ -1,10 +1,8 @@
-import { createSignal } from "solid-js";
 import { LeafletMap, GeoArea, CircleMarker } from "@/components";
 import { format } from "date-fns";
 import { currency, getCssVar, address, useSettings } from "@/utilities";
 
 export const MapListings = props => {
-	const [bounds, setBounds] = createSignal();
 	const settings = useSettings();
 
 	let headings;
@@ -52,39 +50,32 @@ export const MapListings = props => {
 			break;
 	}
 
-	/*
-	cre
-	if (props.listings.length > 0) {
-		bounds = window.L.latLngBounds([listings[0].latitude, listings[0].longitude]);
-
-		props.listings.forEach(l => bounds.extend([l.latitude, l.longitude]));
-		Markers = () =>
-	}*/
-
 	return (
 		<div className="flex-row" style={props.style}>
-			<LeafletMap
-				id={props.id || "genie-embed-map"}
-				mapStyle={settings.mapstyle || "streets-v11"}
-				style=" width: 100%; min-height: 370px">
-				<GeoArea
-					areaId={settings.areaid}
-					style=" color: #feff00; fill-opacity: 0"
-				/>
-				<For each={props.listings}>
-					{(l, i) => (
-						<CircleMarker
-							key={`${l.mlsNumber}:${l.latitude}:${l.longitude}`}
-							color={getCssVar(
-								`--${settings.marketstatus}`,
-								document.body
-							).trim()}
-							caption={i + 1}
-							position={[l.latitude, l.longitude]}
-						/>
-					)}
-				</For>
-			</LeafletMap>
+			<div class="w-33">
+				<LeafletMap
+					id={props.id || "genie-embed-map"}
+					mapStyle={settings.mapstyle || "streets-v11"}
+					style="width: 100%; min-height: 370px">
+					<GeoArea
+						areaId={settings.areaid}
+						style=" color: #feff00; fill-opacity: 0"
+					/>
+					<For each={props.listings}>
+						{(l, i) => (
+							<CircleMarker
+								key={`${l.mlsNumber}:${l.latitude}:${l.longitude}`}
+								color={getCssVar(
+									`--${settings.marketstatus}`,
+									document.body
+								).trim()}
+								caption={i + 1}
+								position={[l.latitude, l.longitude]}
+							/>
+						)}
+					</For>
+				</LeafletMap>
+			</div>
 			<div class="w-66">
 				<div class="listDetail">
 					<table

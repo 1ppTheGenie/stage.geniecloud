@@ -191,7 +191,7 @@ const Genie = ({ layout, nocopyright, nomargin, isLast, ...props }) => {
 
 					<span>
 						&nbsp;
-						{`Copyright \u00a9 ${new Date().getFullYear()} 1parkplace, Inc.`}
+						{`\u00a9 ${new Date().getFullYear()} 1parkplace, Inc.`}
 					</span>
 				</footer>
 			</Show>

@@ -4,12 +4,13 @@ import {
 	createEffect,
 	createContext,
 	useContext,
+	onMount,
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import { differenceInHours } from "date-fns";
 
 import { getAreaMonthly, getAgentData } from "./rest";
-import { sharedEmbedStore } from "./state";
+import { sharedEmbedStore, setSharedEmbedStore } from "./state";
 
 export const SettingsContext = createContext();
 
@@ -77,20 +78,17 @@ export const usePagination = (size = 10, page = 1) => {
 		pageOffset,
 	};
 };
-/*
-export const [sharedEmbedStore, setSharedEmbedStore] = createStore({
-	period: parseInt((ggSettings && ggSettings.areaPeriod) ?? 6),
-	propertyType: 0 /*parseInt(
-		(ggSettings && ggSettings.propertyType && ggSettings.propertyType > -1) ?? 1
-	),* /,
-});
-*/
 
 export const useSettings = () => {
 	const settingsContext = useContext(SettingsContext);
-	const globalSettings = typeof ggSettings !== "undefined" ? ggSettings : {};
+	const globalSettings =
+		typeof window.ggSettings !== "undefined" ? window.ggSettings : {};
 
 	let settings = { ...globalSettings, ...settingsContext };
+
+	onMount(() => {
+		setSharedEmbedStore({ period: parseInt(settingsContext.areaPeriod) });
+	});
 
 	const keyModify = s => s.toLowerCase().replaceAll("_", "");
 	Object.keys(settings).forEach(
@@ -124,60 +122,58 @@ export const filterListings = (
 	timeCutOff.setMonth(timeCutOff.getMonth() - period);
 	const now = new Date();
 
-	if (!typeof mode == "function") {
-		switch (mode.toLocaleLowerCase()) {
-			case "sold":
-				descending = (l1, l2) => {
-					const a = Date.parse(l1.soldDate);
-					const b = Date.parse(l2.soldDate);
+	switch (mode.toLocaleLowerCase()) {
+		case "sold":
+			descending = (l1, l2) => {
+				const a = Date.parse(l1.soldDate);
+				const b = Date.parse(l2.soldDate);
 
-					return a < b ? 1 : a > b ? -1 : 0;
-				};
-				subset = listings.filter(
-					p =>
-						p.statusType.toLowerCase() === "sold" &&
-						p.propertyTypeID === propertyTypeID &&
-						p.soldDate !== null &&
-						Date.parse(p.soldDate) >= timeCutOff.getTime()
-				);
-				break;
+				return a < b ? 1 : a > b ? -1 : 0;
+			};
+			subset = listings.filter(
+				p =>
+					p.statusType.toLowerCase() === "sold" &&
+					p.propertyTypeID === propertyTypeID &&
+					p.soldDate !== null &&
+					Date.parse(p.soldDate) >= timeCutOff.getTime()
+			);
+			break;
 
-			case "new":
-				subset = listings.filter(
-					p =>
-						p.statusType.toLowerCase() === "active" &&
-						Math.floor(differenceInHours(Date.parse(p.listDate), now) / 24) >
-							-30 &&
-						p.propertyTypeID === propertyTypeID
-				);
+		case "new":
+			subset = listings.filter(
+				p =>
+					p.statusType.toLowerCase() === "active" &&
+					Math.floor(differenceInHours(Date.parse(p.listDate), now) / 24) >
+						-30 &&
+					p.propertyTypeID === propertyTypeID
+			);
 
-				descending = (l1, l2) => {
-					const a = Date.parse(l1.listDate);
-					const b = Date.parse(l2.listDate);
+			descending = (l1, l2) => {
+				const a = Date.parse(l1.listDate);
+				const b = Date.parse(l2.listDate);
 
-					return a > b ? -1 : a < b ? 1 : 0;
-				};
-				break;
+				return a > b ? -1 : a < b ? 1 : 0;
+			};
+			break;
 
-			case "pending":
-			case "active":
-			default:
-				descending = (l1, l2) => {
-					const a = Date.parse(l1.listDate);
-					const b = Date.parse(l2.listDate);
+		case "pending":
+		case "active":
+		default:
+			descending = (l1, l2) => {
+				const a = Date.parse(l1.listDate);
+				const b = Date.parse(l2.listDate);
 
-					return a < b ? 1 : a > b ? -1 : 0;
-				};
-				subset = listings.filter(
-					p =>
-						p.statusType.toLowerCase() === mode.toLowerCase() &&
-						p.propertyTypeID === propertyTypeID
-				);
-				break;
-		}
-
-		subset.sort(descending);
+				return a < b ? 1 : a > b ? -1 : 0;
+			};
+			subset = listings.filter(
+				p =>
+					p.statusType.toLowerCase() === mode.toLowerCase() &&
+					p.propertyTypeID === propertyTypeID
+			);
+			break;
 	}
+
+	subset.sort(descending);
 
 	return subset;
 };

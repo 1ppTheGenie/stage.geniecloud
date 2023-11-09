@@ -53,136 +53,132 @@ export const ListingsTable = props => {
 		setSignedIn(bool);
 	};
 
-	return (
-		<>
-			{showSignIn && <DataAccess signedin={signInComplete} />}
-			<table id="listing-table" style={style} class={`mode-${props.mode}`}>
-				<thead>
-					<Show when={props.mode}>
-						<tr>
-							{headings[
-								props.mode.substring(0, 4) !== "sold" ? "default" : "soldextended"
-							].map((caption, i) => (
-								<th
-									key={i}
-									title={
-										caption === "BR"
-											? "Bedrooms"
-											: caption === "BA"
-											? "Bathrooms"
-											: ""
-									}>
-									{caption}
-								</th>
-							))}
-						</tr>
-					</Show>
-				</thead>
-				<tbody>
-					<Show when={props.mode == "sold"}>
-						<For each={props.listings}>
-							{(l, index) => {
-								return (
-									<tr>
-										<td style="text-align: left">
-											<Show when={withIcon}>
-												<SmallIcon marketstatus={props.marketstatus} />
-											</Show>
-											{props.marketstatus === "sold" &&
-												settings.signin &&
-												!signedIn && (
-													<span
-														style="cursor: pointer; margin-left: 0.5rem"
-														onClick={() => setShowSignin(true)}>
-														Sign in to see Address
-													</span>
-												)}
-											{(props.marketstatus !== "sold" ||
-												!settings.signin ||
-												signedIn) &&
-												address(l)}
-										</td>
-										<td>{currency(parseInt(l.priceHigh))}</td>
-										<td
-											classList={{
-												blurText: settings.blurPrice && !signedIn,
-											}}>
-											{currency(parseInt(l.salePrice))}
-										</td>
-										<td>{l.bedrooms}</td>
-										<td>{l.bathroomsTotal}</td>
-
-										<td>
-											{l.soldDate && format(Date.parse(l.soldDate), "M-d-y")}
-										</td>
-										<td>
-											{l.listDate && format(Date.parse(l.listDate), "M-d-y")}
-										</td>
-
-										<td>{Intl.NumberFormat("en-US").format(l.sqft)}</td>
-
-										<td
-											classList={{
-												blurText: settings.blurPrice && !signedIn,
-											}}>
-											{currency(parseInt(l.salePrice) / parseInt(l.sqft))}
-										</td>
-
-										<td>{l.daysOnMarket > 0 ? l.daysOnMarket : "Today!"}</td>
-									</tr>
-								);
-							}}
-						</For>
-					</Show>
-
-					<Show when={props.mode != "sold"}>
-						<For each={props.listings}>
-							{(l, index) => {
-								return (
-									<tr>
-										<td style="text-align: left">
-											<Show when={withIcon}>
-												<SmallIcon marketstatus={props.marketstatus} />
-											</Show>
-											{props.mode === "sold" && settings.signin && !signedIn && (
+return (
+	<>
+		{showSignIn && <DataAccess signedin={signInComplete} />}
+		<table id="listing-table" style={style} class={`mode-${props.mode}`}>
+			<thead>
+				<Show when={props.mode}>
+					<tr>
+						{headings[
+							props.mode.substring(0, 4) !== "sold" ? "default" : "soldextended"
+						].map((caption, i) => (
+							<th
+								key={i}
+								title={
+									caption === "BR"
+										? "Bedrooms"
+										: caption === "BA"
+										? "Bathrooms"
+										: ""
+								}>
+								{caption}
+							</th>
+						))}
+					</tr>
+				</Show>
+			</thead>
+			<tbody>
+				<Show when={props.mode == "sold"}>
+					<For each={props.listings}>
+						{(l, index) => {
+							return (
+								<tr>
+									<td style="text-align: left">
+										<Show when={withIcon}>
+											<SmallIcon marketstatus={props.marketstatus} />
+										</Show>
+										{props.marketstatus === "sold" &&
+											settings.signin &&
+											!signedIn && (
 												<span
 													style="cursor: pointer; margin-left: 0.5rem"
 													onClick={() => setShowSignin(true)}>
 													Sign in to see Address
 												</span>
 											)}
-											{(props.mode !== "sold" ||
-												!settings.signin ||
-												signedIn) &&
-												address(l)}
-										</td>
+										{(props.marketstatus !== "sold" ||
+											!settings.signin ||
+											signedIn) &&
+											address(l)}
+									</td>
+									<td>{currency(parseInt(l.priceHigh))}</td>
+									<td
+										classList={{
+											blurText: settings.blurPrice && !signedIn,
+										}}>
+										{currency(parseInt(l.salePrice))}
+									</td>
+									<td>{l.bedrooms}</td>
+									<td>{l.bathroomsTotal}</td>
 
-										<Show when={props.mode !== "sold"}>
-											<td>{currency(l.priceHigh)}</td>
+									<td>
+										{l.soldDate && format(Date.parse(l.soldDate), "M-d-y")}
+									</td>
+									<td>
+										{l.listDate && format(Date.parse(l.listDate), "M-d-y")}
+									</td>
+
+									<td>{Intl.NumberFormat("en-US").format(l.sqft)}</td>
+
+									<td
+										classList={{
+											blurText: settings.blurPrice && !signedIn,
+										}}>
+										{currency(parseInt(l.salePrice) / parseInt(l.sqft))}
+									</td>
+
+									<td>{l.daysOnMarket > 0 ? l.daysOnMarket : "Today!"}</td>
+								</tr>
+							);
+						}}
+					</For>
+				</Show>
+
+				<Show when={props.mode != "sold"}>
+					<For each={props.listings}>
+						{(l, index) => {
+							return (
+								<tr>
+									<td style="text-align: left">
+										<Show when={withIcon}>
+											<SmallIcon marketstatus={props.marketstatus} />
 										</Show>
+										{props.mode === "sold" && settings.signin && !signedIn && (
+											<span
+												style="cursor: pointer; margin-left: 0.5rem"
+												onClick={() => setShowSignin(true)}>
+												Sign in to see Address
+											</span>
+										)}
+										{(props.mode !== "sold" || !settings.signin || signedIn) &&
+											address(l)}
+									</td>
 
-										<td>{l.bedrooms}</td>
-										<td>{l.bathroomsTotal}</td>
+									<Show when={props.mode !== "sold"}>
+										<td>{currency(l.priceHigh)}</td>
+									</Show>
 
-										<Show when={l.listDate}>
-											<td>{format(Date.parse(l.listDate), "M-d-y")}</td>
-										</Show>
+									<td>{l.bedrooms}</td>
+									<td>{l.bathroomsTotal}</td>
 
-										<td>{Intl.NumberFormat("en-US").format(l.sqft)}</td>
+									<Show when={l.listDate}>
+										<td>{format(Date.parse(l.listDate), "M-d-y")}</td>
+									</Show>
 
-										<td>
-											{currency(parseInt(l.priceHigh) / parseInt(l.sqft))}
-										</td>
-										<td>{l.daysOnMarket > 0 ? l.daysOnMarket : "Today!"}</td>
-									</tr>
-								);
-							}}
-						</For>
-					</Show>
-				</tbody>
-			</table>
-		</>
-	);
+									<td>{Intl.NumberFormat("en-US").format(l.sqft)}</td>
+
+									<td>{currency(parseInt(l.priceHigh) / parseInt(l.sqft))}</td>
+									<td>{l.daysOnMarket > 0 ? l.daysOnMarket : "Today!"}</td>
+								</tr>
+							);
+						}}
+					</For>
+				</Show>
+			</tbody>
+		</table>
+	</>
+);
 };
 
 const SmallIcon = props => {

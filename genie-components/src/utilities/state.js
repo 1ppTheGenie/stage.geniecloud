@@ -1,8 +1,16 @@
 import { createStore } from "solid-js/store";
 /* prettier-ignore */
-import { createSignal, createEffect, createResource, createRoot } from "solid-js";
+import {
+	createSignal,
+	createEffect,
+	createResource,
+	createRoot,
+	useContext,
+} from "solid-js";
 /* prettier-ignore */
 import { getAreaData, getAreaMonthly, getAreaProperties } from "@/utilities/";
+
+import { SettingsContext } from "@/utilities";
 
 export const propertyTypeCaption = (type, count = 0, abbr = false) => {
 	let caption;

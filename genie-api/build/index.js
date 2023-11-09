@@ -9495,7 +9495,11 @@ var prepareAsset = async (asset, params) => {
             await prepareAsset(settings.defaultDownload, {
               ...params,
               overrideKey,
-              size: downloadSize
+              size: downloadSize,
+              qrCode: `${genieGlobals.GENIE_HOST}${s3Key.s3Key.replace(
+                "/index.html",
+                ""
+              )}`
             });
           }
         }

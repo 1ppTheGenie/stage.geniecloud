@@ -1,7 +1,11 @@
 import { Show } from "solid-js";
 import { areaDataStore, listingsStore, usePagination, useSettings } from "@/utilities";
-import { HomeTypes, MapListings, Pagination, ListingsShowing } from "@/components";
-import { format } from "date-fns";
+import {
+	HomeTypes,
+	MapListings,
+	Pagination,
+	ListingsShowing,
+} from "@/components";
 
 import "@/assets/css/listing-map-style-one.css";
 
@@ -10,20 +14,38 @@ export default () => {
 	const settings = useSettings();
 	const currentListings = () =>
 		listingsStore.listings.slice(pageOffset(), pageOffset() + pageSize());
-    
-    const date = new Date();
-    
-    var day = date.toLocaleString('default', {day:'numeric', timeZone:'America/Los_Angeles'});
-    var month = date.toLocaleString('default', {month:'long', timeZone:'America/Los_Angeles'});
-    var year = date.toLocaleString('default', {year:'numeric', timeZone:'America/Los_Angeles'});
-    var hour = date.toLocaleString('default', {hour:'numeric',hour12: false, timeZone:'America/Los_Angeles'});
-    var minute = date.toLocaleString('default', {minute:'2-digit', timeZone:'America/Los_Angeles'});
-    if(minute.length<2){
-        minute = '0'+minute;
-    }
-    var ap = hour > 11? 'pm' : 'am';
 
-    var date_time_text = month+' '+day+', '+year+' @ '+hour+':'+minute+ap;
+	const date = new Date();
+	const tz = "America/Los_Angeles";
+
+	var day = date.toLocaleString("default", {
+		day: "numeric",
+		timeZone: tz,
+	});
+	var month = date.toLocaleString("default", {
+		month: "long",
+		timeZone: tz,
+	});
+	var year = date.toLocaleString("default", {
+		year: "numeric",
+		timeZone: tz,
+	});
+	var hour = date.toLocaleString("default", {
+		hour: "numeric",
+		hour12: false,
+		timeZone: tz,
+	});
+	var minute = date.toLocaleString("default", {
+		minute: "2-digit",
+		timeZone: tz,
+	});
+	if (minute.length < 2) {
+		minute = "0" + minute;
+	}
+	var ap = hour > 11 ? "pm" : "am";
+
+	var date_time_text =
+		month + " " + day + ", " + year + " @ " + hour + ":" + minute + ap;
 
 	return (
 		<div id="padded" style="padding: 1rem 0; width: 100%">
@@ -49,7 +71,7 @@ export default () => {
 						pageSize={pageSize()}
 						offset={pageSize() * currentPage()}
 						len={listingsStore.listings.length}
-						mode={settings.marketstatus}
+						mode={settings.marketstatus ?? "active"}
 						period={areaDataStore.areaPeriod}
 					/>
 				</p>
