@@ -331,22 +331,12 @@
 													<a href="#lead-form" data-scroll-to="#lead-form" class="btn-style heading-color-as-bg background-as-color body-font n">Get My Value</a>
 												</div>
 											</xsl:when>
-											<xsl:when test="string(//lead/property/firstAmericanCurrentAVM)=''">
-												<xsl:text>?</xsl:text>
-											</xsl:when>
 											<xsl:otherwise>
-												<h2 class="font-weight-bold subtitle-color body-font mb-2">
-													<!--<xsl:value-of select="genie:currency-format( number(//lead/property/firstAmericanCurrentAVM), 0 )" />-->
-													<xsl:value-of select="'researching'" />
+												<h2 class="font-weight-bold subtitle-color body-font mb-2" data-lead="avm">
+													<span class="spinner">
+														<xsl:comment/>
+													</span>
 												</h2>
-
-												<h5 class="font-weight-bold subtitle-color body-font mb-2">
-													<!--<xsl:value-of select="genie:currency-format( number(//lead/property/avmLow), 0 )" />-->
-													<xsl:value-of select="'researching'" />
-													<xsl:text> - </xsl:text>
-													<!--<xsl:value-of select="genie:currency-format( number(//lead/property/avmHigh), 0 )" />-->
-													<xsl:value-of select="'researching'" />
-												</h5>
 											</xsl:otherwise>
 										</xsl:choose>
 									</p>
