@@ -245,6 +245,7 @@ export default () => {
 		);
 
 		urlParams.agentId = ggSettings.agentId;
+		urlParams.hideAVM = ggSettings.hideAVM;
 
 		return await landingPageData(urlParams);
 	};
