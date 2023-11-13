@@ -406,7 +406,7 @@
 							<div class="average-count-part">
 								<p class="avg-count-number heading-font heading-color">
 									<xsl:value-of select="format-number(//statistics/@avgPricePerSqFtSold,  '$###,###')" />
-								</p>								
+								</p>
 								<p class="avg-count-text text-uppercast body-font body-color">
 									<xsl:text>AVERAGE SOLD PRICE PER SQUARE FOOT</xsl:text>
 								</p>
