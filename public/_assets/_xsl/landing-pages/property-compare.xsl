@@ -174,7 +174,7 @@
 										<span data-lead="state">
 											<xsl:comment/>
 										</span>
-										&#160;
+										<xsl:text>&#160;</xsl:text>
 										<span data-lead="zip">
 											<xsl:comment/>
 										</span>
@@ -501,7 +501,7 @@
 										<div class="form-group">
 											<label for="exampleFormControlTextarea1" class="background-as-color subtitle-font">Tell us more about your property:</label>
 											<textarea class="form-control" id="exampleFormControlTextarea1" name="note" rows="4" placeholder="Is there anything we should know before estimation?" required="required">
-												<xsl:comment />
+												<xsl:value-of select="''" />
 											</textarea>
 										</div>
 									</div>
