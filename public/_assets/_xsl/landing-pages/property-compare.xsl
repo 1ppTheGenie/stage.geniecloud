@@ -85,7 +85,9 @@
 					<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
 				</xsl:attribute>
 
-				<div class="banner-section" id="compare-header-map" style="z-index: 0;" />
+				<div class="banner-section" id="compare-header-map" style="z-index: 0;">
+					<xsl:comment />
+				</div>
 
 				<div class="container banner-content-box-temp-11">
 					<div class="row">
