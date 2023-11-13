@@ -222,7 +222,7 @@ const defaultRenderSettings = {
 	withBleed: false,
 	withCrops: false,
 	blurPrice: false,
-	hideAVM: false,
+	hideAVM: true,
 	requireSignin: false,
 	customerName: null,
 	isLeadCapture: false,
