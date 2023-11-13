@@ -1,35 +1,29 @@
 <?xml version="1.0"?>
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="global-variables.xsl" />
-<xsl:import href="genie-functions.xsl" />
+	<xsl:import href="global-variables.xsl" />
+	<xsl:import href="genie-functions.xsl" />
 
-
-<xsl:mode on-no-match="shallow-copy" />
-
+	<xsl:mode on-no-match="shallow-copy" />
 
 	<xsl:output method="html" encoding="utf-8" indent="no" omit-xml-declaration="yes" doctype-system="" doctype-public="html" />
-
 	<xsl:template match="/">
 		<html lang="en">
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'genie-landing-page ', //output/@theme, ' asset-v', //output/@assetVersion )" />
 			</xsl:attribute>
-
 			<script>
-				<xsl:value-of select="concat( 'window.gg = {}; let ggSettings = { agentId:`', //output/@userId, '`, areaId:', number(//area/id), ', leadAreaId:`', //output/@leadAreaId, '`, mlsNumber:`', //single/mlsNumber, '`, mlsId:`', //single/mlsId, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(//output/@hideAVM='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', lead: { propertyId:', number(//lead/property_id), ', firstName:`', //lead/property/firstName, '`, lastName:`', //lead/property/lastName, '`, email:`', //lead/property/emailAddress, '`}};' )" />
+				<xsl:value-of select="concat( 'window.gg = {}; let ggSettings = { agentId:`', //output/@userId, '`, areaId:', number(//area/id), ', leadAreaId:`', //output/@leadAreaId, '`, mlsNumber:`', //single/mlsNumber, '`, mlsId:`', //single/mlsId, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(string(//output/@hideAVM)='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', lead: { propertyId:', number(//lead/property_id), ', firstName:`', //lead/property/firstName, '`, lastName:`', //lead/property/lastName, '`, email:`', //lead/property/emailAddress, '`}};' )" />
 				<xsl:value-of select="concat( 'window.ghub = { SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, mapStyle: `satellite-v9`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
 			</script>
 			<xsl:call-template name="landing-page" />
 		</html>
 	</xsl:template>
-
 	<xsl:template name="editable">
 		<xsl:param name="id" />
 		<xsl:param name="default" />
 		<xsl:param name="data-msg" select="'false'" />
 		<xsl:param name="data-element" select="'p'" />
-
 		<xsl:if test="//output/@isEditing">
 			<xsl:attribute name="data-element">
 				<xsl:value-of select="$data-element" />
@@ -49,41 +43,34 @@
 				</xsl:attribute>
 			</xsl:if>
 		</xsl:if>
-
 		<xsl:choose>
 			<xsl:when test="//overrides/*[name()=$id][1]">
-<xsl:value-of select="//overrides/*[name()=$id][1]" />
-
+				<xsl:value-of select="//overrides/*[name()=$id][1]" />
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="$default" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
 	<xsl:template name="head-meta">
 		<root>
 			<title>Welcome to your GenieHub Landing page</title>
 			<description>You're visting a GenieHub Landing page</description>
 		</root>
 	</xsl:template>
-
 	<xsl:template name="copyright">
 		<xsl:param name="url" select="'http://genie.ai'" />
-
 		<div class="bottom-bar-copyright">
 			<div id="copyright">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4 col-sm-4 ">
 							<img alt="1parkplace" src="/_assets/_img/1pp-logo.png" />
-
 							<p class="heading-font ">
 								<strong>
 									<xsl:text>Copyright &#169; </xsl:text>
 									<span id="copyright-year">
-<xsl:value-of select="//output/@year" />
-
+										<xsl:value-of select="//output/@year" />
 									</span>
 									<a target="_blank" href="#">1parkplace, Inc.</a>.
 								</strong>
@@ -97,8 +84,7 @@
 								</strong>
 								<br/>
 								<img class="footer-middle-img" src="/_assets/_img/made-with-love.png">
-<xsl:attribute name="alt" select="concat( 'Made with Love in San Diego - pV', //output/@pluginVersion,', aV', //output/@assetVersion )" />
-
+									<xsl:attribute name="alt" select="concat( 'Made with Love in San Diego - pV', //output/@pluginVersion,', aV', //output/@assetVersion )" />
 								</img>
 								<br/>
 								<strong>US Patent #:</strong> 10,713,325</p>
@@ -114,10 +100,8 @@
 			</div>
 		</div>
 	</xsl:template>
-
 	<xsl:template name="agent-about">
 		<a name="about" />
-
 		<section id="about-section" class="background abt-sec">
 			<div class="container">
 				<div class="row">
@@ -126,7 +110,6 @@
 							<div class="photo">
 								<span class=" f-name">
 									<xsl:value-of select="concat('Call/Text ', //agent[1]/firstName,' for your private showing:' )" />
-
 								</span>
 								<img>
 									<xsl:attribute name="alt">
@@ -137,27 +120,21 @@
 									</xsl:attribute>
 								</img>
 							</div>
-
 							<div class="details">
 								<h3 class="agent-name heading-font body-color">
 									<xsl:value-of select="//agent[1]/marketingName" />
-
 								</h3>
 								<h2 class=" body-font">
 									<xsl:value-of select="//agent[1]/marketingTitle" />
 								</h2>
-
 								<h3 class="agent-phone">
 									<a>
 										<xsl:attribute name="href">
 											<xsl:value-of select="concat( 'tel:',//agent[1]/mobile )" />
-
 										</xsl:attribute>
 										<xsl:value-of select="//agent[1]/mobile" />
-
 									</a>
 								</h3>
-
 								<button class="btn subtitle-font background-as-color contact-me-btn">
 									<span class="contact-svg">
 										<svg xmlns="http://www.w3.org/2000/svg"
@@ -169,23 +146,18 @@
 									</span>
                                         Contact Me
 								</button>
-
 								<h2 class="agent-website body-color body-font">
 									<a target="_blank">
 										<xsl:attribute name="href">
 											<xsl:value-of select="concat( 'https://', //agent[1]/website )" />
-
 										</xsl:attribute>
 										<xsl:value-of select="//agent[1]/website" />
-
 									</a>
 								</h2>
 								<h4 class="agent-code body-color body-font">
 									<xsl:value-of select="//agent[1]/marketingLicense" />
-
 								</h4>
 							</div>
-
 							<div class="agent-logo">
 								<div class="funnel-aboput-personal-logo funnel-company-logo">
 									<div class="funnel-personal-logo  editable">
@@ -212,38 +184,32 @@
 				</div>
 			</div>
 		</section>
-
 		<div class="modal fade contact-modal" id="contact-me" tabindex="-1" role="dialog" aria-labelledby="fl-thankyou-message" aria-hidden="false">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490" data-dismiss="modal">
-<polygon fill="var(--theme-emphasis-color)" stroke-width="30px" stroke="var(--theme-emphasis-color)" points="11.387,490 245,255.832 478.613,490 489.439,479.174 255.809,244.996 489.439,10.811 478.613,0 245,234.161 11.387,0 0.561,10.811 234.191,244.996 0.561,479.174 " />
-
+					<polygon fill="var(--theme-emphasis-color)" stroke-width="30px" stroke="var(--theme-emphasis-color)" points="11.387,490 245,255.832 478.613,490 489.439,479.174 255.809,244.996 489.439,10.811 478.613,0 245,234.161 11.387,0 0.561,10.811 234.191,244.996 0.561,479.174 " />
 				</svg>
-
 				<div class="modal-content">
 					<div class="modal-body">
 						<div class="modal-background-img background">
 							<h1 class="modal_title heading-color heading-font">Fill in your details below </h1>
 							<p class="modal_subtitle body-font body-color">Our team will get in touch with you within 24 hours.</p>
 							<form class="funnel-create-lead" style="margin:0">
-<input type="hidden" name="genieTags" value="ClickCta,RequestMoreInfo" />
-
+								<input type="hidden" name="genieTags" value="ClickCta,RequestMoreInfo" />
 
 								<div class="form-group">
-<input type="text" placeholder="Enter Name*" name="fullName" class="form-control heading-font heading-color phone" id="name" required="" />
-
+									<input type="text" placeholder="Enter Name*" name="fullName" class="form-control heading-font heading-color phone" id="name" required="" />
 								</div>
 								<div class="form-group">
 									<input type="email" placeholder="Enter Email*" name="emailAddress" class="form-control heading-font heading-color step1-input" id="email" />
 								</div>
 								<div class="form-group">
-<input type="text" placeholder="Enter Phone No.*" name="phoneNumber" class="form-control heading-font heading-color step1-input" id="phonenumber" required="" />
-
+									<input type="text" placeholder="Enter Phone No.*" name="phoneNumber" class="form-control heading-font heading-color step1-input" id="phonenumber" required="" />
 								</div>
-
 								<div class="form-group">
 									<textarea placeholder="Enter Message" name="note" class="form-control heading-font heading-color step1-input" id="message" rows="6">
-										&#160;</textarea>
+										<xsl:comment />
+									</textarea>
 								</div>
 								<div class="fl-btn-value text-center">
 									<button class="btn btn-value-info widget heading-font heading-color-as-bg background-as-color">Submit</button>
@@ -255,7 +221,6 @@
 			</div>
 		</div>
 	</xsl:template>
-
 	<xsl:template name="agent-details">
 		<div id="agent-contact" class="container">
 			<div class="row">
@@ -268,7 +233,6 @@
 								</xsl:attribute>
 							</div>
 						</div>
-
 						<ul class="heading-font outline" style="padding: 0;">
 							<li>
 								<xsl:value-of select="//agent[1]/marketingName" />
@@ -327,14 +291,12 @@
 							<xsl:text>Privacy Policy</xsl:text>
 						</a>
 					</div>
-
 					<xsl:if test="string(//mlsDisplay/text())!='external'">
 						<div id="mls-disclaimer">
 							<xsl:copy-of select="//mlsDisplay/text()" />
 							<xsl:comment/>
 						</div>
 					</xsl:if>
-
 					<xsl:if test="//agent[1]/privacySource!='external'">
 						<div id="privacy-policy">
 							<xsl:copy-of select="//agent[1]/privacyPolicy/text()" />
@@ -345,14 +307,11 @@
 			</div>
 		</div>
 	</xsl:template>
-
 	<xsl:template name="css-links">
 		<xsl:param name="primaryCSS" select="'common'" />
 		<xsl:param name="secondaryCSS" select="''" />
 		<xsl:param name="includeFooterCSS" select="'true'" />
-
 		<link rel="stylesheet" type="text/css" href="/_assets/_css/genie-colors.css" />
-
 		<xsl:if test="$primaryCSS!=''">
 			<link rel="stylesheet" type="text/css">
 				<xsl:attribute name="href">
@@ -360,7 +319,6 @@
 				</xsl:attribute>
 			</link>
 		</xsl:if>
-
 		<xsl:if test="$secondaryCSS!=''">
 			<link rel="stylesheet" type="text/css">
 				<xsl:attribute name="href">
@@ -368,18 +326,15 @@
 				</xsl:attribute>
 			</link>
 		</xsl:if>
-
 		<xsl:if test="$includeFooterCSS='true'">
 			<link rel="stylesheet" type="text/css" href="/_assets/landing-pages/css/footer-common.css" />
 		</xsl:if>
-
 		<link rel="stylesheet" type="text/css">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( '/_assets/themes/', //output/@theme, '.css')" />
 			</xsl:attribute>
 		</link>
 	</xsl:template>
-
 	<xsl:template name="standard-header">
 		<xsl:param name="title" select="concat(  $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ' ,//agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
 		<xsl:param name="description" select="substring(concat( 'View details, pricing, photos, floorplan, for ', $listingAddressLine1, '. ' , //single/description, '...') ,0, 373 )" />
@@ -391,18 +346,16 @@
 		<xsl:param name="defaultUtmSource" select="''" />
 		<xsl:param name="defaultUtmCampaign" select="''" />
 		<xsl:param name="leadNotePrompt" select="''" />
-
 		<xsl:variable name="seoTitle">
 			<xsl:choose>
 				<xsl:when test="//overrides/seo-title">
-					<xsl:value-of select="//overrides/seo-title" />	
+					<xsl:value-of select="//overrides/seo-title" />
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="$title" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-
 		<xsl:variable name="seoDescription">
 			<xsl:choose>
 				<xsl:when test="//overrides/seo-description">
@@ -413,7 +366,6 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-
 		<head>
 			<meta name="description">
 				<xsl:attribute name="content">
@@ -430,7 +382,6 @@
 					<xsl:value-of select="$seoTitle" />
 				</xsl:attribute>
 			</meta>
-
 			<meta property="og:image">
 				<xsl:attribute name="content">
 					<xsl:value-of select="$primaryImage" />
@@ -441,11 +392,9 @@
 					<xsl:value-of select="$primaryImage" />
 				</xsl:attribute>
 			</meta>
-
 			<meta itemprop="author">
 				<xsl:attribute name="content">
 					<xsl:value-of select="//agent[1]/marketingName" />
-
 				</xsl:attribute>
 			</meta>
 			<meta property="og:description">
@@ -458,7 +407,6 @@
 					<xsl:value-of select="$seoDescription" />
 				</xsl:attribute>
 			</meta>
-
 			<meta name="twitter:title">
 				<xsl:attribute name="content">
 					<xsl:value-of select="$seoTitle" />
@@ -469,47 +417,38 @@
 					<xsl:value-of select="//output/@siteUrl" />
 				</xsl:attribute>
 			</meta>
-
 			<meta name="twitter:description">
 				<xsl:attribute name="content">
 					<xsl:value-of select="$seoDescription" />
 				</xsl:attribute>
 			</meta>
-
 			<meta property="og:type" content="'website'" />
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta charset="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
-
 			<title>
 				<xsl:value-of select="$seoTitle" />
 			</title>
-
 			<xsl:call-template name="css-links">
 				<xsl:with-param name="primaryCSS" select="$primaryCSS" />
 				<xsl:with-param name="secondaryCSS" select="$secondaryCSS" />
 				<xsl:with-param name="includeFooterCSS" select="$includeFooterCSS" />
 			</xsl:call-template>
-
 			<script>
 				<xsl:value-of select="concat( 'window.gg.defaults = { createLinkLead: ', number(//output/@createLinkLead), ', leadPropertyID: `', //lead/property/propertyID, '`, fullName: `', //lead/property/ownerDisplayName, '`, notePrompt: `', $leadNotePrompt, '`, trackingData: { utmSource: `', $defaultUtmSource, '`, utmCampaign:`', $defaultUtmCampaign, '`} };')" />
 			</script>
-
 			<script>
 				<xsl:value-of select="'(function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)}; h._hjSettings={hjid:1194877,hjsv:6}; a=o.getElementsByTagName(`head`)[0]; r=o.createElement(`script`);r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r); })(window,document,`https://static.hotjar.com/c/hotjar-`,`.js?sv=`);'" />
 			</script>
-
 			<script>
 				<xsl:value-of select="concat( 'window.hj( `identify`, `', //agent[1]/aspNetUserId, '`, { leadID: `', //lead/genieLeadId, '`, url: window.location.href, asset: `', //output/@stylesheet, '`});')" />
 			</script>
-
 			<script type="module" crossorigin="crossorigin">
 				<xsl:attribute name="src">
 					<xsl:value-of select="concat( '/_assets/landing-pages/dist/', $buildVersion, '/assets/index.js' )" />
 				</xsl:attribute>
 				<xsl:comment />
 			</script>
-
 			<link rel="stylesheet">
 				<xsl:attribute name="href">
 					<xsl:value-of select="concat( '/_assets/landing-pages/dist/', $buildVersion, '/assets/index.css' )" />
@@ -517,11 +456,9 @@
 			</link>
 		</head>
 	</xsl:template>
-
 	<xsl:template name="render-key">
 		<xsl:value-of select="concat (//output/@folder, '/', //output/@stylesheet )" />
 	</xsl:template>
-
 	<xsl:template name="market-comment">
 		<xsl:variable name="totalSold" select="//areas/area[1]/statistics/@soldPropertyTypeCount" />
 		<xsl:variable name="totalSoldLastPeriod" select="//areas/area[1]/statistics/previous/@totalSold" />
@@ -547,7 +484,6 @@
 		</xsl:variable>
 		<p>
 			<xsl:value-of select="concat( 'The number of closed ', //area/name, ' ', $singularPropertyType, ' sales have ', $deltaCaption, ' by ', format-number( $soldDelta, '#.#%' ), ' in the ', $lookbackPeriodName, ' from ', $totalSoldLastPeriod, ' to ', $totalSold, '. ' )" />
-
 			<xsl:choose>
 				<xsl:when test="number($soldDelta) < -0.05">
 					<xsl:value-of select="concat('This unusual reduction in listing inventory to the ', //area/name, ' ', $propertyType, ' market creates a huge demand from buyers. If you&#180;re looking to sell your home for the highest possible price there has not been a better time.')" />
@@ -561,33 +497,26 @@
 			</xsl:choose>
 		</p>
 	</xsl:template>
-
 	<xsl:template name="data-access">
 		<div class="popup-dialog">
 			<div id="data-access" class="lead-capture-form">
 				<h1>Access Private Data Now</h1>
-
 				<p>
 					Some state laws require verification of your email address in order to access
 					past sales. Not to worry though, you're only a minute away from seeing the sales
 					data you are looking for and your email will be kept private, secure &amp; will
 					never be sold or spammed!
 				</p>
-
 				<input type="text" name="name" placeholder="Your Name" />
 				<input type="email" name="email" placeholder="Your Email" />
 				<input type="text" name="phone" placeholder="Your Phone No." />
-
 				<button>Sign In</button>
-
 				<a style="color: var(--theme-body-color)">Privacy Policy</a>
 			</div>
 		</div>
 	</xsl:template>
-
 	<xsl:template name="default-thank-you-popup">
 		<xsl:param name="message" select="'Thank you, your request has been successfully submitted!'" />
-
 		<div id="form-thank-you" class="popup-dialog thank-modal">
 			<div id="fl-thankyou-modal" class="modal-dialog modal-dialog-centered" role="document">
 				<div class="fl-close-modal close-popup" data-dismiss="modal">
@@ -612,7 +541,6 @@
 			</div>
 		</div>
 	</xsl:template>
-
 	<xsl:template name="flyer-download-popup">
 		<div id="flyer-popup" class="popup-dialog flyer-popup">
 			<div class="modal-dialog modal-dialog-centered" role="document">
@@ -646,33 +574,26 @@
 			</div>
 		</div>
 	</xsl:template>
-
 	<xsl:template name="add-genie-embed">
 		<xsl:param name="embed" />
-
 		<div class="genie-embed">
 			<xsl:attribute name="data-genie-layout">
 				<xsl:value-of select="$embed" />
 			</xsl:attribute>
-
 			<xsl:attribute name="data-genie-agentid">
 				<xsl:value-of select="//output/@userId" />
 			</xsl:attribute>
-
 			<xsl:attribute name="data-genie-theme">
 				<xsl:value-of select="//output/@theme" />
 			</xsl:attribute>
-
 			<xsl:attribute name="data-genie-areaid">
 				<xsl:value-of select="//areas/area[1]/id" />
 			</xsl:attribute>
-
 			<xsl:if test="//output/@areaPeriod!=''">
 				<xsl:attribute name="data-genie-areaperiod">
 					<xsl:value-of select="//output/@areaPeriod" />
 				</xsl:attribute>
 			</xsl:if>
-
 			<xsl:if test="//single/@mlsNumber!=''">
 				<xsl:attribute name="data-genie-mlsnumber">
 					<xsl:value-of select="//single/@mlsNumber" />
@@ -681,43 +602,36 @@
 					<xsl:value-of select="//single/@mlsId" />
 				</xsl:attribute>
 			</xsl:if>
-
 			<xsl:if test="//output/@propertyType!=''">
 				<xsl:attribute name="data-genie-propertytype">
 					<xsl:value-of select="//output/@propertyType" />
 				</xsl:attribute>
 			</xsl:if>
-
 			<xsl:if test="//output/@mapStyle!=''">
 				<xsl:attribute name="data-genie-mapstyle">
 					<xsl:value-of select="//output/@mapStyle" />
 				</xsl:attribute>
 			</xsl:if>
-
 			<xsl:if test="//output/@mapIcon!=''">
 				<xsl:attribute name="data-genie-mapicon">
 					<xsl:value-of select="//output/@mapIcon" />
 				</xsl:attribute>
 			</xsl:if>
-
 			<xsl:if test="//output/@mapKey!=''">
 				<xsl:attribute name="data-genie-mapkey">
 					<xsl:value-of select="//output/@mapKey" />
 				</xsl:attribute>
 			</xsl:if>
-
 			<xsl:if test="//output/@pricePercent!=''">
 				<xsl:attribute name="data-genie-pricepercent">
 					<xsl:value-of select="//output/@pricePercent" />
 				</xsl:attribute>
 			</xsl:if>
-
 			<xsl:if test="//output/@blurPrice!=''">
 				<xsl:attribute name="data-genie-blurprice">
 					<xsl:value-of select="//output/@blurPrice" />
 				</xsl:attribute>
 			</xsl:if>
-
 			<xsl:if test="//output/@requireSignin!=''">
 				<xsl:attribute name="data-genie-signin">
 					<xsl:value-of select="//output/@requireSignin" />
@@ -726,7 +640,6 @@
 			<xsl:comment />
 		</div>
 	</xsl:template>
-
 	<xsl:template name="gallery">
 		<xsl:if test="count(//single/images/image)&gt;1">
 			<div id="property-gallery-container">
@@ -734,13 +647,11 @@
 					<xsl:comment />
 				</div>
 			</div>
-
 			<div class="property-image-show-btn text-center">
 				<button class="btn btn-value-info subtitle-font background-as-color toggle" data-container="#property-gallery">
 					<xsl:text>Show More</xsl:text>
 				</button>
 			</div>
-
 			<script>
 				<xsl:value-of select="'window.gg.galleryImages=['" />
 				<xsl:for-each select="//single/images/image">
