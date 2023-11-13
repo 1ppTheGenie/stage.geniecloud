@@ -236,9 +236,7 @@ const defaultRenderSettings = {
 export const areaFromMlsNumber = async (mlsNumber, mlsId, userId) => {
 	const listing = await getListing(userId, mlsNumber, mlsId);
 
-	//console.log("areaFromMlsNumber 1,", mlsNumber, userId);
-	if (listing.preferredAreaId) {
-		//console.log("areaFromMlsNumber 2,", listing.preferredAreaId);
+	if (listing && listing.preferredAreaId) {
 		return await areaName(userId, listing.preferredAreaId);
 	}
 
