@@ -10,15 +10,13 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="landing-pages.xsl" />
-<xsl:import href="landing-pages-market-insider.xsl" />
-
+	<xsl:import href="landing-pages.xsl" />
+	<xsl:import href="landing-pages-market-insider.xsl" />
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="description">
 			<xsl:value-of select="concat( 'The ', //area/name, ' market is shifting! View the latest market trends and grab your customized report now.' )" />
 		</xsl:variable>
-
 		<xsl:variable name="listing-caption">
 			<xsl:choose>
 				<xsl:when test="number(//single/statusTypeID) = 2">
@@ -32,13 +30,11 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-
 		<xsl:call-template name="standard-header">
 			<xsl:with-param name="title" select="concat( 'Listing details for #', //single/mlsNumber )" />
 			<xsl:with-param name="description" select="$description" />
 			<xsl:with-param name="secondaryCSS" select="'cush-single-listing'" />
 		</xsl:call-template>
-
 		<body>
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'funnel-market-insider-instant-download ', //output/@theme )" />
@@ -101,7 +97,6 @@
 								</div>
 							</div>
 							<div class="menu-list" id="navbarNav">
-
 								<div class="funnel-menu main-navbar">
 									<div class="navbar-header">
 										<button type="button" class="navbar-toggle collapsed toggler-btn" data-toggle="collapse" data-target="#sidebarMain">
@@ -120,15 +115,12 @@
 										<div class="nav">
 											<ul class="nav genie-module-background">
 												<a href="javascript:void(0)" class="closebtn">×</a>
-
 												<li class="nav-item">
 													<a class="nav-link active genie-module-heading-color" href="https://www.inspired.re" target="_blank">Home</a>
 												</li>
-
 												<li class="nav-item open_about_modal">
 													<a class="nav-link active genie-module-heading-color" href="#about-section">About</a>
 												</li>
-
 												<li class="nav-item">
 													<a class="nav-link active open_lead_form genie-module-heading-color" href="#contact_form">Contact</a>
 												</li>
@@ -148,11 +140,9 @@
 							</xsl:attribute>
 						</img>
 						<div class="address-1 container">
-<xsl:call-template name="listing-address-line-one" />
-
+							<xsl:call-template name="listing-address-line-one" />
 							<span>
-<xsl:call-template name="listing-address-line-two" />
-
+								<xsl:call-template name="listing-address-line-two" />
 							</span>
 							<xsl:choose>
 								<xsl:when test="number(//single/statusTypeID) = 2">
@@ -167,32 +157,26 @@
 							</xsl:choose>
 						</div>
 					</div>
-
 					<div class="address-1 container">
 					</div>
-
 					<div class="hero-details custom-container container">
 						<div class="heading-color-as-bg hero-details-inner">
 							<div class="hero-price">
 								<span class="gradient-color">
-<xsl:value-of select="format-number( //single/price, '$###,###')" />
-
+									<xsl:value-of select="format-number( //single/price, '$###,###')" />
 								</span>
 							</div>
 							<div class="hero-amenities subtitle-color">
 								<span>
-<xsl:value-of select="//single/bedrooms/@count" />
-
+									<xsl:value-of select="//single/bedrooms/@count" />
 									<xsl:text> Beds</xsl:text>
 								</span>
 								<span>
-<xsl:value-of select="$listingTotalBathrooms" />
-
+									<xsl:value-of select="$listingTotalBathrooms" />
 									<xsl:text> Baths</xsl:text>
 								</span>
 								<span>
-<xsl:value-of select="//single/squareFeet" />
-
+									<xsl:value-of select="//single/squareFeet" />
 									<xsl:text> sq. ft</xsl:text>
 								</span>
 							</div>
@@ -220,33 +204,27 @@
 							<div class="overview-details-list">
 								<ul>
 									<li class="body-color">
-
 										<strong>
 											<xsl:text>Beds</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="//single/bedrooms/@count" />
-
+											<xsl:value-of select="//single/bedrooms/@count" />
 										</span>
 									</li>
-
 									<li class="body-color">
 										<strong>
 											<xsl:text>sq. ft</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="//single/squareFeet" />
-
+											<xsl:value-of select="//single/squareFeet" />
 										</span>
 									</li>
-
 									<li class="body-color">
 										<strong>
 											<xsl:text>Baths</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="$listingTotalBathrooms" />
-
+											<xsl:value-of select="$listingTotalBathrooms" />
 										</span>
 									</li>
 									<li class="body-color">
@@ -254,28 +232,23 @@
 											<xsl:text>Status</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="//single/listingStatus" />
-
+											<xsl:value-of select="//single/listingStatus" />
 										</span>
 									</li>
-
 									<li class="body-color">
 										<strong>
 											<xsl:text>Garage</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="(//single/parking/@spaces+//single/parking/@garage)" />
-
+											<xsl:value-of select="(//single/parking/@spaces+//single/parking/@garage)" />
 										</span>
 									</li>
-
 									<li class="body-color">
 										<strong>
 											<xsl:text>Type</xsl:text>
 										</strong>
 										<span>
-<xsl:value-of select="$propertyType" />
-
+											<xsl:value-of select="$propertyType" />
 
 										</span>
 									</li>
@@ -366,7 +339,6 @@
 						<xsl:attribute name="href">
 							<xsl:value-of select="//output/@downloadUrl" />
 						</xsl:attribute>
-
 						<div class="overlay-bg">
 							<xsl:comment/>
 						</div>
@@ -383,8 +355,7 @@
 									<xsl:text>Interested In</xsl:text>
 								</em>
 								<span class="gradient-color">
-<xsl:call-template name="listing-address-line-one" />
-
+									<xsl:call-template name="listing-address-line-one" />
 								</span>
 							</h2>
 							<div role="form" class="wpcf7" id="wpcf7-f194-o1" lang="en-US" dir="ltr">
@@ -402,7 +373,8 @@
 									<div class="form-field">
 										<span class="wpcf7-form-control-wrap your-message">
 											<textarea cols="40" name="note" rows="10" class="form-control" placeholder="Message">
-												&#160;</textarea>
+												<xsl:comment />
+											</textarea>
 										</span>
 										<input type="submit" value="Send" class="wpcf7-submit step1-button" />
 									</div>
@@ -419,23 +391,18 @@
 					</div>
 				</section>
 				<div class="container">
-
 					<xsl:call-template name="add-genie-embed">
 						<xsl:with-param name="embed" select="'MarketUpdate'" />
 					</xsl:call-template>
-
 					<xsl:call-template name="add-genie-embed">
 						<xsl:with-param name="embed" select="'FastFacts'" />
 					</xsl:call-template>
-
 					<xsl:call-template name="add-genie-embed">
 						<xsl:with-param name="embed" select="'MarketTrending'" />
 					</xsl:call-template>
-
 					<xsl:call-template name="add-genie-embed">
 						<xsl:with-param name="embed" select="'MarketHistory'" />
 					</xsl:call-template>
-
 					<xsl:call-template name="add-genie-embed">
 						<xsl:with-param name="embed" select="'PeopleBuying'" />
 					</xsl:call-template>
@@ -476,7 +443,8 @@
 												<div class="awu-field awu-col-12">
 													<span class="wpcf7-form-control-wrap you-message">
 														<textarea name="note" placeholder="Message" cols="30" rows="10">
-																	&#160;</textarea>
+															<xsl:comment />
+														</textarea>
 													</span>
 													<input type="submit" class="step1-button" value="Send" />
 												</div>
@@ -484,7 +452,6 @@
 										</div>
 									</div>
 								</div>
-
 								<!--  THIS DIV ENDS HERE-->
 							</div>
 						</div>
@@ -535,18 +502,16 @@
 							<div class="awu-field col-md-12">
 								<label for="">Your Message</label>
 								<textarea class="form-control" name="note" cols="40" rows="10">
-													&#160;</textarea>
+									<xsl:comment />
+								</textarea>
 							</div>
 							<div class="col-md-12">
-
-<input type="submit" value="Send" class="submit-btn step1-button" id="request-modal-btn" />
-
+								<input type="submit" value="Send" class="submit-btn step1-button" id="request-modal-btn" />
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-
 			<div class="modal fade page-modal" id="schedule-modal" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<button type="button" class="close" id="schedule-modal-close" data-dismiss="modal" aria-label="Close">
@@ -562,42 +527,36 @@
 							</p>
 							<div class="awu-field col-md-6">
 								<label for="">First Name*</label>
-<input type="text" name="firstName" class="form-control" />
-
+								<input type="text" name="firstName" class="form-control" />
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Last Name*</label>
-<input type="text" name="lastName" class="form-control" />
-
+								<input type="text" name="lastName" class="form-control" />
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Email Address*</label>
-<input type="text" name="emailAddress" class="form-control" />
-
+								<input type="text" name="emailAddress" class="form-control" />
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Phone Number*</label>
-<input type="text" name="phoneNumber" class="form-control" />
-
+								<input type="text" name="phoneNumber" class="form-control" />
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">When are you available?</label>
-<input type="date" class="form-control" name="meta[availableDate]" placeholder="MM/DD/YYYY" />
-
+								<input type="date" class="form-control" name="meta[availableDate]" placeholder="MM/DD/YYYY" />
 							</div>
 							<div class="awu-field col-md-6">
 								<label for="">Are you available at another time?</label>
-<input type="date" name="meta[alternativeDate]" class="form-control" placeholder="MM/DD/YYYY" />
-
+								<input type="date" name="meta[alternativeDate]" class="form-control" placeholder="MM/DD/YYYY" />
 							</div>
 							<div class="awu-field col-md-12">
 								<label for="">Your Message</label>
 								<textarea class="form-control" name="note" cols="40" rows="10">
-															&#160;</textarea>
+									<xsl:comment />
+								</textarea>
 							</div>
 							<div class="col-md-12">
-<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />
-
+								<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />
 							</div>
 						</form>
 					</div>
@@ -618,7 +577,6 @@
 					background-color: #000;
 					opacity: 0.5;
 				}
-
 				.stop-scrolling {
 					height: 100%;
 					overflow: hidden;
@@ -627,19 +585,15 @@
 			<script type="text/javascript">
 				<xsl:value-of select="'
 					//window.onscroll = function() {document.querySelector(`.header`).classList[document.body.scrollTop >= 150 ? `add` : `remove`](`fixed`) };
-
 					// Get the modal
 					var modal = document.getElementById(`schedule-modal`);
 					var modal2 = document.getElementById(`request-modal`);
-
 					// Get the button that opens the modal
 					var btn = document.getElementById(`schedule-modal-btn`);
 					var btn2 = document.getElementById(`request-modal-btn`);
-
 					// Get The Button to close  modal
 					var closeBtn = document.getElementById(`schedule-modal-close`);
 					var closeBtn2 = document.getElementById(`request-modal-close`);
-
 					btn.onclick = function() {
 						document.getElementById(`backdrop`).style.display = `block`
 						modal.style.display = `block`
@@ -650,7 +604,6 @@
 						modal2.style.display = `block`
 						modal2.classList.add(`in`);
 					}
-
 					closeBtn.onclick = function() {
 						document.getElementById(`backdrop`).style.display = `none`
 						modal.style.display = `none`
@@ -661,10 +614,8 @@
 						modal2.style.display = `none`
 						modal2.classList.remove(`in`);
 					}
-
 					var scrollPosition = window.scrollY;
 					var logoContainer = document.getElementsByClassName(`header`)[0];
-
 					window.addEventListener(`scroll`, function() {
 						scrollPosition = window.scrollY;
 						if (scrollPosition >= 150) {
@@ -674,11 +625,9 @@
 						}
 });'" />
 			</script>
-
 			<xsl:call-template name="agent-about" />
 			<div class="funnel-footer-background">
 				<xsl:call-template name="agent-details" />
-
 				<xsl:call-template name="copyright" />
 			</div>
 		</body>

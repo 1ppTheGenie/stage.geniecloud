@@ -736,7 +736,8 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 							<div class="awu-field col-md-12">
 								<label for="">Your Message</label>
 								<textarea class="form-control" name="note" cols="40" rows="10">
-									&#160;</textarea>
+									<xsl:comment />
+								</textarea>
 							</div>
 							<div class="col-md-12">
 								<input type="submit" value="Send" class="submit-btn" />
@@ -793,7 +794,8 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 							<div class="awu-field col-md-12">
 								<label for="">Your Message</label>
 								<textarea class="form-control" name="note" cols="40" rows="10">
-											&#160;</textarea>
+									<xsl:comment />
+								</textarea>
 							</div>
 							<div class="col-md-12">
 								<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />

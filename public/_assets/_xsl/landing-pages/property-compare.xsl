@@ -510,7 +510,8 @@
 										<div class="form-group">
 											<label for="exampleFormControlTextarea1" class="background-as-color subtitle-font">Tell us more about your property:</label>
 											<textarea class="form-control" id="exampleFormControlTextarea1" name="note" rows="4" placeholder="Is there anything we should know before estimation?" required="required">
-												&#160;</textarea>
+												<xsl:comment />
+											</textarea>
 										</div>
 									</div>
 									<div class="col-md-12 ml-auto text-right">

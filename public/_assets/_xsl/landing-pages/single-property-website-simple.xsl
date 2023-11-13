@@ -10,8 +10,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="landing-pages.xsl" />
-
+	<xsl:import href="landing-pages.xsl" />
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="head-description">
@@ -19,11 +18,9 @@
 		</xsl:variable>
 
 		<xsl:variable name="pageTitle">
-<xsl:call-template name="listing-address-line-one" />
-
+			<xsl:call-template name="listing-address-line-one" />
 			<xsl:text>,&#160;</xsl:text>
-<xsl:call-template name="listing-address-line-two" />
-
+			<xsl:call-template name="listing-address-line-two" />
 		</xsl:variable>
 
 		<xsl:variable name="listing-caption">
@@ -59,18 +56,15 @@
 			<div class="single-property-website-simple background">
 				<div class="main-banner-section">
 					<xsl:attribute name="style">
-<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
-
+						<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
 					</xsl:attribute>
 
 					<div class="banner-content-box">
 						<h1 class="main-heading heading-fontt">
-<xsl:call-template name="listing-address-line-one" />
-
+							<xsl:call-template name="listing-address-line-one" />
 						</h1>
 						<p class="body-font property-address">
-<xsl:call-template name="listing-address-line-two" />
-
+							<xsl:call-template name="listing-address-line-two" />
 						</p>
 					</div>
 				</div>
@@ -100,8 +94,7 @@
 							<div class="col-lg-3 col-md-6 col-sm-6 col-6 full-width">
 								<div class="property-amenity-list">
 									<span class="count body-font subtitle-color">
-<xsl:value-of select="//single/bedrooms/@count" />
-
+										<xsl:value-of select="//single/bedrooms/@count" />
 									</span>
 									<span class="amenity-name body-font subtitle-color">Beds</span>
 								</div>
@@ -109,8 +102,7 @@
 							<div class="col-lg-3 col-md-6 col-sm-6 col-6 full-width">
 								<div class="property-amenity-list">
 									<span class="count body-font subtitle-color">
-<xsl:value-of select="$listingTotalBathrooms" />
-
+										<xsl:value-of select="$listingTotalBathrooms" />
 									</span>
 									<span class="amenity-name body-font subtitle-color">Baths</span>
 								</div>
@@ -118,7 +110,7 @@
 							<div class="col-lg-3 col-md-6 col-sm-6 col-6 full-width">
 								<div class="property-amenity-list">
 									<span class="count body-font subtitle-color">
-<xsl:value-of select="//single/squareFeet" />
+										<xsl:value-of select="//single/squareFeet" />
 
 									</span>
 									<span class="amenity-name body-font subtitle-color">SQFT</span>
@@ -190,20 +182,18 @@
 						<div class="contact-form-box">
 							<form id="form_step1" class="funnel-create-lead" data-callback="simple_listing_step1">
 								<div class="form-group">
-<input type="text" name="fullName" placeholder="Name*" class="heading-font" />
-
+									<input type="text" name="fullName" placeholder="Name*" class="heading-font" />
 								</div>
 								<div class="form-group">
-<input type="email" name="emailAddress" placeholder="Email*" class="heading-font" />
-
+									<input type="email" name="emailAddress" placeholder="Email*" class="heading-font" />
 								</div>
 								<div class="form-group">
-<input type="text" name="phoneNumber" placeholder="Phone*" class="heading-font phone" id="phonenumber" />
-
+									<input type="text" name="phoneNumber" placeholder="Phone*" class="heading-font phone" id="phonenumber" />
 								</div>
 								<div class="form-group">
 									<textarea name="note" placeholder="Message" class="heading-font form-control" cols="60" rows="5">
-										&#160;</textarea>
+										<xsl:comment />
+									</textarea>
 								</div>
 								<div class="form-group">
 

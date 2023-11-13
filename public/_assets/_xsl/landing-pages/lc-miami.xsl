@@ -10,8 +10,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="landing-pages.xsl" />
-
+	<xsl:import href="landing-pages.xsl" />
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="head-description">
@@ -19,11 +18,9 @@
 		</xsl:variable>
 
 		<xsl:variable name="pageTitle">
-<xsl:call-template name="listing-address-line-one" />
-
+			<xsl:call-template name="listing-address-line-one" />
 			<xsl:text>,&#160;</xsl:text>
-<xsl:call-template name="listing-address-line-two" />
-
+			<xsl:call-template name="listing-address-line-two" />
 		</xsl:variable>
 
 		<xsl:variable name="listing-caption">
@@ -62,19 +59,16 @@
 				<div class="banner-content-box">
 					<div class="banner">
 						<xsl:attribute name="style">
-<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
-
+							<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
 						</xsl:attribute>
 
 						<div class="banner-content">
 							<div class="container">
 								<h1 class="heading-font">
-<xsl:call-template name="listing-address-line-one" />
-
+									<xsl:call-template name="listing-address-line-one" />
 									<br/>
 									<span>
-<xsl:call-template name="listing-address-line-two" />
-
+										<xsl:call-template name="listing-address-line-two" />
 									</span>
 								</h1>
 
@@ -82,14 +76,12 @@
 									<div class="virtual-tour body-font">
 										<a class="btn btn-small btn-info" target="_blank">
 											<xsl:attribute name="href">
-<xsl:value-of select="//single/virtualTourUrl" />
-
+												<xsl:value-of select="//single/virtualTourUrl" />
 											</xsl:attribute>
 											<svg width="22" fill="#ffffff" viewBox="0 0 512 512"
 												xmlns="http://www.w3.org/2000/svg">
-<path d="M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z" style="fill:none;stroke:#ffffff;stroke-miterlimit:10;stroke-width:60px" />
-<path d="M216.32,334.44,330.77,265.3a10.89,10.89,0,0,0,0-18.6L216.32,177.56A10.78,10.78,0,0,0,200,186.87V325.13A10.78,10.78,0,0,0,216.32,334.44Z" />
-
+												<path d="M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z" style="fill:none;stroke:#ffffff;stroke-miterlimit:10;stroke-width:60px" />
+												<path d="M216.32,334.44,330.77,265.3a10.89,10.89,0,0,0,0-18.6L216.32,177.56A10.78,10.78,0,0,0,200,186.87V325.13A10.78,10.78,0,0,0,216.32,334.44Z" />
 											</svg>
 											<xsl:text>&#160;Click here to view Virtual Tour</xsl:text>
 										</a>
@@ -132,8 +124,7 @@
 					<div class="col-md-12">
 						<ul class="property-details background-as-color heading-font">
 							<xsl:attribute name="style">
-<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
-
+								<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
 							</xsl:attribute>
 							<li>
 								<div class="content-box">
@@ -147,8 +138,7 @@
 											<xsl:text>Beds</xsl:text>
 											<br/>
 											<span class="editable">
-<xsl:value-of select="//single/bedrooms/@count" />
-
+												<xsl:value-of select="//single/bedrooms/@count" />
 											</span>
 										</h6>
 									</div>
@@ -166,8 +156,7 @@
 											<xsl:text>Baths</xsl:text>
 											<br/>
 											<span class="editable">
-<xsl:value-of select="$listingTotalBathrooms" />
-
+												<xsl:value-of select="$listingTotalBathrooms" />
 											</span>
 										</h6>
 									</div>
@@ -201,8 +190,7 @@
 											<xsl:text>Sq. ft.</xsl:text>
 											<br/>
 											<span class="editable">
-<xsl:value-of select="//single/squareFeet" />
-
+												<xsl:value-of select="//single/squareFeet" />
 											</span>
 										</h6>
 									</div>
@@ -266,9 +254,7 @@
 									</div>
 									<div class="title-box">
 										<h6 class="background-as-color">
-<xsl:value-of select="$propertyType" />
-
-
+											<xsl:value-of select="$propertyType" />
 										</h6>
 									</div>
 								</div>
@@ -308,7 +294,8 @@
 									</div>
 									<input type="email" name="emailAddress" placeholder="Email*" class="heading-font" />
 									<textarea name="note" placeholder="Message" class="heading-font">
-										&#160;</textarea>
+										<xsl:comment />
+									</textarea>
 									<div class="form-group">
 										<div class="fl-btn-value text-center">
 											<button class="btn btn-value-info heading-font heading-color-as-bg background-as-color btn-submit step1-button">
@@ -344,8 +331,7 @@
 												<h3 class="agent-phone heading-font subtitle-color">
 													<a class="subtitle-color">
 														<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="var(--theme-sub-heading-color)" width="18" height="18">
-<path d="M511.2 387l-23.25 100.8c-3.266 14.25-15.79 24.22-30.46 24.22C205.2 512 0 306.8 0 54.5c0-14.66 9.969-27.2 24.22-30.45l100.8-23.25C139.7-2.602 154.7 5.018 160.8 18.92l46.52 108.5c5.438 12.78 1.77 27.67-8.98 36.45L144.5 207.1c33.98 69.22 90.26 125.5 159.5 159.5l44.08-53.8c8.688-10.78 23.69-14.51 36.47-8.975l108.5 46.51C506.1 357.2 514.6 372.4 511.2 387z" />
-
+															<path d="M511.2 387l-23.25 100.8c-3.266 14.25-15.79 24.22-30.46 24.22C205.2 512 0 306.8 0 54.5c0-14.66 9.969-27.2 24.22-30.45l100.8-23.25C139.7-2.602 154.7 5.018 160.8 18.92l46.52 108.5c5.438 12.78 1.77 27.67-8.98 36.45L144.5 207.1c33.98 69.22 90.26 125.5 159.5 159.5l44.08-53.8c8.688-10.78 23.69-14.51 36.47-8.975l108.5 46.51C506.1 357.2 514.6 372.4 511.2 387z" />
 														</svg>
 														<span>
 															<xsl:attribute name="href">
@@ -372,8 +358,7 @@
 												<div class="agent-email">
 													<a href="#" class="heading-font subtitle-color">
 														<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="var(--theme-sub-heading-color)" width="18" height="18">
-<path d="M352 256C352 278.2 350.8 299.6 348.7 320H163.3C161.2 299.6 159.1 278.2 159.1 256C159.1 233.8 161.2 212.4 163.3 192H348.7C350.8 212.4 352 233.8 352 256zM503.9 192C509.2 212.5 512 233.9 512 256C512 278.1 509.2 299.5 503.9 320H380.8C382.9 299.4 384 277.1 384 256C384 234 382.9 212.6 380.8 192H503.9zM493.4 160H376.7C366.7 96.14 346.9 42.62 321.4 8.442C399.8 29.09 463.4 85.94 493.4 160zM344.3 160H167.7C173.8 123.6 183.2 91.38 194.7 65.35C205.2 41.74 216.9 24.61 228.2 13.81C239.4 3.178 248.7 0 256 0C263.3 0 272.6 3.178 283.8 13.81C295.1 24.61 306.8 41.74 317.3 65.35C328.8 91.38 338.2 123.6 344.3 160H344.3zM18.61 160C48.59 85.94 112.2 29.09 190.6 8.442C165.1 42.62 145.3 96.14 135.3 160H18.61zM131.2 192C129.1 212.6 127.1 234 127.1 256C127.1 277.1 129.1 299.4 131.2 320H8.065C2.8 299.5 0 278.1 0 256C0 233.9 2.8 212.5 8.065 192H131.2zM194.7 446.6C183.2 420.6 173.8 388.4 167.7 352H344.3C338.2 388.4 328.8 420.6 317.3 446.6C306.8 470.3 295.1 487.4 283.8 498.2C272.6 508.8 263.3 512 255.1 512C248.7 512 239.4 508.8 228.2 498.2C216.9 487.4 205.2 470.3 194.7 446.6H194.7zM190.6 503.6C112.2 482.9 48.59 426.1 18.61 352H135.3C145.3 415.9 165.1 469.4 190.6 503.6V503.6zM321.4 503.6C346.9 469.4 366.7 415.9 376.7 352H493.4C463.4 426.1 399.8 482.9 321.4 503.6V503.6z" />
-
+															<path d="M352 256C352 278.2 350.8 299.6 348.7 320H163.3C161.2 299.6 159.1 278.2 159.1 256C159.1 233.8 161.2 212.4 163.3 192H348.7C350.8 212.4 352 233.8 352 256zM503.9 192C509.2 212.5 512 233.9 512 256C512 278.1 509.2 299.5 503.9 320H380.8C382.9 299.4 384 277.1 384 256C384 234 382.9 212.6 380.8 192H503.9zM493.4 160H376.7C366.7 96.14 346.9 42.62 321.4 8.442C399.8 29.09 463.4 85.94 493.4 160zM344.3 160H167.7C173.8 123.6 183.2 91.38 194.7 65.35C205.2 41.74 216.9 24.61 228.2 13.81C239.4 3.178 248.7 0 256 0C263.3 0 272.6 3.178 283.8 13.81C295.1 24.61 306.8 41.74 317.3 65.35C328.8 91.38 338.2 123.6 344.3 160H344.3zM18.61 160C48.59 85.94 112.2 29.09 190.6 8.442C165.1 42.62 145.3 96.14 135.3 160H18.61zM131.2 192C129.1 212.6 127.1 234 127.1 256C127.1 277.1 129.1 299.4 131.2 320H8.065C2.8 299.5 0 278.1 0 256C0 233.9 2.8 212.5 8.065 192H131.2zM194.7 446.6C183.2 420.6 173.8 388.4 167.7 352H344.3C338.2 388.4 328.8 420.6 317.3 446.6C306.8 470.3 295.1 487.4 283.8 498.2C272.6 508.8 263.3 512 255.1 512C248.7 512 239.4 508.8 228.2 498.2C216.9 487.4 205.2 470.3 194.7 446.6H194.7zM190.6 503.6C112.2 482.9 48.59 426.1 18.61 352H135.3C145.3 415.9 165.1 469.4 190.6 503.6V503.6zM321.4 503.6C346.9 469.4 366.7 415.9 376.7 352H493.4C463.4 426.1 399.8 482.9 321.4 503.6V503.6z" />
 														</svg>
 														<span>
 															<xsl:value-of select="//agent[1]/website" />
@@ -430,8 +415,7 @@
 								<div class="fl-thumb-icon text-center subtitle-color-as-bg">
 									<div class="circle-icon background">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="var(--theme-sub-heading-color)">
-<path d="M128 447.1V223.1c0-17.67-14.33-31.1-32-31.1H32c-17.67 0-32 14.33-32 31.1v223.1c0 17.67 14.33 31.1 32 31.1h64C113.7 479.1 128 465.6 128 447.1zM512 224.1c0-26.5-21.48-47.98-48-47.98h-146.5c22.77-37.91 34.52-80.88 34.52-96.02C352 56.52 333.5 32 302.5 32c-63.13 0-26.36 76.15-108.2 141.6L178 186.6C166.2 196.1 160.2 210 160.1 224c-.0234 .0234 0 0 0 0L160 384c0 15.1 7.113 29.33 19.2 38.39l34.14 25.59C241 468.8 274.7 480 309.3 480H368c26.52 0 48-21.47 48-47.98c0-3.635-.4805-7.143-1.246-10.55C434 415.2 448 397.4 448 376c0-9.148-2.697-17.61-7.139-24.88C463.1 347 480 327.5 480 304.1c0-12.5-4.893-23.78-12.72-32.32C492.2 270.1 512 249.5 512 224.1z" fill="var(--theme-sub-heading-color)" />
-
+											<path d="M128 447.1V223.1c0-17.67-14.33-31.1-32-31.1H32c-17.67 0-32 14.33-32 31.1v223.1c0 17.67 14.33 31.1 32 31.1h64C113.7 479.1 128 465.6 128 447.1zM512 224.1c0-26.5-21.48-47.98-48-47.98h-146.5c22.77-37.91 34.52-80.88 34.52-96.02C352 56.52 333.5 32 302.5 32c-63.13 0-26.36 76.15-108.2 141.6L178 186.6C166.2 196.1 160.2 210 160.1 224c-.0234 .0234 0 0 0 0L160 384c0 15.1 7.113 29.33 19.2 38.39l34.14 25.59C241 468.8 274.7 480 309.3 480H368c26.52 0 48-21.47 48-47.98c0-3.635-.4805-7.143-1.246-10.55C434 415.2 448 397.4 448 376c0-9.148-2.697-17.61-7.139-24.88C463.1 347 480 327.5 480 304.1c0-12.5-4.893-23.78-12.72-32.32C492.2 270.1 512 249.5 512 224.1z" fill="var(--theme-sub-heading-color)" />
 										</svg>
 									</div>
 								</div>
