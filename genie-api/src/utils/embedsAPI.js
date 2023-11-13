@@ -67,7 +67,9 @@ export const embedsAPI = async (route, params) => {
 };
 
 export const getLandingPageData = async params => {
-	let { propertyId, qrId, shortUrlDataId, token, agentId } = { ...params };
+	let { propertyId, qrId, shortUrlDataId, token, agentId, hideAVM } = {
+		...params,
+	};
 	let property = null,
 		lead = null;
 
@@ -95,7 +97,7 @@ export const getLandingPageData = async params => {
 	if (property) {
 		property.lead = lead;
 
-		return {
+		let data = {
 			id: property.propertyID,
 			firstName: property.firstName,
 			lastName: property.lastName,
