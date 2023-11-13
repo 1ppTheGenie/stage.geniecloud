@@ -167,11 +167,10 @@
 											</span>
 										</span>
 										<xsl:element name="br" />
-
 										<span data-lead="city">
 											<xsl:comment/>
 										</span>
-										&#160;
+										<xsl:text>, </xsl:text>
 										<span data-lead="state">
 											<xsl:comment/>
 										</span>
