@@ -116,6 +116,21 @@ export const getLandingPageData = async params => {
 			avmLow: property.avmLow,
 			avmHigh: property.avmHigh,
 		};
+
+		if (!hideAVM || hideAVM == false || hideAVM == 0) {
+			if (data.currentAVM && data.currentAVM !== "") {
+				data.avm = data.currentAVM;
+				delete data.currentAVM;
+			} else if (!data.avmLow || data.avmLow !== "") {
+				data.avm = data.avmLow;
+			} else if (!data.avmHigh || data.avmHigh !== "") {
+				data.avm = data.avmHigh;
+			} else {
+				data.avm = `${data.avmLow} - ${data.avmHigh}`;
+			}
+		}
+
+		return data;
 	}
 };
 
