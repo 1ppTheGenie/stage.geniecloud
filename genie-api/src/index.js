@@ -711,7 +711,7 @@ const prepareAsset = async (asset, params) => {
 					asset.startsWith(start)
 				); // The rendered output of funnels and embeds is an A5 PDF
 
-				const withBleed = params?.renderSettings?.withBleed ?? false;
+				const withBleed = params?.withBleed ?? false;
 				const width =
 					suffix === "pdf"
 						? isA5
