@@ -1,0 +1,18 @@
+/*
+	Theme Name: Seven Gables Real Estate
+	Theme Style: Dark  
+*/
+
+@import url("../_css/oranienbaum.css");
+@import url("../_css/montserrat.css");
+
+.seven-gables-real-estate-dark {
+	--theme-body-background: #1d252d;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #a3662d; /* Subtitle */
+	--theme-body-color: #e1e1e1; /* Body */
+	--theme-emphasis-color: #a3662d; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Oranienbaum", serif;
+	--theme-sub-heading-font: "Oranienbaum", serif;
+}
