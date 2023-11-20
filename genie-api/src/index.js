@@ -477,6 +477,9 @@ export const api = async event => {
 
 								params = await setRenderDefaults(params);
 
+								// Cache the main Genie API calls
+								response.body.preCache = await preCallGenieAPIs(params);
+
 								// Save to the processing folder for onward processing and final render
 								const r = await toS3(
 									`_processing/${params.renderId}/prepare.json`,
