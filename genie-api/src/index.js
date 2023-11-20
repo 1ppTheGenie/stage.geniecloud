@@ -11,7 +11,26 @@ const { toXML } = pkg;
 // prettier-ignore
 import { getAreaBoundary, getUser, impersonater, getListing, areaName } from "./genieAI.js";
 // prettier-ignore
-import { userSetting, embedsAPI, getRenderJSON, getCollection, setRenderDefaults, genieGlobals, queueMsg, getAssets, getThemes, getCollections, saveCollection, getCollectionTemplates, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset } from "./utils/index.js";
+import {
+	userSetting,
+	embedsAPI,
+	getRenderJSON,
+	getCollection,
+	setRenderDefaults,
+	genieGlobals,
+	queueMsg,
+	getAssets,
+	getThemes,
+	getCollections,
+	saveCollection,
+	getCollectionTemplates,
+	generateQR,
+	areaFromMlsNumber,
+	getDimensions,
+	assetSetting,
+	getAsset,
+	preCallGenieAPIs,
+} from "./utils/index.js";
 // prettier-ignore
 import { listS3Folder,toS3, copyObject, headObject, jsonFromS3, fromS3, BUCKET, deleteObject  } from "./utils/index.js";
 
@@ -316,6 +335,9 @@ export const api = async event => {
 									renderId: params.renderId,
 								};
 							}
+							break;
+
+						case "/scheduledRerender":
 							break;
 
 						case "/re-render":
@@ -636,7 +658,7 @@ const processAsset = async params => {
 
 const prepareAsset = async (asset, params) => {
 	const settings = await assetSetting(asset, "all");
-
+	console.log("acb123", params);
 	if (Object.keys(settings).length > 0) {
 		let pages, suffix, dims, size;
 

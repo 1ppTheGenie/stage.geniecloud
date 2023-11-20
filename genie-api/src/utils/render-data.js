@@ -485,7 +485,7 @@ const processAreas = async params => {
 					areaImage = image.image;
 				}
 			});
-			
+
 			const defaultJSON = '{"type": "FeatureCollection","features": []}';
 			let geoJSON = boundary?.mapArea?.geoJSON ?? defaultJSON;
 			if (geoJSON.length > 200000) {
@@ -538,7 +538,7 @@ const processAreas = async params => {
 
 				// **** LISTINGS
 				const mls_properties = await mlsProperties(
-					params.mlsID ?? 0,
+					params.mlsId ?? 0,
 					areaId,
 					NOW.plus({ months: params.datePeriod * -1 }).toISO()
 				);
@@ -816,7 +816,7 @@ const processListing = async params => {
 
 		single = [
 			{ mlsNumber: listing.mlsNumber ?? "" },
-			{ mlsID: listing.mlsID ?? "" },
+			{ mlsId: listing.mlsID ?? "" },
 
 			{ price: listing.lowPrice ?? 0 },
 			{ highPrice: listing.highPrice ?? "" },
@@ -842,9 +842,7 @@ const processListing = async params => {
 			{ acres: listing.acres ?? "Enquire" },
 			{ built: listing.yearBuilt ?? "Enquire" },
 
-			{
-				virtualTourUrl: listing.virtualTourUrl,
-			},
+			{ virtualTourUrl: listing.virtualTourUrl },
 
 			{ latitude: listing.latitude ?? 0 },
 			{ longitude: listing.longitude ?? 0 },

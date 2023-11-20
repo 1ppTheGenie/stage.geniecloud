@@ -35,6 +35,7 @@ const to_cache = async (data, endpoint, key, timeout_hours = 4) => {
 	if (timeout > 0) {
 		await toS3(`_cache/${key}`, Buffer.from(data), {
 			genieCache: endpoint?.toString(),
+			ExpireFile: "GenieCache",
 			timeout,
 		});
 	}
@@ -437,7 +438,8 @@ const call_api = async ( endpoint, params, verb = "POST", pre_cache = null ) => 
 				result = pre_cache(result);
 			}
 
-			to_cache(JSON.stringify(result), endpoint, cacheKey);
+			to_cache( JSON.stringify( result ), endpoint, cacheKey );
+			console.log( 'cache to', endpoint,cacheKey );
 		} else {
 			if (
 				!typeof result == "object" ||
@@ -447,6 +449,8 @@ const call_api = async ( endpoint, params, verb = "POST", pre_cache = null ) => 
 				console.log(`GenieAPI error (${endpoint}): `, result);
 			}
 		}
+	} else {
+		console.log( 'cache from', endpoint,cacheKey );
 	}
 
 	return result;
