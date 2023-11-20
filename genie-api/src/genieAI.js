@@ -10,15 +10,20 @@ const API_AUTH =
 	"Basic " + Buffer.from(`${API_USER}:${API_PASS}`).toString("base64");
 
 const HOUR_IN_SECONDS = 60 * 60;
-const DAY_IN_SECONDS = HOUR_IN_SECONDS * 24;
-const CACHE_FOR = { GetAddressPredictions: 48, GetSavedSearches: 72 };
+const CACHE_FOR = {
+	GetAddressPredictions: HOUR_IN_SECONDS * 36,
+	GetSavedSearches: HOUR_IN_SECONDS * 36,
+};
 const AS_JSON = "application/json";
 
 export const impersonater = {};
 
 const from_cache = async (key, endpoint) => {
 	const since = new Date();
-	since.setHours(since.getHours() - (CACHE_FOR[endpoint.split("/")[0]] ?? 4));
+	since.setHours(
+		since.getSeconds() -
+			(CACHE_FOR[endpoint.split("/")[0]] ?? HOUR_IN_SECONDS / 2)
+	);
 
 	// ToDo: some "skip cache" code?
 	return await jsonFromS3(`_cache/${key}`, since);
