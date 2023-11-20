@@ -687,12 +687,9 @@ const processAreas = async params => {
 									history._content.push({
 										_name: "period",
 										_attrs: {
-											period: m.yearPart.str_pad(
-												m.monthPart,
-												2,
-												"0",
-												STR_PAD_LEFT
-											),
+											period: `${m.yearPart.toString()}${m.monthPart
+												.toString()
+												.padStart(2, "0")}`,
 											periodName: DateTime.fromObject({
 												year: m.yearPart,
 												month: m.monthPart,
