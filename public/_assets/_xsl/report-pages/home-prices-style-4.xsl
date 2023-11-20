@@ -107,7 +107,7 @@
 
 		<g style="transform:translate(0%,52%)">
 			<svg x="5%" width="30%" height="35%">
-				<use x="0" y="0" width="100%" height="25%">
+				<use x="0" y="0" width="100%" height="25%" fill="transparent" stroke-width="10">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="number((( //statistics/@maxSalePrice - //statistics/previous/@maxSalePrice ) div //statistics/previous/@maxSalePrice) ) > 0">
@@ -115,6 +115,16 @@
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+					<xsl:attribute name="stroke">
+						<xsl:choose>
+							<xsl:when test="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1 > 0">
+								<xsl:value-of select="'var(--active-green)'" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="'var(--sold-red)'" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
@@ -130,7 +140,7 @@
 			</svg>
 
 			<svg x="35%" width="30%" height="35%">
-				<use x="0" y="0" width="100%" height="25%">
+				<use x="0" y="0" width="100%" height="25%" fill="transparent" stroke-width="10">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="number($priceChange) > 0">
@@ -138,6 +148,16 @@
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+					<xsl:attribute name="stroke">
+						<xsl:choose>
+							<xsl:when test="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1 > 0">
+								<xsl:value-of select="'var(--active-green)'" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="'var(--sold-red)'" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
@@ -153,7 +173,7 @@
 			</svg>
 
 			<svg x="65%" width="30%" height="35%">
-				<use x="0" y="0" width="100%" height="25%">
+				<use x="0" y="0" width="100%" height="25%" fill="transparent" stroke-width="10">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1 > 0">
@@ -161,6 +181,16 @@
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+					<xsl:attribute name="stroke">
+						<xsl:choose>
+							<xsl:when test="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1 > 0">
+								<xsl:value-of select="'var(--active-green)'" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="'var(--sold-red)'" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>

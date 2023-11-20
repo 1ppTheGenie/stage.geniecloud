@@ -3,7 +3,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 
 	<xsl:template name="flyer-footer">
-<rect x="0" y="87%" width="100%" height="9.9%" fill="var(--theme-heading-color)" />
+		<rect x="0" y="87%" width="100%" height="9.9%" fill="var(--theme-heading-color)" />
 
 
 		<g style="transform:translate(0%,87.9%)">
@@ -16,14 +16,14 @@
 			<xsl:choose>
 				<xsl:when test="//output/@stylesheet='single-rear-01'">
 					<!-- when stylesheet is single rear -->
-					<text x="2%" y="1.45%" class="theme-body" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
+					<text x="2%" y="1.45%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="concat( 'CALL or TEXT ' , upper-case(//agent[1]/firstName), ':')" />
 
 						</xsl:call-template>
 					</text>
-					<text x="2%" y="4%" class="theme-body" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700">
+					<text x="2%" y="4%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="//agent[1]/mobile" />
@@ -32,14 +32,14 @@
 					</text>
 				</xsl:when>
 				<xsl:otherwise>
-					<text x="2%" y="3.1%" class="theme-body" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
+					<text x="2%" y="3.1%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="concat( 'CALL or TEXT ' , upper-case(//agent[1]/firstName), ':')" />
 
 						</xsl:call-template>
 					</text>
-					<text x="2%" y="5.5%" class="theme-body" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700">
+					<text x="2%" y="5.5%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="//agent[1]/mobile" />

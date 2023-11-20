@@ -7,7 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-scripts">
 		<xsl:if test="//output/@mapStyle!='no-map'">
@@ -21,8 +21,7 @@
 
 	<xsl:template name="svg-body">
 		<style>
-<xsl:value-of select="'.leaflet-interactive {fill:#3388ff;stroke:#3388ff;fill-opacity:0.2;}'" />
-
+			<xsl:value-of select="'.leaflet-interactive {fill:#3388ff;stroke:#3388ff;fill-opacity:0.2;}'" />
 		</style>
 		<xsl:choose>
 			<xsl:when test="//output/@mapStyle!='no-map'">
@@ -50,9 +49,8 @@
 	</xsl:template>
 
 	<xsl:template name="map-overlay">
-<rect width="50%" x="0%" y="79%" height="5.5%" fill="#b31f24" />
-
-
+		<rect width="50%" x="0%" y="79%" height="5.5%" fill="#b31f24" />
+		
 		<text x="2.5%" y="81.8%" class="bold upper large middle" fill="#fff" style="font-family: var(--theme-body-font);font-size:24px;letter-spacing:1px;" data-max-width="44%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'breakingnews'" />
@@ -60,7 +58,7 @@
 			</xsl:call-template>
 		</text>
 
-<rect width="102%" x="-1" y="84.5%" height="7%" fill="var(--theme-body-background)" fill-opacity="80%" />
+		<rect width="102%" x="-1" y="84.5%" height="7%" fill="var(--theme-body-background)" fill-opacity="80%" />
 
 		<text x="2.8%" y="88%" class="heading middle bold" style="font-size: 150%;font-family: var(--theme-sub-heading-font);" data-max-width="90%">
 			<xsl:call-template name="editable">

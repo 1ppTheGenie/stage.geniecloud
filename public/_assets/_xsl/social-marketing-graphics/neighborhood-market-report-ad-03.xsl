@@ -7,8 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-scripts">
 		<xsl:if test="//output/@mapStyle!='no-map'">
@@ -23,8 +22,7 @@
 
 	<xsl:template name="svg-body">
 		<style>
-<xsl:value-of select="'.leaflet-interactive {fill:#3388ff;stroke:#3388ff;fill-opacity:0.2;}'" />
-
+			<xsl:value-of select="'.leaflet-interactive {fill:#3388ff;stroke:#3388ff;fill-opacity:0.2;}'" />
 		</style>
 
 		<xsl:choose>
@@ -40,16 +38,14 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<image x="0" y="0" width="100%" height="100%">
-<xsl:call-template name="switch-image" />
-
+					<xsl:call-template name="switch-image" />
 				</image>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template name="map-overlay">
-<rect width="41%" x="-1%" y="79%" height="5.5%" fill="#b31f24" />
-
+		<rect width="42%" x="0" y="79%" height="5.5%" fill="#b31f24" />
 
 		<text x="2.8%" y="81.8%" class="bold upper large middle" fill="#fff" style="font-family: var(--theme-body-font);font-size:160%;letter-spacing:1px;">
 			<xsl:call-template name="editable">
@@ -58,7 +54,7 @@
 			</xsl:call-template>
 		</text>
 
-<rect width="102%" x="-1" y="84.5%" height="7%" fill="var(--theme-body-background)" fill-opacity="70%" />
+		<rect width="102%" x="-1" y="84.5%" height="7%" fill="var(--theme-body-background)" fill-opacity="70%" />
 
 		<text x="2.8%" y="88%" class="heading middle bold" style="font-size: 180%;font-family: var(--theme-sub-heading-font);" data-max-width="90%">
 			<xsl:call-template name="editable">

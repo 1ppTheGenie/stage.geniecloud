@@ -7,7 +7,8 @@ Supports:	Collection
 Version:	1.1
 -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:genie="https://theGenie.ai/hub" version="3.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:genie="https://theGenie.ai/hub" version="3.0">
 	<xsl:import href="listing-commands.xsl" />
 
 	<xsl:template name="template-folders">
@@ -116,7 +117,7 @@ Version:	1.1
 					</img>
 					<h1>
 						<span>
-<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
+							<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
 
 
 						</span>
@@ -129,7 +130,7 @@ Version:	1.1
 					<xsl:if test="$listingAddressLine1 !=''">
 						<div class="address">
 							<span>
-<xsl:value-of select="$listingAddressLine1" />
+								<xsl:value-of select="$listingAddressLine1" />
 
 
 							</span>
@@ -167,20 +168,20 @@ Version:	1.1
 				</div>
 
 				<xsl:for-each select="//collection/sections/section">
-<xsl:sort select="@name" />
+					<xsl:sort select="@name" />
 
 
 					<div class="section">
 						<div class="section-heading">
 							<h3 class="light">
-<xsl:value-of select="@name" />
+								<xsl:value-of select="@name" />
 
 
 							</h3>
 
 							<xsl:if test="@caption!=''">
 								<h2>
-<xsl:value-of select="@caption" />
+									<xsl:value-of select="@caption" />
 
 
 								</h2>
@@ -188,7 +189,7 @@ Version:	1.1
 
 							<xsl:if test="@description!=''">
 								<p>
-<xsl:value-of select="@description" />
+									<xsl:value-of select="@description" />
 
 
 								</p>
@@ -206,12 +207,12 @@ Version:	1.1
 
 						<div class="section-grid">
 							<xsl:for-each select="./asset">
-<xsl:sort select="if (matches(@name, '(\d+)')) then format-number(number(regex-group(1)), '000000') else @name" data-type="text" />
+								<xsl:sort select="if (matches(@name, '(\d+)')) then format-number(number(regex-group(1)), '000000') else @name" data-type="text" />
 
 
 
 								<xsl:call-template name="asset-box">
-<xsl:with-param name="asset" select="." />
+									<xsl:with-param name="asset" select="." />
 
 
 								</xsl:call-template>
@@ -219,80 +220,12 @@ Version:	1.1
 
 							<xsl:for-each select="./doc">
 								<xsl:call-template name="asset-box">
-<xsl:with-param name="asset" select="." />
-
-
+									<xsl:with-param name="asset" select="." />
 								</xsl:call-template>
 							</xsl:for-each>
 						</div>
 					</div>
 				</xsl:for-each>
-
-				<div class="advert" style="background-image: url(/_assets/listing-commands/img/wall.webp)">
-					<span class="overlay">
-						<xsl:comment/>
-					</span>
-					<h1>
-						<xsl:call-template name="overridable">
-							<xsl:with-param name="id" select="'promo-heading'" />
-							<xsl:with-param name="default">
-								<xsl:choose>
-									<xsl:when test="//single/mlsNumber != ''">
-<xsl:value-of select="'Want to engage tons of homeowners without lifting a finger? Click below to speak with your consultant today!'" />
-
-
-									</xsl:when>
-									<xsl:otherwise>
-<xsl:value-of select="'Want `Done For You` Facebook ads for your area? Click below to speak with your consultant today!'" />
-
-
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:with-param>
-						</xsl:call-template>
-					</h1>
-					<span class="up-arrow">↑</span>
-					<div class="button">
-						<a>
-							<xsl:attribute name="href">
-								<xsl:call-template name="overridable">
-									<xsl:with-param name="id" select="'link'" />
-									<xsl:with-param name="default">
-										<xsl:choose>
-											<xsl:when test="//single/mlsNumber != ''">
-<xsl:value-of select="'https://1parkplace.as.me/schedule.php?appointmentType=43561933'" />
-
-
-											</xsl:when>
-											<xsl:otherwise>
-<xsl:value-of select="'https://1parkplace.as.me/schedule.php?appointmentType=43562134'" />
-
-
-											</xsl:otherwise>
-										</xsl:choose>
-									</xsl:with-param>
-								</xsl:call-template>
-							</xsl:attribute>
-							<xsl:call-template name="overridable">
-								<xsl:with-param name="id" select="'promo-button'" />
-								<xsl:with-param name="default">
-									<xsl:choose>
-										<xsl:when test="//single/mlsNumber != ''">
-<xsl:value-of select="'Schedule your Meeting Today'" />
-
-
-										</xsl:when>
-										<xsl:otherwise>
-<xsl:value-of select="'Schedule your Campaign Today!'" />
-
-
-										</xsl:otherwise>
-									</xsl:choose>
-								</xsl:with-param>
-							</xsl:call-template>
-						</a>
-					</div>
-				</div>
 
 				<!-- footer -->
 				<section class="footer-marketing-kit">
@@ -348,7 +281,7 @@ Version:	1.1
 							<b>Re-render this kit:&#160;</b>
 							<a>
 								<xsl:attribute name="href">
-<xsl:value-of select="concat( //output/@apiUrl, 're-render/?renderId=', //collection/@id )" />
+									<xsl:value-of select="concat( //output/@apiUrl, 're-render/?renderId=', //collection/@id )" />
 
 
 								</xsl:attribute>
@@ -361,20 +294,20 @@ Version:	1.1
 		</body>
 
 		<footer>
-<xsl:if test="$personalLogo!=''">
-<img>
-	<xsl:attribute name="src">
-<xsl:value-of select="$personalLogo" />
-</xsl:attribute>
-</img>
-</xsl:if>
-<xsl:if test="$companyLogo!=''">
-<img>
-	<xsl:attribute name="src">
-<xsl:value-of select="$companyLogo" />
-</xsl:attribute>
-</img>
-</xsl:if>
+			<xsl:if test="$personalLogo!=''">
+				<img>
+					<xsl:attribute name="src">
+						<xsl:value-of select="$personalLogo" />
+					</xsl:attribute>
+				</img>
+			</xsl:if>
+			<xsl:if test="$companyLogo!=''">
+				<img>
+					<xsl:attribute name="src">
+						<xsl:value-of select="$companyLogo" />
+					</xsl:attribute>
+				</img>
+			</xsl:if>
 		</footer>
 	</xsl:template>
 </xsl:stylesheet>												

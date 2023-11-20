@@ -7,7 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 
 	<xsl:template name="svg-body">
@@ -43,7 +43,7 @@
 
 		<g style="transform:translate(2%, 75%)">
 			<svg width="33%" height="17.5%" class="heading">
-<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%" />
+				<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%" />
 
 				<use x="18.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-15.4%, -144.5%);">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#phone-icon' )" />
@@ -55,7 +55,7 @@
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#email-icon' )" />
 				</use>
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-<circle r=".3500" cx=".5" cy=".5" />
+					<circle r=".3500" cx=".5" cy=".5" />
 
 				</clipPath>
 
@@ -93,13 +93,17 @@
 						<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 					</xsl:call-template>
 				</text>
+
+				<text x="37%" y="78%" style="font-size:80%" fill="var(--theme-sub-heading-color)">
+					<xsl:value-of select="//agent[1]/marketingLicense" />
+				</text>
 			</svg>
 		</g>
 
 		<text style="fill:var(--theme-body-background);text-shadow: 2px 3px 0px rgba(0,0,0);text-transform: uppercase;text-anchor:end;font-weight:bold;font-size:375%;transform:translate(55%,5%)">Just</text>
 
 		<text fill="var(--theme-sub-heading-color)" style="font-weight:bold;font-size:375%;text-transform:uppercase;transform:translate(58.5%,5%)">
-<xsl:value-of select="$soldListed" />
+			<xsl:value-of select="$soldListed" />
 
 		</text>
 
@@ -113,7 +117,7 @@
 			<text x="0" y="5.5%" fill="var(--theme-sub-heading-color)">
 				<tspan class="bold">Type:  </tspan>
 				<tspan class="narrow">
-<xsl:value-of select="$singularPropertyType" />
+					<xsl:value-of select="$singularPropertyType" />
 
 				</tspan>
 			</text>
@@ -150,15 +154,14 @@
 					<xsl:when test="//single/soldDate!=''">
 						<tspan class="bold">Sold on: </tspan>
 						<tspan class="narrow">
-<xsl:value-of select="//single/soldDate" />
+							<xsl:value-of select="//single/soldDate" />
 
 						</tspan>
 					</xsl:when>
 					<xsl:otherwise>
 						<tspan class="bold">Listed on: </tspan>
 						<tspan class="narrow">
-<xsl:value-of select="//single/listed" />
-
+							<xsl:value-of select="//single/listed" />
 						</tspan>
 					</xsl:otherwise>
 				</xsl:choose>
@@ -166,25 +169,19 @@
 		</g>
 
 		<g style="transform:translate(45%,50%);fill:var(--theme-body-background);">
-<rect width="54%" height="35%" fill="var(--theme-sub-heading-color)" fill-opacity="70%" />
-
+			<rect width="54%" height="35%" fill="var(--theme-sub-heading-color)" fill-opacity="70%" />
 
 			<g style="transform:translate(2%,2%);">
 				<text x="0" y="0" class="h2 large" style="fill:var(--theme-body-background);">
-					<tspan>
-<xsl:call-template name="soldListedPrice" />
-
-					</tspan>
+						<xsl:call-template name="soldListedPrice" />
 				</text>
 
 				<text x="0" y="7%" class="medium">
-<xsl:call-template name="listing-address-line-one" />
-
+					<xsl:call-template name="listing-address-line-one" />
 				</text>
 
 				<text x="0" y="12%" class="medium">
-<xsl:call-template name="listing-address-line-two" />
-
+					<xsl:call-template name="listing-address-line-two" />
 				</text>
 				<foreignObject y="16%" width="50%" height="15%">
 					<p style="color:var(--theme-body-background);">
@@ -195,9 +192,6 @@
 					</p>
 				</foreignObject>
 			</g>
-			<text x="13%" y="40%" style="font-size:80%" fill="var(--theme-sub-heading-color)">
-				<xsl:value-of select="//agent[1]/marketingLicense" />
-			</text>
 		</g>
 
 		<xsl:call-template name="copyright" />

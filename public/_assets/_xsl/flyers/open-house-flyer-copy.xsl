@@ -121,13 +121,13 @@
 							<xsl:value-of select="//agent[1]/photo" />
 						</xsl:attribute>
 					</image>
-					<text x="13%" y="3.5%" class="theme-body" style="font-size: 180%;">
+<text x="13%" y="3.5%" fill="var(--theme-body-background)" style="font-size: 180%;">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="concat( //agent[1]/marketingName, '&#160;' )" />
 						</xsl:call-template>
 					</text>
-					<text x="13%" y="5.5%" class="theme-body" style="font-size: 180%;" data-max-width="32%">
+<text x="13%" y="5.5%" fill="var(--theme-body-background)" style="font-size: 180%;" data-max-width="32%">
 						<tspan>
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentmobile'" />
@@ -149,7 +149,7 @@
 							</xsl:call-template>
 						</tspan>
 					</text>
-					<text x="13%" y="7.5%" class="theme-body" style="font-size: 180%;">
+<text x="13%" y="7.5%" fill="var(--theme-body-background)" style="font-size: 180%;">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'licenseno'" />
 							<xsl:with-param name="default" select="//agent[1]/marketingLicense" />

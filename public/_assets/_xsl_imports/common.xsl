@@ -22,14 +22,12 @@
 				<xsl:value-of select="concat( 'translate(', $cropSize, ',', $cropSize, ') scale(', ($svgWidth - ($cropSize * 2) ) div $svgWidth, ',', ($svgHeight - ($cropSize * 2) ) div $svgHeight, ')' )" />
 			</xsl:attribute>
 			<xsl:call-template name="cropped-content" />
-
 		</g>
 	</xsl:template>
 
 	<xsl:template name="cropped-content" />
 
 	<xsl:template name="svg-body" />
-
 
 	<xsl:template name="empty-listing-text">
 		<rect xmlns="" x="7%" y="25%" rx="10" ry="10" width="85%" height="60%" fill-opacity="0" stroke-width="2" stroke="var(--theme-heading-color)"></rect>
@@ -141,20 +139,11 @@
 						<xsl:value-of select="concat( '0 0 ', $svgWidth, ' ', $svgHeight )" />
 					</xsl:attribute>
 
-					<xsl:if test="number(//output/@isSample)=1">
-						<xsl:comment>
-							<xsl:text>IsSample:</xsl:text>
-							<xsl:value-of select="//output/@isSample" />
-							<xsl:text>.</xsl:text>
-						</xsl:comment>
-					</xsl:if>
-
 					<defs>
 						<style>
-							<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/_css/svg.css);' )" />
-							<xsl:text>
-							</xsl:text>
-							<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css);')" />
+							<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/_css/svg.css); ' )" />
+							<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css); ')" />
+							<xsl:value-of select="'#genie-wrapper { --pending: var(--pending-yellow); --sold: var(--sold-red); --active: var(--active-green); --new: var(--new-blue); }'" />
 						</style>
 					</defs>
 
@@ -906,7 +895,6 @@
 
 			<xsl:text>&#160;</xsl:text>
 			<xsl:value-of select="//agent[1]/last-name" />
-
 		</text>
 		<text>
 			<tspan>
@@ -981,7 +969,6 @@
 
 	<xsl:template name="view-period">
 		<xsl:param name="prefix" />
-
 
 		<xsl:choose>
 			<xsl:when test="number(//areas/area[1]/statistics/@lookbackMonths)=1">
@@ -1287,7 +1274,6 @@
 			</use>
 
 			<rect id="rounded-rect" height="4%" fill="var(--theme-heading-color)" fill-opacity="0.1" y="10.5%" x="1%" rx="0.5%">
-
 				<xsl:attribute name="width">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
@@ -1471,7 +1457,7 @@
 					</xsl:choose>
 				</xsl:attribute>
 			</rect>
-			<!-- rect is here -->
+
 			<rect height="0.1%" y="12%" x="1%" fill="#000">
 				<xsl:attribute name="width">
 					<xsl:choose>
@@ -1631,15 +1617,14 @@
 	</xsl:template>
 
 	<xsl:template name="copyright">
-		<xsl:param name="url" select="'https://genie.ai'" />
+		<xsl:param name="url" select="'https://thegenie.ai'" />
 		<xsl:param name="disclaimer" select="'default'" />
 
 		<g id="footer">
 			<text>
 				<tspan fill="var(--theme-heading-color)">
-					<xsl:text>SOURCE: theGenie.ai  Copyright &#169; </xsl:text>
+					<xsl:text>SOURCE: theGenie.ai &#169; </xsl:text>
 					<xsl:value-of select="//output/@year" />
-
 				</tspan>
 				<tspan>
 					<xsl:text> 1parkplace, Inc.</xsl:text>
