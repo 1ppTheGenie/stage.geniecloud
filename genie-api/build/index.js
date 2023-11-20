@@ -7336,7 +7336,7 @@ var defaultRenderSettings = {
   withBleed: false,
   withCrops: false,
   blurPrice: false,
-  hideAVM: false,
+  hideAVM: true,
   requireSignin: false,
   customerName: null,
   isLeadCapture: false,
@@ -7348,7 +7348,7 @@ var defaultRenderSettings = {
 };
 var areaFromMlsNumber = async (mlsNumber, mlsId, userId) => {
   const listing = await getListing(userId, mlsNumber, mlsId);
-  if (listing.preferredAreaId) {
+  if (listing && listing.preferredAreaId) {
     return await areaName(userId, listing.preferredAreaId);
   }
   const areas = await propertySurroundingAreas(mlsNumber, mlsId, userId);
@@ -7426,7 +7426,7 @@ var userSetting = async (userId, setting) => {
 };
 var processAgents = async (agentIds) => {
   let agents = [];
-  Promise.all(
+  await Promise.all(
     agentIds.map(async (agentID) => {
       const profile = await getUser(agentID);
       const marketingSettings = profile.marketingSettings;
@@ -7575,7 +7575,7 @@ var processAreas = async (params) => {
           );
         }
         const mls_properties = await mlsProperties(
-          params.mlsID ?? 0,
+          params.mlsId ?? 0,
           areaId,
           NOW.plus({ months: params.datePeriod * -1 }).toISO()
         );
@@ -7684,7 +7684,7 @@ var processAreas = async (params) => {
             });
           });
           statistics.push(bySize);
-          const monthly = areaStatisticsMonthly(
+          const monthly = await areaStatisticsMonthly(
             params.userId,
             areaId,
             Math.ceil(params.datePeriod / 12)
@@ -7696,12 +7696,7 @@ var processAreas = async (params) => {
                 history._content.push({
                   _name: "period",
                   _attrs: {
-                    period: m.yearPart.str_pad(
-                      m.monthPart,
-                      2,
-                      "0",
-                      STR_PAD_LEFT
-                    ),
+                    period: `${m.yearPart.toString()}${m.monthPart.toString().padStart(2, "0")}`,
                     periodName: DateTime.fromObject({
                       year: m.yearPart,
                       month: m.monthPart,
@@ -7805,7 +7800,7 @@ var processListing = async (params) => {
     }
     single = [
       { mlsNumber: listing.mlsNumber ?? "" },
-      { mlsID: listing.mlsID ?? "" },
+      { mlsId: listing.mlsID ?? "" },
       { price: listing.lowPrice ?? 0 },
       { highPrice: listing.highPrice ?? "" },
       { salePrice: listing.salePrice ?? "" },
@@ -7824,9 +7819,7 @@ var processListing = async (params) => {
       { lotSize: listing.lotSize ?? "Enquire" },
       { acres: listing.acres ?? "Enquire" },
       { built: listing.yearBuilt ?? "Enquire" },
-      {
-        virtualTourUrl: listing.virtualTourUrl
-      },
+      { virtualTourUrl: listing.virtualTourUrl },
       { latitude: listing.latitude ?? 0 },
       { longitude: listing.longitude ?? 0 },
       { city: listing.city ?? "" }
@@ -8056,6 +8049,49 @@ var buildVersion = async () => {
 var debugLog = async (source, params, data) => {
   console.log("debugLog", source, params, data);
 };
+var preCallGenieAPIs = async (params) => {
+  try {
+    if (params.mlsNumber) {
+      await openhouseByMlsNumber(params.mlsId, params.mlsNumber);
+      await propertySurroundingAreas(
+        params.mlsNumber,
+        params.mlsId,
+        params.userId
+      );
+      await agentProperties(params.userId, false);
+      await areaFromMlsNumber(params.mlsNumber, params.mlsId, params.userId);
+      await getListing(params.userId, params.mlsNumber, params.mlsId);
+    }
+    await Promise.all(
+      params?.agentIds?.map(async (agentId) => await getUser(agentId))
+    );
+    await Promise.all(
+      params?.areaIds?.map(async (areaId) => {
+        await getAreaBoundary(areaId);
+        await areaStatisticsWithPrevious(
+          params.userId,
+          areaId,
+          params.datePeriod
+        );
+        await mlsProperties(
+          params.mlsId ?? 0,
+          areaId,
+          NOW.plus({ months: params.datePeriod * -1 }).toISO()
+        );
+        await agentMlsNumbers(params.userId);
+        await areaStatisticsMonthly(
+          params.userId,
+          areaId,
+          Math.ceil(params.datePeriod / 12)
+        );
+      })
+    );
+    return true;
+  } catch (err) {
+    console.log("precache error", err);
+    return false;
+  }
+};
 
 // src/utils/hubAPI.js
 var import_qrcode_svg = __toESM(require_qrcode(), 1);
@@ -8174,7 +8210,9 @@ var embedsAPI = async (route, params) => {
   return result;
 };
 var getLandingPageData = async (params) => {
-  let { propertyId, qrId, shortUrlDataId, token, agentId } = { ...params };
+  let { propertyId, qrId, shortUrlDataId, token, agentId, hideAVM } = {
+    ...params
+  };
   let property = null, lead = null;
   if (token) {
     if (typeof qrId !== "undefined") {
@@ -8195,7 +8233,7 @@ var getLandingPageData = async (params) => {
   }
   if (property) {
     property.lead = lead;
-    return {
+    let data = {
       id: property.propertyID,
       firstName: property.firstName,
       lastName: property.lastName,
@@ -8216,6 +8254,19 @@ var getLandingPageData = async (params) => {
       avmLow: property.avmLow,
       avmHigh: property.avmHigh
     };
+    if (!hideAVM || hideAVM == false || hideAVM == 0) {
+      if (data.currentAVM && data.currentAVM !== "") {
+        data.avm = data.currentAVM;
+        delete data.currentAVM;
+      } else if (!data.avmLow || data.avmLow !== "") {
+        data.avm = data.avmLow;
+      } else if (!data.avmHigh || data.avmHigh !== "") {
+        data.avm = data.avmHigh;
+      } else {
+        data.avm = `${data.avmLow} - ${data.avmHigh}`;
+      }
+    }
+    return data;
   }
 };
 var get_property = async (params) => {
@@ -8645,13 +8696,17 @@ var API_PASS = process.env.GENIE_PASS ?? "iLAE9k1P!fL3";
 var API_USER = process.env.GENIE_USER ?? "genieApiHub2";
 var API_AUTH = "Basic " + Buffer.from(`${API_USER}:${API_PASS}`).toString("base64");
 var HOUR_IN_SECONDS = 60 * 60;
-var DAY_IN_SECONDS2 = HOUR_IN_SECONDS * 24;
-var CACHE_FOR = { GetAddressPredictions: 48, GetSavedSearches: 72 };
+var CACHE_FOR = {
+  GetAddressPredictions: HOUR_IN_SECONDS * 36,
+  GetSavedSearches: HOUR_IN_SECONDS * 36
+};
 var AS_JSON = "application/json";
 var impersonater = {};
 var from_cache = async (key, endpoint) => {
   const since = /* @__PURE__ */ new Date();
-  since.setHours(since.getHours() - (CACHE_FOR[endpoint.split("/")[0]] ?? 4));
+  since.setHours(
+    since.getSeconds() - (CACHE_FOR[endpoint.split("/")[0]] ?? HOUR_IN_SECONDS / 2)
+  );
   return await jsonFromS3(`_cache/${key}`, since);
 };
 var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
@@ -8659,6 +8714,7 @@ var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
   if (timeout > 0) {
     await toS3(`_cache/${key}`, Buffer.from(data), {
       genieCache: endpoint?.toString(),
+      ExpireFile: "GenieCache",
       timeout
     });
   }
@@ -8894,11 +8950,14 @@ var call_api = async (endpoint, params, verb = "POST", pre_cache = null) => {
         result = pre_cache(result);
       }
       to_cache(JSON.stringify(result), endpoint, cacheKey);
+      console.log("cache to", endpoint, cacheKey);
     } else {
       if (false == "object" || !result?.responseDescription || result.responseDescription !== "Asset Url has already been set") {
         console.log(`GenieAPI error (${endpoint}): `, result);
       }
     }
+  } else {
+    console.log("cache from", endpoint, cacheKey);
   }
   return result;
 };
@@ -9147,6 +9206,8 @@ var api = async (event) => {
                 };
               }
               break;
+            case "/scheduledRerender":
+              break;
             case "/re-render":
               if (params.renderId) {
                 const r = await reRender(params.renderId, { ...params });
@@ -9261,6 +9322,7 @@ var api = async (event) => {
                 );
                 params.s3Key = s3Key;
                 params = await setRenderDefaults(params);
+                response.body.preCache = await preCallGenieAPIs(params);
                 const r = await toS3(
                   `_processing/${params.renderId}/prepare.json`,
                   Buffer.from(JSON.stringify(params)),
@@ -9383,6 +9445,7 @@ var processAsset = async (params) => {
 };
 var prepareAsset = async (asset, params) => {
   const settings = await assetSetting(asset, "all");
+  console.log("acb123", params);
   if (Object.keys(settings).length > 0) {
     let pages, suffix, dims, size;
     const { s3Key } = await getS3Key(asset, params);
@@ -9435,7 +9498,7 @@ var prepareAsset = async (asset, params) => {
         const isA5 = ["landing-pages", "funnels", "embeds"].find(
           (start) => asset.startsWith(start)
         );
-        const withBleed = params?.renderSettings?.withBleed ?? false;
+        const withBleed = params?.withBleed ?? false;
         const width = suffix === "pdf" ? isA5 ? "216mm" : `${Math.round(dims.width) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.width);
         const height = suffix === "pdf" ? isA5 ? "279mm" : `${Math.round(dims.height) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.height);
         const render = {
