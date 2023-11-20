@@ -352,7 +352,7 @@ export const userSetting = async (userId, setting) => {
 const processAgents = async agentIds => {
 	let agents = [];
 
-	Promise.all(
+	await Promise.all(
 		agentIds.map(async agentID => {
 			const profile = await getUser(agentID);
 
@@ -672,7 +672,7 @@ const processAreas = async params => {
 					statistics.push(bySize);
 
 					// *** BY QUARTILE
-					const monthly = areaStatisticsMonthly(
+					const monthly = await areaStatisticsMonthly(
 						params.userId,
 						areaId,
 						Math.ceil(params.datePeriod / 12)
