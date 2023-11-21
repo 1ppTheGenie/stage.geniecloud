@@ -20,14 +20,12 @@
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="concat( 'CALL or TEXT ' , upper-case(//agent[1]/firstName), ':')" />
-
 						</xsl:call-template>
 					</text>
 					<text x="2%" y="4%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="//agent[1]/mobile" />
-
 						</xsl:call-template>
 					</text>
 				</xsl:when>
@@ -59,14 +57,12 @@
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentwebsite'" />
 						<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
-
 					</xsl:call-template>
 				</tspan>
 				<tspan x="98%" dy="1.7%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmarketingEmail'" />
 						<xsl:with-param name="default" select="//agent[1]/website" />
-
 					</xsl:call-template>
 				</tspan>
 			</text>
@@ -86,7 +82,7 @@
 			</text>
 	
 			<text x="98%" y="7.1%" class="align-right right" font-size="80%" font-family="var(--theme-heading-font)" font-weight="100"  fill="var(--theme-body-background)">
-				<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
+				<xsl:value-of select="//agent[1]/marketingLicense" />
 			</text>
 
 			<text x="51.5%" y="0.8%" class="center" font-family="var(--theme-heading-font)" font-size="130%" font-weight="300" fill="var(--theme-body-background)">
