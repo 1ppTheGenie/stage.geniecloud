@@ -140,6 +140,16 @@
 					</xsl:attribute>
 
 					<defs>
+						<filter id="softDropShadow">
+							<feGaussianBlur in="SourceAlpha" stdDeviation="41"/>
+							<feOffset dx="1" dy="1" result="offsetblur"/>
+							<feFlood flood-color="#999"/>
+							<feComposite in2="offsetblur" operator="in"/>
+							<feMerge>
+								<feMergeNode/>
+								<feMergeNode in="SourceGraphic"/>
+							</feMerge>
+						</filter>
 						<style>
 							<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/_css/svg.css); ' )" />
 							<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css); ')" />
