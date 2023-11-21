@@ -7,90 +7,113 @@
 			"meta": [],
 			"assets": [
 				{
+					"sort": 1,
 					"asset": "social-marketing-graphics/open-house-01"
 				},
 				{
+					"sort": 2,
 					"asset": "social-marketing-graphics/lc-prop-post-03"
 				},
 				{
+					"sort": 3,
 					"asset": "social-marketing-graphics/ed-oh-instagram-story-2"
 				},
 				{
+					"sort": 4,
 					"asset": "social-marketing-graphics/ed-oh-instagram-story-3"
 				},
 				{
+					"sort": 5,
 					"asset": "social-marketing-graphics/ed-oh-social-templates-2"
 				},
 				{
+					"sort": 6,
 					"asset": "social-marketing-graphics/ed-oh-social-templates-3"
 				},
 				{
+					"sort": 7,
 					"asset": "social-marketing-graphics/ed-oh-social-templates-4"
 				},
 				{
+					"sort": 8,
 					"asset": "social-marketing-graphics/lc-brand-post-01-vip"
 				},
 				{
+					"sort": 9,
 					"asset": "social-marketing-graphics/lc-oh-post-02"
 				},
 				{
+					"sort": 10,
 					"asset": "social-marketing-graphics/lc-oh-post-03"
 				},
 				{
+					"sort": 11,
 					"asset": "social-marketing-graphics/lc-oh-story-01"
 				},
 				{
+					"sort": 12,
 					"asset": "social-marketing-graphics/lc-prop-post-01-vip"
 				},
 				{
+					"sort": 13,
 					"asset": "social-marketing-graphics/lc-prop-post-06-vip"
 				},
 				{
+					"sort": 14,
 					"asset": "social-marketing-graphics/lc-prop-post-06"
 				},
 				{
+					"sort": 15,
 					"asset": "social-marketing-graphics/lc-vip-fb-prop-ad-1"
 				},
-				{ "asset": "social-marketing-graphics/nc-discovery" },
-				{ "asset": "social-marketing-graphics/nc-frisco-v2" },
-				{ "asset": "social-marketing-graphics/nc-frisco" },
-				{ "asset": "social-marketing-graphics/nc-news" },
+				{ "sort": 16, "asset": "social-marketing-graphics/nc-discovery" },
+				{ "sort": 17, "asset": "social-marketing-graphics/nc-frisco-v2" },
+				{ "sort": 18, "asset": "social-marketing-graphics/nc-frisco" },
+				{ "sort": 19, "asset": "social-marketing-graphics/nc-news" },
 				{
+					"sort": 20,
 					"asset": "social-marketing-graphics/active-listings-satellite-map-with-price"
 				},
 				{
+					"sort": 21,
 					"asset": "social-marketing-graphics/map-listings-active"
 				},
 				{
+					"sort": 22,
 					"asset": "social-marketing-graphics/market-report-cover"
 				},
 				{
+					"sort": 23,
 					"asset": "social-marketing-graphics/market-report-insider-instant-download-v1"
 				},
 				{
+					"sort": 24,
 					"asset": "social-marketing-graphics/market-report-insider-instant-download-v2"
 				},
-				{ "asset": "social-marketing-graphics/the-lc-bay" },
-				{ "asset": "social-marketing-graphics/open-house-02" },
-				{ "asset": "facebook-approved/listing-add-no-2" },
-				{ "asset": "social-marketing-graphics/listing-ad-3" },
-				{ "asset": "social-marketing-graphics/lc-oh-post-02" },
-				{ "asset": "social-marketing-graphics/listing-ad-5" },
-				{ "asset": "direct-mail/single-listing-2-style-5" },
-				{ "asset": "social-marketing-graphics/single-listing-02" },
-				{ "asset": "direct-mail/single-listing-3" },
-				{ "asset": "direct-mail/single-listing-4" },
-				{ "asset": "social-marketing-graphics/single-listing-05" },
+				{ "sort": 25, "asset": "social-marketing-graphics/the-lc-bay" },
+				{ "sort": 26, "asset": "social-marketing-graphics/open-house-02" },
+				{ "sort": 27, "asset": "facebook-approved/listing-add-no-2" },
+				{ "sort": 28, "asset": "social-marketing-graphics/listing-ad-3" },
+				{ "sort": 29, "asset": "social-marketing-graphics/lc-oh-post-02" },
+				{ "sort": 30, "asset": "social-marketing-graphics/listing-ad-5" },
+				{ "sort": 31, "asset": "direct-mail/single-listing-2-style-5" },
+				{ "sort": 32, "asset": "social-marketing-graphics/single-listing-02" },
+				{ "sort": 33, "asset": "direct-mail/single-listing-3" },
+				{ "sort": 34, "asset": "direct-mail/single-listing-4" },
+				{ "sort": 35, "asset": "social-marketing-graphics/single-listing-05" },
 				{
+					"sort": 36,
 					"asset": "social-marketing-graphics/single-listing-07"
 				},
 				{
+					"sort": 37,
 					"asset": "social-marketing-graphics/virtual-open-house-02"
 				},
 				{
+					"sort": 38,
 					"asset": "social-marketing-graphics/just-listed-01"
 				},
-				{ "asset": "social-marketing-graphics/just-sold-01" }
+				{ "sort": 39, "asset": "social-marketing-graphics/just-sold-01" }
 			],
 			"name": "All Social"
 		}

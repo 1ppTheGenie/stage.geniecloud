@@ -6,146 +6,183 @@
 			"name": "Direct Mail",
 			"meta": [],
 			"assets": [
-				{ "asset": "direct-mail/ed-kaminsky-combined-1" },
-				{ "asset": "direct-mail/ed-kaminsky-combined-2" },
-				{ "asset": "direct-mail/ed-kaminsky-combined-3" },
-				{ "asset": "direct-mail/ed-kaminsky-combined-4" },
+				{ "sort": 1, "asset": "direct-mail/ed-kaminsky-combined-1" },
+				{ "sort": 2, "asset": "direct-mail/ed-kaminsky-combined-2" },
+				{ "sort": 3, "asset": "direct-mail/ed-kaminsky-combined-3" },
+				{ "sort": 4, "asset": "direct-mail/ed-kaminsky-combined-4" },
 				{
+					"sort": 5,
 					"asset": "direct-mail/ed-kaminsky-postcard-2022-1-postage-side"
 				},
 				{
+					"sort": 6,
 					"asset": "direct-mail/ed-kaminsky-postcard-2022-1"
 				},
 				{
+					"sort": 7,
 					"asset": "direct-mail/ed-kaminsky-postcard-2022-2"
 				},
 				{
+					"sort": 8,
 					"asset": "direct-mail/ed-kaminsky-postcard-2022-3"
 				},
 				{
+					"sort": 9,
 					"asset": "direct-mail/ed-kaminsky-postcard-2022-4"
 				},
-				{ "asset": "direct-mail/qr-code-postcard-2022-1" },
-				{ "asset": "direct-mail/qr-code-postcard-2022-2" },
-				{ "asset": "direct-mail/qr-code-postcard-2022-3" },
-				{ "asset": "direct-mail/qr-code-postcard-2022-4" },
-				{ "asset": "direct-mail/qr-code-postcard-2022-5" },
-				{ "asset": "direct-mail/qr-code-postcard-2022-6" },
-				{ "asset": "direct-mail/qr-code-postcard-2022-7" },
+				{ "sort": 10, "asset": "direct-mail/qr-code-postcard-2022-1" },
+				{ "sort": 11, "asset": "direct-mail/qr-code-postcard-2022-2" },
+				{ "sort": 12, "asset": "direct-mail/qr-code-postcard-2022-3" },
+				{ "sort": 13, "asset": "direct-mail/qr-code-postcard-2022-4" },
+				{ "sort": 14, "asset": "direct-mail/qr-code-postcard-2022-5" },
+				{ "sort": 15, "asset": "direct-mail/qr-code-postcard-2022-6" },
+				{ "sort": 16, "asset": "direct-mail/qr-code-postcard-2022-7" },
 				{
+					"sort": 17,
 					"asset": "direct-mail/qr-code-postcard-2022-postage-side-1"
 				},
 				{
+					"sort": 18,
 					"asset": "direct-mail/qr-code-postcard-combine-2022-1"
 				},
 				{
+					"sort": 19,
 					"asset": "direct-mail/qr-code-postcard-combine-2022-2"
 				},
 				{
+					"sort": 20,
 					"asset": "direct-mail/qr-code-postcard-combine-2022-3"
 				},
 				{
+					"sort": 21,
 					"asset": "direct-mail/qr-code-postcard-combine-2022-4"
 				},
 				{
+					"sort": 22,
 					"asset": "direct-mail/qr-code-postcard-combine-2022-5"
 				},
 				{
+					"sort": 23,
 					"asset": "direct-mail/qr-code-postcard-combine-2022-6"
 				},
 				{
+					"sort": 24,
 					"asset": "direct-mail/qr-code-postcard-combine-2022-7"
 				},
-				{ "asset": "direct-mail/coit-mailer-combined" },
-				{ "asset": "direct-mail/direct-mail-fun-facts" },
+				{ "sort": 25, "asset": "direct-mail/coit-mailer-combined" },
+				{ "sort": 26, "asset": "direct-mail/direct-mail-fun-facts" },
 				{
+					"sort": 27,
 					"asset": "direct-mail/direct-mail-whats-trending-postage-light-1"
 				},
 				{
+					"sort": 28,
 					"asset": "direct-mail/direct-mail-whats-trending-postage-light-combine"
 				},
 				{
+					"sort": 29,
 					"asset": "direct-mail/krg-coming-soon-content-side"
 				},
 				{
+					"sort": 30,
 					"asset": "direct-mail/krg-double-photo-content-combine"
 				},
 				{
+					"sort": 31,
 					"asset": "direct-mail/krg-double-photo-content-side"
 				},
-				{ "asset": "direct-mail/krg-market-insider-combine" },
+				{ "sort": 32, "asset": "direct-mail/krg-market-insider-combine" },
 				{
+					"sort": 33,
 					"asset": "direct-mail/krg-market-insider-content-side"
 				},
-				{ "asset": "direct-mail/krg-postage-side" },
+				{ "sort": 34, "asset": "direct-mail/krg-postage-side" },
 				{
+					"sort": 35,
 					"asset": "direct-mail/krg-single-photo-content-combine"
 				},
 				{
+					"sort": 36,
 					"asset": "direct-mail/krg-single-photo-content-side"
 				},
-				{ "asset": "direct-mail/tracy-phillips-combined" },
+				{ "sort": 37, "asset": "direct-mail/tracy-phillips-combined" },
 				{
+					"sort": 38,
 					"asset": "direct-mail/tracy-phillips-qr-code-content-side"
 				},
 				{
+					"sort": 39,
 					"asset": "direct-mail/tracy-phillips-qr-code-postage-side"
 				},
-				{ "asset": "direct-mail/single-listing-1" },
-				{ "asset": "direct-mail/single-listing-2-style-5" },
-				{ "asset": "direct-mail/single-listing-2" },
-				{ "asset": "direct-mail/single-listing-3" },
-				{ "asset": "direct-mail/single-listing-4" },
-				{ "asset": "direct-mail/single-listing-5" },
-				{ "asset": "direct-mail/cush-content-side-combined" },
+				{ "sort": 41, "asset": "direct-mail/single-listing-1" },
+				{ "sort": 42, "asset": "direct-mail/single-listing-2-style-5" },
+				{ "sort": 43, "asset": "direct-mail/single-listing-2" },
+				{ "sort": 44, "asset": "direct-mail/single-listing-3" },
+				{ "sort": 45, "asset": "direct-mail/single-listing-4" },
+				{ "sort": 46, "asset": "direct-mail/single-listing-5" },
+				{ "sort": 47, "asset": "direct-mail/cush-content-side-combined" },
 				{
+					"sort": 48,
 					"asset": "direct-mail/cush-market-insider-combined"
 				},
-				{ "asset": "direct-mail/cush-market-insider-side" },
-				{ "asset": "direct-mail/cush-postage-side" },
-				{ "asset": "direct-mail/cush-single-content-side" },
-				{ "asset": "direct-mail/test" },
-				{ "asset": "direct-mail/test2" },
+				{ "sort": 49, "asset": "direct-mail/cush-market-insider-side" },
+				{ "sort": 50, "asset": "direct-mail/cush-postage-side" },
+				{ "sort": 51, "asset": "direct-mail/cush-single-content-side" },
+				{ "sort": 52, "asset": "direct-mail/test" },
+				{ "sort": 53, "asset": "direct-mail/test2" },
 				{
+					"sort": 54,
 					"asset": "direct-mail/tse-saratoga-sold-cookie-jar-back"
 				},
 				{
+					"sort": 55,
 					"asset": "direct-mail/tse-saratoga-sold-cookie-jar-combine"
 				},
 				{
+					"sort": 56,
 					"asset": "direct-mail/tse-saratoga-sold-cookie-jar-front"
 				},
-				{ "asset": "direct-mail/would-you-be-seller-mail-1" },
+				{ "sort": 57, "asset": "direct-mail/would-you-be-seller-mail-1" },
 				{
+					"sort": 58,
 					"asset": "direct-mail/would-you-be-seller-mail-test"
 				},
-				{ "asset": "direct-mail/would-you-be-seller-mail" },
-				{ "asset": "direct-mail/your-neighbors-house" },
+				{ "sort": 59, "asset": "direct-mail/would-you-be-seller-mail" },
+				{ "sort": 60, "asset": "direct-mail/your-neighbors-house" },
 				{
+					"sort": 61,
 					"asset": "direct-mail/coit-mailer-front"
 				},
 				{
+					"sort": 62,
 					"asset": "direct-mail/direct-mail-10"
 				},
 				{
+					"sort": 63,
 					"asset": "direct-mail/direct-mail-11"
 				},
 				{
+					"sort": 64,
 					"asset": "direct-mail/whats-trending"
 				},
 				{
+					"sort": 65,
 					"asset": "direct-mail/single-listing"
 				},
 				{
+					"sort": 66,
 					"asset": "direct-mail/your-neighbors-house"
 				},
 				{
+					"sort": 67,
 					"asset": "direct-mail/qr-code-postage-card"
 				},
 				{
+					"sort": 68,
 					"asset": "direct-mail/coit-mailer-back"
 				},
 				{
+					"sort": 69,
 					"asset": "direct-mail/direct-mail-01"
 				}
 			]

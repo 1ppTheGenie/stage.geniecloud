@@ -7,42 +7,53 @@
 			"meta": [],
 			"assets": [
 				{
+					"sort": 1,
 					"asset": "social-marketing-graphics/lc-prop-post-03"
 				},
 				{
+					"sort": 2,
 					"asset": "social-marketing-graphics/lc-brand-post-01-vip"
 				},
 				{
+					"sort": 3,
 					"asset": "social-marketing-graphics/lc-prop-post-01-vip"
 				},
 				{
+					"sort": 4,
 					"asset": "social-marketing-graphics/lc-prop-post-06-vip"
 				},
 				{
+					"sort": 5,
 					"asset": "social-marketing-graphics/lc-prop-post-06"
 				},
 				{
+					"sort": 6,
 					"asset": "social-marketing-graphics/lc-vip-fb-prop-ad-1"
 				},
 				{
+					"sort": 7,
 					"asset": "social-marketing-graphics/map-listings-active"
 				},
-				{ "asset": "facebook-approved/listing-add-no-2" },
-				{ "asset": "social-marketing-graphics/listing-ad-3" },
-				{ "asset": "social-marketing-graphics/listing-ad-5" },
-				{ "asset": "direct-mail/single-listing-2-style-5" },
+				{ "sort": 8, "asset": "facebook-approved/listing-add-no-2" },
+				{ "sort": 9, "asset": "social-marketing-graphics/listing-ad-3" },
+				{ "sort": 10, "asset": "social-marketing-graphics/listing-ad-5" },
+				{ "sort": 11, "asset": "direct-mail/single-listing-2-style-5" },
 				{
+					"sort": 12,
 					"asset": "social-marketing-graphics/single-listing-02"
 				},
-				{ "asset": "direct-mail/single-listing-3" },
-				{ "asset": "direct-mail/single-listing-4" },
+				{ "sort": 13, "asset": "direct-mail/single-listing-3" },
+				{ "sort": 14, "asset": "direct-mail/single-listing-4" },
 				{
+					"sort": 15,
 					"asset": "social-marketing-graphics/single-listing-05"
 				},
 				{
+					"sort": 16,
 					"asset": "social-marketing-graphics/single-listing-07"
 				},
 				{
+					"sort": 17,
 					"asset": "social-marketing-graphics/just-listed-01"
 				}
 			],
