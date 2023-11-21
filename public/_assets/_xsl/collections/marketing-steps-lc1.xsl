@@ -170,28 +170,21 @@ Version:	1.1
 				<xsl:for-each select="//collection/sections/section">
 					<xsl:sort select="@name" />
 
-
 					<div class="section">
 						<div class="section-heading">
 							<h3 class="light">
 								<xsl:value-of select="@name" />
-
-
 							</h3>
 
 							<xsl:if test="@caption!=''">
 								<h2>
 									<xsl:value-of select="@caption" />
-
-
 								</h2>
 							</xsl:if>
 
 							<xsl:if test="@description!=''">
 								<p>
 									<xsl:value-of select="@description" />
-
-
 								</p>
 							</xsl:if>
 
@@ -207,14 +200,11 @@ Version:	1.1
 
 						<div class="section-grid">
 							<xsl:for-each select="./asset">
-								<xsl:sort select="if (matches(@name, '(\d+)')) then format-number(number(regex-group(1)), '000000') else @name" data-type="text" />
-
-
+								<xsl:sort select="@sort"/>
+								<!-- <xsl:sort select="if (matches(@name, '(\d+)')) then format-number(number(regex-group(1)), '000000') else @name" data-type="text" /> -->
 
 								<xsl:call-template name="asset-box">
 									<xsl:with-param name="asset" select="." />
-
-
 								</xsl:call-template>
 							</xsl:for-each>
 
@@ -271,7 +261,8 @@ Version:	1.1
 					<div>
 						<p>
 							<b>Collection:&#160;</b>
-							<xsl:value-of select="//collection/@title" />
+							<xsl:value-of select="//collection/@name" />
+
 						</p>
 						<p>
 							<b>Collection ID:&#160;</b>
@@ -282,8 +273,6 @@ Version:	1.1
 							<a>
 								<xsl:attribute name="href">
 									<xsl:value-of select="concat( //output/@apiUrl, 're-render/?renderId=', //collection/@id )" />
-
-
 								</xsl:attribute>
 								<xsl:text>Click to re-render</xsl:text>
 							</a>
