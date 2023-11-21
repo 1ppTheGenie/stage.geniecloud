@@ -8,7 +8,6 @@
 
 		<rect fill="var(--theme-sub-heading-color)" stroke-width="0" fill-opacity="1" x="0" y="0" width="100%" height="18%" />
 
-
 		<text class="upper center" font-family="var(--theme-body-font)" fill="var(--theme-body-background)" x="50%" y="2.5%" font-size="200%" data-max-width="90%" font-weight="300">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="'When you are ready to sell'" />
@@ -49,7 +48,6 @@
 					<xsl:with-param name="boxWidth" select="'100%'" />
 					<xsl:with-param name="agentX" select="'38%'" />
 					<xsl:with-param name="logoWidth" select="'70%'" />
-
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
@@ -58,7 +56,6 @@
 					<xsl:with-param name="boxWidth" select="'100%'" />
 					<xsl:with-param name="agentX" select="'50%'" />
 					<xsl:with-param name="logoWidth" select="'98%'" />
-
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -224,14 +221,6 @@
 		<xsl:param name="agentX" />
 		<xsl:param name="logoWidth" />
 
-
-		<text class="upper center" font-family="var(--theme-body-font)" fill="var(--theme-heading-color)" y="67%" font-weight="400" font-size="140%" data-max-width="90%">
-			<xsl:attribute name="x">
-				<xsl:value-of select="$readyX" />
-			</xsl:attribute>
-			<xsl:text>When you are ready to sell</xsl:text>
-		</text>
-
 		<rect stroke="var(--theme-body-color)" stroke-width="0" fill-opacity="1" x="0%" y="73%" width="100%" height="6%">
 			<xsl:attribute name="width">
 				<xsl:value-of select="$boxWidth" />
@@ -248,9 +237,9 @@
 
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="concat( 'Call ', //agent[1]/firstName ,' &#124; ', //agent[1]/mobile ) " />
-
 			</xsl:call-template>
 		</text>
+
 		<xsl:choose>
 			<xsl:when test="$companyLogo='' or $personalLogo=''">
 				<text font-size="60%" font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" x="38%" y="80.5%" height="10%" width="31%" class="center">Presented By:</text>

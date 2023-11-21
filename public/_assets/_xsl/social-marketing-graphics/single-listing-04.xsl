@@ -87,6 +87,7 @@
 					</text>
 				</xsl:otherwise>
 			</xsl:choose>
+
 			<text x="1%" y="12%">
 				<xsl:text> in the </xsl:text>
 				<xsl:value-of select="//single/address/city" />
@@ -102,10 +103,7 @@
 				<xsl:call-template name="soldListedPrice" />
 			</text>
 			<text x="1%" y="34%" class="heading">
-				<tspan>Type:  </tspan>
-				<tspan>
-					<xsl:value-of select="$singularPropertyType" />
-				</tspan>
+				<xsl:value-of select="concat( 'Type: ', $singularPropertyType )" />
 			</text>
 
 			<foreignObject x="1%" y="36%" width="35%" height="35%">
@@ -170,7 +168,7 @@
 				<g class="icon-stat" style="transform:translateX(0)">
 					<rect stroke="var(--theme-body-background)" stroke-width="1" fill-opacity="0" x="0" y="0" width="10%" height="20%" />
 
-					<use x="3.5%" y="3%" width="3%" height="5%">
+					<use x="3.5%" y="3%" width="3%" height="5%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#bed-icon' )" />
 					</use>
 					<text class="align-center" fill="var(--theme-body-background)">
@@ -192,7 +190,7 @@
 				<g class="icon-stat" style="transform:translateX(10%)">
 					<rect stroke="var(--theme-body-background)" stroke-width="1" fill-opacity="0" x="0" y="0" width="10%" height="20%" />
 
-					<use x="3.5%" y="3%" width="3%" height="5%">
+					<use x="3.5%" y="3%" width="3%" height="5%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#bath-icon' )" />
 					</use>
 					<text class="align-center" fill="var(--theme-body-background)">
@@ -214,7 +212,7 @@
 				<g class="icon-stat" style="transform:translateX(20%)">
 					<rect stroke="var(--theme-body-background)" stroke-width="1" fill-opacity="0" x="0" y="0" width="10%" height="20%" />
 
-					<use x="3.5%" y="3%" width="3%" height="5%">
+					<use x="3.5%" y="3%" width="3%" height="5%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#avg-dom-icon' )" />
 					</use>
 					<text class="align-center" fill="var(--theme-body-background)">
@@ -236,7 +234,7 @@
 				<g class="icon-stat" style="transform:translateX(30%)">
 					<rect stroke="var(--theme-body-background)" stroke-width="1" fill-opacity="0" x="0" y="0" width="10%" height="20%" />
 
-					<use x="3.5%" y="3%" width="3%" height="5%">
+					<use x="3.5%" y="3%" width="3%" height="5%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#tag-icon' )" />
 					</use>
 					<text class="align-center" fill="var(--theme-body-background)">
@@ -264,7 +262,7 @@
 				<g class="icon-stat" style="transform:translateX(40%)">
 					<rect stroke="var(--theme-body-background)" stroke-width="1" fill-opacity="0" x="0" y="0" width="10%" height="20%" />
 
-					<use x="3.5%" y="3%" width="3%" height="5%">
+					<use x="3.5%" y="3%" width="3%" height="5%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#calendar-icon' )" />
 					</use>
 					<text class="align-center" fill="var(--theme-body-background)">
@@ -306,7 +304,7 @@
 				<g class="icon-stat" style="transform:translateX(50%)">
 					<rect stroke="var(--theme-body-background)" stroke-width="1" fill-opacity="0" x="0" y="0" width="10%" height="20%" />
 
-					<use x="3.5%" y="3%" width="3%" height="5%">
+					<use x="3.5%" y="3%" width="3%" height="5%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#size-icon' )" />
 					</use>
 					<text class="align-center" fill="var(--theme-body-background)">

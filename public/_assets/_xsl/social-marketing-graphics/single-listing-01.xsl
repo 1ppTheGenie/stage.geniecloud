@@ -7,7 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 
 	<xsl:template name="svg-body">
@@ -21,14 +21,8 @@
 				transform: translateY(6%);
 				font-size: 150%!important;
 			}
-
-			.icon-stat tspan {
-				font-size: 75%;
-			}
-			
-			.icon-stat tspan:first-child {
-				font-size: 125%;
-			}'" />
+			.icon-stat tspan { font-size: 75%; }
+			.icon-stat tspan:first-child { font-size: 125%;}'" />
 		</style>
 
 		<image x="-3%" y="0.7%" width="14%" height="14%" preserveAspectRatio="xMidYMid meet">
@@ -56,8 +50,7 @@
 
 		<g style="transform:translate(1%,75%)">
 			<svg width="33%" height="17.5%">
-<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%" />
-
+				<rect width="100%" height="100%" fill="var(--theme-body-background)" fill-opacity="70%" />
 
 				<use x="18.6%" y="16%" width="10%" height="10%" fill="var(--theme-sub-heading-color)" style="transform: rotate(95deg) translate(-15.4%, -144.5%);">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#phone-icon' )" />
@@ -70,8 +63,7 @@
 				</use>
 
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-<circle r=".3500" cx=".5" cy=".5" />
-
+					<circle r=".3500" cx=".5" cy=".5" />
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
@@ -89,25 +81,29 @@
 					</xsl:call-template>
 				</text>
 
-				<text x="37%" y="32%" fill="var(--theme-sub-heading-color)" style="font-size:90%;">
+				<text x="37%" y="32%" fill="var(--theme-sub-heading-color)" font-size="90%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmobile'" />
 						<xsl:with-param name="default" select="//agent[1]/mobile" />
 					</xsl:call-template>
 				</text>
 
-				<text x="37%" y="47%" fill="var(--theme-sub-heading-color)" style="font-size:90%;">
+				<text x="37%" y="47%" fill="var(--theme-sub-heading-color)" font-size="90%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentwebsite'" />
 						<xsl:with-param name="default" select="//agent[1]/website" />
 					</xsl:call-template>
 				</text>
 
-				<text x="37%" y="63%" fill="var(--theme-sub-heading-color)" style="font-size:90%;">
+				<text x="37%" y="63%" fill="var(--theme-sub-heading-color)" font-size="90%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmarketingEmail'" />
 						<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 					</xsl:call-template>
+				</text>
+
+				<text x="37%" y="78%" font-size="80%" fill="var(--theme-sub-heading-color)">
+					<xsl:value-of select="//agent[1]/marketingLicense" />
 				</text>
 			</svg>
 		</g>
@@ -115,10 +111,9 @@
 		<g style="transform:translate(51%,3%);">
 			<xsl:call-template name="listing-address-two-line" />
 
-			<text x="0" y="12%" class="bold" style="font-size:110%;">
+			<text x="0" y="12%" class="bold" font-size="110%;">
 				<tspan>
-<xsl:call-template name="soldListedPrice" />
-
+					<xsl:call-template name="soldListedPrice" />
 				</tspan>
 			</text>
 
@@ -177,7 +172,7 @@
 								<xsl:with-param name="default" select="format-number( //single/price div //single/squareFeet, '$###,###' )" />
 							</xsl:call-template>
 						</tspan>
-						<tspan dx="1%" y="3%" style="font-size:125%;">
+						<tspan dx="1%" y="3%" font-size="125%;">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'pricepersqft'" />
 								<xsl:with-param name="default" select="'Sq.Ft.'" />
@@ -196,8 +191,7 @@
 			<text x="0" y="38%">
 				<tspan class="bold" fill="var(--theme-sub-heading-color)">Type:  </tspan>
 				<tspan class="narrow" fill="var(--theme-sub-heading-color)">
-<xsl:value-of select="$singularPropertyType" />
-
+					<xsl:value-of select="$singularPropertyType" />
 				</tspan>
 			</text>
 
@@ -209,9 +203,6 @@
 					</xsl:call-template>
 				</p>
 			</foreignObject>
-			<text y="90%" style="font-size:80%" fill="var(--theme-sub-heading-color)">
-				<xsl:value-of select="//agent[1]/marketingLicense" />
-			</text>
 		</g>
 
 		<xsl:call-template name="copyright" />

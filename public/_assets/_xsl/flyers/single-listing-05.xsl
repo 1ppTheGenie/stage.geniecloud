@@ -8,9 +8,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<style>
@@ -29,14 +27,11 @@
 		</style>
 
 		<g>
-<rect x="0" y="0" width="100%" height="7%" style="fill:var(--theme-body-color);" />
+			<rect x="0" y="0" width="100%" height="7%" style="fill:var(--theme-body-color);" />
 
-
-<text x="3%" y="2.5%" fill="var(--theme-body-background)" style="font-size:250%;">
+			<text x="3%" y="2.5%" fill="var(--theme-body-background)" style="font-size:250%;">
 				<tspan class="bold upper">
-<xsl:value-of select="concat(//agent/address/company, ' ', //area[1]/name )" />
-
-
+					<xsl:value-of select="concat(//agent/address/company, ' ', //area[1]/name )" />
 				</tspan>
 			</text>
 			<image x="88%" y="1%" width="11%" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
@@ -56,10 +51,7 @@
 		<g style="transform:translate(0%,46%)">
 			<text x="3%" y="0.5%" class="">
 				<tspan class="sub-heading bold upper" style="font-size: 300%;" y="1%">
-<xsl:value-of select="$singularPropertyType" />
-
-
-
+					<xsl:value-of select="$singularPropertyType" />
 				</tspan>
 				<tspan x="3%" y="4.5%" class="theme-invert-body" style="font-size: 275%;">
 					<xsl:call-template name="soldListedPrice" />
@@ -68,18 +60,14 @@
 		</g>
 
 		<g style="transform:translate(0%,56.7%)">
-<rect x="0" y="0" width="60%" height="21%" class="sub-heading" />
-
+			<rect x="0" y="0" width="60%" height="21%" class="sub-heading" />
 
 			<foreignObject x="3%" y="1.7%" width="52.5%" height="17%" style="color:var(--theme-body-background);-webkit-line-clamp:6; line-height: 2.5rem; font-size: 180%;">
-<xsl:call-template name="listing-description" />
-
-
+				<xsl:call-template name="listing-description" />
 			</foreignObject>
 		</g>
 
-<rect x="0" y="77.7%" width="60%" height="22.5%" style="fill:var(--theme-heading-color);" />
-
+		<rect x="0" y="77.7%" width="60%" height="22.5%" style="fill:var(--theme-heading-color);" />
 
 		<g style="transform:translate(0%,79.7%)">
 			<svg width="100%" height="100%">
@@ -143,11 +131,10 @@
 		</g>
 
 		<g style="transform:translate(59.9%,45.2%)">
-<rect x="0" y="0" width="40.2%" height="100%" style="fill:var(--theme-body-color);" />
+			<rect x="0" y="0" width="40.2%" height="100%" style="fill:var(--theme-body-color);" />
 
-
-<g class="upper sub-heading bold" style="font-size: 250%;transform: translate(3%,1.2%);">
-	<text x="0" y="0" data-max-width="42.5%" fill="var(--theme-body-background)">
+			<g class="upper sub-heading bold" style="font-size: 250%;transform: translate(3%,1.2%);">
+				<text x="0" y="0" data-max-width="42.5%" fill="var(--theme-body-background)">
 					<tspan>
 						<xsl:value-of select="$listingAddressLine1" />
 					</tspan>
@@ -157,81 +144,81 @@
 				</text>
 			</g>
 
-<g style="transform: translate(1%,6.5%);">
+			<g style="transform: translate(1%,6.5%);">
 				<use x="1%" y="0.9%" width="2%" height="2%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-navigation' )" />
 				</use>
-<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
+				<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
 
-	<xsl:call-template name="editable">
-		<xsl:with-param name="id" select="'bedroomscount'" />
-		<xsl:with-param name="default" select="concat( 'Beds: ', //single/bedrooms/@count)" />
-	</xsl:call-template>
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'bedroomscount'" />
+						<xsl:with-param name="default" select="concat( 'Beds: ', //single/bedrooms/@count)" />
+					</xsl:call-template>
 
 				</text>
 			</g>
-<g style="transform: translate(1%,9.2%);">
+			<g style="transform: translate(1%,9.2%);">
 				<use x="1%" y="0.9%" width="2%" height="2%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-navigation' )" />
 				</use>
-<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
+				<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
 
-	<xsl:call-template name="editable">
-		<xsl:with-param name="id" select="'bedroomscount'" />
-		<xsl:with-param name="default" select="concat( ' Baths: ', $listingTotalBathrooms)" />
-	</xsl:call-template>
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'bedroomscount'" />
+						<xsl:with-param name="default" select="concat( ' Baths: ', $listingTotalBathrooms)" />
+					</xsl:call-template>
 
 				</text>
 			</g>
-<g style="transform: translate(1%,12%);">
+			<g style="transform: translate(1%,12%);">
 				<use x="1%" y="0.9%" width="2%" height="2%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-navigation' )" />
 				</use>
-<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
+				<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
 
-	<xsl:call-template name="editable">
-		<xsl:with-param name="id" select="'bedroomscount'" />
-		<xsl:with-param name="default" select="concat( ' Sq. Ft.: ', format-number( //single/squareFeet, '###,###' ) )" />
-	</xsl:call-template>
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'bedroomscount'" />
+						<xsl:with-param name="default" select="concat( ' Sq. Ft.: ', format-number( //single/squareFeet, '###,###' ) )" />
+					</xsl:call-template>
 
 				</text>
 			</g>
-<g style="transform: translate(1%,15%);">
+			<g style="transform: translate(1%,15%);">
 				<use x="1%" y="0.9%" width="2%" height="2%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-navigation' )" />
 				</use>
-<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
+				<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
 
-	<xsl:call-template name="editable">
-		<xsl:with-param name="id" select="'bedroomscount'" />
-		<xsl:with-param name="default" select="concat( '  Price Per Sq. Ft.: ', format-number( //single/price div //single/squareFeet, '$###,###' ))" />
-	</xsl:call-template>
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'bedroomscount'" />
+						<xsl:with-param name="default" select="concat( '  Price Per Sq. Ft.: ', format-number( //single/price div //single/squareFeet, '$###,###' ))" />
+					</xsl:call-template>
 
 				</text>
 			</g>
 
-<g style="transform: translate(1%,18%);">
+			<g style="transform: translate(1%,18%);">
 				<use x="1%" y="0.9%" width="2%" height="2%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-navigation' )" />
 				</use>
-<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
-	<xsl:call-template name="editable">
-		<xsl:with-param name="id" select="'daysOnMarket'" />
-		<xsl:with-param name="default" select="concat( ' DOM.: ', //single/daysOnMarket)" />
-	</xsl:call-template>
+				<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'daysOnMarket'" />
+						<xsl:with-param name="default" select="concat( ' DOM.: ', //single/daysOnMarket)" />
+					</xsl:call-template>
 				</text>
 			</g>
 
-<g style="transform: translate(1%,21%);">
+			<g style="transform: translate(1%,21%);">
 				<use x="1%" y="0.9%" width="2%" height="2%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-navigation' )" />
 				</use>
 				<xsl:if test="//single/mlsNumber!=''">
-<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
-	<xsl:call-template name="editable">
-		<xsl:with-param name="id" select="'bedroomscount'" />
-		<xsl:with-param name="default" select="concat( ' MLS #: ', //single/mlsNumber)" />
-	</xsl:call-template>
+					<text style="font-size:240%" x="5%" y="1%" fill="var(--theme-body-background)">
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'bedroomscount'" />
+							<xsl:with-param name="default" select="concat( ' MLS #: ', //single/mlsNumber)" />
+						</xsl:call-template>
 					</text>
 				</xsl:if>
 			</g>

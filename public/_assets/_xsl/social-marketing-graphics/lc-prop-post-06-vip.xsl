@@ -9,22 +9,20 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-<xsl:import href="lc-social-media.xsl" />
-<xsl:import href="lc-prop-posts.xsl" />
-
+	<xsl:import href="common.xsl" />
+	<xsl:import href="lc-social-media.xsl" />
+	<xsl:import href="lc-prop-posts.xsl" />
 
 	<xsl:template name="svg-body">
 		<xsl:call-template name="lc-prop-vip-common" />
 	</xsl:template>
 
 	<xsl:template name="agentAd1-NumberAndLogo">
-<xsl:param name="readyX" />
-<xsl:param name="ready2X" />
-<xsl:param name="boxWidth" />
-<xsl:param name="agentX" />
-<xsl:param name="logoWidth" />
-
+		<xsl:param name="readyX" />
+		<xsl:param name="ready2X" />
+		<xsl:param name="boxWidth" />
+		<xsl:param name="agentX" />
+		<xsl:param name="logoWidth" />
 
 		<rect fill-opacity="0.1" x="0%" y="73%" width="100%" height="6%" fill="var(--theme-body-color)">
 			<xsl:attribute name="width">
@@ -41,7 +39,7 @@
 			</xsl:attribute>
 
 			<xsl:call-template name="editable">
-<xsl:with-param name="default" select="concat( 'Call ', //agent[1]/marketingName ,' &#124; ', //agent[1]/mobile )" />
+				<xsl:with-param name="default" select="concat( 'Call ', //agent[1]/marketingName ,' &#124; ', //agent[1]/mobile )" />
 
 			</xsl:call-template>
 		</text>

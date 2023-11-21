@@ -59,28 +59,28 @@
 
 		<rect x="0" y="80%" width="100%" height="20%" fill="var(--theme-heading-color)"></rect>
 		<g style="transform: translate(28%, 91%);">
-			<use class="center theme-body" x="0" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)">
+			<use class="center" x="0" y="0" width="3.5%" height="3.5%" fill="var(--theme-body-background)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#double-arrow-down' )" />
 			</use>
 
-			<use class="center theme-body" x="10%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)">
+			<use class="center" x="10%" y="0" width="3.5%" height="3.5%" fill="var(--theme-body-background)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#double-arrow-down' )" />
 			</use>
 
-			<use class="center theme-body" x="20%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)">
+			<use class="center" x="20%" y="0" width="3.5%" height="3.5%" fill="var(--theme-body-background)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#double-arrow-down' )" />
 			</use>
 
-			<use class="center theme-body" x="30%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)">
+			<use class="center" x="30%" y="0" width="3.5%" height="3.5%" fill="var(--theme-body-background)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#double-arrow-down' )" />
 			</use>
 
-			<use class="center theme-body" x="40%" y="0" width="3.5%" height="3.5%" fill="var(--theme-heading-color)">
+			<use class="center" x="40%" y="0" width="3.5%" height="3.5%" fill="var(--theme-body-background)">
 				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#double-arrow-down' )" />
 			</use>
 		</g>
 		<g style="transform: translate(0, 83%);">
-			<text x="50%" y="0" class="center upper theme-body" style="font-size: 160%;">
+			<text x="50%" y="0" class="center upper" font-size="160%" fill="var(--theme-body-background)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="default" select="'find out your home value!'" />
 				</xsl:call-template>

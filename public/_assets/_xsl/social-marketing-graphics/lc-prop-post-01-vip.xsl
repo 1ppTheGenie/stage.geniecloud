@@ -8,9 +8,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-<xsl:import href="lc-social-media.xsl" />
-
+	<xsl:import href="common.xsl" />
+	<xsl:import href="lc-social-media.xsl" />
 
 	<xsl:template name="svg-body">
 		<image x="15%" y="27%" width="85%" height="58%" preserveAspectRatio="xMidYMid slice">
@@ -20,19 +19,7 @@
 		</image>
 
 		<g style="transform-origin: 0; transform: rotate(-90deg) translate(-35%, 54%);">
-			<!--
-                   <foreignObject x="0" y="-5%" width="75%" height="9%">
-                       <p style="font-weight:600; font-size:150%; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; text-overflow: ellipsis;" class="heading">
-                            <xsl:call-template name="editable">
-                    <xsl:with-param name="id" select="'yourneighborhood'" />
-<xsl:with-param name="default" select="concat( $singularPropertyType,' &#124; ', //area/name)" />
-
-                </xsl:call-template> 
-                       </p>
-            </foreignObject>
--->
 			<text x="0%" y="-1%" style="letter-spacing:0.5px;" font-weight="600" font-size="150%" class="heading" data-max-width="80%">
-
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'yourneighborhood'" />
 					<xsl:with-param name="default" select="$listingAddressLine1" />
@@ -49,8 +36,7 @@
 				<tspan dx="1%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'beds'" />
-<xsl:with-param name="default" select="'Beds &#124; '" />
-
+						<xsl:with-param name="default" select="'Beds &#124; '" />
 					</xsl:call-template>
 				</tspan>
 				<tspan dx="1%">
@@ -62,8 +48,7 @@
 				<tspan dx="1%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'baths'" />
-<xsl:with-param name="default" select="'Baths &#124; '" />
-
+						<xsl:with-param name="default" select="'Baths &#124; '" />
 					</xsl:call-template>
 				</tspan>
 				<tspan dx="1%">
@@ -125,9 +110,9 @@
 			</xsl:call-template>
 		</text>
 
-<text x="65%" y="19%" font-size="63%" font-family="var(--theme-heading-font)" fill="var(--theme-body-color)" data-max-width="25%" class="left align-left upper">
-	<xsl:value-of select="//agent[1]/marketingLicense" />
-</text>
+		<text x="65%" y="19%" font-size="63%" font-family="var(--theme-heading-font)" fill="var(--theme-body-color)" data-max-width="25%" class="left align-left upper">
+			<xsl:value-of select="//agent[1]/marketingLicense" />
+		</text>
 
 		<image x="83%" y="11%" width="14%" height="16%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
@@ -163,60 +148,6 @@
 				</image>
 			</xsl:otherwise>
 		</xsl:choose>
-
-		<!-- <text x="74%" y="86.4%" class="center" font-size="85%" font-family="var(theme-heading-font)" data-max-width="25%">
-			<tspan>
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'click'" />
-					<xsl:with-param name="default" select="'Click'" />
-				</xsl:call-template>
-			</tspan>
-			<tspan dx="1%" class="upper bold" style="letter-spacing:1px;">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'Learn More'" />
-					<xsl:with-param name="default" select="'LEARN MORE'" />
-				</xsl:call-template>
-			</tspan>
-			<tspan dx="1%">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'for'" />
-					<xsl:with-param name="default" select="'for:'" />
-				</xsl:call-template>
-			</tspan>
-		</text> -->
-
-		<!-- <image x="71%" y="90.5%" width="7%" height="7%" preserveAspectRatio="xMidYMid meet">
-			<xsl:attribute name="href">
-				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/Arrow.svg' )" />
-			</xsl:attribute>
-		</image> -->
-
-		<!-- <text x="88%" y="85.7%" class="bold" font-size="70%" style="letter-spacing:1px;" font-family="var(theme-heading-font)" data-max-width="12%">
-			<tspan x="87%" dy="1%">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'3DTours'" />
-					<xsl:with-param name="default" select="'- 3D Tours'" />
-				</xsl:call-template>
-			</tspan>
-			<tspan x="87%" dy="3%">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'pricing'" />
-					<xsl:with-param name="default" select="'- Pricing'" />
-				</xsl:call-template>
-			</tspan>
-			<tspan x="87%" dy="3%">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'floorPlans'" />
-					<xsl:with-param name="default" select="'- Floor Plans'" />
-				</xsl:call-template>
-			</tspan>
-			<tspan x="87%" dy="3%">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'More'" />
-					<xsl:with-param name="default" select="'- More'" />
-				</xsl:call-template>
-			</tspan>
-		</text> -->
 
 		<g id="agent-contact" style="transform: translateX(-32%);">
 			<xsl:call-template name="copyright" />

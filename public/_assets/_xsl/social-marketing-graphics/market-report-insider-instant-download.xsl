@@ -57,10 +57,10 @@
 			<svg class="" x="25%" y="57%" width="50%" height="30%" viewBox="0 0 800 200">
 				<rect width="100%" height="140" fill="var(--theme-heading-color)" rx="70" ry="100"></rect>
 				<g style="transform: translate(23%, 0);">
-					<use class="theme-body center" x="32%" y="22%" width="48%" height="26%">
+					<use class="center" x="32%" y="22%" width="48%" height="26%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#right-arrow' )" />
 					</use>
-					<text class="bold theme-body center" dx="24%" dy="20%" style="font-size: 300%;">Download My Report </text>
+					<text class="bold center" dx="24%" dy="20%" font-size="300%" fill="var(--theme-body-background)">Download My Report </text>
 				</g>
 			</svg>
 		</g>

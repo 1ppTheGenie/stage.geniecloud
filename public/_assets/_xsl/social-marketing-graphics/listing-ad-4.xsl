@@ -7,24 +7,24 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+    <xsl:import href="common.xsl" />
 
     <xsl:template name="svg-body">
-
         <clipPath id="clipCircle">
             <circle r="30%" cx="50%" cy="50%"></circle>
         </clipPath>
+
         <image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipCircle)">
             <xsl:call-template name="switch-image">
                 <xsl:with-param name="idx" select="1" />
             </xsl:call-template>
         </image>
 
-<rect x="72%" y="0" width="22%" height="17%" fill="var(--theme-heading-color)" />
+        <rect x="72%" y="0" width="22%" height="17%" fill="var(--theme-heading-color)" />
 
         <g style="transform: translate(79%, 0);">
 
-            <text x="4%" y="3%" class="medium center bold theme-body">
+            <text x="4%" y="3%" class="medium center bold " fill="var(--theme-body-background)">
                 <xsl:choose>
                     <xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
                         <tspan >
@@ -68,7 +68,7 @@
             </xsl:attribute>
         </image>
 
-<rect x="3%" y="78%" width="13%" height="13%" fill="var(--theme-heading-color)" />
+        <rect x="3%" y="78%" width="13%" height="13%" fill="var(--theme-heading-color)" />
 
         <image x="4%" y="79%" width="13%" height="13%" preserveAspectRatio="xMidYMid slice">
             <xsl:attribute name="href">

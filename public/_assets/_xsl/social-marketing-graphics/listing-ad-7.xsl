@@ -7,7 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 
 	<xsl:template name="svg-body">
@@ -36,7 +36,7 @@
 				<tspan class="" style="font-size:120%;line-height:120%;">
 					<xsl:choose>
 						<xsl:when test="$min_sale_price_change > 0">
-<xsl:value-of select="concat( ' ',  format-number( $min_sale_price_change, '#.00') , '%' )" />
+							<xsl:value-of select="concat( ' ',  format-number( $min_sale_price_change, '#.00') , '%' )" />
 
 						</xsl:when>
 						<xsl:otherwise>
@@ -49,7 +49,7 @@
 				</tspan>
 			</text>
 		</g>
-<rect fill="var(--theme-heading-color)" x="7.5%" y="16%" width="85%" height="67%" />
+		<rect fill="var(--theme-heading-color)" x="7.5%" y="16%" width="85%" height="67%" />
 
 		<image x="8.5%" y="16.8%" width="83%" height="40%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -59,10 +59,10 @@
 		</image>
 
 		<svg class="" x="38%" y="77%" width="50%" height="30%" viewBox="0 0 800 200">
-<rect width="50%" height="140" fill="var(--theme-sub-heading-color)" rx="70" ry="100" />
+			<rect width="50%" height="140" fill="var(--theme-sub-heading-color)" rx="70" ry="100" />
 
 			<g style="transform: translate(2.2%, 0.5%);">
-				<text class="bold theme-body center" fill="" dx="24%" dy="20%" style="font-size: 300%;color:var(--theme-heading-color)">See How</text>
+				<text class="bold center" dx="24%" dy="20%" font-size="300%" fill="var(--theme-heading-color)">See How</text>
 			</g>
 		</svg>
 
@@ -80,7 +80,7 @@
 			</text>
 			<text x="15%" y="15%" fill="var(--theme-body-background)" class="center">
 				<tspan style="font-size:55%;line-height:120%;">
-<xsl:value-of select="format-number( //single/price, '$###,###')" />
+					<xsl:value-of select="format-number( //single/price, '$###,###')" />
 
 				</tspan>
 			</text>
@@ -102,7 +102,7 @@
 				<tspan style="font-size:55%;line-height:120%;color:var(--theme-body-background)">
 					<xsl:choose>
 						<xsl:when test="//single/salePrice!=''">
-<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+							<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
 
 						</xsl:when>
 						<xsl:otherwise>
@@ -172,7 +172,7 @@
 				<text class="" style="font-size:55%;line-height:120%;color:var(--theme-body-background)">
 					<xsl:choose>
 						<xsl:when test="//single/salePrice!=''">
-<xsl:value-of select="concat( ' ', format-number( $price_status, '#.00'), '%' )" />
+							<xsl:value-of select="concat( ' ', format-number( $price_status, '#.00'), '%' )" />
 
 						</xsl:when>
 						<xsl:otherwise>
@@ -188,7 +188,7 @@
 			<text x="15%" y="15%" fill="var(--theme-body-background)" class="center" style="font-size:55%;line-height:120%;">
 				<xsl:choose>
 					<xsl:when test="//single/salePrice!=''">
-<xsl:value-of select="concat( ' ', format-number( $price_status, '#.00'), '%' )" />
+						<xsl:value-of select="concat( ' ', format-number( $price_status, '#.00'), '%' )" />
 
 					</xsl:when>
 					<xsl:otherwise>
