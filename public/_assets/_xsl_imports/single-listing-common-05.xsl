@@ -116,6 +116,10 @@
 						<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 					</xsl:call-template>
 				</text>
+
+				<text x="37%" y="80%" font-size="70%" fill="var(--theme-sub-heading-color)">
+					<xsl:value-of select="//agent[1]/marketingLicense" />
+				</text>
 			</svg>
 		</g>
 		<g style="transform:translate(1%,2%)">
@@ -331,10 +335,6 @@
 					</text>
 				</svg>
 			</g>
-			<text class="heading upper right" x="38%" y="90%" style="font-size:90%" data-max-width="20%">
-				<xsl:value-of select="//agent[1]/marketingLicense" />
-			</text>
 		</g>
-
 	</xsl:template>
 </xsl:stylesheet>
