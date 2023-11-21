@@ -353,9 +353,9 @@
 			</g>
 
 			<g style="transform: translate(59%, 13.7%);">
-				<use x=".4%" y="2%" width="8%" height="6%">
-					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#qr-code-svg' )" />
-				</use>
+				<image x="3%" y="-5%" width="5%" height="21%" preserveAspectRatio="xMidYMid meet">
+					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/scan-qr.svg' )" />
+				</image>
 				<text x="0%" y="5.4%" fill="var(--theme-body-color)" style="font-size:65%">
 					<tspan x="0%">Scan the</tspan>
 					<tspan x="0%" dy=".7%">QR Code</tspan>
