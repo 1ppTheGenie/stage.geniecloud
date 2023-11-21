@@ -2165,7 +2165,6 @@
 				<xsl:call-template name="switch-image">
 					<xsl:with-param name="id" select="concat( 'image-', $imageIndex )" />
 					<xsl:with-param name="idx" select="$imageIndex" />
-
 				</xsl:call-template>
 			</image>
 		</xsl:if>
