@@ -163,4 +163,21 @@
 
 		<xsl:value-of select="format-dateTime( $ts, $format )" />
 	</xsl:function>
+
+
+	<xsl:template name="round-whole-percents">
+		<xsl:param name="num"/>
+		<xsl:param name="format" select="'#.#%'" />
+
+		<xsl:choose>
+			<xsl:when test="$num = floor($num)">
+				<!-- Format without decimal places -->
+				<xsl:value-of select="format-number($num, '#%')"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<!-- Format as directed -->
+				<xsl:value-of select="format-number($num, $format)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
 </xsl:stylesheet>
