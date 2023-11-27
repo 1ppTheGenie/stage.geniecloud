@@ -101,17 +101,17 @@ s200.8-89.9,200.8-200.4S360.7,49.2,250,49.2L250,49.2z" />
 										<h3 class="home-value-area-info heading-font heading-color">
 											<xsl:value-of select="concat( //area/name, ' ', $singularPropertyType, '&#160;Values' )" />
 											<br />
-											<xsl:text>Have&#160;</xsl:text>
+											<xsl:text>have&#160;</xsl:text>
 											<xsl:choose>
-												<xsl:when test="$change > 0">
-													<strong>Fallen</strong>
+												<xsl:when test="number($change) < 0">
+													<xsl:text>fallen</xsl:text>
 												</xsl:when>
 												<xsl:otherwise>
-													<strong>Risen</strong>
+													<xsl:text>risen</xsl:text>
 												</xsl:otherwise>
 											</xsl:choose>
-
-											<xsl:text> an average&#160;of:</xsl:text>
+											<xsl:text>&#32;</xsl:text>
+											<span style="white-space: nowrap">an average of:</span>
 										</h3>
 										<div class="price_info_with_icon price_rise">
 											<h4 class="home-value-area-price-info body-font heading-color">

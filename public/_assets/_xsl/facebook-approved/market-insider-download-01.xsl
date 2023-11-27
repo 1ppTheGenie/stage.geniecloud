@@ -85,7 +85,9 @@
 						<xsl:value-of select="genie:currency-format( $change, 0 )" />
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="format-number( $change, '#.0%' )" />
+						<xsl:call-template name="round-whole-percents">
+							<xsl:with-param name="num" select="$change" />
+						</xsl:call-template>
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>

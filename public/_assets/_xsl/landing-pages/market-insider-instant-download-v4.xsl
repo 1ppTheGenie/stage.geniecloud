@@ -83,16 +83,16 @@ s200.8-89.9,200.8-200.4S360.7,49.2,250,49.2L250,49.2z" />
 											<p>
 <xsl:value-of select="concat( //area/name, ' ', $singularPropertyType, ' values have ' )" />
 
-
 												<xsl:choose>
-													<xsl:when test="$change > 0">
-														<strong> fallen</strong>
+<xsl:when test="number($change) < 0">
+	<xsl:text>fallen</xsl:text>
 													</xsl:when>
 													<xsl:otherwise>
-														<strong> risen</strong>
+<xsl:text>risen</xsl:text>
 													</xsl:otherwise>
 												</xsl:choose>
-												<xsl:text> an average&#160;of:</xsl:text>
+<xsl:text>&#32;</xsl:text>
+<span style="white-space: nowrap">an average of:</span>
 											</p>
 										</h3>
 

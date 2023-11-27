@@ -54,17 +54,18 @@
 <xsl:value-of select="concat( //area/name, ' ', $singularPropertyType, '&#160;Values' )" />
 
 												<br/>
-												<xsl:text>Have&#160;</xsl:text>
+<xsl:text>have&#160;</xsl:text>
 												<xsl:choose>
-													<xsl:when test="$change < 0">
-														<strong>Fallen</strong>
+<xsl:when test="number($change) < 0">
+	<xsl:text>fallen</xsl:text>
 													</xsl:when>
 													<xsl:otherwise>
-														<strong>Risen</strong>
+<xsl:text>risen</xsl:text>
 													</xsl:otherwise>
 												</xsl:choose>
 
-												<xsl:text> an average&#160;of:</xsl:text>
+<xsl:text>&#32;</xsl:text>
+<span style="white-space: nowrap">an average of:</span>
 											</h3>
 
 											<xsl:choose>
