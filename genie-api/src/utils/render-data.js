@@ -89,6 +89,9 @@ export const getRenderJSON = async params => {
 		},
 
 		// *** Overrides
+		asset: params.asset,
+
+		// *** Overrides
 		overrides: params.customizations
 			? processCustomizations(params.customizations)
 			: {},
