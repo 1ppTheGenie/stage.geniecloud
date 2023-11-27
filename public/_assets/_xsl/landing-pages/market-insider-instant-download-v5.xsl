@@ -12,8 +12,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="landing-pages.xsl" />
-<xsl:import href="landing-pages-market-insider.xsl" />
+	<xsl:import href="landing-pages.xsl" />
+	<xsl:import href="landing-pages-market-insider.xsl" />
 
 
 	<xsl:template name="landing-page">

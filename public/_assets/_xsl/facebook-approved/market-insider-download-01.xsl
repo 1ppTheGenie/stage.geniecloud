@@ -66,7 +66,7 @@
 
 				<tspan x="50%" y="6%" text-decoration="underline">
 					<xsl:choose>
-						<xsl:when test="$change < 0">
+						<xsl:when test="number($change) < 0">
 							<xsl:text>fallen</xsl:text>
 						</xsl:when>
 						<xsl:otherwise>

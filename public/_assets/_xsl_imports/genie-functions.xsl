@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:math="http://www.w3.org/2005/xpath-functions/math" xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:math="http://www.w3.org/2005/xpath-functions/math"
+	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
 
 	<xsl:function name="genie:pick">
 		<xsl:param name="default" />
@@ -34,7 +37,7 @@
 
 		<xsl:variable name="finalR">
 			<xsl:choose>
-<xsl:when test="$r > $assetSize">
+				<xsl:when test="$r > $assetSize">
 					<xsl:value-of select="$default * -1" />
 				</xsl:when>
 				<xsl:otherwise>
@@ -53,18 +56,14 @@
 
 	<xsl:function name="genie:maybe-not-number">
 		<xsl:param name="var" />
-		<!-- <xsl:if test="//single/lotSize!='' and string(number(//single/lotSize))!='NaN'"> 
-		
-		<xsl:when test="//single/lotSize castable as xs:double">
-														
-		-->
+
 		<xsl:choose>
 			<xsl:when test="number($var) > 0">
-<xsl:value-of select="format-number($var, '###,###')" />
+				<xsl:value-of select="format-number($var, '###,###')" />
 
 			</xsl:when>
 			<xsl:otherwise>
-<xsl:value-of select="$var" />
+				<xsl:value-of select="$var" />
 
 			</xsl:otherwise>
 		</xsl:choose>
@@ -76,7 +75,7 @@
 		<xsl:param name="precision" />
 
 		<xsl:choose>
-			<xsl:when test="$pricePercent='price'">
+			<xsl:when test="string($pricePercent)='price'">
 				<xsl:value-of select="number($context/@medianSalePrice) - number($context/previous/@medianSalePrice)" />
 			</xsl:when>
 			<xsl:otherwise>
@@ -143,6 +142,7 @@
 		</xsl:choose>
 	</xsl:function>
 
+
 	<xsl:function name="genie:format-date">
 		<xsl:param name="date" />
 		<xsl:param name="format" as="xs:string" />
@@ -156,8 +156,7 @@
 					<xsl:value-of select="xs:dateTime('1970-01-01T00:00:00Z') + xs:dayTimeDuration(concat('PT', $date, 'S'))" />
 				</xsl:when>
 				<xsl:otherwise>
-<xsl:value-of select="xs:dateTime($date)" />
-
+					<xsl:value-of select="xs:dateTime($date)" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>

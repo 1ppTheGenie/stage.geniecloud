@@ -1599,7 +1599,6 @@
 				<a style="color:#1e88e5;fill:#1e88e5;">
 					<xsl:attribute name="href">
 						<xsl:value-of select="concat( 'tel:', //agent[1]/mobile )" />
-
 					</xsl:attribute>
 					<xsl:value-of select="//agent[1]/mobile" />
 				</a>
@@ -1610,10 +1609,8 @@
 				<a style="color:#1e88e5;fill:#1e88e5;">
 					<xsl:attribute name="href">
 						<xsl:value-of select="concat( 'mailto:', //agent[1]/marketingEmail )" />
-
 					</xsl:attribute>
 					<xsl:value-of select="//agent[1]/marketingEmail" />
-
 				</a>
 			</xsl:if>
 
