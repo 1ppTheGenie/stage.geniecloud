@@ -47,7 +47,9 @@
 
 										<h3 class="home-value-area-info heading-font background-as-color editable">
 											<p>
-<xsl:value-of select="concat( //area/name, '&#160;', $singularPropertyType, '&#160;Values&#160;Have&#160;' )" />
+												<span style="whitespace: nowrap">
+													<xsl:value-of select="concat( //area/name, ' ', $singularPropertyType, ' values have' )" />
+												</span>
 
 												<br/>
 												<xsl:choose>
