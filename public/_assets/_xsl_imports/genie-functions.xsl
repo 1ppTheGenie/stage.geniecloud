@@ -127,19 +127,18 @@
 	</xsl:function>
 
 	<xsl:function name="genie:currency-format">
-<xsl:param name="value" as="xs:double" />
-<xsl:param name="precision" as="xs:integer" />
-<xsl:variable name="suffixes" select="('', 'k', 'm')" />
-<xsl:variable name="base" select="math:log($value) div math:log(1000)" />
+		<xsl:param name="value" as="xs:double" />
+		<xsl:param name="precision" as="xs:integer" />
+		<xsl:variable name="suffixes" select="('', 'k', 'm')" />
+		<xsl:variable name="base" select="if ($value >= 1000) then floor(math:log($value) div math:log(1000)) else 0" />
 
 		<xsl:choose>
 			<xsl:when test="string(number($base)) = 'NaN'">
-<xsl:value-of select="$value" />
-
+				<xsl:value-of select="$value" />
 			</xsl:when>
 			<xsl:otherwise>
-<xsl:value-of select="concat('$', round(math:pow(1000, $base - floor($base)) * 100, $precision), $suffixes[floor($base)])" />
-
+				<xsl:variable name="roundedValue" select="round($value div math:pow(1000, $base) * math:pow(10, $precision)) div math:pow(10, $precision)" />
+				<xsl:value-of select="concat('$', $roundedValue, $suffixes[$base + 1])" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
