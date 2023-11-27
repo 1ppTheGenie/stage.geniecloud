@@ -10,7 +10,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="landing-pages.xsl" />
+	<xsl:import href="landing-pages.xsl" />
 
 
 	<xsl:template name="landing-page">
@@ -45,7 +45,7 @@
 					<xsl:value-of select="concat( 'Welcome to our open house for ', //single/mlsNumber )" />
 				</xsl:attribute>
 			</meta>
-<meta property="og:image" content="" />
+			<meta property="og:image" content="" />
 
 			<meta property="og:description">
 				<xsl:attribute name="content">
@@ -58,8 +58,8 @@
 			</meta>
 
 			<meta property="og:type" content="website" />
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
 			<title>Open House Guest Book</title>
@@ -131,8 +131,7 @@
 										<h3 class="subtitle-font heading-color">
 
 											<strong>
-<xsl:value-of select="format-number( //single/price, '$###,###')" />
-
+												<xsl:value-of select="format-number( //single/price, '$###,###')" />
 											</strong>
 										</h3>
 										<ul class="room-details body-font body-color">
@@ -189,15 +188,15 @@
 								<div class="open-house-gust-from-details body-font" style="padding: 1rem;">
 									<form class="funnel-create-lead">
 										<div class="form-group">
-<input type="text" name="fullName" class="form-control reset-form contact_name" placeholder="Full Name" required="required" />
+											<input type="text" name="fullName" class="form-control reset-form contact_name" placeholder="Full Name" required="required" />
 
 										</div>
 										<div class="form-group">
-<input type="email" name="emailAddress" class="form-control reset-form contact_email" placeholder="Email Address" required="required" />
+											<input type="email" name="emailAddress" class="form-control reset-form contact_email" placeholder="Email Address" required="required" />
 
 										</div>
 										<div class="form-group">
-<input type="tel" name="phoneNumber" class="form-control phone reset-form" placeholder="Phone Number" required="required" />
+											<input type="tel" name="phoneNumber" class="form-control phone reset-form" placeholder="Phone Number" required="required" />
 
 										</div>
 										<div class="form-group">
@@ -208,21 +207,21 @@
 												<ul class="background-as-color heading-font">
 													<li>
 														<label class="custom-control-label" for="customCheck1">
-<input type="checkbox" class="custom-control-input reset-form market-insider-report" name="meta[market-insider-report]" value="Yes" />
-<xsl:copy-of select="concat( 'The latest Market insider report for ', //area/name )" />
+															<input type="checkbox" class="custom-control-input reset-form market-insider-report" name="meta[market-insider-report]" value="Yes" />
+															<xsl:copy-of select="concat( 'The latest Market insider report for ', //area/name )" />
 
 														</label>
 													</li>
 													<li>
 														<label class="custom-control-label" for="customCheck2">
-<input type="checkbox" class="custom-control-input reset-form" id="customCheck2" name="meta[notification]" value="Yes" />
+															<input type="checkbox" class="custom-control-input reset-form" id="customCheck2" name="meta[notification]" value="Yes" />
 
 															<xsl:text>First notification when similar properties hit the market</xsl:text>
 														</label>
 													</li>
 													<li>
 														<label class="custom-control-label property" for="customCheck3">
-<input type="checkbox" class="custom-control-input reset-form" id="customCheck3" name="meta[value-assesment]" value="Yes" />
+															<input type="checkbox" class="custom-control-input reset-form" id="customCheck3" name="meta[value-assesment]" value="Yes" />
 
 															<xsl:text>A TODAY VALUE assessment of my home</xsl:text>
 														</label>
@@ -230,7 +229,7 @@
 												</ul>
 											</div>
 											<div class="form-group property-address" style="display: none;">
-<input type="text" name="meta[property-address]" class="form-control reset-form" placeholder="Address" />
+												<input type="text" name="meta[property-address]" class="form-control reset-form" placeholder="Address" />
 
 											</div>
 										</div>

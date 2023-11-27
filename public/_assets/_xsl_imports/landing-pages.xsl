@@ -7,6 +7,7 @@
 	<xsl:mode on-no-match="shallow-copy" />
 
 	<xsl:output method="html" encoding="utf-8" indent="no" omit-xml-declaration="yes" doctype-system="" doctype-public="html" />
+
 	<xsl:template match="/">
 		<html lang="en">
 			<xsl:attribute name="class">
@@ -19,6 +20,7 @@
 			<xsl:call-template name="landing-page" />
 		</html>
 	</xsl:template>
+
 	<xsl:template name="editable">
 		<xsl:param name="id" />
 		<xsl:param name="default" />

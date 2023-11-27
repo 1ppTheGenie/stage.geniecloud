@@ -7,8 +7,7 @@ Supports: 	Area, Print, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:variable name="listingState">
 		<xsl:choose>
@@ -40,7 +39,7 @@ Supports: 	Area, Print, QRCode
 
 	<xsl:template name="cropped-content">
 		<script>
-			<xsl:text></xsl:text>
+
 			<xsl:value-of select="concat( 'const captionOptions = { &quot;qrBanner&quot; : [ &quot;What&#8217;s Trending with ', //area/name, ' ', $propertyType, '?&quot;')" />
 			<xsl:text>,</xsl:text>
 			<xsl:value-of select="concat( &quot;'Your neighbor&#8217;s house just &quot;, $listingState, &quot;. Curious how much equity YOU have?'&quot; )" />
@@ -85,7 +84,7 @@ Supports: 	Area, Print, QRCode
 			<ul style="display:flex;justify-content:space-between;flex-wrap:nowrap;margin:0;padding:0;" class="bullets" data-editable="true" data-name="xml-QRBullets">
 				<xsl:choose>
 					<xsl:when test="//overrides/*[name()='xml-QRBullets'][1]">
-<xsl:copy-of select="//overrides/*[name()='xml-QRBullets'][1]/*" />
+						<xsl:copy-of select="//overrides/*[name()='xml-QRBullets'][1]/*" />
 
 					</xsl:when>
 					<xsl:otherwise>
