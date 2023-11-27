@@ -91,7 +91,7 @@
 						<xsl:value-of select="//single/address/city" />
 						<xsl:text>, </xsl:text>
 						<xsl:value-of select="//single/address/state" />
-						<xsl:text></xsl:text>
+						<xsl:text>&#32;</xsl:text>
 						<xsl:value-of select="//single/address/zip" />
 					</tspan>
 				</text>

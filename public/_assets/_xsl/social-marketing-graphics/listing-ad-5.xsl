@@ -82,7 +82,7 @@
 					</xsl:call-template>
 				</tspan>
 				<tspan>
-					<xsl:text></xsl:text>
+					<xsl:text>&#32;</xsl:text>
 				</tspan>
 				<tspan >
 					<xsl:call-template name="editable">

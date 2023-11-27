@@ -61,7 +61,7 @@ Supports: Agent
 					<xsl:text>, </xsl:text>
 					<xsl:value-of select="//agent[1]/address/state" />
 
-					<xsl:text></xsl:text>
+					<xsl:text>&#32;</xsl:text>
 					<xsl:value-of select="//agent[1]/address/zip" />
 				</tspan>
 			</text>
