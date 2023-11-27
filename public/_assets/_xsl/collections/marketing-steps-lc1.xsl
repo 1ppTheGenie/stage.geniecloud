@@ -272,7 +272,7 @@ Version:	1.1
 							<b>Re-render this kit:&#160;</b>
 							<a>
 								<xsl:attribute name="href">
-									<xsl:value-of select="concat( //output/@apiUrl, 're-render/?renderId=', //collection/@id )" />
+									<xsl:value-of select="concat( //output/@apiUrl, 're-render?renderId=', //collection/@id )" />
 								</xsl:attribute>
 								<xsl:text>Click to re-render</xsl:text>
 							</a>
