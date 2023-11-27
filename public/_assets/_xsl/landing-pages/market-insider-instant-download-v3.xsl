@@ -99,7 +99,7 @@
 															<xsl:value-of select="genie:currency-format( $change, 0 )" />
 														</xsl:when>
 														<xsl:otherwise>
-															<xsl:value-of select="format-number( $change, '#.#' )" />
+															<xsl:value-of select="format-number( $change, '#.#%' )" />
 														</xsl:otherwise>
 													</xsl:choose>
 												</h4>
