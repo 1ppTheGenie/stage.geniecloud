@@ -1594,7 +1594,7 @@
 	<xsl:template name="agent-contact">
 		<tspan>
 			<xsl:if test="//agent[1]/mobile">
-				<xsl:value-of select="concat( 'Text ', $agentMeUs, ' at')" />
+				<xsl:value-of select="concat( 'Text ', $agentMeUs, ' at ')" />
 
 				<a style="color:#1e88e5;fill:#1e88e5;">
 					<xsl:attribute name="href">
