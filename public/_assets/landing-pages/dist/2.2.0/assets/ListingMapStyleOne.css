@@ -1,0 +1,248 @@
+.ListingMapStyleOne h1 span {
+/*
+    background-color: var(--active-green) !important;
+    display: inline-block;
+    position: relative;
+    color: #fff;
+    font-style: italic;
+    letter-spacing: .04em;
+    font-weight: 400;
+    margin-right: 30px;
+    font-size: 23px;
+    padding: 2px 20px;
+    width: auto;
+    float: none;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 28px;
+*/
+}
+
+.ListingMapStyleOne h1 {
+    color: var(--theme-body-background);
+    text-align: center;
+    font-weight: 400;
+    line-height: 100%;
+    font-size: 34px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.pointer:after {
+/*
+    content: "";
+    position: absolute;
+    border-bottom: 20px solid transparent;
+    top: 0;
+    right: -16px;
+    border-top: 13px solid transparent;
+    border-left: 16px solid var(--active-green);
+*/
+}
+.current-date{
+    color: var(--theme-sub-heading-color);
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0px 0px 5px;
+    white-space: nowrap;
+    text-align: center;
+}
+.current-date span{
+    text-transform: uppercase;
+}
+#listing-table {
+    margin-bottom: 20px;
+    width: 100%;
+    margin-left: 1%;
+}
+
+
+#listing-table th,
+#listing-table td {
+    color: var(--theme-body-background);
+    border: 1px solid #6a953f;
+    padding: 7px 5px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-bottom: 0;
+    border-left: 0;
+    text-align: left;
+}
+#listing-table > tbody > tr > td:nth-child(2n), #listing-table > thead > tr > th:nth-child(2n) {
+    background: rgba(232, 239, 224, 0.2);
+}
+#listing-table th{
+    color: #6a953f;
+    text-transform: uppercase;
+}
+#listing-table th:first-child,
+#listing-table td:first-child {
+    border-left: 1px solid;
+    padding-left: 46px;
+}
+
+
+#listing-table tr:last-child td {
+    border-bottom: 1px solid #6a953f;
+}
+
+.ListingMapStyleOne #hometypes-choice {
+    display: none;
+}
+
+.filterTxt {
+/*    text-align: right;*/
+    
+}
+
+ul.pagination {
+    justify-content: flex-end;
+        margin-top: 7px;
+}
+
+ul.pagination li {
+    color: var(--theme-body-color);
+    background: var(--theme-body-background);    
+    line-height: 100%;
+}
+
+ul.pagination li:hover {
+    opacity: .7;
+}
+
+div.genie-wrap.listingmapstyleone footer {
+    margin: 0;
+    padding: 0 !important;
+}
+
+#genie-map {
+    flex-basis: 33%;
+}
+.listingmapstyleone #genie-map{
+    border: 4px solid #6a953f;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+}
+.w-33 {
+    width: 33%;
+}
+.w-66{
+    width: 66%;
+}
+.listDetail{
+    margin-left: -40px;
+    width: calc(100% + 30px);
+    max-width: none;
+}
+@media (max-width:991px) {
+    .listingmapstyleone .flex-row {
+        flex-wrap: wrap;
+    }
+
+    #listing-table td {
+        border: none;
+        border-bottom: 1px solid var(--theme-body-background);
+        position: relative;
+        width: auto;
+        padding-left: 50%;
+        
+    }
+
+    #listing-table td:after {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        padding-left: 15px;
+        text-shadow: none;
+        color: inherit;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    #listing-table {
+        flex-basis: 100%;
+        border: 1px solid var(--theme-body-background);
+        margin-top: 35px;
+    }
+
+    .active-table td:nth-of-type(1):after {
+        content: "ADDRESS";
+    }
+
+    .active-table td:nth-of-type(2):after {
+        content: "LIST PRICE";
+    }
+
+    .active-table td:nth-of-type(3):after {
+        content: "BR";
+    }
+
+    .active-table td:nth-of-type(4):after {
+        content: "BA";
+    }
+
+    .active-table td:nth-of-type(5):after {
+        content: "SOLD DATE";
+    }
+
+    .active-table td:nth-of-type(6):after {
+        content: "SQ FT";
+    }
+
+    .active-table td:nth-of-type(7):after {
+        content: "$/SQ FT";
+    }
+
+    .active-table td:nth-of-type(8):after {
+        content: "DOM";
+    }
+
+    .active-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+        border-top: none;
+    }
+
+    .active-table tr,
+    .active-table td {
+        display: block
+    }
+
+    #genie-map {
+        flex-basis: 100%;
+    }
+
+    .active-table tr {
+        border: 1px solid #fff;
+    }
+
+    .current-date{
+        font-size: 14px;
+    }
+    .w-66{
+        width: 100%;
+    }
+    #listing-table{
+        margin-left: 0;
+    }
+    .listDetail{                
+        margin-left:0;
+        width:100%;
+    }
+    .ListingMapStyleOne h1 span {
+        display: block;
+    }
+    #listing-table th:first-child, #listing-table td:first-child{
+        padding-left: 50%;
+    }
+
+}
