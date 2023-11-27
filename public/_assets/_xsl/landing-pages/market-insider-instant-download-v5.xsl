@@ -50,33 +50,16 @@
 							<xsl:comment/>
 						</div>
 
-						<a href="#">
-							<div class="funnel-header-company-logo editable">
-								<xsl:attribute name="style">
-									<xsl:value-of select="concat( 'background-image: url(', $personalLogo, ')' )" />
-								</xsl:attribute>
-							</div>
-						</a>
-						<!--
-               <div class="funnel-menu main-navbar">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed toggler-btn" data-toggle="collapse" data-target="#sidebarMain"><span class="icon-bar"><xsl:comment/></span> <span class="icon-bar"><xsl:comment/></span> <span class="icon-bar"><xsl:comment/></span></button>
-                    </div>
-                    <div class="collapse navbar-collapse sidebar-collapse-menu" id="#sidebarMain">
-                        <div class="nav">
-                            <ul class="nav genie-module-background">
-                                <a href="javascript:void(0)" class="closebtn">×</a>
-                                <li class="nav-item">
-                                    <a class="nav-link active genie-module-heading-color genie-module-body-font" href="https://www.inspired.re" target="_blank">Home</a></li>
-                                <li class="nav-item open_about_modal">
-                                    <a class="nav-link active genie-module-heading-color genie-module-body-font" href="#about-section">About</a></li>
-                                <li class="nav-item">
-                                    <a class="nav-link active open_lead_form genie-module-heading-color genie-module-body-font" href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
--->
+						<xsl:if test="string($personalLogo)!=''">
+							<a href="#">
+								<div class="funnel-header-company-logo editable">
+									<xsl:attribute name="style">
+										<xsl:value-of select="concat( 'background-image: url(', $personalLogo, ')' )" />
+									</xsl:attribute>
+									<xsl:comment/>
+								</div>
+							</a>
+						</xsl:if>
 
 						<div class="container">
 							<div class="row">
