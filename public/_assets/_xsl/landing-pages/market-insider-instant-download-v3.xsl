@@ -43,7 +43,7 @@
 							<div class="row">
 								<div class="col-lg-7 text-center">
 									<div class="selling-information">
-										<xsl:variable name="change" select="genie:area-price-change( //areas/area[1]/statistics, //output/@pricePercent, 0 )" />
+										<xsl:variable name="change" select="genie:area-price-change( //areas/area[1]/statistics, //output/@pricePercent, 1 )" />
 
 										<h3 class="home-value-area-info heading-font background-as-color editable">
 											<p>
