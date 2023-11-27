@@ -16,12 +16,13 @@ import {
 	filterListings,
 	getCssVar,
 	useSettings,
+	Context4Settings,
 } from "@/utilities";
 import GridView from "@/assets/view-grid.svg";
 import ListView from "@/assets/view-list.svg";
 
 export default () => {
-	const settings = useSettings();
+	const settings = useSettings(Context4Settings);
 	const [sortBy, setSortBy] = createSignal("Most Recent");
 	const [view, setView] = createSignal("List");
 

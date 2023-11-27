@@ -1,6 +1,11 @@
 import { Show } from "solid-js";
 import { DataPeriod } from "./DataPeriod";
-import { useSettings, sharedEmbedStore, setSharedEmbedStore } from "@/utilities";
+import {
+	useSettings,
+	Context4Settings,
+	sharedEmbedStore,
+	setSharedEmbedStore,
+} from "@/utilities";
 
 import "@/assets/css/home-types.css";
 
@@ -8,7 +13,7 @@ const g = window.ghub;
 
 export const HomeTypes = props => {
 	const { optionTabs, container, style, showPeriod = true } = props;
-	const settings = useSettings();
+	const settings = useSettings(Context4Settings);
 
 	return (
 		<Show when={true}>
@@ -23,12 +28,16 @@ export const HomeTypes = props => {
 					{parseInt(settings.propertyType) === -1 && (
 						<div id="hometypes-choice" style={style} class="curved-tabs">
 							<span
-								class={sharedEmbedStore.propertyType === g.SINGLE ? "active" : ""}
+								class={
+									sharedEmbedStore.propertyType === g.SINGLE ? "active" : ""
+								}
 								onClick={() => setSharedEmbedStore({ propertyType: g.SINGLE })}>
 								Single Family Homes
 							</span>
 							<span
-								class={sharedEmbedStore.propertyType === g.CONDO ? "active" : ""}
+								class={
+									sharedEmbedStore.propertyType === g.CONDO ? "active" : ""
+								}
 								onClick={() => setSharedEmbedStore({ propertyType: g.CONDO })}>
 								Condos
 							</span>
@@ -44,7 +53,9 @@ export const HomeTypes = props => {
 								<input
 									name={`${container}-hometypes`}
 									type="radio"
-									onClick={() => setSharedEmbedStore({ propertyType: g.SINGLE })}
+									onClick={() =>
+										setSharedEmbedStore({ propertyType: g.SINGLE })
+									}
 									checked={sharedEmbedStore.propertyType === g.SINGLE}
 								/>
 								Single Family Homes

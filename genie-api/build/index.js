@@ -7240,6 +7240,8 @@ var getRenderJSON = async (params) => {
       }
     },
     // *** Overrides
+    asset: params.asset,
+    // *** Overrides
     overrides: params.customizations ? processCustomizations(params.customizations) : {},
     // *** Agents
     agents: await processAgents([
@@ -7977,6 +7979,7 @@ var processCollection = async (params) => {
                   _attrs: {
                     stylesheet: asset.asset,
                     size,
+                    sort: parseInt(asset.sort),
                     name: asset.name ?? asset.knownAs ?? assetData.name,
                     version: assetData.version ?? 1,
                     renderKey: s3Key,

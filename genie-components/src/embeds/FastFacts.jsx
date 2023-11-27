@@ -7,6 +7,7 @@ import {
 	usePagination,
 	filterListings,
 	useSettings,
+	Context4Settings,
 	percent,
 } from "@/utilities";
 import {
@@ -31,7 +32,7 @@ import TurnOverHomes from "@/assets/homes-being-sold.svg";
 import "@/assets/css/fast-facts.css";
 
 export default () => {
-	const settings = useSettings();
+	const settings = useSettings(Context4Settings);
 	const [availableListings, setAvailableListings] = createSignal(0);
 	const [listingType, setListingType] = createSignal(0);
 	const [listings, setListings] = createSignal([]);

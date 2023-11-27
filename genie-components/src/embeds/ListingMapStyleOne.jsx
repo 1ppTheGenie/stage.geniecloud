@@ -11,7 +11,7 @@ import "@/assets/css/listing-map-style-one.css";
 
 export default () => {
 	const { currentPage, setPage, pageOffset, pageSize } = usePagination();
-	const settings = useSettings();
+	const settings = useSettings(Context4Settings);
 	const currentListings = () =>
 		listingsStore.listings.slice(pageOffset(), pageOffset() + pageSize());
 

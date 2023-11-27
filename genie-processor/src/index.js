@@ -42,7 +42,7 @@ const transform = (xml, xslt, xsltBaseUri) => {
 			}
 		);
 
-		console.log("carrots", result.output);
+		//console.log("carrots", result.output);
 
 		return SaxonJS.serialize(result.output, { method: "xml" });
 	} catch (error) {

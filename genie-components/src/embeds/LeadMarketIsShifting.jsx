@@ -1,7 +1,7 @@
 import { useSettings } from "@/utilities";
 
 export default () => {
-	const settings = useSettings();
+	const settings = useSettings(Context4Settings);
 	const [isOpen, setIsOpen] = useState(false);
 	const [hasOpened, setHasOpened] = useState(false);
 	const [hasSent, setHasSent] = useState(false);

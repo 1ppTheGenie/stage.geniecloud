@@ -52291,7 +52291,6 @@ var transform = (xml, xslt2, xsltBaseUri) => {
         }
       }
     );
-    console.log("carrots", result.output);
     return import_SaxonJS2N.default.serialize(result.output, { method: "xml" });
   } catch (error) {
     return { failed: true, msg: error.message };

@@ -1,6 +1,13 @@
 import { Show } from "solid-js";
 import { format, sub } from "date-fns";
-import { areaDataStore, useSettings, percent, currency, getCssVar } from "@/utilities";
+import {
+	areaDataStore,
+	useSettings,
+	Context4Settings,
+	percent,
+	currency,
+	getCssVar,
+} from "@/utilities";
 import { HomeTypes, LeafletMap, GeoArea, CircleMarker } from "@/components";
 
 import Arrow from "@/assets/arrow.svg";
@@ -8,7 +15,7 @@ import Arrow from "@/assets/arrow.svg";
 import "@/assets/css/market-update.css";
 
 export default () => {
-	const settings = useSettings();
+	const settings = useSettings(Context4Settings);
 
 	return (
 		<>

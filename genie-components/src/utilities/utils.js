@@ -12,7 +12,7 @@ import { differenceInHours } from "date-fns";
 import { getAreaMonthly, getAgentData } from "./rest";
 import { sharedEmbedStore, setSharedEmbedStore } from "./state";
 
-export const SettingsContext = createContext();
+export const Context4Settings = createContext();
 
 export const twoDigitMonth = month => ("0" + (month + 1)).slice(-2);
 
@@ -79,8 +79,7 @@ export const usePagination = (size = 10, page = 1) => {
 	};
 };
 
-export const useSettings = () => {
-	const settingsContext = useContext(SettingsContext);
+export const useSettings = settingsContext => {
 	const globalSettings =
 		typeof window.ggSettings !== "undefined" ? window.ggSettings : {};
 
@@ -179,7 +178,7 @@ export const filterListings = (
 };
 
 export const useAreaMonthly = () => {
-	const settings = useSettings();
+	const settings = useSettings(Context4Settings);
 	const [store, setStore] = createStore({
 		loading: true,
 	});
@@ -208,7 +207,7 @@ export const useAreaMonthly = () => {
 };
 
 export const useAgentData = () => {
-	const { agentId } = useSettings();
+	const { agentId } = useSettings(Context4Settings);
 	const [agent] = createResource(agentId, getAgentData);
 
 	return agent;

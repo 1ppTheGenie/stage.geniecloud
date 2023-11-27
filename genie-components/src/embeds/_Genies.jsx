@@ -1,6 +1,6 @@
 import { lazy, Suspense, createSignal, onMount, onCleanup } from "solid-js";
 import { Portal } from "solid-js/web";
-import { SettingsContext } from "@/utilities";
+import { Context4Settings } from "@/utilities";
 
 import "@/index.css";
 
@@ -170,11 +170,11 @@ const Genie = ({ layout, nocopyright, nomargin, isLast, ...props }) => {
 				nomargin ? " no-margin" : ""
 			}`}
 			style={cssRootOverrides}>
-			<SettingsContext.Provider value={props}>
+			<Context4Settings.Provider value={props}>
 				<Suspense fallback={<div>Analyzing latest market data...</div>}>
 					<Layout />
 				</Suspense>
-			</SettingsContext.Provider>
+			</Context4Settings.Provider>
 
 			<Show when={!nocopyright}>
 				<footer style="padding-bottom:1rem;">

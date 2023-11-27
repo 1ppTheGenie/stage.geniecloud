@@ -1,5 +1,10 @@
 import { createResource, createSignal, Suspense, Show } from "solid-js";
-import { areaDataStore, useSettings, searchAddress } from "@/utilities";
+import {
+	areaDataStore,
+	useSettings,
+	Context4Settings,
+	searchAddress,
+} from "@/utilities";
 import {
 	AutoComplete,
 	Editable,
@@ -15,7 +20,7 @@ import "@/assets/css/home-value.css";
 
 export default props => {
 	const { withCopy = false, buttonCaption = "Get your Value!" } = props;
-	const { areaId, mapStyle, withLeadCapture } = useSettings();
+	const { areaId, mapStyle, withLeadCapture } = useSettings(Context4Settings);
 
 	const [showResult, setShowResult] = createSignal(false);
 	const [place, setPlace] = createSignal();

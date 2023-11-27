@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { currency, getCssVar, address, useSettings } from "@/utilities";
 
 export const MapListings = props => {
-	const settings = useSettings();
+	const settings = useSettings(Context4Settings);
 
 	let headings;
 

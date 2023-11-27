@@ -10,8 +10,6 @@ import {
 /* prettier-ignore */
 import { getAreaData, getAreaMonthly, getAreaProperties } from "@/utilities/";
 
-import { SettingsContext } from "@/utilities";
-
 export const propertyTypeCaption = (type, count = 0, abbr = false) => {
 	let caption;
 	switch (type) {

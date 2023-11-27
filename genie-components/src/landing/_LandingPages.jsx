@@ -3,13 +3,13 @@ import { render } from "solid-js/web";
 
 import {
 	initAutocomplete,
-	SettingsContext,
 	searchAddress,
 	initMaps,
 	buildMap,
 	createLead,
 	updateLead,
 	useSettings,
+	Context4Settings,
 	landingPageData,
 } from "@/utilities";
 
@@ -228,7 +228,7 @@ export default () => {
 	};
 
 	document.addEventListener("trigger-update-lead", async e => {
-		const settings = useSettings();
+		const settings = useSettings(Context4Settings);
 
 		if (settings.leadId || settings.genieLeadId || window.gg.leadId) {
 			await updateLead({
@@ -251,7 +251,7 @@ export default () => {
 	};
 
 	window.gg.addLead = async (note, data = null) => {
-		const settings = useSettings();
+		const settings = useSettings(Context4Settings);
 
 		window.gg.defaults = window.gg.defaults || {};
 
@@ -349,7 +349,7 @@ export default () => {
 			event.preventDefault();
 
 			if (!document.getElementById("genie-homeValuePopup")) {
-				const settings = useSettings();
+				const settings = useSettings(Context4Settings);
 				document.body.classList.add("hasPopup");
 				const div = document.createElement("div");
 				div.id = "genie-homeValuePopup";
@@ -362,9 +362,9 @@ export default () => {
 					);*/
 
 					return (
-						<SettingsContext.Provider value={settings}>
+						<Context4Settings.Provider value={settings}>
 							<HomeValuation withCopy={false} />
-						</SettingsContext.Provider>
+						</Context4Settings.Provider>
 					);
 				};
 
