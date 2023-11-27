@@ -7528,8 +7528,8 @@ var processAreas = async (params) => {
       const boundary = await getAreaBoundary(areaId);
       const statsData = await areaStatisticsWithPrevious(
         params.userId,
-        areaId,
-        params.datePeriod
+        parseInt(areaId),
+        parseInt(params.datePeriod || 12)
       );
       params.isDebug && debugLog("areaStatisticsWithPrevious", params, statsData);
       const areaName2 = statsData.areaName;
@@ -8074,7 +8074,7 @@ var preCallGenieAPIs = async (params) => {
         await areaStatisticsWithPrevious(
           params.userId,
           areaId,
-          params.datePeriod
+          parseInt(params.datePeriod || 12)
         );
         await mlsProperties(
           params.mlsId ?? 0,

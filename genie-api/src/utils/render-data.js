@@ -468,8 +468,8 @@ const processAreas = async params => {
 			const boundary = await getAreaBoundary(areaId);
 			const statsData = await areaStatisticsWithPrevious(
 				params.userId,
-				areaId,
-				params.datePeriod
+				parseInt(areaId),
+				parseInt(params.datePeriod || 12)
 			);
 
 			params.isDebug &&
@@ -1195,7 +1195,7 @@ export const preCallGenieAPIs = async params => {
 				await areaStatisticsWithPrevious(
 					params.userId,
 					areaId,
-					params.datePeriod
+					parseInt(params.datePeriod || 12)
 				);
 
 				// **** LISTINGS
