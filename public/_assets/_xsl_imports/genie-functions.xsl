@@ -79,7 +79,7 @@
 				<xsl:value-of select="number($context/@medianSalePrice) - number($context/previous/@medianSalePrice)" />
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="round( (( number($context/@medianSalePrice) div number($context/previous/@medianSalePrice) ) - 1) * 100 )" />
+				<xsl:value-of select="round( ( ( xs:decimal($context/@medianSalePrice) div xs:decimal($context/previous/@medianSalePrice) ) - 1 ) * 100 ) div 100" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -93,7 +93,7 @@
 			<xsl:when test="$change > 0">
 				<xsl:variable name="increase">
 					<xsl:choose>
-						<xsl:when test="$pricePercent = 'price'">
+						<xsl:when test="string($pricePercent)='price'">
 							<xsl:value-of select="genie:currency-format( $change, 0 )" />
 						</xsl:when>
 						<xsl:otherwise>

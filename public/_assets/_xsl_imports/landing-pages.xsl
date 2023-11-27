@@ -668,4 +668,33 @@
 			</script>
 		</xsl:if>
 	</xsl:template>
+
+
+	<xsl:template name="green-red-arrow">
+		<xsl:param name="up" select="boolean(1)" />
+
+		<svg viewBox="0 0 491 491">
+			<xsl:if test="not($up)">
+				<xsl:attribute name="style">
+					<xsl:value-of select="'transform:rotate(180deg)'" />
+				</xsl:attribute>
+			</xsl:if>
+
+			<use>
+				<xsl:attribute name="href">
+					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#circle-up-arrow' )"/>
+				</xsl:attribute>
+				<xsl:attribute name="fill">
+					<xsl:choose>
+						<xsl:when test="not($up)">
+							<xsl:value-of select="'var(--sold-red)'" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="'var(--active-green)'" />
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:attribute>
+			</use>
+		</svg>
+	</xsl:template>
 </xsl:stylesheet>
