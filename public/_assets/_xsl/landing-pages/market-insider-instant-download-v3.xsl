@@ -52,18 +52,18 @@
 												</span>
 
 												<br/>
-<xsl:text>have&#160;</xsl:text>
+												<xsl:text>have&#160;</xsl:text>
 												<xsl:choose>
-<xsl:when test="number($change) < 0">
-	<xsl:text>fallen</xsl:text>
+													<xsl:when test="number($change) < 0">
+														<xsl:text>fallen</xsl:text>
 													</xsl:when>
 													<xsl:otherwise>
-<xsl:text>risen</xsl:text>
+														<xsl:text>risen</xsl:text>
 													</xsl:otherwise>
 												</xsl:choose>
 
-<xsl:text>&#32;</xsl:text>
-<span style="white-space: nowrap">an average of:</span>
+												<xsl:text>&#32;</xsl:text>
+												<span style="white-space: nowrap">an average of:</span>
 											</p>
 										</h3>
 
@@ -101,9 +101,9 @@
 															<xsl:value-of select="genie:currency-format( $change, 0 )" />
 														</xsl:when>
 														<xsl:otherwise>
-<xsl:call-template name="round-whole-percents">
-	<xsl:with-param name="num" select="$change" />
-</xsl:call-template>
+															<xsl:call-template name="round-whole-percents">
+																<xsl:with-param name="num" select="$change" />
+															</xsl:call-template>
 														</xsl:otherwise>
 													</xsl:choose>
 												</h4>
@@ -115,7 +115,7 @@
 															<xsl:text>30 days</xsl:text>
 														</xsl:when>
 														<xsl:otherwise>
-<xsl:value-of select="concat( //areas/area[1]/statistics/@lookbackMonths, ' months')" />
+															<xsl:value-of select="concat( //areas/area[1]/statistics/@lookbackMonths, ' months')" />
 
 														</xsl:otherwise>
 													</xsl:choose>

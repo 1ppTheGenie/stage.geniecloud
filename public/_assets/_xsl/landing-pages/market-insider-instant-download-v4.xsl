@@ -12,9 +12,9 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="landing-pages.xsl" />
-<xsl:import href="landing-pages-market-insider.xsl" />
-<xsl:import href="genie-functions.xsl" />
+	<xsl:import href="landing-pages.xsl" />
+	<xsl:import href="landing-pages-market-insider.xsl" />
+	<xsl:import href="genie-functions.xsl" />
 
 
 	<xsl:template name="landing-page">
@@ -81,18 +81,18 @@ s200.8-89.9,200.8-200.4S360.7,49.2,250,49.2L250,49.2z" />
 									<div class="selling-information">
 										<h3 class="home-value-area-info heading-font background-as-color">
 											<p>
-<xsl:value-of select="concat( //area/name, ' ', $singularPropertyType, ' values have ' )" />
+												<xsl:value-of select="concat( //area/name, ' ', $singularPropertyType, ' values have ' )" />
 
 												<xsl:choose>
-<xsl:when test="number($change) < 0">
-	<xsl:text>fallen</xsl:text>
+													<xsl:when test="number($change) < 0">
+														<xsl:text>fallen</xsl:text>
 													</xsl:when>
 													<xsl:otherwise>
-<xsl:text>risen</xsl:text>
+														<xsl:text>risen</xsl:text>
 													</xsl:otherwise>
 												</xsl:choose>
-<xsl:text>&#32;</xsl:text>
-<span style="white-space: nowrap">an average of:</span>
+												<xsl:text>&#32;</xsl:text>
+												<span style="white-space: nowrap">an average of:</span>
 											</p>
 										</h3>
 

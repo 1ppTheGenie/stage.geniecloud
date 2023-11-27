@@ -886,11 +886,9 @@
 						<xsl:choose>
 							<xsl:when test="website!=''">
 								<xsl:value-of select="//agent[1]/website" />
-
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="//agent[1]/website" />
-
 							</xsl:otherwise>
 						</xsl:choose>
 					</tspan>
