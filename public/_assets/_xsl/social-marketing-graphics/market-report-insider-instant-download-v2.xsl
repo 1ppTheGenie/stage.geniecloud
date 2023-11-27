@@ -24,7 +24,7 @@
 			</xsl:attribute>
 		</image>
 		<use class="center" x="12%" y="50%" width="12%" height="12%" fill="var(--active-green)">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-arrow-circle' )" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#circle-up-arrow' )" />
 		</use>
 		<g style="transform: translate(33%, 31%);">
 			<text x="16%" y="0" class="upper bold center medium" fill="var(--theme-heading-color)" data-max-width="60%">

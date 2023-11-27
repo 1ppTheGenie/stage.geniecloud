@@ -41,7 +41,7 @@ Supports:	Area, QRCode
 				</xsl:call-template>
 			</text>
 			<use x="1%" y="2%" width="75%" height="45%" fill="var(--theme-heading-color)">
-				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-arrow-circle' )" />
+				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#circle-up-arrow' )" />
 			</use>
 		</g>
 		<text x="35%" y="66%" class="upper" style="font-weight:400;font-size:150%;font-family:Helvetica,Arial,sans-serif;" fill="var(--theme-heading-color)">

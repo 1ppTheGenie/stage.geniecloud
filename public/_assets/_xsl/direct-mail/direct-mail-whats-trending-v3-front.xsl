@@ -141,7 +141,7 @@ Supports:	Area, QRCode
 				</text>
 			</svg>
 			<use class="center" x="57%" y="4.5%" width="15%" height="15%" fill="var(--theme-heading-color)">
-				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-arrow-circle' )" />
+				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#circle-up-arrow' )" />
 			</use>
 		</g>
 		<g style="transform:translate(12%,40%)">
