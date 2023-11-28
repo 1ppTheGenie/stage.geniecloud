@@ -10,17 +10,11 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 	<xsl:import href="common.xsl" />
 
-
 	<xsl:template name="svg-body">
-
 		<style>
 			<xsl:value-of select="'
-			.h1 {
-				font-size: 150%;
-			}
-			font-weight-normal{
-				font-weight: 600;
-			}'" />
+			.h1 { font-size: 150%; }
+			font-weight-normal{ font-weight: 600; }'" />
 		</style>
 
 		<g>
@@ -59,7 +53,6 @@
 			<text x="35%" y="1.5%" class="normal" style="font-weight: 600;" fill="var(--theme-body-background)">
 				<tspan dy="0" style="font-size:300%">
 					<xsl:call-template name="listing-address-line-one" />
-
 				</tspan>
 				<tspan x="35%" dy="3.5%" style="font-size:230%">
 					<xsl:call-template name="listing-address-line-two" />
@@ -76,11 +69,9 @@
 			<text x="12%" y="13%" class="center bold" fill="var(--theme-body-color)" style="font-size:240%" data-max-width="20%">
 				<tspan x="12%" dy="0">
 					<xsl:call-template name="listing-address-line-one" />
-
 				</tspan>
 				<tspan x="12%" dy="2.5%">
 					<xsl:call-template name="listing-address-line-two" />
-
 				</tspan>
 			</text>
 			<text x="12%" y="19%" class="center" fill="var(--theme-sub-heading-color)" style="font-size:240%" data-max-width="11%">
@@ -96,31 +87,42 @@
 				</xsl:call-template>
 			</text>
 		</g>
+
 		<g style="transform: translate(34%,37%);">
 			<rect x="0" y="0" width="66%" height="28%" style="fill:var(--theme-body-color);" />
 
 			<g style="transform: translate(2%,1%);">
-				<text class="center" x="6%" y="3%" fill="var(--theme-body-background)" style="font-size:230%">$2,188,000</text>
+				<text class="center" x="6%" y="3%" fill="var(--theme-body-background)" style="font-size:230%">
+					<xsl:value-of select="format-number( //single/price, '$###,###')" />
+				</text>
 				<rect x="0" y="6%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
 
-				<text x="1%" y="7%" class="sub-heading" style="font-size:110%">ACTIVE</text>
+				<text x="1%" y="7%" class="sub-heading" style="font-size:110%; text-transform: uppercase">
+					<xsl:value-of select="//single/listingStatus" />
+				</text>
 				<rect x="0" y="10%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
 
-				<text x="1%" y="11%" class="sub-heading" style="font-size:110%">3,861 SQ. FT.</text>
+				<text x="1%" y="11%" class="sub-heading" style="font-size:110%">
+					<xsl:value-of select="concat( format-number( //single/squareFeet, '###,###' ), ' SQ.FT',  )" />
+				</text>
 				<rect x="0" y="14%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
 
-				<text x="1%" y="15%" class="sub-heading" style="font-size:110%">5 BED</text>
+				<text x="1%" y="15%" class="sub-heading" style="font-size:110%">
+					<xls:value-of select="concat( //single/bedrooms/@count, ' BEDROOMS' )" />
+				</text>
 				<rect x="0" y="18%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
 
-				<text x="1%" y="19%" class="sub-heading" style="font-size:110%">3 BATH</text>
+				<text x="1%" y="19%" class="sub-heading" style="font-size:110%">
+					<xls:value-of select="concat( //single/bathrooms/@full, ' BATHROOMS' )" />
+				</text>
 			</g>
 			<foreignObject x="22%" y="2%" width="40%" height="25%">
 				<p style="-webkit-line-clamp:13; line-height: 1.7rem; font-size:140%; color:var(--theme-body-background)">
 					<xsl:call-template name="listing-description" />
-
 				</p>
 			</foreignObject>
 		</g>
+
 		<g style="transform: translate(0, 66%)">
 			<image x="0" y="0" width="32.2%" height="18%" preserveAspectRatio="xMidYMid slice">
 				<xsl:call-template name="switch-image">
@@ -189,7 +191,8 @@
 			</text>
 			<foreignObject x="24%" y="8%" width="70%" height="10%" style='font-size: 140%;'>
 				<p style="color:var(--theme-body-background);-webkit-line-clamp:3; line-height:150%">
-					<xsl:value-of select="concat( 'The information contained herein has been obtained through sources deemed reliable by ',//agent[1]/marketingName, ', but cannot be guaranteed for its accuracy. We recommend to the buyer that any information, which is of special interest, should be obtained through independent verification. ALL MEASUREMENTS ARE APPROXIMATE.')"/></p>
+					<xsl:value-of select="concat( 'The information contained herein has been obtained through sources deemed reliable by ',//agent[1]/marketingName, ', but cannot be guaranteed for its accuracy. We recommend to the buyer that any information, which is of special interest, should be obtained through independent verification. ALL MEASUREMENTS ARE APPROXIMATE.')"/>
+				</p>
 			</foreignObject>
 		</g>
 
