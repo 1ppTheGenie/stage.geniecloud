@@ -37,7 +37,7 @@
 				</text>
 
 				<xsl:if test="count(//openHouse/session) &gt; 0">
-					<text x="50%" y="7.5%" class="center middle bold" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" text-anchor="middle" font-size="340%">
+					<text x="50%" y="7.5%" class="center middle bold" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" text-anchor="middle" font-size="340%" data-max-width="70%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
 							<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
