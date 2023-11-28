@@ -7,8 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<g>
@@ -19,11 +18,10 @@
 				</xsl:call-template>
 			</image>
 
-<rect x="0" y="45%" fill="var(--theme-sub-heading-color)" width="100%" height="2%" />
-
+			<rect x="0" y="45%" fill="var(--theme-sub-heading-color)" width="100%" height="2%" />
 
 			<g style="transform:translate(0%,43%)">
-<rect x="13%" y="-3%" fill="var(--theme-sub-heading-color)" width="75%" height="13.5%" />
+				<rect x="13%" y="-3%" fill="var(--theme-sub-heading-color)" width="75%" height="13.5%" />
 
 				<text x="50%" y="-2%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="370%">
 					<xsl:call-template name="editable">
@@ -69,51 +67,37 @@
 			</g>
 
 			<g style="transform:translate(0%,83%)">
-<rect fill="var(--theme-body-color)" width="100%" height="5%" />
+				<rect fill="var(--theme-body-color)" width="100%" height="5%" />
 
 				<g class="icon-stat" style="transform:translate(16%, -0.4%)">
 					<use x="1%" y="1.4%" width="2%" height="3%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#tag-icon' )" />
 					</use>
-					<text class="medium">
-						<tspan x="4%" y="2%" style=" fill:var(--theme-body-background)">
-							<xsl:call-template name="editable">
-								<xsl:with-param name="id" select="'listedat'" />
-								<xsl:with-param name="default" select="' Listed at $1,399,000'" />
-							</xsl:call-template>
-						</tspan>
+					<text class="medium" x="4%" y="2%" style=" fill:var(--theme-body-background)">
+						<xsl:value-of select="concat(' Listed at ', format-number( //single/price, '$###,###') )" />
 					</text>
 				</g>
 				<g class="icon-stat" style="transform:translate(44.5%, -0.4%)">
 					<use x="0" y="1%" width="3%" height="4%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#bed-icon' )" />
 					</use>
-					<text class="medium">
-						<tspan x="4%" y="2%" style=" fill:var(--theme-body-background)">
-							<xsl:call-template name="editable">
-								<xsl:with-param name="id" select="'bedroomscount'" />
-								<xsl:with-param name="default" select="concat( //single/bedrooms/@count, '&#160; Bedrooms ')" />
-							</xsl:call-template>
-						</tspan>
+					<text class="medium" x="4%" y="2%" style=" fill:var(--theme-body-background)">
+						<xsl:value-of select="concat( //single/bedrooms/@count, '&#32;Bedrooms')" />
 					</text>
 				</g>
+
 				<g class="icon-stat" style="transform:translate(68%, -0.4%)">
 					<use x="0" y="1%" width="3%" height="3%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#bath-icon' )" />
 					</use>
-					<text class="medium">
-						<tspan x="4%" y="2%" style=" fill:var(--theme-body-background)">
-							<xsl:call-template name="editable">
-								<xsl:with-param name="id" select="'bathroomscount'" />
-								<xsl:with-param name="default" select="concat( $listingTotalBathrooms, '&#160; Bathrooms ')" />
-							</xsl:call-template>
-						</tspan>
+					<text class="medium" x="4%" y="2%" style=" fill:var(--theme-body-background)">
+						<xsl:value-of select="concat( $listingTotalBathrooms, '&#32;Bathrooms')" />
 					</text>
 				</g>
 			</g>
 
 			<g style="transform:translate(0%,88%)">
-<rect fill="var(--theme-sub-heading-color)" width="100%" height="12%" />
+				<rect fill="var(--theme-sub-heading-color)" width="100%" height="12%" />
 
 				<g style="transform:translatex(2%)">
 					<image x="0" y="1%" width="12%" height="8%">
@@ -121,27 +105,27 @@
 							<xsl:value-of select="//agent[1]/photo" />
 						</xsl:attribute>
 					</image>
-<text x="13%" y="3.5%" fill="var(--theme-body-background)" style="font-size: 180%;">
+					<text x="13%" y="3.5%" fill="var(--theme-body-background)" style="font-size: 180%;">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="concat( //agent[1]/marketingName, '&#160;' )" />
 						</xsl:call-template>
 					</text>
-<text x="13%" y="5.5%" fill="var(--theme-body-background)" style="font-size: 180%;" data-max-width="32%">
+					<text x="13%" y="5.5%" fill="var(--theme-body-background)" style="font-size: 180%;" data-max-width="32%">
 						<tspan>
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentmobile'" />
 								<xsl:with-param name="default" select="//agent[1]/mobile" />
 							</xsl:call-template>
 						</tspan>
-<tspan> &#124; </tspan>
+						<tspan> &#124; </tspan>
 						<tspan>
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentmarketingEmail'" />
 								<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 							</xsl:call-template>
 						</tspan>
-<tspan> &#124; </tspan>
+						<tspan> &#124; </tspan>
 						<tspan>
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentwebsite'" />
@@ -149,7 +133,7 @@
 							</xsl:call-template>
 						</tspan>
 					</text>
-<text x="13%" y="7.5%" fill="var(--theme-body-background)" style="font-size: 180%;">
+					<text x="13%" y="7.5%" fill="var(--theme-body-background)" style="font-size: 180%;">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'licenseno'" />
 							<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
