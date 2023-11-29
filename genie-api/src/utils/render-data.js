@@ -898,6 +898,7 @@ const processListing = async params => {
 		single.push({
 			_name: "bathrooms",
 			_attrs: {
+				total: listing.totalBathrooms,
 				full: listing.bathroomsFull,
 				half: listing.bathroomsHalf,
 			},

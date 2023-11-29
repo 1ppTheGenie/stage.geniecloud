@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:genie="https://theGenie.ai/hub" version="3.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:genie="https://theGenie.ai/hub" version="3.0">
 	<xsl:import href="genie-functions.xsl" />
 
 	<xsl:variable name="quot">"</xsl:variable>
@@ -28,11 +30,9 @@
 		<xsl:choose>
 			<xsl:when test="//overrides/primaryImage">
 				<xsl:value-of select="//overrides/primaryImage" />
-
 			</xsl:when>
 			<xsl:when test="//overrides/*[name()=concat('LImage',$index)][1]">
 				<xsl:value-of select="//overrides/*[name()=concat('LImage',$index)][1]" />
-
 			</xsl:when>
 			<xsl:when test="$index=1 and $preferPrimary='true' and //single/photoPrimary!=''">
 				<xsl:value-of select="//single/photoPrimary" />
@@ -385,7 +385,6 @@
 		</xsl:choose>
 	</xsl:variable>
 
-
 	<xsl:variable name="companyLogo">
 		<xsl:choose>
 			<xsl:when test="//output/@themeShade='Dark'">
@@ -439,7 +438,14 @@
 
 	<!-- $listingTotalBathrooms -->
 	<xsl:variable name="listingTotalBathrooms">
-		<xsl:value-of select="number(concat('0', //single/bathrooms/@full ))+number(concat('0',//single/bathrooms/@half))" />
+		<xsl:choose>
+			<xsl:when test="string(//single/bathrooms/@total)!=''">
+				<xsl:value-of select="number(//single/bathrooms/@total)" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="number(concat('0', //single/bathrooms/@full ))+number(concat('0',//single/bathrooms/@half))" />
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:variable>
 
 	<!-- $listingStatusColor -->
