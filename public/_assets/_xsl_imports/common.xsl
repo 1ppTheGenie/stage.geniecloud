@@ -2287,9 +2287,8 @@
 		<xsl:if test="$isFBAd!='true'">
 			<text y="92%" class="align-center" style="font-size:80%" data-max-width="98%">
 				<tspan x="50%" style="font-size:75%">
-					<xsl:value-of select="concat( 'Showing the most recent ', fn:min(( $min, count($nodes) )), ' of a total of ', count($nodes), $summary )" />
+					<xsl:value-of select="concat( 'Showing the most recent ', fn:min(( $min, count($nodes) )), ' of a total of ', count($nodes), $summary, ' ', //agent[1]/address/company, ' may not be the broker of record for all properties in the list.')" />
 				</tspan>
-
 				<tspan x="50%" dy="2.5%" style="font-size:90%">
 					<xsl:call-template name="agent-contact" />
 				</tspan>
