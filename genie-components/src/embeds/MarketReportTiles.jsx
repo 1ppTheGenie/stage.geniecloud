@@ -26,27 +26,31 @@ export default () => {
 					</div>
 					<div>
 						<h1>Average Listing Price</h1>
-						<h2>{window.gg.currency(stats.avgListPriceForSold)}</h2>
+						<h2>{window.gHub.currency(stats.avgListPriceForSold)}</h2>
 					</div>
 					<div>
 						<h1>Average price/Sq Ft.</h1>
-						<h2>{window.gg.currency(stats.avgPricePerSqFt)}</h2>
+						<h2>{window.gHub.currency(stats.avgPricePerSqFt)}</h2>
 					</div>
 					<div>
 						<h1>Median sales price</h1>
-						<h2>{window.gg.currency(stats.medSalePrice)}</h2>
+						<h2>{window.gHub.currency(stats.medSalePrice)}</h2>
 					</div>
 					<div>
 						<h1>{period} Month Turn Over Rate</h1>
-						<h2>{window.gg.percent(stats.turnOver)}</h2>
+						<h2>{window.gHub.percent(stats.turnOver)}</h2>
 					</div>
 					<div>
 						<h1>Average Sales Price</h1>
-						<h2>{window.gg.currency(stats.avgSalePrice)}</h2>
+						<h2>{window.gHub.currency(stats.avgSalePrice)}</h2>
 					</div>
 					<div>
 						<h1>Percentage of asking price</h1>
-						<h2>{window.gg.percent(stats.avgSalePrice / stats.avgListPriceForSold)}</h2>
+						<h2>
+							{window.gHub.percent(
+								stats.avgSalePrice / stats.avgListPriceForSold
+							)}
+						</h2>
 					</div>
 					<div>
 						<h1>Total Number of Units</h1>
@@ -54,7 +58,7 @@ export default () => {
 					</div>
 					<div>
 						<h1>% of owners who live here full time</h1>
-						<h2>{window.gg.percent(stats.ownerOccupancy)}</h2>
+						<h2>{window.gHub.percent(stats.ownerOccupancy)}</h2>
 					</div>
 				</div>
 			)}

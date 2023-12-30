@@ -1,5 +1,11 @@
 import { Show } from "solid-js";
-import { areaDataStore, listingsStore, usePagination, useSettings } from "@/utilities";
+import {
+	areaDataStore,
+	listingsStore,
+	usePagination,
+	useSettings,
+	Context4Settings,
+} from "@/utilities";
 import {
 	HomeTypes,
 	MapListings,

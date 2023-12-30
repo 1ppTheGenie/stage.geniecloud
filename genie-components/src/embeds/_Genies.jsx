@@ -73,7 +73,7 @@ export default () => {
 			);
 			const settings = {
 				...defaultSettings,
-				...window.ggSettings,
+				...window.gHub,
 				...queryParams,
 			};
 			const attrs = genieNode.getAttributeNames();
@@ -124,7 +124,7 @@ export default () => {
 				var link = document.createElement("link");
 				link.rel = "stylesheet";
 				link.type = "text/css";
-				link.href = `${window.ghub.siteUrl}_assets/themes/${settings.theme}.css`;
+				link.href = `${window.gHub.siteUrl}_assets/themes/${settings.theme}.css`;
 				document.head.appendChild(link);
 			}
 

@@ -8,7 +8,7 @@ export default props => {
 	const [photos, setPhotoCount] = createSignal(0);
 
 	onMount(() => {
-		//window.gg.lazyLoader("#property-gallery img.lazy");
+		//window.gHub.lazyLoader("#property-gallery img.lazy");
 		setPhotoCount(document.querySelectorAll(".property-images").length);
 	});
 

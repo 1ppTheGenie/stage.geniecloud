@@ -21,9 +21,9 @@ import HomeValuation from "@/components/_HomeValuation";
 const VIEWED = "Viewed Landing Page";
 
 export default () => {
-	window.gg.searchAddress = searchAddress;
+	window.gHub.searchAddress = searchAddress;
 
-	window.gg.lazyLoader = selector => {
+	window.gHub.lazyLoader = selector => {
 		const lazyImages = [].slice.call(document.querySelectorAll(selector));
 
 		const lazyImageObserver = new IntersectionObserver(entries => {
@@ -40,7 +40,7 @@ export default () => {
 		lazyImages.forEach(lazyImage => lazyImageObserver.observe(lazyImage));
 	};
 
-	window.gg.makeMap = async (id, options = null, layers = null) => {
+	window.gHub.makeMap = async (id, options = null, layers = null) => {
 		await initMaps();
 
 		const map = buildMap(
@@ -57,15 +57,15 @@ export default () => {
 
 					const color =
 						l.color ||
-						window.gg.getCssVar(`--${l.state}`, document.body).trim();
+						window.gHub.getCssVar(`--${l.state}`, document.body).trim();
 
 					switch (l.iconType ?? "circle") {
 						case "flag":
 							size = [55 * scale, 38 * scale];
 							anchor = [27 * scale, 38 * scale];
-							datatURI = window.gg.flagURI(
+							datatURI = window.gHub.flagURI(
 								color,
-								window.gg.currency(
+								window.gHub.currency(
 									parseInt(l.state == "sold" ? l.salePrice : l.listPrice)
 								)
 							);
@@ -74,13 +74,13 @@ export default () => {
 						case "dot":
 							size = [15, 15];
 							anchor = [9, 9];
-							datatURI = window.gg.circleURI(color, "", 8);
+							datatURI = window.gHub.circleURI(color, "", 8);
 							break;
 
 						default:
 							size = [34, 34];
 							anchor = [12, 12];
-							datatURI = window.gg.circleURI(color, l.caption || i + 1, 12);
+							datatURI = window.gHub.circleURI(color, l.caption || i + 1, 12);
 					}
 
 					var icon = window.L.icon({
@@ -112,7 +112,7 @@ export default () => {
 		return map;
 	};
 
-	window.gg.autoComplete = (input, setPlace, bounds = null) => {
+	window.gHub.autoComplete = (input, setPlace, bounds = null) => {
 		initAutocomplete(() => {
 			/*var defaultBounds = new google.maps.LatLngBounds(
 				new google.maps.LatLng(40.518, 29.215),
@@ -131,7 +131,7 @@ export default () => {
 		});
 	};
 
-	window.gg.spinner = (fill, style = "") => {
+	window.gHub.spinner = (fill, style = "") => {
 		let petals = "";
 
 		for (let i = 0; i < 12; i++) {
@@ -145,16 +145,16 @@ export default () => {
 		return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="${style}"><circle cx="50" cy="50" r="47" fill="${fill}"/>${petals}</svg>`;
 	};
 
-	window.gg.getCssVar = (name, el) =>
+	window.gHub.getCssVar = (name, el) =>
 		getComputedStyle(el ?? document.body).getPropertyValue(name);
 
-	window.gg.hex2rgba = (hex, alpha = 1) => {
+	window.gHub.hex2rgba = (hex, alpha = 1) => {
 		const re = hex.length === 6 || hex.length === 8 ? /\w\w/g : /\w/g;
 		const [r, g, b] = hex.match(re).map(x => parseInt(x, 16));
 		return `rgba(${r},${g},${b},${alpha})`;
 	};
 
-	window.gg.circleURI = (color, caption = "", size = 12) => {
+	window.gHub.circleURI = (color, caption = "", size = 12) => {
 		const text =
 			caption === ""
 				? ""
@@ -184,7 +184,7 @@ export default () => {
 		return "data:image/svg+xml," + encodeURIComponent(svg);
 	};
 
-	window.gg.flagURI = (color, price) => {
+	window.gHub.flagURI = (color, price) => {
 		const svg = `
 	<svg xmlns="http://www.w3.org/2000/svg" width="11" height="7.5" viewBox="0 0 110 75">
 		<defs>
@@ -208,7 +208,7 @@ export default () => {
 		return "data:image/svg+xml," + encodeURIComponent(svg);
 	};
 
-	window.gg.redirectToParentAsset = (additionalParams = {}) => {
+	window.gHub.redirectToParentAsset = (additionalParams = {}) => {
 		const url = `${window.location.origin}${window.location.pathname
 			.replace("/index.html", "")
 			.split("/")
@@ -230,48 +230,51 @@ export default () => {
 	document.addEventListener("trigger-update-lead", async e => {
 		const settings = useSettings(Context4Settings);
 
-		if (settings.leadId || settings.genieLeadId || window.gg.leadId) {
+		if (settings.leadId || settings.genieLeadId || window.gHub.leadId) {
 			await updateLead({
 				genieLeadId:
-					settings.leadId || settings.genieLeadId || window.gg.leadId,
+					settings.leadId || settings.genieLeadId || window.gHub.leadId,
 				...e.detail,
 			});
 		}
 	});
 
-	window.gg.getLandingPageData = async () => {
+	window.gHub.getLandingPageData = async () => {
 		const urlParams = Object.fromEntries(
 			new URLSearchParams(window.location.search)
 		);
 
-		urlParams.agentId = ggSettings.agentId;
-		urlParams.hideAVM = ggSettings.hideAVM;
+		urlParams.agentId = window.gHub.agentId;
+		urlParams.hideAVM = window.gHub.hideAVM ?? false;
 
 		return await landingPageData(urlParams);
 	};
 
-	window.gg.addLead = async (note, data = null) => {
+	window.gHub.addLead = async (note, data = null) => {
 		const settings = useSettings(Context4Settings);
 
-		window.gg.defaults = window.gg.defaults || {};
+		window.gHub.defaults = window.gHub.defaults || {};
 
 		let postedData = {
 			agentId: settings.agentId,
 			areaId: settings.leadareaId || settings.areaId,
 			propertyId:
-				settings.propertyId ?? window.gg.defaults.leadPropertyId ?? null,
+				settings.propertyId ??
+				window.gHub.defaults.leadPropertyId ??
+				new URLSearchParams(window.location.search).get("propertyId") ??
+				new URLSearchParams(window.location.search).get("propertyID"),
 			firstName: settings.firstname ?? null,
 			lastName: settings.lastname ?? null,
-			fullName: window.gg.defaults.fullName ?? null,
+			fullName: window.gHub.defaults.fullName ?? null,
 			emailAddress: settings.emailaddress ?? null,
 			note: note,
 			...data,
 		};
 
-		if (settings.leadId || settings.genieLeadId || window.gg.leadId) {
+		if (settings.leadId || settings.genieLeadId || window.gHub.leadId) {
 			if (note !== VIEWED) {
 				postedData.genieLeadId =
-					settings.leadId || settings.genieLeadId || window.gg.leadId;
+					settings.leadId || settings.genieLeadId || window.gHub.leadId;
 				postedData.email = postedData.emailAddress;
 
 				await updateLead(postedData);
@@ -302,14 +305,14 @@ export default () => {
 
 			// Merge in any additional default settings
 			if (
-				window.gg.defaults.notePrompt &&
-				window.gg.defaults.notePrompt !== ""
+				window.gHub.defaults.notePrompt &&
+				window.gHub.defaults.notePrompt !== ""
 			) {
-				postedData.note = `${window.gg.defaults.notePrompt}: ${postedData.note}`;
+				postedData.note = `${window.gHub.defaults.notePrompt}: ${postedData.note}`;
 			}
 
 			postedData.trackingData = {
-				...window.gg.defaults.trackingData,
+				...window.gHub.defaults.trackingData,
 				...(postedData.trackingData ?? {}),
 			};
 
@@ -323,7 +326,7 @@ export default () => {
 			const r = await createLead(postedData);
 
 			if (r.result?.key) {
-				window.gg.leadId = r.result.key;
+				window.gHub.leadId = r.result.key;
 			}
 
 			return r.result;
@@ -335,7 +338,7 @@ export default () => {
 		const pid = urlParams.get("propertyId");
 
 		if (pid) {
-			window.gg.addLead(null, { propertyId: pid });
+			window.gHub.addLead(null, { propertyId: pid });
 		}
 	}
 
@@ -472,7 +475,7 @@ export default () => {
 
 				new FormData(e.target).forEach((value, key) => (data[key] = value));
 
-				const lead = await window.gg.addLead(null, data);
+				const lead = await window.gHub.addLead(null, data);
 
 				document.dispatchEvent(
 					new CustomEvent("genie-lead-created", { detail: lead })
@@ -496,7 +499,7 @@ export default () => {
 			};
 
 			const popup = document.getElementById("download-report");
-			if (popup && window.gg.isLeadCapture) {
+			if (popup && window.gHub.isLeadCapture) {
 				const hidePopup = () => {
 					popup.classList.remove("visible");
 
@@ -515,7 +518,7 @@ export default () => {
 					const address = document.getElementById("popup-email").value;
 
 					if (address) {
-						window.gg.addLead("Report download", {
+						window.gHub.addLead("Report download", {
 							emailAddress: address,
 							genieTags: el.getAttribute(tagsAttr), // Support tags on the element
 						});
@@ -546,16 +549,16 @@ export default () => {
 		// Skip if managed by the downloadUrl handler
 		if (!el.hasAttribute(downloadAttr)) {
 			el.addEventListener("click", () => {
-				window.gg.addLead("Event Trigger", {
+				window.gHub.addLead("Event Trigger", {
 					genieTags: el.getAttribute(tagsAttr),
 				});
 			});
 		}
 	});
 
-	window.requestAnimationFrame(() => window.gg.lazyLoader("img.lazy"));
+	window.requestAnimationFrame(() => window.gHub.lazyLoader("img.lazy"));
 
-	window.gg.galleryButton = (button, gallery) => {
+	window.gHub.galleryButton = (button, gallery) => {
 		let v = 1;
 		const captions = ["Show Fewer", "Show More"];
 		button.addEventListener(
@@ -572,13 +575,13 @@ export default () => {
 		*/
 	};
 
-	if (typeof window.gg.galleryImages !== "undefined") {
+	if (typeof window.gHub.galleryImages !== "undefined") {
 		const gallery = document.getElementById("property-gallery");
 
 		if (gallery) {
 			//const Gallery = lazy(() => import("@/components/_Gallery"));
 			const GalleryComponent = () => (
-				<Gallery images={window.gg.galleryImages} />
+				<Gallery images={window.gHub.galleryImages} />
 			);
 
 			render(GalleryComponent, gallery);

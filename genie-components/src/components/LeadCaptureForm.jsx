@@ -25,7 +25,7 @@ export const LeadCaptureForm = props => {
 			data[key] = formData.get(key);
 		}
 
-		await window.gg.addLead(leadNote, data);
+		await window.gHub.addLead(leadNote, data);
 
 		setShowSpinner(false);
 

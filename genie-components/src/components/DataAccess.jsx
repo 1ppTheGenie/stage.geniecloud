@@ -8,7 +8,7 @@ export const DataAccess = ({ signedin }) => {
 	const [fields, setFields] = createSignal({ genieTags: "ClickCta,AccessData" });
 
 	const giveAccess = () => {
-		window.gg.addLead("Data Access", fields);
+		window.gHub.addLead("Data Access", fields);
 		signedin(true);
 	};
 

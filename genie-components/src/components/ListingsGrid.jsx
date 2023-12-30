@@ -115,7 +115,7 @@ export const ListingsGrid = ({ listings, mode, style }) => {
 
 /*
 
-{mode !== "Sold" && <td>{window. window.gg.currency(l.priceHigh)}</td>}
+{mode !== "Sold" && <td>{window. window.gHub.currency(l.priceHigh)}</td>}
 
 <td></td>
 <td></td>
@@ -126,16 +126,16 @@ export const ListingsGrid = ({ listings, mode, style }) => {
 
 {mode === "Sold" && (
 	<>
-		<td>{window. window.gg.currency(parseInt(l.priceHigh))}</td>
-		<td>{window. window.gg.currency(parseInt(l.salePrice))}</td>
+		<td>{window. window.gHub.currency(parseInt(l.priceHigh))}</td>
+		<td>{window. window.gHub.currency(parseInt(l.salePrice))}</td>
 		<td>{format(Date.parse(l.soldDate), "m-d-Y")}</td>
 		<td>
-			{window. window.gg.currency(parseInt(l.salePrice) / parseInt(l.sqft))}
+			{window. window.gHub.currency(parseInt(l.salePrice) / parseInt(l.sqft))}
 		</td>
 	</>
 )}
 
 {mode !== "Sold" && (
-	<td>{window. window.gg.currency(parseInt(l.priceHigh) / parseInt(l.sqft))}</td>
+	<td>{window. window.gHub.currency(parseInt(l.priceHigh) / parseInt(l.sqft))}</td>
 )}
 */

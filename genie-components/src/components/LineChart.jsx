@@ -31,11 +31,11 @@ const loadCharts = () =>
 			script.id = "chartist-script";
 			script.onload = () => {
 				var gScript = document.createElement("script");
-				gScript.src = `https://cloud.thegenie.ai/_assets/_js/charts.js?v=3`;
+				gScript.src = `https://genie-hub-2.s3.eu-west-2.amazonaws.com/_assets/_js/charts.js`;
 				gScript.id = "genie-charts";
 
 				gScript.onload = () => {
-					genieCharts = initCharts();
+					genieCharts = window.genieChart.initCharts();
 					resolve(true);
 				};
 				document.head.appendChild(gScript);

@@ -32,7 +32,7 @@ export default () => {
 		pageOffset,
 		pageOffset + pageSize
 	);
-	const color = window.window.gg
+	const color = window.gHub
 		.getCssVar(`--${settings.mode.toLowerCase()}`, document.body)
 		.trim();
 

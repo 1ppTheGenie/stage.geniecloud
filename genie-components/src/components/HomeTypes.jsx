@@ -9,7 +9,7 @@ import {
 
 import "@/assets/css/home-types.css";
 
-const g = window.ghub;
+const g = window.gHub;
 
 export const HomeTypes = props => {
 	const { optionTabs, container, style, showPeriod = true } = props;

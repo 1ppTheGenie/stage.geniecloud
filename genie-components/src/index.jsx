@@ -30,5 +30,15 @@ const genericJS = () => {
 	}
 };
 
-window.addEventListener("DOMContentLoaded", genericJS);
+console.log("Hello from Genie Hub");
+
+if (
+	document.readyState === "complete" ||
+	document.readyState === "interactive"
+) {
+	genericJS();
+} else {
+	window.addEventListener("DOMContentLoaded", genericJS);
+}
+
 document.addEventListener("trigger-genie-load", genericJS);

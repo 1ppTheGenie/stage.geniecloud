@@ -5,12 +5,7 @@ import { HomeTypes, Editable, LineChart } from "@/components";
 
 import "@/assets/css/market-history.css";
 
-const dollar = new Intl.NumberFormat("en-US", {
-	style: "currency",
-	currency: "USD",
-	minimumFractionDigits: 0,
-});
-var link = document.createElement("link");
+const link = document.createElement("link");
 link.rel = "stylesheet";
 link.type = "text/css";
 link.href = "https://cdn.rawgit.com/tiaanduplessis/wenk/master/dist/wenk.css";
@@ -25,11 +20,9 @@ export default () => {
 
 	createEffect(() => {
 		if (areaMonthlyStore.loading == false) {
-			const stats = [
-				...areaMonthlyStore.stats.filter(
-					stats => stats.propertyTypeId === areaDataStore.propertyTypeID
-				),
-			];
+			const stats = areaMonthlyStore.stats.filter(
+				stats => stats.propertyTypeId === areaDataStore.propertyTypeID
+			);
 
 			setLabels(
 				stats
@@ -132,8 +125,8 @@ export default () => {
 									onlyInteger: true,
 									labelInterpolationFnc:
 										graphView() === "soldCount"
-											? window.gg.charts.number
-											: window.gg.charts.dollarRound,
+											? window.genieChart.number
+											: window.genieChart.dollarRound,
 									scaleLabel:
 										graphView() === "soldCount" ? "Total Sold" : "Price",
 								},

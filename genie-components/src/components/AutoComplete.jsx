@@ -4,7 +4,7 @@ export const AutoComplete = props => {
 	let acInput;
 
 	onMount(() => {
-		window.gg.autoComplete(acInput, props.placeChanged);
+		window.gHub.autoComplete(acInput, props.placeChanged);
 	});
 
 	return (

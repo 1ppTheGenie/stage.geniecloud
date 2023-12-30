@@ -32,37 +32,37 @@ export default () => {
 					/>
 					<MRIcon
 						icon="line-chart"
-						value={window.gg.currency(stats.avgListPriceForSold)}
+						value={window.gHub.currency(stats.avgListPriceForSold)}
 						caption="average listing price"
 						color="#37c6e9"
 					/>
 					<MRIcon
 						icon="ruler"
-						value={window.gg.currency(stats.avgPricePerSqFt)}
+						value={window.gHub.currency(stats.avgPricePerSqFt)}
 						caption="average price/sq ft."
 						color="#f8495d"
 					/>
 					<MRIcon
 						icon="bar-chart"
-						value={window.gg.currency(stats.maxSale.salePrice)}
+						value={window.gHub.currency(stats.maxSale.salePrice)}
 						caption="highest sale price"
 						color="#33c3e8"
 					/>
 					<MRIcon
 						icon="bar-chart"
-						value={window.gg.currency(stats.avgSalePrice)}
+						value={window.gHub.currency(stats.avgSalePrice)}
 						caption="average sales price"
 						color="#f8495d"
 					/>
 					<MRIcon
 						icon="bar-chart"
-						value={window.gg.currency(stats.medSalePrice)}
+						value={window.gHub.currency(stats.medSalePrice)}
 						caption="median sales price"
 						color="#3ea9a7"
 					/>
 					<MRIcon
 						icon="bar-chart"
-						value={window.gg.currency(stats.minSale.salePrice)}
+						value={window.gHub.currency(stats.minSale.salePrice)}
 						caption="lowest sales price"
 						color="#b9be1c"
 					/>

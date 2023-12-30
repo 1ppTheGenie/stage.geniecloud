@@ -18,6 +18,16 @@ export default defineConfig({
 		},
 	},
 	base: __BASE__,
+	experimental: {
+		renderBuiltUrl(filename, { hostType }) {
+			console.log(filename, hostType);
+			if (hostType === "js" || hostType === "css") {
+				return { runtime: `window.gHub.buildUrl(${JSON.stringify(filename)})` };
+			} else {
+				return { relative: true };
+			}
+		},
+	},
 	build: {
 		outDir: `../public/_assets/landing-pages/dist/${__BUILD_VERSION__}/`,
 		sourcemap: false,

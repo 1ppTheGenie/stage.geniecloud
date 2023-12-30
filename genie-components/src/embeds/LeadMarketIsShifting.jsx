@@ -1,4 +1,4 @@
-import { useSettings } from "@/utilities";
+import { useSettings, Context4Settings } from "@/utilities";
 
 export default () => {
 	const settings = useSettings(Context4Settings);
@@ -68,7 +68,7 @@ export default () => {
 								<button
 									class="upper rounded"
 									onClick={() => {
-										window.gg.addLead("Market Shifting", {
+										window.gHub.addLead("Market Shifting", {
 											email: emailAddress,
 											funnel_id: settings.collection_id,
 										});

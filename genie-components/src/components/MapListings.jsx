@@ -1,6 +1,12 @@
 import { LeafletMap, GeoArea, CircleMarker } from "@/components";
 import { format } from "date-fns";
-import { currency, getCssVar, address, useSettings } from "@/utilities";
+import {
+	currency,
+	getCssVar,
+	address,
+	useSettings,
+	Context4Settings,
+} from "@/utilities";
 
 export const MapListings = props => {
 	const settings = useSettings(Context4Settings);
