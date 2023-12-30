@@ -12,6 +12,9 @@ const GENIE_URL =
 
 const JSON_MIME = "application/json";
 
+const KEEP_RENDER_FOR = process.env?.KEEP_RENDER_FOR || 52;
+const WEEK_IN_MILLISECONDS = 60 * 60 * 24 * 1000;
+
 // Set up the S3 client
 const s3Client = new S3Client({ region: REGION });
 
@@ -122,7 +125,7 @@ export const xslt = async event => {
 							await toS3(
 								s3Target,
 								transformedXML,
-								{ finalRender: true },
+								{ finalRender: true, ...params.tags,"Genie-Delete": "extended" },
 								"text/html"
 							);
 						} else {
@@ -136,7 +139,7 @@ export const xslt = async event => {
 							await toS3(
 								r.s3.object.key.replace("xslt.json", "puppeteer.json"),
 								JSON.stringify(params),
-								null,
+								{ "Genie-Delete": true },
 								"application/json"
 							);
 						}
@@ -165,12 +168,13 @@ export const xslt = async event => {
 									width,
 									height,
 									webp: true,
+									tags: params.tags,
 									s3Key: params.s3Key.replace(
 										/(index\.html|\.pdf)/g,
 										revisedSuffix
 									),
 								}),
-								null,
+								{ "Genie-Delete": true },
 								"application/json"
 							);
 						}

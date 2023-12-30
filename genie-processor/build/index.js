@@ -52267,6 +52267,8 @@ var REGION = process.env.REGION ?? "eu-west-2";
 var BUCKET = process.env.BUCKET ?? "genie-hub-2";
 var GENIE_URL = process.env.GENIE_URL ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/";
 var JSON_MIME = "application/json";
+var KEEP_RENDER_FOR = process.env?.KEEP_RENDER_FOR || 52;
+var WEEK_IN_MILLISECONDS = 60 * 60 * 24 * 1e3;
 var s3Client = new import_client_s3.S3Client({ region: REGION });
 var TEMP_DIR = process.env.TEMP_DIR ?? "D:/Dropbox/development/genie-marketing-hub-master/GenieHub/genie-hub-cloud/public/_assets/_xsl_imports/";
 var transform = (xml, xslt2, xsltBaseUri) => {
@@ -52354,7 +52356,7 @@ var xslt = async (event) => {
               await toS3(
                 s3Target,
                 transformedXML,
-                { finalRender: true },
+                { finalRender: true, ...params.tags, "Genie-Delete": "extended" },
                 "text/html"
               );
             } else {
@@ -52367,7 +52369,7 @@ var xslt = async (event) => {
               await toS3(
                 r.s3.object.key.replace("xslt.json", "puppeteer.json"),
                 JSON.stringify(params),
-                null,
+                { "Genie-Delete": true },
                 "application/json"
               );
             }
@@ -52386,12 +52388,13 @@ var xslt = async (event) => {
                   width,
                   height,
                   webp: true,
+                  tags: params.tags,
                   s3Key: params.s3Key.replace(
                     /(index\.html|\.pdf)/g,
                     revisedSuffix
                   )
                 }),
-                null,
+                { "Genie-Delete": true },
                 "application/json"
               );
             }
