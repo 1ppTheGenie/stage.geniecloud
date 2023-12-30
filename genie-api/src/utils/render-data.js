@@ -427,7 +427,7 @@ const processAgents = async agentIds => {
 
 				// *** AGENT ADDRESS
 				address: {
-					company: marketingSettings.office.name ?? "",
+					company: marketingSettings.office.companyName ?? "",
 					street: marketingSettings.office.address ?? "",
 					address2: marketingSettings.office.address2 ?? "",
 					city: marketingSettings.office.city ?? "",

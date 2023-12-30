@@ -442,12 +442,12 @@ const call_api = async ( endpoint, params, verb = "POST", pre_cache = null ) => 
 			console.log( 'cache to', endpoint,cacheKey );
 		} else {
 			if (
-				!typeof result == "object" ||
-				!result?.responseDescription ||
-				result.responseDescription !== "Asset Url has already been set"
-			) {
-				console.log(`GenieAPI error (${endpoint}): `, result);
-			}
+                typeof result !== 'object' ||
+                !result?.responseDescription ||
+                result.responseDescription !== 'Asset Url has already been set'
+            ) {
+                console.log(`GenieAPI error (${endpoint}): `, result)
+            }
 		}
 	} else {
 		console.log( 'cache from', endpoint,cacheKey );

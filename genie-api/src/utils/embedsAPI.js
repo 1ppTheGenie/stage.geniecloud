@@ -66,258 +66,258 @@ export const embedsAPI = async (route, params) => {
 	return result;
 };
 
-export const getLandingPageData = async params => {
-	let { propertyId, qrId, shortUrlDataId, token, agentId, hideAVM } = {
-		...params,
-	};
-	let property = null,
-		lead = null;
+export const getLandingPageData = async (params) => {
+    let { propertyId, qrId, shortUrlDataId, token, agentId, hideAVM } = {
+        ...params,
+    }
+    let property = null,
+        lead = null
 
-	if (token) {
-		if (typeof qrId !== "undefined") {
-			property = await getQRProperty(qrId, token);
+    if (token) {
+        if (typeof qrId !== 'undefined') {
+            property = await getQRProperty(qrId, token)
 
-			lead = {
-				genieLeadId: property.genieLeadId,
-				salutation: property.ownerDisplayName,
-			};
-		} else if (typeof shortUrlDataId !== "undefined") {
-			lead = await getShortData(parseInt(shortUrlDataId), token, agentId);
+            lead = {
+                genieLeadId: property.genieLeadId,
+                salutation: property.ownerDisplayName,
+            }
+        } else if (typeof shortUrlDataId !== 'undefined') {
+            lead = await getShortData(parseInt(shortUrlDataId), token, agentId)
 
-			if (!propertyId) {
-				propertyId = lead.propertyId;
-			}
-		}
-	}
+            if (!propertyId) {
+                propertyId = lead.propertyId
+            }
+        }
+    }
 
-	if (propertyId && !property) {
-		property = await getPropertyFromId(propertyId, agentId);
-	}
+    if (propertyId && !property) {
+        property = await getPropertyFromId(propertyId, agentId)
+    }
 
-	if (property) {
-		property.lead = lead;
+    if (property) {
+        let data = {
+            lead,
+            id: property.propertyID,
+            firstName: property.firstName,
+            lastName: property.lastName,
+            emailAddress: property.emailAddress,
+            ownerDisplayName: property.ownerDisplayName,
+            latitude: property.latitude,
+            longitude: property.longitude,
+            boundaryJSON: property.boundary.geoJSON,
+            address: property.siteAddress,
+            city: property.siteAddressCity,
+            state: property.siteAddressState,
+            zip: property.siteAddressZip,
+            bedrooms: property.bedrooms,
+            bathrooms: property.bathrooms,
+            sqFt: property.sumBuildingSqFt.toLocaleString('en-US'),
+            yearBuilt: property.yearBuilt,
+            currentAVM: property.firstAmericanCurrentAVM,
+            avmLow: property.avmLow,
+            avmHigh: property.avmHigh,
+        }
 
-		let data = {
-			id: property.propertyID,
-			firstName: property.firstName,
-			lastName: property.lastName,
-			emailAddress: property.emailAddress,
-			ownerDisplayName: property.ownerDisplayName,
-			latitude: property.latitude,
-			longitude: property.longitude,
-			boundaryJSON: property.boundary.geoJSON,
-			address: property.siteAddress,
-			city: property.siteAddressCity,
-			state: property.siteAddressState,
-			zip: property.siteAddressZip,
-			bedrooms: property.bedrooms,
-			bathrooms: property.bathrooms,
-			sqFt: property.sumBuildingSqFt.toLocaleString("en-US"),
-			yearBuilt: property.yearBuilt,
-			currentAVM: property.firstAmericanCurrentAVM,
-			avmLow: property.avmLow,
-			avmHigh: property.avmHigh,
-		};
+        if (!hideAVM || hideAVM == false || hideAVM == 0) {
+            if (data.currentAVM && data.currentAVM !== '') {
+                data.avm = data.currentAVM
+                delete data.currentAVM
+            } else if (!data.avmLow || data.avmLow !== '') {
+                data.avm = data.avmLow
+            } else if (!data.avmHigh || data.avmHigh !== '') {
+                data.avm = data.avmHigh
+            } else {
+                data.avm = `${data.avmLow} - ${data.avmHigh}`
+            }
+        }
 
-		if (!hideAVM || hideAVM == false || hideAVM == 0) {
-			if (data.currentAVM && data.currentAVM !== "") {
-				data.avm = data.currentAVM;
-				delete data.currentAVM;
-			} else if (!data.avmLow || data.avmLow !== "") {
-				data.avm = data.avmLow;
-			} else if (!data.avmHigh || data.avmHigh !== "") {
-				data.avm = data.avmHigh;
-			} else {
-				data.avm = `${data.avmLow} - ${data.avmHigh}`;
-			}
-		}
+        return data
+    }
+}
 
-		return data;
-	}
-};
+const get_property = async (params) => {
+    var agent_id = params.agentID || params.agent || params.agent_id || null
 
-const get_property = async params => {
-	var agent_id = params.agentID || params.agent || params.agent_id || null;
+    if (agent_id) {
+        var property = genie_get_property_from_id(params.property_id, agent_id)
 
-	if (agent_id) {
-		var property = genie_get_property_from_id(params.property_id, agent_id);
+        if (property) {
+            return success({ property })
+        }
+    }
 
-		if (property) {
-			return success({ property });
-		}
-	}
+    return error(['No property found'])
+}
 
-	return error(["No property found"]);
-};
+const get_short_data = async (params) => {
+    const r = getShortData(
+        parseInt(params.shortId),
+        params.token,
+        params.agentId || null
+    )
 
-const get_short_data = async params => {
-	const r = getShortData(
-		parseInt(params.shortId),
-		params.token,
-		params.agentId || null
-	);
+    return r ? success({ property: r }) : error('No short data found')
+}
 
-	return r ? success({ property: r }) : error("No short data found");
-};
+const get_qr_property = async (params) => {
+    var property = genie_get_qr_property(params.qrID, params.token)
 
-const get_qr_property = async params => {
-	var property = genie_get_qr_property(params.qrID, params.token);
+    return property ? success({ property }) : error('No QR property found')
+}
 
-	return property ? success({ property }) : error("No QR property found");
-};
+const add_lead = async (params) => {
+    const agentId = params.agentId || params.agent || null
 
-const add_lead = async params => {
-	const agentId = params.agentId || params.agent || null;
+    if (agentId) {
+        var args = {}
+        var keys = [
+            'genieTags',
+            'firstName',
+            'lastName',
+            'phoneNumber',
+            'email',
+            'emailAddress',
+            'phoneNumber',
+            'phone',
+            'referringUrl',
+            'note',
+            'areaId',
+            'propertyId',
+            'leadInquiryType',
+            'trackingData',
+        ]
 
-	if (agentId) {
-		var args = {};
-		var keys = [
-			"genieTags",
-			"firstName",
-			"lastName",
-			"phoneNumber",
-			"email",
-			"emailAddress",
-			"phoneNumber",
-			"phone",
-			"referringUrl",
-			"note",
-			"areaId",
-			"propertyId",
-			"leadInquiryType",
-			"trackingData",
-		];
+        let argsKey
+        for (var i = 0; i < keys.length; i++) {
+            var key = keys[i]
 
-		let argsKey;
-		for (var i = 0; i < keys.length; i++) {
-			var key = keys[i];
+            if (params.hasOwnProperty(key)) {
+                var value = null
 
-			if (params.hasOwnProperty(key)) {
-				var value = null;
+                switch (key) {
+                    case 'genieTags':
+                        argsKey = 'tags'
+                        value = params[key].split(',')
+                        break
 
-				switch (key) {
-					case "genieTags":
-						argsKey = "tags";
-						value = params[key].split(",");
-						break;
+                    case 'email':
+                        argsKey = 'emailAddress'
+                        break
 
-					case "email":
-						argsKey = "emailAddress";
-						break;
+                    case 'phone':
+                        argsKey = 'phoneNumber'
+                        break
 
-					case "phone":
-						argsKey = "phoneNumber";
-						break;
+                    default:
+                        argsKey = key
+                        break
+                }
 
-					default:
-						argsKey = key;
-						break;
-				}
+                args[argsKey] = value !== null ? value : params[key]
+            }
+        }
 
-				args[argsKey] = value !== null ? value : params[key];
-			}
-		}
+        if (params.hasOwnProperty('fullName')) {
+            var split = params.fullName.split(' ')
 
-		if (params.hasOwnProperty("fullName")) {
-			var split = params.fullName.split(" ");
+            if (split.length > 1) {
+                var last = split.pop()
 
-			if (split.length > 1) {
-				var last = split.pop();
+                args['lastName'] = last
+                args['firstName'] = split.join(' ')
+            } else {
+                args['firstName'] = params.fullName
+            }
+        }
 
-				args["lastName"] = last;
-				args["firstName"] = split.join(" ");
-			} else {
-				args["firstName"] = params.fullName;
-			}
-		}
+        if (params.hasOwnProperty('meta[message]')) {
+            args['note'] = 'Message: ' + params.meta[message]
+            delete params.meta[message]
+        } else {
+            args['note'] = args['note'] || ''
+        }
 
-		if (params.hasOwnProperty("meta[message]")) {
-			args["note"] = "Message: " + params.meta[message];
-			delete params.meta[message];
-		} else {
-			args["note"] = args["note"] || "";
-		}
+        var meta_keys = Object.keys(params).reduce(function (m, str) {
+            if (str && str.match(/meta\[(.*)\]/)) {
+                m.push(str.match(/meta\[(.*)\]/)[1])
+            }
+            return m
+        }, [])
 
-		var meta_keys = Object.keys(params).reduce(function (m, str) {
-			if (str && str.match(/meta\[(.*)\]/)) {
-				m.push(str.match(/meta\[(.*)\]/)[1]);
-			}
-			return m;
-		}, []);
+        for (var j = 0; j < meta_keys.length; j++) {
+            var key = meta_keys[j]
 
-		for (var j = 0; j < meta_keys.length; j++) {
-			var key = meta_keys[j];
+            if (!args.note) args.note = ''
 
-			if (!args.note) args.note = "";
+            args['note'] += `\n${key}: ${params[`meta[${key}]`]}`
+        }
 
-			args["note"] += `\n${key}: ${params[`meta[${key}]`]}`;
-		}
+        return success({ xLead: 'create', key: 1001, ...args })
+        if (Object.keys(args).length > 0) {
+            const lead = await createLead(agentId, args)
 
-		if (Object.keys(args).length > 0) {
-			const lead = await createLead(agentId, args);
+            return success(lead)
+        } else {
+            return error('No lead arguments')
+        }
+    } else {
+        return error('Missing agent ID')
+    }
+}
 
-			return success(lead);
-		} else {
-			return error("No lead arguments");
-		}
-	} else {
-		return error("Missing agent ID");
-	}
-};
+const update_lead = async (params) => {
+    var agentId = params.agentId || params.agentID || params.agent || null
 
-const update_lead = async params => {
-	var agentId = params.agentId || params.agentID || params.agent || null;
+    if (agentId) {
+        var args = {}
+        var keys = [
+            'genieLeadId',
+            'email',
+            'phone',
+            'note',
+            'emailAddress',
+            'phoneNumber',
+            'genieTags',
+        ]
 
-	if (agentId) {
-		var args = {};
-		var keys = [
-			"genieLeadId",
-			"email",
-			"phone",
-			"note",
-			"emailAddress",
-			"phoneNumber",
-			"genieTags",
-		];
+        for (var i = 0; i < keys.length; i++) {
+            var key = keys[i]
 
-		for (var i = 0; i < keys.length; i++) {
-			var key = keys[i];
+            if (params.hasOwnProperty(key)) {
+                var value = null
 
-			if (params.hasOwnProperty(key)) {
-				var value = null;
+                switch (key) {
+                    case 'genieTags':
+                        argsKey = 'tags'
+                        value = params[key].split(',')
+                        break
 
-				switch (key) {
-					case "genieTags":
-						argsKey = "tags";
-						value = params[key].split(",");
-						break;
+                    case 'emailAddress':
+                        argsKey = 'emailAddress'
+                        break
 
-					case "emailAddress":
-						argsKey = "emailAddress";
-						break;
+                    case 'phoneNumber':
+                        argsKey = 'phone'
+                        break
 
-					case "phoneNumber":
-						argsKey = "phone";
-						break;
+                    default:
+                        argsKey = key
+                        break
+                }
 
-					default:
-						argsKey = key;
-						break;
-				}
-
-				args[argsKey] = value !== null ? value : params[key];
-			}
-		}
-
-		if (Object.keys(args).length > 0) {
-			return success(updateLead(agentId, args));
-		} else {
-			return error("No lead arguments");
-		}
-	} else {
-		return error("Missing agent ID");
-	}
-};
+                args[argsKey] = value !== null ? value : params[key]
+            }
+        }
+        return success({ xLead: 'update', key: 1001, ...args })
+        if (Object.keys(args).length > 0) {
+            return success(updateLead(agentId, args))
+        } else {
+            return error('No lead arguments')
+        }
+    } else {
+        return error('Missing agent ID')
+    }
+}
 
 const address_search = async params => {
 	const r = await getAssessorPropertiesDetail("1|" + params.place_id);
