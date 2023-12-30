@@ -89,7 +89,8 @@ Version:	1.1
 						<script>
 							<xsl:value-of select="concat('const polygon =', //area[1]/geojson,';' )" />
 							<xsl:value-of select="concat('const options = { mapStyle: `', //output/@mapStyle,'`, zoom: 17 };' )" />
-							<xsl:value-of disable-output-escaping="yes" select="'document.addEventListener( `genie-landing-loaded`, function() { return window.gg.makeMap( `genie-map`, options, { geoJson: polygon } ); })'" />
+<xsl:value-of disable-output-escaping="yes" select="'document.addEventListener( `genie-landing-loaded`, function() { return window.gHub.makeMap( `genie-map`, options, { geoJson: polygon } ); })'" />
+
 						</script>
 						<div id="genie-map" style="width:100vw;height:100%;position:absolute;top:0;">
 							<xsl:comment />

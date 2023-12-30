@@ -43,7 +43,8 @@
 				</link>
 
 				<script>
-					<xsl:value-of select="concat( 'window.ghub = { SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
+<xsl:value-of select="concat( 'window.gHub = { SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
+
 				</script>
 
 				<script>

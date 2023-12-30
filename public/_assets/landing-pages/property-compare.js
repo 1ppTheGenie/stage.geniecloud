@@ -1,7 +1,7 @@
 document.addEventListener(`genie-landing-loaded`, async () => {
-	const lpData = await gg.getLandingPageData();
+	const lpData = await window.gHub.getLandingPageData();
 
-	if (gg.makeMap) {
+	if (window.gHub.makeMap) {
 		const listings = [
 			{ caption: "1", color: "#F00", lat: pCompare.lat, lng: pCompare.lng },
 			{
@@ -11,9 +11,9 @@ document.addEventListener(`genie-landing-loaded`, async () => {
 				lng: lpData.longitude,
 			},
 		];
-		const options = { fitMarkers: true, mapStyle: window.ghub.mapStyle };
+		const options = { fitMarkers: true, mapStyle: window.gHub.mapStyle };
 
-		gg.makeMap("compare-header-map", options, { listings: listings });
+		window.gHub.makeMap("compare-header-map", options, { listings: listings });
 
 		document.querySelector("section.banner-section").style.backgroundImage = "";
 
@@ -21,7 +21,7 @@ document.addEventListener(`genie-landing-loaded`, async () => {
 			typeof lpData.boundaryJSON !== "undefined" &&
 			lpData.boundaryJSON !== ""
 		) {
-			const leadMap = await gg.makeMap("lead-property-map", {});
+			const leadMap = await window.gHub.makeMap("lead-property-map", {});
 
 			document.getElementById("lead-property-map").style.filter = "";
 
@@ -32,6 +32,10 @@ document.addEventListener(`genie-landing-loaded`, async () => {
 				},
 			}).addTo(leadMap);
 		}
+	}
+
+	if (window.gHub) {
+		window.gHub.leadId = lpData?.lead?.leadId;
 	}
 
 	document.querySelectorAll("[data-lead]").forEach(el => {

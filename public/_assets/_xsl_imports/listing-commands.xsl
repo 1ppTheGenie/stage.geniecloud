@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0">
-<xsl:include href="global-variables.xsl" />
-
+	<xsl:include href="global-variables.xsl" />
 
 	<xsl:preserve-space elements="*" />
 
@@ -15,8 +14,8 @@
 			</xsl:attribute>
 
 			<script>
-				<xsl:value-of select="concat( 'window.gg = {}; let ggSettings = { agentId:`', //output/@userId, '`, areaId:', number(//area/id), ', mlsNumber:`', //single/mlsNumber, '`, mlsId:`', //single/mlsId, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(//output/@hideAVM='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', lead: { propertyId:', number(//lead/property_id), ', firstName:`', //lead/property/firstName, '`, lastName:`', //lead/property/lastName, '`, email:`', //lead/property/emailAddress, '`}};' )" />
-				<xsl:value-of select="concat( 'window.ghub = { SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, mapStyle: `satellite-v9`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
+				<xsl:value-of select="concat( 'const ghUrl = `, //output/@siteUrl, `/_assets/landing-pages/dist/', //output/@version, '`' )" />
+				<xsl:value-of select="concat( 'window.gHub = { buildUrl: filename =>  `${ghUrl}/${filename}`, agentId:`', //output/@userId, '`, areaId:', number(//area/id), ', mlsNumber:`', //single/mlsNumber, '`, mlsId:`', //single/mlsId, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(string(//output/@hideAVM)='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, mapStyle: `satellite-v9`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
 			</script>
 
 			<xsl:call-template name="listing-command" />

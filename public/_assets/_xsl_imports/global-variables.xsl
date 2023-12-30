@@ -135,14 +135,13 @@
 	<!-- $propertyType -->
 	<xsl:variable name="propertyType">
 		<xsl:choose>
-			<xsl:when test="//output/@propertyCaption!=''">
+			<xsl:when test="string(//output/@propertyCaption)!=''">
 				<xsl:value-of select="//output/@propertyCaption" />
-
 			</xsl:when>
-			<xsl:when test="(//single/type = 'Condo') or (//single/type = '' and number(//areas/area[1]/statistics/@propertyType) = 1)">
+			<xsl:when test="(//single/type = 'Condo') or ( string(//single/type) = '' and number(//areas/area[1]/statistics/@propertyType) = 1 )">
 				<xsl:text>Condos</xsl:text>
 			</xsl:when>
-			<xsl:when test="(//single/type = 'Townhome') or (//single/type = '' and number(//areas/area[1]/statistics/@propertyType) = 9)">
+			<xsl:when test="(//single/type = 'Townhome') or ( string(//single/type) = '' and number(//areas/area[1]/statistics/@propertyType) = 9 )">
 				<xsl:text>Townhomes</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
@@ -151,16 +150,33 @@
 		</xsl:choose>
 	</xsl:variable>
 
+	<!-- $longPropertyType -->
+	<xsl:variable name="longPropertyType">
+		<xsl:choose>
+			<xsl:when test="string(//output/@longPropertyCaption)!=''">
+				<xsl:value-of select="//output/@longPropertyCaption" />
+			</xsl:when>
+			<xsl:when test="(//single/type = 'Condo') or ( string(//single/type) = '' and number(//areas/area[1]/statistics/@propertyType) = 1 )">
+				<xsl:text>Condos</xsl:text>
+			</xsl:when>
+			<xsl:when test="(//single/type = 'Townhome') or ( string(//single/type) = '' and number(//areas/area[1]/statistics/@propertyType) = 9 )">
+				<xsl:text>Townhomes</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:text>Detached Homes</xsl:text>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+
+
 	<!-- $singularPropertyType -->
 	<xsl:variable name="singularPropertyType">
 		<xsl:choose>
 			<xsl:when test="//output/@propertyCaptionSingular!='' and //output/@propertyCaptionSingular!='null'">
 				<xsl:value-of select="//output/@propertyCaptionSingular" />
-
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="substring( $propertyType, 1, string-length($propertyType) - 1 )" />
-
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>

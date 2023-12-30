@@ -24,8 +24,7 @@
 				transform: translateY(6%);
 				font-size: 150%!important;
 			}
- 			.stat-icon svg { fill:var(--theme-body-background);}'"
-			/>
+ 			.stat-icon svg { fill:var(--theme-body-background);}'" />
 		</style>
 
 		<image x="1%" y="2%" width="60%" height="70%" preserveAspectRatio="xMidYMid slice">
@@ -75,7 +74,6 @@
 				<xsl:text>&#160;</xsl:text>
 				<tspan class="upper bold">
 					<xsl:call-template name="soldListed" />
-
 				</tspan>
 			</text>
 			<text x="1%" y="12%">
@@ -85,21 +83,17 @@
 			</text>
 			<text x="1%" y="16%" class="large heading" data-max-width="35%">
 				<xsl:call-template name="listing-address-line-one" />
-
 			</text>
 			<text x="1%" y="21%" class="large heading" data-max-width="35%">
 				<xsl:call-template name="listing-address-line-two" />
-
 			</text>
 			<text x="1%" y="31%" class="medium bold" style="dominant-baseline: auto;">
 				<xsl:call-template name="soldListedPrice" />
-
 			</text>
 			<text x="1%" y="34%" class="heading">
-				<tspan>Type:  </tspan>
+				<tspan>Type: </tspan>
 				<tspan>
-					<xsl:value-of select="//single/type" />
-
+					<xsl:value-of select="$singularPropertyType" />
 				</tspan>
 			</text>
 
@@ -351,5 +345,5 @@
 		</g>
 		<xsl:call-template name="copyright" />
 	</xsl:template>
-	
+
 </xsl:stylesheet>

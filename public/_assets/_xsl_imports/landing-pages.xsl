@@ -14,8 +14,8 @@
 				<xsl:value-of select="concat( 'genie-landing-page ', //output/@theme, ' asset-v', //output/@assetVersion )" />
 			</xsl:attribute>
 			<script>
-				<xsl:value-of select="concat( 'window.gg = {}; let ggSettings = { agentId:`', //output/@userId, '`, areaId:', number(//area/id), ', leadAreaId:`', //output/@leadAreaId, '`, mlsNumber:`', //single/mlsNumber, '`, mlsId:`', //single/mlsId, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(string(//output/@hideAVM)='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', lead: { propertyId:', number(//lead/property_id), ', firstName:`', //lead/property/firstName, '`, lastName:`', //lead/property/lastName, '`, email:`', //lead/property/emailAddress, '`}};' )" />
-				<xsl:value-of select="concat( 'window.ghub = { SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, mapStyle: `satellite-v9`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
+				<xsl:value-of select="concat( 'const ghUrl = `', //output/@siteUrl, '_assets/landing-pages/dist/', //output/@version, '`; ' )" />
+				<xsl:value-of select="concat( 'window.gHub = { buildUrl: function( filename ) { return `${ghUrl}/${filename}`; }, agentId:`', //output/@userId, '`, areaId:', number(//area/id), ', mlsNumber:`', //single/mlsNumber, '`, mlsId:`', //single/mlsId, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(string(//output/@hideAVM)='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, mapStyle: `satellite-v9`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
 			</script>
 			<xsl:call-template name="landing-page" />
 		</html>
@@ -26,6 +26,7 @@
 		<xsl:param name="default" />
 		<xsl:param name="data-msg" select="'false'" />
 		<xsl:param name="data-element" select="'p'" />
+
 		<xsl:if test="//output/@isEditing">
 			<xsl:attribute name="data-element">
 				<xsl:value-of select="$data-element" />
@@ -45,6 +46,7 @@
 				</xsl:attribute>
 			</xsl:if>
 		</xsl:if>
+
 		<xsl:choose>
 			<xsl:when test="//overrides/*[name()=$id][1]">
 				<xsl:value-of select="//overrides/*[name()=$id][1]" />
@@ -437,9 +439,6 @@
 				<xsl:with-param name="includeFooterCSS" select="$includeFooterCSS" />
 			</xsl:call-template>
 			<script>
-				<xsl:value-of select="concat( 'window.gg.defaults = { createLinkLead: ', number(//output/@createLinkLead), ', leadPropertyID: `', //lead/property/propertyID, '`, fullName: `', //lead/property/ownerDisplayName, '`, notePrompt: `', $leadNotePrompt, '`, trackingData: { utmSource: `', $defaultUtmSource, '`, utmCampaign:`', $defaultUtmCampaign, '`} };')" />
-			</script>
-			<script>
 				<xsl:value-of select="'(function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)}; h._hjSettings={hjid:1194877,hjsv:6}; a=o.getElementsByTagName(`head`)[0]; r=o.createElement(`script`);r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r); })(window,document,`https://static.hotjar.com/c/hotjar-`,`.js?sv=`);'" />
 			</script>
 			<script>
@@ -655,14 +654,15 @@
 				</button>
 			</div>
 			<script>
-				<xsl:value-of select="'window.gg.galleryImages=['" />
+				<xsl:value-of select="'window.gHub.galleryImages=['" />
+
 				<xsl:for-each select="//single/images/image">
 					<xsl:value-of select="concat( &quot;'&quot;, @src, &quot;', &quot; )" />
 				</xsl:for-each>
 				<xsl:value-of select="']; 
 				
 				document.addEventListener(`genie-landing-loaded`, function () {
-					window.gg.galleryButton( 
+window.gHub.galleryButton( 
 						document.querySelector(`.property-image-show-btn button`), 
 						document.getElementById(`property-gallery`) 
 					); 
