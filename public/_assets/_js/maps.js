@@ -1,12 +1,13 @@
-gg.getCssVar = (name, el) => getComputedStyle(el ?? document.body).getPropertyValue(name);
+window.gHub.getCssVar = (name, el) =>
+	getComputedStyle(el ?? document.body).getPropertyValue(name);
 
-gg.hex2rgba = (hex, alpha = 1) => {
+window.gHub.hex2rgba = (hex, alpha = 1) => {
 	const re = hex.length === 6 || hex.length === 8 ? /\w\w/g : /\w/g;
 	const [r, g, b] = hex.match(re).map(x => parseInt(x, 16));
 	return `rgba(${r},${g},${b},${alpha})`;
 };
 
-gg.circleURI = (color, caption = "", size = 12) => {
+window.gHub.circleURI = (color, caption = "", size = 12) => {
 	const text =
 		caption === ""
 			? ""
@@ -38,7 +39,7 @@ gg.circleURI = (color, caption = "", size = 12) => {
 	return "data:image/svg+xml," + encodeURIComponent(svg);
 };
 
-gg.flagURI = (color, price) => {
+window.gHub.flagURI = (color, price) => {
 	const svg = `
 	<svg xmlns="http://www.w3.org/2000/svg" width="11" height="7.5" viewBox="0 0 110 75">
 		<defs>
@@ -73,7 +74,7 @@ function drawMap(
 	scale = 0.5
 ) {
 	if (typeof L !== "undefined") {
-		if (typeof gg.map === "undefined") {
+		if (typeof window.gHub.map === "undefined") {
 			const mapboxTiles = L.tileLayer(
 				`https://api.mapbox.com/styles/v1/mapbox/${map_type}/tiles/{z}/{x}/{y}?access_token=${accessToken}`,
 				{
@@ -83,7 +84,7 @@ function drawMap(
 					zoomOffset: -1,
 				}
 			);
-			gg.map = L.map(map_id, {
+			window.gHub.map = L.map(map_id, {
 				center: [center.lat, center.lng],
 				zoom: 13,
 				zoomControl: false,
@@ -91,24 +92,24 @@ function drawMap(
 				layers: [mapboxTiles],
 				attributionControl: false,
 			});
-			console.log(gg.map);
+			console.log(window.gHub.map);
 		}
 
 		const cleanDirtyMap = () => {
-			gg.map.invalidateSize();
+			window.gHub.map.invalidateSize();
 
 			if (window.genieLeafletCallback) {
-				window.genieLeafletCallback(L, gg.map);
+				window.genieLeafletCallback(L, window.gHub.map);
 			} else {
-				gg.map.panTo(gg.map.getCenter());
+				window.gHub.map.panTo(window.gHub.map.getCenter());
 			}
 		};
-		gg.map.addEventListener("transitionend", cleanDirtyMap);
+		window.gHub.map.addEventListener("transitionend", cleanDirtyMap);
 		const resizeObserver = new ResizeObserver(cleanDirtyMap);
 		resizeObserver.observe(document.getElementById(map_id));
 
 		if (window.genieLeafletCallback) {
-			window.genieLeafletCallback(L, gg.map);
+			window.genieLeafletCallback(L, window.gHub.map);
 		}
 
 		if (polygon) {
@@ -121,9 +122,9 @@ function drawMap(
 				color: "var(--geo-border)",
 				weight: 4,
 			});
-			areaOutline.addTo(gg.map);
+			areaOutline.addTo(window.gHub.map);
 			try {
-				gg.map.fitBounds(areaOutline.getBounds());
+				window.gHub.map.fitBounds(areaOutline.getBounds());
 			} catch {
 				if (listings) {
 					let lat = 0,
@@ -132,7 +133,7 @@ function drawMap(
 						lat += parseFloat(listings[i].lat);
 						lng += parseFloat(listings[i].lng);
 					}
-					gg.map.panTo(
+					window.gHub.map.panTo(
 						new L.LatLng(lat / listings.length, lng / listings.length)
 					);
 				}
@@ -140,12 +141,16 @@ function drawMap(
 		}
 
 		if (window.genieIsEditing) {
-			gg.map.on("moveend", function (ev) {
-				const center = gg.map.getCenter();
+			window.gHub.map.on("moveend", function (ev) {
+				const center = window.gHub.map.getCenter();
 				const msg = {
 					type: "social-post",
 					name: "mapBounds",
-					value: { zoom: gg.map.getZoom(), lat: center.lat, lon: center.lng },
+					value: {
+						zoom: window.gHub.map.getZoom(),
+						lat: center.lat,
+						lon: center.lng,
+					},
 					default: null,
 				};
 				window.parent.postMessage(msg, "*");
@@ -170,9 +175,9 @@ function drawMap(
 					case "flag":
 						size = [55 * scale, 38 * scale];
 						anchor = [27 * scale, 38 * scale];
-						datatURI = window.gg.flagURI(
+						datatURI = window.gHub.flagURI(
 							color,
-							window.gg.currency(
+							window.gHub.currency(
 								parseInt(
 									listings[i].state.toLowerCase() == "sold"
 										? listings[i].salePrice
@@ -185,16 +190,20 @@ function drawMap(
 					case "dot":
 						size = [15, 15];
 						anchor = [9, 9];
-						datatURI = gg.circleURI(color, "", 8);
+						datatURI = window.gHub.circleURI(color, "", 8);
 						break;
 
 					default:
 						size = [30, 30];
 						anchor = [12, 12];
-						datatURI = gg.circleURI(color, listings[i].caption || i + 1, 12);
+						datatURI = window.gHub.circleURI(
+							color,
+							listings[i].caption || i + 1,
+							12
+						);
 				}
 
-				var icon = L.icon({
+				const icon = L.icon({
 					iconUrl: datatURI,
 					iconSize: size,
 					iconAnchor: anchor,
@@ -202,7 +211,7 @@ function drawMap(
 
 				L.marker([listings[i].lat, listings[i].lng], {
 					icon: icon,
-				}).addTo(gg.map);
+				}).addTo(window.gHub.map);
 
 				cleanDirtyMap();
 			}
@@ -210,7 +219,14 @@ function drawMap(
 	}
 }
 
-gg.addListingPopup = (lat, lon, imageUrl, pinX, pinY, popupWidth = 200) => {
+window.gHub.addListingPopup = (
+	lat,
+	lon,
+	imageUrl,
+	pinX,
+	pinY,
+	popupWidth = 200
+) => {
 	const popupHeight = popupWidth * (500 / 600);
 
 	window.genieLeafletCallback = function (L, map) {
@@ -229,12 +245,12 @@ gg.addListingPopup = (lat, lon, imageUrl, pinX, pinY, popupWidth = 200) => {
 		L.marker([lat, lon], { icon: svgIcon }).addTo(map);
 
 		// arrowPoint is an {x%,y%} object of where we want the tip of the arrow relative to the top-left of the map.
-		const arrowPoint = gg.SVGPercentToUnits(pinX, pinY);
+		const arrowPoint = window.gHub.SVGPercentToUnits(pinX, pinY);
 
 		const moveMapToArrow = function () {
-			const propertyPixel = gg.map.latLngToContainerPoint([lat, lon]);
+			const propertyPixel = window.gHub.map.latLngToContainerPoint([lat, lon]);
 
-			gg.map.panBy([
+			window.gHub.map.panBy([
 				propertyPixel.x - arrowPoint.x,
 				propertyPixel.y - arrowPoint.y,
 			]);
