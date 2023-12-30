@@ -180,6 +180,15 @@ div.section div.section-grid div.post div.overlap {
 	transition: transform ease-in-out 0.25s, box-shadow ease-in-out 0.25s;
 }
 
+@media (max-width: 1024px) {
+	div.section div.section-grid div.post img,
+	div.section div.section-grid div.post svg,
+	div.section div.section-grid div.post div.overlap {
+		width: 12.5vw;
+		height: 25vw;
+	}
+}
+
 div.section div.section-grid div.post img:hover {
 	transform: scale(1.1);
 	box-shadow: #00000069 0 0 12px 6px;

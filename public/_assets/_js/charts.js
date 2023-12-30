@@ -1,11 +1,14 @@
-const genieChart = {};
+window.genieChart = {};
 
-genieChart.merge = (target, source) => {
+window.genieChart.merge = (target, source) => {
 	// Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
 	for (const key of Object.keys(source)) {
 		try {
 			if (source[key] instanceof Object)
-				Object.assign(source[key], genieChart.merge(target[key], source[key]));
+				Object.assign(
+					source[key],
+					window.genieChart.merge(target[key], source[key])
+				);
 		} catch {}
 	}
 
@@ -14,21 +17,21 @@ genieChart.merge = (target, source) => {
 	return target;
 };
 
-genieChart.number = value =>
+window.genieChart.number = value =>
 	new Intl.NumberFormat("en-US", {
 		style: "decimal",
 		maximumFractionDigits: 0,
 		minimumFractionDigits: 0,
 	}).format(value);
 
-genieChart.percent = (value, index, values) =>
+window.genieChart.percent = (value, index, values) =>
 	new Intl.NumberFormat("en-US", {
 		style: "percent",
 		maximumFractionDigits: 0,
 		minimumFractionDigits: 0,
 	}).format(value);
 
-genieChart.dollar = (value, index, values) =>
+window.genieChart.dollar = (value, index, values) =>
 	new Intl.NumberFormat("en-US", {
 		style: "currency",
 		currency: "USD",
@@ -37,7 +40,7 @@ genieChart.dollar = (value, index, values) =>
 		notation: "compact",
 	}).format(value);
 
-genieChart.dollarRound = value =>
+window.genieChart.dollarRound = value =>
 	new Intl.NumberFormat("en-US", {
 		style: "currency",
 		currency: "USD",
@@ -46,7 +49,7 @@ genieChart.dollarRound = value =>
 		notation: "compact",
 	}).format(value);
 
-genieChart.draw = (width, height, overrides, chartDiv = "#svgChart") => {
+window.genieChart.draw = (width, height, overrides, chartDiv = "#svgChart") => {
 	let containerWidth, containerHeight;
 	let svg = document.querySelector("svg[viewBox]");
 	if (svg) {
@@ -94,7 +97,7 @@ genieChart.draw = (width, height, overrides, chartDiv = "#svgChart") => {
 		],
 	};
 
-	const options = genieChart.merge(defaults, overrides.options);
+	const options = window.genieChart.merge(defaults, overrides.options);
 
 	const paint = () => new Chartist.Line(chartDiv, overrides.data, options);
 	paint();
@@ -103,9 +106,9 @@ genieChart.draw = (width, height, overrides, chartDiv = "#svgChart") => {
 	resizeObserver.observe(svg);
 };
 
-const initCharts = () => {
-	if (gg) {
-		gg.charts = genieChart;
+window.genieChart.initCharts = () => {
+	if (window.gHub) {
+		window.gHub.charts = genieChart;
 	}
 
 	/**
@@ -197,7 +200,11 @@ const initCharts = () => {
 		}
 
 		function hasClass(element, className) {
-			return (" " + element.getAttribute("class") + " ").indexOf(" " + className + " ") > -1;
+			return (
+				(" " + element.getAttribute("class") + " ").indexOf(
+					" " + className + " "
+				) > -1
+			);
 		}
 
 		function next(element, className) {
@@ -218,7 +225,9 @@ const initCharts = () => {
 				var tooltipSelector = options.pointClass;
 				if (chart.constructor.name == Chartist.Bar.prototype.constructor.name) {
 					tooltipSelector = "ct-bar";
-				} else if (chart.constructor.name == Chartist.Pie.prototype.constructor.name) {
+				} else if (
+					chart.constructor.name == Chartist.Pie.prototype.constructor.name
+				) {
 					// Added support for donut graph
 					if (chart.options.donut) {
 						tooltipSelector = "ct-slice-donut";
@@ -255,7 +264,8 @@ const initCharts = () => {
 					var $point = event.target;
 					var tooltipText = "";
 
-					var isPieChart = chart instanceof Chartist.Pie ? $point : $point.parentNode;
+					var isPieChart =
+						chart instanceof Chartist.Pie ? $point : $point.parentNode;
 					var seriesName = isPieChart
 						? $point.parentNode.getAttribute("ct:meta") ||
 						  $point.parentNode.getAttribute("ct:series-name")
@@ -305,7 +315,8 @@ const initCharts = () => {
 										value.replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,");
 								}
 							}
-							value = '<span class="chartist-tooltip-value">' + value + "</span>";
+							value =
+								'<span class="chartist-tooltip-value">' + value + "</span>";
 							tooltipText += value;
 						}
 					}
@@ -341,7 +352,11 @@ const initCharts = () => {
 						var left = event.pageX - box.left - window.pageXOffset;
 						var top = event.pageY - box.top - window.pageYOffset;
 
-						if (true === options.anchorToPoint && event.target.x2 && event.target.y2) {
+						if (
+							true === options.anchorToPoint &&
+							event.target.x2 &&
+							event.target.y2
+						) {
 							anchorX = parseInt(event.target.x2.baseVal.value);
 							anchorY = parseInt(event.target.y2.baseVal.value);
 						}
@@ -444,7 +459,7 @@ const initCharts = () => {
 		};
 	})(Chartist);
 
-	return genieChart;
+	return window.genieChart;
 };
 
-document.addEventListener("DOMContentLoaded", initCharts);
+document.addEventListener("DOMContentLoaded", window.genieChart.initCharts);
