@@ -247,15 +247,14 @@ export const renderer = async params => {
 					}
 				}
 
-				/*
-				if (render.sourceS3Key) {
+				if (render.sourceS3Key && !render.isDebug) {
 					await s3Client.send(
 						new DeleteObjectCommand({
 							Bucket: render.sourceS3Bucket,
 							Key: render.sourceS3Key,
 						})
 					);
-				}*/
+				}
 				/// just return the response otherwise
 			} else {
 				failures.push({
@@ -303,7 +302,7 @@ export const renderer = async params => {
 			}
 		}
 	}
-	//}
+	
 
 	return response;
 };

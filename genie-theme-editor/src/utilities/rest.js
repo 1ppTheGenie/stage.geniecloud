@@ -7,7 +7,7 @@ const updateTheme = async data => await apiCall(`update-theme`, data, "POST");
 export { getThemes, updateTheme };
 
 async function apiCall(endpoint, data = null, method = "POST") {
-	const url = `${window.ghub.site_url}/wp-json/${GENIE}${endpoint}`;
+	const url = `${window.gHub.site_url}/wp-json/${GENIE}${endpoint}`;
 
 	const headers = new Headers();
 	headers.append("Content-Type", "application/json");

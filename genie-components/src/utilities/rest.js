@@ -92,7 +92,7 @@ export {
 };
 
 async function apiCall(endpoint, data = null, method = "GET") {
-	let url = `${window.ghub.apiUrl}${GENIE}${endpoint}`;
+	let url = `${window.gHub.apiUrl}${GENIE}${endpoint}`;
 
 	const headers = new Headers();
 	headers.append("Content-Type", "application/json");

@@ -80,10 +80,8 @@ export const usePagination = (size = 10, page = 1) => {
 };
 
 export const useSettings = settingsContext => {
-	const globalSettings =
-		typeof window.ggSettings !== "undefined" ? window.ggSettings : {};
-
-	let settings = { ...globalSettings, ...settingsContext };
+	const globalSettings = typeof window.gHub !== "undefined" ? window.gHub : {};
+	const settings = { ...globalSettings, ...settingsContext };
 
 	onMount(() => {
 		setSharedEmbedStore({ period: parseInt(settingsContext.areaPeriod) });

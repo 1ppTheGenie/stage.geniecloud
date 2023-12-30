@@ -1,7 +1,7 @@
 export const initAutocomplete = callback => {
 	if (!document.getElementById("google-maps-script")) {
 		var js = document.createElement("script");
-		js.src = `https://maps.googleapis.com/maps/api/js?key=${window.ghub.googleKey}&libraries=places`;
+		js.src = `https://maps.googleapis.com/maps/api/js?key=${window.gHub.googleKey}&libraries=places`;
 		js.id = "google-maps-script";
 		js.onload = () => callback();
 
@@ -42,10 +42,10 @@ export const initMaps = async () => {
 export const buildMap = (container, options = {}) => {
 	if (window.L) {
 		const center = options.center || { lat: 32.715, lng: -117.1611 };
-		const mapStyle = options.mapStyle || window.ghub.mapStyle;
+		const mapStyle = options.mapStyle || window.gHub.mapStyle;
 
 		const mapboxTiles = window.L.tileLayer(
-			`https://api.mapbox.com/styles/v1/mapbox/${mapStyle}/tiles/{z}/{x}/{y}?access_token=${window.ghub.mapboxKey}`,
+			`https://api.mapbox.com/styles/v1/mapbox/${mapStyle}/tiles/{z}/{x}/{y}?access_token=${window.gHub.mapboxKey}`,
 			{
 				attribution:
 					'&copy; <a href="https://www.mapbox.com/feedback/">Mapbox</a>',

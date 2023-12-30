@@ -5,7 +5,6 @@ import {
 	createEffect,
 	createResource,
 	createRoot,
-	useContext,
 } from "solid-js";
 /* prettier-ignore */
 import { getAreaData, getAreaMonthly, getAreaProperties } from "@/utilities/";
@@ -29,41 +28,35 @@ export const propertyTypeCaption = (type, count = 0, abbr = false) => {
 	return caption;
 };
 
-const areaId = ggSettings.areaId;
-const agentId = ggSettings.agentId;
-
-const defaultPropertyType = Math.max(
-	parseInt(
-		(typeof ggSettings !== "undefined" && ggSettings.propertyType) || 0,
-		10
-	),
-	0
-);
-
-const defaultPeriod = parseInt(
-	typeof ggSettings !== "undefined" ? ggSettings.areaPeriod ?? 6 : 6,
-	10
-);
+const areaId = window.gHub.areaId;
+const agentId = window.gHub.agentId;
 
 export const [sharedEmbedStore, setSharedEmbedStore] = createStore({
-	period: defaultPeriod,
-	propertyType: defaultPropertyType,
+	period: parseInt(window?.gHub?.areaPeriod ?? 6, 10),
+	propertyType: parseInt(window?.gHub?.propertyType ?? 0, 10),
 });
 
-const [area, areaMonthly, areaListings, setPeriod] = createRoot(() => {
-	const [period, setPeriod] = createSignal(sharedEmbedStore.period);
-	const [area] = createResource(period, p =>
-		getAreaData({ areaId, agentId, areaPeriod: p })
-	);
-	const [areaMonthly] = createResource(areaId, aID =>
-		getAreaMonthly({ areaId: aID, agentId })
-	);
-	const [areaListings] = createResource(
-		period,
-		async p => await getAreaProperties(areaId, p, agentId)
-	);
-
-	return [area, areaMonthly, areaListings, setPeriod];
+export const [listingsStore, setListingsStore] = createStore({
+	loading: true,
+	listings: [],
+	get active() {
+		return [
+			this.listings.reduce(countReducer([1], 0), 0),
+			this.listings.reduce(countReducer([1], 1), 0),
+		];
+	},
+	get sold() {
+		return [
+			this.listings.reduce(countReducer([2], 0), 0),
+			this.listings.reduce(countReducer([2], 1), 0),
+		];
+	},
+	get pending() {
+		return [
+			this.listings.reduce(countReducer([3, 4], 0), 0),
+			this.listings.reduce(countReducer([3, 4], 1), 0),
+		];
+	},
 });
 
 export const [areaDataStore, setAreaDataStore] = createStore({
@@ -134,38 +127,23 @@ export const [areaMonthlyStore, setAreaMonthlyStore] = createStore({
 	stats: {},
 });
 
-const countReducer =
-	(matchedStatus, matchedProperty) =>
-	(counter, { statusTypeID, propertyTypeID }) =>
-		matchedStatus.indexOf(statusTypeID) > -1 &&
-		propertyTypeID === matchedProperty
-			? (counter += 1)
-			: counter;
+const [area, areaMonthly, areaListings, setPeriod] = createRoot(() => {
+	const [period, setPeriod] = createSignal(sharedEmbedStore.period);
+	const [area] = createResource(period, async p => {
+		if (!isNaN(p)) {
+			return await getAreaData({ areaId, agentId, areaPeriod: p });
+		}
+	});
+	const [areaMonthly] = createResource(
+		areaId,
+		async aID => await getAreaMonthly({ areaId: aID, agentId })
+	);
+	const [areaListings] = createResource(period, async p => {
+		if (!isNaN(p)) {
+			return await getAreaProperties(areaId, p, agentId);
+		}
+	});
 
-export const [listingsStore, setListingsStore] = createStore({
-	loading: true,
-	listings: [],
-	get active() {
-		return [
-			this.listings.reduce(countReducer([1], 0), 0),
-			this.listings.reduce(countReducer([1], 1), 0),
-		];
-	},
-	get sold() {
-		return [
-			this.listings.reduce(countReducer([2], 0), 0),
-			this.listings.reduce(countReducer([2], 1), 0),
-		];
-	},
-	get pending() {
-		return [
-			this.listings.reduce(countReducer([3, 4], 0), 0),
-			this.listings.reduce(countReducer([3, 4], 1), 0),
-		];
-	},
-});
-
-createRoot(() => {
 	createEffect(() => {
 		setPeriod(sharedEmbedStore.period);
 		setAreaDataStore({ loading: true, areaPeriod: sharedEmbedStore.period });
@@ -183,7 +161,7 @@ createRoot(() => {
 	});
 
 	createEffect(() => {
-		if (!area.loading) {
+		if (!area.loading && typeof area() !== "undefined") {
 			setAreaDataStore({
 				loading: false,
 				areaName: area().areaName,
@@ -194,7 +172,7 @@ createRoot(() => {
 	});
 
 	createEffect(() => {
-		if (!areaMonthly.loading) {
+		if (!areaMonthly.loading && typeof areaMonthly() !== "undefined") {
 			setAreaMonthlyStore({
 				loading: false,
 				areaName: areaMonthly().areaName,
@@ -204,7 +182,7 @@ createRoot(() => {
 	});
 
 	createEffect(() => {
-		if (!areaListings.loading) {
+		if (!areaListings.loading && typeof areaListings() !== "undefined") {
 			setListingsStore({
 				listings: areaListings(),
 			});
@@ -216,4 +194,16 @@ createRoot(() => {
 			loading: areaListings.loading,
 		});
 	});
+
+	return [area, areaMonthly, areaListings, val => setPeriod(val)];
 });
+
+const countReducer =
+	(matchedStatus, matchedProperty) =>
+	(counter, { statusTypeID, propertyTypeID }) =>
+		matchedStatus.indexOf(statusTypeID) > -1 &&
+		propertyTypeID === matchedProperty
+			? (counter += 1)
+			: counter;
+
+

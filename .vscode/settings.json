@@ -1,0 +1,4 @@
+{
+	"editor.formatOnSaveMode": "modificationsIfAvailable",
+	"eslint.codeActionsOnSave.rules": null
+}
