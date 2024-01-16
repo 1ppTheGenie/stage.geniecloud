@@ -8745,7 +8745,7 @@ var AS_JSON = "application/json";
 var impersonater = {};
 var from_cache = async (key, endpoint) => {
   const since = /* @__PURE__ */ new Date();
-  since.setHours(
+  since.setSeconds(
     since.getSeconds() - (CACHE_FOR[endpoint.split("/")[0]] ?? HOUR_IN_SECONDS / 2)
   );
   return await jsonFromS3(`_cache/${key}`, since);
