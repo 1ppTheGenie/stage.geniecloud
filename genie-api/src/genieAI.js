@@ -20,7 +20,7 @@ export const impersonater = {};
 
 const from_cache = async (key, endpoint) => {
 	const since = new Date();
-	since.setHours(
+	since.setSeconds(
 		since.getSeconds() -
 			(CACHE_FOR[endpoint.split("/")[0]] ?? HOUR_IN_SECONDS / 2)
 	);
@@ -414,7 +414,7 @@ const call_api = async ( endpoint, params, verb = "POST", pre_cache = null ) => 
 
 	let result = await from_cache( cacheKey, endpoint );
 	
-	if (!result) {
+if (!result) {
 		// Flag the API call as coming from Hub2
 		params.consumer = 2;
 
