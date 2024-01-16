@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		.forEach(node => {
 			window.gHub.scaleFont(node);
 		});
-});
+} );
+
+window.gHub = window.gHub ?? {};
 
 window.gHub.scaleFont = node => {
 	["width", "height"].forEach(direction => {
