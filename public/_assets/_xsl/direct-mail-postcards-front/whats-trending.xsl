@@ -249,10 +249,7 @@ Supports:	Area, Multi-Listing, Print, PricePercent, QRCode
 
 				<foreignObject x="0" y="30%" width="45%" height="15%" style="color:var(--theme-heading-color);-webkit-line-clamp:6;font-size:66%;line-height:%;">
 					<p>
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'trends-disclaimer'" />
-							<xsl:with-param name="default" select="concat( 'Neighborhood Market Trends Information provided by third-party sources is deemed reliable, but not guaranteed. If your',  ' ', lower-case($singularPropertyType),' ','is currently listed for sale, this is not intended to be a solicitation. &#169; ', $currentYear )" />
-						</xsl:call-template>
+						<xsl:call-template name="solicitation-disclaimer" />
 					</p>
 				</foreignObject>
 			</g>

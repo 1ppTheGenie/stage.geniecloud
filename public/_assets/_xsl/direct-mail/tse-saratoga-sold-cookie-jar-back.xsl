@@ -175,10 +175,7 @@ Supports:	Area, Print, Listing, QRCode
 		<rect x="65.5%" y="21.5%" width="32%" height="0.1%" fill="#434c50" />
 
 		<text x="81.5%" y="22.5%" class="small center open-sans" fill="#000" style="font-weight:400;font-size:40%;font-style: italic;">
-			<xsl:call-template name="editable">
-				<xsl:with-param name="id" select="'homealready'" />
-				<xsl:with-param name="default" select="'If your home is already listed with a real estate agent, this is not a solicitation to list your home.'" />
-			</xsl:call-template>
+			<xsl:call-template name="solicitation-disclaimer" />
 		</text>
 
 		<foreignObject width="41%" height="80%" x="1.5%" y="5%">

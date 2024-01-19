@@ -179,15 +179,11 @@
 					<xsl:value-of select="genie:format-date( //output/@reportDate, 'd/m/y')" />
 				</span>
 				<span>
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'list '" />
-						<xsl:with-param name="default" select="'. If your property is listed this is not intended as a solicitation.
-                            Information deemed reliable but not guaranteed. Amount of money spent will vary from
-                            property to property, all info to be confirmed with Broker prior to&#160;agreement. '" />
-					</xsl:call-template>
+					<xsl:call-template name="solicitation-disclaimer" />
 				</span>
 			</p>
 		</foreignObject>
+
 		<image x="46%" y="88%" width="10%" height="9%" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/CPO_collar.png' )" />

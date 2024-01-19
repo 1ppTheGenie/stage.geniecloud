@@ -320,23 +320,23 @@ s200.8-89.9,200.8-200.4S360.7,49.2,250,49.2L250,49.2z" />
 
 		<foreignObject x="4%" y="90%" width="45%" height="9%">
 			<p class="" style="font-size:80%;margin:0;color:var(--theme-heading-color);font-family:var(--theme-body-font);">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'information'" />
-					<xsl:with-param name="default" select="'Market Trends information provided by third-party sources is deemed reliable, though not guaranteed. If your home is currently listed for sale, this is not intended to be a solicitation. ©2022'" />
-				</xsl:call-template>
+				<xsl:call-template name="solicitation-disclaimer" />
 			</p>
 		</foreignObject>
+
 		<image x="57.5%" y="63%" width="6.5%" height="10%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/scan-qr.svg' )" />
 			</xsl:attribute>
 		</image>
+
 		<text x="59.6%" y="67.4%" class="align-right" fill="var(--theme-heading-color)" style="font-size:40%;">
 			<tspan>Scan the</tspan>
 			<tspan x="59.6%" dy="1%">QR Code</tspan>
 			<tspan x="59.6%" dy="1%">with your</tspan>
 			<tspan x="59.6%" dy="1%">camera</tspan>
 		</text>
+
 		<text class="small" fill="#181818" style="font-weight:500;font-size:100%;font-family:var(--theme-body-font);">
 			<tspan x="66%" y="5%">
 				<xsl:value-of select="//agent[1]/address/street" />

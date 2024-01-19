@@ -165,12 +165,10 @@ Supports:	Area, Print, Listing, QRCode
 				</tspan>
 			</text>
 		</g>
+
 		<foreignObject class="upper" width="44%" height="5%" x="4%" y="94%">
 			<p style="margin: 0;font-size: 6.5px;text-align:justify;opacity:0.5;font-weight: 300;font-family:var(--theme-body-font);color:var(--theme-body-color);">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'discription'" />
-					<xsl:with-param name="default" select="'Neighborhood Market Trends Information provided by third-party sources is deemed reliable, but not guaranteed. If your home is currently listed for sale, this is not intended to be a solicitation. © 2021'" />
-				</xsl:call-template>
+				<xsl:call-template name="solicitation-disclaimer" />
 			</p>
 		</foreignObject>
 

@@ -251,13 +251,11 @@ Supports:	Area, Print, Listing, QRCode
 		</foreignObject>
 
 		<foreignObject class="upper" width="33%" height="4%" x="4%" y="95%" style="font-family:'futura';">
-			<p style="margin: 0;font-size: 6.5px;text-align:justify;opacity:0.5;font-weight: 300;font-family:'futura';color:#fff;">
-				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="'discription'" />
-					<xsl:with-param name="default" select="'NEIGHBORHOOD MARKET TRENDS INFORMATION PROVIDED BY THIRD-PARTY SOURCES IS DEEMED RELIABLE, BUT NOT GUARANTEED. IF YOUR HOME IS CURRENTLY LISTED FOR SALE, THIS IS NOT INTENDED TO BE A SOLICITATION. © 2021'" />
-				</xsl:call-template>
+			<p style="margin:0;font-size:6.5px;text-align:justify;opacity:0.5;font-weight:300;font-family:futura;color:#fff;text-transform:uppercase">
+				<xsl:call-template name="solicitation-disclaimer" />
 			</p>
 		</foreignObject>
+
 		<xsl:call-template name="copyright">
 			<xsl:with-param name="disclaimer" select="'direct-mail'" />
 		</xsl:call-template>
