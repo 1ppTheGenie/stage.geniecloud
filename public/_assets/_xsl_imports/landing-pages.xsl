@@ -157,7 +157,14 @@
 								<h2 class="agent-website body-color body-font">
 									<a target="_blank">
 										<xsl:attribute name="href">
-											<xsl:value-of select="concat( 'https://', //agent[1]/website )" />
+											<xsl:choose>
+												<xsl:when test="substring( //agent[1]/website, 1, 4 ) = 'http'">
+													<xsl:value-of select="//agent[1]/website" />
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:value-of select="concat( 'https://', //agent[1]/website )" />
+												</xsl:otherwise>
+											</xsl:choose>
 										</xsl:attribute>
 										<xsl:value-of select="//agent[1]/website" />
 									</a>
