@@ -92,7 +92,6 @@ function drawMap(
 				layers: [mapboxTiles],
 				attributionControl: false,
 			});
-			console.log(window.gHub.map);
 		}
 
 		const cleanDirtyMap = () => {
@@ -167,7 +166,7 @@ function drawMap(
 						? "--new"
 						: `--${listings[i].state.toLowerCase()}`;
 
-				const color = gg
+				const color = window.gHub
 					.getCssVar(cssVar, document.getElementById("genie-wrapper"))
 					.trim();
 
