@@ -103,7 +103,7 @@
 				<rect x="0" y="10%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
 
 				<text x="1%" y="11%" class="sub-heading" style="font-size:110%">
-					<xsl:value-of select="concat( format-number( //single/squareFeet, '###,###' ), ' SQ.FT',  )" />
+					<xsl:value-of select="concat( format-number( //single/squareFeet, '###,###' ), ' SQ.FT' )" />
 				</text>
 				<rect x="0" y="14%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
 
