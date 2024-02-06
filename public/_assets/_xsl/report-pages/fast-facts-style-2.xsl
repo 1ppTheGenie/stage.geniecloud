@@ -13,12 +13,8 @@
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'
-			rect#rounded-rect {
-			    transform: translateY(-4px);
-			}
-			text.center.central {
-			    transform: translateY(-4px);
-}'" />
+			rect#rounded-rect { transform: translateY(-4px); }
+			text.center.central { transform: translateY(-4px);}'" />
 		</style>
 		<g>
 			<text x="50%" y="5%" class="sub-heading center upper" font-size="180%" style="letter-spacing:2.5px;" data-max-width="90%">
@@ -83,7 +79,6 @@
 
 			<g style="transform:translate(5%,62%)">
 				<g>
-
 					<image x="5%" y="0" width="10%" height="8%" preserveAspectRatio="xMidYMid meet">
 						<xsl:attribute name="href">
 							<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons/clock-green.svg' )" />
