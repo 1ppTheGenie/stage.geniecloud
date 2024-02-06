@@ -5,3 +5,6 @@ node_modules/
 package-lock.json
 .yarn
 .yarnrc.yml
+temp.xml
+temp.json
+temp.json

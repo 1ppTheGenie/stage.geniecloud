@@ -10,30 +10,26 @@
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
 	<xsl:import href="common.xsl" />
 
-
-
-
 	<xsl:template name="change">
 		<xsl:param name="value" />
 
 		<xsl:choose>
 			<xsl:when test="$value = 0">
 				<text x="50%" y="75%" class="center" font-size="150%">
-						No Change
+					<xsl:text>No Change</xsl:text>
 				</text>
 			</xsl:when>
 			<xsl:otherwise>
-
 				<xsl:if test="$value &gt; 0">
 					<svg aria-hidden="true" focusable="false"
 						xmlns="http://www.w3.org/2000/svg" width="23" height="21" x="36%" y="71%" viewBox="0 0 256 512">
-						<path d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z" fill="var(--theme-body-color)"></path>
+						<path d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z" fill="var(--theme-body-color)" />
 					</svg>
 				</xsl:if>
 				<xsl:if test="$value &lt;= 0">
 					<svg aria-hidden="true" focusable="false"
 						xmlns="http://www.w3.org/2000/svg" width="23" height="21" x="36%" y="71%" viewBox="0 0 256 512">
-						<path d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z" fill="var(--theme-body-color)"></path>
+						<path d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z" fill="var(--theme-body-color)" />
 					</svg>
 				</xsl:if>
 
@@ -60,11 +56,11 @@
 		</text>
 
 		<text x="50%" y="18%" class="heading center upper" font-size="330%" font-weight="500">
-				Average Prices
+			<xsl:text>Average Prices</xsl:text>
 		</text>
 
 		<svg height="80" width="300" x="40%" y="25%">
-			<path stroke="var(--theme-body-color)" stroke-width="0.2%" d="M5 20 l215 0"></path>
+			<path stroke="var(--theme-body-color)" stroke-width="0.2%" d="M5 20 l215 0"/>
 		</svg>
 
 		<xsl:variable name="prevAvgSalePrice" select="//statistics/previous/@medianSalePrice" />
