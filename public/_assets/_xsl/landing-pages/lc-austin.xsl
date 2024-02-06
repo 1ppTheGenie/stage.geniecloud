@@ -348,7 +348,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<h3>Upcoming Open Houses</h3>
 											<div class="open-house-times">
 												<xsl:for-each select="//openHouse/session">
-													<xsl:sort select="@ms" />
+													<xsl:sort select="@ms" data-type="number" order="ascending"/>
 													<span>
 														<xsl:value-of select="concat( @dow, ', ', @month, ' ', @date )" />
 													</span>

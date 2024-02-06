@@ -89,8 +89,7 @@ Version:	1.1
 						<script>
 							<xsl:value-of select="concat('const polygon =', //area[1]/geojson,';' )" />
 							<xsl:value-of select="concat('const options = { mapStyle: `', //output/@mapStyle,'`, zoom: 17 };' )" />
-<xsl:value-of disable-output-escaping="yes" select="'document.addEventListener( `genie-landing-loaded`, function() { return window.gHub.makeMap( `genie-map`, options, { geoJson: polygon } ); })'" />
-
+							<xsl:value-of disable-output-escaping="yes" select="'document.addEventListener( `genie-landing-loaded`, function() { return window.gHub.makeMap( `genie-map`, options, { geoJson: polygon } ); })'" />
 						</script>
 						<div id="genie-map" style="width:100vw;height:100%;position:absolute;top:0;">
 							<xsl:comment />
@@ -119,8 +118,6 @@ Version:	1.1
 					<h1>
 						<span>
 							<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
-
-
 						</span>
 						<br/>
 						<xsl:call-template name="overridable">
@@ -132,8 +129,6 @@ Version:	1.1
 						<div class="address">
 							<span>
 								<xsl:value-of select="$listingAddressLine1" />
-
-
 							</span>
 						</div>
 					</xsl:if>
@@ -201,7 +196,7 @@ Version:	1.1
 
 						<div class="section-grid">
 							<xsl:for-each select="./asset">
-								<xsl:sort select="@sort"/>
+								<xsl:sort select="number(@sort)" data-type="number" order="ascending" />
 								<!-- <xsl:sort select="if (matches(@name, '(\d+)')) then format-number(number(regex-group(1)), '000000') else @name" data-type="text" /> -->
 
 								<xsl:call-template name="asset-box">
@@ -263,7 +258,6 @@ Version:	1.1
 						<p>
 							<b>Collection:&#160;</b>
 							<xsl:value-of select="//collection/@name" />
-
 						</p>
 						<p>
 							<b>Collection ID:&#160;</b>

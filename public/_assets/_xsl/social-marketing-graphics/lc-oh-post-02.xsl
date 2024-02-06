@@ -70,7 +70,7 @@
 				<rect x="20%" y="45%" width="60%" height="10%" fill="var(--theme-body-color)" />
 
 				<xsl:for-each select="//openHouse/session[position() &lt;= 2]">
-					<xsl:sort select="@ms" />
+					<xsl:sort select="@ms" data-type="number" order="ascending"/>
 
 					<xsl:variable name="yOffset" select="42.5 + (5 * position())" />
 					<text x="50%" class="center middle bold" font-size="115%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="58%">
