@@ -41,9 +41,11 @@ export default () => {
 	const { currentPage, setPage, pageOffset, pageSize } = usePagination();
 
 	createEffect(() => {
-		if (!listingsStore.loading) {
+		if ( !listingsStore.loading && listingsStore.listings ) {
+			const listings = unwrap( listingsStore?.listings );
+			
 			const subset = filterListings(
-				Object.values(unwrap(listingsStore.listings)),
+				Object.values(listings),
 				listingType(),
 				12,
 				listingsMode()

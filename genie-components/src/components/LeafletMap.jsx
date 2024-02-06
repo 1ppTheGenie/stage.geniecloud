@@ -21,15 +21,14 @@ export const LeafletMap = props => {
 		(async () => {
 			await initMaps();
 
-			setMap(
-				buildMap(refMap, {
-					mapStyle,
-					center: center ? new window.L.LatLng(center[0], center[1]) : null,
-					zoom,
-                    dragPan: false,
-                    
-				})
-			);
+			const leafletMap = buildMap(refMap, {
+				mapStyle,
+				center: center ? new window.L.LatLng(center[0], center[1]) : null,
+				zoom,
+				dragPan: false,
+			});
+
+			if (leafletMap) setMap(leafletMap);
 
 			const cleanDirtyMap = () => {
 				map() && map().invalidateSize();
@@ -41,7 +40,10 @@ export const LeafletMap = props => {
 	});
 
 	createEffect(() => {
-		map() && center && window.L && map().panTo(new window.L.LatLng(center[0], center[1]));
+		map() &&
+			center &&
+			window.L &&
+			map().panTo(new window.L.LatLng(center[0], center[1]));
 	});
 
 	return (
@@ -135,7 +137,9 @@ export const circleURI = (color, caption = "", size = 12) => {
 			: `<text x="12" y="16" fill="#fff" text-anchor="middle" style="font-family:sans-serif;font-weight:800;font-size:12px">${caption}</text>`;
 
 	const svg = `
-	<svg xmlns="http://www.w3.org/2000/svg" width="${size * 2 + 4}" height="${size * 2 + 4}">
+	<svg xmlns="http://www.w3.org/2000/svg" width="${size * 2 + 4}" height="${
+		size * 2 + 4
+	}">
 		<defs>
 			<filter id="shadow" x="0" y="0" width="${size}" height="${size}">
 				<feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 

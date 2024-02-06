@@ -18,7 +18,9 @@ const getAreaData = async params => {
 	return p;
 };
 
-const getAreaProperties = async (areaId, areaPeriod, agentId) => {
+const getAreaProperties = async ( areaId, areaPeriod, agentId ) => {
+	areaPeriod = !isNaN( areaPeriod ) && parseInt( areaPeriod ) > 0 ? areaPeriod : 12;
+
 	const r = await apiCall(`get-area-properties`, {
 		areaId,
 		areaPeriod,

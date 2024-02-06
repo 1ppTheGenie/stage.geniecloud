@@ -40,7 +40,7 @@ export const initMaps = async () => {
 };
 
 export const buildMap = (container, options = {}) => {
-	if (window.L) {
+	if (window.L && container && !container.classList.contains("leaflet-container")) {
 		const center = options.center || { lat: 32.715, lng: -117.1611 };
 		const mapStyle = options.mapStyle || window.gHub.mapStyle;
 
@@ -53,15 +53,17 @@ export const buildMap = (container, options = {}) => {
 				zoomOffset: -1,
 			}
 		);
-
-		return window.L.map(container, {
-			center: [center.lat, center.lng],
-			zoomControl: options.zoomCtl ?? false,
-			scrollWheelZoom: options.scrollCtl ?? false,
-			layers: [mapboxTiles],
-			attributionControl: false,
-			zoom: options.zoom || 13,
-			dragging: false,
-		});
+		
+		try {
+			return window.L.map( container, {
+				center: [center.lat, center.lng],
+				zoomControl: options.zoomCtl ?? false,
+				scrollWheelZoom: options.scrollCtl ?? false,
+				layers: [mapboxTiles],
+				attributionControl: false,
+				zoom: options.zoom || 13,
+				dragging: false,
+			} );
+		} catch  { }
 	}
 };
