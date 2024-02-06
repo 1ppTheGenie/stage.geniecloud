@@ -379,7 +379,6 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 													<xsl:text>Type:&#160;</xsl:text>
 													<span>
 														<xsl:value-of select="$singularPropertyType" />
-
 													</span>
 												</h6>
 											</div>
