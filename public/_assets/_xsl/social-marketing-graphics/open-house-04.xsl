@@ -7,7 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 
 	<xsl:template name="svg-body">
@@ -79,8 +79,7 @@
 		</xsl:choose>
 
 		<text x="50%" y="57.5%" class="large medium upper center" fill="var(--theme-heading-color)" font-size="120%" font-weight="600" data-max-width="40%">
-<xsl:call-template name="listing-address-line-one" />
-
+			<xsl:call-template name="listing-address-line-one" />
 		</text>
 		<text x="50%" y="63.5%" class="large medium center" fill="var(--theme-heading-color)" font-size="120%" font-weight="600" data-max-width="50%">
 			<xsl:call-template name="editable">

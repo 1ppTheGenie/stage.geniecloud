@@ -343,7 +343,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								</div>
 								<!-- Open House Example -->
 								<xsl:if test="count(//openHouse/session) > 0">
-									<div class="open-house">
+									<div class="open-house" style="grid-template-columns: 1fr 1fr; padding: 1rem; font-family: var(--theme-body-font)">
 										<div>
 											<h3>Upcoming Open Houses</h3>
 											<div class="open-house-times">
