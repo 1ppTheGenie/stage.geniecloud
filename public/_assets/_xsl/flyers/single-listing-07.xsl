@@ -108,12 +108,12 @@
 				<rect x="0" y="14%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
 
 				<text x="1%" y="15%" class="sub-heading" style="font-size:110%">
-					<xls:value-of select="concat( //single/bedrooms/@count, ' BEDROOMS' )" />
+					<xsl:value-of select="concat( //single/bedrooms/@count, ' BEDROOMS' )" />
 				</text>
 				<rect x="0" y="18%" width="15%" height="3%" style="fill:var(--theme-body-background);" />
 
 				<text x="1%" y="19%" class="sub-heading" style="font-size:110%">
-					<xls:value-of select="concat( //single/bathrooms/@full, ' BATHROOMS' )" />
+					<xsl:value-of select="concat( //single/bathrooms/@full, ' BATHROOMS' )" />
 				</text>
 			</g>
 			<foreignObject x="22%" y="2%" width="40%" height="25%">
