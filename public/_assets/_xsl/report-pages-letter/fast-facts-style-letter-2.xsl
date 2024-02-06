@@ -33,7 +33,7 @@ rect#rounded-rect { transform: translateY(-4px); }
 			<g style="transform:translate(19%,25%)">
 				<xsl:call-template name="property-count-letter">
 					<xsl:with-param name="transform" select="'transform:translateX(-12%)'" />
-					<xsl:with-param name="icon" select="'home-plus-icon'" />
+					<xsl:with-param name="icon" select="'home-plus'" />
 					<xsl:with-param name="icon-fill" select="'#40719b'" />
 					<xsl:with-param name="broder-stroke-color" select="'#414c56'" />
 					<xsl:with-param name="caption" select="'New'" />
@@ -45,7 +45,7 @@ rect#rounded-rect { transform: translateY(-4px); }
 					<xsl:with-param name="transform" select="'transform:translateX(10.2%)'" />
 					<xsl:with-param name="icon-fill" select="'#8dc641'" />
 					<xsl:with-param name="broder-stroke-color" select="'#517134'" />
-					<xsl:with-param name="icon" select="'home-speaker-icon'" />
+					<xsl:with-param name="icon" select="'home-speaker'" />
 					<xsl:with-param name="caption" select="'Active'" />
 					<xsl:with-param name="count" select="count($listingsTotalActive)" />
 					<xsl:with-param name="description" select="'TOTAL'" />
@@ -53,7 +53,7 @@ rect#rounded-rect { transform: translateY(-4px); }
 
 				<xsl:call-template name="property-count-letter">
 					<xsl:with-param name="transform" select="'transform:translateX(32.5%)'" />
-					<xsl:with-param name="icon" select="'home-dot-icon'" />
+					<xsl:with-param name="icon" select="'home-dot'" />
 					<xsl:with-param name="icon-fill" select="'#fad542'" />
 					<xsl:with-param name="broder-stroke-color" select="'#d5952a'" />
 					<xsl:with-param name="caption" select="'Pending'" />
@@ -65,7 +65,7 @@ rect#rounded-rect { transform: translateY(-4px); }
 
 				<xsl:call-template name="property-count-letter">
 					<xsl:with-param name="transform" select="'transform:translateX(55%)'" />
-					<xsl:with-param name="icon" select="'home-lock-icon'" />
+					<xsl:with-param name="icon" select="'home-lock'" />
 					<xsl:with-param name="icon-fill" select="'#ed8571'" />
 					<xsl:with-param name="broder-stroke-color" select="'#bd3927'" />
 					<xsl:with-param name="caption" select="'Sold'" />

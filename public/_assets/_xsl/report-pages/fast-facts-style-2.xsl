@@ -49,7 +49,7 @@
 					<xsl:with-param name="transform" select="'transform:translateX(16%)'" />
 					<xsl:with-param name="icon-fill" select="'#8dc641'" />
 					<xsl:with-param name="broder-stroke-color" select="'#517134'" />
-					<xsl:with-param name="icon" select="'home-speaker-icon'" />
+					<xsl:with-param name="icon" select="'home-speaker'" />
 					<xsl:with-param name="caption" select="'Active'" />
 					<xsl:with-param name="count" select="count($listingsTotalActive)" />
 					<xsl:with-param name="description" select="'TOTAL'" />
@@ -57,7 +57,7 @@
 
 				<xsl:call-template name="property-count">
 					<xsl:with-param name="transform" select="'transform:translateX(32%)'" />
-					<xsl:with-param name="icon" select="'home-dot-icon'" />
+					<xsl:with-param name="icon" select="'home-dot'" />
 					<xsl:with-param name="icon-fill" select="'#fad542'" />
 					<xsl:with-param name="broder-stroke-color" select="'#d5952a'" />
 					<xsl:with-param name="caption" select="'Pending'" />
@@ -70,7 +70,7 @@
 
 				<xsl:call-template name="property-count">
 					<xsl:with-param name="transform" select="'transform:translateX(48%)'" />
-					<xsl:with-param name="icon" select="'home-lock-icon'" />
+					<xsl:with-param name="icon" select="'home-lock'" />
 					<xsl:with-param name="icon-fill" select="'#ed8571'" />
 					<xsl:with-param name="broder-stroke-color" select="'#bd3927'" />
 					<xsl:with-param name="caption" select="'Sold'" />
