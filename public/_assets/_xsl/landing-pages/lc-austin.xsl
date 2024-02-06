@@ -336,7 +336,6 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 							<div class="col-md-9">
 								<div class="panel-adjustment">
 									<h2 class="main-title heading-font heading-color">
-										<!-- <xsl:text>Just </xsl:text> -->
 										<strong class="heading-font">
 											<xsl:value-of select="$status-name" />
 										</strong>
@@ -553,23 +552,6 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											</div>
 										</li>
 									</xsl:if>
-									<!--
-									<li>
-										<div class="content-box">
-											<div class="icon-box heading-color-as-bg">
-												<svg xmlns="http://www.w3.org/2000/svg" width="18" class="background-svg" viewBox="0 0 512 512">
-<path d="M256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512zM232 256C232 264 236 271.5 242.7 275.1L338.7 339.1C349.7 347.3 364.6 344.3 371.1 333.3C379.3 322.3 376.3 307.4 365.3 300L280 243.2V120C280 106.7 269.3 96 255.1 96C242.7 96 231.1 106.7 231.1 120L232 256z" />
-												</svg>
-											</div>
-											<div class="title-box">
-												<h6>
-													<xsl:text>DOM*: </xsl:text>
-													<xsl:value-of select="concat( //single/daysOnMarket, ' Days' )" />
-												</h6>
-											</div>
-										</div>
-									</li>
-									-->
 									<li>
 										<div class="content-box">
 											<div class="icon-box heading-color-as-bg">
