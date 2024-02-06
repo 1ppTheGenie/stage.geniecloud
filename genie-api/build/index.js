@@ -7898,6 +7898,7 @@ var processListing = async (params) => {
             ts2,
             tz
           ).toFormat("t");
+          session._attrs["ms"] = ts1;
           oh._content.push(session);
         }
       }
@@ -9390,23 +9391,28 @@ var api = async (event) => {
               break;
             case "/re-render":
               if (params.renderId) {
-                const r = await reRender(params.renderId, {
-                  ...params,
-                  skipCache: true
-                });
-                if (r) {
-                  response.body.success = true;
-                  response.body.msg = `${params.renderId} re-render under way`;
-                  if (Object.keys(params).length > 1) {
-                    response.body.msg += " (with override params)";
+                try {
+                  const r = await reRender(params.renderId, {
+                    ...params,
+                    skipCache: true
+                  });
+                  if (r) {
+                    response.body.success = true;
+                    response.body.msg = `${params.renderId} re-render under way`;
+                    if (Object.keys(params).length > 1) {
+                      response.body.msg += " (with override params)";
+                    }
                   }
+                  await queueMsg("clear-cache", {
+                    renderId: {
+                      DataType: "String",
+                      StringValue: params.renderId
+                    }
+                  });
+                } catch (err) {
+                  response.body.success = false;
+                  response.body.msg = `Error: ${err.message}`;
                 }
-                await queueMsg("clear-cache", {
-                  renderId: {
-                    DataType: "String",
-                    StringValue: params.renderId
-                  }
-                });
               } else if (params.assetId || params.userId || params.mlsNumber || params.areaId) {
                 let reRenders = [];
                 const r = await listS3Folder("_processing");
@@ -9611,17 +9617,19 @@ var api = async (event) => {
         }
       } catch (error2) {
         console.log("GenieAPI failed: ", error2);
-        await toS3(
-          `_errors/${params.renderId}-${Date.now()}-api.json`,
-          Buffer.from(
-            JSON.stringify({
-              params,
-              error: error2.toString()
-            })
-          ),
-          { GenieExpireFile: "error" },
-          JSON_MIME
-        );
+        if (params.renderId) {
+          await toS3(
+            `_errors/${params.renderId}-${Date.now()}-api.json`,
+            Buffer.from(
+              JSON.stringify({
+                params,
+                error: error2.toString()
+              })
+            ),
+            { GenieExpireFile: "error" },
+            JSON_MIME
+          );
+        }
         response.body.error = error2;
       } finally {
         if (!response.isBase64Encoded) {
@@ -9892,7 +9900,7 @@ var reRender = async (renderId, params = null) => {
     await queueMsg("prepare", msgAttrbs);
     return true;
   } else {
-    throw new Error(`${renderId}: no such collection exists`);
+    throw new Error(`${renderId}: render data does not exist.`);
   }
 };
 var validateRenderParams = async (args) => {

@@ -794,17 +794,19 @@ export const api = async event => {
             } catch (error) {
                 console.log('GenieAPI failed: ', error);
 
-                await toS3(
-                    `_errors/${params.renderId}-${Date.now()}-api.json`,
-                    Buffer.from(
-                        JSON.stringify({
-                            params,
-                            error: error.toString()
-                        })
-                    ),
-                    { GenieExpireFile: 'error' },
-                    JSON_MIME
-                );
+                if ( params.renderId ) { // We don't want the embed API errors here
+                    await toS3(
+                        `_errors/${params.renderId}-${Date.now()}-api.json`,
+                        Buffer.from(
+                            JSON.stringify( {
+                                params,
+                                error: error.toString()
+                            } )
+                        ),
+                        { GenieExpireFile: 'error' },
+                        JSON_MIME
+                    );
+                }
 
                 response.body.error = error;
             } finally {
