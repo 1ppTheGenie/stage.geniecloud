@@ -68,18 +68,16 @@
 			</xsl:when>
 			<xsl:when test="count(//openHouse/session) &gt; 1">
 				<rect x="20%" y="45%" width="60%" height="10%" fill="var(--theme-body-color)" />
-				<text x="50%" y="47.5%" class="center middle bold" font-size="115%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="58%">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'LC-OH-POST-02-01'" />
-						<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
-					</xsl:call-template>
-				</text>
-				<text x="50%" y="52.5%" class="center middle bold" font-size="115%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="58%">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'LC-OH-POST-02-02'" />
-						<xsl:with-param name="default" select="concat( //openHouse/session[2]/@dow, ', ', //openHouse/session[2]/@month, ' ', //openHouse/session[2]/@date, ' - ', //openHouse/session[2]/@starts, ' to ',//openHouse/session[2]/@ends)" />
-					</xsl:call-template>
-				</text>
+
+				<xsl:for-each select="//openHouse/session[position() &lt;= 2]">
+					<xsl:sort select="@ms" />
+
+					<xsl:variable name="yOffset" select="42.5 + (5 * position())" />
+					<text x="50%" class="center middle bold" font-size="115%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="58%">
+						<xsl:attribute name="y" value="concat( yOffset, '%')" />
+						<xsl:value-of select="concat( @dow, ', ', @month, ' ', @date, ' - ', @starts, ' to ',@ends)" />
+					</text>
+				</xsl:for-each>
 			</xsl:when>
 			<xsl:otherwise/>
 		</xsl:choose>
