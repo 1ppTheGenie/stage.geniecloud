@@ -31,7 +31,7 @@ const loadCharts = () =>
 			script.id = "chartist-script";
 			script.onload = () => {
 				var gScript = document.createElement("script");
-				gScript.src = `https://genie-hub-2.s3.eu-west-2.amazonaws.com/_assets/_js/charts.js`;
+				gScript.src = `${window.gHub.siteUrl}_assets/_js/charts.js`;
 				gScript.id = "genie-charts";
 
 				gScript.onload = () => {

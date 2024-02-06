@@ -1,21 +1,21 @@
-import QRCode from "qrcode-svg";
-import { fromS3, getFileData, listS3Folder, toS3 } from "./index.js";
+import QRCode from 'qrcode-svg';
+import { fromS3, getFileData, listS3Folder, toS3 } from './index.js';
 
 export const ASSET_HEADERS = {
-	name: "Asset Name",
-	knownAs: "Known As",
-	thumbnail: "Thumbnail",
-	access: "Access",
-	permission: "Permission",
-	approved: "Approved",
-	tags: "Tags",
-	sizes: "Sizes",
-	roles: "Roles",
-	component: "Component",
-	supports: "Supports",
-	version: "Version",
-	pages: "Pages",
-	renderKey: "Render Key",
+    name: 'Asset Name',
+    knownAs: 'Known As',
+    thumbnail: 'Thumbnail',
+    access: 'Access',
+    permission: 'Permission',
+    approved: 'Approved',
+    tags: 'Tags',
+    sizes: 'Sizes',
+    roles: 'Roles',
+    component: 'Component',
+    supports: 'Supports',
+    version: 'Version',
+    pages: 'Pages',
+    renderKey: 'Render Key'
 };
 
 /**
@@ -24,27 +24,30 @@ export const ASSET_HEADERS = {
  * @return object
  */
 export const getThemes = async () => {
-	let themes = {};
-	const r = await listS3Folder("_assets/themes");
+    let themes = {};
+    const r = await listS3Folder('_assets/themes');
 
-	await Promise.all(
-		r.map(async t => {
-			if (t.Size > 0) {
-				const css = await fromS3(t.Key);
+    await Promise.all(
+        r.map(async t => {
+            if (t.Size > 0) {
+                const css = await fromS3(t.Key);
 
-				const data = getFileData(css, {
-					name: "Theme Name",
-					style: "Theme Style",
-				});
+                const data = getFileData(css, {
+                    name: 'Theme Name',
+                    style: 'Theme Style'
+                });
 
-				const slug = t.Key.replace(".css", "").replace("_assets/themes/", "");
+                const slug = t.Key.replace('.css', '').replace(
+                    '_assets/themes/',
+                    ''
+                );
 
-				themes[slug] = data;
-			}
-		})
-	);
+                themes[slug] = data;
+            }
+        })
+    );
 
-	return { themes };
+    return { themes };
 };
 
 /**
@@ -53,24 +56,27 @@ export const getThemes = async () => {
  * @return object
  */
 export const getAssets = async () => {
-	let assets = {};
-	const r = await listS3Folder("_assets/_xsl");
+    let assets = {};
+    const r = await listS3Folder('_assets/_xsl');
 
-	await Promise.all(
-		r.map(async t => {
-			if (t.Size > 0) {
-				const xsl = await fromS3(t.Key);
+    await Promise.all(
+        r.map(async t => {
+            if (t.Size > 0) {
+                const xsl = await fromS3(t.Key);
 
-				const data = getFileData(xsl, ASSET_HEADERS);
+                const data = getFileData(xsl, ASSET_HEADERS);
 
-				const slug = t.Key.replace(".xsl", "").replace("_assets/_xsl/", "");
+                const slug = t.Key.replace('.xsl', '').replace(
+                    '_assets/_xsl/',
+                    ''
+                );
 
-				assets[slug] = data;
-			}
-		})
-	);
+                assets[slug] = data;
+            }
+        })
+    );
 
-	return { assets };
+    return { assets };
 };
 
 /**
@@ -79,12 +85,12 @@ export const getAssets = async () => {
  * @return array
  */
 export const getCollectionTemplates = async () => {
-	const templates = await listS3Folder("assets/_xsl/collections");
+    const templates = await listS3Folder('assets/_xsl/collections');
 
-	// Include?
-	templates.filter(t => true); // ToDo Filter on 'include-in-render'
+    // Include?
+    templates.filter(t => true); // ToDo Filter on 'include-in-render'
 
-	return { templates };
+    return { templates };
 };
 
 /**
@@ -93,7 +99,7 @@ export const getCollectionTemplates = async () => {
  * @return array
  */
 export const getCollections = async () =>
-	await listS3Folder("genie-tools/collections");
+    await listS3Folder('genie-tools/collections');
 
 /**
  * save_collections
@@ -101,12 +107,12 @@ export const getCollections = async () =>
  * @return array
  */
 export const saveCollection = async data => {
-	await toS3(
-		`genie-tools/collections/${data.template}.json`,
-		Buffer.from(JSON.stringify(data.collection))
-	);
+    await toS3(
+        `genie-tools/collections/${data.template}.json`,
+        Buffer.from(JSON.stringify(data.collection))
+    );
 
-	return true;
+    return true;
 };
 
 /**

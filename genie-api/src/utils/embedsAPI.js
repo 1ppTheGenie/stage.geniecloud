@@ -14,84 +14,84 @@ import {
 } from "../genieAI.js";
 
 export const embedsAPI = async (route, params) => {
-	let result;
+    let result;
 
-	switch (route) {
-		case "get-landing-data":
-			result = await getLandingPageData(params);
-			break;
-		case "add-lead":
-			result = await add_lead(params);
-			break;
-		case "update-lead":
-			result = await update_lead(params);
-			break;
-		case "address-search":
-			result = await address_search(params);
-			break;
-		case "get-agent-data":
-			result = await get_agent_data(params);
-			break;
-		case "get-area-data":
-			result = await get_area_data(params);
-			break;
-		case "get-area-monthly":
-			result = await get_area_monthly(params);
-			break;
-		case "get-area-properties":
-			result = await get_area_properties(params);
-			break;
-		case "get-area-polygon":
-			result = await get_area_polygon(params);
-			break;
-		case "get-listing-data":
-			result = await get_listing_details(params);
-			break;
-		case "get-qr-property":
-			result = await get_qr_property(params);
-			break;
-		case "get-short-data":
-			result = await get_short_data(params);
-			break;
-		case "get-property":
-			result = await get_property(params);
-			break;
-		case "get-mls-display":
-			result = await get_mls_display(params);
-			break;
-	}
+    switch (route) {
+        case 'get-landing-data':
+            result = await getLandingPageData(params);
+            break;
+        case 'add-lead':
+            result = await add_lead(params);
+            break;
+        case 'update-lead':
+            result = await update_lead(params);
+            break;
+        case 'address-search':
+            result = await address_search(params);
+            break;
+        case 'get-agent-data':
+            result = await get_agent_data(params);
+            break;
+        case 'get-area-data':
+            result = await get_area_data(params);
+            break;
+        case 'get-area-monthly':
+            result = await get_area_monthly(params);
+            break;
+        case 'get-area-properties':
+            result = await get_area_properties(params);
+            break;
+        case 'get-area-polygon':
+            result = await get_area_polygon(params);
+            break;
+        case 'get-listing-data':
+            result = await get_listing_details(params);
+            break;
+        case 'get-qr-property':
+            result = await get_qr_property(params);
+            break;
+        case 'get-short-data':
+            result = await get_short_data(params);
+            break;
+        case 'get-property':
+            result = await get_property(params);
+            break;
+        case 'get-mls-display':
+            result = await get_mls_display(params);
+            break;
+    }
 
-	result.route = `Embed: ${route}`;
+    result.route = `Embed: ${route}`;
 
-	return result;
+    return result;
 };
 
-export const getLandingPageData = async (params) => {
+export const getLandingPageData = async params => {
     let { propertyId, qrId, shortUrlDataId, token, agentId, hideAVM } = {
-        ...params,
-    }
+        ...params
+    };
     let property = null,
-        lead = null
+        lead = null;
 
     if (token) {
         if (typeof qrId !== 'undefined') {
-            property = await getQRProperty(qrId, token)
+            property = await getQRProperty(qrId, token);
 
             lead = {
                 genieLeadId: property.genieLeadId,
-                salutation: property.ownerDisplayName,
-            }
+                salutation: property.ownerDisplayName
+            };
         } else if (typeof shortUrlDataId !== 'undefined') {
-            lead = await getShortData(parseInt(shortUrlDataId), token, agentId)
+            lead = await getShortData(parseInt(shortUrlDataId), token, agentId);
 
             if (!propertyId) {
-                propertyId = lead.propertyId
+                propertyId = lead.propertyId;
             }
         }
     }
 
     if (propertyId && !property) {
-        property = await getPropertyFromId(propertyId, agentId)
+        property = await getPropertyFromId(propertyId, agentId);
     }
 
     if (property) {
@@ -115,61 +115,61 @@ export const getLandingPageData = async (params) => {
             yearBuilt: property.yearBuilt,
             currentAVM: property.firstAmericanCurrentAVM,
             avmLow: property.avmLow,
-            avmHigh: property.avmHigh,
-        }
+            avmHigh: property.avmHigh
+        };
 
         if (!hideAVM || hideAVM == false || hideAVM == 0) {
             if (data.currentAVM && data.currentAVM !== '') {
-                data.avm = data.currentAVM
-                delete data.currentAVM
+                data.avm = data.currentAVM;
+                delete data.currentAVM;
             } else if (!data.avmLow || data.avmLow !== '') {
-                data.avm = data.avmLow
+                data.avm = data.avmLow;
             } else if (!data.avmHigh || data.avmHigh !== '') {
-                data.avm = data.avmHigh
+                data.avm = data.avmHigh;
             } else {
-                data.avm = `${data.avmLow} - ${data.avmHigh}`
+                data.avm = `${data.avmLow} - ${data.avmHigh}`;
             }
         }
 
-        return data
+        return data;
     }
-}
+};
 
-const get_property = async (params) => {
-    var agent_id = params.agentID || params.agent || params.agent_id || null
+const get_property = async params => {
+    var agent_id = params.agentID || params.agent || params.agent_id || null;
 
     if (agent_id) {
-        var property = genie_get_property_from_id(params.property_id, agent_id)
+        var property = genie_get_property_from_id(params.property_id, agent_id);
 
         if (property) {
-            return success({ property })
+            return success({ property });
         }
     }
 
-    return error(['No property found'])
-}
+    return error(['No property found']);
+};
 
-const get_short_data = async (params) => {
+const get_short_data = async params => {
     const r = getShortData(
         parseInt(params.shortId),
         params.token,
         params.agentId || null
-    )
+    );
 
-    return r ? success({ property: r }) : error('No short data found')
-}
+    return r ? success({ property: r }) : error('No short data found');
+};
 
-const get_qr_property = async (params) => {
-    var property = genie_get_qr_property(params.qrID, params.token)
+const get_qr_property = async params => {
+    var property = genie_get_qr_property(params.qrID, params.token);
 
-    return property ? success({ property }) : error('No QR property found')
-}
+    return property ? success({ property }) : error('No QR property found');
+};
 
-const add_lead = async (params) => {
-    const agentId = params.agentId || params.agent || null
+const add_lead = async params => {
+    const agentId = params.agentId || params.agent || null;
 
     if (agentId) {
-        var args = {}
+        var args = {};
         var keys = [
             'genieTags',
             'firstName',
@@ -184,92 +184,92 @@ const add_lead = async (params) => {
             'areaId',
             'propertyId',
             'leadInquiryType',
-            'trackingData',
-        ]
+            'trackingData'
+        ];
 
-        let argsKey
+        let argsKey;
         for (var i = 0; i < keys.length; i++) {
-            var key = keys[i]
+            var key = keys[i];
 
             if (params.hasOwnProperty(key)) {
-                var value = null
+                var value = null;
 
                 switch (key) {
                     case 'genieTags':
-                        argsKey = 'tags'
-                        value = params[key].split(',')
-                        break
+                        argsKey = 'tags';
+                        value = params[key].split(',');
+                        break;
 
                     case 'email':
-                        argsKey = 'emailAddress'
-                        break
+                        argsKey = 'emailAddress';
+                        break;
 
                     case 'phone':
-                        argsKey = 'phoneNumber'
-                        break
+                        argsKey = 'phoneNumber';
+                        break;
 
                     default:
-                        argsKey = key
-                        break
+                        argsKey = key;
+                        break;
                 }
 
-                args[argsKey] = value !== null ? value : params[key]
+                args[argsKey] = value !== null ? value : params[key];
             }
         }
 
         if (params.hasOwnProperty('fullName')) {
-            var split = params.fullName.split(' ')
+            var split = params.fullName.split(' ');
 
             if (split.length > 1) {
-                var last = split.pop()
+                var last = split.pop();
 
-                args['lastName'] = last
-                args['firstName'] = split.join(' ')
+                args['lastName'] = last;
+                args['firstName'] = split.join(' ');
             } else {
-                args['firstName'] = params.fullName
+                args['firstName'] = params.fullName;
             }
         }
 
         if (params.hasOwnProperty('meta[message]')) {
-            args['note'] = 'Message: ' + params.meta[message]
-            delete params.meta[message]
+            args['note'] = 'Message: ' + params.meta[message];
+            delete params.meta[message];
         } else {
-            args['note'] = args['note'] || ''
+            args['note'] = args['note'] || '';
         }
 
         var meta_keys = Object.keys(params).reduce(function (m, str) {
             if (str && str.match(/meta\[(.*)\]/)) {
-                m.push(str.match(/meta\[(.*)\]/)[1])
+                m.push(str.match(/meta\[(.*)\]/)[1]);
             }
-            return m
-        }, [])
+            return m;
+        }, []);
 
         for (var j = 0; j < meta_keys.length; j++) {
-            var key = meta_keys[j]
+            var key = meta_keys[j];
 
-            if (!args.note) args.note = ''
+            if (!args.note) args.note = '';
 
-            args['note'] += `\n${key}: ${params[`meta[${key}]`]}`
+            args['note'] += `\n${key}: ${params[`meta[${key}]`]}`;
         }
 
-        return success({ xLead: 'create', key: 1001, ...args })
+        return success({ xLead: 'create', key: 1001, ...args });
         if (Object.keys(args).length > 0) {
-            const lead = await createLead(agentId, args)
+            const lead = await createLead(agentId, args);
 
-            return success(lead)
+            return success(lead);
         } else {
-            return error('No lead arguments')
+            return error('No lead arguments');
         }
     } else {
-        return error('Missing agent ID')
+        return error('Missing agent ID');
     }
-}
+};
 
-const update_lead = async (params) => {
-    var agentId = params.agentId || params.agentID || params.agent || null
+const update_lead = async params => {
+    var agentId = params.agentId || params.agentID || params.agent || null;
 
     if (agentId) {
-        var args = {}
+        var args = {};
         var keys = [
             'genieLeadId',
             'email',
@@ -277,165 +277,165 @@ const update_lead = async (params) => {
             'note',
             'emailAddress',
             'phoneNumber',
-            'genieTags',
-        ]
+            'genieTags'
+        ];
 
         for (var i = 0; i < keys.length; i++) {
-            var key = keys[i]
+            var key = keys[i];
 
             if (params.hasOwnProperty(key)) {
-                var value = null
+                var value = null;
 
                 switch (key) {
                     case 'genieTags':
-                        argsKey = 'tags'
-                        value = params[key].split(',')
-                        break
+                        argsKey = 'tags';
+                        value = params[key].split(',');
+                        break;
 
                     case 'emailAddress':
-                        argsKey = 'emailAddress'
-                        break
+                        argsKey = 'emailAddress';
+                        break;
 
                     case 'phoneNumber':
-                        argsKey = 'phone'
-                        break
+                        argsKey = 'phone';
+                        break;
 
                     default:
-                        argsKey = key
-                        break
+                        argsKey = key;
+                        break;
                 }
 
-                args[argsKey] = value !== null ? value : params[key]
+                args[argsKey] = value !== null ? value : params[key];
             }
         }
-        return success({ xLead: 'update', key: 1001, ...args })
+        return success({ xLead: 'update', key: 1001, ...args });
         if (Object.keys(args).length > 0) {
-            return success(updateLead(agentId, args))
+            return success(updateLead(agentId, args));
         } else {
-            return error('No lead arguments')
+            return error('No lead arguments');
         }
     } else {
-        return error('Missing agent ID')
+        return error('Missing agent ID');
     }
-}
+};
 
 const address_search = async params => {
-	const r = await getAssessorPropertiesDetail("1|" + params.place_id);
+    const r = await getAssessorPropertiesDetail('1|' + params.place_id);
 
-	return success({ properties: r["properties"] });
+    return success({ properties: r['properties'] });
 };
 
 const get_agent_data = async params => {
-	var profile = genie_get_local_profile(params.agent_id);
+    var profile = genie_get_local_profile(params.agent_id);
 
-	delete profile.notifications;
-	delete profile.theme;
-	delete profile.designs;
-	delete profile.id;
+    delete profile.notifications;
+    delete profile.theme;
+    delete profile.designs;
+    delete profile.id;
 
-	delete profile.user.email;
-	delete profile.user.role;
-	delete profile.user.mobile;
-	delete profile.user.mobileok;
-	delete profile.user.first_name;
-	delete profile.user.last_name;
-	delete profile.user.license;
-	delete profile.user.reuse;
+    delete profile.user.email;
+    delete profile.user.role;
+    delete profile.user.mobile;
+    delete profile.user.mobileok;
+    delete profile.user.first_name;
+    delete profile.user.last_name;
+    delete profile.user.license;
+    delete profile.user.reuse;
 
-	return success({ agent: profile });
+    return success({ agent: profile });
 };
 
 const get_listing_details = async params => {
-	var result = await genie_mls_get_by_number(params.mlsid, params.slug);
-	{
-	}
+    var result = await genie_mls_get_by_number(params.mlsid, params.slug);
+    {
+    }
 
-	if (!result.photoPrimary || result.photoPrimary === "") {
-		result.boundary = genie_property_boundary(
-			params.id,
-			params.slug,
-			null,
-			null
-		);
-	}
+    if (!result.photoPrimary || result.photoPrimary === '') {
+        result.boundary = genie_property_boundary(
+            params.id,
+            params.slug,
+            null,
+            null
+        );
+    }
 
-	return success({ listing: result });
+    return success({ listing: result });
 };
 
 const get_mls_display = async params => {
-	return success(genie_mls_display_settings(parseInt(params.id)));
+    return success(genie_mls_display_settings(parseInt(params.id)));
 };
 
 const get_area_properties = async params => {
-	const profile = await getUser(params.agentId);
-	const mlsGroupId = profile.mlsGroupId ?? 0;
+    const profile = await getUser(params.agentId);
+    const mlsGroupId = profile.mlsGroupId ?? 0;
 
-	const r = await mlsProperties(
-		mlsGroupId,
-		params.areaId,
-		new Date(
-			Date.now() - (params.areaPeriod || 12) * 30 * 24 * 60 * 60 * 1000
-		).toISOString(),
-		false
-	);
+    const r = await mlsProperties(
+        mlsGroupId,
+        params.areaId,
+        new Date(
+            Date.now() - (parseInt(params.areaPeriod ?? 12)) * 30 * 24 * 60 * 60 * 1000
+        ).toISOString(),
+        false
+    );
 
-	const properties = r.map(p => {
-		const {
-			listingAgentName,
-			listingBrokerName,
-			lotSqft,
-			saleAgent,
-			apn,
-			acres,
-			yearBuilt,
-			saleType,
-			propertyType,
-			bathroomsFull,
-			bathroomsHalf,
-			mlsID,
-			state,
-			city,
-			...remainder
-		} = p;
+    const properties = r.map(p => {
+        const {
+            listingAgentName,
+            listingBrokerName,
+            lotSqft,
+            saleAgent,
+            apn,
+            acres,
+            yearBuilt,
+            saleType,
+            propertyType,
+            bathroomsFull,
+            bathroomsHalf,
+            mlsID,
+            state,
+            city,
+            ...remainder
+        } = p;
 
-		return remainder;
-	});
+        return remainder;
+    });
 
-	return Array.isArray(properties)
-		? success(properties)
-		: error({ noProps: true });
+    return Array.isArray(properties)
+        ? success(properties)
+        : error({ noProps: true });
 };
 
 const get_area_monthly = async params => {
-	const statistics = await areaStatisticsMonthly(
-		params.agentId,
-		parseInt(params.areaId),
-		Math.ceil((params.areaPeriod ?? 12) / 12)
-	);
+    const statistics = await areaStatisticsMonthly(
+        params.agentId,
+        parseInt(params.areaId),
+        Math.ceil((params.areaPeriod ?? 12) / 12)
+    );
 
-	return statistics.success ? success(statistics) : error(statistics);
+    return statistics.success ? success(statistics) : error(statistics);
 };
 
 const get_area_data = async params => {
-	const statistics = await areaStatisticsWithPrevious(
-		params.agentId,
-		parseInt(params.areaId),
-		parseInt(params.areaPeriod || 12)
-	);
+    const statistics = await areaStatisticsWithPrevious(
+        params.agentId,
+        parseInt(params.areaId),
+        parseInt(params.areaPeriod || 12)
+    );
 
-	return statistics.success ? success(statistics) : error(statistics);
+    return statistics.success ? success(statistics) : error(statistics);
 };
 
 const get_area_polygon = async params => {
-	const r = await getAreaBoundary(params.areaId);
+    const r = await getAreaBoundary(params.areaId);
 
-	if (r?.success === true) {
-		return success({
-			polygon: r.mapArea,
-		});
-	}
+    if (r?.success === true) {
+        return success({
+            polygon: r.mapArea
+        });
+    }
 
-	return error("getAreaBoundary failed");
+    return error('getAreaBoundary failed');
 };
 
 const error = msg => ({ success: false, error: msg });

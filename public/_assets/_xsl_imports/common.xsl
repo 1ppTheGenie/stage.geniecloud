@@ -1618,7 +1618,6 @@
 
 	<xsl:template name="solicitation-disclaimer">
 		<xsl:value-of select="concat( 'Neighborhood Market Trends Information provided by third-party sources is deemed reliable, but not guaranteed. If your home is currently listed for sale, this is not intended to be a solicitation. &#169; ', //output/@year )" />
-
 	</xsl:template>
 
 	<xsl:template name="copyright">

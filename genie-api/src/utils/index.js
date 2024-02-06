@@ -120,7 +120,7 @@ export const assetSetting = async (assetKey, setting = null) => {
 export const getFileData = (buffer, headers) => {
 	let result = {};
 
-	if (typeof buffer !== undefined) {
+	if (typeof buffer !== "undefined") {
 		const KB_IN_BYTES = 1024;
 		let fileData = buffer.slice(0, KB_IN_BYTES).toString("utf8") || ""; // Look only the first 8KB of the file
 

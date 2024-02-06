@@ -57,10 +57,9 @@ function App() {
 		);
 	});
 
-	createEffect(() => {
-		console.log("f", fonts());
-		Object.keys(fonts()).forEach(key => root.style.setProperty(`--theme-${key}`, fonts()[key]));
-	});
+	createEffect(() => 
+		Object.keys(fonts()).forEach(key => root.style.setProperty(`--theme-${key}`, fonts()[key]))
+	);
 
 	return (
 		<main>

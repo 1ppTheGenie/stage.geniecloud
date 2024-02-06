@@ -1219,6 +1219,7 @@ var require_qrcode = __commonJS({
 var src_exports = {};
 __export(src_exports, {
   JSON_MIME: () => JSON_MIME,
+  TXT_MIME: () => TXT_MIME,
   api: () => api,
   getS3Key: () => getS3Key,
   validateRenderParams: () => validateRenderParams
@@ -7081,30 +7082,16 @@ var REGION = process.env.REGION ?? "eu-west-2";
 var SQS_QUEUE = process.env.SQS_QUEUE ?? "https://sqs.eu-west-2.amazonaws.com/584678469437/genie-cloud";
 var s3Client = new import_client_s3.S3Client({ region: REGION });
 var sqs = new import_client_sqs.SQSClient({ region: REGION });
-var copyObject = async (sourceKey, destinationKey, bucket = null, cache = null) => {
+var copyObject = async (sourceKey, destinationKey, bucket = null, ContentType = null, CacheControl = null) => {
   const args = {
     Bucket: bucket ?? BUCKET,
     CopySource: `/${bucket ?? BUCKET}/${sourceKey}`,
     Key: destinationKey,
-    CacheControl: cache,
-    Metadata: {
-      "Cache-Control": cache,
-      "Genie-Meta": "Active"
-    }
+    CacheControl,
+    ContentType,
+    MetadataDirective: "REPLACE"
   };
   return await s3Client.send(new import_client_s3.CopyObjectCommand(args));
-};
-var setS3Retention = async (Key, retainUntil, bucket = null) => {
-  const args = {
-    Bucket: bucket ?? BUCKET,
-    Key,
-    Retention: {
-      Mode: "GOVERNANCE",
-      RetainUntilDate: retainUntil
-    },
-    BypassGovernanceRetention: true
-  };
-  return await s3Client.send(new import_client_s3.PutObjectRetentionCommand(args));
 };
 var listS3Folder = async (folderPath = "", justContents = true, token = null, bucket = null) => {
   try {
@@ -7137,7 +7124,10 @@ var headObject = async (key, since = null, bucket = null) => {
       })
     );
     return result;
-  } catch {
+  } catch (err) {
+    if (err.name !== "NotFound") {
+      console.log("Error HeadObject:", err);
+    }
   }
 };
 var jsonFromS3 = async (key, since = null, bucket = null) => {
@@ -7149,21 +7139,6 @@ var jsonFromS3 = async (key, since = null, bucket = null) => {
     }
   } catch (err) {
     console.log("Retrieve JSON: ", err);
-  }
-};
-var getTags = async (key, bucket = null) => {
-  bucket = bucket ?? BUCKET;
-  try {
-    const r = await s3Client.send(
-      new import_client_s3.GetObjectTaggingCommand({
-        Bucket: bucket,
-        Key: key
-      })
-    );
-    return r;
-  } catch (err) {
-    if (!err.Code == "NoSuchKey")
-      console.log("Retrieve TAGS: ", err);
   }
 };
 var fromS3 = async (key, since = null, bucket = null) => {
@@ -7231,6 +7206,7 @@ var getRenderJSON = async (params) => {
   if (typeof params != "object" || Object.keys(params).length == 0) {
     throw new Exception("Empty render param set is not supported");
   }
+  const skipCache = params.skipCache ?? false;
   if (!params.offsetDate) {
     params.offsetDate = endOfLastMonth();
   }
@@ -7266,7 +7242,9 @@ var getRenderJSON = async (params) => {
       _attrs: {
         period: dateAdd(params.offsetDate + MINUTE_IN_SECONDS, {
           months: -params.datePeriod
-        }).toFormat(periodFormat) + " to " + DateTime.fromMillis(params.offsetDate).toFormat(periodFormat),
+        }).toFormat(periodFormat) + " to " + DateTime.fromMillis(params.offsetDate).toFormat(
+          periodFormat
+        ),
         previousPeriod: dateAdd(params.offsetDate + MINUTE_IN_SECONDS, {
           months: -datePeriod2
         }).toFormat(periodFormat) + " to " + dateAdd(params.offsetDate + MINUTE_IN_SECONDS, {
@@ -7310,7 +7288,11 @@ var getRenderJSON = async (params) => {
         times.push(typeof t == "string" ? DateTime.fromISO(t) : t);
       });
     } else {
-      const r = await openhouseByMlsNumber(params.mlsId, params.mlsNumber);
+      const r = await openhouseByMlsNumber(
+        params.mlsId,
+        params.mlsNumber,
+        skipCache
+      );
       if (r.openHouses && Array.isArray(r.openHouses)) {
         r.openHouses.forEach((t) => {
           times.push(DateTime.fromISO(t.startDateUtc).toMillis());
@@ -7320,7 +7302,7 @@ var getRenderJSON = async (params) => {
     }
     params.openHouseTimes = times;
     root.single = await processListing(params);
-    let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0);
+    let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0, skipCache);
     if (mlsDisplay) {
       root.mlsDisplay = `<![CDATA[${mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ""}]]>`;
     }
@@ -7383,27 +7365,36 @@ var defaultRenderSettings = {
   propertyCaptionSingular: null,
   reRenderUntil: null
 };
-var areaFromMlsNumber = async (mlsNumber, mlsId, userId) => {
+var areaFromMlsNumber = async (mlsNumber, mlsId, userId, skipCache = false) => {
   const listing = await getListing(userId, mlsNumber, mlsId);
   if (listing && listing.preferredAreaId) {
-    return await areaName(userId, listing.preferredAreaId);
+    return await areaName(userId, listing.preferredAreaId, skipCache);
   }
-  const areas = await propertySurroundingAreas(mlsNumber, mlsId, userId);
+  const areas = await propertySurroundingAreas(
+    mlsNumber,
+    mlsId,
+    userId,
+    null,
+    null,
+    skipCache
+  );
   if (Array.isArray(areas) && areas.length > 0) {
-    const limitApnCount = (area) => area.areaApnCount >= 1e3 && area.areaApnCount <= 3e3;
-    let subset = areas.filter(
-      (area) => !["City", "CarrierRoute", "School"].includes(area.areaType) && limitApnCount(area)
+    let set = areas.filter(
+      (area) => !["City", "CarrierRoute", "School"].includes(area.areaType)
     );
-    if (subset && subset.length) {
-      return subset[0];
+    if (set.length === 0) {
+      return areas.pop();
+    }
+    let subset = set.filter(
+      (area) => area.areaApnCount >= 1e3 && area.areaApnCount <= 3e3
+    );
+    if (subset.length === 0) {
+      subset = set.filter((area) => area.areaType == "ZipCode");
+    }
+    if (subset.length > 0) {
+      return subset.shift();
     } else {
-      subset = areas.filter(limitApnCount);
-      if (subset && subset.length) {
-        return subset[0];
-      } else {
-        let a = areas.pop();
-        return a;
-      }
+      return set.shift();
     }
   }
 };
@@ -7450,8 +7441,13 @@ var setRenderDefaults = async (params) => {
     );
     if (params.area) {
       params.areaIds = [params.area.areaId];
+    } else {
+      throw new Exception(
+        `Failed to get areaId: ${JSON.stringify(params)}`
+      );
     }
   }
+  params.theme = params.theme ?? "_default";
   return params;
 };
 var userSetting = async (userId, setting) => {
@@ -7589,7 +7585,9 @@ var processAreas = async (params) => {
           { name: areaName2 ?? params?.area?.name ?? "NOT SET" },
           { geojson: `<![CDATA[${geoJSON}]]>` },
           { centerLat: boundary?.mapArea?.centerLatitude ?? 32.71 },
-          { centerLng: boundary?.mapArea?.centerLongitude ?? -117.16 },
+          {
+            centerLng: boundary?.mapArea?.centerLongitude ?? -117.16
+          },
           { image: areaImage ?? "" }
         ]
       };
@@ -7601,7 +7599,7 @@ var processAreas = async (params) => {
             prevData = propertyTypeData.previousPeriod;
           }
         });
-        if (propertyTypeData) {
+        if (propertyTypeData && propertyTypeData.minSale) {
           lowerByValue = propertyTypeData.minSale.salePrice + (propertyTypeData.medSalePrice - propertyTypeData.minSale.salePrice) / 2;
           upperByValue = propertyTypeData.maxSale.salePrice - (propertyTypeData.maxSale.salePrice - propertyTypeData.medSalePrice) / 1.25;
           lowerByValue = Math.floor(
@@ -7622,8 +7620,12 @@ var processAreas = async (params) => {
           const listings = [];
           mls_properties.sort((a, b) => {
             if (agentListings.includes(a.mlsNumber) === agentListings.includes(b.mlsNumber)) {
-              const aDate = DateTime.fromISO(a.soldDate ?? a.listDate);
-              const bDate = DateTime.fromISO(b.soldDate ?? b.listDate);
+              const aDate = DateTime.fromISO(
+                a.soldDate ?? a.listDate
+              );
+              const bDate = DateTime.fromISO(
+                b.soldDate ?? b.listDate
+              );
               return aDate === bDate ? 0 : aDate < bDate ? 1 : -1;
             } else {
               return agentListings.includes(a.mlsNumber) ? 1 : -1;
@@ -7653,8 +7655,12 @@ var processAreas = async (params) => {
                   size: p.sqft,
                   listPrice: p.priceHigh,
                   salePrice: p.salePrice ?? null,
-                  listedDate: DateTime.fromISO(p.listDate).toSeconds(),
-                  soldDate: p.soldDate ? DateTime.fromISO(p.soldDate).toSeconds() : null,
+                  listedDate: DateTime.fromISO(
+                    p.listDate
+                  ).toSeconds(),
+                  soldDate: p.soldDate ? DateTime.fromISO(
+                    p.soldDate
+                  ).toSeconds() : null,
                   dom: p.daysOnMarket,
                   thumb: p.photoPrimaryUrl
                 }
@@ -7670,7 +7676,10 @@ var processAreas = async (params) => {
               }
             }
           });
-          area._content.push({ _name: "listings", _content: listings });
+          area._content.push({
+            _name: "listings",
+            _content: listings
+          });
           const statistics = [
             {
               _name: "previous",
@@ -7682,7 +7691,7 @@ var processAreas = async (params) => {
                 averageListPriceForSold: prevData?.avgListPriceForSold,
                 averageSalePrice: prevData?.avgSalePrice,
                 averageDaysOnMarket: prevData?.avgDaysOnMarket,
-                medianSalePrice: prevData.medSalePrice,
+                medianSalePrice: prevData?.medSalePrice,
                 maxSalePrice: prevData?.maxSale?.salePrice,
                 minSalePrice: prevData?.minSale?.salePrice
               }
@@ -7772,22 +7781,22 @@ var processAreas = async (params) => {
             _attrs: {
               lookbackMonths: params.datePeriod,
               propertyType: params.propertyType,
-              averageDaysOnMarket: propertyTypeData.avgDOM,
-              averageListPrice: propertyTypeData.avgListPrice,
-              averageSalePrice: propertyTypeData.avgSalePrice,
-              medianSalePrice: propertyTypeData.medSalePrice,
-              activePropertyTypeCount: propertyTypeData.active,
-              averageListPriceForSold: propertyTypeData.avgListPriceForSold,
-              avgPricePerSqFtSold: propertyTypeData.avgPricePerSqFt,
-              avgPricePerSqFtList: propertyTypeData.avgSoldListingsListPricePerSqFt,
-              soldPropertyTypeCount: propertyTypeData.sold,
-              taxrollCount: propertyTypeData.taxroll,
-              turnOver: propertyTypeData.turnOver,
-              maxSalePrice: propertyTypeData?.maxSale?.salePrice,
-              minSalePrice: propertyTypeData?.minSale?.salePrice,
-              marketTotalSoldVolume: propertyTypeData?.marketTotalSoldVolume,
-              averageYearsInHome: propertyTypeData?.avgYearsInHome,
-              ownerOccupancy: propertyTypeData?.ownerOccupancy
+              averageDaysOnMarket: propertyTypeData?.avgDOM ?? 0,
+              averageListPrice: propertyTypeData?.avgListPrice ?? 0,
+              averageSalePrice: propertyTypeData?.avgSalePrice ?? 0,
+              medianSalePrice: propertyTypeData?.medSalePrice ?? 0,
+              activePropertyTypeCount: propertyTypeData?.active ?? 0,
+              averageListPriceForSold: propertyTypeData?.avgListPriceForSold ?? 0,
+              avgPricePerSqFtSold: propertyTypeData?.avgPricePerSqFt ?? 0,
+              avgPricePerSqFtList: propertyTypeData?.avgSoldListingsListPricePerSqFt ?? 0,
+              soldPropertyTypeCount: propertyTypeData?.sold ?? 0,
+              taxrollCount: propertyTypeData?.taxroll ?? 0,
+              turnOver: propertyTypeData?.turnOver ?? 0,
+              maxSalePrice: propertyTypeData?.maxSale?.salePrice ?? 0,
+              minSalePrice: propertyTypeData?.minSale?.salePrice ?? 0,
+              marketTotalSoldVolume: propertyTypeData?.marketTotalSoldVolume ?? 0,
+              averageYearsInHome: propertyTypeData?.avgYearsInHome ?? 0,
+              ownerOccupancy: propertyTypeData?.ownerOccupancy ?? 0
             },
             _content: statistics
           });
@@ -7880,11 +7889,15 @@ var processListing = async (params) => {
         if (ts2 > NOW && ts1 < timeAgo({ days: 7 })) {
           let session = { _name: "session", _attrs: {} };
           Object.keys(timeAttrbs).forEach(
-            (key) => session._attrs[key] = DateTime.fromMillis(ts1, tz).toFormat(
-              timeAttrbs[key]
-            )
+            (key) => session._attrs[key] = DateTime.fromMillis(
+              ts1,
+              tz
+            ).toFormat(timeAttrbs[key])
           );
-          session._attrs["ends"] = DateTime.fromMillis(ts2, tz).toFormat("t");
+          session._attrs["ends"] = DateTime.fromMillis(
+            ts2,
+            tz
+          ).toFormat("t");
           oh._content.push(session);
         }
       }
@@ -7918,7 +7931,9 @@ var processListing = async (params) => {
         { city: listing.city ?? "" },
         { state: listing.state ?? "" },
         { zip: listing.zip ?? "" },
-        { streetName: listing.streetName ?? listing.listingAddress ?? "" }
+        {
+          streetName: listing.streetName ?? listing.listingAddress ?? ""
+        }
       ]
     });
     const dimensions = [];
@@ -7989,14 +8004,19 @@ var processCollection = async (params) => {
         await Promise.all(
           sectionData.assets.map(async (asset) => {
             if (!asset.hide) {
-              const assetData = await assetSetting(asset.asset, "all");
+              const assetData = await assetSetting(
+                asset.asset,
+                "all"
+              );
               if (Object.keys(assetData).length > 0) {
                 const size = asset.size ?? (Array.isArray(assetData?.sizes) && assetData.sizes[0]) ?? DEFAULT_SIZE;
                 let qrUrl = asset.qrDestination ?? null;
                 if (!qrUrl && asset.qrUrl) {
                   const linkAsset = collectionData.sections.map(
                     async (section2) => section2.assets.find(
-                      async (a) => a.asset?.startsWith("landing-pages") && a.asset == asset.qrUrl
+                      async (a) => a.asset?.startsWith(
+                        "landing-pages"
+                      ) && a.asset == asset.qrUrl
                     )
                   );
                   if (linkAsset) {
@@ -8098,7 +8118,11 @@ var preCallGenieAPIs = async (params) => {
         params.userId
       );
       await agentProperties(params.userId, false);
-      await areaFromMlsNumber(params.mlsNumber, params.mlsId, params.userId);
+      await areaFromMlsNumber(
+        params.mlsNumber,
+        params.mlsId,
+        params.userId
+      );
       await getListing(params.userId, params.mlsNumber, params.mlsId);
     }
     await Promise.all(
@@ -8161,7 +8185,10 @@ var getThemes = async () => {
           name: "Theme Name",
           style: "Theme Style"
         });
-        const slug = t.Key.replace(".css", "").replace("_assets/themes/", "");
+        const slug = t.Key.replace(".css", "").replace(
+          "_assets/themes/",
+          ""
+        );
         themes[slug] = data;
       }
     })
@@ -8176,7 +8203,10 @@ var getAssets = async () => {
       if (t.Size > 0) {
         const xsl = await fromS3(t.Key);
         const data = getFileData(xsl, ASSET_HEADERS);
-        const slug = t.Key.replace(".xsl", "").replace("_assets/_xsl/", "");
+        const slug = t.Key.replace(".xsl", "").replace(
+          "_assets/_xsl/",
+          ""
+        );
         assets[slug] = data;
       }
     })
@@ -8502,7 +8532,7 @@ var get_area_properties = async (params) => {
     mlsGroupId,
     params.areaId,
     new Date(
-      Date.now() - (params.areaPeriod || 12) * 30 * 24 * 60 * 60 * 1e3
+      Date.now() - parseInt(params.areaPeriod ?? 12) * 30 * 24 * 60 * 60 * 1e3
     ).toISOString(),
     false
   );
@@ -8642,7 +8672,7 @@ var assetSetting = async (assetKey, setting = null) => {
 };
 var getFileData = (buffer, headers) => {
   let result = {};
-  if (typeof buffer !== void 0) {
+  if (typeof buffer !== "undefined") {
     const KB_IN_BYTES = 1024;
     let fileData = buffer.slice(0, KB_IN_BYTES).toString("utf8") || "";
     fileData = fileData.replace(/\r/g, "\n");
@@ -8755,7 +8785,7 @@ var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
   if (timeout > 0) {
     await toS3(`_cache/${key}`, Buffer.from(data), {
       genieCache: endpoint?.toString(),
-      ExpireFile: "GenieCache",
+      GenieExpireFile: "GenieCache",
       timeout
     });
   }
@@ -8765,19 +8795,34 @@ var cache_key = (endpoint, params, verb) => {
   const hash = import_crypto.default.createHash("md5").update(`${endpoint}.${verb}.${strParams}`).digest("hex");
   return `genie-${hash}.json`;
 };
-var areaName = async (userId, areaId) => await call_api("GetAreaName", { areaId, userId });
-var areaStatisticsWithPrevious = async (userId, areaId, month_count = 12, end_timestamp = null) => await call_api("GetAreaStatisticsWithPreviousInterval", {
-  areaId,
-  userId,
-  numberOfMonthsToLookBack: month_count,
-  endDate: dateFormat(end_timestamp)
-});
-var areaStatisticsMonthly = async (userId, areaId, years = 1) => await call_api("GetAreaStatisticsSoldMonthly", {
-  areaId,
-  userId,
-  years
-});
-var agentProperties = async (userId, includeOpenHouses = false) => {
+var areaName = async (userId, areaId, skipCache = false) => await call_api("GetAreaName", { areaId, userId }, skipCache);
+var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache = false) => {
+  month_count = month_count ?? 12;
+  return await call_api(
+    "GetAreaStatisticsWithPreviousInterval",
+    {
+      areaId,
+      userId,
+      numberOfMonthsToLookBack: month_count,
+      endDate: dateFormat(end_timestamp)
+    },
+    skipCache
+  );
+};
+var areaStatisticsMonthly = async (userId, areaId, years, skipCache = false) => {
+  years = years ?? 1;
+  return await call_api(
+    "GetAreaStatisticsSoldMonthly",
+    {
+      areaId,
+      userId,
+      years
+    },
+    skipCache
+  );
+};
+var agentProperties = async (userId, includeOpenHouses, skipCache = false) => {
+  includeOpenHouses = includeOpenHouses ?? false;
   const callback = (results) => {
     if (results.properties) {
       results.properties = [...new Set(results.properties)];
@@ -8797,22 +8842,33 @@ var agentProperties = async (userId, includeOpenHouses = false) => {
   return await call_api(
     "GetAgentProperties",
     { userId, includeOpenHouses },
+    skipCache,
     "POST",
     callback
   );
 };
-var getAssessorProperty = async (property_id, agent_id) => await call_api("GetAssessorPropertyDetail", {
-  PropertyId: property_id,
-  userId: agent_id
-});
-var getAssessorPropertiesDetail = async (address_id) => await call_api(`GetAssessorPropertiesDetail/${address_id}`);
-var getAreaBoundary = async (areaId) => await call_api(`GetAreaBoundary/${areaId}`, null, "POST");
-var getListing = async (user_id, mls_number, mls_id = -1) => {
+var getAssessorProperty = async (property_id, agent_id, skipCache = false) => await call_api(
+  "GetAssessorPropertyDetail",
+  {
+    PropertyId: property_id,
+    userId: agent_id
+  },
+  skipCache
+);
+var getAssessorPropertiesDetail = async (address_id, skipCache = false) => await call_api(
+  `GetAssessorPropertiesDetail/${address_id}`,
+  null,
+  skipCache
+);
+var getAreaBoundary = async (areaId, skipCache = false) => await call_api(`GetAreaBoundary/${areaId}`, null, skipCache, "POST");
+var getListing = async (user_id, mls_number, mls_id, skipCache = false) => {
+  mls_id = mls_id ?? -1;
   let listing;
   if (mls_id > -1) {
     const r = await call_api(
       "GetUserMlsListing",
       { mlsId: mls_id, mlsNumber: mls_number, userId: user_id },
+      skipCache,
       "POST"
     );
     listing = r.listing ?? null;
@@ -8823,6 +8879,7 @@ var getListing = async (user_id, mls_number, mls_id = -1) => {
     const r = await call_api(
       "GetListingByMlsNumber",
       { mlsNumber: mls_number },
+      skipCache,
       "POST"
     );
     listing = r?.listings[0] ?? null;
@@ -8831,24 +8888,29 @@ var getListing = async (user_id, mls_number, mls_id = -1) => {
     return listing;
   }
 };
-var mlsDisplaySettings = async (mls_id) => await call_api(`GetMlsDisplaySettings/${mls_id}`, null, "POST");
-var mlsProperties = async (mlsGroupID, area_id, startDate = null, include_open_houses = false) => {
+var mlsDisplaySettings = async (mls_id, skipCache = false) => await call_api(`GetMlsDisplaySettings/${mls_id}`, null, skipCache, "POST");
+var mlsProperties = async (mlsGroupID, area_id, startDate = null, includeOpenHouses, skipCache = false) => {
+  includeOpenHouses = includeOpenHouses ?? false;
   startDate = startDate ?? dateFormat(timeAgo({ months: -1 }));
   let r;
   try {
-    r = await call_api("GetMlsProperties", {
-      mlsGroupID,
-      areaID: area_id,
-      startDate,
-      includeOpenHouses: include_open_houses
-    });
+    r = await call_api(
+      "GetMlsProperties",
+      {
+        mlsGroupID,
+        areaID: area_id,
+        startDate,
+        includeOpenHouses
+      },
+      skipCache
+    );
   } catch (err) {
     console.log("GetMlsProperties failed", err);
   }
   return r ? r?.properties ?? { success: false } : { success: false };
 };
-var openhouseByMlsNumber = async (mlsID, mlsNumber) => await call_api("GetOpenHouseByMlsNumber", { mlsID, mlsNumber });
-var getPropertyBoundary = async (mls_id, mls_number, fips, property_id) => {
+var openhouseByMlsNumber = async (mlsID, mlsNumber, skipCache = false) => await call_api("GetOpenHouseByMlsNumber", { mlsID, mlsNumber }, skipCache);
+var getPropertyBoundary = async (mls_id, mls_number, fips, property_id, skipCache = false) => {
   const args = {};
   if (mls_id) {
     args["MlsID"] = mls_id;
@@ -8862,16 +8924,22 @@ var getPropertyBoundary = async (mls_id, mls_number, fips, property_id) => {
   if (property_id) {
     args["PropertyID"] = property_id;
   }
-  return await call_api("GetPropertyBoundary", args);
+  return await call_api("GetPropertyBoundary", args, skipCache);
 };
-var propertySurroundingAreas = async (mls_number, mls_id, user_id, fips = "", property_id = -1) => {
-  const r = await call_api("GetPropertySurroundingAreas", {
-    AspNetUserId: user_id,
-    mlsID: mls_id,
-    mlsNumber: mls_number,
-    fips,
-    propertyID: property_id
-  });
+var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, property_id, skipCache = false) => {
+  const propertyID = property_id ?? -1;
+  const fips = strFips ?? "";
+  const r = await call_api(
+    "GetPropertySurroundingAreas",
+    {
+      aspNetUserId: user_id,
+      mlsID: mls_id,
+      mlsNumber: mls_number,
+      fips,
+      propertyID
+    },
+    skipCache
+  );
   return r.success && r.areas;
 };
 var getShortData = async (shortUrlDataId, token, agentId = null) => {
@@ -8958,20 +9026,28 @@ var getQRProperty = async (qrID, token) => {
   }
 };
 var createQRCodeLead = async (args) => {
-  const r = await call_api("CreateQRCodeLead", args, "POST");
+  const r = await call_api("CreateQRCodeLead", args, true, "POST");
   if (!r.success) {
     console.log("Failed to capture lead: ", r);
   }
   return r;
 };
-var getQRCodeLead = async (qrCodeId, token) => await call_api("GetQRCodeLead", { qrCodeId, token }, "POST");
-var call_api = async (endpoint, params, verb = "POST", pre_cache = null) => {
+var getQRCodeLead = async (qrCodeId, token, skipCache = false) => await call_api(
+  "GetQRCodeLead",
+  { qrCodeId, token },
+  skipCache,
+  "POST"
+);
+var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_cache = null) => {
   params = params ?? {};
   if (impersonater.id) {
     params.ImpersonatedByAspNetUserId = impersonater.id;
   }
   const cacheKey = cache_key(endpoint, params, verb);
-  let result = await from_cache(cacheKey, endpoint);
+  let result;
+  if (!skipCache) {
+    result = await from_cache(cacheKey, endpoint);
+  }
   if (!result) {
     params.consumer = 2;
     result = await fetch(API_URL + endpoint, {
@@ -8991,14 +9067,12 @@ var call_api = async (endpoint, params, verb = "POST", pre_cache = null) => {
         result = pre_cache(result);
       }
       to_cache(JSON.stringify(result), endpoint, cacheKey);
-      console.log("cache to", endpoint, cacheKey);
     } else {
       if (typeof result !== "object" || !result?.responseDescription || result.responseDescription !== "Asset Url has already been set") {
         console.log(`GenieAPI error (${endpoint}): `, result);
       }
     }
   } else {
-    console.log("cache from", endpoint, cacheKey);
   }
   return result;
 };
@@ -9010,6 +9084,7 @@ var KEEP_FOR = process.env?.KEEP_FOR || 8;
 var WEEK_IN_MILLISECONDS = 60 * 60 * 24 * 1e3;
 var RENDER_VERSION = 100;
 var JSON_MIME = "application/json";
+var TXT_MIME = "text/plain";
 var api = async (event) => {
   let routes = [], routeParams = [];
   let response = {
@@ -9022,6 +9097,7 @@ var api = async (event) => {
   if (event.Records) {
     for (const record of event.Records) {
       if (record.eventSource == "aws:sqs") {
+        console.log("@c", record.body, record.messageAttributes);
         switch (record.body) {
           case "clear-cache":
             let tempParams = {};
@@ -9054,7 +9130,9 @@ var api = async (event) => {
                       ...override
                     };
                     if (override.areaId) {
-                      s3Params.areaIds = [override.areaId];
+                      s3Params.areaIds = [
+                        override.areaId
+                      ];
                     }
                   } else {
                     s3Params[key] = record.messageAttributes[key].dataType == "String" ? record.messageAttributes[key].stringValue : "";
@@ -9093,7 +9171,6 @@ var api = async (event) => {
   for (let i = 0; i < routes.length; i++) {
     const route = routes[i];
     let params = routeParams[i];
-    console.log("route params", route, params);
     if (params) {
       try {
         if (params?.impersonaterId)
@@ -9105,6 +9182,17 @@ var api = async (event) => {
           );
         } else {
           switch (route) {
+            case "/test":
+              console.log(params);
+              response.body = await propertySurroundingAreas(
+                params.mlsNumber,
+                params.mlsId ?? 0,
+                params.userId,
+                null,
+                null,
+                true
+              );
+              break;
             case "/thumbnail":
               if (params.url) {
                 if (params.width) {
@@ -9204,7 +9292,9 @@ var api = async (event) => {
               };
               break;
             case "/save-collection":
-              const collectionSaved = await saveCollection(params);
+              const collectionSaved = await saveCollection(
+                params
+              );
               response.body = {
                 success: true,
                 collection: collectionSaved
@@ -9217,40 +9307,6 @@ var api = async (event) => {
             case "/get-assets":
               const assets = await getAssets();
               response.body = { success: true, ...assets };
-              break;
-            case "/clear-cache":
-              if (CLOUDFLARE_KEY) {
-                const prefixes = [];
-                if (params.renderId) {
-                  const host = genieGlobals.GENIE_HOST.replace(
-                    "https://",
-                    ""
-                  );
-                  prefixes.push(
-                    `${host}genie-collection/${params.renderId}`
-                  );
-                  prefixes.push(
-                    `${host}genie-pages/${params.renderId}`
-                  );
-                  prefixes.push(
-                    `${host}genie-files/${params.renderId}`
-                  );
-                }
-                if (prefixes.length > 0) {
-                  const options = {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                      "X-Auth-Key": CLOUDFLARE_KEY
-                    },
-                    body: `{"prefixes": ["${prefixes}"}`
-                  };
-                  const r = await fetch(
-                    "https://api.cloudflare.com/client/v4/zones/identifier/purge_cache",
-                    options
-                  );
-                }
-              }
               break;
             case "/log":
               if (params.renderId && params.assetId) {
@@ -9279,26 +9335,6 @@ var api = async (event) => {
                 };
               }
               break;
-            case "/change-retention":
-              if (!params.s3Key || !params.keepFor) {
-                response.body = {
-                  success: false,
-                  error: "s3Key are keepFor are required parameters"
-                };
-              } else {
-                const r = await setS3Retention(
-                  `_processing/${params.s3Key}`,
-                  new Date(
-                    Date.now() + WEEK_IN_MILLISECONDS * params.keepFor
-                  )
-                );
-                response.body = {
-                  params,
-                  success: true,
-                  result: r
-                };
-              }
-              break;
             case "/refresh-renders":
               let result = [];
               let isTruncated = true;
@@ -9315,27 +9351,24 @@ var api = async (event) => {
                       if (item.Key.endsWith("html")) {
                         const parts = item.Key.split("/");
                         const renderId = parts[1];
+                        parts.pop();
+                        const asset = parts.pop();
                         try {
                           const renderPath = `_processing/${renderId}/render.json`;
                           const renderExists = await headObject(
                             renderPath
                           );
-                          if (renderExists) {
-                            console.log(renderPath);
+                          if (renderExists?.ContentType == "application/json") {
                             try {
-                              const json = await jsonFromS3(
-                                renderPath
-                              );
-                              const tags = await getTags(
-                                item.Key
-                              );
-                              await prepareAsset(
-                                tags.asset,
-                                {
-                                  ...json,
-                                  ...tags,
-                                  size: "landing-page"
-                                }
+                              const p = {
+                                asset: `landing-pages/${asset}`,
+                                overrideKey: item.Key,
+                                collection: null
+                              };
+                              result.push(p);
+                              return await reRender(
+                                renderId,
+                                p
                               );
                             } catch {
                             }
@@ -9346,20 +9379,20 @@ var api = async (event) => {
                       }
                     })
                   );
-                  isTruncated = response.IsTruncated;
-                  continuationToken = response.NextContinuationToken;
+                  isTruncated = r.IsTruncated;
+                  continuationToken = r.NextContinuationToken;
                 } catch (err) {
                   console.error("refresh Error", err);
                   break;
                 }
               }
               response.body = result;
-              console.log(response.body);
               break;
             case "/re-render":
               if (params.renderId) {
                 const r = await reRender(params.renderId, {
-                  ...params
+                  ...params,
+                  skipCache: true
                 });
                 if (r) {
                   response.body.success = true;
@@ -9380,7 +9413,9 @@ var api = async (event) => {
                 await Promise.all(
                   r.map(async (t) => {
                     if (t.Key.endsWith("render.json") && t.Size > 0) {
-                      const json = await jsonFromS3(t.Key);
+                      const json = await jsonFromS3(
+                        t.Key
+                      );
                       if (params.assetId) {
                       } else if (
                         // ToDo mlsId must match as well as as mlsNumber
@@ -9389,7 +9424,7 @@ var api = async (event) => {
                         ))
                       ) {
                         reRenders.push(
-                          r.Key.split("/")[1]
+                          t.Key.split("/")[1]
                         );
                       }
                     }
@@ -9400,13 +9435,14 @@ var api = async (event) => {
                     (value, index, array) => array.indexOf(value) === index
                   );
                   for (const index in reRenders) {
-                    const r2 = await reRender(
-                      reRenders[index],
-                      params
-                    );
+                    await reRender(reRenders[index], {
+                      ...params,
+                      skipCache: true
+                    });
                   }
                   response.body.success = true;
-                  response.body.msg = `${reRenders.length} re-renders under way`;
+                  response.body.msg = `${reRenders.length} re-renders underway`;
+                  response.body.data = reRenders;
                 }
                 break;
               } else {
@@ -9440,6 +9476,7 @@ var api = async (event) => {
                 const collection = await getCollection(
                   params.collection
                 );
+                console.log("collection", collection);
                 if (collection) {
                   await prepareAsset(
                     `collections/${collection.template}`,
@@ -9478,7 +9515,10 @@ var api = async (event) => {
               } else if (params.assets) {
                 await Promise.all(
                   params.assets.map(async (asset) => {
-                    return await prepareAsset(asset, params);
+                    return await prepareAsset(
+                      asset,
+                      params
+                    );
                   })
                 );
               } else {
@@ -9489,7 +9529,10 @@ var api = async (event) => {
               try {
                 await validateRenderParams(params);
                 params.renderId = (0, import_crypto2.randomUUID)();
-                params.theme = params.theme ?? await userSetting(params.userId, "theme");
+                params.theme = params.theme ?? await userSetting(
+                  params.userId,
+                  "theme"
+                ) ?? "_default";
                 const { s3Key } = await getS3Key(
                   params.asset || params.assets && params.assets[0] || params.collection && "collection",
                   params
@@ -9501,22 +9544,19 @@ var api = async (event) => {
                 );
                 const prepareKey = `_processing/${params.renderId}/render.json`;
                 params = { ...params, version: RENDER_VERSION };
-                const r = await toS3(
+                await toS3(
                   prepareKey,
                   Buffer.from(JSON.stringify(params)),
                   { "Genie-Delete": "extended" },
                   JSON_MIME
                 );
-                await queueMsg("prepare", {
-                  renderId: {
-                    DataType: "String",
-                    StringValue: params.renderId
-                  }
-                });
                 if (params.collection || params.asset?.startsWith("landing-pages")) {
                   await copyObject(
                     "_assets/_reference/collection-rendering.html",
-                    s3Key
+                    s3Key,
+                    null,
+                    "text/html",
+                    "max-age=0"
                   );
                 } else if (params.assets) {
                   const availableAt = [];
@@ -9531,6 +9571,31 @@ var api = async (event) => {
                   );
                   response.body.availableAt = availableAt;
                 }
+                await queueMsg("prepare", {
+                  renderId: {
+                    DataType: "String",
+                    StringValue: params.renderId
+                  }
+                });
+                let lookUpKeys = [
+                  `users/${params.userId}`
+                ];
+                if (params.mlsNumber) {
+                  lookUpKeys.push(`mlsNumber/${params.mlsId}/${params.mlsNumber}`);
+                }
+                if (params.areaIds) {
+                  lookUpKeys = lookUpKeys.concat(params.areaIds.map((areaId) => `areas/${areaId}`));
+                }
+                Promise.all(
+                  lookUpKeys.map(
+                    async (key) => await toS3(
+                      `_lookup/${key}/${params.renderId}`,
+                      Buffer.from("@"),
+                      null,
+                      TXT_MIME
+                    )
+                  )
+                );
                 if (s3Key) {
                   response.body.success = true;
                   response.body.availableAt = response.body.availableAt ?? // Allows earlier code to set custom version of this
@@ -9554,7 +9619,7 @@ var api = async (event) => {
               error: error2.toString()
             })
           ),
-          null,
+          { GenieExpireFile: "error" },
           JSON_MIME
         );
         response.body.error = error2;
@@ -9568,7 +9633,7 @@ var api = async (event) => {
   return response;
 };
 var renderKeyParams = async (params) => {
-  let listing, areaId = params.areaId, propertyType = 0, listingStatus = "";
+  let listing, areaId = params.area?.areaId ?? params.areaId, propertyType = 0, listingStatus = "";
   if (params.mlsNumber) {
     if (!params.propertyType || !params.listingStatus) {
       listing = await getListing(
@@ -9606,6 +9671,7 @@ var renderKeyParams = async (params) => {
 var processAsset = async (params) => {
   const prepareKey = `_processing/${params.renderId}/render.json`;
   let s3Params = await jsonFromS3(prepareKey);
+  console.log("processAsset", s3Params, params);
   if (s3Params) {
     const renderRoot = await getRenderJSON({ ...s3Params, ...params });
     return {
@@ -9661,6 +9727,12 @@ var prepareAsset = async (asset, params) => {
       default:
         suffix = "png";
     }
+    await toS3(
+      `_lookup/asset/${asset}/${params.renderId}`,
+      Buffer.from("@"),
+      null,
+      TXT_MIME
+    );
     await Promise.all(
       pages.map(async (p, i) => {
         const pageParams = {
@@ -9671,7 +9743,7 @@ var prepareAsset = async (asset, params) => {
           isSample: Boolean(params.isSample),
           size
         };
-        pageParams.themeShade = pageParams.theme.includes("dark") ? "Dark" : "Light";
+        pageParams.themeShade = pageParams.theme?.includes("dark") ? "Dark" : "Light";
         if (settings.permission) {
           const user = await getUser(params.userId);
           pageParams.isSample = !user.permissions.includes(
@@ -9773,18 +9845,7 @@ var prepareAsset = async (asset, params) => {
           `_processing/${params.renderId}/${cleanKey}${pageParams.asset.startsWith("landing-pages") ? `-${(0, import_path.basename)(pageParams.asset)}` : ""}-p${i}-prep.json`,
           Buffer.from(JSON.stringify(render)),
           { "Genie-Delete": true },
-          JSON_MIME,
-          null
-          /*
-          {
-              ObjectLockMode: 'GOVERNANCE',
-              ObjectLockRetainUntilDate: new Date(
-                  Date.now() + 60 * 60 * 24 * 1000
-              ),
-              ContentMD5: createHash('md5')
-                  .update(JSON.stringify(render))
-                  .digest('base64'),
-          }*/
+          JSON_MIME
         );
       })
     );
@@ -9949,6 +10010,7 @@ var getS3Key = async (asset, params) => {
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   JSON_MIME,
+  TXT_MIME,
   api,
   getS3Key,
   validateRenderParams
