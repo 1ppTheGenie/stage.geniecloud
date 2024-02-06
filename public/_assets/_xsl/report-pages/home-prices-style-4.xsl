@@ -111,10 +111,10 @@
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="number((( //statistics/@maxSalePrice - //statistics/previous/@maxSalePrice ) div //statistics/previous/@maxSalePrice) ) > 0">
-								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-icon' )" />
+								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#rrow-up-green' )" />
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
+								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#arrow-down-red' )" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
