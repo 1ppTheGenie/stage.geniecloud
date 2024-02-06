@@ -490,8 +490,62 @@ c2.98,2.09,5.61,4.09,7.89,5.91l10.84-9.41c5.81-5.04,14.6-4.42,19.64,1.39C367.65,
 	</symbol>
 
 	<symbol id="arrow-up">
-		<svg viewBox="0 0 256 512" style="transform:scaleY(-1)">
-			<path d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"/>
+		<svg viewBox="0 0 256 512">
+			<path d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"/>
+		</svg>
+	</symbol>
+
+
+	<symbol id="arrow-down-red">
+		<svg viewBox="0 0 500 500">
+			<style type="text/css">
+	.st0{fill:none;stroke:url(#SVGID_1_);stroke-width:60;stroke-miterlimit:10;}
+	.st1{fill:url(#SVGID_2_);}
+	.st2{fill:url(#SVGID_3_);}
+	.st3{fill:url(#SVGID_4_);}
+			</style>
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="483.04" y1="250" x2="16.96" y2="250" gradientTransform="matrix(1 0 0 -1 0 500)">
+				<stop offset="0" style="stop-color:#EE493C" />
+				<stop offset="1" style="stop-color:#DA2728" />
+
+			</linearGradient>
+			<circle class="st0" cx="250" cy="250" r="203.04" />
+
+			<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="160.71" y1="253.35" x2="342.96" y2="253.35" gradientTransform="matrix(1 0 0 -1 0 500)">
+				<stop offset="0" style="stop-color:#DB2929" />
+				<stop offset="1" style="stop-color:#ED463B" />
+
+			</linearGradient>
+			<path class="st1" d="M250,352.4l-89.29-119.34h42.84V140.9c16.03,0,32.06,0,48.09,0c14.96,0,29.92,0,44.88,0
+c0,30.36,0,60.72,0,91.08h46.44L250,352.4z" />
+			<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="203.4" y1="386.5" x2="296.4" y2="386.5" gradientTransform="matrix(1 0 0 -1 0 500)">
+				<stop offset="0" style="stop-color:#DB2929" />
+				<stop offset="1" style="stop-color:#ED483B" />
+
+			</linearGradient>
+			<rect x="203.4" y="103.96" class="st2" width="93" height="19.08" />
+
+			<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="203.4" y1="417.729" x2="296.4" y2="417.729" gradientTransform="matrix(1 0 0 -1 0 500)">
+				<stop offset="0" style="stop-color:#DB2929" />
+				<stop offset="0.9693" style="stop-color:#ED483B" />
+				<stop offset="1" style="stop-color:#EBA123" />
+
+			</linearGradient>
+			<path class="st3" d="M203.4,89.88c0.07-2.92,0.15-5.84,0.22-8.76c17.84-6.36,42.13-6.36,42.13-6.36s23.58-1.41,50.64,6.11
+c0,3,0,6,0,9H203.4z" />
+		</svg>
+	</symbol>
+
+	<symbol id="arrow-up-green">
+		<svg viewBox="0 0 500 500">
+			<circle stroke="#8bad57" stroke-width="60" stroke-miter-limit="10" cx="250" cy="250" r="203.04" fill-opacity="0" />
+			<path fill="#8bad57" d="M250,147.6l-89.29,119.34h42.84v92.16c16.03,0,32.06,0,48.09,0c14.96,0,29.92,0,44.88,0
+c0-30.36,0-60.72,0-91.08h46.44L250,147.6z" />
+
+			<rect x="203.4" y="376.96" fill="#8bad57" width="93" height="19.08" />
+
+			<path fill="#8bad57" d="M203.4,410.12c0.07,2.92,0.15,5.84,0.22,8.76c17.84,6.36,42.13,6.36,42.13,6.36s23.58,1.41,50.64-6.11
+c0-3,0-6,0-9H203.4z" />
 		</svg>
 	</symbol>
 
@@ -514,6 +568,7 @@ c7.16,0,12.96,5.8,12.96,12.96v40.63C394.41,86.39,388.61,92.19,381.45,92.19z" />
 c-4.76,0-8.62-3.86-8.62-8.62v-61.68c0-4.76,3.86-8.62,8.62-8.62h55.56c4.76,0,8.62,3.86,8.62,8.62V222.47z" />
 		</svg>
 	</symbol>
+
 
 	<symbol id="barcode-hand">
 		<svg viewBox="0 0 179 268">
