@@ -74,7 +74,9 @@
 
 					<xsl:variable name="yOffset" select="42.5 + (5 * position())" />
 					<text x="50%" class="center middle bold" font-size="115%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-background)" data-max-width="58%">
-						<xsl:attribute name="y" value="concat( yOffset, '%')" />
+						<xsl:attribute name="y">
+							<xsl:value-of select="concat( yOffset, '%')" />
+						</xsl:attribute>
 						<xsl:value-of select="concat( @dow, ', ', @month, ' ', @date, ' - ', @starts, ' to ',@ends)" />
 					</text>
 				</xsl:for-each>
