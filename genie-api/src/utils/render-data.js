@@ -932,7 +932,9 @@ const processListing = async params => {
                     session._attrs['ends'] = DateTime.fromMillis(
                         ts2,
                         tz
-                    ).toFormat('t');
+                    ).toFormat( 't' );
+                    
+                    session._attrs['ms'] = ts1;
 
                     oh._content.push(session);
                 }
