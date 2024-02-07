@@ -14,7 +14,7 @@
 				<xsl:value-of select="concat( 'genie-landing-page ', //output/@theme, ' asset-v', //output/@assetVersion )" />
 			</xsl:attribute>
 
-			<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GCVGRFNGMD">				<!-- Google tag (gtag.js) --></script>
+			<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GCVGRFNGMD"><!-- Google tag (gtag.js) --></script>
 			<script>
 				<xsl:value-of disable-output-escaping="yes" select="'window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag(`js`, new Date()); gtag(`config`, `G-GCVGRFNGMD`);'" />
 			</script>
