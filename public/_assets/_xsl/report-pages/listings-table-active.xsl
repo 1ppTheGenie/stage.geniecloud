@@ -8,7 +8,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<style>
@@ -46,6 +46,9 @@
 			</text>
 
 			<xsl:for-each select="//listings/listing[@state='active']">
+			    <xsl:sort select="@isAgent" data-type="number" order="descending"/>
+    			<xsl:sort select="@sortDate" data-type="number" order="descending"/>
+
 				<xsl:if test="position() &lt;= 9">
 					<rect style="stroke:var(--active-green);" fill-opacity="0" x="2%" width="96%" height="6%">
 						<xsl:attribute name="y">
@@ -54,7 +57,7 @@
 					</rect>
 
 					<xsl:if test="@dom &lt;= $domNew">
-<circle cx="3.5%" r="1.2%" style="fill:var(--new-blue);">
+						<circle cx="3.5%" r="1.2%" style="fill:var(--new-blue);">
 							<xsl:attribute name="cy">
 								<xsl:value-of select="concat( 2.1 + ( position() * 6 ), '%' )" />
 							</xsl:attribute>
@@ -111,7 +114,7 @@
 		</g>
 
 		<xsl:call-template name="listings-footer">
-<xsl:with-param name="nodes" select="$listingsTotalActive" />
+			<xsl:with-param name="nodes" select="$listingsTotalActive" />
 
 			<xsl:with-param name="summary" select="' active listings.'" />
 		</xsl:call-template>

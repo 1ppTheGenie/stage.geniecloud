@@ -49,6 +49,9 @@
 				</text>
 
 				<xsl:for-each select="//listings/listing[@state='pending']">
+					<xsl:sort select="@isAgent" data-type="number" order="descending"/>
+					<xsl:sort select="@sortDate" data-type="number" order="descending"/>
+
 					<xsl:if test="position() &lt;= 9">
 						<rect style="stroke:var(--pending-yellow);" fill-opacity="0" x="2%" width="96%" height="6%">
 							<xsl:attribute name="y">

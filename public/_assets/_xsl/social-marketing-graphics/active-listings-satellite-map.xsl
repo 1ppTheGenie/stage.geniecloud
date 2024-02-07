@@ -19,7 +19,8 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing[@state='active']">
-<xsl:sort order="ascending" select="@state" />
+			    <xsl:sort select="@isAgent" data-type="number" order="descending"/>
+    			<xsl:sort select="@sortDate" data-type="number" order="descending"/>
 
 				<xsl:if test="position() &lt;= 50">
 					<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;', dom:&quot;, @dom, &quot;},&quot; )" />

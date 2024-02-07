@@ -33,6 +33,9 @@
 
 		<g style="transform: translate(3.7%,27.5%)">
 			<xsl:for-each select="//listings/listing[@state='pending']">
+			    <xsl:sort select="@isAgent" data-type="number" order="descending"/>
+    			<xsl:sort select="@sortDate" data-type="number" order="descending"/>
+
 				<xsl:if test="position() &lt;= 8">
 					<g width="22%" height="20%">
 						<xsl:attribute name="style">

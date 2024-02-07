@@ -52,6 +52,9 @@
 				</text>
 
 				<xsl:for-each select="//listings/listing[@state='sold']">
+					<xsl:sort select="@isAgent" data-type="number" order="descending"/>
+					<xsl:sort select="@sortDate" data-type="number" order="descending"/>
+
 					<xsl:if test="position() &lt;= 8">
 						<rect style="stroke:var(--sold-red);stroke-width:1px;" shape-rendering="geometricPrecision" fill-opacity="0" x="2%" width="96%" height="6%">
 							<xsl:attribute name="y">

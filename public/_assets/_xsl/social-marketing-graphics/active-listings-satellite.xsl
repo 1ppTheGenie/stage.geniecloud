@@ -15,6 +15,9 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing[@state='active']">
+			    <xsl:sort select="@isAgent" data-type="number" order="descending"/>
+    			<xsl:sort select="@sortDate" data-type="number" order="descending"/>
+
 				<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',listPrice:'&quot;, @listPrice, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;', dom:&quot;, @dom, &quot;},&quot; )" />
 			</xsl:for-each>
 			<xsl:text>];</xsl:text>

@@ -32,7 +32,8 @@
 			</text>
 
 			<xsl:for-each select="//listings/listing[@state='sold']">
-				<!-- NO LONGER SORTING HERE:  < xsl:sort select="@soldDate" data-type="number" order="descending" /> -->
+			    <xsl:sort select="@isAgent" data-type="number" order="descending"/>
+    			<xsl:sort select="@sortDate" data-type="number" order="descending"/>
 
 				<xsl:if test="position() &lt;= 10">
 					<rect style="stroke:var(--sold-red);" fill-opacity="0" x="2%" width="96%" height="6%">

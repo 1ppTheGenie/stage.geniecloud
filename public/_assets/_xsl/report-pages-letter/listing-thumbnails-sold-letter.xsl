@@ -8,7 +8,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<!-- Exclude from render if there are no active properties -->
 	<xsl:template name="include-in-render">
@@ -45,6 +45,9 @@
 		<xsl:if test="count(//listings/listing[@state='sold']) != 0">
 			<g style="transform: translate(5.5%,20%)">
 				<xsl:for-each select="//listings/listing[@state='sold']">
+					<xsl:sort select="@isAgent" data-type="number" order="descending"/>
+					<xsl:sort select="@sortDate" data-type="number" order="descending"/>
+
 					<xsl:if test="position() &lt;= 8">
 						<g>
 							<xsl:attribute name="style">
@@ -59,12 +62,11 @@
 
 							<image width="43%" height="16.5%" preserveAspectRatio="xMinYMid slice">
 								<xsl:attribute name="href">
-<xsl:value-of select="@thumb" />
-
+									<xsl:value-of select="@thumb" />
 								</xsl:attribute>
 							</image>
 
-<circle cx="1.5%" cy="1.7%" r="1%" fill="var(--sold)" fill-opacity="0.75" />
+							<circle cx="1.5%" cy="1.7%" r="1%" fill="var(--sold)" fill-opacity="0.75" />
 
 							<text font-size="70%" x="1.5%" y="1.9%" class="align-center" fill="#fff">
 								<xsl:value-of select="position()" />
@@ -99,11 +101,11 @@
 								<tspan>
 									<xsl:value-of select="@beds" />
 								</tspan>
-<tspan> BR &#124; </tspan>
+								<tspan> BR &#124; </tspan>
 								<tspan>
 									<xsl:value-of select="@baths" />
 								</tspan>
-<tspan> BA &#124; </tspan>
+								<tspan> BA &#124; </tspan>
 								<xsl:value-of select="format-number(@size, '###,###')" />
 								<tspan> SQFT</tspan>
 							</text>
@@ -116,7 +118,7 @@
 		<g style="transform: translate(0%,1.5%)">
 			<xsl:call-template name="listings-footer">
 				<xsl:with-param name="min" select="number(8)" />
-<xsl:with-param name="nodes" select="$listingsTotalSold" />
+				<xsl:with-param name="nodes" select="$listingsTotalSold" />
 
 				<xsl:with-param name="summary" select="' active listings.'" />
 			</xsl:call-template>
