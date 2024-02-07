@@ -1,0 +1,17 @@
+/*
+	Theme Name:	Golden Eagle Properties
+  	Theme Style: Light   
+*/
+
+@import url("../_css/open-sans.css");
+
+.golden-eagle-properties-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #000000; /* Heading */
+	--theme-sub-heading-color: #ba900f; /* Subtitle */
+	--theme-body-color: #000000; /* Body */
+	--theme-emphasis-color: #ba900f; /* Outline */
+	--theme-body-font: "Open Sans", sans-serif;
+	--theme-heading-font: "Open Sans", sans-serif;
+	--theme-sub-heading-font: "Open Sans", sans-serif;
+}
