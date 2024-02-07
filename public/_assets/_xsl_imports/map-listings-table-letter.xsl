@@ -80,7 +80,7 @@ background-color: var(--new-blue);
 		<g style="transform: scale(0.8) translate(3.5%, 2.5%);">
 
 			<xsl:call-template name="map-property-count-letter">
-				<xsl:with-param name="icon" select="'home-lock-icon'" />
+				<xsl:with-param name="icon" select="'home-lock'" />
 				<xsl:with-param name="icon-fill" select="'var(--color-scheme)'" />
 <xsl:with-param name="caption" select="$status" />
 
@@ -268,7 +268,7 @@ background-color: var(--new-blue);
 
 		<g style="transform: scale(0.8) translate(2.5%, 2.5%);">
 			<xsl:call-template name="map-property-count-letter">
-				<xsl:with-param name="icon" select="'home-lock-icon'" />
+				<xsl:with-param name="icon" select="'home-lock'" />
 				<xsl:with-param name="icon-fill" select="'var(--color-scheme)'" />
 <xsl:with-param name="caption" select="$status" />
 
