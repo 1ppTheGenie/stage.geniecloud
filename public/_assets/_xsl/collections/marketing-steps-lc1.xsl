@@ -66,10 +66,6 @@ Version:	1.1
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/listing-commands/css/marketing-steps-lc1.css' )" />
 				</xsl:attribute>
 			</link>
-			<script>
-				<xsl:value-of select="concat('const collectionFile = `', //collection/file, '`;' )" />
-				<xsl:value-of select="concat('const collectionID = `', //collection/id, '`;' )" />
-			</script>
 
 			<script type="module" crossorigin="crossorigin" src="/_assets/listing-commands/js/common.js">
 				<xsl:value-of select="';'" />
