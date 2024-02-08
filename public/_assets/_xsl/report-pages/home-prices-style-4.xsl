@@ -102,27 +102,10 @@
 		</text>
 
 		<g style="transform:translate(0%,52%)">
-			<svg x="5%" width="30%" height="35%">
-				<use x="0" y="0" width="100%" height="25%" fill="transparent" stroke-width="10">
+			<svg x="5%" width="30%" height="35%" class="no-style-override">
+				<use x="0" y="0" width="100%" height="25%" fill="transparent" stroke-width="10" class="no-style-override">
 					<xsl:attribute name="href">
-						<xsl:choose>
-							<xsl:when test="number((( //statistics/@maxSalePrice - //statistics/previous/@maxSalePrice ) div //statistics/previous/@maxSalePrice) ) > 0">
-								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#rrow-up-green' )" />
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#arrow-down-red' )" />
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:attribute>
-					<xsl:attribute name="stroke">
-						<xsl:choose>
-							<xsl:when test="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1 > 0">
-								<xsl:value-of select="'var(--active-green)'" />
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="'var(--sold-red)'" />
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#', if(number((( //statistics/@maxSalePrice - //statistics/previous/@maxSalePrice ) div //statistics/previous/@maxSalePrice) ) > 0) then 'arrow-up-green' else 'arrow-down-red' )" />
 					</xsl:attribute>
 				</use>
 				<text x="50%" y="41%" class="center sub-heading" font-size="120%">Highest Sales Price</text>
@@ -135,27 +118,10 @@
 				</xsl:call-template>
 			</svg>
 
-			<svg x="35%" width="30%" height="35%">
-				<use x="0" y="0" width="100%" height="25%" fill="transparent" stroke-width="10">
+			<svg x="35%" width="30%" height="35%" class="no-style-override">
+				<use x="0" y="0" width="100%" height="25%" fill="transparent" stroke-width="10" class="no-style-override">
 					<xsl:attribute name="href">
-						<xsl:choose>
-							<xsl:when test="number($priceChange) > 0">
-								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-icon' )" />
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:attribute>
-					<xsl:attribute name="stroke">
-						<xsl:choose>
-							<xsl:when test="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1 > 0">
-								<xsl:value-of select="'var(--active-green)'" />
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="'var(--sold-red)'" />
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#', if(number($priceChange) > 0) then 'arrow-up-green' else 'arrow-down-red' )" />
 					</xsl:attribute>
 				</use>
 				<text x="50%" y="41%" class="center sub-heading" font-size="120%">Median Sales Price</text>
@@ -168,27 +134,10 @@
 				</xsl:call-template>
 			</svg>
 
-			<svg x="65%" width="30%" height="35%">
-				<use x="0" y="0" width="100%" height="25%" fill="transparent" stroke-width="10">
+			<svg x="65%" width="30%" height="35%" class="no-style-override">
+				<use x="0" y="0" width="100%" height="25%" fill="transparent" stroke-width="10" class="no-style-override">
 					<xsl:attribute name="href">
-						<xsl:choose>
-							<xsl:when test="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1 > 0">
-								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-icon' )" />
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:attribute>
-					<xsl:attribute name="stroke">
-						<xsl:choose>
-							<xsl:when test="( //statistics/@minSalePrice div //statistics/previous/@minSalePrice  ) - 1 > 0">
-								<xsl:value-of select="'var(--active-green)'" />
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="'var(--sold-red)'" />
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#', if((//statistics/@minSalePrice div //statistics/previous/@minSalePrice) - 1 > 0) then 'arrow-up-green' else 'arrow-down-red' )" />
 					</xsl:attribute>
 				</use>
 				<text x="50%" y="41%" class="center sub-heading" font-size="120%">Lowest Sales Price</text>
