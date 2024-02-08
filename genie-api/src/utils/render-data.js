@@ -473,7 +473,6 @@ const processAreas = async params => {
 
     await Promise.all(
         params.areaIds.map(async areaId => {
-            const range = [0, 0, 0];
             const boundary = await getAreaBoundary(areaId);
             const statsData = await areaStatisticsWithPrevious(
                 params.userId,
