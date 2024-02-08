@@ -11,10 +11,10 @@
 	<xsl:import href="common.xsl" />
 	<xsl:import href="map-listings-table.xsl" />
 
-	<xsl:variable name="mapListingNodes" select="//listings/listing[@state='active']" />
+	<xsl:variable name="mapListingNodes" select="$listingsTotalActive" />
 
 	<xsl:template name="svg-body">
-		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
+		<xsl:variable name="activeListingCount" select="count($listingsTotalActive)" />
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
 		<xsl:if test="$activeListingCount = 0">
@@ -22,7 +22,7 @@
 				<xsl:with-param name="status" select="'active'" />
 				<xsl:with-param name="colorScheme" select="'--active-green'" />
 				<xsl:with-param name="totalCount" select="$activeListingCount" />
-				<xsl:with-param name="listings" select="//listings/listing[@state='active']" />
+				<xsl:with-param name="listings" select="$listingsTotalActive" />
 			</xsl:call-template>
 			<rect xmlns="" x="7%" y="25%" rx="10" ry="10" width="85%" height="60%" fill-opacity="0" stroke-width="2" stroke="var(--active-green)"></rect>
 
@@ -34,7 +34,7 @@
 				<xsl:with-param name="status" select="'active'" />
 				<xsl:with-param name="colorScheme" select="'--active-green'" />
 				<xsl:with-param name="totalCount" select="$activeListingCount" />
-				<xsl:with-param name="listings" select="//listings/listing[@state='active']" />
+				<xsl:with-param name="listings" select="$listingsTotalActive" />
 			</xsl:call-template>
 		</xsl:if>
 
