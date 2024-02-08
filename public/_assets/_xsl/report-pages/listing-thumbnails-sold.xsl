@@ -45,7 +45,7 @@
 
 						<image width="22.5%" height="29.5%" preserveAspectRatio="xMinYMid slice">
 							<xsl:attribute name="href">
-								<xsl:value-of select="concat( 'https://hlstwykrw3gkmc6lx4zhe534ma0kuumg.lambda-url.us-west-1.on.aws/thumbnail?width=600&amp;url=', encode-for-uri( @thumb ) )" />
+								<xsl:value-of select="concat( //output/@apiUrl, 'thumbnail?width=600&amp;url=', encode-for-uri( @thumb ) )" />
 							</xsl:attribute>
 						</image>
 
