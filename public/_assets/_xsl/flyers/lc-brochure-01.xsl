@@ -64,7 +64,7 @@
 							<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="6"></path>
 						</svg>
 
-						<h2 contenteditable="true" class="bold" style="font-family:var(--theme-heading-font);color:var(--theme-sub-heading-color);font-size:43px;text-align:center;margin:0;">
+						<h2 class="bold" style="font-family:var(--theme-heading-font);color:var(--theme-sub-heading-color);font-size:43px;text-align:center;margin:0;">
 							<xsl:value-of select="$propertyType" />
 						</h2>
 
