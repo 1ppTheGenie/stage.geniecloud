@@ -7,8 +7,7 @@
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<g style="transform:translateY(22%)">
@@ -34,8 +33,7 @@
 
 			<text x="50%" y="37.5%" class="center sub-heading" style="font-size: 620%;font-weight:500;">
 				<tspan>
-<xsl:value-of select="//statistics/@averageDaysOnMarket" />
-
+					<xsl:value-of select="//statistics/@averageDaysOnMarket" />
 				</tspan>
 			</text>
 
