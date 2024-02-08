@@ -1969,7 +1969,8 @@
 
 			<xsl:choose>
 				<xsl:when test="string(//output/@qrUrl)='skip'">
-					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/blank-qr.svg' )" />
+					<!-- <xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/blank-qr.svg' )" /> -->
+					<xsl:value-of select="'skip'" />
 				</xsl:when>
 				<xsl:when test="//overrides/qrUrl!=''">
 					<xsl:value-of select="//overrides/qrUrl" />
