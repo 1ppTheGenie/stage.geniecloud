@@ -561,13 +561,16 @@ const processAreas = async params => {
                     debugLog('mlsProperties', params, mls_properties);
 
                 if (mls_properties && Array.isArray(mls_properties)) {
-                    const agentListings = await agentMlsNumbers(params.userId);
+                    const agentListings = await agentMlsNumbers( params.userId );
+
                     const listings = [];
 
                     mls_properties.sort((a, b) => {
                         if (
-                            agentListings.includes(a.mlsNumber) ===
-                            agentListings.includes(b.mlsNumber)
+                            agentListings.includes(
+                                a.mlsNumber.toLowerCase()
+                            ) ===
+                            agentListings.includes(b.mlsNumber.toLowerCase())
                         ) {
                             const aDate = DateTime.fromISO(
                                 a.soldDate ?? a.listDate
@@ -578,7 +581,11 @@ const processAreas = async params => {
 
                             return aDate === bDate ? 0 : aDate < bDate ? 1 : -1;
                         } else {
-                            return agentListings.includes(a.mlsNumber) ? 1 : -1;
+                            return agentListings.includes(
+                                a.mlsNumber.toLowerCase()
+                            )
+                                ? 1
+                                : -1;
                         }
                     });
 
