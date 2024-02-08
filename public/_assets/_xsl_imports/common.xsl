@@ -1051,7 +1051,7 @@
 							<xsl:value-of select="'7.3%'" />
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="'7%'" />
+							<xsl:value-of select="'6.25%'" />
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
