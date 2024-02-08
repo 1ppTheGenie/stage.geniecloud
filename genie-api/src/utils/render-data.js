@@ -630,7 +630,15 @@ const processAreas = async params => {
                                           ).toSeconds()
                                         : null,
                                     dom: p.daysOnMarket,
-                                    thumb: p.photoPrimaryUrl
+                                    thumb: p.photoPrimaryUrl,
+                                    isAgent: agentListings.includes( p.mlsNumber.toLowerCase() ) ? 1 : 0,
+                                    dateSort: p.soldDate
+                                        ? DateTime.fromISO(
+                                              p.soldDate
+                                          ).toSeconds()
+                                        : DateTime.fromISO(
+                                              p.listDate
+                                          ).toSeconds()
                                 }
                             });
 
@@ -1039,7 +1047,7 @@ const processCollection = async params => {
             _attrs: {
                 id: params.renderId,
                 name: params.collection.name,
-                assembled: Math.round( Date.now() / 1000 )
+                assembled: Math.round(Date.now() / 1000)
             }
         };
 
@@ -1228,7 +1236,7 @@ const processCollection = async params => {
 
 const buildVersion = async () => {
     const files = await listS3Folder('_assets/landing-pages/dist');
-
+    console.log('buildVersion', files);
     return files
         .pop()
         .Key.replace('_assets/landing-pages/dist/', '')
