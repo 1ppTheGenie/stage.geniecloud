@@ -80,7 +80,7 @@ export const getRenderJSON = async params => {
         },
 
         // *** Overrides
-        asset: params.asset,
+        asset: params.asset.replaceAll('/','_'),
 
         // *** Overrides
         overrides: params.customizations
