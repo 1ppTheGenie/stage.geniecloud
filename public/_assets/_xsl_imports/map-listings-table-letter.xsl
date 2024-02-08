@@ -283,7 +283,7 @@ background-color: var(--new-blue);
 		</g>
 
 		<g style="transform: translateX(11%);" fill="var(--color-scheme)">
-			<text y="3%" class="large upper bold" font-family="var(--theme-heading-font)" data-max-width="75%">
+			<text y="3%" class="large upper bold" font-family="var(--theme-heading-font)" data-max-width="75%"  fill="var(--color-scheme)">
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
@@ -298,7 +298,7 @@ background-color: var(--new-blue);
 				</xsl:attribute>
 				<xsl:value-of select="//area/name" />
 			</text>
-			<text x="12%" class="bold" font-family="var(--theme-sub-heading-font)">
+			<text x="12%" class="bold" font-family="var(--theme-sub-heading-font)" fill="var(--color-scheme)">
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
