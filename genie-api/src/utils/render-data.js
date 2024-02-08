@@ -403,6 +403,7 @@ const processAgents = async agentIds => {
             const agent = {
                 firstName: profile.firstName,
                 lastName: profile.lastName,
+                role: profile.roleDescription,
                 photo: findImage(1), //"me"
 
                 // Switching the naming IS CORRECT! Light logo used on dark themes and vice versa
