@@ -494,57 +494,21 @@ c2.98,2.09,5.61,4.09,7.89,5.91l10.84-9.41c5.81-5.04,14.6-4.42,19.64,1.39C367.65,
 		</svg>
 	</symbol>
 
-
 	<symbol id="arrow-down-red">
-		<svg viewBox="0 0 500 500">
-			<style type="text/css">
-	.st0{fill:none;stroke:url(#SVGID_1_);stroke-width:60;stroke-miterlimit:10;}
-	.st1{fill:url(#SVGID_2_);}
-	.st2{fill:url(#SVGID_3_);}
-	.st3{fill:url(#SVGID_4_);}
-			</style>
-			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="483.04" y1="250" x2="16.96" y2="250" gradientTransform="matrix(1 0 0 -1 0 500)">
-				<stop offset="0" style="stop-color:#EE493C" />
-				<stop offset="1" style="stop-color:#DA2728" />
-
-			</linearGradient>
-			<circle class="st0" cx="250" cy="250" r="203.04" />
-
-			<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="160.71" y1="253.35" x2="342.96" y2="253.35" gradientTransform="matrix(1 0 0 -1 0 500)">
-				<stop offset="0" style="stop-color:#DB2929" />
-				<stop offset="1" style="stop-color:#ED463B" />
-
-			</linearGradient>
-			<path class="st1" d="M250,352.4l-89.29-119.34h42.84V140.9c16.03,0,32.06,0,48.09,0c14.96,0,29.92,0,44.88,0
-c0,30.36,0,60.72,0,91.08h46.44L250,352.4z" />
-			<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="203.4" y1="386.5" x2="296.4" y2="386.5" gradientTransform="matrix(1 0 0 -1 0 500)">
-				<stop offset="0" style="stop-color:#DB2929" />
-				<stop offset="1" style="stop-color:#ED483B" />
-
-			</linearGradient>
-			<rect x="203.4" y="103.96" class="st2" width="93" height="19.08" />
-
-			<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="203.4" y1="417.729" x2="296.4" y2="417.729" gradientTransform="matrix(1 0 0 -1 0 500)">
-				<stop offset="0" style="stop-color:#DB2929" />
-				<stop offset="0.9693" style="stop-color:#ED483B" />
-				<stop offset="1" style="stop-color:#EBA123" />
-
-			</linearGradient>
-			<path class="st3" d="M203.4,89.88c0.07-2.92,0.15-5.84,0.22-8.76c17.84-6.36,42.13-6.36,42.13-6.36s23.58-1.41,50.64,6.11
-c0,3,0,6,0,9H203.4z" />
+		<svg viewBox="0 0 500 500" class="no-style-override">
+			<circle stroke-width="60" stroke-miter-limit="10" cx="250" cy="250" r="203.04" fill-opacity="0" style="stroke: rgb(161, 20, 20);" transform="matrix(1, 0, 0, 0.9999999999999999, 0, 0)"/>
+			<path d="M 248.07 136.6 L 158.78 255.94 L 201.62 255.94 L 201.62 348.1 C 217.65 348.1 233.68 348.1 249.71 348.1 C 264.67 348.1 279.63 348.1 294.59 348.1 C 294.59 317.74 294.59 287.38 294.59 257.02 L 341.03 257.02 L 248.07 136.6 Z" style="fill: rgb(161, 20, 20); transform-origin: 249.905px 242.35px;" transform="matrix(-1, 0, 0, -1, 0.000023476069, 0.000023688944)"/>
+			<rect x="-298.47" y="-124.305" width="93" height="19.08" transform="matrix(-1, 0, 0, -1, 503.939974523457, 229.5300009799)" style="fill: rgb(161, 20, 20); transform-origin: -251.97px -114.765px;"/>
+			<path d="M 204.41 75.92 C 204.48 78.84 204.56 81.76 204.63 84.68 C 222.47 91.04 246.76 91.04 246.76 91.04 C 246.76 91.04 270.34 92.45 297.4 84.93 C 297.4 81.93 297.4 78.93 297.4 75.93 L 204.41 75.93 L 204.41 75.92 Z" style="fill: rgb(161, 20, 20); transform-origin: 250.905px 83.5324px;" transform="matrix(-1, 0, 0, -1, 0.000023447893, -0.000017612461)"/>
 		</svg>
 	</symbol>
 
 	<symbol id="arrow-up-green">
-		<svg viewBox="0 0 500 500">
+		<svg viewBox="0 0 500 500" class="no-style-override">
 			<circle stroke="#8bad57" stroke-width="60" stroke-miter-limit="10" cx="250" cy="250" r="203.04" fill-opacity="0" />
-			<path fill="#8bad57" d="M250,147.6l-89.29,119.34h42.84v92.16c16.03,0,32.06,0,48.09,0c14.96,0,29.92,0,44.88,0
-c0-30.36,0-60.72,0-91.08h46.44L250,147.6z" />
-
+			<path fill="#8bad57" d="M250,147.6l-89.29,119.34h42.84v92.16c16.03,0,32.06,0,48.09,0c14.96,0,29.92,0,44.88,0 c0-30.36,0-60.72,0-91.08h46.44L250,147.6z" />
 			<rect x="203.4" y="376.96" fill="#8bad57" width="93" height="19.08" />
-
-			<path fill="#8bad57" d="M203.4,410.12c0.07,2.92,0.15,5.84,0.22,8.76c17.84,6.36,42.13,6.36,42.13,6.36s23.58,1.41,50.64-6.11
-c0-3,0-6,0-9H203.4z" />
+			<path fill="#8bad57" d="M203.4,410.12c0.07,2.92,0.15,5.84,0.22,8.76c17.84,6.36,42.13,6.36,42.13,6.36s23.58,1.41,50.64-6.11 c0-3,0-6,0-9H203.4z" />
 		</svg>
 	</symbol>
 
