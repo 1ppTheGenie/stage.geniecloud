@@ -16,28 +16,6 @@
 
 		</style>
 
-		<xsl:variable name="icon">
-			<xsl:choose>
-				<xsl:when test="//statistics/@averageSalePrice &lt; //statistics/previous/@averageSalePrice">
-					<xsl:value-of select="'down-red-icon'" />
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="'up-green-icon'" />
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-
-		<xsl:variable name="direction">
-			<xsl:choose>
-				<xsl:when test="//statistics/@averageSalePrice &lt; //statistics/previous/@averageSalePrice">
-					<xsl:value-of select="'Down'" />
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="'Up'" />
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-
 		<g style="transform:translateY(15%)">
 			<text x="50%" y="4%" class="align-center upper sub-heading" style="font-size:180%;">
 				<xsl:value-of select="$areaWithPropertyType" />
@@ -49,8 +27,8 @@
 				</xsl:call-template>
 			</text>
 
-			<use x="42%" y="15%" width="16%" height="16%" fill="var(--theme-sub-heading-color)">
-				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#', $icon )" />
+			<use x="42%" y="15%" width="16%" height="16%" fill="var(--theme-sub-heading-color)" class="no-style-override">
+				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#', if(//statistics/@averageSalePrice &lt; //statistics/previous/@averageSalePrice) then 'arrow-down-red' else 'arrow-up-green' )" />
 			</use>
 
 			<text x="50%" y="36%" class="center upper" font-family="var(--theme-heading-font)" style="font-size: 275%;fill:var(--theme-body-color)">
@@ -66,12 +44,11 @@
 
 			<text x="50%" y="56%" class="center sub-heading" style="font-size:134%;fill:var(--theme-sub-heading-color)">
 				<tspan>
-					<xsl:value-of select="concat( $direction, ' from ')" />
+					<xsl:value-of select="concat( if(//statistics/@averageSalePrice &lt; //statistics/previous/@averageSalePrice) then 'Down' else 'Up', ' from ')" />
 				</tspan>
 				<tspan class="lower">
 					<xsl:call-template name="format-price">
 						<xsl:with-param name="price" select="//statistics/previous/@averageSalePrice" />
-
 					</xsl:call-template>
 				</tspan>
 			</text>
