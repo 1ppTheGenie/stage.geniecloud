@@ -47,7 +47,7 @@
 					<xsl:with-param name="broder-stroke-color" select="'#517134'" />
 					<xsl:with-param name="icon" select="'home-speaker'" />
 					<xsl:with-param name="caption" select="'Active'" />
-					<xsl:with-param name="count" select="count($listingsTotalActive)" />
+					<xsl:with-param name="count" select="count($listingsTotalActiveNotNew)" />
 					<xsl:with-param name="description" select="'TOTAL'" />
 				</xsl:call-template>
 
