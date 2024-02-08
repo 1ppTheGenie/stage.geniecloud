@@ -170,7 +170,7 @@
 			</text>
 
 			<use x="1.5%" y="5%" width="25%" height="3%" fill="#30dd10">
-				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-icon' )" />
+				<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#arrow-up-green' )" />
 			</use>
 		</g>
 
