@@ -7619,7 +7619,9 @@ var processAreas = async (params) => {
           const agentListings = await agentMlsNumbers(params.userId);
           const listings = [];
           mls_properties.sort((a, b) => {
-            if (agentListings.includes(a.mlsNumber) === agentListings.includes(b.mlsNumber)) {
+            if (agentListings.includes(
+              a.mlsNumber.toLowerCase()
+            ) === agentListings.includes(b.mlsNumber.toLowerCase())) {
               const aDate = DateTime.fromISO(
                 a.soldDate ?? a.listDate
               );
@@ -7628,7 +7630,9 @@ var processAreas = async (params) => {
               );
               return aDate === bDate ? 0 : aDate < bDate ? 1 : -1;
             } else {
-              return agentListings.includes(a.mlsNumber) ? 1 : -1;
+              return agentListings.includes(
+                a.mlsNumber.toLowerCase()
+              ) ? 1 : -1;
             }
           });
           mls_properties.forEach((p) => {
@@ -7662,7 +7666,13 @@ var processAreas = async (params) => {
                     p.soldDate
                   ).toSeconds() : null,
                   dom: p.daysOnMarket,
-                  thumb: p.photoPrimaryUrl
+                  thumb: p.photoPrimaryUrl,
+                  isAgent: agentListings.includes(p.mlsNumber.toLowerCase()) ? 1 : 0,
+                  dateSort: p.soldDate ? DateTime.fromISO(
+                    p.soldDate
+                  ).toSeconds() : DateTime.fromISO(
+                    p.listDate
+                  ).toSeconds()
                 }
               });
               if (p?.salePrice) {
@@ -8103,6 +8113,7 @@ var processCollection = async (params) => {
 };
 var buildVersion = async () => {
   const files = await listS3Folder("_assets/landing-pages/dist");
+  console.log("buildVersion", files);
   return files.pop().Key.replace("_assets/landing-pages/dist/", "").split("/").shift();
 };
 var debugLog = async (source, params, data) => {
