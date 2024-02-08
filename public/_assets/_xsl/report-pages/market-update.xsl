@@ -7,12 +7,11 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<style>
-<xsl:value-of select="'text { dominant-baseline: middle;}'" />
+			<xsl:value-of select="'text { dominant-baseline: middle;}'" />
 
 		</style>
 
@@ -25,12 +24,10 @@
 		<symbol id="up-icon" class="stat-icon">
 			<xsl:choose>
 				<xsl:when test="//statistics/@medianSalePrice div //statistics/previous/@medianSalePrice &lt; 1">
-<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#down-icon' )" />
-
+					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#arrow-down-red' )" />
 				</xsl:when>
 				<xsl:otherwise>
-<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#up-icon' )" />
-
+					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#arrow-up-green' )" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</symbol>
@@ -44,7 +41,7 @@
 						<xsl:text>30 Day</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-<xsl:value-of select="concat( //areas/area[1]/statistics/@lookbackMonths, ' Month')" />
+						<xsl:value-of select="concat( //areas/area[1]/statistics/@lookbackMonths, ' Month')" />
 
 					</xsl:otherwise>
 				</xsl:choose>
@@ -57,12 +54,11 @@
 		</g>
 
 		<xsl:variable name="maxAllPrices">
-<xsl:for-each select="//previous/@medianSalePrice &#124; //statistics/@medianSalePrice">
-<xsl:sort select="." order="descending" data-type="number" />
+			<xsl:for-each select="//previous/@medianSalePrice &#124; //statistics/@medianSalePrice">
+				<xsl:sort select="." order="descending" data-type="number" />
 
 				<xsl:if test="position() = 1">
-<xsl:value-of select="." />
-
+					<xsl:value-of select="." />
 				</xsl:if>
 			</xsl:for-each>
 		</xsl:variable>
@@ -74,22 +70,18 @@
 					<xsl:with-param name="caption-width" select="'16'" />
 					<xsl:with-param name="caption-align" select="'middle'" />
 					<xsl:with-param name="caption">
-<xsl:value-of select="//date/@period" />
-
+						<xsl:value-of select="//date/@period" />
 					</xsl:with-param>
 					<xsl:with-param name="left-caption">
-<xsl:value-of select="concat( //statistics/@soldPropertyTypeCount, ' sales' )" />
-
+						<xsl:value-of select="concat( //statistics/@soldPropertyTypeCount, ' sales' )" />
 					</xsl:with-param>
 
-<xsl:with-param name="width" select="//statistics/@medianSalePrice div $maxAllPrices" />
-
+					<xsl:with-param name="width" select="//statistics/@medianSalePrice div $maxAllPrices" />
 
 					<xsl:with-param name="value">
 						<xsl:variable name="formattedPrice">
 							<xsl:call-template name="format-price">
-<xsl:with-param name="price" select="//statistics/@medianSalePrice" />
-
+								<xsl:with-param name="price" select="//statistics/@medianSalePrice" />
 							</xsl:call-template>
 						</xsl:variable>
 

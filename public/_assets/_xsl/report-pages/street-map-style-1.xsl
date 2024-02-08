@@ -7,7 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
@@ -17,8 +17,7 @@
 
 	<xsl:template name="svg-body">
 		<style>
-<xsl:value-of select="'text {dominant-baseline:middle;}'" />
-
+			<xsl:value-of select="'text {dominant-baseline:middle;}'" />
 		</style>
 
 		<foreignObject x="0" y="0" width="100%" height="100%">
@@ -42,7 +41,7 @@
 			</text>
 
 			<svg x="4%" y="32%">
-<circle cy="6%" r="13" fill="var(--new-blue)" cx="5%"></circle>
+				<circle cy="6%" r="13" fill="var(--new-blue)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" style="font-size:85%;" fill="#fff">
 					<xsl:value-of select="count($listingsTotalNew)" />
 				</text>
@@ -71,8 +70,7 @@
 			<svg x="4%" y="84%">
 				<circle cy="6%" r="13" fill="var(--sold-red)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" style="font-size:85%;" fill="#fff">
-<xsl:value-of select="count($listingsTotalSold)" />
-
+					<xsl:value-of select="count($listingsTotalSold)" />
 				</text>
 				<text x="12%" y="6.6%" class="upper" style="font-weight:800" fill="var(--theme-body-background)">
 						Sold

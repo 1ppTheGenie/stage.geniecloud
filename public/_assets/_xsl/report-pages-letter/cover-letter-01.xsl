@@ -8,7 +8,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
@@ -42,59 +42,43 @@
 
 	<xsl:template name="map-overlay">
 		<svg style="position: absolute;top: 0;left: 0;z-index: 9999;width:100%;height:100%;">
-<rect x="2%" y="6%" width="96%" height="88.5%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2" />
 
+			<rect x="2%" y="6%" width="96%" height="88.5%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2" />
+			<rect x="4%" y="8%" width="92%" height="84%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2" />
 
-<rect x="4%" y="8%" width="92%" height="84%" fill-opacity="0" stroke="var(--theme-sub-heading-color)" stroke-width="2" />
+			<xsl:choose>
+				<xsl:when test="//output/@customerName!=''">
+					<xsl:variable name="bgY" select="'13%'"/>
+					<xsl:variable name="byH" select="'74%'"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:variable name="bgY" select="'18%'"/>
+					<xsl:variable name="bgH" select="'60%'"/>
+				</xsl:otherwise>
+			</xsl:choose>
 
-
-			<xsl:if test="//output/@customerName!=''">
-				<rect x="5%" y="13%" width="90%" height="74%" fill-opacity="75%" fill="var(--theme-body-background)" />
-			</xsl:if>
-
-			<xsl:if test="//output/@customerName=''">
-				<rect x="5%" y="18%" width="90%" height="60%" fill-opacity="75%" fill="var(--theme-body-background)"></rect>
-			</xsl:if>
+			<rect x="5%" y="{$bgY}" width="90%" height="{$bgH}" fill-opacity="75%" fill="var(--theme-body-background)" />
 
 			<g>
-				<xsl:if test="//output/@customerName!=''">
-					<foreignObject x="20%" y="30%" height="10%" width="60%">
-						<div style="display:flex;justify-content:center;align-items:center;">
-							<svg height="10" width="30" style="flex-grow:0; margin-right: 2%">
-								<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="2"></path>
-							</svg>
+				<foreignObject x="20%" y="30%" height="10%" width="60%">
+					<div style="display:flex;justify-content:center;align-items:center;">
+						<svg height="10" width="30" style="flex-grow:0; margin-right: 2%">
+							<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="2"></path>
+						</svg>
 
-							<h2 class="upper" style="color: var(--theme-sub-heading-color);text-align: center;font-weight: 400; font-family:var(--theme-sub-heading-font);font-size: 25px;">Market Insider REPORT</h2>
+						<h2 class="upper" style="color: var(--theme-sub-heading-color);text-align: center;font-weight: 400; font-family:var(--theme-sub-heading-font);font-size: 25px;">Market Insider REPORT</h2>
 
-							<svg height="10" width="30" style="flex-grow:0; margin-left: 2%">
-								<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="2"></path>
-							</svg>
-						</div>
-					</foreignObject>
-				</xsl:if>
-
-				<xsl:if test="//output/@customerName=''">
-					<foreignObject x="20%" y="30%" height="10%" width="60%">
-						<div style="display:flex;justify-content:center;align-items:center;">
-							<svg height="10" width="30" style="flex-grow:0; margin-right: 2%">
-								<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="2"></path>
-							</svg>
-
-							<h2 class="upper" style="color: var(--theme-sub-heading-color);text-align: center;font-weight: 400; font-family:var(--theme-sub-heading-font);font-size: 25px;">Market Insider REPORT</h2>
-
-							<svg height="10" width="30" style="flex-grow:0; margin-left: 2%">
-								<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="2"></path>
-							</svg>
-						</div>
-					</foreignObject>
-				</xsl:if>
+						<svg height="10" width="30" style="flex-grow:0; margin-left: 2%">
+							<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="2"></path>
+						</svg>
+					</div>
+				</foreignObject>
 
 				<xsl:if test="//output/@customerName!=''">
 					<text x="50%" y="43%" class="narrow center" font-size="125%">
 						<tspan style="fill:var(--theme-heading-color);">Prepared exclusively for</tspan>
 						<tspan x="50%" dy="3%" font-size="150%">
-<xsl:value-of select="//output/@customerName" />
-
+							<xsl:value-of select="//output/@customerName" />
 						</tspan>
 					</text>
 				</xsl:if>
@@ -108,17 +92,21 @@
 						<xsl:value-of select="genie:format-date( //output/@reportDate, '[FNn], [MNn] [D], [Y0001]')" />
 					</text>
 
-					<xsl:if test="//agent[1]/marketingName!=''">
-						<text x="50%" y="54%" class="center bold" style="fill:var(--theme-body-color);font-size:150%;">
-							<xsl:value-of select="concat( 'Courtesy of ', //agent[1]/marketingName )" />
-						</text>
-					</xsl:if>
+					<xsl:if test="not(starts-with(//agent[1]/role, 'Affiliate'))">
+						<xsl:if test="//agent[1]/marketingName!=''">
+							<text x="50%" y="54%" class="center bold" style="fill:var(--theme-body-color);font-size:150%;">
+								<xsl:value-of select="concat( 'Courtesy of ', //agent[1]/marketingName )" />
+							</text>
+						</xsl:if>
 
-					<image x="41.5%" y="55.5%" width="17%" height="12%" id="logo" preserveAspectRatio="xMidYMid meet">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$companyLogo" />
-						</xsl:attribute>
-					</image>
+						<xsl:if test="//agent[1]/marketingTitle!=''">
+							<text x="50%" y="63.5%" class="center" fill="var(--theme-body-color)" font-size="100%;" font-family="var(--theme-body-font)">
+								<xsl:value-of select="//agent[1]/marketingTitle" />
+							</text>
+						</xsl:if>
+
+						<image x="32.5%" y="68%" width="35%" height="18%" id="logo" preserveAspectRatio="xMidYMid meet" href="{$companyLogo}" />
+					</xsl:if>
 				</xsl:if>
 
 				<xsl:if test="//output/@customerName=''">
@@ -136,11 +124,13 @@
 						</text>
 					</xsl:if>
 
-					<image x="41.5%" y="55.5%" width="17%" height="12%" id="logo" preserveAspectRatio="xMidYMid meet">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$companyLogo" />
-						</xsl:attribute>
-					</image>
+					<xsl:if test="//agent[1]/marketingTitle!=''">
+						<text x="50%" y="63.5%" class="center" fill="var(--theme-body-color)" font-size="100%;" font-family="var(--theme-body-font)">
+							<xsl:value-of select="//agent[1]/marketingTitle" />
+						</text>
+					</xsl:if>
+
+					<image x="41.5%" y="55.5%" width="17%" height="12%" id="logo" preserveAspectRatio="xMidYMid meet" href="{$companyLogo}" />
 				</xsl:if>
 			</g>
 		</svg>
