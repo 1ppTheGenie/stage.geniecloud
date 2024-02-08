@@ -53,7 +53,7 @@
 			<svg x="4%" y="49%">
 				<circle cy="6%" r="13" fill="var(--active-green)" cx="5%"></circle>
 				<text x="5%" y="6.6%" class="center bold" style="font-size:85%;" fill="#fff">
-					<xsl:value-of select="count($listingsTotalActive)" />
+					<xsl:value-of select="count($listingsTotalActiveNotNew)" />
 				</text>
 				<text x="12%" y="6.6%" class="upper" style="font-weight:800" fill="var(--theme-body-background)">
 						Active
