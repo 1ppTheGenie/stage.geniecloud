@@ -519,7 +519,7 @@ const processAreas = async params => {
             };
 
             if (statsData.statistics) {
-                let propertyTypeData, prevData, lowerByValue, upperByValue;
+                let propertyTypeData, prevData;
 
                 statsData.statistics.propertyTypeData.forEach(pData => {
                     if (pData.type == (params.propertyType ?? 0)) {
@@ -528,27 +528,6 @@ const processAreas = async params => {
                     }
                 });
 
-                if (propertyTypeData && propertyTypeData.minSale) {
-                    // Split median/lower and median/highest
-                    lowerByValue =
-                        propertyTypeData.minSale.salePrice +
-                        (propertyTypeData.medSalePrice -
-                            propertyTypeData.minSale.salePrice) /
-                            2;
-                    upperByValue =
-                        propertyTypeData.maxSale.salePrice -
-                        (propertyTypeData.maxSale.salePrice -
-                            propertyTypeData.medSalePrice) /
-                            1.25;
-                    lowerByValue = Math.floor(
-                        parseFloat(lowerByValue) +
-                            (25000 - (parseFloat(lowerByValue) % 25000))
-                    );
-                    upperByValue = Math.floor(
-                        parseFloat(upperByValue) +
-                            (25000 - (parseFloat(upperByValue) % 25000))
-                    );
-                }
 
                 // **** LISTINGS
                 const mls_properties = await mlsProperties(
@@ -641,18 +620,6 @@ const processAreas = async params => {
                                           ).toSeconds()
                                 }
                             });
-
-                            if (p?.salePrice) {
-                                if (parseInt(p.salePrice) <= lowerByValue) {
-                                    range[0]++;
-                                } else if (
-                                    parseInt(p.salePrice) >= upperByValue
-                                ) {
-                                    range[2]++;
-                                } else {
-                                    range[1]++;
-                                }
-                            }
                         }
                     });
                     area._content.push({
@@ -760,25 +727,6 @@ const processAreas = async params => {
                         statistics.push(history);
                     }
 
-                    // *** BY VALUE
-                    const lowerAsDollars = currencyFormat(lowerByValue);
-                    const upperAsDollars = currencyFormat(upperByValue);
-
-                    const byValue = { _name: 'byValue', _content: [] };
-                    [
-                        `${lowerAsDollars}`,
-                        `${lowerAsDollars} / ${upperAsDollars}`,
-                        `${upperAsDollars}`
-                    ].forEach((value, index) =>
-                        byValue._content.push({
-                            _name: 'range',
-                            _attrs: {
-                                value,
-                                sold: range[index]
-                            }
-                        })
-                    );
-                    statistics.push(byValue);
 
                     area._content.push({
                         _name: 'statistics',
