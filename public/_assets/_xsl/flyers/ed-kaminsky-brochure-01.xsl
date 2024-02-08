@@ -45,7 +45,7 @@
 
 		<foreignObject x="7%" y="64.8%" height="25%" width="20%">
 			<div style="width: 80%;">
-				<h2 contenteditable="true" class="upper futura-text" style="color:#fff;font-size: 74px;line-height: 68px;margin-bottom: 34px;">
+				<h2 class="upper futura-text" style="color:#fff;font-size: 74px;line-height: 68px;margin-bottom: 34px;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'areanames'" />
 						<xsl:with-param name="default" select="$listingAddressLine1" />

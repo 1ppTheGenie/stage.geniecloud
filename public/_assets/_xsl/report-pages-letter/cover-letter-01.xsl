@@ -64,7 +64,7 @@
 								<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="2"></path>
 							</svg>
 
-							<h2 contenteditable="true" class="upper" style="color: var(--theme-sub-heading-color);text-align: center;font-weight: 400; font-family:var(--theme-sub-heading-font);font-size: 25px;">Market Insider REPORT</h2>
+							<h2 class="upper" style="color: var(--theme-sub-heading-color);text-align: center;font-weight: 400; font-family:var(--theme-sub-heading-font);font-size: 25px;">Market Insider REPORT</h2>
 
 							<svg height="10" width="30" style="flex-grow:0; margin-left: 2%">
 								<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="2"></path>
@@ -80,7 +80,7 @@
 								<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="2"></path>
 							</svg>
 
-							<h2 contenteditable="true" class="upper" style="color: var(--theme-sub-heading-color);text-align: center;font-weight: 400; font-family:var(--theme-sub-heading-font);font-size: 25px;">Market Insider REPORT</h2>
+							<h2 class="upper" style="color: var(--theme-sub-heading-color);text-align: center;font-weight: 400; font-family:var(--theme-sub-heading-font);font-size: 25px;">Market Insider REPORT</h2>
 
 							<svg height="10" width="30" style="flex-grow:0; margin-left: 2%">
 								<path stroke-linecap="butt" d="M0 5 l75 0" fill="none" stroke="var(--theme-heading-color)" stroke-width="2"></path>

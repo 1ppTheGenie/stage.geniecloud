@@ -70,7 +70,7 @@
 
 		<!-- <foreignObject x="7.5%" y="67%" font-family="var(theme-subtitle-font)" fill="var(theme-heading-color)" font-weight="700" font-size="360%" height="50%" width="50%">
 			<div style="width: 65%;">
-				<h2 contenteditable="true" class="upper futura-text" style="color:var(theme-heading-color);font-size: 64px;line-height: 68px;margin-bottom: 34px;">
+				<h2 class="upper futura-text" style="color:var(theme-heading-color);font-size: 64px;line-height: 68px;margin-bottom: 34px;">
 					<xsl:call-template name="editable">
 		                <xsl:with-param name="id" select="'areanames'" />
 		                <xsl:with-param name="default" select="concat(//single/address/street,' ')" />
@@ -82,7 +82,7 @@
 		        </h2>
 			</div>
 			<div style="width: 90%;">
-				<h2 contenteditable="true" class="upper futura-text" style="color:var(theme-heading-color); font-size: 64px;line-height: 68px;margin-bottom: 34px;">
+				<h2 class="upper futura-text" style="color:var(theme-heading-color); font-size: 64px;line-height: 68px;margin-bottom: 34px;">
 					Open Today 1-4pm
 				</h2>				
 			</div>			
@@ -91,7 +91,7 @@
 		<foreignObject font-family="var(--theme-subtitle-font)" fill="var(--theme-heading-color)" font-weight="700" font-size="360%" height="50%" width="50%" class="open-house-fobject">
 			<div class="open-house-div">
 				<div style="">
-					<h2 contenteditable="true" class="upper futura-text" style="color:var(--theme-heading-color);font-size: 60px;line-height: 60px;margin:0 0;">
+					<h2 class="upper futura-text" style="color:var(--theme-heading-color);font-size: 60px;line-height: 60px;margin:0 0;">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'areanames'" />
 							<xsl:with-param name="default" select="concat(//single/address/street,' ')" />
@@ -103,7 +103,7 @@
 					</h2>
 				</div>
 				<div style="">
-					<h2 contenteditable="true" class="upper futura-text" style="color:var(--theme-heading-color); font-size: 60px;line-height: 60px;margin-top: 30px;">Open Today 1PM - 4PM</h2>
+					<h2 class="upper futura-text" style="color:var(--theme-heading-color); font-size: 60px;line-height: 60px;margin-top: 30px;">Open Today 1PM - 4PM</h2>
 				</div>
 			</div>
 		</foreignObject>

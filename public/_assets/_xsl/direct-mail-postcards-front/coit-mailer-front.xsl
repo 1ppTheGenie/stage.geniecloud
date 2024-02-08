@@ -33,7 +33,7 @@ Supports:	Area, Multi-Listing, Print, PricePercent, QRCode
 	<xsl:template name="cropped-content">
 		<foreignObject font-size="400%" height="100%" width="50%" class="whats-trending">
 			<div style="width: 65%;margin:30px 30px;">
-				<h2 contenteditable="true" class="upper serif-text" style="color: #fff;font-size: 60px;line-height:66px;margin: 0 0;font-weight: 400;letter-spacing: 3px;">
+				<h2 class="upper serif-text" style="color: #fff;font-size: 60px;line-height:66px;margin: 0 0;font-weight: 400;letter-spacing: 3px;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'WHAT’S'" />
 						<xsl:with-param name="default" select="concat('WHAT’S TRENDING WITH ', //area/name ,' HOMES' )" />
