@@ -870,7 +870,7 @@ const processAsset = async params => {
     const prepareKey = `_processing/${params.renderId}/render.json`;
 
     let s3Params = await jsonFromS3(prepareKey);
-    console.log('processAsset', s3Params, params);
+    //console.log('processAsset', s3Params, params);
     if (s3Params) {
         const renderRoot = await getRenderJSON({ ...s3Params, ...params });
 
@@ -914,7 +914,6 @@ const prepareAsset = async (asset, params) => {
             pages = pages.slice(0, params.totalPages + 1);
         }
         
-
         size = (
             params.size ||
             (Array.isArray(settings?.sizes) && settings.sizes[0]) ||

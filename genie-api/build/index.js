@@ -7253,7 +7253,7 @@ var getRenderJSON = async (params) => {
       }
     },
     // *** Overrides
-    asset: params.asset,
+    xslAsset: params.asset.replaceAll("/", "_"),
     // *** Overrides
     overrides: params.customizations ? processCustomizations(params.customizations) : {},
     // *** Agents
@@ -7492,6 +7492,7 @@ var processAgents = async (agentIds) => {
       const agent = {
         firstName: profile.firstName,
         lastName: profile.lastName,
+        role: profile.roleDescription,
         photo: findImage(1),
         //"me"
         // Switching the naming IS CORRECT! Light logo used on dark themes and vice versa
@@ -7555,7 +7556,6 @@ var processAreas = async (params) => {
   const areas = [];
   await Promise.all(
     params.areaIds.map(async (areaId) => {
-      const range = [0, 0, 0];
       const boundary = await getAreaBoundary(areaId);
       const statsData = await areaStatisticsWithPrevious(
         params.userId,
@@ -7592,23 +7592,13 @@ var processAreas = async (params) => {
         ]
       };
       if (statsData.statistics) {
-        let propertyTypeData, prevData, lowerByValue, upperByValue;
+        let propertyTypeData, prevData;
         statsData.statistics.propertyTypeData.forEach((pData) => {
           if (pData.type == (params.propertyType ?? 0)) {
             propertyTypeData = pData.statistics;
             prevData = propertyTypeData.previousPeriod;
           }
         });
-        if (propertyTypeData && propertyTypeData.minSale) {
-          lowerByValue = propertyTypeData.minSale.salePrice + (propertyTypeData.medSalePrice - propertyTypeData.minSale.salePrice) / 2;
-          upperByValue = propertyTypeData.maxSale.salePrice - (propertyTypeData.maxSale.salePrice - propertyTypeData.medSalePrice) / 1.25;
-          lowerByValue = Math.floor(
-            parseFloat(lowerByValue) + (25e3 - parseFloat(lowerByValue) % 25e3)
-          );
-          upperByValue = Math.floor(
-            parseFloat(upperByValue) + (25e3 - parseFloat(upperByValue) % 25e3)
-          );
-        }
         const mls_properties = await mlsProperties(
           params.mlsId ?? 0,
           areaId,
@@ -7675,15 +7665,6 @@ var processAreas = async (params) => {
                   ).toSeconds()
                 }
               });
-              if (p?.salePrice) {
-                if (parseInt(p.salePrice) <= lowerByValue) {
-                  range[0]++;
-                } else if (parseInt(p.salePrice) >= upperByValue) {
-                  range[2]++;
-                } else {
-                  range[1]++;
-                }
-              }
             }
           });
           area._content.push({
@@ -7769,23 +7750,6 @@ var processAreas = async (params) => {
             });
             statistics.push(history);
           }
-          const lowerAsDollars = currencyFormat(lowerByValue);
-          const upperAsDollars = currencyFormat(upperByValue);
-          const byValue = { _name: "byValue", _content: [] };
-          [
-            `${lowerAsDollars}`,
-            `${lowerAsDollars} / ${upperAsDollars}`,
-            `${upperAsDollars}`
-          ].forEach(
-            (value, index) => byValue._content.push({
-              _name: "range",
-              _attrs: {
-                value,
-                sold: range[index]
-              }
-            })
-          );
-          statistics.push(byValue);
           area._content.push({
             _name: "statistics",
             _attrs: {
@@ -8706,13 +8670,6 @@ var endOfLastMonth = () => {
   date.setHours(0, 0, 0, 0);
   date.setDate(0);
   return date.getTime() - MINUTE_IN_SECONDS * 1e3;
-};
-var currencyFormat = (size, precision = 2) => {
-  const suffixes = ["", "k", "m"];
-  const base = Math.log(size) / Math.log(1e3);
-  if (!isNaN(base)) {
-    return "$" + Math.round(Math.pow(1e3, base - Math.floor(base)), precision) + suffixes[Math.floor(base)];
-  }
 };
 var getDimensions = (size = null) => {
   let dims;
@@ -9689,7 +9646,6 @@ var renderKeyParams = async (params) => {
 var processAsset = async (params) => {
   const prepareKey = `_processing/${params.renderId}/render.json`;
   let s3Params = await jsonFromS3(prepareKey);
-  console.log("processAsset", s3Params, params);
   if (s3Params) {
     const renderRoot = await getRenderJSON({ ...s3Params, ...params });
     return {
