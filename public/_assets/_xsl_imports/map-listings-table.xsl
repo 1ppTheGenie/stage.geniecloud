@@ -236,11 +236,9 @@ table.listings th, table.listings td {color: #fff;}'" />
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
 							<xsl:value-of select="'22%'" />
-
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="'12%'" />
-
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>

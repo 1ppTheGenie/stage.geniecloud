@@ -337,7 +337,6 @@
 				<text x="1%" y="5.5%" text-anchor="start" dominant-baseline="hanging" font-size="100%">
 					<xsl:attribute name="data-max-width">
 						<xsl:value-of select="$left-max-width" />
-
 					</xsl:attribute>
 					<xsl:attribute name="fill">
 						<xsl:choose>
@@ -350,14 +349,12 @@
 						</xsl:choose>
 					</xsl:attribute>
 					<xsl:value-of select="$left-caption" />
-
 				</text>
 			</xsl:if>
 
 			<text y="5.5%" text-anchor="end" dominant-baseline="hanging" font-size="150%">
 				<xsl:attribute name="data-max-width">
 					<xsl:value-of select="$max-width" />
-
 				</xsl:attribute>
 
 				<xsl:attribute name="fill">
@@ -585,8 +582,8 @@
 				<text x="1%" y="5.5%" text-anchor="start" dominant-baseline="hanging" font-size="100%">
 					<xsl:attribute name="data-max-width">
 						<xsl:value-of select="$left-max-width" />
-
 					</xsl:attribute>
+
 					<xsl:attribute name="fill">
 						<xsl:choose>
 							<xsl:when test="$hasSpace='true'">
@@ -598,7 +595,6 @@
 						</xsl:choose>
 					</xsl:attribute>
 					<xsl:value-of select="$left-caption" />
-
 				</text>
 			</xsl:if>
 

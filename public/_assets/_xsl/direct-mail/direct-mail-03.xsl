@@ -109,8 +109,8 @@
 			<script>
 				<xsl:text>var listings=[</xsl:text>
 				<xsl:for-each select="//listings/listing[@state='active']">
-				    <xsl:sort select="@isAgent" data-type="number" order="descending"/>
-		   			<xsl:sort select="@sortDate" data-type="number" order="descending"/>
+					<xsl:sort select="@isAgent" data-type="number" order="descending"/>
+					<xsl:sort select="@sortDate" data-type="number" order="descending"/>
 
 					<xsl:if test="position() &lt;= 6">
 						<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;', dom:&quot;, @dom, &quot;},&quot; )" />
