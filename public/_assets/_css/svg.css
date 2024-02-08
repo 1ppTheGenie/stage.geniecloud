@@ -12,9 +12,9 @@ svg#genie-wrapper {
 	font-size: var(--theme-font-size);
 }
 
-svg:not([fill]),
-use:not([fill]),
-text:not([fill]) {
+svg:not(.no-style-override):not([fill]),
+use:not(.no-style-override):not([fill]),
+text:not(.no-style-override):not([fill]) {
 	fill: var(--theme-body-color);
 }
 
