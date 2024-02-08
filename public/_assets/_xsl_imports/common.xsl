@@ -129,7 +129,7 @@
 		<html>
 			<body>
 				<xsl:attribute name="class">
-					<xsl:value-of select="concat( //output/@size, ' ', //output/@theme )" />
+					<xsl:value-of select="concat( //output/@size, ' ', //output/@theme, ' ', /asset )" />
 				</xsl:attribute>
 
 				<svg id="genie-wrapper"
