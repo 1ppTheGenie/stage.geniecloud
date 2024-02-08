@@ -1007,11 +1007,9 @@
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
 							<xsl:value-of select="'25%'" />
-
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="'14%'" />
-
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
@@ -1040,11 +1038,9 @@
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
 							<xsl:value-of select="'305%'" />
-
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="'305%'" />
-
+							<xsl:value-of select="'300%'" />
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
@@ -1053,11 +1049,9 @@
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
 							<xsl:value-of select="'7.3%'" />
-
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="'7.3%'" />
-
+							<xsl:value-of select="'7%'" />
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
@@ -1075,11 +1069,9 @@
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
 							<xsl:value-of select="'16.5%'" />
-
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="'8%'" />
-
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
@@ -1087,11 +1079,9 @@
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
 							<xsl:value-of select="'8%'" />
-
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="'5.5%'" />
-
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>

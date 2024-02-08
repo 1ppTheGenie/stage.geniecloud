@@ -2,8 +2,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:preserve-space elements="*" />
 
@@ -29,7 +28,7 @@
 		<xsl:param name="totalCount" select="count(//listings/listing[@state=$status])" />
 		<xsl:param name="listings" select="//listings/listing[@state=$status]" />
 		<style>
-<xsl:value-of select="concat( ':root { --color-scheme:	var(', $colorScheme, ');--theme-heading-color: var(--color-scheme); --theme-sub-heading-color: var(--color-scheme); } #genie-wrapper[viewBox=&quot;0 0 555 555&quot;] .hide-small { display: none;}' )" />
+			<xsl:value-of select="concat( ':root { --color-scheme:	var(', $colorScheme, ');--theme-heading-color: var(--color-scheme); --theme-sub-heading-color: var(--color-scheme); } #genie-wrapper[viewBox=&quot;0 0 555 555&quot;] .hide-small { display: none;}' )" />
 
 
 			<xsl:value-of select="'
@@ -84,12 +83,10 @@ background-color: var(--new-blue);
 			<xsl:call-template name="map-property-count-letter">
 				<xsl:with-param name="icon" select="'home-lock'" />
 				<xsl:with-param name="icon-fill" select="'var(--color-scheme)'" />
-<xsl:with-param name="caption" select="$status" />
-
+				<xsl:with-param name="caption" select="$status" />
 				<xsl:with-param name="count" select="$totalCount" />
 				<xsl:with-param name="description">
 					<xsl:value-of select="genie:format-date( //output/@reportDate, '[MNn] [Y0001]')" />
-
 				</xsl:with-param>
 			</xsl:call-template>
 		</g>
@@ -99,11 +96,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'22%'" />
+							<xsl:value-of select="'22%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'12%'" />
+							<xsl:value-of select="'12%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -114,11 +111,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'120%'" />
+							<xsl:value-of select="'120%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'180%'" />
+							<xsl:value-of select="'180%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -127,11 +124,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'22%'" />
+							<xsl:value-of select="'22%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'12%'" />
+							<xsl:value-of select="'12%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -140,11 +137,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="y">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'7.5%'" />
+							<xsl:value-of select="'7.5%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'10%'" />
+							<xsl:value-of select="'10%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -158,11 +155,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="y">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'14%'" />
+							<xsl:value-of select="'14%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'12%'" />
+							<xsl:value-of select="'12%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -181,11 +178,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="y">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'19%'" />
+							<xsl:value-of select="'19%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'18%'" />
+							<xsl:value-of select="'18%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -193,11 +190,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'100%'" />
+							<xsl:value-of select="'100%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'120%'" />
+							<xsl:value-of select="'120%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -272,12 +269,10 @@ background-color: var(--new-blue);
 			<xsl:call-template name="map-property-count-letter">
 				<xsl:with-param name="icon" select="'home-lock'" />
 				<xsl:with-param name="icon-fill" select="'var(--color-scheme)'" />
-<xsl:with-param name="caption" select="$status" />
-
+				<xsl:with-param name="caption" select="$status" />
 				<xsl:with-param name="count" select="$totalCount" />
 				<xsl:with-param name="description">
 					<xsl:value-of select="genie:format-date( //output/@reportDate, '[MNn] [Y0001]')" />
-
 				</xsl:with-param>
 			</xsl:call-template>
 		</g>
@@ -287,11 +282,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'22%'" />
+							<xsl:value-of select="'22%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'12%'" />
+							<xsl:value-of select="'12%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -302,11 +297,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'120%'" />
+							<xsl:value-of select="'120%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'180%'" />
+							<xsl:value-of select="'180%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -315,11 +310,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="x">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'22%'" />
+							<xsl:value-of select="'22%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'12%'" />
+							<xsl:value-of select="'12%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -328,11 +323,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="y">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'7.5%'" />
+							<xsl:value-of select="'7.5%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'7%'" />
+							<xsl:value-of select="'7%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -346,11 +341,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="y">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'14%'" />
+							<xsl:value-of select="'14%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'14.5%'" />
+							<xsl:value-of select="'14.5%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -369,11 +364,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="y">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'19%'" />
+							<xsl:value-of select="'19%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'18%'" />
+							<xsl:value-of select="'18%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -381,11 +376,11 @@ background-color: var(--new-blue);
 				<xsl:attribute name="font-size">
 					<xsl:choose>
 						<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'100%'" />
+							<xsl:value-of select="'100%'" />
 
 						</xsl:when>
 						<xsl:otherwise>
-<xsl:value-of select="'120%'" />
+							<xsl:value-of select="'120%'" />
 
 						</xsl:otherwise>
 					</xsl:choose>
@@ -398,11 +393,11 @@ background-color: var(--new-blue);
 		<xsl:variable name="mapWidth">
 			<xsl:choose>
 				<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'95%'" />
+					<xsl:value-of select="'95%'" />
 
 				</xsl:when>
 				<xsl:otherwise>
-<xsl:value-of select="'94.5%'" />
+					<xsl:value-of select="'94.5%'" />
 
 				</xsl:otherwise>
 			</xsl:choose>
@@ -411,11 +406,11 @@ background-color: var(--new-blue);
 		<xsl:variable name="mapHeight">
 			<xsl:choose>
 				<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'27.5%'" />
+					<xsl:value-of select="'27.5%'" />
 
 				</xsl:when>
 				<xsl:otherwise>
-<xsl:value-of select="'30%'" />
+					<xsl:value-of select="'30%'" />
 
 				</xsl:otherwise>
 			</xsl:choose>
@@ -424,11 +419,11 @@ background-color: var(--new-blue);
 		<xsl:variable name="tableWidth">
 			<xsl:choose>
 				<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'95%'" />
+					<xsl:value-of select="'95%'" />
 
 				</xsl:when>
 				<xsl:otherwise>
-<xsl:value-of select="'95%'" />
+					<xsl:value-of select="'95%'" />
 
 				</xsl:otherwise>
 			</xsl:choose>
@@ -437,11 +432,11 @@ background-color: var(--new-blue);
 		<xsl:variable name="tableHeight">
 			<xsl:choose>
 				<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'35%'" />
+					<xsl:value-of select="'35%'" />
 
 				</xsl:when>
 				<xsl:otherwise>
-<xsl:value-of select="'34%'" />
+					<xsl:value-of select="'34%'" />
 
 				</xsl:otherwise>
 			</xsl:choose>
@@ -450,11 +445,11 @@ background-color: var(--new-blue);
 		<xsl:variable name="tableX">
 			<xsl:choose>
 				<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'0'" />
+					<xsl:value-of select="'0'" />
 
 				</xsl:when>
 				<xsl:otherwise>
-<xsl:value-of select="'0'" />
+					<xsl:value-of select="'0'" />
 
 				</xsl:otherwise>
 			</xsl:choose>
@@ -463,11 +458,11 @@ background-color: var(--new-blue);
 		<xsl:variable name="tableY">
 			<xsl:choose>
 				<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'32%'" />
+					<xsl:value-of select="'32%'" />
 
 				</xsl:when>
 				<xsl:otherwise>
-<xsl:value-of select="'32%'" />
+					<xsl:value-of select="'32%'" />
 
 				</xsl:otherwise>
 			</xsl:choose>
@@ -476,11 +471,11 @@ background-color: var(--new-blue);
 		<xsl:variable name="gTransform">
 			<xsl:choose>
 				<xsl:when test="$isFBAd='true'">
-<xsl:value-of select="'transform: translate(2.5%, 26%);'" />
+					<xsl:value-of select="'transform: translate(2.5%, 26%);'" />
 
 				</xsl:when>
 				<xsl:otherwise>
-<xsl:value-of select="'transform: translate(2.5%, 18%);'" />
+					<xsl:value-of select="'transform: translate(2.5%, 18%);'" />
 
 				</xsl:otherwise>
 			</xsl:choose>
@@ -568,7 +563,7 @@ background-color: var(--new-blue);
 										<span>
 											<xsl:attribute name="class">
 												<xsl:if test="@state='active' and number(@dom) &lt;= $domNew">
-<xsl:value-of select="'new'" />
+													<xsl:value-of select="'new'" />
 
 												</xsl:if>
 											</xsl:attribute>
@@ -585,16 +580,16 @@ background-color: var(--new-blue);
 										<xsl:value-of select="@baths" />
 									</td>
 									<td>
-<xsl:value-of select="format-number(@size, '###,###')" />
+										<xsl:value-of select="format-number(@size, '###,###')" />
 
 									</td>
 									<td>
-<xsl:value-of select="format-number(@listPrice, '$###,###')" />
+										<xsl:value-of select="format-number(@listPrice, '$###,###')" />
 
 									</td>
 									<xsl:if test="$status='sold'">
 										<td>
-<xsl:value-of select="format-number(@salePrice, '$###,###')" />
+											<xsl:value-of select="format-number(@salePrice, '$###,###')" />
 
 										</td>
 										<td>
@@ -604,11 +599,11 @@ background-color: var(--new-blue);
 									<xsl:if test="$status!='sold'">
 										<td >
 											<xsl:if test="$status!='sold'">
-<xsl:value-of select="format-number(@listPrice div @size, '$###,###')" />
+												<xsl:value-of select="format-number(@listPrice div @size, '$###,###')" />
 
 											</xsl:if>
 											<xsl:if test="$status='sold'">
-<xsl:value-of select="format-number(@salePrice div @size, '$###,###')" />
+												<xsl:value-of select="format-number(@salePrice div @size, '$###,###')" />
 
 											</xsl:if>
 										</td>
