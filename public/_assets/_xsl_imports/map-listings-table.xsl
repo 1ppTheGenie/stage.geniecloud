@@ -11,6 +11,9 @@
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="$mapListingNodes">
+				<xsl:sort select="@isAgent" data-type="number" order="descending"/>
+				<xsl:sort select="@sortDate" data-type="number" order="descending"/>
+
 				<xsl:if test="position() &lt;= 8">
 					<xsl:value-of select="concat( &quot;{state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;', dom:&quot;, @dom, &quot;},&quot; )" />
 				</xsl:if>
@@ -104,6 +107,8 @@
 				</thead>
 				<tbody>
 					<xsl:for-each select="$listings">
+						<xsl:sort select="@isAgent" data-type="number" order="descending"/>
+						<xsl:sort select="@sortDate" data-type="number" order="descending"/>					
 						<xsl:if test="position() &lt;= 12">
 							<tr>
 								<td>
@@ -712,6 +717,9 @@ background-color: var(--new-blue);
 					</thead>
 					<tbody>
 						<xsl:for-each select="$listings">
+							<xsl:sort select="@isAgent" data-type="number" order="descending"/>
+							<xsl:sort select="@sortDate" data-type="number" order="descending"/>
+
 							<xsl:if test="position() &lt;= 8">
 								<tr>
 									<td>
