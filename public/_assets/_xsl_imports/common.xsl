@@ -1258,7 +1258,6 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="'6%'" />
-
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
