@@ -35,7 +35,7 @@
 			</xsl:call-template>
 		</text>
 
-		<xsl:variable name="totalSales" select="sum(//statistics/byValue/range/@sold)" />
+		<xsl:variable name="totalSales" select="count(//listings/listing[not(@salePrice = '')])" />
 
 		<xsl:variable name="maxSales">
 			<xsl:for-each select="//statistics/byValue/range">
