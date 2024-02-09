@@ -8,8 +8,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<image x="0" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
@@ -17,12 +16,13 @@
 				<xsl:with-param name="idx" select="1" />
 			</xsl:call-template>
 		</image>
-<rect x="0%" y="0%" width="100%" height="100%" fill-opacity="0.8" fill="var(--theme-body-background)" />
 
+		<rect x="0%" y="0%" width="100%" height="100%" fill-opacity="0.8" fill="var(--theme-body-background)" />
 
 		<use x="-8%" y="0" width="30%" height="30%" fill="var(--theme-sub-heading-color)">
 			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#rectangle-icon' )" />
 		</use>
+
 		<text class="center upper" fill="var(--theme-body-background)" style="font-weight: 500;font-size: 150%;letter-spacing: 2px;transform: rotate(-48deg) translate(18.5%, 30.5%);transform-origin: 0;">
 			<xsl:choose>
 				<xsl:when test="number(//single/statusTypeID) = 2">
@@ -43,10 +43,10 @@
 	<xsl:template name="cropped-content">
 
 		<text x="50%" y="6%" class="center" style="font-weight:600;font-size:150%;">
-<xsl:call-template name="listing-address-line-one" />
+			<xsl:call-template name="listing-address-line-one" />
 
 			<xsl:text>, </xsl:text>
-<xsl:call-template name="listing-address-line-two" />
+			<xsl:call-template name="listing-address-line-two" />
 
 		</text>
 
@@ -85,7 +85,7 @@
 				<tspan dx="1%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'SqFt'" />
-<xsl:with-param name="default" select="'Sq.Ft. &#124; '" />
+						<xsl:with-param name="default" select="'Sq.Ft. &#124; '" />
 
 					</xsl:call-template>
 				</tspan>
@@ -95,7 +95,7 @@
 			</text>
 		</g>
 
-<rect x="14.5%" y="23%" width="24%" height="26.5%" fill="#fff" />
+		<rect x="14.5%" y="23%" width="24%" height="26.5%" fill="#fff" />
 
 		<image x="15.2%" y="24.1%" width="22.5%" height="24%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -103,7 +103,7 @@
 			</xsl:call-template>
 		</image>
 
-<rect x="14.5%" y="51.2%" width="24%" height="26.5%" fill="#fff" />
+		<rect x="14.5%" y="51.2%" width="24%" height="26.5%" fill="#fff" />
 
 		<image x="15.2%" y="52.3%" width="22.5%" height="24%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
