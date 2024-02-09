@@ -1314,7 +1314,7 @@ export const getS3Key = async (asset, params) => {
                     keyParams.propertyType,
                     keyParams.propertyCaption
                 ),
-                AREASLUG: keyParams.areaName.replaceAll(' ', '-'),
+                AREASLUG: keyParams.areaName.replace(/(-{2,}|\/|\s)+/g, (match, p1) => p1 ? '-' : ''),
                 MLSNUMBER: keyParams.mlsNumber || 'mls',
                 LISTSTATUS: keyParams.listingStatus || 'market'
             };
