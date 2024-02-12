@@ -194,7 +194,6 @@ Version:	1.1
 						<div class="section-grid">
 							<xsl:for-each select="./asset">
 								<xsl:sort select="number(@sort)" data-type="number" order="ascending" />
-								<!-- <xsl:sort select="if (matches(@name, '(\d+)')) then format-number(number(regex-group(1)), '000000') else @name" data-type="text" /> -->
 
 								<xsl:call-template name="asset-box">
 									<xsl:with-param name="asset" select="." />

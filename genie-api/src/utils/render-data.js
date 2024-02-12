@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 
 /* prettier-ignore */
-import { generateQR, currencyFormat, endOfLastMonth, genieGlobals, MINUTE_IN_SECONDS, NOW, dateAdd, timeAgo, toS3, jsonFromS3, listS3Folder, assetSetting } from "./index.js";
+import { generateQR, endOfLastMonth, genieGlobals, MINUTE_IN_SECONDS, NOW, dateAdd, timeAgo, toS3, jsonFromS3, listS3Folder, assetSetting } from "./index.js";
 /* prettier-ignore */
 import {  areaName,openhouseByMlsNumber, getListing, agentProperties, mlsProperties, areaStatisticsMonthly, areaStatisticsWithPrevious, propertySurroundingAreas, getUser, getAreaBoundary, mlsDisplaySettings, } from "./../genieAI.js";
 import { getS3Key } from './../index.js';
@@ -126,7 +126,7 @@ export const getRenderJSON = async params => {
         let times = [];
 
         if (params.openHouseTimes) {
-            params.openHouseTimes.forEach(t => {
+            params.openHouseTimes.forEach( t => {
                 // Support timestamps and formatted date/time strings
                 times.push(typeof t == 'string' ? DateTime.fromISO(t).toMillis() : t);
             });
@@ -862,7 +862,7 @@ const processListing = async params => {
         ];
 
         /*	Open House */
-        if (params.openHouseTimes) {
+        if ( params.openHouseTimes ) {
             //$tz = new DateTimeZone(Users.timezone(userId));
             const tz = { zone: 'PST' };
             const oh = {
