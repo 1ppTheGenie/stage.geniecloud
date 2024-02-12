@@ -3,11 +3,11 @@
 	Asset Name: Qr code postcard 2022 6
 	Tags: 		Direct Mail
 	Sizes:		Postcard
-Supports:	Area, Print, Listing, QRCode
+	Supports:	Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:variable name="mapListingNodes" select="//listings/listing[@state='sold']" />
 
@@ -60,7 +60,7 @@ Supports:	Area, Print, Listing, QRCode
 				<div style="width: 90%;height: 90%;background: var(--theme-body-color); border:4px solid var(--theme-sub-heading-color); border-radius:50%">
 					<p style="font-size: 250%; font-weight: 900; color: var(--theme-sub-heading-color); margin: 0 auto;
                         text-align: center; line-height: 200%; font-family:var(--theme-sub-heading-font)">
-<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
+						<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
 
 					</p>
 				</div>
@@ -108,7 +108,7 @@ Supports:	Area, Print, Listing, QRCode
 						<xsl:text>LAST 30 DAYS</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
+						<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
 
 					</xsl:otherwise>
 				</xsl:choose>
@@ -150,19 +150,19 @@ Supports:	Area, Print, Listing, QRCode
 				</text>
 			</g>
 			<text class="center upper bold" style="font-family:var(--theme-heading-font); letter-spacing: 1px;">
-				<tspan x="50%" y="63%" fill="var(--theme-body-color)" style="font-size: 150%;font-weight:800;">
+				<tspan x="50%" y="78%" fill="var(--theme-body-color)" style="font-size: 150%;font-weight:800;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'scantosee'" />
 						<xsl:with-param name="default" select="'SCAN TO SEE'" />
 					</xsl:call-template>
 				</tspan>
-				<tspan x="50%" y="69.5%" fill="var(--theme-body-color)" style="font-size: 150%;font-weight:800;">
+				<tspan x="50%" y="82%" fill="var(--theme-body-color)" style="font-size: 150%;font-weight:800;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'whosonthe'" />
 						<xsl:with-param name="default" select="'WHO’S ON THE'" />
 					</xsl:call-template>
 				</tspan>
-				<tspan x="50%" y="75%" fill="var(--theme-sub-heading-color)" style="font-size: 250%;font-weight:800;">
+				<tspan x="50%" y="86%" fill="var(--theme-sub-heading-color)" style="font-size: 250%;font-weight:800;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'move'" />
 						<xsl:with-param name="default" select="'MOVE!'" />
