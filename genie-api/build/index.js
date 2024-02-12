@@ -7285,7 +7285,7 @@ var getRenderJSON = async (params) => {
     let times = [];
     if (params.openHouseTimes) {
       params.openHouseTimes.forEach((t) => {
-        times.push(typeof t == "string" ? DateTime.fromISO(t) : t);
+        times.push(typeof t == "string" ? DateTime.fromISO(t).toMillis() : t);
       });
     } else {
       const r = await openhouseByMlsNumber(
@@ -7844,6 +7844,7 @@ var processListing = async (params) => {
       { longitude: listing.longitude ?? 0 },
       { city: listing.city ?? "" }
     ];
+    console.log("ohX", params.openHouseTimes);
     if (params.openHouseTimes) {
       const tz = { zone: "PST" };
       const oh = {
@@ -7873,9 +7874,13 @@ var processListing = async (params) => {
             tz
           ).toFormat("t");
           session._attrs["ms"] = ts1;
+          console.log("ohX1", session);
           oh._content.push(session);
+        } else {
+          console.log("ohX2 Not long ag");
         }
       }
+      console.log("ohXXX", oh);
       single.push(oh);
     }
     single.push({
@@ -7955,7 +7960,8 @@ var processCollection = async (params) => {
     const collection = {
       _attrs: {
         id: params.renderId,
-        name: params.collection.name,
+        name: collectionData.name,
+        template: collectionData.template,
         assembled: Math.round(Date.now() / 1e3)
       }
     };
