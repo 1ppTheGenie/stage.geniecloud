@@ -128,7 +128,7 @@ export const getRenderJSON = async params => {
         if (params.openHouseTimes) {
             params.openHouseTimes.forEach(t => {
                 // Support timestamps and formatted date/time strings
-                times.push(typeof t == 'string' ? DateTime.fromISO(t) : t);
+                times.push(typeof t == 'string' ? DateTime.fromISO(t).toMillis() : t);
             });
         } else {
             const r = await openhouseByMlsNumber(
