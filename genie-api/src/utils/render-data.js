@@ -994,7 +994,8 @@ const processCollection = async params => {
         const collection = {
             _attrs: {
                 id: params.renderId,
-                name: params.collection.name,
+                name: collectionData.name,
+                template: collectionData.template,
                 assembled: Math.round(Date.now() / 1000)
             }
         };
