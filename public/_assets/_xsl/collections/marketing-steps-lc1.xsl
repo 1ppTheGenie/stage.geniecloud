@@ -160,6 +160,7 @@ Version:	1.1
 				</div>
 
 				<xsl:for-each select="//collection/sections/section">
+					<xsl:sort select="number(@sort)" data-type="number" order="ascending" />
 					<xsl:sort select="@name" />
 
 					<div class="section">
