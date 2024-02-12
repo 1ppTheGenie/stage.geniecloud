@@ -126,7 +126,12 @@
 		<xsl:param name="width" />
 		<xsl:param name="height" />
 
-		<html>
+		<html lang="en">
+			<head>
+				<title>
+					<xsl:value-of select="concat( 'Presented by ', //agent[1]/marketingName, ' ' , //agent[1]/address/company  )" />
+				</title>
+			</head>
 			<body>
 				<xsl:attribute name="class">
 					<xsl:value-of select="concat( //output/@size, ' ', //output/@theme, ' ', //xslAsset )" />
