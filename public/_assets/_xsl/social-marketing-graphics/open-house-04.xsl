@@ -69,8 +69,7 @@
 					<xsl:sort select="@ms" data-type="number" order="ascending"/>
 					<xsl:variable name="yOffset" select="42.5 + (5 * position())" />
 
-					<text x="50%" class="sub-heading center middle bold" font-size="115%" fill="var(--theme-body-background)">
-						<xsl:attribute name="y" value="concat( yOffset, '%')" />
+					<text x="50%" y="{concat( $yOffset, '%')}" class="sub-heading center middle bold" font-size="115%" fill="var(--theme-body-background)">
 						<xsl:value-of select="concat( @dow, ', ', @month, ' ', @date, ' - ', @starts, ' to ',@ends)" />
 					</text>
 				</xsl:for-each>
