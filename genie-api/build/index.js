@@ -7844,7 +7844,6 @@ var processListing = async (params) => {
       { longitude: listing.longitude ?? 0 },
       { city: listing.city ?? "" }
     ];
-    console.log("ohX", params.openHouseTimes);
     if (params.openHouseTimes) {
       const tz = { zone: "PST" };
       const oh = {
@@ -7874,13 +7873,9 @@ var processListing = async (params) => {
             tz
           ).toFormat("t");
           session._attrs["ms"] = ts1;
-          console.log("ohX1", session);
           oh._content.push(session);
-        } else {
-          console.log("ohX2 Not long ag");
         }
       }
-      console.log("ohXXX", oh);
       single.push(oh);
     }
     single.push({
@@ -9979,7 +9974,18 @@ var getS3Key = async (asset, params) => {
       );
       s3Key = `genie-files/${params.renderId}/${params.theme}/${renderKey2}.${fileExtension || hasPages2 && "pdf" || "png"}`;
     }
-  } catch {
+  } catch (error2) {
+    await toS3(
+      `_errors/${params.renderId}-${Date.now()}-api.json`,
+      Buffer.from(
+        JSON.stringify({
+          params,
+          error: error2.toString()
+        })
+      ),
+      { GenieExpireFile: "error" },
+      JSON_MIME
+    );
   }
   return {
     s3Key,
