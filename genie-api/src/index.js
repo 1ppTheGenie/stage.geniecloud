@@ -1329,7 +1329,19 @@ export const getS3Key = async (asset, params) => {
                 params.theme
             }/${renderKey}.${fileExtension || (hasPages && 'pdf') || 'png'}`;
         }
-    } catch {}
+    } catch (error) {
+        await toS3(
+            `_errors/${params.renderId}-${Date.now()}-api.json`,
+            Buffer.from(
+                JSON.stringify( {
+                    params,
+                    error: error.toString()
+                } )
+            ),
+            { GenieExpireFile: 'error' },
+            JSON_MIME
+        );
+    }
 
     return {
         s3Key,
