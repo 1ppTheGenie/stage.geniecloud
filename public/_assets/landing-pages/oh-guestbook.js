@@ -6,5 +6,5 @@ window.showAddressInput = () => {
 };
 
 document.addEventListener(`genie-lead-created`, lead =>
-	gg.redirectToParentAsset({ lead_id: lead.detail.key })
+	gHub.redirectToParentAsset({ lead_id: lead.detail.key })
 );

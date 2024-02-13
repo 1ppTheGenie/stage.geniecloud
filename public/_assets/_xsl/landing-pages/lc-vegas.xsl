@@ -40,7 +40,7 @@
 			<script>
 				<xsl:value-of select="concat( 'const listings = [{caption: `1`, color: `#F00`, lat: ', number(//single/latitude), ', lng: ', number(//single/longitude), '}, {caption: `2`, color: `#0F0`, lat: ', number(//lead/property/latitude), ', lng: ', number(//lead/property/longitude), '}];' )" />
 				<xsl:value-of select="concat( &quot;const options = { fitMarkers: true, mapStyle: `&quot;, //output/@mapStyle, &quot;`}; &quot; )" />
-				<xsl:value-of select="&quot;document.addEventListener( `genie-landing-loaded`, function() { document.querySelector('section.banner-section').style.backgroundImage = ''; gg.makeMap( `compare-header-map`, options, { listings: listings } ); });&quot;" />
+				<xsl:value-of select="&quot;document.addEventListener( `genie-landing-loaded`, function() { document.querySelector('section.banner-section').style.backgroundImage = ''; gHub.makeMap( `compare-header-map`, options, { listings: listings } ); });&quot;" />
 			</script>
 
 			<section class="banner-section market-report-instant-banner" style="position:relative; display:block; background-color: var(--theme-body-background);">
@@ -174,10 +174,10 @@
 
 			<xsl:value-of select="'
 				window.addEventListener(`DOMContentLoaded`, async function() {
-					if(gg.makeMap){
-						const headerMap = await gg.makeMap(`compare-header-map`);
+					if(gHub.makeMap){
+						const headerMap = await gHub.makeMap(`compare-header-map`);
 
-						const url = gg.circleURI(`red`, 1);
+						const url = gHub.circleURI(`red`, 1);
 						const svgIcon = new L.Icon({
 							iconUrl: url,
 							iconSize: [34, 34],
@@ -185,7 +185,7 @@
 						});
 						const m1 = L.marker([homeLat, homeLng], {icon: svgIcon}).addTo(headerMap);
 
-						const url2 = gg.circleURI(`blue`, 2);
+						const url2 = gHub.circleURI(`blue`, 2);
 						const svgIcon2 = new L.Icon({
 							iconUrl: url2,
 							iconSize: [34, 34],
@@ -197,7 +197,7 @@
 						headerMap.fitBounds(featureGroup.getBounds());
 
 						if( leadWkt !== `` ) {
-							const leadMap = await gg.makeMap(`lead-property-map`);
+							const leadMap = await gHub.makeMap(`lead-property-map`);
 
 							window.L.geoJson( JSON.parse(leadWkt), {
 								onEachFeature: function (feature, layer) {

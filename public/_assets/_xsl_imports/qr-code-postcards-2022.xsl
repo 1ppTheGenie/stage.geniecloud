@@ -154,7 +154,7 @@
 			</xsl:variable>
 
 			<script>
-				<xsl:value-of select="concat( 'gg.addListingPopup( ', //single/latitude, ',', //single/longitude, ',`', $ListingImage1, '`,', $pinLeft, ',', $pinTop, ',', $markerSize,  ' );' )" />
+				<xsl:value-of select="concat( 'gHub.addListingPopup( ', //single/latitude, ',', //single/longitude, ',`', $ListingImage1, '`,', $pinLeft, ',', $pinTop, ',', $markerSize,  ' );' )" />
 			</script>
 		</foreignObject>
 	</xsl:template>

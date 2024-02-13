@@ -233,7 +233,7 @@ z M400,412.5c-8.284,0-15-6.716-15-15s6.716-15,15-15c8.284,0,15,6.716,15,15S408.2
                   document.getElementsByClassName(`property-address`)[0].style.display = (checkBox.checked == true) ? `block` : `none`;
                 }
 
-				document.addEventListener( `genie-lead-created`, function (lead) { gg.redirectToParentAsset( { lead_id: lead.detail.key } ); } );
+				document.addEventListener( `genie-lead-created`, function (lead) { gHub.redirectToParentAsset( { lead_id: lead.detail.key } ); } );
 '" />
 			</script>
 		</body>

@@ -224,7 +224,7 @@
                   document.getElementsByClassName(`property-address`)[0].style.display = (checkBox.checked == true) ? `block` : `none`;
                 }
 
-				document.addEventListener( `genie-lead-created`, function(lead) { gg.redirectToParentAsset( { lead_id: lead.detail.key } ); } );
+				document.addEventListener( `genie-lead-created`, function(lead) { gHub.redirectToParentAsset( { lead_id: lead.detail.key } ); } );
 '" />
 			</script>
 		</body>

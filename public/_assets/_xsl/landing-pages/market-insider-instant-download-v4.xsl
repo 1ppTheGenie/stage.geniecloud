@@ -125,7 +125,7 @@
 									<div class="home-value-knowning-info heading-font heading-color">
 										<p>Interested in knowing your home's TRUE&#160;value?</p>
 									</div>
-									<a href="javascript:gg.homeValuePopup();" class="request-home-value subtitle-color-as-bg background-as-color">
+									<a href="javascript:gHub.homeValuePopup();" class="request-home-value subtitle-color-as-bg background-as-color">
 										<div class=" heading-font btn-content-info editable">yes, I'm interested!</div>
 									</a>
 								</div>

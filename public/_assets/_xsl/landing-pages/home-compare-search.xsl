@@ -85,19 +85,19 @@
                     let selectedPlace;
                     const ac = document.getElementById(`search-address`);
                     if (ac) {
-                        gg.autoComplete(ac, function(place) { selectedPlace = place; });
+                        gHub.autoComplete(ac, function(place) { selectedPlace = place; });
 
                         document.getElementById(`search-address-form`).addEventListener(`submit`, function(e) {
 							const searchButton = document.getElementById(`search-address-button`);
 							const previous = searchButton.src;
-							const spinner = gg.spinner(`red`);
+							const spinner = gHub.spinner(`red`);
                             searchButton.src = `data:image/svg+xml;utf8,${spinner}`;
 
-                            gg.searchAddress(selectedPlace.place_id ).then( function(r) {
+                            gHub.searchAddress(selectedPlace.place_id ).then( function(r) {
 								searchButton.src = previous;
 
                                 if (r?.propertyID) {
-									gg.redirectToParentAsset({propertyId: r.propertyID, crLead: 1});
+									gHub.redirectToParentAsset({propertyId: r.propertyID, crLead: 1});
                                 } else {
 									alert(`Sorry, we can&#8217;t find that property`);
 								}
