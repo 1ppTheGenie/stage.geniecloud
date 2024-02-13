@@ -24,7 +24,7 @@ const from_cache = async (key, endpoint) => {
         since.getSeconds() -
             (CACHE_FOR[endpoint.split('/')[0]] ?? HOUR_IN_SECONDS / 2)
     );
-
+    console.log( 'fromCache', endpoint, since );
     // ToDo: some "skip cache" code?
     return await jsonFromS3(`_cache/${key}`, since);
 };
@@ -77,7 +77,7 @@ export const area_statistics = async (
     skipCache = false
 ) => {
     range = range ?? [1, 3, 6, 9, 12];
-    
+
     return await call_api(
         'GetAreaStatistics',
         {
@@ -87,7 +87,7 @@ export const area_statistics = async (
         },
         skipCache
     );
-}
+};
 
 export const areaStatisticsWithPrevious = async (
     userId,
@@ -417,7 +417,7 @@ export const updateHubAsset = async (hubAssetUrl, userId, hubAssetId) =>
     );
 
 export const getUser = async user_id =>
-    await call_api(`GetUserProfile/${user_id}`, null, 'POST');
+    await call_api(`GetUserProfile/${user_id}`);
 
 const expiry_time = token => {
     decoded = JSON.parse(
@@ -526,9 +526,12 @@ const call_api = async ( endpoint, params, skipCache = false, verb = "POST", pre
 		result = await from_cache( cacheKey, endpoint );
 	}
 	
-	if (!result) {
-		// Flag the API call as coming from Hub2
-		params.consumer = 2;
+    if ( !result ) {
+        if ( endpoint.startsWith( 'GetUserProfile' ) ) {
+            console.log( 'ProfileGOT,', skipCache, params );
+        }
+		// Flag the API call as coming from HubCloud
+		params.consumer = 8;
 
         result = await fetch( API_URL + endpoint, {
 			method: verb,

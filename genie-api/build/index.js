@@ -8747,6 +8747,7 @@ var from_cache = async (key, endpoint) => {
   since.setSeconds(
     since.getSeconds() - (CACHE_FOR[endpoint.split("/")[0]] ?? HOUR_IN_SECONDS / 2)
   );
+  console.log("fromCache", endpoint, since);
   return await jsonFromS3(`_cache/${key}`, since);
 };
 var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
@@ -8947,7 +8948,7 @@ var getShortData = async (shortUrlDataId, token, agentId = null) => {
     return r.data;
   }
 };
-var getUser = async (user_id) => await call_api(`GetUserProfile/${user_id}`, null, "POST");
+var getUser = async (user_id) => await call_api(`GetUserProfile/${user_id}`);
 var getPropertyFromId = async (property_id, agent_id) => {
   const r = await getAssessorProperty(property_id, agent_id);
   if (r.hasProperty) {
@@ -9018,7 +9019,10 @@ var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_ca
     result = await from_cache(cacheKey, endpoint);
   }
   if (!result) {
-    params.consumer = 2;
+    if (endpoint.startsWith("GetUserProfile")) {
+      console.log("ProfileGOT,", skipCache, params);
+    }
+    params.consumer = 8;
     result = await fetch(API_URL + endpoint, {
       method: verb,
       httpversion: "1.1",
