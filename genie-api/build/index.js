@@ -7854,8 +7854,7 @@ var processListing = async (params) => {
         dow: "EEEE",
         date: "d",
         month: "MMMM",
-        year: "y",
-        starts: "t"
+        year: "y"
       };
       for (let i = 0; i < params.openHouseTimes.length; i += 2) {
         const ts1 = params.openHouseTimes[i];
@@ -7868,10 +7867,11 @@ var processListing = async (params) => {
               tz
             ).toFormat(timeAttrbs[key])
           );
-          session._attrs["ends"] = DateTime.fromMillis(
-            ts2,
-            tz
-          ).toFormat("t");
+          [{ name: "starts", value: ts1 }, { name: "ends", value: ts2 }].forEach((o) => {
+            const dt = DateTime.fromMillis(o.value, tz);
+            const dtFormat = dt.minute === 0 ? "ha" : "t";
+            session._attrs[o.name] = dt.toFormat(dtFormat);
+          });
           session._attrs["ms"] = ts1;
           oh._content.push(session);
         }
