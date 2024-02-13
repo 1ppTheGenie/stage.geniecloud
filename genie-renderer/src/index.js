@@ -13,6 +13,7 @@ import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
 
 chromium.setGraphicsMode = false;
 
+const DPI = 96;
 const BUCKET = process.env.BUCKET;
 const SQS_QUEUE =
 	process.env.SQS_QUEUE ??
@@ -67,6 +68,17 @@ export const renderer = async params => {
 		batch.push(params);
 	}
 
+	const viewWidth =
+		(parseInt(batch[0].width) || 1200) *
+		(batch[0].width.toString().includes("in")
+			? DPI
+			: 1);
+	const viewHeight =
+		(parseInt(batch[0].height) ?? 628) *
+		(batch[0].height.toString().includes("in")
+			? DPI
+			: 1);
+
 	//try {
 	browser = await puppeteer.launch({
 		args: [
@@ -75,8 +87,8 @@ export const renderer = async params => {
 			"--force-color-profile=srgb",
 		],
 		defaultViewport: {
-			width: parseInt(batch[0].width) || 1200,
-			height: parseInt(batch[0].height) || 628,
+			width: viewWidth,
+			height: viewHeight,
 			deviceScaleFactor: batch[0].scale || 1,
 		},
 
@@ -228,12 +240,14 @@ export const renderer = async params => {
 								mergedPdf.addPage(page);
 							});
 
-							await s3Client.send(
-								new DeleteObjectCommand({
-									Bucket: render.bucket,
-									Key: interimKey,
-								})
-							);
+							if (!params.isDebug) {
+								await s3Client.send(
+									new DeleteObjectCommand({
+										Bucket: render.bucket,
+										Key: interimKey,
+									})
+								);
+							}
 						}
 
 						output = Buffer.from(await mergedPdf.save());
@@ -302,7 +316,6 @@ export const renderer = async params => {
 			}
 		}
 	}
-	
 
 	return response;
 };
