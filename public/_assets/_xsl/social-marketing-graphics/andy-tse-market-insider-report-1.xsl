@@ -153,7 +153,7 @@
 		<text x="17%" y="87%" class="open-sans" fill="#fdb913" style="font-size:48%;">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'agentlicencesNumber'" />
-				<xsl:with-param name="default" select="//agent[1]/licencesNumber" />
+				<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
 			</xsl:call-template>
 		</text>
 
