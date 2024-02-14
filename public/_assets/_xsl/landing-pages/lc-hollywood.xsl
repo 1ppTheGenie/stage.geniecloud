@@ -608,7 +608,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 					<script>
 						<xsl:value-of select="concat( &quot;const listings = [{caption: 'H', state:'&quot;, //single/listingStatus, &quot;',lat:&quot;, //single/latitude, &quot;,lng:&quot;, //single/longitude, &quot;}]; &quot; )" />
 						<xsl:value-of select="concat( &quot;const options = { dragPan: false, mapStyle: `&quot;, 'streets-v11', &quot;`, zoom: 21, center: { lat:&quot;, //single/latitude, &quot;,lng:&quot;, //single/longitude, &quot;}}; &quot; )" />
-<xsl:value-of select="concat( &quot;document.addEventListener( `genie-landing-loaded`, function() { window.gHub.makeMap( `genie-map`, options,&quot;, &quot; { listings } ); })&quot; )" />
+						<xsl:value-of select="concat( &quot;document.addEventListener( `genie-landing-loaded`, function() { window.gHub.makeMap( `genie-map`, options,&quot;, &quot; { listings } ); })&quot; )" />
 
 
 					</script>
