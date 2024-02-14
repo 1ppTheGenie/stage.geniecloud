@@ -130,7 +130,7 @@ export const [areaMonthlyStore, setAreaMonthlyStore] = createStore({
 
 const [area, areaMonthly, areaListings, setPeriod] = createRoot(() => {
 	const [period, setPeriod] = createSignal(sharedEmbedStore.period);
-	const [area] = createResource(period, async p => {
+	const [area] = createResource( period, async p => {
 		if (!isNaN(p)) {
 			return await getAreaData({ areaId, agentId, areaPeriod: p });
 		}
@@ -161,7 +161,7 @@ const [area, areaMonthly, areaListings, setPeriod] = createRoot(() => {
 		});
 	});
 
-	createEffect(() => {
+	createEffect( () => {
 		if (!area.loading && typeof area() !== "undefined") {
 			setAreaDataStore({
 				loading: false,
