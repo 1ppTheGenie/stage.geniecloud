@@ -22,7 +22,7 @@ const TEMP_DIR =
 	process.env.TEMP_DIR ??
 	"D:/Dropbox/development/genie-marketing-hub-master/GenieHub/genie-hub-cloud/public/_assets/_xsl_imports/";
 
-const transform = (xml, xslt, xsltBaseUri) => {
+const transform = (xml, xslt, xsltBaseUri, method='xml') => {
 	try {
 		const result = SaxonJS.XPath.evaluate(
 			`
@@ -45,9 +45,7 @@ const transform = (xml, xslt, xsltBaseUri) => {
 			}
 		);
 
-		//console.log("carrots", result.output);
-
-		return SaxonJS.serialize(result.output, { method: "xml" });
+		return SaxonJS.serialize(result.output, { method });
 	} catch (error) {
 		return { failed: true, msg: error.message };
 	}
@@ -88,7 +86,8 @@ export const xslt = async event => {
 				const transformedXML = transform(
 					transformXml,
 					transformXsl,
-					`file://${TEMP_DIR}`
+					`file://${TEMP_DIR}`,
+					params.s3Key.endsWith('html') ? 'html' : 'xml'
 				);
 
 				if (transformedXML) {
