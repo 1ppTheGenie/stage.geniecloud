@@ -911,71 +911,8 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 				<xsl:call-template name="agent-details" />
 				<xsl:call-template name="copyright" />
 			</div>
-			<script>
-				<xsl:value-of select="'
-			    var offsetHeight = 100;
-			    if( window.innerWidth <= 768 ) {
-			        offsetHeight = 250;
-			    }
-				function scrollTop(element) {
-                     setTimeout(function() {
-                         window.scroll({
-                            behavior: `smooth`,
-                            left: 0,
-                            top: document.querySelector(element).offsetTop - offsetHeight
-                        });
-                     },10);
-                }
-                document.querySelectorAll(`.nav li a.nav-link`).forEach( function (item) {
-                    item.addEventListener(`click`, function(e){ 
-                        scrollTop(item.hash);
-                    });
-                })
-				var close_modal = document.getElementById(`close_modal`);
-				close_modal.addEventListener(`click`, function() {
-					document.getElementById(`fl-submit-message`).style.display = `none`;
-				})
-				var close_compare_modal = document.querySelector(`#close-compare-modal`);			
-				document.querySelector(`#fl-home-compare svg`).addEventListener(`click`, function() {
-					document.querySelector(`#fl-home-compare`).style.display = `none`;
-				})			
-				close_compare_modal.addEventListener(`click`, function() {
-					document.querySelector(`#fl-home-compare`).style.display = `none`;
-				})			
-
-                
-                document.querySelectorAll(`#form_step1`).forEach(function( item ) {
-                    item.addEventListener(`submit`, function() {
-                        document.querySelector(`#contact-me`).style.display = `none`; 
-                    })
-                })
-
-                var scrollPosition = window.scrollY;
-                var logoContainer = document.getElementsByClassName(`header`)[0];
-
-                window.addEventListener( `scroll`, function() {
-					scrollPosition = window.scrollY;
-                	if (scrollPosition >= 150) {
-                		logoContainer.classList.add(`fixed`);
-                	} else {
-                		logoContainer.classList.remove(`fixed`);
-                	}
-                });
-			   	document.addEventListener(`DOMContentLoaded`, function () {
-				  	document.querySelector(`.nav-hamburger`).addEventListener(`click`, function() {
-				  		var menu = document.querySelector(`.navigation-links`);
-if(menu.style.display === `none` &#124;&#124; menu.style.display === `) {
-					  		menu.style.display = `block`;
-					  	} else {
-					  		menu.style.display = `none`;
-					  	}
-		    		})
-		        	 if(window.innerWidth <= 768 ) {
-		        	 	document.querySelector(`.nav-item`).addEventListener(`click`, function() {
-			        		document.querySelector(`.navigation-links`).style.display = `none`;
-			        	})
-		        	 }
-}, false);'" />
+			<script src="{concat( //output/@siteUrl, '_assets/landing-pages/lc-austin.js' )}">
+				<xsl:comment/>
 			</script>
 		</body>
 	</xsl:template>
