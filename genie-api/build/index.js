@@ -8834,28 +8834,37 @@ var getAreaBoundary = async (areaId, skipCache = false) => await call_api(`GetAr
 var getListing = async (user_id, mls_number, mls_id, skipCache = false) => {
   mls_id = mls_id ?? -1;
   let listing;
-  if (mls_id > -1) {
-    const r = await call_api(
-      "GetUserMlsListing",
-      { mlsId: mls_id, mlsNumber: mls_number, userId: user_id },
-      skipCache,
-      "POST"
-    );
-    listing = r.listing ?? null;
-    if (listing && r.preferredAreaId) {
-      listing.preferredAreaId = r.preferredAreaId;
+  let endpoint;
+  try {
+    if (mls_id > -1) {
+      endpoint = "GetUserMlsListing";
+      const r = await call_api(
+        endpoint,
+        { mlsId: mls_id, mlsNumber: mls_number, userId: user_id },
+        skipCache,
+        "POST"
+      );
+      listing = r.listing ?? null;
+      if (listing && r.preferredAreaId) {
+        listing.preferredAreaId = r.preferredAreaId;
+      }
+    } else {
+      endpoint = "GetListingByMlsNumber";
+      const r = await call_api(
+        endpoint,
+        { mlsNumber: mls_number },
+        skipCache,
+        "POST"
+      );
+      listing = r?.listings[0] ?? null;
     }
-  } else {
-    const r = await call_api(
-      "GetListingByMlsNumber",
-      { mlsNumber: mls_number },
-      skipCache,
-      "POST"
+    if (listing?.errorCode == 0) {
+      return listing;
+    }
+  } catch (err) {
+    throw new Error(
+      `${endpoint} failed: ${err.toString()}. (${user_id},${mls_number},${mls_id})`
     );
-    listing = r?.listings[0] ?? null;
-  }
-  if (listing?.errorCode == 0) {
-    return listing;
   }
 };
 var mlsDisplaySettings = async (mls_id, skipCache = false) => await call_api(`GetMlsDisplaySettings/${mls_id}`, null, skipCache, "POST");
@@ -9034,7 +9043,13 @@ var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_ca
       },
       timeout: 60,
       body: Object.keys(params).length > 0 ? JSON.stringify(params) : null
-    }).then((response) => response.json());
+    }).then((response) => {
+      try {
+        return response.json();
+      } catch (err) {
+        throw new Error(`GenieAPI response not JSON: ${response.body}`);
+      }
+    });
     if (result.success) {
       if (pre_cache && typeof pre_cache == "function") {
         result = pre_cache(result);

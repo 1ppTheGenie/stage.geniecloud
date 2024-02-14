@@ -24,7 +24,7 @@ const from_cache = async (key, endpoint) => {
         since.getSeconds() -
             (CACHE_FOR[endpoint.split('/')[0]] ?? HOUR_IN_SECONDS / 2)
     );
-    console.log( 'fromCache', endpoint, since );
+    console.log('fromCache', endpoint, since);
     // ToDo: some "skip cache" code?
     return await jsonFromS3(`_cache/${key}`, since);
 };
@@ -553,7 +553,14 @@ const call_api = async ( endpoint, params, skipCache = false, verb = "POST", pre
 			},
 			timeout: 60,
 			body: Object.keys(params).length > 0 ? JSON.stringify(params) : null,
-		}).then(response => response.json());
+        } ).then( response => {
+            try {
+                return response.json();
+            } catch ( err ) {
+                throw new Error( `GenieAPI response not JSON: ${response.body}` );
+            }
+            
+        } );
 
 		// Only cache successful API calls
 		if (result.success) {
