@@ -32,9 +32,10 @@ const areaId = window.gHub.areaId;
 const agentId = window.gHub.agentId;
 
 export const [sharedEmbedStore, setSharedEmbedStore] = createStore({
-	period: parseInt(window?.gHub?.areaPeriod ?? 6, 10),
+	period: parseInt(window?.gHub?.areaPeriod ?? (document.getElementsByClassName('genie-embed').length ? parseInt(document.getElementsByClassName('genie-embed')[0].getAttribute('data-genie-areaperiod')) :12), 10),
 	propertyType: parseInt(window?.gHub?.propertyType ?? 0, 10),
-});
+} );
+
 
 export const [listingsStore, setListingsStore] = createStore({
 	loading: true,
