@@ -176,7 +176,6 @@ export default () => {
 };
 
 const StatusKey = ({ setStatus }) => {
-	console.log("areaDataStore", { ...areaDataStore });
 	const labels = [
 		{
 			total: areaDataStore?.overall?.new,

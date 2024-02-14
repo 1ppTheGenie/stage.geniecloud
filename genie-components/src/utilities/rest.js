@@ -3,7 +3,6 @@ const GENIE = "genie-embed/v2/";
 const getAgentData = async agent_id => {
 	const r = await apiCall("get-agent-data", { agent_id });
 
-	//console.log("agent", r.result.agent);
 	return r.result.agent;
 };
 

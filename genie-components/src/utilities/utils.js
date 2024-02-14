@@ -216,7 +216,6 @@ export const useAgentData = () => {
 		loading: true,
 		stats: null,
 		get bedrooms() {
-			console.log("bedrooms", this);
 			return {}; //this.stats && this.stats.bedroomStats;
 		},
 		get topSize() {
