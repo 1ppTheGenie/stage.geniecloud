@@ -372,9 +372,7 @@
 									</div>
 									<div class="form-field">
 										<span class="wpcf7-form-control-wrap your-message">
-											<textarea cols="40" name="note" rows="10" class="form-control" placeholder="Message">
-												<xsl:comment />
-											</textarea>
+											<textarea cols="40" name="note" rows="10" class="form-control" placeholder="Message"></textarea>
 										</span>
 										<input type="submit" value="Send" class="wpcf7-submit step1-button" />
 									</div>
@@ -442,9 +440,7 @@
 												</div>
 												<div class="awu-field awu-col-12">
 													<span class="wpcf7-form-control-wrap you-message">
-														<textarea name="note" placeholder="Message" cols="30" rows="10">
-															<xsl:comment />
-														</textarea>
+														<textarea name="note" placeholder="Message" cols="30" rows="10"></textarea>
 													</span>
 													<input type="submit" class="step1-button" value="Send" />
 												</div>
@@ -501,9 +497,7 @@
 							</div>
 							<div class="awu-field col-md-12">
 								<label for="">Your Message</label>
-								<textarea class="form-control" name="note" cols="40" rows="10">
-									<xsl:comment />
-								</textarea>
+								<textarea class="form-control" name="note" cols="40" rows="10"></textarea>
 							</div>
 							<div class="col-md-12">
 								<input type="submit" value="Send" class="submit-btn step1-button" id="request-modal-btn" />
@@ -551,9 +545,7 @@
 							</div>
 							<div class="awu-field col-md-12">
 								<label for="">Your Message</label>
-								<textarea class="form-control" name="note" cols="40" rows="10">
-									<xsl:comment />
-								</textarea>
+								<textarea class="form-control" name="note" cols="40" rows="10"></textarea>
 							</div>
 							<div class="col-md-12">
 								<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />
