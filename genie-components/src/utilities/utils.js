@@ -83,8 +83,10 @@ export const useSettings = settingsContext => {
 	const globalSettings = typeof window.gHub !== "undefined" ? window.gHub : {};
 	const settings = { ...globalSettings, ...settingsContext };
 
-	onMount(() => {
-		setSharedEmbedStore({ period: parseInt(settingsContext.areaPeriod) });
+	onMount( () => {
+		if ( settings.areaPeriod ) {
+			setSharedEmbedStore( { period: parseInt( settings.areaPeriod ) } );
+		}
 	});
 
 	const keyModify = s => s.toLowerCase().replaceAll("_", "");
