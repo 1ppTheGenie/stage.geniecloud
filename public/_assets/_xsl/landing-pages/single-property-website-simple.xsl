@@ -192,9 +192,7 @@
 									<input type="text" name="phoneNumber" placeholder="Phone*" class="heading-font phone" id="phonenumber" />
 								</div>
 								<div class="form-group">
-									<textarea name="note" placeholder="Message" class="heading-font form-control" cols="60" rows="5">
-										<xsl:comment />
-									</textarea>
+									<textarea name="note" placeholder="Message" class="heading-font form-control" cols="60" rows="5"></textarea>
 								</div>
 								<div class="form-group">
 

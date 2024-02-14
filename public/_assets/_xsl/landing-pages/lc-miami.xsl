@@ -294,9 +294,7 @@
 										<input type="text" name="phoneNumber" placeholder="Phone*" class="col-half heading-font phone" id="phonenumber" />
 									</div>
 									<input type="email" name="emailAddress" placeholder="Email*" class="heading-font" />
-									<textarea name="note" placeholder="Message" class="heading-font">
-										<xsl:comment />
-									</textarea>
+									<textarea name="note" placeholder="Message" class="heading-font"></textarea>
 									<div class="form-group">
 										<div class="fl-btn-value text-center">
 											<button class="btn btn-value-info heading-font heading-color-as-bg background-as-color btn-submit step1-button">

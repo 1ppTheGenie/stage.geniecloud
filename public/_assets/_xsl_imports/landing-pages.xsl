@@ -224,9 +224,7 @@
 									<input type="text" placeholder="Enter Phone No.*" name="phoneNumber" class="form-control heading-font heading-color step1-input" id="phonenumber" required="" />
 								</div>
 								<div class="form-group">
-									<textarea placeholder="Enter Message" name="note" class="form-control heading-font heading-color step1-input" id="message" rows="6">
-										<xsl:comment />
-									</textarea>
+									<textarea placeholder="Enter Message" name="note" class="form-control heading-font heading-color step1-input" id="message" rows="6"></textarea>
 								</div>
 								<div class="fl-btn-value text-center">
 									<button class="btn btn-value-info widget heading-font heading-color-as-bg background-as-color">Submit</button>

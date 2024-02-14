@@ -11,42 +11,14 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
+	<xsl:output method="html" encoding="utf-8" indent="no" omit-xml-declaration="yes" doctype-public="html" />
+
 	<xsl:import href="landing-pages.xsl" />
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="head-description">
 			<xsl:value-of select="concat( 'The ', //area/name, ' market is shifting! View the latest market trends and grab your customized report now.' )" />
 		</xsl:variable>
-		<!--
-		<xsl:variable name="status-name">
-			<xsl:choose>
-				<xsl:when test="number(//single/statusTypeID)=2">
-					<xsl:attribute name="class">
-						<xsl:value-of select="'label label-success listing-status listing-status-sold'" />
-					</xsl:attribute>
-                    Sold
-				</xsl:when>
-				<xsl:when test="number(//single/statusTypeID)=1">
-					<xsl:attribute name="class">
-						<xsl:value-of select="'label label-success listing-status listing-status-listed'" />
-					</xsl:attribute>
-                    Listed
-				</xsl:when>
-				<xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
-					<xsl:attribute name="class">
-						<xsl:value-of select="'label label-warning listing-status listing-status-pending'" />
-					</xsl:attribute>
-                    Pending
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:attribute name="class">
-						<xsl:value-of select="'label label-warning listing-status listing-status-coming-soon'" />
-					</xsl:attribute>
-                    Coming Soon
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
--->
 		<xsl:variable name="status-name">
 			<xsl:choose>
 				<xsl:when test="number(//single/statusTypeID)=2">
@@ -82,8 +54,6 @@
 			</xsl:choose>
 		</xsl:variable>
 		<xsl:call-template name="standard-header">
-			<!--			<xsl:with-param name="title" select="concat( 'Get Customized Market Report for ', //area/name )" />-->
-			<!--			<xsl:with-param name="description" select="$head-description" />-->
 			<xsl:with-param name="seoImage" select="//single/photoPrimary" />
 			<xsl:with-param name="secondaryCSS" select="'single-property-1'" />
 			<xsl:with-param name="defaultUtmSource" select="'Property (Austin)'" />
@@ -127,7 +97,7 @@
                                                     c0.224-0.309,1.65-1.575,2.87-2.596c0.778-0.463,1.312-1.151,1.546-1.995c0.311-1.123,0.082-2.444-0.652-3.731
                                                     c-0.173-0.296-4.291-7.27-8.085-9.277c-0.708-0.375-1.506-0.573-2.306-0.573c-1.318,0-2.558,0.514-3.49,1.445L4.7,3.986
                                                     c-4.014,4.013-5.467,8.562-4.321,13.52c0.956,4.132,3.742,8.529,8.282,13.068l14.705,14.705c5.746,5.746,11.224,8.66,16.282,8.66
-c0,0,0,0,0.001,0c3.72,0,7.188-1.581,10.305-4.698l2.537-2.537C54.033,45.163,54.383,42.833,53.364,40.908z" />
+													c0,0,0,0,0.001,0c3.72,0,7.188-1.581,10.305-4.698l2.537-2.537C54.033,45.163,54.383,42.833,53.364,40.908z" />
 												</svg>
 												<span class="heading-font">Call</span>
 											</a>
@@ -144,7 +114,7 @@ c0,0,0,0,0.001,0c3.72,0,7.188-1.581,10.305-4.698l2.537-2.537C54.033,45.163,54.38
                                                 c-18.299,17.251-46.975,17.251-65.28,0L22.202,77.023z M464.188,377.944c3.114-5.135,5.012-11.098,5.012-17.544V108.8
                                                 c0-4.569-0.932-8.915-2.57-12.899L298.411,254.367L464.188,377.944z M283.2,268.464c-13.961,11.961-31.253,18.027-48.6,18.027
                                                 c-17.347,0-34.64-6.06-48.6-18.027L20.692,391.687c4.094,1.741,8.582,2.714,13.308,2.714h401.2c4.726,0,9.214-0.973,13.308-2.714
-L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12.409,5.012,17.544l165.777-123.577L2.571,95.9z" />
+												L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12.409,5.012,17.544l165.777-123.577L2.571,95.9z" />
 												</svg>
 												<span class="heading-font">Text</span>
 											</a>
@@ -276,7 +246,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								</div>
 								<script>
 									<xsl:value-of select="'options.mapStyle = `satellite-v9`;options.zoom = 25;'" />
-									<xsl:value-of select="'document.addEventListener(`genie-landing-loaded`, function() { gg.makeMap( `closeup-satellite-map`, options ); })'" />
+									<xsl:value-of select="'document.addEventListener(`genie-landing-loaded`, function() { gHub.makeMap( `closeup-satellite-map`, options ); })'" />
 								</script>
 							</xsl:otherwise>
 						</xsl:choose>
@@ -609,9 +579,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<input type="text" name="fullName" placeholder="Name*" class="heading-font" required="required" />
 											<input type="text" name="phoneNumber" placeholder="Phone*" class="heading-font phone" id="phonenumber" required="required" />
 											<input type="email" name="emailAddress" placeholder="Email*" class="heading-font" required="required" />
-											<textarea name="note" placeholder="Message" class="heading-font" required="required">
-												<xsl:comment />
-											</textarea>
+											<textarea name="note" placeholder="Message" class="heading-font" required="required" data-x="10"></textarea>
 											<div class="form-group">
 												<div class="fl-btn-value">
 													<button class="btn btn-value-info heading-font heading-color-as-bg background-as-color btn-submit step1-button">
@@ -844,21 +812,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:comment/>
 										</div>
 									</div>
-									<!-- <div class="one">
-										<span class="border-right"></span>
-										<div class="property-bg">
-											<xsl:attribute name="style">
-<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
-											</xsl:attribute>
-										</div>
-									</div>
-									<div class="two">
-										<div class="property-bg">
-											<xsl:attribute name="style">
-<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
-											</xsl:attribute>
-										</div>
-									</div> -->
+
 								</div>
 								<div class="col-md-6 col-sm-6 background">
 									<div class="modal-side-content">
@@ -868,24 +822,9 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<div class="form-group">
 												<input type="text" placeholder="Enter Address*" name="compareAddress" class="form-control heading-font heading-color compare-address" id="compareaddress" />
 											</div>
-											<!-- <div class="form-group">
-												<input type="email" placeholder="Enter Email*" name="emailAddress" class="form-control heading-font heading-color step1-input" id="email" />
-											</div> -->
+
 											<div class="form-group">
-												<!-- <ul class="theme-option-form heading-font heading-color">
-													<li>
-														<label for="lead_meta_get_info" class="selected heading-font heading-color" style="position:relative;">
-<input type="checkbox" id="lead_meta_get_info" class="outline" checked="checked" name="meta[moreInfo]" value="Yes" />
-															<xsl:text>Get more info</xsl:text>
-														</label>
-													</li>
-													<li>
-														<label for="lead_meta_request_showing" class="heading-font heading-color">
-															<input type="checkbox" id="lead_meta_request_showing" class="outline" checked="checked" name="meta[requestShowing]" value="Yes" />
-															<xsl:text>Request a showing</xsl:text>
-														</label>
-													</li>
-												</ul> -->
+
 												<div class="fl-btn-value">
 													<button class="btn btn-value-info widget heading-font heading-color-as-bg background-as-color">Submit</button>
 												</div>
