@@ -72,6 +72,10 @@
             </xsl:call-template>
         </text>
 
+        <text x="85%" y="95%" class=" center" font-family="var(--theme-heading-font)" font-size="65%" font-weight="100" fill="var(--theme-sub-heading-color)">
+            <xsl:value-of select="//agent[1]/marketingLicense" />
+        </text>
+
         <xsl:choose>
             <xsl:when test="$companyLogo='' or $personalLogo=''">
                 <image x="5%" y="90%" width="20%" height="7%" id="logo" preserveAspectRatio="xMinYMid meet">
