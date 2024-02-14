@@ -236,33 +236,42 @@ export const getListing = async (
 ) => {
     mls_id = mls_id ?? -1;
     let listing;
+    let endpoint;
 
-    if (mls_id > -1) {
-        const r = await call_api(
-            'GetUserMlsListing',
-            { mlsId: mls_id, mlsNumber: mls_number, userId: user_id },
-            skipCache,
-            'POST'
-        );
+    try {
+        if (mls_id > -1) {
+            endpoint = 'GetUserMlsListing';
+            const r = await call_api(
+                endpoint,
+                { mlsId: mls_id, mlsNumber: mls_number, userId: user_id },
+                skipCache,
+                'POST'
+            );
 
-        listing = r.listing ?? null;
+            listing = r.listing ?? null;
 
-        if (listing && r.preferredAreaId) {
-            listing.preferredAreaId = r.preferredAreaId;
+            if (listing && r.preferredAreaId) {
+                listing.preferredAreaId = r.preferredAreaId;
+            }
+        } else {
+            endpoint = 'GetListingByMlsNumber';
+            const r = await call_api(
+                endpoint,
+                { mlsNumber: mls_number },
+                skipCache,
+                'POST'
+            );
+
+            listing = r?.listings[0] ?? null;
         }
-    } else {
-        const r = await call_api(
-            'GetListingByMlsNumber',
-            { mlsNumber: mls_number },
-            skipCache,
-            'POST'
+
+        if (listing?.errorCode == 0) {
+            return listing;
+        }
+    } catch (err) {
+        throw new Error(
+            `${endpoint} failed: ${err.toString()}. (${user_id},${mls_number},${mls_id})`
         );
-
-        listing = r?.listings[0] ?? null;
-    }
-
-    if (listing?.errorCode == 0) {
-        return listing;
     }
 };
 
