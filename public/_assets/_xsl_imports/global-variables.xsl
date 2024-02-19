@@ -181,23 +181,6 @@
 		</xsl:choose>
 	</xsl:variable>
 
-	<!-- Listing Switch Case -->
-	<xsl:variable name="status-caption">
-		<xsl:choose>
-			<xsl:when test="number(//single/statusTypeID)=3 or number(//single/statusTypeID)=4 or number(//single/statusTypeID)=12">
-				<xsl:value-of select="'In Escrow'" />
-			</xsl:when>
-			<xsl:when test="number(//single/statusTypeID)=2">
-				<xsl:value-of select="'Just Sold'" />
-			</xsl:when>
-			<xsl:when test="number(//single/statusTypeID)=14">
-				<xsl:value-of select="'Coming Soon'" />
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="'Just Listed'" />
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
 
 	<!-- $areaWithPropertyType -->
 	<xsl:variable name="areaWithPropertyType">
@@ -464,6 +447,27 @@
 		</xsl:choose>
 	</xsl:variable>
 
+	<!-- Listing Switch Case -->
+	<xsl:variable name="status-caption">
+		<xsl:choose>
+			<xsl:when test="number(//single/statusTypeID)=1">
+				<xsl:value-of select="'Just Listed'" />
+			</xsl:when>
+			<xsl:when test="number(//single/statusTypeID)=2">
+				<xsl:value-of select="'Just Sold'" />
+			</xsl:when>
+			<xsl:when test="number(//single/statusTypeID)=3 or number(//single/statusTypeID)=4 or number(//single/statusTypeID)=12">
+				<xsl:value-of select="'In Escrow'" />
+			</xsl:when>
+			<xsl:when test="number(//single/statusTypeID)=14">
+				<xsl:value-of select="'Coming Soon'" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="'Expired'" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+
 	<!-- $listingStatusColor -->
 	<xsl:variable name="listingStatusColor">
 		<xsl:choose>
@@ -488,8 +492,11 @@
 			<xsl:when test="number(//single/statusTypeID)=2">
 				<xsl:value-of select="'Sold'" />
 			</xsl:when>
-			<xsl:otherwise>
+			<xsl:when test="number(//single/statusTypeID)=3 or number(//single/statusTypeID)=4 or number(//single/statusTypeID)=12">
 				<xsl:value-of select="'Pending'" />
+			</xsl:when>			
+			<xsl:otherwise>
+				<xsl:value-of select="'Other'" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
