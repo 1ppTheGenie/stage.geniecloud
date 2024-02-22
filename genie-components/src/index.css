@@ -148,8 +148,14 @@ div.genie-map {
 	height: 100%;
 }
 
+.genie-embed  {
+	background-color: var(--theme-body-background);
+	color: var(--theme-body-color);
+	font-family:  var(--theme-body-font);
+}
+
 .genie-embed h1 {
-	font-size: 27px;
+	font-size: 2.5px;
 }
 
 .genie-embed [data-wenk]:after {
