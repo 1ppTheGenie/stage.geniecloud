@@ -87,7 +87,7 @@ export const xslt = async event => {
 					transformXml,
 					transformXsl,
 					`file://${TEMP_DIR}`,
-					params.s3Key.endsWith('html') ? 'html' : 'xml'
+					params.s3Key.endsWith("html") ? "html" : "xml"
 				);
 
 				if (transformedXML) {
