@@ -1,12 +1,11 @@
 /*
 	Theme Name:	Genie Universal!
-	Theme Style: Light
 */
 
 @import url("../_css/montserrat.css");
 @import url("../_css/myriad-pro-condensed.css");
 
-._default-light {
+._default, ._default.light, ._default .light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #0082ac;
 	--theme-sub-heading-color: #000;
@@ -16,6 +15,16 @@
 	--theme-body-font: "Montserrat", sans-serif;
 	--theme-font-size: 90%;
 }
+
+._default.dark, ._default .dark {
+	--theme-body-background: #293f50;
+	--theme-heading-color: #a5c8de;
+	--theme-sub-heading-color: #a5c8de;
+	--theme-body-color: #fff;
+
+	--sold-red: #fb3a3f;
+}
+
 
 div.banner span.overlay {
 	background-color: var(--white);

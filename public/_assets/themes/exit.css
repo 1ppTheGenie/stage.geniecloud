@@ -1,11 +1,11 @@
 /*
 	Theme Name:	EXIT 
-	Theme Style: Light          
+     
 */
 
 @import url("../_css/helvetica-neue.css");
 
-.exit-light {
+.exit, .exit.light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #2c94ab; /* Heading */
 	--theme-sub-heading-color: #159b9b; /* Subtitle */

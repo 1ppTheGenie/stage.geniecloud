@@ -1,11 +1,21 @@
 /*
 	Theme Name:	Exp Realty   
-	Theme Style: Dark             
 */
 
 @import url("../_css/roboto.css");
 
-.exp-realty-dark {
+.exp-realty, .exp-realty.light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #1b1e2a; /* Heading */
+	--theme-sub-heading-color: #f5821f; /* Subtitle */
+	--theme-body-color: #58595a; /* Body */
+	--theme-emphasis-color: #f5821f; /* Outline */
+	--theme-body-font: 'Roboto', sans-serif;
+	--theme-heading-font: 'Roboto', sans-serif;
+	--theme-sub-heading-font: 'Roboto', sans-serif;
+}
+
+.exp-realty.dark {
 	--theme-body-background: #1b1e2a;
 	--theme-heading-color: #ffffff; /* Heading */
 	--theme-sub-heading-color: #f5821f; /* Subtitle */

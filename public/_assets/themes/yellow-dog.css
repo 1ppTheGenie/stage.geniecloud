@@ -1,11 +1,10 @@
 /*
 	Theme Name:	Yellow Dog  
-	Theme Style: Light             
 */
 
 @import url("../_css/helvetica-neue.css");
 
-.yellow-dog-light {
+.yellow-dog, .yellow-dog.light, .yellow-dog .light {
 	--theme-body-background: #fedc01;
 	--theme-heading-color: #000000; /* Heading */
 	--theme-sub-heading-color: #2c3740; /* Subtitle */

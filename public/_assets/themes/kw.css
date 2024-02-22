@@ -1,13 +1,12 @@
 /*
 	Theme Name:	KW
-	Theme Style: Light        
 */
 
 @import url("../_css/helvetica-neue.css");
 @import url("../_css/helvetica-neue-condensed.css");
 @import url("../_css/myriad-pro-condensed.css");
 
-.kw-light {
+.kw, .kw.light, .kw .light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #b31f24; /* Heading */
 	--theme-sub-heading-color: #9b9999; /* Subtitle */
@@ -17,4 +16,15 @@
 	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
 	--theme-heading-font:"Myriad Pro Condensed", sans-serif;
 	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}
+
+.kw.dark, .kw .dark {
+	--theme-body-background: #b31f24;
+	--theme-heading-color: #fff; /* Heading */
+	--theme-sub-heading-color: #000910; /* Subtitle */
+	--theme-body-color: #d4d4d4; /* Body */
+	--theme-emphasis-color: #000910; /* Outline */
+
+	--sold-red: #f75656;
+	--vivid-color-1: #56f7c7;
 }
