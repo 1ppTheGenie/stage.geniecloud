@@ -252,7 +252,6 @@ const add_lead = async params => {
             args['note'] += `\n${key}: ${params[`meta[${key}]`]}`;
         }
 
-        return success({ xLead: 'create', key: 1001, ...args });
         if (Object.keys(args).length > 0) {
             const lead = await createLead(agentId, args);
 
@@ -267,10 +266,10 @@ const add_lead = async params => {
 
 const update_lead = async params => {
     var agentId = params.agentId || params.agentID || params.agent || null;
-
+    
     if (agentId) {
-        var args = {};
-        var keys = [
+        let args = {};
+        let keys = [
             'genieLeadId',
             'email',
             'phone',
@@ -279,12 +278,12 @@ const update_lead = async params => {
             'phoneNumber',
             'genieTags'
         ];
-
-        for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
+        
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
 
             if (params.hasOwnProperty(key)) {
-                var value = null;
+                let value = null, argsKey=null;
 
                 switch (key) {
                     case 'genieTags':
@@ -308,9 +307,9 @@ const update_lead = async params => {
                 args[argsKey] = value !== null ? value : params[key];
             }
         }
-        return success({ xLead: 'update', key: 1001, ...args });
+
         if (Object.keys(args).length > 0) {
-            return success(updateLead(agentId, args));
+            return success(await updateLead(agentId, args));
         } else {
             return error('No lead arguments');
         }
