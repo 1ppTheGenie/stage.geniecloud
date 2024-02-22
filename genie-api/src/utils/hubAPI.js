@@ -32,10 +32,7 @@ export const getThemes = async () => {
             if (t.Size > 0) {
                 const css = await fromS3(t.Key);
 
-                const data = getFileData(css, {
-                    name: 'Theme Name',
-                    style: 'Theme Style'
-                });
+                const data = getFileData(css, { name: 'Theme Name' });
 
                 const slug = t.Key.replace('.css', '').replace(
                     '_assets/themes/',
