@@ -62,12 +62,14 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+
 	<xsl:template name="head-meta">
 		<root>
 			<title>Welcome to your GenieHub Landing page</title>
 			<description>You're visting a GenieHub Landing page</description>
 		</root>
 	</xsl:template>
+
 	<xsl:template name="copyright">
 		<xsl:param name="url" select="'http://genie.ai'" />
 		<div class="bottom-bar-copyright">
@@ -110,6 +112,7 @@
 			</div>
 		</div>
 	</xsl:template>
+
 	<xsl:template name="agent-about">
 		<a name="about" />
 		<section id="about-section" class="background abt-sec">
@@ -201,6 +204,7 @@
 				</div>
 			</div>
 		</section>
+
 		<div class="modal fade contact-modal" id="contact-me" tabindex="-1" role="dialog" aria-labelledby="fl-thankyou-message" aria-hidden="false">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490" data-dismiss="modal">
@@ -586,6 +590,7 @@
 			</div>
 		</div>
 	</xsl:template>
+
 	<xsl:template name="add-genie-embed">
 		<xsl:param name="embed" />
 		<div class="genie-embed">
@@ -649,7 +654,7 @@
 					<xsl:value-of select="//output/@requireSignin" />
 				</xsl:attribute>
 			</xsl:if>
-			<xsl:comment />
+			<xsl:text>&#160;</xsl:text>
 		</div>
 	</xsl:template>
 	<xsl:template name="gallery">

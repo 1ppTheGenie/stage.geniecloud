@@ -168,7 +168,6 @@
 		</xsl:choose>
 	</xsl:variable>
 
-
 	<!-- $singularPropertyType -->
 	<xsl:variable name="singularPropertyType">
 		<xsl:choose>
@@ -180,7 +179,6 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
-
 
 	<!-- $areaWithPropertyType -->
 	<xsl:variable name="areaWithPropertyType">
