@@ -9,23 +9,18 @@ import {
 /* prettier-ignore */
 import { getAreaData, getAreaMonthly, getAreaProperties } from "@/utilities/";
 
-export const propertyTypeCaption = (type, count = 0, abbr = false) => {
-	let caption;
-	switch (type) {
-		case 1:
-			caption = abbr
-				? `condo${count !== 1 ? "s" : ""}`
-				: count !== 1
-				? "condos"
-				: "condo/townhouse";
-			break;
-		default:
-			caption = abbr ? "home" : "single detached home";
-			if (count !== 1) caption += "s";
-			break;
+export const propertyTypeCaption = (singular= false) => {
+	const propertyCaptions = (window.gHub.propertyCaptions ?? 'homes,home').split(',');
+
+	return propertyCaptions[singular ? 1 : 0];
+
+	if ( !abbr ) {
+		return propertyCaptions[1];
+	} else if ( count == 1 ) {
+		return propertyCaptions[2]
 	}
 
-	return caption;
+	return propertyCaptions[0]
 };
 
 const areaId = window.gHub.areaId;
@@ -62,7 +57,6 @@ export const [listingsStore, setListingsStore] = createStore({
 
 export const [areaDataStore, setAreaDataStore] = createStore({
 	loading: true,
-	propertyTypeCaption: "",
 	propertyTypeID: sharedEmbedStore.propertyType,
 	stats: {},
 	get propertyStats() {
@@ -123,7 +117,6 @@ export const [areaDataStore, setAreaDataStore] = createStore({
 
 export const [areaMonthlyStore, setAreaMonthlyStore] = createStore({
 	loading: true,
-	propertyTypeCaption: "",
 	propertyTypeID: sharedEmbedStore.propertyType,
 	stats: {},
 });
@@ -151,14 +144,7 @@ const [area, areaMonthly, areaListings, setPeriod] = createRoot(() => {
 	});
 
 	createEffect(() => {
-		setAreaDataStore({
-			propertyTypeCaptionAbbr: propertyTypeCaption(
-				sharedEmbedStore.propertyType,
-				true
-			),
-			propertyTypeCaption: propertyTypeCaption(sharedEmbedStore.propertyType),
-			propertyTypeID: sharedEmbedStore.propertyType,
-		});
+		setAreaDataStore({ propertyTypeID: sharedEmbedStore.propertyType });
 	});
 
 	createEffect( () => {

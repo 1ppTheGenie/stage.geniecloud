@@ -2,6 +2,7 @@ import { Show } from "solid-js";
 import { format, sub } from "date-fns";
 import {
 	areaDataStore,
+	propertyTypeCaption,
 	useSettings,
 	Context4Settings,
 	percent,
@@ -25,7 +26,7 @@ export default () => {
 				<h1 class="upper" style="color: var(--theme-heading-color)">
 					{(areaDataStore.areaName || "").trim() +
 						" " +
-						areaDataStore.propertyTypeCaptionAbbr.trim()}
+						propertyTypeCaption()}
 				</h1>
 
 				<h2 class="mt-2">
@@ -40,7 +41,7 @@ export default () => {
 						{`The ${
 							areaDataStore.areaName
 						} area has seen the average sale price of ${
-							areaDataStore.propertyTypeCaption
+							propertyTypeCaption()
 						} ${
 							areaDataStore.percentChange > 0 ? "increase" : "decrease"
 						} by ${percent(
@@ -61,7 +62,7 @@ export default () => {
 				/>
 
 				<h3>
-					Highest home price of <span>{areaDataStore.propertyTypeCaption}</span>
+					Highest home price of <span>{propertyTypeCaption()}</span>
 				</h3>
 
 				<Show when={areaDataStore.propertyStats}>
@@ -78,7 +79,7 @@ export default () => {
 						<div class="snapshot-area">
 							<h3>
 								Average home price of{" "}
-								<span>{areaDataStore.propertyTypeCaption}</span>
+								<span>{propertyTypeCaption()}</span>
 							</h3>
 							<p class="large-number">
 								{currency(areaDataStore.propertyStats.avgSalePrice, false)}
@@ -107,7 +108,7 @@ export default () => {
 					<Show when={areaDataStore.propertyStats.medSalePrice > 0}>
 						<h3>
 							Median home price of{" "}
-							<span>{areaDataStore.propertyTypeCaption}</span>
+							<span>{propertyTypeCaption()}</span>
 						</h3>
 						<p class="large-number">
 							{currency(areaDataStore.propertyStats.medSalePrice, false)}

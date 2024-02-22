@@ -24,7 +24,7 @@ export default () => {
 					areaDataStore.topSize.beds > 0
 						? areaDataStore.topSize.beds + " bedroom"
 						: "studio"
-				}  ${areaDataStore.propertyTypeCaption} in the past ${
+				}  ${propertyTypeCaption()} in the past ${
 					areaDataStore.areaPeriod
 				} months.`}
 			</p>
@@ -67,11 +67,7 @@ export default () => {
 												data-wenk={`Avg: ${currency(size().avgSalePrice)}`}
 												data-wenk-pos="top">
 												{!areaDataStore.loading ? (
-													`${size().sold} ${propertyTypeCaption(
-														areaDataStore.propertyTypeID,
-														size().sold,
-														true
-													)} sold`
+													`${size().sold} ${propertyTypeCaption(size().sold == 1)} sold`
 												) : (
 													<Spinner
 														style="margin: 0; width: 16px; transform: scale(2.5)"

@@ -1,6 +1,6 @@
 import { Show } from "solid-js";
 import { HomeTypes, MRIcon, Spinner } from "@/components";
-import { areaDataStore, currency, percent } from "@/utilities";
+import { areaDataStore, propertyTypeCaption, currency, percent } from "@/utilities";
 
 import PriceLavel from "@/assets/price-level.svg";
 import ClockGreen from "@/assets/clock-green.svg";
@@ -19,7 +19,7 @@ export default () => {
 	return (
 		<>
 			<h1 class="center upper">
-				{areaDataStore.areaName} {areaDataStore.propertyTypeCaption}
+				{areaDataStore.areaName} {propertyTypeCaption()}
 			</h1>
 			<h4 class="center upper">Market Trending</h4>
 

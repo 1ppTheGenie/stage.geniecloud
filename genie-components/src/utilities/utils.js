@@ -195,7 +195,6 @@ export const useAreaMonthly = () => {
 					s => s.propertyTypeId === sharedEmbedStore.propertyType
 				),
 				propertyTypeID: sharedEmbedStore.propertyType,
-				propertyTypeCaption: propertyTypeCaption(sharedEmbedStore.propertyType),
 				areaId: settings.areaId,
 				areaPeriod: sharedEmbedStore.period,
 				loading: false,
