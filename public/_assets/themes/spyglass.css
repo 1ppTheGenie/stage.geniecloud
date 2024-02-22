@@ -1,12 +1,11 @@
 /*
 	Theme Name:	Spyglass
-	Theme Style: Light     
 */
 
 @import url("../_css/helvetica-neue.css");
 @import url("../_css/myriad-pro-condensed.css");
 
-.spyglass-light {
+.spyglass, .spyglass.light, .spyglass .light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #252525; /* Heading */
 	--theme-sub-heading-color: #fa4614; /* Subtitle */
@@ -15,4 +14,14 @@
 	--theme-body-font: "Helvetica Neue", sans-serif;
 	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
 	--theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
+}
+
+.spyglass.dark, .spyglass .dark {
+	--theme-body-background: #000000;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #fa4614; /* Subtitle */
+	--theme-body-color: #ced1d6; /* Body */
+	--theme-emphasis-color: #fa4614; /* Outline */
+	--printers-marks: #f56b00;
+	--genie-chart-stroke: #fff6;
 }
