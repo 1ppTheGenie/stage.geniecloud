@@ -19,7 +19,7 @@ import "@/index.css";
 import "@/assets/css/home-value.css";
 
 export default props => {
-	const { withCopy = false, buttonCaption = "Get your Value!" } = props;
+	const { buttonCaption = "Get your Value!" } = props;
 	const { areaId, mapStyle, withLeadCapture } = useSettings(Context4Settings);
 
 	const [showResult, setShowResult] = createSignal(false);
@@ -54,25 +54,21 @@ export default props => {
 							</Suspense>
 
 							<LeafletPane>
-								<>
-									{withCopy && <EditableCopy />}
-
-									<div style="min-width:80%">
-										<AutoComplete
-											containerStyle="display:flex;min-width:80%;"
-											inputStyle="padding:10px 15px; border-radius:20px;border:2px solid black;outline:none;flex-basis:70%;flex-grow:1"
-											placeChanged={place => {
-												setPlaceID(place.place_id);
-												setPlace(place);
-											}}>
-											<button
-												style="border-radius:20px;border:2px solid black;background-color:black;color:#fff;margin-left:-35px;outline:none;cursor:pointer"
-												onClick={() => setShowResult(true)}>
-												{buttonCaption}
-											</button>
-										</AutoComplete>
-									</div>
-								</>
+								<div style="min-width:80%">
+									<AutoComplete
+										containerStyle="display:flex;min-width:80%;"
+										inputStyle="padding:10px 15px; border-radius:20px;border:2px solid black;outline:none;flex-basis:70%;flex-grow:1"
+										placeChanged={place => {
+											setPlaceID(place.place_id);
+											setPlace(place);
+										}}>
+										<button
+											style="border-radius:20px;border:2px solid black;background-color:black;color:#fff;margin-left:-35px;outline:none;cursor:pointer"
+											onClick={() => setShowResult(true)}>
+											{buttonCaption}
+										</button>
+									</AutoComplete>
+								</div>
 							</LeafletPane>
 						</>
 					</LeafletMap>
@@ -82,21 +78,3 @@ export default props => {
 	);
 };
 
-const EditableCopy = () => {
-	return (
-		<>
-			<Editable class="upper center" id="home-valuation-heading-1">
-				<h1>What’s My {areaDataStore.areaName} Home Value?</h1>
-			</Editable>
-			<Editable id="home-valuation-para-1">
-				<p>GET A FREE QUOTE - NO STRINGS ATTACHED</p>
-			</Editable>
-			<Editable id="home-valuation-para-2">
-				<p>
-					Thinking of selling? Let us assess your home’s value to help you decide if now’s
-					the time to move.
-				</p>
-			</Editable>
-		</>
-	);
-};
