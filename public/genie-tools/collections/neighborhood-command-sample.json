@@ -1,0 +1,132 @@
+{
+	"name": "Neighborhood Command Sample",
+	"template": "marketing-steps-lc1",
+	"sections": [
+		{
+			"sort": 1,
+			"name": "Neighborhood Command Proof Kit 1",
+			"meta": {
+				"caption": "Automating your Neighborhood Marketing Workflow!",
+				"description": "You can choose any one of the postcards below. QR Code will lead to the Market Insider below."
+			},
+			"assets": [
+				{
+					"sort": 1,
+					"asset": "direct-mail/qr-code-postcard-combine-2022-6",
+					"name": "Nabe Trends"
+				},
+				{
+					"sort": 2,
+					"asset": "direct-mail/your-neighbors-house",
+					"name": "Your Neighbors House"
+				},
+				{
+					"sort": 3,
+					"asset": "direct-mail-postcards-front/whats-trending",
+					"name": "What's Trending"
+				},
+				{
+					"sort": 4,
+					"asset": "direct-mail/krg-market-insider-combine",
+					"name": "Recent Sales"
+				},
+				{
+					"sort": 5,
+					"asset": "direct-mail/direct-mail-whats-trending-combine",
+					"name": "Sold in your Area"
+				}
+			]
+		},
+		{
+			"sort": 2,
+			"name": "Social Media Assets 2",
+			"meta": {
+				"caption": "Superpower your Social Media Marketing",
+				"description": "If you choose the Socials channel - You can choose any one of these social graphics."
+			},
+			"assets": [
+				{
+					"sort": 1,
+					"asset": "social-marketing-graphics/nc-frisco",
+					"name": "Frisco - Style 1"
+				},
+				{
+					"sort": 2,
+					"asset": "social-marketing-graphics/nc-frisco-v2",
+					"name": "Frisco - Style 2"
+				},
+				{
+					"sort": 3,
+					"asset": "social-marketing-graphics/nc-discovery",
+					"name": "Discovery"
+				},
+				{
+					"sort": 4,
+					"asset": "social-marketing-graphics/nc-news",
+					"name": "Breaking News"
+				}
+			]
+		},
+		{
+			"sort": 3,
+			"name": "Landing Pages 3",
+			"meta": {
+				"caption": "Move your Engagements through the Funnel",
+				"description": "With powerful Calls to Action, these landing pages will entice your audience to engage"
+			},
+			"assets": [
+				{
+					"sort": 1,
+					"asset": "landing-pages/market-report-instant",
+					"name": "Digital Market Insider"
+				},
+				{
+					"sort": 2,
+					"asset": "landing-pages/market-insider-instant-download-v1",
+					"name": "Market Insider Download - Style 1"
+				},
+				{
+					"sort": 3,
+					"asset": "landing-pages/market-insider-instant-download-v3",
+					"name": "Market Insider Download - Style 3"
+				},
+				{
+					"sort": 4,
+					"asset": "landing-pages/market-insider-instant-download-v4",
+					"name": "Market Insider Download - Style 4"
+				},
+				{
+					"sort": 5,
+					"asset": "landing-pages/market-insider-instant-download-v5",
+					"name": "Market Insider Download - Style 5"
+				},
+				{
+					"sort": 6,
+					"asset": "landing-pages/market-insider-instant-download-v6",
+					"name": "Market Insider Download - Style 6"
+				},
+				{
+					"sort": 7,
+					"asset": "landing-pages/market-insider-instant-download-v7",
+					"name": "Market Insider Download - Style 7"
+				}
+			]
+		},
+		{
+			"sort": 4,
+			"name": "Deliverables 4",
+			"meta": {
+				"caption": "Leave a Lasting Impression",
+				"description": "When your audience engages, they are given a PDF Market Insider report rich in valuable neighborhood insights positioning you as the expert!"
+			},
+			"assets": [
+				{
+					"sort": 1,
+					"asset": "area-insider-reports/market-insider",
+					"name": "Market Insider Report"
+				}
+			]
+		}
+	],
+	"version": 2
+}
