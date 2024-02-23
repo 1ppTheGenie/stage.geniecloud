@@ -630,11 +630,7 @@
 					<xsl:value-of select="//single/@mlsId" />
 				</xsl:attribute>
 			</xsl:if>
-			<xsl:if test="//output/@propertyType!=''">
-				<xsl:attribute name="data-genie-propertytype">
-					<xsl:value-of select="//output/@propertyType" />
-				</xsl:attribute>
-			</xsl:if>
+
 			<xsl:if test="//output/@mapStyle!=''">
 				<xsl:attribute name="data-genie-mapstyle">
 					<xsl:value-of select="//output/@mapStyle" />
