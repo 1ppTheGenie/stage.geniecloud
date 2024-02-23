@@ -28,9 +28,7 @@ Supports: 	Area, Print, QRCode
 			<xsl:value-of select="'
 			ul.bullets li {display:-webkit-box;-webkit-line-clamp:2;font-size:180%;padding:0 0 0 56px;position:relative;margin-right:calc(1% + 48px);font-weight:500;color:var(--theme-heading-color);}
 			ul.bullets li:last-child {margin-right:0}
-			ul.bullets li:before {width:48px;height:48px;display:inline-block;content:'';-webkit-mask-size:cover;mask-size:cover;background-color:var(--theme-emphasis-color);position:absolute;top:10px;left:0px;
-			-webkit-mask: url(/_assets/_img/icons/checkmark.svg) no-repeat 50% 50%;
-			-mask: url(/_assets/_img/icons/checkmark.svg) no-repeat 50% 50%;}
+			ul.bullets li:before {width:48px;height:48px;display:inline-block;content:&quot;&quot;;-webkit-mask-size:cover;mask-size:cover;background-color:var(--theme-emphasis-color);position:absolute;top:10px;left:0px;webkit-mask: url(/_assets/_img/icons/checkmark.svg) no-repeat 50% 50%;mask: url(/_assets/_img/icons/checkmark.svg) no-repeat 50% 50%;}
 			'" />
 		</style>
 
@@ -72,7 +70,7 @@ Supports: 	Area, Print, QRCode
 				</text>
 			</g>
 
-			<text id="qrZillow" x="50%" y="56.4%" class="align-center heading" style="font-size:235%;">
+			<text id="qrZillow" x="50%" y="60%" class="align-center heading" style="font-size:235%;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'whatzillowcant'" />
 					<xsl:with-param name="default" select="'See What Zillow Can&#8217;t Show You'" />
@@ -80,12 +78,11 @@ Supports: 	Area, Print, QRCode
 			</text>
 		</g>
 
-		<foreignObject width="96%" height="17.5%" style="transform:translate(2%,78%);">
+		<foreignObject width="96%" height="17.5%" style="transform:translate(2%,83%);">
 			<ul style="display:flex;justify-content:space-between;flex-wrap:nowrap;margin:0;padding:0;" class="bullets" data-editable="true" data-name="xml-QRBullets">
 				<xsl:choose>
 					<xsl:when test="//overrides/*[name()='xml-QRBullets'][1]">
 						<xsl:copy-of select="//overrides/*[name()='xml-QRBullets'][1]/*" />
-
 					</xsl:when>
 					<xsl:otherwise>
 						<li>Community Trends</li>
