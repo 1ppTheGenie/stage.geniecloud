@@ -481,23 +481,23 @@ export const api = async event => {
                             break;
 
                         case '/re-render':
-                            if ( params.renderId ) {
+                            if (params.renderId) {
                                 try {
-                                    const r = await reRender( params.renderId, {
+                                    const r = await reRender(params.renderId, {
                                         ...params,
                                         skipCache: true
-                                    } );
+                                    });
 
                                     if (r) {
                                         response.body.success = true;
                                         response.body.msg = `${params.renderId} re-render under way`;
-    
+
                                         if (Object.keys(params).length > 1) {
                                             response.body.msg +=
                                                 ' (with override params)';
                                         }
                                     }
-    
+
                                     // Get CloudFlare to empty itself
                                     await queueMsg('clear-cache', {
                                         renderId: {
@@ -505,12 +505,10 @@ export const api = async event => {
                                             StringValue: params.renderId
                                         }
                                     });
-                                } catch ( err ) {
+                                } catch (err) {
                                     response.body.success = false;
                                     response.body.msg = `Error: ${err.message}`;
                                 }
-
-
                             } else if (
                                 params.assetId ||
                                 params.userId ||
@@ -690,7 +688,7 @@ export const api = async event => {
                                             `-${style}`,
                                             ''
                                         );
-                                        params.hue = style;
+                                        params.themeHue = style;
                                     }
                                 });
 
@@ -759,16 +757,20 @@ export const api = async event => {
                                 });
 
                                 // Create a reverse lookup based on userId, mlsNumber and areaId
-                                let lookUpKeys = [
-                                    `users/${params.userId}`
-                                ];
+                                let lookUpKeys = [`users/${params.userId}`];
 
-                                if ( params.mlsNumber ) {
-                                    lookUpKeys.push( `mlsNumber/${params.mlsId}/${params.mlsNumber}` );
+                                if (params.mlsNumber) {
+                                    lookUpKeys.push(
+                                        `mlsNumber/${params.mlsId}/${params.mlsNumber}`
+                                    );
                                 }
 
-                                if ( params.areaIds ) {
-                                    lookUpKeys = lookUpKeys.concat( params.areaIds.map( areaId => `areas/${areaId}` ) );
+                                if (params.areaIds) {
+                                    lookUpKeys = lookUpKeys.concat(
+                                        params.areaIds.map(
+                                            areaId => `areas/${areaId}`
+                                        )
+                                    );
                                 }
 
                                 Promise.all(
@@ -803,14 +805,15 @@ export const api = async event => {
             } catch (error) {
                 console.log('GenieAPI failed: ', error);
 
-                if ( params.renderId ) { // We don't want the embed API errors here
+                if (params.renderId) {
+                    // We don't want the embed API errors here
                     await toS3(
                         `_errors/${params.renderId}-${Date.now()}-api.json`,
                         Buffer.from(
-                            JSON.stringify( {
+                            JSON.stringify({
                                 params,
                                 error: error.toString()
-                            } )
+                            })
                         ),
                         { GenieExpireFile: 'error' },
                         JSON_MIME
@@ -922,7 +925,7 @@ const prepareAsset = async (asset, params) => {
         if (params.totalPages) {
             pages = pages.slice(0, params.totalPages + 1);
         }
-        
+
         size = (
             params.size ||
             (Array.isArray(settings?.sizes) && settings.sizes[0]) ||
@@ -964,7 +967,7 @@ const prepareAsset = async (asset, params) => {
             Buffer.from('@'),
             null,
             TXT_MIME
-        )
+        );
 
         await Promise.all(
             pages.map(async (p, i) => {
@@ -1323,7 +1326,10 @@ export const getS3Key = async (asset, params) => {
                     keyParams.propertyType,
                     keyParams.propertyCaption
                 ),
-                AREASLUG: keyParams.areaName.replace(/(-{2,}|\/|\s)+/g, (match, p1) => p1 ? '-' : ''),
+                AREASLUG: keyParams.areaName.replace(
+                    /(-{2,}|\/|\s)+/g,
+                    (match, p1) => (p1 ? '-' : '')
+                ),
                 MLSNUMBER: keyParams.mlsNumber || 'mls',
                 LISTSTATUS: keyParams.listingStatus || 'market'
             };
@@ -1342,10 +1348,10 @@ export const getS3Key = async (asset, params) => {
         await toS3(
             `_errors/${params.renderId}-${Date.now()}-api.json`,
             Buffer.from(
-                JSON.stringify( {
+                JSON.stringify({
                     params,
                     error: error.toString()
-                } )
+                })
             ),
             { GenieExpireFile: 'error' },
             JSON_MIME
