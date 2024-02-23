@@ -1,6 +1,6 @@
 import { y as spread, t as template, i as insert, b as createComponent, S as Show, g as createMemo, e as createRenderEffect, s as setAttribute } from './index.js';
 import { H as HomeTypes } from './Pagination.js';
-import { b as areaDataStore, c as currency, p as percent } from './index2.js';
+import { k as areaDataStore, q as propertyTypeCaption, c as currency, p as percent } from './index2.js';
 import { M as MRIcon } from './MRIcon.js';
 import { S as Spinner } from './Spinner.js';
 
@@ -94,7 +94,7 @@ const MarketTrending = (() => {
     const _el$ = _tmpl$(),
       _el$2 = _el$.firstChild;
     insert(_el$, () => areaDataStore.areaName, _el$2);
-    insert(_el$, () => areaDataStore.propertyTypeCaption, null);
+    insert(_el$, propertyTypeCaption, null);
     return _el$;
   })(), _tmpl$2(), createComponent(HomeTypes, {
     get container() {

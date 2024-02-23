@@ -172,10 +172,6 @@ p#snapshot-delta svg {
 	line-height: 140%;
 }
 
-.FastFacts {
-	padding: 40px 15px 39px;
-}
-
 .MarketHistory select#date-period,
 .fastfacts select#date-period,
 .fast-facts-property-icons h3,
@@ -442,10 +438,6 @@ table#listing-table + div {
 g.ct-series-a .ct-line {
 	stroke: var(--theme-sub-heading-color);
 	stroke-width: 2px;
-}
-
-.markethistory {
-	padding: 32px 0 22px;
 }
 
 .market-history-chart + footer {

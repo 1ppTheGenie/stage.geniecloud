@@ -1,5 +1,5 @@
 import { c as createSignal, o as onMount, a as createEffect, u as use, s as setAttribute, h as className, e as createRenderEffect, f as style, b as createComponent, S as Show, j as createResource, z as useContext, i as insert, t as template, x as createContext } from './index.js';
-import { q as getAreaPolygon } from './index2.js';
+import { v as getAreaPolygon } from './index2.js';
 
 const initAutocomplete = callback => {
 	if (!document.getElementById("google-maps-script")) {

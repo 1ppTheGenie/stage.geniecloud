@@ -1,8 +1,7 @@
 import { d as delegateEvents, c as createSignal, o as onMount, a as createEffect, b as createComponent, s as setAttribute, F as For, t as template, u as use, i as insert, e as createRenderEffect, f as style, g as createMemo, S as Show, h as className, j as createResource, k as Suspense, r as render } from './index.js';
 import { M as Marker, L as LeafletMap, G as GeoArea, a as LeafletPane, i as initMaps, b as buildMap, c as initAutocomplete } from './LeafletMap.js';
-import { d as dateFormat, c as currency, u as useAgentData, a as useSettings, C as Context4Settings, s as searchAddress, b as areaDataStore, e as updateLead, l as landingPageData, f as createLead } from './index2.js';
+import { d as dateFormat, c as currency, u as useAgentData, a as useSettings, C as Context4Settings, s as searchAddress, b as updateLead, l as landingPageData, e as createLead } from './index2.js';
 import { C as ClosePopup } from './Pagination.js';
-import { E as Editable } from './Editable.js';
 import { S as Spinner } from './Spinner.js';
 
 const gallery = '';
@@ -83,9 +82,9 @@ const _tmpl$$2 = /*#__PURE__*/template(`<h2 class="home-value-title no-backgroun
   _tmpl$2$2 = /*#__PURE__*/template(`<h3>Fill out the fields below and we'll send you your personalized report`),
   _tmpl$3$2 = /*#__PURE__*/template(`<div class="home-value-result"><div style="margin:-5vh 5vw;padding-bottom:4vh;z-index:999999;position:relative;"><div class="invert center" style="padding:1vw;border-radius:10px;box-shadow:0px 2px 10px #0003;"><h4 style="font-size:100%">`),
   _tmpl$4$2 = /*#__PURE__*/template(`<h3>Home Value Range Report for`),
-  _tmpl$5$2 = /*#__PURE__*/template(`<p class="invert" style="text-align:left;padding:2vw">Sorry, we were not able to locate a home valuation for your property above. Not a problem, we will look into this and get back to you shortly. I look forward to discussing the information with you very soon and to help you get top dollar for your home.`),
-  _tmpl$6$2 = /*#__PURE__*/template(`<div class="invert" style="text-align:left;padding:1vw;margin:2vh 0"><p>Here is the initial valuation we found for your address. This automated valuation is one way to get a general idea, but it is important to realize an algorithm can't provide the accuracy you'll want if you are thinking about selling. Many factors that can't be squeezed into a data field impact your market value, from updates and improvements you have (or have not yet) made, to what's located next door or a block away, to recent, sometimes rapidly changing, market trends. Our role as realtors is to take all of this into consideration. If you are thinking about selling, please call for a real-time, real-world value for your most important investment! Looking forward to helping you get top dollar for your home.`),
-  _tmpl$7$2 = /*#__PURE__*/template(`<h3 style="margin-bottom:1vh;color:var(--theme-heading-color);">Confirm Home Details`),
+  _tmpl$5$1 = /*#__PURE__*/template(`<p class="invert" style="text-align:left;padding:2vw">Sorry, we were not able to locate a home valuation for your property above. Not a problem, we will look into this and get back to you shortly. I look forward to discussing the information with you very soon and to help you get top dollar for your home.`),
+  _tmpl$6$1 = /*#__PURE__*/template(`<div class="invert" style="text-align:left;padding:1vw;margin:2vh 0"><p>Here is the initial valuation we found for your address. This automated valuation is one way to get a general idea, but it is important to realize an algorithm can't provide the accuracy you'll want if you are thinking about selling. Many factors that can't be squeezed into a data field impact your market value, from updates and improvements you have (or have not yet) made, to what's located next door or a block away, to recent, sometimes rapidly changing, market trends. Our role as realtors is to take all of this into consideration. If you are thinking about selling, please call for a real-time, real-world value for your most important investment! Looking forward to helping you get top dollar for your home.`),
+  _tmpl$7$1 = /*#__PURE__*/template(`<h3 style="margin-bottom:1vh;color:var(--theme-heading-color);">Confirm Home Details`),
   _tmpl$8$1 = /*#__PURE__*/template(`<div class="invert home-value-details">`),
   _tmpl$9$1 = /*#__PURE__*/template(`<div class="home-value-estimate" style="color:var(--theme-heading-color)"><h4>Estimated Value Range:</h4><h5>`),
   _tmpl$10 = /*#__PURE__*/template(`<p style="text-transform:capitalize">Hi `),
@@ -158,12 +157,12 @@ const PropertyResponse = props => {
     property
   } = props;
   return [typeof property === "undefined" && (() => {
-    const _el$8 = _tmpl$5$2();
+    const _el$8 = _tmpl$5$1();
       _el$8.firstChild;
     insert(_el$8, createComponent(Signature, {}), null);
     return _el$8;
   })(), typeof property !== "undefined" && [(() => {
-    const _el$10 = _tmpl$6$2(),
+    const _el$10 = _tmpl$6$1(),
       _el$11 = _el$10.firstChild;
       _el$11.firstChild;
     insert(_el$10, (() => {
@@ -177,7 +176,7 @@ const PropertyResponse = props => {
     })(), _el$11);
     insert(_el$11, createComponent(Signature, {}), null);
     return _el$10;
-  })(), _tmpl$7$2(), (() => {
+  })(), _tmpl$7$1(), (() => {
     const _el$14 = _tmpl$8$1();
     insert(_el$14, () => [{
       value: Intl.NumberFormat("en-US").format(property.sumBuildingSqFt),
@@ -242,9 +241,9 @@ const _tmpl$$1 = /*#__PURE__*/template(`<input type="text" name="firstName" plac
   _tmpl$2$1 = /*#__PURE__*/template(`<input type="text" name="lastName" placeholder="Enter your last name">`),
   _tmpl$3$1 = /*#__PURE__*/template(`<input type="text" name="phoneNumber" placeholder="Phone Number">`),
   _tmpl$4$1 = /*#__PURE__*/template(`<input type="email" name="emailAddress" placeholder="Email Address">`),
-  _tmpl$5$1 = /*#__PURE__*/template(`<textarea placeholder="Is there anything we should know before estimation?" name="message">`),
-  _tmpl$6$1 = /*#__PURE__*/template(`<input type="text" name="firstName" placeholder="First Name">`),
-  _tmpl$7$1 = /*#__PURE__*/template(`<input type="text" name="lastName" placeholder="Last Name">`),
+  _tmpl$5 = /*#__PURE__*/template(`<textarea placeholder="Is there anything we should know before estimation?" name="message">`),
+  _tmpl$6 = /*#__PURE__*/template(`<input type="text" name="firstName" placeholder="First Name">`),
+  _tmpl$7 = /*#__PURE__*/template(`<input type="text" name="lastName" placeholder="Last Name">`),
   _tmpl$8 = /*#__PURE__*/template(`<div class="lead-capture-notify"><p><em>* we keep your email private, no one else gets to see it</em></p><input type="checkbox" id="text-email-updates" value="yes"><label for="text-email-updates">Please notify me of updates - via text or email`),
   _tmpl$9 = /*#__PURE__*/template(`<form style="max-width:800px;margin:1vw"><button type="submit"> `);
 const LeadCaptureForm = props => {
@@ -279,13 +278,13 @@ const LeadCaptureForm = props => {
     insert(_el$, createComponent(Show, {
       when: formStyle === "valuation",
       get children() {
-        return [_tmpl$$1(), _tmpl$2$1(), _tmpl$3$1(), _tmpl$4$1(), _tmpl$5$1()];
+        return [_tmpl$$1(), _tmpl$2$1(), _tmpl$3$1(), _tmpl$4$1(), _tmpl$5()];
       }
     }), _el$12);
     insert(_el$, createComponent(Show, {
       when: formStyle === "default",
       get children() {
-        return [_tmpl$6$1(), _tmpl$7$1(), _tmpl$4$1(), _tmpl$3$1(), _tmpl$8()];
+        return [_tmpl$6(), _tmpl$7(), _tmpl$4$1(), _tmpl$3$1(), _tmpl$8()];
       }
     }), _el$12);
     insert(_el$12, submitCaption, _el$13);
@@ -302,13 +301,9 @@ const homeValue = '';
 const _tmpl$ = /*#__PURE__*/template(`<h2 class="home-value-title no-background">Let's find your home`),
   _tmpl$2 = /*#__PURE__*/template(`<button style="border-radius:20px;border:2px solid black;background-color:black;color:#fff;margin-left:-35px;outline:none;cursor:pointer">`),
   _tmpl$3 = /*#__PURE__*/template(`<div style="min-width:80%">`),
-  _tmpl$4 = /*#__PURE__*/template(`<div id="map-place-getter" style="border-radius:20px;width:50vw;min-height:450px;">`),
-  _tmpl$5 = /*#__PURE__*/template(`<h1>What’s My <!> Home Value?`),
-  _tmpl$6 = /*#__PURE__*/template(`<p>GET A FREE QUOTE - NO STRINGS ATTACHED`),
-  _tmpl$7 = /*#__PURE__*/template(`<p>Thinking of selling? Let us assess your home’s value to help you decide if now’s the time to move.`);
+  _tmpl$4 = /*#__PURE__*/template(`<div id="map-place-getter" style="border-radius:20px;width:50vw;min-height:450px;">`);
 const HomeValuation = (props => {
   const {
-    withCopy = false,
     buttonCaption = "Get your Value!"
   } = props;
   const {
@@ -353,24 +348,22 @@ const HomeValuation = (props => {
               }
             }), createComponent(LeafletPane, {
               get children() {
-                return [withCopy && createComponent(EditableCopy, {}), (() => {
-                  const _el$3 = _tmpl$3();
-                  insert(_el$3, createComponent(AutoComplete, {
-                    containerStyle: "display:flex;min-width:80%;",
-                    inputStyle: "padding:10px 15px; border-radius:20px;border:2px solid black;outline:none;flex-basis:70%;flex-grow:1",
-                    placeChanged: place => {
-                      setPlaceID(place.place_id);
-                      setPlace(place);
-                    },
-                    get children() {
-                      const _el$4 = _tmpl$2();
-                      _el$4.$$click = () => setShowResult(true);
-                      insert(_el$4, buttonCaption);
-                      return _el$4;
-                    }
-                  }));
-                  return _el$3;
-                })()];
+                const _el$3 = _tmpl$3();
+                insert(_el$3, createComponent(AutoComplete, {
+                  containerStyle: "display:flex;min-width:80%;",
+                  inputStyle: "padding:10px 15px; border-radius:20px;border:2px solid black;outline:none;flex-basis:70%;flex-grow:1",
+                  placeChanged: place => {
+                    setPlaceID(place.place_id);
+                    setPlace(place);
+                  },
+                  get children() {
+                    const _el$4 = _tmpl$2();
+                    _el$4.$$click = () => setShowResult(true);
+                    insert(_el$4, buttonCaption);
+                    return _el$4;
+                  }
+                }));
+                return _el$3;
               }
             })];
           }
@@ -380,30 +373,6 @@ const HomeValuation = (props => {
     }
   })];
 });
-const EditableCopy = () => {
-  return [createComponent(Editable, {
-    "class": "upper center",
-    id: "home-valuation-heading-1",
-    get children() {
-      const _el$5 = _tmpl$5(),
-        _el$6 = _el$5.firstChild,
-        _el$8 = _el$6.nextSibling;
-        _el$8.nextSibling;
-      insert(_el$5, () => areaDataStore.areaName, _el$8);
-      return _el$5;
-    }
-  }), createComponent(Editable, {
-    id: "home-valuation-para-1",
-    get children() {
-      return _tmpl$6();
-    }
-  }), createComponent(Editable, {
-    id: "home-valuation-para-2",
-    get children() {
-      return _tmpl$7();
-    }
-  })];
-};
 delegateEvents(["click"]);
 
 const VIEWED = "Viewed Landing Page";
@@ -465,7 +434,7 @@ const _LandingPages = (() => {
         });
       }
     }
-    if (layers && layers.geoJson) {
+    if (layers && layers.geoJson && options.fitMarkers) {
       window.L.geoJSON(layers.geoJson, {
         onEachFeature: (feature, layer) => {
           map.fitBounds(layer.getBounds(), {
@@ -659,9 +628,7 @@ const _LandingPages = (() => {
           return createComponent(Context4Settings.Provider, {
             value: settings,
             get children() {
-              return createComponent(HomeValuation, {
-                withCopy: false
-              });
+              return createComponent(HomeValuation, {});
             }
           });
         };
@@ -797,6 +764,9 @@ const _LandingPages = (() => {
         });
       });
     }
+  });
+  document.querySelectorAll(`.genie-alternate:nth-child(odd)`).forEach(el => {
+    el.classList.add(window.gHub.alternateShade ?? 'dark');
   });
   window.requestAnimationFrame(() => window.gHub.lazyLoader("img.lazy"));
   window.gHub.galleryButton = (button, gallery) => {

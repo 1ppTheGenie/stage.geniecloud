@@ -1,6 +1,6 @@
 import { b as createComponent, i as insert, F as For, t as template } from './index.js';
 import { H as HomeTypes, f as format } from './Pagination.js';
-import { c as currency, p as percent, m as areaMonthlyStore, b as areaDataStore } from './index2.js';
+import { c as currency, p as percent, m as areaMonthlyStore, k as areaDataStore } from './index2.js';
 import { E as Editable } from './Editable.js';
 
 const listToSold = '';

@@ -1,5 +1,5 @@
 import { b as createComponent, i as insert, g as createMemo, A as Switch, M as Match, e as createRenderEffect, f as style, s as setAttribute, I as Index, t as template } from './index.js';
-import { b as areaDataStore, v as propertyTypeCaption, c as currency } from './index2.js';
+import { k as areaDataStore, q as propertyTypeCaption, c as currency } from './index2.js';
 import { H as HomeTypes } from './Pagination.js';
 import { E as Editable } from './Editable.js';
 import { S as Spinner } from './Spinner.js';
@@ -28,7 +28,7 @@ const PeopleBuying = (() => {
     const _el$2 = _tmpl$2(),
       _el$3 = _el$2.firstChild;
     insert(_el$2, () => `${areaDataStore.areaName} has seen a lot of movement of \n`, _el$3);
-    insert(_el$2, () => `${areaDataStore.topSize.beds > 0 ? areaDataStore.topSize.beds + " bedroom" : "studio"}  ${areaDataStore.propertyTypeCaption} in the past ${areaDataStore.areaPeriod} months.`, null);
+    insert(_el$2, () => `${areaDataStore.topSize.beds > 0 ? areaDataStore.topSize.beds + " bedroom" : "studio"}  ${propertyTypeCaption()} in the past ${areaDataStore.areaPeriod} months.`, null);
     return _el$2;
   })(), createComponent(HomeTypes, {
     get container() {
@@ -86,7 +86,7 @@ const PeopleBuying = (() => {
                 _el$11 = _el$10.firstChild;
               insert(_el$11, (() => {
                 const _c$4 = createMemo(() => !!!areaDataStore.loading);
-                return () => _c$4() ? `${size().sold} ${propertyTypeCaption(areaDataStore.propertyTypeID, size().sold, true)} sold` : createComponent(Spinner, {
+                return () => _c$4() ? `${size().sold} ${propertyTypeCaption(size().sold == 1)} sold` : createComponent(Spinner, {
                   style: "margin: 0; width: 16px; transform: scale(2.5)",
                   fill: "var(--theme-body-color)"
                 });

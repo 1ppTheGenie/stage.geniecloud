@@ -1,5 +1,5 @@
 import { j as createResource, g as createMemo, c as createSignal, a as createEffect, b as createComponent, i as insert, e as createRenderEffect, h as className, S as Show, t as template, d as delegateEvents } from './index.js';
-import { m as areaMonthlyStore, b as areaDataStore } from './index2.js';
+import { m as areaMonthlyStore, k as areaDataStore } from './index2.js';
 import { f as format, H as HomeTypes } from './Pagination.js';
 import { E as Editable } from './Editable.js';
 

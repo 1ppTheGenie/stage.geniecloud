@@ -1579,7 +1579,7 @@ const genericJS = () => {
     const div = document.createElement("div");
     div.id = "genie-landing";
     document.body.appendChild(div);
-    const Landing = lazy(() => __vitePreload(() => import('./_LandingPages.js'),true?[window.gHub.buildUrl("assets/_LandingPages.js"),window.gHub.buildUrl("assets/LeafletMap.js"),window.gHub.buildUrl("assets/index2.js"),window.gHub.buildUrl("assets/index.css"),window.gHub.buildUrl("assets/Pagination.js"),window.gHub.buildUrl("assets/Pagination.css"),window.gHub.buildUrl("assets/Editable.js"),window.gHub.buildUrl("assets/Spinner.js"),window.gHub.buildUrl("assets/_LandingPages.css")]:void 0,import.meta.url));
+    const Landing = lazy(() => __vitePreload(() => import('./_LandingPages.js'),true?[window.gHub.buildUrl("assets/_LandingPages.js"),window.gHub.buildUrl("assets/LeafletMap.js"),window.gHub.buildUrl("assets/index2.js"),window.gHub.buildUrl("assets/index.css"),window.gHub.buildUrl("assets/Pagination.js"),window.gHub.buildUrl("assets/Pagination.css"),window.gHub.buildUrl("assets/Spinner.js"),window.gHub.buildUrl("assets/_LandingPages.css")]:void 0,import.meta.url));
     render(Landing, document.getElementById("genie-landing"));
   }
   if (document.querySelectorAll("div.genie-embed").length > 0) {

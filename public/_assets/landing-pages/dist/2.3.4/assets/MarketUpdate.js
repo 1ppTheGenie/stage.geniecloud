@@ -1,5 +1,5 @@
 import { y as spread, t as template, i as insert, b as createComponent, S as Show } from './index.js';
-import { r as requiredArgs, t as toDate, _ as _typeof, a as useSettings, C as Context4Settings, b as areaDataStore, p as percent, c as currency, n as getCssVar } from './index2.js';
+import { r as requiredArgs, t as toDate, _ as _typeof, a as useSettings, C as Context4Settings, k as areaDataStore, q as propertyTypeCaption, p as percent, c as currency, n as getCssVar } from './index2.js';
 import { t as toInteger, f as format, H as HomeTypes } from './Pagination.js';
 import { G as GeoArea, C as CircleMarker, L as LeafletMap } from './LeafletMap.js';
 
@@ -236,14 +236,14 @@ const MarketUpdate = (() => {
       _el$10 = _el$9.firstChild,
       _el$11 = _el$10.nextSibling,
       _el$27 = _el$2.nextSibling;
-    insert(_el$3, () => (areaDataStore.areaName || "").trim() + " " + areaDataStore.propertyTypeCaptionAbbr.trim());
+    insert(_el$3, () => (areaDataStore.areaName || "").trim() + " " + propertyTypeCaption());
     insert(_el$6, () => ` as of ${format(new Date(), "MMMM d, Y")}`);
     insert(_el$7, createComponent(Show, {
       get when() {
         return !isNaN(areaDataStore.percentChange);
       },
       get children() {
-        return `The ${areaDataStore.areaName} area has seen the average sale price of ${areaDataStore.propertyTypeCaption} ${areaDataStore.percentChange > 0 ? "increase" : "decrease"} by ${percent(Math.abs(areaDataStore.percentChange))} over the last ${areaDataStore.areaPeriod > 1 ? `${areaDataStore.areaPeriod} months` : "30 days"} . `;
+        return `The ${areaDataStore.areaName} area has seen the average sale price of ${propertyTypeCaption()} ${areaDataStore.percentChange > 0 ? "increase" : "decrease"} by ${percent(Math.abs(areaDataStore.percentChange))} over the last ${areaDataStore.areaPeriod > 1 ? `${areaDataStore.areaPeriod} months` : "30 days"} . `;
       }
     }), _el$8);
     insert(_el$2, createComponent(HomeTypes
@@ -253,7 +253,7 @@ const MarketUpdate = (() => {
       },
       style: "width:100%"
     }), _el$9);
-    insert(_el$11, () => areaDataStore.propertyTypeCaption);
+    insert(_el$11, propertyTypeCaption);
     insert(_el$2, createComponent(Show, {
       get when() {
         return areaDataStore.propertyStats;
@@ -277,7 +277,7 @@ const MarketUpdate = (() => {
               _el$19 = _el$15.nextSibling,
               _el$20 = _el$19.nextSibling,
               _el$21 = _el$20.firstChild;
-            insert(_el$18, () => areaDataStore.propertyTypeCaption);
+            insert(_el$18, propertyTypeCaption);
             insert(_el$19, () => currency(areaDataStore.propertyStats.avgSalePrice));
             insert(_el$20, createComponent(Arrow, {
               get style() {
@@ -299,7 +299,7 @@ const MarketUpdate = (() => {
               const _el$22 = _tmpl$3(),
                 _el$23 = _el$22.firstChild,
                 _el$25 = _el$23.nextSibling;
-              insert(_el$25, () => areaDataStore.propertyTypeCaption);
+              insert(_el$25, propertyTypeCaption);
               return _el$22;
             })(), (() => {
               const _el$26 = _tmpl$4();

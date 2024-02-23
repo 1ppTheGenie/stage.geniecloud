@@ -304,23 +304,10 @@ function createStore(...[store, options]) {
   return [wrappedStore, setStore];
 }
 
-const propertyTypeCaption = (type, count = 0, abbr = false) => {
-	let caption;
-	switch (type) {
-		case 1:
-			caption = abbr
-				? `condo${count !== 1 ? "s" : ""}`
-				: count !== 1
-				? "condos"
-				: "condo/townhouse";
-			break;
-		default:
-			caption = abbr ? "home" : "single detached home";
-			if (count !== 1) caption += "s";
-			break;
-	}
+const propertyTypeCaption = (singular= false) => {
+	const propertyCaptions = (window.gHub.propertyCaptions ?? 'homes,home').split(',');
 
-	return caption;
+	return propertyCaptions[singular ? 1 : 0];
 };
 
 const areaId = window.gHub.areaId;
@@ -357,7 +344,6 @@ const [listingsStore, setListingsStore] = createStore({
 
 const [areaDataStore, setAreaDataStore] = createStore({
 	loading: true,
-	propertyTypeCaption: "",
 	propertyTypeID: sharedEmbedStore.propertyType,
 	stats: {},
 	get propertyStats() {
@@ -418,7 +404,6 @@ const [areaDataStore, setAreaDataStore] = createStore({
 
 const [areaMonthlyStore, setAreaMonthlyStore] = createStore({
 	loading: true,
-	propertyTypeCaption: "",
 	propertyTypeID: sharedEmbedStore.propertyType,
 	stats: {},
 });
@@ -446,14 +431,7 @@ createRoot(() => {
 	});
 
 	createEffect(() => {
-		setAreaDataStore({
-			propertyTypeCaptionAbbr: propertyTypeCaption(
-				sharedEmbedStore.propertyType,
-				true
-			),
-			propertyTypeCaption: propertyTypeCaption(sharedEmbedStore.propertyType),
-			propertyTypeID: sharedEmbedStore.propertyType,
-		});
+		setAreaDataStore({ propertyTypeID: sharedEmbedStore.propertyType });
 	});
 
 	createEffect( () => {
@@ -706,9 +684,9 @@ const useSettings = settingsContext => {
 	const globalSettings = typeof window.gHub !== "undefined" ? window.gHub : {};
 	const settings = { ...globalSettings, ...settingsContext };
 
-	onMount( () => {
-		if ( settings.areaPeriod ) {
-			setSharedEmbedStore( { period: parseInt( settings.areaPeriod ) } );
+	onMount(() => {
+		if (settings.areaPeriod) {
+			setSharedEmbedStore({ period: parseInt(settings.areaPeriod) });
 		}
 	});
 
@@ -845,4 +823,4 @@ const useAgentData = () => {
 
 const index = '';
 
-export { Context4Settings as C, _typeof as _, useSettings as a, areaDataStore as b, currency as c, dateFormat as d, updateLead as e, createLead as f, usePagination as g, listingsStore as h, unwrap as i, filterListings as j, sharedEmbedStore as k, landingPageData as l, areaMonthlyStore as m, getCssVar as n, address as o, percent as p, getAreaPolygon as q, requiredArgs as r, searchAddress as s, toDate as t, useAgentData as u, propertyTypeCaption as v, setSharedEmbedStore as w, signedInAtom as x };
+export { Context4Settings as C, _typeof as _, useSettings as a, updateLead as b, currency as c, dateFormat as d, createLead as e, usePagination as f, listingsStore as g, unwrap as h, filterListings as i, sharedEmbedStore as j, areaDataStore as k, landingPageData as l, areaMonthlyStore as m, getCssVar as n, address as o, percent as p, propertyTypeCaption as q, requiredArgs as r, searchAddress as s, toDate as t, useAgentData as u, getAreaPolygon as v, setSharedEmbedStore as w, signedInAtom as x };

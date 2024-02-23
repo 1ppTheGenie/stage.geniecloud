@@ -142,6 +142,7 @@
 
     .flex-row .snapshot-details {
         flex-basis: 100%;
+        margin-bottom: 1rem;
     }
 
     .funnel-template-8 .details-section .col-md-9 .content-para {

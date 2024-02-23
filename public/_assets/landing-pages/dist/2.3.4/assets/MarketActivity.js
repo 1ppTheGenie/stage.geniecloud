@@ -1,6 +1,6 @@
 import { i as insert, e as createRenderEffect, s as setAttribute, t as template, y as spread, c as createSignal, b as createComponent, g as createMemo, f as style, d as delegateEvents } from './index.js';
 import { H as HomeTypes, L as ListingsTable, P as Pagination } from './Pagination.js';
-import { o as address, a as useSettings, C as Context4Settings, g as usePagination, j as filterListings, b as areaDataStore, h as listingsStore, n as getCssVar } from './index2.js';
+import { o as address, a as useSettings, C as Context4Settings, f as usePagination, i as filterListings, k as areaDataStore, g as listingsStore, n as getCssVar } from './index2.js';
 import { G as GeoArea, L as LeafletMap, C as CircleMarker } from './LeafletMap.js';
 import { L as ListingsShowing } from './ListingsShowing.js';
 
