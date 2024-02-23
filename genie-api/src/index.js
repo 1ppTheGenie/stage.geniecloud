@@ -684,6 +684,15 @@ export const api = async event => {
                                         'theme'
                                     )) ??
                                     '_default';
+                                ['light', 'dark'].forEach(style => {
+                                    if (params.theme.includes(`-${style}`)) {
+                                        params.theme = params.theme.replace(
+                                            `-${style}`,
+                                            ''
+                                        );
+                                        params.hue = style;
+                                    }
+                                });
 
                                 const { s3Key } = await getS3Key(
                                     params.asset ||
