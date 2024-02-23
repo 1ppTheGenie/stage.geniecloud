@@ -37,7 +37,7 @@
 		</xsl:call-template>
 		<body>
 			<xsl:attribute name="class">
-				<xsl:value-of select="concat( 'funnel-market-insider-instant-download ', //output/@theme )" />
+				<xsl:value-of select="concat( 'funnel-market-insider-instant-download ', $cssThemeClass)" />
 			</xsl:attribute>
 			<xsl:variable name="primaryImage">
 				<xsl:call-template name="listing-image">

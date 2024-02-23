@@ -47,7 +47,7 @@
 
 		<body style="scroll-behavior: smooth;">
 			<xsl:attribute name="class">
-				<xsl:value-of select="concat( 'property-compare ', //output/@theme )" />
+				<xsl:value-of select="concat( 'property-compare ', $cssThemeClass)" />
 			</xsl:attribute>
 
 			<header class="background header-section">

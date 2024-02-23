@@ -116,7 +116,7 @@
 		<xsl:if test="$renderAs='html'">
 			<div style="width:100%;" data-genie-xsl-output="true">
 				<xsl:attribute name="class">
-					<xsl:value-of select="concat( 'data-genie-embed ', //output/@theme )" />
+					<xsl:value-of select="concat( 'data-genie-embed ', $cssThemeClass)" />
 				</xsl:attribute>
 
 				<xsl:attribute name="data-genie-theme">

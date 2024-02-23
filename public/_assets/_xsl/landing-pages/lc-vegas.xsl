@@ -34,7 +34,7 @@
 
 		<body style="scroll-behavior: smooth;">
 			<xsl:attribute name="class">
-				<xsl:value-of select="concat( 'lc-vegas ', //output/@theme )" />
+				<xsl:value-of select="concat( 'lc-vegas ', $cssThemeClass)" />
 			</xsl:attribute>
 
 			<script>

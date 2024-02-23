@@ -38,7 +38,7 @@
 
 		<body>
 			<xsl:attribute name="class">
-				<xsl:value-of select="concat( 'funnel-market-insider-instant-download ', //output/@theme )" />
+				<xsl:value-of select="concat( 'funnel-market-insider-instant-download ', $cssThemeClass)" />
 			</xsl:attribute>
 
 			<div id="step1" class="steps heading-color-as-bg banner-top-section-info section">

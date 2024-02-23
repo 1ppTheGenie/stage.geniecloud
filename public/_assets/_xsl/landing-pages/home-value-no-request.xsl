@@ -34,7 +34,7 @@
 
         <body style="scroll-behavior: smooth;">
             <xsl:attribute name="class">
-                <xsl:value-of select="concat( 'home-value-no-request ', //output/@theme )" />
+                <xsl:value-of select="concat( 'home-value-no-request ', $cssThemeClass)" />
             </xsl:attribute>
 
             <script>

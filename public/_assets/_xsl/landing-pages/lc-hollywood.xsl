@@ -39,7 +39,7 @@
 
 		<body>
 			<xsl:attribute name="class">
-				<xsl:value-of select="concat( 'lc-hollywood ', //output/@theme )" />
+				<xsl:value-of select="concat( 'lc-hollywood ', $cssThemeClass)" />
 
 			</xsl:attribute>
 

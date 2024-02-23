@@ -113,6 +113,18 @@
 		<xsl:value-of select="//agent[1]/address/zip" />
 	</xsl:template>
 
+	<!-- $cssThemeClass -->
+	<xsl:variable name="cssThemeClass">
+		<xsl:choose>
+			<xsl:when test="//output/@themeHue !=''">
+				<xsl:value-of select="concat( //output/@theme, ' ', //output/@themeHue  )" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="//output/@theme" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+
 	<!-- $hasMultipleAgents -->
 	<xsl:variable name="hasMultipleAgents" select="count(//agent) &gt; 1" />
 
@@ -492,7 +504,7 @@
 			</xsl:when>
 			<xsl:when test="number(//single/statusTypeID)=3 or number(//single/statusTypeID)=4 or number(//single/statusTypeID)=12">
 				<xsl:value-of select="'Pending'" />
-			</xsl:when>			
+			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="'Other'" />
 			</xsl:otherwise>

@@ -6,12 +6,11 @@
 	Sizes:				Landing Page
 	Supports:			Area Funnel
 	Permission: 		Funnels
-	Render Key:			landing-page/TheGenie-Property-Comparison-MLSNUMBER
+	Render Key:			landing-page/instant-market-report-AREASLUG
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="landing-pages.xsl" />
-
+	<xsl:import href="landing-pages.xsl" />
 
 	<xsl:template name="landing-page">
 		<xsl:call-template name="standard-header">
@@ -33,22 +32,29 @@
 
 		<body style="scroll-behavior: smooth;">
 			<xsl:attribute name="class">
-				<xsl:value-of select="concat( 'market-report-instant ', //output/@theme )" />
+				<xsl:value-of select="concat( 'market-report-instant ', $cssThemeClass)" />
 			</xsl:attribute>
+			
+			<style>
+				<xsl:value-of select="'
+				.genie-alternate { background-color: var(--theme-body-background); padding: 1rem 0; }
+				.mystyle{transform: translateX(0px);}
+				.close-nav-btn{transform: translateX(100%);}
+'" />
+			</style>
 
 			<script>
-				<xsl:value-of select="concat( 'const listings = [{caption: `1`, color: `#F00`, lat: ', number(//single/latitude), ', lng: ', number(//single/longitude), '}, {caption: `2`, color: `#0F0`, lat: ', number(//lead/property/latitude), ', lng: ', number(//lead/property/longitude), '}];' )" />
-				<xsl:value-of select="concat( &quot;const options = { fitMarkers: true, mapStyle: `&quot;, //output/@mapStyle, &quot;`}; &quot; )" />
-				<xsl:value-of select="&quot;document.addEventListener( `genie-landing-loaded`, function() { document.querySelector('section.banner-section').style.backgroundImage = ''; gHub.makeMap( `compare-header-map`, options, { listings: listings } ); });&quot;" />
+				<xsl:value-of select="concat('const polygon =', //area[1]/geojson,';' )" />
+				<xsl:value-of select="concat( &quot;const options = { pitch: 60, bearing: 20, zoom: 11, fitMarkers: true, mapStyle: `&quot;, //output/@mapStyle, &quot;`}; &quot; )" />
+				<xsl:value-of select="&quot;document.addEventListener( `genie-landing-loaded`, function() {  console.log('Hello from MRI'); document.querySelector('section.banner-section').style.backgroundImage = ''; gHub.makeMap( `market-report-instant-header-map`, options, { geoJson: polygon } ); });&quot;" />
 			</script>
 
 			<section class="banner-section market-report-instant-banner" style="position:relative; display:block; background-color: var(--theme-body-background);">
 				<xsl:attribute name="style">
-<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
-
+					<xsl:value-of select="concat( 'background-image: url(', $primaryImage, ')' )" />
 				</xsl:attribute>
 
-				<div class="banner-section" id="compare-header-map" style="z-index: 0;">
+				<div class="banner-section" id="market-report-instant-header-map" style="z-index: 0;">
 					<xsl:comment/>
 				</div>
 
@@ -56,7 +62,7 @@
 					<div class="row">
 						<div class="col-md-12 col-lg-12">
 							<div class="report-for">
-								<div class="area-info">
+								<div class="area-info" style="width: 100%">
 									<div class="heading">
 										<h5>Market Insider Report For</h5>
 									</div>
@@ -74,7 +80,7 @@
 				</div>
 			</section>
 
-			<section class="dark-bg market-update">
+			<section class="genie-alternate">
 				<div class="container">
 					<xsl:call-template name="add-genie-embed">
 						<xsl:with-param name="embed" select="'MarketUpdate'" />
@@ -82,13 +88,15 @@
 				</div>
 			</section>
 
-			<div class="container" id="embed_fast_facts">
-				<xsl:call-template name="add-genie-embed">
-					<xsl:with-param name="embed" select="'FastFacts'" />
-				</xsl:call-template>
-			</div>
+			<section class="genie-alternate">
+				<div class="container">
+					<xsl:call-template name="add-genie-embed">
+						<xsl:with-param name="embed" select="'FastFacts'" />
+					</xsl:call-template>
+				</div>
+			</section>
 
-			<section class="dark-bg">
+			<section class="genie-alternate">
 				<div class="container">
 					<xsl:call-template name="add-genie-embed">
 						<xsl:with-param name="embed" select="'MarketTrending'" />
@@ -96,7 +104,7 @@
 				</div>
 			</section>
 
-<!-- DevDsiabled
+			<!-- DevDsiabled
 			<div class="container">
 				<xsl:call-template name="add-genie-embed">
 					<xsl:with-param name="embed" select="'MarketActivity'" />
@@ -104,7 +112,7 @@
 			</div>
 -->
 
-			<section class="dark-bg">
+			<section class="genie-alternate">
 				<div class="container">
 					<xsl:call-template name="add-genie-embed">
 						<xsl:with-param name="embed" select="'PeopleBuying'" />
@@ -112,13 +120,15 @@
 				</div>
 			</section>
 
-			<div class="container">
-				<xsl:call-template name="add-genie-embed">
-					<xsl:with-param name="embed" select="'MarketHistory'" />
-				</xsl:call-template>
-			</div>
+			<section class="genie-alternate">
+				<div class="container">
+					<xsl:call-template name="add-genie-embed">
+						<xsl:with-param name="embed" select="'MarketHistory'" />
+					</xsl:call-template>
+				</div>
+			</section>
 
-			<section class="dark-bg">
+			<section class="genie-alternate">
 				<div class="container">
 					<xsl:call-template name="add-genie-embed">
 						<xsl:with-param name="embed" select="'ListToSold'" />
@@ -126,77 +136,18 @@
 				</div>
 			</section>
 
-			<!-- ToDo: My Market Value HTML/CSS to be added -->
-			<div class="container" id="about">
-				<xsl:call-template name="agent-about" />
+			<section class="genie-alternate">
+				<!-- ToDo: My Market Value HTML/CSS to be added -->
+				<div class="container" id="about">
+					<xsl:call-template name="agent-about" />
+					<xsl:call-template name="default-thank-you-popup" />
+				</div>
 
-<xsl:call-template name="default-thank-you-popup" />
-
-			</div>
-
-			<div class="funnel-footer-background">
-				<xsl:call-template name="agent-details" />
-				<xsl:call-template name="copyright" />
-			</div>
+				<div class="funnel-footer-background">
+					<xsl:call-template name="agent-details" />
+					<xsl:call-template name="copyright" />
+				</div>
+			</section>
 		</body>
-
-		<script>
-			<xsl:value-of select="concat( &quot;const homeWkt='&quot;, //single/boundary/geoJSON, &quot;';&quot;)" />
-			<xsl:value-of select="concat( &quot;const homeLat='&quot;, //single/latitude, &quot;';&quot;)" />
-			<xsl:value-of select="concat( &quot;const homeLng='&quot;, //single/longitude, &quot;';&quot;)" />
-
-			<xsl:value-of select="concat( &quot;const leadWkt='&quot;, //lead/property/boundary/geoJSON, &quot;';&quot;)" />
-			<xsl:value-of select="concat( &quot;const leadLat='&quot;, //lead/property/latitude, &quot;';&quot;)" />
-			<xsl:value-of select="concat( &quot;const leadLng='&quot;, //lead/property/longitude, &quot;';&quot;)" />
-
-			<xsl:value-of select="'
-				window.addEventListener(`DOMContentLoaded`, async function() {
-					if(gHub.makeMap){
-						const headerMap = await gHub.makeMap(`compare-header-map`);
-
-						const url = gHub.circleURI(`red`, 1);
-						const svgIcon = new L.Icon({
-							iconUrl: url,
-							iconSize: [34, 34],
-							iconAnchor: [12, 12],
-						});
-						const m1 = L.marker([homeLat, homeLng], {icon: svgIcon}).addTo(headerMap);
-
-						const url2 = gHub.circleURI(`blue`, 2);
-						const svgIcon2 = new L.Icon({
-							iconUrl: url2,
-							iconSize: [34, 34],
-							iconAnchor: [12, 12],
-						});
-						const m2 = L.marker([leadLat, leadLng], {icon: svgIcon2}).addTo(headerMap);
-
-						var featureGroup = L.featureGroup([m1, m2]);
-						headerMap.fitBounds(featureGroup.getBounds());
-
-						if( leadWkt !== `` ) {
-							const leadMap = await gHub.makeMap(`lead-property-map`);
-
-							window.L.geoJson( JSON.parse(leadWkt), {
-								onEachFeature: function(feature, layer) {
-									leadMap.fitBounds(layer.getBounds(), { maxZoom: 27 });
-									leadMap.invalidateSize();
-								}} 
-							).addTo(leadMap);
-						}
-					}
-				});
-				function myFunction() {
-					document.querySelector(`.navbar-collapse`)?.classList.toggle(`mystyle`);
-				}
-				function closeNavFunction() {
-					document.querySelector(`.navbar-collapse`)?.classList.toggle(`mystyle`);
-}'" />
-		</script>
-		<style>
-			<xsl:value-of select="'
-				.mystyle{transform: translateX(0px);}
-				.close-nav-btn{transform: translateX(100%);}
-'" />
-		</style>
 	</xsl:template>
 </xsl:stylesheet>
