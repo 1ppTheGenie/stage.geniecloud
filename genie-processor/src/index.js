@@ -264,28 +264,32 @@ if ( process.argv.length > 2 ) {
 			const dataDir = process.cwd() +'/../public/_assets/_reference/';
 
 			const server = http.createServer( async ( req, res ) => {
-				const parsedUrl = url.parse(req.url);
-				const queryParams = querystring.parse(parsedUrl.query);		
+				try {
+					const parsedUrl = url.parse( req.url );
+					const queryParams = querystring.parse( parsedUrl.query );
 				
-				const assetPath = `${assetDir}${queryParams.xsl}.xsl`;
-				const dataPath = `${dataDir}${queryParams?.xml ?? '_genie-sample'}.xml`;
+					const assetPath = `${assetDir}${queryParams.xsl}.xsl`;
+					const dataPath = `${dataDir}${queryParams?.xml ?? '_genie-sample'}.xml`;
 					
-				if ( !fs.existsSync( assetPath ) ) {
-					res.writeHead( 200, { "Content-Type": "text/plain" } );
-					res.end( `Asset ${queryParams.xsl} does not exist` );
-					return;					
-				} 
+					if ( !fs.existsSync( assetPath ) ) {
+						res.writeHead( 200, { "Content-Type": "text/plain" } );
+						res.end( `Asset ${queryParams.xsl} does not exist` );
+						return;
+					}
 
-				if ( !fs.existsSync( dataPath ) ) {
-					res.writeHead( 200, { "Content-Type": "text/plain" } );
-					res.end( `Data file ${dataPath} does not exist` );
-					return;					
-				} 
+					if ( !fs.existsSync( dataPath ) ) {
+						res.writeHead( 200, { "Content-Type": "text/plain" } );
+						res.end( `Data file ${dataPath} does not exist` );
+						return;
+					}
 
-				const output = await testXSL( assetPath, dataPath, null );
+					const output = await testXSL( assetPath, dataPath, null );
 				
-				res.writeHead( 200, { "Content-Type": "text/html" } );
-				res.end( typeof output == 'string' ? output: JSON.stringify(output) );
+					res.writeHead( 200, { "Content-Type": "text/html" } );
+					res.end( typeof output == 'string' ? output : JSON.stringify( output ) );
+				} catch ( err ) {
+					res.end( `Failed with ${err.toString()}`);
+				}
 			} );
 
 			const PORT = process.env.PORT || 3000;
