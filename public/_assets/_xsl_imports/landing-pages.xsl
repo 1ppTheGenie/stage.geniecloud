@@ -11,13 +11,21 @@
 	<xsl:template match="/">
 		<html lang="en">
 			<xsl:attribute name="class">
-				<xsl:value-of select="concat( 'genie-landing-page ', //output/@theme, ' asset-v', //output/@assetVersion )" />
+				<xsl:value-of select="concat( 'genie-landing-page ', //output/@theme, ' ', //output/@themeHue, ' asset-v', //output/@assetVersion )" />
 			</xsl:attribute>
 
-			<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GCVGRFNGMD"><!-- Google tag (gtag.js) --></script>
-			<script>
-				<xsl:value-of disable-output-escaping="yes" select="'window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag(`js`, new Date()); gtag(`config`, `G-GCVGRFNGMD`);'" />
-			</script>
+			<xsl:if test="//output/@test!='true'">
+				<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GCVGRFNGMD">
+					<xsl:comment><!-- Google tag (gtag.js) --></xsl:comment>
+				</script>
+				<script>
+					<xsl:value-of disable-output-escaping="yes" select="'window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag(`js`, new Date()); gtag(`config`, `G-GCVGRFNGMD`);'" />
+				</script>
+			</xsl:if>
+
+			<xsl:if test="//output/@test='true'">
+				<base href="{//output/@siteUrl}" />
+			</xsl:if>
 
 			<script>
 				<xsl:value-of select="concat( 'const ghUrl = `', //output/@siteUrl, '_assets/landing-pages/dist/', //output/@version, '`; ' )" />
@@ -453,12 +461,15 @@
 				<xsl:with-param name="secondaryCSS" select="$secondaryCSS" />
 				<xsl:with-param name="includeFooterCSS" select="$includeFooterCSS" />
 			</xsl:call-template>
-			<script>
-				<xsl:value-of select="'(function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)}; h._hjSettings={hjid:1194877,hjsv:6}; a=o.getElementsByTagName(`head`)[0]; r=o.createElement(`script`);r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r); })(window,document,`https://static.hotjar.com/c/hotjar-`,`.js?sv=`);'" />
-			</script>
-			<script>
-				<xsl:value-of select="concat( 'window.hj( `identify`, `', //agent[1]/aspNetUserId, '`, { leadID: `', //lead/genieLeadId, '`, url: window.location.href, asset: `', //output/@stylesheet, '`});')" />
-			</script>
+
+			<xsl:if test="//output/@test!='true'">
+				<script>
+					<xsl:value-of select="'(function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)}; h._hjSettings={hjid:1194877,hjsv:6}; a=o.getElementsByTagName(`head`)[0]; r=o.createElement(`script`);r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r); })(window,document,`https://static.hotjar.com/c/hotjar-`,`.js?sv=`);'" />
+				</script>
+				<script>
+					<xsl:value-of select="concat( 'window.hj( `identify`, `', //agent[1]/aspNetUserId, '`, { leadID: `', //lead/genieLeadId, '`, url: window.location.href, asset: `', //output/@stylesheet, '`});')" />
+				</script>
+			</xsl:if>
 			<script type="module" crossorigin="crossorigin">
 				<xsl:attribute name="src">
 					<xsl:value-of select="concat( '/_assets/landing-pages/dist/', $buildVersion, '/assets/index.js' )" />
