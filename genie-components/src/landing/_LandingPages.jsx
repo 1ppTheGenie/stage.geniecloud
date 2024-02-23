@@ -366,7 +366,7 @@ export default () => {
 
 					return (
 						<Context4Settings.Provider value={settings}>
-							<HomeValuation withCopy={false} />
+							<HomeValuation />
 						</Context4Settings.Provider>
 					);
 				};

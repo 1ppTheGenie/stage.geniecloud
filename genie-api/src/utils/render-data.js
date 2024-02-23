@@ -208,7 +208,8 @@ const filteredMerge = (...objects) => {
 
 const defaultRenderSettings = {
     size: 'facebook',
-    theme: '_default-light',
+    theme: '_default',
+    themeHue:'',
     additionalAgents: null,
     propertyType: 0,
     mapStyle: 'satellite-streets-v9',
@@ -1015,7 +1016,8 @@ const processCollection = async params => {
                     _attrs: {
                         name: sectionData.name || `Section ${i + 1}`,
                         caption: caption,
-                        description: description
+                        description: description,
+                        sort: parseInt(sectionData?.sort ?? 1)
                     },
                     _content: []
                 };

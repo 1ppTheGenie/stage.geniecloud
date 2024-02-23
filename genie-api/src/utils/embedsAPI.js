@@ -373,7 +373,8 @@ const get_area_properties = async params => {
         mlsGroupId,
         params.areaId,
         new Date(
-            Date.now() - (parseInt(params.areaPeriod ?? 12)) * 30 * 24 * 60 * 60 * 1000
+            Date.now() -
+                parseInt(params.areaPeriod ?? 12) * 30 * 24 * 60 * 60 * 1000
         ).toISOString(),
         false
     );

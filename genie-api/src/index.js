@@ -421,7 +421,7 @@ export const api = async event => {
                                     false,
                                     continuationToken
                                 );
-
+                                
                                 try {
                                     await Promise.all(
                                         r.Contents.map(async item => {

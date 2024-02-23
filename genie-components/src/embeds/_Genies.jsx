@@ -116,7 +116,7 @@ export default () => {
 			}
 
 			settings.layout && genieNode.classList.add(settings.layout);
-			settings.theme && genieNode.classList.add(settings.theme);
+			//settings.theme && genieNode.classList.add(settings.theme);
 
 			if (!linkedThemes.includes(settings.theme)) {
 				linkedThemes.push(settings.theme);

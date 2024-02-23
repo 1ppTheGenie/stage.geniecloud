@@ -57,12 +57,13 @@ export const buildMap = (container, options = {}) => {
 		try {
 			return window.L.map( container, {
 				center: [center.lat, center.lng],
-				zoomControl: options.zoomCtl ?? false,
-				scrollWheelZoom: options.scrollCtl ?? false,
+				zoomControl: false, //options.zoomCtl
+				scrollWheelZoom: false, //options.scrollCtl
 				layers: [mapboxTiles],
 				attributionControl: false,
-				zoom: options.zoom || 13,
+				zoom: 13,
 				dragging: false,
+				...options
 			} );
 		} catch  { }
 	}
