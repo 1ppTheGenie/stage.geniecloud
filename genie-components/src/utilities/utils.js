@@ -1,11 +1,4 @@
-import {
-	createResource,
-	createSignal,
-	createEffect,
-	createContext,
-	useContext,
-	onMount,
-} from "solid-js";
+import { createResource, createSignal, createEffect, createContext, onMount } from "solid-js";
 import { createStore } from "solid-js/store";
 import { differenceInHours } from "date-fns";
 
@@ -83,9 +76,9 @@ export const useSettings = settingsContext => {
 	const globalSettings = typeof window.gHub !== "undefined" ? window.gHub : {};
 	const settings = { ...globalSettings, ...settingsContext };
 
-	onMount( () => {
-		if ( settings.areaPeriod ) {
-			setSharedEmbedStore( { period: parseInt( settings.areaPeriod ) } );
+	onMount(() => {
+		if (settings.areaPeriod) {
+			setSharedEmbedStore({ period: parseInt(settings.areaPeriod) });
 		}
 	});
 
