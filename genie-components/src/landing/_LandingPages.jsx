@@ -100,7 +100,7 @@ export default () => {
 			}
 		}
 
-		if (layers && layers.geoJson) {
+		if (layers && layers.geoJson && options.fitMarkers) {
 			window.L.geoJSON(layers.geoJson, {
 				onEachFeature: (feature, layer) => {
 					map.fitBounds(layer.getBounds(), { zoom: 22 });
