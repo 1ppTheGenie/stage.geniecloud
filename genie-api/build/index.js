@@ -7343,7 +7343,8 @@ var filteredMerge = (...objects) => {
 };
 var defaultRenderSettings = {
   size: "facebook",
-  theme: "_default-light",
+  theme: "_default",
+  themeHue: "",
   additionalAgents: null,
   propertyType: 0,
   mapStyle: "satellite-streets-v9",
@@ -7972,7 +7973,8 @@ var processCollection = async (params) => {
           _attrs: {
             name: sectionData.name || `Section ${i + 1}`,
             caption,
-            description
+            description,
+            sort: parseInt(sectionData?.sort ?? 1)
           },
           _content: []
         };
@@ -8157,10 +8159,7 @@ var getThemes = async () => {
     r.map(async (t) => {
       if (t.Size > 0) {
         const css = await fromS3(t.Key);
-        const data = getFileData(css, {
-          name: "Theme Name",
-          style: "Theme Style"
-        });
+        const data = getFileData(css, { name: "Theme Name" });
         const slug = t.Key.replace(".css", "").replace(
           "_assets/themes/",
           ""
@@ -8356,27 +8355,27 @@ var add_lead = async (params) => {
       "leadInquiryType",
       "trackingData"
     ];
-    let argsKey2;
+    let argsKey;
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
       if (params.hasOwnProperty(key)) {
         var value = null;
         switch (key) {
           case "genieTags":
-            argsKey2 = "tags";
+            argsKey = "tags";
             value = params[key].split(",");
             break;
           case "email":
-            argsKey2 = "emailAddress";
+            argsKey = "emailAddress";
             break;
           case "phone":
-            argsKey2 = "phoneNumber";
+            argsKey = "phoneNumber";
             break;
           default:
-            argsKey2 = key;
+            argsKey = key;
             break;
         }
-        args[argsKey2] = value !== null ? value : params[key];
+        args[argsKey] = value !== null ? value : params[key];
       }
     }
     if (params.hasOwnProperty("fullName")) {
@@ -8408,7 +8407,6 @@ var add_lead = async (params) => {
       args["note"] += `
 ${key}: ${params[`meta[${key}]`]}`;
     }
-    return success({ xLead: "create", key: 1001, ...args });
     if (Object.keys(args).length > 0) {
       const lead = await createLead(agentId, args);
       return success(lead);
@@ -8422,8 +8420,8 @@ ${key}: ${params[`meta[${key}]`]}`;
 var update_lead = async (params) => {
   var agentId = params.agentId || params.agentID || params.agent || null;
   if (agentId) {
-    var args = {};
-    var keys = [
+    let args = {};
+    let keys = [
       "genieLeadId",
       "email",
       "phone",
@@ -8432,10 +8430,10 @@ var update_lead = async (params) => {
       "phoneNumber",
       "genieTags"
     ];
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
       if (params.hasOwnProperty(key)) {
-        var value = null;
+        let value = null, argsKey = null;
         switch (key) {
           case "genieTags":
             argsKey = "tags";
@@ -8454,9 +8452,8 @@ var update_lead = async (params) => {
         args[argsKey] = value !== null ? value : params[key];
       }
     }
-    return success({ xLead: "update", key: 1001, ...args });
     if (Object.keys(args).length > 0) {
-      return success(updateLead(agentId, args));
+      return success(await updateLead(agentId, args));
     } else {
       return error("No lead arguments");
     }
@@ -9526,6 +9523,15 @@ var api = async (event) => {
                   params.userId,
                   "theme"
                 ) ?? "_default";
+                ["light", "dark"].forEach((style) => {
+                  if (params.theme.includes(`-${style}`)) {
+                    params.theme = params.theme.replace(
+                      `-${style}`,
+                      ""
+                    );
+                    params.themeHue = style;
+                  }
+                });
                 const { s3Key } = await getS3Key(
                   params.asset || params.assets && params.assets[0] || params.collection && "collection",
                   params
@@ -9570,14 +9576,18 @@ var api = async (event) => {
                     StringValue: params.renderId
                   }
                 });
-                let lookUpKeys = [
-                  `users/${params.userId}`
-                ];
+                let lookUpKeys = [`users/${params.userId}`];
                 if (params.mlsNumber) {
-                  lookUpKeys.push(`mlsNumber/${params.mlsId}/${params.mlsNumber}`);
+                  lookUpKeys.push(
+                    `mlsNumber/${params.mlsId}/${params.mlsNumber}`
+                  );
                 }
                 if (params.areaIds) {
-                  lookUpKeys = lookUpKeys.concat(params.areaIds.map((areaId) => `areas/${areaId}`));
+                  lookUpKeys = lookUpKeys.concat(
+                    params.areaIds.map(
+                      (areaId) => `areas/${areaId}`
+                    )
+                  );
                 }
                 Promise.all(
                   lookUpKeys.map(
@@ -9983,7 +9993,10 @@ var getS3Key = async (asset, params) => {
           keyParams.propertyType,
           keyParams.propertyCaption
         ),
-        AREASLUG: keyParams.areaName.replace(/(-{2,}|\/|\s)+/g, (match2, p1) => p1 ? "-" : ""),
+        AREASLUG: keyParams.areaName.replace(
+          /(-{2,}|\/|\s)+/g,
+          (match2, p1) => p1 ? "-" : ""
+        ),
         MLSNUMBER: keyParams.mlsNumber || "mls",
         LISTSTATUS: keyParams.listingStatus || "market"
       };
