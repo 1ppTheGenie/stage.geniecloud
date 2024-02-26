@@ -39,7 +39,6 @@ export const api = async event => {
     if (event.Records) {
         for (const record of event.Records) {
             if (record.eventSource == 'aws:sqs') {
-                console.log('@c', record.body, record.messageAttributes);
                 switch (record.body) {
                     case 'clear-cache':
                         let tempParams = {};

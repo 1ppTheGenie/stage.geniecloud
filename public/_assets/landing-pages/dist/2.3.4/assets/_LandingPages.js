@@ -765,9 +765,7 @@ const _LandingPages = (() => {
       });
     }
   });
-  document.querySelectorAll(`.genie-alternate:nth-child(odd)`).forEach(el => {
-    el.classList.add(window.gHub.alternateShade ?? 'dark');
-  });
+  document.querySelectorAll(`.genie-alternate:nth-child(odd)`).forEach(el => el.classList.add(window.gHub.alternateShade && window.gHub.alternateShade !== '' ? window.gHub.alternateShade : 'dark'));
   window.requestAnimationFrame(() => window.gHub.lazyLoader("img.lazy"));
   window.gHub.galleryButton = (button, gallery) => {
     let v = 1;

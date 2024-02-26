@@ -266,7 +266,7 @@ const add_lead = async params => {
 
 const update_lead = async params => {
     var agentId = params.agentId || params.agentID || params.agent || null;
-    
+
     if (agentId) {
         let args = {};
         let keys = [
@@ -278,12 +278,13 @@ const update_lead = async params => {
             'phoneNumber',
             'genieTags'
         ];
-        
+
         for (let i = 0; i < keys.length; i++) {
             const key = keys[i];
 
             if (params.hasOwnProperty(key)) {
-                let value = null, argsKey=null;
+                let value = null,
+                    argsKey = null;
 
                 switch (key) {
                     case 'genieTags':
@@ -325,21 +326,34 @@ const address_search = async params => {
 };
 
 const get_agent_data = async params => {
-    var profile = genie_get_local_profile(params.agent_id);
+    const profile = await getUser(params.agentId);
 
-    delete profile.notifications;
-    delete profile.theme;
-    delete profile.designs;
-    delete profile.id;
+    delete profile.aspNetUserId;
+    delete profile.organizationId;
+    delete profile.roleId;
+    delete profile.intercom;
+    delete profile.facebookProfile;
+    delete profile.twilioBotProfile;
+    delete profile.socialProfiles;
+    delete profile.codeSnippets;
+    delete profile.slackChannel;
+    delete profile.google;
+    delete profile.hasProfile;
+    delete profile.hasImages;
+    delete profile.hasOffice;
+    delete profile.hasDisclaimers;
+    delete profile.hasSocialProfiles;
+    delete profile.hasCodeSnippets;
+    delete profile.hasSlackChannel;
+    delete profile.hasGoogleSettings;
+    delete profile.thresholds;
+    delete profile.whmcsId;
 
-    delete profile.user.email;
-    delete profile.user.role;
-    delete profile.user.mobile;
-    delete profile.user.mobileok;
-    delete profile.user.first_name;
-    delete profile.user.last_name;
-    delete profile.user.license;
-    delete profile.user.reuse;
+    if (!params.isDebug) {
+        delete profile.isActive;
+        delete profile.permissions;
+        delete profile.mlsProfiles;
+    }
 
     return success({ agent: profile });
 };

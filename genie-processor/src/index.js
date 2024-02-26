@@ -15,9 +15,7 @@ const GENIE_URL = process.env.GENIE_URL ?? "https://genie-hub-2.s3.eu-west-2.ama
 
 const s3Client = new S3Client({ region: REGION });
 
-const TEMP_DIR =
-	process.env.TEMP_DIR ??
-	"D:/Dropbox/development/genie-marketing-hub-master/GenieHub/genie-hub-cloud/public/_assets/_xsl_imports/";
+const TEMP_DIR = process.env.TEMP_DIR ??	"";
 
 const transform = (xml, xslt, xsltBaseUri, method = "xml") => {
 	try {
@@ -51,8 +49,7 @@ const transform = (xml, xslt, xsltBaseUri, method = "xml") => {
 const copyFilesToLocal = async () => {
 	// Files imported via xsl:import have to exist on a "local" drive
 	if (
-		TEMP_DIR !==
-		"D:/Dropbox/development/genie-marketing-hub-master/GenieHub/genie-hub-cloud/public/_assets/_xsl_imports/"
+		!TEMP_DIR.includes('public/_assets/_xls')
 	) {
 		const imports = await listS3Folder("_assets/_xsl_imports/");
 		await Promise.all(

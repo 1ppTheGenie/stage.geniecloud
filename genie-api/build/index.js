@@ -8466,19 +8466,29 @@ var address_search = async (params) => {
   return success({ properties: r["properties"] });
 };
 var get_agent_data = async (params) => {
-  var profile = genie_get_local_profile(params.agent_id);
-  delete profile.notifications;
-  delete profile.theme;
-  delete profile.designs;
-  delete profile.id;
-  delete profile.user.email;
-  delete profile.user.role;
-  delete profile.user.mobile;
-  delete profile.user.mobileok;
-  delete profile.user.first_name;
-  delete profile.user.last_name;
-  delete profile.user.license;
-  delete profile.user.reuse;
+  const profile = await getUser(params.agentId);
+  if (!params.isDebug) {
+    delete profile.isActive;
+    delete profile.whmcsId;
+    delete profile.permissions;
+    delete profile.thresholds;
+    delete profile.mlsProfiles;
+    delete profile.intercom;
+    delete profile.facebookProfile;
+    delete profile.twilioBotProfile;
+    delete profile.socialProfiles;
+    delete profile.codeSnippets;
+    delete profile.slackChannel;
+    delete profile.google;
+    delete profile.hasProfile;
+    delete profile.hasImages;
+    delete profile.hasOffice;
+    delete profile.hasDisclaimers;
+    delete profile.hasSocialProfiles;
+    delete profile.hasCodeSnippets;
+    delete profile.hasSlackChannel;
+    delete profile.hasGoogleSettings;
+  }
   return success({ agent: profile });
 };
 var get_listing_details = async (params) => {
@@ -9082,7 +9092,6 @@ var api = async (event) => {
   if (event.Records) {
     for (const record of event.Records) {
       if (record.eventSource == "aws:sqs") {
-        console.log("@c", record.body, record.messageAttributes);
         switch (record.body) {
           case "clear-cache":
             let tempParams = {};
