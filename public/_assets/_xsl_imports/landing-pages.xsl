@@ -262,30 +262,42 @@
 							</div>
 						</div>
 						<ul class="heading-font outline" style="padding: 0;">
-							<li>
-								<xsl:value-of select="//agent[1]/marketingName" />
-							</li>
-							<li>
-								<xsl:attribute name="href">
-									<xsl:value-of select="concat( 'tel:',//agent[1]/mobile )" />
-								</xsl:attribute>
-								<xsl:value-of select="//agent[1]/mobile" />
-							</li>
-							<li>
-								<xsl:value-of select="//agent[1]/address/company" />
-							</li>
-							<li>
-								<xsl:value-of select="//agent[1]/marketingLicense" />
-							</li>
+							<xsl:if test="string(//agent[1]/marketingName)!=''">
+								<li>
+									<xsl:value-of select="//agent[1]/marketingName" />
+								</li>
+							</xsl:if>
+							<xsl:if test="string(//agent[1]/mobile)!=''">
+								<li>
+									<xsl:attribute name="href">
+										<xsl:value-of select="concat( 'tel:',//agent[1]/mobile )" />
+									</xsl:attribute>
+									<xsl:value-of select="//agent[1]/mobile" />
+								</li>
+							</xsl:if>
+							<xsl:if test="string(//agent[1]/address/company)!=''">
+								<li>
+									<xsl:value-of select="//agent[1]/address/company" />
+								</li>
+							</xsl:if>
+							<xsl:if test="string(//agent[1]/marketingLicense)!=''">
+								<li>
+									<xsl:value-of select="//agent[1]/marketingLicense" />
+								</li>
+							</xsl:if>
 						</ul>
-						<p class="heading-font">
-							<a target="_blank">
-								<xsl:attribute name="href">
-									<xsl:value-of select="concat( 'https://', //agent[1]/website )" />
-								</xsl:attribute>
-								<xsl:value-of select="//agent[1]/website" />
-							</a>
-						</p>
+
+						<xsl:if test="string(//agent[1]/website)!=''">
+							<p class="heading-font">
+								<a target="_blank">
+									<xsl:attribute name="href">
+										<xsl:value-of select="concat( 'https://', //agent[1]/website )" />
+									</xsl:attribute>
+									<xsl:value-of select="//agent[1]/website" />
+								</a>
+							</p>
+						</xsl:if>
+
 						<p class="heading-font">
 							<xsl:call-template name="agent-address-line-one" />
 							<br/>
