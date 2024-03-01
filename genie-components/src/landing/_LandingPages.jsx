@@ -227,6 +227,15 @@ export default () => {
 		window.location.href = `${url}?${urlParams.toString()}`;
 	};
 
+	window.gHub.randomPriceString = (max = 2000001, min = 200000 ) => {
+		// Format a random number
+		const formattedNumber = Math.floor(Math.random() * (max - min) + min).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	
+		// Replace numbers with letters
+		return formattedNumber.replace(/1/g, 'I').replace(/2/g, 'A').replace(/3/g, 'E').replace(/4/g, 'H').replace(/5/g, 'S').replace(/7/g, 'I').replace(/8/g, 'B').replace(/9/g, 'G');
+	}
+
+
 	document.addEventListener("trigger-update-lead", async e => {
 		const settings = useSettings(Context4Settings);
 
