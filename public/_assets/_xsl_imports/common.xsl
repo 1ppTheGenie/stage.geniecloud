@@ -131,6 +131,10 @@
 				<title>
 					<xsl:value-of select="concat( 'Presented by ', //agent[1]/marketingName, ' ' , //agent[1]/address/company  )" />
 				</title>
+				<style>
+					<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/_css/svg.css); ' )" />
+					<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css); ')" />
+				</style>
 			</head>
 			<body>
 				<xsl:attribute name="class">
@@ -156,8 +160,6 @@
 							</feMerge>
 						</filter>
 						<style>
-							<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/_css/svg.css); ' )" />
-							<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css); ')" />
 							<xsl:value-of select="'#genie-wrapper { --pending: var(--pending-yellow); --sold: var(--sold-red); --active: var(--active-green); --new: var(--new-blue); }'" />
 						</style>
 					</defs>
