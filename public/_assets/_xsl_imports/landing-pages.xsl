@@ -724,7 +724,7 @@
 				<xsl:value-of select="']; 
 				
 				document.addEventListener(`genie-landing-loaded`, function () {
-window.gHub.galleryButton( 
+					window.gHub.galleryButton( 
 						document.querySelector(`.property-image-show-btn button`), 
 						document.getElementById(`property-gallery`) 
 					); 
