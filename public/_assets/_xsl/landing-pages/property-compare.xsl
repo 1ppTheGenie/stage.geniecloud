@@ -326,7 +326,7 @@
 								<div class="property-detail-part text-center">
 									<p class="font-weight-bold subtitle-color body-font mb-0">
 										<xsl:choose>
-											<xsl:when test="number(//output/@hideAVM)=1">
+											<xsl:when test="number(//output/@hideAVM)=1 or string(//output/@hideAVM)='true'">
 												<div class="get-my-report-info-btn">
 													<a href="#lead-form" data-scroll-to="#lead-form" class="btn-style heading-color-as-bg background-as-color body-font n">Get My Value</a>
 												</div>
@@ -449,6 +449,7 @@
 				<xsl:attribute name="style">
 					<xsl:value-of select="concat( 'background-image: url(', //output/@siteUrl, '_assets/_img/form-bg-img.webp)')" />
 				</xsl:attribute>
+
 				<div class="form-section-overlay heading-color-as-bg">
 					<xsl:comment/>
 				</div>
