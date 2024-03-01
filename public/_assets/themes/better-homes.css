@@ -1,11 +1,10 @@
 /*
 	Theme Name:	Better Homes
-	Theme Style: Light          
 */
 
 @import url("../_css/montserrat.css");
 
-.better-homes-light {
+.better-homes,.better-homes.light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #2d862d; /* Heading */
 	--theme-sub-heading-color: #414042; /* Subtitle */
@@ -14,4 +13,12 @@
 	--theme-body-font: "Montserrat", sans-serif;
 	--theme-heading-font: "Montserrat", sans-serif;
 	--theme-sub-heading-font: "Montserrat", sans-serif;
+}
+
+.better-homes.dark {
+	--theme-body-background: #414042;
+	--theme-heading-color: #ffffff; /* Heading --theme-heading-color */
+	--theme-sub-heading-color: #48ab47; /* Subtitle --theme-sub-heading-color */
+	--theme-body-color: #ffffff; /* Body --theme-body-color */
+	--theme-emphasis-color: #48ab47; /* Outline --theme-emphasis-color */
 }

@@ -1,12 +1,22 @@
 /*
 	Theme Name:	EO
-	Theme Style: Dark        
 */
 
 @import url("../_css/roboto.css");
 @import url("../_css/barlow.css");
 
-.eo-dark {
+.eo,.eo.light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #de7fb3; /* Heading */
+	--theme-sub-heading-color: #628cce; /* Subtitle */
+	--theme-body-color: #616972; /* Body */
+	--theme-emphasis-color: #628cce; /* Outline */
+	--theme-body-font: "Barlow", sans-serif;
+	--theme-heading-font: "Roboto", sans-serif;
+	--theme-sub-heading-font: "Barlow", sans-serif;
+}
+
+.eo.dark {
 	--theme-body-background: #3f4f73;
 	--theme-heading-color: #ffffff; /* Heading */
 	--theme-sub-heading-color: #de7fb3; /* Subtitle */

@@ -1,10 +1,9 @@
 /*
 	Theme Name: Aviara Real Estate
-	Theme Style: Light  
 */
 @import url("../_css/poppins.css");
 
-.aviara-realestate-light {
+.aviara-realestate,.aviara-realestate.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #064d8a; /* Heading */
 	--theme-sub-heading-color: #adacb3; /* Subtitle */
@@ -13,4 +12,12 @@
 	--theme-body-font: "Poppins", sans-serif;
 	--theme-heading-font: "Poppins", sans-serif;
 	--theme-sub-heading-font: "Poppins", sans-serif;
+}
+
+.aviara-realestate.dark {
+	--theme-body-background: #064d8a;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #adacb3; /* Subtitle */
+	--theme-body-color: #e1e1e1; /* Body */
+	--theme-emphasis-color: #adacb3; /* Outline */
 }

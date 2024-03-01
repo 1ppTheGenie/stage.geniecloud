@@ -1,12 +1,11 @@
 /*
 	Theme Name:	BrokerInTrust 
-	Theme Style: Light
 */
 
 @import url("../_css/lato.css");
 @import url("../_css/arial.css");
 
-.brokerintrust-light {
+.brokerintrust,.brokerintrust.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #5d2723; /* Heading */
 	--theme-sub-heading-color: #6f6f6f; /* Subtitle */
@@ -15,4 +14,12 @@
 	--theme-body-font: "Arial";
 	--theme-heading-font: "Lato", sans-serif;
 	--theme-sub-heading-font: "Arial";
+}
+
+.brokerintrust.dark {
+	--theme-body-background: #5d2723;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #dddddd; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
 }

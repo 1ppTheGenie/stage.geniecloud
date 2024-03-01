@@ -1,11 +1,10 @@
 /*
 	Theme Name:	Bay RE Group
-	Theme Style: Light 
 */
 
 @import url("../_css/roboto.css");
 
-.bay-re-group-light{
+.bay-re-group, .bay-re-group.light{
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #000000; /* Heading */
 	--theme-sub-heading-color: #241e20; /* Subtitle */
@@ -14,4 +13,12 @@
 	--theme-body-font: 'Roboto', sans-serif;
 	--theme-heading-font: 'Roboto', sans-serif;
 	--theme-sub-heading-font: 'Roboto', sans-serif;
+}
+
+.bay-re-group.dark {
+	--theme-body-background:#000000;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #c6c6c6; /* Subtitle */
+	--theme-body-color:#ffffff; /* Body */
+	--theme-emphasis-color: #c6c6c6; /* Outline */
 }

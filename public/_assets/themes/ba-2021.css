@@ -1,13 +1,12 @@
 /*
 	Theme Name:	B+A 2021
-	Theme Style: Light    
 */
 
 @import url("../_css/helvetica-neue-condensed.css");
 @import url("../_css/lato.css");
 @import url("../_css/montserrat.css");
 
-.ba-2021-light {
+.ba-2021, .ba-2021.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #074360; /* Heading */
 	--theme-sub-heading-color: #a47f54; /* Subtitle */
@@ -16,4 +15,12 @@
 	--theme-body-font: "Lato", sans-serif; 
 	--theme-heading-font:  "Helvetica Neue Condensed", sans-serif;
 	--theme-sub-heading-font: "Montserrat", sans-serif;
+}
+
+.ba-2021.dark {
+	--theme-body-background: #074360;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #a47f54; /* Subtitle */
+	--theme-body-color: #eeeeee; /* Body */
+	--theme-emphasis-color: #a47f54; /* Outline */
 }
