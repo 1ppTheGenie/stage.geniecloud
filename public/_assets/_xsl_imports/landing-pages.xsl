@@ -249,6 +249,20 @@
 			</div>
 		</div>
 	</xsl:template>
+
+	<xsl:template name="replaceBR">
+		<xsl:param name="str" />
+
+        <xsl:analyze-string select="$str" regex="\n">
+            <xsl:matching-substring>
+                <br/>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <xsl:value-of select="."/>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
+    </xsl:template>
+
 	<xsl:template name="agent-details">
 		<div id="agent-contact" class="container">
 			<div class="row">
