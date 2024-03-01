@@ -98,7 +98,7 @@ Supports:	Area, Print, Listing, QRCode
 			</xsl:variable>
 
 			<xsl:if test="number(//single/statusTypeID)!=14 and //single/mlsNumber!=''">
-				<text x="4%" y="18.5%" class="bold middle" fill="#ffffff" style="font-family:Gotham;font-size:330%;">
+				<text x="4%" y="18.5%" class="bold middle" fill="#ffffff" font-family="var(--theme-body-font)" style="font-size:330%;">
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'justlisted'" />
@@ -267,7 +267,7 @@ Supports:	Area, Print, Listing, QRCode
 			</xsl:if>
 		</g>
 		<xsl:if test="number(//single/statusTypeID)!=14 and //single/statusTypeID!=''">
-			<text x="96%" y="93%" data-max-width="30%" class="align-right upper" fill="#eeac27" style="font-family:Gotham;font-size:110%;font-weight:500;text-shadow: 1px 1px 2px #0e1232;">
+			<text x="96%" y="93%" data-max-width="30%" class="align-right upper" fill="#eeac27" font-family="var(--theme-body-font)" style="font-size:110%;font-weight:500;text-shadow: 1px 1px 2px #0e1232;">
 				<tspan>
 					<xsl:value-of select="//single/address/street" />
 					<xsl:text> &#8226; </xsl:text>
@@ -345,7 +345,7 @@ Supports:	Area, Print, Listing, QRCode
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:variable>
-				<text x="4%" y="59.5%" class="bold" fill="#ffffff" style="font-family:'Gotham'; font-size:110%;">
+				<text x="4%" y="59.5%" class="bold" fill="#ffffff" font-family="var(--theme-body-font)" style="font-size:110%;">
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'scan'" />
@@ -372,7 +372,7 @@ Supports:	Area, Print, Listing, QRCode
 		</clipPath>
 
 		<g class="agent-detail">
-			<text x="4%" y="85%" style="font-size:115%;font-family:'Gotham';" data-max-width="15%" fill="#ffffff">
+			<text x="4%" y="85%" style="font-size:115%;" font-family="var(--theme-body-font)" data-max-width="15%" fill="#ffffff">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentfirstName'" />
@@ -395,25 +395,25 @@ Supports:	Area, Print, Listing, QRCode
 					</xsl:call-template>
 				</tspan>
 			</text>
-			<text x="4%" y="92.6%" class="upper" style="font-size:100%;font-family:'Gotham';font-weight:500;" data-max-width="25%" fill="#eeac27">
+			<text x="4%" y="92.6%" class="upper" style="font-size:100%;font-weight:500;" font-family="var(--theme-body-font)" data-max-width="25%" fill="#eeac27">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentwebsite'" />
 					<xsl:with-param name="default" select="//agent[1]/website" />
 				</xsl:call-template>
 			</text>
-			<text x="4%" y="89%" style="font-size:75%;font-family:'Gotham';" data-max-width="15%" fill="#ffffff">
+			<text x="4%" y="89%" style="font-size:75%;" font-family="var(--theme-body-font)" data-max-width="15%" fill="#ffffff">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'licenseno'" />
 					<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
 				</xsl:call-template>
 			</text>
-			<text x="22.5%" y="85.5%" style="font-size:90%;font-family:'Gotham';" fill="#ffffff">
+			<text x="22.5%" y="85.5%" style="font-size:90%;" font-family="var(--theme-body-font)" fill="#ffffff">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentmobile'" />
 					<xsl:with-param name="default" select=" //agent[1]/mobile" />
 				</xsl:call-template>
 			</text>
-			<text x="22.5%" y="88.5%" fill="#ffffff" data-max-width="15%" style="font-size:90%;font-family:'Gotham';">
+			<text x="22.5%" y="88.5%" fill="#ffffff" data-max-width="15%" style="font-size:90%;" font-family="var(--theme-body-font)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentmarketingEmail'" />
 					<xsl:with-param name="default" select="//agent[1]/marketingEmail" />

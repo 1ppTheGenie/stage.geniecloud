@@ -9,7 +9,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800" />
@@ -21,8 +21,8 @@
 '" />
 		</style>
 
-<rect xmlns="" x="0%" y="0%" width="100%" height="100%" fill="#fff" />
-<rect xmlns="" x="0%" y="0%" width="100%" height="13%" fill="#fdb913" />
+		<rect xmlns="" x="0%" y="0%" width="100%" height="100%" fill="#fff" />
+		<rect xmlns="" x="0%" y="0%" width="100%" height="13%" fill="#fdb913" />
 
 		<g>
 			<text x="50%" y="7%" width="100%" fill="#fff" height="10%" class="upper open-sans center" style="font-size:260%;">
@@ -30,20 +30,18 @@
 					<xsl:choose>
 						<xsl:when test="//single/sale-price!=''">
 							<tspan class="bold">Sold for  </tspan>
-<xsl:value-of select="format-number( //single/sale-price, '$###,###')" />
-
+							<xsl:value-of select="format-number( //single/sale-price, '$###,###')" />
 						</xsl:when>
 						<xsl:otherwise>
 							<tspan class="bold">Just Listed </tspan>
-<xsl:value-of select="format-number( //single/price , '$###,###')" />
-
+							<xsl:value-of select="format-number( //single/price , '$###,###')" />
 						</xsl:otherwise>
 					</xsl:choose>
 				</tspan>
 			</text>
 		</g>
-		<rect xmlns="" x="0%" y="13%" width="20%" height="53%" fill="#2c3740">
-		</rect>
+		<rect xmlns="" x="0%" y="13%" width="20%" height="53%" fill="#2c3740" />
+
 		<g style="transform-origin: 0; transform: rotate(-90deg) translate(0%, 56.8%);">
 			<foreignObject height="10%" width="55%" class="open-sans align-right" fill="#fdb913" style="font-size:120%;font-weight:600;color:#fdb913;text-align:left;" x="-20%" y="-2.5%">
 				<div style="margin: 0 auto;text-align: right;text-overflow: ellipsis;overflow: hidden;width: 100%;white-space: nowrap;">
@@ -63,7 +61,7 @@
 				<tspan dx="1%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'bed'" />
-<xsl:with-param name="default" select="'Bed &#124; '" />
+						<xsl:with-param name="default" select="'Bed &#124; '" />
 
 					</xsl:call-template>
 				</tspan>
@@ -76,7 +74,7 @@
 				<tspan dx="1%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'bath'" />
-<xsl:with-param name="default" select="'Bath &#124; '" />
+						<xsl:with-param name="default" select="'Bath &#124; '" />
 
 					</xsl:call-template>
 				</tspan>
@@ -116,7 +114,7 @@
 				</xsl:call-template>
 			</text>
 		</g>
-<rect xmlns="" x="0%" y="77%" width="100%" height="12%" fill="#2c3740" />
+		<rect xmlns="" x="0%" y="77%" width="100%" height="12%" fill="#2c3740" />
 
 		<image x="2%" y="78%" width="27%" height="6%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
@@ -154,7 +152,7 @@
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/andy-tse.png' )" />
 			</xsl:attribute>
 		</image>
-<rect xmlns="" x="0%" y="90.5%" width="100%" height="10%" fill="#e0e0e0" stroke="#e0e0e0" />
+		<rect xmlns="" x="0%" y="90.5%" width="100%" height="10%" fill="#e0e0e0" stroke="#e0e0e0" />
 
 		<text x="50%" y="95.5%" style="font-size:150%;" fill="#2c3740" class="open-sans upper center bold" data-max-width="95%">
 			<xsl:call-template name="editable">

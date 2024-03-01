@@ -8,11 +8,11 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/gotham-embedded.css')" />
 
 		</link>
 
@@ -46,8 +46,7 @@
 			</image>
 
 			<svg class="background-shape">
-<polygon points="0,0 600,0 1095,500 0,500" fill="var(--theme-color)" />
-
+				<polygon points="0,0 600,0 1095,500 0,500" fill="var(--theme-color)" />
 				<rect style="transform: rotate(315deg);" x="29%" y="22.5%" width=".2%" height="38%" fill="white"></rect>
 			</svg>
 
@@ -65,7 +64,7 @@
 			</image>
 			<!-- SECTION-1 TEXT -->
 			<svg viewBox="0 0 5500 5500" fill="#fff" x="96.5%" y="-10%">
-<circle cx="50" cy="50" r="50" />
+				<circle cx="50" cy="50" r="50" />
 
 			</svg>
 			<text x="97%" y="4.5%" font-size="35px" data-max-width="30%" class="align-right bold" style="line-height:7%;letter-spacing:4px;" fill="#edaa2a">
@@ -207,7 +206,7 @@
 			<rect x="29.4%" y="92.5%" width="36%" height="1" stroke="white"></rect>
 			<foreignObject x="5%" y="78%" width="57%" height="13%">
 				<p style="color:var(--theme-colr);-webkit-line-clamp:5;font-size:160%;line-height: 148%;text-align:justify;">
-<xsl:call-template name="listing-description" />
+					<xsl:call-template name="listing-description" />
 
 				</p>
 			</foreignObject>

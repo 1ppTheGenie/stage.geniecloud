@@ -27,8 +27,7 @@ Supports:	Area, Print, Listing, QRCode
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800" />
 
 		<style>
-			<xsl:value-of select="'	.open-sans{ font-family: &quot;Open Sans&quot;, sans-serif !important; }'" />
-
+			<xsl:value-of select="'.open-sans{ font-family: &quot;Open Sans&quot;, sans-serif !important; }'" />
 		</style>
 
 		<xsl:variable name="textSize">

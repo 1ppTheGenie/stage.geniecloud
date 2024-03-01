@@ -93,14 +93,14 @@
 		<rect fill="#006a64" x="22.5%" y="81%" rx="10" ry="10" width="15%" height="10%" />
 
 
-		<text x="23%" y="82.5%" class="upper" fill="#fff" font-size="105%" data-max-width="22%" style="font-family:Futura Condensed;">
+		<text x="23%" y="82.5%" class="upper" fill="#fff" font-size="105%" data-max-width="22%" font-family="var(--theme-body-font)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'agentwebsite'" />
 				<xsl:with-param name="default" select="//agent[1]/website" />
 			</xsl:call-template>
 		</text>
 
-		<text x="23%" y="86.5%" class="lower" fill="#fff" font-size="105%" data-max-width="20%" style="font-family:Futura Condensed;">
+		<text x="23%" y="86.5%" class="lower" fill="#fff" font-size="105%" data-max-width="20%" font-family="var(--theme-body-font)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'agentmarketingEmail'" />
 				<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
@@ -139,7 +139,7 @@
 		</g>
 
 		<foreignObject x="37.5%" y="4%" width="25%" height="50%">
-			<p class="center upper" style="font-size:290%;margin:0; color:#000; font-family:Futura Condensed; font-style:italic; -webkit-line-clamp: unset;">
+			<p class="center upper" font-family="var(--theme-body-font)" style="font-size:290%;margin:0; color:#000;font-style:italic; -webkit-line-clamp: unset;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'your'" />
 					<xsl:with-param name="default" select="'your neighbor’s house'" />
@@ -155,7 +155,7 @@
 			</p>
 		</foreignObject>
 
-		<text x="51%" y="75%" class="center" fill="#000" style="font-size:85%;font-family:Futura Condensed;">
+		<text x="51%" y="75%" class="center" fill="#000" font-size="85%" font-family="var(--theme-body-font)">
 
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'Scan the QR Code with your camera'" />
@@ -186,7 +186,7 @@
 		</text>
 
 		<g style="transform: translate(65%, 34%);">
-			<text fill="#fff" class="middle" font-size="160%" font-weight="600" style="font-family:Futura Condensed;">
+			<text fill="#fff" class="middle" font-size="160%" font-weight="600" font-family="var(--theme-body-font)">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'714.536.5377'" />
@@ -194,7 +194,7 @@
 					</xsl:call-template>
 				</tspan>
 			</text>
-			<text y="6%" fill="#fff" class="middle" font-size="150%" style="letter-spacing:0.4;font-family:Futura Condensed;">
+			<text y="6%" fill="#fff" class="middle" font-size="150%" style="letter-spacing:0.4;" font-family="var(--theme-body-font)">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'19440 Goldenwest St'" />
@@ -202,7 +202,7 @@
 					</xsl:call-template>
 				</tspan>
 			</text>
-			<text y="11%" fill="#fff" class="middle" font-size="150%" style="letter-spacing:0.4;font-family:Futura Condensed;">
+			<text y="11%" fill="#fff" class="middle" font-size="150%" style="letter-spacing:0.4;" font-family="var(--theme-body-font)">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'Huntington Beach, CA 92648'" />

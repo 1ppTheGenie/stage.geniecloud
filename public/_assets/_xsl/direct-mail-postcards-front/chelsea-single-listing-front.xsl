@@ -111,7 +111,6 @@
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'agent-ownership'" />
 				<xsl:with-param name="default" select="'Owned by a subsidiary of NRT LLC. &#124; CalDRE #: 01416035'" />
-
 			</xsl:call-template>
 		</text>
 
@@ -132,7 +131,7 @@
 		</image>
 
 		<g style="transform:translate(20%,6%)">
-			<text fill="#000" style="font-size:257%;letter-spacing:2.5px;font-family:Futura Condensed;">
+			<text fill="#000" style="font-size:257%;letter-spacing:2.5px;" font-family="var(--theme-body-font)">
 				<tspan >
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'is excited to share your neighborhood’s '" />

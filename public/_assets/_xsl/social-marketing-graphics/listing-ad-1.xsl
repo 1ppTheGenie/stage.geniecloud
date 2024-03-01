@@ -7,10 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
-
-	<xsl:template name="svg-scripts">
-	</xsl:template>
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<g>
@@ -34,13 +31,13 @@
 						<xsl:text>Sold</xsl:text>
 					</xsl:when>
 					<xsl:when test="number(//single/statusTypeID) = 1">
-						<xsl:text> Active </xsl:text>
+						<xsl:text>Active</xsl:text>
 					</xsl:when>
 					<xsl:when test="number(//single/statusTypeID) = 14">
-						<xsl:text> Coming Soon </xsl:text>
+						<xsl:text>Coming Soon</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:text> Escrow </xsl:text>
+						<xsl:text>Escrow</xsl:text>
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>

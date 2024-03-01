@@ -15,7 +15,7 @@
 	</xsl:template>
 
 	<xsl:template name="cropped-content">
-		<text x="17%" y="2%" class="center upper" fill="var(--theme-heading-color)" style="font-size:450%;font-weight: 600;font-family: Lato;">
+		<text x="17%" y="2%" class="center upper" fill="var(--theme-heading-color)" style="font-size:450%;font-weight: 600;" font-family="var(--theme-heading-font)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'Hi Neeha!'" />
 				<xsl:with-param name="default" select="'Hi Neeha!'" />
@@ -38,13 +38,13 @@
 		<rect x="20%" y="88%" width="80%" height="12%" class="heading" />
 
 
-		<text x="2%" y="90.5%" class="upper" style="font-weight:600;font-size:150%;font-family:Helvetica,Arial,sans-serif;" fill="var(--theme-heading-color)">
+		<text x="2%" y="90.5%" class="upper" style="font-weight:600;font-size:150%;" font-family="var(--theme-body-font)" fill="var(--theme-heading-color)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'agentname'" />
 				<xsl:with-param name="default" select="concat( //agent[1]/marketingName,'')" />
 			</xsl:call-template>
 		</text>
-		<text x="3%" y="94.5%" class="upper" style="font-weight:600;font-size:180%;font-family:Helvetica,Arial,sans-serif;" fill="var(--theme-heading-color)">
+		<text x="3%" y="94.5%" class="upper" style="font-weight:600;font-size:180%;" font-family="var(--theme-body-font)" fill="var(--theme-heading-color)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'agentmobile'" />
 				<xsl:with-param name="default" select="//agent[1]/mobile" />
@@ -105,10 +105,10 @@
 
 		<g style="transform:translate(29%,74%)">
 			<text x="1.2%" y="-1.4%" class="upper" fill="var(--theme-body-background)">
-				<tspan style="font-weight:600;font-size:320%;font-family: open sans,sans-serif;">why?</tspan>
+				<tspan style="font-weight:600;font-size:320%;" font-family="var(--theme-body-font)">why?</tspan>
 			</text>
 			<svg x="15%" y="0.8%" width="45%" height="9%" fill="var(--theme-body-background)" style="color:var(--theme-body-background)">
-				<text class="upper" fill="var(--theme-body-background)" style="font-weight:500;font-size:140%;font-family: Helvetica,Arial,sans-serif;">
+				<text class="upper" fill="var(--theme-body-background)" style="font-weight:500;font-size:140%;" font-family="var(--theme-body-font)">
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'Because i believe that an educated'" />
@@ -127,7 +127,7 @@
 
 		<g style="transform:translate(19%,56%)">
 			<svg x="13%" y="0%" width="60%" height="15%" fill="var(--theme-heading-color)" style="color:var(--theme-heading-color)">
-				<text class="upper" fill="var(--theme-heading-color)" style="font-weight:600;font-size:130%;font-family: Lato;">
+				<text class="upper" fill="var(--theme-heading-color)" style="font-weight:600;font-size:130%;" font-family="var(--theme-heading-font)">
 					<tspan >View a sample report or get a free up to the Minute</tspan>
 					<tspan x="0%" dy="30%">
 						<xsl:call-template name="listing-address-line-one" />
@@ -135,7 +135,7 @@
 					</tspan>
 				</text>
 				<text x="0%" dy="65%" class="upper" fill="var(--theme-heading-color)" style="color:var(--theme-heading-color)">
-					<tspan style="font-weight:600;font-size:130%;font-family: Lato;">Point your smart phone camera to scan </tspan>
+					<tspan style="font-weight:600;font-size:130%;" font-family="var(--theme-heading-font)">Point your smart phone camera to scan </tspan>
 				</text>
 			</svg>
 			<use class="center" x="57%" y="4.5%" width="15%" height="15%" fill="var(--theme-heading-color)">
@@ -144,7 +144,7 @@
 		</g>
 		<g style="transform:translate(12%,40%)">
 			<svg x="13%" y="0%" width="72%" height="15%" fill="var(--theme-heading-color)" style="color:var(--theme-heading-color)">
-				<text class="upper" fill="var(--theme-heading-color)" style="font-weight:600;font-size:500%;font-family: Lato;">
+				<text class="upper" fill="var(--theme-heading-color)" style="font-weight:600;font-size:500%;" font-family="var(--theme-heading-font)">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'Would You Like To ?'" />
 						<xsl:with-param name="default" select="'Would You Like To ?'" />
@@ -154,7 +154,7 @@
 		</g>
 		<g style="transform:translate(12%,15%)">
 			<svg x="13%" y="2%" width="45%" height="10%" fill="var(--theme-heading-color)" style="color:var(--theme-heading-color)">
-				<text class="upper" fill="var(--theme-heading-color)" style="font-weight:600;font-size:150%;line-height:160%;font-family: Lato;">
+				<text class="upper" fill="var(--theme-heading-color)" style="font-weight:600;font-size:150%;line-height:160%;" font-family="var(--theme-heading-font)">
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'DO YOU KNOW WHAT IS SO SPECIAL ABOUT '" />
@@ -168,7 +168,7 @@
 				</text>
 			</svg>
 			<svg x="13%" y="14%" width="60%" height="10%" fill="var(--theme-heading-color)" style="color:var(--theme-heading-color)">
-				<text class="upper" fill="var(--theme-heading-color)" style="font-weight:600;font-size:150%;line-height:160%;font-family: Lato;">
+				<text class="upper" fill="var(--theme-heading-color)" style="font-weight:600;font-size:150%;line-height:160%;" font-family="var(--theme-heading-font)">
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'Do you know what the highest home sale price'" />
@@ -184,7 +184,7 @@
 				</text>
 			</svg>
 		</g>
-		<text style="font-family: Lato;">
+		<text style="" font-family="var(--theme-heading-font)">
 			<tspan x="30%" y="52.5%" style="font-size:300%" class="heading bold">•</tspan>
 			<tspan x="30%" y="62.5%" style="font-size:300%" class="heading bold">•</tspan>
 			<tspan x="23%" y="16.5%" fill="var(--theme-heading-color)" style="font-size:180%" class="bold">•</tspan>

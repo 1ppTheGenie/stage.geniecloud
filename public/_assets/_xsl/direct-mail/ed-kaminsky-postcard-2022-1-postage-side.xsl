@@ -64,7 +64,7 @@ Sizes:		Postcard, QRCode
 			</xsl:attribute>
 		</image>
 
-		<text x="4%" y="62%" class="bold middle upper" fill="#fff" style="font-family:'futura'; letter-spacing: 1px; font-size:115%;word-spacing:-2px;">
+		<text x="4%" y="62%" class="bold middle upper" fill="#fff" font-family="var(--theme-body-font)" style="letter-spacing: 1px; font-size:115%;word-spacing:-2px;">
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'knowledge'" />
@@ -80,12 +80,11 @@ Sizes:		Postcard, QRCode
 		</text>
 
 		<svg x="-0.8%" y="42%" width="50%" height="48%" viewBox="0 0 1289 757" style="enable-background:new 0 0 1289 757;" xml:space="preserve">
-<rect fill="#b2934e" x="47.7" y="367.12" class="st0" width="1169.3" height="7.88" />
-<polygon fill="#b2934e" points="1199.21,346 1194.02,351.93 1215.49,370.71 1194.5,390 1199.83,395.81 1227.3,370.57 " />
-
+			<rect fill="#b2934e" x="47.7" y="367.12" class="st0" width="1169.3" height="7.88" />
+			<polygon fill="#b2934e" points="1199.21,346 1194.02,351.93 1215.49,370.71 1194.5,390 1199.83,395.81 1227.3,370.57 " />
 		</svg>
 
-		<text x="4%" y="68.2%" class="middle" fill="#fff" style="font-family:'futura';font-size:96%;font-weight:500;word-spacing:-2px;">
+		<text x="4%" y="68.2%" class="middle" fill="#fff" font-family="var(--theme-body-font)" style="font-size:96%;font-weight:500;word-spacing:-2px;">
 			<tspan class="bold">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'scannow'" />
@@ -116,7 +115,7 @@ Sizes:		Postcard, QRCode
 				</xsl:attribute>
 			</image>
 
-			<text x="10%" y="81%" class="bold" style="font-size:100%;font-family:'futura';" fill="#fff">
+			<text x="10%" y="81%" class="bold" font-size="100%" font-family="var(--theme-body-font)" fill="#fff">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentfirstName'" />
@@ -133,7 +132,7 @@ Sizes:		Postcard, QRCode
 					</xsl:call-template>
 				</tspan>
 			</text>
-			<text x="10%" y="84.2%" style="font-size:68%;font-weight:500;font-family:'futura';" fill="#fff">
+			<text x="10%" y="84.2%" style="font-size:68%;font-weight:500;" font-family="var(--theme-body-font)" fill="#fff">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'licenseno'" />
 					<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
@@ -142,7 +141,7 @@ Sizes:		Postcard, QRCode
 
 			<rect x="21.5%" y="81.5%" width="0.13%" height="5.6%" fill="#b2934e"></rect>
 
-			<text x="23%" y="81.5%" style="font-size:75%;font-family:'futura'" fill="var(--theme-body-background)">
+			<text x="23%" y="81.5%" style="font-size:75%;" font-family="var(--theme-body-font)" fill="var(--theme-body-background)">
 				<tspan fill="#b2934e" class="bold">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'m'" />
@@ -157,7 +156,7 @@ Sizes:		Postcard, QRCode
 				</tspan>
 			</text>
 
-			<text x="23%" y="83.8%" fill="#fff" style="font-family:'futura'">
+			<text x="23%" y="83.8%" fill="#fff" style="" font-family="var(--theme-body-font)">
 				<tspan dy="0.2%" class="bold" fill="#b2934e" style="font-size:85%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'e'" />
@@ -196,20 +195,19 @@ Sizes:		Postcard, QRCode
 				</tspan>
 			</text>
 		</g>
-		<foreignObject class="upper" width="44%" height="10%" x="4%" y="90%" style="font-family:'futura';">
-			<p style="margin: 0;font-size: 6.5px;text-align:justify;opacity:0.5;font-weight: 300;font-family:'futura';color:#fff;">
+		<foreignObject class="upper" width="44%" height="10%" x="4%" y="90%" font-family="var(--theme-body-font)">
+			<p style="margin: 0;font-size: 6.5px;text-align:justify;opacity:0.5;font-weight: 300;color:#fff;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'discription'" />
-<xsl:with-param name="default" select="'ED KAMINSKY DRE #00958114 &#124; EXP REALTY OF CALIFORNIA, INC. DRE #01878277. THE INFORMATION CONTAINED IN THIS DOCUMENT, INCLUDING, BUT
+					<xsl:with-param name="default" select="'ED KAMINSKY DRE #00958114 &#124; EXP REALTY OF CALIFORNIA, INC. DRE #01878277. THE INFORMATION CONTAINED IN THIS DOCUMENT, INCLUDING, BUT
 					NOT LIMITED TO, SQUARE FOOTAGE AND/OR ACREAGE, HAS BEEN PROVIDED BY VARIOUS SOURCES WHICH MAY INCLUDE THE SELLER, PUBLIC RECORDS,
 					THE MULTIPLE LISTING SERVICE OR OTHER SOURCES. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.'" />
 				</xsl:call-template>
 			</p>
 		</foreignObject>
 
-		<foreignObject x="4%" y="25.5%" class="bold middle" width="40%" fill="#fff" height="20%" style="font-family:'futura'; letter-spacing: 0.5px; font-size:174%;word-spacing:-5px;">
+		<foreignObject x="4%" y="25.5%" class="bold middle" width="40%" fill="#fff" height="20%" font-family="var(--theme-body-font)" style="letter-spacing: 0.5px; font-size:174%;word-spacing:-5px;">
 			<p style="margin: 0;color:#fff">
-
 				<xsl:choose>
 					<xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
 						<xsl:call-template name="editable">
@@ -244,7 +242,8 @@ Sizes:		Postcard, QRCode
 				</xsl:choose>
 			</p>
 		</foreignObject>
-		<foreignObject x="4%" y="41%" class="bold middle" width="40%" fill="#b2934e" height="20%" style="font-family:'futura'; letter-spacing: 0.5px; font-size:174%;word-spacing:-5px;">
+
+		<foreignObject x="4%" y="41%" class="bold middle" width="40%" fill="#b2934e" height="20%" font-family="var(--theme-body-font)" style="letter-spacing: 0.5px; font-size:174%;word-spacing:-5px;">
 			<p style="margin: 0;color:#b2934e;">
 
 				<xsl:choose>

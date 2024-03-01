@@ -3,7 +3,7 @@
 	Asset Name: KRG Single Photo Content Side
 	Tags: 		Direct Mail
 	Sizes:		Postcard
-Supports:	Area, Print, Listing, QRCode
+	Supports:	Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
@@ -169,7 +169,7 @@ Supports:	Area, Print, Listing, QRCode
 			</tspan>
 		</text>
 
-		<text x="4%" y="92%" fill="var(--theme-heading-color)" data-max-width="32%" style="font-family: var(--theme-body-font);font-size:120%;">
+		<text x="4%" y="92%" fill="var(--theme-heading-color)" data-max-width="32%" font-family="var(--theme-body-font)" font-size="120%">
 			<tspan dy="0.2%" class="bold" fill="var(--theme-sub-heading-color)" style="font-size:100%;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'e'" />

@@ -217,13 +217,13 @@
 				</xsl:call-template>
 			</tspan>
 		</text>
-		<text x="63%" y="36%" style="font-size:100%; fill:#ac1a1f;font-weight: bold;font-family: 'Compass Sans';">
+		<text x="63%" y="36%" style="font-size:100%; fill:#ac1a1f;font-weight: bold;" font-family="var(--theme-body-font)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'Tracy’s'" />
 				<xsl:with-param name="default" select="'$750,000 home = $45,000 more in your pocket!'" />
 			</xsl:call-template>
 		</text>
-		<text x="63%" y="42%" style="font-size:98%; fill:#000000;font-weight: 500;font-family: 'Compass Sans';">
+		<text x="63%" y="42%" style="font-size:98%; fill:#000000;font-weight: 500;" font-family="var(--theme-body-font)">
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'Tracy’s'" />
@@ -244,7 +244,7 @@
 			</tspan>
 		</text>
 
-		<text x="63%" y="48%" style="font-size:100%; fill:#000000;font-weight: 500;font-family: 'Compass Sans';">
+		<text x="63%" y="48%" style="font-size:100%; fill:#000000;font-weight: 500;" font-family="var(--theme-body-font)">
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'Tracy’s'" />
@@ -265,7 +265,7 @@
 				</xsl:call-template>
 			</tspan>
 		</text>
-		<text x="63%" y="52%" style="font-size:100%; fill:#ac1a1f;font-family: 'Compass Sans';" class="bold">
+		<text x="63%" y="52%" style="font-size:100%; fill:#ac1a1f;" font-family="var(--theme-body-font)" class="bold">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'Tracy’s'" />
 				<xsl:with-param name="default" select="'$750,000 home = $30,000 more in your pocket!'" />

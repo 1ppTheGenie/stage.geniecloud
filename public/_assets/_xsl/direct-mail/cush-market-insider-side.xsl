@@ -172,7 +172,7 @@
 				</xsl:choose>
 			</xsl:variable>
 
-			<text x="4%" y="59.5%" class="bold" fill="#ffffff" style="font-family:'Gotham'; font-size:110%;">
+			<text x="4%" y="59.5%" class="bold" fill="#ffffff" font-family="var(--theme-body-font)" font-size="110%">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'scan'" />
@@ -198,7 +198,7 @@
 		</clipPath>
 
 		<g class="agent-detail">
-			<text x="4%" y="85%" style="font-size:115%;font-family:'Gotham';" data-max-width="15%" fill="#ffffff">
+			<text x="4%" y="85%" font-size="115%" font-family="var(--theme-body-font)" data-max-width="15%" fill="#ffffff">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentfirstName'" />
@@ -221,25 +221,25 @@
 					</xsl:call-template>
 				</tspan>
 			</text>
-			<text x="4%" y="92.6%" class="upper" style="font-size:100%;font-family:'Gotham';font-weight:500;" data-max-width="25%" fill="#eeac27">
+			<text x="4%" y="92.6%" class="upper" font-family="var(--theme-body-font)" font-size="100%" font-weight="500" data-max-width="25%" fill="#eeac27">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentwebsite'" />
 					<xsl:with-param name="default" select="//agent[1]/website" />
 				</xsl:call-template>
 			</text>
-			<text x="4%" y="89%" style="font-size:75%;font-family:'Gotham';" data-max-width="15%" fill="#ffffff">
+			<text x="4%" y="89%" font-size="75%" data-max-width="15%" fill="#ffffff">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'licenseno'" />
 					<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
 				</xsl:call-template>
 			</text>
-			<text x="22.5%" y="85.5%" style="font-size:90%;font-family:'Gotham';" fill="#ffffff">
+			<text x="22.5%" y="85.5%" font-size="90%" fill="#ffffff">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentmobile'" />
 					<xsl:with-param name="default" select=" //agent[1]/mobile" />
 				</xsl:call-template>
 			</text>
-			<text x="22.5%" y="88.5%" fill="#ffffff" data-max-width="15%" style="font-size:90%;font-family:'Gotham';">
+			<text x="22.5%" y="88.5%" fill="#ffffff" data-max-width="15%" font-size="90%">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentmarketingEmail'" />
 					<xsl:with-param name="default" select="//agent[1]/marketingEmail" />

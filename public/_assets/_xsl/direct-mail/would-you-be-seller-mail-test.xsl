@@ -11,7 +11,7 @@
 	<xsl:template name="cropped-content">
 
 		<svg x="20%" y="10%">
-			<text x="32%" y="8%" width="50%" height="40%" class="center" fill="var(--theme-sub-heading-color)" style="font-size:320%;font-family: Helvetica,Arial,sans-serif;">
+			<text x="32%" y="8%" width="50%" height="40%" class="center" fill="var(--theme-sub-heading-color)" style="font-size:320%;" font-family="var(--theme-body-font)">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'at-what-price'" />
@@ -25,13 +25,13 @@
 					</xsl:call-template>
 				</tspan>
 			</text>
-			<text x="32%" y="18%" width="50%" height="40%" class="center" fill="var(--theme-sub-heading-color)" style="font-weight:500;font-size:320%;font-family: Helvetica,Arial,sans-serif;">
+			<text x="32%" y="18%" width="50%" height="40%" class="center" fill="var(--theme-sub-heading-color)" style="font-weight:500;font-size:320%;" font-family="var(--theme-body-font)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'at-what-price'" />
 					<xsl:with-param name="default" select="'WOULD YOU BE A'" />
 				</xsl:call-template>
 			</text>
-			<text x="32%" y="28%" width="50%" height="40%" class="center bold" fill="var(--theme-sub-heading-color)" style="font-size:500%;font-family: Helvetica,Arial,sans-serif;">
+			<text x="32%" y="28%" width="50%" height="40%" class="center bold" fill="var(--theme-sub-heading-color)" style="font-size:500%;" font-family="var(--theme-body-font)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'at-what-price'" />
 					<xsl:with-param name="default" select="'SELLER?'" />

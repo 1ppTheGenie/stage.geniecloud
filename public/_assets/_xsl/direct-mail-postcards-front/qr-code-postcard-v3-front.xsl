@@ -22,7 +22,7 @@
 	</xsl:template>
 
 	<xsl:template name="cropped-content">
-		<g style="font-family:var(--theme-heading-font);transform:translate(50%,4%)">
+		<g font-family="var(--theme-heading-font)" style="transform:translate(50%,4%)">
 			<text class="center" fill="var(--theme-body-background)" style="font-size:320%;font-style: italic;">
 				<tspan fill="var(--theme-heading-background)">
 					<xsl:call-template name="editable">

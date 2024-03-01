@@ -103,7 +103,7 @@ Supports:	Area, Print, Listing, QRCode
 				</xsl:choose>
 			</xsl:variable>
 
-			<text x="4%" y="25.5%" class="bold middle" fill="#ffffff" style="font-family:'futura';font-size:320%;">
+			<text x="4%" y="25.5%" class="bold middle" fill="#ffffff" font-family="var(--theme-body-font)" font-size="320%">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'justlisted'" />
@@ -131,7 +131,7 @@ Supports:	Area, Print, Listing, QRCode
 				</tspan>
 			</text>
 
-			<text x="4%" y="58.7%" class="bold" fill="#ffffff" style="font-family:'futura'; font-size:124%;">
+			<text x="4%" y="58.7%" class="bold" fill="#ffffff" font-family="var(--theme-body-font)" font-size="124%">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'scan'" />
@@ -147,7 +147,7 @@ Supports:	Area, Print, Listing, QRCode
 			</text>
 		</g>
 
-		<text x="4%" y="85%" class="bold" style="font-size:115%;font-family:'futura';" fill="#ffffff" data-max-width="11%">
+		<text x="4%" y="85%" class="bold" font-size="115%" font-family="var(--theme-body-font)" fill="#ffffff" data-max-width="11%">
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentfirstName'" />
@@ -165,7 +165,7 @@ Supports:	Area, Print, Listing, QRCode
 			</tspan>
 		</text>
 
-		<text x="4%" y="88.6%" style="font-size:75%;font-weight:500;font-family:'futura';" fill="#ffffff" data-max-width="11%">
+		<text x="4%" y="88.6%" font-size="75%" font-weight="500" font-family="var(--theme-body-font)" fill="#ffffff" data-max-width="11%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'licenseno'" />
 				<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
@@ -174,7 +174,7 @@ Supports:	Area, Print, Listing, QRCode
 
 		<rect x="16%" y="85.5%" width="0.13%" height="5.6%" fill="#b2934e"></rect>
 
-		<text x="17.5%" y="85.5%" style="font-size:90%;font-family:'futura';" fill="#0e1232">
+		<text x="17.5%" y="85.5%" font-size="90%" font-family="var(--theme-body-font)" fill="#0e1232">
 			<tspan fill="#b2934e" class="bold">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'m'" />
@@ -190,20 +190,20 @@ Supports:	Area, Print, Listing, QRCode
 		</text>
 
 		<text x="17.5%" y="87.5%" fill="#ffffff" data-max-width="13%">
-			<tspan dy="0.2%" class="bold" fill="#b2934e" style="font-size:100%;font-family:'futura';">
+			<tspan dy="0.2%" class="bold" fill="#b2934e" font-size="100%" font-family="var(--theme-body-font)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'e'" />
 					<xsl:with-param name="default" select="'e'" />
 				</xsl:call-template>
 			</tspan>
-			<tspan x="19.2%" dy="0.5%" fill="#ffffff" style="font-weight:400; font-size:75%;font-family:'futura';">
+			<tspan x="19.2%" dy="0.5%" fill="#ffffff" font-weight="400" font-size="75%" font-family="var(--theme-body-font)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentmarketingEmail'" />
 					<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 				</xsl:call-template>
 			</tspan>
 		</text>
-		<text x="75%" y="88%" data-max-width="30%" class="center upper" fill="#ffffff" style="font-family:'futura';font-size:135%;font-weight:600;text-shadow: 1px 1px 2px #0e1232;">
+		<text x="75%" y="88%" data-max-width="30%" class="center upper" fill="#ffffff" font-family="var(--theme-body-font)" font-size="135%" font-weight="600" style="text-shadow: 1px 1px 2px #0e1232;">
 			<tspan>
 				<xsl:value-of select="//single/address/street" />
 				<xsl:text> &#8226; </xsl:text>

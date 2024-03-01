@@ -3,7 +3,7 @@
 	Asset Name: Ed Kaminsky Postcard 2022 1
 	Tags: 		Direct Mail
 	Sizes:		Postcard
-Supports:	Area, Print, Listing, QRCode
+	Supports:	Area, Print, Listing, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
@@ -91,7 +91,7 @@ Supports:	Area, Print, Listing, QRCode
 				</xsl:choose>
 			</xsl:variable>
 
-			<text x="4%" y="25.5%" class="bold middle" fill="#ffffff" style="font-family:'futura';font-size:320%;">
+			<text x="4%" y="25.5%" class="bold middle" fill="#ffffff" font-family="var(--theme-body-font)" style="font-size:320%;">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'justlisted'" />
@@ -119,7 +119,7 @@ Supports:	Area, Print, Listing, QRCode
 				</tspan>
 			</text>
 
-			<text x="4%" y="58.7%" class="bold" fill="#ffffff" style="font-family:'futura'; font-size:124%;">
+			<text x="4%" y="58.7%" class="bold" fill="#ffffff" font-family="var(--theme-body-font)" style="font-size:124%;">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'scan'" />
@@ -137,11 +137,10 @@ Supports:	Area, Print, Listing, QRCode
 			<svg width="41%" class="scan-svg-icon" height="22%" x="0.8%" y="47%" viewBox="0 0 2000 452">
 				<path fill="#eeac27" d="M1757.79,75.26c-58.07,0-105.31,47.24-105.31,105.31v117.14c0,42.23-34.36,76.59-76.59,76.59H136.91v11.53 h1438.98c48.59,0,88.12-39.53,88.12-88.12V180.57c0-51.71,42.07-93.78,93.78-93.78h114.2V75.26H1757.79z" />
 				<polygon fill="#eeac27" points="1841.9,44.98 1834.31,53.66 1865.73,81.13 1835.02,109.35 1842.82,117.84 1883,80.92" />
-
 			</svg>
 		</g>
 
-		<text x="75%" y="88%" data-max-width="40%" class="center upper" fill="#ffffff" style="font-family:'futura';font-size:135%;font-weight:600;text-shadow: 1px 1px 2px #0e1232;">
+		<text x="75%" y="88%" data-max-width="40%" class="center upper" fill="#ffffff" font-family="var(--theme-body-font)" style="font-size:135%;font-weight:600;text-shadow: 1px 1px 2px #0e1232;">
 			<tspan>
 				<xsl:value-of select="//single/address/street" />
 				<xsl:text> &#8226; </xsl:text>
@@ -153,7 +152,7 @@ Supports:	Area, Print, Listing, QRCode
 			<rect x="30%" y="65%" width="20%" height="35%"></rect>
 		</clipPath>
 
-		<text x="4%" y="85%" class="bold" style="font-size:115%;font-family:'futura';" fill="#ffffff" data-max-width="11%">
+		<text x="4%" y="85%" class="bold" font-family="var(--theme-body-font)" font-size="115%" fill="#ffffff" data-max-width="11%">
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentfirstName'" />
@@ -170,7 +169,7 @@ Supports:	Area, Print, Listing, QRCode
 				</xsl:call-template>
 			</tspan>
 		</text>
-		<text x="4%" y="88.6%" style="font-size:75%;font-weight:500;font-family:'futura';" fill="#ffffff" data-max-width="11%">
+		<text x="4%" y="88.6%" font-size="75%" font-weight="500" font-family="var(--theme-body-font)" fill="#ffffff" data-max-width="11%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'licenseno'" />
 				<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
@@ -179,14 +178,14 @@ Supports:	Area, Print, Listing, QRCode
 
 		<rect x="16%" y="85.5%" width="0.13%" height="5.6%" fill="#b2934e"></rect>
 
-		<text x="17.5%" y="85.5%" style="font-size:90%;font-family:'futura';" fill="#0e1232">
+		<text x="17.5%" y="85.5%" font-size="90%" font-family="var(--theme-body-font)" fill="#0e1232">
 			<tspan fill="#b2934e" class="bold">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'m'" />
 					<xsl:with-param name="default" select="'m'" />
 				</xsl:call-template>
 			</tspan>
-			<tspan x="19.2%" fill="#ffffff" style="font-weight:500;">
+			<tspan x="19.2%" fill="#ffffff" font-weight="500">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentmobile'" />
 					<xsl:with-param name="default" select=" //agent[1]/mobile" />
@@ -195,13 +194,13 @@ Supports:	Area, Print, Listing, QRCode
 		</text>
 
 		<text x="17.5%" y="87.5%" fill="#ffffff" data-max-width="13%">
-			<tspan dy="0.2%" class="bold" fill="#b2934e" style="font-size:100%;font-family:'futura';">
+			<tspan dy="0.2%" class="bold" fill="#b2934e" font-size="100%" font-family="var(--theme-body-font)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'e'" />
 					<xsl:with-param name="default" select="'e'" />
 				</xsl:call-template>
 			</tspan>
-			<tspan x="19.2%" dy="0.5%" fill="#ffffff" style="font-weight:400; font-size:75%;font-family:'futura';">
+			<tspan x="19.2%" dy="0.5%" fill="#ffffff" font-weight="400" font-size="75%" font-family="var(--theme-body-font)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentmarketingEmail'" />
 					<xsl:with-param name="default" select="//agent[1]/marketingEmail" />

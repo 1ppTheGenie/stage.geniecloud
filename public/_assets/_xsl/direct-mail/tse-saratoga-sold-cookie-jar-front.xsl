@@ -7,10 +7,9 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-
 		<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/tse-saratoga-sold-cookie-jar-front.png' )" />
@@ -23,8 +22,7 @@
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800" />
 		<style>
-<xsl:value-of select="'.open-sans{ font-family: &quot;Open Sans&quot;, sans-serif !important; }'" />
-
+			<xsl:value-of select="'.open-sans{ font-family: &quot;Open Sans&quot;, sans-serif !important; }'" />
 		</style>
 
 		<image x="2%" y="90%" width="14%" height="10%" id="logo" preserveAspectRatio="xMidYMid meet">
