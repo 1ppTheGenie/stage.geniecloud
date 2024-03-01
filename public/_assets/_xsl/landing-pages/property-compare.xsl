@@ -386,7 +386,9 @@
 					<div class="row average-count-box">
 						<div class="col-6 col-md-6 col-lg-3 text-center">
 							<div class="average-count-part">
-								<p class="avg-count-number heading-font heading-color">43</p>
+								<p class="avg-count-number heading-font heading-color">
+									<xsl:value-of select="//statistics/@averageDaysOnMarket" />
+								</p>
 								<p class="avg-count-text text-uppercast body-font body-color">
 									<xsl:text>AVERAGE DAYS ON MARKET</xsl:text>
 								</p>
