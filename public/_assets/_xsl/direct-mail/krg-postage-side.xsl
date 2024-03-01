@@ -10,7 +10,6 @@ Supports:	Area, Print, Listing, QRCode
 	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-
 		<rect x="0" y="0" width="51%" height="100%" fill="#fff"></rect>
 		<line xmlns="" stroke="#fff" stroke-width="0.8%" x1="51%" x2="51%" y1="0" y2="100%"></line>
 		<rect x="50%" y="0" width="50%" height="100%" fill="#fff"></rect>
@@ -34,7 +33,6 @@ Supports:	Area, Print, Listing, QRCode
 			</xsl:attribute>
 		</image>
 		<rect x="0" y="0" width="51%" height="100%" fill="url(#lgrad)" />
-
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
@@ -73,7 +71,7 @@ Supports:	Area, Print, Listing, QRCode
 
 		</svg>
 
-		<text x="4%" y="68.2%" class="middle" fill="var(--theme-body-font)" style="font-family:var(--theme-body-font);font-size:96%;font-weight:500;">
+		<text x="4%" y="68.2%" class="middle" fill="var(--theme-body-color)" font-family="var(--theme-body-font)" font-size="96%" font-weight="500">
 			<tspan class="bold">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'scannow'" />
@@ -112,12 +110,14 @@ Supports:	Area, Print, Listing, QRCode
 					</xsl:call-template>
 				</tspan>
 			</text>
+
 			<text x="11%" y="84.7%" style="font-size:65%;font-weight:500;font-family: var(--theme-body-font);" data-max-width="32%" fill="var(--theme-heading-color)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'licenseno'" />
 					<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
 				</xsl:call-template>
 			</text>
+
 			<text x="11%" y="87.5%" style="font-size:100%;font-family: var(--theme-body-font);" data-max-width="32%" fill="var(--theme-body-background)">
 				<tspan fill="var(--theme-sub-heading-color)" class="bold">
 					<xsl:call-template name="editable">
