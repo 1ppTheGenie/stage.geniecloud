@@ -294,18 +294,23 @@
 					</div>
 				</div>
 				<div class="col-md-12">
+
+					<xsl:variable name="isExternalPrivacy">
+						<xsl:value-of select="//agent[1]/privacyPolicy='external' or //agent[1]/privacyPolicy='External Link'" />
+					</xsl:variable>
+
 					<div class="term-condition text-center heading-font">
 						<xsl:if test="string(//mlsDisplay/text())!=''">
 							<a href="#" class="heading-font toggle" data-container="#mls-disclaimer">MLS/IDX Disclaimer</a>
 							<xsl:text>&#160;&#124;&#160;</xsl:text>
 						</xsl:if>
 						<a class="privacy-policy heading-font" target="_blank">
-							<xsl:if test="//agent[1]/privacySource='external'">
+							<xsl:if test="$isExternalPrivacy">
 								<xsl:attribute name="href">
-									<xsl:value-of select="//agent[1]/privacyPolicy" />
+									<xsl:value-of select="//agent[1]/privacySource" />
 								</xsl:attribute>
 							</xsl:if>
-							<xsl:if test="//agent[1]/privacySource!='external'">
+							<xsl:if test="not($isExternalPrivacy)">
 								<xsl:attribute name="href">
 									<xsl:value-of select="'#'" />
 								</xsl:attribute>
@@ -325,9 +330,9 @@
 							<xsl:comment/>
 						</div>
 					</xsl:if>
-					<xsl:if test="//agent[1]/privacySource!='external'">
+					<xsl:if test="not($isExternalPrivacy)">
 						<div id="privacy-policy">
-							<xsl:copy-of select="//agent[1]/privacyPolicy/text()" />
+							<xsl:copy-of select="replace(//agent[1]/privacyPolicy/text(), '\\n', '&lt;br/&gt;')" />
 							<xsl:comment/>
 						</div>
 					</xsl:if>
