@@ -14,8 +14,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Upload to S3
+      - name: Upload to public assets
         run: aws s3 sync ./public/_assets s3://$GENIE_CLOUD_BUCKET/_assets/ --delete --cache-control max-age=3600
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ vars.AWS_REGION }}
+          GENIE_CLOUD_BUCKET: ${{ vars.GENIE_CLOUD_BUCKET }}
+
+      - name: Upload to Genie Tools
+        run: aws s3 sync ./public/genie-tools s3://$GENIE_CLOUD_BUCKET/genie-tools/ --cache-control max-age=3600
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
