@@ -294,6 +294,13 @@
 					</div>
 				</div>
 				<div class="col-md-12">
+					<xsl:if test="string(//agent[1]/disclaimerExtra/text())!=''">
+						<p>
+							<xsl:call-template name="replaceBR">
+								<xsl:with-param name="str" select="//agent[1]/disclaimerExtra/text()"/>
+							</xsl:call-template>
+						</p>
+					</xsl:if>
 
 					<xsl:variable name="isExternalPrivacy">
 						<xsl:value-of select="//agent[1]/privacyPolicy='external' or //agent[1]/privacyPolicy='External Link'" />
