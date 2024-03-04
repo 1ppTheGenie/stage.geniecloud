@@ -1,11 +1,10 @@
 /*
 	Theme Name: Pinnacles Properites
-	Theme Style: Light  
 */
 @import url("../_css/raleway.css");
 @import url("../_css/montserrat.css");
 
-.pinnacles-properites-light {
+.pinnacles-properites,.pinnacles-properites.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #163055; /* Heading */
 	--theme-sub-heading-color: #00559b; /* Subtitle */
@@ -14,4 +13,12 @@
 	--theme-body-font: "Montserrat", sans-serif;
 	--theme-heading-font: "Raleway", sans-serif;
 	--theme-sub-heading-font: "Raleway", sans-serif;
+}
+
+.pinnacles-properites.dark {
+	--theme-body-background: #163055;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #dbdbdb; /* Subtitle */
+	--theme-body-color: #e1e1e1; /* Body */
+	--theme-emphasis-color: #dbdbdb; /* Outline */
 }

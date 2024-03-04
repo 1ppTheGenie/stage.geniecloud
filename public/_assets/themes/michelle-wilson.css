@@ -1,12 +1,10 @@
 /*
 	Theme Name:	Michelle Wilson
-  Theme Style: Light    
 */
 
 @import url("../_css/open-sans.css");
 
-
-.michelle-wilson-light {
+.michelle-wilson,.michelle-wilson.light {
 	--theme-body-background:#ffffff;
 	--theme-heading-color:#333333; /* Heading */
 	--theme-sub-heading-color: #da3a92; /* Subtitle */
@@ -15,4 +13,12 @@
 	--theme-body-font: "Open Sans", sans-serif;
 	--theme-heading-font: "Open Sans", sans-serif;
 	--theme-sub-heading-font: "Open Sans", sans-serif;
+}
+
+.michelle-wilson.dark {
+	--theme-body-background:#181f25;
+	--theme-heading-color:#ffffff; /* Heading */
+	--theme-sub-heading-color: #da3a92; /* Subtitle */
+	--theme-body-color: #b1b1b1; /* Body */
+	--theme-emphasis-color: #da3a92; /* Outline */
 }

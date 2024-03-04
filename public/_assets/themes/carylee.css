@@ -1,0 +1,36 @@
+/*
+	Theme Name:	Carylee (was Delmar)
+*/
+
+@import url("../_css/myriad-pro-condensed.css");
+@import url("../_css/lato.css");
+@import url("../_css/helvetica-neue-condensed.css");
+
+.carylee, .carylee.light {
+	--theme-body-background: #ffefef;
+	--theme-heading-color: #3d8fd2; /* Heading */
+	--theme-sub-heading-color: #2c3740; /* Subtitle */
+	--theme-body-color: #5586ab; /* Body */
+	--theme-emphasis-color: #555; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}
+.carylee.dark {
+	--theme-body-background: #2c3740;
+	--theme-heading-color: #fff; /* Heading */
+	--theme-sub-heading-color: #8494a0; /* Subtitle */
+	--theme-body-color: #fff; /* Body */
+	--theme-emphasis-color: #8494a0; /* Outline */
+}
+
+.carylee.new-kw-light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #2c3740; /* Heading */
+	--theme-sub-heading-color: #767474; /* Subtitle */
+	--theme-body-color: #8494a0; /* Body */
+	--theme-emphasis-color: #767474; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue Condensed", sans-serif;
+}

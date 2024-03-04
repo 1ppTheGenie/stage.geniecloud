@@ -1,0 +1,42 @@
+/*
+	Theme Name:	Cush
+*/
+
+@import url("../_css/myriad-pro-condensed.css");
+@import url("../_css/lato.css");
+@import url("../_css/gotham.css");
+
+.cush,.cush.light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #06213f; /* Heading */
+	--theme-sub-heading-color: #ebac29; /* Subtitle */
+	--theme-body-color: #06213f; /* Body */
+	--theme-emphasis-color: #ebac29; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
+}
+
+
+.cush.dark {
+	--theme-body-background: #06213f;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #ebac29; /* Subtitle */
+	--theme-body-color: #f0f0f0; /* Body */
+	--theme-emphasis-color: #ebac29; /* Outline */
+}
+
+.cush.twenty22 {
+	--theme-body-background: #062040;
+	--theme-heading-color: #edab28; /* Heading */
+	--theme-sub-heading-color: #7f8691; /* Subtitle */
+	--theme-body-color: #fff; /* Body */
+	--theme-emphasis-color: #a47c28; /* Outline */
+	--theme-body-font: "Gotham", sans-serif;
+	--theme-heading-font: "Gotham", sans-serif;
+	--theme-sub-heading-font: "Gotham", sans-serif;
+
+	--theme-gradient-stop1: #efab2a;
+	--theme-gradient-stop2: #e2a12b;
+	--theme-gradient-stop3: #be822b;
+}

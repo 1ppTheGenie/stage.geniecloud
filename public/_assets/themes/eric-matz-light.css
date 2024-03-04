@@ -1,12 +1,11 @@
 /*
 	Theme Name:	Eric Matz
-	Theme Style: Light
 */
 
 @import url("../_css/helvetica-neue.css");
 @import url("../_css/helvetica-neue-condensed.css");
 
-.eric-matz-light {
+.eric-matz,.eric-matz.light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #333333; /* Heading */
 	--theme-sub-heading-color: #d6af3f; /* Subtitle */

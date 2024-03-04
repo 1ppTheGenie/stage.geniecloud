@@ -1,12 +1,11 @@
 /*
 	Theme Name:	Fathom Realty 
-	Theme Style: Light        
 */
 
 @import url("../_css/open-sans.css");
 @import url("../_css/open-sans.css");
 
-.fathom-realty-light {
+.fathom-realty, .fathom-realty.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #1e2022; /* Heading */
 	--theme-sub-heading-color: #ce181f; /* Subtitle */
@@ -15,4 +14,12 @@
 	--theme-heading-font: "Open Sans", sans-serif;
     --theme-sub-heading-font: "Open Sans", sans-serif;
 	--theme-body-font:"Open Sans", sans-serif;
+}
+
+.fathom-realty.dark {
+	--theme-body-background: #1c1d21;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #ce181f; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #ce181f; /* Outline */		
 }

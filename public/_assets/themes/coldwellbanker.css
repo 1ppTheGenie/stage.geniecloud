@@ -1,12 +1,11 @@
 /*
 	Theme Name:	Coldwell Banker
-	Theme Style: Light
 */
 
 @import url("../_css/myriad-pro-condensed.css");
 @import url("../_css/lato.css");
 
-.coldwellbanker-light {
+.coldwellbanker,.coldwellbanker.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #012169; /* Heading */
 	--theme-sub-heading-color: #cf7c0c; /* Subtitle */
@@ -15,4 +14,12 @@
 	--theme-body-font: "Myriad Pro Condensed", sans-serif;
 	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
 	--theme-sub-heading-font: "Lato", sans-serif;
+}
+
+.coldwellbanker.dark {
+	--theme-body-background: #012169;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #cf7c0c; /* Subtitle */
+	--theme-body-color: #7ea6cd; /* Body */
+	--theme-emphasis-color: #7ea6cd; /* Outline */
 }

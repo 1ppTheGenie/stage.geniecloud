@@ -1,12 +1,10 @@
 /*
 	Theme Name:	Filkey 
-	Theme Style: Light           
-	Roles: Filkey
 */
 
 @import url("../_css/montserrat.css");
 
-.filkey-light {
+.filkey,.filkey.light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #0082ac; /* Heading */
 	--theme-sub-heading-color: #000000; /* Subtitle */
@@ -15,4 +13,12 @@
 	--theme-body-font: "Montserrat", sans-serif;
 	--theme-heading-font: "Montserrat", sans-serif;
 	--theme-sub-heading-font: "Montserrat", sans-serif;
+}
+
+.filkey.dark {
+	--theme-body-background: #293f50;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #a5c8de; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #0082ac; /* Outline */
 }

@@ -1,11 +1,10 @@
 /* 
 	Theme Name:	Circa
-	Theme Style: Light  
 */
 
 @import url("../_css/raleway.css");
 
-.circa-light {
+.circa,.circa.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #372675; /* Heading */
 	--theme-sub-heading-color: #73a1eb; /* Subtitle */
@@ -14,4 +13,12 @@
 	--theme-body-font: "Raleway", sans-serif;
 	--theme-heading-font: "Raleway", sans-serif;
 	--theme-sub-heading-font: "Raleway", sans-serif;
+}
+
+.circa.dark {
+	--theme-body-background: #372675;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #73a1eb; /* Subtitle */
+	--theme-body-color: #e1e1e1; /* Body */
+	--theme-emphasis-color: #73a1eb; /* Outline */
 }

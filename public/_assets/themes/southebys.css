@@ -1,12 +1,11 @@
 /*
 	Theme Name:	Sothebys
-	Theme Style: Light   
 */
 
 @import url("../_css/helvetica-neue.css");
 @import url("../_css/helvetica-neue-condensed.css");
 
-.southebys-light {
+.southebys,.southebys.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #002b5c; /* Heading */
 	--theme-sub-heading-color: #000000; /* Subtitle */
@@ -15,4 +14,12 @@
 	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
 	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
 	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}
+
+.southebys.dark {
+	--theme-body-background: #002b5c;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #cfdee7; /* Subtitle */
+	--theme-body-color: #baced9; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
 }

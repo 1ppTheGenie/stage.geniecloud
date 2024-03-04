@@ -1,12 +1,11 @@
 /*
 	Theme Name:	Dallas Golf Homes
-	Theme Style: Light       
 */
 
 @import url("../_css/lato.css");
 @import url("../_css/myriad-pro-condensed.css");
 
-.dallas-golf-homes-light {
+.dallas-golf-homes,.dallas-golf-homes.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #000000; /* Heading */
 	--theme-sub-heading-color: #8bc63e; /* Subtitle */
@@ -15,4 +14,12 @@
 	--theme-body-font: "Lato", sans-serif;
 	--theme-heading-font: "Lato", sans-serif;
 	--theme-sub-heading-font: "Lato", sans-serif;
+}
+
+.dallas-golf-homes.dark {
+	--theme-body-background: #000000;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #8bc63e; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #8bc63e; /* Outline */
 }

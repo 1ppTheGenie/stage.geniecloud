@@ -1,11 +1,10 @@
 /*
 	Theme Name:	Century 21 
-	Theme Style: Light           
 */
 
 @import url("../_css/open-sans.css");
 
-.century-21-light {
+.century-21,.century-21.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #252526; /* Heading */
 	--theme-sub-heading-color: #beaf87; /* Subtitle */
@@ -14,4 +13,12 @@
 	--theme-body-font: "Open Sans", sans-serif;
 	--theme-heading-font: "Open Sans", sans-serif;
 	--theme-sub-heading-font: "Open Sans", sans-serif;
+}
+
+.century-21.dark {
+	--theme-body-background: #252526;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #beaf87; /* Subtitle */
+	--theme-body-color: #e6e7e8; /* Body */
+	--theme-emphasis-color: #beaf87; /* Outline */
 }

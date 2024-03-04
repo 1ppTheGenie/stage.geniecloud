@@ -1,11 +1,10 @@
 /*
 	Theme Name:	FirstTeam Real Estate
-	Theme Style: Light        
 */
 
 @import url("../_css/montserrat.css");
 
-.firstteam-real-estate-light {
+.firstteam-real-estate, .firstteam-real-estate.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #051d29; /* Heading */
 	--theme-sub-heading-color: #fdb813; /* Subtitle */
@@ -15,6 +14,17 @@
 	--theme-heading-font: "Montserrat", sans-serif;
 	--theme-sub-heading-font: "Montserrat", sans-serif;
 
+	--sold-red: #f75656;
+	--vivid-color-1: #56f7c7;
+}
+
+
+.firstteam-real-estate.dark {
+	--theme-body-background: #051d29;
+	--theme-heading-color: #fff; /* Heading */
+	--theme-sub-heading-color: #fdb813; /* Subtitle */
+	--theme-body-color: #ddddda; /* Body */
+	--theme-emphasis-color: #ddddda; /* Outline */
 	--sold-red: #f75656;
 	--vivid-color-1: #56f7c7;
 }
