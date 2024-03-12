@@ -137,7 +137,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:variable name="roundedValue" select="round($value div math:pow(1000, $base) * math:pow(10, $precision)) div math:pow(10, $precision)" />
-				<xsl:value-of select="concat('$', $roundedValue, $suffixes[$base + 1])" />
+				<xsl:value-of select="concat('$', format-number($roundedValue, '#,###'), $suffixes[$base + 1])" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
