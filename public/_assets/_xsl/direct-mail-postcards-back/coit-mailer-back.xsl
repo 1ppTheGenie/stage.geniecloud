@@ -156,15 +156,15 @@
 			<text x="-1.5%" y="1.8%" class="bold right medium" fill="var(--theme-heading-color)" style="font-size:190%;">
 				<xsl:choose>
 					<xsl:when test="//output/@pricePercent = 'price'">
-						<xsl:value-of select="genie:currency-format( $change, 0 )" />
+						<xsl:value-of select="genie:currency-format( abs($change), 0 )" />
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:choose>
 							<xsl:when test="abs($change) < 35">
-								<xsl:value-of select="format-number( $change, '#.#%' )" />
+								<xsl:value-of select="format-number( abs($change), '#.#%' )" />
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="format-number( $change, '#%' )" />
+								<xsl:value-of select="format-number( abs($change), '#%' )" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:otherwise>

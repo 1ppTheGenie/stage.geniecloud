@@ -82,11 +82,11 @@
 			<text x="50%" y="0" class="center" font-size="600%" font-weight="bold" fill="var(--theme-sub-heading-color)">
 				<xsl:choose>
 					<xsl:when test="//output/@pricePercent = 'price'">
-						<xsl:value-of select="genie:currency-format( $change, 0 )" />
+						<xsl:value-of select="genie:currency-format( abs($change), 0 )" />
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:call-template name="round-whole-percents">
-							<xsl:with-param name="num" select="$change" />
+							<xsl:with-param name="num" select="abs($change)" />
 						</xsl:call-template>
 					</xsl:otherwise>
 				</xsl:choose>
