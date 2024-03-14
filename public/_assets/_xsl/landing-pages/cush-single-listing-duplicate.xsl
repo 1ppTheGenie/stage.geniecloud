@@ -280,12 +280,7 @@
 										</span>
 									</h2>
 									<div class="virtual-tour-embed">
-										<iframe height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-											<xsl:attribute name="src">
-												<xsl:value-of select="//single/virtualTourUrl" />
-											</xsl:attribute>
-											<xsl:comment/>
-										</iframe>
+										<xsl:call-template name="virtual-tour-embed" />
 									</div>
 								</div>
 							</div>

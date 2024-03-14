@@ -36,6 +36,35 @@
 		</html>
 	</xsl:template>
 
+	<xsl:template name="virtual-tour-embed">
+		<xsl:choose>
+			<xsl:when test="contains(//single/virtualTourUrl, 'player.vimeo.com') or contains(//single/virtualTourUrl, 'youtube.com/embed')">
+				<iframe height="315px" frameborder="0" allow="fullscreen;accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;" allowfullscreen="">
+					<xsl:attribute name="src">
+						<xsl:value-of select="//single/virtualTourUrl" />
+					</xsl:attribute>
+					<xsl:comment/>
+				</iframe>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<div class="virtual-tour body-font">
+					<a class="btn btn-small btn-info" target="_blank">
+						<xsl:attribute name="href">
+							<xsl:value-of select="//single/virtualTourUrl"/>
+						</xsl:attribute>
+						<svg width="22" fill="#ffffff" viewBox="0 0 512 512"
+							xmlns="http://www.w3.org/2000/svg">
+							<path d="M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z" style="fill:none;stroke:#ffffff;stroke-miterlimit:10;stroke-width:60px"/>
+							<path d="M216.32,334.44,330.77,265.3a10.89,10.89,0,0,0,0-18.6L216.32,177.56A10.78,10.78,0,0,0,200,186.87V325.13A10.78,10.78,0,0,0,216.32,334.44Z"/>
+						</svg>
+						<xsl:text>&#160;Click here to view Virtual Tour</xsl:text>
+					</a>
+				</div>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<xsl:template name="editable">
 		<xsl:param name="id" />
 		<xsl:param name="default" />

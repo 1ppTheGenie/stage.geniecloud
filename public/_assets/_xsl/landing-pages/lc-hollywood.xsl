@@ -497,6 +497,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 										</span>
 									</h2>
 									<div class="virtual-tour-embed">
+										<xsl:call-template name="virtual-tour-embed" />
 									</div>
 								</div>
 							</div>
