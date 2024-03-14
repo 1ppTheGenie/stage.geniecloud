@@ -342,13 +342,30 @@ export default () => {
 		}
 	};
 
-	const urlParams = new URLSearchParams(window.location.search);
-	if (parseInt(urlParams.get("crLead")) === 1) {
-		const pid = urlParams.get("propertyId");
+	const urlParams = Object.fromEntries( ( window.location.search.substring( 1 ).split( '&' ).map( l => l.split( "=" ) ) ).map( ( [key, value] ) => [key.toLowerCase(), value] ) );  //new URLSearchParams(window.location.search);
+	if ( parseInt( urlParams.crlead ) === 1 ) {
+		const pid = urlParams.propertyid;
 
-		if (pid) {
-			window.gHub.addLead(null, { propertyId: pid });
+		if ( pid ) {
+			window.gHub.addLead( null, { propertyId: pid } );
 		}
+	} else if ( urlParams.token ) {
+		( async () => {
+			let r;
+			if ( urlParams.qrid ) {
+				r = await getPropertyQR( {
+					qrID: urlParams.qrid,
+					token: urlParams.token,
+					agentID: settings.agentid,
+				} );
+			} else if ( urlParams.shorturldataid ) {
+				r = await getShortData( {
+					qrID: urlParams.qrid,
+					token: urlParams.token,
+					agentID: settings.agentid,
+				} );
+			}
+		} )();
 	}
 
 	/***********************
