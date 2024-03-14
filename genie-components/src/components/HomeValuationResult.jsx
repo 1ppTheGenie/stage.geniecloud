@@ -160,11 +160,11 @@ const Signature = () => {
 			Sincerely,
 			<br />
 			<br />
-			{agent()?.marketing.name}
+			{agent()?.displayName}
 			<br />
-			{agent()?.marketing.mobile}
+			{agent()?.phone}
 			<br />
-			{agent()?.marketing.email}
+			{agent()?.email}
 		</Show>
 	);
 };
