@@ -1,0 +1,197 @@
+<renderRoot>
+	<output apiUrl="https://cloud-api.thegenie.ai/" siteUrl="https://cloud.thegenie.ai/" year="2024" reportDate="1710264155" sinceDate="1677628740" renderId="69cd0e76-cb84-4371-bc8d-52d015ab12ba" mapboxKey="pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJ0VnNHQ0o4In0.Ju1ET8Y81mGY1Eu0l5DfRQ" googleKey="AIzaSyBNRERCDZnk-eRiCsXW4mz6XkWKMlhY2H0" areaIndex="1" areaPeriod="12" userId="2b093729-5ec5-4c3e-be21-bdda9efe675c" version="2.3.4" size="landing-page" theme="kw" themeHue="light" propertyType="0" mapStyle="satellite-v9" mapIcon="flag" mapKey="false" pricePercent="price" listingCount="15" withBleed="false" withCrops="false" blurPrice="true" hideAVM="true" requireSignin="false" isLeadCapture="false" downloadUrl="/genie-pages/69cd0e76-cb84-4371-bc8d-52d015ab12ba/property-compare/property-compare-download.pdf" qrUrl="https://cloud.thegenie.ai/genie-files/69cd0e76-cb84-4371-bc8d-52d015ab12ba/qr.svg"/>
+	<date period="Jan `23 to Jan `24" previousPeriod="Jan `22 to Jan `23"/>
+	<xslAsset>landing-pages_property-compare</xslAsset>
+	<overrides/>
+	<agents>
+		<agent>
+			<firstName>Steve</firstName>
+			<lastName>Fox</lastName>
+			<role>Super User</role>
+			<photo>https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/20844245-1543-4aa2-bbf6-4c68a18c4e00/public</photo>
+			<personalLogoLight/>
+			<personalLogoDark/>
+			<companyLogoLight>https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/286c5d90-5adc-48f7-a643-e9896c8ce100/public</companyLogoLight>
+			<companyLogoDark>https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/d53bbedb-2f34-4c33-8856-9830f9418900/public</companyLogoDark>
+			<marketingName>Steve Tony Fox</marketingName>
+			<marketingTitle>Imposter</marketingTitle>
+			<marketingEmail>sfox@1parkplace.com</marketingEmail>
+			<marketingAbout><![CDATA[This is a placeholder which will tell me if a bio is getting injected into the site. I also am putting this in to make sure that the marketing settings are done correctly]]></marketingAbout>
+			<marketingLicense>DRE# 92345678</marketingLicense>
+			<privacySource>http://www.1parkplace.com/privacy</privacySource>
+			<privacyPolicy>Privacy Policy</privacyPolicy>
+			<disclaimerOptin>We are committed to keeping your e-mail address and phone number confidential. We do not sell, rent, or lease our lists to third parties, and we will not provide your personal information to any third party individual, government agency, or company at any time unless compelled to do so by law, but you would have to have done something pretty bad for us to give anything to the government. We will use your e-mail address solely to administer content and provide timely information about our awesomeness and the real estate services we provide. We merely send periodic emails you agree to receive about real estate topics we think will interest you. We do not share this information with outside parties except to the extent necessary to provide the service. If at any time you would like to unsubscribe from receiving future emails, we would be devastated beyond words and seek appropriate therapy.</disclaimerOptin>
+			<disclaimerExtra>This is a custom disclaimer to make sure it shows up on the site properly.</disclaimerExtra>
+			<disclaimerIDX/>
+			<pronoun>plural</pronoun>
+			<timezone>America/Los_Angeles</timezone>
+			<mobile>858.699.5577</mobile>
+			<website>www.1parkplace.com/cloudqrtest</website>
+			<email>sfox@1parkplace.com</email>
+			<agentId>2b093729-5ec5-4c3e-be21-bdda9efe675c</agentId>
+			<address>
+				<company>1parkplace Inc</company>
+				<street>PO Box 501682</street>
+				<address2/>
+				<city>San Diego</city>
+				<state>CA</state>
+				<zip>92150</zip>
+			</address>
+		</agent>
+	</agents>
+	<areas>
+		<area>
+			<id>6759</id>
+			<name>Marina District</name>
+			<geojson><![CDATA[{"type":"Polygon","coordinates":[[[-117.15816,32.70191],[-117.1628,32.70501],[-117.16288,32.70494],[-117.16292,32.7044],[-117.16237,32.p70364],[-117.16357,32.70249],[-117.16387,32.70263],[-117.16649,32.70429],[-117.16661,32.70505],[-117.16597,32.70534],[-117.1646,32.70494],[-117.16391,32.70581],[-117.16752,32.70826],[-117.16893,32.70834],[-117.16889,32.70779],[-117.16661,32.70613],[-117.16653,32.70541],[-117.16713,32.70512],[-117.17022,32.70707],[-117.17052,32.70819],[-117.17121,32.70812],[-117.17215,32.70873],[-117.17344,32.71191],[-117.1758,32.71104],[-117.1767,32.71354],[-117.1667,32.71368],[-117.16649,32.71271],[-117.16091,32.71263],[-117.16116,32.70769],[-117.16005,32.70711],[-117.16035,32.70657],[-117.15619,32.70404],[-117.15816,32.70191]]]}]]></geojson>
+			<centerLat>32.70701702180442</centerLat>
+			<centerLng>-117.16598814023087</centerLng>
+			<image/>
+			<statistics lookbackMonths="12" propertyType="0" averageDaysOnMarket="0" averageListPrice="0" averageSalePrice="0" medianSalePrice="0" activePropertyTypeCount="0" averageListPriceForSold="0" avgPricePerSqFtSold="0" avgPricePerSqFtList="0" soldPropertyTypeCount="0" taxrollCount="4" turnOver="0" maxSalePrice="0" minSalePrice="0" marketTotalSoldVolume="0" averageYearsInHome="10" ownerOccupancy="0.25">
+				<previous totalSold="0" turnOver="0" avgPricePerSqFtSold="0" avgPricePerSqFtList="0" averageListPriceForSold="0" averageSalePrice="0" averageDaysOnMarket="0" medianSalePrice="0" maxSalePrice="0" minSalePrice="0"/>
+				<byBedroom>
+					<bedroom number="0" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+					<bedroom number="1" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+					<bedroom number="2" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+					<bedroom number="3" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+					<bedroom number="4" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+					<bedroom number="5" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+				</byBedroom>
+				<bySize>
+					<size min="0" max="1000" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+					<size min="1001" max="2000" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+					<size min="2001" max="3000" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+					<size min="3001" max="4000" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+					<size min="4001" max="5000" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+					<size min="5001" sold="0" active="0" pending="0" averageSalePrice="0" averageListPrice="0" averageListPriceForSold="0"/>
+				</bySize>
+			</statistics>
+		</area>
+	</areas>
+	<single>
+		<mlsNumber>240004106</mlsNumber>
+		<mlsId>0</mlsId>
+		<price>1600000</price>
+		<highPrice/>
+		<salePrice/>
+		<listed>2/25/2024</listed>
+		<soldDate/>
+		<daysOnMarket>0</daysOnMarket>
+		<type>Condo</type>
+		<listingStatus>Active</listingStatus>
+		<listingAgent>Gregg Neuman</listingAgent>
+		<statusTypeID>1</statusTypeID>
+		<description>This Harbor Club residence offers breathtaking views of San Diego Bay and the cityscape. The private balcony and numerous windows provide an unparalleled vantage point to take in the blue water panoramas and stunning sunsets. Inside, the living room is elegant with plush carpeted floors, Alabaster wall sconces, mirrored walls, and a built-in cabinet featuring a beverage chiller. The kitchen is well-appointed with granite surfaces, designer backsplash, glass-front cabinets, and a Travertine floor with insert. The primary bedroom suite is spacious with built-in cabinetry, carpeted floors, and a ceiling fan for comfort. The remodeled shower and granite vanity offer a luxurious spa-like experience. The tub has been replaced with a built-in closet, designer wallpaper, and dual medicine cabinets. The second bedroom is currently used as a den with built-in bookshelves and direct access to the balcony, making it an ideal guest room or home office. This stunning property is a must-see and a perfect place to call your own.</description>
+		<photoPrimary>https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_1.JPEG</photoPrimary>
+		<listingBoundary/>
+		<squareFeet>1572</squareFeet>
+		<lotSize>Enquire</lotSize>
+		<acres>2</acres>
+		<built>1992</built>
+		<virtualTourUrl>https://vimeo.com/818187223</virtualTourUrl>
+		<latitude>32.708968</latitude>
+		<longitude>-117.162534</longitude>
+		<city>San Diego Downtown</city>
+		<bedrooms count="2"/>
+		<bathrooms total="2" full="2" half="0"/>
+		<parking spaces="2" garage="2"/>
+		<address>
+			<streetNumber>100</streetNumber>
+			<unitNumber>2404</unitNumber>
+			<street>100 Harbor Drive</street>
+			<city>San Diego Downtown</city>
+			<state>CA</state>
+			<zip>92101</zip>
+			<streetName>Harbor Drive</streetName>
+		</address>
+		<dimensions>
+			<room name="Master Bedroom" size="15X17"/>
+			<room name="2nd Bedroom" size="9X14"/>
+			<room name="Living Room" size="20X28"/>
+		</dimensions>
+		<features>
+			<feature category="Accessibility Features" description="No Interior Steps"/>
+			<feature category="Appliances" description="Dishwasher, Disposal, Dryer, Microwave, Range/Oven, Refrigerator, Washer, Built-In, Electric Cooking"/>
+			<feature category="Community Features" description="BBQ, Clubhouse, Concierge, Fitness Center, Gated, Pool, Recreation Area, Sauna, Spa/Hot Tub"/>
+			<feature category="Construction Materials" description="Other"/>
+			<feature category="Fencing" description="Full"/>
+			<feature category="Flooring" description="Carpet, Tile"/>
+			<feature category="Foundation Details" description="Slab other Story"/>
+			<feature category="Foundation Details" description="Slab other Story"/>
+			<feature category="Interior Features" description="Interior Walls (Drywall), Counter Top, Elevators/Stairclimber, Balcony, Built-in Features, Ceiling Fan(s), Granite Counters, Living Room Balcony, Open Floorplan, Recessed Lighting, Shower, Kitchen Open to Family Rm"/>
+			<feature category="Laundry Features" description="Closet Stacked"/>
+			<feature category="Lot Features" description="Sidewalks, West of I-5"/>
+			<feature category="Parking Features" description="Garage(Assigned,Attached,Gated,Community Garage)"/>
+			<feature category="Patio And Porch Features" description="Balcony, Covered, Stone/Tile"/>
+			<feature category="Pool Features" description="In Ground, Community"/>
+			<feature category="Roof" description="Other"/>
+			<feature category="Security Features" description="Fire Sprinkler System, Gated Community, Security Guard, Resident Manager"/>
+			<feature category="Spa Features" description="Community, Yes"/>
+			<feature category="View" description="City, Evening Lights, Neighborhood, City Lights"/>
+		</features>
+		<images>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_1.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_2.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_3.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_4.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_5.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_6.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_7.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_8.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_9.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_10.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_11.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_12.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_13.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_14.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_15.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_16.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_17.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_18.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_19.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_20.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_21.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_22.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_23.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_24.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_25.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_26.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_27.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_28.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_29.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_30.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_31.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_32.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_33.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_34.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_35.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_36.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_37.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_38.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_39.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_40.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_41.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_42.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_43.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_44.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_45.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_46.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_47.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_48.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_49.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_50.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_51.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_52.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_53.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_54.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_55.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_56.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_57.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_58.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_59.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_60.JPEG"/>
+			<image src="https://sdmls-media.cdn-connectmls.com/20240224T204244645/Property_240004106_Photo_61.JPEG"/>
+		</images>
+	</single>
+	<mlsDisplay><![CDATA[This information is deemed reliable but not guaranteed. You should rely on this information only to decide whether or not to further investigate a particular property. BEFORE MAKING ANY OTHER DECISION, YOU SHOULD PERSONALLY INVESTIGATE THE FACTS (e.g. square footage and lot size) with the assistance of an appropriate professional. You may use this information only to identify properties you may be interested in investigating further. All uses except for personal, non-commercial use in accordance with the foregoing purpose are prohibited. Redistribution or copying of this information, any photographs or video tours is strictly prohibited. This information is derived from the Internet Data Exchange (IDX) service provided by San Diego MLS. Displayed property listings may be held by a brokerage firm other than the broker and/or agent responsible for this display. The information and any photographs and video tours and the compilation from which they are derived is protected by copyright. Compilation 2020 San Diego MLS.]]></mlsDisplay>
+</renderRoot>
