@@ -486,7 +486,10 @@ export default () => {
 							.removeEventListener("click", hidePopup);
 
 						// These really need removing and some generic event code running instead
-						document.querySelector(".modal.in").classList.remove("in");
+						const modal = document.querySelector( ".modal.in" )
+							
+						modal.classList.remove( "in" );
+						modal.style.display = "none";;
 						document.getElementById("backdrop").style.display = "none";
 					};
 
