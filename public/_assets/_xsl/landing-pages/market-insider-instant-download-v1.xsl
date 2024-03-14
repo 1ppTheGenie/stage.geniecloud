@@ -6,7 +6,8 @@
 	Sizes:				Landing Page
 	Supports:			Area Funnel
 	Permission: 		Funnels
-		Default Download:	area-insider-reports/market-insider
+	Default Download:	area-insider-reports/market-insider
+	Render Key:			landing-page/TheGenie-Instant-Download-v1-AREASLUG
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
