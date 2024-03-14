@@ -7100,10 +7100,10 @@ var listS3Folder = async (folderPath = "", justContents = true, token = null, bu
       Prefix: folderPath,
       ContinuationToken: token
     };
-    const response = await s3Client.send(
+    const response2 = await s3Client.send(
       new import_client_s3.ListObjectsV2Command(listParams)
     );
-    return justContents ? response.Contents : response;
+    return justContents ? response2.Contents : response2;
   } catch (err) {
     console.error("Error:", err);
   }
@@ -7285,7 +7285,9 @@ var getRenderJSON = async (params) => {
     let times = [];
     if (params.openHouseTimes) {
       params.openHouseTimes.forEach((t) => {
-        times.push(typeof t == "string" ? DateTime.fromISO(t).toMillis() : t);
+        times.push(
+          typeof t == "string" ? DateTime.fromISO(t).toMillis() : t
+        );
       });
     } else {
       const r = await openhouseByMlsNumber(
@@ -7301,7 +7303,7 @@ var getRenderJSON = async (params) => {
       }
     }
     params.openHouseTimes = times;
-    root.single = await processListing(params);
+    root.single = await processListing(params, root.agents[0].agent.timezone);
     let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0, skipCache);
     if (mlsDisplay) {
       root.mlsDisplay = `<![CDATA[${mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ""}]]>`;
@@ -7481,9 +7483,26 @@ var processAgents = async (agentIds) => {
       };
       let timezone;
       switch (marketingSettings.profile?.timeZoneId) {
+        case 1:
+          timezone = "America/New_York";
+          break;
+        case 2:
+          timezone = "America/Chicago";
+          break;
+        case 3:
+          timezone = "America/Denver";
+          break;
         case 4:
+          timezone = "America/Los_Angeles";
+          break;
+        case 5:
+          timezone = "America/Anchorage";
+          break;
+        case 6:
+          timezone = "Pacific/Honolulu";
+          break;
         default:
-          timezone = "PT";
+          timezone = "America/Los_Angeles";
           break;
       }
       let about = (marketingSettings.profile.about ?? "").replaceAll(
@@ -7658,7 +7677,9 @@ var processAreas = async (params) => {
                   ).toSeconds() : null,
                   dom: p.daysOnMarket,
                   thumb: p.photoPrimaryUrl,
-                  isAgent: agentListings.includes(p.mlsNumber.toLowerCase()) ? 1 : 0,
+                  isAgent: agentListings.includes(
+                    p.mlsNumber.toLowerCase()
+                  ) ? 1 : 0,
                   dateSort: p.soldDate ? DateTime.fromISO(
                     p.soldDate
                   ).toSeconds() : DateTime.fromISO(
@@ -7790,7 +7811,7 @@ var listingPropertyTypeId = async (params) => {
   );
   return listing.propertyTypeID;
 };
-var processListing = async (params) => {
+var processListing = async (params, agentTimezone) => {
   let single = [];
   const listing = await getListing(
     params.userId,
@@ -7846,7 +7867,7 @@ var processListing = async (params) => {
       { city: listing.city ?? "" }
     ];
     if (params.openHouseTimes) {
-      const tz = { zone: "PST" };
+      const tz = { zone: agentTimezone ?? "PST" };
       const oh = {
         _name: "openHouse",
         _content: []
@@ -7868,7 +7889,10 @@ var processListing = async (params) => {
               tz
             ).toFormat(timeAttrbs[key])
           );
-          [{ name: "starts", value: ts1 }, { name: "ends", value: ts2 }].forEach((o) => {
+          [
+            { name: "starts", value: ts1 },
+            { name: "ends", value: ts2 }
+          ].forEach((o) => {
             const dt = DateTime.fromMillis(o.value, tz);
             const dtFormat = dt.minute === 0 ? "ha" : "t";
             session._attrs[o.name] = dt.toFormat(dtFormat);
@@ -8078,11 +8102,7 @@ var processCollection = async (params) => {
     return collection;
   }
 };
-var buildVersion = async () => {
-  const files = await listS3Folder("_assets/landing-pages/dist");
-  console.log("buildVersion", files);
-  return files.pop().Key.replace("_assets/landing-pages/dist/", "").split("/").shift();
-};
+var buildVersion = async () => (await listS3Folder("_assets/landing-pages/dist")).pop().Key.replace("_assets/landing-pages/dist/", "").split("/").shift();
 var debugLog = async (source, params, data) => {
   console.log("debugLog", source, params, data);
 };
@@ -8134,23 +8154,65 @@ var preCallGenieAPIs = async (params) => {
   }
 };
 
-// src/utils/hubAPI.js
+// src/utils/cloudHubAPI.js
 var import_qrcode_svg = __toESM(require_qrcode(), 1);
-var ASSET_HEADERS = {
-  name: "Asset Name",
-  knownAs: "Known As",
-  thumbnail: "Thumbnail",
-  access: "Access",
-  permission: "Permission",
-  approved: "Approved",
-  tags: "Tags",
-  sizes: "Sizes",
-  roles: "Roles",
-  component: "Component",
-  supports: "Supports",
-  version: "Version",
-  pages: "Pages",
-  renderKey: "Render Key"
+var cloudHubAPI = async (route, params) => {
+  let result = { none: true };
+  switch (route) {
+    case "/get-assets":
+      const assets = await getAssets();
+      result = { success: true, ...assets };
+      break;
+    case "/get-themes":
+      const themes = await getThemes();
+      result = { success: true, ...themes };
+      break;
+    case "/get-collection-templates":
+      const templates = await getCollectionTemplates();
+      result = { success: true, ...templates };
+      break;
+    case "/get-collections":
+      const collections = await getCollections();
+      const processedCollections = {};
+      for (const index in collections) {
+        if (collections[index].Key.endsWith("json")) {
+          processedCollections[basename(collections[index].Key)] = JSON.parse(
+            (await fromS3(collections[index].Key)).toString()
+          );
+        }
+      }
+      result = {
+        success: true,
+        collections: processedCollections
+      };
+      break;
+    case "/save-collection":
+      const collectionSaved = await saveCollection(params);
+      response.body = {
+        success: true,
+        collection: collectionSaved
+      };
+      break;
+    case "/render-errors":
+      const errors = [];
+      const rErrors = await listS3Folder("_errors");
+      await Promise.all(
+        rErrors.map(async (e) => {
+          if (!params.renderId || e.Key.includes(params.renderId)) {
+            if (e.Size > 0) {
+              const json = JSON.parse(
+                (await fromS3(e.Key)).toString()
+              );
+              json.key = e.Key;
+              errors.push(json);
+            }
+          }
+        })
+      );
+      response.body = { success: true, ...errors };
+      break;
+  }
+  return result;
 };
 var getThemes = async () => {
   let themes = {};
@@ -8177,7 +8239,7 @@ var getAssets = async () => {
     r.map(async (t) => {
       if (t.Size > 0) {
         const xsl = await fromS3(t.Key);
-        const data = getFileData(xsl, ASSET_HEADERS);
+        const data = getFileData(xsl, genieGlobals.ASSET_HEADERS);
         const slug = t.Key.replace(".xsl", "").replace(
           "_assets/_xsl/",
           ""
@@ -8379,7 +8441,7 @@ var add_lead = async (params) => {
       }
     }
     if (params.hasOwnProperty("fullName")) {
-      var split = params.fullName.split(" ");
+      var split = params?.fullName?.split(" ");
       if (split.length > 1) {
         var last = split.pop();
         args["lastName"] = last;
@@ -8388,9 +8450,9 @@ var add_lead = async (params) => {
         args["firstName"] = params.fullName;
       }
     }
-    if (params.hasOwnProperty("meta[message]")) {
-      args["note"] = "Message: " + params.meta[message];
-      delete params.meta[message];
+    if (params.hasOwnProperty("meta[message]") && params.hasOwnProperty("meta[message]") != null) {
+      args["note"] = "Message: " + params?.meta["message"];
+      delete params.meta["message"];
     } else {
       args["note"] = args["note"] || "";
     }
@@ -8466,28 +8528,31 @@ var address_search = async (params) => {
   return success({ properties: r["properties"] });
 };
 var get_agent_data = async (params) => {
-  const profile = await getUser(params.agentId);
+  const profile = await getUser(params.agentId ?? params.agent_id);
+  delete profile.aspNetUserId;
+  delete profile.organizationId;
+  delete profile.roleId;
+  delete profile.intercom;
+  delete profile.facebookProfile;
+  delete profile.twilioBotProfile;
+  delete profile.socialProfiles;
+  delete profile.codeSnippets;
+  delete profile.slackChannel;
+  delete profile.google;
+  delete profile.hasProfile;
+  delete profile.hasImages;
+  delete profile.hasOffice;
+  delete profile.hasDisclaimers;
+  delete profile.hasSocialProfiles;
+  delete profile.hasCodeSnippets;
+  delete profile.hasSlackChannel;
+  delete profile.hasGoogleSettings;
+  delete profile.thresholds;
+  delete profile.whmcsId;
   if (!params.isDebug) {
     delete profile.isActive;
-    delete profile.whmcsId;
     delete profile.permissions;
-    delete profile.thresholds;
     delete profile.mlsProfiles;
-    delete profile.intercom;
-    delete profile.facebookProfile;
-    delete profile.twilioBotProfile;
-    delete profile.socialProfiles;
-    delete profile.codeSnippets;
-    delete profile.slackChannel;
-    delete profile.google;
-    delete profile.hasProfile;
-    delete profile.hasImages;
-    delete profile.hasOffice;
-    delete profile.hasDisclaimers;
-    delete profile.hasSocialProfiles;
-    delete profile.hasCodeSnippets;
-    delete profile.hasSlackChannel;
-    delete profile.hasGoogleSettings;
   }
   return success({ agent: profile });
 };
@@ -9050,11 +9115,11 @@ var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_ca
       },
       timeout: 60,
       body: Object.keys(params).length > 0 ? JSON.stringify(params) : null
-    }).then((response) => {
+    }).then((response2) => {
       try {
-        return response.json();
+        return response2.json();
       } catch (err) {
-        throw new Error(`GenieAPI response not JSON: ${response.body}`);
+        throw new Error(`GenieAPI response not JSON: ${response2.body}`);
       }
     });
     if (result.success) {
@@ -9082,7 +9147,7 @@ var JSON_MIME = "application/json";
 var TXT_MIME = "text/plain";
 var api = async (event) => {
   let routes = [], routeParams = [];
-  let response = {
+  let response2 = {
     statusCode: 200,
     body: { success: false },
     headers: {
@@ -9170,15 +9235,25 @@ var api = async (event) => {
         if (params?.impersonaterId)
           impersonater.id = params.impersonaterId;
         if (route.startsWith("/genie-embed")) {
-          response.body = await embedsAPI(
+          response2.body = await embedsAPI(
             route.replace("/genie-embed/v2/", ""),
+            params
+          );
+        } else if (route.startsWith("/genie-admin")) {
+          response2.body = await cloudHubAPI(
+            route.replace("/genie-admin/v2/", ""),
             params
           );
         } else {
           switch (route) {
+            case "/build-version":
+              response2.body = {
+                buildVersion: await buildVersion()
+              };
+              break;
             case "/test":
               console.log(params);
-              response.body = await propertySurroundingAreas(
+              response2.body = await propertySurroundingAreas(
                 params.mlsNumber,
                 params.mlsId ?? 0,
                 params.userId,
@@ -9217,7 +9292,7 @@ var api = async (event) => {
                       })
                     );
                     const resizedImageBuffer = await resizedImage.toBuffer();
-                    response = {
+                    response2 = {
                       statusCode: 200,
                       headers: {
                         "Content-Type": "image/webp"
@@ -9228,79 +9303,27 @@ var api = async (event) => {
                       )
                     };
                   } else {
-                    response.body = {
+                    response2.body = {
                       success: false,
                       error: `Failed to fetch image: HTTP status ${image.status}`
                     };
                   }
                 } catch (error2) {
-                  response.body = {
+                  response2.body = {
                     success: false,
                     error: `Error: ${error2.message}`
                   };
                 }
               } else {
-                response.body = {
+                response2.body = {
                   success: false,
                   error: "`url` is a required parameter"
                 };
               }
               break;
-            case "/render-errors":
-              const errors = [];
-              const rErrors = await listS3Folder("_errors");
-              await Promise.all(
-                rErrors.map(async (e) => {
-                  if (e.Size > 0) {
-                    const json = JSON.parse(
-                      (await fromS3(e.Key)).toString()
-                    );
-                    json.key = e.Key;
-                    errors.push(json);
-                  }
-                })
-              );
-              response.body = { success: true, ...errors };
-              break;
-            case "/get-themes":
-              const themes = await getThemes();
-              response.body = { success: true, ...themes };
-              break;
-            case "/get-collection-templates":
-              const templates = await getCollectionTemplates();
-              response.body = { success: true, ...templates };
-              break;
-            case "/get-collections":
-              const collections = await getCollections();
-              const processedCollections = {};
-              for (const index in collections) {
-                if (collections[index].Key.endsWith("json")) {
-                  processedCollections[(0, import_path.basename)(collections[index].Key)] = JSON.parse(
-                    (await fromS3(collections[index].Key)).toString()
-                  );
-                }
-              }
-              response.body = {
-                success: true,
-                collections: processedCollections
-              };
-              break;
-            case "/save-collection":
-              const collectionSaved = await saveCollection(
-                params
-              );
-              response.body = {
-                success: true,
-                collection: collectionSaved
-              };
-              break;
             case "/make-qrcode":
               const qr = await generateQR();
-              response.body = { success: true, ...qr };
-              break;
-            case "/get-assets":
-              const assets = await getAssets();
-              response.body = { success: true, ...assets };
+              response2.body = { success: true, ...qr };
               break;
             case "/log":
               if (params.renderId && params.assetId) {
@@ -9323,7 +9346,7 @@ var api = async (event) => {
                   });
                   console.log(updated.key);
                 }
-                response.body = {
+                response2.body = {
                   success: true,
                   renderId: params.renderId
                 };
@@ -9380,7 +9403,7 @@ var api = async (event) => {
                   break;
                 }
               }
-              response.body = result;
+              response2.body = result;
               break;
             case "/re-render":
               if (params.renderId) {
@@ -9390,10 +9413,10 @@ var api = async (event) => {
                     skipCache: true
                   });
                   if (r) {
-                    response.body.success = true;
-                    response.body.msg = `${params.renderId} re-render under way`;
+                    response2.body.success = true;
+                    response2.body.msg = `${params.renderId} re-render under way`;
                     if (Object.keys(params).length > 1) {
-                      response.body.msg += " (with override params)";
+                      response2.body.msg += " (with override params)";
                     }
                   }
                   await queueMsg("clear-cache", {
@@ -9403,8 +9426,8 @@ var api = async (event) => {
                     }
                   });
                 } catch (err) {
-                  response.body.success = false;
-                  response.body.msg = `Error: ${err.message}`;
+                  response2.body.success = false;
+                  response2.body.msg = `Error: ${err.message}`;
                 }
               } else if (params.assetId || params.userId || params.mlsNumber || params.areaId) {
                 let reRenders = [];
@@ -9439,9 +9462,9 @@ var api = async (event) => {
                       skipCache: true
                     });
                   }
-                  response.body.success = true;
-                  response.body.msg = `${reRenders.length} re-renders underway`;
-                  response.body.data = reRenders;
+                  response2.body.success = true;
+                  response2.body.msg = `${reRenders.length} re-renders underway`;
+                  response2.body.data = reRenders;
                 }
                 break;
               } else {
@@ -9547,7 +9570,7 @@ var api = async (event) => {
                 );
                 params.s3Key = s3Key;
                 params = await setRenderDefaults(params);
-                response.body.preCache = await preCallGenieAPIs(
+                response2.body.preCache = await preCallGenieAPIs(
                   params
                 );
                 const prepareKey = `_processing/${params.renderId}/render.json`;
@@ -9577,7 +9600,7 @@ var api = async (event) => {
                       availableAt.push(assetS3Key);
                     })
                   );
-                  response.body.availableAt = availableAt;
+                  response2.body.availableAt = availableAt;
                 }
                 await queueMsg("prepare", {
                   renderId: {
@@ -9609,14 +9632,14 @@ var api = async (event) => {
                   )
                 );
                 if (s3Key) {
-                  response.body.success = true;
-                  response.body.availableAt = response.body.availableAt ?? // Allows earlier code to set custom version of this
+                  response2.body.success = true;
+                  response2.body.availableAt = response2.body.availableAt ?? // Allows earlier code to set custom version of this
                   `${genieGlobals.GENIE_HOST}${s3Key.replace("/index.html", "")}`;
-                  response.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
-                  response.body.renderId = params.renderId;
+                  response2.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
+                  response2.body.renderId = params.renderId;
                 }
               } catch (e) {
-                response.body.error = e.message;
+                response2.body.error = e.message;
               }
               break;
           }
@@ -9636,15 +9659,15 @@ var api = async (event) => {
             JSON_MIME
           );
         }
-        response.body.error = error2;
+        response2.body.error = error2;
       } finally {
-        if (!response.isBase64Encoded) {
-          response.body = JSON.stringify(response.body);
+        if (!response2.isBase64Encoded) {
+          response2.body = JSON.stringify(response2.body);
         }
       }
     }
   }
-  return response;
+  return response2;
 };
 var renderKeyParams = async (params) => {
   let listing, areaId = params.area?.areaId ?? params.areaId, propertyType = 0, listingStatus = "";

@@ -9141,7 +9141,7 @@ var require_form_data = __commonJS({
     var CombinedStream = require_combined_stream();
     var util = require("util");
     var path = require("path");
-    var http = require("http");
+    var http2 = require("http");
     var https = require("https");
     var parseUrl = require("url").parse;
     var fs2 = require("fs");
@@ -9412,7 +9412,7 @@ var require_form_data = __commonJS({
       if (options.protocol == "https:") {
         request = https.request(options);
       } else {
-        request = http.request(options);
+        request = http2.request(options);
       }
       this.getLength(function(err, length) {
         if (err && err !== "Unknown stream") {
@@ -9466,8 +9466,8 @@ var require_proxy_from_env = __commonJS({
     var stringEndsWith = String.prototype.endsWith || function(s) {
       return s.length <= this.length && this.indexOf(s, this.length - s.length) !== -1;
     };
-    function getProxyForUrl(url) {
-      var parsedUrl = typeof url === "string" ? parseUrl(url) : url || {};
+    function getProxyForUrl(url2) {
+      var parsedUrl = typeof url2 === "string" ? parseUrl(url2) : url2 || {};
       var proto = parsedUrl.protocol;
       var hostname = parsedUrl.host;
       var port = parsedUrl.port;
@@ -9543,9 +9543,9 @@ var require_debug = __commonJS({
 // node_modules/follow-redirects/index.js
 var require_follow_redirects = __commonJS({
   "node_modules/follow-redirects/index.js"(exports, module2) {
-    var url = require("url");
-    var URL2 = url.URL;
-    var http = require("http");
+    var url2 = require("url");
+    var URL2 = url2.URL;
+    var http2 = require("http");
     var https = require("https");
     var Writable = require("stream").Writable;
     var assert = require("assert");
@@ -9788,7 +9788,7 @@ var require_follow_redirects = __commonJS({
       for (var event of events) {
         request.on(event, eventHandlers[event]);
       }
-      this._currentUrl = /^\//.test(this._options.path) ? url.format(this._options) : (
+      this._currentUrl = /^\//.test(this._options.path) ? url2.format(this._options) : (
         // When making a request to a proxy, […]
         // a client MUST send the target URI in absolute-form […].
         this._options.path
@@ -9856,7 +9856,7 @@ var require_follow_redirects = __commonJS({
       var currentHostHeader = removeMatchingHeaders(/^host$/i, this._options.headers);
       var currentUrlParts = parseUrl(this._currentUrl);
       var currentHost = currentHostHeader || currentUrlParts.host;
-      var currentUrl = /^\w+:/.test(location) ? this._currentUrl : url.format(Object.assign(currentUrlParts, { host: currentHost }));
+      var currentUrl = /^\w+:/.test(location) ? this._currentUrl : url2.format(Object.assign(currentUrlParts, { host: currentHost }));
       var redirectUrl = resolveUrl(location, currentUrl);
       debug("redirecting to", redirectUrl.href);
       this._isRedirect = true;
@@ -9934,7 +9934,7 @@ var require_follow_redirects = __commonJS({
       if (useNativeURL) {
         parsed = new URL2(input);
       } else {
-        parsed = validateUrl(url.parse(input));
+        parsed = validateUrl(url2.parse(input));
         if (!isString(parsed.protocol)) {
           throw new InvalidUrlError({ input });
         }
@@ -9942,7 +9942,7 @@ var require_follow_redirects = __commonJS({
       return parsed;
     }
     function resolveUrl(relative, base) {
-      return useNativeURL ? new URL2(relative, base) : parseUrl(url.resolve(base, relative));
+      return useNativeURL ? new URL2(relative, base) : parseUrl(url2.resolve(base, relative));
     }
     function validateUrl(input) {
       if (/^\[/.test(input.hostname) && !/^\[[:0-9a-f]+\]$/i.test(input.hostname)) {
@@ -10021,7 +10021,7 @@ var require_follow_redirects = __commonJS({
     function isURL(value) {
       return URL2 && value instanceof URL2;
     }
-    module2.exports = wrap({ http, https });
+    module2.exports = wrap({ http: http2, https });
     module2.exports.wrap = wrap;
   }
 });
@@ -10031,9 +10031,9 @@ var require_axios = __commonJS({
   "node_modules/axios/dist/node/axios.cjs"(exports, module2) {
     "use strict";
     var FormData$1 = require_form_data();
-    var url = require("url");
+    var url2 = require("url");
     var proxyFromEnv = require_proxy_from_env();
-    var http = require("http");
+    var http2 = require("http");
     var https = require("https");
     var util = require("util");
     var followRedirects = require_follow_redirects();
@@ -10044,8 +10044,8 @@ var require_axios = __commonJS({
       return e && typeof e === "object" && "default" in e ? e : { "default": e };
     }
     var FormData__default = /* @__PURE__ */ _interopDefaultLegacy(FormData$1);
-    var url__default = /* @__PURE__ */ _interopDefaultLegacy(url);
-    var http__default = /* @__PURE__ */ _interopDefaultLegacy(http);
+    var url__default = /* @__PURE__ */ _interopDefaultLegacy(url2);
+    var http__default = /* @__PURE__ */ _interopDefaultLegacy(http2);
     var https__default = /* @__PURE__ */ _interopDefaultLegacy(https);
     var util__default = /* @__PURE__ */ _interopDefaultLegacy(util);
     var followRedirects__default = /* @__PURE__ */ _interopDefaultLegacy(followRedirects);
@@ -10628,9 +10628,9 @@ var require_axios = __commonJS({
     function encode(val) {
       return encodeURIComponent(val).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+").replace(/%5B/gi, "[").replace(/%5D/gi, "]");
     }
-    function buildURL(url2, params, options) {
+    function buildURL(url3, params, options) {
       if (!params) {
-        return url2;
+        return url3;
       }
       const _encode = options && options.encode || encode;
       const serializeFn = options && options.serialize;
@@ -10641,13 +10641,13 @@ var require_axios = __commonJS({
         serializedParams = utils$1.isURLSearchParams(params) ? params.toString() : new AxiosURLSearchParams(params, options).toString(_encode);
       }
       if (serializedParams) {
-        const hashmarkIndex = url2.indexOf("#");
+        const hashmarkIndex = url3.indexOf("#");
         if (hashmarkIndex !== -1) {
-          url2 = url2.slice(0, hashmarkIndex);
+          url3 = url3.slice(0, hashmarkIndex);
         }
-        url2 += (url2.indexOf("?") === -1 ? "?" : "&") + serializedParams;
+        url3 += (url3.indexOf("?") === -1 ? "?" : "&") + serializedParams;
       }
-      return url2;
+      return url3;
     }
     var InterceptorManager = class {
       constructor() {
@@ -11204,8 +11204,8 @@ var require_axios = __commonJS({
         ));
       }
     }
-    function isAbsoluteURL(url2) {
-      return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url2);
+    function isAbsoluteURL(url3) {
+      return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url3);
     }
     function combineURLs(baseURL, relativeURL) {
       return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
@@ -11217,8 +11217,8 @@ var require_axios = __commonJS({
       return requestedURL;
     }
     var VERSION = "1.6.7";
-    function parseProtocol(url2) {
-      const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url2);
+    function parseProtocol(url3) {
+      const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url3);
       return match && match[1] || "";
     }
     var DATA_URL_PATTERN = /^(?:([^;]+);)?(?:[^;]+;)?(base64|),([\s\S]*)$/;
@@ -12110,8 +12110,8 @@ var require_axios = __commonJS({
         const msie = /(msie|trident)/i.test(navigator.userAgent);
         const urlParsingNode = document.createElement("a");
         let originURL;
-        function resolveURL(url2) {
-          let href = url2;
+        function resolveURL(url3) {
+          let href = url3;
           if (msie) {
             urlParsingNode.setAttribute("href", href);
             href = urlParsingNode.href;
@@ -12671,23 +12671,23 @@ var require_axios = __commonJS({
       }
     };
     utils$1.forEach(["delete", "get", "head", "options"], function forEachMethodNoData(method) {
-      Axios.prototype[method] = function(url2, config) {
+      Axios.prototype[method] = function(url3, config) {
         return this.request(mergeConfig(config || {}, {
           method,
-          url: url2,
+          url: url3,
           data: (config || {}).data
         }));
       };
     });
     utils$1.forEach(["post", "put", "patch"], function forEachMethodWithData(method) {
       function generateHTTPMethod(isForm) {
-        return function httpMethod(url2, data, config) {
+        return function httpMethod(url3, data, config) {
           return this.request(mergeConfig(config || {}, {
             method,
             headers: isForm ? {
               "Content-Type": "multipart/form-data"
             } : {},
-            url: url2,
+            url: url3,
             data
           }));
         };
@@ -61835,18 +61835,19 @@ __export(src_exports, {
   xslt: () => xslt
 });
 module.exports = __toCommonJS(src_exports);
+var import_http = __toESM(require("http"), 1);
+var import_url = __toESM(require("url"), 1);
+var import_querystring = __toESM(require("querystring"), 1);
 var import_fs = __toESM(require("fs"), 1);
 var import_path = require("path");
 var import_SaxonJS2N = __toESM(require_SaxonJS2N(), 1);
 var import_client_s3 = require("@aws-sdk/client-s3");
+var JSON_MIME = "application/json";
 var REGION = process.env.REGION ?? "eu-west-2";
 var BUCKET = process.env.BUCKET ?? "genie-hub-2";
 var GENIE_URL = process.env.GENIE_URL ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/";
-var JSON_MIME = "application/json";
-var KEEP_RENDER_FOR = process.env?.KEEP_RENDER_FOR || 52;
-var WEEK_IN_MILLISECONDS = 60 * 60 * 24 * 1e3;
 var s3Client = new import_client_s3.S3Client({ region: REGION });
-var TEMP_DIR = process.env.TEMP_DIR ?? "D:/Dropbox/development/genie-marketing-hub-master/GenieHub/genie-hub-cloud/public/_assets/_xsl_imports/";
+var TEMP_DIR = process.env.TEMP_DIR ?? "";
 var transform = (xml, xslt2, xsltBaseUri, method = "xml") => {
   try {
     const result = import_SaxonJS2N.default.XPath.evaluate(
@@ -61875,7 +61876,7 @@ var transform = (xml, xslt2, xsltBaseUri, method = "xml") => {
   }
 };
 var copyFilesToLocal = async () => {
-  if (TEMP_DIR !== "D:/Dropbox/development/genie-marketing-hub-master/GenieHub/genie-hub-cloud/public/_assets/_xsl_imports/") {
+  if (!TEMP_DIR.includes("public/_assets/_xls")) {
     const imports = await listS3Folder("_assets/_xsl_imports/");
     await Promise.all(
       imports.map(async (s3File) => {
@@ -61887,8 +61888,10 @@ var copyFilesToLocal = async () => {
   }
 };
 var xslt = async (event) => {
-  if (!event.Records)
+  if (!event.Records) {
+    console.log("xslt: no records");
     return;
+  }
   await copyFilesToLocal();
   await Promise.all(
     event.Records.map(async (r) => {
@@ -61898,12 +61901,18 @@ var xslt = async (event) => {
         ).then(
           (buffer) => buffer && buffer.length > 0 ? JSON.parse(buffer) : null
         );
+        if (params.isDebug) {
+          console.log("xslt transforming:", params.asset);
+        }
         const transformedXML = transform(
           transformXml,
           transformXsl,
           `file://${TEMP_DIR}`,
           params.s3Key.endsWith("html") ? "html" : "xml"
         );
+        if (params.isDebug === "true") {
+          console.log("Transformed:", transformedXML);
+        }
         if (transformedXML) {
           if (typeof transformedXML == "object" && transformedXML.failed) {
             await toS3(
@@ -61929,13 +61938,24 @@ var xslt = async (event) => {
           } else {
             const s3Target = params.noPuppeteer ? params.s3Key : r.s3.object.key.replace("-xslt.json", ".html");
             params.url = `${GENIE_URL}${s3Target}`;
+            if (params.isDebug) {
+              console.log("target:", s3Target, params.url);
+            }
             if (params.noPuppeteer) {
-              await toS3(
+              const htmlTags = {
+                finalRender: true,
+                ...params.tags,
+                "Genie-Delete": "extended"
+              };
+              const r2 = await toS3(
                 s3Target,
                 transformedXML,
-                { finalRender: true, ...params.tags, "Genie-Delete": "extended" },
+                htmlTags,
                 "text/html"
               );
+              if (params.isDebug) {
+                console.log("No Pupp result:", r2);
+              }
             } else {
               await toS3(
                 s3Target,
@@ -62030,12 +62050,64 @@ var toS3 = async (key, buffer, tags = null, mimeType = null, bucket = null) => {
         Key: key,
         Body: buffer,
         ContentType: mimeType,
+        CacheControl: "max-age=30",
         Tagging: tags
       })
     );
     return res.ETag;
   } catch (err) {
   }
+};
+if (process.argv.length > 2) {
+  console.log("Processing command line: ", process.argv);
+  try {
+    if (process.argv[2] == "test") {
+      const assetDir = process.cwd() + "/../public/_assets/_xsl/";
+      const dataDir = process.cwd() + "/../public/_assets/_reference/";
+      const server = import_http.default.createServer(async (req, res) => {
+        try {
+          const parsedUrl = import_url.default.parse(req.url);
+          const queryParams = import_querystring.default.parse(parsedUrl.query);
+          const assetPath = `${assetDir}${queryParams.xsl}.xsl`;
+          const dataPath = `${dataDir}${queryParams?.xml ?? "_genie-sample"}.xml`;
+          if (!import_fs.default.existsSync(assetPath)) {
+            res.writeHead(200, { "Content-Type": "text/plain" });
+            res.end(`Asset ${queryParams.xsl} does not exist`);
+            return;
+          }
+          if (!import_fs.default.existsSync(dataPath)) {
+            res.writeHead(200, { "Content-Type": "text/plain" });
+            res.end(`Data file ${dataPath} does not exist`);
+            return;
+          }
+          const output = await testXSL(assetPath, dataPath, null);
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.end(typeof output == "string" ? output : JSON.stringify(output));
+        } catch (err) {
+          res.end(`Failed with ${err.toString()}`);
+        }
+      });
+      const PORT = process.env.PORT || 3e3;
+      server.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    }
+  } catch (err) {
+    console.log("Error:", err);
+  }
+}
+var testXSL = async (xslKey, xmlKey = "_assets/_reference/_genie-sample.xml", outName = "output.svg") => {
+  const transformXsl = import_fs.default.existsSync(xslKey) ? import_fs.default.readFileSync(xslKey, "utf8") : (await fromS3(`_assets/_xsl/${xslKey}.xsl`)).toString();
+  const transformXml = import_fs.default.existsSync(xmlKey) ? import_fs.default.readFileSync(xmlKey, "utf8") : (await fromS3(xmlKey)).toString();
+  const r = transform(transformXml, transformXsl, `file://${TEMP_DIR}`);
+  if (outName) {
+    import_fs.default.writeFile(outName, r, (err) => {
+      if (err)
+        throw err;
+      console.log(`Data has been written to the ${out}.`);
+    });
+  }
+  return r;
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
