@@ -150,7 +150,13 @@ export const api = async event => {
                         params
                     );
                 } else {
-                    switch (route) {
+                    switch ( route ) {
+                        case '/build-version':
+                            response.body = {
+                                buildVersion: await buildVersion()
+                            };
+                            break;
+
                         case '/test':
                             console.log(params);
                             response.body = await propertySurroundingAreas(

@@ -324,9 +324,6 @@
 		<xsl:value-of select="genie:format-date( //output/@reportDate, 'Y' )" />
 	</xsl:variable>
 
-	<!-- $buildVersion -->
-	<xsl:variable name="buildVersion" select="//output/@version" />
-
 	<!-- $today -->
 	<xsl:variable name="today">
 		<xsl:value-of select="genie:format-date( //output/@reportDate, 'm/d/Y' )" />
