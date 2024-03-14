@@ -64,7 +64,10 @@ const copyFilesToLocal = async () => {
 };
 
 export const xslt = async event => {
-	if (!event.Records) return;
+	if ( !event.Records ) {
+		console.log( 'xslt: no records' );
+		return;
+	}
 
 	await copyFilesToLocal();
 
@@ -77,12 +80,20 @@ export const xslt = async event => {
 					buffer && buffer.length > 0 ? JSON.parse(buffer) : null
 				);
 
+				if ( params.isDebug ) {
+					console.log( 'xslt transforming:',params.asset );
+				}
+
 				const transformedXML = transform(
 					transformXml,
 					transformXsl,
 					`file://${TEMP_DIR}`,
 					params.s3Key.endsWith("html") ? "html" : "xml"
 				);
+
+				if ( params.isDebug === 'true' ) {
+					console.log( 'Transformed:',transformedXML );
+				}
 
 				if (transformedXML) {
 					if (typeof transformedXML == "object" && transformedXML.failed) {
@@ -114,17 +125,26 @@ export const xslt = async event => {
 
 						params.url = `${GENIE_URL}${s3Target}`;
 
-						if (params.noPuppeteer) {
-							await toS3(
+						if ( params.isDebug  ) {
+							console.log( 'target:',s3Target,params.url  );
+						}
+
+						if ( params.noPuppeteer ) {
+							const htmlTags = {
+								finalRender: true,
+								...params.tags,
+								"Genie-Delete": "extended",
+							};
+							const r = await toS3(
 								s3Target,
 								transformedXML,
-								{
-									finalRender: true,
-									...params.tags,
-									"Genie-Delete": "extended",
-								},
+								htmlTags,
 								"text/html"
 							);
+						
+							if ( params.isDebug  ) {
+								console.log( 'No Pupp result:',r  );
+							}
 						} else {
 							await toS3(
 								s3Target,
@@ -245,6 +265,7 @@ const toS3 = async (
 				Key: key,
 				Body: buffer,
 				ContentType: mimeType,
+				CacheControl: "max-age=30",
 				Tagging: tags,
 			})
 		);
@@ -255,6 +276,7 @@ const toS3 = async (
 
 
 if ( process.argv.length > 2 ) {
+	console.log( 'Processing command line: ', process.argv );
 	try {
 		if ( process.argv[2] == "test" ) {
 			const assetDir = process.cwd() + '/../public/_assets/_xsl/';
