@@ -6,7 +6,7 @@
 	Sizes:				Landing Page
 	Supports:			Area Funnel
 	Permission: 		Funnels
-		Default Download:	area-insider-reports/market-insider
+	Default Download:	area-insider-reports/market-insider
 	Render Key:			landing-page/TheGenie-Instant-Download-v4-AREASLUG
 -->
 
@@ -15,7 +15,6 @@
 	<xsl:import href="landing-pages.xsl" />
 	<xsl:import href="landing-pages-market-insider.xsl" />
 	<xsl:import href="genie-functions.xsl" />
-
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="change" select="genie:area-price-change( //areas/area[1]/statistics, //output/@pricePercent, 0 )" />
@@ -29,11 +28,6 @@
 			<xsl:with-param name="description" select="$head-description" />
 			<xsl:with-param name="secondaryCSS" select="'market-insider-instant-download-v4'" />
 		</xsl:call-template>
-		<link rel="stylesheet" type="text/css">
-			<xsl:attribute name="href">
-				<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/css/market-insider-common.css' )" />
-			</xsl:attribute>
-		</link>
 
 		<body>
 			<xsl:attribute name="class">

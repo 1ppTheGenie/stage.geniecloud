@@ -11,19 +11,13 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="landing-pages.xsl" />
-<xsl:import href="landing-pages-market-insider.xsl" />
-
+	<xsl:import href="landing-pages.xsl" />
+	<xsl:import href="landing-pages-market-insider.xsl" />
 
 	<xsl:template name="landing-page">
 		<xsl:variable name="description">
 			<xsl:value-of select="concat( 'The ', //area/name, ' market is shifting! View the latest market trends and grab your customized report now.' )" />
 		</xsl:variable>
-		<link rel="stylesheet" type="text/css">
-			<xsl:attribute name="href">
-				<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/css/market-insider-common.css' )" />
-			</xsl:attribute>
-		</link>
 
 		<xsl:call-template name="standard-header">
 			<xsl:with-param name="title" select="concat( 'Market-Insider Report: Instant Download for ', //area/name )" />

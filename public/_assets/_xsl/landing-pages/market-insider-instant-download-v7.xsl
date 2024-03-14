@@ -7,7 +7,7 @@
 	Sizes:				Landing Page
 	Supports:			Area Funnel
 	Permission: 		Funnels
-		Default Download:	area-insider-reports/market-insider
+	Default Download:	area-insider-reports/market-insider
 	Render Key:			landing-page/TheGenie-Instant-Download-v7-AREASLUG
 -->
 
@@ -19,12 +19,6 @@
 		<xsl:variable name="description">
 			<xsl:value-of select="concat( 'The ', //area/name, ' market is shifting! View the latest market trends and grab your customized report now.' )" />
 		</xsl:variable>
-
-		<link rel="stylesheet" type="text/css">
-			<xsl:attribute name="href">
-				<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/css/market-insider-common.css' )" />
-			</xsl:attribute>
-		</link>
 
 		<xsl:call-template name="standard-header">
 			<xsl:with-param name="title" select="concat( 'Market-Insider Report: Instant Download for ', //area/name )" />
