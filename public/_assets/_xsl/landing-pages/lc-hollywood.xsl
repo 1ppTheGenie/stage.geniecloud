@@ -40,7 +40,6 @@
 		<body>
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'lc-hollywood ', $cssThemeClass)" />
-
 			</xsl:attribute>
 
 			<div id="step1" class="steps banner-top-section-info section background">
@@ -614,78 +613,84 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 					</div>
 				</section>
 
-				<div>
-					<section class="dark-bg" id="real_time_market_trends">
-						<div class="container">
-							<div class="col-md-12 real-time text-center">
-								<h2 class="subtitle-font">
-									<span>
-										<xsl:value-of select="concat('REAL-TIME ' , //area/name )" />
-									</span>
-									<br/>
-									<span>
-										<xsl:value-of select="' Neighborhood Snapshot'" />
-									</span>
-								</h2>
-								<p class="subtitle-font">
-									<xsl:value-of select="concat( '- as of ', genie:format-date( //output/@reportDate, '[MNn] [D], [Y0001] @ [h]:[m01][PN,*-2]') )" />
-								</p>
-							</div>
+				<section class="genie-alternate" id="real_time_market_trends">
+					<div class="container">
+						<div class="col-md-12 real-time text-center">
+							<h2 class="subtitle-font">
+								<span>
+									<xsl:value-of select="concat('REAL-TIME ' , //area/name )" />
+								</span>
+								<br/>
+								<span>
+									<xsl:value-of select="' Neighborhood Snapshot'" />
+								</span>
+							</h2>
+							<p class="subtitle-font">
+								<xsl:value-of select="concat( '- as of ', genie:format-date( //output/@reportDate, '[MNn] [D], [Y0001] @ [h]:[m01][PN,*-2]') )" />
+							</p>
 						</div>
-					</section>
+					</div>
+				</section>
 
-					<section class="dark-bg market-update">
-						<div class="container">
-							<xsl:call-template name="add-genie-embed">
-								<xsl:with-param name="embed" select="'MarketUpdate'" />
-							</xsl:call-template>
-						</div>
-					</section>
+				<section class="genie-alternate market-update">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'MarketUpdate'" />
+						</xsl:call-template>
+					</div>
+				</section>
 
+				<section class="genie-alternate">
 					<div class="container">
 						<xsl:call-template name="add-genie-embed">
 							<xsl:with-param name="embed" select="'FastFacts'" />
 						</xsl:call-template>
 					</div>
+				</section>
 
-					<section class="dark-bg">
-						<div class="container">
-							<xsl:call-template name="add-genie-embed">
-								<xsl:with-param name="embed" select="'MarketTrending'" />
-							</xsl:call-template>
-						</div>
-					</section>
-
+				<section class="genie-alternate">
 					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'MarketTrending'" />
+						</xsl:call-template>
+					</div>
+				</section>
+
+				<section class="genie-alternate">
+					<div class="container ">
 						<xsl:call-template name="add-genie-embed">
 							<xsl:with-param name="embed" select="'MarketHistory'" />
 						</xsl:call-template>
 					</div>
+				</section>
 
-					<section class="dark-bg">
-						<div class="container">
-							<xsl:call-template name="add-genie-embed">
-								<xsl:with-param name="embed" select="'PeopleBuying'" />
-							</xsl:call-template>
-						</div>
-					</section>
+				<section class="genie-alternate">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'PeopleBuying'" />
+						</xsl:call-template>
+					</div>
+				</section>
 
+				<section class="genie-alternate">
 					<div class="container">
 						<xsl:call-template name="add-genie-embed">
 							<xsl:with-param name="embed" select="'ListToSold'" />
 						</xsl:call-template>
 					</div>
+				</section>
 
-					<section class="dark-bg">
-						<div class="container">
-							<xsl:call-template name="add-genie-embed">
-								<xsl:with-param name="embed" select="'ListingMapStyleOne'" />
-							</xsl:call-template>
-						</div>
-					</section>
-				</div>
+				<section class="genie-alternate">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'ListingMapStyleOne'" />
+						</xsl:call-template>
+					</div>
+				</section>
 
-				<xsl:call-template name="agent-about" />
+				<section class="genie-alternate">
+					<xsl:call-template name="agent-about" />
+				</section>
 			</div>
 
 			<div class="modal fade page-modal" id="request-modal" tabindex="-1" role="dialog" aria-hidden="true">
