@@ -217,7 +217,7 @@ h2.heading-title {
 	margin-bottom: 40px;
 }
 
-.map-iframe iframe {
+.virtual-tour-embed iframe {
 	width: 100%;
 	max-width: 100%;
 	height: 600px;
