@@ -10,6 +10,15 @@ const __BASE__ =
 		? `/_assets/landing-pages/dist/${__BUILD_VERSION__}/`
 		: "";
 
+const updateGenieVersion = () => ({
+	name: "update-version",
+	async generateBundle(options, bundle) {
+		await fs.writeFile(`../public/_assets/version.txt`, __BUILD_VERSION__);
+
+		console.log(`Version ${__BUILD_VERSION__} has been written to dist/version.txt`);
+	},
+});
+
 export default defineConfig({
 	plugins: [solidPlugin(), solidSvg(), mkcert()],
 	resolve: {
