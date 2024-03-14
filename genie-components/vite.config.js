@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import fs from "fs/promises";
 import solidPlugin from "vite-plugin-solid";
 import solidSvg from "vite-plugin-solid-svg";
 import mkcert from "vite-plugin-mkcert";
@@ -20,7 +21,7 @@ const updateGenieVersion = () => ({
 });
 
 export default defineConfig({
-	plugins: [solidPlugin(), solidSvg(), mkcert()],
+	plugins: [solidPlugin(), solidSvg(), mkcert(), updateGenieVersion()],
 	resolve: {
 		alias: {
 			"@": path.resolve(__dirname, "./src"),
@@ -39,8 +40,8 @@ export default defineConfig({
 	},
 	build: {
 		outDir: `../public/_assets/landing-pages/dist/${__BUILD_VERSION__}/`,
-		sourcemap: false,
-		minify: false,
+		sourcemap: true,
+		minify: true,
 		target: "esnext",
 		polyfillDynamicImport: false,
 		rollupOptions: {
@@ -49,7 +50,7 @@ export default defineConfig({
 				chunkFileNames: `assets/[name].js`,
 				assetFileNames: `assets/[name].[ext]`,
 			},
-		},
+		}
 	},
 	server: {
 		port: 3001,

@@ -11,9 +11,9 @@ const { toXML } = pkg;
 // prettier-ignore
 import {propertySurroundingAreas, getAreaBoundary, getUser, impersonater, getListing, areaName } from "./genieAI.js";
 // prettier-ignore
-import { userSetting, embedsAPI, getRenderJSON, getCollection, setRenderDefaults, genieGlobals, queueMsg, getAssets, getThemes, getCollections, saveCollection, getCollectionTemplates, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset, preCallGenieAPIs } from "./utils/index.js";
+import { userSetting, embedsAPI, cloudHubAPI,getRenderJSON, getCollection, setRenderDefaults, genieGlobals, queueMsg, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset, preCallGenieAPIs } from "./utils/index.js";
 // prettier-ignore
-import { setS3Retention, listS3Folder, toS3, copyObject, headObject, jsonFromS3, getTags, fromS3, BUCKET, deleteObject } from "./utils/index.js";
+import { listS3Folder, toS3, copyObject, headObject, jsonFromS3, fromS3, BUCKET, deleteObject, buildVersion } from "./utils/index.js";
 
 const CLOUDFLARE_KEY = process.env?.CLOUDFLARE_KEY;
 const KEEP_FOR = process.env?.KEEP_FOR || 8;
@@ -144,9 +144,14 @@ export const api = async event => {
                 if (params?.impersonaterId)
                     impersonater.id = params.impersonaterId;
 
-                if (route.startsWith('/genie-embed')) {
+                if ( route.startsWith( '/genie-embed' ) ) {
                     response.body = await embedsAPI(
-                        route.replace('/genie-embed/v2/', ''),
+                        route.replace( '/genie-embed/v2/', '' ),
+                        params
+                    );
+                }else if (route.startsWith('/genie-admin')) {
+                    response.body = await cloudHubAPI(
+                        route.replace('/genie-admin/v2/', ''),
                         params
                     );
                 } else {
@@ -245,78 +250,14 @@ export const api = async event => {
                             }
                             break;
 
-                        case '/render-errors':
-                            const errors = [];
-                            const rErrors = await listS3Folder('_errors');
 
-                            await Promise.all(
-                                rErrors.map(async e => {
-                                    if (e.Size > 0) {
-                                        const json = JSON.parse(
-                                            (await fromS3(e.Key)).toString()
-                                        );
-
-                                        json.key = e.Key;
-
-                                        errors.push(json);
-                                    }
-                                })
-                            );
-
-                            response.body = { success: true, ...errors };
-                            break;
-
-                        case '/get-themes':
-                            const themes = await getThemes();
-                            response.body = { success: true, ...themes };
-                            break;
-
-                        case '/get-collection-templates':
-                            const templates = await getCollectionTemplates();
-                            response.body = { success: true, ...templates };
-                            break;
-
-                        case '/get-collections':
-                            const collections = await getCollections();
-                            const processedCollections = {};
-
-                            for (const index in collections) {
-                                if (collections[index].Key.endsWith('json')) {
-                                    processedCollections[
-                                        basename(collections[index].Key)
-                                    ] = JSON.parse(
-                                        (
-                                            await fromS3(collections[index].Key)
-                                        ).toString()
-                                    );
-                                }
-                            }
-
-                            response.body = {
-                                success: true,
-                                collections: processedCollections
-                            };
-                            break;
-
-                        case '/save-collection':
-                            const collectionSaved = await saveCollection(
-                                params
-                            );
-                            response.body = {
-                                success: true,
-                                collection: collectionSaved
-                            };
-                            break;
 
                         case '/make-qrcode':
                             const qr = await generateQR();
                             response.body = { success: true, ...qr };
                             break;
 
-                        case '/get-assets':
-                            const assets = await getAssets();
-                            response.body = { success: true, ...assets };
-                            break;
+
 
                         /*
                         case '/clear-cache':

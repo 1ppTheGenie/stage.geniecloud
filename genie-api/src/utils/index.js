@@ -3,7 +3,7 @@ import { fromS3, jsonFromS3, headObject } from "./aws.js";
 export * from "./dates.js";
 export * from "./aws.js";
 export * from "./render-data.js";
-export * from "./hubAPI.js";
+export * from "./cloudHubAPI.js";
 export * from "./embedsAPI.js";
 
 export const genieGlobals = {

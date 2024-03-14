@@ -1,6 +1,6 @@
 {
 	"name": "genie-landing-page-components",
-	"version": "2.3.4",
+	"version": "2.3.9",
 	"description": "",
 	"scripts": {
 		"start": "vite",

@@ -80,7 +80,7 @@ export const getRenderJSON = async params => {
         },
 
         // *** Overrides
-        xslAsset: params.asset.replaceAll('/','_'),
+        xslAsset: params.asset.replaceAll('/', '_'),
 
         // *** Overrides
         overrides: params.customizations
@@ -126,9 +126,11 @@ export const getRenderJSON = async params => {
         let times = [];
 
         if (params.openHouseTimes) {
-            params.openHouseTimes.forEach( t => {
+            params.openHouseTimes.forEach(t => {
                 // Support timestamps and formatted date/time strings
-                times.push(typeof t == 'string' ? DateTime.fromISO(t).toMillis() : t);
+                times.push(
+                    typeof t == 'string' ? DateTime.fromISO(t).toMillis() : t
+                );
             });
         } else {
             const r = await openhouseByMlsNumber(
@@ -145,7 +147,7 @@ export const getRenderJSON = async params => {
         }
         params.openHouseTimes = times;
 
-        root.single = await processListing(params);
+        root.single = await processListing(params, root.agents[0].agent.timezone);
 
         let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0, skipCache);
 
@@ -209,7 +211,7 @@ const filteredMerge = (...objects) => {
 const defaultRenderSettings = {
     size: 'facebook',
     theme: '_default',
-    themeHue:'',
+    themeHue: '',
     additionalAgents: null,
     propertyType: 0,
     mapStyle: 'satellite-streets-v9',
@@ -391,9 +393,26 @@ const processAgents = async agentIds => {
 
             let timezone;
             switch (marketingSettings.profile?.timeZoneId) {
+                case 1:
+                    timezone = 'America/New_York';
+                    break;
+                case 2:
+                    timezone = 'America/Chicago';
+                    break;
+                case 3:
+                    timezone = 'America/Denver';
+                    break;
                 case 4:
+                    timezone = 'America/Los_Angeles';
+                    break;
+                case 5:
+                    timezone = 'America/Anchorage';
+                    break;
+                case 6:
+                    timezone = 'Pacific/Honolulu';
+                    break;
                 default:
-                    timezone = 'PT';
+                    timezone = 'America/Los_Angeles';
                     break;
             }
             let about = (marketingSettings.profile.about ?? '').replaceAll(
@@ -529,7 +548,6 @@ const processAreas = async params => {
                     }
                 });
 
-
                 // **** LISTINGS
                 const mls_properties = await mlsProperties(
                     params.mlsId ?? 0,
@@ -541,7 +559,7 @@ const processAreas = async params => {
                     debugLog('mlsProperties', params, mls_properties);
 
                 if (mls_properties && Array.isArray(mls_properties)) {
-                    const agentListings = await agentMlsNumbers( params.userId );
+                    const agentListings = await agentMlsNumbers(params.userId);
 
                     const listings = [];
 
@@ -611,7 +629,11 @@ const processAreas = async params => {
                                         : null,
                                     dom: p.daysOnMarket,
                                     thumb: p.photoPrimaryUrl,
-                                    isAgent: agentListings.includes( p.mlsNumber.toLowerCase() ) ? 1 : 0,
+                                    isAgent: agentListings.includes(
+                                        p.mlsNumber.toLowerCase()
+                                    )
+                                        ? 1
+                                        : 0,
                                     dateSort: p.soldDate
                                         ? DateTime.fromISO(
                                               p.soldDate
@@ -728,7 +750,6 @@ const processAreas = async params => {
                         statistics.push(history);
                     }
 
-
                     area._content.push({
                         _name: 'statistics',
                         _attrs: {
@@ -786,7 +807,7 @@ const listingPropertyTypeId = async params => {
     return listing.propertyTypeID;
 };
 
-const processListing = async params => {
+const processListing = async (params, agentTimezone) => {
     let single = [];
 
     const listing = await getListing(
@@ -863,9 +884,8 @@ const processListing = async params => {
         ];
 
         /*	Open House */
-        if ( params.openHouseTimes ) {
-            //$tz = new DateTimeZone(Users.timezone(userId));
-            const tz = { zone: 'PST' };
+        if (params.openHouseTimes) {
+            const tz = { zone: agentTimezone ?? 'PST' };
             const oh = {
                 _name: 'openHouse',
                 _content: []
@@ -875,7 +895,7 @@ const processListing = async params => {
                 dow: 'EEEE',
                 date: 'd',
                 month: 'MMMM',
-                year: 'y',
+                year: 'y'
             };
 
             for (let i = 0; i < params.openHouseTimes.length; i += 2) {
@@ -893,11 +913,14 @@ const processListing = async params => {
                             ).toFormat(timeAttrbs[key]))
                     );
 
-                    [{ name:'starts', value: ts1 },{ name: 'ends', value: ts2 }].forEach( o => {
-                            const dt = DateTime.fromMillis( o.value, tz );
-                            const dtFormat = (dt.minute === 0) ? 'ha': 't';
-                            session._attrs[o.name] = dt.toFormat( dtFormat );
-                    })
+                    [
+                        { name: 'starts', value: ts1 },
+                        { name: 'ends', value: ts2 }
+                    ].forEach(o => {
+                        const dt = DateTime.fromMillis(o.value, tz);
+                        const dtFormat = dt.minute === 0 ? 'ha' : 't';
+                        session._attrs[o.name] = dt.toFormat(dtFormat);
+                    });
 
                     session._attrs['ms'] = ts1;
 
@@ -1186,15 +1209,12 @@ const processCollection = async params => {
     }
 };
 
-const buildVersion = async () => {
-    const files = await listS3Folder('_assets/landing-pages/dist');
-    console.log('buildVersion', files);
-    return files
+export const buildVersion = async () =>
+    (await listS3Folder('_assets/landing-pages/dist'))
         .pop()
         .Key.replace('_assets/landing-pages/dist/', '')
         .split('/')
         .shift();
-};
 
 const debugLog = async (source, params, data) => {
     console.log('debugLog', source, params, data);

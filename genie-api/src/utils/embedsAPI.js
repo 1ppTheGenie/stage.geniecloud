@@ -218,7 +218,7 @@ const add_lead = async params => {
         }
 
         if (params.hasOwnProperty('fullName')) {
-            var split = params.fullName.split(' ');
+            var split = params?.fullName?.split(' ');
 
             if (split.length > 1) {
                 var last = split.pop();
@@ -230,9 +230,9 @@ const add_lead = async params => {
             }
         }
 
-        if (params.hasOwnProperty('meta[message]')) {
-            args['note'] = 'Message: ' + params.meta[message];
-            delete params.meta[message];
+        if (params.hasOwnProperty('meta[message]') && params.hasOwnProperty('meta[message]') != null) {
+            args['note'] = 'Message: ' + params?.meta["message"];
+            delete params.meta["message"];
         } else {
             args['note'] = args['note'] || '';
         }
@@ -326,7 +326,7 @@ const address_search = async params => {
 };
 
 const get_agent_data = async params => {
-    const profile = await getUser(params.agentId);
+    const profile = await getUser(params.agentId ?? params.agent_id);
 
     delete profile.aspNetUserId;
     delete profile.organizationId;
