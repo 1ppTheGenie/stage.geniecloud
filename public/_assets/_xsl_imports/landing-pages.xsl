@@ -538,19 +538,14 @@
 					<xsl:value-of select="concat( 'window.hj( `identify`, `', //agent[1]/aspNetUserId, '`, { leadID: `', //lead/genieLeadId, '`, url: window.location.href, asset: `', //output/@stylesheet, '`});')" />
 				</script>
 			</xsl:if>
-			<script type="module" crossorigin="crossorigin">
-				<xsl:attribute name="src">
-					<xsl:value-of select="concat( '/_assets/landing-pages/dist/', $buildVersion, '/assets/index.js' )" />
-				</xsl:attribute>
-				<xsl:comment />
-			</script>
-			<link rel="stylesheet">
-				<xsl:attribute name="href">
-					<xsl:value-of select="concat( '/_assets/landing-pages/dist/', $buildVersion, '/assets/index.css' )" />
-				</xsl:attribute>
-			</link>
+			<xsl:call-template name="landing-header-additions" />
 		</head>
 	</xsl:template>
+
+	<xsl:template name="landing-header-additions">
+		<xsl:comment>			<!-- For overrides --></xsl:comment>
+	</xsl:template>
+
 	<xsl:template name="render-key">
 		<xsl:value-of select="concat (//output/@folder, '/', //output/@stylesheet )" />
 	</xsl:template>
