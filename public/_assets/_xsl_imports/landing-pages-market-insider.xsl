@@ -2,6 +2,21 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 
+	<xsl:template name="landing-header-additions">
+		<script type="module" crossorigin="crossorigin">
+			<xsl:attribute name="src">
+				<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/market-insider-instant-download.js' )" />
+			</xsl:attribute>
+			<xsl:comment />
+		</script>
+
+		<link rel="stylesheet" type="text/css">
+			<xsl:attribute name="href">
+				<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/css/market-insider-common.css' )" />
+			</xsl:attribute>
+		</link>
+	</xsl:template>
+
 	<xsl:template name="download-button">
 		<xsl:param name="hasCustomPopup" select="'false'" />
 
