@@ -30,7 +30,7 @@
 
 		<xsl:call-template name="standard-header">
 			<xsl:with-param name="seoImage" select="$primaryImage" />
-			<xsl:with-param name="secondaryCSS" select="'cush-single-listing'" />
+			<xsl:with-param name="secondaryCSS" select="'lc-hollywood'" />
 
 			<xsl:with-param name="defaultUtmSource" select="'Property (Hwood)'" />
 			<xsl:with-param name="defaultUtmCampaign" select="concat( $listingAddressLine1, ', ', $listingAddressLine2 )" />
