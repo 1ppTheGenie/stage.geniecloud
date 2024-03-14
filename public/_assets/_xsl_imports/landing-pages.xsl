@@ -286,15 +286,15 @@
 	<xsl:template name="replaceBR">
 		<xsl:param name="str" />
 
-        <xsl:analyze-string select="$str" regex="\n">
-            <xsl:matching-substring>
-                <br/>
-            </xsl:matching-substring>
-            <xsl:non-matching-substring>
-                <xsl:value-of select="."/>
-            </xsl:non-matching-substring>
-        </xsl:analyze-string>
-    </xsl:template>
+		<xsl:analyze-string select="$str" regex="\n">
+			<xsl:matching-substring>
+				<br/>
+			</xsl:matching-substring>
+			<xsl:non-matching-substring>
+				<xsl:value-of select="."/>
+			</xsl:non-matching-substring>
+		</xsl:analyze-string>
+	</xsl:template>
 
 	<xsl:template name="agent-details">
 		<div id="agent-contact" class="container">
@@ -406,6 +406,7 @@
 			</div>
 		</div>
 	</xsl:template>
+
 	<xsl:template name="css-links">
 		<xsl:param name="primaryCSS" select="'common'" />
 		<xsl:param name="secondaryCSS" select="''" />
@@ -553,6 +554,8 @@
 	<xsl:template name="render-key">
 		<xsl:value-of select="concat (//output/@folder, '/', //output/@stylesheet )" />
 	</xsl:template>
+
+
 	<xsl:template name="market-comment">
 		<xsl:variable name="totalSold" select="//areas/area[1]/statistics/@soldPropertyTypeCount" />
 		<xsl:variable name="totalSoldLastPeriod" select="//areas/area[1]/statistics/previous/@totalSold" />
