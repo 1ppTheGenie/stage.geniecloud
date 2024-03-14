@@ -1,0 +1,24 @@
+/*
+	Theme Name:	Frontgate
+*/
+
+@import url("../_css/arapey-italic.css");
+@import url("../_css/montserrat.css");
+
+.frontgate,.frontgate.light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #1B1B1B; /* Heading */
+	--theme-sub-heading-color: #7f7d7e; /* Subtitle */
+	--theme-body-color: #241e20; /* Body */
+	--theme-emphasis-color: #7f7d7e; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Arapey", serif;
+	--theme-sub-heading-font:"Montserrat", sans-serif;
+}
+.frontgate.dark {
+	--theme-body-background: #1B1B1B;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #e3e5e5; /* Subtitle */
+	--theme-body-color: #e1e1e1; /* Body */
+	--theme-emphasis-color: #e3e5e5; /* Outline */
+}

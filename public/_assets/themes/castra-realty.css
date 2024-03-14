@@ -1,11 +1,10 @@
 /*
 	Theme Name:	Castra Realty
-	Theme Style: Light         
 */
 
 @import url("../_css/helvetica-neue-condensed.css");
 
-.castra-realty-light {
+.castra-realty,.castra-realty.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #8b0304; /* Heading */
 	--theme-sub-heading-color:#666666; /* Subtitle */
@@ -14,4 +13,11 @@
 	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
 	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
 	--theme-sub-heading-font: "Helvetica Neue Condensed", sans-serif;
+}
+.castra-realty.dark{
+	--theme-body-background:#8b0304;
+	--theme-heading-color:#ffffff ; /* Heading */
+	--theme-sub-heading-color:#9e9e9e; /* Subtitle */
+	--theme-body-color: #cccccc; /* Body */
+	--theme-emphasis-color: #9e9e9e; /* Outline */
 }

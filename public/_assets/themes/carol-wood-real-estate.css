@@ -1,11 +1,11 @@
 /*
 	Theme Name: Carol Wood Real Estate
-	Theme Style: Light  
+
 */
 
 @import url("../_css/montserrat.css");
 
-.carol-wood-real-estate-light {
+.carol-wood-real-estate,.carol-wood-real-estate.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #000000; /* Heading */
 	--theme-sub-heading-color: #ab341e; /* Subtitle */
@@ -14,4 +14,11 @@
 	--theme-body-font: "Montserrat", sans-serif;
 	--theme-heading-font: "Montserrat", sans-serif;
 	--theme-sub-heading-font: "Montserrat", sans-serif;
+}
+.carol-wood-real-estate.dark {
+	--theme-body-background: #000000;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #ab341e; /* Subtitle */
+	--theme-body-color: #e1e1e1; /* Body */
+	--theme-emphasis-color: #ab341e; /* Outline */
 }
