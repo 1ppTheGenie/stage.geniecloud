@@ -279,7 +279,7 @@
 											<xsl:text>Virtual Tour</xsl:text>
 										</span>
 									</h2>
-									<div class="map-iframe">
+									<div class="virtual-tour-embed">
 										<iframe height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
 											<xsl:attribute name="src">
 												<xsl:value-of select="//single/virtualTourUrl" />

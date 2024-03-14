@@ -496,14 +496,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:text>Virtual Tour</xsl:text>
 										</span>
 									</h2>
-									<div class="map-iframe">
-										<iframe id="vt-iframe" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-											<xsl:attribute name="src">
-												<xsl:value-of select="//single/virtualTourUrl" />
-
-											</xsl:attribute>
-											<xsl:comment/>
-										</iframe>
+									<div class="virtual-tour-embed">
 									</div>
 								</div>
 							</div>
