@@ -1,23 +1,9 @@
 import { createSignal, createEffect, Show } from "solid-js";
 import { unwrap } from "solid-js/store";
-import {
-	sharedEmbedStore,
-	areaDataStore,
-	listingsStore,
-	usePagination,
-	filterListings,
-	useSettings,
-	Context4Settings,
-	percent,
-} from "@/utilities";
-import {
-	ListingsTable,
-	ListingsShowing,
-	Pagination,
-	Editable,
-	HomeTypes,
-	Spinner,
-} from "@/components";
+/* prettier-ignore */
+import { sharedEmbedStore, areaDataStore, listingsStore, usePagination, filterListings, useSettings, Context4Settings, percent } from "@/utilities";
+/* prettier-ignore */
+import { ListingsTable, ListingsShowing, Pagination, Editable, HomeTypes, Spinner } from "@/components";
 
 import CloseIcon from "@/assets/icon-close.svg";
 import SoldIcon from "@/assets/icon-sold.svg";
@@ -38,24 +24,23 @@ export default () => {
 	const [listings, setListings] = createSignal([]);
 	const [listingsMode, setListingsMode] = createSignal();
 	const [listingsVisible, setListingsVisible] = createSignal(false);
-	const { currentPage, setPage, pageOffset, pageSize } = usePagination();
+	const { currentPage, setPage, pageSize } = usePagination();
+
+	const listingsSubset = (lType, lMode) => {
+		if (!listingsStore.loading && listingsStore.listings) {
+			const listings = unwrap(listingsStore?.listings);
+
+			return filterListings(Object.values(listings), lType, 12, lMode);
+		}
+	};
 
 	createEffect(() => {
-		if ( !listingsStore.loading && listingsStore.listings ) {
-			const listings = unwrap( listingsStore?.listings );
-			
-			const subset = filterListings(
-				Object.values(listings),
-				listingType(),
-				12,
-				listingsMode()
-			);
+		const subset = listingsSubset(listingType(), listingsMode());
 
-			if (subset) {
-				const offset = currentPage() * pageSize();
-				setAvailableListings(subset.length);
-				setListings(subset.slice(offset, offset + pageSize()));
-			}
+		if (subset) {
+			const offset = (currentPage() - 1) * pageSize();
+			setAvailableListings(subset.length);
+			setListings(subset.slice(offset, offset + pageSize()));
 		}
 	});
 
@@ -63,33 +48,35 @@ export default () => {
 		setListingType(sharedEmbedStore.propertyType);
 	});
 
-	const showProperties = (propertyTypeID, statusType) => {
+	const showProperties = (propertyTypeId, statusType) => {
 		setPage(0);
-		setListingType(propertyTypeID);
+		setListingType(propertyTypeId);
 		setListingsMode(statusType.toLowerCase());
 		setListingsVisible(true);
 	};
 
 	return (
 		<>
-			<Editable id="fast-facts-title">
+			<div id="fast-facts-title">
 				<h1>{areaDataStore.areaName} Fast&#160;Facts</h1>
-			</Editable>
+			</div>
 
 			<HomeTypes container={`FastFacts-${areaDataStore.areaId}`} />
 			<Show when={typeof areaDataStore.propertyStats === "undefined"}>
 				<p>Sorry, but we have no data for that period.</p>
 			</Show>
+
 			<div class="fast-facts-property-icons">
 				<div>
 					<NewIcon />
 					<ListingTableLinks
 						title="NEW"
 						status="new"
-						propertyType={settings.propertyTypeID}
+						count={listingsSubset(listingType(), "new")?.length}
+						propertyType={settings.propertytype}
 						propertyView={sharedEmbedStore.propertyType}
-						showProperties={(propertyTypeID, statusType) =>
-							showProperties(propertyTypeID, statusType)
+						showProperties={(propertyTypeId, statusType) =>
+							showProperties(propertyTypeId, statusType)
 						}
 					/>
 				</div>
@@ -98,10 +85,11 @@ export default () => {
 					<ListingTableLinks
 						title="ACTIVE"
 						status="active"
-						propertyType={settings.propertyTypeID}
+						count={listingsSubset(listingType(), "active")?.length}
+						propertyType={settings.propertytype}
 						propertyView={sharedEmbedStore.propertyType}
-						showProperties={(propertyTypeID, statusType) =>
-							showProperties(propertyTypeID, statusType)
+						showProperties={(propertyTypeId, statusType) =>
+							showProperties(propertyTypeId, statusType)
 						}
 					/>
 				</div>
@@ -110,10 +98,11 @@ export default () => {
 					<ListingTableLinks
 						title="PENDING"
 						status="pending"
-						propertyType={settings.propertyTypeID}
+						count={listingsSubset(listingType(), "pending")?.length}
+						propertyType={settings.propertytype}
 						propertyView={sharedEmbedStore.propertyType}
-						showProperties={(propertyTypeID, statusType) =>
-							showProperties(propertyTypeID, statusType)
+						showProperties={(propertyTypeId, statusType) =>
+							showProperties(propertyTypeId, statusType)
 						}
 					/>
 				</div>
@@ -123,10 +112,11 @@ export default () => {
 					<ListingTableLinks
 						title={`SOLD IN ${sharedEmbedStore.period} MOs`}
 						status="sold"
-						propertyType={settings.propertyTypeID}
+						count={listingsSubset(listingType(), "sold")?.length}
+						propertyType={settings.propertytype}
 						propertyView={sharedEmbedStore.propertyType}
-						showProperties={(propertyTypeID, statusType) =>
-							showProperties(propertyTypeID, statusType)
+						showProperties={(propertyTypeId, statusType) =>
+							showProperties(propertyTypeId, statusType)
 						}
 					/>
 				</div>
@@ -150,7 +140,8 @@ export default () => {
 						<div style="margin-top: 1em">
 							<ListingsShowing
 								pageSize={pageSize()}
-								offset={currentPage() * pageSize()}
+								cp={(currentPage() - 1)}
+								offset={(currentPage() - 1) * pageSize()}
 								len={availableListings()}
 								mode={listingsMode()}
 								period={areaDataStore.areaPeriod}
@@ -159,7 +150,7 @@ export default () => {
 
 						<Pagination
 							totalItems={availableListings()}
-							currentPage={currentPage() + 1}
+							currentPage={currentPage()}
 							pageChange={page => setPage(page)}
 							style="align-self: center"
 						/>
@@ -211,54 +202,49 @@ export default () => {
 
 const captions = ["Single Family", "Condos"];
 
-const ListingTableLinks = props => {
-	return (
-		<div>
-			<Show when={props.propertyType !== -1}>
-				<span
-					onClick={() =>
-						areaDataStore.propertyStats[props.status] > 0 &&
-						props.showProperties(props.propertyView, props.status)
-					}>
-					{props.title + ": "}
-					<Show when={!areaDataStore.loading}>
-						{areaDataStore.propertyStats[props.status]}
-					</Show>
-					<Show when={areaDataStore.loading}>
-						<Spinner
-							style={{
-								margin: "0",
-								"vertical-align": "middle",
-								height: "25px",
-								width: "auto",
-							}}
-						/>
-					</Show>
-				</span>
-				{props.status == "new" ? (
-					<small style="white-space:nowrap;display:block;">
-						Active in last 30 days
-					</small>
-				) : (
-					""
-				)}
-			</Show>
+const ListingTableLinks = props => (
+	<div>
+		<Show when={props.propertyType !== -1}>
+			<span
+				onClick={() =>
+					areaDataStore.propertyStats[props.status] > 0 &&
+					props.showProperties(props.propertyView, props.status)
+				}>
+				{`${props.title}: ${props.count}`}
+				<Show when={areaDataStore.loading}>
+					<Spinner
+						style={{
+							margin: "0",
+							"vertical-align": "middle",
+							height: "25px",
+							width: "auto",
+						}}
+					/>
+				</Show>
+			</span>
+			{props.status == "new" ? (
+				<small style="white-space:nowrap;display:block;">
+					Active in last 30 days
+				</small>
+			) : (
+				""
+			)}
+		</Show>
 
-			<Show when={props.propertyType === -1}>
-				<span onClick={() => props.showProperties(0, props.status)}>
-					{props.title + ": "}
-					<Show when={listingsStore.loading}>
-						<Spinner style="margin: 0; vertical-align: middle; height: 25px" />
-					</Show>
-				</span>
-				<span onClick={() => props.showProperties(1, props.status)}>
-					{captions[1]}:{" "}
-					{!listingsStore.loading && listingsStore[props.status][1]}
-					<Show when={listingsStore.loading}>
-						<Spinner style="margin: 0; vertical-align: middle; height: 25px" />
-					</Show>
-				</span>
-			</Show>
-		</div>
-	);
-};
+		<Show when={props.propertyType === -1}>
+			<span onClick={() => props.showProperties(0, props.status)}>
+				{props.title + ": "}
+				<Show when={listingsStore.loading}>
+					<Spinner style="margin: 0; vertical-align: middle; height: 25px" />
+				</Show>
+			</span>
+			<span onClick={() => props.showProperties(1, props.status)}>
+				{captions[1]}:{" "}
+				{!listingsStore.loading && listingsStore[props.status][1]}
+				<Show when={listingsStore.loading}>
+					<Spinner style="margin: 0; vertical-align: middle; height: 25px" />
+				</Show>
+			</span>
+		</Show>
+	</div>
+);

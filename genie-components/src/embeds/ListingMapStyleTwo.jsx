@@ -223,7 +223,7 @@ export default () => {
 				</div>
 				<Pagination
 					totalItems={currentListings.length}
-					currentPage={currentPage}
+					currentPage={currentPage()}
 					pageChange={page => setPage(page)}
 					style="align-self:flex-end; margin: 0.25rem 0"
 				/>

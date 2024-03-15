@@ -167,7 +167,7 @@ export default () => {
 
 			<Pagination
 				totalItems={currentListings?.length}
-				currentPage={currentPage}
+				currentPage={currentPage()}
 				pageChange={page => setPage(page)}
 				style="align-self: flex-end"
 			/>

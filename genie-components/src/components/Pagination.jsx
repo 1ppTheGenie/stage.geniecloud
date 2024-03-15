@@ -59,9 +59,9 @@ export const Pagination = props => {
 					<li onClick={() => pageChange(props.currentPage - 1)}>&laquo; Prev</li>
 				)}
 				<For each={buttons()}>
-					{(p, index) => (
+					{p => (
 						<li
-							onClick={() => pageChange(index() + 1)} // +1 because pages are 1-based
+							onClick={() => pageChange(p)} // +1 because pages are 1-based
 							classList={{ active: p === props.currentPage }}>
 							{p}
 						</li>
@@ -71,6 +71,8 @@ export const Pagination = props => {
 					<li onClick={() => pageChange(props.currentPage + 1)}>Next &raquo;</li>
 				)}
 			</Show>
+
+			<li>XX {props.currentPage} XZZZ</li>
 		</ul>
 	);
 };
