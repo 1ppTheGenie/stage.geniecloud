@@ -38,7 +38,6 @@
 			<div class="leaflet-overlay-pane" style="position: absolute;z-index:9999999999;width:100%;height:100%;">
 				<svg style="width: 100%; height: 100%; point-events:none;">
 					<xsl:call-template name="map-overlay" />
-
 				</svg>
 			</div>
 		</div>
