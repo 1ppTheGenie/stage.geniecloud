@@ -350,22 +350,7 @@ export default () => {
 			window.gHub.addLead( null, { propertyId: pid } );
 		}
 	} else if ( urlParams.token ) {
-		( async () => {
-			let r;
-			if ( urlParams.qrid ) {
-				r = await getPropertyQR( {
-					qrID: urlParams.qrid,
-					token: urlParams.token,
-					agentID: settings.agentid,
-				} );
-			} else if ( urlParams.shorturldataid ) {
-				r = await getShortData( {
-					qrID: urlParams.qrid,
-					token: urlParams.token,
-					agentID: settings.agentid,
-				} );
-			}
-		} )();
+		(async () => await window.gHub.getLandingPageData())();
 	}
 
 	/***********************
