@@ -38,7 +38,7 @@ export default () => {
 		const subset = listingsSubset(listingType(), listingsMode());
 
 		if (subset) {
-			const offset = (currentPage() - 1) * pageSize();
+			const offset = Math.max((currentPage() - 1) * pageSize(),0);
 			setAvailableListings(subset.length);
 			setListings(subset.slice(offset, offset + pageSize()));
 		}
@@ -140,8 +140,7 @@ export default () => {
 						<div style="margin-top: 1em">
 							<ListingsShowing
 								pageSize={pageSize()}
-								cp={(currentPage() - 1)}
-								offset={(currentPage() - 1) * pageSize()}
+								offset={Math.max((currentPage() - 1) * pageSize(),0)}
 								len={availableListings()}
 								mode={listingsMode()}
 								period={areaDataStore.areaPeriod}

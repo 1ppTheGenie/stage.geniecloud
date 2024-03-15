@@ -71,8 +71,6 @@ export const Pagination = props => {
 					<li onClick={() => pageChange(props.currentPage + 1)}>Next &raquo;</li>
 				)}
 			</Show>
-
-			<li>XX {props.currentPage} XZZZ</li>
 		</ul>
 	);
 };
