@@ -32,12 +32,12 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 
 // node_modules/jstoxml/dist/jstoxml.js
 var require_jstoxml = __commonJS({
-  "node_modules/jstoxml/dist/jstoxml.js"(exports) {
+  "node_modules/jstoxml/dist/jstoxml.js"(exports2) {
     (function(global, factory) {
       if (typeof define === "function" && define.amd) {
         define(["exports"], factory);
-      } else if (typeof exports !== "undefined") {
-        factory(exports);
+      } else if (typeof exports2 !== "undefined") {
+        factory(exports2);
       } else {
         var mod = {
           exports: {}
@@ -45,7 +45,7 @@ var require_jstoxml = __commonJS({
         factory(mod.exports);
         global.jstoxml = mod.exports;
       }
-    })(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : exports, function(_exports) {
+    })(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : exports2, function(_exports) {
       "use strict";
       Object.defineProperty(_exports, "__esModule", {
         value: true
@@ -65,26 +65,26 @@ var require_jstoxml = __commonJS({
         if (Array.isArray(arr))
           return _arrayLikeToArray(arr);
       }
-      function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+      function ownKeys(e, r) {
+        var t = Object.keys(e);
         if (Object.getOwnPropertySymbols) {
-          var symbols = Object.getOwnPropertySymbols(object);
-          enumerableOnly && (symbols = symbols.filter(function(sym) {
-            return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          var o = Object.getOwnPropertySymbols(e);
+          r && (o = o.filter(function(r2) {
+            return Object.getOwnPropertyDescriptor(e, r2).enumerable;
+          })), t.push.apply(t, o);
         }
-        return keys;
+        return t;
       }
-      function _objectSpread(target) {
-        for (var i = 1; i < arguments.length; i++) {
-          var source = null != arguments[i] ? arguments[i] : {};
-          i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
-            _defineProperty(target, key, source[key]);
-          }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
-            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      function _objectSpread(e) {
+        for (var r = 1; r < arguments.length; r++) {
+          var t = null != arguments[r] ? arguments[r] : {};
+          r % 2 ? ownKeys(Object(t), true).forEach(function(r2) {
+            _defineProperty(e, r2, t[r2]);
+          }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r2) {
+            Object.defineProperty(e, r2, Object.getOwnPropertyDescriptor(t, r2));
           });
         }
-        return target;
+        return e;
       }
       function _defineProperty(obj, key, value) {
         key = _toPropertyKey(key);
@@ -95,21 +95,21 @@ var require_jstoxml = __commonJS({
         }
         return obj;
       }
-      function _toPropertyKey(arg) {
-        var key = _toPrimitive(arg, "string");
-        return _typeof(key) === "symbol" ? key : String(key);
+      function _toPropertyKey(t) {
+        var i = _toPrimitive(t, "string");
+        return "symbol" == _typeof(i) ? i : String(i);
       }
-      function _toPrimitive(input, hint) {
-        if (_typeof(input) !== "object" || input === null)
-          return input;
-        var prim = input[Symbol.toPrimitive];
-        if (prim !== void 0) {
-          var res = prim.call(input, hint || "default");
-          if (_typeof(res) !== "object")
-            return res;
+      function _toPrimitive(t, r) {
+        if ("object" != _typeof(t) || !t)
+          return t;
+        var e = t[Symbol.toPrimitive];
+        if (void 0 !== e) {
+          var i = e.call(t, r || "default");
+          if ("object" != _typeof(i))
+            return i;
           throw new TypeError("@@toPrimitive must return a primitive value.");
         }
-        return (hint === "string" ? String : Number)(input);
+        return ("string" === r ? String : Number)(t);
       }
       function _slicedToArray(arr, i) {
         return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
@@ -137,43 +137,43 @@ var require_jstoxml = __commonJS({
           arr2[i] = arr[i];
         return arr2;
       }
-      function _iterableToArrayLimit(arr, i) {
-        var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
-        if (null != _i) {
-          var _s, _e, _x, _r, _arr = [], _n = true, _d = false;
+      function _iterableToArrayLimit(r, l2) {
+        var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+        if (null != t) {
+          var e, n2, i, u, a = [], f = true, o = false;
           try {
-            if (_x = (_i = _i.call(arr)).next, 0 === i) {
-              if (Object(_i) !== _i)
+            if (i = (t = t.call(r)).next, 0 === l2) {
+              if (Object(t) !== t)
                 return;
-              _n = false;
+              f = false;
             } else
-              for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = true)
+              for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l2); f = true)
                 ;
-          } catch (err) {
-            _d = true, _e = err;
+          } catch (r2) {
+            o = true, n2 = r2;
           } finally {
             try {
-              if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r))
+              if (!f && null != t.return && (u = t.return(), Object(u) !== u))
                 return;
             } finally {
-              if (_d)
-                throw _e;
+              if (o)
+                throw n2;
             }
           }
-          return _arr;
+          return a;
         }
       }
       function _arrayWithHoles(arr) {
         if (Array.isArray(arr))
           return arr;
       }
-      function _typeof(obj) {
+      function _typeof(o) {
         "@babel/helpers - typeof";
-        return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
-          return typeof obj2;
-        } : function(obj2) {
-          return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-        }, _typeof(obj);
+        return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+          return typeof o2;
+        } : function(o2) {
+          return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+        }, _typeof(o);
       }
       var DATA_TYPES = {
         ARRAY: "array",
@@ -280,7 +280,7 @@ var require_jstoxml = __commonJS({
         "&": "&amp;",
         '"': "&quot;"
       };
-      var toXML2 = function toXML3() {
+      var toXML2 = _exports.toXML = function toXML3() {
         var obj = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
         var config = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         var _config$depth = config.depth, depth = _config$depth === void 0 ? 0 : _config$depth, indent = config.indent, _isFirstItem = config._isFirstItem, _config$_isOutputStar = config._isOutputStart, _isOutputStart = _config$_isOutputStar === void 0 ? true : _config$_isOutputStar, header = config.header, _config$attributeRepl = config.attributeReplacements, rawAttributeReplacements = _config$attributeRepl === void 0 ? {} : _config$attributeRepl, attributeFilter = config.attributeFilter, _config$attributeExpl = config.attributeExplicitTrue, attributeExplicitTrue = _config$attributeExpl === void 0 ? false : _config$attributeExpl, _config$contentReplac = config.contentReplacements, rawContentReplacements = _config$contentReplac === void 0 ? {} : _config$contentReplac, contentMap = config.contentMap, _config$selfCloseTags = config.selfCloseTags, selfCloseTags = _config$selfCloseTags === void 0 ? true : _config$selfCloseTags;
@@ -288,6 +288,7 @@ var require_jstoxml = __commonJS({
         var attributeReplacements = shouldTurnOffAttributeReplacements ? {} : _objectSpread(_objectSpread({}, defaultEntityReplacements), rawAttributeReplacements);
         var shouldTurnOffContentReplacements = typeof rawContentReplacements === "boolean" && !rawContentReplacements;
         var contentReplacements = shouldTurnOffContentReplacements ? {} : _objectSpread(_objectSpread({}, defaultEntityReplacements), rawContentReplacements);
+        var shouldAddNewlines = typeof indent === "string";
         var indentStr = getIndentStr(indent, depth);
         var valType = getType(obj);
         var headerStr = getHeaderString({
@@ -297,7 +298,7 @@ var require_jstoxml = __commonJS({
           isOutputStart: _isOutputStart
         });
         var isOutputStart = _isOutputStart && !headerStr && _isFirstItem && depth === 0;
-        var preIndentStr = indent && !isOutputStart ? "\n" : "";
+        var preIndentStr = shouldAddNewlines && !isOutputStart ? "\n" : "";
         var outputStr = "";
         switch (valType) {
           case DATA_TYPES.JSTOXML_OBJECT: {
@@ -340,7 +341,7 @@ var require_jstoxml = __commonJS({
             var selfCloseStr = shouldSelfClose ? "/" : "";
             var attributesString = formatAttributes(obj._attrs, attributeReplacements, attributeFilter, attributeExplicitTrue);
             var tag = "<".concat(_name).concat(attributesString).concat(selfCloseStr, ">");
-            var preTagCloseStr = indent && !isNewValSimple && !isNewValCDATA ? "\n".concat(indentStr) : "";
+            var preTagCloseStr = shouldAddNewlines && !isNewValSimple && !isNewValCDATA ? "\n".concat(indentStr) : "";
             var postTag = !shouldSelfClose ? "".concat(newVal).concat(preTagCloseStr, "</").concat(_name, ">") : "";
             outputStr += "".concat(preTag).concat(tag).concat(postTag);
             break;
@@ -405,18 +406,16 @@ var require_jstoxml = __commonJS({
         }
         return "".concat(headerStr).concat(outputStr);
       };
-      _exports.toXML = toXML2;
-      var _default = {
+      var _default = _exports.default = {
         toXML: toXML2
       };
-      _exports.default = _default;
     });
   }
 });
 
 // node_modules/qrcode-svg/lib/qrcode.js
 var require_qrcode = __commonJS({
-  "node_modules/qrcode-svg/lib/qrcode.js"(exports, module2) {
+  "node_modules/qrcode-svg/lib/qrcode.js"(exports2, module2) {
     function QR8bitByte(data) {
       this.mode = QRMode.MODE_8BIT_BYTE;
       this.data = data;
@@ -1746,6 +1745,16 @@ function systemLocale() {
     return sysLocaleCache;
   }
 }
+var weekInfoCache = {};
+function getCachedWeekInfo(locString) {
+  let data = weekInfoCache[locString];
+  if (!data) {
+    const locale = new Intl.Locale(locString);
+    data = "getWeekInfo" in locale ? locale.getWeekInfo() : locale.weekInfo;
+    weekInfoCache[locString] = data;
+  }
+  return data;
+}
 function parseLocaleString(localeStr) {
   const xIndex = localeStr.indexOf("-x-");
   if (xIndex !== -1) {
@@ -1788,7 +1797,7 @@ function intlConfigString(localeStr, numberingSystem, outputCalendar) {
 function mapMonths(f) {
   const ms = [];
   for (let i = 1; i <= 12; i++) {
-    const dt = DateTime.utc(2016, i, 1);
+    const dt = DateTime.utc(2009, i, 1);
     ms.push(f(dt));
   }
   return ms;
@@ -1801,8 +1810,8 @@ function mapWeekdays(f) {
   }
   return ms;
 }
-function listStuff(loc, length, defaultOK, englishFn, intlFn) {
-  const mode = loc.listingMode(defaultOK);
+function listStuff(loc, length, englishFn, intlFn) {
+  const mode = loc.listingMode();
   if (mode === "error") {
     return null;
   } else if (mode === "en") {
@@ -1924,16 +1933,28 @@ var PolyRelFormatter = class {
     }
   }
 };
+var fallbackWeekSettings = {
+  firstDay: 1,
+  minimalDays: 4,
+  weekend: [6, 7]
+};
 var Locale = class _Locale {
   static fromOpts(opts) {
-    return _Locale.create(opts.locale, opts.numberingSystem, opts.outputCalendar, opts.defaultToEN);
+    return _Locale.create(
+      opts.locale,
+      opts.numberingSystem,
+      opts.outputCalendar,
+      opts.weekSettings,
+      opts.defaultToEN
+    );
   }
-  static create(locale, numberingSystem, outputCalendar, defaultToEN = false) {
+  static create(locale, numberingSystem, outputCalendar, weekSettings, defaultToEN = false) {
     const specifiedLocale = locale || Settings.defaultLocale;
     const localeR = specifiedLocale || (defaultToEN ? "en-US" : systemLocale());
     const numberingSystemR = numberingSystem || Settings.defaultNumberingSystem;
     const outputCalendarR = outputCalendar || Settings.defaultOutputCalendar;
-    return new _Locale(localeR, numberingSystemR, outputCalendarR, specifiedLocale);
+    const weekSettingsR = validateWeekSettings(weekSettings) || Settings.defaultWeekSettings;
+    return new _Locale(localeR, numberingSystemR, outputCalendarR, weekSettingsR, specifiedLocale);
   }
   static resetCache() {
     sysLocaleCache = null;
@@ -1941,14 +1962,15 @@ var Locale = class _Locale {
     intlNumCache = {};
     intlRelCache = {};
   }
-  static fromObject({ locale, numberingSystem, outputCalendar } = {}) {
-    return _Locale.create(locale, numberingSystem, outputCalendar);
+  static fromObject({ locale, numberingSystem, outputCalendar, weekSettings } = {}) {
+    return _Locale.create(locale, numberingSystem, outputCalendar, weekSettings);
   }
-  constructor(locale, numbering, outputCalendar, specifiedLocale) {
+  constructor(locale, numbering, outputCalendar, weekSettings, specifiedLocale) {
     const [parsedLocale, parsedNumberingSystem, parsedOutputCalendar] = parseLocaleString(locale);
     this.locale = parsedLocale;
     this.numberingSystem = numbering || parsedNumberingSystem || null;
     this.outputCalendar = outputCalendar || parsedOutputCalendar || null;
+    this.weekSettings = weekSettings;
     this.intl = intlConfigString(this.locale, this.numberingSystem, this.outputCalendar);
     this.weekdaysCache = { format: {}, standalone: {} };
     this.monthsCache = { format: {}, standalone: {} };
@@ -1976,6 +1998,7 @@ var Locale = class _Locale {
         alts.locale || this.specifiedLocale,
         alts.numberingSystem || this.numberingSystem,
         alts.outputCalendar || this.outputCalendar,
+        validateWeekSettings(alts.weekSettings) || this.weekSettings,
         alts.defaultToEN || false
       );
     }
@@ -1986,8 +2009,8 @@ var Locale = class _Locale {
   redefaultToSystem(alts = {}) {
     return this.clone({ ...alts, defaultToEN: false });
   }
-  months(length, format = false, defaultOK = true) {
-    return listStuff(this, length, defaultOK, months, () => {
+  months(length, format = false) {
+    return listStuff(this, length, months, () => {
       const intl = format ? { month: length, day: "numeric" } : { month: length }, formatStr = format ? "format" : "standalone";
       if (!this.monthsCache[formatStr][length]) {
         this.monthsCache[formatStr][length] = mapMonths((dt) => this.extract(dt, intl, "month"));
@@ -1995,8 +2018,8 @@ var Locale = class _Locale {
       return this.monthsCache[formatStr][length];
     });
   }
-  weekdays(length, format = false, defaultOK = true) {
-    return listStuff(this, length, defaultOK, weekdays, () => {
+  weekdays(length, format = false) {
+    return listStuff(this, length, weekdays, () => {
       const intl = format ? { weekday: length, year: "numeric", month: "long", day: "numeric" } : { weekday: length }, formatStr = format ? "format" : "standalone";
       if (!this.weekdaysCache[formatStr][length]) {
         this.weekdaysCache[formatStr][length] = mapWeekdays(
@@ -2006,11 +2029,10 @@ var Locale = class _Locale {
       return this.weekdaysCache[formatStr][length];
     });
   }
-  meridiems(defaultOK = true) {
+  meridiems() {
     return listStuff(
       this,
       void 0,
-      defaultOK,
       () => meridiems,
       () => {
         if (!this.meridiemCache) {
@@ -2023,8 +2045,8 @@ var Locale = class _Locale {
       }
     );
   }
-  eras(length, defaultOK = true) {
-    return listStuff(this, length, defaultOK, eras, () => {
+  eras(length) {
+    return listStuff(this, length, eras, () => {
       const intl = { era: length };
       if (!this.eraCache[length]) {
         this.eraCache[length] = [DateTime.utc(-40, 1, 1), DateTime.utc(2017, 1, 1)].map(
@@ -2052,6 +2074,24 @@ var Locale = class _Locale {
   }
   isEnglish() {
     return this.locale === "en" || this.locale.toLowerCase() === "en-us" || new Intl.DateTimeFormat(this.intl).resolvedOptions().locale.startsWith("en-us");
+  }
+  getWeekSettings() {
+    if (this.weekSettings) {
+      return this.weekSettings;
+    } else if (!hasLocaleWeekInfo()) {
+      return fallbackWeekSettings;
+    } else {
+      return getCachedWeekInfo(this.locale);
+    }
+  }
+  getStartOfWeek() {
+    return this.getWeekSettings().firstDay;
+  }
+  getMinDaysInFirstWeek() {
+    return this.getWeekSettings().minimalDays;
+  }
+  getWeekendDays() {
+    return this.getWeekSettings().weekend;
   }
   equals(other) {
     return this.locale === other.locale && this.numberingSystem === other.numberingSystem && this.outputCalendar === other.outputCalendar;
@@ -2200,7 +2240,7 @@ function normalizeZone(input, defaultZone2) {
       return FixedOffsetZone.parseSpecifier(lowered) || IANAZone.create(input);
   } else if (isNumber(input)) {
     return FixedOffsetZone.instance(input);
-  } else if (typeof input === "object" && input.offset && typeof input.offset === "number") {
+  } else if (typeof input === "object" && "offset" in input && typeof input.offset === "function") {
     return input;
   } else {
     return new InvalidZone(input);
@@ -2215,6 +2255,7 @@ var defaultNumberingSystem = null;
 var defaultOutputCalendar = null;
 var twoDigitCutoffYear = 60;
 var throwOnInvalid;
+var defaultWeekSettings = null;
 var Settings = class {
   /**
    * Get the callback for returning the current timestamp.
@@ -2292,6 +2333,28 @@ var Settings = class {
     defaultOutputCalendar = outputCalendar;
   }
   /**
+   * @typedef {Object} WeekSettings
+   * @property {number} firstDay
+   * @property {number} minimalDays
+   * @property {number[]} weekend
+   */
+  /**
+   * @return {WeekSettings|null}
+   */
+  static get defaultWeekSettings() {
+    return defaultWeekSettings;
+  }
+  /**
+   * Allows overriding the default locale week settings, i.e. the start of the week, the weekend and
+   * how many days are required in the first week of a year.
+   * Does not affect existing instances.
+   *
+   * @param {WeekSettings|null} weekSettings
+   */
+  static set defaultWeekSettings(weekSettings) {
+    defaultWeekSettings = validateWeekSettings(weekSettings);
+  }
+  /**
    * Get the cutoff year after which a string encoding a year as two digits is interpreted to occur in the current century.
    * @type {number}
    */
@@ -2301,10 +2364,10 @@ var Settings = class {
   /**
    * Set the cutoff year after which a string encoding a year as two digits is interpreted to occur in the current century.
    * @type {number}
-   * @example Settings.twoDigitCutoffYear = 0 // cut-off year is 0, so all 'yy' are interpretted as current century
+   * @example Settings.twoDigitCutoffYear = 0 // cut-off year is 0, so all 'yy' are interpreted as current century
    * @example Settings.twoDigitCutoffYear = 50 // '49' -> 1949; '50' -> 2050
-   * @example Settings.twoDigitCutoffYear = 1950 // interpretted as 50
-   * @example Settings.twoDigitCutoffYear = 2050 // ALSO interpretted as 50
+   * @example Settings.twoDigitCutoffYear = 1950 // interpreted as 50
+   * @example Settings.twoDigitCutoffYear = 2050 // ALSO interpreted as 50
    */
   static set twoDigitCutoffYear(cutoffYear) {
     twoDigitCutoffYear = cutoffYear % 100;
@@ -2333,6 +2396,163 @@ var Settings = class {
   }
 };
 
+// node_modules/luxon/src/impl/invalid.js
+var Invalid = class {
+  constructor(reason, explanation) {
+    this.reason = reason;
+    this.explanation = explanation;
+  }
+  toMessage() {
+    if (this.explanation) {
+      return `${this.reason}: ${this.explanation}`;
+    } else {
+      return this.reason;
+    }
+  }
+};
+
+// node_modules/luxon/src/impl/conversions.js
+var nonLeapLadder = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+var leapLadder = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
+function unitOutOfRange(unit, value) {
+  return new Invalid(
+    "unit out of range",
+    `you specified ${value} (of type ${typeof value}) as a ${unit}, which is invalid`
+  );
+}
+function dayOfWeek(year, month, day) {
+  const d = new Date(Date.UTC(year, month - 1, day));
+  if (year < 100 && year >= 0) {
+    d.setUTCFullYear(d.getUTCFullYear() - 1900);
+  }
+  const js = d.getUTCDay();
+  return js === 0 ? 7 : js;
+}
+function computeOrdinal(year, month, day) {
+  return day + (isLeapYear(year) ? leapLadder : nonLeapLadder)[month - 1];
+}
+function uncomputeOrdinal(year, ordinal) {
+  const table = isLeapYear(year) ? leapLadder : nonLeapLadder, month0 = table.findIndex((i) => i < ordinal), day = ordinal - table[month0];
+  return { month: month0 + 1, day };
+}
+function isoWeekdayToLocal(isoWeekday, startOfWeek) {
+  return (isoWeekday - startOfWeek + 7) % 7 + 1;
+}
+function gregorianToWeek(gregObj, minDaysInFirstWeek = 4, startOfWeek = 1) {
+  const { year, month, day } = gregObj, ordinal = computeOrdinal(year, month, day), weekday = isoWeekdayToLocal(dayOfWeek(year, month, day), startOfWeek);
+  let weekNumber = Math.floor((ordinal - weekday + 14 - minDaysInFirstWeek) / 7), weekYear;
+  if (weekNumber < 1) {
+    weekYear = year - 1;
+    weekNumber = weeksInWeekYear(weekYear, minDaysInFirstWeek, startOfWeek);
+  } else if (weekNumber > weeksInWeekYear(year, minDaysInFirstWeek, startOfWeek)) {
+    weekYear = year + 1;
+    weekNumber = 1;
+  } else {
+    weekYear = year;
+  }
+  return { weekYear, weekNumber, weekday, ...timeObject(gregObj) };
+}
+function weekToGregorian(weekData, minDaysInFirstWeek = 4, startOfWeek = 1) {
+  const { weekYear, weekNumber, weekday } = weekData, weekdayOfJan4 = isoWeekdayToLocal(dayOfWeek(weekYear, 1, minDaysInFirstWeek), startOfWeek), yearInDays = daysInYear(weekYear);
+  let ordinal = weekNumber * 7 + weekday - weekdayOfJan4 - 7 + minDaysInFirstWeek, year;
+  if (ordinal < 1) {
+    year = weekYear - 1;
+    ordinal += daysInYear(year);
+  } else if (ordinal > yearInDays) {
+    year = weekYear + 1;
+    ordinal -= daysInYear(weekYear);
+  } else {
+    year = weekYear;
+  }
+  const { month, day } = uncomputeOrdinal(year, ordinal);
+  return { year, month, day, ...timeObject(weekData) };
+}
+function gregorianToOrdinal(gregData) {
+  const { year, month, day } = gregData;
+  const ordinal = computeOrdinal(year, month, day);
+  return { year, ordinal, ...timeObject(gregData) };
+}
+function ordinalToGregorian(ordinalData) {
+  const { year, ordinal } = ordinalData;
+  const { month, day } = uncomputeOrdinal(year, ordinal);
+  return { year, month, day, ...timeObject(ordinalData) };
+}
+function usesLocalWeekValues(obj, loc) {
+  const hasLocaleWeekData = !isUndefined(obj.localWeekday) || !isUndefined(obj.localWeekNumber) || !isUndefined(obj.localWeekYear);
+  if (hasLocaleWeekData) {
+    const hasIsoWeekData = !isUndefined(obj.weekday) || !isUndefined(obj.weekNumber) || !isUndefined(obj.weekYear);
+    if (hasIsoWeekData) {
+      throw new ConflictingSpecificationError(
+        "Cannot mix locale-based week fields with ISO-based week fields"
+      );
+    }
+    if (!isUndefined(obj.localWeekday))
+      obj.weekday = obj.localWeekday;
+    if (!isUndefined(obj.localWeekNumber))
+      obj.weekNumber = obj.localWeekNumber;
+    if (!isUndefined(obj.localWeekYear))
+      obj.weekYear = obj.localWeekYear;
+    delete obj.localWeekday;
+    delete obj.localWeekNumber;
+    delete obj.localWeekYear;
+    return {
+      minDaysInFirstWeek: loc.getMinDaysInFirstWeek(),
+      startOfWeek: loc.getStartOfWeek()
+    };
+  } else {
+    return { minDaysInFirstWeek: 4, startOfWeek: 1 };
+  }
+}
+function hasInvalidWeekData(obj, minDaysInFirstWeek = 4, startOfWeek = 1) {
+  const validYear = isInteger(obj.weekYear), validWeek = integerBetween(
+    obj.weekNumber,
+    1,
+    weeksInWeekYear(obj.weekYear, minDaysInFirstWeek, startOfWeek)
+  ), validWeekday = integerBetween(obj.weekday, 1, 7);
+  if (!validYear) {
+    return unitOutOfRange("weekYear", obj.weekYear);
+  } else if (!validWeek) {
+    return unitOutOfRange("week", obj.weekNumber);
+  } else if (!validWeekday) {
+    return unitOutOfRange("weekday", obj.weekday);
+  } else
+    return false;
+}
+function hasInvalidOrdinalData(obj) {
+  const validYear = isInteger(obj.year), validOrdinal = integerBetween(obj.ordinal, 1, daysInYear(obj.year));
+  if (!validYear) {
+    return unitOutOfRange("year", obj.year);
+  } else if (!validOrdinal) {
+    return unitOutOfRange("ordinal", obj.ordinal);
+  } else
+    return false;
+}
+function hasInvalidGregorianData(obj) {
+  const validYear = isInteger(obj.year), validMonth = integerBetween(obj.month, 1, 12), validDay = integerBetween(obj.day, 1, daysInMonth(obj.year, obj.month));
+  if (!validYear) {
+    return unitOutOfRange("year", obj.year);
+  } else if (!validMonth) {
+    return unitOutOfRange("month", obj.month);
+  } else if (!validDay) {
+    return unitOutOfRange("day", obj.day);
+  } else
+    return false;
+}
+function hasInvalidTimeData(obj) {
+  const { hour, minute, second, millisecond } = obj;
+  const validHour = integerBetween(hour, 0, 23) || hour === 24 && minute === 0 && second === 0 && millisecond === 0, validMinute = integerBetween(minute, 0, 59), validSecond = integerBetween(second, 0, 59), validMillisecond = integerBetween(millisecond, 0, 999);
+  if (!validHour) {
+    return unitOutOfRange("hour", hour);
+  } else if (!validMinute) {
+    return unitOutOfRange("minute", minute);
+  } else if (!validSecond) {
+    return unitOutOfRange("second", second);
+  } else if (!validMillisecond) {
+    return unitOutOfRange("millisecond", millisecond);
+  } else
+    return false;
+}
+
 // node_modules/luxon/src/impl/util.js
 function isUndefined(o) {
   return typeof o === "undefined";
@@ -2352,6 +2572,13 @@ function isDate(o) {
 function hasRelative() {
   try {
     return typeof Intl !== "undefined" && !!Intl.RelativeTimeFormat;
+  } catch (e) {
+    return false;
+  }
+}
+function hasLocaleWeekInfo() {
+  try {
+    return typeof Intl !== "undefined" && !!Intl.Locale && ("weekInfo" in Intl.Locale.prototype || "getWeekInfo" in Intl.Locale.prototype);
   } catch (e) {
     return false;
   }
@@ -2382,6 +2609,22 @@ function pick(obj, keys) {
 }
 function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+function validateWeekSettings(settings) {
+  if (settings == null) {
+    return null;
+  } else if (typeof settings !== "object") {
+    throw new InvalidArgumentError("Week settings must be an object");
+  } else {
+    if (!integerBetween(settings.firstDay, 1, 7) || !integerBetween(settings.minimalDays, 1, 7) || !Array.isArray(settings.weekend) || settings.weekend.some((v) => !integerBetween(v, 1, 7))) {
+      throw new InvalidArgumentError("Invalid week settings");
+    }
+    return {
+      firstDay: settings.firstDay,
+      minimalDays: settings.minimalDays,
+      weekend: Array.from(settings.weekend)
+    };
+  }
 }
 function integerBetween(thing, bottom, top) {
   return isInteger(thing) && thing >= bottom && thing <= top;
@@ -2455,9 +2698,14 @@ function objToLocalTS(obj) {
   }
   return +d;
 }
-function weeksInWeekYear(weekYear) {
-  const p1 = (weekYear + Math.floor(weekYear / 4) - Math.floor(weekYear / 100) + Math.floor(weekYear / 400)) % 7, last = weekYear - 1, p2 = (last + Math.floor(last / 4) - Math.floor(last / 100) + Math.floor(last / 400)) % 7;
-  return p1 === 4 || p2 === 3 ? 53 : 52;
+function firstWeekOffset(year, minDaysInFirstWeek, startOfWeek) {
+  const fwdlw = isoWeekdayToLocal(dayOfWeek(year, 1, minDaysInFirstWeek), startOfWeek);
+  return -fwdlw + minDaysInFirstWeek - 1;
+}
+function weeksInWeekYear(weekYear, minDaysInFirstWeek = 4, startOfWeek = 1) {
+  const weekOffset = firstWeekOffset(weekYear, minDaysInFirstWeek, startOfWeek);
+  const weekOffsetNext = firstWeekOffset(weekYear + 1, minDaysInFirstWeek, startOfWeek);
+  return (daysInYear(weekYear) - weekOffset + weekOffsetNext) / 7;
 }
 function untruncateYear(year) {
   if (year > 99) {
@@ -2733,21 +2981,21 @@ var Formatter = class _Formatter {
     const df = this.systemLoc.dtFormatter(dt, { ...this.opts, ...opts });
     return df.format();
   }
-  formatDateTime(dt, opts = {}) {
-    const df = this.loc.dtFormatter(dt, { ...this.opts, ...opts });
-    return df.format();
+  dtFormatter(dt, opts = {}) {
+    return this.loc.dtFormatter(dt, { ...this.opts, ...opts });
   }
-  formatDateTimeParts(dt, opts = {}) {
-    const df = this.loc.dtFormatter(dt, { ...this.opts, ...opts });
-    return df.formatToParts();
+  formatDateTime(dt, opts) {
+    return this.dtFormatter(dt, opts).format();
   }
-  formatInterval(interval, opts = {}) {
-    const df = this.loc.dtFormatter(interval.start, { ...this.opts, ...opts });
+  formatDateTimeParts(dt, opts) {
+    return this.dtFormatter(dt, opts).formatToParts();
+  }
+  formatInterval(interval, opts) {
+    const df = this.dtFormatter(interval.start, opts);
     return df.dtf.formatRange(interval.start.toJSDate(), interval.end.toJSDate());
   }
-  resolvedOptions(dt, opts = {}) {
-    const df = this.loc.dtFormatter(dt, { ...this.opts, ...opts });
-    return df.resolvedOptions();
+  resolvedOptions(dt, opts) {
+    return this.dtFormatter(dt, opts).resolvedOptions();
   }
   num(n2, p = 0) {
     if (this.opts.forceSimple) {
@@ -2878,6 +3126,14 @@ var Formatter = class _Formatter {
           return this.num(dt.weekNumber);
         case "WW":
           return this.num(dt.weekNumber, 2);
+        case "n":
+          return this.num(dt.localWeekNumber);
+        case "nn":
+          return this.num(dt.localWeekNumber, 2);
+        case "ii":
+          return this.num(dt.localWeekYear.toString().slice(-2), 2);
+        case "iiii":
+          return this.num(dt.localWeekYear, 4);
         case "o":
           return this.num(dt.ordinal);
         case "ooo":
@@ -2930,21 +3186,6 @@ var Formatter = class _Formatter {
       []
     ), collapsed = dur.shiftTo(...realTokens.map(tokenToField).filter((t) => t));
     return stringifyTokens(tokens, tokenToString(collapsed));
-  }
-};
-
-// node_modules/luxon/src/impl/invalid.js
-var Invalid = class {
-  constructor(reason, explanation) {
-    this.reason = reason;
-    this.explanation = explanation;
-  }
-  toMessage() {
-    if (this.explanation) {
-      return `${this.reason}: ${this.explanation}`;
-    } else {
-      return this.reason;
-    }
   }
 };
 
@@ -3287,19 +3528,37 @@ function clone(dur, alts, clear = false) {
   };
   return new Duration(conf);
 }
-function antiTrunc(n2) {
-  return n2 < 0 ? Math.floor(n2) : Math.ceil(n2);
-}
-function convert(matrix, fromMap, fromUnit, toMap, toUnit) {
-  const conv = matrix[toUnit][fromUnit], raw = fromMap[fromUnit] / conv, sameSign = Math.sign(raw) === Math.sign(toMap[toUnit]), added = !sameSign && toMap[toUnit] !== 0 && Math.abs(raw) <= 1 ? antiTrunc(raw) : Math.trunc(raw);
-  toMap[toUnit] += added;
-  fromMap[fromUnit] -= added * conv;
+function durationToMillis(matrix, vals) {
+  let sum = vals.milliseconds ?? 0;
+  for (const unit of reverseUnits.slice(1)) {
+    if (vals[unit]) {
+      sum += vals[unit] * matrix[unit]["milliseconds"];
+    }
+  }
+  return sum;
 }
 function normalizeValues(matrix, vals) {
-  reverseUnits.reduce((previous, current) => {
+  const factor = durationToMillis(matrix, vals) < 0 ? -1 : 1;
+  orderedUnits.reduceRight((previous, current) => {
     if (!isUndefined(vals[current])) {
       if (previous) {
-        convert(matrix, vals, previous, vals, current);
+        const previousVal = vals[previous] * factor;
+        const conv = matrix[current][previous];
+        const rollUp = Math.floor(previousVal / conv);
+        vals[current] += rollUp * factor;
+        vals[previous] -= rollUp * conv * factor;
+      }
+      return current;
+    } else {
+      return previous;
+    }
+  }, null);
+  orderedUnits.reduce((previous, current) => {
+    if (!isUndefined(vals[current])) {
+      if (previous) {
+        const fraction = vals[previous] % 1;
+        vals[previous] -= fraction;
+        vals[current] += fraction * matrix[previous][current];
       }
       return current;
     } else {
@@ -3546,9 +3805,10 @@ var Duration = class _Duration {
   }
   /**
    * Returns a string representation of a Duration with all units included.
-   * To modify its behavior use the `listStyle` and any Intl.NumberFormat option, though `unitDisplay` is especially relevant.
-   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
-   * @param opts - On option object to override the formatting. Accepts the same keys as the options parameter of the native `Int.NumberFormat` constructor, as well as `listStyle`.
+   * To modify its behavior, use `listStyle` and any Intl.NumberFormat option, though `unitDisplay` is especially relevant.
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options
+   * @param {Object} opts - Formatting options. Accepts the same keys as the options parameter of the native `Intl.NumberFormat` constructor, as well as `listStyle`.
+   * @param {string} [opts.listStyle='narrow'] - How to format the merged list. Corresponds to the `style` property of the options parameter of the native `Intl.ListFormat` constructor.
    * @example
    * ```js
    * var dur = Duration.fromObject({ days: 1, hours: 5, minutes: 6 })
@@ -3558,6 +3818,8 @@ var Duration = class _Duration {
    * ```
    */
   toHuman(opts = {}) {
+    if (!this.isValid)
+      return INVALID;
     const l2 = orderedUnits.map((unit) => {
       const val = this.values[unit];
       if (isUndefined(val)) {
@@ -3638,21 +3900,11 @@ var Duration = class _Duration {
       suppressSeconds: false,
       includePrefix: false,
       format: "extended",
-      ...opts
+      ...opts,
+      includeOffset: false
     };
-    const value = this.shiftTo("hours", "minutes", "seconds", "milliseconds");
-    let fmt = opts.format === "basic" ? "hhmm" : "hh:mm";
-    if (!opts.suppressSeconds || value.seconds !== 0 || value.milliseconds !== 0) {
-      fmt += opts.format === "basic" ? "ss" : ":ss";
-      if (!opts.suppressMilliseconds || value.milliseconds !== 0) {
-        fmt += ".SSS";
-      }
-    }
-    let str = value.toFormat(fmt);
-    if (opts.includePrefix) {
-      str = "T" + str;
-    }
-    return str;
+    const dateTime = DateTime.fromMillis(millis, { zone: "UTC" });
+    return dateTime.toISOTime(opts);
   }
   /**
    * Returns an ISO 8601 representation of this Duration appropriate for use in JSON.
@@ -3669,11 +3921,24 @@ var Duration = class _Duration {
     return this.toISO();
   }
   /**
+   * Returns a string representation of this Duration appropriate for the REPL.
+   * @return {string}
+   */
+  [Symbol.for("nodejs.util.inspect.custom")]() {
+    if (this.isValid) {
+      return `Duration { values: ${JSON.stringify(this.values)} }`;
+    } else {
+      return `Duration { Invalid, reason: ${this.invalidReason} }`;
+    }
+  }
+  /**
    * Returns an milliseconds value of this Duration.
    * @return {number}
    */
   toMillis() {
-    return this.as("milliseconds");
+    if (!this.isValid)
+      return NaN;
+    return durationToMillis(this.matrix, this.values);
   }
   /**
    * Returns an milliseconds value of this Duration. Alias of {@link toMillis}
@@ -3772,8 +4037,17 @@ var Duration = class _Duration {
   }
   /**
    * Reduce this Duration to its canonical representation in its current units.
+   * Assuming the overall value of the Duration is positive, this means:
+   * - excessive values for lower-order units are converted to higher-order units (if possible, see first and second example)
+   * - negative lower-order units are converted to higher order units (there must be such a higher order unit, otherwise
+   *   the overall value would be negative, see third example)
+   * - fractional values for higher-order units are converted to lower-order units (if possible, see fourth example)
+   *
+   * If the overall value is negative, the result of this method is equivalent to `this.negate().normalize().negate()`.
    * @example Duration.fromObject({ years: 2, days: 5000 }).normalize().toObject() //=> { years: 15, days: 255 }
+   * @example Duration.fromObject({ days: 5000 }).normalize().toObject() //=> { days: 5000 }
    * @example Duration.fromObject({ hours: 12, minutes: -45 }).normalize().toObject() //=> { hours: 11, minutes: 15 }
+   * @example Duration.fromObject({ years: 2.5, days: 0, hours: 0 }).normalize().toObject() //=> { years: 2, days: 182, hours: 12 }
    * @return {Duration}
    */
   normalize() {
@@ -3822,11 +4096,6 @@ var Duration = class _Duration {
         const i = Math.trunc(own);
         built[k] = i;
         accumulated[k] = (own * 1e3 - i * 1e3) / 1e3;
-        for (const down in vals) {
-          if (orderedUnits.indexOf(down) > orderedUnits.indexOf(k)) {
-            convert(this.matrix, vals, down, built, k);
-          }
-        }
       } else if (isNumber(vals[k])) {
         accumulated[k] = vals[k];
       }
@@ -3836,7 +4105,8 @@ var Duration = class _Duration {
         built[lastUnit] += key === lastUnit ? accumulated[key] : accumulated[key] / this.matrix[lastUnit][key];
       }
     }
-    return clone(this, { values: built }, true).normalize();
+    normalizeValues(this.matrix, built);
+    return clone(this, { values: built }, true);
   }
   /**
    * Shift this Duration to all available units.
@@ -4162,12 +4432,21 @@ var Interval = class _Interval {
    * Unlike {@link Interval#length} this counts sections of the calendar, not periods of time, e.g. specifying 'day'
    * asks 'what dates are included in this interval?', not 'how many days long is this interval?'
    * @param {string} [unit='milliseconds'] - the unit of time to count.
+   * @param {Object} opts - options
+   * @param {boolean} [opts.useLocaleWeeks=false] - If true, use weeks based on the locale, i.e. use the locale-dependent start of the week; this operation will always use the locale of the start DateTime
    * @return {number}
    */
-  count(unit = "milliseconds") {
+  count(unit = "milliseconds", opts) {
     if (!this.isValid)
       return NaN;
-    const start = this.start.startOf(unit), end = this.end.startOf(unit);
+    const start = this.start.startOf(unit, opts);
+    let end;
+    if (opts?.useLocaleWeeks) {
+      end = this.end.reconfigure({ locale: start.locale });
+    } else {
+      end = this.end;
+    }
+    end = end.startOf(unit, opts);
     return Math.floor(end.diff(start, unit).get(unit)) + (end.valueOf() !== this.end.valueOf());
   }
   /**
@@ -4235,7 +4514,7 @@ var Interval = class _Interval {
   splitAt(...dateTimes) {
     if (!this.isValid)
       return [];
-    const sorted = dateTimes.map(friendlyDateTime).filter((d) => this.contains(d)).sort(), results = [];
+    const sorted = dateTimes.map(friendlyDateTime).filter((d) => this.contains(d)).sort((a, b) => a.toMillis() - b.toMillis()), results = [];
     let { s: s2 } = this, i = 0;
     while (s2 < this.e) {
       const added = sorted[i] || this.e, next = +added > +this.e ? this.e : added;
@@ -4421,6 +4700,17 @@ var Interval = class _Interval {
     return `[${this.s.toISO()} \u2013 ${this.e.toISO()})`;
   }
   /**
+   * Returns a string representation of this Interval appropriate for the REPL.
+   * @return {string}
+   */
+  [Symbol.for("nodejs.util.inspect.custom")]() {
+    if (this.isValid) {
+      return `Interval { start: ${this.s.toISO()}, end: ${this.e.toISO()} }`;
+    } else {
+      return `Interval { Invalid, reason: ${this.invalidReason} }`;
+    }
+  }
+  /**
    * Returns a localized string representing this Interval. Accepts the same options as the
    * Intl.DateTimeFormat constructor and any presets defined by Luxon, such as
    * {@link DateTime.DATE_FULL} or {@link DateTime.TIME_SIMPLE}. The exact behavior of this method
@@ -4558,6 +4848,37 @@ var Info = class {
     return normalizeZone(input, Settings.defaultZone);
   }
   /**
+   * Get the weekday on which the week starts according to the given locale.
+   * @param {Object} opts - options
+   * @param {string} [opts.locale] - the locale code
+   * @param {string} [opts.locObj=null] - an existing locale object to use
+   * @returns {number} the start of the week, 1 for Monday through 7 for Sunday
+   */
+  static getStartOfWeek({ locale = null, locObj = null } = {}) {
+    return (locObj || Locale.create(locale)).getStartOfWeek();
+  }
+  /**
+   * Get the minimum number of days necessary in a week before it is considered part of the next year according
+   * to the given locale.
+   * @param {Object} opts - options
+   * @param {string} [opts.locale] - the locale code
+   * @param {string} [opts.locObj=null] - an existing locale object to use
+   * @returns {number}
+   */
+  static getMinimumDaysInFirstWeek({ locale = null, locObj = null } = {}) {
+    return (locObj || Locale.create(locale)).getMinDaysInFirstWeek();
+  }
+  /**
+   * Get the weekdays, which are considered the weekend according to the given locale
+   * @param {Object} opts - options
+   * @param {string} [opts.locale] - the locale code
+   * @param {string} [opts.locObj=null] - an existing locale object to use
+   * @returns {number[]} an array of weekdays, 1 for Monday through 7 for Sunday
+   */
+  static getWeekendWeekdays({ locale = null, locObj = null } = {}) {
+    return (locObj || Locale.create(locale)).getWeekendDays().slice();
+  }
+  /**
    * Return an array of standalone month names.
    * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat
    * @param {string} [length='long'] - the length of the month representation, such as "numeric", "2-digit", "narrow", "short", "long"
@@ -4654,11 +4975,12 @@ var Info = class {
    * Some features of Luxon are not available in all environments. For example, on older browsers, relative time formatting support is not available. Use this function to figure out if that's the case.
    * Keys:
    * * `relative`: whether this environment supports relative time formatting
-   * @example Info.features() //=> { relative: false }
+   * * `localeWeek`: whether this environment supports different weekdays for the start of the week based on the locale
+   * @example Info.features() //=> { relative: false, localeWeek: true }
    * @return {Object}
    */
   static features() {
-    return { relative: hasRelative() };
+    return { relative: hasRelative(), localeWeek: hasLocaleWeekInfo() };
   }
 };
 
@@ -4692,6 +5014,11 @@ function highOrderDiffs(cursor, later, units) {
       if (highWater > later) {
         results[unit]--;
         cursor = earlier.plus(results);
+        if (cursor > later) {
+          highWater = cursor;
+          results[unit]--;
+          cursor = earlier.plus(results);
+        }
       } else {
         cursor = highWater;
       }
@@ -4833,9 +5160,9 @@ function unitForToken(token, loc) {
     }
     switch (t.val) {
       case "G":
-        return oneOf(loc.eras("short", false), 0);
+        return oneOf(loc.eras("short"), 0);
       case "GG":
-        return oneOf(loc.eras("long", false), 0);
+        return oneOf(loc.eras("long"), 0);
       case "y":
         return intUnit(oneToSix);
       case "yy":
@@ -4851,17 +5178,17 @@ function unitForToken(token, loc) {
       case "MM":
         return intUnit(two);
       case "MMM":
-        return oneOf(loc.months("short", true, false), 1);
+        return oneOf(loc.months("short", true), 1);
       case "MMMM":
-        return oneOf(loc.months("long", true, false), 1);
+        return oneOf(loc.months("long", true), 1);
       case "L":
         return intUnit(oneOrTwo);
       case "LL":
         return intUnit(two);
       case "LLL":
-        return oneOf(loc.months("short", false, false), 1);
+        return oneOf(loc.months("short", false), 1);
       case "LLLL":
-        return oneOf(loc.months("long", false, false), 1);
+        return oneOf(loc.months("long", false), 1);
       case "d":
         return intUnit(oneOrTwo);
       case "dd":
@@ -4914,13 +5241,13 @@ function unitForToken(token, loc) {
       case "c":
         return intUnit(one);
       case "EEE":
-        return oneOf(loc.weekdays("short", false, false), 1);
+        return oneOf(loc.weekdays("short", false), 1);
       case "EEEE":
-        return oneOf(loc.weekdays("long", false, false), 1);
+        return oneOf(loc.weekdays("long", false), 1);
       case "ccc":
-        return oneOf(loc.weekdays("short", true, false), 1);
+        return oneOf(loc.weekdays("short", true), 1);
       case "cccc":
-        return oneOf(loc.weekdays("long", true, false), 1);
+        return oneOf(loc.weekdays("long", true), 1);
       case "Z":
       case "ZZ":
         return offset(new RegExp(`([+-]${oneOrTwo.source})(?::(${two.source}))?`), 2);
@@ -4961,9 +5288,13 @@ var partTypeStyleToTokenVal = {
   },
   dayperiod: "a",
   dayPeriod: "a",
-  hour: {
+  hour12: {
     numeric: "h",
     "2-digit": "hh"
+  },
+  hour24: {
+    numeric: "H",
+    "2-digit": "HH"
   },
   minute: {
     numeric: "m",
@@ -4978,7 +5309,7 @@ var partTypeStyleToTokenVal = {
     short: "ZZZ"
   }
 };
-function tokenForPart(part, formatOpts) {
+function tokenForPart(part, formatOpts, resolvedOpts) {
   const { type, value } = part;
   if (type === "literal") {
     const isSpace = /^\s+$/.test(value);
@@ -4988,7 +5319,21 @@ function tokenForPart(part, formatOpts) {
     };
   }
   const style = formatOpts[type];
-  let val = partTypeStyleToTokenVal[type];
+  let actualType = type;
+  if (type === "hour") {
+    if (formatOpts.hour12 != null) {
+      actualType = formatOpts.hour12 ? "hour12" : "hour24";
+    } else if (formatOpts.hourCycle != null) {
+      if (formatOpts.hourCycle === "h11" || formatOpts.hourCycle === "h12") {
+        actualType = "hour12";
+      } else {
+        actualType = "hour24";
+      }
+    } else {
+      actualType = resolvedOpts.hour12 ? "hour12" : "hour24";
+    }
+  }
+  let val = partTypeStyleToTokenVal[actualType];
   if (typeof val === "object") {
     val = val[style];
   }
@@ -5137,117 +5482,10 @@ function formatOptsToTokens(formatOpts, locale) {
     return null;
   }
   const formatter = Formatter.create(locale, formatOpts);
-  const parts = formatter.formatDateTimeParts(getDummyDateTime());
-  return parts.map((p) => tokenForPart(p, formatOpts));
-}
-
-// node_modules/luxon/src/impl/conversions.js
-var nonLeapLadder = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
-var leapLadder = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
-function unitOutOfRange(unit, value) {
-  return new Invalid(
-    "unit out of range",
-    `you specified ${value} (of type ${typeof value}) as a ${unit}, which is invalid`
-  );
-}
-function dayOfWeek(year, month, day) {
-  const d = new Date(Date.UTC(year, month - 1, day));
-  if (year < 100 && year >= 0) {
-    d.setUTCFullYear(d.getUTCFullYear() - 1900);
-  }
-  const js = d.getUTCDay();
-  return js === 0 ? 7 : js;
-}
-function computeOrdinal(year, month, day) {
-  return day + (isLeapYear(year) ? leapLadder : nonLeapLadder)[month - 1];
-}
-function uncomputeOrdinal(year, ordinal) {
-  const table = isLeapYear(year) ? leapLadder : nonLeapLadder, month0 = table.findIndex((i) => i < ordinal), day = ordinal - table[month0];
-  return { month: month0 + 1, day };
-}
-function gregorianToWeek(gregObj) {
-  const { year, month, day } = gregObj, ordinal = computeOrdinal(year, month, day), weekday = dayOfWeek(year, month, day);
-  let weekNumber = Math.floor((ordinal - weekday + 10) / 7), weekYear;
-  if (weekNumber < 1) {
-    weekYear = year - 1;
-    weekNumber = weeksInWeekYear(weekYear);
-  } else if (weekNumber > weeksInWeekYear(year)) {
-    weekYear = year + 1;
-    weekNumber = 1;
-  } else {
-    weekYear = year;
-  }
-  return { weekYear, weekNumber, weekday, ...timeObject(gregObj) };
-}
-function weekToGregorian(weekData) {
-  const { weekYear, weekNumber, weekday } = weekData, weekdayOfJan4 = dayOfWeek(weekYear, 1, 4), yearInDays = daysInYear(weekYear);
-  let ordinal = weekNumber * 7 + weekday - weekdayOfJan4 - 3, year;
-  if (ordinal < 1) {
-    year = weekYear - 1;
-    ordinal += daysInYear(year);
-  } else if (ordinal > yearInDays) {
-    year = weekYear + 1;
-    ordinal -= daysInYear(weekYear);
-  } else {
-    year = weekYear;
-  }
-  const { month, day } = uncomputeOrdinal(year, ordinal);
-  return { year, month, day, ...timeObject(weekData) };
-}
-function gregorianToOrdinal(gregData) {
-  const { year, month, day } = gregData;
-  const ordinal = computeOrdinal(year, month, day);
-  return { year, ordinal, ...timeObject(gregData) };
-}
-function ordinalToGregorian(ordinalData) {
-  const { year, ordinal } = ordinalData;
-  const { month, day } = uncomputeOrdinal(year, ordinal);
-  return { year, month, day, ...timeObject(ordinalData) };
-}
-function hasInvalidWeekData(obj) {
-  const validYear = isInteger(obj.weekYear), validWeek = integerBetween(obj.weekNumber, 1, weeksInWeekYear(obj.weekYear)), validWeekday = integerBetween(obj.weekday, 1, 7);
-  if (!validYear) {
-    return unitOutOfRange("weekYear", obj.weekYear);
-  } else if (!validWeek) {
-    return unitOutOfRange("week", obj.week);
-  } else if (!validWeekday) {
-    return unitOutOfRange("weekday", obj.weekday);
-  } else
-    return false;
-}
-function hasInvalidOrdinalData(obj) {
-  const validYear = isInteger(obj.year), validOrdinal = integerBetween(obj.ordinal, 1, daysInYear(obj.year));
-  if (!validYear) {
-    return unitOutOfRange("year", obj.year);
-  } else if (!validOrdinal) {
-    return unitOutOfRange("ordinal", obj.ordinal);
-  } else
-    return false;
-}
-function hasInvalidGregorianData(obj) {
-  const validYear = isInteger(obj.year), validMonth = integerBetween(obj.month, 1, 12), validDay = integerBetween(obj.day, 1, daysInMonth(obj.year, obj.month));
-  if (!validYear) {
-    return unitOutOfRange("year", obj.year);
-  } else if (!validMonth) {
-    return unitOutOfRange("month", obj.month);
-  } else if (!validDay) {
-    return unitOutOfRange("day", obj.day);
-  } else
-    return false;
-}
-function hasInvalidTimeData(obj) {
-  const { hour, minute, second, millisecond } = obj;
-  const validHour = integerBetween(hour, 0, 23) || hour === 24 && minute === 0 && second === 0 && millisecond === 0, validMinute = integerBetween(minute, 0, 59), validSecond = integerBetween(second, 0, 59), validMillisecond = integerBetween(millisecond, 0, 999);
-  if (!validHour) {
-    return unitOutOfRange("hour", hour);
-  } else if (!validMinute) {
-    return unitOutOfRange("minute", minute);
-  } else if (!validSecond) {
-    return unitOutOfRange("second", second);
-  } else if (!validMillisecond) {
-    return unitOutOfRange("millisecond", millisecond);
-  } else
-    return false;
+  const df = formatter.dtFormatter(getDummyDateTime());
+  const parts = df.formatToParts();
+  const resolvedOpts = df.resolvedOptions();
+  return parts.map((p) => tokenForPart(p, formatOpts, resolvedOpts));
 }
 
 // node_modules/luxon/src/datetime.js
@@ -5261,6 +5499,16 @@ function possiblyCachedWeekData(dt) {
     dt.weekData = gregorianToWeek(dt.c);
   }
   return dt.weekData;
+}
+function possiblyCachedLocalWeekData(dt) {
+  if (dt.localWeekData === null) {
+    dt.localWeekData = gregorianToWeek(
+      dt.c,
+      dt.loc.getMinDaysInFirstWeek(),
+      dt.loc.getStartOfWeek()
+    );
+  }
+  return dt.localWeekData;
 }
 function clone2(inst, alts) {
   const current = {
@@ -5369,13 +5617,13 @@ function toISOTime(o, extended, suppressSeconds, suppressMilliseconds, includeOf
   if (extended) {
     c += ":";
     c += padStart(o.c.minute);
-    if (o.c.second !== 0 || !suppressSeconds) {
+    if (o.c.millisecond !== 0 || o.c.second !== 0 || !suppressSeconds) {
       c += ":";
     }
   } else {
     c += padStart(o.c.minute);
   }
-  if (o.c.second !== 0 || !suppressSeconds) {
+  if (o.c.millisecond !== 0 || o.c.second !== 0 || !suppressSeconds) {
     c += padStart(o.c.second);
     if (o.c.millisecond !== 0 || !suppressMilliseconds) {
       c += ".";
@@ -5467,6 +5715,21 @@ function normalizeUnit(unit) {
     throw new InvalidUnitError(unit);
   return normalized;
 }
+function normalizeUnitWithLocalWeeks(unit) {
+  switch (unit.toLowerCase()) {
+    case "localweekday":
+    case "localweekdays":
+      return "localWeekday";
+    case "localweeknumber":
+    case "localweeknumbers":
+      return "localWeekNumber";
+    case "localweekyear":
+    case "localweekyears":
+      return "localWeekYear";
+    default:
+      return normalizeUnit(unit);
+  }
+}
 function quickDT(obj, opts) {
   const zone = normalizeZone(opts.zone, Settings.defaultZone), loc = Locale.fromObject(opts), tsNow = Settings.now();
   let ts, o;
@@ -5548,6 +5811,7 @@ var DateTime = class _DateTime {
     this.loc = config.loc || Locale.create();
     this.invalid = invalid;
     this.weekData = null;
+    this.localWeekData = null;
     this.c = c;
     this.o = o;
     this.isLuxonDateTime = true;
@@ -5695,13 +5959,16 @@ var DateTime = class _DateTime {
    * @param {number} obj.weekYear - an ISO week year
    * @param {number} obj.weekNumber - an ISO week number, between 1 and 52 or 53, depending on the year
    * @param {number} obj.weekday - an ISO weekday, 1-7, where 1 is Monday and 7 is Sunday
+   * @param {number} obj.localWeekYear - a week year, according to the locale
+   * @param {number} obj.localWeekNumber - a week number, between 1 and 52 or 53, depending on the year, according to the locale
+   * @param {number} obj.localWeekday - a weekday, 1-7, where 1 is the first and 7 is the last day of the week, according to the locale
    * @param {number} obj.hour - hour of the day, 0-23
    * @param {number} obj.minute - minute of the hour, 0-59
    * @param {number} obj.second - second of the minute, 0-59
    * @param {number} obj.millisecond - millisecond of the second, 0-999
    * @param {Object} opts - options for creating this DateTime
    * @param {string|Zone} [opts.zone='local'] - interpret the numbers in the context of a particular zone. Can take any value taken as the first argument to setZone()
-   * @param {string} [opts.locale='system's locale'] - a locale to set on the resulting DateTime instance
+   * @param {string} [opts.locale='system\'s locale'] - a locale to set on the resulting DateTime instance
    * @param {string} opts.outputCalendar - the output calendar to set on the resulting DateTime instance
    * @param {string} opts.numberingSystem - the numbering system to set on the resulting DateTime instance
    * @example DateTime.fromObject({ year: 1982, month: 5, day: 25}).toISODate() //=> '1982-05-25'
@@ -5711,6 +5978,7 @@ var DateTime = class _DateTime {
    * @example DateTime.fromObject({ hour: 10, minute: 26, second: 6 }, { zone: 'local' })
    * @example DateTime.fromObject({ hour: 10, minute: 26, second: 6 }, { zone: 'America/New_York' })
    * @example DateTime.fromObject({ weekYear: 2016, weekNumber: 2, weekday: 3 }).toISODate() //=> '2016-01-13'
+   * @example DateTime.fromObject({ localWeekYear: 2022, localWeekNumber: 1, localWeekday: 1 }, { locale: "en-US" }).toISODate() //=> '2021-12-26'
    * @return {DateTime}
    */
   static fromObject(obj, opts = {}) {
@@ -5719,7 +5987,10 @@ var DateTime = class _DateTime {
     if (!zoneToUse.isValid) {
       return _DateTime.invalid(unsupportedZone(zoneToUse));
     }
-    const tsNow = Settings.now(), offsetProvis = !isUndefined(opts.specificOffset) ? opts.specificOffset : zoneToUse.offset(tsNow), normalized = normalizeObject(obj, normalizeUnit), containsOrdinal = !isUndefined(normalized.ordinal), containsGregorYear = !isUndefined(normalized.year), containsGregorMD = !isUndefined(normalized.month) || !isUndefined(normalized.day), containsGregor = containsGregorYear || containsGregorMD, definiteWeekDef = normalized.weekYear || normalized.weekNumber, loc = Locale.fromObject(opts);
+    const loc = Locale.fromObject(opts);
+    const normalized = normalizeObject(obj, normalizeUnitWithLocalWeeks);
+    const { minDaysInFirstWeek, startOfWeek } = usesLocalWeekValues(normalized, loc);
+    const tsNow = Settings.now(), offsetProvis = !isUndefined(opts.specificOffset) ? opts.specificOffset : zoneToUse.offset(tsNow), containsOrdinal = !isUndefined(normalized.ordinal), containsGregorYear = !isUndefined(normalized.year), containsGregorMD = !isUndefined(normalized.month) || !isUndefined(normalized.day), containsGregor = containsGregorYear || containsGregorMD, definiteWeekDef = normalized.weekYear || normalized.weekNumber;
     if ((containsGregor || containsOrdinal) && definiteWeekDef) {
       throw new ConflictingSpecificationError(
         "Can't mix weekYear/weekNumber units with year/month/day or ordinals"
@@ -5733,7 +6004,7 @@ var DateTime = class _DateTime {
     if (useWeekData) {
       units = orderedWeekUnits;
       defaultValues = defaultWeekUnitValues;
-      objNow = gregorianToWeek(objNow);
+      objNow = gregorianToWeek(objNow, minDaysInFirstWeek, startOfWeek);
     } else if (containsOrdinal) {
       units = orderedOrdinalUnits;
       defaultValues = defaultOrdinalUnitValues;
@@ -5753,11 +6024,11 @@ var DateTime = class _DateTime {
         normalized[u] = objNow[u];
       }
     }
-    const higherOrderInvalid = useWeekData ? hasInvalidWeekData(normalized) : containsOrdinal ? hasInvalidOrdinalData(normalized) : hasInvalidGregorianData(normalized), invalid = higherOrderInvalid || hasInvalidTimeData(normalized);
+    const higherOrderInvalid = useWeekData ? hasInvalidWeekData(normalized, minDaysInFirstWeek, startOfWeek) : containsOrdinal ? hasInvalidOrdinalData(normalized) : hasInvalidGregorianData(normalized), invalid = higherOrderInvalid || hasInvalidTimeData(normalized);
     if (invalid) {
       return _DateTime.invalid(invalid);
     }
-    const gregorian = useWeekData ? weekToGregorian(normalized) : containsOrdinal ? ordinalToGregorian(normalized) : normalized, [tsFinal, offsetFinal] = objToTS(gregorian, offsetProvis, zoneToUse), inst = new _DateTime({
+    const gregorian = useWeekData ? weekToGregorian(normalized, minDaysInFirstWeek, startOfWeek) : containsOrdinal ? ordinalToGregorian(normalized) : normalized, [tsFinal, offsetFinal] = objToTS(gregorian, offsetProvis, zoneToUse), inst = new _DateTime({
       ts: tsFinal,
       zone: zoneToUse,
       o: offsetFinal,
@@ -5888,7 +6159,7 @@ var DateTime = class _DateTime {
   }
   /**
    * Create an invalid DateTime.
-   * @param {DateTime} reason - simple string of why this DateTime is invalid. Should not contain parameters or anything else data-dependent
+   * @param {string} reason - simple string of why this DateTime is invalid. Should not contain parameters or anything else data-dependent.
    * @param {string} [explanation=null] - longer explanation, may include parameters and other useful debugging information
    * @return {DateTime}
    */
@@ -6097,6 +6368,39 @@ var DateTime = class _DateTime {
     return this.isValid ? possiblyCachedWeekData(this).weekday : NaN;
   }
   /**
+   * Returns true if this date is on a weekend according to the locale, false otherwise
+   * @returns {boolean}
+   */
+  get isWeekend() {
+    return this.isValid && this.loc.getWeekendDays().includes(this.weekday);
+  }
+  /**
+   * Get the day of the week according to the locale.
+   * 1 is the first day of the week and 7 is the last day of the week.
+   * If the locale assigns Sunday as the first day of the week, then a date which is a Sunday will return 1,
+   * @returns {number}
+   */
+  get localWeekday() {
+    return this.isValid ? possiblyCachedLocalWeekData(this).weekday : NaN;
+  }
+  /**
+   * Get the week number of the week year according to the locale. Different locales assign week numbers differently,
+   * because the week can start on different days of the week (see localWeekday) and because a different number of days
+   * is required for a week to count as the first week of a year.
+   * @returns {number}
+   */
+  get localWeekNumber() {
+    return this.isValid ? possiblyCachedLocalWeekData(this).weekNumber : NaN;
+  }
+  /**
+   * Get the week year according to the locale. Different locales assign week numbers (and therefor week years)
+   * differently, see localWeekNumber.
+   * @returns {number}
+   */
+  get localWeekYear() {
+    return this.isValid ? possiblyCachedLocalWeekData(this).weekYear : NaN;
+  }
+  /**
    * Get the ordinal (meaning the day of the year)
    * @example DateTime.local(2017, 5, 25).ordinal //=> 145
    * @type {number|DateTime}
@@ -6198,6 +6502,36 @@ var DateTime = class _DateTime {
     }
   }
   /**
+   * Get those DateTimes which have the same local time as this DateTime, but a different offset from UTC
+   * in this DateTime's zone. During DST changes local time can be ambiguous, for example
+   * `2023-10-29T02:30:00` in `Europe/Berlin` can have offset `+01:00` or `+02:00`.
+   * This method will return both possible DateTimes if this DateTime's local time is ambiguous.
+   * @returns {DateTime[]}
+   */
+  getPossibleOffsets() {
+    if (!this.isValid || this.isOffsetFixed) {
+      return [this];
+    }
+    const dayMs = 864e5;
+    const minuteMs = 6e4;
+    const localTS = objToLocalTS(this.c);
+    const oEarlier = this.zone.offset(localTS - dayMs);
+    const oLater = this.zone.offset(localTS + dayMs);
+    const o1 = this.zone.offset(localTS - oEarlier * minuteMs);
+    const o2 = this.zone.offset(localTS - oLater * minuteMs);
+    if (o1 === o2) {
+      return [this];
+    }
+    const ts1 = localTS - o1 * minuteMs;
+    const ts2 = localTS - o2 * minuteMs;
+    const c1 = tsToObj(ts1, o1);
+    const c2 = tsToObj(ts2, o2);
+    if (c1.hour === c2.hour && c1.minute === c2.minute && c1.second === c2.second && c1.millisecond === c2.millisecond) {
+      return [clone2(this, { ts: ts1 }), clone2(this, { ts: ts2 })];
+    }
+    return [this];
+  }
+  /**
    * Returns true if this DateTime is in a leap year, false otherwise
    * @example DateTime.local(2016).isInLeapYear //=> true
    * @example DateTime.local(2013).isInLeapYear //=> false
@@ -6233,6 +6567,19 @@ var DateTime = class _DateTime {
    */
   get weeksInWeekYear() {
     return this.isValid ? weeksInWeekYear(this.weekYear) : NaN;
+  }
+  /**
+   * Returns the number of weeks in this DateTime's local week year
+   * @example DateTime.local(2020, 6, {locale: 'en-US'}).weeksInLocalWeekYear //=> 52
+   * @example DateTime.local(2020, 6, {locale: 'de-DE'}).weeksInLocalWeekYear //=> 53
+   * @type {number}
+   */
+  get weeksInLocalWeekYear() {
+    return this.isValid ? weeksInWeekYear(
+      this.localWeekYear,
+      this.loc.getMinDaysInFirstWeek(),
+      this.loc.getStartOfWeek()
+    ) : NaN;
   }
   /**
    * Returns the resolved Intl options for this DateTime.
@@ -6315,6 +6662,9 @@ var DateTime = class _DateTime {
   /**
    * "Set" the values of specified units. Returns a newly-constructed DateTime.
    * You can only set units with this method; for "setting" metadata, see {@link DateTime#reconfigure} and {@link DateTime#setZone}.
+   *
+   * This method also supports setting locale-based week units, i.e. `localWeekday`, `localWeekNumber` and `localWeekYear`.
+   * They cannot be mixed with ISO-week units like `weekday`.
    * @param {Object} values - a mapping of units to numbers
    * @example dt.set({ year: 2017 })
    * @example dt.set({ hour: 8, minute: 30 })
@@ -6325,7 +6675,9 @@ var DateTime = class _DateTime {
   set(values) {
     if (!this.isValid)
       return this;
-    const normalized = normalizeObject(values, normalizeUnit), settingWeekStuff = !isUndefined(normalized.weekYear) || !isUndefined(normalized.weekNumber) || !isUndefined(normalized.weekday), containsOrdinal = !isUndefined(normalized.ordinal), containsGregorYear = !isUndefined(normalized.year), containsGregorMD = !isUndefined(normalized.month) || !isUndefined(normalized.day), containsGregor = containsGregorYear || containsGregorMD, definiteWeekDef = normalized.weekYear || normalized.weekNumber;
+    const normalized = normalizeObject(values, normalizeUnitWithLocalWeeks);
+    const { minDaysInFirstWeek, startOfWeek } = usesLocalWeekValues(normalized, this.loc);
+    const settingWeekStuff = !isUndefined(normalized.weekYear) || !isUndefined(normalized.weekNumber) || !isUndefined(normalized.weekday), containsOrdinal = !isUndefined(normalized.ordinal), containsGregorYear = !isUndefined(normalized.year), containsGregorMD = !isUndefined(normalized.month) || !isUndefined(normalized.day), containsGregor = containsGregorYear || containsGregorMD, definiteWeekDef = normalized.weekYear || normalized.weekNumber;
     if ((containsGregor || containsOrdinal) && definiteWeekDef) {
       throw new ConflictingSpecificationError(
         "Can't mix weekYear/weekNumber units with year/month/day or ordinals"
@@ -6336,7 +6688,11 @@ var DateTime = class _DateTime {
     }
     let mixed;
     if (settingWeekStuff) {
-      mixed = weekToGregorian({ ...gregorianToWeek(this.c), ...normalized });
+      mixed = weekToGregorian(
+        { ...gregorianToWeek(this.c, minDaysInFirstWeek, startOfWeek), ...normalized },
+        minDaysInFirstWeek,
+        startOfWeek
+      );
     } else if (!isUndefined(normalized.ordinal)) {
       mixed = ordinalToGregorian({ ...gregorianToOrdinal(this.c), ...normalized });
     } else {
@@ -6382,6 +6738,8 @@ var DateTime = class _DateTime {
   /**
    * "Set" this DateTime to the beginning of a unit of time.
    * @param {string} unit - The unit to go to the beginning of. Can be 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', or 'millisecond'.
+   * @param {Object} opts - options
+   * @param {boolean} [opts.useLocaleWeeks=false] - If true, use weeks based on the locale, i.e. use the locale-dependent start of the week
    * @example DateTime.local(2014, 3, 3).startOf('month').toISODate(); //=> '2014-03-01'
    * @example DateTime.local(2014, 3, 3).startOf('year').toISODate(); //=> '2014-01-01'
    * @example DateTime.local(2014, 3, 3).startOf('week').toISODate(); //=> '2014-03-03', weeks always start on Mondays
@@ -6389,7 +6747,7 @@ var DateTime = class _DateTime {
    * @example DateTime.local(2014, 3, 3, 5, 30).startOf('hour').toISOTime(); //=> '05:00:00.000-05:00'
    * @return {DateTime}
    */
-  startOf(unit) {
+  startOf(unit, { useLocaleWeeks = false } = {}) {
     if (!this.isValid)
       return this;
     const o = {}, normalizedUnit = Duration.normalizeUnit(unit);
@@ -6413,7 +6771,16 @@ var DateTime = class _DateTime {
         break;
     }
     if (normalizedUnit === "weeks") {
-      o.weekday = 1;
+      if (useLocaleWeeks) {
+        const startOfWeek = this.loc.getStartOfWeek();
+        const { weekday } = this;
+        if (weekday < startOfWeek) {
+          o.weekNumber = this.weekNumber - 1;
+        }
+        o.weekday = startOfWeek;
+      } else {
+        o.weekday = 1;
+      }
     }
     if (normalizedUnit === "quarters") {
       const q = Math.ceil(this.month / 3);
@@ -6424,6 +6791,8 @@ var DateTime = class _DateTime {
   /**
    * "Set" this DateTime to the end (meaning the last millisecond) of a unit of time
    * @param {string} unit - The unit to go to the end of. Can be 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', or 'millisecond'.
+   * @param {Object} opts - options
+   * @param {boolean} [opts.useLocaleWeeks=false] - If true, use weeks based on the locale, i.e. use the locale-dependent start of the week
    * @example DateTime.local(2014, 3, 3).endOf('month').toISO(); //=> '2014-03-31T23:59:59.999-05:00'
    * @example DateTime.local(2014, 3, 3).endOf('year').toISO(); //=> '2014-12-31T23:59:59.999-05:00'
    * @example DateTime.local(2014, 3, 3).endOf('week').toISO(); // => '2014-03-09T23:59:59.999-05:00', weeks start on Mondays
@@ -6431,8 +6800,8 @@ var DateTime = class _DateTime {
    * @example DateTime.local(2014, 3, 3, 5, 30).endOf('hour').toISO(); //=> '2014-03-03T05:59:59.999-05:00'
    * @return {DateTime}
    */
-  endOf(unit) {
-    return this.isValid ? this.plus({ [unit]: 1 }).startOf(unit).minus(1) : this;
+  endOf(unit, opts) {
+    return this.isValid ? this.plus({ [unit]: 1 }).startOf(unit, opts).minus(1) : this;
   }
   // OUTPUT
   /**
@@ -6659,6 +7028,17 @@ var DateTime = class _DateTime {
     return this.isValid ? this.toISO() : INVALID3;
   }
   /**
+   * Returns a string representation of this DateTime appropriate for the REPL.
+   * @return {string}
+   */
+  [Symbol.for("nodejs.util.inspect.custom")]() {
+    if (this.isValid) {
+      return `DateTime { ts: ${this.toISO()}, zone: ${this.zone.name}, locale: ${this.locale} }`;
+    } else {
+      return `DateTime { Invalid, reason: ${this.invalidReason} }`;
+    }
+  }
+  /**
    * Returns the epoch milliseconds of this DateTime. Alias of {@link DateTime#toMillis}
    * @return {number}
    */
@@ -6774,15 +7154,17 @@ var DateTime = class _DateTime {
    * Note that time zones are **ignored** in this comparison, which compares the **local** calendar time. Use {@link DateTime#setZone} to convert one of the dates if needed.
    * @param {DateTime} otherDateTime - the other DateTime
    * @param {string} unit - the unit of time to check sameness on
+   * @param {Object} opts - options
+   * @param {boolean} [opts.useLocaleWeeks=false] - If true, use weeks based on the locale, i.e. use the locale-dependent start of the week; only the locale of this DateTime is used
    * @example DateTime.now().hasSame(otherDT, 'day'); //~> true if otherDT is in the same current calendar day
    * @return {boolean}
    */
-  hasSame(otherDateTime, unit) {
+  hasSame(otherDateTime, unit, opts) {
     if (!this.isValid)
       return false;
     const inputMs = otherDateTime.valueOf();
     const adjustedToZone = this.setZone(otherDateTime.zone, { keepLocalTime: true });
-    return adjustedToZone.startOf(unit) <= inputMs && inputMs <= adjustedToZone.endOf(unit);
+    return adjustedToZone.startOf(unit, opts) <= inputMs && inputMs <= adjustedToZone.endOf(unit, opts);
   }
   /**
    * Equality check
@@ -7075,8 +7457,9 @@ var import_jstoxml = __toESM(require_jstoxml(), 1);
 var import_crypto = __toESM(require("crypto"), 1);
 
 // src/utils/aws.js
-var import_client_sqs = require("@aws-sdk/client-sqs");
 var import_client_s3 = require("@aws-sdk/client-s3");
+var import_client_cloudfront = require("@aws-sdk/client-cloudfront");
+var import_client_sqs = require("@aws-sdk/client-sqs");
 var BUCKET = process.env.BUCKET ?? "genie-hub-2";
 var REGION = process.env.REGION ?? "eu-west-2";
 var SQS_QUEUE = process.env.SQS_QUEUE ?? "https://sqs.eu-west-2.amazonaws.com/584678469437/genie-cloud";

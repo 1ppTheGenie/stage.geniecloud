@@ -1,15 +1,10 @@
-import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
+/* prettier-ignore */
+import { S3Client, DeleteObjectCommand, ListObjectsV2Command, GetObjectCommand, GetObjectTaggingCommand, PutObjectCommand, HeadObjectCommand, CopyObjectCommand, PutObjectRetentionCommand } from '@aws-sdk/client-s3';
 import {
-    S3Client,
-    DeleteObjectCommand,
-    ListObjectsV2Command,
-    GetObjectCommand,
-    GetObjectTaggingCommand,
-    PutObjectCommand,
-    HeadObjectCommand,
-    CopyObjectCommand,
-    PutObjectRetentionCommand
-} from '@aws-sdk/client-s3';
+    CloudFrontClient,
+    CreateInvalidationCommand
+} from '@aws-sdk/client-cloudfront';
+import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
 
 export const BUCKET = process.env.BUCKET ?? 'genie-hub-2';
 const REGION = process.env.REGION ?? 'eu-west-2';
@@ -35,7 +30,7 @@ export const copyObject = async (
         Key: destinationKey,
         CacheControl: CacheControl,
         ContentType: ContentType,
-        MetadataDirective: "REPLACE"
+        MetadataDirective: 'REPLACE'
     };
 
     return await s3Client.send(new CopyObjectCommand(args));
@@ -196,4 +191,27 @@ export const queueMsg = async (body, attributes) => {
     };
 
     return await sqs.send(new SendMessageCommand(sqsMessage));
+};
+
+export const invalidateCache = async paths => {
+    if (process.env.CF_DISTRIBUTION_ID) {
+        try {
+            const client = new CloudFrontClient({ region: REGION });
+
+            await client.send(
+                new CreateInvalidationCommand({
+                    DistributionId: process.env.CF_DISTRIBUTION_ID,
+                    InvalidationBatch: {
+                        CallerReference: Date.now().toString(),
+                        Paths: {
+                            Quantity: paths.length,
+                            Items: paths
+                        }
+                    }
+                })
+            );
+        } catch (err) {
+            console.error('Error invalidating cache:', err);
+        }
+    }
 };

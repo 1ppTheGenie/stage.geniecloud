@@ -18,6 +18,7 @@ esbuild
 		external: [
 			"@aws-sdk/client-s3",
 			"@aws-sdk/client-sqs",
+			"@aws-sdk/client-cloudfront",
 			"node-fetch",
 			"sharp",
 		],
