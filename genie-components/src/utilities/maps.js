@@ -5,15 +5,12 @@ export const initAutocomplete = callback => {
 		js.src = `https://maps.googleapis.com/maps/api/js?key=${window.gHub.googleKey}&libraries=places`;
 		js.id = "google-maps-script";
 		js.onload = () => callback();
-		console.log('js.async!!')
 
 		var ref = document.getElementsByTagName("script")[0];
 		ref.parentNode.insertBefore(js, ref);
 	} else {
-		console.log('initAutocomplete 3')
 		callback();
 	}
-	console.log('initAutocomplete 4')
 };
 
 export const initMaps = async () => {
