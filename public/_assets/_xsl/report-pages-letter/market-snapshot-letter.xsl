@@ -68,33 +68,12 @@
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'text {dominant-baseline:middle;}'" />
-
 		</style>
-		<symbol id="up-icon" class="stat-icon">
-			<svg aria-hidden="true" focusable="false"
-				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-				<path d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"></path>
-			</svg>
-		</symbol>
-		<symbol id="down-icon" class="stat-icon">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-				<path d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"></path>
-			</svg>
-		</symbol>
 
 		<xsl:variable name="medianSalePrice" select="number(//statistics/@medianSalePrice)" />
 		<xsl:variable name="previousMedianSalePrice" select="number(//previous/@medianSalePrice)" />
 		<xsl:variable name="change" select="$medianSalePrice div $previousMedianSalePrice" />
 		<xsl:variable name="formattedChange" select="format-number( abs( 1 - $change ), '#.0%' )" />
-
-		<!-- <text x="50%" y="53%" class="upper center heading" font-size="180%" data-max-width="80%">
-<xsl:value-of select="$areaWithPropertyType" />
-
-		</text>
-
-		<text x="50%" y="56%" class="upper center sub-heading" font-size="320%">
-			Market Snapshot
-		</text> -->
 
 		<xsl:call-template name="letter-report-header">
 			<xsl:with-param name="title" select="'Market Snapshot'" />
@@ -130,7 +109,6 @@
 		<text x="50%" y="32%" font-size="240%" class="center heading">
 			<tspan>
 				<xsl:value-of select="format-number( //statistics/@maxSalePrice, '$###,###')" />
-
 			</tspan>
 		</text>
 
@@ -154,7 +132,6 @@
 		<text x="50%" y="42%" font-size="240%" class="center heading">
 			<tspan>
 				<xsl:value-of select="format-number( //statistics/@averageSalePrice, '$###,###')" />
-
 			</tspan>
 		</text>
 
@@ -198,7 +175,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<tspan>
-							<xsl:value-of select="concat( ' Up ', $formattedChange, ' since '  )" />
+							<xsl:value-of select="concat( ' Down ', $formattedChange, ' since '  )" />
 						</tspan>
 						<tspan x="77%" dy="2%">
 							<xsl:value-of select="concat( ' ', $since )" />
