@@ -91,12 +91,11 @@ Version:	1.1
 							<xsl:comment />
 						</div>
 
-						<script type="module" crossorigin="crossorigin">
-							<xsl:attribute name="src">
-								<xsl:value-of select="concat( '/_assets/landing-pages/dist/', $buildVersion, '/assets/index.js' )" />
-							</xsl:attribute>
-							<xsl:comment />
+						<xsl:value-of select="concat( 'window.ghUrl = `', //output/@siteUrl, '_assets`; ' )" />
+						<script async="async" src="{concat( //output/@siteUrl, '_assets/landing-pages/_global.js' )}">
+							<xsl:comment><!-- Genie Global JS --></xsl:comment>
 						</script>
+						
 						<style>
 							<xsl:value-of select="'div.banner span.overlay {z-index: 10!important;}'" />
 						</style>
