@@ -1,2 +1,0 @@
-import{i as n,g as s,t as l}from"./index.js";const i=l('<span style="font-weight:bold">'),o=t=>["Showing",(()=>{const e=i();return n(e,()=>` ${t.offset+1}-${t.offset+Math.min(Math.min(t.pageSize,t.len),t.len-t.offset)} `),e})(),"of",(()=>{const e=i();return n(e,()=>` ${t.len} `),e})(),s(()=>t.mode==="sold"?`sold listings in the last ${t.period} months`:`${t.mode} listings`),". DOM: Days On Market"];export{o as L};
-//# sourceMappingURL=ListingsShowing.js.map
