@@ -52,7 +52,7 @@ export default () => {
 		setPage(0);
 		setListingType(propertyTypeId);
 		setListingsMode(statusType.toLowerCase());
-		setListingsVisible(true);
+		setListingsVisible( true );
 	};
 
 	return (
@@ -122,9 +122,8 @@ export default () => {
 				</div>
 			</div>
 			<div
-				class="toggle"
 				id="ff-listing-table"
-				style={`height: ${listingsVisible() ? "auto" : "0"}; `}>
+				style={{ height: listingsVisible() ? "auto" : "0" }}>
 				<div style="box-sizing: border-box;">
 					<CloseIcon
 						style="height: 35px; width: auto; cursor: pointer; float: right;"

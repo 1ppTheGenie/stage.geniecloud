@@ -1,21 +1,25 @@
 import { Show } from "solid-js";
+import { unwrap } from "solid-js/store";
 import { HomeTypes, MRIcon, Spinner } from "@/components";
-import { areaDataStore, propertyTypeCaption, currency, percent } from "@/utilities";
+import { areaDataStore, listingsStore, filterListings, propertyTypeCaption, sharedEmbedStore, currency, percent } from "@/utilities";
 
 import PriceLavel from "@/assets/price-level.svg";
 import ClockGreen from "@/assets/clock-green.svg";
 import UpGreen from "@/assets/up-green.svg";
 import DnRed from "@/assets/dn-red.svg";
 
-// Status home Icon
-import homePlus from "@/assets/home-plus.svg";
-import homeSpeaker from "@/assets/home-speaker.svg";
-import homeDot from "@/assets/home-dot.svg";
-import homeLock from "@/assets/home-lock.svg";
-
 import "@/assets/css/market-trending.css";
 
 export default () => {
+
+	const listingsSubset = (lMode) => {
+		if (!listingsStore.loading && listingsStore.listings) {
+			const listings = unwrap(listingsStore?.listings);
+
+			return filterListings(Object.values(listings), sharedEmbedStore.propertyType, 12, lMode);
+		}
+	};
+
 	return (
 		<>
 			<h1 class="center upper">
@@ -34,25 +38,25 @@ export default () => {
 					<StatusIcon
 						caption={`New`.toUpperCase()}
 						isLoading={areaDataStore.loading}
-						count={areaDataStore.propertyStats.new}
+						count={listingsSubset( "new")?.length}
 						period="0-30 days"
 					/>
 					<StatusIcon
 						caption={`Active`.toUpperCase()}
 						isLoading={areaDataStore.loading}
-						count={areaDataStore.propertyStats.active}
+						count={listingsSubset( "active")?.length}
 						period="Total"
 					/>
 					<StatusIcon
 						caption={`Pending`.toUpperCase()}
 						isLoading={areaDataStore.loading}
-						count={areaDataStore.propertyStats.pending}
+						count={listingsSubset( "pending")?.length}
 						period={`${areaDataStore.areaPeriod} months`}
 					/>
 					<StatusIcon
 						caption={`Sold`.toUpperCase()}
 						isLoading={areaDataStore.loading}
-						count={areaDataStore.propertyStats.sold}
+						count={listingsSubset( "sold")?.length}
 						period={`${areaDataStore.areaPeriod} months`}
 					/>
 				</Show>
