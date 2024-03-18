@@ -4,6 +4,7 @@
 	"template": "marketing-steps-lc1",
 	"sections": [
 		{
+			"sort": 1,
 			"meta": { "caption": "", "description": "" },
 			"assets": [
 				{
@@ -88,6 +89,7 @@
 			"name": "EMAIL GRAPHICS"
 		},
 		{
+			"sort": 2,
 			"meta": { "caption": "", "description": "" },
 			"assets": [
 				{

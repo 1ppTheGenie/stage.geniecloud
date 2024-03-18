@@ -4,6 +4,7 @@
 	"template": "marketing-steps-lc1",
 	"sections": [
 		{
+			"sort": 1,
 			"meta": {
 				"caption": "Automating your Listing Marketing Workflow!",
 				"description": "You can choose any one of the postcards below. QR Code will lead to the QR Property Compare below."
@@ -36,6 +37,7 @@
 			"name": "Listing Command Proof Kit"
 		},
 		{
+			"sort": 2,
 			"name": "Social Media Assets",
 			"meta": {
 				"caption": "Superpower your Social Media Marketing",
@@ -65,6 +67,7 @@
 			]
 		},
 		{
+			"sort": 3,
 			"name": "Landing Pages",
 			"meta": {
 				"caption": "Move your Engagements through the Funnel",
@@ -84,6 +87,7 @@
 			]
 		},
 		{
+			"sort": 4,
 			"name": "Deliverables",
 			"meta": {
 				"caption": "Leave a Lasting Impression",

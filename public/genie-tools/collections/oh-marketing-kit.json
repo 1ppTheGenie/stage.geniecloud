@@ -4,6 +4,7 @@
 	"version": 3,
 	"sections": [
 		{
+			"sort": 1,
 			"meta": { "caption": "", "description": "" },
 			"assets": [
 				{
@@ -25,6 +26,7 @@
 			"name": "Social Stories"
 		},
 		{
+			"sort": 2,
 			"meta": { "caption": "", "description": "" },
 			"assets": [
 				{

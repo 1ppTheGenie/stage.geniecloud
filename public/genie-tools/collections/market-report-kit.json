@@ -4,6 +4,7 @@
 	"template": "marketing-steps-lc1",
 	"sections": [
 		{
+			"sort": 1,
 			"meta": { "caption": "Become the Local Expert!" },
 			"assets": [
 				{
