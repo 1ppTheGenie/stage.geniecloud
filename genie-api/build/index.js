@@ -8854,7 +8854,6 @@ var add_lead = async (params) => {
 ${key}: ${params[`meta[${key}]`]}`;
       }
     }
-    console.log("@p", args);
     if (Object.keys(args).length > 0) {
       const lead = await createLead(agentId, args);
       return success(lead);
