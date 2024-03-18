@@ -220,7 +220,7 @@ const add_lead = async params => {
         if (params.hasOwnProperty('fullName')) {
             var split = params?.fullName?.split(' ');
 
-            if (split.length > 1) {
+            if (split && split.length > 1) {
                 var last = split.pop();
 
                 args['lastName'] = last;
@@ -244,12 +244,14 @@ const add_lead = async params => {
             return m;
         }, []);
 
-        for (var j = 0; j < meta_keys.length; j++) {
-            var key = meta_keys[j];
+        if ( meta_keys ) {
+            for ( var j = 0; j < meta_keys.length; j++ ) {
+                var key = meta_keys[j];
 
-            if (!args.note) args.note = '';
+                if ( !args.note ) args.note = '';
 
-            args['note'] += `\n${key}: ${params[`meta[${key}]`]}`;
+                args['note'] += `\n${key}: ${params[`meta[${key}]`]}`;
+            }
         }
 
         if (Object.keys(args).length > 0) {

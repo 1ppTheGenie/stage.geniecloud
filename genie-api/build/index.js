@@ -8825,7 +8825,7 @@ var add_lead = async (params) => {
     }
     if (params.hasOwnProperty("fullName")) {
       var split = params?.fullName?.split(" ");
-      if (split.length > 1) {
+      if (split && split.length > 1) {
         var last = split.pop();
         args["lastName"] = last;
         args["firstName"] = split.join(" ");
@@ -8845,13 +8845,16 @@ var add_lead = async (params) => {
       }
       return m;
     }, []);
-    for (var j = 0; j < meta_keys.length; j++) {
-      var key = meta_keys[j];
-      if (!args.note)
-        args.note = "";
-      args["note"] += `
+    if (meta_keys) {
+      for (var j = 0; j < meta_keys.length; j++) {
+        var key = meta_keys[j];
+        if (!args.note)
+          args.note = "";
+        args["note"] += `
 ${key}: ${params[`meta[${key}]`]}`;
+      }
     }
+    console.log("@p", args);
     if (Object.keys(args).length > 0) {
       const lead = await createLead(agentId, args);
       return success(lead);
