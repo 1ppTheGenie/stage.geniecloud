@@ -18,7 +18,6 @@
 				<xsl:value-of select="concat( 'window.gHub = { buildUrl: filename =>  `${window.ghUrl}/${filename}`, agentId:`', //output/@userId, '`, areaId:', number(//area/id), ', mlsNumber:`', //single/mlsNumber, '`, mlsId:`', //single/mlsId, '`, pricePercent:`', //output/@pricePercent, '`, blurPrice:', boolean(//output/@blurPrice='1' or //output/@blurPrice='true'), ', requireSignin:', boolean(//output/@requireSignin='1' or //output/@requireSignin='true'), ', propertyType:', number(//area/statistics/@propertyType), ',noCopyright:', boolean(//output/@noCopyright='1' or //output/@noCopyright='true'), ',openHouseTimes:`', //output/@openHouseTimes, '`,hideAVM:', boolean(string(//output/@hideAVM)='1' or //output/@hideAVM='true'), ',downloadUrl:`', //output/@downloadUrl, '`,isLeadCapture:', boolean(//output/@isLeadCapture='1' or //output/@isLeadCapture='true'), ', SINGLE:  0, CONDO: 1, siteUrl: `', //output/@siteUrl, '`, apiUrl: `', //output/@apiUrl, '`, mapStyle: `satellite-v9`, googleKey: `', //output/@googleKey, '`, mapboxKey: `', //output/@mapboxKey, '` };')" />
 			</script>
 
-			<xsl:value-of select="concat( 'window.ghUrl = `', //output/@siteUrl, '_assets`; ' )" />
 			<script async="async" src="{concat( //output/@siteUrl, '_assets/landing-pages/_global.js' )}">
 				<xsl:comment><!-- Genie Global JS --></xsl:comment>
 			</script>

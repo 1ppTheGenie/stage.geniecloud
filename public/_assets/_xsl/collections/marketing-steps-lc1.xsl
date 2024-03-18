@@ -85,13 +85,13 @@ Version:	1.1
 						<script>
 							<xsl:value-of select="concat('const polygon =', //area[1]/geojson,';' )" />
 							<xsl:value-of select="concat('const options = { mapStyle: `', //output/@mapStyle,'`, zoom: 17 };' )" />
+							<xsl:value-of select="concat( 'window.ghUrl = `', //output/@siteUrl, '_assets`; ' )" />
 							<xsl:value-of disable-output-escaping="yes" select="'document.addEventListener( `genie-landing-loaded`, function() { return window.gHub.makeMap( `genie-map`, options, { geoJson: polygon } ); })'" />
 						</script>
 						<div id="genie-map" style="width:100vw;height:100%;position:absolute;top:0;">
 							<xsl:comment />
 						</div>
-
-						<xsl:value-of select="concat( 'window.ghUrl = `', //output/@siteUrl, '_assets`; ' )" />
+						
 						<script async="async" src="{concat( //output/@siteUrl, '_assets/landing-pages/_global.js' )}">
 							<xsl:comment><!-- Genie Global JS --></xsl:comment>
 						</script>
