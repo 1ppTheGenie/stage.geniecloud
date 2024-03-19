@@ -9429,7 +9429,6 @@ var getPropertyFromId = async (property_id, agent_id) => {
 };
 var createLead = async (userId, args) => {
   args.userId = userId;
-  console.log("CreateNewLead", args);
   const r = await call_api("CreateNewLead", args, "POST");
   if (!r) {
     console.log("Failed to create new lead: ", r);
