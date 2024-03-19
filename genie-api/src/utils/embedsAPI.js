@@ -217,7 +217,7 @@ const add_lead = async params => {
             }
         }
 
-        if (params.hasOwnProperty('fullName')) {
+        if (params.hasOwnProperty('fullName') && params.fullName ) {
             var split = params?.fullName?.split(' ');
 
             if (split && split.length > 1) {
