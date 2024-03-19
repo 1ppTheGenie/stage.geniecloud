@@ -8,23 +8,13 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-
-<xsl:import href="common.xsl" />
-<xsl:import href="lc-social-media.xsl" />
-
+	<xsl:import href="common.xsl" />
+	<xsl:import href="lc-social-media.xsl" />
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 		</link>
-
-		<xsl:call-template name="lc-prop-post-03-common" />
-	</xsl:template>
-
-	<xsl:template name="lc-prop-post-03-common">
-<xsl:param name="status" select="'true'" />
-
 
 		<image x="0" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
