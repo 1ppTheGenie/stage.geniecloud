@@ -8823,7 +8823,7 @@ var add_lead = async (params) => {
         args[argsKey] = value !== null ? value : params[key];
       }
     }
-    if (params.hasOwnProperty("fullName")) {
+    if (params.hasOwnProperty("fullName") && params.fullName) {
       var split = params?.fullName?.split(" ");
       if (split && split.length > 1) {
         var last = split.pop();
@@ -9429,6 +9429,7 @@ var getPropertyFromId = async (property_id, agent_id) => {
 };
 var createLead = async (userId, args) => {
   args.userId = userId;
+  console.log("CreateNewLead", args);
   const r = await call_api("CreateNewLead", args, "POST");
   if (!r) {
     console.log("Failed to create new lead: ", r);
