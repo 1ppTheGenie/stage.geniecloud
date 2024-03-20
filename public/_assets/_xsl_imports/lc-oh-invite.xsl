@@ -12,11 +12,11 @@
 					<xsl:with-param name="idx" select="1" />
 				</xsl:call-template>
 			</image>
+
 			<g style="transform:translate(80%, 0%)">
 				<svg width="10%" x="-0.3%" y="-44.5%" viewBox="0 0 68 100" fill="var(--theme-body-background)"
 					xmlns="http://www.w3.org/2000/svg">
 					<path d="M0 82.5V0H67.5V82.5L33.5 100L0 82.5Z" />
-
 				</svg>
 
 				<xsl:call-template name="qr-code">
@@ -36,7 +36,6 @@
 
 			<rect x="0" y="45%" fill="var(--theme-sub-heading-color)" width="100%" height="2%" />
 
-
 			<g style="transform:translate(0%,43%)">
 				<rect x="13%" y="-3%" fill="var(--theme-sub-heading-color)" width="75%" height="13.5%" />
 
@@ -46,6 +45,7 @@
 						<xsl:with-param name="default" select="'you’re invited'" />
 					</xsl:call-template>
 				</text>
+
 				<text x="50%" y="0.5%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="700%" font-weight="300">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'openhouse'" />
