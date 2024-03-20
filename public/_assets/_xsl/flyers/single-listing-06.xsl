@@ -3,12 +3,12 @@
 	Asset Name: Single Listing Flyer - No.6
 	Tags:		Report, Direct Mail
 	Sizes:		Letter
-	Supports:	Listing
+	Supports:	Listing, QRCode
 	Pages:		flyers/single-listing-06,flyers/single-rear-01
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 
 	<xsl:template name="svg-body">
@@ -18,8 +18,7 @@
 
 		<g>
 			<g>
-<rect fill="var(--theme-body-color)" width="100%" height="7%" />
-
+				<rect fill="var(--theme-body-color)" width="100%" height="7%" />
 
 				<image x="2%" y="1%" width="10%" height="5%" class="center" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
@@ -43,45 +42,42 @@
 
 			<g style="transform:translate(2.5%,11%)">
 				<filter x="-0.12" y="-0.3" width="1.2" height="1.8" id="solid">
-<feFlood flood-color="var(--theme-sub-heading-color)" />
+					<feFlood flood-color="var(--theme-sub-heading-color)" />
 
 					<feComposite in="SourceGraphic" operator="xor" />
 				</filter>
 				<text x="0" y="0" filter="url(#solid)" style="fill:var(--theme-body-background); font-size: 230%;">
-<xsl:call-template name="soldListedPrice" />
+					<xsl:call-template name="soldListedPrice" />
 
 				</text>
 				<text x="0" y="0" fill="#fff" style="fill:var(--theme-body-background); font-size: 230%;">
-<xsl:call-template name="soldListedPrice" />
-
+					<xsl:call-template name="soldListedPrice" />
 				</text>
 			</g>
 
 			<g style="transform:translate(0%,49%)">
-<rect fill="var(--theme-sub-heading-color)" width="100%" height="9%" />
+				<rect fill="var(--theme-sub-heading-color)" width="100%" height="9%" />
 
 				<text x="2%" y="1.5%" class="upper" fill="var(--theme-body-background)" style="font-size:250%;">
-<xsl:call-template name="listing-address-line-one" />
+					<xsl:call-template name="listing-address-line-one" />
 
 				</text>
 				<text x="2%" y="4.5%" class="upper" fill="var(--theme-body-background)" style="font-size:250%;">
-<xsl:call-template name="listing-address-line-two" />
+					<xsl:call-template name="listing-address-line-two" />
 
 				</text>
 				<text x="50%" y="3%" fill="var(--theme-body-background)" style="font-size:310%;">
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'singletype'" />
-<xsl:with-param name="default" select="$propertyType" />
-
+							<xsl:with-param name="default" select="$propertyType" />
 						</xsl:call-template>
 					</tspan>
 				</text>
 			</g>
 
 			<foreignObject x="2%" y="61%" width="44%" height="21%" style="color:var(--theme-body-color);-webkit-line-clamp:6; line-height: 2.5rem; font-size: 180%;">
-<xsl:call-template name="listing-description" />
-
+				<xsl:call-template name="listing-description" />
 			</foreignObject>
 
 			<g style="transform:translate(50%,58%)">
@@ -149,14 +145,14 @@
 			</g>
 
 			<g style="transform: translate(0%, 88%);">
-<rect x="0" y="0" width="100%" height="12%" style="fill:var(--theme-sub-heading-color);" />
+				<rect x="0" y="0" width="100%" height="12%" style="fill:var(--theme-sub-heading-color);" />
 
 				<image x="16%" y="1%" width="12%" height="9%" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:value-of select="//agent[1]/photo" />
 					</xsl:attribute>
 				</image>
-<text x="30%" y="2%" fill="var(--theme-body-background)" style="font-size: 180%;">
+				<text x="30%" y="2%" fill="var(--theme-body-background)" style="font-size: 180%;">
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
@@ -164,21 +160,21 @@
 						</xsl:call-template>
 					</tspan>
 				</text>
-<text x="30%" y="4.5%" fill="var(--theme-body-background)" style="font-size: 180%;" data-max-width="60%">
+				<text x="30%" y="4.5%" fill="var(--theme-body-background)" style="font-size: 180%;" data-max-width="60%">
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentmobile'" />
 							<xsl:with-param name="default" select="//agent[1]/mobile" />
 						</xsl:call-template>
 					</tspan>
-<tspan> &#124; </tspan>
+					<tspan> &#124; </tspan>
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentmarketingEmail'" />
 							<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 						</xsl:call-template>
 					</tspan>
-<tspan> &#124; </tspan>
+					<tspan> &#124; </tspan>
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentwebsite'" />
@@ -186,7 +182,7 @@
 						</xsl:call-template>
 					</tspan>
 				</text>
-<text x="30%" y="7%" fill="var(--theme-body-background)" style="font-size: 180%;">
+				<text x="30%" y="7%" fill="var(--theme-body-background)" style="font-size: 180%;">
 					<tspan>
 
 						<xsl:call-template name="editable">

@@ -96,19 +96,22 @@
 					"sort": 1,
 					"asset": "flyers/single-listing-02",
 					"knownAs": "Listing Flyer 1",
-					"name": "Listing Flyer 1"
+					"name": "Listing Flyer 1",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 2,
 					"asset": "flyers/single-listing-03",
 					"knownAs": "Listing Flyer 2",
-					"name": "Listing Flyer 2"
+					"name": "Listing Flyer 2",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 3,
 					"asset": "flyers/single-listing-04",
 					"knownAs": "Listing Flyer 3",
-					"name": "Listing Flyer 3"
+					"name": "Listing Flyer 3",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 4,
@@ -121,19 +124,22 @@
 					"sort": 5,
 					"asset": "flyers/single-listing-05",
 					"knownAs": "Listing Flyer 5",
-					"name": "Listing Flyer 5"
+					"name": "Listing Flyer 5",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 6,
 					"asset": "flyers/single-listing-06",
 					"knownAs": "Listing Flyer 6",
-					"name": "Listing Flyer 6"
+					"name": "Listing Flyer 6",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 7,
 					"asset": "flyers/single-listing-07",
 					"knownAs": "Listing Flyer 7",
-					"name": "Listing Flyer 7"
+					"name": "Listing Flyer 7",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 8,

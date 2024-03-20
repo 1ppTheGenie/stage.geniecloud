@@ -3,7 +3,7 @@
 	Asset Name: Single Listing Flyer - No.7
 	Tags:		Report, Direct Mail
 	Sizes:		Letter
-	Supports:	Listing
+	Supports:	Listing, QRCode
 	Pages:		flyers/single-listing-07,flyers/single-rear-01
 -->
 
