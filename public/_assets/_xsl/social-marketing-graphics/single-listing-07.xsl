@@ -13,12 +13,6 @@
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'
-			<!-- #logo {
-					width: 30%;
-					height:10%;
-					transform: translateX(65%);
-				} -->
-
 				g#photos {
 					transform: translate(2.5%, 14.5%);
 				}
@@ -44,6 +38,7 @@
 		<text x="2.5%" y="5%" class="h1 heading large bold" data-max-width="60%">
 			<xsl:value-of select="//areas/area/name" />
 		</text>
+
 		<image x="80%" y="1%" width="18%" height="12%" id="logo" preserveAspectRatio="xMidYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="$companyLogo" />
