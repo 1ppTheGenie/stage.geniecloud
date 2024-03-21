@@ -144,18 +144,18 @@ export const api = async event => {
                 if (params?.impersonaterId)
                     impersonater.id = params.impersonaterId;
 
-                if ( route.startsWith( '/genie-embed' ) ) {
+                if (route.startsWith('/genie-embed')) {
                     response.body = await embedsAPI(
-                        route.replace( '/genie-embed/v2/', '' ),
+                        route.replace('/genie-embed/v2/', ''),
                         params
                     );
-                }else if (route.startsWith('/genie-admin')) {
+                } else if (route.startsWith('/genie-admin')) {
                     response.body = await cloudHubAPI(
                         route.replace('/genie-admin/v2/', ''),
                         params
                     );
                 } else {
-                    switch ( route ) {
+                    switch (route) {
                         case '/build-version':
                             response.body = {
                                 buildVersion: await buildVersion()
@@ -250,14 +250,10 @@ export const api = async event => {
                             }
                             break;
 
-
-
                         case '/make-qrcode':
                             const qr = await generateQR();
                             response.body = { success: true, ...qr };
                             break;
-
-
 
                         /*
                         case '/clear-cache':
@@ -367,7 +363,7 @@ export const api = async event => {
                                     false,
                                     continuationToken
                                 );
-                                
+
                                 try {
                                     await Promise.all(
                                         r.Contents.map(async item => {
@@ -559,7 +555,7 @@ export const api = async event => {
                                 const collection = await getCollection(
                                     params.collection
                                 );
-                                console.log('collection', collection);
+
                                 if (collection) {
                                     // Do the template first
                                     await prepareAsset(
@@ -1021,7 +1017,10 @@ const prepareAsset = async (asset, params) => {
                     );
                 } else if (params?.qrUrl) {
                     render.tags.qrUrl = params.qrUrl;
-                    qrUrl = await getLandingQrCodeUrl(qrUrl, params.renderId);
+                    qrUrl = await getLandingQrCodeUrl(
+                        params.qrUrl,
+                        params.renderId
+                    );
                 }
 
                 if (qrUrl) {
@@ -1220,15 +1219,12 @@ export const validateRenderParams = async args => {
 
 const getLandingQrCodeUrl = async (asset, renderId, qrUrl = null) => {
     let s3Key = `genie-files/${renderId}/${asset}-qr.svg`;
-
-    // Saving location of the rendered landing page
-    qrUrl =
-        qrUrl ??
-        `${genieGlobals.GENIE_HOST}/` +
-            (await getS3Key(`landing-pages/${asset}`, { renderId }));
+    let landingS3Key = await getS3Key(`landing-pages/${asset}`, { renderId });
 
     // S3 url of the rendered landing page
-    const qrSVG = await generateQR(qrUrl);
+    const qrSVG = await generateQR(
+        qrUrl ?? `${genieGlobals.GENIE_HOST}${landingS3Key.s3Key}`
+    );
     await toS3(s3Key, Buffer.from(qrSVG), null, 'image/svg+xml');
 
     return `${genieGlobals.GENIE_HOST}${s3Key}`;

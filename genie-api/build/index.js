@@ -8403,8 +8403,6 @@ var processCollection = async (params) => {
                       ) && a.asset == asset.qrUrl
                     )
                   );
-                  if (linkAsset) {
-                  }
                 }
                 const { s3Key } = await getS3Key(asset.asset, {
                   ...params,
@@ -9883,7 +9881,6 @@ var api = async (event) => {
                 const collection = await getCollection(
                   params.collection
                 );
-                console.log("collection", collection);
                 if (collection) {
                   await prepareAsset(
                     `collections/${collection.template}`,
@@ -10227,7 +10224,7 @@ var prepareAsset = async (asset, params) => {
           );
         } else if (params?.qrUrl) {
           render.tags.qrUrl = params.qrUrl;
-          qrUrl = await getLandingQrCodeUrl(qrUrl, params.renderId);
+          qrUrl = await getLandingQrCodeUrl(params.qrUrl, params.renderId);
         }
         if (qrUrl) {
           render.customizations = { qrUrl };
@@ -10381,8 +10378,8 @@ var validateRenderParams = async (args) => {
 };
 var getLandingQrCodeUrl = async (asset, renderId, qrUrl = null) => {
   let s3Key = `genie-files/${renderId}/${asset}-qr.svg`;
-  qrUrl = qrUrl ?? `${genieGlobals.GENIE_HOST}/` + await getS3Key(`landing-pages/${asset}`, { renderId });
-  const qrSVG = await generateQR(qrUrl);
+  let landingS3Key = await getS3Key(`landing-pages/${asset}`, { renderId });
+  const qrSVG = await generateQR(qrUrl ?? `${genieGlobals.GENIE_HOST}${landingS3Key.s3Key}`);
   await toS3(s3Key, Buffer.from(qrSVG), null, "image/svg+xml");
   return `${genieGlobals.GENIE_HOST}${s3Key}`;
 };

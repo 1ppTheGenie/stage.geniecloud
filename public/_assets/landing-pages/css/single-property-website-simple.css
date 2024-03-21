@@ -224,7 +224,7 @@ html {
     text-decoration: none;
 }
 
-.property-single-image:hover .image-overlay-content {
+body:not(.lightbox) .property-single-image:hover .image-overlay-content {
     opacity: 1;
 }
 

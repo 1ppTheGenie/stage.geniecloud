@@ -1074,17 +1074,6 @@ const processCollection = async params => {
                                                 )
                                         );
 
-                                    if (linkAsset) {
-                                        /*
-										const rdata = get_collection_render_data(
-											linkAsset,
-											params.renderId
-										);
-	
-										if (rdata?.id) {
-											qrUrl = get_asset_landing_link(linkAsset, rdata.id);
-										}*/
-                                    }
                                 }
 
                                 const { s3Key } = await getS3Key(asset.asset, {
@@ -1116,10 +1105,6 @@ const processCollection = async params => {
                                     _content: tags
                                 });
                             }
-                            // ToDo } else if (asset_file) {
-                            // Only log errors for files that actually exist
-                            // TODO error_log('Collection Render Data failed: ' . $collection_id);
-                            // TODO error_log(print_r($asset, true));
                         }
                     })
                 );
