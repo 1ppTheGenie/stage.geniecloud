@@ -10,7 +10,6 @@ Supports:	Area, Print, Listing, QRCode
 	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-
 		<rect x="0" y="0" width="51%" height="100%" fill="#fff"></rect>
 		<line xmlns="" stroke="#fff" stroke-width="0.8%" x1="51%" x2="51%" y1="0" y2="100%"></line>
 		<rect x="50%" y="0" width="50%" height="100%" fill="#fff"></rect>
@@ -31,8 +30,9 @@ Supports:	Area, Print, Listing, QRCode
 		<g style="transform:translate(45.2%, 55.5%)">
 			<xsl:call-template name="qr-code">
 				<xsl:with-param name="width" select="'11.5%'" />
-`			</xsl:call-template>
+			</xsl:call-template>
 		</g>
+
 		<image x="4%" y="6%" width="25%" height="10%" id="logo" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="$companyLogo" />
