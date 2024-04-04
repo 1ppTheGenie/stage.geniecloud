@@ -1,0 +1,39 @@
+/*
+	Theme Name:	The Complete Real Estate Group Light
+*/
+
+@import url("../_css/myriad-pro-condensed.css");
+@import url("../_css/lato.css");
+
+.the-complete-real-estate-group, .the-complete-real-estate-group.light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #3b3d41; /* Heading */
+	--theme-sub-heading-color: #1aa7ec; /* Subtitle */
+	--theme-body-color: #7d7e81; /* Body */
+	--theme-emphasis-color: #1aa7ec; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed";
+	--theme-heading-font: "Myriad Pro Condensed";
+	--theme-sub-heading-font: "Lato", sans-serif;
+}
+
+.the-complete-real-estate-group.dark {
+	--theme-body-background: #3b3d41;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #1aa7ec; /* Subtitle */
+	--theme-body-color: #a3a3a3; /* Body */
+	--theme-emphasis-color: #1aa7ec; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed";
+	--theme-heading-font: "Myriad Pro Condensed";
+	--theme-sub-heading-font: "Lato", sans-serif;
+}
+
+.the-complete-real-estate-group.blue {
+	--theme-body-background: #1aa7ec;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #14516f; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #14516f; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed";
+	--theme-heading-font: "Myriad Pro Condensed";
+	--theme-sub-heading-font: "Lato", sans-serif;
+}

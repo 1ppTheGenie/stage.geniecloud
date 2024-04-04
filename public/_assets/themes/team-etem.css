@@ -1,17 +1,27 @@
 /*
-	Theme Name:	Team Etem
-	Theme Style: Light        
+	Theme Name:	Team Etem    
 */
 
 @import url("../_css/helvetica-neue.css");
 @import url("../_css/arial.css");
 
-.team-etem-light {
+.team-etem, .team-etem.light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #00d8ff; /* Heading */
 	--theme-sub-heading-color: #000000; /* Subtitle */
 	--theme-body-color: #949494; /* Body */
 	--theme-emphasis-color: #000000; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Helvetica Neue", sans-serif;
+	--theme-sub-heading-font: "Arial", sans-serif;
+}
+
+.team-etem.dark {
+	--theme-body-background: #00d8ff;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #111111; /* Subtitle */
+	--theme-body-color: #000000; /* Body */
+	--theme-emphasis-color: #111111; /* Outline */
 	--theme-body-font: "Helvetica Neue", sans-serif;
 	--theme-heading-font: "Helvetica Neue", sans-serif;
 	--theme-sub-heading-font: "Arial", sans-serif;

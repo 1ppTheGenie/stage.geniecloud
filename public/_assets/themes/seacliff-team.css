@@ -1,16 +1,26 @@
 /*
 	Theme Name: seaCliff Team 
-	Theme Style: Light
 */
 
 @import url("../_css/helvetica-neue-condensed.css");
 
-.seacliff-team-light {
+.seacliff-team, .seacliff-team.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #417f7c; /* Heading */
 	--theme-sub-heading-color: #006b65; /* Subtitle */
 	--theme-body-color: #4f4f4f; /* Body */
 	--theme-emphasis-color: #006b65; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue Condensed", sans-serif;
+}
+
+.seacliff-team.dark {
+	--theme-body-background: #417f7c;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #ffffff; /* Subtitle */
+	--theme-body-color: #ede7e7; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
 	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
 	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
 	--theme-sub-heading-font: "Helvetica Neue Condensed", sans-serif;

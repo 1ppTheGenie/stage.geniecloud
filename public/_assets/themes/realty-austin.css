@@ -1,11 +1,10 @@
 /*
 	Theme Name:	Realty Austin
-	Theme Style: Light        
 */
 
 @import url("../_css/lato.css");
 
-.realty-austin-light {
+.realty-austin, .realty-austin.light {
 	--theme-body-background: #00263a;
 	--theme-heading-color: #e1523d; /* Heading */
 	--theme-sub-heading-color: #ffffff; /* Subtitle */

@@ -1,11 +1,21 @@
 /*
 	Theme Name:	Sheppard Properties
-	Theme Style: Dark
 */
 
 @import url("../_css/helvetica-neue.css");
 
-.sheppard-properties-dark {
+.sheppard-properties, .sheppard-properties.light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #444444; /* Heading */
+	--theme-sub-heading-color: #04466d; /* Subtitle */
+	--theme-body-color: #444444; /* Body */
+	--theme-emphasis-color: #04466d; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Helvetica Neue", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}
+
+.sheppard-properties.dark {
 	--theme-body-background: #04466d;
 	--theme-heading-color: #ffffff; /* Heading */
 	--theme-sub-heading-color: #ffffff; /* Subtitle */
@@ -14,5 +24,4 @@
 	--theme-body-font: "Helvetica Neue", sans-serif;
 	--theme-heading-font: "Helvetica Neue", sans-serif;
 	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
-
 }

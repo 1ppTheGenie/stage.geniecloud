@@ -1,17 +1,27 @@
 /*
 	Theme Name:	WeWin 
-	Theme Style: Light        
 */
 
 @import url("../_css/lato.css");
 @import url("../_css/myriad-pro-condensed.css");
 
-.wewin-light {
+.wewin, .wewin.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #3b3d41; /* Heading */
 	--theme-sub-heading-color: #2376bc; /* Subtitle */ 
 	--theme-body-color: #7d7e81; /* Body */
 	--theme-emphasis-color: #2376bc; /* Outline */	
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+    --theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-body-font: "Lato", sans-serif;
+}
+
+.wewin.dark {
+	--theme-body-background: #3b3d41;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #2376bc; /* Subtitle */
+	--theme-body-color: #a3a3a3; /* Body */
+	--theme-emphasis-color: #2376bc; /* Outline */		
 	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
     --theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
 	--theme-body-font: "Lato", sans-serif;

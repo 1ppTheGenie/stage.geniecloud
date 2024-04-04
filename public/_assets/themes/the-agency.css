@@ -1,12 +1,22 @@
 /*
 	Theme Name:	The Agency
-	Theme Style: Dark
 */
 
 @import url("../_css/open-sans.css");
 @import url("../_css/myriad-pro-condensed.css");
 
-.the-agency-dark {
+.the-agency, .the-agency.light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #d2232a; /* Heading */
+	--theme-sub-heading-color: #231f20; /* Subtitle */
+	--theme-body-color: #231f20; /* Body */
+	--theme-emphasis-color: #d2232a; /* Outline */
+	--theme-body-font: "Open Sans", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Myriad Pro Condensed", sans-serif;
+}
+
+.the-agency.dark {
 	--theme-body-background: #d2232a;
 	--theme-heading-color: #ffffff; /* Heading */
 	--theme-sub-heading-color: #ffffff; /* Subtitle */

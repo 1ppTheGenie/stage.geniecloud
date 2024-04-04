@@ -1,16 +1,26 @@
 /*
 	Theme Name:	Stone Home Team
-	Theme Style: Light        
 */
 
 @import url("../_css/lato.css");
 
-.stone-home-team-light-1 {
+.stone-home-team, .stone-home-team.light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #b40101; /* Heading */
 	--theme-sub-heading-color: #000000; /* Subtitle */
 	--theme-body-color: #999999; /* Body */
 	--theme-emphasis-color: #cccccc; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}
+
+.stone-home-team.alt-light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #2c3740; /* Heading */
+	--theme-sub-heading-color: #2c3740; /* Subtitle */
+	--theme-body-color: #8494a0; /* Body */
+	--theme-emphasis-color: #555; /* Outline */
 	--theme-body-font: "Lato", sans-serif;
 	--theme-heading-font: "Lato", sans-serif;
 	--theme-sub-heading-font: "Lato", sans-serif;

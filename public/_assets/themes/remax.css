@@ -1,17 +1,27 @@
 /*
 	Theme Name:	Remax
-	Theme Style: Light       
 */
 
 @import url("../_css/montserrat.css");
 @import url("../_css/open-sans.css");
 
-.remax-light {
+.remax, .remax.light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #005898; /* Heading */
 	--theme-sub-heading-color: #dc1c2e; /* Subtitle */
 	--theme-body-color: #333333; /* Body */
 	--theme-emphasis-color: #dc1c2e; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Open Sans", sans-serif;
+}
+
+.remax.dark {
+	--theme-body-background: #1a3668;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #99bbda; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
 	--theme-body-font: "Montserrat", sans-serif;
 	--theme-heading-font: "Montserrat", sans-serif;
 	--theme-sub-heading-font: "Open Sans", sans-serif;

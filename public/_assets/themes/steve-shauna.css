@@ -1,0 +1,41 @@
+/*
+	Theme Name:	Steve and Shauna
+*/
+
+@import url("../_css/myriad-pro-condensed.css");
+@import url("../_css/lato.css");
+
+.steve-shauna, .steve-shauna.light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #3b3d41; /* Heading */
+	--theme-sub-heading-color: #3193c2; /* Subtitle */
+	--theme-body-color: #7d7e81; /* Body */
+	--theme-emphasis-color: #3193c2; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}
+
+.steve-shauna.dark {
+	--theme-body-background: #3b3d41;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #3193c2; /* Subtitle */
+	--theme-body-color: #a3a3a3; /* Body */
+	--theme-emphasis-color: #3193c2; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}
+
+
+.steve-shauna.blue {
+	--theme-body-background: #3193c2;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #14516f; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+	--active-green: #1b5e20;
+}
