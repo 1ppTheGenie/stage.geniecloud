@@ -5,7 +5,7 @@
 @import url("../_css/times-new-roman.css");
 @import url("../_css/roboto.css");
 
-.rodeo-realty .rodeo-realty.light {
+.rodeo-realty, .rodeo-realty.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #011d35; /* Heading */
 	--theme-sub-heading-color: #4d6172; /* Subtitle */
