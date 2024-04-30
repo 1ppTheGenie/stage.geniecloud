@@ -1,11 +1,10 @@
 /*
-	Theme Name:	Lisa Default 
-	Theme Style: Light         
+	Theme Name:	Lisa Default  
 */
 
 @import url("../_css/montserrat.css");
 
-.lisa-default-light {
+.lisa-default,.lisa-default.light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #2c3740; /* Heading */
 	--theme-sub-heading-color: #2c3740; /* Subtitle */

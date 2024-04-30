@@ -1,12 +1,22 @@
 /*
 	Theme Name:	Mission Realty
-	Theme Style: Dark  
 */
 
 @import url("../_css/work-sans.css");
 
 
-.mission-realty-dark {
+.mission-realty,.mission-realty.light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #b40101; /* Heading */
+	--theme-sub-heading-color: #2d2d37; /* Subtitle */
+	--theme-body-color: #bf2f2f; /* Body */
+	--theme-emphasis-color: #2d2d37; /* Outline */
+	--theme-body-font: 'Work Sans', sans-serif;
+	--theme-heading-font: 'Work Sans', sans-serif;
+	--theme-sub-heading-font: 'Work Sans', sans-serif;
+}
+
+.mission-realty.dark {
 	--theme-body-background: #b40101;
 	--theme-heading-color: #ffffff; /* Heading */
 	--theme-sub-heading-color: #d2b788; /* Subtitle */

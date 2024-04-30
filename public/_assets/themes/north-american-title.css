@@ -1,12 +1,22 @@
 /*
 	Theme Name:	North American Title 
-	Theme Style: Dark           
 */
 
 @import url("../_css/helvetica-neue-condensed.css");
 @import url("../_css/helvetica-neue.css");
 
-.north-american-title-dark {
+.north-american-title,.north-american-title.light {
+	--theme-body-background: #fff;
+	--theme-heading-color: #01567f; /* Heading */
+	--theme-sub-heading-color: #0192c9; /* Subtitle */
+	--theme-body-color: #252525; /* Body */
+	--theme-emphasis-color: #01567f; /* Outline */
+	--theme-body-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-heading-font: "Helvetica Neue Condensed", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}
+
+.north-american-title.dark {
 	--theme-body-background: #01567f;
 	--theme-heading-color: #ffffff; /* Heading */
 	--theme-sub-heading-color: #0192c9; /* Subtitle */

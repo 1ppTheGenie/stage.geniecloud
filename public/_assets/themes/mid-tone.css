@@ -1,11 +1,10 @@
 /*
 	Theme Name:	Mid Tone 
-	Theme Style: Light           
 */
 
 @import url("../_css/helvetica-neue.css");
 
-.mid-tone-light {
+.mid-tone,.mid-tone.light {
 	--theme-body-background: #23064b;
 	--theme-heading-color: #11abab; /* Heading */
 	--theme-sub-heading-color: #05635f; /* Subtitle */

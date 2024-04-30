@@ -1,15 +1,25 @@
 /*
 	Theme Name:	MCR
-	Theme Style: Light        
 */
 
 @import url("../_css/lato.css");
 
-.mcr-light {
+.mcr,.mcr.light {
 	--theme-body-background: #fff;
 	--theme-heading-color: #000000; /* Heading */
 	--theme-sub-heading-color: #527087; /* Subtitle */
 	--theme-body-color: #14508c; /* Body */
+	--theme-emphasis-color: #ffffff; /* Outline */
+	--theme-body-font: "Lato", sans-serif;
+	--theme-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}
+
+.mcr.dark {
+	--theme-body-background: #14508c;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #a1c9ea; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
 	--theme-emphasis-color: #ffffff; /* Outline */
 	--theme-body-font: "Lato", sans-serif;
 	--theme-heading-font: "Lato", sans-serif;

@@ -1,0 +1,41 @@
+/*
+	Theme Name:	Harcourts
+*/
+
+@import url("../_css/myriad-pro-condensed.css");
+@import url("../_css/montserrat.css");
+@import url("../_css/lato.css");
+
+.harcourts,.harcourts.light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #002b49; /* Heading */
+	--theme-sub-heading-color: #00adef; /* Subtitle */
+	--theme-body-color: #222222; /* Body */
+	--theme-emphasis-color: #00adef; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}
+
+
+.harcourts.dark {
+	--theme-body-background: #002b49;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #00adef; /* Subtitle */
+	--theme-body-color: #eeeeee; /* Body */
+	--theme-emphasis-color: #00adef; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}
+
+.harcourts.test {
+	--theme-body-background: #f00;
+	--theme-heading-color: #002b49; /* Heading */
+	--theme-sub-heading-color: #00adef; /* Subtitle */
+	--theme-body-color: #222222; /* Body */
+	--theme-emphasis-color: #00adef; /* Outline */
+	--theme-body-font: "Myriad Pro Condensed", sans-serif;
+	--theme-heading-font: "Myriad Pro Condensed", sans-serif;
+	--theme-sub-heading-font: "Lato", sans-serif;
+}
