@@ -2,6 +2,7 @@
 import { PDFDocument } from "pdf-lib";
 import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
+import { CloudFrontClient, CreateInvalidationCommand } from "@aws-sdk/client-cloudfront";
 import {
 	ListObjectsV2Command,
 	DeleteObjectCommand,
@@ -24,6 +25,8 @@ const SQS_QUEUE =
 const region = process.env.REGION ?? "eu-west-2";
 
 const s3Client = new S3Client({});
+
+const cloudFrontClient = new CloudFrontClient({});
 
 let browserWSEndpoint, browser;
 
@@ -353,10 +356,35 @@ const s3_upload = async (bucket, key, file, mimeType = null) => {
 		]);
 
 		if (res.ETag) {
-			return `https://${bucket}.s3.${region}.amazonaws.com/${key}`;
-		}
+			const s3Url = `https://${bucket}.s3.${region}.amazonaws.com/${key}`;
+	  
+			// Trigger CloudFront invalidation for the uploaded file
+			await createCloudFrontInvalidation(process.env.CLOUDFRONT_DISTRIBUTION_ID, [`/${key}`]);
+	  
+			return s3Url;
+		  }
 	} catch (err) {}
 };
+
+const createCloudFrontInvalidation = async (distributionId, paths) => {
+	const params = {
+	  DistributionId: distributionId,
+	  InvalidationBatch: {
+		CallerReference: `${Date.now()}`,
+		Paths: {
+		  Quantity: paths.length,
+		  Items: paths,
+		},
+	  },
+	};
+  
+	try {
+	  await cloudFrontClient.send(new CreateInvalidationCommand(params));
+	  console.log("CloudFront invalidation created successfully.");
+	} catch (error) {
+	  console.error("Error creating CloudFront invalidation:", error);
+	}
+  };
 
 export const jsonFromS3 = async (key, bucket = null) => {
 	bucket = bucket ?? BUCKET;
