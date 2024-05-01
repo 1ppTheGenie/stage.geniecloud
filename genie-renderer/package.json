@@ -1,6 +1,6 @@
 {
 	"name": "genie-renderer",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Processing script for the creation of image/PDF assets from GenieHub. v2.0.0",
 	"main": "index.js",
 	"scripts": {

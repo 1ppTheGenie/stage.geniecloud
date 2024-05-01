@@ -11,7 +11,9 @@ import {
 } from "@aws-sdk/client-s3";
 import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
 
+// Chromium layer from https://github.com/Sparticuz/chromium
 chromium.setGraphicsMode = false;
+chromium.setHeadlessMode = true;
 
 const DPI = 96;
 const BUCKET = process.env.BUCKET;
@@ -23,10 +25,11 @@ const region = process.env.REGION ?? "eu-west-2";
 
 const s3Client = new S3Client({});
 
+let browserWSEndpoint, browser;
+
 export const renderer = async params => {
 	let batch = [],
 		failures = [],
-		browser = null,
 		output = null,
 		mimeType = null,
 		s3Url = null,
@@ -70,226 +73,236 @@ export const renderer = async params => {
 
 	const viewWidth =
 		(parseInt(batch[0].width) || 1200) *
-		(batch[0].width.toString().includes("in")
-			? DPI
-			: 1);
+		(batch[0].width.toString().includes("in") ? DPI : 1);
 	const viewHeight =
 		(parseInt(batch[0].height) ?? 628) *
-		(batch[0].height.toString().includes("in")
-			? DPI
-			: 1);
+		(batch[0].height.toString().includes("in") ? DPI : 1);
 
-	//try {
-	browser = await puppeteer.launch({
-		args: [
-			...chromium.args,
-			"--font-render-hinting=none",
-			"--force-color-profile=srgb",
-		],
-		defaultViewport: {
-			width: viewWidth,
-			height: viewHeight,
-			deviceScaleFactor: batch[0].scale || 1,
-		},
+	try {
+		browser = await puppeteer.launch({
+			defaultViewport: {
+				width: viewWidth,
+				height: viewHeight,
+				deviceScaleFactor: batch[0].scale || 1,
+			},
+			ignoreHTTPSErrors: true,
+			ignoreDefaultArgs: ["--enable-automation"],
+			args: [
+				...chromium.args,
+				"--disable-infobars",
+				//'--no-sandbox',
+				//'--disable-setuid-sandbox',
+				"--disable-gpu",
+				//'--enable-webgl',
+				"--font-render-hinting=none",
+				"--force-color-profile=srgb",
+			],
+			timeout: 15_000, // 10 seconds
+			protocolTimeout: 15_000, // 10 seconds
+			executablePath: await chromium.executablePath(),
+			headless: chromium.headless,
+		});
+//		console.log("Browser from scratch");
+//		browserWSEndpoint = browser.wsEndpoint();
 
-		executablePath: await chromium.executablePath(),
-		headless: chromium.headless,
-		ignoreHTTPSErrors: true,
-	});
+		const page = await browser.newPage();
+		const waitUntil = ["networkidle0", "load", "domcontentloaded"];
 
-	const page = await browser.newPage();
-	const waitUntil = ["networkidle0", "load", "domcontentloaded"];
+		console.log("Batching");
+		for (const render of batch) {
+			const isWebp = render.suffix == "webp";
+			response.tempKey = render.s3Key ?? render.s3key;
 
-	for (const render of batch) {
-		const isWebp = render.suffix == "webp";
-		response.tempKey = render.s3Key ?? render.s3key;
-
-		if (render.url && render.url.length > 10) {
-			await page.goto(render.url, { waitUntil, timeout: 90000 });
-		} else {
-			// Array'ed HTML is dealt with in the loop
-			if (!Array.isArray(render.html)) {
-				await page.setContent(render.html, {
-					waitUntil: waitUntil,
-					timeout: 90000,
-				});
-			}
-		}
-
-		await page.evaluateHandle("document.fonts.ready");
-
-		if (render.suffix == "mp4") {
-			let options = {};
-
-			if (render.clip) {
-				options.clip = {
-					x: render.clipX || 0,
-					y: render.clipY || 0,
-					width: render.clipWidth || page.viewport().width,
-					height: render.clipHeight || page.viewport().height,
-				};
-			}
-			const frame_folder = "frames-" + Date.now();
-
-			let i = 0;
-			while (render.html.length > 0) {
-				await page.setContent(render.html.shift(), {
-					waitUntil: waitUntil,
-					timeout: 90000,
-				});
-
-				let screenshot = await page.screenshot(options);
-
-				await s3_upload(
-					render.bucket || BUCKET,
-					`${frame_folder}/${i}.png`,
-					screenshot,
-					"image/png"
-				);
-
-				i++;
+			if (render.url && render.url.length > 10) {
+				await page.goto(render.url, { waitUntil, timeout: 5000 });
+			} else {
+				// Array'ed HTML is dealt with in the loop
+				if (!Array.isArray(render.html)) {
+					await page.setContent(render.html, {
+						waitUntil: waitUntil,
+						timeout: 90000,
+					});
+				}
 			}
 
-			response.body = {
-				success: true,
-				frameFolder: frame_folder,
-				renderID: render.renderID,
-				s3Url: true, // just needs a value to validate at the other end
-			};
-		} else if (render.suffix == "pdf") {
-			let options = {
-				scale: render.scale || 1,
-				preferCSSPageSize: render.CSSPageSize || false,
-				width: render.width, // || `${Math.round(render.width / 2)}mm`,
-				height: render.height, // || `${Math.round(render.height / 2)}mm`,
-				printBackground: true,
-			};
+			await page.evaluateHandle("document.fonts.ready");
 
-			page.emulateMediaType("print");
+			if (render.suffix == "mp4") {
+				let options = {};
 
-			output = await page.pdf(options);
-			mimeType = "application/pdf";
-		} else {
-			let options = {};
+				if (render.clip) {
+					options.clip = {
+						x: render.clipX || 0,
+						y: render.clipY || 0,
+						width: render.clipWidth || page.viewport().width,
+						height: render.clipHeight || page.viewport().height,
+					};
+				}
+				const frame_folder = "frames-" + Date.now();
 
-			if (render.clip) {
-				options.clip = {
-					x: render.clipX || 0,
-					y: render.clipY || 0,
-					width: render.clipWidth || page.viewport().width,
-					height: render.clipHeight || page.viewport().height,
-				};
-			}
+				let i = 0;
+				while (render.html.length > 0) {
+					await page.setContent(render.html.shift(), {
+						waitUntil: waitUntil,
+						timeout: 90000,
+					});
 
-			output = await page.screenshot(options);
-			mimeType = isWebp ? "image/webp" : "image/png";
-		}
+					let screenshot = await page.screenshot(options);
 
-		if (output) {
-			if (isWebp) {
-				// https://github.com/bubblydoo/lambda-layer-sharp/releases
-				const sharp = require("sharp");
+					await s3_upload(
+						render.bucket || BUCKET,
+						`${frame_folder}/${i}.png`,
+						screenshot,
+						"image/png"
+					);
 
-				output = await sharp(output).webp().toBuffer();
-			}
+					i++;
+				}
 
-			s3Url = await s3_upload(
-				render.bucket || BUCKET,
-				render.totalPages > 1
-					? `${render.s3Key}/interim/page-${render.pageIndex}.pdf`
-					: render.s3Key ?? render.s3key,
-				output,
-				mimeType
-			);
-
-			if (s3Url) {
 				response.body = {
 					success: true,
-					s3Url: s3Url,
+					frameFolder: frame_folder,
+					renderID: render.renderID,
+					s3Url: true, // just needs a value to validate at the other end
+				};
+			} else if (render.suffix == "pdf") {
+				let options = {
+					scale: render.scale || 1,
+					preferCSSPageSize: render.CSSPageSize || false,
+					width: render.width, // || `${Math.round(render.width / 2)}mm`,
+					height: render.height, // || `${Math.round(render.height / 2)}mm`,
+					printBackground: true,
 				};
 
-				if (render.totalPages && render.totalPages > 1) {
-					const interims = await listS3Folder(
-						`${render.s3Key ?? render.s3key}/interim/`,
-						render.bucket
-					);
+				page.emulateMediaType("print");
 
-					if (interims && interims.length == render.totalPages) {
-						// Natural sorting function
-						const collator = new Intl.Collator(undefined, {
-							numeric: true,
-							sensitivity: "base",
-						});
-						const naturalSort = array =>
-							array.sort((a, b) => collator.compare(a, b));
+				output = await page.pdf(options);
+				mimeType = "application/pdf";
+			} else {
+				console.log("Render 3");
+				let options = {};
 
-						// Sort the array using the natural sort algorithm
-						const sortedKeys = naturalSort(interims.map(i => i.Key));
+				if (render.clip) {
+					options.clip = {
+						x: render.clipX || 0,
+						y: render.clipY || 0,
+						width: render.clipWidth || page.viewport().width,
+						height: render.clipHeight || page.viewport().height,
+					};
+				}
+				console.log("Render 4");
+				output = await page.screenshot(options);
+				mimeType = isWebp ? "image/webp" : "image/png";
+				console.log("Render 5");
+			}
 
-						const mergedPdf = await PDFDocument.create();
+			if (output) {
+				if (isWebp) {
+					// Sharp layer from https://github.com/bubblydoo/lambda-layer-sharp/releases
+					const sharp = require("sharp");
 
-						for (const interimKey of sortedKeys) {
-							let buffer = await fromS3(interimKey, render.bucket);
+					output = await sharp(output).webp().toBuffer();
+				}
 
-							const pdf = await PDFDocument.load(buffer);
-							const copiedPages = await mergedPdf.copyPages(
-								pdf,
-								pdf.getPageIndices()
-							);
-							copiedPages.forEach(page => {
-								mergedPdf.addPage(page);
+				s3Url = await s3_upload(
+					render.bucket || BUCKET,
+					render.totalPages > 1
+						? `${render.s3Key}/interim/page-${render.pageIndex}.pdf`
+						: render.s3Key ?? render.s3key,
+					output,
+					mimeType
+				);
+
+				if (s3Url) {
+					response.body = {
+						success: true,
+						s3Url: s3Url,
+					};
+
+					if (render.totalPages && render.totalPages > 1) {
+						const interims = await listS3Folder(
+							`${render.s3Key ?? render.s3key}/interim/`,
+							render.bucket
+						);
+
+						console.log( 'interims', interims ? interims.length : 'n/a', render.totalPages );
+
+						if (interims && interims.length == render.totalPages) {
+							// Natural sorting function
+							const collator = new Intl.Collator(undefined, {
+								numeric: true,
+								sensitivity: "base",
 							});
+							const naturalSort = array =>
+								array.sort((a, b) => collator.compare(a, b));
 
-							if (!params.isDebug) {
-								await s3Client.send(
-									new DeleteObjectCommand({
-										Bucket: render.bucket,
-										Key: interimKey,
-									})
+							// Sort the array using the natural sort algorithm
+							const sortedKeys = naturalSort(interims.map(i => i.Key));
+
+							const mergedPdf = await PDFDocument.create();
+
+							for (const interimKey of sortedKeys) {
+								let buffer = await fromS3(interimKey, render.bucket);
+
+								const pdf = await PDFDocument.load(buffer);
+								const copiedPages = await mergedPdf.copyPages(
+									pdf,
+									pdf.getPageIndices()
 								);
+								copiedPages.forEach(page => {
+									mergedPdf.addPage(page);
+								});
+
+								if (!params.isDebug) {
+									await s3Client.send(
+										new DeleteObjectCommand({
+											Bucket: render.bucket,
+											Key: interimKey,
+										})
+									);
+								}
 							}
+
+							output = Buffer.from(await mergedPdf.save());
+
+							await s3_upload(
+								render.bucket || BUCKET,
+								render.s3Key ?? render.s3key,
+								output,
+								"application/pdf"
+							);
 						}
+					}
 
-						output = Buffer.from(await mergedPdf.save());
-
-						await s3_upload(
-							render.bucket || BUCKET,
-							render.s3Key ?? render.s3key,
-							output,
-							"application/pdf"
+					if (render.sourceS3Key && !render.isDebug) {
+						await s3Client.send(
+							new DeleteObjectCommand({
+								Bucket: render.sourceS3Bucket,
+								Key: render.sourceS3Key,
+							})
 						);
 					}
+					/// just return the response otherwise
+				} else {
+					failures.push({
+						Bucket: render.sourceS3Bucket,
+						Key: render.sourceS3Key,
+					});
 				}
-
-				if (render.sourceS3Key && !render.isDebug) {
-					await s3Client.send(
-						new DeleteObjectCommand({
-							Bucket: render.sourceS3Bucket,
-							Key: render.sourceS3Key,
-						})
-					);
-				}
-				/// just return the response otherwise
 			} else {
 				failures.push({
 					Bucket: render.sourceS3Bucket,
 					Key: render.sourceS3Key,
 				});
 			}
-		} else {
-			failures.push({
-				Bucket: render.sourceS3Bucket,
-				Key: render.sourceS3Key,
-			});
 		}
-	}
-	/*} catch (err) {
+	} catch (err) {
 		response.statusCode = 500;
 		response.body = { message: err.message };
-		console.log("!Error!", response.tempKey, params, err.message);
-	} finally {*/
-
-	if (browser) await browser.close();
+		console.log("GenieError:", 3, err.message);
+	} finally {
+		if (browser) await browser.close();
+	}
 
 	if (failures.length > 0) {
 		const sqs = new SQSClient({ region });
@@ -319,6 +332,12 @@ export const renderer = async params => {
 
 	return response;
 };
+
+process.on("beforeExit", async () => {
+	if (browser) {
+		await browser.close();
+	}
+});
 
 const s3_upload = async (bucket, key, file, mimeType = null) => {
 	key = key || "failed/no-key-given.png";
