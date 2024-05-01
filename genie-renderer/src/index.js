@@ -190,10 +190,9 @@ export const renderer = async params => {
 						height: render.clipHeight || page.viewport().height,
 					};
 				}
-				console.log("Render 4");
+
 				output = await page.screenshot(options);
 				mimeType = isWebp ? "image/webp" : "image/png";
-				console.log("Render 5");
 			}
 
 			if (output) {
@@ -224,8 +223,6 @@ export const renderer = async params => {
 							`${render.s3Key ?? render.s3key}/interim/`,
 							render.bucket
 						);
-
-						console.log( 'interims', interims ? interims.length : 'n/a', render.totalPages );
 
 						if (interims && interims.length == render.totalPages) {
 							// Natural sorting function

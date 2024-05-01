@@ -19,7 +19,7 @@ esbuild
 			"@aws-sdk/client-s3",
 			"@aws-sdk/client-sqs",
 		],
-		minify: false,
+		minify: true,
 		bundle: true,
 		loader: {
 			".js": "jsx",
