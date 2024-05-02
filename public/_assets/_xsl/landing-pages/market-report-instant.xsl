@@ -46,7 +46,7 @@
 			<script>
 				<xsl:value-of select="concat('const polygon =', //area[1]/geojson,';' )" />
 				<xsl:value-of select="concat( &quot;const options = { pitch: 60, bearing: 20, zoom: 11, fitMarkers: true, mapStyle: `&quot;, //output/@mapStyle, &quot;`}; &quot; )" />
-				<xsl:value-of select="&quot;document.addEventListener( `genie-landing-loaded`, function() {  console.log('Hello from MRI'); document.querySelector('section.banner-section').style.backgroundImage = ''; gHub.makeMap( `market-report-instant-header-map`, options, { geoJson: polygon } ); });&quot;" />
+				<xsl:value-of select="&quot;document.addEventListener( `genie-landing-loaded`, function() {  document.querySelector('section.banner-section').style.backgroundImage = ''; gHub.makeMap( `market-report-instant-header-map`, options, { geoJson: polygon } ); });&quot;" />
 			</script>
 
 			<section class="banner-section market-report-instant-banner" style="position:relative; display:block; background-color: var(--theme-body-background);">
