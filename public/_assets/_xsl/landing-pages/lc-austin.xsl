@@ -656,7 +656,7 @@
 				<section class="dark-bg" id="real_time_market_trends">
 					<div class="container">
 						<div class="col-md-12 real-time text-center">
-							<h2 class="subtitle-font">
+							<h2 class="subtitle-font subtitle-color">
 								<span>
 									<xsl:value-of select="concat('REAL-TIME ' , //area/name )" />
 								</span>
@@ -665,7 +665,7 @@
 									<xsl:value-of select="' Neighborhood Snapshot'" />
 								</span>
 							</h2>
-							<p class="subtitle-font">
+							<p class="subtitle-font subtitle-color">
 								<xsl:value-of select="concat( '- as of ', genie:format-date( //output/@reportDate, '[MNn] [D], [Y0001] @ [h]:[m01][PN,*-2]') )" />
 							</p>
 						</div>

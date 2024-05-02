@@ -616,7 +616,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 				<section class="genie-alternate" id="real_time_market_trends">
 					<div class="container">
 						<div class="col-md-12 real-time text-center">
-							<h2 class="subtitle-font">
+							<h2 class="subtitle-font subtitle-color">
 								<span>
 									<xsl:value-of select="concat('REAL-TIME ' , //area/name )" />
 								</span>
@@ -625,7 +625,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 									<xsl:value-of select="' Neighborhood Snapshot'" />
 								</span>
 							</h2>
-							<p class="subtitle-font">
+							<p class="subtitle-font subtitle-color">
 								<xsl:value-of select="concat( '- as of ', genie:format-date( //output/@reportDate, '[MNn] [D], [Y0001] @ [h]:[m01][PN,*-2]') )" />
 							</p>
 						</div>
