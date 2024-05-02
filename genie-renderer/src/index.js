@@ -54,10 +54,16 @@ export const renderer = async params => {
 					record.s3.object.key,
 					record.s3.bucket.name
 				);
-				json.sourceS3Bucket = record.s3.bucket.name;
-				json.sourceS3Key = record.s3.object.key;
+				if (json && typeof json == "object") {
+					json.sourceS3Bucket = record.s3.bucket.name;
+					json.sourceS3Key = record.s3.object.key;
 
-				batch.push(json);
+					batch.push(json);
+				} else {
+					console.log(
+						`GenieError: Unable to retrieve S3 Object ${record.s3.object.key} from ${record.s3.bucket.name} bucket`
+					);
+				}
 			} else if (record.sqs) {
 				if (record.sqs.body == "genie-retry") {
 					s3Key = `${record.sqs.messageAttributes.S3Key.stringValue} (retry)`;
