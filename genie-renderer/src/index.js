@@ -358,9 +358,11 @@ const s3_upload = async (bucket, key, file, mimeType = null) => {
 		if (res.ETag) {
 			const s3Url = `https://${bucket}.s3.${region}.amazonaws.com/${key}`;
 	  
-			// Trigger CloudFront invalidation for the uploaded file
-			await createCloudFrontInvalidation(process.env.CLOUDFRONT_DISTRIBUTION_ID, [`/${key}`]);
-	  
+			// Trigger CloudFront invalidation for the uploaded file (excludes interim PDF pages)
+			if (!s3Url.includes("interim")) {
+				await createCloudFrontInvalidation(process.env.CLOUDFRONT_DISTRIBUTION_ID, [`/${key}`]);
+			}
+			
 			return s3Url;
 		  }
 	} catch (err) {}
