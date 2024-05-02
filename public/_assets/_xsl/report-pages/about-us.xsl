@@ -24,20 +24,16 @@
 
 			<foreignObject x="6%" y="12%" height="70%" width="88%">
 				<div style="line-height:1.7;font-size:100%;font-family:var(--theme-body-font);">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'html-about-us'" />
-						<xsl:with-param name="default">
-							<xsl:choose>
-								<xsl:when test="//agent[1]/marketingAbout!=''">
-									<xsl:value-of select="//agent[1]/marketingAbout" />
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:call-template name="default-bio" />
-								</xsl:otherwise>
-							</xsl:choose>
-						</xsl:with-param>
-						<xsl:with-param name="data-element" select="'p'" />
-					</xsl:call-template>
+					<xsl:choose>
+						<xsl:when test="//agent[1]/marketingAbout!=''">
+							<p>
+								<xsl:value-of select="//agent[1]/marketingAbout" />
+							</p>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:call-template name="default-bio" />
+						</xsl:otherwise>
+					</xsl:choose>
 				</div>
 			</foreignObject>
 		</g>
