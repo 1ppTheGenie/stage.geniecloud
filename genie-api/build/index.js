@@ -7864,7 +7864,7 @@ var processAgents = async (agentIds) => {
           url: ""
         };
       };
-      let timezone;
+      let timezone, tzOffset;
       switch (marketingSettings.profile?.timeZoneId) {
         case 1:
           timezone = "America/New_York";
@@ -7924,6 +7924,7 @@ var processAgents = async (agentIds) => {
         // "idxDisclaimer"
         pronoun: marketingSettings.profile.isTeam ? "plural" : "singular",
         timezone,
+        tzOffset: DateTime.local().setZone(timezone).offset,
         mobile: marketingSettings.profile.phone ?? null,
         website: marketingSettings.profile.websiteUrl ?? null,
         email: marketingSettings.profile.email,
@@ -8502,13 +8503,17 @@ var preCallGenieAPIs = async (params) => {
         params.mlsId,
         params.userId
       );
-      await getListing(params.userId, params.mlsNumber, params.mlsId);
+      await getListing(
+        params.userId,
+        params.mlsNumber,
+        params.mlsId
+      );
     }
-    await Promise.all(
-      params?.agentIds?.map(async (agentId) => await getUser(agentId))
-    );
-    await Promise.all(
-      params?.areaIds?.map(async (areaId) => {
+    if (Array.isArray(params?.agentIds)) {
+      await Promise.all(params.agentIds.map(async (agentId) => await getUser(agentId)));
+    }
+    if (Array.isArray(params?.areaIds)) {
+      await Promise.all(params.areaIds.map(async (areaId) => {
         await getAreaBoundary(areaId);
         await areaStatisticsWithPrevious(
           params.userId,
@@ -8526,8 +8531,8 @@ var preCallGenieAPIs = async (params) => {
           areaId,
           Math.ceil(params.datePeriod / 12)
         );
-      })
-    );
+      }));
+    }
     return true;
   } catch (err) {
     console.log("precache error", err);
@@ -8538,21 +8543,39 @@ var preCallGenieAPIs = async (params) => {
 // src/utils/cloudHubAPI.js
 var import_qrcode_svg = __toESM(require_qrcode(), 1);
 var cloudHubAPI = async (route, params) => {
-  let result = { none: true };
+  let result = { none: true, route, params: { ...params } };
   switch (route) {
-    case "/get-assets":
+    case "get-agent":
+      const agent = await getUser(params.agentId);
+      result = { success: true, agent };
+      break;
+    case "recent-renders":
+      const renders = await listS3Folder("_lookup/renders");
+      const reRenders = await listS3Folder("_lookup/re-render");
+      const restructure = (arr) => arr.reduce((acc, { Key, LastModified }) => {
+        const renderId = Key.split("/").pop();
+        acc[renderId] = LastModified;
+        return acc;
+      }, {});
+      result = {
+        success: true,
+        renders: restructure(renders),
+        reRenders: restructure(reRenders)
+      };
+      break;
+    case "get-assets":
       const assets = await getAssets();
       result = { success: true, ...assets };
       break;
-    case "/get-themes":
+    case "get-themes":
       const themes = await getThemes();
       result = { success: true, ...themes };
       break;
-    case "/get-collection-templates":
+    case "get-collection-templates":
       const templates = await getCollectionTemplates();
       result = { success: true, ...templates };
       break;
-    case "/get-collections":
+    case "get-collections":
       const collections = await getCollections();
       const processedCollections = {};
       for (const index in collections) {
@@ -8567,14 +8590,14 @@ var cloudHubAPI = async (route, params) => {
         collections: processedCollections
       };
       break;
-    case "/save-collection":
+    case "save-collection":
       const collectionSaved = await saveCollection(params);
       response.body = {
         success: true,
         collection: collectionSaved
       };
       break;
-    case "/render-errors":
+    case "render-errors":
       const errors = [];
       const rErrors = await listS3Folder("_errors");
       await Promise.all(
@@ -9023,6 +9046,7 @@ var genieGlobals = {
   GOOGLE_KEY: process.env.GOOGLE_KEY ?? "AIzaSyDLFcQk1FV7U4tf_aXU3NiLItNxy_b0AzU",
   MAPBOX_KEY: process.env.MAPBOX_KEY ?? "pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJ0VnNHQ0o4In0.Ju1ET8Y81mGY1Eu0l5DfRQ",
   GENIE_HOST: process.env.GENIE_HOST ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/",
+  GENIE_NO_CACHE_HOST: process.env.GENIE_NO_CACHE_HOST ?? "https://genie-cloud.s3.us-west-1.amazonaws.com/",
   GENIE_API: process.env.GENIE_API ?? "https://dqohcd54xpkdwnueu2wn2nkxge0aboae.lambda-url.eu-west-2.on.aws/",
   ASSET_HEADERS: {
     name: "Asset Name",
@@ -9202,7 +9226,6 @@ var from_cache = async (key, endpoint) => {
   since.setSeconds(
     since.getSeconds() - (CACHE_FOR[endpoint.split("/")[0]] ?? HOUR_IN_SECONDS / 2)
   );
-  console.log("fromCache", endpoint, since);
   return await jsonFromS3(`_cache/${key}`, since);
 };
 var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
@@ -9522,9 +9545,6 @@ var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_ca
 
 // src/index.js
 var { toXML } = import_jstoxml.default;
-var CLOUDFLARE_KEY = process.env?.CLOUDFLARE_KEY;
-var KEEP_FOR = process.env?.KEEP_FOR || 8;
-var WEEK_IN_MILLISECONDS = 60 * 60 * 24 * 1e3;
 var RENDER_VERSION = 100;
 var JSON_MIME = "application/json";
 var TXT_MIME = "text/plain";
@@ -9796,6 +9816,12 @@ var api = async (event) => {
                     skipCache: true
                   });
                   if (r) {
+                    await toS3(
+                      `_lookup/re-render/${params.renderId}`,
+                      Buffer.from("@"),
+                      null,
+                      TXT_MIME
+                    );
                     response2.body.success = true;
                     response2.body.msg = `${params.renderId} re-render under way`;
                     if (Object.keys(params).length > 1) {
@@ -9844,6 +9870,12 @@ var api = async (event) => {
                       ...params,
                       skipCache: true
                     });
+                    await toS3(
+                      `_lookup/re-render/${reRenders[index]}`,
+                      Buffer.from("@"),
+                      null,
+                      TXT_MIME
+                    );
                   }
                   response2.body.success = true;
                   response2.body.msg = `${reRenders.length} re-renders underway`;
@@ -9990,7 +10022,7 @@ var api = async (event) => {
                     StringValue: params.renderId
                   }
                 });
-                let lookUpKeys = [`users/${params.userId}`];
+                let lookUpKeys = [`renders`, `users/${params.userId}`];
                 if (params.mlsNumber) {
                   lookUpKeys.push(
                     `mlsNumber/${params.mlsId}/${params.mlsNumber}`
@@ -10016,7 +10048,7 @@ var api = async (event) => {
                 if (s3Key) {
                   response2.body.success = true;
                   response2.body.availableAt = response2.body.availableAt ?? // Allows earlier code to set custom version of this
-                  `${genieGlobals.GENIE_HOST}${s3Key.replace("/index.html", "")}`;
+                  `${params.isWorkFlow ? genieGlobals.GENIE_NO_CACHE_HOST : genieGlobals.GENIE_HOST}${s3Key.replace("/index.html", "")}`;
                   response2.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
                   response2.body.renderId = params.renderId;
                 }
@@ -10075,7 +10107,7 @@ var renderKeyParams = async (params) => {
       }
     }
     propertyType = params.propertyType ?? listing.propertyType;
-    listingStatus = params.listingStatus ?? listing.listingStatus;
+    listingStatus = params.listingStatus ?? (listing.listingStatus ?? "");
   }
   const area = await areaName(params.userId, areaId);
   return {
@@ -10224,7 +10256,10 @@ var prepareAsset = async (asset, params) => {
           );
         } else if (params?.qrUrl) {
           render.tags.qrUrl = params.qrUrl;
-          qrUrl = await getLandingQrCodeUrl(params.qrUrl, params.renderId);
+          qrUrl = await getLandingQrCodeUrl(
+            params.qrUrl,
+            params.renderId
+          );
         }
         if (qrUrl) {
           render.customizations = { qrUrl };
@@ -10379,7 +10414,9 @@ var validateRenderParams = async (args) => {
 var getLandingQrCodeUrl = async (asset, renderId, qrUrl = null) => {
   let s3Key = `genie-files/${renderId}/${asset}-qr.svg`;
   let landingS3Key = await getS3Key(`landing-pages/${asset}`, { renderId });
-  const qrSVG = await generateQR(qrUrl ?? `${genieGlobals.GENIE_HOST}${landingS3Key.s3Key}`);
+  const qrSVG = await generateQR(
+    qrUrl ?? `${genieGlobals.GENIE_HOST}${landingS3Key.s3Key}`
+  );
   await toS3(s3Key, Buffer.from(qrSVG), null, "image/svg+xml");
   return `${genieGlobals.GENIE_HOST}${s3Key}`;
 };
