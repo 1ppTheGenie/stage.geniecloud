@@ -1,0 +1,4 @@
+{
+	"api": "https://cloud-api.thegenie.ai/",
+	"s3": "https://genie-cloud.s3.us-west-1.amazonaws.com/"
+}
