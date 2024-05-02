@@ -391,7 +391,7 @@ const processAgents = async agentIds => {
                 );
             };
 
-            let timezone;
+            let timezone, tzOffset;
             switch (marketingSettings.profile?.timeZoneId) {
                 case 1:
                     timezone = 'America/New_York';
@@ -449,6 +449,7 @@ const processAgents = async agentIds => {
                     ? 'plural'
                     : 'singular',
                 timezone,
+                tzOffset: DateTime.local().setZone(timezone).offset,
 
                 mobile: marketingSettings.profile.phone ?? null,
                 website: marketingSettings.profile.websiteUrl ?? null,
