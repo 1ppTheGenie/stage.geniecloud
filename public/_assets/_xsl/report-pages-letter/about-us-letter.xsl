@@ -21,7 +21,7 @@
 			</text>
 
 			<foreignObject x="6%" y="12%" height="70%" width="88%">
-				<div style="line-height:1.7;font-size:100%;font-family:var(--theme-body-font);">
+				<div style="line-height:1.5;font-size:85%;font-family:var(--theme-body-font);">
 					<xsl:choose>
 						<xsl:when test="//agent[1]/marketingAbout!=''">
 							<p>

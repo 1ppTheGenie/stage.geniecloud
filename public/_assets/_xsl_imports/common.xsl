@@ -32,7 +32,7 @@
 	<xsl:template name="default-bio">
 		<xsl:choose>
 			<xsl:when test="//agents/agent[1]/pronoun='plural'">
-				<h1>Our Mission</h1>
+				<h2>Our Mission</h2>
 
 				<p>As your professional real estate advisors, we focus on client satisfaction. Our business is about service, and we are not happy until you are happy. Our years in the business have provided us with the experience to assist you with nearly every real estate need. Whether it's finding you a home, finding the best loan, or helping you get the most out of selling your home, we are here to guide you. If there is anything you need, please let us know.</p>
 
@@ -45,7 +45,7 @@
 				<p>Our satisfied clients are our best resource for new business. In this very competitive real estate industry, service makes the difference. Our service is second to none and has earned us a valuable source of referrals. If you are considering real estate professionals, please give us an opportunity to earn your business too. We are confident you will be very happy!</p>
 			</xsl:when>
 			<xsl:otherwise>
-				<h1>My Personal Mission</h1>
+				<h2>My Personal Mission</h2>
 
 				<p>As your professional real estate advisor, I focus on client satisfaction. My business is about service and I am not happy until you are happy. My years in the business have provided me the experience to assist you with nearly every real estate need. Whether it's finding you a home, finding the best loan, or helping you getting the most out of selling your home I am here to guide you. If there is anything you need, please let me know.</p>
 
