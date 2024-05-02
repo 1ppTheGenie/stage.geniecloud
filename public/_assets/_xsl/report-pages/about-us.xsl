@@ -7,12 +7,11 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<style>
-<xsl:value-of select="'text {dominant-baseline: auto;}'" />
-
+			<xsl:value-of select="'text {dominant-baseline: auto;}'" />
 		</style>
 
 		<g style="transform: translate(0%, 25%);">
@@ -33,7 +32,7 @@
 									<xsl:value-of select="//agent[1]/marketingAbout" />
 								</xsl:when>
 								<xsl:otherwise>
-									<xsl:value-of select="'Some content about your firm.'" />
+									<xsl:call-template name="default-bio" />
 								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:with-param>

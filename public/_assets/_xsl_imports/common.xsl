@@ -29,6 +29,30 @@
 
 	<xsl:template name="svg-body" />
 
+	<xsl:template name="default-bio">
+		<h1>My Personal Mission</h1>
+
+		<p>As your professional real estate advisor, I focus on client satisfaction. My business is about
+service and I am not happy until you are happy. My years in the business have provided me the
+experience to assist you with nearly every real estate need. Whether it's finding you a home,
+finding the best loan, or helping you getting the most out of selling your home I am here to
+guide you. If there is anything you need, please let me know.</p>
+
+		<h2>About My Services</h2>
+
+		<p>I will listen to your needs and want to establish our goals and objectives. We work as a team to
+meet the goals and you will continually be in the loop during the entire process. In this fast
+paced market, I believe communication is key in meeting our goals and building our relationship.</p>
+
+		<h2>Satisfied clients are the key to my success</h2>
+
+		<p>My satisfied clients are my best resource for new business. In this very competitive business of
+real estate, service makes the difference. My service is second to none and has earned me a
+valuable source of referrals. If you are considering a real estate professional, please give me
+an opportunity to earn your business too. I am confident you will be very happy!</p>
+	</xsl:template>
+
+
 	<xsl:template name="empty-listing-text">
 		<rect xmlns="" x="7%" y="25%" rx="10" ry="10" width="85%" height="60%" fill-opacity="0" stroke-width="2" stroke="var(--theme-heading-color)"></rect>
 		<g style="transform: translate(-0.5%,-2.5%)">
@@ -2431,5 +2455,4 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
 </xsl:stylesheet>
