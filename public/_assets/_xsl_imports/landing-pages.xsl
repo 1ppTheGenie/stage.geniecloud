@@ -14,7 +14,7 @@
 				<xsl:value-of select="concat( 'genie-landing-page ', //output/@theme, ' ', //output/@themeHue, ' asset-v', //output/@assetVersion )" />
 			</xsl:attribute>
 
-			<xsl:if test="//output/@test!='true'">
+			<xsl:if test="not(exists(//output/@testing))">
 				<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GCVGRFNGMD">
 					<xsl:comment><!-- Google tag (gtag.js) --></xsl:comment>
 				</script>
@@ -23,7 +23,7 @@
 				</script>
 			</xsl:if>
 
-			<xsl:if test="//output/@test='true'">
+			<xsl:if test="//output/@testing">
 				<base href="{//output/@siteUrl}" />
 			</xsl:if>
 
@@ -535,7 +535,7 @@
 				<xsl:with-param name="includeFooterCSS" select="$includeFooterCSS" />
 			</xsl:call-template>
 
-			<xsl:if test="//output/@test!='true'">
+			<xsl:if test="not(exists(//output/@testing))">
 				<script>
 					<xsl:value-of select="'(function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)}; h._hjSettings={hjid:1194877,hjsv:6}; a=o.getElementsByTagName(`head`)[0]; r=o.createElement(`script`);r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r); })(window,document,`https://static.hotjar.com/c/hotjar-`,`.js?sv=`);'" />
 				</script>
