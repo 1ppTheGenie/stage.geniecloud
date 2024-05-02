@@ -430,7 +430,14 @@ export const api = async event => {
                                         skipCache: true
                                     });
 
-                                    if (r) {
+                                    if ( r ) {
+                                        await toS3(
+                                            `_lookup/re-render/${params.renderId}`,
+                                            Buffer.from( '@' ),
+                                            null,
+                                            TXT_MIME
+                                        );
+
                                         response.body.success = true;
                                         response.body.msg = `${params.renderId} re-render under way`;
 
@@ -509,7 +516,14 @@ export const api = async event => {
                                         await reRender(reRenders[index], {
                                             ...params,
                                             skipCache: true
-                                        });
+                                        } );
+                                        
+                                        await toS3(
+                                            `_lookup/re-render/${reRenders[index]}`,
+                                            Buffer.from( '@' ),
+                                            null,
+                                            TXT_MIME
+                                        );
                                     }
 
                                     response.body.success = true;
@@ -699,7 +713,7 @@ export const api = async event => {
                                 });
 
                                 // Create a reverse lookup based on userId, mlsNumber and areaId
-                                let lookUpKeys = [`users/${params.userId}`];
+                                let lookUpKeys = [`renders`,`users/${params.userId}`];
 
                                 if (params.mlsNumber) {
                                     lookUpKeys.push(

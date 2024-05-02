@@ -1,27 +1,52 @@
 import QRCode from 'qrcode-svg';
 
+import { getUser } from './../genieAI.js';
 import { fromS3, getFileData, listS3Folder, toS3, genieGlobals } from './index.js';
 
 export const cloudHubAPI = async (route, params) => {
-    let result = { none: true };
+    let result = { none: true, route, params: { ...params } };
 
     switch (route) {
-        case '/get-assets':
+        case 'get-agent':
+            const agent = await getUser(params.agentId);
+
+            result = { success: true, agent };
+            break;
+
+        case 'recent-renders':
+            const renders = await listS3Folder('_lookup/renders');
+            const reRenders = await listS3Folder('_lookup/re-render');
+
+            const restructure = arr =>
+                arr.reduce((acc, { Key, LastModified }) => {
+                    const renderId = Key.split('/').pop();
+                    acc[renderId] = LastModified;
+                    return acc;
+                }, {});
+
+            result = {
+                success: true,
+                renders: restructure(renders),
+                reRenders: restructure(reRenders)
+            };
+            break;
+
+        case 'get-assets':
             const assets = await getAssets();
             result = { success: true, ...assets };
             break;
 
-        case '/get-themes':
+        case 'get-themes':
             const themes = await getThemes();
             result = { success: true, ...themes };
             break;
 
-        case '/get-collection-templates':
+        case 'get-collection-templates':
             const templates = await getCollectionTemplates();
             result = { success: true, ...templates };
             break;
 
-        case '/get-collections':
+        case 'get-collections':
             const collections = await getCollections();
             const processedCollections = {};
 
@@ -40,7 +65,7 @@ export const cloudHubAPI = async (route, params) => {
             };
             break;
 
-        case '/save-collection':
+        case 'save-collection':
             const collectionSaved = await saveCollection(params);
             response.body = {
                 success: true,
@@ -48,7 +73,7 @@ export const cloudHubAPI = async (route, params) => {
             };
             break;
 
-        case '/render-errors':
+        case 'render-errors':
             const errors = [];
             const rErrors = await listS3Folder('_errors');
 
