@@ -15,6 +15,8 @@ export const genieGlobals = {
 		"pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJ0VnNHQ0o4In0.Ju1ET8Y81mGY1Eu0l5DfRQ",
 	GENIE_HOST:
 		process.env.GENIE_HOST ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/",
+	GENIE_NO_CACHE_HOST:
+		process.env.GENIE_NO_CACHE_HOST ?? "https://genie-cloud.s3.us-west-1.amazonaws.com/",
 	GENIE_API:
 		process.env.GENIE_API ??
 		"https://dqohcd54xpkdwnueu2wn2nkxge0aboae.lambda-url.eu-west-2.on.aws/",

@@ -733,7 +733,7 @@ export const api = async event => {
                                     response.body.availableAt =
                                         response.body.availableAt ?? // Allows earlier code to set custom version of this
                                         `${
-                                            genieGlobals.GENIE_HOST
+                                           params.isWorkFlow ?  genieGlobals.GENIE_NO_CACHE_HOST :  genieGlobals.GENIE_HOST
                                         }${s3Key.replace('/index.html', '')}`;
                                     response.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
                                     response.body.renderId = params.renderId;
