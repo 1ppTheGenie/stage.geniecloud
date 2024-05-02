@@ -1208,60 +1208,55 @@ const debugLog = async (source, params, data) => {
 
 export const preCallGenieAPIs = async params => {
     try {
-        if (params.mlsNumber) {
-            await openhouseByMlsNumber(params.mlsId, params.mlsNumber);
-
-            await propertySurroundingAreas(
-                params.mlsNumber,
-                params.mlsId,
-                params.userId
-            );
-
+      if (params.mlsNumber) {
+        await openhouseByMlsNumber(params.mlsId, params.mlsNumber);
+        
+        await propertySurroundingAreas(
+            params.mlsNumber, 
+            params.mlsId, 
+            params.userId);
+        
             await agentProperties(params.userId, false);
+        
+        await areaFromMlsNumber(params.mlsNumber, 
+            params.mlsId, 
+            params.userId);
+        
+            await getListing(params.userId, 
+            params.mlsNumber, 
+            params.mlsId);
+      }
+  
+      if (Array.isArray(params?.agentIds)) {
+        await Promise.all(params.agentIds.map(async agentId => await getUser(agentId)));
+      }
+  
+      if (Array.isArray(params?.areaIds)) {
+        await Promise.all(params.areaIds.map(async areaId => {
+          await getAreaBoundary(areaId);
 
-            await areaFromMlsNumber(
-                params.mlsNumber,
-                params.mlsId,
-                params.userId
-            );
-
-            await getListing(params.userId, params.mlsNumber, params.mlsId);
-        }
-
-        await Promise.all(
-            params?.agentIds?.map(async agentId => await getUser(agentId))
-        );
-
-        await Promise.all(
-            params?.areaIds?.map(async areaId => {
-                await getAreaBoundary(areaId);
-
-                await areaStatisticsWithPrevious(
-                    params.userId,
-                    areaId,
-                    parseInt(params.datePeriod || 12)
-                );
-
-                // **** LISTINGS
-                await mlsProperties(
-                    params.mlsId ?? 0,
-                    areaId,
-                    NOW.plus({ months: params.datePeriod * -1 }).toISO()
-                );
-
-                await agentMlsNumbers(params.userId);
-
-                await areaStatisticsMonthly(
-                    params.userId,
-                    areaId,
-                    Math.ceil(params.datePeriod / 12)
-                );
-            })
-        );
-
-        return true;
+          await areaStatisticsWithPrevious(
+            params.userId, 
+            areaId, 
+            parseInt(params.datePeriod || 12));
+          // **** LISTINGS
+          await mlsProperties(
+            params.mlsId ?? 0, 
+            areaId, 
+            NOW.plus({ months: params.datePeriod * -1 }).toISO());
+          
+          await agentMlsNumbers(params.userId);
+          
+          await areaStatisticsMonthly(
+            params.userId, 
+            areaId, 
+            Math.ceil(params.datePeriod / 12));
+        }));
+      }
+  
+      return true;
     } catch (err) {
-        console.log('precache error', err);
-        return false;
+      console.log('precache error', err);
+      return false;
     }
-};
+  };

@@ -212,7 +212,8 @@ export const renderer = async params => {
 						? `${render.s3Key}/interim/page-${render.pageIndex}.pdf`
 						: render.s3Key ?? render.s3key,
 					output,
-					mimeType
+					mimeType,
+					true //skipInvalidation
 				);
 
 				if (s3Url) {
@@ -339,7 +340,7 @@ process.on("beforeExit", async () => {
 	}
 });
 
-const s3_upload = async (bucket, key, file, mimeType = null) => {
+const s3_upload = async (bucket, key, file, mimeType = null, skipInvalidation = false) => {
 	key = key || "failed/no-key-given.png";
 
 	const command = new PutObjectCommand({
@@ -359,7 +360,7 @@ const s3_upload = async (bucket, key, file, mimeType = null) => {
 			const s3Url = `https://${bucket}.s3.${region}.amazonaws.com/${key}`;
 	  
 			// Trigger CloudFront invalidation for the uploaded file (excludes interim PDF pages)
-			if (!s3Url.includes("interim")) {
+			if (!skipInvalidation) {
 				await createCloudFrontInvalidation(process.env.CLOUDFRONT_DISTRIBUTION_ID, [`/${key}`]);
 			}
 			
