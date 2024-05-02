@@ -25,11 +25,13 @@
 	</xsl:template>
 
 	<xsl:template name="svg-body">
-		<div style="height: 100%; width:100%;">
+		<foreignObject x="0%" y="0%" width="100%" height="100%">
+					<div width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="map-output">
 				<xsl:with-param name="style" select="'streets-v11'" />
 				<xsl:with-param name="iconType" select="'flag'" />
 			</xsl:call-template>
-		</div>
+			</div>
+		</foreignObject>
 	</xsl:template>
 </xsl:stylesheet>
