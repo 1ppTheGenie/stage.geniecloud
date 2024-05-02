@@ -15,9 +15,6 @@ import { userSetting, embedsAPI, cloudHubAPI,getRenderJSON, getCollection, setRe
 // prettier-ignore
 import { listS3Folder, toS3, copyObject, headObject, jsonFromS3, fromS3, BUCKET, deleteObject, buildVersion } from "./utils/index.js";
 
-const CLOUDFLARE_KEY = process.env?.CLOUDFLARE_KEY;
-const KEEP_FOR = process.env?.KEEP_FOR || 8;
-const WEEK_IN_MILLISECONDS = 60 * 60 * 24 * 1000;
 
 const RENDER_VERSION = 100;
 
