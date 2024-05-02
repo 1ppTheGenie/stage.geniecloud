@@ -835,7 +835,7 @@ const processAsset = async params => {
     const prepareKey = `_processing/${params.renderId}/render.json`;
 
     let s3Params = await jsonFromS3(prepareKey);
-    //console.log('processAsset', s3Params, params);
+
     if (s3Params) {
         const renderRoot = await getRenderJSON({ ...s3Params, ...params });
 
