@@ -332,7 +332,7 @@
 												</div>
 											</xsl:when>
 											<xsl:otherwise>
-												<h2 class="font-weight-bold subtitle-color body-font mb-2" data-lead="avm">
+												<h2 class="font-weight-bold subtitle-color body-font mb-2" data-lead="displayAVM">
 													<span class="spinner">
 														<xsl:comment/>
 													</span>

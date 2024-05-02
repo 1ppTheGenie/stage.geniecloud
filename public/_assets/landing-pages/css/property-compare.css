@@ -356,6 +356,7 @@ textarea.form-control {
 	padding: 19px 60px;
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 }
 
 section#about-section {

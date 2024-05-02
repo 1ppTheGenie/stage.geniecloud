@@ -38,9 +38,16 @@ document.addEventListener(`genie-landing-loaded`, async () => {
 		window.gHub.leadId = lpData?.lead?.leadId;
 	}
 
+
+	window.gHub.displayAVM = () => window.gHub.currency(lpData?.avmLow) + " - " + window.gHub.currency(lpData?.avmHigh);
+
 	document.querySelectorAll("[data-lead]").forEach(el => {
 		const prop = el.getAttribute("data-lead");
 
-		if (typeof lpData[prop] !== "undefined") el.innerHTML = lpData[prop];
-	});
+		if ( typeof lpData[prop] !== "undefined" ) {
+			el.innerHTML = lpData[prop];
+		} else if ( typeof window.gHub[prop] === 'function' )  {
+			el.innerHTML = window.gHub[prop]();
+		}
+	} );
 });
