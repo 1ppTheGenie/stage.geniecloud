@@ -24,7 +24,7 @@ const from_cache = async (key, endpoint) => {
         since.getSeconds() -
             (CACHE_FOR[endpoint.split('/')[0]] ?? HOUR_IN_SECONDS / 2)
     );
-    console.log('fromCache', endpoint, since);
+
     // ToDo: some "skip cache" code?
     return await jsonFromS3(`_cache/${key}`, since);
 };
