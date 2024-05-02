@@ -27,17 +27,16 @@
 				</xsl:call-template>
 			</text>
 			<text class="center" x="0%" y="7%" fill="var(--theme-heading-color)" data-max-width="60%">
-				<tspan class="" style="font-size:120%;line-height:120%;">
+				<tspan style="font-size:120%;line-height:120%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentname'" />
 						<xsl:with-param name="default" select="concat( 'Learn how some ', //area/name , ' sellers gained' )" />
 					</xsl:call-template>
 				</tspan>
-				<tspan class="" style="font-size:120%;line-height:120%;">
+				<tspan style="font-size:120%;line-height:120%;">
 					<xsl:choose>
 						<xsl:when test="$min_sale_price_change > 0">
 							<xsl:value-of select="concat( ' ',  format-number( $min_sale_price_change, '#.00') , '%' )" />
-
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:call-template name="editable">
@@ -58,7 +57,7 @@
 			</xsl:call-template>
 		</image>
 
-		<svg class="" x="38%" y="77%" width="50%" height="30%" viewBox="0 0 800 200">
+		<svg x="38%" y="77%" width="50%" height="30%" viewBox="0 0 800 200">
 			<rect width="50%" height="140" fill="var(--theme-sub-heading-color)" rx="70" ry="100" />
 
 			<g style="transform: translate(2.2%, 0.5%);">
@@ -169,7 +168,7 @@
 			</text>
 
 			<foreignObject x="0%" y="15%" width="30%" height="5%" class="center" style="color:var(--theme-body-background)">
-				<text class="" style="font-size:55%;line-height:120%;color:var(--theme-body-background)">
+				<text style="font-size:55%;line-height:120%;color:var(--theme-body-background)">
 					<xsl:choose>
 						<xsl:when test="//single/salePrice!=''">
 							<xsl:value-of select="concat( ' ', format-number( $price_status, '#.00'), '%' )" />

@@ -567,7 +567,7 @@
 	</xsl:variable>
 
 	<!-- Listing totals -->
-	<xsl:variable name="listingsTotalNew" select="//listings/listing[@state='active' and number(@dom)&lt;=$domNew]" />
+	<xsl:variable name="listingsTotalNew" select="//listings/listing[@state='active' and number(@dom) &lt;= $domNew]" />
 	<xsl:variable name="listingsTotalActive" select="//listings/listing[@state='active']" />
 	<xsl:variable name="listingsTotalActiveNotNew" select="//listings/listing[@state='active' and number(@dom) &gt; $domNew]" />
 	<xsl:variable name="listingsTotalPending" select="//listings/listing[@state='pending']" />

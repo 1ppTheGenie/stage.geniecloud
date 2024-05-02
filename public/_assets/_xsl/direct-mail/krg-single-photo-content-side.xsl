@@ -32,7 +32,6 @@
 
 		<rect x="0" y="0" width="50%" height="100%" fill="url(#lgrad)" />
 
-
 		<image x="36.5%" y="75%" width="13.5%" height="25%" preserveAspectRatio="xMaxYMax meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="//agent[1]/photo" />
@@ -52,11 +51,6 @@
 	</xsl:template>
 
 	<xsl:template name="cropped-content">
-		<g style="transform:translate(35%, 21%)">
-			<xsl:call-template name="qr-code">
-				<xsl:with-param name="width" select="'30%'" />
-			</xsl:call-template>
-		</g>
 		<image x="4%" y="5%" width="16%" height="13%" id="logo" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="$personalLogo" />
@@ -122,7 +116,7 @@
 				</tspan>
 			</text>
 
-			<svg width="41%" class="scan-svg-icon" height="22%" x="0.8%" y="46%" viewBox="0 0 2000 452">
+			<svg width="41%" class="scan-svg-icon" height="22%" x="0.6%" y="46%" viewBox="0 0 2000 452">
 				<path fill="#eeac27" d="M1757.79,75.26c-58.07,0-105.31,47.24-105.31,105.31v117.14c0,42.23-34.36,76.59-76.59,76.59H136.91v11.53 h1438.98c48.59,0,88.12-39.53,88.12-88.12V180.57c0-51.71,42.07-93.78,93.78-93.78h114.2V75.26H1757.79z" />
 				<polygon fill="#eeac27" points="1841.9,44.98 1834.31,53.66 1865.73,81.13 1835.02,109.35 1842.82,117.84 1883,80.92" />
 			</svg>
@@ -148,12 +142,14 @@
 				</xsl:call-template>
 			</tspan>
 		</text>
+	
 		<text x="4%" y="84.9%" style="font-size:90%;font-weight:500;font-family: var(--theme-body-font);" data-max-width="32%" fill="var(--theme-heading-color)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'licenseno'" />
 				<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
 			</xsl:call-template>
 		</text>
+	
 		<text x="4%" y="89%" style="font-size:120%;font-family: var(--theme-body-font);" data-max-width="32%" fill="var(--theme-body-background)">
 			<tspan fill="var(--theme-sub-heading-color)" class="bold">
 				<xsl:call-template name="editable">
@@ -189,5 +185,12 @@
 				<xsl:value-of select="$companyLogo" />
 			</xsl:attribute>
 		</image>
+
+		<g style="transform:translate(39.275%, 30.335%)">
+			<xsl:call-template name="qr-code">
+				<xsl:with-param name="width" select="'21.45%'" />
+			</xsl:call-template>
+		</g>
+		<!-- <rect x="39.275%" y="30.335%" width="21.45%" height="39.33%" fill="#fff"></rect> -->
 	</xsl:template>
 </xsl:stylesheet>

@@ -31,9 +31,7 @@
 	</xsl:template>
 
 	<xsl:template name="svg-body">
-
 		<foreignObject x="0%" y="0%" width="100%" height="100%">
-
 			<div width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 				<div style="height: 628px; width:100%;">
 					<xsl:call-template name="map-output">
