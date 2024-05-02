@@ -805,7 +805,7 @@ const renderKeyParams = async params => {
         }
 
         propertyType = params.propertyType ?? listing.propertyType;
-        listingStatus = params.listingStatus ?? listing.listingStatus;
+        listingStatus = params.listingStatus ?? (listing.listingStatus ??'');
     }
 
     const area = await areaName(params.userId, areaId);
