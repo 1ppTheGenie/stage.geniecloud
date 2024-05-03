@@ -82,7 +82,7 @@
 							<xsl:with-param name="available-space" select="number(0.55)" />
 							<xsl:with-param name="caption">
 								<tspan x="0">
-									<xsl:value-of select="genie:currency-format( $salePrice, 1 )" />
+									<xsl:value-of select="genie:currency-format( $salePrice + 100000, 1 )" />
 								</tspan>
 								<tspan x="0" dy="3.5%">
 									<xsl:text>Or More</xsl:text>
