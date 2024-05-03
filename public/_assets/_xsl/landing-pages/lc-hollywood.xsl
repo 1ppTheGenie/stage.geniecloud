@@ -485,6 +485,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 						</div>
 					</div>
 				</section>
+
 				<xsl:if test="//single/virtualTourUrl !=''">
 					<section class="video-section" id="virtualTour">
 						<div class="container">
@@ -503,6 +504,13 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 						</div>
 					</section>
 				</xsl:if>
+
+				<section id="listing-agents">
+					<div class="container">
+						<xsl:call-template name="listing-agent-bullets" />
+					</div>
+				</section>
+
 				<section class="gallery" id="galary-sec">
 					<div class="container">
 						<div class="row">
@@ -608,7 +616,6 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 					<div class="map-embed">
 						<div class="map-embed-inner mapboxgl-map" id="map">
 							<div id="genie-map" />
-
 						</div>
 					</div>
 				</section>

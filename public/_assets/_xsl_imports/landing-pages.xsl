@@ -16,7 +16,7 @@
 
 			<xsl:if test="not(exists(//output/@testing))">
 				<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GCVGRFNGMD">
-					<xsl:comment><!-- Google tag (gtag.js) --></xsl:comment>
+					<xsl:comment>						<!-- Google tag (gtag.js) --></xsl:comment>
 				</script>
 				<script>
 					<xsl:value-of disable-output-escaping="yes" select="'window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag(`js`, new Date()); gtag(`config`, `G-GCVGRFNGMD`);'" />
@@ -33,7 +33,7 @@
 			</script>
 
 			<script async="async" src="{concat( //output/@siteUrl, '_assets/landing-pages/_global.js' )}">
-				<xsl:comment><!-- Genie Global JS --></xsl:comment>
+				<xsl:comment>					<!-- Genie Global JS --></xsl:comment>
 			</script>
 
 			<xsl:call-template name="landing-page" />
@@ -594,6 +594,60 @@
 			</xsl:choose>
 		</p>
 	</xsl:template>
+
+	<xsl:template name="listing-agent-bullets">
+		<xsl:for-each select="//listingAgent">
+			<xsl:sort select="@count" order="ascending" data-type="number" />
+
+			<p class="listing-agent-bullets">
+				<xsl:if test="@name!=''">
+					<xsl:variable name="agentName">
+						<xsl:choose>
+							<xsl:when test="@email!=''">
+								<a>
+									<xsl:attribute name="href" select="concat( 'mailto:', @email )"/>
+									<xsl:value-of select="@name" />
+								</a>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="@name" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
+
+					<span>
+						<xsl:choose>
+							<xsl:when test="number(@count)=1">
+								<xsl:text>Listed by: </xsl:text>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:text>Co-Listed by: </xsl:text>
+							</xsl:otherwise>
+						</xsl:choose>
+						
+						<xsl:copy-of select="$agentName" />
+					</span>
+				</xsl:if>
+				<xsl:if test="@license!=''">
+					<span>
+						<xsl:value-of select="@license" />
+					</span>
+				</xsl:if>
+				<xsl:if test="@broker!=''">
+					<span>
+						<xsl:value-of select="@broker" />
+					</span>
+				</xsl:if>
+				<xsl:if test="@phone!=''">
+					<span>
+						<xsl:value-of select="concat( 'Contact: ', @phone )" />
+					</span>
+				</xsl:if>
+			</p>
+		</xsl:for-each>
+	</xsl:template>
+
+
 	<xsl:template name="data-access">
 		<div class="popup-dialog">
 			<div id="data-access" class="lead-capture-form">
@@ -612,6 +666,7 @@
 			</div>
 		</div>
 	</xsl:template>
+
 	<xsl:template name="default-thank-you-popup">
 		<xsl:param name="message" select="'Thank you, your request has been successfully submitted!'" />
 		<div id="form-thank-you" class="popup-dialog thank-modal">

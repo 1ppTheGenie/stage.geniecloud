@@ -7686,7 +7686,10 @@ var getRenderJSON = async (params) => {
       }
     }
     params.openHouseTimes = times;
-    root.single = await processListing(params, root.agents[0].agent.timezone);
+    root.single = await processListing(
+      params,
+      root.agents[0].agent.timezone
+    );
     let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0, skipCache);
     if (mlsDisplay) {
       root.mlsDisplay = `<![CDATA[${mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ""}]]>`;
@@ -8250,7 +8253,38 @@ var processListing = async (params, agentTimezone) => {
       { longitude: listing.longitude ?? 0 },
       { city: listing.city ?? "" }
     ];
-    if (params.openHouseTimes) {
+    
+    const listingAgentContent = [];
+    listingAgentContent.push({
+      _name: "listingAgent",
+      _attrs: {
+        count: 1,
+        name: listing.listingAgentName ?? "",
+        email: listing.listingAgentEmail ?? "",
+        phone: listing.listingAgentPhone ?? "",
+        license: listing.listingAgentStateLicense ?? "",
+        broker: listing.listingBrokerName ?? ""
+      }
+    });
+    if (listing.coListingAgentName !== "" || listing.coListingBrokerName !== "") {
+      listingAgentContent.push({
+        _name: "listingAgent",
+        _attrs: {
+          count: 2,
+          name: listing.coListingAgentName ?? "",
+          email: listing.coListingAgentEmail ?? "",
+          phone: listing.coListingAgentPhone ?? "",
+          license: listing.coListingAgentStateLicense ?? "",
+          broker: listing.coListingBrokerName ?? ""
+        }
+      });
+    }
+    single.push({
+      _name: "listingAgents",
+      _content: listingAgentContent
+    });
+    
+    if ( params.openHouseTimes ) {
       const tz = { zone: agentTimezone ?? "PST" };
       const oh = {
         _name: "openHouse",
@@ -8503,35 +8537,35 @@ var preCallGenieAPIs = async (params) => {
         params.mlsId,
         params.userId
       );
-      await getListing(
-        params.userId,
-        params.mlsNumber,
-        params.mlsId
-      );
+      await getListing(params.userId, params.mlsNumber, params.mlsId);
     }
     if (Array.isArray(params?.agentIds)) {
-      await Promise.all(params.agentIds.map(async (agentId) => await getUser(agentId)));
+      await Promise.all(
+        params.agentIds.map(async (agentId) => await getUser(agentId))
+      );
     }
     if (Array.isArray(params?.areaIds)) {
-      await Promise.all(params.areaIds.map(async (areaId) => {
-        await getAreaBoundary(areaId);
-        await areaStatisticsWithPrevious(
-          params.userId,
-          areaId,
-          parseInt(params.datePeriod || 12)
-        );
-        await mlsProperties(
-          params.mlsId ?? 0,
-          areaId,
-          NOW.plus({ months: params.datePeriod * -1 }).toISO()
-        );
-        await agentMlsNumbers(params.userId);
-        await areaStatisticsMonthly(
-          params.userId,
-          areaId,
-          Math.ceil(params.datePeriod / 12)
-        );
-      }));
+      await Promise.all(
+        params.areaIds.map(async (areaId) => {
+          await getAreaBoundary(areaId);
+          await areaStatisticsWithPrevious(
+            params.userId,
+            areaId,
+            parseInt(params.datePeriod || 12)
+          );
+          await mlsProperties(
+            params.mlsId ?? 0,
+            areaId,
+            NOW.plus({ months: params.datePeriod * -1 }).toISO()
+          );
+          await agentMlsNumbers(params.userId);
+          await areaStatisticsMonthly(
+            params.userId,
+            areaId,
+            Math.ceil(params.datePeriod / 12)
+          );
+        })
+      );
     }
     return true;
   } catch (err) {

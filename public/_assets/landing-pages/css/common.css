@@ -3554,3 +3554,15 @@ section.genie-alternate {
     background-color: var(--theme-body-background);
 	padding: 1vh 0;
 }
+
+section#listing-agents {
+	margin: 0;
+    padding: 0;
+	text-align: center;
+	font-size: small;
+}
+
+p.listing-agent-bullets span:not(:last-child)::after {
+    content: " \2022";
+    margin-right: 5px;
+}
