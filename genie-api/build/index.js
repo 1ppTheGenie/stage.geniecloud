@@ -8253,7 +8253,6 @@ var processListing = async (params, agentTimezone) => {
       { longitude: listing.longitude ?? 0 },
       { city: listing.city ?? "" }
     ];
-    
     const listingAgentContent = [];
     listingAgentContent.push({
       _name: "listingAgent",
@@ -8283,8 +8282,7 @@ var processListing = async (params, agentTimezone) => {
       _name: "listingAgents",
       _content: listingAgentContent
     });
-    
-    if ( params.openHouseTimes ) {
+    if (params.openHouseTimes) {
       const tz = { zone: agentTimezone ?? "PST" };
       const oh = {
         _name: "openHouse",

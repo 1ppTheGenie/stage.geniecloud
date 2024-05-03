@@ -147,7 +147,10 @@ export const getRenderJSON = async params => {
         }
         params.openHouseTimes = times;
 
-        root.single = await processListing(params, root.agents[0].agent.timezone);
+        root.single = await processListing(
+            params,
+            root.agents[0].agent.timezone
+        );
 
         let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0, skipCache);
 
@@ -884,6 +887,44 @@ const processListing = async (params, agentTimezone) => {
             { city: listing.city ?? '' }
         ];
 
+        // *** SINGLE LISTINGAGENT
+        const listingAgentContent = [];
+        listingAgentContent.push({
+            _name: 'listingAgent',
+            _attrs: {
+                count: 1,
+                name: listing.listingAgentName ?? '',
+                email: listing.listingAgentEmail ?? '',
+                phone: listing.listingAgentPhone ?? '',
+
+                license: listing.listingAgentStateLicense ?? '',
+                broker: listing.listingBrokerName ?? ''
+            }
+        });
+
+        if (
+            listing.coListingAgentName !== '' ||
+            listing.coListingBrokerName !== ''
+        ) {
+            listingAgentContent.push({
+                _name: 'listingAgent',
+                _attrs: {
+                    count: 2,
+                    name: listing.coListingAgentName ?? '',
+                    email: listing.coListingAgentEmail ?? '',
+                    phone: listing.coListingAgentPhone ?? '',
+
+                    license: listing.coListingAgentStateLicense ?? '',
+                    broker: listing.coListingBrokerName ?? ''
+                }
+            });
+        }
+
+        single.push({
+            _name: 'listingAgents',
+            _content: listingAgentContent
+        });
+
         /*	Open House */
         if (params.openHouseTimes) {
             const tz = { zone: agentTimezone ?? 'PST' };
@@ -1074,7 +1115,6 @@ const processCollection = async params => {
                                                         a.asset == asset.qrUrl
                                                 )
                                         );
-
                                 }
 
                                 const { s3Key } = await getS3Key(asset.asset, {
@@ -1208,55 +1248,63 @@ const debugLog = async (source, params, data) => {
 
 export const preCallGenieAPIs = async params => {
     try {
-      if (params.mlsNumber) {
-        await openhouseByMlsNumber(params.mlsId, params.mlsNumber);
-        
-        await propertySurroundingAreas(
-            params.mlsNumber, 
-            params.mlsId, 
-            params.userId);
-        
-            await agentProperties(params.userId, false);
-        
-        await areaFromMlsNumber(params.mlsNumber, 
-            params.mlsId, 
-            params.userId);
-        
-            await getListing(params.userId, 
-            params.mlsNumber, 
-            params.mlsId);
-      }
-  
-      if (Array.isArray(params?.agentIds)) {
-        await Promise.all(params.agentIds.map(async agentId => await getUser(agentId)));
-      }
-  
-      if (Array.isArray(params?.areaIds)) {
-        await Promise.all(params.areaIds.map(async areaId => {
-          await getAreaBoundary(areaId);
+        if (params.mlsNumber) {
+            await openhouseByMlsNumber(params.mlsId, params.mlsNumber);
 
-          await areaStatisticsWithPrevious(
-            params.userId, 
-            areaId, 
-            parseInt(params.datePeriod || 12));
-          // **** LISTINGS
-          await mlsProperties(
-            params.mlsId ?? 0, 
-            areaId, 
-            NOW.plus({ months: params.datePeriod * -1 }).toISO());
-          
-          await agentMlsNumbers(params.userId);
-          
-          await areaStatisticsMonthly(
-            params.userId, 
-            areaId, 
-            Math.ceil(params.datePeriod / 12));
-        }));
-      }
-  
-      return true;
+            await propertySurroundingAreas(
+                params.mlsNumber,
+                params.mlsId,
+                params.userId
+            );
+
+            await agentProperties(params.userId, false);
+
+            await areaFromMlsNumber(
+                params.mlsNumber,
+                params.mlsId,
+                params.userId
+            );
+
+            await getListing(params.userId, params.mlsNumber, params.mlsId);
+        }
+
+        if (Array.isArray(params?.agentIds)) {
+            await Promise.all(
+                params.agentIds.map(async agentId => await getUser(agentId))
+            );
+        }
+
+        if (Array.isArray(params?.areaIds)) {
+            await Promise.all(
+                params.areaIds.map(async areaId => {
+                    await getAreaBoundary(areaId);
+
+                    await areaStatisticsWithPrevious(
+                        params.userId,
+                        areaId,
+                        parseInt(params.datePeriod || 12)
+                    );
+                    // **** LISTINGS
+                    await mlsProperties(
+                        params.mlsId ?? 0,
+                        areaId,
+                        NOW.plus({ months: params.datePeriod * -1 }).toISO()
+                    );
+
+                    await agentMlsNumbers(params.userId);
+
+                    await areaStatisticsMonthly(
+                        params.userId,
+                        areaId,
+                        Math.ceil(params.datePeriod / 12)
+                    );
+                })
+            );
+        }
+
+        return true;
     } catch (err) {
-      console.log('precache error', err);
-      return false;
+        console.log('precache error', err);
+        return false;
     }
-  };
+};
