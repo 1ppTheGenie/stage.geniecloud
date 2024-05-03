@@ -28,17 +28,17 @@
 						<xsl:when test="//agent[1]/marketingAbout!=''">
 							<xsl:variable name="marketingAboutLength" select="string-length(//agent[1]/marketingAbout)" />
 							<xsl:choose>
-								<xsl:when test="$marketingAboutLength &lt;= 500">
+								<xsl:when test="$marketingAboutLength &lt;= 1000">
 									<div style="line-height:1.7;font-size:100%;">
 										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
 									</div>
 								</xsl:when>
-								<xsl:when test="$marketingAboutLength &lt;= 1000">
+								<xsl:when test="$marketingAboutLength &lt;= 1250">
 									<div style="line-height:1.6;font-size:90%;">
 										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
 									</div>
 								</xsl:when>
-								<xsl:when test="$marketingAboutLength &lt;= 1500">
+								<xsl:when test="$marketingAboutLength &lt;= 1700">
 									<div style="line-height:1.5;font-size:80%;">
 										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
 									</div>
