@@ -97,9 +97,8 @@ export const xslt = async event => {
 
 				if (transformedXML) {
 					if (typeof transformedXML == "object" && transformedXML.failed) {
-						const currentDate = new Date().toISOString().split('T')[0];
 						await toS3(
-							`_errors/${currentDate}/${params.renderId}-${Date.now()}-api.json`,
+							`_errors/${params.renderId}-${Date.now()}-api.json`,
 							Buffer.from(
 								JSON.stringify({
 									error: transformedXML.msg,

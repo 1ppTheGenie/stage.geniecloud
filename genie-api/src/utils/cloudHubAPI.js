@@ -76,25 +76,24 @@ export const cloudHubAPI = async (route, params) => {
         case 'render-errors':
             const errors = [];
             const rErrors = await listS3Folder('_errors');
+
             await Promise.all(
-                rErrors.map(async (e) => {
-                if (!params.renderId || e.Key.includes(params.renderId)) {
-                    if (e.Size > 0) {
-                    const json = JSON.parse((await fromS3(e.Key)).toString());
-                    json.key = e.Key;
-                    
-                    // Extract the date from the error file path
-                    const dateMatch = e.Key.match(/_errors\/(\d{4}-\d{2}-\d{2})\//);
-                    if (dateMatch && dateMatch[1]) {
-                        json.date = dateMatch[1];
+                rErrors.map(async e => {
+                    if (!params.renderId || e.Key.includes(params.renderId)) {
+                        if (e.Size > 0) {
+                            const json = JSON.parse(
+                                (await fromS3(e.Key)).toString()
+                            );
+
+                            json.key = e.Key;
+
+                            errors.push(json);
+                        }
                     }
-                    
-                    errors.push(json);
-                    }
-                }
                 })
             );
-            response.body = { success: true, errors };
+
+            response.body = { success: true, ...errors };
             break;
     }
 

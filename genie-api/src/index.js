@@ -1298,9 +1298,8 @@ export const getS3Key = async (asset, params) => {
             }/${renderKey}.${fileExtension || (hasPages && 'pdf') || 'png'}`;
         }
     } catch (error) {
-        const currentDate = new Date().toISOString().split('T')[0];
         await toS3(
-            `_errors/${currentDate}/${params.renderId}-${Date.now()}-api.json`,
+            `_errors/${params.renderId}-${Date.now()}-api.json`,
             Buffer.from(
                 JSON.stringify({
                     params,
