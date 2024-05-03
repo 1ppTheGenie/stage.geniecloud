@@ -51,7 +51,7 @@
 							</xsl:choose>
 						</xsl:when>
 						<xsl:otherwise>
-							<div style="line-height:1.5;font-size:80%;">
+							<div style="line-height:1.7;font-size:100%;">
 								<xsl:call-template name="default-bio" />
 							</div>
 						</xsl:otherwise>
