@@ -129,18 +129,28 @@
 		<xsl:param name="value" as="xs:double" />
 		<xsl:param name="precision" as="xs:integer" />
 		<xsl:variable name="suffixes" select="('', 'k', 'm')" />
-		<xsl:variable name="base" select="if ($value >= 1000) then floor(math:log($value) div math:log(1000)) else 0" />
-
+		<xsl:variable name="log1000" select="math:log(1000)" />
+		<xsl:variable name="base" select="if ($value >= 1000) then floor(math:log($value) div $log1000) else 0" />
 		<xsl:choose>
 			<xsl:when test="string(number($base)) = 'NaN'">
 				<xsl:value-of select="$value" />
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:variable name="roundedValue" select="round($value div math:pow(1000, $base) * math:pow(10, $precision)) div math:pow(10, $precision)" />
-				<xsl:value-of select="concat('$', format-number($roundedValue, '#,###'), $suffixes[$base + 1])" />
+				<xsl:variable name="roundedValue" select="round($value div math:pow(1000, $base), $precision)" />
+				<xsl:variable name="formattedValue">
+					<xsl:choose>
+					<xsl:when test="$precision = 0">
+						<xsl:value-of select="format-number($roundedValue, '#,##0')" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="format-number($roundedValue, '#,##0.0')" />
+					</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+				<xsl:value-of select="concat('$', $formattedValue, $suffixes[$base + 1])" />
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:function>
+		</xsl:function>
 
 
 	<xsl:function name="genie:format-date">
