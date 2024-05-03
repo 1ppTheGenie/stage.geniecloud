@@ -29,29 +29,29 @@
 							<xsl:variable name="marketingAboutLength" select="string-length(//agent[1]/marketingAbout)" />
 							<xsl:choose>
 								<xsl:when test="$marketingAboutLength &lt;= 1000">
-									<div style="line-height:1.7;font-size:100%;">
+									<div style="line-height:1.7;font-size:120%;">
 										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
 									</div>
 								</xsl:when>
 								<xsl:when test="$marketingAboutLength &lt;= 1250">
-									<div style="line-height:1.6;font-size:90%;">
+									<div style="line-height:1.6;font-size:100%;">
 										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
 									</div>
 								</xsl:when>
 								<xsl:when test="$marketingAboutLength &lt;= 1700">
-									<div style="line-height:1.5;font-size:80%;">
+									<div style="line-height:1.5;font-size:90%;">
 										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
 									</div>
 								</xsl:when>
 								<xsl:otherwise>
-									<div style="line-height:1.5;font-size:75%;">
+									<div style="line-height:1.5;font-size:80%;">
 										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
 									</div>
 								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:when>
 						<xsl:otherwise>
-							<div style="line-height:1.5;font-size:80%;">
+							<div style="line-height:1.7;font-size:120%;">
 								<xsl:call-template name="default-bio" />
 							</div>
 						</xsl:otherwise>
