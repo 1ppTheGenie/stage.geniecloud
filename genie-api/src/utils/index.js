@@ -12,7 +12,7 @@ export const genieGlobals = {
 		process.env.GOOGLE_KEY ?? "AIzaSyDLFcQk1FV7U4tf_aXU3NiLItNxy_b0AzU",
 	MAPBOX_KEY:
 		process.env.MAPBOX_KEY ??
-		"pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJ0VnNHQ0o4In0.Ju1ET8Y81mGY1Eu0l5DfRQ",
+		"pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJjbHZxc2R6NDMwZncxMmlxaW41MzVrdzV2In0.fl0G_yHPzEc_rzAaJ58v6Q",
 	GENIE_HOST:
 		process.env.GENIE_HOST ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/",
 	GENIE_NO_CACHE_HOST:
