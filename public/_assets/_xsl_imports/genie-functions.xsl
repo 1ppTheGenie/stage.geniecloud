@@ -129,8 +129,8 @@
 		<xsl:param name="value" as="xs:double" />
 		<xsl:param name="precision" as="xs:integer" />
 		<xsl:variable name="suffixes" select="('', 'k', 'm')" />
-		<xsl:variable name="base" select="if ($value >= 1000) then floor(math:log($value) div math:log(1000)) else 0" />
-
+		<xsl:variable name="log1000" select="math:log(1000)" />
+		<xsl:variable name="base" select="if ($value >= 1000) then floor(math:log($value) div $log1000) else 0" />
 		<xsl:choose>
 			<xsl:when test="string(number($base)) = 'NaN'">
 				<xsl:value-of select="$value" />
