@@ -68,8 +68,8 @@
 							<xsl:with-param name="caption">
 								<tspan x="0">
 									<xsl:choose>
-									<xsl:when test="$maxLowerQuartile">
-										<xsl:value-of select="genie:currency-format( $maxLowerQuartile, 0 )" />
+									<xsl:when test="$minUpperQuartile">
+										<xsl:value-of select="genie:currency-format( $minUpperQuartile, 0 )" />
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:text>N/A</xsl:text>
@@ -97,7 +97,7 @@
 										<xsl:value-of select="genie:currency-format( $maxLowerQuartile, 0 )" />
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:text>N/A</xsl:text>
+										<xsl:text>$0</xsl:text>
 									</xsl:otherwise>
 									</xsl:choose>
 								</tspan>
