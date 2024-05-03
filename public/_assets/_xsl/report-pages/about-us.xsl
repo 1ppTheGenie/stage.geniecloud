@@ -23,15 +23,37 @@
 			</text>
 
 			<foreignObject x="6%" y="12%" height="70%" width="88%">
-				<div style="line-height:1.5;font-size:85%;font-family:var(--theme-body-font);">
+				<div style="font-family:var(--theme-body-font);">
 					<xsl:choose>
 						<xsl:when test="//agent[1]/marketingAbout!=''">
-							<p>
-								<xsl:value-of select="//agent[1]/marketingAbout" />
-							</p>
+							<xsl:variable name="marketingAboutLength" select="string-length(//agent[1]/marketingAbout)" />
+							<xsl:choose>
+								<xsl:when test="$marketingAboutLength &lt;= 500">
+									<div style="line-height:1.7;font-size:100%;">
+										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
+									</div>
+								</xsl:when>
+								<xsl:when test="$marketingAboutLength &lt;= 1000">
+									<div style="line-height:1.6;font-size:90%;">
+										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
+									</div>
+								</xsl:when>
+								<xsl:when test="$marketingAboutLength &lt;= 1500">
+									<div style="line-height:1.5;font-size:80%;">
+										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
+									</div>
+								</xsl:when>
+								<xsl:otherwise>
+									<div style="line-height:1.5;font-size:75%;">
+										<xsl:value-of select="//agent[1]/marketingAbout" disable-output-escaping="yes" />
+									</div>
+								</xsl:otherwise>
+							</xsl:choose>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:call-template name="default-bio" />
+							<div style="line-height:1.5;font-size:80%;">
+								<xsl:call-template name="default-bio" />
+							</div>
 						</xsl:otherwise>
 					</xsl:choose>
 				</div>
