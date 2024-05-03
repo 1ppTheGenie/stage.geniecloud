@@ -37,19 +37,65 @@
 		</text>
 
 		<xsl:variable name="totalSales" select="count(//listings/listing[not(@salePrice = '')])" />
-
-		<xsl:variable name="maxSales">
-			<xsl:for-each select="//statistics/byValue/range">
-				<xsl:sort select="@sold" data-type="number" order="descending" />
-
-				<xsl:if test="position() = 1">
-					<xsl:value-of select="@sold" />
-				</xsl:if>
-			</xsl:for-each>
-		</xsl:variable>
+		<xsl:variable name="listingCount" select="count(//listings/listing[not(@salePrice = '')])"/>
 
 		<xsl:choose>
-			<xsl:when test="count(//listings/listing[not(@salePrice = '')]) > 0">
+			<xsl:when test="$listingCount = 1">
+				<xsl:variable name="salePrice" select="//listings/listing[not(@salePrice = '')]/@salePrice"/>
+				<g style="transform: translate(5%, 20%)">
+					<g style="transform: translateY(10%)">
+						<xsl:call-template name="lozenge">
+							<xsl:with-param name="fill-id" select="'5'" />
+							<xsl:with-param name="available-space" select="number(0.55)" />
+							<xsl:with-param name="caption">
+								<tspan x="0">
+									<xsl:value-of select="genie:currency-format( $salePrice - 100000, 0 )" />
+								</tspan>
+								<tspan x="0" dy="3.5%">
+									<xsl:text>Or Less</xsl:text>
+								</tspan>
+							</xsl:with-param>
+							<xsl:with-param name="width" select="0.5" />
+							<xsl:with-param name="diamond-caption" select="'0%'" />
+							<xsl:with-param name="value" select="'0 sales'" />
+						</xsl:call-template>
+					</g>
+
+					<g style="transform: translateY(30%)">
+						<xsl:call-template name="lozenge">
+							<xsl:with-param name="fill-id" select="'4'" />
+							<xsl:with-param name="available-space" select="number(0.55)" />
+							<xsl:with-param name="caption">
+								<tspan x="0">
+									<xsl:value-of select="genie:currency-format( $salePrice, 0 )" />
+								</tspan>
+							</xsl:with-param>
+							<xsl:with-param name="width" select="1" />
+							<xsl:with-param name="diamond-caption" select="'100%'" />
+							<xsl:with-param name="value" select="'1 sale'" />
+						</xsl:call-template>
+					</g>
+
+					<g style="transform: translateY(50%)">
+						<xsl:call-template name="lozenge">
+							<xsl:with-param name="fill-id" select="'2'" />
+							<xsl:with-param name="available-space" select="number(0.55)" />
+							<xsl:with-param name="caption">
+								<tspan x="0">
+									<xsl:value-of select="genie:currency-format( $salePrice, 0 )" />
+								</tspan>
+								<tspan x="0" dy="3.5%">
+									<xsl:text>Or More</xsl:text>
+								</tspan>
+							</xsl:with-param>
+							<xsl:with-param name="width" select="0.5" />
+							<xsl:with-param name="diamond-caption" select="'0%'" />
+							<xsl:with-param name="value" select="'0 sales'" />
+						</xsl:call-template>
+					</g>
+				</g>
+			</xsl:when>
+			<xsl:when test="$listingCount > 1">
 				<xsl:variable name="sortedSalesValues">
 					<xsl:for-each select="//listings/listing[not(@salePrice = '')]">
 						<xsl:sort select="@salePrice" data-type="number"/>
@@ -68,12 +114,12 @@
 							<xsl:with-param name="caption">
 								<tspan x="0">
 									<xsl:choose>
-									<xsl:when test="$minUpperQuartile">
-										<xsl:value-of select="genie:currency-format( $minUpperQuartile, 0 )" />
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:text>N/A</xsl:text>
-									</xsl:otherwise>
+										<xsl:when test="$maxLowerQuartile">
+											<xsl:value-of select="genie:currency-format( $maxLowerQuartile, 0 )" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:text>N/A</xsl:text>
+										</xsl:otherwise>
 									</xsl:choose>
 								</tspan>
 								<tspan x="0" dy="3.5%">
@@ -93,16 +139,23 @@
 							<xsl:with-param name="caption">
 								<tspan x="0">
 									<xsl:choose>
-									<xsl:when test="$maxLowerQuartile">
-										<xsl:value-of select="genie:currency-format( $maxLowerQuartile, 0 )" />
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:text>$0</xsl:text>
-									</xsl:otherwise>
+										<xsl:when test="$maxLowerQuartile">
+											<xsl:value-of select="genie:currency-format( $maxLowerQuartile, 0 )" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:text>N/A</xsl:text>
+										</xsl:otherwise>
 									</xsl:choose>
 								</tspan>
 								<tspan x="0" dy="3.5%">
-									<xsl:value-of select="concat( 'To ', genie:currency-format( $minUpperQuartile, 0 ) )" />
+									<xsl:choose>
+										<xsl:when test="$minUpperQuartile">
+											<xsl:value-of select="concat( 'To ', genie:currency-format( $minUpperQuartile, 0 ) )" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:text>N/A</xsl:text>
+										</xsl:otherwise>
+									</xsl:choose>
 								</tspan>
 							</xsl:with-param>
 							<xsl:with-param name="width" select="1" />
@@ -118,12 +171,12 @@
 							<xsl:with-param name="caption">
 								<tspan x="0">
 									<xsl:choose>
-									<xsl:when test="$minUpperQuartile">
-										<xsl:value-of select="genie:currency-format( $minUpperQuartile, 0 )" />
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:text>N/A</xsl:text>
-									</xsl:otherwise>
+										<xsl:when test="$minUpperQuartile">
+											<xsl:value-of select="genie:currency-format( $minUpperQuartile, 0 )" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:text>N/A</xsl:text>
+										</xsl:otherwise>
 									</xsl:choose>
 								</tspan>
 								<tspan x="0" dy="3.5%">
