@@ -137,10 +137,20 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:variable name="roundedValue" select="round($value div math:pow(1000, $base), $precision)" />
-				<xsl:value-of select="concat('$', format-number($roundedValue, '#,##0.0'), $suffixes[$base + 1])" />
+				<xsl:variable name="formattedValue">
+					<xsl:choose>
+					<xsl:when test="$precision = 0">
+						<xsl:value-of select="format-number($roundedValue, '#,##0')" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="format-number($roundedValue, '#,##0.0')" />
+					</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+				<xsl:value-of select="concat('$', $formattedValue, $suffixes[$base + 1])" />
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:function>
+		</xsl:function>
 
 
 	<xsl:function name="genie:format-date">

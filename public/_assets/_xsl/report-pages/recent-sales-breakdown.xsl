@@ -115,7 +115,7 @@
 								<tspan x="0">
 									<xsl:choose>
 										<xsl:when test="$maxLowerQuartile">
-											<xsl:value-of select="genie:currency-format( $maxLowerQuartile, 0 )" />
+											<xsl:value-of select="genie:currency-format( $maxLowerQuartile, 1 )" />
 										</xsl:when>
 										<xsl:otherwise>
 											<xsl:text>N/A</xsl:text>
@@ -140,7 +140,7 @@
 								<tspan x="0">
 									<xsl:choose>
 										<xsl:when test="$maxLowerQuartile">
-											<xsl:value-of select="genie:currency-format( $maxLowerQuartile, 0 )" />
+											<xsl:value-of select="genie:currency-format( $maxLowerQuartile, 1 )" />
 										</xsl:when>
 										<xsl:otherwise>
 											<xsl:text>N/A</xsl:text>
@@ -150,7 +150,7 @@
 								<tspan x="0" dy="3.5%">
 									<xsl:choose>
 										<xsl:when test="$minUpperQuartile">
-											<xsl:value-of select="concat( 'To ', genie:currency-format( $minUpperQuartile, 0 ) )" />
+											<xsl:value-of select="concat( 'To ', genie:currency-format( $minUpperQuartile, 1 ) )" />
 										</xsl:when>
 										<xsl:otherwise>
 											<xsl:text>N/A</xsl:text>
@@ -172,7 +172,7 @@
 								<tspan x="0">
 									<xsl:choose>
 										<xsl:when test="$minUpperQuartile">
-											<xsl:value-of select="genie:currency-format( $minUpperQuartile, 0 )" />
+											<xsl:value-of select="genie:currency-format( $minUpperQuartile, 1 )" />
 										</xsl:when>
 										<xsl:otherwise>
 											<xsl:text>N/A</xsl:text>
