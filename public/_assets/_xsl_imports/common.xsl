@@ -32,35 +32,13 @@
 	<xsl:template name="default-bio">
 		<xsl:choose>
 			<xsl:when test="//agents/agent[1]/pronoun='plural'">
-				<h2>Our Mission</h2>
-
-				<p>As your professional real estate advisors, we focus on client satisfaction. Our business is about service, and we are not happy until you are happy. Our years in the business have provided us with the experience to assist you with nearly every real estate need. Whether it's finding you a home, finding the best loan, or helping you get the most out of selling your home, we are here to guide you. If there is anything you need, please let us know.</p>
-
-				<h2>About Our Services</h2>
-
-				<p>We will listen to your needs and want to establish our goals and objectives. We work as a team to meet those goals, and you will continually be in the loop during the entire process. In this fast-paced market, we believe communication is key in meeting our goals and building our relationship.</p>
-
-				<h2>Satisfied clients are the key to our success</h2>
-
-				<p>Our satisfied clients are our best resource for new business. In this very competitive real estate industry, service makes the difference. Our service is second to none and has earned us a valuable source of referrals. If you are considering real estate professionals, please give us an opportunity to earn your business too. We are confident you will be very happy!</p>
+				<p>As professional real estate advisors, our focus is on ensuring client satisfaction. With years of experience in the industry, we are equipped to assist you with all your real estate needs. Whether it's finding your dream home, securing the best loan, or maximizing the value of your property when selling, we are here to guide you every step of the way. Communication is crucial to us, and we believe in keeping you informed throughout the entire process. Our dedication to providing exceptional service has led to satisfied clients who have become our best source of referrals. Allow us the opportunity to earn your business, and we are confident that you will be delighted with the results.</p>
 			</xsl:when>
 			<xsl:otherwise>
-				<h2>My Personal Mission</h2>
-
-				<p>As your professional real estate advisor, I focus on client satisfaction. My business is about service and I am not happy until you are happy. My years in the business have provided me the experience to assist you with nearly every real estate need. Whether it's finding you a home, finding the best loan, or helping you getting the most out of selling your home I am here to guide you. If there is anything you need, please let me know.</p>
-
-				<h2>About My Services</h2>
-
-				<p>I will listen to your needs and want to establish our goals and objectives. We work as a team to meet the goals and you will continually be in the loop during the entire process. In this fast paced market, I believe communication is key in meeting our goals and building our relationship.</p>
-
-				<h2>Satisfied clients are the key to my success</h2>
-
-				<p>My satisfied clients are my best resource for new business. In this very competitive business of real estate, service makes the difference. My service is second to none and has earned me a valuable source of referrals. If you are considering a real estate professional, please give me an opportunity to earn your business too. I am confident you will be very happy!</p>
+				<p>As a professional real estate advisor, my focus is on ensuring client satisfaction. With years of experience in the industry, I am equipped to assist you with all your real estate needs. Whether it's finding your dream home, securing the best loan, or maximizing the value of your property when selling, I am here to guide you every step of the way. Communication is crucial to me, and I believe in keeping you informed throughout the entire process. My dedication to providing exceptional service has led to satisfied clients who have become my best source of referrals. Allow me the opportunity to earn your business, and I am confident that you will be delighted with the results.</p>
 			</xsl:otherwise>
 		</xsl:choose>
-
 	</xsl:template>
-
 
 	<xsl:template name="empty-listing-text">
 		<rect xmlns="" x="7%" y="25%" rx="10" ry="10" width="85%" height="60%" fill-opacity="0" stroke-width="2" stroke="var(--theme-heading-color)"></rect>
