@@ -598,7 +598,8 @@ const processAreas = async params => {
                         ) {
                             const state =
                                 parseInt(p.statusTypeID) == 4 ||
-                                parseInt(p.statusTypeID) == 12
+                                parseInt(p.statusTypeID) == 12 ||
+                                parseInt(p.statusTypeID) == 3
                                     ? 'pending'
                                     : p.statusType.toLowerCase();
 
