@@ -7,7 +7,7 @@ Sizes:		Postcard, QRCode
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
 		<rect x="0" y="0" width="51%" height="100%" fill="#fff"></rect>
@@ -30,20 +30,17 @@ Sizes:		Postcard, QRCode
 				<stop offset="100%" style="stop-color:#0e1232;stop-opacity:1.00" />
 			</linearGradient>
 		</defs>
-<rect x="0" y="0" width="51%" height="100%" fill="url(#lgrad)" />
-
+		<rect x="0" y="0" width="51%" height="100%" fill="url(#lgrad)" />
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
 
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet" type="text/css">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 		</link>
 		<link rel="stylesheet" type="text/css">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/smooch.css')" />
-
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/smooch.css')" />
 		</link>
 
 		<g style="transform:translate(45.2%, 55.5%)">
@@ -206,7 +203,7 @@ Sizes:		Postcard, QRCode
 			</p>
 		</foreignObject>
 
-		<foreignObject x="4%" y="25.5%" class="bold middle" width="40%" fill="#fff" height="20%" font-family="var(--theme-body-font)" style="letter-spacing: 0.5px; font-size:174%;word-spacing:-5px;">
+		<foreignObject x="4%" y="25.5%" class="bold middle" width="40%" fill="#fff" height="20%" font-family="var(--theme-heading-font)" style="letter-spacing: 0.5px; font-size:174%;word-spacing:-5px;">
 			<p style="margin: 0;color:#fff">
 				<xsl:choose>
 					<xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
@@ -243,7 +240,7 @@ Sizes:		Postcard, QRCode
 			</p>
 		</foreignObject>
 
-		<foreignObject x="4%" y="41%" class="bold middle" width="40%" fill="#b2934e" height="20%" font-family="var(--theme-body-font)" style="letter-spacing: 0.5px; font-size:174%;word-spacing:-5px;">
+		<foreignObject x="4%" y="41%" class="bold middle" width="40%" fill="#b2934e" height="20%" font-family="var(--theme-heading-font)" style="letter-spacing: 0.5px; font-size:174%;word-spacing:-5px;">
 			<p style="margin: 0;color:#b2934e;">
 
 				<xsl:choose>
