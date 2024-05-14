@@ -39,8 +39,8 @@ export default () => {
 		listingsStore.listings,
 		areaDataStore.propertyTypeID,
 		areaDataStore.areaPeriod,
-		status,
-		sortBy
+		status(),
+		sortBy()
 	);
 	const visibleListings =
 		currentListings && currentListings.slice(pageOffset, pageOffset + pageSize);
@@ -140,7 +140,7 @@ export default () => {
 					<span>
 						<ListingsShowing
 							pageSize={pageSize}
-							offset={pageOffset}
+							ffset={Math.max((currentPage() - 1) * pageSize(),0)}
 							len={currentListings.length}
 							mode={settings.mode}
 							period={period}

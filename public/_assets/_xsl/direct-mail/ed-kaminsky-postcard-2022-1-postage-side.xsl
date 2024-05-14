@@ -81,7 +81,7 @@ Sizes:		Postcard, QRCode
 			<polygon fill="#b2934e" points="1199.21,346 1194.02,351.93 1215.49,370.71 1194.5,390 1199.83,395.81 1227.3,370.57 " />
 		</svg>
 
-		<text x="4%" y="68.2%" class="middle" fill="#fff" font-family="var(--theme-heading-font)" style="font-size:96%;font-weight:500;word-spacing:-2px;">
+		<text x="4%" y="68.2%" class="middle" fill="#fff" font-family="var(--theme-heading-font)" style="font-size:96%;font-weight:500;">
 			<tspan class="bold">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'scannow'" />
@@ -177,7 +177,7 @@ Sizes:		Postcard, QRCode
 		</g>
 
 		<g style="transform: translate(54%, 5%);">
-			<text fill="#5c5c5c" font-family= 'futura' font-size="100%" font-weight="500">
+			<text fill="#5c5c5c" font-family= "var(--theme-body-font)" font-size="100%" font-weight="500">
 				<tspan>
 					<xsl:value-of select="//agent[1]/address/street" />
 				</tspan>

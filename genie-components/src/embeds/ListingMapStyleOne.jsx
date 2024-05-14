@@ -75,7 +75,7 @@ export default () => {
 				<p class="filterTxt" style="font-size:13px; color: #fff;">
 					<ListingsShowing
 						pageSize={pageSize()}
-						offset={pageSize() * currentPage()}
+						offset={Math.max((currentPage() - 1) * pageSize(),0)}
 						len={listingsStore.listings.length}
 						mode={settings.marketstatus ?? "active"}
 						period={areaDataStore.areaPeriod}

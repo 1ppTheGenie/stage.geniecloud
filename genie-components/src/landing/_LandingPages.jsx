@@ -11,6 +11,7 @@ import {
 	useSettings,
 	Context4Settings,
 	landingPageData,
+	currency
 } from "@/utilities";
 
 import "@/index.css";
@@ -39,6 +40,8 @@ export default () => {
 
 		lazyImages.forEach(lazyImage => lazyImageObserver.observe(lazyImage));
 	};
+
+	window.gHub.currency = c => currency(c);
 
 	window.gHub.makeMap = async (id, options = null, layers = null) => {
 		await initMaps();
@@ -95,7 +98,7 @@ export default () => {
 
 			group.addTo(map);
 
-			if (options.fitMarkers) {
+			if (options.fitMarkers && Object.keys(group.getBounds()).length > 0) {
 				map.fitBounds(group.getBounds(), { padding: [60, 60] });
 			}
 		}

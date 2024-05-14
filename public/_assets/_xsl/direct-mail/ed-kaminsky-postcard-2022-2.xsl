@@ -67,11 +67,6 @@ Supports:	Area, Print, Listing, QRCode
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet" type="text/css">
 			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-
-		</link>
-		<link rel="stylesheet" type="text/css">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/smooch.css')" />
-
 		</link>
 
 		<image x="4%" y="6%" width="19%" height="10%" id="logo" preserveAspectRatio="xMinYMid meet">

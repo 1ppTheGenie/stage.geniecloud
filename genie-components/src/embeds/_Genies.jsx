@@ -118,6 +118,8 @@ export default () => {
 			settings.layout && genieNode.classList.add(settings.layout);
 			//settings.theme && genieNode.classList.add(settings.theme);
 
+			settings.theme = settings.theme.replace( '-light', '' ).replace( '-dark', '' );
+
 			if (!linkedThemes.includes(settings.theme)) {
 				linkedThemes.push(settings.theme);
 

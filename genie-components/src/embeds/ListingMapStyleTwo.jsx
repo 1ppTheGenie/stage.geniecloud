@@ -213,7 +213,7 @@ export default () => {
 				<div style="font-size:80%">
 					<ListingsShowing
 						pageSize={pageSize}
-						offset={pageOffset}
+						ffset={Math.max((currentPage() - 1) * pageSize(),0)}
 						len={currentListings.length}
 						mode={settings.mode}
 						period={period}

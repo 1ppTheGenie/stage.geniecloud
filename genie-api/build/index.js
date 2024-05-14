@@ -9801,6 +9801,7 @@ var api = async (event) => {
                   await Promise.all(
                     r.Contents.map(async (item) => {
                       if (item.Key.endsWith("html")) {
+                        console.log("refresh", item.Key);
                         const parts = item.Key.split("/");
                         const renderId = parts[1];
                         parts.pop();
@@ -9811,6 +9812,7 @@ var api = async (event) => {
                             renderPath
                           );
                           if (renderExists?.ContentType == "application/json") {
+                            console.log("refresh exists", item.Key);
                             try {
                               const p = {
                                 asset: `landing-pages/${asset}`,
@@ -9838,7 +9840,7 @@ var api = async (event) => {
                   break;
                 }
               }
-              response2.body = result;
+              response2.body = { "disabled": false, renders: result };
               break;
             case "/re-render":
               if (params.renderId) {
@@ -10092,9 +10094,10 @@ var api = async (event) => {
         }
       } catch (error2) {
         console.log("GenieAPI failed: ", error2);
+        const currentDate = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
         if (params.renderId) {
           await toS3(
-            `_errors/${params.renderId}-${Date.now()}-api.json`,
+            `_errors/${currentDate}/${params.renderId}-${Date.now()}-api.json`,
             Buffer.from(
               JSON.stringify({
                 params,
