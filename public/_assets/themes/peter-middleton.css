@@ -1,15 +1,25 @@
 /*
 	Theme Name:	Peter Middleton   
-	Theme Style: Light          
 */
 
 @import url("../_css/helvetica-neue.css");
 
-.peter-middleton-light {
+.peter-middleton,.peter-middleton.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #000000; /* Heading */
 	--theme-sub-heading-color: #86764f; /* Subtitle */
 	--theme-body-color: #323232; /* Body */
+	--theme-emphasis-color: #86764f; /* Outline */
+	--theme-body-font: "Helvetica Neue", sans-serif;
+	--theme-heading-font: "Helvetica Neue", sans-serif;
+	--theme-sub-heading-font: "Helvetica Neue", sans-serif;
+}
+
+.peter-middleton.dark {
+	--theme-body-background: #1a1a1a;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #86764f; /* Subtitle */
+	--theme-body-color: #f0f4f5; /* Body */
 	--theme-emphasis-color: #86764f; /* Outline */
 	--theme-body-font: "Helvetica Neue", sans-serif;
 	--theme-heading-font: "Helvetica Neue", sans-serif;

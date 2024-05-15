@@ -1,11 +1,21 @@
 /*
 	Theme Name:	Oscar Tortola Group
-	Theme Style: Dark
 */
 
 @import url("../_css/oscor-font.css");
 
-.oscar-tortola-group-dark {
+.oscar-tortola-group, .oscar-tortola-group.light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #030202; /* Heading --theme-heading-color */
+	--theme-sub-heading-color: #dc1f26; /* Subtitle --theme-sub-heading-color */
+	--theme-body-color: #1a1a1a; /* Body --theme-body-color */
+	--theme-emphasis-color: #dc1f26; /* Outline --theme-emphasis-color */
+	--theme-body-font: "BodoniSevITCBoo", sans-serif; /* --theme-body-font */
+	--theme-heading-font: "BodoniSevITCBoo", sans-serif;
+	--theme-sub-heading-font: "BodoniSevITCBoo", sans-serif;
+}
+
+.oscar-tortola-group.dark {
 	--theme-body-background: #dc1f26;
 	--theme-heading-color: #ffffff; /* Heading --theme-heading-color */
 	--theme-sub-heading-color: #030202; /* Subtitle --theme-sub-heading-color */
