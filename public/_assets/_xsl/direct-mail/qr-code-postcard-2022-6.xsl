@@ -117,7 +117,7 @@
 				<rect x="13%" y="65%" width="10%" height="18%" stroke="var(--theme-sub-heading-color)" stroke-width="1" rx="70" ry="70"></rect>
 
 				<clipPath id="clipCircle">
-					<circle r="6%" cx="18%" cy="74%"></circle>
+					<circle r="6%" cx="18%" cy="74%" fill="var(--theme-emphasis-color)"></circle>
 				</clipPath>
 				<image x="10.5%" y="63.5%" width="15%" height="21%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
 					<xsl:attribute name="href">

@@ -8034,7 +8034,7 @@ var processAreas = async (params) => {
           });
           mls_properties.forEach((p) => {
             if (p.propertyTypeID == (params.propertyType ?? params.propertyTypeID ?? 0)) {
-              const state = parseInt(p.statusTypeID) == 4 || parseInt(p.statusTypeID) == 12 ? "pending" : p.statusType.toLowerCase();
+              const state = parseInt(p.statusTypeID) == 4 || parseInt(p.statusTypeID) == 12 || parseInt(p.statusTypeID) == 3 ? "pending" : p.statusType.toLowerCase();
               listings.push({
                 _name: "listing",
                 _attrs: {
@@ -10092,9 +10092,10 @@ var api = async (event) => {
         }
       } catch (error2) {
         console.log("GenieAPI failed: ", error2);
+        const currentDate = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
         if (params.renderId) {
           await toS3(
-            `_errors/${params.renderId}-${Date.now()}-api.json`,
+            `_errors/${currentDate}/${params.renderId}-${Date.now()}-api.json`,
             Buffer.from(
               JSON.stringify({
                 params,
