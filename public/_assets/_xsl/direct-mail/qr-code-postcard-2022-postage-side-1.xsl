@@ -65,15 +65,15 @@
 		</g>
 
 		<rect x="4.1%" y="57.1%" width="9.8%" height="17.8%" stroke="var(--theme-body-color)" stroke-width="1" rx="70" ry="70" fill="#ffffff" />
-
 		<clipPath id="clipCircle">
 			<circle r="6%" cx="9%" cy="66%" fill="var(--theme-emphasis-color)"></circle>
 		</clipPath>
-		<image x="1.5%" y="57%" width="15%" height="19%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
+		<image x="3%" y="60%" width="12%" height="12%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipCircle)">
 			<xsl:attribute name="href">
-				<xsl:value-of select="//agent[1]/photo" />
+				<xsl:value-of select="//agent\[1\]/photo" />
 			</xsl:attribute>
 		</image>
+
 		<text x="16%" y="57.5%" class="upper" style="font-weight:600;font-size:175%;letter-spacing:1px;font-family:var(--theme-body-font);" fill="var(--theme-heading-color)" data-max-width="25%">
 			<xsl:value-of select="//agent[1]/marketingName" />
 		</text>
