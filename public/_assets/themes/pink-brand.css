@@ -1,11 +1,10 @@
 /*
 	Theme Name:	Pink Brand  
-	Theme Style: Light       
 */
 
 @import url("../_css/helvetica-neue-condensed.css");
 
-.pink-brand-light {
+.pink-brand,.pink-brand.light {
 	--theme-body-background: #fbdbe0;
 	--theme-heading-color: #656769; /* Heading */
 	--theme-sub-heading-color: #656769; /* Subtitle */

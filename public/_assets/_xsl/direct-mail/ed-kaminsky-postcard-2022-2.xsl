@@ -67,11 +67,6 @@ Supports:	Area, Print, Listing, QRCode
 	<xsl:template name="cropped-content">
 		<link rel="stylesheet" type="text/css">
 			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-
-		</link>
-		<link rel="stylesheet" type="text/css">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/smooch.css')" />
-
 		</link>
 
 		<image x="4%" y="6%" width="19%" height="10%" id="logo" preserveAspectRatio="xMinYMid meet">
@@ -103,7 +98,7 @@ Supports:	Area, Print, Listing, QRCode
 				</xsl:choose>
 			</xsl:variable>
 
-			<text x="4%" y="25.5%" class="bold middle" fill="#ffffff" font-family="var(--theme-body-font)" font-size="320%">
+			<text x="4%" y="25.5%" class="bold middle" fill="#ffffff" font-family="var(--theme-heading-font)" font-size="320%">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'justlisted'" />
@@ -131,7 +126,7 @@ Supports:	Area, Print, Listing, QRCode
 				</tspan>
 			</text>
 
-			<text x="4%" y="58.7%" class="bold" fill="#ffffff" font-family="var(--theme-body-font)" font-size="124%">
+			<text x="4%" y="58.7%" class="bold" fill="#ffffff" font-family="var(--theme-heading-font)" font-size="124%">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'scan'" />

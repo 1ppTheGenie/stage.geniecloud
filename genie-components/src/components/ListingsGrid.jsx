@@ -113,29 +113,3 @@ export const ListingsGrid = ({ listings, mode, style }) => {
 	);
 };
 
-/*
-
-{mode !== "Sold" && <td>{window. window.gHub.currency(l.priceHigh)}</td>}
-
-<td></td>
-<td></td>
-
-{mode !== "Sold" && <td>{format(Date.parse(l.listDate), "m-d-Y")} </td>}
-
-<td></td>
-
-{mode === "Sold" && (
-	<>
-		<td>{window. window.gHub.currency(parseInt(l.priceHigh))}</td>
-		<td>{window. window.gHub.currency(parseInt(l.salePrice))}</td>
-		<td>{format(Date.parse(l.soldDate), "m-d-Y")}</td>
-		<td>
-			{window. window.gHub.currency(parseInt(l.salePrice) / parseInt(l.sqft))}
-		</td>
-	</>
-)}
-
-{mode !== "Sold" && (
-	<td>{window. window.gHub.currency(parseInt(l.priceHigh) / parseInt(l.sqft))}</td>
-)}
-*/

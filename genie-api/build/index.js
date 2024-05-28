@@ -9801,6 +9801,7 @@ var api = async (event) => {
                   await Promise.all(
                     r.Contents.map(async (item) => {
                       if (item.Key.endsWith("html")) {
+                        console.log("refresh", item.Key);
                         const parts = item.Key.split("/");
                         const renderId = parts[1];
                         parts.pop();
@@ -9811,6 +9812,7 @@ var api = async (event) => {
                             renderPath
                           );
                           if (renderExists?.ContentType == "application/json") {
+                            console.log("refresh exists", item.Key);
                             try {
                               const p = {
                                 asset: `landing-pages/${asset}`,
@@ -9838,7 +9840,7 @@ var api = async (event) => {
                   break;
                 }
               }
-              response2.body = result;
+              response2.body = { "disabled": false, renders: result };
               break;
             case "/re-render":
               if (params.renderId) {

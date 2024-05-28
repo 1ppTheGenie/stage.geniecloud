@@ -364,7 +364,8 @@ export const api = async event => {
                                 try {
                                     await Promise.all(
                                         r.Contents.map(async item => {
-                                            if (item.Key.endsWith('html')) {
+                                            if ( item.Key.endsWith( 'html' ) ) {
+                                                console.log( 'refresh', item.Key );
                                                 const parts =
                                                     item.Key.split('/');
                                                 const renderId = parts[1];
@@ -380,14 +381,8 @@ export const api = async event => {
                                                         renderExists?.ContentType ==
                                                         'application/json'
                                                     ) {
+                                                        console.log( 'refresh exists', item.Key );
                                                         try {
-                                                            /*
-                                                            const tags =
-                                                                await getTags(
-                                                                    item.Key
-                                                                );
-                                                                */
-
                                                             const p = {
                                                                 asset: `landing-pages/${asset}`,
                                                                 overrideKey:
@@ -416,7 +411,7 @@ export const api = async event => {
                                     break;
                                 }
                             }
-                            response.body = result;
+                            response.body = { 'disabled': false, renders: result };
                             break;
 
                         case '/re-render':

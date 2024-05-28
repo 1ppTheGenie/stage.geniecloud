@@ -1,0 +1,38 @@
+/*
+	Theme Name:	Gantry Wilson Group 
+*/
+
+@import url("../_css/compass-sans.css");
+
+.gantry-wilson-group,.gantry-wilson-group.light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #1b2428; /* Heading */
+	--theme-sub-heading-color: #3498d8; /* Subtitle */
+	--theme-body-color: #7b97aa; /* Body */
+	--theme-emphasis-color: #3498d8; /* Outline */
+	--theme-body-font: "Compass Sans", sans-serif;
+	--theme-heading-font: "Compass Sans", sans-serif;
+	--theme-sub-heading-font: "Compass Sans", sans-serif;
+}
+
+.gantry-wilson-group.dark {
+	--theme-body-background: #000000;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #3498d8; /* Subtitle */
+	--theme-body-color: #7b97aa; /* Body */
+	--theme-emphasis-color: #3498d8; /* Outline */
+	--theme-body-font: "Compass Sans", sans-serif;
+	--theme-heading-font: "Compass Sans", sans-serif;
+	--theme-sub-heading-font: "Compass Sans", sans-serif;
+}
+
+.gantry-wilson-group.direct-mail {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #b40101; /* Heading */
+	--theme-sub-heading-color: #3498d8; /* Subtitle */
+	--theme-body-color: #5c5c5c; /* Body */
+	--theme-emphasis-color: #b40101; /* Outline */
+	--theme-body-font: "Compass Sans", sans-serif;
+	--theme-heading-font: "Compass Sans", sans-serif;
+	--theme-sub-heading-font: "Compass Sans", sans-serif;
+}

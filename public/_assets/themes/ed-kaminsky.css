@@ -4,6 +4,7 @@
 
 @import url("../_css/lato.css");
 @import url("../_css/futura-condensed.css");
+@import url("https://fonts.googleapis.com/css2?family=Smooch&display=swap");
 
 .ed-kaminsky, .ed-kaminsky.light, .ed-kaminsky .light {
 	--theme-body-background: #ffffff;

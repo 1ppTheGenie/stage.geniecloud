@@ -1,4 +1,10 @@
-import { createResource, createSignal, createEffect, createContext, onMount } from "solid-js";
+import {
+	createResource,
+	createSignal,
+	createEffect,
+	createContext,
+	onMount,
+} from "solid-js";
 import { createStore } from "solid-js/store";
 import { differenceInHours } from "date-fns";
 
@@ -114,7 +120,7 @@ export const filterListings = (
 	timeCutOff.setMonth(timeCutOff.getMonth() - period);
 	const now = new Date();
 
-	switch (mode.toLocaleLowerCase()) {
+	switch (mode.toString().toLocaleLowerCase()) {
 		case "sold":
 			descending = (l1, l2) => {
 				const a = Date.parse(l1.soldDate);
@@ -149,6 +155,20 @@ export const filterListings = (
 			break;
 
 		case "pending":
+			descending = (l1, l2) => {
+				const a = Date.parse(l1.listDate);
+				const b = Date.parse(l2.listDate);
+
+				return a < b ? 1 : a > b ? -1 : 0;
+			};
+			subset = listings.filter(
+				p =>
+					(p.statusType.toLowerCase() === "pending" ||
+						p.statusType.toLowerCase() === "contingent") &&
+					p.propertyTypeID === propertyTypeID
+			);
+			break;
+
 		case "active":
 		default:
 			descending = (l1, l2) => {

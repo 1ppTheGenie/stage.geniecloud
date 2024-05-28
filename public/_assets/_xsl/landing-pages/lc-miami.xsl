@@ -52,7 +52,7 @@
 			<script>
 				<xsl:value-of select="concat( &quot;const listing = [{caption: 'HH', state:'&quot;, //single/listingStatus, &quot;',lat:&quot;, //single/latitude, &quot;,lng:&quot;, //single/longitude, &quot;}]; &quot; )" />
 				<xsl:value-of select="concat( &quot;const options = { mapStyle: `&quot;, //output/@mapStyle, &quot;`, zoom: 21, center: { lat:&quot;, //single/latitude, &quot;,lng:&quot;, //single/longitude, &quot;}}; &quot; )" />
-<xsl:value-of select="'document.addEventListener( `genie-landing-loaded`, function() { window.gHub.makeMap( `genie-map`, options, { listings:listing } ); })'" />
+				<xsl:value-of select="'document.addEventListener( `genie-landing-loaded`, function() { window.gHub.makeMap( `genie-map`, options, { listings:listing } ); })'" />
 
 			</script>
 
