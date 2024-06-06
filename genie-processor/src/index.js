@@ -1,6 +1,6 @@
 import http from "http";
-import url  from 'url';
-import querystring from 'querystring';
+import url from "url";
+import querystring from "querystring";
 import fs from "fs";
 import { basename } from "path";
 import SaxonJS from "saxon-js/SaxonJS2N.js";
@@ -11,11 +11,12 @@ import { S3Client,DeleteObjectCommand, GetObjectCommand, PutObjectCommand, ListO
 const JSON_MIME = "application/json";
 const REGION = process.env.REGION ?? "eu-west-2";
 const BUCKET = process.env.BUCKET ?? "genie-hub-2";
-const GENIE_URL = process.env.GENIE_URL ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/";
+const GENIE_URL =
+	process.env.GENIE_URL ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/";
 
 const s3Client = new S3Client({ region: REGION });
 
-const TEMP_DIR = process.env.TEMP_DIR ??	"";
+const TEMP_DIR = process.env.TEMP_DIR ?? "";
 
 const transform = (
 	xml,
@@ -56,9 +57,7 @@ const transform = (
 
 const copyFilesToLocal = async () => {
 	// Files imported via xsl:import have to exist on a "local" drive
-	if (
-		!TEMP_DIR.includes('public/_assets/_xls')
-	) {
+	if (!TEMP_DIR.includes("public/_assets/_xls")) {
 		const imports = await listS3Folder("_assets/_xsl_imports/");
 		await Promise.all(
 			imports.map(async s3File => {
@@ -72,8 +71,7 @@ const copyFilesToLocal = async () => {
 };
 
 export const xslt = async event => {
-	if ( !event.Records ) {
-		console.log( 'xslt: no records' );
+	if (!event.Records) {
 		return;
 	}
 
@@ -87,11 +85,6 @@ export const xslt = async event => {
 				).then(buffer =>
 					buffer && buffer.length > 0 ? JSON.parse(buffer) : null
 				);
-
-				if ( params.isDebug ) {
-					console.log( 'xslt transforming:',params.asset );
-				}
-
 				const renderAsBlank =
 					params.s3Key.endsWith("pdf") &&
 					transform(
@@ -108,10 +101,6 @@ export const xslt = async event => {
 					`file://${TEMP_DIR}`,
 					params.s3Key.endsWith("html") ? "html" : "xml"
 				);
-
-				if ( params.isDebug === 'true' ) {
-					console.log( 'Transformed:',transformedXML );
-				}
 
 				if (transformedXML) {
 					if (typeof transformedXML == "object" && transformedXML.failed) {
@@ -143,11 +132,7 @@ export const xslt = async event => {
 
 						params.url = `${GENIE_URL}${s3Target}`;
 
-						if ( params.isDebug  ) {
-							console.log( 'target:',s3Target,params.url  );
-						}
-
-						if ( params.noPuppeteer ) {
+						if (params.noPuppeteer) {
 							const htmlTags = {
 								finalRender: true,
 								...params.tags,
@@ -159,10 +144,6 @@ export const xslt = async event => {
 								htmlTags,
 								"text/html"
 							);
-						
-							if ( params.isDebug  ) {
-								console.log( 'No Pupp result:',r  );
-							}
 						} else {
 							await toS3(
 								s3Target,
