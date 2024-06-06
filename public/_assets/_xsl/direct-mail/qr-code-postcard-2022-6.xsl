@@ -97,10 +97,10 @@
 				<rect x="13%" y="65%" width="10%" height="18%" stroke="var(--theme-body-color)" stroke-width="1" rx="70" ry="70" fill="#ffffff"></rect>
 
 				<clipPath id="clipCircle">
-					<circle r="6.1%" cx="18%" cy="74%" fill="var(--theme-emphasis-color)"></circle>
+					<circle r="6%" cx="18%" cy="74%" fill="var(--theme-emphasis-color)"></circle>
 				</clipPath>
 
-				<image x="10.5%" y="68%" width="15%" height="15%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
+				<image x="13%" y="65%" width="10%" height="18%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
 					<xsl:attribute name="href">
 						<xsl:value-of select="//agent[1]/photo" />
 					</xsl:attribute>
