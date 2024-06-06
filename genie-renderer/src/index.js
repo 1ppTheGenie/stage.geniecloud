@@ -215,7 +215,7 @@ export const renderer = async params => {
 					s3Url = await s3_upload(
 						render.bucket || BUCKET,
 						render.totalPages > 1
-							? `${render.s3Key}/interim/page-${render.pageIndex}.pdf`
+							? `${render.s3Key}/interim/page-${render.pageIndex}${render.renderAsBlank ? '-blank.txt' : '.pdf'}`
 							: render.s3Key ?? render.s3key,
 						output,
 						mimeType,
@@ -248,25 +248,28 @@ export const renderer = async params => {
 
 								const mergedPdf = await PDFDocument.create();
 
-								for (const interimKey of sortedKeys) {
-									let buffer = await fromS3(interimKey, render.bucket);
+								for ( const interimKey of sortedKeys ) {
+									if ( interimKey.endsWith( 'pdf' ) ) {
+										let buffer = await fromS3( interimKey, render.bucket );
 
-									const pdf = await PDFDocument.load(buffer);
-									const copiedPages = await mergedPdf.copyPages(
-										pdf,
-										pdf.getPageIndices()
-									);
-									copiedPages.forEach(page => {
-										mergedPdf.addPage(page);
-									});
+										const pdf = await PDFDocument.load( buffer );
+										const copiedPages = await mergedPdf.copyPages(
+											pdf,
+											pdf.getPageIndices()
+										);
+										copiedPages.forEach( page => {
+											mergedPdf.addPage( page );
+										} );
+									}
 
-									if (!params.isDebug) {
+									if ( !params.isDebug ) {
+										/*
 										await s3Client.send(
 											new DeleteObjectCommand({
 												Bucket: render.bucket,
 												Key: interimKey,
 											})
-										);
+										);*/
 									}
 								}
 
@@ -373,7 +376,7 @@ const s3_upload = async (
 			const s3Url = `https://${bucket}.s3.${region}.amazonaws.com/${key}`;
 
 			// Trigger CloudFront invalidation for the uploaded file (excludes interim PDF pages)
-			if (!skipInvalidation) {
+			if (process.env.CLOUDFRONT_DISTRIBUTION_ID && !skipInvalidation) {
 				await createCloudFrontInvalidation(
 					process.env.CLOUDFRONT_DISTRIBUTION_ID,
 					[`/${key}`]

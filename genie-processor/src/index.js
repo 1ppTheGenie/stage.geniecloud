@@ -84,7 +84,17 @@ export const xslt = async event => {
 					console.log( 'xslt transforming:',params.asset );
 				}
 
-				const transformedXML = transform(
+				const renderAsBlank =
+					params.s3Key.endsWith("pdf") &&
+					transform(
+						transformXml,
+						transformXsl,
+						`file://${TEMP_DIR}`,
+						"html",
+						"include-in-render"
+					) == "false";
+
+				let transformedXML = transform(
 					transformXml,
 					transformXsl,
 					`file://${TEMP_DIR}`,
@@ -155,7 +165,7 @@ export const xslt = async event => {
 
 							await toS3(
 								r.s3.object.key.replace("xslt.json", "puppeteer.json"),
-								JSON.stringify(params),
+								JSON.stringify({ ...params, renderAsBlank }),
 								{ "Genie-Delete": true },
 								"application/json"
 							);
