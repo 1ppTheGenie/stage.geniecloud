@@ -61848,25 +61848,23 @@ var BUCKET = process.env.BUCKET ?? "genie-hub-2";
 var GENIE_URL = process.env.GENIE_URL ?? "https://genie-hub-2.s3.eu-west-2.amazonaws.com/";
 var s3Client = new import_client_s3.S3Client({ region: REGION });
 var TEMP_DIR = process.env.TEMP_DIR ?? "";
-var transform = (xml, xslt2, xsltBaseUri, method = "xml") => {
+var transform = (xml, xslt2, xsltBaseUri, method = "xml", initialTemplate = null) => {
   try {
     const result = import_SaxonJS2N.default.XPath.evaluate(
-      `
-				  transform(
-					  map {
-						  'stylesheet-text' : $pXslt,
-						  'stylesheet-base-uri' : $pXsltBaseUri,
-						  'source-node' : parse-xml($pXml),
-						  'delivery-format' : 'raw'
-					  }
-				  )
-			  `,
+      `transform(
+				map {
+					'stylesheet-text' : $pXslt,
+					'stylesheet-base-uri' : $pXsltBaseUri,
+					'source-node' : parse-xml($pXml),
+					'delivery-format' : 'raw'` + (initialTemplate ? ",'initial-template' : QName('', $pInitialTemplate)" : "") + `}
+			)`,
       [],
       {
         params: {
           pXml: xml,
           pXslt: xslt2,
-          pXsltBaseUri: xsltBaseUri
+          pXsltBaseUri: xsltBaseUri,
+          ...initialTemplate && { pInitialTemplate: initialTemplate }
         }
       }
     );
@@ -61889,7 +61887,6 @@ var copyFilesToLocal = async () => {
 };
 var xslt = async (event) => {
   if (!event.Records) {
-    console.log("xslt: no records");
     return;
   }
   await copyFilesToLocal();
@@ -61904,15 +61901,19 @@ var xslt = async (event) => {
         if (params.isDebug) {
           console.log("xslt transforming:", params.asset);
         }
-        const transformedXML = transform(
+        const renderAsBlank = params.s3Key.endsWith("pdf") && transform(
+          transformXml,
+          transformXsl,
+          `file://${TEMP_DIR}`,
+          "html",
+          "include-in-render"
+        ) == "false";
+        let transformedXML = transform(
           transformXml,
           transformXsl,
           `file://${TEMP_DIR}`,
           params.s3Key.endsWith("html") ? "html" : "xml"
         );
-        if (params.isDebug === "true") {
-          console.log("Transformed:", transformedXML);
-        }
         if (transformedXML) {
           if (typeof transformedXML == "object" && transformedXML.failed) {
             await toS3(
@@ -61965,19 +61966,35 @@ var xslt = async (event) => {
               );
               await toS3(
                 r.s3.object.key.replace("xslt.json", "puppeteer.json"),
-                JSON.stringify(params),
+                JSON.stringify({ ...params, renderAsBlank }),
                 { "Genie-Delete": true },
                 "application/json"
               );
             }
-            if (params.noPuppeteer || params.isCollection && params.suffix == "pdf" && params.pageIndex <= 2) {
-              const revisedSuffix = `${params.noPuppeteer ? "" : "-"}grab-${params.pageIndex}.webp`;
+            if (r.s3.object.key.includes("welcome")) {
+              console.log(
+                "JJ2",
+                params.isCollection,
+                params.suffix == "pdf",
+                params.pageIndex <= 2 || !params.pageIndex,
+                params
+              );
+            }
+            if (params.noPuppeteer || params.isCollection && params.suffix == "pdf" && (params.pageIndex <= 2 || !params.pageIndex)) {
+              const revisedSuffix = `${params.noPuppeteer ? "" : "-"}grab-${params.pageIndex ?? 0}.webp`;
               const width = params.noPuppeteer ? 800 : params.dims.width;
               const height = params.noPuppeteer ? 1200 : params.dims.height;
+              console.log(
+                "grab",
+                r.s3.object.key.replace(
+                  "xslt.json",
+                  `grab-${params.pageIndex ?? 0}-puppeteer.json`
+                )
+              );
               await toS3(
                 r.s3.object.key.replace(
                   "xslt.json",
-                  `grab-${params.pageIndex}-puppeteer.json`
+                  `grab-${params.pageIndex ?? 0}-puppeteer.json`
                 ),
                 JSON.stringify({
                   url: params.url,
@@ -61996,12 +62013,6 @@ var xslt = async (event) => {
               );
             }
             if (!params.isDebug) {
-              await s3Client.send(
-                new import_client_s3.DeleteObjectCommand({
-                  Bucket: BUCKET,
-                  Key: r.s3.object.key
-                })
-              );
             }
           }
         } else {
@@ -62099,7 +62110,18 @@ if (process.argv.length > 2) {
 var testXSL = async (xslKey, xmlKey = "_assets/_reference/_genie-sample.xml", outName = "output.svg") => {
   const transformXsl = import_fs.default.existsSync(xslKey) ? import_fs.default.readFileSync(xslKey, "utf8") : (await fromS3(`_assets/_xsl/${xslKey}.xsl`)).toString();
   const transformXml = import_fs.default.existsSync(xmlKey) ? import_fs.default.readFileSync(xmlKey, "utf8") : (await fromS3(xmlKey)).toString();
-  const r = transform(transformXml, transformXsl, `file://${TEMP_DIR}`);
+  let r = transform(
+    transformXml,
+    transformXsl,
+    `file://${TEMP_DIR}`,
+    "html",
+    "include-in-render"
+  );
+  if (r == "false") {
+    r = "no dice";
+  } else {
+    r = transform(transformXml, transformXsl, `file://${TEMP_DIR}`, "html");
+  }
   if (outName) {
     import_fs.default.writeFile(outName, r, (err) => {
       if (err)

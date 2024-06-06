@@ -7789,7 +7789,7 @@ var areaFromMlsNumber = async (mlsNumber, mlsId, userId, skipCache = false) => {
 };
 var agentMlsNumbers = async (userId) => {
   const r = await agentProperties(userId, false);
-  return r.properties.map((p) => p.mlsNumber);
+  return r.properties.map((p) => p.mlsNumber.toLowerCase());
 };
 var singleAddress = (listing) => {
   let address = `${listing.streetNumber} ${listing.streetName}`;
@@ -8011,30 +8011,13 @@ var processAreas = async (params) => {
           areaId,
           NOW.plus({ months: params.datePeriod * -1 }).toISO()
         );
-        params.isDebug && debugLog("mlsProperties", params, mls_properties);
+        params.isDebug && debugLog("mlsProperties X", params, mls_properties);
         if (mls_properties && Array.isArray(mls_properties)) {
           const agentListings = await agentMlsNumbers(params.userId);
           const listings = [];
-          mls_properties.sort((a, b) => {
-            if (agentListings.includes(
-              a.mlsNumber.toLowerCase()
-            ) === agentListings.includes(b.mlsNumber.toLowerCase())) {
-              const aDate = DateTime.fromISO(
-                a.soldDate ?? a.listDate
-              );
-              const bDate = DateTime.fromISO(
-                b.soldDate ?? b.listDate
-              );
-              return aDate === bDate ? 0 : aDate < bDate ? 1 : -1;
-            } else {
-              return agentListings.includes(
-                a.mlsNumber.toLowerCase()
-              ) ? 1 : -1;
-            }
-          });
           mls_properties.forEach((p) => {
             if (p.propertyTypeID == (params.propertyType ?? params.propertyTypeID ?? 0)) {
-              const state = parseInt(p.statusTypeID) == 4 || parseInt(p.statusTypeID) == 12 ? "pending" : p.statusType.toLowerCase();
+              const state = parseInt(p.statusTypeID) == 4 || parseInt(p.statusTypeID) == 12 || parseInt(p.statusTypeID) == 3 ? "pending" : p.statusType.toLowerCase();
               listings.push({
                 _name: "listing",
                 _attrs: {
@@ -8067,7 +8050,7 @@ var processAreas = async (params) => {
                   isAgent: agentListings.includes(
                     p.mlsNumber.toLowerCase()
                   ) ? 1 : 0,
-                  dateSort: p.soldDate ? DateTime.fromISO(
+                  sortDate: p.soldDate ? DateTime.fromISO(
                     p.soldDate
                   ).toSeconds() : DateTime.fromISO(
                     p.listDate
@@ -8428,15 +8411,6 @@ var processCollection = async (params) => {
               if (Object.keys(assetData).length > 0) {
                 const size = asset.size ?? (Array.isArray(assetData?.sizes) && assetData.sizes[0]) ?? DEFAULT_SIZE;
                 let qrUrl = asset.qrDestination ?? null;
-                if (!qrUrl && asset.qrUrl) {
-                  const linkAsset = collectionData.sections.map(
-                    async (section2) => section2.assets.find(
-                      async (a) => a.asset?.startsWith(
-                        "landing-pages"
-                      ) && a.asset == asset.qrUrl
-                    )
-                  );
-                }
                 const { s3Key } = await getS3Key(asset.asset, {
                   ...params,
                   lpo: asset.lpo
@@ -8445,17 +8419,21 @@ var processCollection = async (params) => {
                   _name: "tag",
                   _attrs: { name: tag.trim() }
                 })) : null;
+                const _attrs = {
+                  stylesheet: asset.asset,
+                  size,
+                  sort: parseInt(asset.sort),
+                  name: asset.name ?? asset.knownAs ?? assetData.name,
+                  version: assetData.version ?? 1,
+                  renderKey: s3Key,
+                  qrUrl
+                };
+                if (assetData.pages?.length) {
+                  _attrs.pageCount = assetData.pages.length;
+                }
                 section._content.push({
                   _name: "asset",
-                  _attrs: {
-                    stylesheet: asset.asset,
-                    size,
-                    sort: parseInt(asset.sort),
-                    name: asset.name ?? asset.knownAs ?? assetData.name,
-                    version: assetData.version ?? 1,
-                    renderKey: s3Key,
-                    qrUrl
-                  },
+                  _attrs,
                   _content: tags
                 });
               }
@@ -8699,7 +8677,10 @@ var saveCollection = async (data) => {
   );
   return true;
 };
-var generateQR = async (url) => new import_qrcode_svg.default(url).svg();
+var generateQR = async (url) => {
+  console.log("Making QR code for ", url);
+  return new import_qrcode_svg.default(url).svg();
+};
 
 // src/utils/embedsAPI.js
 var embedsAPI = async (route, params) => {
@@ -8764,7 +8745,7 @@ var getLandingPageData = async (params) => {
         salutation: property.ownerDisplayName
       };
     } else if (typeof shortUrlDataId !== "undefined") {
-      lead = await getShortData(parseInt(shortUrlDataId), token, agentId);
+      lead = await getShortData(parseInt(shortUrlDataId), token, agentId, params.skipLeadCreate);
       if (!propertyId) {
         propertyId = lead.propertyId;
       }
@@ -9431,14 +9412,14 @@ var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, prop
   );
   return r.success && r.areas;
 };
-var getShortData = async (shortUrlDataId, token, agentId = null) => {
+var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = null) => {
   const r = await call_api(
     "GetShortUrlData",
     { shortUrlDataId, token },
     "POST"
   );
   if (r.data) {
-    if (agentId) {
+    if (agentId && (!skipLeadCreate || is_null(skipLeadCreate))) {
       const capture = r.data;
       capture.shortUrlDataId = shortUrlDataId;
       capture.trackingData = {
@@ -9687,7 +9668,6 @@ var api = async (event) => {
               };
               break;
             case "/test":
-              console.log(params);
               response2.body = await propertySurroundingAreas(
                 params.mlsNumber,
                 params.mlsId ?? 0,
@@ -9779,7 +9759,6 @@ var api = async (event) => {
                     mlsNumber: json.mlsNumber,
                     userId: json.userId
                   });
-                  console.log(updated.key);
                 }
                 response2.body = {
                   success: true,
@@ -9801,7 +9780,6 @@ var api = async (event) => {
                   await Promise.all(
                     r.Contents.map(async (item) => {
                       if (item.Key.endsWith("html")) {
-                        console.log("refresh", item.Key);
                         const parts = item.Key.split("/");
                         const renderId = parts[1];
                         parts.pop();
@@ -9812,7 +9790,6 @@ var api = async (event) => {
                             renderPath
                           );
                           if (renderExists?.ContentType == "application/json") {
-                            console.log("refresh exists", item.Key);
                             try {
                               const p = {
                                 asset: `landing-pages/${asset}`,
@@ -9840,7 +9817,10 @@ var api = async (event) => {
                   break;
                 }
               }
-              response2.body = { "disabled": false, renders: result };
+              response2.body = {
+                disabled: false,
+                renders: result
+              };
               break;
             case "/re-render":
               if (params.renderId) {
@@ -9963,13 +9943,32 @@ var api = async (event) => {
                         await Promise.all(
                           section.assets.map(
                             async (asset) => {
+                              let qrUrl = asset.qrUrl;
+                              let qrDestination = asset.qrDestination;
+                              if (!qrDestination && qrUrl) {
+                                const lpoAsset = collection.sections.flatMap(
+                                  (s2) => s2.assets
+                                ).find(
+                                  (asset2) => asset2.asset === `landing-pages/${qrUrl}`
+                                );
+                                if (lpoAsset && lpoAsset.lpo) {
+                                  const destinationKey = await getS3Key(
+                                    `${lpoAsset.lpo}/${qrUrl}/index.html`,
+                                    {
+                                      renderId: params.renderId
+                                    }
+                                  );
+                                  qrDestination = `${genieGlobals.GENIE_HOST}${destinationKey.s3Key}`;
+                                  qrUrl = null;
+                                }
+                              }
                               const assetParams = {
                                 ...params,
                                 asset: asset.asset,
                                 size: asset.size,
                                 lpo: asset.lpo,
-                                qrDestination: asset.qrDestination,
-                                qrUrl: asset.qrUrl
+                                qrDestination,
+                                qrUrl
                               };
                               return await prepareAsset(
                                 asset.asset,
@@ -10056,7 +10055,10 @@ var api = async (event) => {
                     StringValue: params.renderId
                   }
                 });
-                let lookUpKeys = [`renders`, `users/${params.userId}`];
+                let lookUpKeys = [
+                  `renders`,
+                  `users/${params.userId}`
+                ];
                 if (params.mlsNumber) {
                   lookUpKeys.push(
                     `mlsNumber/${params.mlsId}/${params.mlsNumber}`
@@ -10142,7 +10144,7 @@ var renderKeyParams = async (params) => {
       }
     }
     propertyType = params.propertyType ?? listing.propertyType;
-    listingStatus = params.listingStatus ?? (listing.listingStatus ?? "");
+    listingStatus = params.listingStatus ?? listing.listingStatus ?? "";
   }
   const area = await areaName(params.userId, areaId);
   return {
@@ -10183,10 +10185,14 @@ var prepareAsset = async (asset, params) => {
     const { s3Key } = await getS3Key(asset, params);
     if (params.pages) {
       pages = params.pages;
+      params.asPDF = params.asPDF ?? true;
     } else if (settings.pages && settings.pages !== "") {
       pages = settings.pages.map((s2) => ({ asset: s2 }));
     } else {
       pages = [{ asset: asset.trim() }];
+    }
+    if (settings.supports.includes("AsPDF")) {
+      params.asPDF = true;
     }
     if (params.totalPages) {
       pages = pages.slice(0, params.totalPages + 1);
@@ -10194,6 +10200,10 @@ var prepareAsset = async (asset, params) => {
     size = (params.size || Array.isArray(settings?.sizes) && settings.sizes[0] || genieGlobals.DEFAULT_SIZE).replaceAll(" ", "-").trim().toLowerCase();
     dims = getDimensions(size) ?? { width: 1200, height: 628 };
     switch (true) {
+      case params.asPDF:
+      case pages.length > 1:
+        suffix = "pdf";
+        break;
       case params.isCollectionTemplate:
       case params.isLandingPage:
         suffix = "html";
@@ -10204,10 +10214,6 @@ var prepareAsset = async (asset, params) => {
       case size == "video":
         suffix = "mp4";
         dims = { width: 1920, height: 1080 };
-        break;
-      case params.asPDF:
-      case pages.length > 1:
-        suffix = "pdf";
         break;
       default:
         suffix = "png";
@@ -10278,26 +10284,36 @@ var prepareAsset = async (asset, params) => {
             lpo: params.lpo
           }
         };
-        let qrUrl;
+        let qrCodeSVGUrl;
         if (params?.qrDestination) {
           render.qrUrl = params.qrDestination;
           render.tags.qrDestination = params.qrDestination;
           if (!params.qrDestination.startsWith("http"))
-            params.qrDestination = `https://${qrUrl}`;
-          qrUrl = await getLandingQrCodeUrl(
-            params?.parentAsset,
+            params.qrDestination = `https://${qrCodeSVGUrl}`;
+          console.log(
+            "Ex4",
+            params?.parentAsset ?? asset,
+            params.qrDestination
+          );
+          qrCodeSVGUrl = await getLandingQrCodeUrl(
+            params?.parentAsset ?? asset,
             params.renderId,
             params.qrDestination
           );
+          console.log(
+            "Ex4a",
+            params?.parentAsset ?? asset,
+            qrCodeSVGUrl
+          );
         } else if (params?.qrUrl) {
           render.tags.qrUrl = params.qrUrl;
-          qrUrl = await getLandingQrCodeUrl(
+          qrCodeSVGUrl = await getLandingQrCodeUrl(
             params.qrUrl,
             params.renderId
           );
         }
-        if (qrUrl) {
-          render.customizations = { qrUrl };
+        if (qrCodeSVGUrl) {
+          render.customizations = { qrCodeSVGUrl };
         }
         if (suffix === "mp4") {
           render.music = params.music ?? null;
@@ -10444,8 +10460,11 @@ var validateRenderParams = async (args) => {
   return msgs;
 };
 var getLandingQrCodeUrl = async (asset, renderId, qrUrl = null) => {
+  let landingS3Key;
   let s3Key = `genie-files/${renderId}/${asset}-qr.svg`;
-  let landingS3Key = await getS3Key(`landing-pages/${asset}`, { renderId });
+  if (!qrUrl) {
+    landingS3Key = await getS3Key(`landing-pages/${asset}`, { renderId });
+  }
   const qrSVG = await generateQR(
     qrUrl ?? `${genieGlobals.GENIE_HOST}${landingS3Key.s3Key}`
   );
@@ -10457,6 +10476,8 @@ var getS3Key = async (asset, params) => {
   try {
     if (asset.startsWith("collection")) {
       s3Key = `genie-collection/${params.renderId}/index.html`;
+    } else if (asset.endsWith("index.html")) {
+      s3Key = `genie-pages/${params.renderId}/${asset}`;
     } else if (asset.startsWith("landing-pages")) {
       const base = typeof params.lpo !== "undefined" ? `${(0, import_path.basename)(params.lpo)}/${(0, import_path.basename)(asset)}` : (0, import_path.basename)(asset);
       s3Key = `genie-pages/${params.renderId}/${base}/index.html`;
