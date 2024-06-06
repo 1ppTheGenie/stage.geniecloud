@@ -58,11 +58,11 @@
 
 			<circle r="6%" cx="20%" cy="28%" fill="var(--theme-body-color)" stroke="var(--theme-sub-heading-color)" stroke-width="4"></circle>
 
-			<text x="20%" y="35%" class="center upper" fill="var(--theme-sub-heading-color)" font-size="350%" font-family="var(--theme-heading-font)" font-weight="bold" dominant-baseline="mathematical">
+			<text x="20%" y="35%" class="center upper" fill="var(--theme-sub-heading-color)" font-size="350%" font-family="var(--theme-heading-font)" font-weight="bold" style="dominant-baseline:mathematical">
 				<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
 			</text>
 
-			<text x="20%" y="44.5%" class="center upper" fill="var(--theme-body-color)" font-size="160%" font-weight="700" font-family="var(--theme-heading-font)" letter-spacing="1px" dominant-baseline="auto">
+			<text x="20%" y="44.5%" class="center upper" fill="var(--theme-body-color)" font-size="160%" font-weight="700" font-family="var(--theme-heading-font)" style="dominant-baseline:auto">
 				<tspan style=";">
 					<xsl:text>OF YOUR</xsl:text>
 					<xsl:text> </xsl:text>
