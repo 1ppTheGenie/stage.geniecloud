@@ -71,7 +71,7 @@
 					</tspan>
 				</tspan>
 
-				<tspan x="20%" dy="8%">
+				<tspan x="20%" dy="6%">
 					<xsl:text>HOMES</xsl:text>
 					<xsl:text> </xsl:text>
 					<tspan fill="var(--theme-sub-heading-color)" font-size="130%" font-weight="800">
@@ -81,7 +81,7 @@
 					<xsl:text>IN THE</xsl:text>
 				</tspan>
 
-				<tspan x="20%" dy="8%">
+				<tspan x="20%" dy="6%">
 					<xsl:choose>
 						<xsl:when test="//areas/area[1]/statistics/@lookbackMonths='1'">
 							<xsl:text>LAST 30 DAYS</xsl:text>
