@@ -579,15 +579,54 @@ export const api = async event => {
                                                 await Promise.all(
                                                     section.assets.map(
                                                         async asset => {
+                                                            let qrUrl =
+                                                                asset.qrUrl;
+                                                            let qrDestination =
+                                                                asset.qrDestination;
+
+                                                            if (
+                                                                !qrDestination &&
+                                                                qrUrl
+                                                            ) {
+                                                                const lpoAsset =
+                                                                    collection.sections
+                                                                        .flatMap(
+                                                                            s =>
+                                                                                s.assets
+                                                                        )
+                                                                        .find(
+                                                                            asset =>
+                                                                                asset.asset ===
+                                                                                `landing-pages/${qrUrl}`
+                                                                        );
+
+                                                                if (
+                                                                    lpoAsset &&
+                                                                    lpoAsset.lpo
+                                                                ) {
+                                                                    const destinationKey =
+                                                                        await getS3Key(
+                                                                            `${lpoAsset.lpo}/${qrUrl}/index.html`,
+                                                                            {
+                                                                                renderId:
+                                                                                    params.renderId
+                                                                            }
+                                                                        );
+
+                                                                    qrDestination = `${genieGlobals.GENIE_HOST}${destinationKey.s3Key}`;
+                                                                    qrUrl =
+                                                                        null;
+                                                                }
+                                                            }
+
                                                             const assetParams =
                                                                 {
                                                                     ...params,
                                                                     asset: asset.asset,
                                                                     size: asset.size,
                                                                     lpo: asset.lpo,
-                                                                    qrDestination:
-                                                                        asset.qrDestination,
-                                                                    qrUrl: asset.qrUrl
+                                                                    qrDestination,
+                                                                    qrUrl
                                                                 };
 
                                                             return await prepareAsset(
@@ -1030,13 +1069,13 @@ const prepareAsset = async (asset, params) => {
                     }
                 };
 
-                let qrUrl;
+                let qrCodeSVGUrl;
                 if (params?.qrDestination) {
                     render.qrUrl = params.qrDestination;
                     render.tags.qrDestination = params.qrDestination;
 
                     if (!params.qrDestination.startsWith('http'))
-                        params.qrDestination = `https://${qrUrl}`;
+                        params.qrDestination = `https://${qrCodeSVGUrl}`;
 
                     qrUrl = await getLandingQrCodeUrl(
                         params?.parentAsset,
@@ -1045,14 +1084,15 @@ const prepareAsset = async (asset, params) => {
                     );
                 } else if (params?.qrUrl) {
                     render.tags.qrUrl = params.qrUrl;
-                    qrUrl = await getLandingQrCodeUrl(
+
+                    qrCodeSVGUrl = await getLandingQrCodeUrl(
                         params.qrUrl,
                         params.renderId
                     );
                 }
 
-                if (qrUrl) {
-                    render.customizations = { qrUrl };
+                if (qrCodeSVGUrl) {
+                    render.customizations = { qrCodeSVGUrl };
                 }
 
                 if (suffix === 'mp4') {
@@ -1246,8 +1286,12 @@ export const validateRenderParams = async args => {
 };
 
 const getLandingQrCodeUrl = async (asset, renderId, qrUrl = null) => {
+    let landingS3Key;
     let s3Key = `genie-files/${renderId}/${asset}-qr.svg`;
-    let landingS3Key = await getS3Key(`landing-pages/${asset}`, { renderId });
+
+    if (!qrUrl) {
+        landingS3Key = await getS3Key(`landing-pages/${asset}`, { renderId });
+    }
 
     // S3 url of the rendered landing page
     const qrSVG = await generateQR(

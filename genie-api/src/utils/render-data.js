@@ -1104,20 +1104,6 @@ const processCollection = async params => {
                                     DEFAULT_SIZE;
                                 let qrUrl = asset.qrDestination ?? null;
 
-                                if (!qrUrl && asset.qrUrl) {
-                                    const linkAsset =
-                                        collectionData.sections.map(
-                                            async section =>
-                                                section.assets.find(
-                                                    async a =>
-                                                        a.asset?.startsWith(
-                                                            'landing-pages'
-                                                        ) &&
-                                                        a.asset == asset.qrUrl
-                                                )
-                                        );
-                                }
-
                                 const { s3Key } = await getS3Key(asset.asset, {
                                     ...params,
                                     lpo: asset.lpo
