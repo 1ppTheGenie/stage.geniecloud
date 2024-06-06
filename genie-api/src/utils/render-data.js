@@ -564,9 +564,8 @@ const processAreas = async params => {
 
                 if (mls_properties && Array.isArray(mls_properties)) {
                     const agentListings = await agentMlsNumbers(params.userId);
-
                     const listings = [];
-
+/*
                     mls_properties.sort((a, b) => {
                         if (
                             agentListings.includes(
@@ -589,7 +588,7 @@ const processAreas = async params => {
                                 ? 1
                                 : -1;
                         }
-                    });
+                    });*/
 
                     mls_properties.forEach(p => {
                         if (
@@ -639,7 +638,7 @@ const processAreas = async params => {
                                     )
                                         ? 1
                                         : 0,
-                                    dateSort: p.soldDate
+                                    sortDate: p.soldDate
                                         ? DateTime.fromISO(
                                               p.soldDate
                                           ).toSeconds()
