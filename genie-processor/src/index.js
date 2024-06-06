@@ -17,25 +17,33 @@ const s3Client = new S3Client({ region: REGION });
 
 const TEMP_DIR = process.env.TEMP_DIR ??	"";
 
-const transform = (xml, xslt, xsltBaseUri, method = "xml") => {
+const transform = (
+	xml,
+	xslt,
+	xsltBaseUri,
+	method = "xml",
+	initialTemplate = null
+) => {
 	try {
 		const result = SaxonJS.XPath.evaluate(
-			`
-				  transform(
-					  map {
-						  'stylesheet-text' : $pXslt,
-						  'stylesheet-base-uri' : $pXsltBaseUri,
-						  'source-node' : parse-xml($pXml),
-						  'delivery-format' : 'raw'
-					  }
-				  )
-			  `,
+			`transform(
+				map {
+					'stylesheet-text' : $pXslt,
+					'stylesheet-base-uri' : $pXsltBaseUri,
+					'source-node' : parse-xml($pXml),
+					'delivery-format' : 'raw'` +
+				(initialTemplate
+					? ",'initial-template' : QName('', $pInitialTemplate)"
+					: "") +
+				`}
+			)`,
 			[],
 			{
 				params: {
 					pXml: xml,
 					pXslt: xslt,
 					pXsltBaseUri: xsltBaseUri,
+					...(initialTemplate && { pInitialTemplate: initialTemplate }),
 				},
 			}
 		);
