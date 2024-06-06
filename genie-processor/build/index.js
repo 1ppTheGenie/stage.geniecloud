@@ -61898,9 +61898,6 @@ var xslt = async (event) => {
         ).then(
           (buffer) => buffer && buffer.length > 0 ? JSON.parse(buffer) : null
         );
-        if (params.isDebug) {
-          console.log("xslt transforming:", params.asset);
-        }
         const renderAsBlank = params.s3Key.endsWith("pdf") && transform(
           transformXml,
           transformXsl,
@@ -61939,9 +61936,6 @@ var xslt = async (event) => {
           } else {
             const s3Target = params.noPuppeteer ? params.s3Key : r.s3.object.key.replace("-xslt.json", ".html");
             params.url = `${GENIE_URL}${s3Target}`;
-            if (params.isDebug) {
-              console.log("target:", s3Target, params.url);
-            }
             if (params.noPuppeteer) {
               const htmlTags = {
                 finalRender: true,
@@ -61954,9 +61948,6 @@ var xslt = async (event) => {
                 htmlTags,
                 "text/html"
               );
-              if (params.isDebug) {
-                console.log("No Pupp result:", r2);
-              }
             } else {
               await toS3(
                 s3Target,
@@ -61971,26 +61962,10 @@ var xslt = async (event) => {
                 "application/json"
               );
             }
-            if (r.s3.object.key.includes("welcome")) {
-              console.log(
-                "JJ2",
-                params.isCollection,
-                params.suffix == "pdf",
-                params.pageIndex <= 2 || !params.pageIndex,
-                params
-              );
-            }
             if (params.noPuppeteer || params.isCollection && params.suffix == "pdf" && (params.pageIndex <= 2 || !params.pageIndex)) {
               const revisedSuffix = `${params.noPuppeteer ? "" : "-"}grab-${params.pageIndex ?? 0}.webp`;
               const width = params.noPuppeteer ? 800 : params.dims.width;
               const height = params.noPuppeteer ? 1200 : params.dims.height;
-              console.log(
-                "grab",
-                r.s3.object.key.replace(
-                  "xslt.json",
-                  `grab-${params.pageIndex ?? 0}-puppeteer.json`
-                )
-              );
               await toS3(
                 r.s3.object.key.replace(
                   "xslt.json",
@@ -62013,6 +61988,12 @@ var xslt = async (event) => {
               );
             }
             if (!params.isDebug) {
+              await s3Client.send(
+                new import_client_s3.DeleteObjectCommand({
+                  Bucket: BUCKET,
+                  Key: r.s3.object.key
+                })
+              );
             }
           }
         } else {

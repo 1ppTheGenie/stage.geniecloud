@@ -7647,15 +7647,15 @@ var getRenderJSON = async (params) => {
     // *** Areas
     areas: params.isEmbed ? params.areaIds.map((id) => ({ id })) : await processAreas(params)
   };
-  let qrUrl = params.qrCode ?? root.agents[0].agent.website ?? "";
-  if (qrUrl == "skip") {
+  let qrUrl2 = params.qrCode ?? root.agents[0].agent.website ?? "";
+  if (qrUrl2 == "skip") {
     root.output._attrs.qrUrl = "skip";
   } else if (params.customizations?.qrUrl) {
     root.output._attrs.qrUrl = params.customizations?.qrUrl;
-  } else if (qrUrl && qrUrl !== "") {
-    if (!qrUrl.startsWith("http"))
-      qrUrl = `https://${qrUrl}`;
-    const qrSVG = await generateQR(decodeURI(qrUrl));
+  } else if (qrUrl2 && qrUrl2 !== "") {
+    if (!qrUrl2.startsWith("http"))
+      qrUrl2 = `https://${qrUrl2}`;
+    const qrSVG = await generateQR(decodeURI(qrUrl2));
     await toS3(
       `genie-files/${params.renderId}/qr.svg`,
       Buffer.from(qrSVG),
@@ -8011,7 +8011,7 @@ var processAreas = async (params) => {
           areaId,
           NOW.plus({ months: params.datePeriod * -1 }).toISO()
         );
-        params.isDebug && debugLog("mlsProperties X", params, mls_properties);
+        params.isDebug && debugLog("mlsProperties", params, mls_properties);
         if (mls_properties && Array.isArray(mls_properties)) {
           const agentListings = await agentMlsNumbers(params.userId);
           const listings = [];
@@ -8410,7 +8410,7 @@ var processCollection = async (params) => {
               );
               if (Object.keys(assetData).length > 0) {
                 const size = asset.size ?? (Array.isArray(assetData?.sizes) && assetData.sizes[0]) ?? DEFAULT_SIZE;
-                let qrUrl = asset.qrDestination ?? null;
+                let qrUrl2 = asset.qrDestination ?? null;
                 const { s3Key } = await getS3Key(asset.asset, {
                   ...params,
                   lpo: asset.lpo
@@ -8426,7 +8426,7 @@ var processCollection = async (params) => {
                   name: asset.name ?? asset.knownAs ?? assetData.name,
                   version: assetData.version ?? 1,
                   renderKey: s3Key,
-                  qrUrl
+                  qrUrl: qrUrl2
                 };
                 if (assetData.pages?.length) {
                   _attrs.pageCount = assetData.pages.length;
@@ -8666,7 +8666,6 @@ var getAssets = async () => {
 };
 var getCollectionTemplates = async () => {
   const templates = await listS3Folder("assets/_xsl/collections");
-  templates.filter((t) => true);
   return { templates };
 };
 var getCollections = async () => await listS3Folder("genie-tools/collections");
@@ -8677,10 +8676,7 @@ var saveCollection = async (data) => {
   );
   return true;
 };
-var generateQR = async (url) => {
-  console.log("Making QR code for ", url);
-  return new import_qrcode_svg.default(url).svg();
-};
+var generateQR = async (url) => new import_qrcode_svg.default(url).svg();
 
 // src/utils/embedsAPI.js
 var embedsAPI = async (route, params) => {
@@ -9419,7 +9415,7 @@ var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate 
     "POST"
   );
   if (r.data) {
-    if (agentId && (!skipLeadCreate || is_null(skipLeadCreate))) {
+    if (agentId && (!skipLeadCreate || skipLeadCreate == null)) {
       const capture = r.data;
       capture.shortUrlDataId = shortUrlDataId;
       capture.trackingData = {
@@ -9943,23 +9939,23 @@ var api = async (event) => {
                         await Promise.all(
                           section.assets.map(
                             async (asset) => {
-                              let qrUrl = asset.qrUrl;
+                              let qrUrl2 = asset.qrUrl;
                               let qrDestination = asset.qrDestination;
-                              if (!qrDestination && qrUrl) {
+                              if (!qrDestination && qrUrl2) {
                                 const lpoAsset = collection.sections.flatMap(
                                   (s2) => s2.assets
                                 ).find(
-                                  (asset2) => asset2.asset === `landing-pages/${qrUrl}`
+                                  (asset2) => asset2.asset === `landing-pages/${qrUrl2}`
                                 );
                                 if (lpoAsset && lpoAsset.lpo) {
                                   const destinationKey = await getS3Key(
-                                    `${lpoAsset.lpo}/${qrUrl}/index.html`,
+                                    `${lpoAsset.lpo}/${qrUrl2}/index.html`,
                                     {
                                       renderId: params.renderId
                                     }
                                   );
                                   qrDestination = `${genieGlobals.GENIE_HOST}${destinationKey.s3Key}`;
-                                  qrUrl = null;
+                                  qrUrl2 = null;
                                 }
                               }
                               const assetParams = {
@@ -9968,7 +9964,7 @@ var api = async (event) => {
                                 size: asset.size,
                                 lpo: asset.lpo,
                                 qrDestination,
-                                qrUrl
+                                qrUrl: qrUrl2
                               };
                               return await prepareAsset(
                                 asset.asset,
@@ -10290,20 +10286,10 @@ var prepareAsset = async (asset, params) => {
           render.tags.qrDestination = params.qrDestination;
           if (!params.qrDestination.startsWith("http"))
             params.qrDestination = `https://${qrCodeSVGUrl}`;
-          console.log(
-            "Ex4",
-            params?.parentAsset ?? asset,
-            params.qrDestination
-          );
-          qrCodeSVGUrl = await getLandingQrCodeUrl(
-            params?.parentAsset ?? asset,
+          qrUrl = await getLandingQrCodeUrl(
+            params?.parentAsset,
             params.renderId,
             params.qrDestination
-          );
-          console.log(
-            "Ex4a",
-            params?.parentAsset ?? asset,
-            qrCodeSVGUrl
           );
         } else if (params?.qrUrl) {
           render.tags.qrUrl = params.qrUrl;
@@ -10459,14 +10445,14 @@ var validateRenderParams = async (args) => {
   }
   return msgs;
 };
-var getLandingQrCodeUrl = async (asset, renderId, qrUrl = null) => {
+var getLandingQrCodeUrl = async (asset, renderId, qrUrl2 = null) => {
   let landingS3Key;
   let s3Key = `genie-files/${renderId}/${asset}-qr.svg`;
-  if (!qrUrl) {
+  if (!qrUrl2) {
     landingS3Key = await getS3Key(`landing-pages/${asset}`, { renderId });
   }
   const qrSVG = await generateQR(
-    qrUrl ?? `${genieGlobals.GENIE_HOST}${landingS3Key.s3Key}`
+    qrUrl2 ?? `${genieGlobals.GENIE_HOST}${landingS3Key.s3Key}`
   );
   await toS3(s3Key, Buffer.from(qrSVG), null, "image/svg+xml");
   return `${genieGlobals.GENIE_HOST}${s3Key}`;
