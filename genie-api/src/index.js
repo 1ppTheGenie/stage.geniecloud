@@ -1304,6 +1304,8 @@ export const getS3Key = async (asset, params) => {
         // params.s3Key is the final destination for the render. All are public urls.
         if (asset.startsWith('collection')) {
             s3Key = `genie-collection/${params.renderId}/index.html`;
+        } else if (asset.endsWith('index.html')) {
+            s3Key = `genie-pages/${params.renderId}/${asset}`;
         } else if (asset.startsWith('landing-pages')) {
             const base =
                 typeof params.lpo !== 'undefined'
