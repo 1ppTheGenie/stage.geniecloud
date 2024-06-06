@@ -82,7 +82,7 @@ export const getLandingPageData = async params => {
                 salutation: property.ownerDisplayName
             };
         } else if (typeof shortUrlDataId !== 'undefined') {
-            lead = await getShortData(parseInt(shortUrlDataId), token, agentId);
+            lead = await getShortData(parseInt(shortUrlDataId), token, agentId, params.skipLeadCreate);
 
             if (!propertyId) {
                 propertyId = lead.propertyId;

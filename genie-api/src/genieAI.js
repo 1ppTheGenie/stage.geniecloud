@@ -373,7 +373,7 @@ export const propertySurroundingAreas = async (
 export const savedSearches = async (userId, areaId) =>
     await call_api('GetSavedSearches', { userId, areaId });
 
-export const getShortData = async (shortUrlDataId, token, agentId = null) => {
+export const getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = null) => {
     const r = await call_api(
         'GetShortUrlData',
         { shortUrlDataId: shortUrlDataId, token: token },
@@ -381,7 +381,7 @@ export const getShortData = async (shortUrlDataId, token, agentId = null) => {
     );
 
     if (r.data) {
-        if (agentId) {
+        if (agentId && (!skipLeadCreate || skipLeadCreate == null )) {
             const capture = r.data;
 
             capture.shortUrlDataId = shortUrlDataId;

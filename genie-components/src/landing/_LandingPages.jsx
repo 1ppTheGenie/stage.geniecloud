@@ -251,13 +251,14 @@ export default () => {
 		}
 	});
 
-	window.gHub.getLandingPageData = async () => {
+	window.gHub.getLandingPageData = async (skipLeadCreate = false) => {
 		const urlParams = Object.fromEntries(
 			new URLSearchParams(window.location.search)
 		);
 
 		urlParams.agentId = window.gHub.agentId;
 		urlParams.hideAVM = window.gHub.hideAVM ?? false;
+		urlParams.skipLeadCreate = skipLeadCreate;
 
 		return await landingPageData(urlParams);
 	};
