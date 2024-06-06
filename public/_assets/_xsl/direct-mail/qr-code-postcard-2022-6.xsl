@@ -58,7 +58,7 @@
 
 			<circle r="6%" cx="20%" cy="28%" fill="var(--theme-body-color)" stroke="var(--theme-sub-heading-color)" stroke-width="4"></circle>
 
-			<text x="20%" y="35%" class="center upper" fill="var(--theme-sub-heading-color)" font-size="350%" font-family="var(--theme-heading-font)" font-weight="bold" style="dominant-baseline:mathematical">
+			<text x="20%" y="28%" class="center upper" fill="var(--theme-sub-heading-color)" font-size="350%" font-family="var(--theme-heading-font)" font-weight="bold" style="dominant-baseline:mathematical">
 				<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
 			</text>
 
