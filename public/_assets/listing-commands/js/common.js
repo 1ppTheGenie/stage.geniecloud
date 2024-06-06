@@ -41,10 +41,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
 							imageUrl = linkUrl;
 					}
 
+					const pageCount = el.dataset.pagecount ?? 0;
 					const headers = await getHeaderValues(imageUrl);
-
 					const children = [];
-
 					const h4 = document.createElement("h4");
 					h4.innerHTML = el.dataset.title;
 					children.push(h4);
@@ -67,7 +66,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 							children.push(a);
 						} else if (linkUrl.endsWith("pdf")) {
 							const div = document.createElement("div");
-							div.classList.add("overlap");
+							if(pageCount > 1) div.classList.add("overlap");
 
 							const a = document.createElement("a");
 							a.setAttribute("target", "_blank");
@@ -77,12 +76,13 @@ document.addEventListener(`DOMContentLoaded`, () => {
 							child.src = imageUrl;
 							a.appendChild(child);
 
-							child = new Image();
-							child.title = "2nd Thumbnail";
-							child.src = imageUrl.replace("-grab-1", "-grab-2");
-							a.appendChild(child);
-
-							div.appendChild(a);
+							if ( pageCount > 1 ) {
+								child = new Image();
+								child.title = "2nd Thumbnail";
+								child.src = imageUrl.replace( "-grab-1", "-grab-2" );
+								a.appendChild( child );
+							}
+							div.appendChild( a );
 							children.push(div);
 						}
 
