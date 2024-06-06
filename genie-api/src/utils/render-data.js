@@ -286,7 +286,7 @@ export const areaFromMlsNumber = async (
 const agentMlsNumbers = async userId => {
     const r = await agentProperties(userId, false);
 
-    return r.properties.map(p => p.mlsNumber);
+    return r.properties.map(p => p.mlsNumber.toLowerCase());
 };
 
 const singleAddress = listing => {
