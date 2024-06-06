@@ -166,9 +166,6 @@ const getAssets = async () => {
 const getCollectionTemplates = async () => {
     const templates = await listS3Folder('assets/_xsl/collections');
 
-    // Include?
-    templates.filter(t => true); // ToDo Filter on 'include-in-render'
-
     return { templates };
 };
 
