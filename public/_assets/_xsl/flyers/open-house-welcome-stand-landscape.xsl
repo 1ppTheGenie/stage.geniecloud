@@ -3,7 +3,7 @@
 	Asset Name: Open House Welcome Stand Landscape
 	Tags:		Direct Mail
 	Sizes:		Ipad Landscape
-	Supports:	Listing, Multi-Listing, QRCode
+	Supports:	Listing, Multi-Listing, QRCode, AsPDF
 	Pages:		flyers/open-house-welcome-stand-landscape
 -->
 
