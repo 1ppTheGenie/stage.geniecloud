@@ -56,69 +56,51 @@
 				</tspan>
 			</text>
 
-			<foreignObject x="17%" y="21%" width="90px" height="90px">
-				<div style="width: 90%;height: 90%;background: var(--theme-body-color); border:4px solid var(--theme-sub-heading-color); border-radius:50%">
-					<p style="font-size: 250%; font-weight: 900; color: var(--theme-sub-heading-color); margin: 0 auto;
-                        text-align: center; line-height: 200%; font-family:var(--theme-sub-heading-font)">
-						<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
+			<circle r="6%" cx="20%" cy="28%" fill="var(--theme-body-color)" stroke="var(--theme-sub-heading-color)" stroke-width="4"></circle>
 
-					</p>
-				</div>
-			</foreignObject>
-
-			<text x="20%" y="44.5%" class="center upper" fill="var(--theme-body-color)" style="font-size: 160%;font-family:var(--theme-heading-font); letter-spacing: 1px;dominant-baseline: auto;">
-				<tspan style="font-weight:700;">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'ofyour'" />
-						<xsl:with-param name="default" select="'OF YOUR '" />
-					</xsl:call-template>
-				</tspan>
-				<tspan style="fill:var(--theme-sub-heading-color); font-size:130%; font-weight:800;">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'neighbors'" />
-						<xsl:with-param name="default" select="'NEIGHBORS'" />
-					</xsl:call-template>
-				</tspan>
+			<text x="20%" y="35%" class="center upper" fill="var(--theme-sub-heading-color)" font-size="350%" font-family="var(--theme-heading-font)" font-weight="bold" dominant-baseline="mathematical">
+				<xsl:value-of select="format-number(//statistics/@soldPropertyTypeCount, '###,###')" />
 			</text>
-			<text x="20%" y="52.3%" class="center upper" fill="var(--theme-body-color)" style="font-size: 160%;font-family:var(--theme-heading-font); letter-spacing: 1px;dominant-baseline: auto;">
 
-				<tspan style="font-weight:700;">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'home'" />
-						<xsl:with-param name="default" select="'HOME'" />
-					</xsl:call-template>
+			<text x="20%" y="44.5%" class="center upper" fill="var(--theme-body-color)" font-size="160%" font-weight="700" font-family="var(--theme-heading-font)" letter-spacing="1px" dominant-baseline="auto">
+				<tspan style=";">
+					<xsl:text>OF YOUR</xsl:text>
+					<xsl:text> </xsl:text>
+					<tspan fill="var(--theme-sub-heading-color)" font-size="130%" font-weight="800">
+						<xsl:text>NEIGHBORS'</xsl:text>
+					</tspan>
 				</tspan>
-				<tspan style="fill:var(--theme-sub-heading-color); font-size:130%;font-weight:800;" dx="1%">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'sold'" />
-						<xsl:with-param name="default" select="'sold'" />
-					</xsl:call-template>
+
+				<tspan x="20%" dy="8%">
+					<xsl:text>HOMES</xsl:text>
+					<xsl:text> </xsl:text>
+					<tspan fill="var(--theme-sub-heading-color)" font-size="130%" font-weight="800">
+						<xsl:text>SOLD</xsl:text>
+					</tspan>
+					<xsl:text> </xsl:text>
+					<xsl:text>IN THE</xsl:text>
 				</tspan>
-				<tspan style="font-weight:700;">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'inthe'" />
-						<xsl:with-param name="default" select="' IN THE '" />
-					</xsl:call-template>
+
+				<tspan x="20%" dy="8%">
+					<xsl:choose>
+						<xsl:when test="//areas/area[1]/statistics/@lookbackMonths='1'">
+							<xsl:text>LAST 30 DAYS</xsl:text>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
+						</xsl:otherwise>
+					</xsl:choose>
 				</tspan>
 			</text>
 
-			<text x="20%" y="55%" class="center upper" fill="var(--theme-body-color)" style="font-size: 160%;font-weight:700;font-family:var(--theme-heading-font); letter-spacing: 1px;">
-				<xsl:choose>
-					<xsl:when test="//areas/area[1]/statistics/@lookbackMonths='1'">
-						<xsl:text>LAST 30 DAYS</xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="concat( 'Last ', //areas/area[1]/statistics/@lookbackMonths, ' Months')" />
-
-					</xsl:otherwise>
-				</xsl:choose>
-			</text>
 			<g style="transform:translate(3%, 2%);">
 				<rect x="13%" y="65%" width="10%" height="18%" stroke="var(--theme-body-color)" stroke-width="1" rx="70" ry="70" fill="#ffffff"></rect>
+
 				<clipPath id="clipCircle">
 					<circle r="6.1%" cx="18%" cy="74%" fill="var(--theme-emphasis-color)"></circle>
 				</clipPath>
-				<image x="13%" y="68%" width="10%" height="12%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
+
+				<image x="10.5%" y="68%" width="15%" height="15%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
 					<xsl:attribute name="href">
 						<xsl:value-of select="//agent[1]/photo" />
 					</xsl:attribute>
