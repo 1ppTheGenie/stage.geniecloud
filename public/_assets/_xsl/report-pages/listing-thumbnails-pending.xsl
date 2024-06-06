@@ -7,7 +7,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="common.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<!-- Exclude from render if there are no pending properties -->
 	<xsl:template name="include-in-render">
@@ -23,8 +23,7 @@
 
 	<xsl:template name="svg-body">
 		<style>
-<xsl:value-of select="'text {dominant-baseline:middle;}'" />
-
+			<xsl:value-of select="'text {dominant-baseline:middle;}'" />
 		</style>
 		<xsl:call-template name="listings-header">
 			<xsl:with-param name="title" select="'Pending Listings'" />
@@ -33,8 +32,8 @@
 
 		<g style="transform: translate(3.7%,27.5%)">
 			<xsl:for-each select="//listings/listing[@state='pending']">
-			    <xsl:sort select="@isAgent" data-type="number" order="descending"/>
-    			<xsl:sort select="@sortDate" data-type="number" order="descending"/>
+				<xsl:sort select="@isAgent" data-type="number" order="descending"/>
+				<xsl:sort select="@sortDate" data-type="number" order="descending"/>
 
 				<xsl:if test="position() &lt;= 8">
 					<g width="22%" height="20%">
@@ -95,7 +94,7 @@
 
 		<xsl:call-template name="listings-footer">
 			<xsl:with-param name="min" select="number(8)" />
-				<xsl:with-param name="nodes" select="$listingsTotalPending" />
+			<xsl:with-param name="nodes" select="$listingsTotalPending" />
 			<xsl:with-param name="summary" select="' pending listings.'" />
 		</xsl:call-template>
 

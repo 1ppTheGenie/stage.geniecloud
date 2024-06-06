@@ -8,8 +8,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
-<xsl:import href="listing-commands.xsl" />
-
+	<xsl:import href="listing-commands.xsl" />
 
 	<xsl:template name="template-folders">
 		<xsl:value-of select="'[`Step One`, `Step Two`]'" />
@@ -20,8 +19,7 @@
 
 		<div class="post">
 			<h4>
-<xsl:value-of select="@name" />
-
+				<xsl:value-of select="@name" />
 			</h4>
 
 			<xsl:choose>
@@ -70,9 +68,8 @@
 		</xsl:call-template>
 
 		<body>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
-
+			<link rel="preconnect" href="https://fonts.googleapis.com" />
+			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
 
 			<main>
 				<div class="banner">
@@ -87,8 +84,7 @@
 					</img>
 					<h1>
 						<span>
-<xsl:value-of select="//agent[1]/firstName" />
-
+							<xsl:value-of select="//agent[1]/firstName" />
 						</span>
 						<span>
 							<xsl:text>'s Open House</xsl:text>
@@ -98,8 +94,7 @@
 					</h1>
 					<div class="address">
 						<span>
-<xsl:value-of select="$listingAddressLine1" />
-
+							<xsl:value-of select="$listingAddressLine1" />
 						</span>
 						<span>
 							<xsl:value-of select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date )" />
@@ -157,14 +152,14 @@
 					<div class="section-grid">
 						<xsl:for-each select="//collection/folders/folder[@name='Step One']/asset">
 							<xsl:call-template name="asset-box">
-<xsl:with-param name="asset" select="." />
+								<xsl:with-param name="asset" select="." />
 
 							</xsl:call-template>
 						</xsl:for-each>
 
 						<xsl:for-each select="//collection/additionalDocs/folder[@name='Step One']/doc">
 							<xsl:call-template name="asset-box">
-<xsl:with-param name="asset" select="." />
+								<xsl:with-param name="asset" select="." />
 
 							</xsl:call-template>
 						</xsl:for-each>
@@ -173,8 +168,8 @@
 				<div class="open-house-checklist">
 					<h1>
 						<span class="text-gold">But wait, there’s more!</span>
-						<br/>
-Don’t forget your open house checklist.</h1>
+						<br/>Don’t forget your open house checklist.
+					</h1>
 					<div>
 						<svg width="65px" height="75px" viewBox="0 0 21 21"
 							xmlns="http://www.w3.org/2000/svg">
@@ -217,15 +212,13 @@ Don’t forget your open house checklist.</h1>
 					<div class="section-grid">
 						<xsl:for-each select="//collection/folders/folder[@name='Step Two']/asset">
 							<xsl:call-template name="asset-box">
-<xsl:with-param name="asset" select="." />
-
+								<xsl:with-param name="asset" select="." />
 							</xsl:call-template>
 						</xsl:for-each>
 
 						<xsl:for-each select="//collection/additionalDocs/folder[@name='Step Two']/doc">
 							<xsl:call-template name="asset-box">
-<xsl:with-param name="asset" select="." />
-
+								<xsl:with-param name="asset" select="." />
 							</xsl:call-template>
 						</xsl:for-each>
 					</div>

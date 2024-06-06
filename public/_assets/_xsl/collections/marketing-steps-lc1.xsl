@@ -97,11 +97,11 @@ Version:	1.1
 						<div id="genie-map" style="width:100vw;height:100%;position:absolute;top:0;">
 							<xsl:comment />
 						</div>
-						
+
 						<script async="async" src="{concat( //output/@siteUrl, '_assets/landing-pages/_global.js' )}">
 							<xsl:comment><!-- Genie Global JS --></xsl:comment>
 						</script>
-						
+
 						<style>
 							<xsl:value-of select="'div.banner span.overlay {z-index: 10!important;}'" />
 						</style>

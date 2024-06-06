@@ -15,7 +15,6 @@ import { userSetting, embedsAPI, cloudHubAPI,getRenderJSON, getCollection, setRe
 // prettier-ignore
 import { listS3Folder, toS3, copyObject, headObject, jsonFromS3, fromS3, BUCKET, deleteObject, buildVersion } from "./utils/index.js";
 
-
 const RENDER_VERSION = 100;
 
 export const JSON_MIME = 'application/json';
@@ -160,7 +159,6 @@ export const api = async event => {
                             break;
 
                         case '/test':
-                            console.log(params);
                             response.body = await propertySurroundingAreas(
                                 params.mlsNumber,
                                 params.mlsId ?? 0,
@@ -315,7 +313,7 @@ export const api = async event => {
                                         userId: json.userId
                                     });
 
-                                    console.log(updated.key); // updated.key is UTC
+                                    ///console.log(updated.key); // updated.key is UTC
                                     // ToDo if update.key > render timestamp of index.html file, then trigger re-render
                                 }
 
@@ -364,8 +362,7 @@ export const api = async event => {
                                 try {
                                     await Promise.all(
                                         r.Contents.map(async item => {
-                                            if ( item.Key.endsWith( 'html' ) ) {
-                                                console.log( 'refresh', item.Key );
+                                            if (item.Key.endsWith('html')) {
                                                 const parts =
                                                     item.Key.split('/');
                                                 const renderId = parts[1];
@@ -381,7 +378,6 @@ export const api = async event => {
                                                         renderExists?.ContentType ==
                                                         'application/json'
                                                     ) {
-                                                        console.log( 'refresh exists', item.Key );
                                                         try {
                                                             const p = {
                                                                 asset: `landing-pages/${asset}`,
@@ -411,7 +407,10 @@ export const api = async event => {
                                     break;
                                 }
                             }
-                            response.body = { 'disabled': false, renders: result };
+                            response.body = {
+                                disabled: false,
+                                renders: result
+                            };
                             break;
 
                         case '/re-render':
@@ -422,10 +421,10 @@ export const api = async event => {
                                         skipCache: true
                                     });
 
-                                    if ( r ) {
+                                    if (r) {
                                         await toS3(
                                             `_lookup/re-render/${params.renderId}`,
-                                            Buffer.from( '@' ),
+                                            Buffer.from('@'),
                                             null,
                                             TXT_MIME
                                         );
@@ -508,11 +507,11 @@ export const api = async event => {
                                         await reRender(reRenders[index], {
                                             ...params,
                                             skipCache: true
-                                        } );
-                                        
+                                        });
+
                                         await toS3(
                                             `_lookup/re-render/${reRenders[index]}`,
-                                            Buffer.from( '@' ),
+                                            Buffer.from('@'),
                                             null,
                                             TXT_MIME
                                         );
@@ -705,7 +704,10 @@ export const api = async event => {
                                 });
 
                                 // Create a reverse lookup based on userId, mlsNumber and areaId
-                                let lookUpKeys = [`renders`,`users/${params.userId}`];
+                                let lookUpKeys = [
+                                    `renders`,
+                                    `users/${params.userId}`
+                                ];
 
                                 if (params.mlsNumber) {
                                     lookUpKeys.push(
@@ -739,7 +741,9 @@ export const api = async event => {
                                     response.body.availableAt =
                                         response.body.availableAt ?? // Allows earlier code to set custom version of this
                                         `${
-                                           params.isWorkFlow ?  genieGlobals.GENIE_NO_CACHE_HOST :  genieGlobals.GENIE_HOST
+                                            params.isWorkFlow
+                                                ? genieGlobals.GENIE_NO_CACHE_HOST
+                                                : genieGlobals.GENIE_HOST
                                         }${s3Key.replace('/index.html', '')}`;
                                     response.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
                                     response.body.renderId = params.renderId;
@@ -756,7 +760,9 @@ export const api = async event => {
                 if (params.renderId) {
                     // We don't want the embed API errors here
                     await toS3(
-                        `_errors/${currentDate}/${params.renderId}-${Date.now()}-api.json`,
+                        `_errors/${currentDate}/${
+                            params.renderId
+                        }-${Date.now()}-api.json`,
                         Buffer.from(
                             JSON.stringify({
                                 params,
@@ -811,7 +817,7 @@ const renderKeyParams = async params => {
         }
 
         propertyType = params.propertyType ?? listing.propertyType;
-        listingStatus = params.listingStatus ?? (listing.listingStatus ??'');
+        listingStatus = params.listingStatus ?? listing.listingStatus ?? '';
     }
 
     const area = await areaName(params.userId, areaId);
@@ -855,7 +861,11 @@ const processAsset = async params => {
 };
 
 const prepareAsset = async (asset, params) => {
-    const settings = await assetSetting(asset, 'all');
+    const settings = await assetSetting( asset, 'all' );
+    
+    //if ( typeof params.qrDestination !== 'undefined' && params.qrDestination.toString().length > 0 ) {
+        //console.log( 'Ex5', asset, settings.supports.includes( 'AsPDF' ) );
+    //}
 
     if (Object.keys(settings).length > 0) {
         let pages, suffix, dims, size;
@@ -880,7 +890,7 @@ const prepareAsset = async (asset, params) => {
         if (params.totalPages) {
             pages = pages.slice(0, params.totalPages + 1);
         }
-
+        
         size = (
             params.size ||
             (Array.isArray(settings?.sizes) && settings.sizes[0]) ||
@@ -1079,10 +1089,10 @@ const prepareAsset = async (asset, params) => {
                 }
 
                 // Save to the processing folder to trigger onward processing and final render
-                const cleanKey = basename( render.s3Key )
-                    .replaceAll( /[.\/]|_/g, '-' )
-                    .replaceAll( /[^\w\s-]|_/g, '' ) // Remove all non-word,number,space chars.
-                    .replaceAll( '--', '-' );
+                const cleanKey = basename(render.s3Key)
+                    .replaceAll(/[.\/]|_/g, '-')
+                    .replaceAll(/[^\w\s-]|_/g, '') // Remove all non-word,number,space chars.
+                    .replaceAll('--', '-');
 
                 await toS3(
                     `_processing/${params.renderId}/${cleanKey}${
