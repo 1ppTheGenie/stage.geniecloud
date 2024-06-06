@@ -1,5 +1,5 @@
 document.addEventListener(`genie-landing-loaded`, async () => {
-	const lpData = await window.gHub.getLandingPageData();
+	const lpData = await window.gHub.getLandingPageData( true );
 
 	if (window.gHub.makeMap) {
 		const listings = [
