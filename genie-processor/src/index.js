@@ -284,45 +284,46 @@ const toS3 = async (
 	} catch (err) {}
 };
 
-
-if ( process.argv.length > 2 ) {
-	console.log( 'Processing command line: ', process.argv );
+if (process.argv.length > 2) {
+	console.log("Processing command line: ", process.argv);
 	try {
-		if ( process.argv[2] == "test" ) {
-			const assetDir = process.cwd() + '/../public/_assets/_xsl/';
-			const dataDir = process.cwd() +'/../public/_assets/_reference/';
+		if (process.argv[2] == "test") {
+			const assetDir = process.cwd() + "/../public/_assets/_xsl/";
+			const dataDir = process.cwd() + "/../public/_assets/_reference/";
 
-			const server = http.createServer( async ( req, res ) => {
+			const server = http.createServer(async (req, res) => {
 				try {
-					const parsedUrl = url.parse( req.url );
-					const queryParams = querystring.parse( parsedUrl.query );
-				
+					const parsedUrl = url.parse(req.url);
+					const queryParams = querystring.parse(parsedUrl.query);
+
 					const assetPath = `${assetDir}${queryParams.xsl}.xsl`;
-					const dataPath = `${dataDir}${queryParams?.xml ?? '_genie-sample'}.xml`;
-					
-					if ( !fs.existsSync( assetPath ) ) {
-						res.writeHead( 200, { "Content-Type": "text/plain" } );
-						res.end( `Asset ${queryParams.xsl} does not exist` );
+					const dataPath = `${dataDir}${
+						queryParams?.xml ?? "_genie-sample"
+					}.xml`;
+
+					if (!fs.existsSync(assetPath)) {
+						res.writeHead(200, { "Content-Type": "text/plain" });
+						res.end(`Asset ${queryParams.xsl} does not exist`);
 						return;
 					}
 
-					if ( !fs.existsSync( dataPath ) ) {
-						res.writeHead( 200, { "Content-Type": "text/plain" } );
-						res.end( `Data file ${dataPath} does not exist` );
+					if (!fs.existsSync(dataPath)) {
+						res.writeHead(200, { "Content-Type": "text/plain" });
+						res.end(`Data file ${dataPath} does not exist`);
 						return;
 					}
 
-					const output = await testXSL( assetPath, dataPath, null );
-				
-					res.writeHead( 200, { "Content-Type": "text/html" } );
-					res.end( typeof output == 'string' ? output : JSON.stringify( output ) );
-				} catch ( err ) {
-					res.end( `Failed with ${err.toString()}`);
+					const output = await testXSL(assetPath, dataPath, null);
+
+					res.writeHead(200, { "Content-Type": "text/html" });
+					res.end(typeof output == "string" ? output : JSON.stringify(output));
+				} catch (err) {
+					res.end(`Failed with ${err.toString()}`);
 				}
-			} );
+			});
 
 			const PORT = process.env.PORT || 3000;
-			
+
 			server.listen(PORT, () => {
 				console.log(`Server is running on port ${PORT}`);
 			});
@@ -332,18 +333,38 @@ if ( process.argv.length > 2 ) {
 	}
 }
 
-const testXSL = async (xslKey,  xmlKey = "_assets/_reference/_genie-sample.xml", outName = "output.svg") => {
-	const transformXsl = fs.existsSync(xslKey) ? fs.readFileSync(xslKey, 'utf8') : ( await fromS3( `_assets/_xsl/${xslKey}.xsl` ) ).toString();
-	const transformXml = fs.existsSync(xmlKey) ? fs.readFileSync(xmlKey, 'utf8') : ( await fromS3(xmlKey) ).toString();
+const testXSL = async (
+	xslKey,
+	xmlKey = "_assets/_reference/_genie-sample.xml",
+	outName = "output.svg"
+) => {
+	const transformXsl = fs.existsSync(xslKey)
+		? fs.readFileSync(xslKey, "utf8")
+		: (await fromS3(`_assets/_xsl/${xslKey}.xsl`)).toString();
+	const transformXml = fs.existsSync(xmlKey)
+		? fs.readFileSync(xmlKey, "utf8")
+		: (await fromS3(xmlKey)).toString();
 
-	const r = transform( transformXml, transformXsl, `file://${TEMP_DIR}` );
+	let r = transform(
+		transformXml,
+		transformXsl,
+		`file://${TEMP_DIR}`,
+		"html",
+		"include-in-render"
+	);
 
-	if ( outName ) {
-		fs.writeFile( outName, r, err => {
-			if ( err ) throw err;
-			console.log( `Data has been written to the ${out}.` );
-		} );
+	if (r == "false") {
+		r = "no dice";
+	} else {
+		r = transform(transformXml, transformXsl, `file://${TEMP_DIR}`, "html");
 	}
-	
+
+	if (outName) {
+		fs.writeFile(outName, r, err => {
+			if (err) throw err;
+			console.log(`Data has been written to the ${out}.`);
+		});
+	}
+
 	return r;
 };
