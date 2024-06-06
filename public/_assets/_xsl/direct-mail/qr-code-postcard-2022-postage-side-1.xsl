@@ -64,6 +64,10 @@
 			</xsl:call-template>
 		</g>
 
+		<rect x="4.1%" y="57.1%" width="9.8%" height="17.8%" stroke="var(--theme-body-color)" stroke-width="1" rx="70" ry="70" fill="#ffffff" />
+		<clipPath id="clipCircle">
+			<circle r="10%" cx="9%" cy="66%" fill="var(--theme-emphasis-color)"></circle>
+		</clipPath>
 		<image x="4.5%" y="60%" width="9%" height="12%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
 			<xsl:attribute name="href">
 				<xsl:value-of select="//agent[1]/photo" />

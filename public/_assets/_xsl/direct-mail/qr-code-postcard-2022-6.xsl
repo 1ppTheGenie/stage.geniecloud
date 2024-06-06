@@ -114,6 +114,10 @@
 				</xsl:choose>
 			</text>
 			<g style="transform:translate(3%, 2%);">
+				<rect x="13%" y="65%" width="10%" height="18%" stroke="var(--theme-body-color)" stroke-width="1" rx="70" ry="70" fill="#ffffff"></rect>
+				<clipPath id="clipCircle">
+					<circle r="6.1%" cx="18%" cy="74%" fill="var(--theme-emphasis-color)"></circle>
+				</clipPath>
 				<image x="13%" y="68%" width="10%" height="12%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
 					<xsl:attribute name="href">
 						<xsl:value-of select="//agent[1]/photo" />
