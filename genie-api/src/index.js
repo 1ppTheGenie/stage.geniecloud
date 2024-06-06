@@ -961,11 +961,6 @@ const prepareAsset = async (asset, params) => {
                 dims = { width: 1920, height: 1080 };
                 break;
 
-            case params.asPDF:
-            case pages.length > 1:
-                suffix = 'pdf';
-                break;
-
             default:
                 suffix = 'png';
         }
