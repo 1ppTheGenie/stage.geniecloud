@@ -27,6 +27,12 @@ Version:	1.1
 				<xsl:value-of select="$asset/@renderKey" />
 			</xsl:attribute>
 
+			<xsl:if test="$asset/@pageCount!=''">
+				<xsl:attribute name="data-pagecount">
+					<xsl:value-of select="$asset/@pageCount" />
+				</xsl:attribute>
+			</xsl:if>
+
 			<h4>
 				<span class="rendering-spinner">
 					<xsl:comment/>

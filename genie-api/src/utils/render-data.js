@@ -1130,20 +1130,26 @@ const processCollection = async params => {
                                       }))
                                     : null;
 
+                                const _attrs = {
+                                    stylesheet: asset.asset,
+                                    size: size,
+                                    sort: parseInt( asset.sort ),
+                                    name:
+                                        asset.name ??
+                                        asset.knownAs ??
+                                        assetData.name,
+                                    version: assetData.version ?? 1,
+                                    renderKey: s3Key,
+                                    qrUrl
+                                };
+
+                                if ( assetData.pages?.length ) {
+                                    _attrs.pageCount = assetData.pages.length;
+                                }
+
                                 section._content.push({
                                     _name: 'asset',
-                                    _attrs: {
-                                        stylesheet: asset.asset,
-                                        size: size,
-                                        sort: parseInt(asset.sort),
-                                        name:
-                                            asset.name ??
-                                            asset.knownAs ??
-                                            assetData.name,
-                                        version: assetData.version ?? 1,
-                                        renderKey: s3Key,
-                                        qrUrl
-                                    },
+                                    _attrs,
                                     _content: tags
                                 });
                             }

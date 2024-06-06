@@ -864,10 +864,17 @@ const prepareAsset = async (asset, params) => {
 
         if (params.pages) {
             pages = params.pages;
+            // If we have pages (even one), let's make it as a PDF unless otherwise guided...
+            // Added for flyer assets that have a single page, eg OpenHouse Welcome Stand
+            params.asPDF = params.asPDF ?? true;
         } else if (settings.pages && settings.pages !== '') {
             pages = settings.pages.map(s => ({ asset: s }));
         } else {
             pages = [{ asset: asset.trim() }];
+        }
+        
+        if ( settings.supports.includes( 'AsPDF' ) ) {
+            params.asPDF = true;
         }
 
         if (params.totalPages) {
@@ -886,6 +893,11 @@ const prepareAsset = async (asset, params) => {
         dims = getDimensions(size) ?? { width: 1200, height: 628 };
 
         switch (true) {
+            case params.asPDF:
+            case pages.length > 1:
+                suffix = 'pdf';
+                break;
+
             case params.isCollectionTemplate:
             case params.isLandingPage:
                 suffix = 'html';

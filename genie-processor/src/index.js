@@ -176,10 +176,10 @@ export const xslt = async event => {
 							params.noPuppeteer ||
 							(params.isCollection &&
 								params.suffix == "pdf" &&
-								params.pageIndex <= 2)
+								(params.pageIndex <= 2 || !params.pageIndex))
 						) {
 							const revisedSuffix = `${params.noPuppeteer ? "" : "-"}grab-${
-								params.pageIndex
+								params.pageIndex ?? 0
 							}.webp`;
 							const width = params.noPuppeteer ? 800 : params.dims.width;
 							const height = params.noPuppeteer ? 1200 : params.dims.height;
@@ -187,7 +187,7 @@ export const xslt = async event => {
 							await toS3(
 								r.s3.object.key.replace(
 									"xslt.json",
-									`grab-${params.pageIndex}-puppeteer.json`
+									`grab-${params.pageIndex ?? 0}-puppeteer.json`
 								),
 								JSON.stringify({
 									url: params.url,
