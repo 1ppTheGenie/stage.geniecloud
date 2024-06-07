@@ -1072,7 +1072,7 @@ const prepareAsset = async (asset, params) => {
                     if (!params.qrDestination.startsWith('http'))
                         params.qrDestination = `https://${qrCodeSVGUrl}`;
 
-                    qrUrl = await getLandingQrCodeUrl(
+                    qrCodeSVGUrl = await getLandingQrCodeUrl(
                         params?.parentAsset,
                         params.renderId,
                         params.qrDestination
