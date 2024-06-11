@@ -222,24 +222,24 @@
 							</div>
 							<div class="agent-logo">
 								<div class="funnel-about-company-logo">
-									<div class="genie-logo-light">
+									<div class="funnel-personal-logo genie-logo-light">
 										<xsl:attribute name="style">
 											<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoLight, ')' )" />
 										</xsl:attribute>
 									</div>
-									<div class="genie-logo-dark">
+									<div class="funnel-personal-logo genie-logo-dark">
 										<xsl:attribute name="style">
 											<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoDark, ')' )" />
 										</xsl:attribute>
 									</div>
 								</div>
 								<div class="funnel-about-personal-logo">
-									<div class="genie-logo-light">
+									<div class="funnel-personal-logo genie-logo-light">
 										<xsl:attribute name="style">
 											<xsl:value-of select="concat( 'background: url(', //agent[1]/personalLogoLight, ')' )" />
 										</xsl:attribute>
 									</div>
-									<div class="genie-logo-dark">
+									<div class="funnel-personal-logo genie-logo-dark">
 										<xsl:attribute name="style">
 											<xsl:value-of select="concat( 'background: url(', //agent[1]/personalLogoDark, ')' )" />
 										</xsl:attribute>

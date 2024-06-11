@@ -290,9 +290,8 @@ button.btn.subtitle-font.background-as-color.contact-me-btn {
 
 #about-section .agent-logo {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: bottom;
     margin-left: 45px;
-    margin-top: 70px;
 }
 
 #about-section .agent-details .agent-logo .funnel-personal-logo {
