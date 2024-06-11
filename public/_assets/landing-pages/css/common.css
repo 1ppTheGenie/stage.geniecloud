@@ -3566,3 +3566,19 @@ p.listing-agent-bullets span:not(:last-child)::after {
     content: " \2022";
     margin-right: 5px;
 }
+
+.genie-landing-page.light .genie-logo-dark {
+	display:none;
+}
+
+.genie-landing-page.dark .genie-logo-light {
+	display:none;
+}
+
+.genie-landing-page.light .genie-alternate.dark .genie-logo-dark,.genie-landing-page.dark .genie-alternate.light .genie-logo-light {
+	display:block;
+}
+
+.genie-landing-page.light .genie-alternate.dark .genie-logo-light, .genie-landing-page.dark .genie-alternate.light .genie-logo-dark {
+	display:none;
+}

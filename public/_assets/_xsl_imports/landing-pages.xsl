@@ -16,7 +16,7 @@
 
 			<xsl:if test="not(exists(//output/@testing))">
 				<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GCVGRFNGMD">
-					<xsl:comment>						<!-- Google tag (gtag.js) --></xsl:comment>
+					<xsl:comment><!-- Google tag (gtag.js) --></xsl:comment>
 				</script>
 				<script>
 					<xsl:value-of disable-output-escaping="yes" select="'window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag(`js`, new Date()); gtag(`config`, `G-GCVGRFNGMD`);'" />
@@ -33,7 +33,7 @@
 			</script>
 
 			<script async="async" src="{concat( //output/@siteUrl, '_assets/landing-pages/_global.js' )}">
-				<xsl:comment>					<!-- Genie Global JS --></xsl:comment>
+				<xsl:comment><!-- Genie Global JS --></xsl:comment>
 			</script>
 
 			<xsl:call-template name="landing-page" />
@@ -221,10 +221,26 @@
 								</h4>
 							</div>
 							<div class="agent-logo">
-								<div class="funnel-aboput-personal-logo funnel-company-logo">
-									<div class="funnel-personal-logo  editable">
+									<div class="genie-logo-light">
 										<xsl:attribute name="style">
-											<xsl:value-of select="concat( 'background: url(', $personalLogo, ')' )" />
+											<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoLight, ')' )" />
+										</xsl:attribute>
+									</div>
+									<div class="genie-logo-dark">
+										<xsl:attribute name="style">
+											<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoDark, ')' )" />
+										</xsl:attribute>
+									</div>
+								</div>
+								<div class="funnel-about-personal-logo">
+									<div class="genie-logo-light">
+										<xsl:attribute name="style">
+											<xsl:value-of select="concat( 'background: url(', //agent[1]/personalLogoLight, ')' )" />
+										</xsl:attribute>
+									</div>
+									<div class="genie-logo-dark">
+										<xsl:attribute name="style">
+											<xsl:value-of select="concat( 'background: url(', //agent[1]/personalLogoDark, ')' )" />
 										</xsl:attribute>
 									</div>
 								</div>
