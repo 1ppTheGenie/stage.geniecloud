@@ -22,7 +22,7 @@
 				</xsl:call-template>
 			</text>
 
-			<foreignObject x="6%" y="12%" height="70%" width="88%">
+			<foreignObject x="6%" y="12%" height="70%" width="88%" style="--description-line-limit: 20;">
 				<div style="font-family:var(--theme-body-font);">
 					<xsl:choose>
 						<xsl:when test="//agent[1]/marketingAbout!=''">
