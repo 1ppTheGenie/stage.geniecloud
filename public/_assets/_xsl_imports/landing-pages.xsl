@@ -321,7 +321,7 @@
 						<div class="funnel-footer-company-logo">
 							<div class="funnel-company-logo your_logo_class editable">
 								<xsl:attribute name="style">
-									<xsl:value-of select="concat( 'background: url(', $companyLogo, ')' )" />
+									<xsl:value-of select="concat( 'background: url(', $companyLogoInverse, ')' )" />
 								</xsl:attribute>
 							</div>
 						</div>
