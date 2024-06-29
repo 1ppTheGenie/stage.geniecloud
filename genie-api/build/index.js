@@ -7589,7 +7589,7 @@ var getRenderJSON = async (params) => {
   if (typeof params != "object" || Object.keys(params).length == 0) {
     throw new Exception("Empty render param set is not supported");
   }
-  const skipCache = params.skipCache ?? false;
+  const skipCache2 = params.skipCache ?? false;
   if (!params.offsetDate) {
     params.offsetDate = endOfLastMonth();
   }
@@ -7676,7 +7676,7 @@ var getRenderJSON = async (params) => {
       const r = await openhouseByMlsNumber(
         params.mlsId,
         params.mlsNumber,
-        skipCache
+        skipCache2
       );
       if (r.openHouses && Array.isArray(r.openHouses)) {
         r.openHouses.forEach((t) => {
@@ -7690,7 +7690,7 @@ var getRenderJSON = async (params) => {
       params,
       root.agents[0].agent.timezone
     );
-    let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0, skipCache);
+    let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0, skipCache2);
     if (mlsDisplay) {
       root.mlsDisplay = `<![CDATA[${mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ""}]]>`;
     }
@@ -7754,10 +7754,10 @@ var defaultRenderSettings = {
   propertyCaptionSingular: null,
   reRenderUntil: null
 };
-var areaFromMlsNumber = async (mlsNumber, mlsId, userId, skipCache = false) => {
+var areaFromMlsNumber = async (mlsNumber, mlsId, userId, skipCache2 = false) => {
   const listing = await getListing(userId, mlsNumber, mlsId);
   if (listing && listing.preferredAreaId) {
-    return await areaName(userId, listing.preferredAreaId, skipCache);
+    return await areaName(userId, listing.preferredAreaId, skipCache2);
   }
   const areas = await propertySurroundingAreas(
     mlsNumber,
@@ -7765,8 +7765,9 @@ var areaFromMlsNumber = async (mlsNumber, mlsId, userId, skipCache = false) => {
     userId,
     null,
     null,
-    skipCache
+    skipCache2
   );
+  console.log(`Surrounding areas found:`, areas);
   if (Array.isArray(areas) && areas.length > 0) {
     let set = areas.filter(
       (area) => !["City", "CarrierRoute", "School"].includes(area.areaType)
@@ -7786,6 +7787,8 @@ var areaFromMlsNumber = async (mlsNumber, mlsId, userId, skipCache = false) => {
       return set.shift();
     }
   }
+  console.log(`No suitable area found for MLS number: ${mlsNumber}`);
+  return null;
 };
 var agentMlsNumbers = async (userId) => {
   const r = await agentProperties(userId, false);
@@ -7831,7 +7834,8 @@ var setRenderDefaults = async (params) => {
     if (params.area) {
       params.areaIds = [params.area.areaId];
     } else {
-      throw new Exception(
+      throw new Error(
+        // Changed from Exception to Error
         `Failed to get areaId: ${JSON.stringify(params)}`
       );
     }
@@ -8680,52 +8684,63 @@ var generateQR = async (url) => new import_qrcode_svg.default(url).svg();
 
 // src/utils/embedsAPI.js
 var embedsAPI = async (route, params) => {
-  let result;
-  switch (route) {
-    case "get-landing-data":
-      result = await getLandingPageData(params);
-      break;
-    case "add-lead":
-      result = await add_lead(params);
-      break;
-    case "update-lead":
-      result = await update_lead(params);
-      break;
-    case "address-search":
-      result = await address_search(params);
-      break;
-    case "get-agent-data":
-      result = await get_agent_data(params);
-      break;
-    case "get-area-data":
-      result = await get_area_data(params);
-      break;
-    case "get-area-monthly":
-      result = await get_area_monthly(params);
-      break;
-    case "get-area-properties":
-      result = await get_area_properties(params);
-      break;
-    case "get-area-polygon":
-      result = await get_area_polygon(params);
-      break;
-    case "get-listing-data":
-      result = await get_listing_details(params);
-      break;
-    case "get-qr-property":
-      result = await get_qr_property(params);
-      break;
-    case "get-short-data":
-      result = await get_short_data(params);
-      break;
-    case "get-property":
-      result = await get_property(params);
-      break;
-    case "get-mls-display":
-      result = await get_mls_display(params);
-      break;
+  let result = {};
+  try {
+    switch (route) {
+      case "get-landing-data":
+        result = await getLandingPageData(params);
+        break;
+      case "add-lead":
+        result = await add_lead(params);
+        break;
+      case "update-lead":
+        result = await update_lead(params);
+        break;
+      case "address-search":
+        result = await address_search(params);
+        break;
+      case "get-agent-data":
+        result = await get_agent_data(params);
+        break;
+      case "get-area-data":
+        result = await get_area_data(params);
+        break;
+      case "get-area-monthly":
+        result = await get_area_monthly(params);
+        break;
+      case "get-area-properties":
+        result = await get_area_properties(params);
+        break;
+      case "get-area-polygon":
+        result = await get_area_polygon(params);
+        break;
+      case "get-listing-data":
+        result = await get_listing_details(params);
+        break;
+      case "get-qr-property":
+        result = await get_qr_property(params);
+        break;
+      case "get-short-data":
+        result = await get_short_data(params);
+        break;
+      case "get-property":
+        result = await get_property(params);
+        break;
+      case "get-mls-display":
+        result = await get_mls_display(params);
+        break;
+      default:
+        throw new Error(`Unknown route: ${route}`);
+    }
+    if (result) {
+      result.route = `Embed: ${route}`;
+    } else {
+      result = { route: `Embed: ${route}`, error: "No result returned" };
+    }
+  } catch (error2) {
+    console.error(`Error in embedsAPI for route ${route}:`, error2);
+    result = { route: `Embed: ${route}`, error: error2.message };
   }
-  result.route = `Embed: ${route}`;
   return result;
 };
 var getLandingPageData = async (params) => {
@@ -9252,8 +9267,8 @@ var cache_key = (endpoint, params, verb) => {
   const hash = import_crypto.default.createHash("md5").update(`${endpoint}.${verb}.${strParams}`).digest("hex");
   return `genie-${hash}.json`;
 };
-var areaName = async (userId, areaId, skipCache = false) => await call_api("GetAreaName", { areaId, userId }, skipCache);
-var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache = false) => {
+var areaName = async (userId, areaId, skipCache2 = false) => await call_api("GetAreaName", { areaId, userId }, skipCache2);
+var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache2 = false) => {
   month_count = month_count ?? 12;
   return await call_api(
     "GetAreaStatisticsWithPreviousInterval",
@@ -9263,10 +9278,10 @@ var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timesta
       numberOfMonthsToLookBack: month_count,
       endDate: dateFormat(end_timestamp)
     },
-    skipCache
+    skipCache2
   );
 };
-var areaStatisticsMonthly = async (userId, areaId, years, skipCache = false) => {
+var areaStatisticsMonthly = async (userId, areaId, years, skipCache2 = false) => {
   years = years ?? 1;
   return await call_api(
     "GetAreaStatisticsSoldMonthly",
@@ -9275,10 +9290,10 @@ var areaStatisticsMonthly = async (userId, areaId, years, skipCache = false) => 
       userId,
       years
     },
-    skipCache
+    skipCache2
   );
 };
-var agentProperties = async (userId, includeOpenHouses, skipCache = false) => {
+var agentProperties = async (userId, includeOpenHouses, skipCache2 = false) => {
   includeOpenHouses = includeOpenHouses ?? false;
   const callback = (results) => {
     if (results.properties) {
@@ -9299,26 +9314,26 @@ var agentProperties = async (userId, includeOpenHouses, skipCache = false) => {
   return await call_api(
     "GetAgentProperties",
     { userId, includeOpenHouses },
-    skipCache,
+    skipCache2,
     "POST",
     callback
   );
 };
-var getAssessorProperty = async (property_id, agent_id, skipCache = false) => await call_api(
+var getAssessorProperty = async (property_id, agent_id, skipCache2 = false) => await call_api(
   "GetAssessorPropertyDetail",
   {
     PropertyId: property_id,
     userId: agent_id
   },
-  skipCache
+  skipCache2
 );
-var getAssessorPropertiesDetail = async (address_id, skipCache = false) => await call_api(
+var getAssessorPropertiesDetail = async (address_id, skipCache2 = false) => await call_api(
   `GetAssessorPropertiesDetail/${address_id}`,
   null,
-  skipCache
+  skipCache2
 );
-var getAreaBoundary = async (areaId, skipCache = false) => await call_api(`GetAreaBoundary/${areaId}`, null, skipCache, "POST");
-var getListing = async (user_id, mls_number, mls_id, skipCache = false) => {
+var getAreaBoundary = async (areaId, skipCache2 = false) => await call_api(`GetAreaBoundary/${areaId}`, null, skipCache2, "POST");
+var getListing = async (user_id, mls_number, mls_id, skipCache2 = false) => {
   mls_id = mls_id ?? -1;
   let listing;
   let endpoint;
@@ -9328,7 +9343,7 @@ var getListing = async (user_id, mls_number, mls_id, skipCache = false) => {
       const r = await call_api(
         endpoint,
         { mlsId: mls_id, mlsNumber: mls_number, userId: user_id },
-        skipCache,
+        skipCache2,
         "POST"
       );
       listing = r.listing ?? null;
@@ -9340,7 +9355,7 @@ var getListing = async (user_id, mls_number, mls_id, skipCache = false) => {
       const r = await call_api(
         endpoint,
         { mlsNumber: mls_number },
-        skipCache,
+        skipCache2,
         "POST"
       );
       listing = r?.listings[0] ?? null;
@@ -9354,8 +9369,8 @@ var getListing = async (user_id, mls_number, mls_id, skipCache = false) => {
     );
   }
 };
-var mlsDisplaySettings = async (mls_id, skipCache = false) => await call_api(`GetMlsDisplaySettings/${mls_id}`, null, skipCache, "POST");
-var mlsProperties = async (mlsGroupID, area_id, startDate = null, includeOpenHouses, skipCache = false) => {
+var mlsDisplaySettings = async (mls_id, skipCache2 = false) => await call_api(`GetMlsDisplaySettings/${mls_id}`, null, skipCache2, "POST");
+var mlsProperties = async (mlsGroupID, area_id, startDate = null, includeOpenHouses, skipCache2 = false) => {
   includeOpenHouses = includeOpenHouses ?? false;
   startDate = startDate ?? dateFormat(timeAgo({ months: -1 }));
   let r;
@@ -9368,15 +9383,15 @@ var mlsProperties = async (mlsGroupID, area_id, startDate = null, includeOpenHou
         startDate,
         includeOpenHouses
       },
-      skipCache
+      skipCache2
     );
   } catch (err) {
     console.log("GetMlsProperties failed", err);
   }
   return r ? r?.properties ?? { success: false } : { success: false };
 };
-var openhouseByMlsNumber = async (mlsID, mlsNumber, skipCache = false) => await call_api("GetOpenHouseByMlsNumber", { mlsID, mlsNumber }, skipCache);
-var getPropertyBoundary = async (mls_id, mls_number, fips, property_id, skipCache = false) => {
+var openhouseByMlsNumber = async (mlsID, mlsNumber, skipCache2 = false) => await call_api("GetOpenHouseByMlsNumber", { mlsID, mlsNumber }, skipCache2);
+var getPropertyBoundary = async (mls_id, mls_number, fips, property_id, skipCache2 = false) => {
   const args = {};
   if (mls_id) {
     args["MlsID"] = mls_id;
@@ -9390,9 +9405,9 @@ var getPropertyBoundary = async (mls_id, mls_number, fips, property_id, skipCach
   if (property_id) {
     args["PropertyID"] = property_id;
   }
-  return await call_api("GetPropertyBoundary", args, skipCache);
+  return await call_api("GetPropertyBoundary", args, skipCache2);
 };
-var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, property_id, skipCache = false) => {
+var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, property_id, skipCache2 = false) => {
   const propertyID = property_id ?? -1;
   const fips = strFips ?? "";
   const r = await call_api(
@@ -9404,7 +9419,7 @@ var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, prop
       fips,
       propertyID
     },
-    skipCache
+    skipCache2
   );
   return r.success && r.areas;
 };
@@ -9444,7 +9459,7 @@ var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate 
     return r.data;
   }
 };
-var getUser = async (user_id) => await call_api(`GetUserProfile/${user_id}`);
+var getUser = async (user_id) => await call_api(`GetUserProfile/${user_id}`, skipCache = true);
 var getPropertyFromId = async (property_id, agent_id) => {
   const r = await getAssessorProperty(property_id, agent_id);
   if (r.hasProperty) {
@@ -9498,25 +9513,25 @@ var createQRCodeLead = async (args) => {
   }
   return r;
 };
-var getQRCodeLead = async (qrCodeId, token, skipCache = false) => await call_api(
+var getQRCodeLead = async (qrCodeId, token, skipCache2 = false) => await call_api(
   "GetQRCodeLead",
   { qrCodeId, token },
-  skipCache,
+  skipCache2,
   "POST"
 );
-var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_cache = null) => {
+var call_api = async (endpoint, params, skipCache2 = false, verb = "POST", pre_cache = null) => {
   params = params ?? {};
   if (impersonater.id) {
     params.ImpersonatedByAspNetUserId = impersonater.id;
   }
   const cacheKey = cache_key(endpoint, params, verb);
   let result;
-  if (!skipCache) {
+  if (!skipCache2 && !endpoint.startsWith("GetUserProfile")) {
     result = await from_cache(cacheKey, endpoint);
   }
   if (!result) {
     if (endpoint.startsWith("GetUserProfile")) {
-      console.log("ProfileGOT,", skipCache, params);
+      console.log("ProfileGOT,", skipCache2, params);
     }
     params.consumer = 8;
     result = await fetch(API_URL + endpoint, {
@@ -9992,7 +10007,9 @@ var api = async (event) => {
               break;
             case "/create":
               try {
+                console.log("Validating render params");
                 await validateRenderParams(params);
+                console.log("Render params validated");
                 params.renderId = (0, import_crypto2.randomUUID)();
                 params.theme = params.theme ?? await userSetting(
                   params.userId,
@@ -10012,7 +10029,12 @@ var api = async (event) => {
                   params
                 );
                 params.s3Key = s3Key;
-                params = await setRenderDefaults(params);
+                try {
+                  params = await setRenderDefaults(params);
+                } catch (error2) {
+                  console.error("Error in setRenderDefaults:", error2);
+                  throw error2;
+                }
                 response2.body.preCache = await preCallGenieAPIs(
                   params
                 );
@@ -10085,6 +10107,7 @@ var api = async (event) => {
                   response2.body.renderId = params.renderId;
                 }
               } catch (e) {
+                console.error("Error in /create route:", e);
                 response2.body.error = e.message;
               }
               break;

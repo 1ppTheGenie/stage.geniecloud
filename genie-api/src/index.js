@@ -657,7 +657,9 @@ export const api = async event => {
                         case '/create':
                             try {
                                 // This line will succeed or have a error thrown that will be caught below
+                                console.log('Validating render params');
                                 await validateRenderParams(params);
+                                console.log('Render params validated');
 
                                 // VERY IMPORTANT LINE! Determines the uniqueness of all links
                                 params.renderId = randomUUID();
@@ -687,7 +689,12 @@ export const api = async event => {
 
                                 params.s3Key = s3Key;
 
-                                params = await setRenderDefaults(params);
+                                try {
+                                    params = await setRenderDefaults(params);
+                                } catch (error) {
+                                    console.error('Error in setRenderDefaults:', error);
+                                    throw error;
+                                }
 
                                 // Cache the main Genie API calls
                                 response.body.preCache = await preCallGenieAPIs(
@@ -788,6 +795,7 @@ export const api = async event => {
                                     response.body.renderId = params.renderId;
                                 }
                             } catch (e) {
+                                console.error('Error in /create route:', e)
                                 response.body.error = e.message;
                             }
                             break;

@@ -426,7 +426,7 @@ export const updateHubAsset = async (hubAssetUrl, userId, hubAssetId) =>
     );
 
 export const getUser = async user_id =>
-    await call_api(`GetUserProfile/${user_id}`);
+    await call_api(`GetUserProfile/${user_id}`, skipCache = true);
 
 const expiry_time = token => {
     decoded = JSON.parse(
@@ -531,7 +531,7 @@ const call_api = async ( endpoint, params, skipCache = false, verb = "POST", pre
 	const cacheKey = cache_key( endpoint, params, verb );
 
 	let result;
-	if ( !skipCache ) {
+	if ( !skipCache && !endpoint.startsWith( 'GetUserProfile' ) ) {
 		result = await from_cache( cacheKey, endpoint );
 	}
 	
