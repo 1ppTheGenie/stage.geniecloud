@@ -7589,7 +7589,7 @@ var getRenderJSON = async (params) => {
   if (typeof params != "object" || Object.keys(params).length == 0) {
     throw new Exception("Empty render param set is not supported");
   }
-  const skipCache2 = params.skipCache ?? false;
+  const skipCache = params.skipCache ?? false;
   if (!params.offsetDate) {
     params.offsetDate = endOfLastMonth();
   }
@@ -7676,7 +7676,7 @@ var getRenderJSON = async (params) => {
       const r = await openhouseByMlsNumber(
         params.mlsId,
         params.mlsNumber,
-        skipCache2
+        skipCache
       );
       if (r.openHouses && Array.isArray(r.openHouses)) {
         r.openHouses.forEach((t) => {
@@ -7690,7 +7690,7 @@ var getRenderJSON = async (params) => {
       params,
       root.agents[0].agent.timezone
     );
-    let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0, skipCache2);
+    let mlsDisplay = await mlsDisplaySettings(params.mlsId ?? 0, skipCache);
     if (mlsDisplay) {
       root.mlsDisplay = `<![CDATA[${mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ""}]]>`;
     }
@@ -7754,10 +7754,10 @@ var defaultRenderSettings = {
   propertyCaptionSingular: null,
   reRenderUntil: null
 };
-var areaFromMlsNumber = async (mlsNumber, mlsId, userId, skipCache2 = false) => {
+var areaFromMlsNumber = async (mlsNumber, mlsId, userId, skipCache = false) => {
   const listing = await getListing(userId, mlsNumber, mlsId);
   if (listing && listing.preferredAreaId) {
-    return await areaName(userId, listing.preferredAreaId, skipCache2);
+    return await areaName(userId, listing.preferredAreaId, skipCache);
   }
   const areas = await propertySurroundingAreas(
     mlsNumber,
@@ -7765,7 +7765,7 @@ var areaFromMlsNumber = async (mlsNumber, mlsId, userId, skipCache2 = false) => 
     userId,
     null,
     null,
-    skipCache2
+    skipCache
   );
   console.log(`Surrounding areas found:`, areas);
   if (Array.isArray(areas) && areas.length > 0) {
@@ -9267,8 +9267,8 @@ var cache_key = (endpoint, params, verb) => {
   const hash = import_crypto.default.createHash("md5").update(`${endpoint}.${verb}.${strParams}`).digest("hex");
   return `genie-${hash}.json`;
 };
-var areaName = async (userId, areaId, skipCache2 = false) => await call_api("GetAreaName", { areaId, userId }, skipCache2);
-var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache2 = false) => {
+var areaName = async (userId, areaId, skipCache = false) => await call_api("GetAreaName", { areaId, userId }, skipCache);
+var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache = false) => {
   month_count = month_count ?? 12;
   return await call_api(
     "GetAreaStatisticsWithPreviousInterval",
@@ -9278,10 +9278,10 @@ var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timesta
       numberOfMonthsToLookBack: month_count,
       endDate: dateFormat(end_timestamp)
     },
-    skipCache2
+    skipCache
   );
 };
-var areaStatisticsMonthly = async (userId, areaId, years, skipCache2 = false) => {
+var areaStatisticsMonthly = async (userId, areaId, years, skipCache = false) => {
   years = years ?? 1;
   return await call_api(
     "GetAreaStatisticsSoldMonthly",
@@ -9290,10 +9290,10 @@ var areaStatisticsMonthly = async (userId, areaId, years, skipCache2 = false) =>
       userId,
       years
     },
-    skipCache2
+    skipCache
   );
 };
-var agentProperties = async (userId, includeOpenHouses, skipCache2 = false) => {
+var agentProperties = async (userId, includeOpenHouses, skipCache = false) => {
   includeOpenHouses = includeOpenHouses ?? false;
   const callback = (results) => {
     if (results.properties) {
@@ -9314,26 +9314,26 @@ var agentProperties = async (userId, includeOpenHouses, skipCache2 = false) => {
   return await call_api(
     "GetAgentProperties",
     { userId, includeOpenHouses },
-    skipCache2,
+    skipCache,
     "POST",
     callback
   );
 };
-var getAssessorProperty = async (property_id, agent_id, skipCache2 = false) => await call_api(
+var getAssessorProperty = async (property_id, agent_id, skipCache = false) => await call_api(
   "GetAssessorPropertyDetail",
   {
     PropertyId: property_id,
     userId: agent_id
   },
-  skipCache2
+  skipCache
 );
-var getAssessorPropertiesDetail = async (address_id, skipCache2 = false) => await call_api(
+var getAssessorPropertiesDetail = async (address_id, skipCache = false) => await call_api(
   `GetAssessorPropertiesDetail/${address_id}`,
   null,
-  skipCache2
+  skipCache
 );
-var getAreaBoundary = async (areaId, skipCache2 = false) => await call_api(`GetAreaBoundary/${areaId}`, null, skipCache2, "POST");
-var getListing = async (user_id, mls_number, mls_id, skipCache2 = false) => {
+var getAreaBoundary = async (areaId, skipCache = false) => await call_api(`GetAreaBoundary/${areaId}`, null, skipCache, "POST");
+var getListing = async (user_id, mls_number, mls_id, skipCache = false) => {
   mls_id = mls_id ?? -1;
   let listing;
   let endpoint;
@@ -9343,7 +9343,7 @@ var getListing = async (user_id, mls_number, mls_id, skipCache2 = false) => {
       const r = await call_api(
         endpoint,
         { mlsId: mls_id, mlsNumber: mls_number, userId: user_id },
-        skipCache2,
+        skipCache,
         "POST"
       );
       listing = r.listing ?? null;
@@ -9355,7 +9355,7 @@ var getListing = async (user_id, mls_number, mls_id, skipCache2 = false) => {
       const r = await call_api(
         endpoint,
         { mlsNumber: mls_number },
-        skipCache2,
+        skipCache,
         "POST"
       );
       listing = r?.listings[0] ?? null;
@@ -9369,8 +9369,8 @@ var getListing = async (user_id, mls_number, mls_id, skipCache2 = false) => {
     );
   }
 };
-var mlsDisplaySettings = async (mls_id, skipCache2 = false) => await call_api(`GetMlsDisplaySettings/${mls_id}`, null, skipCache2, "POST");
-var mlsProperties = async (mlsGroupID, area_id, startDate = null, includeOpenHouses, skipCache2 = false) => {
+var mlsDisplaySettings = async (mls_id, skipCache = false) => await call_api(`GetMlsDisplaySettings/${mls_id}`, null, skipCache, "POST");
+var mlsProperties = async (mlsGroupID, area_id, startDate = null, includeOpenHouses, skipCache = false) => {
   includeOpenHouses = includeOpenHouses ?? false;
   startDate = startDate ?? dateFormat(timeAgo({ months: -1 }));
   let r;
@@ -9383,15 +9383,15 @@ var mlsProperties = async (mlsGroupID, area_id, startDate = null, includeOpenHou
         startDate,
         includeOpenHouses
       },
-      skipCache2
+      skipCache
     );
   } catch (err) {
     console.log("GetMlsProperties failed", err);
   }
   return r ? r?.properties ?? { success: false } : { success: false };
 };
-var openhouseByMlsNumber = async (mlsID, mlsNumber, skipCache2 = false) => await call_api("GetOpenHouseByMlsNumber", { mlsID, mlsNumber }, skipCache2);
-var getPropertyBoundary = async (mls_id, mls_number, fips, property_id, skipCache2 = false) => {
+var openhouseByMlsNumber = async (mlsID, mlsNumber, skipCache = false) => await call_api("GetOpenHouseByMlsNumber", { mlsID, mlsNumber }, skipCache);
+var getPropertyBoundary = async (mls_id, mls_number, fips, property_id, skipCache = false) => {
   const args = {};
   if (mls_id) {
     args["MlsID"] = mls_id;
@@ -9405,9 +9405,9 @@ var getPropertyBoundary = async (mls_id, mls_number, fips, property_id, skipCach
   if (property_id) {
     args["PropertyID"] = property_id;
   }
-  return await call_api("GetPropertyBoundary", args, skipCache2);
+  return await call_api("GetPropertyBoundary", args, skipCache);
 };
-var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, property_id, skipCache2 = false) => {
+var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, property_id, skipCache = false) => {
   const propertyID = property_id ?? -1;
   const fips = strFips ?? "";
   const r = await call_api(
@@ -9419,7 +9419,7 @@ var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, prop
       fips,
       propertyID
     },
-    skipCache2
+    skipCache
   );
   return r.success && r.areas;
 };
@@ -9459,7 +9459,7 @@ var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate 
     return r.data;
   }
 };
-var getUser = async (user_id) => await call_api(`GetUserProfile/${user_id}`, skipCache = true);
+var getUser = async (user_id) => await call_api(`GetUserProfile/${user_id}`);
 var getPropertyFromId = async (property_id, agent_id) => {
   const r = await getAssessorProperty(property_id, agent_id);
   if (r.hasProperty) {
@@ -9513,25 +9513,25 @@ var createQRCodeLead = async (args) => {
   }
   return r;
 };
-var getQRCodeLead = async (qrCodeId, token, skipCache2 = false) => await call_api(
+var getQRCodeLead = async (qrCodeId, token, skipCache = false) => await call_api(
   "GetQRCodeLead",
   { qrCodeId, token },
-  skipCache2,
+  skipCache,
   "POST"
 );
-var call_api = async (endpoint, params, skipCache2 = false, verb = "POST", pre_cache = null) => {
+var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_cache = null) => {
   params = params ?? {};
   if (impersonater.id) {
     params.ImpersonatedByAspNetUserId = impersonater.id;
   }
   const cacheKey = cache_key(endpoint, params, verb);
   let result;
-  if (!skipCache2 && !endpoint.startsWith("GetUserProfile")) {
+  if (!skipCache && !endpoint.startsWith("GetUserProfile")) {
     result = await from_cache(cacheKey, endpoint);
   }
   if (!result) {
     if (endpoint.startsWith("GetUserProfile")) {
-      console.log("ProfileGOT,", skipCache2, params);
+      console.log("ProfileGOT,", skipCache, params);
     }
     params.consumer = 8;
     result = await fetch(API_URL + endpoint, {

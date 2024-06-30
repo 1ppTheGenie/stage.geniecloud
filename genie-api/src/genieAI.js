@@ -426,7 +426,7 @@ export const updateHubAsset = async (hubAssetUrl, userId, hubAssetId) =>
     );
 
 export const getUser = async user_id =>
-    await call_api(`GetUserProfile/${user_id}`, skipCache = true);
+    await call_api(`GetUserProfile/${user_id}`);
 
 const expiry_time = token => {
     decoded = JSON.parse(
