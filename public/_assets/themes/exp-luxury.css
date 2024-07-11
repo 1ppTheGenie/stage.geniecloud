@@ -4,7 +4,7 @@
 
 @import url("../_css/roboto.css");
 
-.exp-luxury, .exp-luxury.black {
+.exp-luxury.dark {
     --theme-body-background: #070300;
     --theme-heading-color: #ffffff;
     /* Heading */
@@ -34,7 +34,7 @@
     --theme-sub-heading-font: 'Roboto', sans-serif;
 }
 
-.exp-luxury.white {
+.exp-luxury, .exp-luxury.light {
     --theme-body-background: #ffffff;
     --theme-heading-color: #2b2e35;
     /* Heading */
