@@ -531,7 +531,7 @@ const call_api = async ( endpoint, params, skipCache = false, verb = "POST", pre
 	const cacheKey = cache_key( endpoint, params, verb );
 
 	let result;
-	if ( !skipCache && !endpoint.startsWith( 'GetUserProfile' ) ) {
+	if ( !skipCache ) {
 		result = await from_cache( cacheKey, endpoint );
 	}
 	
