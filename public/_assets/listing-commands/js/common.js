@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => renderElement(el, retryCount + 1), INITIAL_RETRY_DELAY * Math.pow(2, retryCount)); //If initial retry set to 5000, retries at 5, 10, 20 seconds will occur
         } else {
             console.error(`Failed to load resource after ${MAX_RETRIES} attempts: ${imageUrl}`);
-            el.innerHTML = `<p>Failed to load resource: ${el.dataset.title}</p>`;
+            el.innerHTML = `<p>Failed to load resource: ${el.dataset.title} Try waiting a bit and refreshing the page.</p>`;
             el.removeAttribute(renderKeyAttrib);
         }
     };
