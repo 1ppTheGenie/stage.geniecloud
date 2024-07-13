@@ -9037,19 +9037,27 @@ var get_area_properties = async (params) => {
   return Array.isArray(properties) ? success(properties) : error({ noProps: true });
 };
 var get_area_monthly = async (params) => {
-  const statistics = await areaStatisticsMonthly(
+  let statistics = await areaStatisticsMonthly(
     params.agentId,
     parseInt(params.areaId),
     Math.ceil((params.areaPeriod ?? 12) / 12)
   );
+  const areaName2 = await areaName2(params.agentId, parseInt(params.areaId));
+  if (statistics.success && areaName2 !== statistics.areaName) {
+    statistics = { areaName: areaName2, ...statistics };
+  }
   return statistics.success ? success(statistics) : error(statistics);
 };
 var get_area_data = async (params) => {
-  const statistics = await areaStatisticsWithPrevious(
+  let statistics = await areaStatisticsWithPrevious(
     params.agentId,
     parseInt(params.areaId),
     parseInt(params.areaPeriod || 12)
   );
+  const areaName2 = await areaName2(params.agentId, parseInt(params.areaId));
+  if (statistics.success && areaName2 !== statistics.areaName) {
+    statistics = { areaName: areaName2, ...statistics };
+  }
   return statistics.success ? success(statistics) : error(statistics);
 };
 var get_area_polygon = async (params) => {

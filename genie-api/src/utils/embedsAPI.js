@@ -1,7 +1,9 @@
 // prettier-ignore
+import { stat } from "fs";
 import {
 	getUser,
 	areaStatisticsMonthly,
+    areaName,
 	getShortData,
 	areaStatisticsWithPrevious,
 	mlsProperties,
@@ -434,21 +436,33 @@ const get_area_properties = async params => {
 };
 
 const get_area_monthly = async params => {
-    const statistics = await areaStatisticsMonthly(
+    let statistics = await areaStatisticsMonthly(
         params.agentId,
         parseInt(params.areaId),
         Math.ceil((params.areaPeriod ?? 12) / 12)
     );
 
+    const areaName = await areaName(params.agentId, parseInt(params.areaId));
+
+    if (statistics.success && areaName !== statistics.areaName) {
+        statistics = { areaName, ...statistics };
+    }
+
     return statistics.success ? success(statistics) : error(statistics);
 };
 
 const get_area_data = async params => {
-    const statistics = await areaStatisticsWithPrevious(
+    let statistics = await areaStatisticsWithPrevious(
         params.agentId,
         parseInt(params.areaId),
         parseInt(params.areaPeriod || 12)
     );
+
+    const areaName = await areaName(params.agentId, parseInt(params.areaId));
+
+    if (statistics.success && areaName !== statistics.areaName) {
+        statistics = { areaName, ...statistics };
+    }
 
     return statistics.success ? success(statistics) : error(statistics);
 };
