@@ -9042,9 +9042,9 @@ var get_area_monthly = async (params) => {
     parseInt(params.areaId),
     Math.ceil((params.areaPeriod ?? 12) / 12)
   );
-  const areaName2 = await areaName2(params.agentId, parseInt(params.areaId));
-  if (statistics.success && areaName2 !== statistics.areaName) {
-    statistics = { areaName: areaName2, ...statistics };
+  const areaNameResult = await areaName(params.agentId, parseInt(params.areaId));
+  if (statistics.success && areaNameResult.areaName !== statistics.areaName) {
+    statistics = { ...statistics, areaName: areaNameResult.areaName };
   }
   return statistics.success ? success(statistics) : error(statistics);
 };
@@ -9054,9 +9054,9 @@ var get_area_data = async (params) => {
     parseInt(params.areaId),
     parseInt(params.areaPeriod || 12)
   );
-  const areaName2 = await areaName2(params.agentId, parseInt(params.areaId));
-  if (statistics.success && areaName2 !== statistics.areaName) {
-    statistics = { areaName: areaName2, ...statistics };
+  const areaNameResult = await areaName(params.agentId, parseInt(params.areaId));
+  if (areaNameResult.areaName !== statistics.areaName) {
+    statistics = { ...statistics, areaName: areaNameResult.areaName };
   }
   return statistics.success ? success(statistics) : error(statistics);
 };

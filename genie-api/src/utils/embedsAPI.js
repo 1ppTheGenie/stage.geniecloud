@@ -442,10 +442,10 @@ const get_area_monthly = async params => {
         Math.ceil((params.areaPeriod ?? 12) / 12)
     );
 
-    const areaName = await areaName(params.agentId, parseInt(params.areaId));
+    const areaNameResult = await areaName(params.agentId, parseInt(params.areaId));
 
-    if (statistics.success && areaName !== statistics.areaName) {
-        statistics = { areaName, ...statistics };
+    if (statistics.success && areaNameResult.areaName !== statistics.areaName) {
+        statistics = { ...statistics, areaName: areaNameResult.areaName };
     }
 
     return statistics.success ? success(statistics) : error(statistics);
@@ -458,10 +458,10 @@ const get_area_data = async params => {
         parseInt(params.areaPeriod || 12)
     );
 
-    const areaName = await areaName(params.agentId, parseInt(params.areaId));
+    const areaNameResult = await areaName(params.agentId, parseInt(params.areaId));
 
-    if (statistics.success && areaName !== statistics.areaName) {
-        statistics = { areaName, ...statistics };
+    if (areaNameResult.areaName !== statistics.areaName) {
+        statistics = { ...statistics, areaName: areaNameResult.areaName };
     }
 
     return statistics.success ? success(statistics) : error(statistics);
