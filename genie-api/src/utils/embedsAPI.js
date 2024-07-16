@@ -1,7 +1,9 @@
 // prettier-ignore
+import { stat } from "fs";
 import {
 	getUser,
 	areaStatisticsMonthly,
+    areaName,
 	getShortData,
 	areaStatisticsWithPrevious,
 	mlsProperties,
@@ -14,54 +16,65 @@ import {
 } from "../genieAI.js";
 
 export const embedsAPI = async (route, params) => {
-    let result;
+    let result = {};
 
-    switch (route) {
-        case 'get-landing-data':
-            result = await getLandingPageData(params);
-            break;
-        case 'add-lead':
-            result = await add_lead(params);
-            break;
-        case 'update-lead':
-            result = await update_lead(params);
-            break;
-        case 'address-search':
-            result = await address_search(params);
-            break;
-        case 'get-agent-data':
-            result = await get_agent_data(params);
-            break;
-        case 'get-area-data':
-            result = await get_area_data(params);
-            break;
-        case 'get-area-monthly':
-            result = await get_area_monthly(params);
-            break;
-        case 'get-area-properties':
-            result = await get_area_properties(params);
-            break;
-        case 'get-area-polygon':
-            result = await get_area_polygon(params);
-            break;
-        case 'get-listing-data':
-            result = await get_listing_details(params);
-            break;
-        case 'get-qr-property':
-            result = await get_qr_property(params);
-            break;
-        case 'get-short-data':
-            result = await get_short_data(params);
-            break;
-        case 'get-property':
-            result = await get_property(params);
-            break;
-        case 'get-mls-display':
-            result = await get_mls_display(params);
-            break;
+    try {
+        switch (route) {
+            case 'get-landing-data':
+                result = await getLandingPageData(params);
+                break;
+            case 'add-lead':
+                result = await add_lead(params);
+                break;
+            case 'update-lead':
+                result = await update_lead(params);
+                break;
+            case 'address-search':
+                result = await address_search(params);
+                break;
+            case 'get-agent-data':
+                result = await get_agent_data(params);
+                break;
+            case 'get-area-data':
+                result = await get_area_data(params);
+                break;
+            case 'get-area-monthly':
+                result = await get_area_monthly(params);
+                break;
+            case 'get-area-properties':
+                result = await get_area_properties(params);
+                break;
+            case 'get-area-polygon':
+                result = await get_area_polygon(params);
+                break;
+            case 'get-listing-data':
+                result = await get_listing_details(params);
+                break;
+            case 'get-qr-property':
+                result = await get_qr_property(params);
+                break;
+            case 'get-short-data':
+                result = await get_short_data(params);
+                break;
+            case 'get-property':
+                result = await get_property(params);
+                break;
+            case 'get-mls-display':
+                result = await get_mls_display(params);
+                break;
+            default:
+                throw new Error(`Unknown route: ${route}`)
+        }
+    
+        if (result) {
+            result.route = `Embed: ${route}`;
+        } else {
+            result = { route: `Embed: ${route}`, error: 'No result returned' };
+        }
+    } catch (error) {
+        console.error(`Error in embedsAPI for route ${route}:`, error);
+        result = { route: `Embed: ${route}`, error: error.message };
     }
-
-    result.route = `Embed: ${route}`;
 
     return result;
 };
@@ -423,21 +436,33 @@ const get_area_properties = async params => {
 };
 
 const get_area_monthly = async params => {
-    const statistics = await areaStatisticsMonthly(
+    let statistics = await areaStatisticsMonthly(
         params.agentId,
         parseInt(params.areaId),
         Math.ceil((params.areaPeriod ?? 12) / 12)
     );
 
+    const areaNameResult = await areaName(params.agentId, parseInt(params.areaId));
+
+    if (statistics.success && areaNameResult.areaName !== statistics.areaName) {
+        statistics = { ...statistics, areaName: areaNameResult.areaName };
+    }
+
     return statistics.success ? success(statistics) : error(statistics);
 };
 
 const get_area_data = async params => {
-    const statistics = await areaStatisticsWithPrevious(
+    let statistics = await areaStatisticsWithPrevious(
         params.agentId,
         parseInt(params.areaId),
         parseInt(params.areaPeriod || 12)
     );
+
+    const areaNameResult = await areaName(params.agentId, parseInt(params.areaId));
+
+    if (areaNameResult.areaName !== statistics.areaName) {
+        statistics = { ...statistics, areaName: areaNameResult.areaName };
+    }
 
     return statistics.success ? success(statistics) : error(statistics);
 };

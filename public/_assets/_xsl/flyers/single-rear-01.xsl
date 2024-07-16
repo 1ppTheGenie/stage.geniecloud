@@ -294,7 +294,7 @@
 					<circle cx="15" cy="81" r="4" fill="#a47f54" />
 				</svg>
 				<text x="2%" y="3.8%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
-					<tspan>3D VIRTUAL TOUR</tspan>
+					<tspan>VIRTUAL TOUR</tspan>
 				</text>
 				<svg height="100" width="100" y="0.5%">
 					<circle cx="15" cy="98" r="4" fill="#a47f54" />

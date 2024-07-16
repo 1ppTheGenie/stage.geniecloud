@@ -257,6 +257,7 @@ export const areaFromMlsNumber = async (
         null,
         skipCache
     );
+    console.log(`Surrounding areas found:`, areas);
 
     if (Array.isArray(areas) && areas.length > 0) {
         let set = areas.filter(
@@ -281,6 +282,9 @@ export const areaFromMlsNumber = async (
             return set.shift();
         }
     }
+    console.log(`No suitable area found for MLS number: ${mlsNumber}`);
+    
+    return null;
 };
 
 const agentMlsNumbers = async userId => {
@@ -340,11 +344,11 @@ export const setRenderDefaults = async params => {
             params.mlsId,
             params.userId
         );
-
+    
         if (params.area) {
             params.areaIds = [params.area.areaId];
         } else {
-            throw new Exception(
+            throw new Error(  // Changed from Exception to Error
                 `Failed to get areaId: ${JSON.stringify(params)}`
             );
         }

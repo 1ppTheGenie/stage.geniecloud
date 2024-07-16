@@ -219,7 +219,7 @@ export const renderer = async params => {
 							: render.s3Key ?? render.s3key,
 						output,
 						mimeType,
-						true //skipInvalidation
+						render.totalPages > 1 ? true : false ?? false //skipInvalidation
 					);
 
 					if (s3Url) {
