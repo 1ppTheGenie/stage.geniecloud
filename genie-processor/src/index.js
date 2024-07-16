@@ -285,6 +285,12 @@ const toS3 = async (
 };
 
 if (process.argv.length > 2) {
+	const querystring = await import("querystring");
+	const http = await import("http");
+	const url = await import("url");
+
+	const HOME_PATH = process.env.HOME_PATH ?? process.cwd() + "/../public/";
+
 	console.log("Processing command line: ", process.argv);
 	try {
 		if (process.argv[2] == "test") {
@@ -294,29 +300,55 @@ if (process.argv.length > 2) {
 			const server = http.createServer(async (req, res) => {
 				try {
 					const parsedUrl = url.parse(req.url);
-					const queryParams = querystring.parse(parsedUrl.query);
+					let pathname = `${HOME_PATH}${parsedUrl.pathname}`;
 
-					const assetPath = `${assetDir}${queryParams.xsl}.xsl`;
-					const dataPath = `${dataDir}${
-						queryParams?.xml ?? "_genie-sample"
-					}.xml`;
+					if (!fs.statSync(pathname).isDirectory() && fs.existsSync(pathname)) {
+						fs.readFile(pathname, (err, data) => {
+							if (err) {
+								res.statusCode = 404;
+								res.end(`File not found: ${pathname}`);
+							} else {
+								res.statusCode = 200;
+								res.end(data);
+							}
+						});
+						//res.writeHead( 200, { "Content-Type": "text/html" } );
+						//res.end( typeof output == "string" ? output : JSON.stringify( output ) );
+					} else {
+						const queryParams = querystring.parse(parsedUrl.query);
 
-					if (!fs.existsSync(assetPath)) {
-						res.writeHead(200, { "Content-Type": "text/plain" });
-						res.end(`Asset ${queryParams.xsl} does not exist`);
-						return;
+						const assetPath = `${assetDir}${queryParams.xsl}.xsl`;
+						const dataPath = `${dataDir}${
+							queryParams?.xml ?? "_genie-sample"
+						}.xml`;
+						const themeName = queryParams?.themeName;
+						const themeHue = queryParams?.themeHue;
+
+						if (!fs.existsSync(assetPath)) {
+							res.writeHead(200, { "Content-Type": "text/plain" });
+							res.end(`Asset ${queryParams.xsl} does not exist`);
+							return;
+						}
+
+						if (!fs.existsSync(dataPath)) {
+							res.writeHead(200, { "Content-Type": "text/plain" });
+							res.end(`Data file ${dataPath} does not exist`);
+							return;
+						}
+
+						const output = await testXSL(
+							assetPath,
+							dataPath,
+							themeName,
+							themeHue,
+							null
+						);
+
+						res.writeHead(200, { "Content-Type": "text/html" });
+						res.end(
+							typeof output == "string" ? output : JSON.stringify(output)
+						);
 					}
-
-					if (!fs.existsSync(dataPath)) {
-						res.writeHead(200, { "Content-Type": "text/plain" });
-						res.end(`Data file ${dataPath} does not exist`);
-						return;
-					}
-
-					const output = await testXSL(assetPath, dataPath, null);
-
-					res.writeHead(200, { "Content-Type": "text/html" });
-					res.end(typeof output == "string" ? output : JSON.stringify(output));
 				} catch (err) {
 					res.end(`Failed with ${err.toString()}`);
 				}
@@ -331,40 +363,75 @@ if (process.argv.length > 2) {
 	} catch (err) {
 		console.log("Error:", err);
 	}
+
+	const testXSL = async (
+		xslKey,
+		xmlKey = "_assets/_reference/_genie-sample.xml",
+		themeName = null,
+		themeHue = null,
+		outName = "output.svg"
+	) => {
+		const transformXsl = fs.existsSync(xslKey)
+			? fs.readFileSync(xslKey, "utf8")
+			: (await fromS3(`_assets/_xsl/${xslKey}.xsl`)).toString();
+		let transformXml = fs.existsSync(xmlKey)
+			? fs.readFileSync(xmlKey, "utf8")
+			: (await fromS3(xmlKey)).toString();
+		const { XMLParser, XMLBuilder } = await import("fast-xml-parser");
+
+		const xmlParseOptions = {
+			ignoreAttributes: false,
+			attributeNamePrefix: "aa_",
+			parseAttributeValue: true,
+		};
+
+		const parser = new XMLParser(xmlParseOptions);
+		const jsonObj = parser.parse(transformXml);
+
+		jsonObj.renderRoot.output[`${xmlParseOptions.attributeNamePrefix}siteUrl`] =
+			GENIE_URL;
+		if (themeName) {
+			jsonObj.renderRoot.output[`${xmlParseOptions.attributeNamePrefix}theme`] =
+				themeName;
+		}
+		if (themeHue) {
+			jsonObj.renderRoot.output[
+				`${xmlParseOptions.attributeNamePrefix}themeHue`
+			] = themeHue;
+		}
+
+		xmlParseOptions.attributeValueProcessor = (attrName, val) => {
+			if (val === "true" || val === true) return 1;
+
+			if (val === "false" || val === false) return 0;
+
+			return val;
+		};
+
+		const builder = new XMLBuilder(xmlParseOptions);
+		transformXml = builder.build(jsonObj);
+
+		let r = transform(
+			transformXml,
+			transformXsl,
+			`file://${TEMP_DIR}`,
+			"html",
+			"include-in-render"
+		);
+
+		if (r == "false") {
+			r = "no dice";
+		} else {
+			r = transform(transformXml, transformXsl, `file://${TEMP_DIR}`, "html");
+		}
+
+		if (outName) {
+			fs.writeFile(outName, r, err => {
+				if (err) throw err;
+				console.log(`Data has been written to the ${outName}.`);
+			});
+		}
+
+		return r;
+	};
 }
-
-const testXSL = async (
-	xslKey,
-	xmlKey = "_assets/_reference/_genie-sample.xml",
-	outName = "output.svg"
-) => {
-	const transformXsl = fs.existsSync(xslKey)
-		? fs.readFileSync(xslKey, "utf8")
-		: (await fromS3(`_assets/_xsl/${xslKey}.xsl`)).toString();
-	const transformXml = fs.existsSync(xmlKey)
-		? fs.readFileSync(xmlKey, "utf8")
-		: (await fromS3(xmlKey)).toString();
-
-	let r = transform(
-		transformXml,
-		transformXsl,
-		`file://${TEMP_DIR}`,
-		"html",
-		"include-in-render"
-	);
-
-	if (r == "false") {
-		r = "no dice";
-	} else {
-		r = transform(transformXml, transformXsl, `file://${TEMP_DIR}`, "html");
-	}
-
-	if (outName) {
-		fs.writeFile(outName, r, err => {
-			if (err) throw err;
-			console.log(`Data has been written to the ${out}.`);
-		});
-	}
-
-	return r;
-};
