@@ -1133,7 +1133,7 @@ const prepareAsset = async (asset, params) => {
 
                 // Save to the processing folder to trigger onward processing and final render
                 const cleanKey = basename(render.s3Key)
-                    .replaceAll(/[.\/]|_/g, '-')
+                    .replaceAll(/[.\/#]|_/g, '-')
                     .replaceAll(/[^\w\s-]|_/g, '') // Remove all non-word,number,space chars.
                     .replaceAll('--', '-');
 
