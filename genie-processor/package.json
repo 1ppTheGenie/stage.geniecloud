@@ -14,8 +14,9 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"saxon-js": "^2.6.0",
-		"@aws-sdk/client-s3": "^3.347.1"
+		"@aws-sdk/client-s3": "^3.347.1",
+		"fast-xml-parser": "^4.4.0",
+		"saxon-js": "^2.6.0"
 	},
 	"devDependencies": {
 		"esbuild": "^0.18.4",

@@ -52,7 +52,7 @@
             </xsl:call-template>
         </text>
 
-        <image x="74%" y="60.5%" width="22%" height="26%" preserveAspectRatio="xMidYMid slice">
+        <image x="74%" y="60.5%" width="22%" height="26%" preserveAspectRatio="xMidYMax">
             <xsl:attribute name="href">
                 <xsl:value-of select="//agent[1]/photo" />
             </xsl:attribute>
