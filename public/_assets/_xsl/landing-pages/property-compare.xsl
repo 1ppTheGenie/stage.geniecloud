@@ -57,7 +57,7 @@
 							<div class="logo-part">
 								<div class="logo">
 									<xsl:attribute name="style">
-										<xsl:value-of select="concat( 'background: url(', $companyLogo, ');background-size:contain;background-repeat:no-repeat;background-position:center;' )" />
+										<xsl:value-of select="concat( 'background: url(', $companyLogoInverse, ');background-size:contain;background-repeat:no-repeat;background-position:center;' )" />
 									</xsl:attribute>
 									<xsl:comment/>
 								</div>
