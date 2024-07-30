@@ -110,11 +110,11 @@
 					<xsl:with-param name="text" select="substring-after($text, '&quot;')" />
 				</xsl:call-template>
 			</xsl:when>
-			<xsl:when test="contains($text, '&apos;')">
-				<xsl:value-of select="substring-before($text, '&apos;')" />
+			<xsl:when test="contains($text, &apos;&apos;)">
+				<xsl:value-of select="substring-before($text, &apos;&apos;)" />
 				<xsl:text disable-output-escaping="yes">'</xsl:text>
 				<xsl:call-template name="decode-entities">
-					<xsl:with-param name="text" select="substring-after($text, '&apos;')" />
+					<xsl:with-param name="text" select="substring-after($text, &apos;&apos;)" />
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
@@ -122,6 +122,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+
 
 
 	<xsl:template name="sanitize">
