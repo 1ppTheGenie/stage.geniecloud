@@ -113,7 +113,7 @@
 	</xsl:template>
 
 	<xsl:template name="copyright">
-		<xsl:param name="url" select="'http://genie.ai'" />
+		<xsl:param name="url" select="'http://thegenie.ai'" />
 		<div class="bottom-bar-copyright">
 			<div id="copyright">
 				<div class="container">
@@ -561,6 +561,7 @@
 				</script>
 			</xsl:if>
 			<xsl:call-template name="landing-header-additions" />
+			<xsl:value-of select="//agent[1]/snippetHeadTag" />
 		</head>
 	</xsl:template>
 
