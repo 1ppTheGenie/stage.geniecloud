@@ -79,49 +79,50 @@
 		<xsl:value-of select="$decoded" disable-output-escaping="yes" />
 	</xsl:template>
 
-    <xsl:template name="decode-entities">
+	<xsl:template name="decode-entities">
 		<xsl:param name="text" />
 		<xsl:choose>
 			<xsl:when test="contains($text, '&lt;')">
 				<xsl:value-of select="substring-before($text, '&lt;')" />
-				<xsl:text>&lt;</xsl:text>
+				<xsl:text disable-output-escaping="yes">&lt;</xsl:text>
 				<xsl:call-template name="decode-entities">
 					<xsl:with-param name="text" select="substring-after($text, '&lt;')" />
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:when test="contains($text, '&gt;')">
 				<xsl:value-of select="substring-before($text, '&gt;')" />
-				<xsl:text>&gt;</xsl:text>
+				<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
 				<xsl:call-template name="decode-entities">
 					<xsl:with-param name="text" select="substring-after($text, '&gt;')" />
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:when test="contains($text, '&amp;')">
 				<xsl:value-of select="substring-before($text, '&amp;')" />
-				<xsl:text>&amp;</xsl:text>
+				<xsl:text disable-output-escaping="yes">&amp;</xsl:text>
 				<xsl:call-template name="decode-entities">
 					<xsl:with-param name="text" select="substring-after($text, '&amp;')" />
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:when test="contains($text, '&quot;')">
 				<xsl:value-of select="substring-before($text, '&quot;')" />
-				<xsl:text>"</xsl:text>
+				<xsl:text disable-output-escaping="yes">"</xsl:text>
 				<xsl:call-template name="decode-entities">
 					<xsl:with-param name="text" select="substring-after($text, '&quot;')" />
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:when test="contains($text, '&apos;')">
 				<xsl:value-of select="substring-before($text, '&apos;')" />
-				<xsl:text>'</xsl:text>
+				<xsl:text disable-output-escaping="yes">'</xsl:text>
 				<xsl:call-template name="decode-entities">
 					<xsl:with-param name="text" select="substring-after($text, '&apos;')" />
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="$text" />
+				<xsl:value-of select="$text" disable-output-escaping="yes" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+
 
 	<xsl:template name="sanitize">
 		<xsl:param name="value" />
