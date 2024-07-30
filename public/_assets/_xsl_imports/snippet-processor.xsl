@@ -5,12 +5,8 @@
 
     <xsl:template name="process-snippet">
         <xsl:param name="snippet"/>
-        <xsl:variable name="snippet-doc">
-            <wrapper>
-                <xsl:value-of select="$snippet" disable-output-escaping="yes"/>
-            </wrapper>
-        </xsl:variable>
-        <xsl:copy-of select="$snippet-doc/wrapper/node()"/>
+        <xsl:variable name="snippet-doc" select="saxon:parse($snippet)"/>
+        <xsl:copy-of select="$snippet-doc/*"/>
     </xsl:template>
 
 </xsl:stylesheet>
