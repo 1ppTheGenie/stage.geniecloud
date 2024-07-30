@@ -31,11 +31,10 @@
 		</xsl:call-template>
 
 		<body style="scroll-behavior: smooth;">
-			<xsl:copy-of select="//agent[1]/snippetOpenBodyTag" />
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'market-report-instant ', $cssThemeClass)" />
 			</xsl:attribute>
-
+			<xsl:value-of select="//agent[1]/snippetOpenBodyTag" disable-output-escaping="yes" />
 			<style>
 				<xsl:value-of select="'
 				.genie-alternate { background-color: var(--theme-body-background); padding: 1rem 0; }
@@ -167,7 +166,7 @@
 					<xsl:call-template name="copyright" />
 				</div>
 			</section>
-			<xsl:copy-of select="//agent[1]/snippetCloseBodyTag" />
+			<xsl:value-of select="//agent[1]/snippetCloseBodyTag" disable-output-escaping="yes" />
 		</body>
 	</xsl:template>
 </xsl:stylesheet>

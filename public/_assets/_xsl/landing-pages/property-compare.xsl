@@ -46,11 +46,10 @@
 		</script>
 
 		<body style="scroll-behavior: smooth;">
-			<xsl:copy-of select="//agent[1]/snippetOpenBodyTag" />
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'property-compare ', $cssThemeClass)" />
 			</xsl:attribute>
-
+			<xsl:value-of select="//agent[1]/snippetOpenBodyTag" disable-output-escaping="yes" />
 			<header class="background header-section">
 				<div class="container">
 					<div class="row">
@@ -530,7 +529,7 @@
 			<xsl:if test="$requireDataAccess">
 				<xsl:call-template name="data-access" />
 			</xsl:if>
-		<xsl:copy-of select="//agent[1]/snippetCloseBodyTag" />
+			<xsl:value-of select="//agent[1]/snippetCloseBodyTag" disable-output-escaping="yes" />
 		</body>
 	</xsl:template>
 </xsl:stylesheet>
