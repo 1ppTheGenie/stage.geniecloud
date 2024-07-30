@@ -17,7 +17,13 @@
     <!-- Template to decode entities -->
     <xsl:template name="decode-entities">
         <xsl:param name="text" />
-        <xsl:value-of select="$text" disable-output-escaping="yes"/>
+        <xsl:variable name="step1" select="replace($text, '&amp;lt;', '&lt;')"/>
+        <xsl:variable name="step2" select="replace($step1, '&amp;gt;', '&gt;')"/>
+        <xsl:variable name="step3" select="replace($step2, '&amp;amp;', '&amp;')"/>
+        <xsl:variable name="step4" select="replace($step3, '&amp;quot;', '&quot;')"/>
+        <xsl:variable name="step5" select="replace($step4, '&amp;apos;', &quot;'&quot;)"/>
+        <xsl:variable name="step6" select="replace($step5, '&amp;#10;', '&#10;')"/>
+        <xsl:value-of select="$step6"/>
     </xsl:template>
 
 </xsl:stylesheet>
