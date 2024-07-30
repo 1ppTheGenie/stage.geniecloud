@@ -42,7 +42,7 @@
 				<xsl:value-of select="concat( 'lc-hollywood ', $cssThemeClass)" />
 			</xsl:attribute>
 			<xsl:call-template name="process-snippet">
-				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag/text()" />
+				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag" />
 			</xsl:call-template>
 			<div id="step1" class="steps banner-top-section-info section background">
 				<div class="mobile-header-sec">
@@ -829,7 +829,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 
 			<link rel="stylesheet" href="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.css' )}" />
 			<xsl:call-template name="process-snippet">
-				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag/text()" />
+				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag" />
 			</xsl:call-template>
 		</body>
 	</xsl:template>

@@ -474,9 +474,9 @@ const processAgents = async agentIds => {
                 disclaimerExtra: getDisclaimer(4).text, //"htmlDisclaimer"
                 disclaimerIDX: getDisclaimer(3).text, // "idxDisclaimer"
 
-                snippetHeadTag: `<![CDATA[${prepareSnippet(getSnippet(1))}]]>`,
-                snippetOpenBodyTag: `<![CDATA[${prepareSnippet(getSnippet(2))}]]>`,
-                snippetCloseBodyTag: `<![CDATA[${prepareSnippet(getSnippet(3))}]]>`,
+                snippetHeadTag: prepareSnippet(getSnippet(1)),
+                snippetOpenBodyTag: prepareSnippet(getSnippet(2)),
+                snippetCloseBodyTag: prepareSnippet(getSnippet(3)),
 
                 pronoun: marketingSettings.profile.isTeam
                     ? 'plural'

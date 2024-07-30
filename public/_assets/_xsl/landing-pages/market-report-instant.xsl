@@ -35,7 +35,7 @@
 				<xsl:value-of select="concat( 'market-report-instant ', $cssThemeClass)" />
 			</xsl:attribute>
 			<xsl:call-template name="process-snippet">
-				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag/text()" />
+				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag" />
 			</xsl:call-template>
 			<style>
 				<xsl:value-of select="'
@@ -169,7 +169,7 @@
 				</div>
 			</section>
 			<xsl:call-template name="process-snippet">
-				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag/text()" />
+				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag" />
 			</xsl:call-template>
 		</body>
 	</xsl:template>

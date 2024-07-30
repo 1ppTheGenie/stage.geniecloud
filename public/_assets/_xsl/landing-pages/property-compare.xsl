@@ -50,7 +50,7 @@
 				<xsl:value-of select="concat( 'property-compare ', $cssThemeClass)" />
 			</xsl:attribute>
 			<xsl:call-template name="process-snippet">
-				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag/text()" />
+				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag" />
 			</xsl:call-template>
 			<header class="background header-section">
 				<div class="container">
@@ -532,7 +532,7 @@
 				<xsl:call-template name="data-access" />
 			</xsl:if>
 			<xsl:call-template name="process-snippet">
-				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag/text()" />
+				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag" />
 			</xsl:call-template>
 		</body>
 	</xsl:template>
