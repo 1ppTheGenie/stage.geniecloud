@@ -7876,7 +7876,7 @@ var processAgents = async (agentIds) => {
           (d) => d.marketingSnippetTypeId == id
         );
         return snippet ?? {
-          text: ""
+          codeSnippet: ""
         };
       };
       let timezone, tzOffset;
@@ -7937,9 +7937,9 @@ var processAgents = async (agentIds) => {
         //"htmlDisclaimer"
         disclaimerIDX: getDisclaimer(3).text,
         // "idxDisclaimer"
-        snippetHeadTag: getSnippet(1).text,
-        snippetOpenBodyTag: getSnippet(2).text,
-        snippetCloseBodyTag: getSnippet(3).text,
+        snippetHeadTag: getSnippet(1).codeSnippet,
+        snippetOpenBodyTag: getSnippet(2).codeSnippet,
+        snippetCloseBodyTag: getSnippet(3).codeSnippet,
         pronoun: marketingSettings.profile.isTeam ? "plural" : "singular",
         timezone,
         tzOffset: DateTime.local().setZone(timezone).offset,
