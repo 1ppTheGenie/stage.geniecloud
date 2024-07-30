@@ -561,7 +561,7 @@
 				</script>
 			</xsl:if>
 			<xsl:call-template name="landing-header-additions" />
-			<xsl:copy-of select="//agent[1]/snippetHeadTag/node()" />
+			<xsl:copy-of select="//agent[1]/snippetHeadBodyTag" />
 		</head>
 	</xsl:template>
 

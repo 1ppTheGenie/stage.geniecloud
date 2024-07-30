@@ -46,7 +46,7 @@
 		</script>
 
 		<body style="scroll-behavior: smooth;">
-			<xsl:copy-of select="//agent[1]/snippetOpenBodyTag/node()" />
+			<xsl:copy-of select="//agent[1]/snippetOpenBodyTag" />
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'property-compare ', $cssThemeClass)" />
 			</xsl:attribute>
@@ -530,7 +530,7 @@
 			<xsl:if test="$requireDataAccess">
 				<xsl:call-template name="data-access" />
 			</xsl:if>
-		<xsl:copy-of select="//agent[1]/snippetCloseBodyTag/node()" />
+		<xsl:copy-of select="//agent[1]/snippetCloseBodyTag" />
 		</body>
 	</xsl:template>
 </xsl:stylesheet>
