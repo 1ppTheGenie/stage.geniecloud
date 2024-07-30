@@ -3,6 +3,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 	<xsl:import href="global-variables.xsl" />
 	<xsl:import href="genie-functions.xsl" />
+	<xsl:import href="snippet-processor.xsl" />
 
 	<xsl:mode on-no-match="shallow-copy" />
 
