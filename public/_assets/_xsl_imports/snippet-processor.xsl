@@ -9,8 +9,11 @@
         <xsl:output-character character="&gt;" string="&#62;"/>
         <xsl:output-character character="&amp;" string="&#38;"/>
         <xsl:output-character character="&quot;" string="&#34;"/>
-        <xsl:output-character character="'" string="&#39;"/>
+        <xsl:output-character character="&apos;" string="&#39;"/>
     </xsl:character-map>
+
+    <!-- Define variables for quotes -->
+    <xsl:variable name="apos">'</xsl:variable>
 
     <!-- Template to process the snippet -->
     <xsl:template name="process-snippet">
@@ -41,7 +44,7 @@
                     <xsl:with-param name="text" select="substring-after($text, '&gt;')" />
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="contains($text, '&amp;') and not(contains($text, '&amp;lt;') or contains($text, '&amp;gt;') or contains($text, '&amp;quot;') or contains($text, '&amp;apos;'))">
+            <xsl:when test="contains($text, '&amp;')">
                 <xsl:value-of select="substring-before($text, '&amp;')" />
                 <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
                 <xsl:call-template name="decode-entities">
@@ -55,11 +58,11 @@
                     <xsl:with-param name="text" select="substring-after($text, '&quot;')" />
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="contains($text, &apos;&apos;)">
-                <xsl:value-of select="substring-before($text, &apos;&apos;)" />
+            <xsl:when test="contains($text, $apos)">
+                <xsl:value-of select="substring-before($text, $apos)" />
                 <xsl:text disable-output-escaping="yes">'</xsl:text>
                 <xsl:call-template name="decode-entities">
-                    <xsl:with-param name="text" select="substring-after($text, &apos;&apos;)" />
+                    <xsl:with-param name="text" select="substring-after($text, $apos)" />
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
