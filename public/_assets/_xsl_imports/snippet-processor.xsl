@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <!-- Character map for decoding entities -->
+    <xsl:output method="html" encoding="UTF-8" indent="yes" use-character-maps="entities"/>
     
-    <xsl:output method="html" encoding="UTF-8" indent="yes"/>
-    
+    <xsl:character-map name="entities">
+        <xsl:output-character character="&lt;" string="&#60;"/>
+        <xsl:output-character character="&gt;" string="&#62;"/>
+        <xsl:output-character character="&amp;" string="&#38;"/>
+        <xsl:output-character character="&quot;" string="&#34;"/>
+        <xsl:output-character character="&apos;" string="&#39;"/>
+    </xsl:character-map>
+
+    <!-- Template to process the snippet -->
     <xsl:template name="process-snippet">
         <xsl:param name="snippet" />
         <xsl:variable name="decoded">
@@ -10,9 +20,10 @@
                 <xsl:with-param name="text" select="$snippet" />
             </xsl:call-template>
         </xsl:variable>
-        <xsl:value-of select="$decoded" disable-output-escaping="yes" />
+        <xsl:value-of select="$decoded" disable-output-escaping="yes"/>
     </xsl:template>
 
+    <!-- Template to decode entities -->
     <xsl:template name="decode-entities">
         <xsl:param name="text" />
         <xsl:choose>
