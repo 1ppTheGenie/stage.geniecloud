@@ -124,8 +124,6 @@
 	</xsl:template>
 
 
-
-
 	<xsl:template name="sanitize">
 		<xsl:param name="value" />
 
