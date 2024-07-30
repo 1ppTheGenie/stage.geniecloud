@@ -410,15 +410,15 @@ const processAgents = async agentIds => {
                 );
             };
 
-            const prepareSnippet = (snippet) => {
-                return snippet.codeSnippet
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&apos;')
-                    .replace(/\r\n|\n|\r/g, '&#10;');
-            };
+            // const prepareSnippet = (snippet) => {
+            //     return snippet.codeSnippet
+            //         .replace(/&/g, '&amp;')
+            //         .replace(/</g, '&lt;')
+            //         .replace(/>/g, '&gt;')
+            //         .replace(/"/g, '&quot;')
+            //         .replace(/'/g, '&apos;')
+            //         .replace(/\r\n|\n|\r/g, '&#10;');
+            // };
 
             let timezone, tzOffset;
             switch (marketingSettings.profile?.timeZoneId) {
@@ -474,9 +474,9 @@ const processAgents = async agentIds => {
                 disclaimerExtra: getDisclaimer(4).text, //"htmlDisclaimer"
                 disclaimerIDX: getDisclaimer(3).text, // "idxDisclaimer"
 
-                snippetHeadTag: prepareSnippet(getSnippet(1)),
-                snippetOpenBodyTag: prepareSnippet(getSnippet(2)),
-                snippetCloseBodyTag: prepareSnippet(getSnippet(3)),
+                snippetHeadTag: getSnippet(1).codeSnippet,
+                snippetOpenBodyTag: getSnippet(2).codeSnippet,
+                snippetCloseBodyTag: getSnippet(3).codeSnippet,
 
                 pronoun: marketingSettings.profile.isTeam
                     ? 'plural'
