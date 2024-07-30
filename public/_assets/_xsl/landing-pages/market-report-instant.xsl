@@ -34,7 +34,9 @@
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'market-report-instant ', $cssThemeClass)" />
 			</xsl:attribute>
-			<xsl:copy-of select="//agent[1]/snippetOpenBodyTag/text()" />
+			<xsl:call-template name="process-snippet">
+				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag/text()" />
+			</xsl:call-template>
 			<style>
 				<xsl:value-of select="'
 				.genie-alternate { background-color: var(--theme-body-background); padding: 1rem 0; }
@@ -166,7 +168,9 @@
 					<xsl:call-template name="copyright" />
 				</div>
 			</section>
-			<xsl:copy-of select="//agent[1]/snippetCloseBodyTag/text()" />
+			<xsl:call-template name="process-snippet">
+				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag/text()" />
+			</xsl:call-template>
 		</body>
 	</xsl:template>
 </xsl:stylesheet>

@@ -49,7 +49,9 @@
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'property-compare ', $cssThemeClass)" />
 			</xsl:attribute>
-			<xsl:copy-of select="//agent[1]/snippetOpenBodyTag/text()" />
+			<xsl:call-template name="process-snippet">
+				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag/text()" />
+			</xsl:call-template>
 			<header class="background header-section">
 				<div class="container">
 					<div class="row">
@@ -529,7 +531,9 @@
 			<xsl:if test="$requireDataAccess">
 				<xsl:call-template name="data-access" />
 			</xsl:if>
-			<xsl:copy-of select="//agent[1]/snippetCloseBodyTag/text()" />
+			<xsl:call-template name="process-snippet">
+				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag/text()" />
+			</xsl:call-template>
 		</body>
 	</xsl:template>
 </xsl:stylesheet>
