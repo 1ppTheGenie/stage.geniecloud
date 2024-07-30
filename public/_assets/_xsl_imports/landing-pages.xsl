@@ -561,7 +561,7 @@
 				</script>
 			</xsl:if>
 			<xsl:call-template name="landing-header-additions" />
-			<xsl:value-of select="//agent[1]/snippetHeadTag/text()" disable-output-escaping="yes" />
+			<xsl:copy-of select="//agent[1]/snippetHeadTag/text()" />
 		</head>
 	</xsl:template>
 

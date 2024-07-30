@@ -41,7 +41,7 @@
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'lc-hollywood ', $cssThemeClass)" />
 			</xsl:attribute>
-			<xsl:value-of select="//agent[1]/snippetOpenBodyTag/text()" disable-output-escaping="yes" />
+			<xsl:copy-of select="//agent[1]/snippetOpenBodyTag/text()" />
 			<div id="step1" class="steps banner-top-section-info section background">
 				<div class="mobile-header-sec">
 					<div class="tab-sec">
@@ -826,7 +826,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 			</script>
 
 			<link rel="stylesheet" href="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.css' )}" />
-			<xsl:value-of select="//agent[1]/snippetCloseBodyTag/text()" disable-output-escaping="yes" />
+			<xsl:copy-of select="//agent[1]/snippetCloseBodyTag/text()" />
 		</body>
 	</xsl:template>
 </xsl:stylesheet>												

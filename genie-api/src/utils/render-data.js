@@ -408,7 +408,7 @@ const processAgents = async agentIds => {
                         codeSnippet: ''
                     }
                 );
-            }
+            };
 
             let timezone, tzOffset;
             switch (marketingSettings.profile?.timeZoneId) {

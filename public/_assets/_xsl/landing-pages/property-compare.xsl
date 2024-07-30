@@ -49,7 +49,7 @@
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'property-compare ', $cssThemeClass)" />
 			</xsl:attribute>
-			<xsl:value-of select="//agent[1]/snippetOpenBodyTag/text()" disable-output-escaping="yes" />
+			<xsl:copy-of select="//agent[1]/snippetOpenBodyTag/text()" />
 			<header class="background header-section">
 				<div class="container">
 					<div class="row">
@@ -529,7 +529,7 @@
 			<xsl:if test="$requireDataAccess">
 				<xsl:call-template name="data-access" />
 			</xsl:if>
-			<xsl:value-of select="//agent[1]/snippetCloseBodyTag/text()" disable-output-escaping="yes" />
+			<xsl:copy-of select="//agent[1]/snippetCloseBodyTag/text()" />
 		</body>
 	</xsl:template>
 </xsl:stylesheet>
