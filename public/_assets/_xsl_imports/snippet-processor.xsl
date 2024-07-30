@@ -41,7 +41,7 @@
                     <xsl:with-param name="text" select="substring-after($text, '&gt;')" />
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="contains($text, '&amp;')">
+            <xsl:when test="contains($text, '&amp;') and not(contains($text, '&amp;lt;') or contains($text, '&amp;gt;') or contains($text, '&amp;quot;') or contains($text, '&amp;apos;'))">
                 <xsl:value-of select="substring-before($text, '&amp;')" />
                 <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
                 <xsl:call-template name="decode-entities">
@@ -55,11 +55,11 @@
                     <xsl:with-param name="text" select="substring-after($text, '&quot;')" />
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="contains($text, &quot;&apos;&quot;)">
-                <xsl:value-of select="substring-before($text, &quot;&apos;&quot;)" />
+            <xsl:when test="contains($text, '&apos;')">
+                <xsl:value-of select="substring-before($text, '&apos;')" />
                 <xsl:text disable-output-escaping="yes">'</xsl:text>
                 <xsl:call-template name="decode-entities">
-                    <xsl:with-param name="text" select="substring-after($text, &quot;&apos;&quot;)" />
+                    <xsl:with-param name="text" select="substring-after($text, '&apos;')" />
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
