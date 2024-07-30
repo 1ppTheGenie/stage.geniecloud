@@ -7871,6 +7871,14 @@ var processAgents = async (agentIds) => {
           url: ""
         };
       };
+      const getSnippet = (id) => {
+        const snippet = marketingSettings.codeSnippets.find(
+          (d) => d.marketingSnippetTypeId == id
+        );
+        return snippet ?? {
+          text: ""
+        };
+      };
       let timezone, tzOffset;
       switch (marketingSettings.profile?.timeZoneId) {
         case 1:
@@ -7929,6 +7937,9 @@ var processAgents = async (agentIds) => {
         //"htmlDisclaimer"
         disclaimerIDX: getDisclaimer(3).text,
         // "idxDisclaimer"
+        snippetHeadTag: getSnippet(1).text,
+        snippetOpenBodyTag: getSnippet(2).text,
+        snippetCloseBodyTag: getSnippet(3).text,
         pronoun: marketingSettings.profile.isTeam ? "plural" : "singular",
         timezone,
         tzOffset: DateTime.local().setZone(timezone).offset,
