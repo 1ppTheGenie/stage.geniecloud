@@ -31,7 +31,7 @@
 		</xsl:call-template>
 
 		<body style="scroll-behavior: smooth;">
-			<xsl:value-of select="//agent[1]/snippetOpenBodyTag" />
+			<xsl:value-of select="//agent[1]/snippetOpenBodyTag/text()" />
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'market-report-instant ', $cssThemeClass)" />
 			</xsl:attribute>
@@ -167,7 +167,7 @@
 					<xsl:call-template name="copyright" />
 				</div>
 			</section>
-			<xsl:value-of select="//agent[1]/snippetCloseBodyTag" />
+			<xsl:value-of select="//agent[1]/snippetCloseBodyTag/text()" />
 		</body>
 	</xsl:template>
 </xsl:stylesheet>
