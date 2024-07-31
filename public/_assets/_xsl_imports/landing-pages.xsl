@@ -565,7 +565,7 @@
 			<xsl:call-template name="process-snippet">
 				<xsl:with-param name="snippet" select="//agent[1]/snippetHeadTag" />
 			</xsl:call-template>
-			<xsl:if test="//agent[1]/googleAnalyticsId">
+			<xsl:if test="//agent[1]/googleAnalyticsId!=''">
 				<script async="async">
 					<xsl:attribute name="src">
 						<xsl:value-of select="concat('https://www.googletagmanager.com/gtag/js?id=', //agent[1]/googleAnalyticsId)"/>
@@ -580,7 +580,7 @@
 					')" />
 				</script>
 			</xsl:if>
-			<xsl:if test="//agent[1]/facebookPixelId">
+			<xsl:if test="//agent[1]/facebookPixelId!=''">
 				<script>
 					<xsl:value-of select="concat('
 						!function(f,b,e,v,n,t,s)
