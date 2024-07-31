@@ -7940,6 +7940,8 @@ var processAgents = async (agentIds) => {
         snippetHeadTag: getSnippet(1).codeSnippet,
         snippetOpenBodyTag: getSnippet(2).codeSnippet,
         snippetCloseBodyTag: getSnippet(3).codeSnippet,
+        googleAnalyticsId: marketingSettings.hasGoogleSettings ? marketingSettings.google.analyticsId : null,
+        facebookPixelId: marketingSettings.hasFacebookSettings ? marketingSettings.facebook.pixelId : null,
         pronoun: marketingSettings.profile.isTeam ? "plural" : "singular",
         timezone,
         tzOffset: DateTime.local().setZone(timezone).offset,

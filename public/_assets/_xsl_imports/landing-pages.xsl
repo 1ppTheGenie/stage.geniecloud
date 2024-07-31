@@ -565,6 +565,46 @@
 			<xsl:call-template name="process-snippet">
 				<xsl:with-param name="snippet" select="//agent[1]/snippetHeadTag" />
 			</xsl:call-template>
+			<xsl:if test="//agent[1]/googleAnalyticsId">
+				<script async="async">
+					<xsl:attribute name="src">
+						<xsl:value-of select="concat('https://www.googletagmanager.com/gtag/js?id=', //agent[1]/googleAnalyticsId)"/>
+					</xsl:attribute>
+				</script>
+				<script>
+					<xsl:value-of select="concat('
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag(`js`, new Date());
+						gtag(`config`, `', //agent[1]/googleAnalyticsId, '`);
+					')" />
+				</script>
+			</xsl:if>
+			<xsl:if test="//agent[1]/facebookPixelId">
+				<script>
+					<xsl:value-of select="concat('
+						!function(f,b,e,v,n,t,s)
+						{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+						n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+						if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version=`2.0`;
+						n.queue=[];t=b.createElement(e);t.async=!0;
+						t.src=v;s=b.getElementsByTagName(e)[0];
+						s.parentNode.insertBefore(t,s)}(window,document,`script`,
+						`https://connect.facebook.net/en_US/fbevents.js`);
+						fbq(`init`, `', //agent[1]/facebookPixelId, '`);
+						fbq(`track`, `PageView`);
+					')" />
+				</script>
+				<noscript>
+					<xsl:element name="img">
+						<xsl:attribute name="height">1</xsl:attribute>
+						<xsl:attribute name="width">1</xsl:attribute>
+						<xsl:attribute name="src">
+							<xsl:value-of select="concat('https://www.facebook.com/tr?id=', //agent[1]/facebookPixelId, '&amp;ev=PageView&amp;noscript=1')"/>
+						</xsl:attribute>
+					</xsl:element>
+				</noscript>
+			</xsl:if>
 		</head>
 	</xsl:template>
 
