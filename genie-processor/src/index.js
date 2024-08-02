@@ -294,6 +294,10 @@ if (process.argv.length > 2) {
 					let pathname = `${HOME_PATH}${parsedUrl.pathname}`;
 
 					if (!fs.statSync(pathname).isDirectory() && fs.existsSync(pathname)) {
+						if (pathname.endsWith('.js')) {
+							res.setHeader('Content-Type', 'application/javascript');
+						}
+						
 						fs.readFile(pathname, (err, data) => {
 							if (err) {
 								res.statusCode = 404;
