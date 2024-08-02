@@ -16,3 +16,5 @@ export * from "./MapListings";
 export * from "./MRIcon";
 export * from "./Pagination";
 export * from "./Spinner";
+
+export * from "./_LeadCtaTag";
