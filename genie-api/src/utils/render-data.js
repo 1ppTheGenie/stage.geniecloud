@@ -408,17 +408,7 @@ const processAgents = async agentIds => {
                         codeSnippet: ''
                     }
                 );
-            };
-
-            // const prepareSnippet = (snippet) => {
-            //     return snippet.codeSnippet
-            //         .replace(/&/g, '&amp;')
-            //         .replace(/</g, '&lt;')
-            //         .replace(/>/g, '&gt;')
-            //         .replace(/"/g, '&quot;')
-            //         .replace(/'/g, '&apos;')
-            //         .replace(/\r\n|\n|\r/g, '&#10;');
-            // };
+            };            
 
             let timezone, tzOffset;
             switch (marketingSettings.profile?.timeZoneId) {

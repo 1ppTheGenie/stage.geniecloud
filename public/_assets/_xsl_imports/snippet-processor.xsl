@@ -4,7 +4,7 @@
     <xsl:output method="html" encoding="UTF-8" indent="yes" omit-xml-declaration="yes"/>
 
     <xsl:template name="process-snippet">
-        <xsl:param name="snippet"/>
+        <xsl:param name="snippet"/> 
         <xsl:variable name="snippet-doc" as="document-node()">
             <xsl:sequence select="parse-xml-fragment(concat('<root>', $snippet, '</root>'))"/>
         </xsl:variable>
