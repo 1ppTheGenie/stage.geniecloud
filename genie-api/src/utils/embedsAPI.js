@@ -163,7 +163,7 @@ const get_property = async params => {
 };
 
 const get_short_data = async params => {
-    const r = getShortData(
+    const r = await getShortData(
         parseInt(params.shortId),
         params.token,
         params.agentId || null
