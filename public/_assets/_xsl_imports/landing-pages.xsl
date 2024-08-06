@@ -571,7 +571,7 @@
 						<xsl:value-of select="concat('https://www.googletagmanager.com/gtag/js?id=', //agent[1]/googleAnalyticsId)"/>
 					</xsl:attribute>
 				</script>
-				<script>
+				<script> 
 					<xsl:value-of select="concat('
 						window.dataLayer = window.dataLayer || [];
 						function gtag(){dataLayer.push(arguments);}

@@ -225,6 +225,65 @@ export const useAgentData = () => {
 	return agent;
 };
 
+//TODO: not sure if accessing document from util is considered bad practice...tbd
+export const addDynamicPopup = (popupId) => {  
+  if (document.getElementById(popupId))
+    return false; //already exists
+
+  document.body.classList.add("hasPopup");
+  const div = document.createElement("div");
+  div.id = popupId;
+  div.classList.add("popup-dialog", "visible");
+  document.body.appendChild(div);
+  return true;
+}
+
+//TODO: I think we can expose api endpoint that will deliver options but just mocking till we have a clear plan
+export const mockCtaData = (ctaId) => {
+  switch(ctaId) {
+    case 1:
+      return {
+        ctaTitle: "Market Insider Offer",
+        ctaSubTitle: "What's happening in YOUR market?",
+        ctaBody: "Do you want your market insider report delivered monthly?",
+        ctaTags: "OptInMarketInsider",
+        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/b05063b4-514a-41ed-8dfa-5faa4acddb00/public",
+        ctaNote: "I would like monthly market update for ",
+        ctaSubmitText: "Yes!", 
+        ctaResponse: "All set, we submitted your request!",
+        delay: 5
+      };
+    default:
+      return {
+        ctaTitle: "Market Insider Subscription",
+        ctaSubTitle: "Stay on top of the latest TRENDS",
+        ctaBody: "Get your market insider report delivered monthly.",
+        ctaTags: "OptInMarketInsider",
+        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/b05063b4-514a-41ed-8dfa-5faa4acddb00/public",
+        ctaNote: "I would like monthly market update for ",
+        ctaSubmitText: "Yes Please!", 
+        ctaResponse: "All set, we submitted your request!",
+        delay: 5
+      };
+  }
+}
+
+//TODO: check w/ John on location of this class
+export class InsensitiveURLSearchParams {
+  constructor(queryString) {
+    this.params = new URLSearchParams(queryString);
+    this.map = new Map();
+
+    // Populate the map with lowercase keys
+    for (const [key, value] of this.params.entries()) {
+      this.map.set(key.toLowerCase(), value);
+    }
+  }
+
+  get(key) {
+    return this.map.get(key.toLowerCase());
+  }  
+}
 /**
 	 * 	const [store, setStore] = createStore({
 		loading: true,

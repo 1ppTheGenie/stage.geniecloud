@@ -11,13 +11,17 @@ import {
 	useSettings,
 	Context4Settings,
 	landingPageData,
-	currency
+	currency,
+  addDynamicPopup,
+  mockCtaData,
+  InsensitiveURLSearchParams
 } from "@/utilities";
 
 import "@/index.css";
 
 import Gallery from "@/components/_Gallery";
 import HomeValuation from "@/components/_HomeValuation";
+import LeadCtaTag from "@/components/_LeadCtaTag";
 
 const VIEWED = "Viewed Landing Page";
 
@@ -366,6 +370,7 @@ export default () => {
 		el.addEventListener("click", event => {
 			event.preventDefault();
 
+      //TODO: should be able to convert to use addDynamicPopup
 			if (!document.getElementById("genie-homeValuePopup")) {
 				const settings = useSettings(Context4Settings);
 				document.body.classList.add("hasPopup");
@@ -391,7 +396,51 @@ export default () => {
 		});
 	});
 
-	/***********************
+  /***********************
+	 *
+	 * Opt-in timed popup
+	 *
+	 ***********************/
+  window.gHub.showOptIn = () => { 
+    const ctaId = new InsensitiveURLSearchParams(window.location.search).get("ctaId"); 
+
+    if(ctaId == null)
+      return;
+    
+    const data = mockCtaData(parseInt(ctaId));
+
+    if(data == null)
+      return; 
+    
+    const settings = useSettings(Context4Settings);
+        
+    //the delay for the popup, I am making the assumption that this would also allow the lead to be created first so that we have
+    //a leadId when it actually fires.
+    setTimeout(() => {
+      //to test you can explicitly set the user and leadId     
+      if (settings.leadId || settings.genieLeadId || window.gHub.leadId) {
+        const dynamicPopupId = "genie-leadCtaTagPopup";
+        if(addDynamicPopup(dynamicPopupId)) {        
+          const settings = useSettings(Context4Settings);
+    
+          const App = () => {
+            return (
+              <Context4Settings.Provider value={settings}>
+                <LeadCtaTag ctaData={data} />
+              </Context4Settings.Provider>
+            );
+          };
+    
+          render(App, document.getElementById(dynamicPopupId));
+        }
+      }
+    }, data.delay);  
+  }    
+        
+  window.gHub.showOptIn();
+  
+  
+  /***********************
 	 *
 	 * Vanilla version of the jQuery slide toggle
 	 *

@@ -163,7 +163,7 @@ const get_property = async params => {
 };
 
 const get_short_data = async params => {
-    const r = getShortData(
+    const r = await getShortData(
         parseInt(params.shortId),
         params.token,
         params.agentId || null
@@ -230,17 +230,20 @@ const add_lead = async params => {
             }
         }
 
-        if (params.hasOwnProperty('fullName') && params.fullName ) {
-            var split = params?.fullName?.split(' ');
+        if (params.hasOwnProperty('fullName') && params.fullName ) {                    
+          //I was seeing leads coming through with a double first name and empty last name so the assumption was a user
+          //inputting something like 'John Doe '.  This should clean that up and instances where multiple spaces are found anywhere in the input.
+          //It is probably worth prototyping to something like String.prototype.splitRemoveEmpty at some point if it gets more usage.
+          var split = params?.fullName?.split(' ')?.filter(Boolean);
 
-            if (split && split.length > 1) {
-                var last = split.pop();
+          if (split && split.length > 1) {
+              var last = split.pop();
 
-                args['lastName'] = last;
-                args['firstName'] = split.join(' ');
-            } else {
-                args['firstName'] = params.fullName;
-            }
+              args['lastName'] = last;
+              args['firstName'] = split.join(' ');
+          } else {
+              args['firstName'] = params.fullName;
+          }
         }
 
         if (params.hasOwnProperty('meta[message]') && params.hasOwnProperty('meta[message]') != null) {

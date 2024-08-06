@@ -296,7 +296,7 @@ if (process.argv.length > 2) {
 					if (!fs.statSync(pathname).isDirectory() && fs.existsSync(pathname)) {
 						if (pathname.endsWith('.js')) {
 							res.setHeader('Content-Type', 'application/javascript');
-						}
+						} 
 						
 						fs.readFile(pathname, (err, data) => {
 							if (err) {
