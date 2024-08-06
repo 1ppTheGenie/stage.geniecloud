@@ -293,7 +293,7 @@ export default () => {
 				postedData.genieLeadId =
 					settings.leadId || settings.genieLeadId || window.gHub.leadId;
 				postedData.email = postedData.emailAddress;
-
+        
 				await updateLead(postedData);
 			}
 		} else {
@@ -339,7 +339,7 @@ export default () => {
 			) {
 				postedData.trackingData.utmSource = window.location.href;
 			}
-
+      
 			const r = await createLead(postedData);
 
 			if (r.result?.key) {
@@ -357,9 +357,18 @@ export default () => {
 		if ( pid ) {
 			window.gHub.addLead( null, { propertyId: pid } );
 		}
-	} else if ( urlParams.token ) {
-		(async () => await window.gHub.getLandingPageData())();
-	}
+	} else if ( urlParams.token ){
+    (async () => {
+      const lpData = await window.gHub.getLandingPageData();            
+      if(lpData.lead && lpData.lead.genieLeadId) {         
+        window.gHub.leadId = lpData.lead.genieLeadId;
+      }
+
+      document.dispatchEvent(new Event("genie-landing-data-loaded"), true);      
+    })();
+  }  
+
+   
 
 	/***********************
 	 *
@@ -416,7 +425,7 @@ export default () => {
         
     //the delay for the popup, I am making the assumption that this would also allow the lead to be created first so that we have
     //a leadId when it actually fires.
-    setTimeout(() => {
+    setTimeout(() => {            
       //to test you can explicitly set the user and leadId     
       if (settings.leadId || settings.genieLeadId || window.gHub.leadId) {
         const dynamicPopupId = "genie-leadCtaTagPopup";
@@ -435,10 +444,11 @@ export default () => {
         }
       }
     }, data.delay);  
-  }    
-        
-  window.gHub.showOptIn();
+  }   
   
+  document.addEventListener("genie-landing-data-loaded", function(){
+    window.gHub.showOptIn();
+  }); 
   
   /***********************
 	 *
@@ -525,9 +535,11 @@ export default () => {
 
 						// These really need removing and some generic event code running instead
 						const modal = document.querySelector( ".modal.in" )
-							
-						modal.classList.remove( "in" );
-						modal.style.display = "none";;
+						
+            if(modal) {
+              modal.classList.remove( "in" );
+              modal.style.display = "none";
+            }
 						document.getElementById("backdrop").style.display = "none";
 					};
 
@@ -677,7 +689,7 @@ export default () => {
 			);
 	}
 
-	document.dispatchEvent(new Event("genie-landing-loaded"), true);
+	document.dispatchEvent(new Event("genie-landing-loaded"), true);  
 
 	return null;
 };
