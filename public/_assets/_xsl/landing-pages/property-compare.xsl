@@ -431,7 +431,7 @@
 						<div class="col-md-12 mt-5 text-center form-section-btn">
 							<div class="area_report_download">
 								<div class="get-my-report-info-btn">
-									<a href="#" class="btn-style heading-color-as-bg background-as-color body-font" data-genie-tags="DownloadMarketReport">
+									<a href="#" class="btn-style heading-color-as-bg background-as-color body-font" data-genie-tags="DownloadMarketReport,ClickCta">
 										<xsl:attribute name="data-download-url">
 											<xsl:value-of select="//output/@downloadUrl" />
 										</xsl:attribute>

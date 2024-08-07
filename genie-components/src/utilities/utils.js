@@ -236,7 +236,7 @@ export const addDynamicPopup = (popupId) => {
   div.classList.add("popup-dialog", "visible");
   document.body.appendChild(div);
   return true;
-}
+};
 
 //TODO: I think we can expose api endpoint that will deliver options but just mocking till we have a clear plan
 export const mockCtaData = (ctaId) => {
@@ -246,7 +246,7 @@ export const mockCtaData = (ctaId) => {
         ctaTitle: "Market Insider Offer",
         ctaSubTitle: "What's happening in YOUR market?",
         ctaBody: "Do you want your market insider report delivered monthly?",
-        ctaTags: "OptInMarketInsider",
+        ctaTags: "MarketInsiderSubscribe, OptInContact",
         ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/b05063b4-514a-41ed-8dfa-5faa4acddb00/public",
         ctaNote: "I would like monthly market update for ",
         ctaSubmitText: "Yes!", 
@@ -258,7 +258,7 @@ export const mockCtaData = (ctaId) => {
         ctaTitle: "Market Insider Subscription",
         ctaSubTitle: "Stay on top of the latest TRENDS",
         ctaBody: "Get your market insider report delivered monthly.",
-        ctaTags: "OptInMarketInsider",
+        ctaTags: "MarketInsiderSubscribe, OptInContact",
         ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/b05063b4-514a-41ed-8dfa-5faa4acddb00/public",
         ctaNote: "I would like monthly market update for ",
         ctaSubmitText: "Yes Please!", 
@@ -266,7 +266,63 @@ export const mockCtaData = (ctaId) => {
         delay: 5
       };
   }
-}
+};
+
+export const formatFormNote = (data) => {
+
+  if(!data.noteFormatter) {
+    data.note = data.note || 'Form Submission';
+    return;
+  }
+
+  //since we are formatting it here we can remove the meta data so you will see a few "delete data.meta[xx]", that will prevent duplicate info in notes.
+  
+  const formatterType = data.noteFormatter.toLowerCase();    
+
+  switch(formatterType) {
+    case "RequestShowing".toLowerCase():
+      let formatted = `Showing request for ${data.formListingAddress}`;
+
+      const option1 = data["meta[availableDate]"];
+      const option2 = data["meta[alternativeDate]"];
+      if(option1 || option2) {
+        const dates = [];
+        
+        if (option1) 
+          dates.push(option1);      
+
+        if (option2)
+          dates.push(option2);
+
+        formatted += ` availability: ${dates.join(", ")}`; 
+
+        delete data.meta["availableDate"];
+        delete data.meta["alternativeDate"];
+      } 
+
+      if(!data.note) {
+        data.note = formatted;
+      } else {
+        data.note = `${formatted}.  Message: ${data.note}`;
+      }
+      
+    break;
+
+    case "RequestMoreInfoMoving".toLowerCase():
+      const movingDate = data["meta[movingDate]"] || 'not moving';
+      const contactPreference = data["meta[reachMe]"];      
+      const movingFormatted = `More information requested for ${data.formListingAddress} \nMoving Date: ${ movingDate } \nBest way to reach: ${ contactPreference } \nMessage: ${ data.note || 'please follow up'} `;
+
+      data.note = movingFormatted;        
+      
+      delete data.meta["movingDate"];
+      delete data.meta["reachMe"];
+    break;
+    
+    default:
+    break;
+  }
+};
 
 //TODO: check w/ John on location of this class
 export class InsensitiveURLSearchParams {
@@ -282,40 +338,11 @@ export class InsensitiveURLSearchParams {
 
   get(key) {
     return this.map.get(key.toLowerCase());
-  }  
+  }
+  
+  //returns an object where all property names are lowercase (values remain untouched)
+  getObjectLower() {
+    return Object.fromEntries(this.map);
+  }
 }
-/**
-	 * 	const [store, setStore] = createStore({
-		loading: true,
-		stats: null,
-		get bedrooms() {
-			return {}; //this.stats && this.stats.bedroomStats;
-		},
-		get topSize() {
-			return (
-				this.stats &&
-				this.stats.bedroomStats.reduce((prev, current) =>
-					prev.sold > current.sold ? prev : current
-				)
-		},
-		get percentChange() {
-			return  (
-				this.stats && this.stats.avgSalePrice / this.stats.previousPeriod.avgSalePrice - 1
-			);
-		},
-		areaId,
-		areaPeriod,
-	});
 
-	createEffect(() => {
-		if (!area.loading) {
-			setStore({
-				propertyCaption: propertyTypeCaption(sharedEmbedStore.propertyType, null, true),
-				areaName: area().areaName,
-				period: area().stats.monthCount,
-				overall: area().stats.overall,
-				stats: area().stats.propertyTypeData[sharedEmbedStore.propertyType].statistics,
-				loading: false,
-			});
-		}
-	});*/
