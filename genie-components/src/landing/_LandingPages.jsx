@@ -243,6 +243,11 @@ export default () => {
 		return formattedNumber.replace(/1/g, 'I').replace(/2/g, 'A').replace(/3/g, 'E').replace(/4/g, 'H').replace(/5/g, 'S').replace(/7/g, 'I').replace(/8/g, 'B').replace(/9/g, 'G');
 	}
 
+  //this was the one giving casing issues so just want to centralize it.
+  window.gHub.getPropertyIdFromUrl = () => {
+    return new InsensitiveURLSearchParams(window.location.search).get("propertyId")
+  }
+
   window.gHub.getLeadId = (settings = useSettings(Context4Settings)) => {
     return settings.leadId || settings.genieLeadId || window.gHub.leadId;
   };
@@ -265,6 +270,15 @@ export default () => {
 		urlParams.agentId = window.gHub.agentId;
 		urlParams.hideAVM = window.gHub.hideAVM ?? false;
 		urlParams.skipLeadCreate = skipLeadCreate;
+
+    //since we are converting to an object here we want in format of propertyId but from url it could be either Id or id
+    const propertyId = window.gHub.getPropertyIdFromUrl();
+
+    if(propertyId) {
+      //just in case it was lower in the URL remove it to avoid confusion
+      delete urlParams.propertyid; 
+      urlParams.propertyId = propertyId;
+    }
 
 		return await landingPageData(urlParams);
 	};
@@ -337,7 +351,7 @@ export default () => {
 			propertyId:
 				settings.propertyId ??
 				window.gHub.defaults.leadPropertyId ??
-        new InsensitiveURLSearchParams(window.location.search).get("propertyId"),
+        window.gHub.getPropertyIdFromUrl(),
 			firstName: settings.firstname ?? null,
 			lastName: settings.lastname ?? null,
 			fullName: window.gHub.defaults.fullName ?? null,
@@ -392,11 +406,10 @@ export default () => {
         window.gHub.leadId = lpData.lead.genieLeadId;
       }
 
+      //might be worth a custom event supplying the lpData
       document.dispatchEvent(new Event("genie-landing-data-loaded"), true);      
     })();
-  }  
-
-   
+  } 
 
 	/***********************
 	 *
@@ -556,11 +569,20 @@ export default () => {
               modal.classList.remove( "in" );
               modal.style.display = "none";
             }
-						document.getElementById("backdrop").style.display = "none";
+
+						const backdrop = document.getElementById("backdrop");
+
+            if(backdrop)
+              backdrop.style.display = "none";
 					};
 
 					popup.classList.add("visible");
-					document.getElementById("fl-thankyou-modal").classList.add("hide");
+
+          const thankModal = document.getElementById("fl-thankyou-modal");
+
+          if(thankModal)
+					  thankModal.classList.add("hide");
+          
 					popup
 						.querySelector(".close-popup")
 						.addEventListener("click", hidePopup);
@@ -588,12 +610,15 @@ export default () => {
 		el.addEventListener("click", event => {
 			event.preventDefault();
 
+      let downloadedNote;
 			const downloadFile = () => {
-				const anchor = document.createElement("a");
+				const anchor = document.createElement("a");         
 				anchor.href = el.getAttribute(downloadAttr);
 				anchor.target = "_blank";
 				anchor.download = el.getAttribute(downloadAttr);
 				anchor.click();
+
+        downloadedNote =  `Report Downloaded - ${anchor.href}`;
 			};
 
 			const popup = document.getElementById("download-report");
@@ -616,12 +641,14 @@ export default () => {
 					const address = document.getElementById("popup-email").value;
 
 					if (address) {
-						window.gHub.addLead("Report download", {
+            downloadFile();
+						hidePopup();
+            
+						window.gHub.addLead(downloadedNote, {
 							emailAddress: address,
 							genieTags: el.getAttribute(tagsAttr), // Support tags on the element
 						});
-						downloadFile();
-						hidePopup();
+						
 					} else {
 						document.getElementById("popup-valid-email").style.display =
 							"block";
@@ -639,6 +666,13 @@ export default () => {
 					.addEventListener("click", submitForm);
 			} else {
 				downloadFile();
+
+        if(window.gHub.getLeadId()) {
+          //no lead capture here but we want to record the activty by passing the tags along
+          window.gHub.addLead(downloadedNote, {          
+            genieTags: el.getAttribute(tagsAttr), // Support tags on the element
+          });
+        }
 			}
 		});
 	});
@@ -713,7 +747,6 @@ export default () => {
 			);
 	}
 
-	document.dispatchEvent(new Event("genie-landing-loaded"), true);  
-
+	document.dispatchEvent(new Event("genie-landing-loaded"), true);    
 	return null;
 };

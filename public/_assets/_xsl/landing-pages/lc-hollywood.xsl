@@ -27,13 +27,13 @@
 				<xsl:with-param name="preferPrimary" select="'true'" />
 			</xsl:call-template>
 		</xsl:variable>
-
+    
     <xsl:variable name="defaultUtmSource">
       <xsl:value-of select="'Listing Page Hollywood'" />
     </xsl:variable>
     <xsl:variable name="defaultUtmCampaign">
       <xsl:value-of select="$listingAddressLine1" />
-    </xsl:variable>
+    </xsl:variable>    
 
 		<xsl:call-template name="standard-header">
 			<xsl:with-param name="seoImage" select="$primaryImage" />
@@ -819,16 +819,20 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 				<xsl:call-template name="copyright" />
 			</div>
 
+      <xsl:call-template name="utm-page-default">            
+        <xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+        <xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+      </xsl:call-template>      
+
 			<script src="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.js' )}">
 				<xsl:comment/>
 			</script>
 
 			<link rel="stylesheet" href="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.css' )}" />
-			<xsl:call-template name="process-snippet">
+			
+      <xsl:call-template name="process-snippet">
 				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag" />
-			</xsl:call-template>
-      <input type="hidden" id="pageUtmSource" value="{ $defaultUtmSource }" />
-      <input type="hidden" id="pageUtmCampaign" value="{ $defaultUtmCampaign }" />
+			</xsl:call-template>      
 		</body>
 	</xsl:template>
 </xsl:stylesheet>												

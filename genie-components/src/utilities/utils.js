@@ -318,6 +318,10 @@ export const formatFormNote = (data) => {
       delete data.meta["movingDate"];
       delete data.meta["reachMe"];
     break;
+
+    case "RequestCustomValuation".toLowerCase():
+      data.note = `Custom valuation request for ${data.notePropertyAddress}.\n\nAdditional property details: ${ data.note || 'none provided'} `;
+    break;
     
     default:
     break;
