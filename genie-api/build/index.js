@@ -8827,7 +8827,7 @@ var get_property = async (params) => {
   return error(["No property found"]);
 };
 var get_short_data = async (params) => {
-  const r = getShortData(
+  const r = await getShortData(
     parseInt(params.shortId),
     params.token,
     params.agentId || null
@@ -8882,7 +8882,7 @@ var add_lead = async (params) => {
       }
     }
     if (params.hasOwnProperty("fullName") && params.fullName) {
-      var split = params?.fullName?.split(" ");
+      var split = params?.fullName?.split(" ")?.filter(Boolean);
       if (split && split.length > 1) {
         var last = split.pop();
         args["lastName"] = last;
