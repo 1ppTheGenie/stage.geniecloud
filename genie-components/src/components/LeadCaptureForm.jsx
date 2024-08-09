@@ -10,6 +10,7 @@ export const LeadCaptureForm = props => {
 		submitCaption = "Send Report",
 		className = "",
 		leadNote = "",
+    genieTags = "OptInContact"
 	} = props;
 
 	const [showSpinner, setShowSpinner] = createSignal(false);
@@ -24,6 +25,8 @@ export const LeadCaptureForm = props => {
 		for (var key of formData.keys()) {
 			data[key] = formData.get(key);
 		}
+
+    data.genieTags = genieTags;
 
 		await window.gHub.addLead(leadNote, data);
 
@@ -57,12 +60,7 @@ export const LeadCaptureForm = props => {
 				<div class="lead-capture-notify">
 					<p>
 						<em>* we keep your email private, no one else gets to see it</em>
-					</p>
-
-					<input type="checkbox" id="text-email-updates" value="yes" />
-					<label for="text-email-updates">
-						Please notify me of updates - via text or email
-					</label>
+					</p>					
 				</div>
 			</Show>
 

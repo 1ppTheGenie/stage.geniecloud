@@ -386,30 +386,7 @@ export default () => {
 
 			return r.result;
 		}
-	};
-
-	const urlParams = new InsensitiveURLSearchParams(window.location.search).getObjectLower();
-	if ( parseInt( urlParams.crlead ) === 1 ) {
-		const pid = urlParams.propertyid;
-
-		if ( pid ) {
-      //only found the crLead in one spot so adding an applicable note
-			window.gHub.addLead('Manually entered address property comparison', { propertyId: pid } );
-		}
-	} else if ( urlParams.token ) {
-    (async () => {
-      const lpData = await window.gHub.getLandingPageData();  
-            
-      if(lpData.lead && lpData.lead.genieLeadId) {         
-        const settings = useSettings(Context4Settings);
-        settings.trackingdata = lpData.lead.trackingData; //unsure on the casing descrepancy here but add lead maps it;
-        window.gHub.leadId = lpData.lead.genieLeadId;
-      }
-
-      //might be worth a custom event supplying the lpData
-      document.dispatchEvent(new Event("genie-landing-data-loaded"), true);      
-    })();
-  } 
+	};  
 
 	/***********************
 	 *
@@ -418,9 +395,13 @@ export default () => {
 	 ***********************/
 	document.querySelectorAll(".request-home-value").forEach(el => {
 		el.addEventListener("click", event => {
-			event.preventDefault();      
+			event.preventDefault();    
+      window.gHub.popHomeValue();
+		});
+	});
 
-      const dynamicPopupId = "genie-homeValuePopup";
+  window.gHub.popHomeValue = () => {
+    const dynamicPopupId = "genie-homeValuePopup";
       
       if(addDynamicPopup(dynamicPopupId)) {        
         const settings = useSettings(Context4Settings);			
@@ -434,8 +415,7 @@ export default () => {
 
 				render(App, document.getElementById(dynamicPopupId));
 			}
-		});
-	});
+  };
 
   /***********************
 	 *
@@ -447,6 +427,11 @@ export default () => {
 
     if(ctaId == null)
       return;
+
+    //special handling for home value that is hooked on page param hooks
+    if(ctaId == 0) {      
+      return;
+    }
     
     const data = mockCtaData(parseInt(ctaId));
 
@@ -473,11 +458,57 @@ export default () => {
         }
       }
     }, data.delay);  
-  }   
+  };  
   
   document.addEventListener("genie-landing-data-loaded", function(){
     window.gHub.showOptIn();
   }); 
+
+  /***********************
+	 *
+	 * Url Param hooks
+	 *
+	 ***********************/
+	const urlParams = new InsensitiveURLSearchParams(window.location.search).getObjectLower();
+
+  //special handling for the home value cta
+  const ctaHomeValue = parseInt(urlParams.ctaid) === 0;  
+
+	if ( parseInt( urlParams.crlead ) === 1 ) {
+		const pid = urlParams.propertyid;
+
+		if ( pid ) {
+      //only found the crLead in one spot so adding an applicable note
+			window.gHub.addLead('Manually entered address property comparison', { propertyId: pid } );
+		}
+	} else if ( urlParams.token ) {
+    (async () => {
+      const lpData = await window.gHub.getLandingPageData();  
+            
+      if(lpData.lead && lpData.lead.genieLeadId) {         
+        const settings = useSettings(Context4Settings);
+        settings.trackingdata = lpData.lead.trackingData; //unsure on the casing descrepancy here but add lead maps it;
+        window.gHub.leadId = lpData.lead.genieLeadId;
+      }
+
+      //when we are dealing with existing data wait till loaded to pop
+      if(ctaHomeValue) {
+        setTimeout(() => { window.gHub.popHomeValue() }, 2000);
+        return;
+      }
+      //might be worth a custom event supplying the lpData
+      document.dispatchEvent(new Event("genie-landing-data-loaded"), true);      
+    })();
+  } else {
+    if(ctaHomeValue) {
+      setTimeout(() => { window.gHub.popHomeValue() }, 3000);
+      return;
+    }
+  }
+
+  /***********************	 
+	 * End Url Param hooks	 
+	 ***********************/
   
   /***********************
 	 *
