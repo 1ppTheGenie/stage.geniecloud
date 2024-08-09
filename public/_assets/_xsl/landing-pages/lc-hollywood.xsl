@@ -27,14 +27,21 @@
 				<xsl:with-param name="preferPrimary" select="'true'" />
 			</xsl:call-template>
 		</xsl:variable>
+    
+    <xsl:variable name="defaultUtmSource">
+      <xsl:value-of select="'Listing Page Hollywood'" />
+    </xsl:variable>
+    <xsl:variable name="defaultUtmCampaign">
+      <xsl:value-of select="$listingAddressLine1" />
+    </xsl:variable>    
 
 		<xsl:call-template name="standard-header">
 			<xsl:with-param name="seoImage" select="$primaryImage" />
 			<xsl:with-param name="secondaryCSS" select="'lc-hollywood'" />
 
-			<xsl:with-param name="defaultUtmSource" select="'Property (Hwood)'" />
-			<xsl:with-param name="defaultUtmCampaign" select="concat( $listingAddressLine1, ', ', $listingAddressLine2 )" />
-			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', //single/address/street, ' Property Site!')" />
+			<xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+			<xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', $listingAddressLine1, ' Listing Site!')" />
 		</xsl:call-template>
 
 		<body>
@@ -537,7 +544,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 							</xsl:attribute>
 						</img>
 					</div>
-					<a class="pdf-btn" target="_blank" data-genie-tags="DownloadMarketReport">
+					<a class="pdf-btn" target="_blank" data-genie-tags="DownloadPropertyBrochure,ClickCta">
 						<xsl:attribute name="href">
 							<xsl:value-of select="//output/@downloadUrl" />
 						</xsl:attribute>
@@ -577,31 +584,14 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 									<div class="form-field numberform">
 										<span class="wpcf7-form-control-wrap your-message">
 											<input type="text" name="phoneNumber" class="form-control" placeholder="Phone" />
-
 										</span>
-										<input type="hidden" name="lead_id" value="0" class="lead-id" />
-										<input type="hidden" name="send_email" value="1" />
-										<input type="hidden" name="funnel_id" value="131730" />
-
-									</div>
-
+									</div>            
 									<div class="f_check preferred_contact body-font desk">
-										<div class="che_box body-font">
-											<label class="spn" for="">Preferred contact*:</label>
-											<label>
-												<input type="checkbox" name="preferred_contact" />
-
-												<xsl:text>Text</xsl:text>
-											</label>
-											<label>
-												<input type="checkbox" name="preferred_contact" required="" checked="" />
-
-												<xsl:text>Phone</xsl:text>
-											</label>
-										</div>
+										<div class="che_box body-font"></div><!--left to preserve the spacing-->
 										<div class="che_box submit-btn">
-											<input type="submit" value="Send" class="wpcf7-submit" />
-
+											<input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact" />
+                      <input type="hidden" name="note" value="I am interested in { $listingAddressLine1 }" /> 
+                      <input type="submit" value="Send" class="wpcf7-submit" />
 										</div>
 									</div>
 								</form>
@@ -749,6 +739,9 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								<textarea class="form-control" name="note" cols="40" rows="10"></textarea>
 							</div>
 							<div class="col-md-12">
+                <input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact" />
+                <input type="hidden" name="formListingAddress" value="{ $listingAddressLine1 }" />
+                <input type="hidden" name="noteFormatter" value="RequestMoreInfoMoving" />
 								<input type="submit" value="Send" class="submit-btn" />
 							</div>
 						</form>
@@ -805,6 +798,9 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								<textarea class="form-control" name="note" cols="40" rows="10"></textarea>
 							</div>
 							<div class="col-md-12">
+                <input type="hidden" name="genieTags" value="RequestShowing, OptInContact" />
+                <input type="hidden" name="formListingAddress" value="{ $listingAddressLine1 }" />
+                <input type="hidden" name="noteFormatter" value="RequestShowing" />
 								<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />
 							</div>
 						</form>
@@ -823,14 +819,20 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 				<xsl:call-template name="copyright" />
 			</div>
 
+      <xsl:call-template name="utm-page-default">            
+        <xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+        <xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+      </xsl:call-template>      
+
 			<script src="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.js' )}">
 				<xsl:comment/>
 			</script>
 
 			<link rel="stylesheet" href="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.css' )}" />
-			<xsl:call-template name="process-snippet">
+			
+      <xsl:call-template name="process-snippet">
 				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag" />
-			</xsl:call-template>
+			</xsl:call-template>      
 		</body>
 	</xsl:template>
 </xsl:stylesheet>												

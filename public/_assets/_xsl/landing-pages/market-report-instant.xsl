@@ -13,6 +13,13 @@
 	<xsl:import href="landing-pages.xsl" />
 
 	<xsl:template name="landing-page">
+    <xsl:variable name="defaultUtmSource">
+        <xsl:value-of select="'Market Report Instant'" />
+      </xsl:variable>
+      <xsl:variable name="defaultUtmCampaign">
+        <xsl:value-of select="//area/name" />
+    </xsl:variable>
+
 		<xsl:call-template name="standard-header">
 			<xsl:with-param name="title" select="concat(//area/name, ' Housing Market Report' )" />
 			<xsl:with-param name="description" select="concat( 'The ', //area/name, ' market is shifting! View the latest market trends and grab your customized report now.' )" />
@@ -25,9 +32,9 @@
 				</xsl:call-template>
 			</xsl:with-param>
 
-			<xsl:with-param name="defaultUtmSource" select="'Property Compare'" />
-			<xsl:with-param name="defaultUtmCampaign" select="concat( $listingAddressLine1, ', ', $listingAddressLine2 )" />
-			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', //single/address/street, ' Property Comparison Site!')" />
+			<xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+			<xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', //area/name, ' Market Report Instant!')" />
 		</xsl:call-template>
 
 		<body style="scroll-behavior: smooth;">
@@ -168,6 +175,10 @@
 					<xsl:call-template name="copyright" />
 				</div>
 			</section>
+      <xsl:call-template name="utm-page-default">            
+        <xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+        <xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+      </xsl:call-template>
 			<xsl:call-template name="process-snippet">
 				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag" />
 			</xsl:call-template>

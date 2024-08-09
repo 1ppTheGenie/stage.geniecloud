@@ -16,7 +16,14 @@
 	<xsl:import href="landing-pages.xsl" />
 	<xsl:import href="genie-functions.xsl" />
 
-	<xsl:template name="landing-page">
+	<xsl:template name="landing-page">    
+    <xsl:variable name="defaultUtmSource">
+      <xsl:value-of select="'Property Compare Page'" />
+    </xsl:variable>
+    <xsl:variable name="defaultUtmCampaign">
+      <xsl:value-of select="$listingAddressLine1" />
+    </xsl:variable>
+    
 		<xsl:call-template name="standard-header">
 			<xsl:with-param name="title" select="concat( 'Compare your ', //area/name, ' property' )" />
 			<xsl:with-param name="description" select="concat( 'The ', //area/name, ' market is shifting! View the latest market trends and grab your customized report now.' )" />
@@ -27,11 +34,11 @@
 					<xsl:with-param name="index" select="number(1)" />
 					<xsl:with-param name="preferPrimary" select="'true'" />
 				</xsl:call-template>
-			</xsl:with-param>
-
-			<xsl:with-param name="defaultUtmSource" select="'Property Compare'" />
-			<xsl:with-param name="defaultUtmCampaign" select="concat( $listingAddressLine1, ', ', $listingAddressLine2 )" />
-			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', //single/address/street, ' Property Comparison Site!')" />
+			</xsl:with-param>		
+			
+      <xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+			<xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', $listingAddressLine1, ' Property Comparison Site!')" />
 		</xsl:call-template>
 
 		<script>
@@ -431,7 +438,7 @@
 						<div class="col-md-12 mt-5 text-center form-section-btn">
 							<div class="area_report_download">
 								<div class="get-my-report-info-btn">
-									<a href="#" class="btn-style heading-color-as-bg background-as-color body-font" data-genie-tags="DownloadMarketReport">
+									<a href="#" class="btn-style heading-color-as-bg background-as-color body-font" data-genie-tags="DownloadMarketReport,ClickCta">
 										<xsl:attribute name="data-download-url">
 											<xsl:value-of select="//output/@downloadUrl" />
 										</xsl:attribute>
@@ -475,14 +482,6 @@
 					<div class="row">
 						<div class="col-md-8 mx-auto form-section-form-part">
 							<form class="funnel-create-lead">
-								<input type="hidden" name="genieTags" value="RequestMoreInfo" />
-
-								<input type="hidden" name="agent">
-									<xsl:attribute name="value">
-										<xsl:value-of select="//output/@userId" />
-									</xsl:attribute>
-								</input>
-
 								<div class="row">
 									<div class="col-lg-4">
 										<div class="form-group">
@@ -504,13 +503,22 @@
 									</div>
 									<div class="col-md-12 mt-2">
 										<div class="form-group">
-											<label for="exampleFormControlTextarea1" class="background-as-color subtitle-font">Tell us more about your property:</label>
-											<textarea class="form-control" id="exampleFormControlTextarea1" name="note" rows="4" placeholder="Is there anything we should know before estimation?" required="required"></textarea>
+											<label for="homeValuationNote" class="background-as-color subtitle-font">Tell us more about your property:</label>
+											<textarea class="form-control" id="homeValuationNote" name="note" rows="4" placeholder="Is there anything we should know before estimation?" required="required"></textarea>
 										</div>
 									</div>
 									<div class="col-md-12 ml-auto text-right">
 										<div class="mb-3 form-section-btn">
 											<button type="submit" class="btn-style body-font background heading-color step1-button">SEND REQUEST</button>
+
+                      <input type="hidden" name="genieTags" value="RequestCustomValuation, OptInContact" />
+                      <input type="hidden" id="notePropertyAddress" name="notePropertyAddress" value="" />
+                      <input type="hidden" name="noteFormatter" value="RequestCustomValuation" />                      
+                      <input type="hidden" name="agent">
+                        <xsl:attribute name="value">
+                          <xsl:value-of select="//output/@userId" />
+                        </xsl:attribute>
+                      </input>
 										</div>
 									</div>
 								</div>
@@ -531,6 +539,10 @@
 			<xsl:if test="$requireDataAccess">
 				<xsl:call-template name="data-access" />
 			</xsl:if>
+      <xsl:call-template name="utm-page-default">            
+        <xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+        <xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+      </xsl:call-template>
 			<xsl:call-template name="process-snippet">
 				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag" />
 			</xsl:call-template>

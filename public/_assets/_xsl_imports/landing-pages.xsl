@@ -881,6 +881,14 @@
 	</xsl:template>
 
 
+  <xsl:template name="utm-page-default">
+      <xsl:param name="defaultUtmSource" select="''" />
+      <xsl:param name="defaultUtmCampaign" select="''" />
+      
+      <input type="hidden" id="pageUtmSource" value="{$defaultUtmSource}" />
+      <input type="hidden" id="pageUtmCampaign" value="{$defaultUtmCampaign}" />      
+  </xsl:template>
+
 	<xsl:template name="green-red-arrow">
 		<xsl:param name="up" select="boolean(1)" />
 
