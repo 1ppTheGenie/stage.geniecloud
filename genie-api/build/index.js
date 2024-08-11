@@ -9284,9 +9284,11 @@ var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
   }
 };
 var cache_key = (endpoint, params, verb) => {
-  const strParams = JSON.stringify(Object.entries(params ?? {}));
+  const { userId, ...restParams } = params ?? {};
+  const strParams = JSON.stringify(Object.entries(restParams));
   const hash = import_crypto.default.createHash("md5").update(`${endpoint}.${verb}.${strParams}`).digest("hex");
-  return `genie-${hash}.json`;
+  const userIdPart = userId ? `${userId}-` : "";
+  return `genie-${userIdPart}${hash}.json`;
 };
 var areaName = async (userId, areaId, skipCache = false) => await call_api("GetAreaName", { areaId, userId }, skipCache);
 var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache = false) => {
