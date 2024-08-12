@@ -503,8 +503,10 @@ export default () => {
     })();
   } else {
     if(ctaHomeValue) {
-      setTimeout(() => { window.gHub.popHomeValue() }, 3000);
-      return;
+      const data = mockCtaData(parseInt(ctaId));
+
+        if(data?.enabled)
+          setTimeout(() => { window.gHub.popHomeValue() }, data.delay);
     }
   }
 
