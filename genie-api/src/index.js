@@ -9,9 +9,9 @@ import pkg from 'jstoxml';
 const { toXML } = pkg;
 
 // prettier-ignore
-import {propertySurroundingAreas, getAreaBoundary, getUser, impersonater, getListing, areaName } from "./genieAI.js";
+import { propertySurroundingAreas, getAreaBoundary, getUser, impersonater, getListing, areaName } from "./genieAI.js";
 // prettier-ignore
-import { userSetting, embedsAPI, cloudHubAPI,getRenderJSON, getCollection, setRenderDefaults, genieGlobals, queueMsg, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset, preCallGenieAPIs } from "./utils/index.js";
+import { userSetting, embedsAPI, cloudHubAPI, getRenderJSON, getCollection, setRenderDefaults, genieGlobals, queueMsg, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset, preCallGenieAPIs } from "./utils/index.js";
 // prettier-ignore
 import { listS3Folder, toS3, copyObject, headObject, jsonFromS3, fromS3, BUCKET, deleteObject, buildVersion } from "./utils/index.js";
 
@@ -51,9 +51,9 @@ export const api = async event => {
                             ) {
                                 tempParams[key] =
                                     record.messageAttributes[key].dataType ==
-                                    'String'
+                                        'String'
                                         ? record.messageAttributes[key]
-                                              .stringValue
+                                            .stringValue
                                         : '';
                             }
                         });
@@ -90,7 +90,7 @@ export const api = async event => {
                                             record.messageAttributes[key]
                                                 .dataType == 'String'
                                                 ? record.messageAttributes[key]
-                                                      .stringValue
+                                                    .stringValue
                                                 : '';
                                     }
                                 }
@@ -174,67 +174,72 @@ export const api = async event => {
                                 if (params.width) {
                                     params.width = parseInt(params.width);
                                 } else {
-                                    params.width =
-                                        typeof params.height == 'undefined'
-                                            ? 300
-                                            : null;
+                                    params.width = typeof params.height == 'undefined' ? 300 : null;
                                 }
 
                                 if (typeof params.height != 'undefined') {
                                     params.height = parseInt(params.height);
                                 }
 
-                                try {
-                                    const image = await fetch(params.url);
-                                    if (image.ok) {
-                                        // Create a readable stream from the response body
-                                        const imageBuffer =
-                                            await image.arrayBuffer();
-                                        const bytes = new Uint8Array(
-                                            imageBuffer
-                                        );
-                                        const imageStream = new Readable();
-                                        imageStream.push(bytes);
-                                        imageStream.push(null);
+                                const fallbackImageUrl = 'https://genie-cloud.s3.us-west-1.amazonaws.com/_assets/_img/picture-pending.jpg';
 
-                                        // Resize the image using sharp
-                                        const resizedImage = imageStream.pipe(
-                                            sharp()
-                                                .resize({
-                                                    width: params.width,
-                                                    height: params.height
-                                                })
-                                                .webp({
-                                                    effort: 3,
-                                                    quality:
-                                                        params.quality ?? 90
-                                                })
-                                        );
+                                async function fetchAndProcessImage(url) {
+                                    const controller = new AbortController();
+                                    const timeoutId = setTimeout(() => controller.abort(), 3000);  // 3 second timeout
 
-                                        // Convert the resized image to a buffer
-                                        const resizedImageBuffer =
-                                            await resizedImage.toBuffer();
+                                    try {
+                                        const image = await fetch(url, { signal: controller.signal });
+                                        clearTimeout(timeoutId);
 
-                                        response = {
-                                            statusCode: 200,
-                                            headers: {
-                                                'Content-Type': 'image/webp'
-                                            },
-                                            isBase64Encoded: true,
-                                            body: resizedImageBuffer.toString(
-                                                'base64'
-                                            )
-                                        };
-                                    } else {
-                                        response.body = {
-                                            success: false,
-                                            error: `Failed to fetch image: HTTP status ${image.status}`
-                                        };
+                                        if (image.ok) {
+                                            const imageBuffer = await image.arrayBuffer();
+                                            const bytes = new Uint8Array(imageBuffer);
+                                            const imageStream = new Readable();
+                                            imageStream.push(bytes);
+                                            imageStream.push(null);
+
+                                            const resizedImage = imageStream.pipe(
+                                                sharp()
+                                                    .resize({
+                                                        width: params.width,
+                                                        height: params.height
+                                                    })
+                                                    .webp({
+                                                        effort: 3,
+                                                        quality: params.quality ?? 90
+                                                    })
+                                            );
+
+                                            const resizedImageBuffer = await resizedImage.toBuffer();
+
+                                            return {
+                                                statusCode: 200,
+                                                headers: {
+                                                    'Content-Type': 'image/webp'
+                                                },
+                                                isBase64Encoded: true,
+                                                body: resizedImageBuffer.toString('base64')
+                                            };
+                                        } else {
+                                            throw new Error(`HTTP status ${image.status}`);
+                                        }
+                                    } catch (error) {
+                                        if (url !== fallbackImageUrl) {
+                                            console.error(`Error fetching original image: ${error.message}`);
+                                            return fetchAndProcessImage(fallbackImageUrl);
+                                        } else {
+                                            throw error;
+                                        }
                                     }
+                                }
+
+                                try {
+                                    response = await fetchAndProcessImage(params.url);
                                 } catch (error) {
+                                    console.error(`Failed to fetch both original and fallback images: ${error.message}`);
                                     response.body = {
                                         success: false,
-                                        error: `Error: ${error.message}`
+                                        error: 'Failed to fetch image'
                                     };
                                 }
                             } else {
@@ -391,7 +396,7 @@ export const api = async event => {
                                                                 renderId,
                                                                 p
                                                             );
-                                                        } catch {}
+                                                        } catch { }
                                                     }
                                                 } catch (err) {
                                                     console.log('fail', err);
@@ -475,10 +480,10 @@ export const api = async event => {
                                                 // ToDo mlsId must match as well as as mlsNumber
                                                 (!params.userId ||
                                                     params.userId ==
-                                                        json.userId) &&
+                                                    json.userId) &&
                                                 (!params.mlsNumber ||
                                                     params.mlsNumber ==
-                                                        json.mlsNumber) &&
+                                                    json.mlsNumber) &&
                                                 (!params.areaId ||
                                                     json.areaIds.includes(
                                                         params.areaId
@@ -620,14 +625,14 @@ export const api = async event => {
                                                             }
 
                                                             const assetParams =
-                                                                {
-                                                                    ...params,
-                                                                    asset: asset.asset,
-                                                                    size: asset.size,
-                                                                    lpo: asset.lpo,
-                                                                    qrDestination,
-                                                                    qrUrl
-                                                                };
+                                                            {
+                                                                ...params,
+                                                                asset: asset.asset,
+                                                                size: asset.size,
+                                                                lpo: asset.lpo,
+                                                                qrDestination,
+                                                                qrUrl
+                                                            };
 
                                                             return await prepareAsset(
                                                                 asset.asset,
@@ -682,8 +687,8 @@ export const api = async event => {
 
                                 const { s3Key } = await getS3Key(
                                     params.asset ||
-                                        (params.assets && params.assets[0]) ||
-                                        (params.collection && 'collection'),
+                                    (params.assets && params.assets[0]) ||
+                                    (params.collection && 'collection'),
                                     params
                                 );
 
@@ -786,10 +791,9 @@ export const api = async event => {
                                     // Remove trailing index.html if it exists: S3 routing will default to that file on a folder request
                                     response.body.availableAt =
                                         response.body.availableAt ?? // Allows earlier code to set custom version of this
-                                        `${
-                                            params.isWorkFlow
-                                                ? genieGlobals.GENIE_NO_CACHE_HOST
-                                                : genieGlobals.GENIE_HOST
+                                        `${params.isWorkFlow
+                                            ? genieGlobals.GENIE_NO_CACHE_HOST
+                                            : genieGlobals.GENIE_HOST
                                         }${s3Key.replace('/index.html', '')}`;
                                     response.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
                                     response.body.renderId = params.renderId;
@@ -807,8 +811,7 @@ export const api = async event => {
                 if (params.renderId) {
                     // We don't want the embed API errors here
                     await toS3(
-                        `_errors/${currentDate}/${
-                            params.renderId
+                        `_errors/${currentDate}/${params.renderId
                         }-${Date.now()}-api.json`,
                         Buffer.from(
                             JSON.stringify({
@@ -908,10 +911,10 @@ const processAsset = async params => {
 };
 
 const prepareAsset = async (asset, params) => {
-    const settings = await assetSetting( asset, 'all' );
-    
+    const settings = await assetSetting(asset, 'all');
+
     //if ( typeof params.qrDestination !== 'undefined' && params.qrDestination.toString().length > 0 ) {
-        //console.log( 'Ex5', asset, settings.supports.includes( 'AsPDF' ) );
+    //console.log( 'Ex5', asset, settings.supports.includes( 'AsPDF' ) );
     //}
 
     if (Object.keys(settings).length > 0) {
@@ -929,15 +932,15 @@ const prepareAsset = async (asset, params) => {
         } else {
             pages = [{ asset: asset.trim() }];
         }
-        
-        if ( settings.supports.includes( 'AsPDF' ) ) {
+
+        if (settings.supports.includes('AsPDF')) {
             params.asPDF = true;
         }
 
         if (params.totalPages) {
             pages = pages.slice(0, params.totalPages + 1);
         }
-        
+
         size = (
             params.size ||
             (Array.isArray(settings?.sizes) && settings.sizes[0]) ||
@@ -1013,19 +1016,17 @@ const prepareAsset = async (asset, params) => {
                     suffix === 'pdf'
                         ? isA5
                             ? '216mm'
-                            : `${
-                                  Math.round(dims.width) / 100 +
-                                  (withBleed ? 0.25 : 0)
-                              }in`
+                            : `${Math.round(dims.width) / 100 +
+                            (withBleed ? 0.25 : 0)
+                            }in`
                         : Math.round(dims.width);
                 const height =
                     suffix === 'pdf'
                         ? isA5
                             ? '279mm'
-                            : `${
-                                  Math.round(dims.height) / 100 +
-                                  (withBleed ? 0.25 : 0)
-                              }in`
+                            : `${Math.round(dims.height) / 100 +
+                            (withBleed ? 0.25 : 0)
+                            }in`
                         : Math.round(dims.height);
 
                 const render = {
@@ -1050,13 +1051,13 @@ const prepareAsset = async (asset, params) => {
                     cssPageSize: false, // ToDo: some decision making
 
                     /*
-						ToDo?
-						render.clip
-						render.clipX
-						render.clipY
-						render.clipWidth
-						render.clipHeight
-					*/
+                        ToDo?
+                        render.clip
+                        render.clipX
+                        render.clipY
+                        render.clipWidth
+                        render.clipHeight
+                    */
 
                     noPuppeteer: s3Key.endsWith('html'),
                     isCollection: params.collection, // Flag for use by XSLT processor
@@ -1123,9 +1124,8 @@ const prepareAsset = async (asset, params) => {
                             ...params,
                             overrideKey,
                             size: downloadSize,
-                            qrDestination: `${
-                                genieGlobals.GENIE_HOST
-                            }${render.s3Key.replace('/index.html', '')}`,
+                            qrDestination: `${genieGlobals.GENIE_HOST
+                                }${render.s3Key.replace('/index.html', '')}`,
                             parentAsset: pageParams.asset
                         });
                     }
@@ -1138,10 +1138,9 @@ const prepareAsset = async (asset, params) => {
                     .replaceAll('--', '-');
 
                 await toS3(
-                    `_processing/${params.renderId}/${cleanKey}${
-                        pageParams.asset.startsWith('landing-pages')
-                            ? `-${basename(pageParams.asset)}`
-                            : ''
+                    `_processing/${params.renderId}/${cleanKey}${pageParams.asset.startsWith('landing-pages')
+                        ? `-${basename(pageParams.asset)}`
+                        : ''
                     }-p${i}-prep.json`,
                     Buffer.from(JSON.stringify(render)),
                     { 'Genie-Delete': true },
@@ -1325,8 +1324,8 @@ export const getS3Key = async (asset, params) => {
             const fileExtension = params?.asPDF
                 ? 'pdf'
                 : params?.webp
-                ? 'webp'
-                : null;
+                    ? 'webp'
+                    : null;
             const keyParams = await renderKeyParams(params);
 
             let { renderKey, pages } = await assetSetting(asset, [
@@ -1359,9 +1358,8 @@ export const getS3Key = async (asset, params) => {
                 key => (renderKey = renderKey.replace(key, replaces[key]))
             );
 
-            s3Key = `genie-files/${params.renderId}/${
-                params.theme
-            }/${renderKey}.${fileExtension || (hasPages && 'pdf') || 'png'}`;
+            s3Key = `genie-files/${params.renderId}/${params.theme
+                }/${renderKey}.${fileExtension || (hasPages && 'pdf') || 'png'}`;
         }
     } catch (error) {
         await toS3(
