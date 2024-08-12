@@ -9721,46 +9721,56 @@ var api = async (event) => {
                 if (typeof params.height != "undefined") {
                   params.height = parseInt(params.height);
                 }
-                try {
-                  const image = await fetch(params.url);
-                  if (image.ok) {
-                    const imageBuffer = await image.arrayBuffer();
-                    const bytes = new Uint8Array(
-                      imageBuffer
-                    );
-                    const imageStream = new import_stream.Readable();
-                    imageStream.push(bytes);
-                    imageStream.push(null);
-                    const resizedImage = imageStream.pipe(
-                      (0, import_sharp.default)().resize({
-                        width: params.width,
-                        height: params.height
-                      }).webp({
-                        effort: 3,
-                        quality: params.quality ?? 90
-                      })
-                    );
-                    const resizedImageBuffer = await resizedImage.toBuffer();
-                    response2 = {
-                      statusCode: 200,
-                      headers: {
-                        "Content-Type": "image/webp"
-                      },
-                      isBase64Encoded: true,
-                      body: resizedImageBuffer.toString(
-                        "base64"
-                      )
-                    };
-                  } else {
-                    response2.body = {
-                      success: false,
-                      error: `Failed to fetch image: HTTP status ${image.status}`
-                    };
+                const fallbackImageUrl = "https://genie-cloud.s3.us-west-1.amazonaws.com/_assets/_img/picture-pending.jpg";
+                async function fetchAndProcessImage(url) {
+                  const controller = new AbortController();
+                  const timeoutId = setTimeout(() => controller.abort(), 3e3);
+                  try {
+                    const image = await fetch(url, { signal: controller.signal });
+                    clearTimeout(timeoutId);
+                    if (image.ok) {
+                      const imageBuffer = await image.arrayBuffer();
+                      const bytes = new Uint8Array(imageBuffer);
+                      const imageStream = new import_stream.Readable();
+                      imageStream.push(bytes);
+                      imageStream.push(null);
+                      const resizedImage = imageStream.pipe(
+                        (0, import_sharp.default)().resize({
+                          width: params.width,
+                          height: params.height
+                        }).webp({
+                          effort: 3,
+                          quality: params.quality ?? 90
+                        })
+                      );
+                      const resizedImageBuffer = await resizedImage.toBuffer();
+                      return {
+                        statusCode: 200,
+                        headers: {
+                          "Content-Type": "image/webp"
+                        },
+                        isBase64Encoded: true,
+                        body: resizedImageBuffer.toString("base64")
+                      };
+                    } else {
+                      throw new Error(`HTTP status ${image.status}`);
+                    }
+                  } catch (error2) {
+                    if (url !== fallbackImageUrl) {
+                      console.error(`Error fetching original image: ${error2.message}`);
+                      return fetchAndProcessImage(fallbackImageUrl);
+                    } else {
+                      throw error2;
+                    }
                   }
+                }
+                try {
+                  response2 = await fetchAndProcessImage(params.url);
                 } catch (error2) {
+                  console.error(`Failed to fetch both original and fallback images: ${error2.message}`);
                   response2.body = {
                     success: false,
-                    error: `Error: ${error2.message}`
+                    error: "Failed to fetch image"
                   };
                 }
               } else {
@@ -10308,12 +10318,12 @@ var prepareAsset = async (asset, params) => {
           cssPageSize: false,
           // ToDo: some decision making
           /*
-          	ToDo?
-          	render.clip
-          	render.clipX
-          	render.clipY
-          	render.clipWidth
-          	render.clipHeight
+              ToDo?
+              render.clip
+              render.clipX
+              render.clipY
+              render.clipWidth
+              render.clipHeight
           */
           noPuppeteer: s3Key.endsWith("html"),
           isCollection: params.collection,

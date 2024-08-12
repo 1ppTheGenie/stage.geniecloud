@@ -181,63 +181,66 @@ export const api = async event => {
                                     params.height = parseInt(params.height);
                                 }
 
-                                try {
+                                const fallbackImageUrl = 'https://genie-cloud.s3.us-west-1.amazonaws.com/_assets/_img/picture-pending.jpg';
+
+                                async function fetchAndProcessImage(url) {
                                     const controller = new AbortController();
-                                    const timeoutId = setTimeout(() => controller.abort(), 5000);  // 5 second timeout
+                                    const timeoutId = setTimeout(() => controller.abort(), 3000);  // 3 second timeout
 
-                                    const image = await fetch(params.url, { signal: controller.signal });
-                                    clearTimeout(timeoutId);
+                                    try {
+                                        const image = await fetch(url, { signal: controller.signal });
+                                        clearTimeout(timeoutId);
 
-                                    if (image.ok) {
-                                        // Create a readable stream from the response body
-                                        const imageBuffer = await image.arrayBuffer();
-                                        const bytes = new Uint8Array(imageBuffer);
-                                        const imageStream = new Readable();
-                                        imageStream.push(bytes);
-                                        imageStream.push(null);
+                                        if (image.ok) {
+                                            const imageBuffer = await image.arrayBuffer();
+                                            const bytes = new Uint8Array(imageBuffer);
+                                            const imageStream = new Readable();
+                                            imageStream.push(bytes);
+                                            imageStream.push(null);
 
-                                        // Resize the image using sharp
-                                        const resizedImage = imageStream.pipe(
-                                            sharp()
-                                                .resize({
-                                                    width: params.width,
-                                                    height: params.height
-                                                })
-                                                .webp({
-                                                    effort: 3,
-                                                    quality: params.quality ?? 90
-                                                })
-                                        );
+                                            const resizedImage = imageStream.pipe(
+                                                sharp()
+                                                    .resize({
+                                                        width: params.width,
+                                                        height: params.height
+                                                    })
+                                                    .webp({
+                                                        effort: 3,
+                                                        quality: params.quality ?? 90
+                                                    })
+                                            );
 
-                                        // Convert the resized image to a buffer
-                                        const resizedImageBuffer = await resizedImage.toBuffer();
+                                            const resizedImageBuffer = await resizedImage.toBuffer();
 
-                                        response = {
-                                            statusCode: 200,
-                                            headers: {
-                                                'Content-Type': 'image/webp'
-                                            },
-                                            isBase64Encoded: true,
-                                            body: resizedImageBuffer.toString('base64')
-                                        };
-                                    } else {
-                                        response.body = {
-                                            success: false,
-                                            error: `Failed to fetch image: HTTP status ${image.status}`
-                                        };
+                                            return {
+                                                statusCode: 200,
+                                                headers: {
+                                                    'Content-Type': 'image/webp'
+                                                },
+                                                isBase64Encoded: true,
+                                                body: resizedImageBuffer.toString('base64')
+                                            };
+                                        } else {
+                                            throw new Error(`HTTP status ${image.status}`);
+                                        }
+                                    } catch (error) {
+                                        if (url !== fallbackImageUrl) {
+                                            console.error(`Error fetching original image: ${error.message}`);
+                                            return fetchAndProcessImage(fallbackImageUrl);
+                                        } else {
+                                            throw error;
+                                        }
                                     }
+                                }
+
+                                try {
+                                    response = await fetchAndProcessImage(params.url);
                                 } catch (error) {
-                                    if (error.name === 'AbortError') {
-                                        response.body = {
-                                            success: false,
-                                            error: 'Image fetch timed out after 5 seconds'
-                                        };
-                                    } else {
-                                        response.body = {
-                                            success: false,
-                                            error: `Error: ${error.message}`
-                                        };
-                                    }
+                                    console.error(`Failed to fetch both original and fallback images: ${error.message}`);
+                                    response.body = {
+                                        success: false,
+                                        error: 'Failed to fetch image'
+                                    };
                                 }
                             } else {
                                 response.body = {
