@@ -241,6 +241,12 @@ export const addDynamicPopup = (popupId) => {
 //TODO: I think we can expose api endpoint that will deliver options but just mocking till we have a clear plan
 export const mockCtaData = (ctaId) => {
   switch(ctaId) {
+    case 0:
+      //the home value pops an existing modal so just need the delay and enabled properties available
+      return {        
+        delay: 3,
+        enabled: true
+      };
     case 1:
       return {
         ctaTitle: "Market Insider Offer",
@@ -251,7 +257,8 @@ export const mockCtaData = (ctaId) => {
         ctaNote: "I would like monthly market update for ",
         ctaSubmitText: "Yes!", 
         ctaResponse: "All set, we submitted your request!",
-        delay: 5
+        delay: 5,
+        enabled: true
       };
     default:
       return {
@@ -263,7 +270,8 @@ export const mockCtaData = (ctaId) => {
         ctaNote: "I would like monthly market update for ",
         ctaSubmitText: "Yes Please!", 
         ctaResponse: "All set, we submitted your request!",
-        delay: 5
+        delay: 5,
+        enabled: true
       };
   }
 };

@@ -435,29 +435,28 @@ export default () => {
     
     const data = mockCtaData(parseInt(ctaId));
 
-    if(data == null)
-      return; 
-        
-    //the delay for the popup, I am making the assumption that this would also allow the lead to be created first so that we have
-    //a leadId when it actually fires.
-    setTimeout(() => { 
-      const settings = useSettings(Context4Settings);           
-      //to test you can explicitly set the user and leadId     
-      if (window.gHub.getLeadId(settings)) {
-        const dynamicPopupId = "genie-leadCtaTagPopup";
-        if(addDynamicPopup(dynamicPopupId)) {        
-          const App = () => {
-            return (
-              <Context4Settings.Provider value={settings}>
-                <LeadCtaTag ctaData={data} />
-              </Context4Settings.Provider>
-            );
-          };
-    
-          render(App, document.getElementById(dynamicPopupId));
+    if(data?.enabled) {
+      //the delay for the popup, I am making the assumption that this would also allow the lead to be created first so that we have
+      //a leadId when it actually fires.
+      setTimeout(() => { 
+        const settings = useSettings(Context4Settings);           
+        //to test you can explicitly set the user and leadId     
+        if (window.gHub.getLeadId(settings)) {
+          const dynamicPopupId = "genie-leadCtaTagPopup";
+          if(addDynamicPopup(dynamicPopupId)) {        
+            const App = () => {
+              return (
+                <Context4Settings.Provider value={settings}>
+                  <LeadCtaTag ctaData={data} />
+                </Context4Settings.Provider>
+              );
+            };
+      
+            render(App, document.getElementById(dynamicPopupId));
+          }
         }
-      }
-    }, data.delay);  
+      }, data.delay); 
+    } 
   };  
   
   document.addEventListener("genie-landing-data-loaded", function(){
@@ -493,8 +492,11 @@ export default () => {
 
       //when we are dealing with existing data wait till loaded to pop
       if(ctaHomeValue) {
-        setTimeout(() => { window.gHub.popHomeValue() }, 2000);
-        return;
+
+        const data = mockCtaData(parseInt(ctaId));
+
+        if(data?.enabled)
+          setTimeout(() => { window.gHub.popHomeValue() }, data.delay);
       }
       //might be worth a custom event supplying the lpData
       document.dispatchEvent(new Event("genie-landing-data-loaded"), true);      
