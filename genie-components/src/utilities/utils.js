@@ -296,8 +296,10 @@ export const formatFormNote = (data) => {
 
         formatted += ` availability: ${dates.join(", ")}`; 
 
-        delete data.meta["availableDate"];
-        delete data.meta["alternativeDate"];
+        if(data.meta) {
+          delete data.meta["availableDate"];
+          delete data.meta["alternativeDate"];
+        }
       } 
 
       if(!data.note) {
@@ -315,8 +317,10 @@ export const formatFormNote = (data) => {
 
       data.note = movingFormatted;        
       
-      delete data.meta["movingDate"];
-      delete data.meta["reachMe"];
+      if(data.meta) {
+        delete data.meta["movingDate"];
+        delete data.meta["reachMe"];
+      }
     break;
 
     case "RequestCustomValuation".toLowerCase():
