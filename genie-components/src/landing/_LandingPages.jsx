@@ -425,13 +425,9 @@ export default () => {
   window.gHub.showOptIn = () => { 
     const ctaId = new InsensitiveURLSearchParams(window.location.search).get("ctaId"); 
 
-    if(ctaId == null)
-      return;
-
-    //special handling for home value that is hooked on page param hooks
-    if(ctaId == 0) {      
-      return;
-    }
+    //0 is special handling for home value that is hooked on page param hooks
+    if(ctaId == null || ctaId == 0)
+      return;    
     
     const data = mockCtaData(parseInt(ctaId));
 
@@ -471,7 +467,8 @@ export default () => {
 	const urlParams = new InsensitiveURLSearchParams(window.location.search).getObjectLower();
 
   //special handling for the home value cta
-  const ctaHomeValue = parseInt(urlParams.ctaid) === 0;  
+  const ctaHomeValueKey = 0;
+  const ctaHomeValue = parseInt(urlParams.ctaid) === ctaHomeValueKey;    
 
 	if ( parseInt( urlParams.crlead ) === 1 ) {
 		const pid = urlParams.propertyid;
@@ -493,7 +490,7 @@ export default () => {
       //when we are dealing with existing data wait till loaded to pop
       if(ctaHomeValue) {
 
-        const data = mockCtaData(parseInt(ctaId));
+        const data = mockCtaData(ctaHomeValueKey);
 
         if(data?.enabled)
           setTimeout(() => { window.gHub.popHomeValue() }, data.delay);
@@ -503,7 +500,7 @@ export default () => {
     })();
   } else {
     if(ctaHomeValue) {
-      const data = mockCtaData(parseInt(ctaId));
+      const data = mockCtaData(ctaHomeValueKey);
 
         if(data?.enabled)
           setTimeout(() => { window.gHub.popHomeValue() }, data.delay);
