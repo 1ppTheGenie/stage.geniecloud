@@ -274,7 +274,7 @@ export const formatFormNote = (data) => {
     data.note = data.note || 'Form Submission';
     return;
   }
-
+  
   //since we are formatting it here we can remove the meta data so you will see a few "delete data.meta[xx]", that will prevent duplicate info in notes.
   
   const formatterType = data.noteFormatter.toLowerCase();    
@@ -294,12 +294,10 @@ export const formatFormNote = (data) => {
         if (option2)
           dates.push(option2);
 
-        formatted += ` availability: ${dates.join(", ")}`; 
+        formatted += ` availability: ${dates.join(", ")}`;         
 
-        if(data.meta) {
-          delete data.meta["availableDate"];
-          delete data.meta["alternativeDate"];
-        }
+        delete data["meta[availableDate]"];
+        delete data["meta[alternativeDate]"];
       } 
 
       if(!data.note) {
@@ -317,10 +315,8 @@ export const formatFormNote = (data) => {
 
       data.note = movingFormatted;        
       
-      if(data.meta) {
-        delete data.meta["movingDate"];
-        delete data.meta["reachMe"];
-      }
+      delete data["meta[movingDate]"];
+      delete data["meta[reachMe]"];
     break;
 
     case "RequestCustomValuation".toLowerCase():
