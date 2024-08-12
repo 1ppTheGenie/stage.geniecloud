@@ -8827,7 +8827,7 @@ var get_property = async (params) => {
   return error(["No property found"]);
 };
 var get_short_data = async (params) => {
-  const r = getShortData(
+  const r = await getShortData(
     parseInt(params.shortId),
     params.token,
     params.agentId || null
@@ -8882,7 +8882,7 @@ var add_lead = async (params) => {
       }
     }
     if (params.hasOwnProperty("fullName") && params.fullName) {
-      var split = params?.fullName?.split(" ");
+      var split = params?.fullName?.split(" ")?.filter(Boolean);
       if (split && split.length > 1) {
         var last = split.pop();
         args["lastName"] = last;
@@ -9284,9 +9284,11 @@ var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
   }
 };
 var cache_key = (endpoint, params, verb) => {
-  const strParams = JSON.stringify(Object.entries(params ?? {}));
+  const { userId, ...restParams } = params ?? {};
+  const strParams = JSON.stringify(Object.entries(restParams));
   const hash = import_crypto.default.createHash("md5").update(`${endpoint}.${verb}.${strParams}`).digest("hex");
-  return `genie-${hash}.json`;
+  const userIdPart = userId ? `${userId}-` : "";
+  return `genie-${userIdPart}${hash}.json`;
 };
 var areaName = async (userId, areaId, skipCache = false) => await call_api("GetAreaName", { areaId, userId }, skipCache);
 var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache = false) => {

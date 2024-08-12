@@ -42,13 +42,15 @@ const to_cache = async (data, endpoint, key, timeout_hours = 4) => {
 };
 
 const cache_key = (endpoint, params, verb) => {
-    const strParams = JSON.stringify(Object.entries(params ?? {}));
+    const { userId, ...restParams } = params ?? {};
+    const strParams = JSON.stringify(Object.entries(restParams));
     const hash = crypto
         .createHash('md5')
         .update(`${endpoint}.${verb}.${strParams}`)
         .digest('hex');
 
-    return `genie-${hash}.json`;
+    const userIdPart = userId ? `${userId}-` : '';
+    return `genie-${userIdPart}${hash}.json`;
 };
 
 export const areaName = async (userId, areaId, skipCache = false) =>
