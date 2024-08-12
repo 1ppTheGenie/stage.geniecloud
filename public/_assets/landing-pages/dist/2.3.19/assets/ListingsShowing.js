@@ -1,0 +1,2 @@
+import{i as n,g as a,t as l}from"./index.js";var i=l("<span style=font-weight:bold>");const f=e=>["Showing",(()=>{var t=i();return n(t,()=>` ${e.offset+1}${e.offset+1==Math.min(e.offset+e.pageSize,e.len)?"":`-${Math.min(e.offset+e.pageSize,e.len)}`} `),t})(),"of",(()=>{var t=i();return n(t,()=>` ${e.len} `),t})(),a(()=>e.mode==="sold"?`sold listings in the last ${e.period} months`:`${e.mode} listings`),". DOM: Days On Market"];export{f as L};
+//# sourceMappingURL=ListingsShowing.js.map

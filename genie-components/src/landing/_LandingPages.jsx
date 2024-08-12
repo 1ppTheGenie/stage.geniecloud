@@ -313,10 +313,10 @@ export default () => {
     if (!postTracking.utmSource || postTracking.utmSource === "url") {
       
       //in the event someone lands on the page that was not driven by a short URL with tracking data
-      const pageUtmSource = document.getElementById("pageUtmSource").value;
-      const pageUtmCampaign = document.getElementById("pageUtmCampaign").value;
-      postTracking.utmSource = pageUtmSource || window.location.href;
-      postTracking.utmCampaign = pageUtmCampaign;
+      const pageUtmSource = document.getElementById("pageUtmSource");
+      const pageUtmCampaign = document.getElementById("pageUtmCampaign");
+      postTracking.utmSource = pageUtmSource?.value || window.location.href;
+      postTracking.utmCampaign = pageUtmCampaign?.value;
     }
 
     return postTracking;
