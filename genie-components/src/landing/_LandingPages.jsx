@@ -643,6 +643,7 @@ export default () => {
 			event.preventDefault();
 
       let downloadedNote;
+      
 			const downloadFile = () => {
 				const anchor = document.createElement("a");         
 				anchor.href = el.getAttribute(downloadAttr);
@@ -650,7 +651,7 @@ export default () => {
 				anchor.download = el.getAttribute(downloadAttr);
 				anchor.click();
 
-        downloadedNote =  `Report Downloaded - ${anchor.href}`;
+        downloadedNote =  `File Downloaded - ${anchor.href}`;
 			};
 
 			const popup = document.getElementById("download-report");
@@ -713,11 +714,19 @@ export default () => {
 		// Skip if managed by the downloadUrl handler
 		if (!el.hasAttribute(downloadAttr)) {
 			el.addEventListener("click", () => {
-
+        
         //the downloadUrl handler captures the email so this one is a bit different in that we MUST have lead in context
         //to fire of the update here.
         if(window.gHub.getLeadId()) {
-          window.gHub.addLead("Event Trigger", {
+
+          let downloadedNote = 'File Downloaded';
+
+          const fileLink = el.getAttribute("href");
+
+          if(fileLink) 
+            downloadedNote = `${downloadedNote} - ${fileLink}`;
+
+          window.gHub.addLead(downloadedNote, {
             genieTags: el.getAttribute(tagsAttr),
           });
         }
