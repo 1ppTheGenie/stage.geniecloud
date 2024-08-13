@@ -724,6 +724,7 @@ export default () => {
         //to fire of the update here.
         if(window.gHub.getLeadId()) {
 
+          //TODO: consolidate duplicate code          
           let downloadedNote = 'File Downloaded';
           let downloadUrl = el.getAttribute("href");
 
