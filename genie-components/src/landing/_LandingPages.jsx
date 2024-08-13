@@ -651,7 +651,12 @@ export default () => {
 				anchor.download = el.getAttribute(downloadAttr);
 				anchor.click();
 
-        downloadedNote =  `File Downloaded - ${anchor.href}`;
+        let downloadUrl = anchor.href;
+
+        if(downloadUrl && downloadUrl.startsWith("/"))
+          downloadUrl = `${window.location.origin}${downloadUrl}`;
+
+        downloadedNote =  `File Downloaded - ${downloadUrl}`;
 			};
 
 			const popup = document.getElementById("download-report");
@@ -720,11 +725,14 @@ export default () => {
         if(window.gHub.getLeadId()) {
 
           let downloadedNote = 'File Downloaded';
+          let downloadUrl = el.getAttribute("href");
 
-          const fileLink = el.getAttribute("href");
+          if(downloadUrl) {
+            if(downloadUrl.startsWith("/"))
+              downloadUrl = `${window.location.origin}${downloadUrl}`;          
 
-          if(fileLink) 
-            downloadedNote = `${downloadedNote} - ${fileLink}`;
+            downloadedNote = `${downloadedNote} - ${downloadUrl}`;
+          } 
 
           window.gHub.addLead(downloadedNote, {
             genieTags: el.getAttribute(tagsAttr),
@@ -735,8 +743,7 @@ export default () => {
 	} );
 	
 	document.querySelectorAll( `.genie-alternate:nth-child(odd)` ).forEach( el =>
-		el.classList.add( window.gHub.alternateShade && window.gHub.alternateShade !== '' ? window.gHub.alternateShade : 'dark' ) );
-	
+		el.classList.add( window.gHub.alternateShade && window.gHub.alternateShade !== '' ? window.gHub.alternateShade : 'dark' ) );  
 
 	window.requestAnimationFrame(() => window.gHub.lazyLoader("img.lazy"));
 
