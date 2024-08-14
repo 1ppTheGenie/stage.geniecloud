@@ -629,9 +629,9 @@ export default () => {
         
 				const lead = await window.gHub.addLead(data.note, data);
 
-				document.dispatchEvent(
-					new CustomEvent("genie-lead-created", { detail: lead })
-				);
+        //window.gHub.leadId is set in addLead in success so adding a check here, a lot of hooks on this event do not have null handling
+        if(window.gHub.leadId)
+				  document.dispatchEvent(new CustomEvent("genie-lead-created", { detail: lead }));
 			})();
 		})
 	);

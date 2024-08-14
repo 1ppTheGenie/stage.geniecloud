@@ -44,6 +44,28 @@
 			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', $listingAddressLine1, ' Listing Site!')" />
 		</xsl:call-template>
 
+    <xsl:variable name="fileDownloadTags">
+      <xsl:choose>
+        <xsl:when test="contains(//output/@downloadUrl, 'market-insider')">
+          <xsl:text>DownloadMarketReport,ClickCta</xsl:text>          
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>DownloadPropertyBrochure,ClickCta</xsl:text>          
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="fileDownloadText">
+      <xsl:choose>
+        <xsl:when test="contains(//output/@downloadUrl, 'market-insider')">
+          <xsl:text>Download Market Report</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>Download Property Brochure</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>  
+
 		<body>
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'lc-hollywood ', $cssThemeClass)" />
@@ -284,8 +306,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 					<div class="hero-details custom-container container">
 						<div class="heading-color-as-bg hero-details-inner">
 							<div class="hero-price">
-								<span class="gradient-color">
-									<!-- <xsl:value-of select="format-number( //single/price, '$###,###')" /> -->
+								<span class="gradient-color">									
 									<xsl:choose>
 										<xsl:when test="//single/soldDate!=''">
 											<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
@@ -543,17 +564,21 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/cush-pdf-bg.jpg')" />
 							</xsl:attribute>
 						</img>
-					</div>
-					<a class="pdf-btn" target="_blank" data-genie-tags="DownloadPropertyBrochure,ClickCta">
+					</div>           
+					<a class="pdf-btn" target="_blank" >
 						<xsl:attribute name="href">
 							<xsl:value-of select="//output/@downloadUrl" />
+						</xsl:attribute>
+
+            <xsl:attribute name="data-genie-tags">
+							<xsl:value-of select="$fileDownloadTags" />
 						</xsl:attribute>
 
 						<div class="overlay-bg">
 							<xsl:comment/>
 						</div>
 						<span class="gradient-color">
-							<xsl:text>Download Property Brochure</xsl:text>
+							<xsl:value-of select="$fileDownloadText" />
 						</span>
 					</a>
 				</section>
