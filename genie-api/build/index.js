@@ -1225,7 +1225,7 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 var import_sharp = __toESM(require("sharp"), 1);
-var import_stream = require("stream");
+var import_stream2 = require("stream");
 
 // node_modules/luxon/src/errors.js
 var LuxonError = class extends Error {
@@ -7460,11 +7460,37 @@ var import_crypto = __toESM(require("crypto"), 1);
 var import_client_s3 = require("@aws-sdk/client-s3");
 var import_client_cloudfront = require("@aws-sdk/client-cloudfront");
 var import_client_sqs = require("@aws-sdk/client-sqs");
+var import_stream = require("stream");
 var BUCKET = process.env.BUCKET ?? "genie-hub-2";
 var REGION = process.env.REGION ?? "eu-west-2";
 var SQS_QUEUE = process.env.SQS_QUEUE ?? "https://sqs.eu-west-2.amazonaws.com/584678469437/genie-cloud";
 var s3Client = new import_client_s3.S3Client({ region: REGION });
 var sqs = new import_client_sqs.SQSClient({ region: REGION });
+var streamS3Object = async (key, bucket = null) => {
+  try {
+    const command = new import_client_s3.GetObjectCommand({
+      Bucket: bucket ?? BUCKET,
+      Key: key
+    });
+    const { Body } = await s3Client.send(command);
+    if (Body instanceof import_stream.Readable) {
+      return Body;
+    } else {
+      const stream = new import_stream.Readable();
+      stream.push(await Body.transformToByteArray());
+      stream.push(null);
+      return stream;
+    }
+  } catch (err) {
+    console.error(`Error streaming object ${key}:`, err);
+    throw err;
+  }
+};
+var readStream = async function* (stream) {
+  for await (const chunk of stream) {
+    yield chunk.toString("utf-8");
+  }
+};
 var copyObject = async (sourceKey, destinationKey, bucket = null, ContentType = null, CacheControl = null) => {
   const args = {
     Bucket: bucket ?? BUCKET,
@@ -7476,19 +7502,56 @@ var copyObject = async (sourceKey, destinationKey, bucket = null, ContentType = 
   };
   return await s3Client.send(new import_client_s3.CopyObjectCommand(args));
 };
+var searchS3ByPrefix = async (prefix, suffix = null, bucket = null) => {
+  try {
+    let allMatches = [];
+    let isTruncated = true;
+    let nextContinuationToken = null;
+    while (isTruncated) {
+      const listParams = {
+        Bucket: bucket ?? BUCKET,
+        Prefix: prefix,
+        ContinuationToken: nextContinuationToken
+      };
+      const response2 = await s3Client.send(
+        new import_client_s3.ListObjectsV2Command(listParams)
+      );
+      let contents = response2.Contents || [];
+      if (suffix) {
+        contents = contents.filter((item) => item.Key.endsWith(suffix));
+      }
+      allMatches = allMatches.concat(contents);
+      isTruncated = response2.IsTruncated;
+      nextContinuationToken = response2.NextContinuationToken;
+    }
+    return allMatches;
+  } catch (err) {
+    console.error("Error in searchS3ByPrefix:", err);
+    throw err;
+  }
+};
 var listS3Folder = async (folderPath = "", justContents = true, token = null, bucket = null) => {
   try {
-    const listParams = {
-      Bucket: bucket ?? BUCKET,
-      Prefix: folderPath,
-      ContinuationToken: token
-    };
-    const response2 = await s3Client.send(
-      new import_client_s3.ListObjectsV2Command(listParams)
-    );
-    return justContents ? response2.Contents : response2;
+    let allContents = [];
+    let isTruncated = true;
+    let nextContinuationToken = null;
+    while (isTruncated) {
+      const listParams = {
+        Bucket: bucket ?? BUCKET,
+        Prefix: folderPath,
+        ContinuationToken: nextContinuationToken
+      };
+      const response2 = await s3Client.send(
+        new import_client_s3.ListObjectsV2Command(listParams)
+      );
+      allContents = allContents.concat(response2.Contents || []);
+      isTruncated = response2.IsTruncated;
+      nextContinuationToken = response2.NextContinuationToken;
+    }
+    return justContents ? allContents : { Contents: allContents };
   } catch (err) {
-    console.error("Error:", err);
+    console.error("Error in listS3Folder:", err);
+    throw err;
   }
 };
 var deleteObject = async (Key, Bucket = null) => await s3Client.send(
@@ -9731,7 +9794,7 @@ var api = async (event) => {
                     if (image.ok) {
                       const imageBuffer = await image.arrayBuffer();
                       const bytes = new Uint8Array(imageBuffer);
-                      const imageStream = new import_stream.Readable();
+                      const imageStream = new import_stream2.Readable();
                       imageStream.push(bytes);
                       imageStream.push(null);
                       const resizedImage = imageStream.pipe(
@@ -9897,59 +9960,65 @@ var api = async (event) => {
                   response2.body.msg = `Error: ${err.message}`;
                 }
               } else if (params.assetId || params.userId || params.mlsNumber || params.areaId) {
-                let reRenders = [];
+                let deletedCacheItems = 0;
                 if (params.userId) {
-                  const c = await listS3Folder("_cache");
-                  await Promise.all(
-                    c.map(async (f) => {
-                      if (f.Key.startsWith(`genie-${params.userId}`) && f.Size > 0) {
-                        await deleteObject(f.Key);
-                      }
-                    })
-                  );
+                  try {
+                    const cacheItems = await searchS3ByPrefix(`_cache/genie-${params.userId}`);
+                    console.log(`Found ${cacheItems.length} cache items for user ${params.userId}`);
+                    await Promise.all(
+                      cacheItems.map(async (f) => {
+                        if (f.Size > 0) {
+                          try {
+                            await deleteObject(f.Key);
+                            deletedCacheItems++;
+                          } catch (deleteError) {
+                            console.error(`Error deleting object ${f.Key}:`, deleteError);
+                          }
+                        }
+                      })
+                    );
+                    console.log(`Deleted ${deletedCacheItems} cache items for user ${params.userId}`);
+                  } catch (cacheError) {
+                    console.error("Error processing cache deletions:", cacheError);
+                  }
                 }
-                const r = await listS3Folder("_processing");
-                await Promise.all(
-                  r.map(async (t) => {
-                    if (t.Key.endsWith("render.json") && t.Size > 0) {
-                      const json = await jsonFromS3(
-                        t.Key
-                      );
-                      if (params.assetId) {
-                      } else if (
-                        // ToDo mlsId must match as well as as mlsNumber
-                        (!params.userId || params.userId == json.userId) && (!params.mlsNumber || params.mlsNumber == json.mlsNumber) && (!params.areaId || json.areaIds.includes(
-                          params.areaId
-                        ))
-                      ) {
-                        reRenders.push(
-                          t.Key.split("/")[1]
+                try {
+                  const processingItems = await searchS3ByPrefix("_processing", "render.json");
+                  console.log(`Found ${processingItems.length} render.json files in _processing folder`);
+                  const reRenders = await processBatch(processingItems, params);
+                  console.log(`${reRenders.length} items matched the re-render criteria`);
+                  if (reRenders.length > 0) {
+                    const uniqueReRenders = [...new Set(reRenders)];
+                    console.log(`${uniqueReRenders.length} unique items to be re-rendered`);
+                    for (const renderId of uniqueReRenders) {
+                      try {
+                        await reRender(renderId, {
+                          ...params,
+                          skipCache: true
+                        });
+                        await toS3(
+                          `_lookup/re-render/${renderId}`,
+                          Buffer.from("@"),
+                          null,
+                          TXT_MIME
                         );
+                      } catch (reRenderError) {
+                        console.error(`Error during reRender for ${renderId}:`, reRenderError);
                       }
                     }
-                  })
-                );
-                if (reRenders.length > 0) {
-                  reRenders = reRenders.filter(
-                    (value, index, array) => array.indexOf(value) === index
-                  );
-                  for (const index in reRenders) {
-                    await reRender(reRenders[index], {
-                      ...params,
-                      skipCache: true
-                    });
-                    await toS3(
-                      `_lookup/re-render/${reRenders[index]}`,
-                      Buffer.from("@"),
-                      null,
-                      TXT_MIME
-                    );
+                    response2.body.success = true;
+                    response2.body.msg = `${uniqueReRenders.length} re-renders underway. ${deletedCacheItems} cache items deleted.`;
+                    response2.body.reRenders = uniqueReRenders;
+                  } else {
+                    response2.body.success = false;
+                    response2.body.msg = "No items found to re-render";
                   }
-                  response2.body.success = true;
-                  response2.body.msg = `${reRenders.length} re-renders underway`;
-                  response2.body.data = reRenders;
+                } catch (processingError) {
+                  console.error("Error processing _processing folder:", processingError);
+                  response2.body.success = false;
+                  response2.body.msg = "Error during processing";
                 }
-                break;
+                console.log(`Re-render process completed. Response: ${JSON.stringify(response2.body)}`);
               } else {
                 throw new Error(
                   "[renderId] or [userId] or [mlsNumber] is required for a re-render"
@@ -10181,6 +10250,42 @@ var api = async (event) => {
     }
   }
   return response2;
+};
+var processBatch = async (items, params, batchSize = 500) => {
+  let reRenders = [];
+  for (let i = 0; i < items.length; i += batchSize) {
+    const batch = items.slice(i, i + batchSize);
+    await Promise.all(
+      batch.map(async (t) => {
+        try {
+          const stream = await streamS3Object(t.Key);
+          let jsonString = "";
+          for await (const chunk of readStream(stream)) {
+            jsonString += chunk;
+          }
+          if (params.userId && !jsonString.includes(`"userId":"${params.userId}"`))
+            return;
+          if (params.mlsNumber && !jsonString.includes(`"mlsNumber":"${params.mlsNumber}"`))
+            return;
+          if (params.areaId && !jsonString.includes(`"areaIds":`))
+            return;
+          try {
+            const json = JSON.parse(jsonString);
+            if ((!params.userId || params.userId === json.userId) && (!params.mlsNumber || params.mlsNumber === json.mlsNumber) && (!params.areaId || json.areaIds.includes(params.areaId))) {
+              reRenders.push(t.Key.split("/")[1]);
+            }
+          } catch (parseError) {
+            console.error(`Error parsing JSON for ${t.Key}:`, parseError);
+            console.error(`Problematic JSON string: ${jsonString}`);
+          }
+        } catch (streamError) {
+          console.error(`Error streaming object ${t.Key}:`, streamError);
+        }
+      })
+    );
+    console.log(`Processed batch ${i / batchSize + 1}, total matches: ${reRenders.length}`);
+  }
+  return reRenders;
 };
 var renderKeyParams = async (params) => {
   let listing, areaId = params.area?.areaId ?? params.areaId, propertyType = 0, listingStatus = "";

@@ -5,6 +5,7 @@ import {
     CreateInvalidationCommand
 } from '@aws-sdk/client-cloudfront';
 import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
+import { Readable } from 'stream';
 
 export const BUCKET = process.env.BUCKET ?? 'genie-hub-2';
 const REGION = process.env.REGION ?? 'eu-west-2';
@@ -16,6 +17,37 @@ const SQS_QUEUE =
 // Set up the S3 client
 const s3Client = new S3Client({ region: REGION });
 const sqs = new SQSClient({ region: REGION });
+
+export const streamS3Object = async (key, bucket = null) => {
+    try {
+        const command = new GetObjectCommand({
+            Bucket: bucket ?? BUCKET,
+            Key: key
+        });
+
+        const { Body } = await s3Client.send(command);
+        
+        if (Body instanceof Readable) {
+            return Body;
+        } else {
+            // If Body is not a stream, convert it to one
+            const stream = new Readable();
+            stream.push(await Body.transformToByteArray());
+            stream.push(null);
+            return stream;
+        }
+    } catch (err) {
+        console.error(`Error streaming object ${key}:`, err);
+        throw err;
+    }
+};
+
+// Helper function to read a stream chunk by chunk
+export const readStream = async function* (stream) {
+    for await (const chunk of stream) {
+        yield chunk.toString('utf-8');
+    }
+};
 
 export const copyObject = async (
     sourceKey,
@@ -50,6 +82,42 @@ export const setS3Retention = async (Key, retainUntil, bucket = null) => {
     return await s3Client.send(new PutObjectRetentionCommand(args));
 };
 
+export const searchS3ByPrefix = async (prefix, suffix = null, bucket = null) => {
+    try {
+        let allMatches = [];
+        let isTruncated = true;
+        let nextContinuationToken = null;
+
+        while (isTruncated) {
+            const listParams = {
+                Bucket: bucket ?? BUCKET,
+                Prefix: prefix,
+                ContinuationToken: nextContinuationToken
+            };
+
+            const response = await s3Client.send(
+                new ListObjectsV2Command(listParams)
+            );
+
+            let contents = response.Contents || [];
+            
+            // If a suffix is provided, filter the results
+            if (suffix) {
+                contents = contents.filter(item => item.Key.endsWith(suffix));
+            }
+
+            allMatches = allMatches.concat(contents);
+            isTruncated = response.IsTruncated;
+            nextContinuationToken = response.NextContinuationToken;
+        }
+
+        return allMatches;
+    } catch (err) {
+        console.error('Error in searchS3ByPrefix:', err);
+        throw err;
+    }
+};
+
 export const listS3Folder = async (
     folderPath = '',
     justContents = true,
@@ -57,19 +125,30 @@ export const listS3Folder = async (
     bucket = null
 ) => {
     try {
-        const listParams = {
-            Bucket: bucket ?? BUCKET,
-            Prefix: folderPath,
-            ContinuationToken: token
-        };
+        let allContents = [];
+        let isTruncated = true;
+        let nextContinuationToken = null;
 
-        const response = await s3Client.send(
-            new ListObjectsV2Command(listParams)
-        );
+        while (isTruncated) {
+            const listParams = {
+                Bucket: bucket ?? BUCKET,
+                Prefix: folderPath,
+                ContinuationToken: nextContinuationToken
+            };
 
-        return justContents ? response.Contents : response;
+            const response = await s3Client.send(
+                new ListObjectsV2Command(listParams)
+            );
+
+            allContents = allContents.concat(response.Contents || []);
+            isTruncated = response.IsTruncated;
+            nextContinuationToken = response.NextContinuationToken;
+        }
+
+        return justContents ? allContents : { Contents: allContents };
     } catch (err) {
-        console.error('Error:', err);
+        console.error('Error in listS3Folder:', err);
+        throw err;
     }
 };
 

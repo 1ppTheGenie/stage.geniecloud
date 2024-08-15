@@ -13,7 +13,7 @@ import { propertySurroundingAreas, getAreaBoundary, getUser, impersonater, getLi
 // prettier-ignore
 import { userSetting, embedsAPI, cloudHubAPI, getRenderJSON, getCollection, setRenderDefaults, genieGlobals, queueMsg, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset, preCallGenieAPIs } from "./utils/index.js";
 // prettier-ignore
-import { listS3Folder, toS3, copyObject, headObject, jsonFromS3, fromS3, BUCKET, deleteObject, buildVersion } from "./utils/index.js";
+import { listS3Folder, searchS3ByPrefix, streamS3Object, readStream, toS3, copyObject, headObject, jsonFromS3, fromS3, BUCKET, deleteObject, buildVersion } from "./utils/index.js";
 
 const RENDER_VERSION = 100;
 
@@ -438,12 +438,10 @@ export const api = async event => {
                                         response.body.msg = `${params.renderId} re-render under way`;
 
                                         if (Object.keys(params).length > 1) {
-                                            response.body.msg +=
-                                                ' (with override params)';
+                                            response.body.msg += ' (with override params)';
                                         }
                                     }
 
-                                    // Get CloudFlare to empty itself
                                     await queueMsg('clear-cache', {
                                         renderId: {
                                             DataType: 'String',
@@ -460,87 +458,74 @@ export const api = async event => {
                                 params.mlsNumber ||
                                 params.areaId
                             ) {
-                                let reRenders = [];
+                                let deletedCacheItems = 0;
 
                                 if (params.userId) {
-                                    const c = await listS3Folder('_cache');
-                                    await Promise.all(
-                                        c.map(async f => {
-                                            if (
-                                                f.Key.startsWith(`genie-${params.userId}`) &&
-                                                f.Size > 0
-                                            ) {
-                                                await deleteObject(f.Key)
-                                            }
-                                        })
-                                    );
+                                    try {
+                                        const cacheItems = await searchS3ByPrefix(`_cache/genie-${params.userId}`);
+                                        console.log(`Found ${cacheItems.length} cache items for user ${params.userId}`);
+
+                                        await Promise.all(
+                                            cacheItems.map(async f => {
+                                                if (f.Size > 0) {
+                                                    try {
+                                                        await deleteObject(f.Key);
+                                                        deletedCacheItems++;
+                                                    } catch (deleteError) {
+                                                        console.error(`Error deleting object ${f.Key}:`, deleteError);
+                                                    }
+                                                }
+                                            })
+                                        );
+                                        console.log(`Deleted ${deletedCacheItems} cache items for user ${params.userId}`);
+                                    } catch (cacheError) {
+                                        console.error('Error processing cache deletions:', cacheError);
+                                    }
                                 }
 
-                                const r = await listS3Folder('_processing');
-                                await Promise.all(
-                                    r.map(async t => {
-                                        if (
-                                            t.Key.endsWith('render.json') &&
-                                            t.Size > 0
-                                        ) {
-                                            const json = await jsonFromS3(
-                                                t.Key
-                                            );
+                                try {
+                                    const processingItems = await searchS3ByPrefix('_processing', 'render.json');
+                                    console.log(`Found ${processingItems.length} render.json files in _processing folder`);
 
-                                            // Rerenders based on asset don't distinguish on user/area/mlsNumber basis
-                                            if (params.assetId) {
-                                                //ToDo
-                                            } else if (
-                                                // ToDo mlsId must match as well as as mlsNumber
-                                                (!params.userId ||
-                                                    params.userId ==
-                                                    json.userId) &&
-                                                (!params.mlsNumber ||
-                                                    params.mlsNumber ==
-                                                    json.mlsNumber) &&
-                                                (!params.areaId ||
-                                                    json.areaIds.includes(
-                                                        params.areaId
-                                                    ))
-                                            ) {
-                                                // ToDo Consider skipping collections that are single assets BUT NOT landing pages
+                                    const reRenders = await processBatch(processingItems, params);
+                                    console.log(`${reRenders.length} items matched the re-render criteria`);
 
-                                                // ToDo? And access.json updates in last N hours/days?
+                                    if (reRenders.length > 0) {
+                                        const uniqueReRenders = [...new Set(reRenders)];
+                                        console.log(`${uniqueReRenders.length} unique items to be re-rendered`);
 
-                                                //Rerender: key will be `_processing/{renderId}/render.json`
-                                                reRenders.push(
-                                                    t.Key.split('/')[1]
+                                        for (const renderId of uniqueReRenders) {
+                                            try {
+                                                await reRender(renderId, {
+                                                    ...params,
+                                                    skipCache: true
+                                                });
+
+                                                await toS3(
+                                                    `_lookup/re-render/${renderId}`,
+                                                    Buffer.from('@'),
+                                                    null,
+                                                    TXT_MIME
                                                 );
+                                            } catch (reRenderError) {
+                                                console.error(`Error during reRender for ${renderId}:`, reRenderError);
                                             }
                                         }
-                                    })
-                                );
 
-                                if (reRenders.length > 0) {
-                                    reRenders = reRenders.filter(
-                                        (value, index, array) =>
-                                            array.indexOf(value) === index
-                                    );
-
-                                    for (const index in reRenders) {
-                                        await reRender(reRenders[index], {
-                                            ...params,
-                                            skipCache: true
-                                        });
-
-                                        await toS3(
-                                            `_lookup/re-render/${reRenders[index]}`,
-                                            Buffer.from('@'),
-                                            null,
-                                            TXT_MIME
-                                        );
+                                        response.body.success = true;
+                                        response.body.msg = `${uniqueReRenders.length} re-renders underway. ${deletedCacheItems} cache items deleted.`;
+                                        response.body.reRenders = uniqueReRenders; // Changed from 'data' to 'reRenders'
+                                    } else {
+                                        response.body.success = false;
+                                        response.body.msg = 'No items found to re-render';
                                     }
-
-                                    response.body.success = true;
-                                    response.body.msg = `${reRenders.length} re-renders underway`;
-                                    response.body.data = reRenders;
+                                } catch (processingError) {
+                                    console.error('Error processing _processing folder:', processingError);
+                                    response.body.success = false;
+                                    response.body.msg = 'Error during processing';
                                 }
-                                break;
+
+                                console.log(`Re-render process completed. Response: ${JSON.stringify(response.body)}`);
                             } else {
                                 throw new Error(
                                     '[renderId] or [userId] or [mlsNumber] is required for a re-render'
@@ -848,6 +833,48 @@ export const api = async event => {
     }
 
     return response;
+};
+
+const processBatch = async (items, params, batchSize = 500) => {
+    let reRenders = [];
+    for (let i = 0; i < items.length; i += batchSize) {
+        const batch = items.slice(i, i + batchSize);
+        await Promise.all(
+            batch.map(async t => {
+                try {
+                    const stream = await streamS3Object(t.Key);
+                    let jsonString = '';
+                    for await (const chunk of readStream(stream)) {
+                        jsonString += chunk;
+                    }
+
+                    // Early exit conditions
+                    if (params.userId && !jsonString.includes(`"userId":"${params.userId}"`)) return;
+                    if (params.mlsNumber && !jsonString.includes(`"mlsNumber":"${params.mlsNumber}"`)) return;
+                    if (params.areaId && !jsonString.includes(`"areaIds":`)) return;
+
+                    // Parse JSON after reading the entire file
+                    try {
+                        const json = JSON.parse(jsonString);
+                        if (
+                            (!params.userId || params.userId === json.userId) &&
+                            (!params.mlsNumber || params.mlsNumber === json.mlsNumber) &&
+                            (!params.areaId || json.areaIds.includes(params.areaId))
+                        ) {
+                            reRenders.push(t.Key.split('/')[1]);
+                        }
+                    } catch (parseError) {
+                        console.error(`Error parsing JSON for ${t.Key}:`, parseError);
+                        console.error(`Problematic JSON string: ${jsonString}`);
+                    }
+                } catch (streamError) {
+                    console.error(`Error streaming object ${t.Key}:`, streamError);
+                }
+            })
+        );
+        console.log(`Processed batch ${i / batchSize + 1}, total matches: ${reRenders.length}`);
+    }
+    return reRenders;
 };
 
 const renderKeyParams = async params => {
