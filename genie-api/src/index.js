@@ -462,6 +462,20 @@ export const api = async event => {
                             ) {
                                 let reRenders = [];
 
+                                if (params.userId) {
+                                    const c = await listS3Folder('_cache');
+                                    await Promise.all(
+                                        c.map(async f => {
+                                            if (
+                                                f.Key.startsWith(`genie-${params.userId}`) &&
+                                                f.Size > 0
+                                            ) {
+                                                await deleteObject(f.Key)
+                                            }
+                                        })
+                                    )
+                                }
+
                                 const r = await listS3Folder('_processing');
                                 await Promise.all(
                                     r.map(async t => {
