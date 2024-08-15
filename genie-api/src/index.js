@@ -473,7 +473,7 @@ export const api = async event => {
                                                 await deleteObject(f.Key)
                                             }
                                         })
-                                    )
+                                    );
                                 }
 
                                 const r = await listS3Folder('_processing');
