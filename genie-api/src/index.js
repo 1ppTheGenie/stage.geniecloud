@@ -658,6 +658,161 @@ export const api = async event => {
                             }
                             break;
 
+                        case '/cleanup-renders':
+                            try {
+                                const userId = params.userId;
+                                if (!userId) {
+                                    throw new Error('userId parameter is required');
+                                }
+
+                                console.log(`Starting cleanup of render.json files for user ${userId}`);
+
+                                const processRenderBatch = async (items, batchSize = 500) => {
+                                    let userAssets = {};
+                                    let filesToDelete = [];
+                                    for (let i = 0; i < items.length; i += batchSize) {
+                                        const batch = items.slice(i, i + batchSize);
+                                        await Promise.all(
+                                            batch.map(async (item) => {
+                                                try {
+                                                    const stream = await streamS3Object(item.Key);
+                                                    let jsonString = '';
+                                                    for await (const chunk of readStream(stream)) {
+                                                        jsonString += chunk;
+                                                    }
+
+                                                    try {
+                                                        const json = JSON.parse(jsonString);
+                                                        if (json.userId === userId) {
+                                                            if (!userAssets[json.userId]) {
+                                                                userAssets[json.userId] = { assetCount: 0, assets: [] };
+                                                            }
+                                                            userAssets[json.userId].assetCount++;
+                                                            userAssets[json.userId].assets.push(item.Key);
+                                                            filesToDelete.push(item.Key);
+                                                        }
+                                                    } catch (parseError) {
+                                                        console.error(`Error parsing JSON for ${item.Key}:`, parseError);
+                                                    }
+                                                } catch (streamError) {
+                                                    console.error(`Error streaming object ${item.Key}:`, streamError);
+                                                }
+                                            })
+                                        );
+                                        console.log(`Processed batch ${i / batchSize + 1}`);
+                                    }
+                                    return { userAssets, filesToDelete };
+                                };
+
+                                const renderJsonFiles = await searchS3ByPrefix('_processing', 'render.json');
+                                console.log(`Found ${renderJsonFiles.length} render.json files`);
+
+                                const { userAssets, filesToDelete } = await processRenderBatch(renderJsonFiles);
+
+                                console.log(`Found ${filesToDelete.length} files to delete for user ${userId}`);
+
+                                let deletedCount = 0;
+                                // Uncomment the following block to perform actual deletion
+
+                                for (const fileKey of filesToDelete) {
+                                    try {
+                                        await deleteObject(fileKey);
+                                        deletedCount++;
+                                    } catch (deleteError) {
+                                        console.error(`Error deleting ${fileKey}:`, deleteError);
+                                    }
+                                }
+
+
+                                const result = Object.entries(userAssets).map(([userId, data]) => ({
+                                    userId,
+                                    assetCount: data.assetCount,
+                                    assets: data.assets
+                                }));
+
+                                response.body = {
+                                    success: true,
+                                    message: `Cleanup complete for user ${userId}. ${deletedCount} files deleted.`,
+                                    userAssetsData: result,
+                                    filesToDelete: filesToDelete
+                                };
+                            } catch (error) {
+                                console.error('Error in cleanup-renders:', error);
+                                response.body = {
+                                    success: false,
+                                    error: `Failed to cleanup render.json files: ${error.message}`
+                                };
+                            }
+                            break;
+
+                        case '/inspect-renders':
+                            try {
+                                console.log('Starting inspection of render.json files');
+
+                                const processRenderBatch = async (items, batchSize = 500) => {
+                                    let userAssets = {};
+                                    for (let i = 0; i < items.length; i += batchSize) {
+                                        const batch = items.slice(i, i + batchSize);
+                                        await Promise.all(
+                                            batch.map(async (item) => {
+                                                try {
+                                                    const stream = await streamS3Object(item.Key);
+                                                    let jsonString = '';
+                                                    for await (const chunk of readStream(stream)) {
+                                                        jsonString += chunk;
+                                                    }
+
+                                                    try {
+                                                        const json = JSON.parse(jsonString);
+                                                        if (json.userId) {
+                                                            if (!userAssets[json.userId]) {
+                                                                userAssets[json.userId] = { assetCount: 0, assets: [] };
+                                                            }
+                                                            userAssets[json.userId].assetCount++;
+                                                            userAssets[json.userId].assets.push(item.Key);
+                                                        }
+                                                    } catch (parseError) {
+                                                        console.error(`Error parsing JSON for ${item.Key}:`, parseError);
+                                                    }
+                                                } catch (streamError) {
+                                                    console.error(`Error streaming object ${item.Key}:`, streamError);
+                                                }
+                                            })
+                                        );
+                                        console.log(`Processed batch ${i / batchSize + 1}`);
+                                    }
+                                    return userAssets;
+                                };
+
+                                const renderJsonFiles = await searchS3ByPrefix('_processing', 'render.json');
+                                console.log(`Found ${renderJsonFiles.length} render.json files`);
+
+                                const userAssets = await processRenderBatch(renderJsonFiles);
+
+                                const result = Object.entries(userAssets)
+                                    .map(([userId, data]) => ({
+                                        userId,
+                                        assetCount: data.assetCount,
+                                        assets: data.assets
+                                    }))
+                                    .filter(user => user.assetCount >= 100)
+                                    .sort((a, b) => b.assetCount - a.assetCount);
+
+                                response.body = {
+                                    success: true,
+                                    message: `Inspection complete. Processed ${renderJsonFiles.length} render.json files.`,
+                                    userAssetsData: result,
+                                    totalUsersWithHighAssetCount: result.length
+                                };
+                            } catch (error) {
+                                console.error('Error in inspect-renders:', error);
+                                response.body = {
+                                    success: false,
+                                    error: `Failed to inspect render.json files: ${error.message}`
+                                };
+                            }
+                            break;
+
                         case '/create':
                             try {
                                 // This line will succeed or have a error thrown that will be caught below
