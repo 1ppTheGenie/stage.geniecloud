@@ -244,7 +244,7 @@ export const mockCtaData = (ctaId) => {
     case 0:
       //the home value pops an existing modal so just need the delay and enabled properties available
       return {        
-        delay: 5000,
+        delay: 2000,
         enabled: true
       };
     case 1:
@@ -252,12 +252,23 @@ export const mockCtaData = (ctaId) => {
         ctaTitle: "Market Insider Offer",
         ctaSubTitle: "What's happening in YOUR market?",
         ctaBody: "Do you want your market insider report delivered monthly?",
-        ctaTags: "MarketInsiderSubscribe, OptInContact",
+        ctaTags: "MarketInsiderSubscribe, OptInContact, Cta1Accept",
+        ctaDisplayTags: "Cta1Display",
+        ctaDisplayNote: "Prompt for a market insider report was displayed",
+        ctaVerifiedNote: "Contact information was confirmed after requesting a market insider subscription",
+        ctaVerifyTags: "CtaContactVerfied",
         ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/b05063b4-514a-41ed-8dfa-5faa4acddb00/public",
-        ctaNote: "I would like monthly market update for ",
-        ctaSubmitText: "Yes!", 
+        ctaNote: "I would like to subscribe to your monthly market update",
+        ctaNoteIncludeArea: true,
+        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
         ctaResponse: "All set, we submitted your request!",
-        delay: 3000,
+        ctaSubmitButtonText: "Yes!", 
+        ctaShowContactForm: true,
+        ctaContactFormBody: "Please verify or update your contact information to ensure we have the correct details for future communications",
+        ctaContactFormResponse: "Thanks for verifying, you are all set!",
+        ctaVerifyButtonText: "Update",
+        ctaContactMeMessage: "If you need any additonal information please reach out.",
+        delay: 2000,
         enabled: true
       };
     default:
@@ -265,12 +276,23 @@ export const mockCtaData = (ctaId) => {
         ctaTitle: "Market Insider Subscription",
         ctaSubTitle: "Stay on top of the latest TRENDS",
         ctaBody: "Get your market insider report delivered monthly.",
-        ctaTags: "MarketInsiderSubscribe, OptInContact",
+        ctaTags: "MarketInsiderSubscribe, OptInContact, CtaAccept",
+        ctaDisplayTags: "CtaDisplay",
+        ctaDisplayNote: "Prompt for a market insider report was displayed",
+        ctaVerifiedNote: "Contact information was confirmed after requesting a market insider subscription",
+        ctaVerifyTags: "CtaContactVerfied",     
         ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/b05063b4-514a-41ed-8dfa-5faa4acddb00/public",
-        ctaNote: "I would like monthly market update for ",
-        ctaSubmitText: "Yes Please!", 
+        ctaNote: "I would like to subscribe to your monthly market update",
+        ctaNoteIncludeArea: true,
+        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
         ctaResponse: "All set, we submitted your request!",
-        delay: 1000,
+        ctaSubmitButtonText: "Yes!", 
+        ctaShowContactForm: true,
+        ctaContactFormBody: "Please verify or update your contact information to ensure we have the correct details for future communications",
+        ctaContactFormResponse: "Thanks for verifying, you are all set!",
+        ctaVerifyButtonText: "Update",
+        ctaContactMeMessage: "If you need any additonal information please reach out.",
+        delay: 2000,
         enabled: true
       };
   }

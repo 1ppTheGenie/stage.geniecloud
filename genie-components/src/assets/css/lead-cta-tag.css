@@ -71,6 +71,15 @@
 	top: 5vh;
 }
 
+.cta-disclaimer {
+  padding: 1rem;
+  font-size: 75%;
+}
+
+.contact-verify {
+  padding-top: 1.25rem
+}
+
 @media (max-width: 960px) {
 	.popup-dialog > * {
 		max-width: 100vw;

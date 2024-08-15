@@ -25,7 +25,7 @@ export default props => {
 	const [showResult, setShowResult] = createSignal(false);
 	const [place, setPlace] = createSignal();
 	const [placeID, setPlaceID] = createSignal();
-	const [property] = createResource(placeID, searchAddress);
+	const [property] = createResource(placeID, searchAddress); 
 
 	return (
 		<>
@@ -64,7 +64,10 @@ export default props => {
 										}}>
 										<button
 											style="border-radius:20px;border:2px solid black;background-color:black;color:#fff;margin-left:-35px;outline:none;cursor:pointer"
-											onClick={() => setShowResult(true)}>
+											onClick={() => {
+                        if(place()) 
+                          setShowResult(true);
+                      }}>
 											{buttonCaption}
 										</button>
 									</AutoComplete>

@@ -338,7 +338,17 @@ export default () => {
       }
 
       return referringUrl;
-  }
+  };
+
+  //TODO: not sure if the best spot and if we should be string stuff like this on the gHub but 
+  //setting here so the can prepop form inputs if desired.
+  window.gHub.setFormPrepopInputs = (email, phone) => {
+    if(email)
+      window.gHub.leadEmailAddress = email;
+
+    if(phone)
+      window.gHub.leadPhoneNumber = phone;
+  };
 
 	window.gHub.addLead = async (note, data = null) => {
 		const settings = useSettings(Context4Settings);
@@ -382,11 +392,12 @@ export default () => {
 
 			if (r.result?.key) {
 				window.gHub.leadId = r.result.key;
+        window.gHub.setFormPrepopInputs(postedData.emailAddress, postedData.phoneNumber);        
 			}
 
 			return r.result;
 		}
-	};  
+	};   
 
 	/***********************
 	 *
@@ -485,6 +496,7 @@ export default () => {
         const settings = useSettings(Context4Settings);
         settings.trackingdata = lpData.lead.trackingData; //unsure on the casing descrepancy here but add lead maps it;
         window.gHub.leadId = lpData.lead.genieLeadId;
+        window.gHub.setFormPrepopInputs(lpData.lead.emailAddress, lpData.lead.phoneNumber);
       }
 
       //when we are dealing with existing data wait till loaded to pop

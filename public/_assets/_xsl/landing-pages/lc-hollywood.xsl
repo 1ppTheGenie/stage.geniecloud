@@ -46,7 +46,7 @@
 
     <xsl:variable name="fileDownloadTags">
       <xsl:choose>
-        <xsl:when test="contains(//output/@downloadUrl, 'market-insider')">
+        <xsl:when test="contains(lower-case(//output/@downloadUrl), 'market-insider')">
           <xsl:text>DownloadMarketReport,ClickCta</xsl:text>          
         </xsl:when>
         <xsl:otherwise>
@@ -57,7 +57,7 @@
 
     <xsl:variable name="fileDownloadText">
       <xsl:choose>
-        <xsl:when test="contains(//output/@downloadUrl, 'market-insider')">
+        <xsl:when test="contains(lower-case(//output/@downloadUrl), 'market-insider')">
           <xsl:text>Download Market Report</xsl:text>
         </xsl:when>
         <xsl:otherwise>

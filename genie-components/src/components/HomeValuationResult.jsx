@@ -7,18 +7,22 @@ export const HomeValuationResult = props => {
 	const [leadCaptured, setLeadCaptured] = createSignal(!withLeadCapture);
 
   const getLeadNote = () => {
-    let formattedNote = "Custom valuation request for";
+    let formattedNote = "Custom valuation request for";    
 
-    if(property()?.propertyID)
+    //landing page data
+    if(property()?.propertyID && property()?.address)
       formattedNote = `${formattedNote} ${property().address}, ${property().zip}`;
+    //direct property api result data
+    else if (property()?.propertyID && property()?.siteAddress)
+      formattedNote = `${formattedNote} ${property().siteAddress}, ${property().siteAddressZip}`;
     else if(place()?.formatted_address)
       formattedNote = `${formattedNote} ${place().formatted_address}`;
     else
       formattedNote = "A new home valuation lead from TheGenie!";
 
     return formattedNote;
-  }
-
+  };
+  
 	return (
 		<>
 			<h2 class="home-value-title no-background">
@@ -61,7 +65,7 @@ export const HomeValuationResult = props => {
 						<LeadCaptureForm
 							setLeadCaptured={setLeadCaptured}
 							leadNote={getLeadNote()}
-              genieTags="RequestCustomValuation, OptInContact"
+              genieTags="RequestCustomValuation, OptInContact"              
 							existingData={property() && { propertyId: property().propertyID }}
 						/>
 					</Show>

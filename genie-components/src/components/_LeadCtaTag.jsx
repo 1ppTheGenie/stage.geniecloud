@@ -1,15 +1,24 @@
-import { createSignal } from "solid-js";
+import { createSignal, Show } from "solid-js";
 import { areaDataStore } from "@/utilities";
-import { ClosePopup } from "@/components";
+import { ClosePopup, LeadCaptureForm } from "@/components";
 
 import "@/assets/css/lead-cta-tag.css";
 
 export default (ctaData) => {     
-	const [hasSubmitted, setHasSubmitted] = createSignal(false);	 	  
-  const data = ctaData.ctaData;    
-  const ctaNoteWithArea = `${data.ctaNote} ${areaDataStore.areaName ?? "area"}`;  
+	const [hasSubmitted, setHasSubmitted] = createSignal(false);	   
+  const [leadCaptured, setLeadCaptured] = createSignal(false);
 
-  //TODO: maybe put actual contact information in the contact section vs generic message.
+  const data = ctaData.ctaData;  
+  
+  let formattedNote = data.ctaNote;
+
+  if(data.ctaNoteIncludeArea && areaDataStore.areaName) 
+    formattedNote = `Area Name: ${areaDataStore.areaName} \n${formattedNote}`;  
+  
+  //tagging that a lead was shown the CTA
+  if(window.gHub.getLeadId())  
+    window.gHub.addLead(data.ctaDisplayNote, { genieTags: data.ctaDisplayTags });
+  
   return (
 		<>
       <h2 class="lead-cta-title no-background">
@@ -23,28 +32,52 @@ export default (ctaData) => {
           </div>
           <div class="lead-cta-copy-container">              
             <Show when={hasSubmitted() === true}>
+              <Show when={ !leadCaptured() }>
               <div class="invert cta-response">
-                <h4>{ data.ctaResponse }</h4>
-              </div>                            
-              <div class="cta-contact">                
-                <h4>If you need any additonal information please reach out.</h4>                   
-              </div>
+                  <h4>{ data.ctaResponse }</h4>
+                </div>
+              </Show>
+              <Show when={ leadCaptured() }>
+              <div class="invert cta-response">
+                  <h4>{ data.ctaContactFormResponse }</h4>
+                </div>
+              </Show>               
+              <Show when={ data.ctaShowContactForm && !leadCaptured() }>
+                <div class="contact-verify"> { data.ctaContactFormBody }</div>
+                <LeadCaptureForm
+                  formStyle="contactOnly"
+                  setLeadCaptured={setLeadCaptured}
+                  leadNote={ data.ctaVerifiedNote }
+                  genieTags={ data.ctaVerifyTags }              
+                  populateInputs={ true }
+                  submitCaption = { data.ctaVerifyButtonText }
+                />  
+              </Show> 
+              <Show when={ !data.ctaShowContactForm || leadCaptured() }>                                      
+                <div class="cta-contact">                
+                  <h4>{ data.ctaContactMeMessage }</h4>                   
+                </div>
+              </Show>
             </Show>
             <Show when={hasSubmitted() === false}>	            
               <div class="invert cta-subtitle">
                 <h1>{ data.ctaSubTitle }</h1>                
               </div>
               <div class="cta-body"> <h4>{ data.ctaBody }</h4>              
-                <button                  
-                    onClick={() => {
-                      //this add lead handles the check for update/create                      
-                      window.gHub.addLead(ctaNoteWithArea, { genieTags: data.ctaTags });                      
-                      setHasSubmitted(true);
-                    }}>
-                    { data.ctaSubmitText }
-                  </button> 
+                <button onClick={() => {
+                    //this add lead handles the check for update/create                      
+                    window.gHub.addLead(formattedNote, { genieTags: data.ctaTags });                      
+                    setHasSubmitted(true);
+                  }}>
+                  { data.ctaSubmitButtonText }
+                </button> 
               </div>
-            </Show>
+              <div class="cta-disclaimer">
+                {data.ctaDisclaimer.map((copy, i) => {                            
+                  return (<p>{copy}</p>) 
+                })}
+              </div>
+            </Show>           
           </div>
         </div>         			
       </div>  		
