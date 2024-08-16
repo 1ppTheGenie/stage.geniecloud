@@ -7502,7 +7502,7 @@ var copyObject = async (sourceKey, destinationKey, bucket = null, ContentType = 
   };
   return await s3Client.send(new import_client_s3.CopyObjectCommand(args));
 };
-var searchS3ByPrefix = async (prefix, suffix = null, bucket = null) => {
+var searchS3ByPrefix = async (prefix, contains = null, bucket = null) => {
   try {
     let allMatches = [];
     let isTruncated = true;
@@ -7517,8 +7517,8 @@ var searchS3ByPrefix = async (prefix, suffix = null, bucket = null) => {
         new import_client_s3.ListObjectsV2Command(listParams)
       );
       let contents = response2.Contents || [];
-      if (suffix) {
-        contents = contents.filter((item) => item.Key.endsWith(suffix));
+      if (contains) {
+        contents = contents.filter((item) => item.Key.includes(contains));
       }
       allMatches = allMatches.concat(contents);
       isTruncated = response2.IsTruncated;
@@ -9325,11 +9325,20 @@ var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
   }
 };
 var cache_key = (endpoint, params, verb) => {
-  const { userId, ...restParams } = params ?? {};
+  const { userId, areaId, mlsId, mlsNumber, ...restParams } = params ?? {};
+  const prefixParts = [];
+  if (userId)
+    prefixParts.push(`u_${userId}`);
+  if (areaId)
+    prefixParts.push(`a_${areaId}`);
+  if (mlsId)
+    prefixParts.push(`mid_${mlsId}`);
+  if (mlsNumber)
+    prefixParts.push(`mnum_${mlsNumber}`);
+  const prefix = prefixParts.length > 0 ? prefixParts.join("-") + "-" : "";
   const strParams = JSON.stringify(Object.entries(restParams));
   const hash = import_crypto.default.createHash("md5").update(`${endpoint}.${verb}.${strParams}`).digest("hex");
-  const userIdPart = userId ? `${userId}-` : "";
-  return `genie-${userIdPart}${hash}.json`;
+  return `genie-${prefix}${hash}.json`;
 };
 var areaName = async (userId, areaId, skipCache = false) => await call_api("GetAreaName", { areaId, userId }, skipCache);
 var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache = false) => {
@@ -9939,6 +9948,14 @@ var api = async (event) => {
                     deletedCacheItems = await deleteUserCache(params.userId);
                     console.log(`Deleted ${deletedCacheItems} cache items for user ${params.userId}`);
                   }
+                  if (params.areaId) {
+                    deletedCacheItems = await deleteAreaCache(params.areaId);
+                    console.log(`Deleted ${deletedCacheItems} cache items for area ${params.areaId}`);
+                  }
+                  if (params.mlsNumber) {
+                    deletedCacheItems = await deleteListingCache(params.mlsNumber);
+                    console.log(`Deleted ${deletedCacheItems} cache items for listing ${params.mlsNumber}`);
+                  }
                   let renderIds = [];
                   if (params.userId) {
                     const userLookupPrefix = `_lookup/users/${params.userId}/`;
@@ -10402,6 +10419,50 @@ var deleteUserCache = async (userId) => {
   try {
     const cacheItems = await searchS3ByPrefix(`_cache/genie-${userId}`);
     console.log(`Found ${cacheItems.length} cache items for user ${userId}`);
+    await Promise.all(
+      cacheItems.map(async (f) => {
+        if (f.Size > 0) {
+          try {
+            await deleteObject(f.Key);
+            deletedCount++;
+          } catch (deleteError) {
+            console.error(`Error deleting object ${f.Key}:`, deleteError);
+          }
+        }
+      })
+    );
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
+};
+var deleteAreaCache = async (areaId) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `a_${areaId}`);
+    console.log(`Found ${cacheItems.length} cache items for area ${areaId}`);
+    await Promise.all(
+      cacheItems.map(async (f) => {
+        if (f.Size > 0) {
+          try {
+            await deleteObject(f.Key);
+            deletedCount++;
+          } catch (deleteError) {
+            console.error(`Error deleting object ${f.Key}:`, deleteError);
+          }
+        }
+      })
+    );
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
+};
+var deleteListingCache = async (mlsNumber) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `mnum_${mlsNumber}`);
+    console.log(`Found ${cacheItems.length} cache items for listing ${mlsNumber}`);
     await Promise.all(
       cacheItems.map(async (f) => {
         if (f.Size > 0) {

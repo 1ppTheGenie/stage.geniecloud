@@ -42,15 +42,25 @@ const to_cache = async (data, endpoint, key, timeout_hours = 4) => {
 };
 
 const cache_key = (endpoint, params, verb) => {
-    const { userId, ...restParams } = params ?? {};
+    const { userId, areaId, mlsId, mlsNumber, ...restParams } = params ?? {};
+    
+    // Create the prefix part of the key
+    const prefixParts = [];
+    if (userId) prefixParts.push(`u_${userId}`);
+    if (areaId) prefixParts.push(`a_${areaId}`);
+    if (mlsId) prefixParts.push(`mid_${mlsId}`);
+    if (mlsNumber) prefixParts.push(`mnum_${mlsNumber}`);
+    
+    const prefix = prefixParts.length > 0 ? prefixParts.join('-') + '-' : '';
+
+    // Create the hash part
     const strParams = JSON.stringify(Object.entries(restParams));
     const hash = crypto
         .createHash('md5')
         .update(`${endpoint}.${verb}.${strParams}`)
         .digest('hex');
 
-    const userIdPart = userId ? `${userId}-` : '';
-    return `genie-${userIdPart}${hash}.json`;
+    return `genie-${prefix}${hash}.json`;
 };
 
 export const areaName = async (userId, areaId, skipCache = false) =>

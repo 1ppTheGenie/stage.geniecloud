@@ -82,7 +82,7 @@ export const setS3Retention = async (Key, retainUntil, bucket = null) => {
     return await s3Client.send(new PutObjectRetentionCommand(args));
 };
 
-export const searchS3ByPrefix = async (prefix, suffix = null, bucket = null) => {
+export const searchS3ByPrefix = async (prefix, contains = null, bucket = null) => {
     try {
         let allMatches = [];
         let isTruncated = true;
@@ -102,8 +102,8 @@ export const searchS3ByPrefix = async (prefix, suffix = null, bucket = null) => 
             let contents = response.Contents || [];
             
             // If a suffix is provided, filter the results
-            if (suffix) {
-                contents = contents.filter(item => item.Key.endsWith(suffix));
+            if (contains) {
+                contents = contents.filter(item => item.Key.includes(contains));
             }
 
             allMatches = allMatches.concat(contents);
