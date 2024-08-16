@@ -87,16 +87,24 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template name="format-price">
-		<xsl:param name="price" />
+	<xsl:template name="safe-number">
+		<xsl:param name="value" />
 		<xsl:choose>
-			<xsl:when test="$price > 999999">
-				<xsl:value-of select="format-number( $price div 1000000, '$#.00M')" />
-			</xsl:when>
+			<xsl:when test="string($value) = '' or not(number($value))">0</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="format-number( $price, '$###,###')" />
+				<xsl:value-of select="number($value)" />
 			</xsl:otherwise>
 		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="format-price">
+		<xsl:param name="price" />
+		<xsl:variable name="safe-price">
+			<xsl:call-template name="safe-number">
+			<xsl:with-param name="value" select="$price" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:value-of select="format-number($safe-price, '$#,##0')" />
 	</xsl:template>
 
 	<xsl:template name="agent-address-line-one">
