@@ -10523,9 +10523,9 @@ var prepareAsset = async (asset, params) => {
             settings.permission
           );
         }
-        const isA5 = ["landing-pages", "funnels", "embeds"].find(
+        const isA5 = asset ? ["landing-pages", "funnels", "embeds"].find(
           (start) => asset.startsWith(start)
-        );
+        ) : false;
         const withBleed = params?.withBleed ?? false;
         const width = suffix === "pdf" ? isA5 ? "216mm" : `${Math.round(dims.width) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.width);
         const height = suffix === "pdf" ? isA5 ? "279mm" : `${Math.round(dims.height) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.height);

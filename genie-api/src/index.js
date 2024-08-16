@@ -1145,9 +1145,9 @@ const prepareAsset = async (asset, params) => {
                     );
                 }
 
-                const isA5 = ['landing-pages', 'funnels', 'embeds'].find(
+                const isA5 = asset ? ['landing-pages', 'funnels', 'embeds'].find(
                     start => asset.startsWith(start)
-                ); // The rendered output of funnels and embeds is an A5 PDF
+                ) : false; // The rendered output of funnels and embeds is an A5 PDF
 
                 const withBleed = params?.withBleed ?? false;
                 const width =
