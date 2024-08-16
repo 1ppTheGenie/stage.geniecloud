@@ -255,48 +255,6 @@ export const api = async event => {
                             response.body = { success: true, ...qr };
                             break;
 
-                        /*
-                        case '/clear-cache':
-                            if (CLOUDFLARE_KEY) {
-                                const prefixes = [];
-
-                                if (params.renderId) {
-                                    const host =
-                                        genieGlobals.GENIE_HOST.replace(
-                                            'https://',
-                                            ''
-                                        );
-
-                                    prefixes.push(
-                                        `${host}genie-collection/${params.renderId}`
-                                    );
-                                    prefixes.push(
-                                        `${host}genie-pages/${params.renderId}`
-                                    );
-                                    prefixes.push(
-                                        `${host}genie-files/${params.renderId}`
-                                    );
-                                }
-
-                                if (prefixes.length > 0) {
-                                    const options = {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                            'X-Auth-Key': CLOUDFLARE_KEY
-                                        },
-                                        body: `{"prefixes": ["${prefixes}"}`
-                                    };
-
-                                    const r = await fetch(
-                                        'https://api.cloudflare.com/client/v4/zones/identifier/purge_cache',
-                                        options
-                                    );
-                                }
-                            }
-
-                            break;
-*/
                         case '/log':
                             if (params.renderId && params.assetId) {
                                 await toS3(
@@ -328,29 +286,7 @@ export const api = async event => {
                                 };
                             }
                             break;
-                        /*case '/change-retention':
-                            if (!params.s3Key || !params.keepFor) {
-                                response.body = {
-                                    success: false,
-                                    error: 's3Key are keepFor are required parameters'
-                                };
-                            } else {
-                                const r = await setS3Retention(
-                                    `_processing/${params.s3Key}`,
-                                    new Date(
-                                        Date.now() +
-                                            WEEK_IN_MILLISECONDS *
-                                                params.keepFor
-                                    )
-                                );
-                                response.body = {
-                                    params,
-                                    success: true,
-                                    result: r
-                                };
-                            }
-                            break;
-*/
+
                         case '/refresh-renders':
                             // Automated update of landing pages so that they don't go stale
                             let result = [];
@@ -419,8 +355,11 @@ export const api = async event => {
                             break;
 
                         case '/re-render':
-                            if (params.renderId) {
-                                try {
+                            try {
+                                let deletedCacheItems = 0;
+
+                                if (params.renderId) {
+                                    // Existing logic for single renderId re-render
                                     const r = await reRender(params.renderId, {
                                         ...params,
                                         skipCache: true
@@ -448,90 +387,89 @@ export const api = async event => {
                                             StringValue: params.renderId
                                         }
                                     });
-                                } catch (err) {
-                                    response.body.success = false;
-                                    response.body.msg = `Error: ${err.message}`;
-                                }
-                            } else if (
-                                params.assetId ||
-                                params.userId ||
-                                params.mlsNumber ||
-                                params.areaId
-                            ) {
-                                let deletedCacheItems = 0;
-
-                                if (params.userId) {
-                                    try {
-                                        const cacheItems = await searchS3ByPrefix(`_cache/genie-${params.userId}`);
-                                        console.log(`Found ${cacheItems.length} cache items for user ${params.userId}`);
-
-                                        await Promise.all(
-                                            cacheItems.map(async f => {
-                                                if (f.Size > 0) {
-                                                    try {
-                                                        await deleteObject(f.Key);
-                                                        deletedCacheItems++;
-                                                    } catch (deleteError) {
-                                                        console.error(`Error deleting object ${f.Key}:`, deleteError);
-                                                    }
-                                                }
-                                            })
-                                        );
+                                } else if (params.userId || params.mlsNumber || params.areaId) {
+                                    // Delete user cache if userId is provided
+                                    if (params.userId) {
+                                        deletedCacheItems = await deleteUserCache(params.userId);
                                         console.log(`Deleted ${deletedCacheItems} cache items for user ${params.userId}`);
-                                    } catch (cacheError) {
-                                        console.error('Error processing cache deletions:', cacheError);
                                     }
-                                }
 
-                                try {
-                                    const processingItems = await searchS3ByPrefix('_processing', 'render.json');
-                                    console.log(`Found ${processingItems.length} render.json files in _processing folder`);
+                                    let renderIds = [];
 
-                                    const reRenders = await processBatch(processingItems, params);
-                                    console.log(`${reRenders.length} items matched the re-render criteria`);
+                                    if (params.userId) {
+                                        // Fetch renderIds from /_lookup/users/{params.userId}
+                                        const userLookupPrefix = `_lookup/users/${params.userId}/`;
+                                        const userRenderIds = await listS3Folder(userLookupPrefix);
+                                        if (Array.isArray(userRenderIds) && userRenderIds.length > 0) {
+                                            renderIds = userRenderIds.map(item => item.Key.split('/').pop());
 
-                                    if (reRenders.length > 0) {
-                                        const uniqueReRenders = [...new Set(reRenders)];
-                                        console.log(`${uniqueReRenders.length} unique items to be re-rendered`);
-
-                                        for (const renderId of uniqueReRenders) {
-                                            try {
-                                                await reRender(renderId, {
-                                                    ...params,
-                                                    skipCache: true
-                                                });
-
-                                                await toS3(
-                                                    `_lookup/re-render/${renderId}`,
-                                                    Buffer.from('@'),
-                                                    null,
-                                                    TXT_MIME
-                                                );
-                                            } catch (reRenderError) {
-                                                console.error(`Error during reRender for ${renderId}:`, reRenderError);
+                                            // Additional filtering based on mlsNumber or areaId if supplied
+                                            if (params.mlsNumber || params.areaId) {
+                                                renderIds = await filterRenderIds(renderIds, params);
                                             }
+                                        } else {
+                                            console.log(`No render IDs found for user ${params.userId}`);
                                         }
-
-                                        response.body.success = true;
-                                        response.body.msg = `${uniqueReRenders.length} re-renders underway. ${deletedCacheItems} cache items deleted.`;
-                                        response.body.reRenders = uniqueReRenders; // Changed from 'data' to 'reRenders'
-                                    } else {
-                                        response.body.success = false;
-                                        response.body.msg = 'No items found to re-render';
                                     }
-                                } catch (processingError) {
-                                    console.error('Error processing _processing folder:', processingError);
-                                    response.body.success = false;
-                                    response.body.msg = 'Error during processing';
-                                }
 
-                                console.log(`Re-render process completed. Response: ${JSON.stringify(response.body)}`);
-                            } else {
-                                throw new Error(
-                                    '[renderId] or [userId] or [mlsNumber] is required for a re-render'
-                                );
+                                    if (!params.userId && params.mlsNumber) {
+                                        const mlsLookupPrefix = `_lookup/mlsNumber/${params.mlsNumber}/`;
+                                        const mlsRenderIds = await listS3Folder(mlsLookupPrefix);
+                                        if (Array.isArray(mlsRenderIds) && mlsRenderIds.length > 0) {
+                                            renderIds = mlsRenderIds.map(item => item.Key.split('/').pop());
+                                        } else {
+                                            console.log(`No render IDs found for mlsNumber ${params.mlsNumber}`);
+                                        }
+                                    }
+
+                                    if (!params.userId && params.areaId) {
+                                        const areaLookupPrefix = `_lookup/areas/${params.areaId}/`;
+                                        const areaRenderIds = await listS3Folder(areaLookupPrefix);
+                                        if (Array.isArray(areaRenderIds) && areaRenderIds.length > 0) {
+                                            renderIds = areaRenderIds.map(item => item.Key.split('/').pop());
+                                        } else {
+                                            console.log(`No render IDs found for areaId ${params.areaId}`);
+                                        }
+                                    }
+
+                                    console.log(`Found ${renderIds.length} renders to process`);
+
+                                    let reRenderedCount = 0;
+                                    for (const renderId of renderIds) {
+                                        try {
+                                            await reRender(renderId, {
+                                                ...params,
+                                                skipCache: true
+                                            });
+
+                                            await toS3(
+                                                `_lookup/re-render/${renderId}`,
+                                                Buffer.from('@'),
+                                                null,
+                                                TXT_MIME
+                                            );
+
+                                            reRenderedCount++;
+                                        } catch (reRenderError) {
+                                            console.error(`Error during reRender for ${renderId}:`, reRenderError);
+                                        }
+                                    }
+
+                                    response.body.success = true;
+                                    response.body.msg = `${reRenderedCount} re-renders underway. ${deletedCacheItems} cache items deleted.`;
+                                    response.body.reRenders = renderIds;
+                                } else {
+                                    throw new Error(
+                                        '[renderId] or [userId] or [mlsNumber] or [areaId] is required for a re-render'
+                                    );
+                                }
+                            } catch (error) {
+                                console.error('Error in /re-render route:', error);
+                                response.body.success = false;
+                                response.body.error = error.message;
                             }
                             break;
+
 
                         case '/process':
                             if (params) {
@@ -990,46 +928,50 @@ export const api = async event => {
     return response;
 };
 
-const processBatch = async (items, params, batchSize = 500) => {
-    let reRenders = [];
-    for (let i = 0; i < items.length; i += batchSize) {
-        const batch = items.slice(i, i + batchSize);
+// Helper function to filter renderIds based on mlsNumber or areaId
+const filterRenderIds = async (renderIds, params) => {
+    const filteredIds = [];
+    for (const renderId of renderIds) {
+        const renderJsonKey = `_processing/${renderId}/render.json`;
+        try {
+            const renderJson = await jsonFromS3(renderJsonKey);
+            if (renderJson) {
+                if (params.mlsNumber && renderJson.mlsNumber === params.mlsNumber) {
+                    filteredIds.push(renderId);
+                } else if (params.areaId && renderJson.areaIds && renderJson.areaIds.includes(params.areaId)) {
+                    filteredIds.push(renderId);
+                }
+            }
+        } catch (error) {
+            console.error(`Error reading render.json for ${renderId}:`, error);
+        }
+    }
+    return filteredIds;
+};
+
+// Helper function to delete user cache
+const deleteUserCache = async (userId) => {
+    let deletedCount = 0;
+    try {
+        const cacheItems = await searchS3ByPrefix(`_cache/genie-${userId}`);
+        console.log(`Found ${cacheItems.length} cache items for user ${userId}`);
+
         await Promise.all(
-            batch.map(async t => {
-                try {
-                    const stream = await streamS3Object(t.Key);
-                    let jsonString = '';
-                    for await (const chunk of readStream(stream)) {
-                        jsonString += chunk;
-                    }
-
-                    // Early exit conditions
-                    if (params.userId && !jsonString.includes(`"userId":"${params.userId}"`)) return;
-                    if (params.mlsNumber && !jsonString.includes(`"mlsNumber":"${params.mlsNumber}"`)) return;
-                    if (params.areaId && !jsonString.includes(`"areaIds":`)) return;
-
-                    // Parse JSON after reading the entire file
+            cacheItems.map(async f => {
+                if (f.Size > 0) {
                     try {
-                        const json = JSON.parse(jsonString);
-                        if (
-                            (!params.userId || params.userId === json.userId) &&
-                            (!params.mlsNumber || params.mlsNumber === json.mlsNumber) &&
-                            (!params.areaId || json.areaIds.includes(params.areaId))
-                        ) {
-                            reRenders.push(t.Key.split('/')[1]);
-                        }
-                    } catch (parseError) {
-                        console.error(`Error parsing JSON for ${t.Key}:`, parseError);
-                        console.error(`Problematic JSON string: ${jsonString}`);
+                        await deleteObject(f.Key);
+                        deletedCount++;
+                    } catch (deleteError) {
+                        console.error(`Error deleting object ${f.Key}:`, deleteError);
                     }
-                } catch (streamError) {
-                    console.error(`Error streaming object ${t.Key}:`, streamError);
                 }
             })
         );
-        console.log(`Processed batch ${i / batchSize + 1}, total matches: ${reRenders.length}`);
+    } catch (cacheError) {
+        console.error('Error processing cache deletions:', cacheError);
     }
-    return reRenders;
+    return deletedCount;
 };
 
 const renderKeyParams = async params => {
