@@ -472,7 +472,7 @@ export default () => {
 	 * Get short/qr data
 	 *
 	 ***********************/
-  window.gHub.initLandingPageData = () => {
+  window.gHub.initLandingPageData = (urlParamCtaid) => {
     (async () => {
       const lpData = await window.gHub.getLandingPageData();  
             
@@ -481,7 +481,7 @@ export default () => {
         settings.trackingdata = lpData.lead.trackingData; //unsure on the casing descrepancy here but add lead maps it;
         window.gHub.leadId = lpData.lead.genieLeadId;
         window.gHub.setFormPrepopInputs(lpData.lead.emailAddress, lpData.lead.phoneNumber);        
-        window.gHub.showOptIn(urlParams.ctaid, lpData.lead.ctaId, true);
+        window.gHub.showOptIn(urlParamCtaid, lpData.lead.ctaId, true);
       }     
     })();
   };
@@ -501,7 +501,7 @@ export default () => {
 			window.gHub.addLead('Manually entered address property comparison', { propertyId: pid } );
 		}
 	} else if (urlParams.token) {
-    window.gHub.initLandingPageData();
+    window.gHub.initLandingPageData(urlParams.ctaid);
   } else {
     window.gHub.showOptIn(urlParams.ctaid, null, false);    
   }  
