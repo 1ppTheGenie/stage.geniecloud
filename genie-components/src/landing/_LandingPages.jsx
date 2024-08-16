@@ -13,7 +13,7 @@ import {
 	landingPageData,
 	currency,
   addDynamicPopup,
-  mockCtaData,
+  getCtaData,
   formatFormNote,
   InsensitiveURLSearchParams
 } from "@/utilities";
@@ -349,7 +349,7 @@ export default () => {
     if(phone)
       window.gHub.leadPhoneNumber = phone;
   };
-
+  
 	window.gHub.addLead = async (note, data = null) => {
 		const settings = useSettings(Context4Settings);
 
@@ -433,21 +433,22 @@ export default () => {
 	 * Opt-in timed popup
 	 *
 	 ***********************/
-  window.gHub.showOptIn = () => { 
-    const ctaId = new InsensitiveURLSearchParams(window.location.search).get("ctaId"); 
+  window.gHub.showOptIn = (ctaIdUrlParam, ctaIdShortDataValue, hasLeadData) => { 
+    //url param will take precedence over what is supplied in short data
+    const ctaId = parseInt(ctaIdUrlParam) || ctaIdShortDataValue;      
+    const data = getCtaData(ctaId);
 
-    //0 is special handling for home value that is hooked on page param hooks
-    if(ctaId == null || ctaId == 0)
-      return;    
-    
-    const data = mockCtaData(parseInt(ctaId));
+    if(!data.enabled)
+      return;
 
-    if(data?.enabled) {
-      //the delay for the popup, I am making the assumption that this would also allow the lead to be created first so that we have
-      //a leadId when it actually fires.
+    const ctaHomeValueKey = 1; //home value has special handling and just pops an existing modal
+
+    if(ctaId === ctaHomeValueKey)
+      setTimeout(() => { window.gHub.popHomeValue() }, data.delay);
+    else if (hasLeadData){ //all the CTA's need a lead in context      
       setTimeout(() => { 
         const settings = useSettings(Context4Settings);           
-        //to test you can explicitly set the user and leadId     
+        
         if (window.gHub.getLeadId(settings)) {
           const dynamicPopupId = "genie-leadCtaTagPopup";
           if(addDynamicPopup(dynamicPopupId)) {        
@@ -465,30 +466,13 @@ export default () => {
       }, data.delay); 
     } 
   };  
-  
-  document.addEventListener("genie-landing-data-loaded", function(){
-    window.gHub.showOptIn();
-  }); 
 
   /***********************
 	 *
-	 * Url Param hooks
+	 * Get short/qr data
 	 *
 	 ***********************/
-	const urlParams = new InsensitiveURLSearchParams(window.location.search).getObjectLower();
-
-  //special handling for the home value cta
-  const ctaHomeValueKey = 0;
-  const ctaHomeValue = parseInt(urlParams.ctaid) === ctaHomeValueKey;    
-
-	if ( parseInt( urlParams.crlead ) === 1 ) {
-		const pid = urlParams.propertyid;
-
-		if ( pid ) {
-      //only found the crLead in one spot so adding an applicable note
-			window.gHub.addLead('Manually entered address property comparison', { propertyId: pid } );
-		}
-	} else if ( urlParams.token ) {
+  window.gHub.initLandingPageData = () => {
     (async () => {
       const lpData = await window.gHub.getLandingPageData();  
             
@@ -496,32 +480,31 @@ export default () => {
         const settings = useSettings(Context4Settings);
         settings.trackingdata = lpData.lead.trackingData; //unsure on the casing descrepancy here but add lead maps it;
         window.gHub.leadId = lpData.lead.genieLeadId;
-        window.gHub.setFormPrepopInputs(lpData.lead.emailAddress, lpData.lead.phoneNumber);
-      }
-
-      //when we are dealing with existing data wait till loaded to pop
-      if(ctaHomeValue) {
-
-        const data = mockCtaData(ctaHomeValueKey);
-
-        if(data?.enabled)
-          setTimeout(() => { window.gHub.popHomeValue() }, data.delay);
-      }
-      //might be worth a custom event supplying the lpData
-      document.dispatchEvent(new Event("genie-landing-data-loaded"), true);      
+        window.gHub.setFormPrepopInputs(lpData.lead.emailAddress, lpData.lead.phoneNumber);        
+        window.gHub.showOptIn(urlParams.ctaid, lpData.lead.ctaId, true);
+      }     
     })();
-  } else {
-    if(ctaHomeValue) {
-      const data = mockCtaData(ctaHomeValueKey);
+  };
 
-        if(data?.enabled)
-          setTimeout(() => { window.gHub.popHomeValue() }, data.delay);
-    }
-  }
-
-  /***********************	 
-	 * End Url Param hooks	 
+  /***********************
+	 *
+	 * Global Url Param hook
+	 *
 	 ***********************/
+	const urlParams = new InsensitiveURLSearchParams(window.location.search).getObjectLower();   
+
+	if (parseInt(urlParams.crlead) === 1) {
+		const pid = urlParams.propertyid;
+
+		if (pid) {
+      //only found the crLead in one spot so adding an applicable note
+			window.gHub.addLead('Manually entered address property comparison', { propertyId: pid } );
+		}
+	} else if (urlParams.token) {
+    window.gHub.initLandingPageData();
+  } else {
+    window.gHub.showOptIn(urlParams.ctaid, null, false);    
+  }  
   
   /***********************
 	 *

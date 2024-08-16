@@ -239,15 +239,15 @@ export const addDynamicPopup = (popupId) => {
 };
 
 //TODO: I think we can expose api endpoint that will deliver options but just mocking till we have a clear plan
-export const mockCtaData = (ctaId) => {
+export const getCtaData = (ctaId) => {
   switch(ctaId) {
-    case 0:
+    case 1:
       //the home value pops an existing modal so just need the delay and enabled properties available
       return {        
         delay: 2000,
-        enabled: true
+        enabled: false
       };
-    case 1:
+    case 2:
       return {
         ctaTitle: "Market Insider Offer",
         ctaSubTitle: "What's happening in YOUR market?",
@@ -257,7 +257,31 @@ export const mockCtaData = (ctaId) => {
         ctaDisplayNote: "Prompt for a market insider report was displayed",
         ctaVerifiedNote: "Contact information was confirmed after requesting a market insider subscription",
         ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/b05063b4-514a-41ed-8dfa-5faa4acddb00/public",
+        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
+        ctaNote: "I would like to subscribe to your monthly market update",
+        ctaNoteIncludeArea: true,
+        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
+        ctaResponse: "All set, we submitted your request!",
+        ctaSubmitButtonText: "Yes!", 
+        ctaShowContactForm: true,
+        ctaContactFormBody: "Please verify or update your contact information to ensure we have the correct details for future communications",
+        ctaContactFormResponse: "Thanks for verifying, you are all set!",
+        ctaVerifyButtonText: "Update",
+        ctaContactMeMessage: "If you need any additonal information please reach out.",
+        delay: 2000,
+        enabled: true
+      };
+    case 3:
+      return {
+        ctaTitle: "Market Insider Subscription",
+        ctaSubTitle: "Stay on top of the latest TRENDS",
+        ctaBody: "Get your market insider report delivered monthly.",
+        ctaTags: "MarketInsiderSubscribe, OptInContact, CtaAccept",
+        ctaDisplayTags: "CtaDisplay",
+        ctaDisplayNote: "Prompt for a market insider report was displayed",
+        ctaVerifiedNote: "Contact information was confirmed after requesting a market insider subscription",
+        ctaVerifyTags: "CtaContactVerfied",     
+        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
         ctaNote: "I would like to subscribe to your monthly market update",
         ctaNoteIncludeArea: true,
         ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
@@ -272,28 +296,9 @@ export const mockCtaData = (ctaId) => {
         enabled: true
       };
     default:
-      return {
-        ctaTitle: "Market Insider Subscription",
-        ctaSubTitle: "Stay on top of the latest TRENDS",
-        ctaBody: "Get your market insider report delivered monthly.",
-        ctaTags: "MarketInsiderSubscribe, OptInContact, CtaAccept",
-        ctaDisplayTags: "CtaDisplay",
-        ctaDisplayNote: "Prompt for a market insider report was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a market insider subscription",
-        ctaVerifyTags: "CtaContactVerfied",     
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/b05063b4-514a-41ed-8dfa-5faa4acddb00/public",
-        ctaNote: "I would like to subscribe to your monthly market update",
-        ctaNoteIncludeArea: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "All set, we submitted your request!",
-        ctaSubmitButtonText: "Yes!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Please verify or update your contact information to ensure we have the correct details for future communications",
-        ctaContactFormResponse: "Thanks for verifying, you are all set!",
-        ctaVerifyButtonText: "Update",
-        ctaContactMeMessage: "If you need any additonal information please reach out.",
-        delay: 2000,
-        enabled: true
+      return {     
+        //if it is not a mapped cta then just mark disabled and nothing will pop   
+        enabled: false
       };
   }
 };
