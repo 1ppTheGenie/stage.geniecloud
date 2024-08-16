@@ -48,7 +48,7 @@ const cache_key = (endpoint, params, verb) => {
     const prefixParts = [];
     if (userId) prefixParts.push(`u_${userId}`);
     if (areaId) prefixParts.push(`a_${areaId}`);
-    if (mlsId) prefixParts.push(`mid_${mlsId}`);
+    if (mlsId !== undefined && mlsId !== null) prefixParts.push(`mid_${mlsId}`);
     if (mlsNumber) prefixParts.push(`mnum_${mlsNumber}`);
     
     const prefix = prefixParts.length > 0 ? prefixParts.join('-') + '-' : '';

@@ -9331,7 +9331,7 @@ var cache_key = (endpoint, params, verb) => {
     prefixParts.push(`u_${userId}`);
   if (areaId)
     prefixParts.push(`a_${areaId}`);
-  if (mlsId)
+  if (mlsId !== void 0 && mlsId !== null)
     prefixParts.push(`mid_${mlsId}`);
   if (mlsNumber)
     prefixParts.push(`mnum_${mlsNumber}`);
