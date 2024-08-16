@@ -8042,7 +8042,7 @@ var processCustomizations = (customizations) => {
 var processAreas = async (params) => {
   const areas = [];
   await Promise.all(
-    params.areaIds.map(async (areaId) => {
+    (params.areaIds || []).map(async (areaId) => {
       const boundary = await getAreaBoundary(areaId);
       const statsData = await areaStatisticsWithPrevious(
         params.userId,
@@ -8050,19 +8050,17 @@ var processAreas = async (params) => {
         parseInt(params.datePeriod || 12)
       );
       params.isDebug && debugLog("areaStatisticsWithPrevious", params, statsData);
-      const areaName2 = statsData.areaName;
+      const areaName2 = statsData?.areaName ?? "Unknown Area";
       let areaImage = null;
       const area_images = [];
-      area_images.forEach((image) => {
-        if (!Array.isArray(image)) {
-        }
-        if (image.id == areaId) {
+      (area_images || []).forEach((image) => {
+        if (Array.isArray(image) && image.id == areaId) {
           areaImage = image.image;
         }
       });
       const defaultJSON = '{"type": "FeatureCollection","features": []}';
       let geoJSON = boundary?.mapArea?.geoJSON ?? defaultJSON;
-      if (geoJSON.length > 2e5) {
+      if (typeof geoJSON === "string" && geoJSON.length > 2e5) {
         geoJSON = defaultJSON;
       }
       const area = {
@@ -8072,18 +8070,16 @@ var processAreas = async (params) => {
           { name: areaName2 ?? params?.area?.name ?? "NOT SET" },
           { geojson: `<![CDATA[${geoJSON}]]>` },
           { centerLat: boundary?.mapArea?.centerLatitude ?? 32.71 },
-          {
-            centerLng: boundary?.mapArea?.centerLongitude ?? -117.16
-          },
+          { centerLng: boundary?.mapArea?.centerLongitude ?? -117.16 },
           { image: areaImage ?? "" }
         ]
       };
-      if (statsData.statistics) {
+      if (statsData?.statistics) {
         let propertyTypeData, prevData;
-        statsData.statistics.propertyTypeData.forEach((pData) => {
-          if (pData.type == (params.propertyType ?? 0)) {
+        statsData.statistics.propertyTypeData?.forEach((pData) => {
+          if (pData?.type == (params.propertyType ?? 0)) {
             propertyTypeData = pData.statistics;
-            prevData = propertyTypeData.previousPeriod;
+            prevData = propertyTypeData?.previousPeriod;
           }
         });
         const mls_properties = await mlsProperties(
@@ -8096,45 +8092,28 @@ var processAreas = async (params) => {
           const agentListings = await agentMlsNumbers(params.userId);
           const listings = [];
           mls_properties.forEach((p) => {
-            if (p.propertyTypeID == (params.propertyType ?? params.propertyTypeID ?? 0)) {
-              const state = parseInt(p.statusTypeID) == 4 || parseInt(p.statusTypeID) == 12 || parseInt(p.statusTypeID) == 3 ? "pending" : p.statusType.toLowerCase();
+            if (p?.propertyTypeID == (params.propertyType ?? params.propertyTypeID ?? 0)) {
+              const state = parseInt(p.statusTypeID) == 4 || parseInt(p.statusTypeID) == 12 || parseInt(p.statusTypeID) == 3 ? "pending" : p.statusType?.toLowerCase() ?? "unknown";
               listings.push({
                 _name: "listing",
                 _attrs: {
-                  lat: p.latitude,
-                  lon: p.longitude,
-                  // TODO: Lookup based on statusTypeID rather than the string
-                  /*
-                  Use values:
-                  1    Active
-                  2    Sold
-                  3    Pending
-                  4    Contingent - Pending
-                  12    Active With Contingency - Pending
-                  13    Expired - DON@T INCLUDE */
+                  lat: p.latitude ?? 0,
+                  lon: p.longitude ?? 0,
                   state,
                   address: singleAddress(p),
-                  beds: p.bedrooms,
-                  baths: p.bathroomsTotal,
-                  size: p.sqft,
-                  listPrice: p.priceHigh,
+                  beds: p.bedrooms ?? "N/A",
+                  baths: p.bathroomsTotal ?? "N/A",
+                  size: p.sqft ?? "N/A",
+                  listPrice: p.priceHigh ?? "N/A",
                   salePrice: p.salePrice ?? null,
-                  listedDate: DateTime.fromISO(
-                    p.listDate
-                  ).toSeconds(),
-                  soldDate: p.soldDate ? DateTime.fromISO(
-                    p.soldDate
-                  ).toSeconds() : null,
-                  dom: p.daysOnMarket,
-                  thumb: p.photoPrimaryUrl,
+                  listedDate: p.listDate ? DateTime.fromISO(p.listDate).toSeconds() : null,
+                  soldDate: p.soldDate ? DateTime.fromISO(p.soldDate).toSeconds() : null,
+                  dom: p.daysOnMarket ?? "N/A",
+                  thumb: p.photoPrimaryUrl ?? "",
                   isAgent: agentListings.includes(
-                    p.mlsNumber.toLowerCase()
+                    p.mlsNumber?.toLowerCase() ?? ""
                   ) ? 1 : 0,
-                  sortDate: p.soldDate ? DateTime.fromISO(
-                    p.soldDate
-                  ).toSeconds() : DateTime.fromISO(
-                    p.listDate
-                  ).toSeconds()
+                  sortDate: p.soldDate ? DateTime.fromISO(p.soldDate).toSeconds() : p.listDate ? DateTime.fromISO(p.listDate).toSeconds() : null
                 }
               });
             }
@@ -8147,48 +8126,48 @@ var processAreas = async (params) => {
             {
               _name: "previous",
               _attrs: {
-                totalSold: prevData?.sold,
-                turnOver: prevData?.turnOver,
-                avgPricePerSqFtSold: prevData?.avgPricePerSqFt,
-                avgPricePerSqFtList: prevData?.avgSoldListingsListPricePerSqFt,
-                averageListPriceForSold: prevData?.avgListPriceForSold,
-                averageSalePrice: prevData?.avgSalePrice,
-                averageDaysOnMarket: prevData?.avgDaysOnMarket,
-                medianSalePrice: prevData?.medSalePrice,
-                maxSalePrice: prevData?.maxSale?.salePrice,
-                minSalePrice: prevData?.minSale?.salePrice
+                totalSold: prevData?.sold ?? "N/A",
+                turnOver: prevData?.turnOver ?? "N/A",
+                avgPricePerSqFtSold: prevData?.avgPricePerSqFt ?? "N/A",
+                avgPricePerSqFtList: prevData?.avgSoldListingsListPricePerSqFt ?? "N/A",
+                averageListPriceForSold: prevData?.avgListPriceForSold ?? "N/A",
+                averageSalePrice: prevData?.avgSalePrice ?? "N/A",
+                averageDaysOnMarket: prevData?.avgDaysOnMarket ?? "N/A",
+                medianSalePrice: prevData?.medSalePrice ?? "N/A",
+                maxSalePrice: prevData?.maxSale?.salePrice ?? "N/A",
+                minSalePrice: prevData?.minSale?.salePrice ?? "N/A"
               }
             }
           ];
           const byBedroom = { _name: "byBedroom", _content: [] };
-          propertyTypeData.bedroomStats.forEach((stat) => {
+          propertyTypeData?.bedroomStats?.forEach((stat) => {
             byBedroom._content.push({
               _name: "bedroom",
               _attrs: {
-                number: stat.beds,
-                sold: stat.sold,
-                active: stat.active,
-                pending: stat.pending,
-                averageSalePrice: stat.avgSalePrice,
-                averageListPrice: stat.avgListPrice,
-                averageListPriceForSold: stat.avgListPriceForSold
+                number: stat.beds ?? "N/A",
+                sold: stat.sold ?? "N/A",
+                active: stat.active ?? "N/A",
+                pending: stat.pending ?? "N/A",
+                averageSalePrice: stat.avgSalePrice ?? "N/A",
+                averageListPrice: stat.avgListPrice ?? "N/A",
+                averageListPriceForSold: stat.avgListPriceForSold ?? "N/A"
               }
             });
           });
           statistics.push(byBedroom);
           const bySize = { _name: "bySize", _content: [] };
-          propertyTypeData.squareFootStats.forEach((stat) => {
+          propertyTypeData?.squareFootStats?.forEach((stat) => {
             bySize._content.push({
               _name: "size",
               _attrs: {
-                min: stat.min,
-                max: stat.max,
-                sold: stat.sold,
-                active: stat.active,
-                pending: stat.pending,
-                averageSalePrice: stat.avgSalePrice,
-                averageListPrice: stat.avgListPrice,
-                averageListPriceForSold: stat.avgListPriceForSold
+                min: stat.min ?? "N/A",
+                max: stat.max ?? "N/A",
+                sold: stat.sold ?? "N/A",
+                active: stat.active ?? "N/A",
+                pending: stat.pending ?? "N/A",
+                averageSalePrice: stat.avgSalePrice ?? "N/A",
+                averageListPrice: stat.avgListPrice ?? "N/A",
+                averageListPriceForSold: stat.avgListPriceForSold ?? "N/A"
               }
             });
           });
@@ -8198,24 +8177,24 @@ var processAreas = async (params) => {
             areaId,
             Math.ceil(params.datePeriod / 12)
           );
-          if (monthly.statistics) {
+          if (monthly?.statistics) {
             const history = { _name: "history", _content: [] };
             monthly.statistics.slice((params.datePeriod + 1) * 2 * -1).forEach((m) => {
               if (m.propertyTypeId == params.propertyType) {
                 history._content.push({
                   _name: "period",
                   _attrs: {
-                    period: `${m.yearPart.toString()}${m.monthPart.toString().padStart(2, "0")}`,
-                    periodName: DateTime.fromObject({
+                    period: `${m.yearPart?.toString() ?? ""}${(m.monthPart?.toString() ?? "").padStart(2, "0")}`,
+                    periodName: m.yearPart && m.monthPart ? DateTime.fromObject({
                       year: m.yearPart,
                       month: m.monthPart,
                       day: 1
-                    }).toFormat("LLL yyyy"),
-                    totalSold: m.soldCount,
-                    averageListPrice: m.averageListPrice,
-                    averageSalePrice: m.averageSalePrice,
-                    averageDaysOnMarket: m.averageDaysOnMarket,
-                    averagePricePerSqFt: m.averagePricePerSqFt
+                    }).toFormat("LLL yyyy") : "Unknown",
+                    totalSold: m.soldCount ?? "N/A",
+                    averageListPrice: m.averageListPrice ?? "N/A",
+                    averageSalePrice: m.averageSalePrice ?? "N/A",
+                    averageDaysOnMarket: m.averageDaysOnMarket ?? "N/A",
+                    averagePricePerSqFt: m.averagePricePerSqFt ?? "N/A"
                   }
                 });
               }
@@ -8227,22 +8206,22 @@ var processAreas = async (params) => {
             _attrs: {
               lookbackMonths: params.datePeriod,
               propertyType: params.propertyType,
-              averageDaysOnMarket: propertyTypeData?.avgDOM ?? 0,
-              averageListPrice: propertyTypeData?.avgListPrice ?? 0,
-              averageSalePrice: propertyTypeData?.avgSalePrice ?? 0,
-              medianSalePrice: propertyTypeData?.medSalePrice ?? 0,
-              activePropertyTypeCount: propertyTypeData?.active ?? 0,
-              averageListPriceForSold: propertyTypeData?.avgListPriceForSold ?? 0,
-              avgPricePerSqFtSold: propertyTypeData?.avgPricePerSqFt ?? 0,
-              avgPricePerSqFtList: propertyTypeData?.avgSoldListingsListPricePerSqFt ?? 0,
-              soldPropertyTypeCount: propertyTypeData?.sold ?? 0,
-              taxrollCount: propertyTypeData?.taxroll ?? 0,
-              turnOver: propertyTypeData?.turnOver ?? 0,
-              maxSalePrice: propertyTypeData?.maxSale?.salePrice ?? 0,
-              minSalePrice: propertyTypeData?.minSale?.salePrice ?? 0,
-              marketTotalSoldVolume: propertyTypeData?.marketTotalSoldVolume ?? 0,
-              averageYearsInHome: propertyTypeData?.avgYearsInHome ?? 0,
-              ownerOccupancy: propertyTypeData?.ownerOccupancy ?? 0
+              averageDaysOnMarket: propertyTypeData?.avgDOM ?? "N/A",
+              averageListPrice: propertyTypeData?.avgListPrice ?? "N/A",
+              averageSalePrice: propertyTypeData?.avgSalePrice ?? "N/A",
+              medianSalePrice: propertyTypeData?.medSalePrice ?? "N/A",
+              activePropertyTypeCount: propertyTypeData?.active ?? "N/A",
+              averageListPriceForSold: propertyTypeData?.avgListPriceForSold ?? "N/A",
+              avgPricePerSqFtSold: propertyTypeData?.avgPricePerSqFt ?? "N/A",
+              avgPricePerSqFtList: propertyTypeData?.avgSoldListingsListPricePerSqFt ?? "N/A",
+              soldPropertyTypeCount: propertyTypeData?.sold ?? "N/A",
+              taxrollCount: propertyTypeData?.taxroll ?? "N/A",
+              turnOver: propertyTypeData?.turnOver ?? "N/A",
+              maxSalePrice: propertyTypeData?.maxSale?.salePrice ?? "N/A",
+              minSalePrice: propertyTypeData?.minSale?.salePrice ?? "N/A",
+              marketTotalSoldVolume: propertyTypeData?.marketTotalSoldVolume ?? "N/A",
+              averageYearsInHome: propertyTypeData?.avgYearsInHome ?? "N/A",
+              ownerOccupancy: propertyTypeData?.ownerOccupancy ?? "N/A"
             },
             _content: statistics
           });
@@ -8283,7 +8262,7 @@ var processListing = async (params, agentTimezone) => {
         "http:",
         "https:"
       );
-      if (listing.virtualTourUrl.indexOf("youtube.com/watch")) {
+      if (listing.virtualTourUrl.indexOf("youtube.com/watch") !== -1) {
         listing.virtualTourUrl = listing.virtualTourUrl.replace(
           /https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
           "https://www.youtube.com/embed/$1"
@@ -8304,7 +8283,6 @@ var processListing = async (params, agentTimezone) => {
       { listingAgent: listing.listingAgentName ?? "" },
       { statusTypeID: listing.statusTypeID ?? "" },
       { description: listing.remarks ?? "" },
-      //ToDo clean entities?
       { photoPrimary: primaryPhoto },
       { listingBoundary: listingBoundary ?? "" },
       { squareFeet: listing.squareFeet ?? "Enquire" },
