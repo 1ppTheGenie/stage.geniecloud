@@ -10336,22 +10336,39 @@ var api = async (event) => {
           }
         }
       } catch (error2) {
-        console.log("GenieAPI failed: ", error2);
+        console.error("GenieAPI failed: ", error2);
         const currentDate = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
         if (params.renderId) {
+          const errorInfo = {
+            params,
+            error: {
+              message: error2.message,
+              name: error2.name,
+              stack: error2.stack,
+              // Capture additional properties of the error object
+              ...Object.getOwnPropertyNames(error2).reduce((acc, key) => {
+                acc[key] = error2[key];
+                return acc;
+              }, {})
+            },
+            timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+            route
+            // Assuming 'route' is accessible here
+          };
           await toS3(
             `_errors/${currentDate}/${params.renderId}-${Date.now()}-api.json`,
-            Buffer.from(
-              JSON.stringify({
-                params,
-                error: error2.toString()
-              })
-            ),
+            Buffer.from(JSON.stringify(errorInfo, null, 2)),
             { GenieExpireFile: "error" },
             JSON_MIME
           );
+          console.error("Detailed error:", JSON.stringify(errorInfo, null, 2));
         }
-        response2.body.error = error2;
+        response2.body.error = {
+          message: error2.message,
+          name: error2.name,
+          // Optionally include a truncated stack trace
+          stack: error2.stack ? error2.stack.split("\n").slice(0, 3).join("\n") : void 0
+        };
       } finally {
         if (!response2.isBase64Encoded) {
           response2.body = JSON.stringify(response2.body);

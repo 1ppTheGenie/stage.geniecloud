@@ -898,25 +898,44 @@ export const api = async event => {
                     }
                 }
             } catch (error) {
-                console.log('GenieAPI failed: ', error);
+                console.error('GenieAPI failed: ', error);
                 const currentDate = new Date().toISOString().split('T')[0];
                 if (params.renderId) {
                     // We don't want the embed API errors here
+                    const errorInfo = {
+                        params,
+                        error: {
+                            message: error.message,
+                            name: error.name,
+                            stack: error.stack,
+                            // Capture additional properties of the error object
+                            ...Object.getOwnPropertyNames(error).reduce((acc, key) => {
+                                acc[key] = error[key];
+                                return acc;
+                            }, {})
+                        },
+                        timestamp: new Date().toISOString(),
+                        route: route // Assuming 'route' is accessible here
+                    };
+
                     await toS3(
-                        `_errors/${currentDate}/${params.renderId
-                        }-${Date.now()}-api.json`,
-                        Buffer.from(
-                            JSON.stringify({
-                                params,
-                                error: error.toString()
-                            })
-                        ),
+                        `_errors/${currentDate}/${params.renderId}-${Date.now()}-api.json`,
+                        Buffer.from(JSON.stringify(errorInfo, null, 2)),
                         { GenieExpireFile: 'error' },
                         JSON_MIME
                     );
+
+                    // Optionally log to console for immediate visibility
+                    console.error('Detailed error:', JSON.stringify(errorInfo, null, 2));
                 }
 
-                response.body.error = error;
+                // Set a sanitized error message in the response
+                response.body.error = {
+                    message: error.message,
+                    name: error.name,
+                    // Optionally include a truncated stack trace
+                    stack: error.stack ? error.stack.split('\n').slice(0, 3).join('\n') : undefined
+                };
             } finally {
                 if (!response.isBase64Encoded) {
                     response.body = JSON.stringify(response.body);
