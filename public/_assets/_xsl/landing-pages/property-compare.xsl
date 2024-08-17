@@ -110,12 +110,7 @@
 								<h1 class="mb-0 heading-font">
 									<xsl:value-of select="concat( 'Your Neighbor’s Home ', $status-caption, '!' )" />
 								</h1>
-								<p class="mb-0 body-font">See how yours compares!</p>
-								<div class="banner-btn">
-									<a href="#lead-form" data-scroll-to="#lead-form" class="btn-style body-font heading-color-as-bg background-as-color">
-										<xsl:text>Get My Value</xsl:text>
-									</a>
-								</div>
+								<p class="mb-0 body-font">See how yours compares!</p>								
 							</div>
 						</div>
 					</div>
