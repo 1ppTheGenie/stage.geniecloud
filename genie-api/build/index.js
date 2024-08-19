@@ -10691,7 +10691,7 @@ var prepareAsset = async (asset, params) => {
             });
           }
         }
-        const cleanKey = (0, import_path.basename)(render.s3Key).replaceAll(/[.\/#]|_/g, "-").replaceAll(/[^\w\s-]|_/g, "").replaceAll("--", "-");
+        const cleanKey = decodeURIComponent((0, import_path.basename)(render.s3Key)).replaceAll(/[.\/#]|_/g, "-").replaceAll(/[^\w\s-]|_/g, "").replaceAll("--", "-").replaceAll(/\s+/g, "-");
         await toS3(
           `_processing/${params.renderId}/${cleanKey}${pageParams.asset.startsWith("landing-pages") ? `-${(0, import_path.basename)(pageParams.asset)}` : ""}-p${i}-prep.json`,
           Buffer.from(JSON.stringify(render)),
