@@ -9325,7 +9325,15 @@ var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
   }
 };
 var cache_key = (endpoint, params, verb) => {
-  const { userId, areaId, mlsId, mlsNumber, ...restParams } = params ?? {};
+  let userId, areaId, mlsId, mlsNumber, restParams;
+  if (endpoint.includes("GetUserProfile")) {
+    const parts = endpoint.split("/");
+    userId = parts.pop();
+    endpoint = parts.join("/");
+    restParams = {};
+  } else {
+    ({ userId, areaId, mlsId, mlsNumber, ...restParams } = params ?? {});
+  }
   const prefixParts = [];
   if (userId)
     prefixParts.push(`u_${userId}`);

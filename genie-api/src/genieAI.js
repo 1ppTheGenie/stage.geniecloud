@@ -42,7 +42,18 @@ const to_cache = async (data, endpoint, key, timeout_hours = 4) => {
 };
 
 const cache_key = (endpoint, params, verb) => {
-    const { userId, areaId, mlsId, mlsNumber, ...restParams } = params ?? {};
+    let userId, areaId, mlsId, mlsNumber, restParams;
+
+    if (endpoint.includes("GetUserProfile")) {
+        // Special handling for GetUserProfile endpoint
+        const parts = endpoint.split('/');
+        userId = parts.pop();
+        endpoint = parts.join('/'); // Reconstruct the endpoint without userId
+        restParams = {};
+    } else {
+        // Normal handling for other endpoints
+        ({ userId, areaId, mlsId, mlsNumber, ...restParams } = params ?? {});
+    }
     
     // Create the prefix part of the key
     const prefixParts = [];
