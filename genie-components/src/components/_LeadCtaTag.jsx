@@ -13,7 +13,10 @@ export default (ctaData) => {
   let formattedNote = data.ctaNote;
 
   if(data.ctaNoteIncludeArea && areaDataStore.areaName) 
-    formattedNote = `Area Name: ${areaDataStore.areaName} \n${formattedNote}`;  
+    formattedNote = `Area Name: ${areaDataStore.areaName} \n${formattedNote}`; 
+  
+  if(window.gHub.leadAddress && data.ctaNoteIncludeAddress)
+    formattedNote = `Property Address: ${window.gHub.leadAddress} \n${formattedNote}`
   
   //tagging that a lead was shown the CTA
   if(window.gHub.getLeadId())  

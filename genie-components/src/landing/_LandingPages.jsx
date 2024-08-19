@@ -480,6 +480,10 @@ export default () => {
         const settings = useSettings(Context4Settings);
         settings.trackingdata = lpData.lead.trackingData; //unsure on the casing descrepancy here but add lead maps it;
         window.gHub.leadId = lpData.lead.genieLeadId;
+
+        if(lpData.address && lpData.zip)
+          window.gHub.leadAddress = `${lpData.address}, ${lpData.zip}`;
+
         window.gHub.setFormPrepopInputs(lpData.lead.emailAddress, lpData.lead.phoneNumber);        
         window.gHub.showOptIn(urlParamCtaid, lpData.lead.ctaId, true);
       }     
