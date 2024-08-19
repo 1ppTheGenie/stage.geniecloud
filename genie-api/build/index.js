@@ -10858,6 +10858,7 @@ var getS3Key = async (asset, params) => {
       Object.keys(replaces).map(
         (key) => renderKey2 = renderKey2.replace(key, replaces[key])
       );
+      renderKey2 = renderKey2.replace(/['\/#]/g, "-").replace(/[^\w\-]/g, "").replace(/-+/g, "-");
       s3Key = `genie-files/${params.renderId}/${params.theme}/${renderKey2}.${fileExtension || hasPages2 && "pdf" || "png"}`;
     }
   } catch (error2) {

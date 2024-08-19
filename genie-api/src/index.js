@@ -1576,6 +1576,11 @@ export const getS3Key = async (asset, params) => {
                 key => (renderKey = renderKey.replace(key, replaces[key]))
             );
 
+            renderKey = renderKey
+                .replace(/['\/#]/g, '-')  // Replace apostrophes, slashes, and hashes with hyphens
+                .replace(/[^\w\-]/g, '')  // Remove any remaining non-word characters (except hyphens)
+                .replace(/-+/g, '-');     // Replace multiple consecutive hyphens with a single hyphen
+
             s3Key = `genie-files/${params.renderId}/${params.theme
                 }/${renderKey}.${fileExtension || (hasPages && 'pdf') || 'png'}`;
         }
