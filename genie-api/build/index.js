@@ -10691,7 +10691,7 @@ var prepareAsset = async (asset, params) => {
             });
           }
         }
-        const cleanKey = (0, import_path.basename)(render.s3Key).replaceAll(/[.\/#]|_/g, "-").replaceAll(/[^\w\s-]|_/g, "").replaceAll("--", "-");
+        const cleanKey = decodeURIComponent((0, import_path.basename)(render.s3Key)).replaceAll(/[.\/#]|_/g, "-").replaceAll(/[^\w\s-]|_/g, "").replaceAll("--", "-").replaceAll(/\s+/g, "-");
         await toS3(
           `_processing/${params.renderId}/${cleanKey}${pageParams.asset.startsWith("landing-pages") ? `-${(0, import_path.basename)(pageParams.asset)}` : ""}-p${i}-prep.json`,
           Buffer.from(JSON.stringify(render)),
@@ -10858,6 +10858,7 @@ var getS3Key = async (asset, params) => {
       Object.keys(replaces).map(
         (key) => renderKey2 = renderKey2.replace(key, replaces[key])
       );
+      renderKey2 = renderKey2.replace(/['\/#]/g, "-").replace(/[^\w\-]/g, "").replace(/-+/g, "-");
       s3Key = `genie-files/${params.renderId}/${params.theme}/${renderKey2}.${fileExtension || hasPages2 && "pdf" || "png"}`;
     }
   } catch (error2) {

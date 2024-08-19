@@ -1349,10 +1349,11 @@ const prepareAsset = async (asset, params) => {
                 }
 
                 // Save to the processing folder to trigger onward processing and final render
-                const cleanKey = basename(render.s3Key)
+                const cleanKey = decodeURIComponent(basename(render.s3Key))
                     .replaceAll(/[.\/#]|_/g, '-')
-                    .replaceAll(/[^\w\s-]|_/g, '') // Remove all non-word,number,space chars.
-                    .replaceAll('--', '-');
+                    .replaceAll(/[^\w\s-]|_/g, '')
+                    .replaceAll('--', '-')
+                    .replaceAll(/\s+/g, '-');
 
                 await toS3(
                     `_processing/${params.renderId}/${cleanKey}${pageParams.asset.startsWith('landing-pages')
@@ -1574,6 +1575,11 @@ export const getS3Key = async (asset, params) => {
             Object.keys(replaces).map(
                 key => (renderKey = renderKey.replace(key, replaces[key]))
             );
+
+            renderKey = renderKey
+                .replace(/['\/#]/g, '-')  // Replace apostrophes, slashes, and hashes with hyphens
+                .replace(/[^\w\-]/g, '')  // Remove any remaining non-word characters (except hyphens)
+                .replace(/-+/g, '-');     // Replace multiple consecutive hyphens with a single hyphen
 
             s3Key = `genie-files/${params.renderId}/${params.theme
                 }/${renderKey}.${fileExtension || (hasPages && 'pdf') || 'png'}`;
