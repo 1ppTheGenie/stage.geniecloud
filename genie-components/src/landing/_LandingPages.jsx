@@ -483,8 +483,7 @@ export default () => {
 
         if(lpData.address && lpData.zip)
           window.gHub.leadAddress = `${lpData.address}, ${lpData.zip}`;
-
-        console.log(lpData);
+        
         window.gHub.setFormPrepopInputs(lpData.lead.emailAddress, lpData.lead.phoneNumber);        
         window.gHub.showOptIn(urlParamCtaid, lpData.lead.ctaId, true);
       }     
