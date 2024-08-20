@@ -435,7 +435,7 @@ export default () => {
 	 ***********************/
   window.gHub.showOptIn = (ctaIdUrlParam, ctaIdShortDataValue, hasLeadData) => { 
     //url param will take precedence over what is supplied in short data
-    const ctaId = parseInt(ctaIdUrlParam) || ctaIdShortDataValue;      
+    const ctaId = parseInt(ctaIdUrlParam) || parseInt(ctaIdShortDataValue);      
     const data = getCtaData(ctaId);
 
     if(!data.enabled)
@@ -484,6 +484,7 @@ export default () => {
         if(lpData.address && lpData.zip)
           window.gHub.leadAddress = `${lpData.address}, ${lpData.zip}`;
 
+        console.log(lpData);
         window.gHub.setFormPrepopInputs(lpData.lead.emailAddress, lpData.lead.phoneNumber);        
         window.gHub.showOptIn(urlParamCtaid, lpData.lead.ctaId, true);
       }     
