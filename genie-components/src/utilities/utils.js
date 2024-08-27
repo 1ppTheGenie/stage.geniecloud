@@ -225,7 +225,6 @@ export const useAgentData = () => {
 	return agent;
 };
 
-//TODO: not sure if accessing document from util is considered bad practice...tbd
 export const addDynamicPopup = (popupId) => {  
   if (document.getElementById(popupId))
     return false; //already exists
@@ -243,8 +242,8 @@ export const getCtaData = (ctaId) => {
   switch(ctaId) {
     case 1:
       //the home value pops an existing modal so just need the delay and enabled properties available
-      return {        
-        delay: 2000,
+      return {       
+        delay: 2,
         enabled: false
       };
     case 2:    //CTA GROUP 1
@@ -269,7 +268,9 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for confirming, you're all set!",
         ctaVerifyButtonText: "Confirm",
         ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
-        delay: 1000,
+        delay: 1,
+        scrollUpPercentage: 0,
+        scrollDownPercentage: 0,
         enabled: true
       };
     case 3: //CTA GROUP 1
@@ -294,7 +295,9 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for updating, you're all set!",
         ctaVerifyButtonText: "Verify",
         ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
-        delay: 2000,
+        delay: 2,
+        scrollUpPercentage: 0,
+        scrollDownPercentage: 0,
         enabled: true
       };
     case 4:    //CTA GROUP 2
@@ -319,7 +322,9 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for confirming, you're all set!",
         ctaVerifyButtonText: "Confirm",
         ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
-        delay: 1000,
+        delay: 1,
+        scrollUpPercentage: 0,
+        scrollDownPercentage: 0,
         enabled: true
       };
     case 5: //CTA GROUP 2
@@ -344,7 +349,9 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for updating, you're all set!",
         ctaVerifyButtonText: "Verify",
         ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
-        delay: 2000,
+        delay: 2,
+        scrollUpPercentage: 0,
+        scrollDownPercentage: 0,
         enabled: true
       };
     default:

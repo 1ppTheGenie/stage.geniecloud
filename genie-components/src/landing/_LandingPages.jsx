@@ -430,10 +430,40 @@ export default () => {
 
   /***********************
 	 *
-	 * Opt-in timed popup
+	 * Opt-in popup
 	 *
 	 ***********************/
-  window.gHub.showOptIn = (ctaIdUrlParam, ctaIdShortDataValue, hasLeadData) => { 
+  window.gHub.createScrollTracker = (direction, ctaData) => {
+    let lastScrollTop = 0;
+    let scrollAmount = 0;
+
+    return function checkScrollAndShowModal(scrollPercentage) {
+        function onScroll()  {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            
+            if ((direction === 'down' && scrollTop > lastScrollTop) || 
+                (direction === 'up' && scrollTop < lastScrollTop)) {
+                scrollAmount += Math.abs(scrollTop - lastScrollTop);
+                
+                let percentScrolled = (scrollAmount / scrollableHeight) * 100;
+                
+                if (percentScrolled >= scrollPercentage) {
+                    window.gHub.showOptIn(ctaData);
+                    window.removeEventListener('scroll', onScroll);                    
+                }
+            } else {
+                scrollAmount = 0;
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        };
+
+        window.addEventListener('scroll', onScroll);
+    };
+  };
+
+  window.gHub.hookShowOptIn = (ctaIdUrlParam, ctaIdShortDataValue, hasLeadData) => { 
     //url param will take precedence over what is supplied in short data
     const ctaId = parseInt(ctaIdUrlParam) || parseInt(ctaIdShortDataValue);      
     const data = getCtaData(ctaId);
@@ -445,28 +475,43 @@ export default () => {
 
     if(ctaId === ctaHomeValueKey)
       setTimeout(() => { window.gHub.popHomeValue() }, data.delay);
-    else if (hasLeadData){ //all the CTA's need a lead in context      
-      setTimeout(() => { 
-        const settings = useSettings(Context4Settings);           
-        
-        if (window.gHub.getLeadId(settings)) {
-          const dynamicPopupId = "genie-leadCtaTagPopup";
-          if(addDynamicPopup(dynamicPopupId)) {        
-            const App = () => {
-              return (
-                <Context4Settings.Provider value={settings}>
-                  <LeadCtaTag ctaData={data} />
-                </Context4Settings.Provider>
-              );
-            };
-      
-            render(App, document.getElementById(dynamicPopupId));
-          }
-        }
-      }, data.delay); 
+    else if (hasLeadData){ //all the CTA's need a lead in context        
+      if(data.scrollUpPercentage > 0) {
+        const checkUpwardScrollAndShowModal = window.gHub.createScrollTracker('up', data);
+        checkUpwardScrollAndShowModal(data.scrollUpPercentage);
+      }
+
+      if(data.scrollDownPercentage > 0) {
+        const checkDownwardScrollAndShowModal = window.gHub.createScrollTracker('down', data);
+        checkDownwardScrollAndShowModal(data.scrollDownPercentage); 
+      }
+
+      if(data.delay > 0) {
+        setTimeout(() => window.gHub.showOptIn(data), (data.delay * 1000)); 
+      }      
     } 
   };  
 
+  window.gHub.showOptIn = (data) => { 
+    const settings = useSettings(Context4Settings);           
+    
+    if (window.gHub.getLeadId(settings) && !window.gHub.ctaDisplayed) {
+      const dynamicPopupId = "genie-leadCtaTagPopup";
+      if(addDynamicPopup(dynamicPopupId)) {        
+        window.gHub.ctaDisplayed = true;
+        const App = () => {
+          return (
+            <Context4Settings.Provider value={settings}>
+              <LeadCtaTag ctaData={data} />
+            </Context4Settings.Provider>
+          );
+        };
+  
+        render(App, document.getElementById(dynamicPopupId));
+      }
+    }
+  };
+  
   /***********************
 	 *
 	 * Get short/qr data
@@ -485,7 +530,7 @@ export default () => {
           window.gHub.leadAddress = `${lpData.address}, ${lpData.zip}`;
         
         window.gHub.setFormPrepopInputs(lpData.lead.emailAddress, lpData.lead.phoneNumber);        
-        window.gHub.showOptIn(urlParamCtaid, lpData.lead.ctaId, true);
+        window.gHub.hookShowOptIn(urlParamCtaid, lpData.lead.ctaId, true);
       }     
     })();
   };
@@ -507,7 +552,7 @@ export default () => {
 	} else if (urlParams.token) {
     window.gHub.initLandingPageData(urlParams.ctaid);
   } else {
-    window.gHub.showOptIn(urlParams.ctaid, null, false);    
+    window.gHub.hookShowOptIn(urlParams.ctaid, null, false);    
   }  
   
   /***********************
