@@ -75,7 +75,7 @@ const cache_key = (endpoint, params, verb) => {
     } else {
         // Normalize keys to lowercase for other cases
         const normalizedParams = Object.entries(params ?? {}).reduce((acc, [key, value]) => {
-            if (key.toLowerCase() === 'startdate' && typeof value === 'string') {
+            if ((key.toLowerCase() === 'startdate' || key.toLowerCase() === 'enddate') && typeof value === 'string') {
                 acc[key.toLowerCase()] = roundDateForCacheKey(value);
             } else {
                 acc[key.toLowerCase()] = value;
