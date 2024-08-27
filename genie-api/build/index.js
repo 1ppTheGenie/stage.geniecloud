@@ -9312,27 +9312,51 @@ var from_cache = async (key, endpoint) => {
   since.setSeconds(
     since.getSeconds() - (CACHE_FOR[endpoint.split("/")[0]] ?? HOUR_IN_SECONDS / 2)
   );
-  return await jsonFromS3(`_cache/${key}`, since);
+  const cachedData = await jsonFromS3(`_cache/${key}`, since);
+  if (cachedData && cachedData.response) {
+    return cachedData.response;
+  }
+  return null;
 };
-var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
+var to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) => {
   const timeout = CACHE_FOR[endpoint.split("/")[0]] ?? timeout_hours;
   if (timeout > 0) {
-    await toS3(`_cache/${key}`, Buffer.from(data), {
+    const cacheData = {
+      endpoint,
+      params,
+      verb,
+      timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+      response: JSON.parse(data)
+    };
+    await toS3(`_cache/${key}`, Buffer.from(JSON.stringify(cacheData)), {
       genieCache: endpoint?.toString(),
       GenieExpireFile: "GenieCache",
       timeout
     });
   }
 };
+var roundDateForCacheKey = (dateString, intervalMinutes = 5) => {
+  const date = DateTime.fromISO(dateString);
+  const roundedMinutes = Math.floor(date.minute / intervalMinutes) * intervalMinutes;
+  return date.set({ minute: roundedMinutes, second: 0, millisecond: 0 }).toISO();
+};
 var cache_key = (endpoint, params, verb) => {
   let userId, areaId, mlsId, mlsNumber, restParams;
-  if (endpoint.includes("GetUserProfile")) {
+  if (endpoint.includes("GetAreaBoundary")) {
     const parts = endpoint.split("/");
-    userId = parts.pop();
+    areaId = parts.pop();
     endpoint = parts.join("/");
     restParams = {};
   } else {
-    ({ userId, areaId, mlsId, mlsNumber, ...restParams } = params ?? {});
+    const normalizedParams = Object.entries(params ?? {}).reduce((acc, [key, value]) => {
+      if ((key.toLowerCase() === "startdate" || key.toLowerCase() === "enddate") && typeof value === "string") {
+        acc[key.toLowerCase()] = roundDateForCacheKey(value);
+      } else {
+        acc[key.toLowerCase()] = value;
+      }
+      return acc;
+    }, {});
+    ({ userid: userId, areaid: areaId, mlsid: mlsId, mlsnumber: mlsNumber, ...restParams } = normalizedParams);
   }
   const prefixParts = [];
   if (userId)
@@ -9540,7 +9564,11 @@ var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate 
     return r.data;
   }
 };
-var getUser = async (user_id) => await call_api(`GetUserProfile/${user_id}`);
+var getUser = async (userId) => await call_api(
+  "HubCloudGetUser",
+  { userId },
+  "POST"
+);
 var getPropertyFromId = async (property_id, agent_id) => {
   const r = await getAssessorProperty(property_id, agent_id);
   if (r.hasProperty) {
@@ -9611,9 +9639,6 @@ var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_ca
     result = await from_cache(cacheKey, endpoint);
   }
   if (!result) {
-    if (endpoint.startsWith("GetUserProfile")) {
-      console.log("ProfileGOT,", skipCache, params);
-    }
     params.consumer = 8;
     result = await fetch(API_URL + endpoint, {
       method: verb,
@@ -9637,7 +9662,7 @@ var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_ca
       if (pre_cache && typeof pre_cache == "function") {
         result = pre_cache(result);
       }
-      to_cache(JSON.stringify(result), endpoint, cacheKey);
+      to_cache(JSON.stringify(result), endpoint, cacheKey, params, verb);
     } else {
       if (typeof result !== "object" || !result?.responseDescription || result.responseDescription !== "Asset Url has already been set") {
         console.log(`GenieAPI error (${endpoint}): `, result);

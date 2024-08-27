@@ -25,15 +25,31 @@ const from_cache = async (key, endpoint) => {
             (CACHE_FOR[endpoint.split('/')[0]] ?? HOUR_IN_SECONDS / 2)
     );
 
-    // ToDo: some "skip cache" code?
-    return await jsonFromS3(`_cache/${key}`, since);
+    // Fetch the cached data
+    const cachedData = await jsonFromS3(`_cache/${key}`, since);
+
+    // If cached data exists, return only the response part
+    if (cachedData && cachedData.response) {
+        return cachedData.response;
+    }
+
+    return null;
 };
 
-const to_cache = async (data, endpoint, key, timeout_hours = 4) => {
+const to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) => {
     const timeout = CACHE_FOR[endpoint.split('/')[0]] ?? timeout_hours;
 
     if (timeout > 0) {
-        await toS3(`_cache/${key}`, Buffer.from(data), {
+        // Create a more complex structure for caching
+        const cacheData = {
+            endpoint,
+            params,
+            verb,
+            timestamp: new Date().toISOString(),
+            response: JSON.parse(data)
+        };
+
+        await toS3(`_cache/${key}`, Buffer.from(JSON.stringify(cacheData)), {
             genieCache: endpoint?.toString(),
             GenieExpireFile: 'GenieCache',
             timeout
@@ -41,27 +57,43 @@ const to_cache = async (data, endpoint, key, timeout_hours = 4) => {
     }
 };
 
+const roundDateForCacheKey = (dateString, intervalMinutes = 5) => {
+    const date = DateTime.fromISO(dateString);
+    const roundedMinutes = Math.floor(date.minute / intervalMinutes) * intervalMinutes;
+    return date.set({ minute: roundedMinutes, second: 0, millisecond: 0 }).toISO();
+};
+
 const cache_key = (endpoint, params, verb) => {
     let userId, areaId, mlsId, mlsNumber, restParams;
 
-    if (endpoint.includes("GetUserProfile")) {
-        // Special handling for GetUserProfile endpoint
+    if (endpoint.includes("GetAreaBoundary")) {
+        // Special handling for GetAreaBoundary endpoint
         const parts = endpoint.split('/');
-        userId = parts.pop();
-        endpoint = parts.join('/'); // Reconstruct the endpoint without userId
+        areaId = parts.pop();
+        endpoint = parts.join('/'); // Reconstruct the endpoint without areaId
         restParams = {};
     } else {
-        // Normal handling for other endpoints
-        ({ userId, areaId, mlsId, mlsNumber, ...restParams } = params ?? {});
+        // Normalize keys to lowercase for other cases
+        const normalizedParams = Object.entries(params ?? {}).reduce((acc, [key, value]) => {
+            if ((key.toLowerCase() === 'startdate' || key.toLowerCase() === 'enddate') && typeof value === 'string') {
+                acc[key.toLowerCase()] = roundDateForCacheKey(value);
+            } else {
+                acc[key.toLowerCase()] = value;
+            }
+            return acc;
+        }, {});
+
+        // Destructure using normalized keys
+        ({ userid: userId, areaid: areaId, mlsid: mlsId, mlsnumber: mlsNumber, ...restParams } = normalizedParams);
     }
-    
+
     // Create the prefix part of the key
     const prefixParts = [];
     if (userId) prefixParts.push(`u_${userId}`);
     if (areaId) prefixParts.push(`a_${areaId}`);
     if (mlsId !== undefined && mlsId !== null) prefixParts.push(`mid_${mlsId}`);
     if (mlsNumber) prefixParts.push(`mnum_${mlsNumber}`);
-    
+
     const prefix = prefixParts.length > 0 ? prefixParts.join('-') + '-' : '';
 
     // Create the hash part
@@ -448,8 +480,12 @@ export const updateHubAsset = async (hubAssetUrl, userId, hubAssetId) =>
         'POST'
     );
 
-export const getUser = async user_id =>
-    await call_api(`GetUserProfile/${user_id}`);
+export const getUser = async userId =>
+    await call_api(
+        'HubCloudGetUser',
+        { userId },
+        'POST'
+    );
 
 const expiry_time = token => {
     decoded = JSON.parse(
@@ -559,9 +595,6 @@ const call_api = async ( endpoint, params, skipCache = false, verb = "POST", pre
 	}
 	
     if ( !result ) {
-        if ( endpoint.startsWith( 'GetUserProfile' ) ) {
-            console.log( 'ProfileGOT,', skipCache, params );
-        }
 		// Flag the API call as coming from HubCloud
 		params.consumer = 8;
 
@@ -592,7 +625,7 @@ const call_api = async ( endpoint, params, skipCache = false, verb = "POST", pre
 				result = pre_cache(result);
 			}
 
-			to_cache( JSON.stringify( result ), endpoint, cacheKey );
+			to_cache( JSON.stringify( result ), endpoint, cacheKey, params, verb );
 			//console.log( 'cache to', endpoint, cacheKey );
 		} else {
 			if (
