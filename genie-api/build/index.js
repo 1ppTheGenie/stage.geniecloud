@@ -7502,7 +7502,7 @@ var copyObject = async (sourceKey, destinationKey, bucket = null, ContentType = 
   };
   return await s3Client.send(new import_client_s3.CopyObjectCommand(args));
 };
-var searchS3ByPrefix = async (prefix, contains = null, bucket = null) => {
+var searchS3ByPrefix2 = async (prefix, contains = null, bucket = null) => {
   try {
     let allMatches = [];
     let isTruncated = true;
@@ -7554,7 +7554,7 @@ var listS3Folder = async (folderPath = "", justContents = true, token = null, bu
     throw err;
   }
 };
-var deleteObject = async (Key, Bucket = null) => await s3Client.send(
+var deleteObject2 = async (Key, Bucket = null) => await s3Client.send(
   new import_client_s3.DeleteObjectCommand({
     Bucket: Bucket || BUCKET,
     Key
@@ -8578,6 +8578,9 @@ var preCallGenieAPIs = async (params) => {
         params.agentIds.map(async (agentId) => await getUser(agentId))
       );
     }
+    if (params.userId) {
+      await getUser(params.userId);
+    }
     if (Array.isArray(params?.areaIds)) {
       await Promise.all(
         params.areaIds.map(async (areaId) => {
@@ -9293,6 +9296,101 @@ var getDimensions = (size = null) => {
       break;
   }
   return { width: dims[0], height: dims[1] };
+};
+var filterRenderIds = async (renderIds, params) => {
+  const filteredIds = [];
+  for (const renderId of renderIds) {
+    const renderJsonKey = `_processing/${renderId}/render.json`;
+    try {
+      const renderJson = await jsonFromS3(renderJsonKey);
+      if (renderJson) {
+        if (params.mlsNumber && renderJson.mlsNumber === params.mlsNumber) {
+          filteredIds.push(renderId);
+        } else if (params.areaId && renderJson.areaIds && renderJson.areaIds.includes(params.areaId)) {
+          filteredIds.push(renderId);
+        }
+      }
+    } catch (error2) {
+      console.error(`Error reading render.json for ${renderId}:`, error2);
+    }
+  }
+  return filteredIds;
+};
+var deleteUserCache = async (userId) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-${userId}`);
+    console.log(`Found ${cacheItems.length} cache items for user ${userId}`);
+    await Promise.all(
+      cacheItems.map(async (f) => {
+        if (f.Size > 0) {
+          try {
+            await deleteObject(f.Key);
+            deletedCount++;
+          } catch (deleteError) {
+            console.error(`Error deleting object ${f.Key}:`, deleteError);
+          }
+        }
+      })
+    );
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
+};
+var deleteAreaCache = async (areaId) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `a_${areaId}`);
+    console.log(`Found ${cacheItems.length} cache items for area ${areaId}`);
+    await Promise.all(
+      cacheItems.map(async (f) => {
+        if (f.Size > 0) {
+          try {
+            await deleteObject(f.Key);
+            deletedCount++;
+          } catch (deleteError) {
+            console.error(`Error deleting object ${f.Key}:`, deleteError);
+          }
+        }
+      })
+    );
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
+};
+var deleteListingCache = async (mlsNumber) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `mnum_${mlsNumber}`);
+    console.log(`Found ${cacheItems.length} cache items for listing ${mlsNumber}`);
+    await Promise.all(
+      cacheItems.map(async (f) => {
+        if (f.Size > 0) {
+          try {
+            await deleteObject(f.Key);
+            deletedCount++;
+          } catch (deleteError) {
+            console.error(`Error deleting object ${f.Key}:`, deleteError);
+          }
+        }
+      })
+    );
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
+};
+var getPropertyCaption = (id, custom = null) => {
+  if (custom)
+    return custom;
+  switch (id) {
+    case 3:
+      return "Condos";
+    default:
+      return "Homes";
+  }
 };
 
 // src/genieAI.js
@@ -10069,7 +10167,7 @@ var api = async (event) => {
                     { "Genie-Delete": true },
                     JSON_MIME
                   );
-                  await deleteObject(sourceKey);
+                  await deleteObject2(sourceKey);
                 }
               }
               break;
@@ -10187,14 +10285,14 @@ var api = async (event) => {
                   }
                   return { userAssets: userAssets2, filesToDelete: filesToDelete2 };
                 };
-                const renderJsonFiles = await searchS3ByPrefix("_processing", "render.json");
+                const renderJsonFiles = await searchS3ByPrefix2("_processing", "render.json");
                 console.log(`Found ${renderJsonFiles.length} render.json files`);
                 const { userAssets, filesToDelete } = await processRenderBatch(renderJsonFiles);
                 console.log(`Found ${filesToDelete.length} files to delete for user ${userId}`);
                 let deletedCount = 0;
                 for (const fileKey of filesToDelete) {
                   try {
-                    await deleteObject(fileKey);
+                    await deleteObject2(fileKey);
                     deletedCount++;
                   } catch (deleteError) {
                     console.error(`Error deleting ${fileKey}:`, deleteError);
@@ -10255,7 +10353,7 @@ var api = async (event) => {
                   }
                   return userAssets2;
                 };
-                const renderJsonFiles = await searchS3ByPrefix("_processing", "render.json");
+                const renderJsonFiles = await searchS3ByPrefix2("_processing", "render.json");
                 console.log(`Found ${renderJsonFiles.length} render.json files`);
                 const userAssets = await processRenderBatch(renderJsonFiles);
                 const result2 = Object.entries(userAssets).map(([userId, data]) => ({
@@ -10427,91 +10525,6 @@ var api = async (event) => {
     }
   }
   return response2;
-};
-var filterRenderIds = async (renderIds, params) => {
-  const filteredIds = [];
-  for (const renderId of renderIds) {
-    const renderJsonKey = `_processing/${renderId}/render.json`;
-    try {
-      const renderJson = await jsonFromS3(renderJsonKey);
-      if (renderJson) {
-        if (params.mlsNumber && renderJson.mlsNumber === params.mlsNumber) {
-          filteredIds.push(renderId);
-        } else if (params.areaId && renderJson.areaIds && renderJson.areaIds.includes(params.areaId)) {
-          filteredIds.push(renderId);
-        }
-      }
-    } catch (error2) {
-      console.error(`Error reading render.json for ${renderId}:`, error2);
-    }
-  }
-  return filteredIds;
-};
-var deleteUserCache = async (userId) => {
-  let deletedCount = 0;
-  try {
-    const cacheItems = await searchS3ByPrefix(`_cache/genie-${userId}`);
-    console.log(`Found ${cacheItems.length} cache items for user ${userId}`);
-    await Promise.all(
-      cacheItems.map(async (f) => {
-        if (f.Size > 0) {
-          try {
-            await deleteObject(f.Key);
-            deletedCount++;
-          } catch (deleteError) {
-            console.error(`Error deleting object ${f.Key}:`, deleteError);
-          }
-        }
-      })
-    );
-  } catch (cacheError) {
-    console.error("Error processing cache deletions:", cacheError);
-  }
-  return deletedCount;
-};
-var deleteAreaCache = async (areaId) => {
-  let deletedCount = 0;
-  try {
-    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `a_${areaId}`);
-    console.log(`Found ${cacheItems.length} cache items for area ${areaId}`);
-    await Promise.all(
-      cacheItems.map(async (f) => {
-        if (f.Size > 0) {
-          try {
-            await deleteObject(f.Key);
-            deletedCount++;
-          } catch (deleteError) {
-            console.error(`Error deleting object ${f.Key}:`, deleteError);
-          }
-        }
-      })
-    );
-  } catch (cacheError) {
-    console.error("Error processing cache deletions:", cacheError);
-  }
-  return deletedCount;
-};
-var deleteListingCache = async (mlsNumber) => {
-  let deletedCount = 0;
-  try {
-    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `mnum_${mlsNumber}`);
-    console.log(`Found ${cacheItems.length} cache items for listing ${mlsNumber}`);
-    await Promise.all(
-      cacheItems.map(async (f) => {
-        if (f.Size > 0) {
-          try {
-            await deleteObject(f.Key);
-            deletedCount++;
-          } catch (deleteError) {
-            console.error(`Error deleting object ${f.Key}:`, deleteError);
-          }
-        }
-      })
-    );
-  } catch (cacheError) {
-    console.error("Error processing cache deletions:", cacheError);
-  }
-  return deletedCount;
 };
 var renderKeyParams = async (params) => {
   let listing, areaId = params.area?.areaId ?? params.areaId, propertyType = 0, listingStatus = "";
@@ -10733,16 +10746,6 @@ var prepareAsset = async (asset, params) => {
         );
       })
     );
-  }
-};
-var getPropertyCaption = (id, custom = null) => {
-  if (custom)
-    return custom;
-  switch (id) {
-    case 3:
-      return "Condos";
-    default:
-      return "Homes";
   }
 };
 var reRender = async (renderId, params = null) => {
