@@ -376,7 +376,7 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for confirming, you're all set!",
         ctaVerifyButtonText: "Confirm",
         ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
-        delay: 15,
+        delay: 10,
         scrollUpPercentage: 15,
         scrollDownPercentage: 60,
         enabled: true
@@ -403,7 +403,7 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for updating, you're all set!",
         ctaVerifyButtonText: "Verify",
         ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
-        delay: 15,
+        delay: 10,
         scrollUpPercentage: 15,
         scrollDownPercentage: 60,
         enabled: true
@@ -430,7 +430,7 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for confirming, you're all set!",
         ctaVerifyButtonText: "Confirm",
         ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
-        delay: 15,
+        delay: 10,
         scrollUpPercentage: 15,
         scrollDownPercentage: 60,
         enabled: true
@@ -457,7 +457,7 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for updating, you're all set!",
         ctaVerifyButtonText: "Verify",
         ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
-        delay: 15,
+        delay: 10,
         scrollUpPercentage: 15,
         scrollDownPercentage: 60,
         enabled: true
