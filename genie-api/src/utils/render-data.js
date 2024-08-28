@@ -1235,6 +1235,10 @@ export const preCallGenieAPIs = async params => {
             );
         }
 
+        if (params.userId){
+            await getUser(params.userId);
+        }
+
         if (Array.isArray(params?.areaIds)) {
             await Promise.all(
                 params.areaIds.map(async areaId => {

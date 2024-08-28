@@ -11,7 +11,11 @@ const { toXML } = pkg;
 // prettier-ignore
 import { propertySurroundingAreas, getAreaBoundary, getUser, impersonater, getListing, areaName } from "./genieAI.js";
 // prettier-ignore
-import { userSetting, embedsAPI, cloudHubAPI, getRenderJSON, getCollection, setRenderDefaults, genieGlobals, queueMsg, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset, preCallGenieAPIs } from "./utils/index.js";
+import { 
+        userSetting, embedsAPI, cloudHubAPI, getRenderJSON, getCollection, setRenderDefaults, 
+        genieGlobals, queueMsg, generateQR, areaFromMlsNumber, getDimensions, assetSetting, 
+        getAsset, preCallGenieAPIs, deleteAreaCache, deleteListingCache, deleteUserCache,
+        filterRenderIds, getPropertyCaption } from "./utils/index.js";
 // prettier-ignore
 import { listS3Folder, searchS3ByPrefix, streamS3Object, readStream, toS3, copyObject, headObject, jsonFromS3, fromS3, BUCKET, deleteObject, buildVersion } from "./utils/index.js";
 
@@ -479,7 +483,6 @@ export const api = async event => {
                                 response.body.error = error.message;
                             }
                             break;
-
 
                         case '/process':
                             if (params) {
@@ -957,102 +960,6 @@ export const api = async event => {
     return response;
 };
 
-// Helper function to filter renderIds based on mlsNumber or areaId
-const filterRenderIds = async (renderIds, params) => {
-    const filteredIds = [];
-    for (const renderId of renderIds) {
-        const renderJsonKey = `_processing/${renderId}/render.json`;
-        try {
-            const renderJson = await jsonFromS3(renderJsonKey);
-            if (renderJson) {
-                if (params.mlsNumber && renderJson.mlsNumber === params.mlsNumber) {
-                    filteredIds.push(renderId);
-                } else if (params.areaId && renderJson.areaIds && renderJson.areaIds.includes(params.areaId)) {
-                    filteredIds.push(renderId);
-                }
-            }
-        } catch (error) {
-            console.error(`Error reading render.json for ${renderId}:`, error);
-        }
-    }
-    return filteredIds;
-};
-
-// Helper function to delete user cache
-const deleteUserCache = async (userId) => {
-    let deletedCount = 0;
-    try {
-        const cacheItems = await searchS3ByPrefix(`_cache/genie-${userId}`);
-        console.log(`Found ${cacheItems.length} cache items for user ${userId}`);
-
-        await Promise.all(
-            cacheItems.map(async f => {
-                if (f.Size > 0) {
-                    try {
-                        await deleteObject(f.Key);
-                        deletedCount++;
-                    } catch (deleteError) {
-                        console.error(`Error deleting object ${f.Key}:`, deleteError);
-                    }
-                }
-            })
-        );
-    } catch (cacheError) {
-        console.error('Error processing cache deletions:', cacheError);
-    }
-    return deletedCount;
-};
-
-// Helper function to delete area cache
-const deleteAreaCache = async (areaId) => {
-    let deletedCount = 0;
-    try {
-        const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `a_${areaId}`);
-        console.log(`Found ${cacheItems.length} cache items for area ${areaId}`);
-
-        await Promise.all(
-            cacheItems.map(async f => {
-                if (f.Size > 0) {
-                    try {
-                        await deleteObject(f.Key);
-                        deletedCount++;
-                    } catch (deleteError) {
-                        console.error(`Error deleting object ${f.Key}:`, deleteError);
-                    }
-                }
-            })
-        );
-    } catch (cacheError) {
-        console.error('Error processing cache deletions:', cacheError);
-    }
-    return deletedCount;
-};
-
-// Helper function to delete area cache
-const deleteListingCache = async (mlsNumber) => {
-    let deletedCount = 0;
-    try {
-        const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `mnum_${mlsNumber}`);
-        console.log(`Found ${cacheItems.length} cache items for listing ${mlsNumber}`);
-
-        await Promise.all(
-            cacheItems.map(async f => {
-                if (f.Size > 0) {
-                    try {
-                        await deleteObject(f.Key);
-                        deletedCount++;
-                    } catch (deleteError) {
-                        console.error(`Error deleting object ${f.Key}:`, deleteError);
-                    }
-                }
-            })
-        );
-    } catch (cacheError) {
-        console.error('Error processing cache deletions:', cacheError);
-    }
-    return deletedCount;
-};
-
 const renderKeyParams = async params => {
     let listing,
         areaId = params.area?.areaId ?? params.areaId,
@@ -1129,10 +1036,6 @@ const processAsset = async params => {
 
 const prepareAsset = async (asset, params) => {
     const settings = await assetSetting(asset, 'all');
-
-    //if ( typeof params.qrDestination !== 'undefined' && params.qrDestination.toString().length > 0 ) {
-    //console.log( 'Ex5', asset, settings.supports.includes( 'AsPDF' ) );
-    //}
 
     if (Object.keys(settings).length > 0) {
         let pages, suffix, dims, size;
@@ -1369,17 +1272,7 @@ const prepareAsset = async (asset, params) => {
     }
 };
 
-const getPropertyCaption = (id, custom = null) => {
-    if (custom) return custom;
 
-    switch (id) {
-        case 3:
-            return 'Condos';
-
-        default:
-            return 'Homes';
-    }
-};
 
 const reRender = async (renderId, params = null) => {
     // Save to the processing folder for onward processing and final render

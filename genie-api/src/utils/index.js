@@ -248,3 +248,111 @@ export const getDimensions = (size = null) => {
 
 	return { width: dims[0], height: dims[1] };
 };
+
+// Helper function to filter renderIds based on mlsNumber or areaId
+export const filterRenderIds = async (renderIds, params) => {
+    const filteredIds = [];
+    for (const renderId of renderIds) {
+        const renderJsonKey = `_processing/${renderId}/render.json`;
+        try {
+            const renderJson = await jsonFromS3(renderJsonKey);
+            if (renderJson) {
+                if (params.mlsNumber && renderJson.mlsNumber === params.mlsNumber) {
+                    filteredIds.push(renderId);
+                } else if (params.areaId && renderJson.areaIds && renderJson.areaIds.includes(params.areaId)) {
+                    filteredIds.push(renderId);
+                }
+            }
+        } catch (error) {
+            console.error(`Error reading render.json for ${renderId}:`, error);
+        }
+    }
+    return filteredIds;
+};
+
+// Helper function to delete user cache
+export const deleteUserCache = async (userId) => {
+    let deletedCount = 0;
+    try {
+        const cacheItems = await searchS3ByPrefix(`_cache/genie-${userId}`);
+        console.log(`Found ${cacheItems.length} cache items for user ${userId}`);
+
+        await Promise.all(
+            cacheItems.map(async f => {
+                if (f.Size > 0) {
+                    try {
+                        await deleteObject(f.Key);
+                        deletedCount++;
+                    } catch (deleteError) {
+                        console.error(`Error deleting object ${f.Key}:`, deleteError);
+                    }
+                }
+            })
+        );
+    } catch (cacheError) {
+        console.error('Error processing cache deletions:', cacheError);
+    }
+    return deletedCount;
+};
+
+// Helper function to delete area cache
+export const deleteAreaCache = async (areaId) => {
+    let deletedCount = 0;
+    try {
+        const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `a_${areaId}`);
+        console.log(`Found ${cacheItems.length} cache items for area ${areaId}`);
+
+        await Promise.all(
+            cacheItems.map(async f => {
+                if (f.Size > 0) {
+                    try {
+                        await deleteObject(f.Key);
+                        deletedCount++;
+                    } catch (deleteError) {
+                        console.error(`Error deleting object ${f.Key}:`, deleteError);
+                    }
+                }
+            })
+        );
+    } catch (cacheError) {
+        console.error('Error processing cache deletions:', cacheError);
+    }
+    return deletedCount;
+};
+
+// Helper function to delete area cache
+export const deleteListingCache = async (mlsNumber) => {
+    let deletedCount = 0;
+    try {
+        const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `mnum_${mlsNumber}`);
+        console.log(`Found ${cacheItems.length} cache items for listing ${mlsNumber}`);
+
+        await Promise.all(
+            cacheItems.map(async f => {
+                if (f.Size > 0) {
+                    try {
+                        await deleteObject(f.Key);
+                        deletedCount++;
+                    } catch (deleteError) {
+                        console.error(`Error deleting object ${f.Key}:`, deleteError);
+                    }
+                }
+            })
+        );
+    } catch (cacheError) {
+        console.error('Error processing cache deletions:', cacheError);
+    }
+    return deletedCount;
+};
+
+export const getPropertyCaption = (id, custom = null) => {
+    if (custom) return custom;
+
+    switch (id) {
+        case 3:
+            return 'Condos';
+
+        default:
+            return 'Homes';
+    }
+};
