@@ -408,7 +408,7 @@ export const getCtaData = (ctaId) => {
         scrollDownPercentage: 60,
         enabled: true
       };
-      case 8:    //CTA GROUP 2 scroll triggers
+      case 8: //CTA GROUP 2 scroll triggers
       return {
         ctaTitle: "Personalized Home Value Estimate",
         ctaSubTitle: "Discover Your Home's True Worth",
