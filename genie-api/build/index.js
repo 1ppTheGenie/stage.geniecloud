@@ -9434,10 +9434,9 @@ var to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) => {
     });
   }
 };
-var roundDateForCacheKey = (dateString, intervalMinutes = 5) => {
+var roundDateForCacheKey = (dateString) => {
   const date = DateTime.fromISO(dateString);
-  const roundedMinutes = Math.floor(date.minute / intervalMinutes) * intervalMinutes;
-  return date.set({ minute: roundedMinutes, second: 0, millisecond: 0 }).toISO();
+  return date.startOf("day").set({ hour: 12 }).toISO();
 };
 var cache_key = (endpoint, params, verb) => {
   let userId, areaId, mlsId, mlsNumber, restParams;

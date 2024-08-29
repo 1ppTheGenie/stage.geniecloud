@@ -57,10 +57,9 @@ const to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) =>
     }
 };
 
-const roundDateForCacheKey = (dateString, intervalMinutes = 5) => {
+const roundDateForCacheKey = (dateString) => {
     const date = DateTime.fromISO(dateString);
-    const roundedMinutes = Math.floor(date.minute / intervalMinutes) * intervalMinutes;
-    return date.set({ minute: roundedMinutes, second: 0, millisecond: 0 }).toISO();
+    return date.startOf('day').set({ hour: 12 }).toISO();
 };
 
 const cache_key = (endpoint, params, verb) => {
