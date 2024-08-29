@@ -1,4 +1,4 @@
-import { fromS3, jsonFromS3, headObject } from "./aws.js";
+import { fromS3, jsonFromS3, headObject, deleteObject, searchS3ByPrefix } from "./aws.js";
 
 export * from "./dates.js";
 export * from "./aws.js";

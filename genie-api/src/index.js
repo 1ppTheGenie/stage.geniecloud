@@ -395,17 +395,17 @@ export const api = async event => {
                                     // Delete user cache if userId is provided
                                     if (params.userId) {
                                         deletedCacheItems = await deleteUserCache(params.userId);
-                                        console.log(`Deleted ${deletedCacheItems} cache items for user ${params.userId}`);
+                                        // console.log(`Deleted ${deletedCacheItems} cache items for user ${params.userId}`);
                                     }
 
                                     if (params.areaId) {
                                         deletedCacheItems = await deleteAreaCache(params.areaId);
-                                        console.log(`Deleted ${deletedCacheItems} cache items for area ${params.areaId}`);
+                                        // console.log(`Deleted ${deletedCacheItems} cache items for area ${params.areaId}`);
                                     }
 
                                     if (params.mlsNumber) {
                                         deletedCacheItems = await deleteListingCache(params.mlsNumber);
-                                        console.log(`Deleted ${deletedCacheItems} cache items for listing ${params.mlsNumber}`);
+                                        // console.log(`Deleted ${deletedCacheItems} cache items for listing ${params.mlsNumber}`);
                                     }
 
                                     let renderIds = [];
@@ -446,7 +446,7 @@ export const api = async event => {
                                         }
                                     }
 
-                                    console.log(`Found ${renderIds.length} renders to process`);
+                                    // console.log(`Found ${renderIds.length} renders to process`);
 
                                     let reRenderedCount = 0;
                                     for (const renderId of renderIds) {
@@ -767,9 +767,9 @@ export const api = async event => {
                         case '/create':
                             try {
                                 // This line will succeed or have a error thrown that will be caught below
-                                console.log('Validating render params');
+                                // console.log('Validating render params');
                                 await validateRenderParams(params);
-                                console.log('Render params validated');
+                                // console.log('Render params validated');
 
                                 // VERY IMPORTANT LINE! Determines the uniqueness of all links
                                 params.renderId = randomUUID();
@@ -990,7 +990,7 @@ const renderKeyParams = async params => {
             }
         }
 
-        propertyType = params.propertyType ?? listing.propertyType;
+        propertyType = params.propertyType === 9 ? 1 : (params.propertyType ?? (listing.propertyType === 9 ? 1 : listing.propertyType));
         listingStatus = params.listingStatus ?? listing.listingStatus ?? '';
     }
 

@@ -7502,7 +7502,7 @@ var copyObject = async (sourceKey, destinationKey, bucket = null, ContentType = 
   };
   return await s3Client.send(new import_client_s3.CopyObjectCommand(args));
 };
-var searchS3ByPrefix2 = async (prefix, contains = null, bucket = null) => {
+var searchS3ByPrefix = async (prefix, contains = null, bucket = null) => {
   try {
     let allMatches = [];
     let isTruncated = true;
@@ -7554,7 +7554,7 @@ var listS3Folder = async (folderPath = "", justContents = true, token = null, bu
     throw err;
   }
 };
-var deleteObject2 = async (Key, Bucket = null) => await s3Client.send(
+var deleteObject = async (Key, Bucket = null) => await s3Client.send(
   new import_client_s3.DeleteObjectCommand({
     Bucket: Bucket || BUCKET,
     Key
@@ -7885,6 +7885,7 @@ var setRenderDefaults = async (params) => {
       }
     }
   }
+  params.propertyType = params.propertyType === 9 ? 1 : params.propertyType;
   if (params.areaId && !params.areaIds) {
     params.areaIds = [params.areaId];
   }
@@ -8101,14 +8102,14 @@ var processAreas = async (params) => {
                   lon: p.longitude ?? 0,
                   state,
                   address: singleAddress(p),
-                  beds: p.bedrooms ?? "N/A",
-                  baths: p.bathroomsTotal ?? "N/A",
-                  size: p.sqft ?? "N/A",
-                  listPrice: p.priceHigh ?? "N/A",
+                  beds: p.bedrooms ?? null,
+                  baths: p.bathroomsTotal ?? null,
+                  size: p.sqft ?? null,
+                  listPrice: p.priceLow ?? null,
                   salePrice: p.salePrice ?? null,
                   listedDate: p.listDate ? DateTime.fromISO(p.listDate).toSeconds() : null,
                   soldDate: p.soldDate ? DateTime.fromISO(p.soldDate).toSeconds() : null,
-                  dom: p.daysOnMarket ?? "N/A",
+                  dom: p.daysOnMarket ?? null,
                   thumb: p.photoPrimaryUrl ?? "",
                   isAgent: agentListings.includes(
                     p.mlsNumber?.toLowerCase() ?? ""
@@ -8126,16 +8127,16 @@ var processAreas = async (params) => {
             {
               _name: "previous",
               _attrs: {
-                totalSold: prevData?.sold ?? "N/A",
-                turnOver: prevData?.turnOver ?? "N/A",
-                avgPricePerSqFtSold: prevData?.avgPricePerSqFt ?? "N/A",
-                avgPricePerSqFtList: prevData?.avgSoldListingsListPricePerSqFt ?? "N/A",
-                averageListPriceForSold: prevData?.avgListPriceForSold ?? "N/A",
-                averageSalePrice: prevData?.avgSalePrice ?? "N/A",
-                averageDaysOnMarket: prevData?.avgDaysOnMarket ?? "N/A",
-                medianSalePrice: prevData?.medSalePrice ?? "N/A",
-                maxSalePrice: prevData?.maxSale?.salePrice ?? "N/A",
-                minSalePrice: prevData?.minSale?.salePrice ?? "N/A"
+                totalSold: prevData?.sold ?? 0,
+                turnOver: prevData?.turnOver ?? 0,
+                avgPricePerSqFtSold: prevData?.avgPricePerSqFt ?? 0,
+                avgPricePerSqFtList: prevData?.avgSoldListingsListPricePerSqFt ?? 0,
+                averageListPriceForSold: prevData?.avgListPriceForSold ?? 0,
+                averageSalePrice: prevData?.avgSalePrice ?? 0,
+                averageDaysOnMarket: prevData?.avgDaysOnMarket ?? 0,
+                medianSalePrice: prevData?.medSalePrice ?? 0,
+                maxSalePrice: prevData?.maxSale?.salePrice ?? 0,
+                minSalePrice: prevData?.minSale?.salePrice ?? 0
               }
             }
           ];
@@ -8144,13 +8145,13 @@ var processAreas = async (params) => {
             byBedroom._content.push({
               _name: "bedroom",
               _attrs: {
-                number: stat.beds ?? "N/A",
-                sold: stat.sold ?? "N/A",
-                active: stat.active ?? "N/A",
-                pending: stat.pending ?? "N/A",
-                averageSalePrice: stat.avgSalePrice ?? "N/A",
-                averageListPrice: stat.avgListPrice ?? "N/A",
-                averageListPriceForSold: stat.avgListPriceForSold ?? "N/A"
+                number: stat.beds ?? null,
+                sold: stat.sold ?? 0,
+                active: stat.active ?? 0,
+                pending: stat.pending ?? 0,
+                averageSalePrice: stat.avgSalePrice ?? 0,
+                averageListPrice: stat.avgListPrice ?? 0,
+                averageListPriceForSold: stat.avgListPriceForSold ?? 0
               }
             });
           });
@@ -8160,14 +8161,14 @@ var processAreas = async (params) => {
             bySize._content.push({
               _name: "size",
               _attrs: {
-                min: stat.min ?? "N/A",
-                max: stat.max ?? "N/A",
-                sold: stat.sold ?? "N/A",
-                active: stat.active ?? "N/A",
-                pending: stat.pending ?? "N/A",
-                averageSalePrice: stat.avgSalePrice ?? "N/A",
-                averageListPrice: stat.avgListPrice ?? "N/A",
-                averageListPriceForSold: stat.avgListPriceForSold ?? "N/A"
+                min: stat.min ?? 0,
+                max: stat.max ?? 0,
+                sold: stat.sold ?? 0,
+                active: stat.active ?? 0,
+                pending: stat.pending ?? 0,
+                averageSalePrice: stat.avgSalePrice ?? 0,
+                averageListPrice: stat.avgListPrice ?? 0,
+                averageListPriceForSold: stat.avgListPriceForSold ?? 0
               }
             });
           });
@@ -8190,11 +8191,11 @@ var processAreas = async (params) => {
                       month: m.monthPart,
                       day: 1
                     }).toFormat("LLL yyyy") : "Unknown",
-                    totalSold: m.soldCount ?? "N/A",
-                    averageListPrice: m.averageListPrice ?? "N/A",
-                    averageSalePrice: m.averageSalePrice ?? "N/A",
-                    averageDaysOnMarket: m.averageDaysOnMarket ?? "N/A",
-                    averagePricePerSqFt: m.averagePricePerSqFt ?? "N/A"
+                    totalSold: m.soldCount ?? 0,
+                    averageListPrice: m.averageListPrice ?? 0,
+                    averageSalePrice: m.averageSalePrice ?? 0,
+                    averageDaysOnMarket: m.averageDaysOnMarket ?? 0,
+                    averagePricePerSqFt: m.averagePricePerSqFt ?? 0
                   }
                 });
               }
@@ -8206,22 +8207,22 @@ var processAreas = async (params) => {
             _attrs: {
               lookbackMonths: params.datePeriod,
               propertyType: params.propertyType,
-              averageDaysOnMarket: propertyTypeData?.avgDOM ?? "N/A",
-              averageListPrice: propertyTypeData?.avgListPrice ?? "N/A",
-              averageSalePrice: propertyTypeData?.avgSalePrice ?? "N/A",
-              medianSalePrice: propertyTypeData?.medSalePrice ?? "N/A",
-              activePropertyTypeCount: propertyTypeData?.active ?? "N/A",
-              averageListPriceForSold: propertyTypeData?.avgListPriceForSold ?? "N/A",
-              avgPricePerSqFtSold: propertyTypeData?.avgPricePerSqFt ?? "N/A",
-              avgPricePerSqFtList: propertyTypeData?.avgSoldListingsListPricePerSqFt ?? "N/A",
-              soldPropertyTypeCount: propertyTypeData?.sold ?? "N/A",
-              taxrollCount: propertyTypeData?.taxroll ?? "N/A",
-              turnOver: propertyTypeData?.turnOver ?? "N/A",
-              maxSalePrice: propertyTypeData?.maxSale?.salePrice ?? "N/A",
-              minSalePrice: propertyTypeData?.minSale?.salePrice ?? "N/A",
-              marketTotalSoldVolume: propertyTypeData?.marketTotalSoldVolume ?? "N/A",
-              averageYearsInHome: propertyTypeData?.avgYearsInHome ?? "N/A",
-              ownerOccupancy: propertyTypeData?.ownerOccupancy ?? "N/A"
+              averageDaysOnMarket: propertyTypeData?.avgDOM ?? 0,
+              averageListPrice: propertyTypeData?.avgListPrice ?? 0,
+              averageSalePrice: propertyTypeData?.avgSalePrice ?? 0,
+              medianSalePrice: propertyTypeData?.medSalePrice ?? 0,
+              activePropertyTypeCount: propertyTypeData?.active ?? 0,
+              averageListPriceForSold: propertyTypeData?.avgListPriceForSold ?? 0,
+              avgPricePerSqFtSold: propertyTypeData?.avgPricePerSqFt ?? 0,
+              avgPricePerSqFtList: propertyTypeData?.avgSoldListingsListPricePerSqFt ?? 0,
+              soldPropertyTypeCount: propertyTypeData?.sold ?? 0,
+              taxrollCount: propertyTypeData?.taxroll ?? 0,
+              turnOver: propertyTypeData?.turnOver ?? 0,
+              maxSalePrice: propertyTypeData?.maxSale?.salePrice ?? 0,
+              minSalePrice: propertyTypeData?.minSale?.salePrice ?? 0,
+              marketTotalSoldVolume: propertyTypeData?.marketTotalSoldVolume ?? 0,
+              averageYearsInHome: propertyTypeData?.avgYearsInHome ?? 0,
+              ownerOccupancy: propertyTypeData?.ownerOccupancy ?? null
             },
             _content: statistics
           });
@@ -8362,7 +8363,7 @@ var processListing = async (params, agentTimezone) => {
     }
     single.push({
       _name: "bedrooms",
-      _attrs: { count: listing?.bedrooms || "n/a" }
+      _attrs: { count: listing?.bedrooms ?? null }
     });
     single.push({
       _name: "bathrooms",
@@ -10077,15 +10078,12 @@ var api = async (event) => {
                 } else if (params.userId || params.mlsNumber || params.areaId) {
                   if (params.userId) {
                     deletedCacheItems = await deleteUserCache(params.userId);
-                    console.log(`Deleted ${deletedCacheItems} cache items for user ${params.userId}`);
                   }
                   if (params.areaId) {
                     deletedCacheItems = await deleteAreaCache(params.areaId);
-                    console.log(`Deleted ${deletedCacheItems} cache items for area ${params.areaId}`);
                   }
                   if (params.mlsNumber) {
                     deletedCacheItems = await deleteListingCache(params.mlsNumber);
-                    console.log(`Deleted ${deletedCacheItems} cache items for listing ${params.mlsNumber}`);
                   }
                   let renderIds = [];
                   if (params.userId) {
@@ -10118,7 +10116,6 @@ var api = async (event) => {
                       console.log(`No render IDs found for areaId ${params.areaId}`);
                     }
                   }
-                  console.log(`Found ${renderIds.length} renders to process`);
                   let reRenderedCount = 0;
                   for (const renderId of renderIds) {
                     try {
@@ -10167,7 +10164,7 @@ var api = async (event) => {
                     { "Genie-Delete": true },
                     JSON_MIME
                   );
-                  await deleteObject2(sourceKey);
+                  await deleteObject(sourceKey);
                 }
               }
               break;
@@ -10285,14 +10282,14 @@ var api = async (event) => {
                   }
                   return { userAssets: userAssets2, filesToDelete: filesToDelete2 };
                 };
-                const renderJsonFiles = await searchS3ByPrefix2("_processing", "render.json");
+                const renderJsonFiles = await searchS3ByPrefix("_processing", "render.json");
                 console.log(`Found ${renderJsonFiles.length} render.json files`);
                 const { userAssets, filesToDelete } = await processRenderBatch(renderJsonFiles);
                 console.log(`Found ${filesToDelete.length} files to delete for user ${userId}`);
                 let deletedCount = 0;
                 for (const fileKey of filesToDelete) {
                   try {
-                    await deleteObject2(fileKey);
+                    await deleteObject(fileKey);
                     deletedCount++;
                   } catch (deleteError) {
                     console.error(`Error deleting ${fileKey}:`, deleteError);
@@ -10353,7 +10350,7 @@ var api = async (event) => {
                   }
                   return userAssets2;
                 };
-                const renderJsonFiles = await searchS3ByPrefix2("_processing", "render.json");
+                const renderJsonFiles = await searchS3ByPrefix("_processing", "render.json");
                 console.log(`Found ${renderJsonFiles.length} render.json files`);
                 const userAssets = await processRenderBatch(renderJsonFiles);
                 const result2 = Object.entries(userAssets).map(([userId, data]) => ({
@@ -10377,9 +10374,7 @@ var api = async (event) => {
               break;
             case "/create":
               try {
-                console.log("Validating render params");
                 await validateRenderParams(params);
-                console.log("Render params validated");
                 params.renderId = (0, import_crypto2.randomUUID)();
                 params.theme = params.theme ?? await userSetting(
                   params.userId,
@@ -10549,7 +10544,7 @@ var renderKeyParams = async (params) => {
         areaId = area2.areaId;
       }
     }
-    propertyType = params.propertyType ?? listing.propertyType;
+    propertyType = params.propertyType === 9 ? 1 : params.propertyType ?? (listing.propertyType === 9 ? 1 : listing.propertyType);
     listingStatus = params.listingStatus ?? listing.listingStatus ?? "";
   }
   const area = await areaName(params.userId, areaId);

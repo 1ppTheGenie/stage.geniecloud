@@ -332,6 +332,8 @@ export const setRenderDefaults = async params => {
         }
     }
 
+    params.propertyType = params.propertyType === 9 ? 1 : params.propertyType;
+
     // ** AREA(s)
     if (params.areaId && !params.areaIds) {
         params.areaIds = [params.areaId];
@@ -600,10 +602,10 @@ const processAreas = async params => {
                                     lon: p.longitude ?? 0,
                                     state: state,
                                     address: singleAddress(p),
-                                    beds: p.bedrooms ?? 'N/A',
-                                    baths: p.bathroomsTotal ?? 'N/A',
-                                    size: p.sqft ?? 'N/A',
-                                    listPrice: p.priceHigh ?? 'N/A',
+                                    beds: p.bedrooms ?? null,
+                                    baths: p.bathroomsTotal ?? null,
+                                    size: p.sqft ?? null,
+                                    listPrice: p.priceLow ?? null,
                                     salePrice: p.salePrice ?? null,
                                     listedDate: p.listDate
                                         ? DateTime.fromISO(p.listDate).toSeconds()
@@ -611,7 +613,7 @@ const processAreas = async params => {
                                     soldDate: p.soldDate
                                         ? DateTime.fromISO(p.soldDate).toSeconds()
                                         : null,
-                                    dom: p.daysOnMarket ?? 'N/A',
+                                    dom: p.daysOnMarket ?? null,
                                     thumb: p.photoPrimaryUrl ?? '',
                                     isAgent: agentListings.includes(
                                         p.mlsNumber?.toLowerCase() ?? ''
@@ -636,18 +638,18 @@ const processAreas = async params => {
                         {
                             _name: 'previous',
                             _attrs: {
-                                totalSold: prevData?.sold ?? 'N/A',
-                                turnOver: prevData?.turnOver ?? 'N/A',
-                                avgPricePerSqFtSold: prevData?.avgPricePerSqFt ?? 'N/A',
+                                totalSold: prevData?.sold ?? 0,
+                                turnOver: prevData?.turnOver ?? 0,
+                                avgPricePerSqFtSold: prevData?.avgPricePerSqFt ?? 0,
                                 avgPricePerSqFtList:
-                                    prevData?.avgSoldListingsListPricePerSqFt ?? 'N/A',
+                                    prevData?.avgSoldListingsListPricePerSqFt ?? 0,
                                 averageListPriceForSold:
-                                    prevData?.avgListPriceForSold ?? 'N/A',
-                                averageSalePrice: prevData?.avgSalePrice ?? 'N/A',
-                                averageDaysOnMarket: prevData?.avgDaysOnMarket ?? 'N/A',
-                                medianSalePrice: prevData?.medSalePrice ?? 'N/A',
-                                maxSalePrice: prevData?.maxSale?.salePrice ?? 'N/A',
-                                minSalePrice: prevData?.minSale?.salePrice ?? 'N/A'
+                                    prevData?.avgListPriceForSold ?? 0,
+                                averageSalePrice: prevData?.avgSalePrice ?? 0,
+                                averageDaysOnMarket: prevData?.avgDaysOnMarket ?? 0,
+                                medianSalePrice: prevData?.medSalePrice ?? 0,
+                                maxSalePrice: prevData?.maxSale?.salePrice ?? 0,
+                                minSalePrice: prevData?.minSale?.salePrice ?? 0
                             }
                         }
                     ];
@@ -658,14 +660,14 @@ const processAreas = async params => {
                         byBedroom._content.push({
                             _name: 'bedroom',
                             _attrs: {
-                                number: stat.beds ?? 'N/A',
-                                sold: stat.sold ?? 'N/A',
-                                active: stat.active ?? 'N/A',
-                                pending: stat.pending ?? 'N/A',
-                                averageSalePrice: stat.avgSalePrice ?? 'N/A',
-                                averageListPrice: stat.avgListPrice ?? 'N/A',
+                                number: stat.beds ?? null,
+                                sold: stat.sold ?? 0,
+                                active: stat.active ?? 0,
+                                pending: stat.pending ?? 0,
+                                averageSalePrice: stat.avgSalePrice ?? 0,
+                                averageListPrice: stat.avgListPrice ?? 0,
                                 averageListPriceForSold:
-                                    stat.avgListPriceForSold ?? 'N/A'
+                                    stat.avgListPriceForSold ?? 0
                             }
                         });
                     });
@@ -677,15 +679,15 @@ const processAreas = async params => {
                         bySize._content.push({
                             _name: 'size',
                             _attrs: {
-                                min: stat.min ?? 'N/A',
-                                max: stat.max ?? 'N/A',
-                                sold: stat.sold ?? 'N/A',
-                                active: stat.active ?? 'N/A',
-                                pending: stat.pending ?? 'N/A',
-                                averageSalePrice: stat.avgSalePrice ?? 'N/A',
-                                averageListPrice: stat.avgListPrice ?? 'N/A',
+                                min: stat.min ?? 0,
+                                max: stat.max ?? 0,
+                                sold: stat.sold ?? 0,
+                                active: stat.active ?? 0,
+                                pending: stat.pending ?? 0,
+                                averageSalePrice: stat.avgSalePrice ?? 0,
+                                averageListPrice: stat.avgListPrice ?? 0,
                                 averageListPriceForSold:
-                                    stat.avgListPriceForSold ?? 'N/A'
+                                    stat.avgListPriceForSold ?? 0
                             }
                         });
                     });
@@ -715,15 +717,15 @@ const processAreas = async params => {
                                                     day: 1
                                                 }).toFormat('LLL yyyy')
                                                 : 'Unknown',
-                                            totalSold: m.soldCount ?? 'N/A',
+                                            totalSold: m.soldCount ?? 0,
                                             averageListPrice:
-                                                m.averageListPrice ?? 'N/A',
+                                                m.averageListPrice ?? 0,
                                             averageSalePrice:
-                                                m.averageSalePrice ?? 'N/A',
+                                                m.averageSalePrice ?? 0,
                                             averageDaysOnMarket:
-                                                m.averageDaysOnMarket ?? 'N/A',
+                                                m.averageDaysOnMarket ?? 0,
                                             averagePricePerSqFt:
-                                                m.averagePricePerSqFt ?? 'N/A'
+                                                m.averagePricePerSqFt ?? 0
                                         }
                                     });
                                 }
@@ -737,35 +739,35 @@ const processAreas = async params => {
                         _attrs: {
                             lookbackMonths: params.datePeriod,
                             propertyType: params.propertyType,
-                            averageDaysOnMarket: propertyTypeData?.avgDOM ?? 'N/A',
+                            averageDaysOnMarket: propertyTypeData?.avgDOM ?? 0,
                             averageListPrice:
-                                propertyTypeData?.avgListPrice ?? 'N/A',
+                                propertyTypeData?.avgListPrice ?? 0,
                             averageSalePrice:
-                                propertyTypeData?.avgSalePrice ?? 'N/A',
+                                propertyTypeData?.avgSalePrice ?? 0,
                             medianSalePrice:
-                                propertyTypeData?.medSalePrice ?? 'N/A',
+                                propertyTypeData?.medSalePrice ?? 0,
                             activePropertyTypeCount:
-                                propertyTypeData?.active ?? 'N/A',
+                                propertyTypeData?.active ?? 0,
                             averageListPriceForSold:
-                                propertyTypeData?.avgListPriceForSold ?? 'N/A',
+                                propertyTypeData?.avgListPriceForSold ?? 0,
                             avgPricePerSqFtSold:
-                                propertyTypeData?.avgPricePerSqFt ?? 'N/A',
+                                propertyTypeData?.avgPricePerSqFt ?? 0,
                             avgPricePerSqFtList:
                                 propertyTypeData?.avgSoldListingsListPricePerSqFt ??
-                                'N/A',
-                            soldPropertyTypeCount: propertyTypeData?.sold ?? 'N/A',
-                            taxrollCount: propertyTypeData?.taxroll ?? 'N/A',
-                            turnOver: propertyTypeData?.turnOver ?? 'N/A',
+                                0,
+                            soldPropertyTypeCount: propertyTypeData?.sold ?? 0,
+                            taxrollCount: propertyTypeData?.taxroll ?? 0,
+                            turnOver: propertyTypeData?.turnOver ?? 0,
                             maxSalePrice:
-                                propertyTypeData?.maxSale?.salePrice ?? 'N/A',
+                                propertyTypeData?.maxSale?.salePrice ?? 0,
                             minSalePrice:
-                                propertyTypeData?.minSale?.salePrice ?? 'N/A',
+                                propertyTypeData?.minSale?.salePrice ?? 0,
                             marketTotalSoldVolume:
-                                propertyTypeData?.marketTotalSoldVolume ?? 'N/A',
+                                propertyTypeData?.marketTotalSoldVolume ?? 0,
                             averageYearsInHome:
-                                propertyTypeData?.avgYearsInHome ?? 'N/A',
+                                propertyTypeData?.avgYearsInHome ?? 0,
                             ownerOccupancy:
-                                propertyTypeData?.ownerOccupancy ?? 'N/A'
+                                propertyTypeData?.ownerOccupancy ?? null
                         },
                         _content: statistics
                     });
@@ -944,7 +946,7 @@ const processListing = async (params, agentTimezone) => {
 
         single.push({
             _name: 'bedrooms',
-            _attrs: { count: listing?.bedrooms || 'n/a' }
+            _attrs: { count: listing?.bedrooms ?? null }
         });
         single.push({
             _name: 'bathrooms',
