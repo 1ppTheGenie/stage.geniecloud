@@ -111,7 +111,22 @@
 					"name": "Market Insider Download - Style 7"
 				}
 			]
+		},
+		{
+			"sort": 4,
+			"name": "Deliverables 4",
+			"meta": {
+				"caption": "Leave a Lasting Impression",
+				"description": "When your audience engages, they are given a PDF Market Insider report rich in valuable neighborhood insights positioning you as the expert!"
+			},
+			"assets": [
+				{
+					"sort": 1,
+					"asset": "area-insider-reports/market-insider",
+					"name": "Market Insider Report"
+				}
+			]
 		}
 	],
-	"version": 4
+	"version": 3
 }

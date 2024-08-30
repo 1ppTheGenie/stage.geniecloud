@@ -595,7 +595,7 @@ const call_api = async ( endpoint, params, skipCache = false, verb = "POST", pre
 	if ( !skipCache ) {
 		result = await from_cache( cacheKey, endpoint );
         if (result) {
-            console.log('Cache Hit', cacheKey);
+            console.log('Cache Hit', cacheKey, endpoint, params, skipCache, pre_cache);
         }
 	}
 	
