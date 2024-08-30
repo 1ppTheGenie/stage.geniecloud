@@ -453,7 +453,7 @@ export const api = async event => {
                                         try {
                                             await reRender(renderId, {
                                                 ...params,
-                                                skipCache: true
+                                                skipCache: false
                                             });
 
                                             await toS3(

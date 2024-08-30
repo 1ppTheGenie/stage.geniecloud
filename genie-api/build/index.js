@@ -9470,7 +9470,7 @@ var cache_key = (endpoint, params, verb) => {
   const hash = import_crypto.default.createHash("md5").update(`${endpoint}.${verb}.${strParams}`).digest("hex");
   return `genie-${prefix}${hash}.json`;
 };
-var areaName = async (userId, areaId, skipCache = false) => await call_api("GetAreaName", { areaId, userId }, skipCache);
+var areaName = async (userId, areaId, skipCache = true) => await call_api("GetAreaName", { areaId, userId }, skipCache);
 var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache = false) => {
   month_count = month_count ?? 12;
   return await call_api(
@@ -9626,10 +9626,11 @@ var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, prop
   );
   return r.success && r.areas;
 };
-var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = false) => {
+var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = false, skipCache = false) => {
   const r = await call_api(
     "GetShortUrlData",
     { shortUrlDataId, token },
+    skipCache,
     "POST"
   );
   if (r.data) {
@@ -9662,9 +9663,10 @@ var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate 
     return r.data;
   }
 };
-var getUser = async (userId) => await call_api(
+var getUser = async (userId, skipCache = false) => await call_api(
   "HubCloudGetUser",
   { userId },
+  skipCache,
   "POST"
 );
 var getPropertyFromId = async (property_id, agent_id) => {
@@ -9679,15 +9681,15 @@ var getPropertyFromId = async (property_id, agent_id) => {
     return r.property;
   }
 };
-var createLead = async (userId, args) => {
+var createLead = async (userId, args, skipCache = true) => {
   args.userId = userId;
-  const r = await call_api("CreateNewLead", args, "POST");
+  const r = await call_api("CreateNewLead", args, skipCache, "POST");
   if (!r) {
     console.log("Failed to create new lead: ", r);
   }
   return r;
 };
-var updateLead = async (userId, args) => await call_api("UpdateLead", { ...args, userId }, "POST");
+var updateLead = async (userId, args, skipCache = true) => await call_api("UpdateLead", { ...args, userId }, skipCache, "POST");
 var getQRProperty = async (qrID, token) => {
   const lead = await getQRCodeLead(qrID, token);
   if (lead.property) {
@@ -9713,8 +9715,8 @@ var getQRProperty = async (qrID, token) => {
     return property;
   }
 };
-var createQRCodeLead = async (args) => {
-  const r = await call_api("CreateQRCodeLead", args, true, "POST");
+var createQRCodeLead = async (args, skipCache = true) => {
+  const r = await call_api("CreateQRCodeLead", args, skipCache, "POST");
   if (!r.success) {
     console.log("Failed to capture lead: ", r);
   }
@@ -9735,8 +9737,12 @@ var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_ca
   let result;
   if (!skipCache) {
     result = await from_cache(cacheKey, endpoint);
+    if (result) {
+      console.log("Cache Hit", cacheKey);
+    }
   }
   if (!result) {
+    console.log("Cache Miss", cacheKey, endpoint, params, skipCache, pre_cache);
     params.consumer = 8;
     result = await fetch(API_URL + endpoint, {
       method: verb,
@@ -10120,7 +10126,7 @@ var api = async (event) => {
                     try {
                       await reRender(renderId, {
                         ...params,
-                        skipCache: true
+                        skipCache: false
                       });
                       await toS3(
                         `_lookup/re-render/${renderId}`,
