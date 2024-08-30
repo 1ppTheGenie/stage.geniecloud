@@ -278,7 +278,7 @@ export const fromDirectoryBucket = async (key, since = null) => {
         const buffer = await Body.transformToByteArray();
         return Buffer.from(buffer);
     } catch (err) {
-        console.log('Error retrieving from Directory Bucket:', err);
+        //console.log('Error retrieving from Directory Bucket:', err);
         return null;
     }
 };

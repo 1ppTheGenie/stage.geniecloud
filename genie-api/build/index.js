@@ -7462,7 +7462,7 @@ var import_client_cloudfront = require("@aws-sdk/client-cloudfront");
 var import_client_sqs = require("@aws-sdk/client-sqs");
 var import_stream = require("stream");
 var BUCKET = process.env.BUCKET ?? "genie-hub-2";
-var CACHEBUCKET = process.env.CACHEBUCKET ?? "genie-hub-cache";
+var CACHEBUCKET = process.env.CACHEBUCKET ?? "genie-cache--usw2-az1--x-s3";
 var REGION = process.env.REGION ?? "eu-west-2";
 var CACHEBUCKETREGION = process.env.CACHEBUCKETREGION ?? "us-west-2";
 var SQS_QUEUE = process.env.SQS_QUEUE ?? "https://sqs.eu-west-2.amazonaws.com/584678469437/genie-cloud";
@@ -7639,7 +7639,6 @@ var fromDirectoryBucket = async (key, since = null) => {
     const buffer = await Body.transformToByteArray();
     return Buffer.from(buffer);
   } catch (err) {
-    console.log("Error retrieving from Directory Bucket:", err);
     return null;
   }
 };
