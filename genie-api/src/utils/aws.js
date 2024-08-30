@@ -8,7 +8,9 @@ import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
 import { Readable } from 'stream';
 
 export const BUCKET = process.env.BUCKET ?? 'genie-hub-2';
+export const CACHEBUCKET = process.env.CACHEBUCKET ?? 'genie-cache--usw2-az1--x-s3';
 const REGION = process.env.REGION ?? 'eu-west-2';
+const CACHEBUCKETREGION = process.env.CACHEBUCKETREGION ?? 'us-west-2';
 
 const SQS_QUEUE =
     process.env.SQS_QUEUE ??
@@ -16,6 +18,7 @@ const SQS_QUEUE =
 
 // Set up the S3 client
 const s3Client = new S3Client({ region: REGION });
+const s3CacheClient = new S3Client({ region: CACHEBUCKETREGION});
 const sqs = new SQSClient({ region: REGION });
 
 export const streamS3Object = async (key, bucket = null) => {
@@ -259,6 +262,43 @@ export const toS3 = async (
         return res.ETag;
     } catch (err) {
         console.log('S3 save err', err, key, tags);
+    }
+};
+
+// New function for Directory Bucket operations
+export const fromDirectoryBucket = async (key, since = null) => {
+    try {
+        const command = new GetObjectCommand({
+            Bucket: CACHEBUCKET,
+            Key: key,
+            IfModifiedSince: since
+        });
+
+        const { Body } = await s3CacheClient.send(command);
+        const buffer = await Body.transformToByteArray();
+        return Buffer.from(buffer);
+    } catch (err) {
+        console.log('Error retrieving from Directory Bucket:', err);
+        return null;
+    }
+};
+
+export const toDirectoryBucket = async (key, buffer, metadata = null, mimeType = null, otherParams = {}) => {
+    try {
+        const command = new PutObjectCommand({
+            Bucket: CACHEBUCKET,
+            Key: key,
+            Body: buffer,
+            ContentType: mimeType,
+            Metadata: metadata, // Store tags as metadata instead
+            ...otherParams
+        });
+
+        const res = await s3CacheClient.send(command);
+        return res.ETag;
+    } catch (err) {
+        console.log('Error saving to Directory Bucket:', err);
+        return null;
     }
 };
 

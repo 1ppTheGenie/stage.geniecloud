@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import crypto from 'crypto';
 import { dateFormat, toS3, jsonFromS3, timeAgo } from './utils/index.js';
+import { fromDirectoryBucket, toDirectoryBucket} from './utils/aws.js'
 
 const API_URL = process.env.GENIE_URL ?? 'https://app.thegenie.ai/api/Data/';
 const API_PASS = process.env.GENIE_PASS ?? 'iLAE9k1P!fL3';
@@ -25,10 +26,21 @@ const from_cache = async (key, endpoint) => {
             (CACHE_FOR[endpoint.split('/')[0]] ?? HOUR_IN_SECONDS / 2)
     );
 
-    // Fetch the cached data
-    const cachedData = await jsonFromS3(`_cache/${key}`, since);
+    try {
+        // First, try to fetch from Directory Bucket
+        const cachedData = await fromDirectoryBucket(`_cache/${key}`, since);
+        if (cachedData) {
+            const parsedData = JSON.parse(cachedData.toString());
+            if (parsedData && parsedData.response) {
+                return parsedData.response;
+            }
+        }
+    } catch (error) {
+        console.log('Error fetching from Directory Bucket, falling back to S3:', error);
+    }
 
-    // If cached data exists, return only the response part
+    // Fallback to regular S3
+    const cachedData = await jsonFromS3(`_cache/${key}`, since);
     if (cachedData && cachedData.response) {
         return cachedData.response;
     }
@@ -40,7 +52,6 @@ const to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) =>
     const timeout = CACHE_FOR[endpoint.split('/')[0]] ?? timeout_hours;
 
     if (timeout > 0) {
-        // Create a more complex structure for caching
         const cacheData = {
             endpoint,
             params,
@@ -49,11 +60,29 @@ const to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) =>
             response: JSON.parse(data)
         };
 
-        await toS3(`_cache/${key}`, Buffer.from(JSON.stringify(cacheData)), {
-            genieCache: endpoint?.toString(),
-            GenieExpireFile: 'GenieCache',
-            timeout
-        });
+        const cacheBuffer = Buffer.from(JSON.stringify(cacheData));
+
+        try {
+            // For Directory Bucket, use metadata instead of tags
+            const metadata = {
+                genieCache: endpoint?.toString(),
+                GenieExpireFile: 'GenieCache',
+                timeout: timeout.toString()
+            };
+
+            await toDirectoryBucket(`_cache/${key}`, cacheBuffer, metadata);
+        } catch (error) {
+            console.log('Error saving to Directory Bucket, falling back to S3:', error);
+            
+            // Fallback to regular S3 (using tags as before)
+            const tags = {
+                genieCache: endpoint?.toString(),
+                GenieExpireFile: 'GenieCache',
+                timeout: timeout.toString()
+            };
+
+            await toS3(`_cache/${key}`, cacheBuffer, tags);
+        }
     }
 };
 

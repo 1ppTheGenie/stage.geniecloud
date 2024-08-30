@@ -7462,9 +7462,12 @@ var import_client_cloudfront = require("@aws-sdk/client-cloudfront");
 var import_client_sqs = require("@aws-sdk/client-sqs");
 var import_stream = require("stream");
 var BUCKET = process.env.BUCKET ?? "genie-hub-2";
+var CACHEBUCKET = process.env.CACHEBUCKET ?? "genie-hub-cache";
 var REGION = process.env.REGION ?? "eu-west-2";
+var CACHEBUCKETREGION = process.env.CACHEBUCKETREGION ?? "us-west-2";
 var SQS_QUEUE = process.env.SQS_QUEUE ?? "https://sqs.eu-west-2.amazonaws.com/584678469437/genie-cloud";
 var s3Client = new import_client_s3.S3Client({ region: REGION });
+var s3CacheClient = new import_client_s3.S3Client({ region: CACHEBUCKETREGION });
 var sqs = new import_client_sqs.SQSClient({ region: REGION });
 var streamS3Object = async (key, bucket = null) => {
   try {
@@ -7623,6 +7626,39 @@ var toS3 = async (key, buffer, tags = null, mimeType = null, bucket = null, othe
     return res.ETag;
   } catch (err) {
     console.log("S3 save err", err, key, tags);
+  }
+};
+var fromDirectoryBucket = async (key, since = null) => {
+  try {
+    const command = new import_client_s3.GetObjectCommand({
+      Bucket: CACHEBUCKET,
+      Key: key,
+      IfModifiedSince: since
+    });
+    const { Body } = await s3CacheClient.send(command);
+    const buffer = await Body.transformToByteArray();
+    return Buffer.from(buffer);
+  } catch (err) {
+    console.log("Error retrieving from Directory Bucket:", err);
+    return null;
+  }
+};
+var toDirectoryBucket = async (key, buffer, metadata = null, mimeType = null, otherParams = {}) => {
+  try {
+    const command = new import_client_s3.PutObjectCommand({
+      Bucket: CACHEBUCKET,
+      Key: key,
+      Body: buffer,
+      ContentType: mimeType,
+      Metadata: metadata,
+      // Store tags as metadata instead
+      ...otherParams
+    });
+    const res = await s3CacheClient.send(command);
+    return res.ETag;
+  } catch (err) {
+    console.log("Error saving to Directory Bucket:", err);
+    return null;
   }
 };
 var queueMsg = async (body, attributes) => {
@@ -9411,6 +9447,17 @@ var from_cache = async (key, endpoint) => {
   since.setSeconds(
     since.getSeconds() - (CACHE_FOR[endpoint.split("/")[0]] ?? HOUR_IN_SECONDS / 2)
   );
+  try {
+    const cachedData2 = await fromDirectoryBucket(`_cache/${key}`, since);
+    if (cachedData2) {
+      const parsedData = JSON.parse(cachedData2.toString());
+      if (parsedData && parsedData.response) {
+        return parsedData.response;
+      }
+    }
+  } catch (error2) {
+    console.log("Error fetching from Directory Bucket, falling back to S3:", error2);
+  }
   const cachedData = await jsonFromS3(`_cache/${key}`, since);
   if (cachedData && cachedData.response) {
     return cachedData.response;
@@ -9427,11 +9474,23 @@ var to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) => {
       timestamp: (/* @__PURE__ */ new Date()).toISOString(),
       response: JSON.parse(data)
     };
-    await toS3(`_cache/${key}`, Buffer.from(JSON.stringify(cacheData)), {
-      genieCache: endpoint?.toString(),
-      GenieExpireFile: "GenieCache",
-      timeout
-    });
+    const cacheBuffer = Buffer.from(JSON.stringify(cacheData));
+    try {
+      const metadata = {
+        genieCache: endpoint?.toString(),
+        GenieExpireFile: "GenieCache",
+        timeout: timeout.toString()
+      };
+      await toDirectoryBucket(`_cache/${key}`, cacheBuffer, metadata);
+    } catch (error2) {
+      console.log("Error saving to Directory Bucket, falling back to S3:", error2);
+      const tags = {
+        genieCache: endpoint?.toString(),
+        GenieExpireFile: "GenieCache",
+        timeout: timeout.toString()
+      };
+      await toS3(`_cache/${key}`, cacheBuffer, tags);
+    }
   }
 };
 var roundDateForCacheKey = (dateString) => {
