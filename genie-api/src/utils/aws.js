@@ -18,7 +18,7 @@ const SQS_QUEUE =
 
 // Set up the S3 client
 const s3Client = new S3Client({ region: REGION });
-const s3CacheClient = new S3Client({ region: CACHEBUCKETREGION});
+const s3CacheClient = new S3Client({ region: CACHEBUCKETREGION });
 const sqs = new SQSClient({ region: REGION });
 
 export const streamS3Object = async (key, bucket = null) => {
@@ -29,7 +29,7 @@ export const streamS3Object = async (key, bucket = null) => {
         });
 
         const { Body } = await s3Client.send(command);
-        
+
         if (Body instanceof Readable) {
             return Body;
         } else {
@@ -103,7 +103,7 @@ export const searchS3ByPrefix = async (prefix, contains = null, bucket = null) =
             );
 
             let contents = response.Contents || [];
-            
+
             // If a suffix is provided, filter the results
             if (contains) {
                 contents = contents.filter(item => item.Key.includes(contains));
@@ -300,6 +300,160 @@ export const toDirectoryBucket = async (key, buffer, metadata = null, mimeType =
         console.log('Error saving to Directory Bucket:', err);
         return null;
     }
+};
+
+const deleteFromDirectoryBucket = async (key) => {
+    try {
+        await s3CacheClient.send(new DeleteObjectCommand({
+            Bucket: CACHEBUCKET,
+            Key: key
+        }));
+        return true;
+    } catch (error) {
+        console.error(`Error deleting object ${key} from Directory Bucket:`, error);
+        return false;
+    }
+};
+
+// Updated function to delete user cache
+export const deleteUserCache = async (userId) => {
+    let deletedCount = 0;
+    try {
+        // Delete from regular S3 bucket
+        const cacheItems = await searchS3ByPrefix(`_cache/genie-${userId}`);
+        console.log(`Found ${cacheItems.length} cache items for user ${userId} in regular bucket`);
+
+        for (const f of cacheItems) {
+            if (f.Size > 0) {
+                try {
+                    await deleteObject(f.Key);
+                    deletedCount++;
+                } catch (deleteError) {
+                    console.error(`Error deleting object ${f.Key} from regular bucket:`, deleteError);
+                }
+            }
+        }
+
+        // Delete from Directory Bucket
+        const directoryBucketPrefix = `_cache/genie-${userId}`;
+        let continuationToken = undefined;
+        do {
+            const listCommand = new ListObjectsV2Command({
+                Bucket: CACHEBUCKET,
+                Prefix: directoryBucketPrefix,
+                ContinuationToken: continuationToken
+            });
+            const listResponse = await s3CacheClient.send(listCommand);
+
+            if (listResponse.Contents) {
+                for (const item of listResponse.Contents) {
+                    if (await deleteFromDirectoryBucket(item.Key)) {
+                        deletedCount++;
+                    }
+                }
+            }
+
+            continuationToken = listResponse.NextContinuationToken;
+        } while (continuationToken);
+
+    } catch (cacheError) {
+        console.error('Error processing cache deletions:', cacheError);
+    }
+    return deletedCount;
+};
+
+// Updated function to delete area cache
+export const deleteAreaCache = async (areaId) => {
+    let deletedCount = 0;
+    try {
+        // Delete from regular S3 bucket
+        const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `a_${areaId}`);
+        console.log(`Found ${cacheItems.length} cache items for area ${areaId} in regular bucket`);
+
+        for (const f of cacheItems) {
+            if (f.Size > 0) {
+                try {
+                    await deleteObject(f.Key);
+                    deletedCount++;
+                } catch (deleteError) {
+                    console.error(`Error deleting object ${f.Key} from regular bucket:`, deleteError);
+                }
+            }
+        }
+
+        // Delete from Directory Bucket
+        const directoryBucketPrefix = `_cache/genie-`;
+        let continuationToken = undefined;
+        do {
+            const listCommand = new ListObjectsV2Command({
+                Bucket: CACHEBUCKET,
+                Prefix: directoryBucketPrefix,
+                ContinuationToken: continuationToken
+            });
+            const listResponse = await s3CacheClient.send(listCommand);
+
+            if (listResponse.Contents) {
+                for (const item of listResponse.Contents) {
+                    if (item.Key.includes(`a_${areaId}`) && await deleteFromDirectoryBucket(item.Key)) {
+                        deletedCount++;
+                    }
+                }
+            }
+
+            continuationToken = listResponse.NextContinuationToken;
+        } while (continuationToken);
+
+    } catch (cacheError) {
+        console.error('Error processing cache deletions:', cacheError);
+    }
+    return deletedCount;
+};
+
+// Updated function to delete listing cache
+export const deleteListingCache = async (mlsNumber) => {
+    let deletedCount = 0;
+    try {
+        // Delete from regular S3 bucket
+        const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `mnum_${mlsNumber}`);
+        console.log(`Found ${cacheItems.length} cache items for listing ${mlsNumber} in regular bucket`);
+
+        for (const f of cacheItems) {
+            if (f.Size > 0) {
+                try {
+                    await deleteObject(f.Key);
+                    deletedCount++;
+                } catch (deleteError) {
+                    console.error(`Error deleting object ${f.Key} from regular bucket:`, deleteError);
+                }
+            }
+        }
+
+        // Delete from Directory Bucket
+        const directoryBucketPrefix = `_cache/genie-`;
+        let continuationToken = undefined;
+        do {
+            const listCommand = new ListObjectsV2Command({
+                Bucket: CACHEBUCKET,
+                Prefix: directoryBucketPrefix,
+                ContinuationToken: continuationToken
+            });
+            const listResponse = await s3CacheClient.send(listCommand);
+
+            if (listResponse.Contents) {
+                for (const item of listResponse.Contents) {
+                    if (item.Key.includes(`mnum_${mlsNumber}`) && await deleteFromDirectoryBucket(item.Key)) {
+                        deletedCount++;
+                    }
+                }
+            }
+
+            continuationToken = listResponse.NextContinuationToken;
+        } while (continuationToken);
+
+    } catch (cacheError) {
+        console.error('Error processing cache deletions:', cacheError);
+    }
+    return deletedCount;
 };
 
 export const queueMsg = async (body, attributes) => {
