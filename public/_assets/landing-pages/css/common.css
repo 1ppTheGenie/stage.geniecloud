@@ -2275,6 +2275,46 @@ h3.agent-phone {
 	line-height: 30px;
 }
 
+/* Mobile Banner */
+.mobile-banner {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--theme-heading-color);  
+  padding: 15px;
+  opacity: 0.9;
+  z-index: 1000;
+}
+
+.mobile-banner p {
+  margin: 0;  
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--theme-sub-heading-color);
+  text-transform: uppercase;
+}
+
+.mobile-banner-close {
+  position: absolute;
+  color: var(--theme-sub-heading-color);
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  cursor: pointer;
+}
+/* End Mobile Banner */
+
 .mobile-header-sec {
 	display: none;
 }

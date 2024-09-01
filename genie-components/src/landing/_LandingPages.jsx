@@ -15,6 +15,8 @@ import {
   addDynamicPopup,
   getCtaData,
   formatFormNote,
+  isMobileDevice,
+  formatPhoneNumber,
   InsensitiveURLSearchParams
 } from "@/utilities";
 
@@ -347,7 +349,7 @@ export default () => {
       window.gHub.leadEmailAddress = email;
 
     if(phone)
-      window.gHub.leadPhoneNumber = phone;
+      window.gHub.leadPhoneNumber = formatPhoneNumber(phone);
   };
   
 	window.gHub.addLead = async (note, data = null) => {
@@ -463,6 +465,39 @@ export default () => {
     };
   };
 
+  window.gHub.toggleMobileBanner = (data, show) => {    
+    const mobileBanner = document.getElementById("js-mobile-banner");
+
+    if(!show && mobileBanner) {
+      mobileBanner.style.display = "none";
+      return;
+    }
+
+    const mobileBannerText = document.getElementById("js-mobile-banner-text");
+    const mobileBannerCta = document.getElementById("js-mobile-banner-cta");
+    const mobileBannerClose = document.getElementById("js-mobile-banner-close");        
+    
+    if(mobileBanner && mobileBannerCta && mobileBannerClose && mobileBannerText) {      
+      mobileBannerText.value = data.ctaMobileBannerText;
+
+      mobileBannerCta.addEventListener("click", event => {
+				event.preventDefault();
+        
+        if(window.gHub.getLeadId())  
+          window.gHub.addLead(data.ctaMobileBannerNote, { genieTags: data.ctaMobileBannerTags });
+
+        window.gHub.showOptIn(data);
+      });
+
+      mobileBannerClose.addEventListener("click", event => {
+				event.preventDefault();
+        mobileBanner.style.display = "none";
+      });
+      
+      mobileBanner.style.display = "block";      
+    }    
+  };
+
   window.gHub.hookShowOptIn = (ctaIdUrlParam, ctaIdShortDataValue, hasLeadData) => { 
     //url param will take precedence over what is supplied in short data
     const ctaId = parseInt(ctaIdUrlParam) || parseInt(ctaIdShortDataValue);      
@@ -470,11 +505,15 @@ export default () => {
 
     if(!data.enabled)
       return;
+    
+    if(data.showMobileBanner && isMobileDevice()) {
+      window.gHub.toggleMobileBanner(data, true);
+    }
 
     const ctaHomeValueKey = 1; //home value has special handling and just pops an existing modal
 
     if(ctaId === ctaHomeValueKey)
-      setTimeout(() => { window.gHub.popHomeValue() }, data.delay);
+      setTimeout(() => { window.gHub.popHomeValue() }, data.delay * 1000);
     else if (hasLeadData){ //all the CTA's need a lead in context        
       if(data.scrollUpPercentage > 0) {
         const checkUpwardScrollAndShowModal = window.gHub.createScrollTracker('up', data);
@@ -497,7 +536,8 @@ export default () => {
     
     if (window.gHub.getLeadId(settings) && !window.gHub.ctaDisplayed) {
       const dynamicPopupId = "genie-leadCtaTagPopup";
-      if(addDynamicPopup(dynamicPopupId)) {        
+      if(addDynamicPopup(dynamicPopupId)) { 
+        window.gHub.toggleMobileBanner(data, false); // hide the banner if cta shown
         window.gHub.ctaDisplayed = true;
         const App = () => {
           return (
@@ -553,7 +593,7 @@ export default () => {
     window.gHub.initLandingPageData(urlParams.ctaid);
   } else {
     window.gHub.hookShowOptIn(urlParams.ctaid, null, false);    
-  }  
+  }    
   
   /***********************
 	 *

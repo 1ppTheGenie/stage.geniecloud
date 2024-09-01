@@ -728,6 +728,13 @@
 		</div>
 	</xsl:template>
 
+  <xsl:template name="mobile-cta-banner">
+    <div id="js-mobile-banner" class="mobile-banner">    
+        <a id="js-mobile-banner-cta"><p><span id="js-mobile-banner-text" class="gradient-color">Get Your Home Value</span></p></a>
+        <p><button id="js-mobile-banner-close" class="mobile-banner-close"><span class="gradient-color">X</span></button></p>        
+    </div>
+  </xsl:template>
+
 	<xsl:template name="default-thank-you-popup">
 		<xsl:param name="message" select="'Thank you, your request has been successfully submitted!'" />
 		<div id="form-thank-you" class="popup-dialog thank-modal">

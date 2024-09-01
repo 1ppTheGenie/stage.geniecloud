@@ -244,6 +244,7 @@ export const getCtaData = (ctaId) => {
       //the home value pops an existing modal so just need the delay and enabled properties available
       return {       
         delay: 2,
+        showMobileBanner: false,
         enabled: false
       };
     case 2:    //CTA GROUP 1
@@ -268,9 +269,13 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for confirming, you're all set!",
         ctaVerifyButtonText: "Confirm",
         ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
+        ctaMobileBannerText: 'Get Your Home Value',
+        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
+        ctaMobileBannerTags: "ClickCtaMobileBanner",
         delay: 1,
         scrollUpPercentage: 0,
-        scrollDownPercentage: 0,
+        scrollDownPercentage: 0,        
+        showMobileBanner: false,       
         enabled: true
       };
     case 3: //CTA GROUP 1
@@ -295,9 +300,13 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for updating, you're all set!",
         ctaVerifyButtonText: "Verify",
         ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
+        ctaMobileBannerText: 'Get Your Home Value',
+        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
+        ctaMobileBannerTags: "ClickCtaMobileBanner",
         delay: 2,
         scrollUpPercentage: 0,
         scrollDownPercentage: 0,
+        showMobileBanner: false,
         enabled: true
       };
     case 4:    //CTA GROUP 2
@@ -322,9 +331,13 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for confirming, you're all set!",
         ctaVerifyButtonText: "Confirm",
         ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
+        ctaMobileBannerText: 'Get Your Home Value',
+        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
+        ctaMobileBannerTags: "ClickCtaMobileBanner",
         delay: 1,
         scrollUpPercentage: 0,
         scrollDownPercentage: 0,
+        showMobileBanner: false,
         enabled: true
       };
     case 5: //CTA GROUP 2
@@ -349,9 +362,13 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for updating, you're all set!",
         ctaVerifyButtonText: "Verify",
         ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
+        ctaMobileBannerText: 'Get Your Home Value',
+        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
+        ctaMobileBannerTags: "ClickCtaMobileBanner",
         delay: 2,
         scrollUpPercentage: 0,
         scrollDownPercentage: 0,
+        showMobileBanner: false,
         enabled: true
       };
       case 6:    //CTA GROUP 1 scroll triggers
@@ -376,9 +393,13 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for confirming, you're all set!",
         ctaVerifyButtonText: "Confirm",
         ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
+        ctaMobileBannerText: 'Get Your Home Value',
+        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
+        ctaMobileBannerTags: "ClickCtaMobileBanner",
         delay: 10,
         scrollUpPercentage: 15,
         scrollDownPercentage: 60,
+        showMobileBanner: true,
         enabled: true
       };
     case 7: //CTA GROUP 1 scroll triggers
@@ -403,9 +424,13 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for updating, you're all set!",
         ctaVerifyButtonText: "Verify",
         ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
+        ctaMobileBannerText: 'Get Your Home Value',
+        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
+        ctaMobileBannerTags: "ClickCtaMobileBanner",
         delay: 10,
         scrollUpPercentage: 15,
         scrollDownPercentage: 60,
+        showMobileBanner: false,
         enabled: true
       };
       case 8: //CTA GROUP 2 scroll triggers
@@ -430,9 +455,13 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for confirming, you're all set!",
         ctaVerifyButtonText: "Confirm",
         ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
+        ctaMobileBannerText: 'Get Your Home Value',
+        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
+        ctaMobileBannerTags: "ClickCtaMobileBanner",
         delay: 10,
         scrollUpPercentage: 15,
         scrollDownPercentage: 60,
+        showMobileBanner: true,
         enabled: true
       };
     case 9: //CTA GROUP 2 scroll triggers
@@ -457,9 +486,13 @@ export const getCtaData = (ctaId) => {
         ctaContactFormResponse: "Thanks for updating, you're all set!",
         ctaVerifyButtonText: "Verify",
         ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
+        ctaMobileBannerText: 'Get Your Home Value',
+        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
+        ctaMobileBannerTags: "ClickCtaMobileBanner",
         delay: 10,
         scrollUpPercentage: 15,
         scrollDownPercentage: 60,
+        showMobileBanner: false,
         enabled: true
       };
     default:
@@ -468,6 +501,53 @@ export const getCtaData = (ctaId) => {
         enabled: false
       };
   }
+};
+
+export const isMobileDevice = () => {
+  let hasTouchScreen = false;
+  
+  try {  
+    if ("maxTouchPoints" in navigator) {
+      hasTouchScreen = navigator.maxTouchPoints > 0;
+    } else if ("msMaxTouchPoints" in navigator) {
+      hasTouchScreen = navigator.msMaxTouchPoints > 0;
+    } else {
+      const mQ = matchMedia?.("(pointer:coarse)");
+      if (mQ?.media === "(pointer:coarse)") {
+        hasTouchScreen = !!mQ.matches;
+      } else if ("orientation" in window) {
+        hasTouchScreen = true; // deprecated, but good fallback
+      } else {
+        // Only as a last resort, fall back to basic user agent sniffing
+        // * I opted to see what our results look like before adding something like bowser for more robust user agent parsing since our need is pretty basic
+        const UA = navigator.userAgent;
+        hasTouchScreen =
+          /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+          /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
+      }
+    }
+  } catch (error) {
+    console.error("Error detecting mobile device:", error);    
+  }
+  
+  return hasTouchScreen;
+};
+
+// I suspect we my have a mask lib but did not find it, so going this route for the moment
+export const formatPhoneNumber = (phoneNumber) => {
+  if(!phoneNumber)
+    return phoneNumber;
+
+  // Remove any non-digit characters
+  const cleaned = phoneNumber.replace(/\D/g, '');
+  
+  // Check if it's a 10-digit number
+  if (cleaned.length === 10) {
+    return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+  }
+  
+  // If it's not 10 digits, return the original input
+  return phoneNumber;
 };
 
 export const formatFormNote = (data) => {
