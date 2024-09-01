@@ -7462,9 +7462,12 @@ var import_client_cloudfront = require("@aws-sdk/client-cloudfront");
 var import_client_sqs = require("@aws-sdk/client-sqs");
 var import_stream = require("stream");
 var BUCKET = process.env.BUCKET ?? "genie-hub-2";
+var CACHEBUCKET = process.env.CACHEBUCKET ?? "genie-cache--usw2-az1--x-s3";
 var REGION = process.env.REGION ?? "eu-west-2";
+var CACHEBUCKETREGION = process.env.CACHEBUCKETREGION ?? "us-west-2";
 var SQS_QUEUE = process.env.SQS_QUEUE ?? "https://sqs.eu-west-2.amazonaws.com/584678469437/genie-cloud";
 var s3Client = new import_client_s3.S3Client({ region: REGION });
+var s3CacheClient = new import_client_s3.S3Client({ region: CACHEBUCKETREGION });
 var sqs = new import_client_sqs.SQSClient({ region: REGION });
 var streamS3Object = async (key, bucket = null) => {
   try {
@@ -7624,6 +7627,173 @@ var toS3 = async (key, buffer, tags = null, mimeType = null, bucket = null, othe
   } catch (err) {
     console.log("S3 save err", err, key, tags);
   }
+};
+var fromDirectoryBucket = async (key, since = null) => {
+  try {
+    const command = new import_client_s3.GetObjectCommand({
+      Bucket: CACHEBUCKET,
+      Key: key,
+      IfModifiedSince: since
+    });
+    const { Body } = await s3CacheClient.send(command);
+    const buffer = await Body.transformToByteArray();
+    return Buffer.from(buffer);
+  } catch (err) {
+    console.log("Error retrieving from Directory Bucket:", err);
+    return null;
+  }
+};
+var toDirectoryBucket = async (key, buffer, metadata = null, mimeType = null, otherParams = {}) => {
+  try {
+    const command = new import_client_s3.PutObjectCommand({
+      Bucket: CACHEBUCKET,
+      Key: key,
+      Body: buffer,
+      ContentType: mimeType,
+      Metadata: metadata,
+      ...otherParams
+    });
+    const res = await s3CacheClient.send(command);
+    return res.ETag;
+  } catch (err) {
+    console.log("Error saving to Directory Bucket:", err);
+    return null;
+  }
+};
+var deleteFromDirectoryBucket = async (key) => {
+  try {
+    await s3CacheClient.send(new import_client_s3.DeleteObjectCommand({
+      Bucket: CACHEBUCKET,
+      Key: key
+    }));
+    console.log(`Successfully deleted ${key} from Directory Bucket.`);
+    return true;
+  } catch (error2) {
+    console.error(`Error deleting object ${key} from Directory Bucket:`, error2);
+    return false;
+  }
+};
+var listDirectoryBucketObjects = async (prefix) => {
+  let allItems = [];
+  let continuationToken;
+  const listParams = {
+    Bucket: CACHEBUCKET,
+    Prefix: prefix.endsWith("/") ? prefix : `${prefix}/`
+  };
+  do {
+    try {
+      const response2 = await s3CacheClient.send(new import_client_s3.ListObjectsV2Command({
+        ...listParams,
+        ContinuationToken: continuationToken
+      }));
+      if (response2.Contents) {
+        allItems = allItems.concat(response2.Contents);
+      }
+      continuationToken = response2.NextContinuationToken;
+    } catch (error2) {
+      console.error("Error listing Directory Bucket objects:", error2);
+      break;
+    }
+  } while (continuationToken);
+  return allItems;
+};
+var deleteUserCache = async (userId) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `u_${userId}`);
+    console.log(`Found ${cacheItems.length} cache items for user ${userId} in regular bucket`);
+    for (const f of cacheItems) {
+      if (f.Size > 0) {
+        try {
+          await deleteObject(f.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${f.Key} from regular bucket:`, deleteError);
+        }
+      }
+    }
+    const directoryItems = await listDirectoryBucketObjects(`_cache/`);
+    console.log(`Found ${directoryItems.length} total cache items in Directory Bucket`);
+    for (const item of directoryItems) {
+      if (item.Key.includes(`u_${userId}`)) {
+        try {
+          await deleteFromDirectoryBucket(item.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${item.Key} from Directory Bucket:`, deleteError);
+        }
+      }
+    }
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
+};
+var deleteAreaCache = async (areaId) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `a_${areaId}`);
+    console.log(`Found ${cacheItems.length} cache items for area ${areaId} in regular bucket`);
+    for (const f of cacheItems) {
+      if (f.Size > 0) {
+        try {
+          await deleteObject(f.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${f.Key} from regular bucket:`, deleteError);
+        }
+      }
+    }
+    const directoryBucketPrefix = `_cache/`;
+    const directoryItems = await listDirectoryBucketObjects(directoryBucketPrefix);
+    console.log(`Found ${directoryItems.length} total cache items in Directory Bucket`);
+    for (const item of directoryItems) {
+      if (item.Key.includes(`a_${areaId}`)) {
+        try {
+          await deleteFromDirectoryBucket(item.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${item.Key} from Directory Bucket:`, deleteError);
+        }
+      }
+    }
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
+};
+var deleteListingCache = async (mlsNumber) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `mnum_${mlsNumber}`);
+    console.log(`Found ${cacheItems.length} cache items for listing ${mlsNumber} in regular bucket`);
+    for (const f of cacheItems) {
+      if (f.Size > 0) {
+        try {
+          await deleteObject(f.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${f.Key} from regular bucket:`, deleteError);
+        }
+      }
+    }
+    const directoryBucketPrefix = `_cache/`;
+    const directoryItems = await listDirectoryBucketObjects(directoryBucketPrefix);
+    console.log(`Found ${directoryItems.length} total cache items in Directory Bucket`);
+    for (const item of directoryItems) {
+      if (item.Key.includes(`mnum_${mlsNumber}`)) {
+        try {
+          await deleteFromDirectoryBucket(item.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${item.Key} from Directory Bucket:`, deleteError);
+        }
+      }
+    }
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
 };
 var queueMsg = async (body, attributes) => {
   const sqsMessage = {
@@ -9317,72 +9487,6 @@ var filterRenderIds = async (renderIds, params) => {
   }
   return filteredIds;
 };
-var deleteUserCache = async (userId) => {
-  let deletedCount = 0;
-  try {
-    const cacheItems = await searchS3ByPrefix(`_cache/genie-${userId}`);
-    console.log(`Found ${cacheItems.length} cache items for user ${userId}`);
-    await Promise.all(
-      cacheItems.map(async (f) => {
-        if (f.Size > 0) {
-          try {
-            await deleteObject(f.Key);
-            deletedCount++;
-          } catch (deleteError) {
-            console.error(`Error deleting object ${f.Key}:`, deleteError);
-          }
-        }
-      })
-    );
-  } catch (cacheError) {
-    console.error("Error processing cache deletions:", cacheError);
-  }
-  return deletedCount;
-};
-var deleteAreaCache = async (areaId) => {
-  let deletedCount = 0;
-  try {
-    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `a_${areaId}`);
-    console.log(`Found ${cacheItems.length} cache items for area ${areaId}`);
-    await Promise.all(
-      cacheItems.map(async (f) => {
-        if (f.Size > 0) {
-          try {
-            await deleteObject(f.Key);
-            deletedCount++;
-          } catch (deleteError) {
-            console.error(`Error deleting object ${f.Key}:`, deleteError);
-          }
-        }
-      })
-    );
-  } catch (cacheError) {
-    console.error("Error processing cache deletions:", cacheError);
-  }
-  return deletedCount;
-};
-var deleteListingCache = async (mlsNumber) => {
-  let deletedCount = 0;
-  try {
-    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `mnum_${mlsNumber}`);
-    console.log(`Found ${cacheItems.length} cache items for listing ${mlsNumber}`);
-    await Promise.all(
-      cacheItems.map(async (f) => {
-        if (f.Size > 0) {
-          try {
-            await deleteObject(f.Key);
-            deletedCount++;
-          } catch (deleteError) {
-            console.error(`Error deleting object ${f.Key}:`, deleteError);
-          }
-        }
-      })
-    );
-  } catch (cacheError) {
-    console.error("Error processing cache deletions:", cacheError);
-  }
-  return deletedCount;
-};
 var getPropertyCaption = (id, custom = null) => {
   if (custom)
     return custom;
@@ -9411,6 +9515,17 @@ var from_cache = async (key, endpoint) => {
   since.setSeconds(
     since.getSeconds() - (CACHE_FOR[endpoint.split("/")[0]] ?? HOUR_IN_SECONDS / 2)
   );
+  try {
+    const cachedData2 = await fromDirectoryBucket(`_cache/${key}`, since);
+    if (cachedData2) {
+      const parsedData = JSON.parse(cachedData2.toString());
+      if (parsedData && parsedData.response) {
+        return parsedData.response;
+      }
+    }
+  } catch (error2) {
+    console.log("Error fetching from Directory Bucket, falling back to S3:", error2);
+  }
   const cachedData = await jsonFromS3(`_cache/${key}`, since);
   if (cachedData && cachedData.response) {
     return cachedData.response;
@@ -9427,11 +9542,23 @@ var to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) => {
       timestamp: (/* @__PURE__ */ new Date()).toISOString(),
       response: JSON.parse(data)
     };
-    await toS3(`_cache/${key}`, Buffer.from(JSON.stringify(cacheData)), {
-      genieCache: endpoint?.toString(),
-      GenieExpireFile: "GenieCache",
-      timeout
-    });
+    const cacheBuffer = Buffer.from(JSON.stringify(cacheData));
+    try {
+      const metadata = {
+        genieCache: endpoint?.toString(),
+        GenieExpireFile: "GenieCache",
+        timeout: timeout.toString()
+      };
+      await toDirectoryBucket(`_cache/${key}`, cacheBuffer, metadata);
+    } catch (error2) {
+      console.log("Error saving to Directory Bucket, falling back to S3:", error2);
+      const tags = {
+        genieCache: endpoint?.toString(),
+        GenieExpireFile: "GenieCache",
+        timeout: timeout.toString()
+      };
+      await toS3(`_cache/${key}`, cacheBuffer, tags);
+    }
   }
 };
 var roundDateForCacheKey = (dateString) => {
@@ -9470,7 +9597,7 @@ var cache_key = (endpoint, params, verb) => {
   const hash = import_crypto.default.createHash("md5").update(`${endpoint}.${verb}.${strParams}`).digest("hex");
   return `genie-${prefix}${hash}.json`;
 };
-var areaName = async (userId, areaId, skipCache = false) => await call_api("GetAreaName", { areaId, userId }, skipCache);
+var areaName = async (userId, areaId, skipCache = true) => await call_api("GetAreaName", { areaId, userId }, skipCache);
 var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache = false) => {
   month_count = month_count ?? 12;
   return await call_api(
@@ -9626,10 +9753,11 @@ var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, prop
   );
   return r.success && r.areas;
 };
-var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = false) => {
+var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = false, skipCache = false) => {
   const r = await call_api(
     "GetShortUrlData",
     { shortUrlDataId, token },
+    skipCache,
     "POST"
   );
   if (r.data) {
@@ -9662,9 +9790,10 @@ var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate 
     return r.data;
   }
 };
-var getUser = async (userId) => await call_api(
+var getUser = async (userId, skipCache = false) => await call_api(
   "HubCloudGetUser",
   { userId },
+  skipCache,
   "POST"
 );
 var getPropertyFromId = async (property_id, agent_id) => {
@@ -9679,15 +9808,15 @@ var getPropertyFromId = async (property_id, agent_id) => {
     return r.property;
   }
 };
-var createLead = async (userId, args) => {
+var createLead = async (userId, args, skipCache = true) => {
   args.userId = userId;
-  const r = await call_api("CreateNewLead", args, "POST");
+  const r = await call_api("CreateNewLead", args, skipCache, "POST");
   if (!r) {
     console.log("Failed to create new lead: ", r);
   }
   return r;
 };
-var updateLead = async (userId, args) => await call_api("UpdateLead", { ...args, userId }, "POST");
+var updateLead = async (userId, args, skipCache = true) => await call_api("UpdateLead", { ...args, userId }, skipCache, "POST");
 var getQRProperty = async (qrID, token) => {
   const lead = await getQRCodeLead(qrID, token);
   if (lead.property) {
@@ -9713,8 +9842,8 @@ var getQRProperty = async (qrID, token) => {
     return property;
   }
 };
-var createQRCodeLead = async (args) => {
-  const r = await call_api("CreateQRCodeLead", args, true, "POST");
+var createQRCodeLead = async (args, skipCache = true) => {
+  const r = await call_api("CreateQRCodeLead", args, skipCache, "POST");
   if (!r.success) {
     console.log("Failed to capture lead: ", r);
   }
@@ -9735,8 +9864,12 @@ var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_ca
   let result;
   if (!skipCache) {
     result = await from_cache(cacheKey, endpoint);
+    if (result) {
+      console.log("Cache Hit", cacheKey, endpoint, params, skipCache, pre_cache);
+    }
   }
   if (!result) {
+    console.log("Cache Miss", cacheKey, endpoint, params, skipCache, pre_cache);
     params.consumer = 8;
     result = await fetch(API_URL + endpoint, {
       method: verb,
@@ -10120,7 +10253,7 @@ var api = async (event) => {
                     try {
                       await reRender(renderId, {
                         ...params,
-                        skipCache: true
+                        skipCache: false
                       });
                       await toS3(
                         `_lookup/re-render/${renderId}`,

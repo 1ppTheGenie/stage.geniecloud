@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import crypto from 'crypto';
 import { dateFormat, toS3, jsonFromS3, timeAgo } from './utils/index.js';
+import { fromDirectoryBucket, toDirectoryBucket} from './utils/aws.js'
 
 const API_URL = process.env.GENIE_URL ?? 'https://app.thegenie.ai/api/Data/';
 const API_PASS = process.env.GENIE_PASS ?? 'iLAE9k1P!fL3';
@@ -25,10 +26,21 @@ const from_cache = async (key, endpoint) => {
             (CACHE_FOR[endpoint.split('/')[0]] ?? HOUR_IN_SECONDS / 2)
     );
 
-    // Fetch the cached data
-    const cachedData = await jsonFromS3(`_cache/${key}`, since);
+    try {
+        // First, try to fetch from Directory Bucket
+        const cachedData = await fromDirectoryBucket(`_cache/${key}`, since);
+        if (cachedData) {
+            const parsedData = JSON.parse(cachedData.toString());
+            if (parsedData && parsedData.response) {
+                return parsedData.response;
+            }
+        }
+    } catch (error) {
+        console.log('Error fetching from Directory Bucket, falling back to S3:', error);
+    }
 
-    // If cached data exists, return only the response part
+    // Fallback to regular S3
+    const cachedData = await jsonFromS3(`_cache/${key}`, since);
     if (cachedData && cachedData.response) {
         return cachedData.response;
     }
@@ -40,7 +52,6 @@ const to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) =>
     const timeout = CACHE_FOR[endpoint.split('/')[0]] ?? timeout_hours;
 
     if (timeout > 0) {
-        // Create a more complex structure for caching
         const cacheData = {
             endpoint,
             params,
@@ -49,11 +60,29 @@ const to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) =>
             response: JSON.parse(data)
         };
 
-        await toS3(`_cache/${key}`, Buffer.from(JSON.stringify(cacheData)), {
-            genieCache: endpoint?.toString(),
-            GenieExpireFile: 'GenieCache',
-            timeout
-        });
+        const cacheBuffer = Buffer.from(JSON.stringify(cacheData));
+
+        try {
+            // For Directory Bucket, use metadata instead of tags
+            const metadata = {
+                genieCache: endpoint?.toString(),
+                GenieExpireFile: 'GenieCache',
+                timeout: timeout.toString()
+            };
+
+            await toDirectoryBucket(`_cache/${key}`, cacheBuffer, metadata);
+        } catch (error) {
+            console.log('Error saving to Directory Bucket, falling back to S3:', error);
+            
+            // Fallback to regular S3 (using tags as before)
+            const tags = {
+                genieCache: endpoint?.toString(),
+                GenieExpireFile: 'GenieCache',
+                timeout: timeout.toString()
+            };
+
+            await toS3(`_cache/${key}`, cacheBuffer, tags);
+        }
     }
 };
 
@@ -105,14 +134,14 @@ const cache_key = (endpoint, params, verb) => {
     return `genie-${prefix}${hash}.json`;
 };
 
-export const areaName = async (userId, areaId, skipCache = false) =>
+export const areaName = async (userId, areaId, skipCache = true) =>
     await call_api('GetAreaName', { areaId, userId }, skipCache);
 
 export const rename_area = async (
     user_id,
     area_id,
     new_name,
-    skipCache = false
+    skipCache = true
 ) =>
     await call_api(
         'RenameArea',
@@ -329,7 +358,7 @@ export const getListing = async (
     }
 };
 
-export const mlsListingLastUpdate = async (data, skipCache = false) =>
+export const mlsListingLastUpdate = async (data, skipCache = true) =>
     await call_api(`GetMlsListingLastUpdate`, data, skipCache, 'POST');
 
 export const mlsDisplaySettings = async (mls_id, skipCache = false) =>
@@ -427,10 +456,11 @@ export const propertySurroundingAreas = async (
 export const savedSearches = async (userId, areaId) =>
     await call_api('GetSavedSearches', { userId, areaId });
 
-export const getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = false) => {
+export const getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = false, skipCache = false) => {
     const r = await call_api(
         'GetShortUrlData',
         { shortUrlDataId: shortUrlDataId, token: token },
+        skipCache,
         'POST'
     );
 
@@ -472,17 +502,19 @@ export const getShortData = async (shortUrlDataId, token, agentId = null, skipLe
     }
 };
 
-export const updateHubAsset = async (hubAssetUrl, userId, hubAssetId) =>
+export const updateHubAsset = async (hubAssetUrl, userId, hubAssetId, skipCache = true) =>
     await call_api(
         'UpdateHubAsset',
         { userId, hubAssetId, hubAssetUrl },
+        skipCache,
         'POST'
     );
 
-export const getUser = async userId =>
+export const getUser = async (userId, skipCache = false) =>
     await call_api(
         'HubCloudGetUser',
         { userId },
+        skipCache,
         'POST'
     );
 
@@ -511,10 +543,10 @@ export const getPropertyFromId = async (property_id, agent_id) => {
     }
 };
 
-export const createLead = async (userId, args) => {
+export const createLead = async (userId, args, skipCache = true) => {
     args.userId = userId;
 
-    const r = await call_api('CreateNewLead', args, 'POST');
+    const r = await call_api('CreateNewLead', args, skipCache, 'POST');
 
     if (!r) {
         console.log('Failed to create new lead: ', r);
@@ -523,8 +555,8 @@ export const createLead = async (userId, args) => {
     return r;
 };
 
-export const updateLead = async (userId, args) =>
-    await call_api('UpdateLead', { ...args, userId }, 'POST');
+export const updateLead = async (userId, args, skipCache = true) =>
+    await call_api('UpdateLead', { ...args, userId }, skipCache, 'POST');
 
 export const getQRProperty = async (qrID, token) => {
     const lead = await getQRCodeLead(qrID, token);
@@ -559,8 +591,8 @@ export const getQRProperty = async (qrID, token) => {
     }
 };
 
-export const createQRCodeLead = async args => {
-    const r = await call_api('CreateQRCodeLead', args, true, 'POST');
+export const createQRCodeLead = async (args, skipCache = true) => {
+    const r = await call_api('CreateQRCodeLead', args, skipCache, 'POST');
 
     if (!r.success) {
         console.log('Failed to capture lead: ', r);
@@ -591,9 +623,13 @@ const call_api = async ( endpoint, params, skipCache = false, verb = "POST", pre
 	let result;
 	if ( !skipCache ) {
 		result = await from_cache( cacheKey, endpoint );
+        if (result) {
+            console.log('Cache Hit', cacheKey, endpoint, params, skipCache, pre_cache);
+        }
 	}
 	
     if ( !result ) {
+        console.log('Cache Miss', cacheKey, endpoint, params, skipCache, pre_cache);
 		// Flag the API call as coming from HubCloud
 		params.consumer = 8;
 
