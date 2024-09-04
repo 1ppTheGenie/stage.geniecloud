@@ -275,7 +275,7 @@ export const getCtaData = (ctaId) => {
         delay: 1,
         scrollUpPercentage: 0,
         scrollDownPercentage: 0,        
-        showMobileBanner: false,       
+        showMobileBanner: true,       
         enabled: true
       };
     case 3: //CTA GROUP 1
@@ -306,7 +306,7 @@ export const getCtaData = (ctaId) => {
         delay: 2,
         scrollUpPercentage: 0,
         scrollDownPercentage: 0,
-        showMobileBanner: false,
+        showMobileBanner: true,
         enabled: true
       };
     case 4:    //CTA GROUP 2
@@ -337,7 +337,7 @@ export const getCtaData = (ctaId) => {
         delay: 1,
         scrollUpPercentage: 0,
         scrollDownPercentage: 0,
-        showMobileBanner: false,
+        showMobileBanner: true,
         enabled: true
       };
     case 5: //CTA GROUP 2
@@ -368,7 +368,7 @@ export const getCtaData = (ctaId) => {
         delay: 2,
         scrollUpPercentage: 0,
         scrollDownPercentage: 0,
-        showMobileBanner: false,
+        showMobileBanner: true,
         enabled: true
       };
       case 6:    //CTA GROUP 1 scroll triggers
@@ -430,7 +430,7 @@ export const getCtaData = (ctaId) => {
         delay: 5,
         scrollUpPercentage: 15,
         scrollDownPercentage: 60,
-        showMobileBanner: false,
+        showMobileBanner: true,
         enabled: true
       };
       case 8: //CTA GROUP 2 scroll triggers
@@ -492,7 +492,7 @@ export const getCtaData = (ctaId) => {
         delay: 5,
         scrollUpPercentage: 15,
         scrollDownPercentage: 60,
-        showMobileBanner: false,
+        showMobileBanner: true,
         enabled: true
       };
     case 10:    //CTA GROUP 3

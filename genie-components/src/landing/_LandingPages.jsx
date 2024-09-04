@@ -486,6 +486,8 @@ export default () => {
         if(window.gHub.getLeadId())  
           window.gHub.addLead(data.ctaMobileBannerNote, { genieTags: data.ctaMobileBannerTags });
 
+        //as long as the CTA has not been accepted we allow the mobile banner to re-trigger the display
+        window.gHub.ctaDisplayed = false;
         window.gHub.showOptIn(data);
       });
 
@@ -536,8 +538,7 @@ export default () => {
     
     if (window.gHub.getLeadId(settings) && !window.gHub.ctaDisplayed) {
       const dynamicPopupId = "genie-leadCtaTagPopup";
-      if(addDynamicPopup(dynamicPopupId)) { 
-        window.gHub.toggleMobileBanner(data, false); // hide the banner if cta shown
+      if(addDynamicPopup(dynamicPopupId)) {         
         window.gHub.ctaDisplayed = true;
         const App = () => {
           return (
