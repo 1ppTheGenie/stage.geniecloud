@@ -1,7 +1,10 @@
 import fs from "fs";
 import { basename } from "path";
 import SaxonJS from "saxon-js/SaxonJS2N.js";
+import dotenv from 'dotenv';
 
+// Load environment variables from .env file
+dotenv.config();
 // prettier-ignore
 import { S3Client,DeleteObjectCommand, GetObjectCommand, PutObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
 
@@ -14,6 +17,7 @@ const GENIE_URL =
 const s3Client = new S3Client({ region: REGION });
 
 const TEMP_DIR = process.env.TEMP_DIR ?? "";
+console.log(TEMP_DIR);
 
 const transform = (
 	xml,
