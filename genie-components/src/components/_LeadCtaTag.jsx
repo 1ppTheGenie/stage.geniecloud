@@ -56,7 +56,7 @@ export default (ctaData) => {
                   submitCaption = { data.ctaVerifyButtonText }
                 />  
               </Show> 
-              <Show when={ !data.ctaShowContactForm || leadCaptured() }>                                      
+              <Show when={ !data.ctaShowContactForm || leadCaptured() }>
                 <div class="cta-contact">                
                   <h4>{ data.ctaContactMeMessage }</h4>                   
                 </div>
@@ -71,6 +71,9 @@ export default (ctaData) => {
                     //this add lead handles the check for update/create                      
                     window.gHub.addLead(formattedNote, { genieTags: data.ctaTags });                      
                     setHasSubmitted(true);
+
+                    // hide the banner if cta accepted
+                    window.gHub.toggleMobileBanner(data, false); 
                   }}>
                   { data.ctaSubmitButtonText }
                 </button> 
