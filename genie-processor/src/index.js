@@ -313,11 +313,12 @@ if (process.argv.length > 2) {
 						const queryParams = querystring.parse(parsedUrl.query);
 
 						const assetPath = `${assetDir}${queryParams.xsl}.xsl`;
-						const dataPath = `${dataDir}${
-							queryParams?.xml ?? "_genie-sample"
-						}.xml`;
+						const dataPath = `${dataDir}${queryParams?.xml ?? "_genie-sample"}.xml`;
 						const themeName = queryParams?.themeName;
 						const themeHue = queryParams?.themeHue;
+
+						// Remove special params that we handle separately
+						const { xsl, xml, themeName: _, themeHue: __, ...remainingParams } = queryParams;
 
 						if (!fs.existsSync(assetPath)) {
 							res.writeHead(200, { "Content-Type": "text/plain" });
@@ -336,7 +337,8 @@ if (process.argv.length > 2) {
 							dataPath,
 							themeName,
 							themeHue,
-							null
+							null,
+							remainingParams  // Pass additional params
 						);
 
 						res.writeHead(200, { "Content-Type": "text/html" });
@@ -364,7 +366,8 @@ if (process.argv.length > 2) {
 		xmlKey = "_assets/_reference/_genie-sample.xml",
 		themeName = null,
 		themeHue = null,
-		outName = "output.svg"
+		outName = "output.svg",
+		additionalParams = {}
 	) => {
 		const transformXsl = fs.existsSync(xslKey)
 			? fs.readFileSync(xslKey, "utf8")
@@ -383,17 +386,18 @@ if (process.argv.length > 2) {
 		const parser = new XMLParser(xmlParseOptions);
 		const jsonObj = parser.parse(transformXml);
 
-		jsonObj.renderRoot.output[`${xmlParseOptions.attributeNamePrefix}siteUrl`] =
-			GENIE_URL;
+		jsonObj.renderRoot.output[`${xmlParseOptions.attributeNamePrefix}siteUrl`] = GENIE_URL;
 		if (themeName) {
-			jsonObj.renderRoot.output[`${xmlParseOptions.attributeNamePrefix}theme`] =
-				themeName;
+			jsonObj.renderRoot.output[`${xmlParseOptions.attributeNamePrefix}theme`] = themeName;
 		}
 		if (themeHue) {
-			jsonObj.renderRoot.output[
-				`${xmlParseOptions.attributeNamePrefix}themeHue`
-			] = themeHue;
+			jsonObj.renderRoot.output[`${xmlParseOptions.attributeNamePrefix}themeHue`] = themeHue;
 		}
+
+		// Add any additional parameters to output attributes
+		Object.entries(additionalParams).forEach(([key, value]) => {
+			jsonObj.renderRoot.output[`${xmlParseOptions.attributeNamePrefix}${key}`] = value;
+		});
 
 		xmlParseOptions.attributeValueProcessor = (attrName, val) => {
 			if (val === "true" || val === true) return 1;
