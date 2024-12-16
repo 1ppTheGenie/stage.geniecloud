@@ -1,0 +1,24 @@
+/*
+	Theme Name:	Evoke Realty
+*/
+
+@import url("../_css/montserrat.css");
+
+.evoke-realty, .evoke-realty.light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #041a31; /* Heading */
+	--theme-sub-heading-color: #041a31; /* Subtitle */
+	--theme-body-color: #0a2b34; /* Body */
+	--theme-emphasis-color:#041a31; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Montserrat", sans-serif;
+}
+
+.evoke-realty.dark, .evoke-realty .dark {
+	--theme-body-background: #041a31;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #e3e3e3; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #e3e3e3; /* Outline */
+}
