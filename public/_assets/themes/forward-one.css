@@ -1,0 +1,26 @@
+/*
+	Theme Name:	Forward One
+*/
+
+@import url("../_css/montserrat.css");
+@import url("../_css/raleway.css");
+
+.forward-one, .forward-one.light, .forward-one .light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #000000; /* Heading */
+	--theme-sub-heading-color: #f26522; /* Subtitle */
+	--theme-body-color: #000000; /* Body */
+	--theme-emphasis-color: #f26522; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Raleway", sans-serif;
+	--theme-sub-heading-font: "Montserrat", sans-serif;
+}
+
+.forward-one.dark, .forward-one .dark {
+	--theme-body-background: #000000;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #f26522; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #f26522; /* Outline */
+}
+
