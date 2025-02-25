@@ -3,7 +3,6 @@
 */
 
 @import url("../_css/montserrat.css");
-@import url("../_css/raleway.css");
 
 .forward-one, .forward-one.light, .forward-one .light {
 	--theme-body-background: #ffffff;
@@ -12,7 +11,7 @@
 	--theme-body-color: #000000; /* Body */
 	--theme-emphasis-color: #f26522; /* Outline */
 	--theme-body-font: "Montserrat", sans-serif;
-	--theme-heading-font: "Raleway", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
 	--theme-sub-heading-font: "Montserrat", sans-serif;
 }
 
@@ -23,4 +22,3 @@
 	--theme-body-color: #ffffff; /* Body */
 	--theme-emphasis-color: #f26522; /* Outline */
 }
-
