@@ -33,8 +33,8 @@
 			</text>
 			<text x="50%" y="12.5%" class="upper center" style="font-family:var(--theme-heading-font); font-size:250%;font-weight:300;" fill="var(--theme-heading-color)">
 				<xsl:call-template name="editable">
-					<xsl:with-param name="id" select="' MARKET INSIDER REPORT'" />
-					<xsl:with-param name="default" select="' MARKET INSIDER REPORT'" />
+					<xsl:with-param name="id" select="' MARKET INSIDER REPORTW'" />
+					<xsl:with-param name="default" select="' MARKET INSIDER REPORTW'" />
 				</xsl:call-template>
 			</text>
 		</g>
