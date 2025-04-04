@@ -169,7 +169,7 @@ Version:	1.1
 					<xsl:sort select="@name" />
 
 					<div class="section">
-						<div class="section-heading">
+						<div class="section-heading testing">
 							<h3 class="light">
 								<xsl:value-of select="@name" />
 							</h3>
