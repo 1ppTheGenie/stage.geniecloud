@@ -14,7 +14,7 @@ Version:	1.1
 	<xsl:template name="template-folders">
 		<xsl:value-of select="'[`Step One`, `Step Two`]'" />
 	</xsl:template>
-	
+
 	<xsl:template name="asset-box">
 		<xsl:param name="asset" />
 
@@ -64,13 +64,12 @@ Version:	1.1
 			</xsl:with-param>
 		</xsl:call-template>
 
-		<body class="marketing-steps">
+		<body>
 			<link href="https://fonts.googleapis.com" rel="preconnect" />
 			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
-			
 			<link rel="stylesheet">
 				<xsl:attribute name="href">
-					<xsl:value-of select="'/_assets/listing-commands/css/marketing-steps-lc1.css'" />
+					<xsl:value-of select="concat( //output/@siteUrl, '_assets/listing-commands/css/marketing-steps-lc1.css' )" />
 				</xsl:attribute>
 			</link>
 
@@ -79,7 +78,7 @@ Version:	1.1
 			</script>
 
 			<main>
-				<div class="landing-page-banner">					
+				<div class="banner">
 					<xsl:attribute name="style">
 						<xsl:if test="$primaryImageNoDefault != ''">
 							<xsl:value-of select="concat( 'background-image: url(', $primaryImageNoDefault, ')' )" />
@@ -103,79 +102,77 @@ Version:	1.1
 							<xsl:comment><!-- Genie Global JS --></xsl:comment>
 						</script>
 
+						<style>
+							<xsl:value-of select="'div.banner span.overlay {z-index: 10!important;}'" />
+						</style>
 					</xsl:if>
 
-					<div class="container">
-						<img class="company-logo" title="Company Logo">
-							<xsl:attribute name="src">
-								<xsl:value-of select="$companyLogo" />
-							</xsl:attribute>
-						</img>
-						<h1>
-							<span>
-								<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
-							</span>
-							<br/>
-							<xsl:call-template name="overridable">
-								<xsl:with-param name="id" select="'page-title'" />
-								<xsl:with-param name="default" select="'Marketing Toolkit'" />
-							</xsl:call-template>
-						</h1>
-						<xsl:if test="$listingAddressLine1 !=''">
-							<div class="address">
-								<span>
-									<xsl:value-of select="$listingAddressLine1" />
-								</span>
-							</div>
-						</xsl:if>
-						<div class="genie-logo">
-							<span>Powered by: </span>
-							<image title="The Genie AI" preserveAspectRatio="xMidYMid slice" src="/_assets/_img/genie-logo-1.png" />
-						</div>	
-					</div>					
-				</div>
+					<span class="overlay">
+						<xsl:comment/>
+					</span>
 
-				<section>
-					<div class="container">
-						<div class="agent-profiles">
-							<div class="single-agent">
+					<img class="logo-img" title="Company Logo">
+						<xsl:attribute name="src">
+							<xsl:value-of select="$companyLogo" />
+						</xsl:attribute>
+					</img>
+					<h1>
+						<span>
+							<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
+						</span>
+						<br/>
+						<xsl:call-template name="overridable">
+							<xsl:with-param name="id" select="'page-title'" />
+							<xsl:with-param name="default" select="'Marketing Toolkit'" />
+						</xsl:call-template>
+					</h1>
+					<xsl:if test="$listingAddressLine1 !=''">
+						<div class="address">
+							<span>
+								<xsl:value-of select="$listingAddressLine1" />
+							</span>
+						</div>
+					</xsl:if>
+
+					<image title="The Genie AI" class="genie-logo" preserveAspectRatio="xMidYMid slice" src="/_assets/_img/genie-logo-1.png" />
+
+					<div style="position:absolute;bottom:-100px;top:unset;left:0;right:0;margin:auto;display:flex;justify-content:center;">
+						<div class="profile" style="width:200px;height:200px;margin:1%;">
+							<img>
+								<xsl:attribute name="title">
+									<xsl:value-of select="//agent[1]/marketingName" />
+								</xsl:attribute>
+								<xsl:attribute name="src">
+									<xsl:copy-of select="//agent[1]/photo" />
+								</xsl:attribute>
+							</img>
+						</div>
+
+						<xsl:if test="$hasMultipleAgents">
+							<div class="profile" style="width:200px;height:200px;margin:1%;">
 								<img>
 									<xsl:attribute name="title">
-										<xsl:value-of select="//agent[1]/marketingName" />
+										<xsl:value-of select="//agent[2]/marketingName" />
 									</xsl:attribute>
+
 									<xsl:attribute name="src">
-										<xsl:copy-of select="//agent[1]/photo" />
+										<xsl:copy-of select="//agent[2]/photo" />
 									</xsl:attribute>
 								</img>
 							</div>
-
-							<xsl:if test="$hasMultipleAgents">
-								<div class="multi-agent">
-									<img>
-										<xsl:attribute name="title">
-											<xsl:value-of select="//agent[2]/marketingName" />
-										</xsl:attribute>
-
-										<xsl:attribute name="src">
-											<xsl:copy-of select="//agent[2]/photo" />
-										</xsl:attribute>
-									</img>
-								</div>
-							</xsl:if>
-						</div>	
+						</xsl:if>
 					</div>
-				</section>
+				</div>
 
 				<xsl:for-each select="//collection/sections/section">
 					<xsl:sort select="number(@sort)" data-type="number" order="ascending" />
 					<xsl:sort select="@name" />
 
-					<div class="section assets-steps">
+					<div class="section">
 						<div class="section-heading">
-							<p class="steps-count">Step One</p>
-							<h2 class="steps-heading">
+							<h3 class="light">
 								<xsl:value-of select="@name" />
-							</h2>
+							</h3>
 
 							<xsl:if test="@caption!=''">
 								<h2>
@@ -215,52 +212,6 @@ Version:	1.1
 							</xsl:for-each>
 						</div>
 					</div>
-
-					<!-- open house checklist start -->
-					<section class="open-house-checklist">
-						<div class="container">
-							<h1>
-								<span class="text-gold">But wait, there’s more!</span>
-								<br/>Don’t forget your open house checklist.
-							</h1>
-							<div class="arrow-container">
-								<svg width="65px" height="75px" viewBox="0 0 21 21"
-									xmlns="http://www.w3.org/2000/svg">
-									<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
-										<path d="m.5 9.499 4 4.001 4-4.001"></path>
-										<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
-									</g>
-								</svg>
-
-								<svg width="65px" height="75px" viewBox="0 0 21 21"
-									xmlns="http://www.w3.org/2000/svg">
-									<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
-										<path d="m.5 9.499 4 4.001 4-4.001"></path>
-										<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
-									</g>
-								</svg>
-
-								<svg width="65px" height="75px" viewBox="0 0 21 21"
-									xmlns="http://www.w3.org/2000/svg">
-									<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
-										<path d="m.5 9.499 4 4.001 4-4.001"></path>
-										<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
-									</g>
-								</svg>
-							</div>
-						</div>	
-					</section>
-					<!-- open house checklist end -->
-
-					<!-- visitor section start -->
-					<section class="visitor-sec">
-						<div class="container">
-							<h1>Get contact info for every visitor,<br/> every time. No exceptions.</h1>
-							<span class="up-arrow">↑</span>
-							<p class="bordered-button">This isn't a button. Read the above again.</p>
-						</div>	
-					</section>
-					<!-- visitor section end -->
 				</xsl:for-each>
 
 				<!-- footer -->
