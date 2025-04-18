@@ -12,32 +12,34 @@ Version:	1.1
 	<xsl:import href="listing-commands.xsl" />
 
 	<xsl:template name="template-folders">
-		<xsl:value-of select="'[`Step One`, `Step Two`]'" />
+		<xsl:value-of select="'[`Step One:`, `Step Two`]'" />
 	</xsl:template>
-
+	
 	<xsl:template name="asset-box">
 		<xsl:param name="asset" />
 
 		<div class="post">
-			<xsl:attribute name="data-title">
-				<xsl:value-of select="$asset/@name" />
-			</xsl:attribute>
-
-			<xsl:attribute name="data-renderkey">
-				<xsl:value-of select="$asset/@renderKey" />
-			</xsl:attribute>
-
-			<xsl:if test="$asset/@pageCount!=''">
-				<xsl:attribute name="data-pagecount">
-					<xsl:value-of select="$asset/@pageCount" />
+			<div class="asset-container">
+				<xsl:attribute name="data-title">
+					<xsl:value-of select="$asset/@name" />
 				</xsl:attribute>
-			</xsl:if>
 
-			<h4>
-				<span class="rendering-spinner">
-					<xsl:comment/>
-				</span>
-			</h4>
+				<xsl:attribute name="data-renderkey">
+					<xsl:value-of select="$asset/@renderKey" />
+				</xsl:attribute>
+
+				<xsl:if test="$asset/@pageCount!=''">
+					<xsl:attribute name="data-pagecount">
+						<xsl:value-of select="$asset/@pageCount" />
+					</xsl:attribute>
+				</xsl:if>
+
+				<h4>
+					<span class="rendering-spinner">
+						<xsl:comment/>
+					</span>
+				</h4>
+			</div>	
 		</div>
 	</xsl:template>
 
@@ -64,12 +66,13 @@ Version:	1.1
 			</xsl:with-param>
 		</xsl:call-template>
 
-		<body>
+		<body class="marketing-steps">
 			<link href="https://fonts.googleapis.com" rel="preconnect" />
 			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
+			
 			<link rel="stylesheet">
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat( //output/@siteUrl, '_assets/listing-commands/css/marketing-steps-lc1.css' )" />
+					<xsl:value-of select="'/_assets/listing-commands/css/marketing-steps-lc1.css'" />
 				</xsl:attribute>
 			</link>
 
@@ -78,7 +81,7 @@ Version:	1.1
 			</script>
 
 			<main>
-				<div class="banner">
+				<div class="landing-page-banner">					
 					<xsl:attribute name="style">
 						<xsl:if test="$primaryImageNoDefault != ''">
 							<xsl:value-of select="concat( 'background-image: url(', $primaryImageNoDefault, ')' )" />
@@ -102,109 +105,127 @@ Version:	1.1
 							<xsl:comment><!-- Genie Global JS --></xsl:comment>
 						</script>
 
-						<style>
-							<xsl:value-of select="'div.banner span.overlay {z-index: 10!important;}'" />
-						</style>
 					</xsl:if>
 
-					<span class="overlay">
-						<xsl:comment/>
-					</span>
-
-					<img class="logo-img" title="Company Logo">
-						<xsl:attribute name="src">
-							<xsl:value-of select="$companyLogo" />
-						</xsl:attribute>
-					</img>
-					<h1>
-						<span>
-							<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
-						</span>
-						<br/>
-						<xsl:call-template name="overridable">
-							<xsl:with-param name="id" select="'page-title'" />
-							<xsl:with-param name="default" select="'Marketing Toolkit'" />
-						</xsl:call-template>
-					</h1>
-					<xsl:if test="$listingAddressLine1 !=''">
-						<div class="address">
+					<div class="container">
+						<img class="company-logo" title="Company Logo">
+							<xsl:attribute name="src">
+								<xsl:value-of select="$companyLogo" />
+							</xsl:attribute>
+						</img>
+						<h1>
 							<span>
-								<xsl:value-of select="$listingAddressLine1" />
+								<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
 							</span>
-						</div>
-					</xsl:if>
+							<br/>
+							<xsl:call-template name="overridable">
+								<xsl:with-param name="id" select="'page-title'" />
+								<xsl:with-param name="default" select="'Marketing Toolkit'" />
+							</xsl:call-template>
+						</h1>
+						<xsl:if test="$listingAddressLine1 !=''">
+							<div class="address">
+								<span>
+									<xsl:value-of select="$listingAddressLine1" />
+								</span>
+							</div>
+						</xsl:if>
+						<div class="genie-logo">
+							<span>Powered by: </span>
+							<image title="The Genie AI" preserveAspectRatio="xMidYMid slice" src="/_assets/_img/genie-logo-1.png" />
+						</div>	
+					</div>					
+				</div>
 
-					<image title="The Genie AI" class="genie-logo" preserveAspectRatio="xMidYMid slice" src="/_assets/_img/genie-logo-1.png" />
-
-					<div style="position:absolute;bottom:-100px;top:unset;left:0;right:0;margin:auto;display:flex;justify-content:center;">
-						<div class="profile" style="width:200px;height:200px;margin:1%;">
-							<img>
-								<xsl:attribute name="title">
-									<xsl:value-of select="//agent[1]/marketingName" />
-								</xsl:attribute>
-								<xsl:attribute name="src">
-									<xsl:copy-of select="//agent[1]/photo" />
-								</xsl:attribute>
-							</img>
-						</div>
-
-						<xsl:if test="$hasMultipleAgents">
-							<div class="profile" style="width:200px;height:200px;margin:1%;">
+				<section>
+					<div class="container">
+						<div class="agent-profiles">
+							<div class="single-agent">
 								<img>
 									<xsl:attribute name="title">
-										<xsl:value-of select="//agent[2]/marketingName" />
+										<xsl:value-of select="//agent[1]/marketingName" />
 									</xsl:attribute>
-
 									<xsl:attribute name="src">
-										<xsl:copy-of select="//agent[2]/photo" />
+										<xsl:copy-of select="//agent[1]/photo" />
 									</xsl:attribute>
 								</img>
 							</div>
-						</xsl:if>
+
+							<xsl:if test="$hasMultipleAgents">
+								<div class="multi-agent">
+									<img>
+										<xsl:attribute name="title">
+											<xsl:value-of select="//agent[2]/marketingName" />
+										</xsl:attribute>
+
+										<xsl:attribute name="src">
+											<xsl:copy-of select="//agent[2]/photo" />
+										</xsl:attribute>
+									</img>
+								</div>
+							</xsl:if>
+						</div>	
 					</div>
-				</div>
+				</section>
 
 				<xsl:for-each select="//collection/sections/section">
 					<xsl:sort select="number(@sort)" data-type="number" order="ascending" />
 					<xsl:sort select="@name" />
+					
+					<!-- Capture position -->
+					<xsl:variable name="pos" select="position()" />
 
-					<div class="section">
+					<!-- Section Output -->
+					<div class="section assets-steps">
 						<div class="section-heading">
-							<h3 class="light">
-								<xsl:value-of select="@name" />
-							</h3>
-
-							<xsl:if test="@caption!=''">
-								<h2>
-									<xsl:value-of select="@caption" />
-								</h2>
+														 
+							<xsl:if test="number(@sort) = 1">
+								<p class="steps-count"> Step one </p>
 							</xsl:if>
 
-							<xsl:if test="@description!=''">
+							<xsl:if test="number(@sort) = 2">
+								<p class="steps-count"> Step two </p>
+							</xsl:if>
+							
+							<h2 class="steps-heading">
+								<xsl:value-of select="@name" />
+							</h2>
+
+							<xsl:if test="@caption != ''">
+								<h3>
+									<xsl:value-of select="@caption" />
+								</h3>
+							</xsl:if>
+
+							<xsl:if test="@description != ''">
 								<p>
 									<xsl:value-of select="@description" />
 								</p>
 							</xsl:if>
 
 							<div class="golden-border">
-								<span>
-									<xsl:comment/>
-								</span>
-								<span>
-									<xsl:comment/>
-								</span>
+								<span><xsl:comment/></span>
+								<span><xsl:comment/></span>
 							</div>
+
+							<xsl:if test="@assetTitle != ''">
+								<p class="asset-box-title">
+									<xsl:value-of select="@assetTitle" />
+								</p>
+							</xsl:if>
+
 						</div>
 
 						<div class="section-grid">
+							<!-- Loop over assets -->
 							<xsl:for-each select="./asset">
 								<xsl:sort select="number(@sort)" data-type="number" order="ascending" />
-
 								<xsl:call-template name="asset-box">
 									<xsl:with-param name="asset" select="." />
 								</xsl:call-template>
 							</xsl:for-each>
 
+							<!-- Loop over docs -->
 							<xsl:for-each select="./doc">
 								<xsl:call-template name="asset-box">
 									<xsl:with-param name="asset" select="." />
@@ -212,7 +233,54 @@ Version:	1.1
 							</xsl:for-each>
 						</div>
 					</div>
+
+					<!-- Insert Open House Checklist after the FIRST section -->
+					<xsl:if test="$pos = 1">
+						<section class="open-house-checklist">
+							<div class="container">
+								<h1>
+									<span class="text-gold">But wait, there’s more!</span>
+									<br/>Don’t forget your open house checklist.
+								</h1>
+								<div class="arrow-container">
+									<svg width="65px" height="75px" viewBox="0 0 21 21"
+										xmlns="http://www.w3.org/2000/svg">
+										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
+											<path d="m.5 9.499 4 4.001 4-4.001"></path>
+											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
+										</g>
+									</svg>
+									<svg width="65px" height="75px" viewBox="0 0 21 21"
+										xmlns="http://www.w3.org/2000/svg">
+										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
+											<path d="m.5 9.499 4 4.001 4-4.001"></path>
+											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
+										</g>
+									</svg>
+									<svg width="65px" height="75px" viewBox="0 0 21 21"
+										xmlns="http://www.w3.org/2000/svg">
+										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
+											<path d="m.5 9.499 4 4.001 4-4.001"></path>
+											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
+										</g>
+									</svg>
+								</div>
+							</div>	
+						</section>
+					</xsl:if>
+
+					<!-- Insert Visitor Section after the SECOND section -->
+					<xsl:if test="$pos = 2">
+						<section class="visitor-sec">
+							<div class="container">
+								<h1>Get contact info for every visitor,<br/> every time. No exceptions.</h1>
+								<span class="up-arrow">↑</span>
+								<p class="bordered-button">This isn't a button. Read the above again.</p>
+							</div>	
+						</section>
+					</xsl:if>
 				</xsl:for-each>
+
 
 				<!-- footer -->
 				<section class="footer-marketing-kit">

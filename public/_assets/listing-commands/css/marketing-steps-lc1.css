@@ -2,6 +2,7 @@
 	--primary-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	--deep-blue:  #0c0e30;
 	--mid-blue: #101230;
+	--mid-black: #333333;
 	--golden: #b0914c;
 	--white: #ffffff;
 }
@@ -110,6 +111,7 @@ body{
     letter-spacing: 0.313rem;
     color: var(--mid-blue);
 	text-transform: uppercase;
+	line-height: 1.42;
 }
 .assets-steps .steps-heading{
 	font-size: 3.125rem;
@@ -130,17 +132,44 @@ body{
 .assets-steps div.section-grid div.post {
     flex-basis: 20% !important;
     width: 20%;
+	row-gap: 2.125rem;
+	column-gap: 1.25rem;
 }
 .assets-steps div.section-grid{
 	justify-content: start !important;
 }
-.assets-steps .section-grid .post h4{
-	white-space: normal !important;
-	text-align: center;
-}
+
 .assets-steps .section-grid .post img{
 	width: 100% !important;
 	height: 100% !important;
+	max-height: 9.375rem;
+}
+div.assets-steps .section-grid div.post img{
+	box-shadow: none !important;
+	transform: none !important;
+}
+.assets-steps .asset-box-title{
+	font-size: 1.5rem;
+	font-weight: 700;
+	text-align: left;
+	text-transform: uppercase;
+	color: var(--mid-black);
+	margin-block: 2.5rem 0.625rem;
+}
+.assets-steps .section-grid .post h4{
+	font-weight: 800;
+    font-size: 19px !important;
+    color: var(--deep-blue);
+    margin: 10px 0 !important;
+    height: 44px;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-spacing: -5px;
+	line-height: 1.1;
+	white-space: normal !important;
+	text-align: center;
 }
 /* steps section end */
 
