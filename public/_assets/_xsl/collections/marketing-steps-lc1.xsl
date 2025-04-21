@@ -12,13 +12,13 @@ Version:	1.1
 	<xsl:import href="listing-commands.xsl" />
 
 	<xsl:template name="template-folders">
-		<xsl:value-of select="'[`Step One:`, `Step Two`]'" />
+		<xsl:value-of select="'[`Step One`, `Step Two`]'" />
 	</xsl:template>
-	
+
 	<xsl:template name="asset-box">
 		<xsl:param name="asset" />
 
-		<div class="asset-container">
+		<div class="post">
 			<xsl:attribute name="data-title">
 				<xsl:value-of select="$asset/@name" />
 			</xsl:attribute>
@@ -37,7 +37,7 @@ Version:	1.1
 				<span class="rendering-spinner">
 					<xsl:comment/>
 				</span>
-			</h4>	
+			</h4>
 		</div>
 	</xsl:template>
 
@@ -64,20 +64,12 @@ Version:	1.1
 			</xsl:with-param>
 		</xsl:call-template>
 
-		<body class="marketing-steps">
+		<body>
 			<link href="https://fonts.googleapis.com" rel="preconnect" />
 			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
-			
-			<!-- Futura Font -->
 			<link rel="stylesheet">
 				<xsl:attribute name="href">
-					<xsl:value-of select="'/_assets/_css/futura-embedded.css'" />
-				</xsl:attribute>
-			</link>
-
-			<link rel="stylesheet">
-				<xsl:attribute name="href">
-					<xsl:value-of select="'/_assets/listing-commands/css/marketing-steps-lc1.css'" />
+					<xsl:value-of select="concat( //output/@siteUrl, '_assets/listing-commands/css/marketing-steps-lc1.css' )" />
 				</xsl:attribute>
 			</link>
 
@@ -86,7 +78,7 @@ Version:	1.1
 			</script>
 
 			<main>
-				<div class="landing-page-banner">					
+				<div class="banner">
 					<xsl:attribute name="style">
 						<xsl:if test="$primaryImageNoDefault != ''">
 							<xsl:value-of select="concat( 'background-image: url(', $primaryImageNoDefault, ')' )" />
@@ -110,129 +102,109 @@ Version:	1.1
 							<xsl:comment><!-- Genie Global JS --></xsl:comment>
 						</script>
 
+						<style>
+							<xsl:value-of select="'div.banner span.overlay {z-index: 10!important;}'" />
+						</style>
 					</xsl:if>
 
-					<div class="container">
-						<img class="company-logo" title="Company Logo">
-							<xsl:attribute name="src">
-								<xsl:value-of select="$companyLogo" />
-							</xsl:attribute>
-						</img>
-						<h1>
-							<span>
-								<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
-							</span>
-							<br/>
-							<xsl:call-template name="overridable">
-								<xsl:with-param name="id" select="'page-title'" />
-								<xsl:with-param name="default" select="'Marketing Toolkit'" />
-							</xsl:call-template>
-						</h1>
-						<xsl:if test="$listingAddressLine1 !=''">
-							<div class="address">
-								<span>
-									<xsl:value-of select="$listingAddressLine1" />
-								</span>
-							</div>
-						</xsl:if>
-						<div class="genie-logo">
-							<span>Powered by: </span>
-							<image title="The Genie AI" preserveAspectRatio="xMidYMid slice" src="/_assets/_img/genie-logo-1.png" />
-						</div>	
-					</div>					
-				</div>
+					<span class="overlay">
+						<xsl:comment/>
+					</span>
 
-				<section>
-					<div class="container">
-						<div class="agent-profiles">
-							<div class="partner-agent">
+					<img class="logo-img" title="Company Logo">
+						<xsl:attribute name="src">
+							<xsl:value-of select="$companyLogo" />
+						</xsl:attribute>
+					</img>
+					<h1>
+						<span>
+							<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
+						</span>
+						<br/>
+						<xsl:call-template name="overridable">
+							<xsl:with-param name="id" select="'page-title'" />
+							<xsl:with-param name="default" select="'Marketing Toolkit'" />
+						</xsl:call-template>
+					</h1>
+					<xsl:if test="$listingAddressLine1 !=''">
+						<div class="address">
+							<span>
+								<xsl:value-of select="$listingAddressLine1" />
+							</span>
+						</div>
+					</xsl:if>
+
+					<image title="The Genie AI" class="genie-logo" preserveAspectRatio="xMidYMid slice" src="/_assets/_img/genie-logo-1.png" />
+
+					<div style="position:absolute;bottom:-100px;top:unset;left:0;right:0;margin:auto;display:flex;justify-content:center;">
+						<div class="profile" style="width:200px;height:200px;margin:1%;">
+							<img>
+								<xsl:attribute name="title">
+									<xsl:value-of select="//agent[1]/marketingName" />
+								</xsl:attribute>
+								<xsl:attribute name="src">
+									<xsl:copy-of select="//agent[1]/photo" />
+								</xsl:attribute>
+							</img>
+						</div>
+
+						<xsl:if test="$hasMultipleAgents">
+							<div class="profile" style="width:200px;height:200px;margin:1%;">
 								<img>
 									<xsl:attribute name="title">
-										<xsl:value-of select="//agent[1]/marketingName" />
+										<xsl:value-of select="//agent[2]/marketingName" />
 									</xsl:attribute>
+
 									<xsl:attribute name="src">
-										<xsl:copy-of select="//agent[1]/photo" />
+										<xsl:copy-of select="//agent[2]/photo" />
 									</xsl:attribute>
 								</img>
 							</div>
-							
-
-							<xsl:if test="$hasMultipleAgents">
-								<div class="multi-agent">
-									<div class="partner-agent">
-										<img>
-											<xsl:attribute name="title">
-												<xsl:value-of select="//agent[2]/marketingName" />
-											</xsl:attribute>
-											<xsl:attribute name="src">
-												<xsl:copy-of select="//agent[2]/photo" />
-											</xsl:attribute>
-										</img>
-									</div>
-								</div>
-							</xsl:if>
-						</div>	
+						</xsl:if>
 					</div>
-				</section>
+				</div>
 
 				<xsl:for-each select="//collection/sections/section">
 					<xsl:sort select="number(@sort)" data-type="number" order="ascending" />
 					<xsl:sort select="@name" />
-					
-					<!-- Capture position -->
-					<xsl:variable name="pos" select="position()" />
 
-					<!-- Section Output -->
-					<div class="section assets-steps">
+					<div class="section">
 						<div class="section-heading">
-														 
-							<xsl:if test="number(@sort) = 1">
-								<p class="steps-count"> Step one </p>
-							</xsl:if>
-
-							<xsl:if test="number(@sort) = 2">
-								<p class="steps-count"> Step two </p>
-							</xsl:if>
-							
-							<h2 class="steps-heading">
+							<h3 class="light">
 								<xsl:value-of select="@name" />
-							</h2>
+							</h3>
 
-							<xsl:if test="@caption != ''">
-								<h3>
+							<xsl:if test="@caption!=''">
+								<h2>
 									<xsl:value-of select="@caption" />
-								</h3>
+								</h2>
 							</xsl:if>
 
-							<xsl:if test="@description != ''">
+							<xsl:if test="@description!=''">
 								<p>
 									<xsl:value-of select="@description" />
 								</p>
 							</xsl:if>
 
 							<div class="golden-border">
-								<span><xsl:comment/></span>
-								<span><xsl:comment/></span>
+								<span>
+									<xsl:comment/>
+								</span>
+								<span>
+									<xsl:comment/>
+								</span>
 							</div>
-
-							<xsl:if test="@assetTitle != ''">
-								<p class="asset-box-title">
-									<xsl:value-of select="@assetTitle" />
-								</p>
-							</xsl:if>
-
 						</div>
 
 						<div class="section-grid">
-							<!-- Loop over assets -->
 							<xsl:for-each select="./asset">
 								<xsl:sort select="number(@sort)" data-type="number" order="ascending" />
+
 								<xsl:call-template name="asset-box">
 									<xsl:with-param name="asset" select="." />
 								</xsl:call-template>
 							</xsl:for-each>
 
-							<!-- Loop over docs -->
 							<xsl:for-each select="./doc">
 								<xsl:call-template name="asset-box">
 									<xsl:with-param name="asset" select="." />
@@ -240,157 +212,73 @@ Version:	1.1
 							</xsl:for-each>
 						</div>
 					</div>
-
-					<!-- Insert Open House Checklist after the FIRST section -->
-					<xsl:if test="$pos = 1">
-						<section class="open-house-checklist">
-							<div class="container">
-								<h1>
-									<span class="text-gold">But wait, there’s more!</span>
-									<br/>Don’t forget your open house checklist.
-								</h1>
-								<div class="arrow-container">
-									<svg width="65px" height="75px" viewBox="0 0 21 21"
-										xmlns="http://www.w3.org/2000/svg">
-										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
-											<path d="m.5 9.499 4 4.001 4-4.001"></path>
-											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
-										</g>
-									</svg>
-									<svg width="65px" height="75px" viewBox="0 0 21 21"
-										xmlns="http://www.w3.org/2000/svg">
-										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
-											<path d="m.5 9.499 4 4.001 4-4.001"></path>
-											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
-										</g>
-									</svg>
-									<svg width="65px" height="75px" viewBox="0 0 21 21"
-										xmlns="http://www.w3.org/2000/svg">
-										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
-											<path d="m.5 9.499 4 4.001 4-4.001"></path>
-											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
-										</g>
-									</svg>
-								</div>
-							</div>	
-						</section>
-					</xsl:if>
-
-					<!-- Insert Visitor Section after the SECOND section -->
-					<xsl:if test="$pos = 2">
-						<section class="visitor-sec">
-							<div class="container">
-								<h1>Get contact info for every visitor,<br/> every time. No exceptions.</h1>
-								<span class="up-arrow">↑</span>
-								<p class="bordered-button">This isn't a button. Read the above again.</p>
-							</div>	
-						</section>
-					</xsl:if>
 				</xsl:for-each>
 
-
 				<!-- footer -->
-				<section>
-					<div class="container">
-						<div class="grid-col-3 marketing-footer">
-							<div>
-								<xsl:if test="//single/mlsNumber != ''">
-									<p>
-										<b>Property: </b>
-										<xsl:value-of select="$listingAddressLine1" />
-									</p>
-									<p>
-										<b>Hosted By:&#160;</b>
-										<xsl:value-of select="//agent[1]/marketingName" />
-									</p>
-									<p>
-										<b>Area Name:&#160;</b>
-										<xsl:value-of select="//areas/area[1]/name" />
-									</p>
-									<p class="download-pdf-link">                       
-										<a href="#" target="_blank"> About this collection
-											<span class="link-icon">
-												<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path d="M6.66665 0L8.86198 2.19533L4.19531 6.862L5.13798 7.80467L9.80465 3.138L12 5.33333V0H6.66665Z" fill="#195386"></path>
-													<path d="M10.6667 10.6667H1.33333V1.33333H6L4.66667 0H1.33333C0.598 0 0 0.598 0 1.33333V10.6667C0 11.402 0.598 12 1.33333 12H10.6667C11.402 12 12 11.402 12 10.6667V7.33333L10.6667 6V10.6667Z" fill="#195386"></path>
-												</svg>
-											</span>
-										</a>
-									</p>									
-								</xsl:if>
-							</div>
+				<section class="footer-marketing-kit">
+					<div>
+						<xsl:if test="//single/mlsNumber != ''">
+							<p>
+								<b>Property: </b>
+								<xsl:value-of select="$listingAddressLine1" />
+							</p>
+							<p>
+								<b>MLS: </b>
+								<xsl:value-of select="//single/mlsNumber" />
+							</p>
+							<p>
+								<b>Listing Agent: </b>
+								<xsl:choose>
+									<xsl:when test="//single/listingAgent != ''">
+										<xsl:value-of select="//single/listingAgent" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="'n/a'" />
+									</xsl:otherwise>
+								</xsl:choose>
+							</p>
+						</xsl:if>
+					</div>
 
-							<div>
-								<p>
-									<b>Collection:&#160;</b>
-									<xsl:value-of select="//collection/@name" />
-								</p>
-								<p>
-									<b>Listing Agent: </b>
-									<xsl:choose>
-										<xsl:when test="//single/listingAgent != ''">
-											<xsl:value-of select="//single/listingAgent" />
-										</xsl:when>
-										<xsl:otherwise>
-											<xsl:value-of select="'n/a'" />
-										</xsl:otherwise>
-									</xsl:choose>
-								</p>
-								<p>
-									<b>MLS: </b>
-									<xsl:value-of select="//single/mlsNumber" />
-								</p>
-								<p class="download-pdf-link">                       
-									<a href="#" target="_blank"> Marketing Kit
-										<span class="link-icon">
-											<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M6.66665 0L8.86198 2.19533L4.19531 6.862L5.13798 7.80467L9.80465 3.138L12 5.33333V0H6.66665Z" fill="#195386"></path>
-												<path d="M10.6667 10.6667H1.33333V1.33333H6L4.66667 0H1.33333C0.598 0 0 0.598 0 1.33333V10.6667C0 11.402 0.598 12 1.33333 12H10.6667C11.402 12 12 11.402 12 10.6667V7.33333L10.6667 6V10.6667Z" fill="#195386"></path>
-											</svg>
-										</span>
-									</a>
-								</p>
+					<div>
+						<p>
+							<b>Created On:&#160;</b>
+							<xsl:value-of select="genie:format-date( //collection/@assembled, '[M02]-[D]-[Y0001]' )" />
+						</p>
+						<p>
+							<b>Prepared For:&#160;</b>
+							<xsl:value-of select="//agent[1]/marketingName" />
+						</p>
+						<p>
+							<b>Area Name:&#160;</b>
+							<xsl:value-of select="//areas/area[1]/name" />
+						</p>
+					</div>
 
-								
-								<!-- <p>
-									<b>Prepared For:&#160;</b>
-									<xsl:value-of select="//agent[1]/marketingName" />
-								</p> -->
-								
-							</div>
-
-							<div>
-								<p>
-									<b>Created On:&#160;</b>
-									<xsl:value-of select="genie:format-date( //collection/@assembled, '[M02]-[D]-[Y0001]' )" />
-								</p>
-
-								<p>
-									<b>Open House Date:&#160;</b>
-									
-								</p>
-								
-								<p>
-									<b>Collection ID:&#160;</b>
-									<xsl:value-of select="//collection/@id" />
-								</p>
-								<!-- <p>
-									<b>Re-render this kit:&#160;</b>
-									<a>
-										<xsl:attribute name="href">
-											<xsl:value-of select="concat( //output/@apiUrl, 're-render?renderId=', //collection/@id )" />
-										</xsl:attribute>
-										<xsl:text>Click to re-render</xsl:text>
-									</a>
-								</p> -->
-							</div>
-						</div>
-					</div>	
+					<div>
+						<p>
+							<b>Collection:&#160;</b>
+							<xsl:value-of select="//collection/@name" />
+						</p>
+						<p>
+							<b>Collection ID:&#160;</b>
+							<xsl:value-of select="//collection/@id" />
+						</p>
+						<p>
+							<b>Re-render this kit:&#160;</b>
+							<a>
+								<xsl:attribute name="href">
+									<xsl:value-of select="concat( //output/@apiUrl, 're-render?renderId=', //collection/@id )" />
+								</xsl:attribute>
+								<xsl:text>Click to re-render</xsl:text>
+							</a>
+						</p>
+					</div>
 				</section>
 			</main>
 		</body>
 
-		<!-- <footer>
+		<footer>
 			<xsl:if test="$personalLogo!=''">
 				<img>
 					<xsl:attribute name="src">
@@ -405,25 +293,6 @@ Version:	1.1
 					</xsl:attribute>
 				</img>
 			</xsl:if>
-		</footer> -->
-		<footer>
-			<div class="container">
-				<div class="grid-col-3 footer">
-					<div>
-						<p><b>Copyright © 2025</b> 1parkplace, Inc.. All rights reserved.</p>
-					</div>
-					<div class="footer-middle">
-						<a href="#" target="_blank">TheGenie.ai.</a>
-						
-						<img class="footer-middle-img" src="/_assets/_img/made-with-love.png" alt="Made with Love in San Diego - pV, aV" />
-						
-						<p><strong>US Patent #:</strong> 10,713,325</p>
-					</div>
-					<div>
-						<p><b>Power Tools</b> for your Real Estate Business!</p>
-					</div>
-				</div>
-			</div>
 		</footer>
 	</xsl:template>
 </xsl:stylesheet>												
