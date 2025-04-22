@@ -6,6 +6,10 @@
 @import url("../_css/futura-condensed.css");
 @import url("https://fonts.googleapis.com/css2?family=Smooch&display=swap");
 
+html {
+	font-size: 100%;
+}
+
 .ed-kaminsky, .ed-kaminsky.light, .ed-kaminsky .light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #0e1232; /* Heading */
