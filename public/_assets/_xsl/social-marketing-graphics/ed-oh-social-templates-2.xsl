@@ -13,10 +13,10 @@
 
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
+		<!-- <link rel="stylesheet">
 <xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
-		</link>
+		</link> -->
 		<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)"></rect>
 
 		<image x="26%" y="4.8%" width="70%" height="70%" stroke-width="5" preserveAspectRatio="xMidYMid slice">
@@ -28,7 +28,7 @@
 
 		<foreignObject x="-1%" y="-5%" height="22%" width="54%" style="transform-origin: 0; transform: rotate(-90deg) translate(-7%, 63%)">
 			<div>
-				<h2 class="upper futura-text" style="color:var(--theme-heading-color); font-weight:500; font-size:25px;">
+				<h2 class="upper" style="color:var(--theme-heading-color); font-weight:500;  font-size:250%; font-family:var(--theme-heading-font)">
 					<xsl:value-of select="//area/name" />
 				</h2>
 			</div>
@@ -43,11 +43,11 @@
 			</xsl:attribute>
 		</image>
 
-		<text class="futura-text" x="40.8%" y="78.8%" fill="var(--theme-heading-color)" font-weight="800" font-size="160%">
+		<text font-family="var(--theme-heading-font)" x="40.8%" y="78.8%" fill="var(--theme-heading-color)" font-weight="800" font-size="290%">
 			<xsl:text>Open 1-4pm</xsl:text>
 		</text>
 
-		<text class="futura-text" x="40.8%" y="85.5%" fill="var(--theme-heading-color)" font-weight="400" font-size="155%" data-max-width="55%" style="letter-spacing:-1px;">
+		<text font-family="var(--theme-heading-font)" x="40.8%" y="85.5%" fill="var(--theme-heading-color)" font-weight="400" font-size="290%" data-max-width="55%" style="letter-spacing:-1px;">
 			<xsl:value-of select="$listingAddressLine1" />
 		</text>
 	</xsl:template>

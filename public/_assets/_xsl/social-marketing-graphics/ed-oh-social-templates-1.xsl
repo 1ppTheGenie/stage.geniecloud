@@ -13,10 +13,11 @@
 
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-
-		</link>
+		<!-- <link rel="stylesheet">
+			<xsl:attribute name="href">
+				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_css/futura-condensed.css' )" />
+			</xsl:attribute>
+		</link> -->
 
 		<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -32,8 +33,8 @@
 				<xsl:value-of select="//agent[1]/photo" />
 			</xsl:attribute>
 		</image>
-		<text xmlns="" x="12%" y="78%" fill="var(--theme-heading-color)" font-size="140%" font-weight="700" class="futura-text">Open
-			<tspan x="11%" dy="4.5%">1-4pm </tspan>
+		<text xmlns="" x="12%" y="78%" width="18.1%" fill="var(--theme-heading-color)" font-size="275%" font-weight="700" font-family="var(--theme-heading-font)">Open
+			<tspan x="11%" dy="4.5%" >1-4pm </tspan>
 		</text>
 	</xsl:template>
 
