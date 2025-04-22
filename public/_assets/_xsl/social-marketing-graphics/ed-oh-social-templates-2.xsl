@@ -28,7 +28,7 @@
 
 		<foreignObject x="-1%" y="-5%" height="22%" width="54%" style="transform-origin: 0; transform: rotate(-90deg) translate(-7%, 63%)">
 			<div>
-				<h2 class="upper" style="color:var(--theme-heading-color); font-weight:500;  font-size:125%; font-family:var(--theme-heading-font)">
+				<h2 class="upper" style="color:var(--theme-heading-color); font-weight:500;  font-size:250%; font-family:var(--theme-heading-font)">
 					<xsl:value-of select="//area/name" />
 				</h2>
 			</div>
@@ -43,11 +43,11 @@
 			</xsl:attribute>
 		</image>
 
-		<text font-family="var(--theme-heading-font)" x="40.8%" y="78.8%" fill="var(--theme-heading-color)" font-weight="800" font-size="145%">
+		<text font-family="var(--theme-heading-font)" x="40.8%" y="78.8%" fill="var(--theme-heading-color)" font-weight="800" font-size="290%">
 			<xsl:text>Open 1-4pm</xsl:text>
 		</text>
 
-		<text font-family="var(--theme-heading-font)" x="40.8%" y="85.5%" fill="var(--theme-heading-color)" font-weight="400" font-size="145%" data-max-width="55%" style="letter-spacing:-1px;">
+		<text font-family="var(--theme-heading-font)" x="40.8%" y="85.5%" fill="var(--theme-heading-color)" font-weight="400" font-size="290%" data-max-width="55%" style="letter-spacing:-1px;">
 			<xsl:value-of select="$listingAddressLine1" />
 		</text>
 	</xsl:template>
