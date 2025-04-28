@@ -179,10 +179,10 @@
 			</xsl:otherwise>
 		</xsl:choose>
 
-		<text x="12%" y="93%" class="futura-condensed" fill="#8494a0" data-max-width="90%">
+		<text x="12%" y="93%" class="futura-condensed" fill="#8494a0">
 			<xsl:text>EXP REALTY OF CALIFORNIA, INC LICENSE #01878277. INFORMATION IS DEEMED RELIABLE, BUT NOT GUARANTEED.</xsl:text>
 		</text>
-		<text x="12%" y="95%" class="futura-condensed" fill="#8494a0" data-max-width="90%">
+		<text x="12%" y="95%" class="futura-condensed" fill="#8494a0">
 			<xsl:text>BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.</xsl:text>
 		</text>
 	</xsl:template>
@@ -230,7 +230,7 @@
 			</tspan>
 		</text>
 
-		<text y="88.2%" class="futura-text" font-size="240%" data-max-width="10%">
+		<text y="88.2%" class="futura-text" font-size="240%" data-max-width="50%">
 			<tspan x="32.3%" dy="0%" fill="#b0934c">e</tspan>
 			<tspan x="36.4%" dy="0%" fill="#fff" class="futura-text" font-weight="300">
 				<xsl:call-template name="editable">
