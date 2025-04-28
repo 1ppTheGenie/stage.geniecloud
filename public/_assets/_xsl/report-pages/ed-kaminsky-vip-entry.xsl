@@ -179,10 +179,10 @@
 			</xsl:otherwise>
 		</xsl:choose>
 
-		<text x="12%" y="93%" class="futura-condensed" fill="#8494a0" font-size="200%">
+		<text x="12%" y="93%" class="futura-condensed" fill="#8494a0" font-size="180%">
 			<xsl:text>EXP REALTY OF CALIFORNIA, INC LICENSE #01878277. INFORMATION IS DEEMED RELIABLE, BUT NOT GUARANTEED.</xsl:text>
 		</text>
-		<text x="12%" y="95%" class="futura-condensed" fill="#8494a0" font-size="200%">
+		<text x="12%" y="95%" class="futura-condensed" fill="#8494a0" font-size="180%">
 			<xsl:text>BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.</xsl:text>
 		</text>
 	</xsl:template>
