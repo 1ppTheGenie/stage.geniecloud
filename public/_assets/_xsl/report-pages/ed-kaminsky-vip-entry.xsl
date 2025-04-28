@@ -154,14 +154,14 @@
 					</xsl:call-template>
 				</g>
 
-				<image x="42%" y="85%" width="16%" height="6%" preserveAspectRatio="xMidYMin slice">
+				<!-- <image x="42%" y="85%" width="16%" height="6%" preserveAspectRatio="xMidYMin slice">
 					<xsl:attribute name="href">
 						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download.png' )" />
 					</xsl:attribute>
 				</image>
 				<text x="50%" y="91%" class="futura-text" fill="#b0934c" font-size="300%" font-weight="600" text-anchor="middle">
 					<xsl:text>More Info</xsl:text>
-				</text>
+				</text> -->
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="custom-agent-details">
@@ -179,10 +179,10 @@
 			</xsl:otherwise>
 		</xsl:choose>
 
-		<text x="12%" y="93%" class="futura-condensed" fill="#8494a0">
+		<text x="12%" y="93%" class="futura-condensed" fill="#8494a0" font-size="240%">
 			<xsl:text>EXP REALTY OF CALIFORNIA, INC LICENSE #01878277. INFORMATION IS DEEMED RELIABLE, BUT NOT GUARANTEED.</xsl:text>
 		</text>
-		<text x="12%" y="95%" class="futura-condensed" fill="#8494a0">
+		<text x="12%" y="95%" class="futura-condensed" fill="#8494a0" font-size="240%">
 			<xsl:text>BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.</xsl:text>
 		</text>
 	</xsl:template>
@@ -232,7 +232,7 @@
 
 		<text y="88.2%" class="futura-text" font-size="240%" data-max-width="50%">
 			<tspan x="32.3%" dy="0%" fill="#b0934c">e</tspan>
-			<tspan x="36.4%" dy="0%" fill="#fff" class="futura-text" font-weight="300">
+			<tspan x="36.4%" dy="0%" fill="#fff" class="futura-text" font-weight="400">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="concat( 'agentEmail-', $idx )" />
 					<xsl:with-param name="default" select="$agent/marketingEmail" />
@@ -242,7 +242,7 @@
 
 		<text y="89.7%" class="futura-text">
 			<tspan x="32.3%" dy="0%" fill="#b0934c" font-size="235%">w</tspan>
-			<tspan x="36.4%" dy="0%" fill="#fff" class="futura-text" font-size="235%" font-weight="300">
+			<tspan x="36.4%" dy="0%" fill="#fff" class="futura-text" font-size="235%" font-weight="400">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="concat( 'agentwebsite-', $idx )" />
 					<xsl:with-param name="default" select="$agent/website" />
