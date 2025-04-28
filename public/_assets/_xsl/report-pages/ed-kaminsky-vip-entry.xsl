@@ -11,12 +11,12 @@
 <xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-		<link xmlns="http://www.w3.org/1999/xhtml" rel="stylesheet" type="text/css">
+		<!-- <link xmlns="http://www.w3.org/1999/xhtml" rel="stylesheet" type="text/css">
 			<xsl:attribute name="href">
 <xsl:value-of select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css' )" />
 
 			</xsl:attribute>
-		</link>
+		</link> -->
 
 		<rect x="0" y="0" width="100%" height="100%" fill="#0d0f30" style="background: #0d0f30;"></rect>
 
@@ -78,12 +78,18 @@
 			</xsl:call-template>
 		</text>
 
-		<text x="50%" y="76.7%" class="futura-text center" fill="#fff" font-size="243%" style="word-spacing: 5px;">
-			<tspan>Listed by </tspan>
+		<!-- <text x="50%" y="76.7%" class="futura-text center" fill="#fff" font-size="243%" style="word-spacing: 5px;">
+			<tspan>Presented by </tspan>
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'marketingName'" />
 					<xsl:with-param name="default" select="//agent[1]/marketingName" />
+				</xsl:call-template>
+			</tspan>
+			<tspan>
+				<xsl:call-template name="editable">
+					<xsl:with-param name="id" select="'marketingName'" />
+					<xsl:with-param name="default" select="concat( 'And ', //agent[2]/marketingName)" />
 				</xsl:call-template>
 			</tspan>
 			<tspan fill="#b0934c"> • </tspan>
@@ -93,7 +99,62 @@
 					<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
 				</xsl:call-template>
 			</tspan>
+		</text> -->
+
+		<!--  -->
+
+		<xsl:choose>
+			<xsl:when test="$hasMultipleAgents">
+				<text x="50%" y="76.7%" class="futura-text center" fill="#fff" font-size="243%" style="word-spacing: 5px;">
+			<tspan>Presented by </tspan>
+			<tspan>
+				<xsl:call-template name="editable">
+					<xsl:with-param name="id" select="'marketingName'" />
+					<xsl:with-param name="default" select="//agent[1]/marketingName" />
+				</xsl:call-template>
+			</tspan>
+			<tspan>
+				<xsl:call-template name="editable">
+					<xsl:with-param name="id" select="'marketingName'" />
+					<xsl:with-param name="default" select="concat( 'And ', //agent[2]/marketingName)" />
+				</xsl:call-template>
+			</tspan>
+			<!-- <tspan fill="#b0934c"> • </tspan>
+			<tspan >
+				<xsl:call-template name="editable">
+					<xsl:with-param name="id" select="'licenseno'" />
+					<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
+				</xsl:call-template>
+			</tspan> -->
 		</text>
+			</xsl:when>
+			<xsl:otherwise>
+				<text x="50%" y="76.7%" class="futura-text center" fill="#fff" font-size="243%" style="word-spacing: 5px;">
+					<tspan>Presented by </tspan>
+					<tspan>
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'marketingName'" />
+							<xsl:with-param name="default" select="//agent[1]/marketingName" />
+						</xsl:call-template>
+					</tspan>
+					<!-- <tspan>
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'marketingName'" />
+							<xsl:with-param name="default" select="concat( 'And ', //agent[2]/marketingName)" />
+						</xsl:call-template>
+					</tspan> -->
+					<!-- <tspan fill="#b0934c"> • </tspan>
+					<tspan >
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'licenseno'" />
+							<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
+						</xsl:call-template>
+					</tspan> -->
+				</text>
+			</xsl:otherwise>
+		</xsl:choose>
+
+		<!--  -->
 
 		<xsl:choose>
 			<xsl:when test="$hasMultipleAgents">
