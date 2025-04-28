@@ -11,10 +11,9 @@
 <xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-		<!-- <link xmlns="http://www.w3.org/1999/xhtml" rel="stylesheet" type="text/css">
+		<!-- <link rel="stylesheet" type="text/css">
 			<xsl:attribute name="href">
-<xsl:value-of select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css' )" />
-
+				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css' )" />
 			</xsl:attribute>
 		</link> -->
 
@@ -170,7 +169,7 @@
 
 				<image x="70.5%" y="82.7%" width="18%" height="6.5%" preserveAspectRatio="xMidYMin slice">
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download.png' )" />
+						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download-new.png' )" />
 					</xsl:attribute>
 				</image>
 				<text x="79.5%" y="89.5%" class="futura-text center" fill="#b0934c" font-size="250%" font-weight="600">
