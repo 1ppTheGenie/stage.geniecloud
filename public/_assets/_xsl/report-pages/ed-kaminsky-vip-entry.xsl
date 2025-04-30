@@ -140,18 +140,68 @@
 
 		<xsl:choose>
 			<xsl:when test="$hasMultipleAgents">
-				<g style="transform: scale(0.65) translateY(12.5%); transform-origin: left;">
-					<xsl:call-template name="custom-agent-details">
-						<xsl:with-param name="agent" select="//agent[1]" />
-						<xsl:with-param name="idx" select="1" />
-					</xsl:call-template>
+				<!-- Agent One -->
+				<svg x="20%" y="80%" width='180' height='180'>
+					<circle cx="95" cy="95" r="85" stroke='#fff' stroke-width='3' fill='#e3e3e3' />
+				</svg>
+				<g style="transform: scale(0.65) translateY(12.8%); transform-origin: left;">
+					<clipPath id="clipCircle">
+						<circle r="7%" cx="41%" cy="86.5%"></circle>
+					</clipPath>
+					<image x="33.5%" y="84%" width="20%" height="8.8%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
+						<xsl:attribute name="href">
+							<xsl:value-of select="//agent[1]/photo" />
+						</xsl:attribute>
+					</image>
 				</g>
-				<g style="transform: scale(0.65) translateY(12.5%) translateX(70%); transform-origin: left;">
+				<text x="0%" y="86.3%" class="futura-text" font-size="300%" font-weight="800" style="letter-spacing:2px">
+					<tspan x="15.3%" dy="0%" fill="#fff">
+						<xsl:call-template name="editable">
+							<!-- <xsl:with-param name="id" select="concat( 'marketingFirstName-', $idx )" /> -->
+							<xsl:with-param name="default" select="//agent[1]/firstName" />
+						</xsl:call-template>
+					</tspan>
+					<tspan fill="#b0934c" class="futura-text" font-weight="800">
+						<xsl:call-template name="editable">
+							<!-- <xsl:with-param name="id" select="concat( 'marketingLastName-', $idx )" /> -->
+							<xsl:with-param name="default" select="concat(' ',//agent[1]/lastName)" />
+						</xsl:call-template>
+					</tspan>
+				</text>
+				<!-- Agent Second -->
+				<svg x="65%" y="80%" width='180' height='180'>
+					<circle cx="95" cy="95" r="85" stroke='#fff' stroke-width='3' fill='#e3e3e3' />
+				</svg>
+				<g style="transform: scale(0.65) translateY(12.5%) translateX(7%); transform-origin: left;">
+					<clipPath id="clipCircles">
+						<circle r="7%" cx="104.5%" cy="86.8%"></circle>
+					</clipPath>
+					<image x="95%" y="84%" width="20%" height="8.8%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircles)">
+						<xsl:attribute name="href">
+							<xsl:value-of select="//agent[1]/photo" />
+						</xsl:attribute>
+					</image>
+				</g>
+				<text x="0%" y="86.3%" class="futura-text" font-size="300%" font-weight="800" style="letter-spacing:2px">
+					<tspan x="62%" dy="0%" fill="#fff">
+						<xsl:call-template name="editable">
+							<!-- <xsl:with-param name="id" select="concat( 'marketingFirstName-', $idx )" /> -->
+							<xsl:with-param name="default" select="//agent[1]/firstName" />
+						</xsl:call-template>
+					</tspan>
+					<tspan fill="#b0934c" class="futura-text" font-weight="800">
+						<xsl:call-template name="editable">
+							<!-- <xsl:with-param name="id" select="concat( 'marketingLastName-', $idx )" /> -->
+							<xsl:with-param name="default" select="concat(' ',//agent[1]/lastName)" />
+						</xsl:call-template>
+					</tspan>
+				</text>
+				<!-- <g style="transform: scale(0.65) translateY(12.5%) translateX(70%); transform-origin: left;">
 					<xsl:call-template name="custom-agent-details">
 						<xsl:with-param name="agent" select="//agent[2]" />
 						<xsl:with-param name="idx" select="2" />
 					</xsl:call-template>
-				</g>
+				</g> -->
 
 				<!-- <image x="42%" y="85%" width="16%" height="6%" preserveAspectRatio="xMidYMin slice">
 					<xsl:attribute name="href">
@@ -160,7 +210,7 @@
 				</image>
 				<text x="50%" y="91%" class="futura-text" fill="#b0934c" font-size="300%" font-weight="600" text-anchor="middle">
 					<xsl:text>More Info</xsl:text>
-				</text> -->
+				</text> -->				
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="custom-agent-details">
@@ -175,7 +225,7 @@
 				<text x="79.5%" y="89.5%" class="futura-text center" fill="#b0934c" font-size="250%" font-weight="600">
 					<xsl:text>More Info</xsl:text>
 				</text>
-			</xsl:otherwise>
+			</xsl:otherwise>			
 		</xsl:choose>
 
 		<text x="12%" y="93%" class="futura-condensed" fill="#8494a0" font-size="180%">
