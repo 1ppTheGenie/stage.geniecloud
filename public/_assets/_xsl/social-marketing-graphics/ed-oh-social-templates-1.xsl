@@ -33,7 +33,7 @@
 				<xsl:value-of select="//agent[1]/photo" />
 			</xsl:attribute>
 		</image>
-		<text xmlns="" x="12%" y="78%" width="18.1%" fill="var(--theme-heading-color)" font-size="22" font-weight="700" font-family="var(--theme-heading-font)">Open
+		<text xmlns="" x="12%" y="78%"  fill="var(--theme-heading-color)" font-size="44" font-weight="700" font-family="var(--theme-heading-font)">Open
 			<tspan x="11%" dy="4.5%" >1-4pm </tspan>
 		</text>
 	</xsl:template>
