@@ -21,8 +21,8 @@
 
 		<image x="26%" y="4.8%" width="70%" height="70%" stroke-width="5" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="id" select="image-1" />
-				<xsl:with-param name="idx" select="1" />
+				<xsl:with-param name="id" select="image-2" />
+				<xsl:with-param name="idx" select="2" />
 			</xsl:call-template>
 		</image>
 
