@@ -140,7 +140,7 @@
 
 		<xsl:choose>
 			<xsl:when test="$hasMultipleAgents">
-				<!-- Agent One -->
+				<!-- Agent One Data -->
 				<svg x="20%" y="80%" width='180' height='180'>
 					<circle cx="95" cy="95" r="85" stroke='#fff' stroke-width='3' fill='#e3e3e3' />
 				</svg>
