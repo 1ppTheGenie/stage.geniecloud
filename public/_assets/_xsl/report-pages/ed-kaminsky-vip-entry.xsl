@@ -11,12 +11,11 @@
 <xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-		<link xmlns="http://www.w3.org/1999/xhtml" rel="stylesheet" type="text/css">
+		<!-- <link rel="stylesheet" type="text/css">
 			<xsl:attribute name="href">
-<xsl:value-of select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css' )" />
-
+				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css' )" />
 			</xsl:attribute>
-		</link>
+		</link> -->
 
 		<rect x="0" y="0" width="100%" height="100%" fill="#0d0f30" style="background: #0d0f30;"></rect>
 
@@ -78,12 +77,18 @@
 			</xsl:call-template>
 		</text>
 
-		<text x="50%" y="76.7%" class="futura-text center" fill="#fff" font-size="243%" style="word-spacing: 5px;">
-			<tspan>Listed by </tspan>
+		<!-- <text x="50%" y="76.7%" class="futura-text center" fill="#fff" font-size="243%" style="word-spacing: 5px;">
+			<tspan>Presented by </tspan>
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'marketingName'" />
 					<xsl:with-param name="default" select="//agent[1]/marketingName" />
+				</xsl:call-template>
+			</tspan>
+			<tspan>
+				<xsl:call-template name="editable">
+					<xsl:with-param name="id" select="'marketingName'" />
+					<xsl:with-param name="default" select="concat( 'And ', //agent[2]/marketingName)" />
 				</xsl:call-template>
 			</tspan>
 			<tspan fill="#b0934c"> • </tspan>
@@ -93,7 +98,45 @@
 					<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
 				</xsl:call-template>
 			</tspan>
-		</text>
+		</text> -->
+
+		<xsl:choose>
+			<xsl:when test="$hasMultipleAgents">
+				<text x="50%" y="76.7%" class="futura-text center" fill="#fff" font-size="243%" style="word-spacing: 5px;">
+					<tspan>Presented by </tspan>
+					<tspan>
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'marketingName'" />
+							<xsl:with-param name="default" select="//agent[1]/marketingName" />
+						</xsl:call-template>
+					</tspan>
+					<tspan>
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'marketingName'" />
+							<xsl:with-param name="default" select="concat( ' And ', //agent[2]/marketingName)" />
+						</xsl:call-template>
+					</tspan>
+					<!-- <tspan fill="#b0934c"> • </tspan>
+					<tspan >
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'licenseno'" />
+							<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
+						</xsl:call-template>
+					</tspan> -->
+				</text>
+			</xsl:when>
+			<xsl:otherwise>
+				<text x="50%" y="76.7%" class="futura-text center" fill="#fff" font-size="243%" style="word-spacing: 5px;">
+					<tspan>Presented by </tspan>
+					<tspan>
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'marketingName'" />
+							<xsl:with-param name="default" select="//agent[1]/marketingName" />
+						</xsl:call-template>
+					</tspan>
+				</text>
+			</xsl:otherwise>
+		</xsl:choose>
 
 		<xsl:choose>
 			<xsl:when test="$hasMultipleAgents">
@@ -110,42 +153,42 @@
 					</xsl:call-template>
 				</g>
 
-				<image x="42%" y="85%" width="16%" height="6%" preserveAspectRatio="xMidYMin slice">
+				<!-- <image x="42%" y="85%" width="16%" height="6%" preserveAspectRatio="xMidYMin slice">
 					<xsl:attribute name="href">
 						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download.png' )" />
 					</xsl:attribute>
 				</image>
 				<text x="50%" y="91%" class="futura-text" fill="#b0934c" font-size="300%" font-weight="600" text-anchor="middle">
 					<xsl:text>More Info</xsl:text>
-				</text>
+				</text> -->
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="custom-agent-details">
 					<xsl:with-param name="agent" select="//agent[1]" />
 				</xsl:call-template>
 
-				<image x="70.5%" y="85.5%" width="17.6%" height="6.7%" preserveAspectRatio="xMidYMin slice">
+				<image x="70.5%" y="82.7%" width="18%" height="6.5%" preserveAspectRatio="xMidYMin slice">
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download.png' )" />
+						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download-new.png' )" />
 					</xsl:attribute>
 				</image>
-				<text x="70.9%" y="92%" class="futura-text" fill="#b0934c" font-size="250%" font-weight="600">
+				<text x="79.5%" y="89.5%" class="futura-text center" fill="#b0934c" font-size="250%" font-weight="600">
 					<xsl:text>More Info</xsl:text>
 				</text>
 			</xsl:otherwise>
 		</xsl:choose>
 
-		<text x="5%" y="93%" class="futura-condensed" fill="#8494a0" data-max-width="90%">
+		<text x="12%" y="93%" class="futura-condensed" fill="#8494a0" font-size="180%">
 			<xsl:text>EXP REALTY OF CALIFORNIA, INC LICENSE #01878277. INFORMATION IS DEEMED RELIABLE, BUT NOT GUARANTEED.</xsl:text>
 		</text>
-		<text x="5%" y="95%" class="futura-condensed" fill="#8494a0" data-max-width="90%">
+		<text x="12%" y="95%" class="futura-condensed" fill="#8494a0" font-size="180%">
 			<xsl:text>BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.</xsl:text>
 		</text>
 	</xsl:template>
 
 	<xsl:template name="custom-agent-details">
-<xsl:param name="agent" />
-<xsl:param name="idx" select="'1'" />
+		<xsl:param name="agent" />
+		<xsl:param name="idx" select="'1'" />
 
 
 		<image x="12.5% " y="82.1%" width="17.5%" height="8.8%" preserveAspectRatio="xMidYMin slice">
@@ -169,7 +212,7 @@
 			</tspan>
 		</text>
 
-		<text x="32.3%" y="84.2%" class="futura-text" font-size="200%">
+		<text x="32.3%" y="84.2%" fill="#fff" class="futura-text" font-size="200%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="concat( 'licenseno-', $idx )" />
 				<xsl:with-param name="default" select="$agent/marketingLicense" />
@@ -186,9 +229,9 @@
 			</tspan>
 		</text>
 
-		<text y="88.2%" class="futura-text" font-size="240%" data-max-width="10%">
+		<text y="88.2%" class="futura-text" font-size="240%" data-max-width="50%">
 			<tspan x="32.3%" dy="0%" fill="#b0934c">e</tspan>
-			<tspan x="36.4%" dy="0%" fill="#fff" class="futura-text" font-weigt="300">
+			<tspan x="36.4%" dy="0%" fill="#fff" class="futura-text" font-weight="400">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="concat( 'agentEmail-', $idx )" />
 					<xsl:with-param name="default" select="$agent/marketingEmail" />
@@ -198,7 +241,7 @@
 
 		<text y="89.7%" class="futura-text">
 			<tspan x="32.3%" dy="0%" fill="#b0934c" font-size="235%">w</tspan>
-			<tspan x="36.4%" dy="0%" fill="#fff" class="futura-text" font-size="235%" font-weight="300">
+			<tspan x="36.4%" dy="0%" fill="#fff" class="futura-text" font-size="235%" font-weight="400">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="concat( 'agentwebsite-', $idx )" />
 					<xsl:with-param name="default" select="$agent/website" />
