@@ -21,8 +21,8 @@
 
 		<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="id" select="image-1" />
-				<xsl:with-param name="idx" select="1" />
+				<xsl:with-param name="id" select="image-2" />
+				<xsl:with-param name="idx" select="2" />
 			</xsl:call-template>
 		</image>
 		<rect x="7%" y="72.5%" width="39%" height="20%" fill="var(--theme-body-background)"></rect>
@@ -33,7 +33,7 @@
 				<xsl:value-of select="//agent[1]/photo" />
 			</xsl:attribute>
 		</image>
-		<text xmlns="" x="12%" y="78%" width="18.1%" fill="var(--theme-heading-color)" font-size="22" font-weight="700" font-family="var(--theme-heading-font)">Open
+		<text xmlns="" x="12%" y="78%"  fill="var(--theme-heading-color)" font-size="44" font-weight="700" font-family="var(--theme-heading-font)">Open
 			<tspan x="11%" dy="4.5%" >1-4pm </tspan>
 		</text>
 	</xsl:template>

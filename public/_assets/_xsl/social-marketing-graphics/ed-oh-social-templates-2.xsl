@@ -21,18 +21,14 @@
 
 		<image x="26%" y="4.8%" width="70%" height="70%" stroke-width="5" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="id" select="image-1" />
-				<xsl:with-param name="idx" select="1" />
+				<xsl:with-param name="id" select="image-2" />
+				<xsl:with-param name="idx" select="2" />
 			</xsl:call-template>
 		</image>
 
-		<foreignObject x="-1%" y="-5%" height="22%" width="54%" style="transform-origin: 0; transform: rotate(-90deg) translate(-7%, 63%)">
-			<div>
-				<h2 class="upper" style="color:var(--theme-heading-color); font-weight:500;  font-size:250%; font-family:var(--theme-heading-font)">
-					<xsl:value-of select="//area/name" />
-				</h2>
-			</div>
-		</foreignObject>
+		<text x="-385" y="280" transform="rotate(-90, 40, 200)" class="upper" style="color:var(--theme-heading-color); font-family:var(--theme-heading-font)" font-size="40" font-weight="600">
+    <xsl:value-of select="//area/name" />
+  </text>
 
 <rect fill="#e3e3e3" stroke-width="1%" stroke="#fff" fill-opacity="1" x="2%" y="61.5%" width="34%" height="33%" />
 
@@ -43,11 +39,11 @@
 			</xsl:attribute>
 		</image>
 
-		<text font-family="var(--theme-heading-font)" x="40.8%" y="78.8%" fill="var(--theme-heading-color)" font-weight="800" font-size="290%">
+		<text font-family="var(--theme-heading-font)" x="40.8%" y="78.8%" fill="var(--theme-heading-color)" font-weight="800" font-size="47">
 			<xsl:text>Open 1-4pm</xsl:text>
 		</text>
 
-		<text font-family="var(--theme-heading-font)" x="40.8%" y="85.5%" fill="var(--theme-heading-color)" font-weight="400" font-size="290%" data-max-width="55%" style="letter-spacing:-1px;">
+		<text font-family="var(--theme-heading-font)" x="40.8%" y="85.5%" fill="var(--theme-heading-color)" font-weight="400" font-size="47" data-max-width="55%" style="letter-spacing:-1px;">
 			<xsl:value-of select="$listingAddressLine1" />
 		</text>
 	</xsl:template>
