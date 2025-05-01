@@ -26,7 +26,7 @@
 			</xsl:call-template>
 		</image>
 
-		<text x="-385" y="280" transform="rotate(-90, 40, 200)" class="upper" style="color:var(--theme-heading-color); font-family:var(--theme-heading-font)" font-size="40" font-weight="500">
+		<text x="-385" y="280" transform="rotate(-90, 40, 200)" class="upper" style="color:var(--theme-heading-color); font-family:var(--theme-heading-font)" font-size="40" font-weight="600">
     <xsl:value-of select="//area/name" />
   </text>
 

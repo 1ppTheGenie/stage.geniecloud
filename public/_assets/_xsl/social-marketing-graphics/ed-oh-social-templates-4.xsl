@@ -23,21 +23,25 @@
 			</xsl:call-template>
 		</image>
 
+		 <xsl:choose>
+        <xsl:when test="//output/@themeHue = 'light'">
+          <image x="0%" y="70%" width="100%" height="30%" preserveAspectRatio="xMidYMid slice">
+            <xsl:attribute name="href">
+              <xsl:value-of select="concat(//output/@siteUrl, '_assets/_img/bottomlightlayer-dark.png')" />
+            </xsl:attribute>
+          </image>
+        </xsl:when>
+        <xsl:otherwise>
+          <image x="0%" y="60%" width="100%" height="40%" preserveAspectRatio="xMidYMid slice">
+            <xsl:attribute name="href">
+              <xsl:value-of select="concat(//output/@siteUrl, '_assets/_img/bottom-gradient-layer-2.png')" />
+            </xsl:attribute>
+          </image>
+        </xsl:otherwise>
+      </xsl:choose>
+
 		<!-- Gradient layer start -->
-		<xsl:if test="//output/@themeShade='Dark'">
-			<image x="0%" y="70%" width="100%" height="30%" preserveAspectRatio="xMidYMid slice">
-				<xsl:attribute name="href">
-					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/bottomlightlayer-dark.png' )" />
-				</xsl:attribute>
-			</image>
-		</xsl:if>
-		<xsl:if test="//output/@themeShade='Light'">
-			<image x="0%" y="60%" width="100%" height="40%" preserveAspectRatio="xMidYMid slice">
-				<xsl:attribute name="href">
-					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/bottom-gradient-layer-2.png' )" />
-				</xsl:attribute>
-			</image>
-		</xsl:if>
+		
 		<!-- Gradient layer End -->
 
 		<text class="upper" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" x="3.8%" y="82%" font-weight="800" font-size="60" data-max-width="70%" style="letter-spacing: 1px;">Open 1-4pm
