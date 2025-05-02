@@ -26,7 +26,7 @@
 			</xsl:call-template>
 		</image>
 
-		<!-- Gradient layer start -->
+		<!-- Gradient layer start  -->
 
 		<xsl:if test="//output/@themeHue='dark'">
 			<image x="0%" y="70%" width="100%" height="30%" preserveAspectRatio="xMidYMid slice">
