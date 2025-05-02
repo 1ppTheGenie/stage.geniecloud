@@ -36,7 +36,7 @@
 			</image>
 		</xsl:if>
 		<xsl:if test="//output/@themeHue='light'">
-			<image x="0%" y="60%" width="100%" height="40%" preserveAspectRatio="xMidYMid slice">
+			<image x="0%" y="50%" width="100%" height="50%" preserveAspectRatio="xMidYMid slice">
 				<xsl:attribute name="href">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/bottomlightlayer-light.png' )" />
 				</xsl:attribute>
@@ -44,7 +44,7 @@
 		</xsl:if>
 		<!-- Gradient layer End -->
 
-		<text x="4%" y="85%" fill="var(--theme-heading-color)" font-weight="800" font-family="var(--theme-heading-font)" font-size="50" style="letter-spacing:1px;word-spacing:-10px;">
+		<text x="4%" y="86%" fill="var(--theme-heading-color)" font-weight="800" font-family="var(--theme-heading-font)" font-size="50" style="letter-spacing:1px;word-spacing:-10px;">
 			 Open 1-4pm
 		</text>
 		<text x="4%" y="89.5%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="600" font-size="40" data-max-width="80%">
@@ -54,7 +54,7 @@
 			</xsl:call-template>
 		</text>
 
-		<text x="4%" y="92%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="400" font-size="35" data-max-width="80%">
+		<text x="4%" y="92%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="500" font-size="35" data-max-width="80%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'areanames'" />
 				<xsl:with-param name="default" select="//area/name" />
@@ -67,7 +67,7 @@
 			<circle cx="98" cy="99" r="89" stroke="#fff" stroke-width="8" fill="#e1e1e1"></circle>
 		</svg>
 
-		<g style="transform: translateY(0);">
+		<g transform="rotate(7, 940, 1775)">
 			<clipPath id="clipCircle">
 				<circle r="5.5%" cx="87.5%" cy="91.6%"></circle>
 			</clipPath>

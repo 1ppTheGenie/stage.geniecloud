@@ -71,7 +71,7 @@
   >
     <tspan id="area-name-text" fill="var(--theme-heading-color)" 
     font-size="40" 
-    font-weight="400"
+    font-weight="500"
 	font-family="var(--theme-heading-font)">
       <xsl:call-template name="editable">
         <xsl:with-param name="id" select="'areanames'" />
