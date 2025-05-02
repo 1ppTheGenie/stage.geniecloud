@@ -14,10 +14,10 @@
 
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
+		<!-- <link rel="stylesheet">
 <xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
-		</link>
+		</link> -->
 
 <rect x="0%" y="0%" width="100%" height="100%" fill="#fff" />
 
@@ -32,18 +32,18 @@
 <rect x="2.5%" y="37.1%" width="95%" height="26%" fill="var(--theme-body-background)" />
 
 
-		<text class="futura-text capitalize center" x="50%" y="43.2%" fill="var(--theme-heading-color)" font-weight="700" font-size="400%">Open 1-4pm</text>
+		<text class="capitalize center" x="50%" y="43.2%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="70">Open 1-4pm</text>
 
 		<line xmlns="" x1="45%" y1="49%" x2="55.2%" y2="49%" style="stroke:var(--theme-body-color);stroke-width:2.5"></line>
 
-		<text class="capitalize center futura-text" x="50%" y="51%" fill="var(--theme-heading-color)" font-weight="500" font-size="250%" data-max-width="80%">
+		<text class="capitalize center" x="50%" y="51%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="500" font-size="50" data-max-width="80%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'streetaddress'" />
 				<xsl:with-param name="default" select="concat(//single/address/street,' ')" />
 			</xsl:call-template>
 		</text>
 
-		<text class="capitalize center futura-text" x="50%" y="53.7%" fill="var(--theme-heading-color)" font-weight="700" font-size="310%" data-max-width="80%">
+		<text class="capitalize center" x="50%" y="53.7%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="60" data-max-width="80%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'areaname'" />
 				<xsl:with-param name="default" select="//area/name" />
