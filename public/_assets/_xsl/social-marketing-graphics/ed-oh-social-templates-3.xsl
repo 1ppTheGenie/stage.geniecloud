@@ -45,14 +45,7 @@
           <xsl:with-param name="default" select="//area/name" />
         </xsl:call-template>
       </text>
-    </g>
-
-    <text xmlns="" fill="var(--theme-body-background)" font-size="130%">
-      <tspan x="13.5%" y="69.5%" class="upper" font-family="var(--theme-heading-font)" font-size="40" font-weight="700">
-        Open House</tspan>
-      <tspan x="14.4%" class="upper" y="75.5%" font-family="var(--theme-heading-font)" font-size="40" font-weight="700">
-        1pm - 4pm</tspan>
-    </text>
+    </g>    
     <xsl:choose>
       <xsl:when test="count(//openHouse/session) &gt; 0">
         <text xmlns="" fill="var(--theme-body-background)" font-size="130%">
@@ -62,8 +55,7 @@
             font-weight="700">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'Open House'" />
-              <xsl:with-param name="default"
-                select="concat(//openHouse/session[1]/@starts, '-', //openHouse/session[1]/@ends)" />
+              <xsl:with-param name="default" select="concat(//openHouse/session[1]/@starts, '-', //openHouse/session[1]/@ends)" />
             </xsl:call-template>
           </tspan>
         </text>
