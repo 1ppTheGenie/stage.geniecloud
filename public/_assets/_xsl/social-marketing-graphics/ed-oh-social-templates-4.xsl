@@ -48,10 +48,11 @@
       <xsl:when test="count(//openHouse/session) &gt; 0">
         <text class="upper" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" x="3.8%" y="82%"
           font-weight="800" font-size="60" data-max-width="70%" style="letter-spacing: 1px">
-          <xsl:text>Open</xsl:text>
+          <xsl:text>Open </xsl:text>
           <xsl:call-template name="editable">
             <xsl:with-param name="id" select="'Open House'" />
-            <xsl:with-param name="default" select="concat(//openHouse/session[1]/@starts, ' - ', //openHouse/session[1]/@ends)" />
+            <xsl:with-param name="default" select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
+              />
           </xsl:call-template>
         </text>
       </xsl:when>
