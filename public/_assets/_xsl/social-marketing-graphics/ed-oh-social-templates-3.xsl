@@ -55,7 +55,7 @@
             font-weight="700">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'Open House'" />
-              <xsl:with-param name="default" select="concat(//openHouse/session[1]/@starts, '-', //openHouse/session[1]/@ends)" />
+              <xsl:with-param name="default" select="concat(//openHouse/session[1]/@starts, ' - ', //openHouse/session[1]/@ends)" />
             </xsl:call-template>
           </tspan>
         </text>
