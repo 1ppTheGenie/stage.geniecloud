@@ -32,10 +32,28 @@
 			<xsl:attribute name="href">
 				<xsl:value-of select="//agent[1]/photo" />
 			</xsl:attribute>
-		</image>
-		<text xmlns="" x="12%" y="78%"  fill="var(--theme-heading-color)" font-size="44" font-weight="700" font-family="var(--theme-heading-font)">Open
-			<tspan x="11%" dy="4.5%" >1-4pm </tspan>
-		</text>
+		</image>	
+		<xsl:choose>
+			<xsl:when test="count(//openHouse/session) &gt; 0">
+				<text x="12%" y="78%" fill="var(--theme-heading-color)" font-size="44" font-weight="700" font-family="var(--theme-heading-font)">Open
+				<tspan x="11%" dy="4.5%">
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
+						<!-- <xsl:with-param name="default"
+						select="concat(substring-before(//openHouse/session[1]/@starts, ':'), '-', substring-before(//openHouse/session[1]/@ends, ':'), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))" /> -->
+						<xsl:with-param name="default" select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"/>
+					</xsl:call-template>
+				</tspan>
+				</text>
+			</xsl:when>
+			<xsl:otherwise>
+				<text xmlns="" x="12%" y="78%" fill="var(--theme-heading-color)" font-size="44" font-weight="700" font-family="var(--theme-heading-font)">
+				Open
+					<tspan x="11%" dy="4.5%">1-4pm</tspan>
+				</text>
+			</xsl:otherwise>
+		</xsl:choose>	
+
 	</xsl:template>
 
 </xsl:stylesheet>
