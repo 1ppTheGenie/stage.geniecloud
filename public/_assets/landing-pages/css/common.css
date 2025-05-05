@@ -3256,6 +3256,9 @@ label {
 	max-width: 100%;
 	margin-bottom: 5px;
 }
+.fast-facts-property-icons{
+    max-width: 100% !important;
+}
 
 @media (min-width: 768px) {
 	[class*="col-sm-"] {

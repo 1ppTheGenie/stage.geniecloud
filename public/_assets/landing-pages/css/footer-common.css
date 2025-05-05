@@ -8,6 +8,11 @@ a {
     padding: 0;
 }
 
+.footer-form{
+    display: none;
+    margin-left: auto;
+}
+
 .bottom-bar-copyright {
     color: #888;
     font-weight: 500;
@@ -135,6 +140,35 @@ a {
     object-position: top;
 
 }
+.abt-sec .agent-detail-wrapper .details .agent-name{
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+.abt-sec .agent-detail-wrapper .agent-code{
+    font-size: 18px;
+    font-weight: 400;
+}
+.abt-sec .agent-detail-wrapper{
+    text-align: center;
+}
+.abt-sec .agent-detail-wrapper .photo img {
+    border-radius: 0;
+    margin-inline: auto;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 10px;
+}
+.agent-desig{
+    margin-bottom: 5px;
+}
+.abt-sec .agent-detail-wrapper .agent-logo{
+    margin-inline: auto !important;
+    margin-top: 10px;
+}
+.abt-sec .agent-detail-wrapper .agent-logo .funnel-personal-logo{
+    width: 220px !important;
+}
 
 .agent-details .details {
     vertical-align: top;
@@ -171,11 +205,13 @@ a {
 }
 
 .agent-details {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 35px;
+    border-bottom: 0;
+    padding-bottom: 0;
 }
 
-
+.team-about-wrapper{
+    border-top: 1px solid #ddd;
+}
 .team-about-wrapper h4 {
     padding-top: 30px;
     font-size: 19px;
@@ -244,7 +280,7 @@ button.btn.subtitle-font.background-as-color.contact-me-btn {
 
 .footer-style p {
     color: var(--theme-body-color);
-    font-family: var(--theme-body-font);
+    font-family: var(--theme-heading-font);
 }
 
 .footer-middle-img {

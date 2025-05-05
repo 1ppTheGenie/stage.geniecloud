@@ -107,3 +107,38 @@ document
 		document.querySelector("#contact-me").style.display = "none";
 		document.querySelector("#contact-me").classList.remove("in");
 	});
+
+document.addEventListener("DOMContentLoaded", function() {
+		const maxLength = 120;
+	
+		document.querySelectorAll('.summary').forEach(function(summary) {
+			const fullTextSpan = summary.querySelector('.full-text');
+			const fullText = fullTextSpan.innerHTML.trim();
+			const toggleLink = summary.querySelector('.toggle-link');
+			const dots = summary.querySelector('.dots');
+			const moreTextSpan = summary.querySelector('.more-text');
+	
+			if (fullText.length > maxLength) {
+				const shortText = fullText.substring(0, maxLength);
+				const remainingText = fullText.substring(maxLength);
+	
+				fullTextSpan.innerHTML = shortText;
+				moreTextSpan.innerHTML = remainingText;
+				dots.style.display = 'inline';
+				toggleLink.style.display = 'inline';
+	
+				toggleLink.addEventListener('click', function() {
+					if (toggleLink.textContent === " Read More") {
+						moreTextSpan.style.display = 'inline';
+						dots.style.display = 'none';
+						toggleLink.textContent = ' Read Less';
+					} else {
+						moreTextSpan.style.display = 'none';
+						dots.style.display = 'inline';
+						toggleLink.textContent = ' Read More';
+					}
+				});
+			}
+		});
+	});
+	

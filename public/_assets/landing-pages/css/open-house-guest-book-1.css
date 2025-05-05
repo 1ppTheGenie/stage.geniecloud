@@ -19,7 +19,48 @@ h4{
 .open-houes-guest1 .open-house-gust-date h1 {
     font-size: 41px;  
     line-height: 100%;
-font-weight: 400;
+    font-weight: 500;
+}
+.open-houes-guest1 .open-house-details h2 > span{
+    font-weight: 500;
+}
+.contact-me-btn{
+    margin:auto !important;
+}
+/* .custom-radio ul{
+    padding-left: 0;
+} */
+.custom-radio .custom-control-input{
+    display: none;
+}
+.open-houes-guest1 .custom-radio ul li label{
+    font-weight: 700;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: -28px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 4px 1px inset rgba(0, 0, 0, .1);
+    border-radius: 50%;
+}
+  
+.custom-radio .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 2.2px;
+    left: 2.5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+}
+.custom-radio input:checked ~ .checkmark:after {
+    display: block;
 }
 
 .open-house-gust-date p {
@@ -48,8 +89,9 @@ h3.address-part span{
 }
 .funnel-open-houes-guest1 .open-house-details .second-span{
     font-size: 20px!important;
-    font-weight: 400;
+    font-weight: 500;
 }
+
 @media (max-width:767px) {
 
     .open-houes-guest1 .open-house-gust-date h1 span {
@@ -59,7 +101,7 @@ h3.address-part span{
     .open-house-gust-from-details button.btn{
         width: auto;
     }
-    section.open-houes-guest1 .col-md-6:first-child{
+    /* section.open-houes-guest1 .col-md-6:first-child{
             padding: 40px 0;
-    }
+    } */
 }

@@ -45,12 +45,50 @@
 					</text>
 				</xsl:otherwise>
 			</xsl:choose>
-	
-			<image x="22%" y="1%" width="14%" height="8%">
-				<xsl:attribute name="href">
-					<xsl:value-of select="//agent[1]/photo" />
-				</xsl:attribute>
-			</image>
+
+			<xsl:choose>
+				<xsl:when test="$hasMultipleAgents">
+					<defs>
+						<clipPath id="circleClip1">
+							<circle cx="22%" cy="3.7%" r="3.7%" />
+						</clipPath>
+						<clipPath id="circleClip2">
+							<circle cx="32%" cy="3.7%" r="3.7%" />
+						</clipPath>
+					</defs>
+
+					<g>
+						<!-- background circle behind image 1 -->
+						<circle cx="22%" cy="3.7%" r="3.7%" fill="#69657a" />
+
+						<!-- Circular image 1 -->
+						<image x="15%" y="0%" width="15%" height="7%" clip-path="url(#circleClip1)">
+							<xsl:attribute name="href">
+								<xsl:value-of select="//agent[1]/photo" />
+							</xsl:attribute>
+						</image>
+
+						<!-- background circle behind image 2 -->
+						<circle cx="32%" cy="3.7%" r="3.7%" fill="#69657a" />
+
+						<!-- Circular image 2 -->
+						<image x="25%" y="0%" width="15%" height="7%" clip-path="url(#circleClip2)">
+							<xsl:attribute name="href">
+								<xsl:value-of select="//agent[2]/photo" />
+							</xsl:attribute>
+						</image>
+					</g>					
+				</xsl:when>
+				<xsl:otherwise>
+					<g>
+						<image x="15%" y="0%" width="22%" height="9%">
+							<xsl:attribute name="href">
+								<xsl:value-of select="//agent[1]/photo" />
+							</xsl:attribute>
+						</image>
+					</g>
+				</xsl:otherwise>
+			</xsl:choose>
 
 			<text x="98%" y="0.7%" class="align-right right" font-family="var(--theme-heading-font)" font-size="125%" font-weight="100"  fill="var(--theme-body-background)">
 				<tspan x="98%">

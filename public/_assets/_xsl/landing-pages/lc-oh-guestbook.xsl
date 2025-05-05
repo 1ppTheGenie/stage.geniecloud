@@ -59,11 +59,11 @@
 											</span>
 										</h2>
 
-										<h6 class="subtitle-font heading-color" style="font-weight:400;">
+										<h6 class="subtitle-font heading-color" style="font-weight:500;">
 											<xsl:value-of select="concat( ' MLS #: ', //single/mlsNumber)" />
 										</h6>
 
-										<h3 class="subtitle-font heading-color">
+										<h3 class="subtitle-font heading-color" style="font-weight:700;">
 											<strong>
 												<xsl:value-of select="format-number( //single/price, '$###,###')" />
 											</strong>
@@ -129,10 +129,10 @@
 											<input type="tel" name="phoneNumber" class="form-control phone reset-form" placeholder="Phone Number" required="required" />
 										</div>
 										<div class="form-group">
-											<h4 class="background-as-color heading-font" style="font-weight:400;">
+											<h4 class="background-as-color heading-font" style="font-weight:500;">
 												<xsl:text>I'd like to get:</xsl:text>
 											</h4>
-											<div class="custom-control custom-checkbox mb-3">
+											<!-- <div class="custom-control custom-checkbox mb-3">
 												<ul class="background-as-color heading-font">
 													<li>
 														<label class="custom-control-label heading-font" for="customCheck1">
@@ -159,6 +159,32 @@
 											<div class="form-group property-address" style="display: none;">
 												<input type="text" name="meta[propertyAddress]" class="form-control reset-form" placeholder="Address" />
 
+											</div> -->
+											<!-- Radio-->
+											<div class="custom-control custom-radio mb-3">
+												<ul class="background-as-color heading-font">
+													<li>
+														<label class="custom-control-label heading-font" for="customCheck1">
+															<input type="radio" class="custom-control-input reset-form market-insider-report" id="customCheck1" name="option" />
+															<span class="checkmark"></span>
+															<xsl:copy-of select="concat( 'The latest Market insider report for ', //area/name )" />
+														</label>
+													</li>
+													<li>
+														<label class="custom-control-label heading-font" for="customCheck2">
+															<input type="radio" class="custom-control-input reset-form" id="customCheck2" name="option" />
+															<span class="checkmark"></span>
+															<xsl:text>First notification when similar properties hit the market</xsl:text>
+														</label>
+													</li>
+													<li>
+														<label class="custom-control-label property heading-font" for="customCheck3">
+															<input type="radio" class="custom-control-input reset-form" id="customCheck3" name="option" />
+															<span class="checkmark"></span>
+															<xsl:text>A TODAY VALUE assessment of my home</xsl:text>
+														</label>
+													</li>
+												</ul>
 											</div>
 										</div>
 										<div class="form-group">

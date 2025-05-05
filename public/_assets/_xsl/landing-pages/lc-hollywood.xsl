@@ -612,11 +612,20 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 										</span>
 									</div>            
 									<div class="f_check preferred_contact body-font desk">
-										<div class="che_box body-font"></div><!--left to preserve the spacing-->
+										<!-- <div class="che_box body-font"></div> -->
+										<!--left to preserve the spacing-->
+										<div class="spn">
+											<span>Preferred contact*:</span>
+										</div>
+										<div class="che_box">
+											<label> <input type="checkbox" name="lead_meta_contact_via_text" value="yes" />Text</label>
+											<label> <input type="checkbox" name="lead_meta_contact_via_email" value="yes" checked="" />Email</label>
+										</div>
 										<div class="che_box submit-btn">
+											
 											<input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact" />
-                      <input type="hidden" name="note" value="I am interested in { $listingAddressLine1 }" /> 
-                      <input type="submit" value="Send" class="wpcf7-submit" />
+											<input type="hidden" name="note" value="I am interested in { $listingAddressLine1 }" /> 
+											<input type="submit" value="Send" class="wpcf7-submit" />
 										</div>
 									</div>
 								</form>
@@ -637,7 +646,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 					</div>
 				</section>
 
-				<section class="genie-alternate" id="real_time_market_trends">
+				<section class="genie-alternate dark real-time-market" id="real_time_market_trends">
 					<div class="container">
 						<div class="col-md-12 real-time text-center">
 							<h2 class="subtitle-font subtitle-color">
@@ -851,7 +860,11 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
         <xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
       </xsl:call-template>      
 
-			<script src="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.js' )}">
+			<!-- <script src="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.js' )}">
+				<xsl:comment/>
+			</script> -->
+
+			<script src="{'/_assets/landing-pages/lc-hollywood.js'}">
 				<xsl:comment/>
 			</script>
 

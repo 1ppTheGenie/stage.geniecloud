@@ -44,9 +44,25 @@
 		</xsl:if>
 		<!-- Gradient layer End -->
 
+		<xsl:choose>
+      <xsl:when test="count(//openHouse/session) &gt; 0">
 		<text x="4%" y="86%" fill="var(--theme-heading-color)" font-weight="800" font-family="var(--theme-heading-font)" font-size="50" style="letter-spacing:1px;word-spacing:-10px;">
+			<xsl:text>Open</xsl:text>
+          <xsl:call-template name="editable">
+            <xsl:with-param name="id" select="'Open House'" />
+            <xsl:with-param
+              name="default"
+              select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
+            />
+          </xsl:call-template>
+		</text>
+      </xsl:when>
+      <xsl:otherwise>
+        <text x="4%" y="86%" fill="var(--theme-heading-color)" font-weight="800" font-family="var(--theme-heading-font)" font-size="50" style="letter-spacing:1px;word-spacing:-10px;">
 			 Open 1-4pm
 		</text>
+      </xsl:otherwise>
+    </xsl:choose>
 		<text x="4%" y="89.5%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="600" font-size="40" data-max-width="80%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'address'" />
