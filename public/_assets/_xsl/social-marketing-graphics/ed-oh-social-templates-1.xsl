@@ -53,7 +53,16 @@
 			</xsl:otherwise>
 		</xsl:choose>
 		<!-- comment -->
-		
+		<xsl:if test="count(//openHouse/session) &gt; 0">
+            <text x="50%" y="8.5%" class="center bold" font-family="var(--theme-heading-font)" fill="var(--theme-body-background)" text-anchor="middle" font-size="320%" style="dominant-baseline: middle; letter-spacing:4px;">
+                <xsl:call-template name="editable">
+                    <xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
+                    <xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
+                    <!-- <xsl:with-param name="default" select="concat(substring-before(//openHouse/session[1]/@starts, ':'), '-', substring-before(//openHouse/session[1]/@ends, ':'), 'pm')" /> -->
+
+                </xsl:call-template>
+            </text>
+        </xsl:if>
 		
 
 	</xsl:template>
