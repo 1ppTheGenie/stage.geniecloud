@@ -48,13 +48,15 @@
       <xsl:when test="count(//openHouse/session) &gt; 0">
 		<text x="4%" y="86%" fill="var(--theme-heading-color)" font-weight="800" font-family="var(--theme-heading-font)" font-size="50" style="letter-spacing:1px;word-spacing:-10px;">
 			<xsl:text>Open</xsl:text>
-          <xsl:call-template name="editable">
-            <xsl:with-param name="id" select="'Open House'" />
-            <xsl:with-param
-              name="default"
-              select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
-            />
-          </xsl:call-template>
+          <tspan style="text-transform: lowercase;">
+            <xsl:call-template name="editable">
+              <xsl:with-param name="id" select="'Open House'" />
+              <xsl:with-param
+                name="default"
+                select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
+              />
+            </xsl:call-template>
+          </tspan>
 		</text>
       </xsl:when>
       <xsl:otherwise>

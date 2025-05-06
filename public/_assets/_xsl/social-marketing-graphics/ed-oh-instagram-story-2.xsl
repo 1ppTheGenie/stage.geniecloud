@@ -55,13 +55,14 @@
           </tspan>
         </text>
 		<text class="capitalize center" x="50%" y="43.2%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="70">Open 
-            <xsl:call-template name="editable">
-              <xsl:with-param name="id" select="'Open House'" />
-              <xsl:with-param
-                name="default"
-                select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
-              />
-            </xsl:call-template>
+            <xsl:text>Open</xsl:text>
+          	<xsl:call-template name="editable" >
+            <xsl:with-param name="id" select="'Open House'" />
+            <xsl:with-param
+              name="default"
+              select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
+            />
+          </xsl:call-template>
 		</text>
       </xsl:when>
       <xsl:otherwise>

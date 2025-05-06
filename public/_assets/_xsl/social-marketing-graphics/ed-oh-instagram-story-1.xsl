@@ -110,7 +110,7 @@
         </text>
 		<text x="90" y="85.5%" fill="var(theme-heading-color)" font-family="var(--theme-heading-font)" font-size="60" font-weight="700" style="line-height: 1;text-transform: uppercase;">
 			<tspan>Open Today</tspan>
-			<tspan x="90" dy="3.5%">
+		  <tspan x="90" dy="3.5%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'Open House'" />
               <xsl:with-param

@@ -14,8 +14,8 @@
   <xsl:template name="svg-body">
     <image x="0%" y="0%" width="50%" height="50%" preserveAspectRatio="xMidYMid slice">
       <xsl:call-template name="switch-image">
-        <xsl:with-param name="id" select="image-2" />
-        <xsl:with-param name="idx" select="2" />
+        <xsl:with-param name="id" select="image-1" />
+        <xsl:with-param name="idx" select="1" />
       </xsl:call-template>
     </image>
 
@@ -24,8 +24,8 @@
 
     <image x="50%" y="50%" width="50%" height="50%" preserveAspectRatio="xMidYMid slice">
       <xsl:call-template name="switch-image">
-        <xsl:with-param name="id" select="image-1" />
-        <xsl:with-param name="idx" select="1" />
+        <xsl:with-param name="id" select="image-2" />
+        <xsl:with-param name="idx" select="2" />
       </xsl:call-template>
     </image>
 

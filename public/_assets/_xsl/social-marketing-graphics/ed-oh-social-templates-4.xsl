@@ -25,7 +25,7 @@
 
     <xsl:choose>
       <xsl:when test="//output/@themeHue = 'light'">
-        <image x="0%" y="70%" width="100%" height="30%" preserveAspectRatio="xMidYMid slice">
+        <image x="0%" y="55%" width="100%" height="45%" preserveAspectRatio="xMidYMid slice">
           <xsl:attribute name="href">
             <xsl:value-of select="concat(//output/@siteUrl, '_assets/_img/bottomlightlayer-light.png')" />
           </xsl:attribute>
