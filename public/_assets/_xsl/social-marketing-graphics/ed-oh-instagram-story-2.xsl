@@ -54,8 +54,8 @@
             </xsl:call-template>
           </tspan>
         </text>
-		<text class="capitalize center" x="50%" y="43.2%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="70">Open 
-            <xsl:text>Open</xsl:text>
+		<text class="capitalize center" x="50%" y="43.2%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="70"> 
+            Open 
           	<xsl:call-template name="editable" >
             <xsl:with-param name="id" select="'Open House'" />
             <xsl:with-param

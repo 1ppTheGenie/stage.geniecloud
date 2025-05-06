@@ -90,7 +90,7 @@
 				<circle r="5.5%" cx="87.5%" cy="91.6%"></circle>
 			</clipPath>
 
-			<image x="80%" y="78%" width="15%" height="29%" preserveAspectRatio="xMaxYMid meet" clip-path="url(#clipCircle)">
+			<image x="80%" y="77.8%" width="15%" height="29%" preserveAspectRatio="xMaxYMid meet" clip-path="url(#clipCircle)">
 				<xsl:attribute name="href">
 					<xsl:value-of select="//agent[1]/photo" />
 				</xsl:attribute>
