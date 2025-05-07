@@ -10,9 +10,9 @@
 	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
+		<!-- <link rel="stylesheet">
 			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-		</link>
+		</link> -->
 
 		<xsl:variable name="salesCountChange" select="//statistics/@soldPropertyTypeCount div //previous/@totalSold" />
 		<xsl:variable name="salesCountPercent" select="abs( 1 - $salesCountChange )" />
@@ -65,8 +65,8 @@
 			</xsl:call-template>
 		</text>
 
-		<rect xmlns="" x="0%" y="28%" width="100%" height="17.2%" fill="#0d0f30"></rect>
-		<text x="50%" y="24%" class="futura-text upper align-center" font-weight="500" fill="#383950" style="font-family: Times New Roman;font-size: 147px;line-height: 74%;">
+		<rect xmlns="" x="0%" y="28%" width="100%" height="18%" fill="#0d0f30"></rect>
+		<text x="50%" y="24%" class="futura-text upper align-center" font-weight="500" fill="#383950" style="font-family: serif;font-size: 147px;line-height: 74%;">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="'CONFIDENTIAL'" />
 			</xsl:call-template>
