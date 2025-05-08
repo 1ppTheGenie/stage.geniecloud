@@ -249,7 +249,7 @@ export const getDimensions = (size = null) => {
 
 		case "facebook":
 		default:
-			dims = [1000, 628];
+			dims = [1200, 628];
 			break;
 	}
 
