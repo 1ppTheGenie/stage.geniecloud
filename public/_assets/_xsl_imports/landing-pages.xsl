@@ -158,13 +158,13 @@
 
 	<xsl:template name="agent-about">
 		<a name="about" />
-		<section id="about-section" class="background abt-sec">
+		<section id="about-section" class="abt-sec background">
 			<div class="container">
 				<div class="row">
 					<xsl:choose>
 						<xsl:when test="$hasMultipleAgents">
 							<div class="col-md-3">
-								<div class="agent-details agent-detail-wrapper">
+								<div class="agent-detail-wrapper agent-details">
 									<div class="photo">
 										<span class=" f-name">
 											<xsl:value-of select="concat('Call/Text ', //agent[1]/firstName,' for your private showing:' )" />
