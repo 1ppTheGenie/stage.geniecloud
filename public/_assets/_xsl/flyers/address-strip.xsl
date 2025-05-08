@@ -13,20 +13,22 @@
 
     <xsl:template name="svg-body">
         <g style="font-size: 14px">
-            <g style="transform: translate(4%, 4%)">
+            <g style="transform: translate(180px, 4%)">
                 <text font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="800"
-                    font-size="18em">
+                    font-size="18em" class="upper">
                     <xsl:value-of select="$listingAddressLine1" />
                 </text>
                 <xsl:choose>
                     <xsl:when test="count(//openHouse/session) &gt; 0">
                         <text font-family="var(--theme-heading-font)" x="0%" y="10%"
                             fill="var(--theme-sub-heading-color)" font-weight="800" font-size="18em">
-                            <xsl:text>Open House</xsl:text>
-                            <xsl:call-template name="editable">
+                            Open House
+                            <tspan style="text-transform: lowercase;">
+                                <xsl:call-template name="editable">
                                 <xsl:with-param name="id" select="'Open House'" />
                                 <xsl:with-param name="default" select="concat(//openHouse/session[1]/@starts, ' - ',//openHouse/session[1]/@ends)" />
                             </xsl:call-template>
+                            </tspan>
                         </text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -42,20 +44,22 @@
                     <path d="M110 110.5L0 220.5V0.5L110 110.5Z" fill="var(--theme-sub-heading-color)" />
                 </svg>
             </g>
-            <g style="transform: translate(4%, 38.5%)">
+            <g style="transform: translate(180px, 38.5%)">
                 <text font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="800"
-                    font-size="18em">
+                    font-size="18em" class="upper">
                     <xsl:value-of select="$listingAddressLine1" />
                 </text>
                 <xsl:choose>
                     <xsl:when test="count(//openHouse/session) &gt; 0">
                         <text font-family="var(--theme-heading-font)" x="0%" y="10%"
                             fill="var(--theme-sub-heading-color)" font-weight="800" font-size="18em">
-                            <xsl:text>Open House</xsl:text>
-                            <xsl:call-template name="editable">
+                            Open House
+                            <tspan style="text-transform: lowercase;">
+                                <xsl:call-template name="editable">
                                 <xsl:with-param name="id" select="'Open House'" />
                                 <xsl:with-param name="default" select="concat(//openHouse/session[1]/@starts, ' - ',//openHouse/session[1]/@ends)" />
                             </xsl:call-template>
+                            </tspan>
                         </text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -71,20 +75,22 @@
                     <path d="M110 110.5L0 220.5V0.5L110 110.5Z" fill="var(--theme-sub-heading-color)" />
                 </svg>
             </g>
-            <g style="transform: translate(4%, 73%)">
+            <g style="transform: translate(180px, 73%)">
                 <text font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="800"
-                    font-size="18em">
+                    font-size="18em" class="upper">
                     <xsl:value-of select="$listingAddressLine1" />
                 </text>
                 <xsl:choose>
                     <xsl:when test="count(//openHouse/session) &gt; 0">
                         <text font-family="var(--theme-heading-font)" x="0%" y="10%"
                             fill="var(--theme-sub-heading-color)" font-weight="800" font-size="18em">
-                            <xsl:text>Open House</xsl:text>
-                            <xsl:call-template name="editable">
+                            Open House
+                            <tspan style="text-transform: lowercase;">
+                                <xsl:call-template name="editable">
                                 <xsl:with-param name="id" select="'Open House'" />
                                 <xsl:with-param name="default" select="concat(//openHouse/session[1]/@starts, ' - ',//openHouse/session[1]/@ends)" />
                             </xsl:call-template>
+                            </tspan>
                         </text>
                     </xsl:when>
                     <xsl:otherwise>
