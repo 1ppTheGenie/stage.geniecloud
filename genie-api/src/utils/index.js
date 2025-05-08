@@ -244,6 +244,14 @@ export const getDimensions = (size = null) => {
 		default:
 			dims = [1200, 628];
 			break;
+
+		case "a5":
+			dims = [2550, 3300];
+			break;
+			
+		case "tabloid-flyer":
+			dims = [5100, 3300];
+		break;
 	}
 
 	return { width: dims[0], height: dims[1] };
