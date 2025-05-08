@@ -146,11 +146,6 @@
 				<style>
 					<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/_css/svg.css); ' )" />
 					<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css); ')" />
-					<xsl:value-of select="'
-					.report-cover text {
-    					font-size:9px;
-						fill:#fff;
-					'"/>
 				</style>
 				
 			</head>
@@ -1635,13 +1630,13 @@
 		<xsl:param name="disclaimer" select="'default'" />
 
 		<g id="footer">
-			<text font-size="20" font-weight="400" font-family="var(--theme-body-font)" fill="var(--theme-heading-color)">
+			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#fff">
 				<xsl:text>Source: TheGenie.ai</xsl:text>
 			</text>
-			<text font-size="20" font-weight="400" font-family="var(--theme-body-font)" fill="var(--theme-heading-color)">
+			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#fff">
 				<xsl:text> Recipients to verify all information.</xsl:text>
 			</text>
-			<text font-size="20" font-weight="400" font-family="var(--theme-body-font)" fill="var(--theme-heading-color)">
+			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#fff">
 				<xsl:text> Copyright © </xsl:text>
 				<xsl:value-of select="//output/@year" />
 				<xsl:text> 1parkplace, Inc.</xsl:text>

@@ -186,6 +186,6 @@
 			</xsl:otherwise>
 		</xsl:choose>
 
-		<g class="report-cover"><xsl:call-template name="copyright" /></g>
+		<xsl:call-template name="copyright" />
 	</xsl:template>
 </xsl:stylesheet>
