@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--
 	Asset Name: Ed Kaminsky Address Strip
-	Tags:		Direct Mail
-	Sizes:		tabloid-flyer
+	Tags:		Direct Mail, Flyer
+	Sizes:		Tabloid Flyer
 	Supports:	Listing, Reports, AsPDF
 	Pages:		flyers/address-strip
 -->
