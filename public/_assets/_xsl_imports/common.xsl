@@ -1630,13 +1630,13 @@
 		<xsl:param name="disclaimer" select="'default'" />
 
 		<g id="footer">
-			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#fff">
+			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#ffffff">
 				<xsl:text>Source: TheGenie.ai</xsl:text>
 			</text>
-			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#fff">
+			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#ffffff">
 				<xsl:text> Recipients to verify all information.</xsl:text>
 			</text>
-			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#fff">
+			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#ffffff">
 				<xsl:text> Copyright © </xsl:text>
 				<xsl:value-of select="//output/@year" />
 				<xsl:text> 1parkplace, Inc.</xsl:text>
