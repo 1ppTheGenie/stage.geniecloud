@@ -29,7 +29,7 @@
 
 		<body>
 			<xsl:attribute name="class">
-				<xsl:value-of select="//output/@theme" />
+				<xsl:value-of select="concat( //output/@theme, ' ', //output/@themeHue  )" />
 			</xsl:attribute>
 
 			<div id="step1" class="background steps funnel-open-houes-guest1">
@@ -97,7 +97,7 @@
 								<img width="100%" height="100%">
 									<xsl:attribute name="src">
 										<xsl:call-template name="listing-image">
-											<xsl:with-param name="index" select="number(2)" />
+											<xsl:with-param name="index" select="number(1)" />
 											<xsl:with-param name="preferPrimary" select="'true'" />
 										</xsl:call-template>
 									</xsl:attribute>
@@ -110,12 +110,18 @@
 										<xsl:text>Open House Guest Book</xsl:text>
 									</h1>
 									<h3 class="address-part subtitle-font background-as-color">
-										<xsl:copy-of select="$listingAddressHTML" />
+										<xsl:copy-of select="concat($listingAddressLine1, ' ', $listingAddressLine2)" />
 									</h3>
-									<h4 class="background-as-color">
-										<!-- Sunday, March 13th<br/> 12 pm - 2 pm -->
-										<xsl:value-of select="//single/openHouse" />
-									</h4>
+									<p class="background-as-color">
+										<!-- Sunday, March 13th 12 pm - 2 pm -->
+										<!-- <xsl:value-of select="//single/openHouse" /> -->
+										<xsl:if test="count(//openHouse/session) &gt; 0">				
+											<xsl:call-template name="editable">
+												<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
+												<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
+											</xsl:call-template>
+										</xsl:if>
+									</p>
 								</div>
 								<div class="open-house-gust-from-details body-font">
 									<form id="form_step1" class="funnel-create-lead fl-thankyou-modal">
@@ -130,7 +136,7 @@
 										</div>
 										<div class="form-group">
 											<h4 class="background-as-color heading-font" style="font-weight:500;">
-												<xsl:text>I'd like to get:</xsl:text>
+												<xsl:text>What best describes your visit?</xsl:text>
 											</h4>
 											<!-- <div class="custom-control custom-checkbox mb-3">
 												<ul class="background-as-color heading-font">
@@ -162,26 +168,26 @@
 											</div> -->
 											<!-- Radio-->
 											<div class="custom-control custom-radio mb-3">
-												<ul class="background-as-color heading-font">
+												<ul class="background-as-color heading-font mt-0">
 													<li>
 														<label class="custom-control-label heading-font" for="customCheck1">
 															<input type="radio" class="custom-control-input reset-form market-insider-report" id="customCheck1" name="option" />
 															<span class="checkmark"></span>
-															<xsl:copy-of select="concat( 'The latest Market insider report for ', //area/name )" />
+															Thinking about buying
 														</label>
 													</li>
 													<li>
 														<label class="custom-control-label heading-font" for="customCheck2">
 															<input type="radio" class="custom-control-input reset-form" id="customCheck2" name="option" />
 															<span class="checkmark"></span>
-															<xsl:text>First notification when similar properties hit the market</xsl:text>
+															Curious neighbor
 														</label>
 													</li>
 													<li>
 														<label class="custom-control-label property heading-font" for="customCheck3">
 															<input type="radio" class="custom-control-input reset-form" id="customCheck3" name="option" />
 															<span class="checkmark"></span>
-															<xsl:text>A TODAY VALUE assessment of my home</xsl:text>
+															Checking the market before selling
 														</label>
 													</li>
 												</ul>

@@ -224,7 +224,7 @@
 										</h4>
 									</div>
 									<div class="agent-logo">
-										<div class="funnel-about-company-logo">
+										<!-- <div class="funnel-about-company-logo">
 											<div class="funnel-personal-logo genie-logo-light">
 												<xsl:attribute name="style">
 													<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoLight, ')' )" />
@@ -235,7 +235,7 @@
 													<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoDark, ')' )" />
 												</xsl:attribute>
 											</div>
-										</div>
+										</div> -->
 										<div class="funnel-about-personal-logo">
 											<div class="funnel-personal-logo genie-logo-light">
 												<xsl:attribute name="style">
@@ -312,7 +312,7 @@
 										</h4>
 									</div>
 									<div class="agent-logo">
-										<div class="funnel-about-company-logo">
+										<!-- <div class="funnel-about-company-logo">
 											<div class="funnel-personal-logo genie-logo-light">
 												<xsl:attribute name="style">
 													<xsl:value-of select="concat( 'background: url(', //agent[2]/companyLogoLight, ')' )" />
@@ -323,7 +323,7 @@
 													<xsl:value-of select="concat( 'background: url(', //agent[2]/companyLogoDark, ')' )" />
 												</xsl:attribute>
 											</div>
-										</div>
+										</div> -->
 										<div class="funnel-about-personal-logo">
 											<div class="funnel-personal-logo genie-logo-light">
 												<xsl:attribute name="style">
@@ -402,7 +402,7 @@
 										</h4>
 									</div>
 									<div class="agent-logo">
-										<div class="funnel-about-company-logo">
+										<!-- <div class="funnel-about-company-logo">
 											<div class="funnel-personal-logo genie-logo-light">
 												<xsl:attribute name="style">
 													<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoLight, ')' )" />
@@ -413,7 +413,7 @@
 													<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoDark, ')' )" />
 												</xsl:attribute>
 											</div>
-										</div>
+										</div> -->
 										<div class="funnel-about-personal-logo">
 											<div class="funnel-personal-logo genie-logo-light">
 												<xsl:attribute name="style">
@@ -547,10 +547,20 @@
 					<div class="footer-style footer-area">
 						<div class="funnel-footer-company-logo">
 							<div class="funnel-company-logo your_logo_class editable">
-								<xsl:attribute name="style">
-									<xsl:value-of select="concat( 'background: url(', $companyLogoInverse, ')' )" />
-								</xsl:attribute>
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue='dark'">
+										<xsl:attribute name="style">
+											<xsl:value-of select="concat( 'background: url(', //agent/companyLogoDark, ')' )" />
+										</xsl:attribute>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:attribute name="style">
+											<xsl:value-of select="concat( 'background: url(', //agent/companyLogoLight, ')' )" />
+										</xsl:attribute>
+									</xsl:otherwise>
+								</xsl:choose>
 							</div>
+								
 						</div>
 						<ul class="heading-font outline" style="padding: 0;">
 							<xsl:if test="string(//agent[1]/marketingName)!=''">

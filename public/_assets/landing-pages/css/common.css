@@ -72,6 +72,9 @@ section {
 .text-uppercase {
 	text-transform: uppercase;
 }
+.mt-0 {
+margin-top: 0;
+}
 
 .btn-primary:hover,
 .btn-primary:active,
@@ -736,7 +739,7 @@ h4.home-value-area-price-info span.past-months {
 	left: 0;
 	bottom: 0;
 	z-index: 1;
-	opacity: 0.8;
+	opacity: 0.6;
 }
 
 .open-houes-guest1-info {
