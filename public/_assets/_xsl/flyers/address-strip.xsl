@@ -11,7 +11,7 @@
     expand-text="yes">
     <xsl:import href="common.xsl" />
 
-    <xsl:template name="svg-body" style="background-color: yellow;">
+    <xsl:template name="svg-body">
         <g style="font-size: 14px;background-color:red;">
             <g style="">
                 <text font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="800"
