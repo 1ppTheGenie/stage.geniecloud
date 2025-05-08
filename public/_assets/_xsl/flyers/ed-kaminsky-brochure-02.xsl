@@ -108,8 +108,8 @@
 		<rect x="17%" y="2.5%" width="83%" height="98%" fill="var(--theme-body-background)" />
 		<image x="17.3%" y="2.5%" width="54.6%" height="44.8%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="id" select="'image-1'" />
-				<xsl:with-param name="idx" select="1" />
+				<xsl:with-param name="id" select="'image-4'" />
+				<xsl:with-param name="idx" select="4" />
 			</xsl:call-template>
 		</image>
 
@@ -145,20 +145,20 @@
 		<rect x="72.2%" y="2.5%" width="26%" height="98%" fill="var(--theme-body-background)" />
 		<image x="72.2%" y="2.5%" width="26%" height="22.2%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="id" select="'image-2'" />
-				<xsl:with-param name="idx" select="2" />
+				<xsl:with-param name="id" select="'image-7'" />
+				<xsl:with-param name="idx" select="7" />
 			</xsl:call-template>
 		</image>
 		<image x="72.2%" y="25.2%" width="26%" height="22.2%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="id" select="'image-3'" />
-				<xsl:with-param name="idx" select="3" />
+				<xsl:with-param name="id" select="'image-10'" />
+				<xsl:with-param name="idx" select="10" />
 			</xsl:call-template>
 		</image>
 		<image x="72.2%" y="47.8%" width="26%" height="24.9%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="id" select="'image-4'" />
-				<xsl:with-param name="idx" select="5" />
+				<xsl:with-param name="id" select="'image-13'" />
+				<xsl:with-param name="idx" select="13" />
 			</xsl:call-template>
 		</image>
 
