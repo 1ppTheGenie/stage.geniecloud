@@ -9450,6 +9450,12 @@ var getDimensions = (size = null) => {
     case "a4":
       dims = [827, 1169];
       break;
+      case "a5":
+        dims = [2550, 3300];
+        break;
+      case "tabloid-flyer":
+        dims = [5100, 3300];
+        break;
     case "postcard":
       dims = [1100, 600];
       break;
