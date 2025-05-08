@@ -229,7 +229,7 @@
 		<dims name="facebook-post" width="555" height="555" />
 		<dims name="facebook-video-ad" width="555" height="555" />
 		<dims name="instagram-story" width="1080" height="1920" />
-		<dims width="1200" height="628" />
+		<dims width="1000" height="628" />
 	</xsl:variable>
 
 	<xsl:variable name="assetSize">

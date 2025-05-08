@@ -9469,7 +9469,7 @@ var getDimensions = (size = null) => {
       break;
     case "facebook":
     default:
-      dims = [1200, 628];
+      dims = [1000, 628];
       break;
   }
   return { width: dims[0], height: dims[1] };
