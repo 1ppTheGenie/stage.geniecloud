@@ -66,8 +66,8 @@
 		</text>
 
 		<rect xmlns="" x="0%" y="28%" width="100%" height="18%" fill="#0d0f30"></rect>
-		<text x="50%" y="24%" class="upper align-center" font-weight="500" fill="#383950" style="font-size: 147px;line-height: 74%;">
-			<tspan font-family="var(--theme-heading-font)">
+		<text x="49.7%" y="22.5%" class="upper align-center" font-weight="500" fill="#383950" style="font-size: 158px;line-height: 74%;">
+			<tspan font-family="'Brygada 1918', serif">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="'CONFIDENTIAL'" />
 			</xsl:call-template>
