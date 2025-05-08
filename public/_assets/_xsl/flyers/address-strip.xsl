@@ -4,7 +4,7 @@
 	Tags:		Direct Mail, Flyer
 	Sizes:		Letter
 	Supports:	Listing, Area
-	Pages:		flyers/address-strip
+	Pages:		flyers/address-strip 
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:genie="https://theGenie.ai/hub" version="3.0"
