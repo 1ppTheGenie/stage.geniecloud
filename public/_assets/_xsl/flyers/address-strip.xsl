@@ -13,7 +13,7 @@
 
     <xsl:template name="svg-body">
         <g style="font-size: 14px">
-            <g style="transform: translate(180px, 4%)">
+            <g style="">
                 <text font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="800"
                     font-size="18em" class="upper">
                     <xsl:value-of select="$listingAddressLine1" />
