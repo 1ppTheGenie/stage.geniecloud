@@ -66,7 +66,7 @@
 		</text>
 
 		<rect xmlns="" x="0%" y="28%" width="100%" height="18%" fill="#0d0f30"></rect>
-		<text x="50%" y="24%" class="futura-text upper align-center" font-weight="500" fill="#383950" style="font-family: serif;font-size: 147px;line-height: 74%;">
+		<text x="50%" y="24%" class="upper align-center" font-weight="500" fill="#383950" style="font-family: serif !important;font-size: 147px;line-height: 74%;">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="'CONFIDENTIAL'" />
 			</xsl:call-template>
