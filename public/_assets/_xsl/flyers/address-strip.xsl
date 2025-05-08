@@ -2,8 +2,8 @@
 <!--
 	Asset Name: Ed Kaminsky Address Strip
 	Tags:		Direct Mail, Flyer
-	Sizes:		Tabloid Flyer
-	Supports:	Listing, Reports, AsPDF
+	Sizes:		Letter
+	Supports:	Listing, Area
 	Pages:		flyers/address-strip
 -->
 
@@ -12,7 +12,7 @@
     <xsl:import href="common.xsl" />
 
     <xsl:template name="svg-body">
-        <g style="font-size: 14px;background-color:red;">
+        <g style="font-size: 14px;background-color:red;fill:yellow;">
             <g style="">
                 <text font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="800"
                     font-size="18em" class="upper">
