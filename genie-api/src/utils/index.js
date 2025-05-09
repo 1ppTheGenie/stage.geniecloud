@@ -239,12 +239,13 @@ export const getDimensions = (size = null) => {
 		case "instagram-story":
 			dims = [1080, 1920];
 			break;
+
 		case "a5":
-			dims = [2550, 3300];
+			dims = [2126, 2753];
 			break;
-			
+
 		case "tabloid-flyer":
-			dims = [5100, 3300];
+			dims = [4253, 2753];
 		break;
 
 		case "facebook":
