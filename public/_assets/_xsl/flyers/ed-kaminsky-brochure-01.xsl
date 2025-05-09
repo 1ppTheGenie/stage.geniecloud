@@ -64,7 +64,7 @@
 
 		<image x="37.2% " y="68.7%" width="14.2%" height="18.6%" preserveAspectRatio="xMidYMin slice">
 			<xsl:attribute name="href">
-				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download.png' )" />
+				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download-new.png' )" />
 			</xsl:attribute>
 		</image>
 
