@@ -3,6 +3,7 @@
 */
 
 @import url("../_css/montserrat.css");
+@import url("../_css/roboto.css");
 
 .forward-one, .forward-one.light, .forward-one .light {
 	--theme-body-background: #ffffff;
@@ -23,3 +24,13 @@
 	--theme-emphasis-color: #f0ad3a; /* Outline */
 }
 
+.forward-one.dark2, .forward-one .dark2 {
+    --theme-body-background: #070300;
+    --theme-heading-color: #ffffff; /* Heading */
+    --theme-sub-heading-color: #b19a55; /* Subtitle */
+    --theme-body-color: #ffffff; /* Body */
+    --theme-emphasis-color: #b19a55; /* Outline */
+    --theme-body-font: 'Roboto', sans-serif;
+    --theme-heading-font: 'Roboto', sans-serif;
+    --theme-sub-heading-font: 'Roboto', sans-serif;
+}
