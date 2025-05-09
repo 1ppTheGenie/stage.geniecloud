@@ -121,12 +121,20 @@ Version:	1.1
 					<div class="container">
 						<img class="company-logo" title="Company Logo">
 							<xsl:attribute name="src">
-								<xsl:value-of select="$companyLogo" />
+								<xsl:value-of select="//agent/personalLogoDark" />
 							</xsl:attribute>
 						</img>
 						<h1>
 							<span>
-								<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
+								<!--<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />-->
+								<xsl:choose>
+									<xsl:when test="$hasMultipleAgents">
+										<xsl:value-of select="concat(//agent[1]/firstName, ' ', //agent[1]/lastName, ' to ', //agent[2]/firstName, ' ', //agent[2]/lastName)" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
+									</xsl:otherwise>
+								</xsl:choose>
 							</span>
 							<br/>
 							<xsl:call-template name="overridable">
@@ -135,9 +143,21 @@ Version:	1.1
 							</xsl:call-template>
 						</h1>
 						<xsl:if test="$listingAddressLine1 !=''">
-							<div class="address">
+							<div class="address" style="text-transform:uppercase;">
+								<span>
+									<xsl:value-of select="//area/name" />
+								</span><br/>
 								<span>
 									<xsl:value-of select="$listingAddressLine1" />
+									<xsl:if test="//openHouse/session[1]/@dow != ''">
+										<xsl:value-of select="concat(
+										' • ', //openHouse/session[1]/@dow, ', ',
+										//openHouse/session[1]/@month, ' ',
+										//openHouse/session[1]/@date,
+										' • ', //openHouse/session[1]/@starts, ' - ',
+										//openHouse/session[1]/@ends
+										)" />
+									</xsl:if>									
 								</span>
 							</div>
 						</xsl:if>
@@ -150,34 +170,37 @@ Version:	1.1
 
 				<section>
 					<div class="container">
-						<div class="agent-profiles">
-							<div class="partner-agent">
-								<img>
-									<xsl:attribute name="title">
-										<xsl:value-of select="//agent[1]/marketingName" />
-									</xsl:attribute>
-									<xsl:attribute name="src">
-										<xsl:copy-of select="//agent[1]/photo" />
-									</xsl:attribute>
-								</img>
-							</div>
-							
-
-							<xsl:if test="$hasMultipleAgents">
-								<div class="multi-agent">
+						<xsl:choose>
+							<xsl:when test="$hasMultipleAgents">
+								<div class="agent-profiles multi-agent">
 									<div class="partner-agent">
 										<img>
-											<xsl:attribute name="title">
-												<xsl:value-of select="//agent[2]/marketingName" />
+											<xsl:attribute name="src">
+												<xsl:copy-of select="//agent[1]/photo" />
 											</xsl:attribute>
+										</img>
+									</div>
+									<div class="partner-agent">
+										<img>
 											<xsl:attribute name="src">
 												<xsl:copy-of select="//agent[2]/photo" />
 											</xsl:attribute>
 										</img>
 									</div>
 								</div>
-							</xsl:if>
-						</div>	
+							</xsl:when>
+							<xsl:otherwise>
+								<div class="agent-profiles">
+									<div class="partner-agent">
+										<img>
+											<xsl:attribute name="src">
+												<xsl:copy-of select="//agent[1]/photo" />
+											</xsl:attribute>
+										</img>
+									</div>
+								</div>
+							</xsl:otherwise>
+						</xsl:choose>	
 					</div>
 				</section>
 
