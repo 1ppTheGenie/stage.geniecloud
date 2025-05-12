@@ -216,6 +216,7 @@
 		<!-- For sizes going to print, values should be inches * 100, eg 11" x 6" = 1100 x 600 -->
 		<!-- DO NOT CHANGE these values -->
 		<dims name="postcard" width="1100" height="600" />
+		<dims name="tabloid-flyer" width="1100" height="1700" />
 
 		<dims name="facebook-ad" width="555" height="555" />
 		<dims name="facebook-post" width="555" height="555" />
