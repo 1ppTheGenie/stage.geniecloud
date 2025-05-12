@@ -7642,7 +7642,7 @@ var getRenderJSON = async (params) => {
     // *** Agents
     agents: await processAgents([
       params.userId,
-      ...params?.renderSettings?.additionalAgents ?? []
+      ...renderSettings?.additionalAgents ?? []
     ]),
     // *** Areas
     areas: params.isEmbed ? params.areaIds.map((id) => ({ id })) : await processAreas(params)
@@ -8215,6 +8215,7 @@ var processListing = async (params, agentTimezone) => {
       }
     }
     single = [
+      { documents: listing.genieDocuments ?? [] },
       { mlsNumber: listing.mlsNumber ?? "" },
       { mlsId: listing.mlsID ?? "" },
       { price: listing.lowPrice ?? 0 },
@@ -8373,6 +8374,7 @@ var processListing = async (params, agentTimezone) => {
     });
     images.length && single.push({ _name: "images", _content: images });
   }
+  console.log("single mls", params.mlsNumber, single);
   return single;
 };
 var processCollection = async (params) => {
@@ -9225,6 +9227,9 @@ var getDimensions = (size = null) => {
     case "postcard":
       dims = [1100, 600];
       break;
+    case "tabloid-flyer":
+      dims = [1100, 1700];
+      break;
     case "facebook-ad":
     case "facebook-post":
     case "facebook-video-ad":
@@ -9357,6 +9362,9 @@ var getListing = async (user_id, mls_number, mls_id, skipCache = false) => {
       listing = r.listing ?? null;
       if (listing && r.preferredAreaId) {
         listing.preferredAreaId = r.preferredAreaId;
+      }
+      if (listing && r?.hasDocuments) {
+        listing.genieDocuments = r.documents;
       }
     } else {
       endpoint = "GetListingByMlsNumber";
