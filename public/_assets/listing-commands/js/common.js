@@ -89,11 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!linkUrl.endsWith("html")) {
                 a = document.createElement("a");
                 a.classList.add("asset-icon");
+                a.setAttribute("target", "_blank");
+                a.href = linkUrl; // Opens directly in a new tab
                 a.onclick = e => {
                     e.preventDefault();
                     downloadFile(linkUrl);
                 };
-                a.href = "#";
+                // a.href = "#";
                 a.innerHTML = `
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 298 298" style="enable-background:new 0 0 298 298;" xml:space="preserve">
                         <g>
@@ -128,16 +130,20 @@ document.addEventListener('DOMContentLoaded', () => {
     getRenderUpdate();
 });
 
+// const downloadFile = url => {
+//     fetch(url, { method: "get", mode: "no-cors", referrerPolicy: "no-referrer" })
+//         .then(res => res.blob())
+//         .then(res => {
+//             const aElement = document.createElement("a");
+//             const href = URL.createObjectURL(res);
+//             aElement.href = href;
+//             aElement.setAttribute("download", url.split("/").reverse()[0]);
+//             aElement.setAttribute("target", "_blank");
+//             aElement.click();
+//             URL.revokeObjectURL(href);
+//         });
+// };
+
 const downloadFile = url => {
-    fetch(url, { method: "get", mode: "no-cors", referrerPolicy: "no-referrer" })
-        .then(res => res.blob())
-        .then(res => {
-            const aElement = document.createElement("a");
-            const href = URL.createObjectURL(res);
-            aElement.href = href;
-            aElement.setAttribute("download", url.split("/").reverse()[0]);
-            aElement.setAttribute("target", "_blank");
-            aElement.click();
-            URL.revokeObjectURL(href);
-        });
+    window.open(url, '_blank');
 };
