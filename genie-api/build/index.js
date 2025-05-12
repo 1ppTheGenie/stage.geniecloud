@@ -1225,7 +1225,7 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 var import_sharp = __toESM(require("sharp"), 1);
-var import_stream = require("stream");
+var import_stream2 = require("stream");
 
 // node_modules/luxon/src/errors.js
 var LuxonError = class extends Error {
@@ -7460,11 +7460,40 @@ var import_crypto = __toESM(require("crypto"), 1);
 var import_client_s3 = require("@aws-sdk/client-s3");
 var import_client_cloudfront = require("@aws-sdk/client-cloudfront");
 var import_client_sqs = require("@aws-sdk/client-sqs");
+var import_stream = require("stream");
 var BUCKET = process.env.BUCKET ?? "genie-hub-2";
+var CACHEBUCKET = process.env.CACHEBUCKET ?? "genie-cache--usw2-az1--x-s3";
 var REGION = process.env.REGION ?? "eu-west-2";
+var CACHEBUCKETREGION = process.env.CACHEBUCKETREGION ?? "us-west-2";
 var SQS_QUEUE = process.env.SQS_QUEUE ?? "https://sqs.eu-west-2.amazonaws.com/584678469437/genie-cloud";
 var s3Client = new import_client_s3.S3Client({ region: REGION });
+var s3CacheClient = new import_client_s3.S3Client({ region: CACHEBUCKETREGION });
 var sqs = new import_client_sqs.SQSClient({ region: REGION });
+var streamS3Object = async (key, bucket = null) => {
+  try {
+    const command = new import_client_s3.GetObjectCommand({
+      Bucket: bucket ?? BUCKET,
+      Key: key
+    });
+    const { Body } = await s3Client.send(command);
+    if (Body instanceof import_stream.Readable) {
+      return Body;
+    } else {
+      const stream = new import_stream.Readable();
+      stream.push(await Body.transformToByteArray());
+      stream.push(null);
+      return stream;
+    }
+  } catch (err) {
+    console.error(`Error streaming object ${key}:`, err);
+    throw err;
+  }
+};
+var readStream = async function* (stream) {
+  for await (const chunk of stream) {
+    yield chunk.toString("utf-8");
+  }
+};
 var copyObject = async (sourceKey, destinationKey, bucket = null, ContentType = null, CacheControl = null) => {
   const args = {
     Bucket: bucket ?? BUCKET,
@@ -7476,19 +7505,56 @@ var copyObject = async (sourceKey, destinationKey, bucket = null, ContentType = 
   };
   return await s3Client.send(new import_client_s3.CopyObjectCommand(args));
 };
+var searchS3ByPrefix = async (prefix, contains = null, bucket = null) => {
+  try {
+    let allMatches = [];
+    let isTruncated = true;
+    let nextContinuationToken = null;
+    while (isTruncated) {
+      const listParams = {
+        Bucket: bucket ?? BUCKET,
+        Prefix: prefix,
+        ContinuationToken: nextContinuationToken
+      };
+      const response2 = await s3Client.send(
+        new import_client_s3.ListObjectsV2Command(listParams)
+      );
+      let contents = response2.Contents || [];
+      if (contains) {
+        contents = contents.filter((item) => item.Key.includes(contains));
+      }
+      allMatches = allMatches.concat(contents);
+      isTruncated = response2.IsTruncated;
+      nextContinuationToken = response2.NextContinuationToken;
+    }
+    return allMatches;
+  } catch (err) {
+    console.error("Error in searchS3ByPrefix:", err);
+    throw err;
+  }
+};
 var listS3Folder = async (folderPath = "", justContents = true, token = null, bucket = null) => {
   try {
-    const listParams = {
-      Bucket: bucket ?? BUCKET,
-      Prefix: folderPath,
-      ContinuationToken: token
-    };
-    const response2 = await s3Client.send(
-      new import_client_s3.ListObjectsV2Command(listParams)
-    );
-    return justContents ? response2.Contents : response2;
+    let allContents = [];
+    let isTruncated = true;
+    let nextContinuationToken = null;
+    while (isTruncated) {
+      const listParams = {
+        Bucket: bucket ?? BUCKET,
+        Prefix: folderPath,
+        ContinuationToken: nextContinuationToken
+      };
+      const response2 = await s3Client.send(
+        new import_client_s3.ListObjectsV2Command(listParams)
+      );
+      allContents = allContents.concat(response2.Contents || []);
+      isTruncated = response2.IsTruncated;
+      nextContinuationToken = response2.NextContinuationToken;
+    }
+    return justContents ? allContents : { Contents: allContents };
   } catch (err) {
-    console.error("Error:", err);
+    console.error("Error in listS3Folder:", err);
+    throw err;
   }
 };
 var deleteObject = async (Key, Bucket = null) => await s3Client.send(
@@ -7561,6 +7627,173 @@ var toS3 = async (key, buffer, tags = null, mimeType = null, bucket = null, othe
   } catch (err) {
     console.log("S3 save err", err, key, tags);
   }
+};
+var fromDirectoryBucket = async (key, since = null) => {
+  try {
+    const command = new import_client_s3.GetObjectCommand({
+      Bucket: CACHEBUCKET,
+      Key: key,
+      IfModifiedSince: since
+    });
+    const { Body } = await s3CacheClient.send(command);
+    const buffer = await Body.transformToByteArray();
+    return Buffer.from(buffer);
+  } catch (err) {
+    console.log("Error retrieving from Directory Bucket:", err);
+    return null;
+  }
+};
+var toDirectoryBucket = async (key, buffer, metadata = null, mimeType = null, otherParams = {}) => {
+  try {
+    const command = new import_client_s3.PutObjectCommand({
+      Bucket: CACHEBUCKET,
+      Key: key,
+      Body: buffer,
+      ContentType: mimeType,
+      Metadata: metadata,
+      ...otherParams
+    });
+    const res = await s3CacheClient.send(command);
+    return res.ETag;
+  } catch (err) {
+    console.log("Error saving to Directory Bucket:", err);
+    return null;
+  }
+};
+var deleteFromDirectoryBucket = async (key) => {
+  try {
+    await s3CacheClient.send(new import_client_s3.DeleteObjectCommand({
+      Bucket: CACHEBUCKET,
+      Key: key
+    }));
+    console.log(`Successfully deleted ${key} from Directory Bucket.`);
+    return true;
+  } catch (error2) {
+    console.error(`Error deleting object ${key} from Directory Bucket:`, error2);
+    return false;
+  }
+};
+var listDirectoryBucketObjects = async (prefix) => {
+  let allItems = [];
+  let continuationToken;
+  const listParams = {
+    Bucket: CACHEBUCKET,
+    Prefix: prefix.endsWith("/") ? prefix : `${prefix}/`
+  };
+  do {
+    try {
+      const response2 = await s3CacheClient.send(new import_client_s3.ListObjectsV2Command({
+        ...listParams,
+        ContinuationToken: continuationToken
+      }));
+      if (response2.Contents) {
+        allItems = allItems.concat(response2.Contents);
+      }
+      continuationToken = response2.NextContinuationToken;
+    } catch (error2) {
+      console.error("Error listing Directory Bucket objects:", error2);
+      break;
+    }
+  } while (continuationToken);
+  return allItems;
+};
+var deleteUserCache = async (userId) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `u_${userId}`);
+    console.log(`Found ${cacheItems.length} cache items for user ${userId} in regular bucket`);
+    for (const f of cacheItems) {
+      if (f.Size > 0) {
+        try {
+          await deleteObject(f.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${f.Key} from regular bucket:`, deleteError);
+        }
+      }
+    }
+    const directoryItems = await listDirectoryBucketObjects(`_cache/`);
+    console.log(`Found ${directoryItems.length} total cache items in Directory Bucket`);
+    for (const item of directoryItems) {
+      if (item.Key.includes(`u_${userId}`)) {
+        try {
+          await deleteFromDirectoryBucket(item.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${item.Key} from Directory Bucket:`, deleteError);
+        }
+      }
+    }
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
+};
+var deleteAreaCache = async (areaId) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `a_${areaId}`);
+    console.log(`Found ${cacheItems.length} cache items for area ${areaId} in regular bucket`);
+    for (const f of cacheItems) {
+      if (f.Size > 0) {
+        try {
+          await deleteObject(f.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${f.Key} from regular bucket:`, deleteError);
+        }
+      }
+    }
+    const directoryBucketPrefix = `_cache/`;
+    const directoryItems = await listDirectoryBucketObjects(directoryBucketPrefix);
+    console.log(`Found ${directoryItems.length} total cache items in Directory Bucket`);
+    for (const item of directoryItems) {
+      if (item.Key.includes(`a_${areaId}`)) {
+        try {
+          await deleteFromDirectoryBucket(item.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${item.Key} from Directory Bucket:`, deleteError);
+        }
+      }
+    }
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
+};
+var deleteListingCache = async (mlsNumber) => {
+  let deletedCount = 0;
+  try {
+    const cacheItems = await searchS3ByPrefix(`_cache/genie-`, `mnum_${mlsNumber}`);
+    console.log(`Found ${cacheItems.length} cache items for listing ${mlsNumber} in regular bucket`);
+    for (const f of cacheItems) {
+      if (f.Size > 0) {
+        try {
+          await deleteObject(f.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${f.Key} from regular bucket:`, deleteError);
+        }
+      }
+    }
+    const directoryBucketPrefix = `_cache/`;
+    const directoryItems = await listDirectoryBucketObjects(directoryBucketPrefix);
+    console.log(`Found ${directoryItems.length} total cache items in Directory Bucket`);
+    for (const item of directoryItems) {
+      if (item.Key.includes(`mnum_${mlsNumber}`)) {
+        try {
+          await deleteFromDirectoryBucket(item.Key);
+          deletedCount++;
+        } catch (deleteError) {
+          console.error(`Error deleting object ${item.Key} from Directory Bucket:`, deleteError);
+        }
+      }
+    }
+  } catch (cacheError) {
+    console.error("Error processing cache deletions:", cacheError);
+  }
+  return deletedCount;
 };
 var queueMsg = async (body, attributes) => {
   const sqsMessage = {
@@ -7822,6 +8055,7 @@ var setRenderDefaults = async (params) => {
       }
     }
   }
+  params.propertyType = params.propertyType === 9 ? 1 : params.propertyType;
   if (params.areaId && !params.areaIds) {
     params.areaIds = [params.areaId];
   }
@@ -7869,6 +8103,14 @@ var processAgents = async (agentIds) => {
         return disclaimer ?? {
           text: "",
           url: ""
+        };
+      };
+      const getSnippet = (id) => {
+        const snippet = marketingSettings.codeSnippets.find(
+          (d) => d.marketingSnippetTypeId == id
+        );
+        return snippet ?? {
+          codeSnippet: ""
         };
       };
       let timezone, tzOffset;
@@ -7929,6 +8171,11 @@ var processAgents = async (agentIds) => {
         //"htmlDisclaimer"
         disclaimerIDX: getDisclaimer(3).text,
         // "idxDisclaimer"
+        snippetHeadTag: getSnippet(1).codeSnippet,
+        snippetOpenBodyTag: getSnippet(2).codeSnippet,
+        snippetCloseBodyTag: getSnippet(3).codeSnippet,
+        googleAnalyticsId: marketingSettings.hasGoogleSettings ? marketingSettings.google.analyticsId : null,
+        facebookPixelId: marketingSettings.hasFacebookSettings ? marketingSettings.facebook.pixelId : null,
         pronoun: marketingSettings.profile.isTeam ? "plural" : "singular",
         timezone,
         tzOffset: DateTime.local().setZone(timezone).offset,
@@ -7966,7 +8213,7 @@ var processCustomizations = (customizations) => {
 var processAreas = async (params) => {
   const areas = [];
   await Promise.all(
-    params.areaIds.map(async (areaId) => {
+    (params.areaIds || []).map(async (areaId) => {
       const boundary = await getAreaBoundary(areaId);
       const statsData = await areaStatisticsWithPrevious(
         params.userId,
@@ -7974,19 +8221,17 @@ var processAreas = async (params) => {
         parseInt(params.datePeriod || 12)
       );
       params.isDebug && debugLog("areaStatisticsWithPrevious", params, statsData);
-      const areaName2 = statsData.areaName;
+      const areaName2 = statsData?.areaName ?? "Unknown Area";
       let areaImage = null;
       const area_images = [];
-      area_images.forEach((image) => {
-        if (!Array.isArray(image)) {
-        }
-        if (image.id == areaId) {
+      (area_images || []).forEach((image) => {
+        if (Array.isArray(image) && image.id == areaId) {
           areaImage = image.image;
         }
       });
       const defaultJSON = '{"type": "FeatureCollection","features": []}';
       let geoJSON = boundary?.mapArea?.geoJSON ?? defaultJSON;
-      if (geoJSON.length > 2e5) {
+      if (typeof geoJSON === "string" && geoJSON.length > 2e5) {
         geoJSON = defaultJSON;
       }
       const area = {
@@ -7996,18 +8241,16 @@ var processAreas = async (params) => {
           { name: areaName2 ?? params?.area?.name ?? "NOT SET" },
           { geojson: `<![CDATA[${geoJSON}]]>` },
           { centerLat: boundary?.mapArea?.centerLatitude ?? 32.71 },
-          {
-            centerLng: boundary?.mapArea?.centerLongitude ?? -117.16
-          },
+          { centerLng: boundary?.mapArea?.centerLongitude ?? -117.16 },
           { image: areaImage ?? "" }
         ]
       };
-      if (statsData.statistics) {
+      if (statsData?.statistics) {
         let propertyTypeData, prevData;
-        statsData.statistics.propertyTypeData.forEach((pData) => {
-          if (pData.type == (params.propertyType ?? 0)) {
+        statsData.statistics.propertyTypeData?.forEach((pData) => {
+          if (pData?.type == (params.propertyType ?? 0)) {
             propertyTypeData = pData.statistics;
-            prevData = propertyTypeData.previousPeriod;
+            prevData = propertyTypeData?.previousPeriod;
           }
         });
         const mls_properties = await mlsProperties(
@@ -8020,45 +8263,28 @@ var processAreas = async (params) => {
           const agentListings = await agentMlsNumbers(params.userId);
           const listings = [];
           mls_properties.forEach((p) => {
-            if (p.propertyTypeID == (params.propertyType ?? params.propertyTypeID ?? 0)) {
-              const state = parseInt(p.statusTypeID) == 4 || parseInt(p.statusTypeID) == 12 || parseInt(p.statusTypeID) == 3 ? "pending" : p.statusType.toLowerCase();
+            if (p?.propertyTypeID == (params.propertyType ?? params.propertyTypeID ?? 0)) {
+              const state = parseInt(p.statusTypeID) == 4 || parseInt(p.statusTypeID) == 12 || parseInt(p.statusTypeID) == 3 ? "pending" : p.statusType?.toLowerCase() ?? "unknown";
               listings.push({
                 _name: "listing",
                 _attrs: {
-                  lat: p.latitude,
-                  lon: p.longitude,
-                  // TODO: Lookup based on statusTypeID rather than the string
-                  /*
-                  Use values:
-                  1    Active
-                  2    Sold
-                  3    Pending
-                  4    Contingent - Pending
-                  12    Active With Contingency - Pending
-                  13    Expired - DON@T INCLUDE */
+                  lat: p.latitude ?? 0,
+                  lon: p.longitude ?? 0,
                   state,
                   address: singleAddress(p),
-                  beds: p.bedrooms,
-                  baths: p.bathroomsTotal,
-                  size: p.sqft,
-                  listPrice: p.priceHigh,
+                  beds: p.bedrooms ?? null,
+                  baths: p.bathroomsTotal ?? null,
+                  size: p.sqft ?? null,
+                  listPrice: p.priceLow ?? null,
                   salePrice: p.salePrice ?? null,
-                  listedDate: DateTime.fromISO(
-                    p.listDate
-                  ).toSeconds(),
-                  soldDate: p.soldDate ? DateTime.fromISO(
-                    p.soldDate
-                  ).toSeconds() : null,
-                  dom: p.daysOnMarket,
-                  thumb: p.photoPrimaryUrl,
+                  listedDate: p.listDate ? DateTime.fromISO(p.listDate).toSeconds() : null,
+                  soldDate: p.soldDate ? DateTime.fromISO(p.soldDate).toSeconds() : null,
+                  dom: p.daysOnMarket ?? null,
+                  thumb: p.photoPrimaryUrl ?? "",
                   isAgent: agentListings.includes(
-                    p.mlsNumber.toLowerCase()
+                    p.mlsNumber?.toLowerCase() ?? ""
                   ) ? 1 : 0,
-                  sortDate: p.soldDate ? DateTime.fromISO(
-                    p.soldDate
-                  ).toSeconds() : DateTime.fromISO(
-                    p.listDate
-                  ).toSeconds()
+                  sortDate: p.soldDate ? DateTime.fromISO(p.soldDate).toSeconds() : p.listDate ? DateTime.fromISO(p.listDate).toSeconds() : null
                 }
               });
             }
@@ -8071,48 +8297,48 @@ var processAreas = async (params) => {
             {
               _name: "previous",
               _attrs: {
-                totalSold: prevData?.sold,
-                turnOver: prevData?.turnOver,
-                avgPricePerSqFtSold: prevData?.avgPricePerSqFt,
-                avgPricePerSqFtList: prevData?.avgSoldListingsListPricePerSqFt,
-                averageListPriceForSold: prevData?.avgListPriceForSold,
-                averageSalePrice: prevData?.avgSalePrice,
-                averageDaysOnMarket: prevData?.avgDaysOnMarket,
-                medianSalePrice: prevData?.medSalePrice,
-                maxSalePrice: prevData?.maxSale?.salePrice,
-                minSalePrice: prevData?.minSale?.salePrice
+                totalSold: prevData?.sold ?? 0,
+                turnOver: prevData?.turnOver ?? 0,
+                avgPricePerSqFtSold: prevData?.avgPricePerSqFt ?? 0,
+                avgPricePerSqFtList: prevData?.avgSoldListingsListPricePerSqFt ?? 0,
+                averageListPriceForSold: prevData?.avgListPriceForSold ?? 0,
+                averageSalePrice: prevData?.avgSalePrice ?? 0,
+                averageDaysOnMarket: prevData?.avgDaysOnMarket ?? 0,
+                medianSalePrice: prevData?.medSalePrice ?? 0,
+                maxSalePrice: prevData?.maxSale?.salePrice ?? 0,
+                minSalePrice: prevData?.minSale?.salePrice ?? 0
               }
             }
           ];
           const byBedroom = { _name: "byBedroom", _content: [] };
-          propertyTypeData.bedroomStats.forEach((stat) => {
+          propertyTypeData?.bedroomStats?.forEach((stat) => {
             byBedroom._content.push({
               _name: "bedroom",
               _attrs: {
-                number: stat.beds,
-                sold: stat.sold,
-                active: stat.active,
-                pending: stat.pending,
-                averageSalePrice: stat.avgSalePrice,
-                averageListPrice: stat.avgListPrice,
-                averageListPriceForSold: stat.avgListPriceForSold
+                number: stat.beds ?? null,
+                sold: stat.sold ?? 0,
+                active: stat.active ?? 0,
+                pending: stat.pending ?? 0,
+                averageSalePrice: stat.avgSalePrice ?? 0,
+                averageListPrice: stat.avgListPrice ?? 0,
+                averageListPriceForSold: stat.avgListPriceForSold ?? 0
               }
             });
           });
           statistics.push(byBedroom);
           const bySize = { _name: "bySize", _content: [] };
-          propertyTypeData.squareFootStats.forEach((stat) => {
+          propertyTypeData?.squareFootStats?.forEach((stat) => {
             bySize._content.push({
               _name: "size",
               _attrs: {
-                min: stat.min,
-                max: stat.max,
-                sold: stat.sold,
-                active: stat.active,
-                pending: stat.pending,
-                averageSalePrice: stat.avgSalePrice,
-                averageListPrice: stat.avgListPrice,
-                averageListPriceForSold: stat.avgListPriceForSold
+                min: stat.min ?? 0,
+                max: stat.max ?? 0,
+                sold: stat.sold ?? 0,
+                active: stat.active ?? 0,
+                pending: stat.pending ?? 0,
+                averageSalePrice: stat.avgSalePrice ?? 0,
+                averageListPrice: stat.avgListPrice ?? 0,
+                averageListPriceForSold: stat.avgListPriceForSold ?? 0
               }
             });
           });
@@ -8122,24 +8348,24 @@ var processAreas = async (params) => {
             areaId,
             Math.ceil(params.datePeriod / 12)
           );
-          if (monthly.statistics) {
+          if (monthly?.statistics) {
             const history = { _name: "history", _content: [] };
             monthly.statistics.slice((params.datePeriod + 1) * 2 * -1).forEach((m) => {
               if (m.propertyTypeId == params.propertyType) {
                 history._content.push({
                   _name: "period",
                   _attrs: {
-                    period: `${m.yearPart.toString()}${m.monthPart.toString().padStart(2, "0")}`,
-                    periodName: DateTime.fromObject({
+                    period: `${m.yearPart?.toString() ?? ""}${(m.monthPart?.toString() ?? "").padStart(2, "0")}`,
+                    periodName: m.yearPart && m.monthPart ? DateTime.fromObject({
                       year: m.yearPart,
                       month: m.monthPart,
                       day: 1
-                    }).toFormat("LLL yyyy"),
-                    totalSold: m.soldCount,
-                    averageListPrice: m.averageListPrice,
-                    averageSalePrice: m.averageSalePrice,
-                    averageDaysOnMarket: m.averageDaysOnMarket,
-                    averagePricePerSqFt: m.averagePricePerSqFt
+                    }).toFormat("LLL yyyy") : "Unknown",
+                    totalSold: m.soldCount ?? 0,
+                    averageListPrice: m.averageListPrice ?? 0,
+                    averageSalePrice: m.averageSalePrice ?? 0,
+                    averageDaysOnMarket: m.averageDaysOnMarket ?? 0,
+                    averagePricePerSqFt: m.averagePricePerSqFt ?? 0
                   }
                 });
               }
@@ -8166,7 +8392,7 @@ var processAreas = async (params) => {
               minSalePrice: propertyTypeData?.minSale?.salePrice ?? 0,
               marketTotalSoldVolume: propertyTypeData?.marketTotalSoldVolume ?? 0,
               averageYearsInHome: propertyTypeData?.avgYearsInHome ?? 0,
-              ownerOccupancy: propertyTypeData?.ownerOccupancy ?? 0
+              ownerOccupancy: propertyTypeData?.ownerOccupancy ?? null
             },
             _content: statistics
           });
@@ -8207,7 +8433,7 @@ var processListing = async (params, agentTimezone) => {
         "http:",
         "https:"
       );
-      if (listing.virtualTourUrl.indexOf("youtube.com/watch")) {
+      if (listing.virtualTourUrl.indexOf("youtube.com/watch") !== -1) {
         listing.virtualTourUrl = listing.virtualTourUrl.replace(
           /https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
           "https://www.youtube.com/embed/$1"
@@ -8229,7 +8455,6 @@ var processListing = async (params, agentTimezone) => {
       { listingAgent: listing.listingAgentName ?? "" },
       { statusTypeID: listing.statusTypeID ?? "" },
       { description: listing.remarks ?? "" },
-      //ToDo clean entities?
       { photoPrimary: primaryPhoto },
       { listingBoundary: listingBoundary ?? "" },
       { squareFeet: listing.squareFeet ?? "Enquire" },
@@ -8309,7 +8534,7 @@ var processListing = async (params, agentTimezone) => {
     }
     single.push({
       _name: "bedrooms",
-      _attrs: { count: listing?.bedrooms || "n/a" }
+      _attrs: { count: listing?.bedrooms ?? null }
     });
     single.push({
       _name: "bathrooms",
@@ -8525,6 +8750,9 @@ var preCallGenieAPIs = async (params) => {
       await Promise.all(
         params.agentIds.map(async (agentId) => await getUser(agentId))
       );
+    }
+    if (params.userId) {
+      await getUser(params.userId);
     }
     if (Array.isArray(params?.areaIds)) {
       await Promise.all(
@@ -8816,7 +9044,7 @@ var get_property = async (params) => {
   return error(["No property found"]);
 };
 var get_short_data = async (params) => {
-  const r = getShortData(
+  const r = await getShortData(
     parseInt(params.shortId),
     params.token,
     params.agentId || null
@@ -8871,7 +9099,7 @@ var add_lead = async (params) => {
       }
     }
     if (params.hasOwnProperty("fullName") && params.fullName) {
-      var split = params?.fullName?.split(" ");
+      var split = params?.fullName?.split(" ")?.filter(Boolean);
       if (split && split.length > 1) {
         var last = split.pop();
         args["lastName"] = last;
@@ -9224,6 +9452,12 @@ var getDimensions = (size = null) => {
     case "a4":
       dims = [827, 1169];
       break;
+    case "a5":
+      dims = [2126, 2753];
+      break;
+    case "tabloid-flyer":
+      dims = [4253, 2753];
+      break;
     case "postcard":
       dims = [1100, 600];
       break;
@@ -9245,6 +9479,35 @@ var getDimensions = (size = null) => {
   }
   return { width: dims[0], height: dims[1] };
 };
+var filterRenderIds = async (renderIds, params) => {
+  const filteredIds = [];
+  for (const renderId of renderIds) {
+    const renderJsonKey = `_processing/${renderId}/render.json`;
+    try {
+      const renderJson = await jsonFromS3(renderJsonKey);
+      if (renderJson) {
+        if (params.mlsNumber && renderJson.mlsNumber === params.mlsNumber) {
+          filteredIds.push(renderId);
+        } else if (params.areaId && renderJson.areaIds && renderJson.areaIds.includes(params.areaId)) {
+          filteredIds.push(renderId);
+        }
+      }
+    } catch (error2) {
+      console.error(`Error reading render.json for ${renderId}:`, error2);
+    }
+  }
+  return filteredIds;
+};
+var getPropertyCaption = (id, custom = null) => {
+  if (custom)
+    return custom;
+  switch (id) {
+    case 3:
+      return "Condos";
+    default:
+      return "Homes";
+  }
+};
 
 // src/genieAI.js
 var API_URL = process.env.GENIE_URL ?? "https://app.thegenie.ai/api/Data/";
@@ -9263,24 +9526,89 @@ var from_cache = async (key, endpoint) => {
   since.setSeconds(
     since.getSeconds() - (CACHE_FOR[endpoint.split("/")[0]] ?? HOUR_IN_SECONDS / 2)
   );
-  return await jsonFromS3(`_cache/${key}`, since);
+  try {
+    const cachedData2 = await fromDirectoryBucket(`_cache/${key}`, since);
+    if (cachedData2) {
+      const parsedData = JSON.parse(cachedData2.toString());
+      if (parsedData && parsedData.response) {
+        return parsedData.response;
+      }
+    }
+  } catch (error2) {
+    console.log("Error fetching from Directory Bucket, falling back to S3:", error2);
+  }
+  const cachedData = await jsonFromS3(`_cache/${key}`, since);
+  if (cachedData && cachedData.response) {
+    return cachedData.response;
+  }
+  return null;
 };
-var to_cache = async (data, endpoint, key, timeout_hours = 4) => {
+var to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) => {
   const timeout = CACHE_FOR[endpoint.split("/")[0]] ?? timeout_hours;
   if (timeout > 0) {
-    await toS3(`_cache/${key}`, Buffer.from(data), {
-      genieCache: endpoint?.toString(),
-      GenieExpireFile: "GenieCache",
-      timeout
-    });
+    const cacheData = {
+      endpoint,
+      params,
+      verb,
+      timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+      response: JSON.parse(data)
+    };
+    const cacheBuffer = Buffer.from(JSON.stringify(cacheData));
+    try {
+      const metadata = {
+        genieCache: endpoint?.toString(),
+        GenieExpireFile: "GenieCache",
+        timeout: timeout.toString()
+      };
+      await toDirectoryBucket(`_cache/${key}`, cacheBuffer, metadata);
+    } catch (error2) {
+      console.log("Error saving to Directory Bucket, falling back to S3:", error2);
+      const tags = {
+        genieCache: endpoint?.toString(),
+        GenieExpireFile: "GenieCache",
+        timeout: timeout.toString()
+      };
+      await toS3(`_cache/${key}`, cacheBuffer, tags);
+    }
   }
 };
-var cache_key = (endpoint, params, verb) => {
-  const strParams = JSON.stringify(Object.entries(params ?? {}));
-  const hash = import_crypto.default.createHash("md5").update(`${endpoint}.${verb}.${strParams}`).digest("hex");
-  return `genie-${hash}.json`;
+var roundDateForCacheKey = (dateString) => {
+  const date = DateTime.fromISO(dateString);
+  return date.startOf("day").set({ hour: 12 }).toISO();
 };
-var areaName = async (userId, areaId, skipCache = false) => await call_api("GetAreaName", { areaId, userId }, skipCache);
+var cache_key = (endpoint, params, verb) => {
+  let userId, areaId, mlsId, mlsNumber, restParams;
+  if (endpoint.includes("GetAreaBoundary")) {
+    const parts = endpoint.split("/");
+    areaId = parts.pop();
+    endpoint = parts.join("/");
+    restParams = {};
+  } else {
+    const normalizedParams = Object.entries(params ?? {}).reduce((acc, [key, value]) => {
+      if ((key.toLowerCase() === "startdate" || key.toLowerCase() === "enddate") && typeof value === "string") {
+        acc[key.toLowerCase()] = roundDateForCacheKey(value);
+      } else {
+        acc[key.toLowerCase()] = value;
+      }
+      return acc;
+    }, {});
+    ({ userid: userId, areaid: areaId, mlsid: mlsId, mlsnumber: mlsNumber, ...restParams } = normalizedParams);
+  }
+  const prefixParts = [];
+  if (userId)
+    prefixParts.push(`u_${userId}`);
+  if (areaId)
+    prefixParts.push(`a_${areaId}`);
+  if (mlsId !== void 0 && mlsId !== null)
+    prefixParts.push(`mid_${mlsId}`);
+  if (mlsNumber)
+    prefixParts.push(`mnum_${mlsNumber}`);
+  const prefix = prefixParts.length > 0 ? prefixParts.join("-") + "-" : "";
+  const strParams = JSON.stringify(Object.entries(restParams));
+  const hash = import_crypto.default.createHash("md5").update(`${endpoint}.${verb}.${strParams}`).digest("hex");
+  return `genie-${prefix}${hash}.json`;
+};
+var areaName = async (userId, areaId, skipCache = true) => await call_api("GetAreaName", { areaId, userId }, skipCache);
 var areaStatisticsWithPrevious = async (userId, areaId, month_count, end_timestamp = null, skipCache = false) => {
   month_count = month_count ?? 12;
   return await call_api(
@@ -9439,10 +9767,11 @@ var propertySurroundingAreas = async (mls_number, mls_id, user_id, strFips, prop
   );
   return r.success && r.areas;
 };
-var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = false) => {
+var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = false, skipCache = false) => {
   const r = await call_api(
     "GetShortUrlData",
     { shortUrlDataId, token },
+    skipCache,
     "POST"
   );
   if (r.data) {
@@ -9475,7 +9804,12 @@ var getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate 
     return r.data;
   }
 };
-var getUser = async (user_id) => await call_api(`GetUserProfile/${user_id}`);
+var getUser = async (userId, skipCache = false) => await call_api(
+  "HubCloudGetUser",
+  { userId },
+  skipCache,
+  "POST"
+);
 var getPropertyFromId = async (property_id, agent_id) => {
   const r = await getAssessorProperty(property_id, agent_id);
   if (r.hasProperty) {
@@ -9488,15 +9822,15 @@ var getPropertyFromId = async (property_id, agent_id) => {
     return r.property;
   }
 };
-var createLead = async (userId, args) => {
+var createLead = async (userId, args, skipCache = true) => {
   args.userId = userId;
-  const r = await call_api("CreateNewLead", args, "POST");
+  const r = await call_api("CreateNewLead", args, skipCache, "POST");
   if (!r) {
     console.log("Failed to create new lead: ", r);
   }
   return r;
 };
-var updateLead = async (userId, args) => await call_api("UpdateLead", { ...args, userId }, "POST");
+var updateLead = async (userId, args, skipCache = true) => await call_api("UpdateLead", { ...args, userId }, skipCache, "POST");
 var getQRProperty = async (qrID, token) => {
   const lead = await getQRCodeLead(qrID, token);
   if (lead.property) {
@@ -9522,8 +9856,8 @@ var getQRProperty = async (qrID, token) => {
     return property;
   }
 };
-var createQRCodeLead = async (args) => {
-  const r = await call_api("CreateQRCodeLead", args, true, "POST");
+var createQRCodeLead = async (args, skipCache = true) => {
+  const r = await call_api("CreateQRCodeLead", args, skipCache, "POST");
   if (!r.success) {
     console.log("Failed to capture lead: ", r);
   }
@@ -9544,11 +9878,12 @@ var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_ca
   let result;
   if (!skipCache) {
     result = await from_cache(cacheKey, endpoint);
+    if (result) {
+      console.log("Cache Hit", cacheKey, endpoint, params, skipCache, pre_cache);
+    }
   }
   if (!result) {
-    if (endpoint.startsWith("GetUserProfile")) {
-      console.log("ProfileGOT,", skipCache, params);
-    }
+    console.log("Cache Miss", cacheKey, endpoint, params, skipCache, pre_cache);
     params.consumer = 8;
     result = await fetch(API_URL + endpoint, {
       method: verb,
@@ -9572,7 +9907,7 @@ var call_api = async (endpoint, params, skipCache = false, verb = "POST", pre_ca
       if (pre_cache && typeof pre_cache == "function") {
         result = pre_cache(result);
       }
-      to_cache(JSON.stringify(result), endpoint, cacheKey);
+      to_cache(JSON.stringify(result), endpoint, cacheKey, params, verb);
     } else {
       if (typeof result !== "object" || !result?.responseDescription || result.responseDescription !== "Asset Url has already been set") {
         console.log(`GenieAPI error (${endpoint}): `, result);
@@ -9714,46 +10049,56 @@ var api = async (event) => {
                 if (typeof params.height != "undefined") {
                   params.height = parseInt(params.height);
                 }
-                try {
-                  const image = await fetch(params.url);
-                  if (image.ok) {
-                    const imageBuffer = await image.arrayBuffer();
-                    const bytes = new Uint8Array(
-                      imageBuffer
-                    );
-                    const imageStream = new import_stream.Readable();
-                    imageStream.push(bytes);
-                    imageStream.push(null);
-                    const resizedImage = imageStream.pipe(
-                      (0, import_sharp.default)().resize({
-                        width: params.width,
-                        height: params.height
-                      }).webp({
-                        effort: 3,
-                        quality: params.quality ?? 90
-                      })
-                    );
-                    const resizedImageBuffer = await resizedImage.toBuffer();
-                    response2 = {
-                      statusCode: 200,
-                      headers: {
-                        "Content-Type": "image/webp"
-                      },
-                      isBase64Encoded: true,
-                      body: resizedImageBuffer.toString(
-                        "base64"
-                      )
-                    };
-                  } else {
-                    response2.body = {
-                      success: false,
-                      error: `Failed to fetch image: HTTP status ${image.status}`
-                    };
+                const fallbackImageUrl = "https://genie-cloud.s3.us-west-1.amazonaws.com/_assets/_img/picture-pending.jpg";
+                async function fetchAndProcessImage(url) {
+                  const controller = new AbortController();
+                  const timeoutId = setTimeout(() => controller.abort(), 3e3);
+                  try {
+                    const image = await fetch(url, { signal: controller.signal });
+                    clearTimeout(timeoutId);
+                    if (image.ok) {
+                      const imageBuffer = await image.arrayBuffer();
+                      const bytes = new Uint8Array(imageBuffer);
+                      const imageStream = new import_stream2.Readable();
+                      imageStream.push(bytes);
+                      imageStream.push(null);
+                      const resizedImage = imageStream.pipe(
+                        (0, import_sharp.default)().resize({
+                          width: params.width,
+                          height: params.height
+                        }).webp({
+                          effort: 3,
+                          quality: params.quality ?? 90
+                        })
+                      );
+                      const resizedImageBuffer = await resizedImage.toBuffer();
+                      return {
+                        statusCode: 200,
+                        headers: {
+                          "Content-Type": "image/webp"
+                        },
+                        isBase64Encoded: true,
+                        body: resizedImageBuffer.toString("base64")
+                      };
+                    } else {
+                      throw new Error(`HTTP status ${image.status}`);
+                    }
+                  } catch (error2) {
+                    if (url !== fallbackImageUrl) {
+                      console.error(`Error fetching original image: ${error2.message}`);
+                      return fetchAndProcessImage(fallbackImageUrl);
+                    } else {
+                      throw error2;
+                    }
                   }
+                }
+                try {
+                  response2 = await fetchAndProcessImage(params.url);
                 } catch (error2) {
+                  console.error(`Failed to fetch both original and fallback images: ${error2.message}`);
                   response2.body = {
                     success: false,
-                    error: `Error: ${error2.message}`
+                    error: "Failed to fetch image"
                   };
                 }
               } else {
@@ -9850,8 +10195,9 @@ var api = async (event) => {
               };
               break;
             case "/re-render":
-              if (params.renderId) {
-                try {
+              try {
+                let deletedCacheItems = 0;
+                if (params.renderId) {
                   const r = await reRender(params.renderId, {
                     ...params,
                     skipCache: true
@@ -9875,58 +10221,77 @@ var api = async (event) => {
                       StringValue: params.renderId
                     }
                   });
-                } catch (err) {
-                  response2.body.success = false;
-                  response2.body.msg = `Error: ${err.message}`;
-                }
-              } else if (params.assetId || params.userId || params.mlsNumber || params.areaId) {
-                let reRenders = [];
-                const r = await listS3Folder("_processing");
-                await Promise.all(
-                  r.map(async (t) => {
-                    if (t.Key.endsWith("render.json") && t.Size > 0) {
-                      const json = await jsonFromS3(
-                        t.Key
-                      );
-                      if (params.assetId) {
-                      } else if (
-                        // ToDo mlsId must match as well as as mlsNumber
-                        (!params.userId || params.userId == json.userId) && (!params.mlsNumber || params.mlsNumber == json.mlsNumber) && (!params.areaId || json.areaIds.includes(
-                          params.areaId
-                        ))
-                      ) {
-                        reRenders.push(
-                          t.Key.split("/")[1]
-                        );
+                } else if (params.userId || params.mlsNumber || params.areaId) {
+                  if (params.userId) {
+                    deletedCacheItems = await deleteUserCache(params.userId);
+                  }
+                  if (params.areaId) {
+                    deletedCacheItems = await deleteAreaCache(params.areaId);
+                  }
+                  if (params.mlsNumber) {
+                    deletedCacheItems = await deleteListingCache(params.mlsNumber);
+                  }
+                  let renderIds = [];
+                  if (params.userId) {
+                    const userLookupPrefix = `_lookup/users/${params.userId}/`;
+                    const userRenderIds = await listS3Folder(userLookupPrefix);
+                    if (Array.isArray(userRenderIds) && userRenderIds.length > 0) {
+                      renderIds = userRenderIds.map((item) => item.Key.split("/").pop());
+                      if (params.mlsNumber || params.areaId) {
+                        renderIds = await filterRenderIds(renderIds, params);
                       }
+                    } else {
+                      console.log(`No render IDs found for user ${params.userId}`);
                     }
-                  })
-                );
-                if (reRenders.length > 0) {
-                  reRenders = reRenders.filter(
-                    (value, index, array) => array.indexOf(value) === index
-                  );
-                  for (const index in reRenders) {
-                    await reRender(reRenders[index], {
-                      ...params,
-                      skipCache: true
-                    });
-                    await toS3(
-                      `_lookup/re-render/${reRenders[index]}`,
-                      Buffer.from("@"),
-                      null,
-                      TXT_MIME
-                    );
+                  }
+                  if (!params.userId && params.mlsNumber) {
+                    const mlsLookupPrefix = `_lookup/mlsNumber/${params.mlsNumber}/`;
+                    const mlsRenderIds = await listS3Folder(mlsLookupPrefix);
+                    if (Array.isArray(mlsRenderIds) && mlsRenderIds.length > 0) {
+                      renderIds = mlsRenderIds.map((item) => item.Key.split("/").pop());
+                    } else {
+                      console.log(`No render IDs found for mlsNumber ${params.mlsNumber}`);
+                    }
+                  }
+                  if (!params.userId && params.areaId) {
+                    const areaLookupPrefix = `_lookup/areas/${params.areaId}/`;
+                    const areaRenderIds = await listS3Folder(areaLookupPrefix);
+                    if (Array.isArray(areaRenderIds) && areaRenderIds.length > 0) {
+                      renderIds = areaRenderIds.map((item) => item.Key.split("/").pop());
+                    } else {
+                      console.log(`No render IDs found for areaId ${params.areaId}`);
+                    }
+                  }
+                  let reRenderedCount = 0;
+                  for (const renderId of renderIds) {
+                    try {
+                      await reRender(renderId, {
+                        ...params,
+                        skipCache: false
+                      });
+                      await toS3(
+                        `_lookup/re-render/${renderId}`,
+                        Buffer.from("@"),
+                        null,
+                        TXT_MIME
+                      );
+                      reRenderedCount++;
+                    } catch (reRenderError) {
+                      console.error(`Error during reRender for ${renderId}:`, reRenderError);
+                    }
                   }
                   response2.body.success = true;
-                  response2.body.msg = `${reRenders.length} re-renders underway`;
-                  response2.body.data = reRenders;
+                  response2.body.msg = `${reRenderedCount} re-renders underway. ${deletedCacheItems} cache items deleted.`;
+                  response2.body.reRenders = renderIds;
+                } else {
+                  throw new Error(
+                    "[renderId] or [userId] or [mlsNumber] or [areaId] is required for a re-render"
+                  );
                 }
-                break;
-              } else {
-                throw new Error(
-                  "[renderId] or [userId] or [mlsNumber] is required for a re-render"
-                );
+              } catch (error2) {
+                console.error("Error in /re-render route:", error2);
+                response2.body.success = false;
+                response2.body.error = error2.message;
               }
               break;
             case "/process":
@@ -10021,11 +10386,141 @@ var api = async (event) => {
                 await prepareAsset(params.asset, params);
               }
               break;
+            case "/cleanup-renders":
+              try {
+                const userId = params.userId;
+                if (!userId) {
+                  throw new Error("userId parameter is required");
+                }
+                console.log(`Starting cleanup of render.json files for user ${userId}`);
+                const processRenderBatch = async (items, batchSize = 500) => {
+                  let userAssets2 = {};
+                  let filesToDelete2 = [];
+                  for (let i2 = 0; i2 < items.length; i2 += batchSize) {
+                    const batch = items.slice(i2, i2 + batchSize);
+                    await Promise.all(
+                      batch.map(async (item) => {
+                        try {
+                          const stream = await streamS3Object(item.Key);
+                          let jsonString = "";
+                          for await (const chunk of readStream(stream)) {
+                            jsonString += chunk;
+                          }
+                          try {
+                            const json = JSON.parse(jsonString);
+                            if (json.userId === userId) {
+                              if (!userAssets2[json.userId]) {
+                                userAssets2[json.userId] = { assetCount: 0, assets: [] };
+                              }
+                              userAssets2[json.userId].assetCount++;
+                              userAssets2[json.userId].assets.push(item.Key);
+                              filesToDelete2.push(item.Key);
+                            }
+                          } catch (parseError) {
+                            console.error(`Error parsing JSON for ${item.Key}:`, parseError);
+                          }
+                        } catch (streamError) {
+                          console.error(`Error streaming object ${item.Key}:`, streamError);
+                        }
+                      })
+                    );
+                    console.log(`Processed batch ${i2 / batchSize + 1}`);
+                  }
+                  return { userAssets: userAssets2, filesToDelete: filesToDelete2 };
+                };
+                const renderJsonFiles = await searchS3ByPrefix("_processing", "render.json");
+                console.log(`Found ${renderJsonFiles.length} render.json files`);
+                const { userAssets, filesToDelete } = await processRenderBatch(renderJsonFiles);
+                console.log(`Found ${filesToDelete.length} files to delete for user ${userId}`);
+                let deletedCount = 0;
+                for (const fileKey of filesToDelete) {
+                  try {
+                    await deleteObject(fileKey);
+                    deletedCount++;
+                  } catch (deleteError) {
+                    console.error(`Error deleting ${fileKey}:`, deleteError);
+                  }
+                }
+                const result2 = Object.entries(userAssets).map(([userId2, data]) => ({
+                  userId: userId2,
+                  assetCount: data.assetCount,
+                  assets: data.assets
+                }));
+                response2.body = {
+                  success: true,
+                  message: `Cleanup complete for user ${userId}. ${deletedCount} files deleted.`,
+                  userAssetsData: result2,
+                  filesToDelete
+                };
+              } catch (error2) {
+                console.error("Error in cleanup-renders:", error2);
+                response2.body = {
+                  success: false,
+                  error: `Failed to cleanup render.json files: ${error2.message}`
+                };
+              }
+              break;
+            case "/inspect-renders":
+              try {
+                console.log("Starting inspection of render.json files");
+                const processRenderBatch = async (items, batchSize = 500) => {
+                  let userAssets2 = {};
+                  for (let i2 = 0; i2 < items.length; i2 += batchSize) {
+                    const batch = items.slice(i2, i2 + batchSize);
+                    await Promise.all(
+                      batch.map(async (item) => {
+                        try {
+                          const stream = await streamS3Object(item.Key);
+                          let jsonString = "";
+                          for await (const chunk of readStream(stream)) {
+                            jsonString += chunk;
+                          }
+                          try {
+                            const json = JSON.parse(jsonString);
+                            if (json.userId) {
+                              if (!userAssets2[json.userId]) {
+                                userAssets2[json.userId] = { assetCount: 0, assets: [] };
+                              }
+                              userAssets2[json.userId].assetCount++;
+                              userAssets2[json.userId].assets.push(item.Key);
+                            }
+                          } catch (parseError) {
+                            console.error(`Error parsing JSON for ${item.Key}:`, parseError);
+                          }
+                        } catch (streamError) {
+                          console.error(`Error streaming object ${item.Key}:`, streamError);
+                        }
+                      })
+                    );
+                    console.log(`Processed batch ${i2 / batchSize + 1}`);
+                  }
+                  return userAssets2;
+                };
+                const renderJsonFiles = await searchS3ByPrefix("_processing", "render.json");
+                console.log(`Found ${renderJsonFiles.length} render.json files`);
+                const userAssets = await processRenderBatch(renderJsonFiles);
+                const result2 = Object.entries(userAssets).map(([userId, data]) => ({
+                  userId,
+                  assetCount: data.assetCount,
+                  assets: data.assets
+                })).filter((user) => user.assetCount >= 100).sort((a, b) => b.assetCount - a.assetCount);
+                response2.body = {
+                  success: true,
+                  message: `Inspection complete. Processed ${renderJsonFiles.length} render.json files.`,
+                  userAssetsData: result2,
+                  totalUsersWithHighAssetCount: result2.length
+                };
+              } catch (error2) {
+                console.error("Error in inspect-renders:", error2);
+                response2.body = {
+                  success: false,
+                  error: `Failed to inspect render.json files: ${error2.message}`
+                };
+              }
+              break;
             case "/create":
               try {
-                console.log("Validating render params");
                 await validateRenderParams(params);
-                console.log("Render params validated");
                 params.renderId = (0, import_crypto2.randomUUID)();
                 params.theme = params.theme ?? await userSetting(
                   params.userId,
@@ -10130,22 +10625,39 @@ var api = async (event) => {
           }
         }
       } catch (error2) {
-        console.log("GenieAPI failed: ", error2);
+        console.error("GenieAPI failed: ", error2);
         const currentDate = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
         if (params.renderId) {
+          const errorInfo = {
+            params,
+            error: {
+              message: error2.message,
+              name: error2.name,
+              stack: error2.stack,
+              // Capture additional properties of the error object
+              ...Object.getOwnPropertyNames(error2).reduce((acc, key) => {
+                acc[key] = error2[key];
+                return acc;
+              }, {})
+            },
+            timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+            route
+            // Assuming 'route' is accessible here
+          };
           await toS3(
             `_errors/${currentDate}/${params.renderId}-${Date.now()}-api.json`,
-            Buffer.from(
-              JSON.stringify({
-                params,
-                error: error2.toString()
-              })
-            ),
+            Buffer.from(JSON.stringify(errorInfo, null, 2)),
             { GenieExpireFile: "error" },
             JSON_MIME
           );
+          console.error("Detailed error:", JSON.stringify(errorInfo, null, 2));
         }
-        response2.body.error = error2;
+        response2.body.error = {
+          message: error2.message,
+          name: error2.name,
+          // Optionally include a truncated stack trace
+          stack: error2.stack ? error2.stack.split("\n").slice(0, 3).join("\n") : void 0
+        };
       } finally {
         if (!response2.isBase64Encoded) {
           response2.body = JSON.stringify(response2.body);
@@ -10178,7 +10690,7 @@ var renderKeyParams = async (params) => {
         areaId = area2.areaId;
       }
     }
-    propertyType = params.propertyType ?? listing.propertyType;
+    propertyType = params.propertyType === 9 ? 1 : params.propertyType ?? (listing.propertyType === 9 ? 1 : listing.propertyType);
     listingStatus = params.listingStatus ?? listing.listingStatus ?? "";
   }
   const area = await areaName(params.userId, areaId);
@@ -10276,9 +10788,9 @@ var prepareAsset = async (asset, params) => {
             settings.permission
           );
         }
-        const isA5 = ["landing-pages", "funnels", "embeds"].find(
+        const isA5 = asset ? ["landing-pages", "funnels", "embeds"].find(
           (start) => asset.startsWith(start)
-        );
+        ) : false;
         const withBleed = params?.withBleed ?? false;
         const width = suffix === "pdf" ? isA5 ? "216mm" : `${Math.round(dims.width) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.width);
         const height = suffix === "pdf" ? isA5 ? "279mm" : `${Math.round(dims.height) / 100 + (withBleed ? 0.25 : 0)}in` : Math.round(dims.height);
@@ -10301,12 +10813,12 @@ var prepareAsset = async (asset, params) => {
           cssPageSize: false,
           // ToDo: some decision making
           /*
-          	ToDo?
-          	render.clip
-          	render.clipX
-          	render.clipY
-          	render.clipWidth
-          	render.clipHeight
+              ToDo?
+              render.clip
+              render.clipX
+              render.clipY
+              render.clipWidth
+              render.clipHeight
           */
           noPuppeteer: s3Key.endsWith("html"),
           isCollection: params.collection,
@@ -10366,7 +10878,7 @@ var prepareAsset = async (asset, params) => {
             });
           }
         }
-        const cleanKey = (0, import_path.basename)(render.s3Key).replaceAll(/[.\/#]|_/g, "-").replaceAll(/[^\w\s-]|_/g, "").replaceAll("--", "-");
+        const cleanKey = decodeURIComponent((0, import_path.basename)(render.s3Key)).replaceAll(/[.\/#]|_/g, "-").replaceAll(/[^\w\s-]|_/g, "").replaceAll("--", "-").replaceAll(/\s+/g, "-");
         await toS3(
           `_processing/${params.renderId}/${cleanKey}${pageParams.asset.startsWith("landing-pages") ? `-${(0, import_path.basename)(pageParams.asset)}` : ""}-p${i}-prep.json`,
           Buffer.from(JSON.stringify(render)),
@@ -10375,16 +10887,6 @@ var prepareAsset = async (asset, params) => {
         );
       })
     );
-  }
-};
-var getPropertyCaption = (id, custom = null) => {
-  if (custom)
-    return custom;
-  switch (id) {
-    case 3:
-      return "Condos";
-    default:
-      return "Homes";
   }
 };
 var reRender = async (renderId, params = null) => {
@@ -10533,6 +11035,7 @@ var getS3Key = async (asset, params) => {
       Object.keys(replaces).map(
         (key) => renderKey2 = renderKey2.replace(key, replaces[key])
       );
+      renderKey2 = renderKey2.replace(/['\/#]/g, "-").replace(/[^\w\-]/g, "").replace(/-+/g, "-");
       s3Key = `genie-files/${params.renderId}/${params.theme}/${renderKey2}.${fileExtension || hasPages2 && "pdf" || "png"}`;
     }
   } catch (error2) {

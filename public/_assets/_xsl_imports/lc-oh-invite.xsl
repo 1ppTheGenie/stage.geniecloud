@@ -2,6 +2,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 	<xsl:import href="flyers.xsl" />
+	
 
 	<xsl:template name="lc-oh-invite">
 		<xsl:param name="sub-heading" />
@@ -18,13 +19,13 @@
 					xmlns="http://www.w3.org/2000/svg">
 					<path d="M0 82.5V0H67.5V82.5L33.5 100L0 82.5Z" />
 				</svg>
-
+ 
 				<xsl:call-template name="qr-code">
 					<xsl:with-param name="width" select="'9.5%'" />
 					<xsl:with-param name="height" select="'7%'" />
 				</xsl:call-template>
 
-				<text x="4.5%" y="6%" class="align-center heading" font-weight="900" font-size="140%">
+				<text x="4.5%" y="6%" class="align-center heading" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="140%">
 					<tspan x="4.5%" dy="1%">
 						<xsl:value-of select="'SCAN FOR'" />
 					</tspan>
@@ -39,48 +40,49 @@
 			<g style="transform:translate(0%,43%)">
 				<rect x="13%" y="-3%" fill="var(--theme-sub-heading-color)" width="75%" height="13.5%" />
 
-				<text x="50%" y="-2%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="370%" font-weight="200">
+				<text x="50%" y="-1%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="370%" font-weight="500">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'openhouse'" />
 						<xsl:with-param name="default" select="'you’re invited'" />
 					</xsl:call-template>
 				</text>
 
-				<text x="50%" y="0.5%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="700%" font-weight="300">
+				<text x="50%" y="2.5%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="700%" font-weight="400">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'openhouse'" />
 						<xsl:with-param name="default" select="'Open House'" />
 					</xsl:call-template>
-				</text>
+				</text>			
+			</g>
 
+			<g style="transform:translate(0%,57.5%)">
+				
 				<xsl:if test="count(//openHouse/session) &gt; 0">
-					<text x="50%" y="8.5%" class="center bold" font-family="var(--theme-heading-font)" fill="var(--theme-body-background)" text-anchor="middle" font-size="320%" style="dominant-baseline: middle; letter-spacing:4px;">
+					<text x="50%" y="0%" class="center bold" font-family="var(--theme-heading-font)" fill="var(--theme-body-color)" text-anchor="middle" font-size="320%" style="dominant-baseline: middle; letter-spacing:4px;">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
 							<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
 						</xsl:call-template>
 					</text>
 				</xsl:if>
-			</g>
 
-			<g style="transform:translate(0%,57.5%)">
-				<foreignObject x="0" width="100%" height="25%">
-					<p class="center upper" style="font-size:500%;padding: 0 190px;margin-top:0;margin-bottom:12px;color:var(--theme-sub-heading-color);line-height:110%">
+				
+				<foreignObject x="0" y="2.5%" width="100%" height="25%">
+					<p class="center upper" style="font-family:var(--theme-body-font);font-size:500%;font-weight:500;width: 800px; margin-inline: auto;margin-top:0;margin-bottom:12px;color:var(--theme-sub-heading-color);line-height:110%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'yourdreamhome'" />
 							<xsl:with-param name="default" select="concat('',$sub-heading)" />
 						</xsl:call-template>
 					</p>
-					<p class="center upper" style="font-size:350%; letter-spacing:2px;margin:0;font-family: var(--theme-heading-font);font-weight: 500;">
-						<span>
-							<xsl:value-of select="$listingAddressLine1" />
-						</span>
-						<br/>
-						<span>
-							<xsl:value-of select="$listingAddressLine2" />
-						</span>
-					</p>
 				</foreignObject>
+				<text x="50%" y="12%" class="center upper" fill="var(--theme-body-color)" font-size="350%" font-family="var(--theme-heading-font)" style="letter-spacing:2px;margin:0;" font-weight="700">
+					<tspan x="50%" dy="0">
+						<xsl:value-of select="$listingAddressLine1" />
+					</tspan>
+					<tspan x="50%" dy="4%">
+						<xsl:value-of select="$listingAddressLine2" />
+					</tspan>
+				</text>
 
 				<text x="98.2%" y="23%" fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)" class="right upper narrow" font-size="140%">
 					<xsl:call-template name="editable">

@@ -9,11 +9,17 @@ import pkg from 'jstoxml';
 const { toXML } = pkg;
 
 // prettier-ignore
-import {propertySurroundingAreas, getAreaBoundary, getUser, impersonater, getListing, areaName } from "./genieAI.js";
+import { propertySurroundingAreas, getAreaBoundary, getUser, impersonater, getListing, areaName } from "./genieAI.js";
 // prettier-ignore
-import { userSetting, embedsAPI, cloudHubAPI,getRenderJSON, getCollection, setRenderDefaults, genieGlobals, queueMsg, generateQR, areaFromMlsNumber, getDimensions, assetSetting, getAsset, preCallGenieAPIs } from "./utils/index.js";
+import { 
+        userSetting, embedsAPI, cloudHubAPI, getRenderJSON, getCollection, setRenderDefaults, 
+        genieGlobals, queueMsg, generateQR, areaFromMlsNumber, getDimensions, assetSetting, 
+        getAsset, preCallGenieAPIs, filterRenderIds, getPropertyCaption } from "./utils/index.js";
 // prettier-ignore
-import { listS3Folder, toS3, copyObject, headObject, jsonFromS3, fromS3, BUCKET, deleteObject, buildVersion } from "./utils/index.js";
+import { 
+        listS3Folder, searchS3ByPrefix, streamS3Object, readStream, toS3, copyObject, headObject, 
+        jsonFromS3, fromS3, BUCKET, deleteObject, buildVersion, deleteAreaCache, deleteListingCache, 
+        deleteUserCache, } from "./utils/index.js";
 
 const RENDER_VERSION = 100;
 
@@ -51,9 +57,9 @@ export const api = async event => {
                             ) {
                                 tempParams[key] =
                                     record.messageAttributes[key].dataType ==
-                                    'String'
+                                        'String'
                                         ? record.messageAttributes[key]
-                                              .stringValue
+                                            .stringValue
                                         : '';
                             }
                         });
@@ -90,7 +96,7 @@ export const api = async event => {
                                             record.messageAttributes[key]
                                                 .dataType == 'String'
                                                 ? record.messageAttributes[key]
-                                                      .stringValue
+                                                    .stringValue
                                                 : '';
                                     }
                                 }
@@ -174,67 +180,72 @@ export const api = async event => {
                                 if (params.width) {
                                     params.width = parseInt(params.width);
                                 } else {
-                                    params.width =
-                                        typeof params.height == 'undefined'
-                                            ? 300
-                                            : null;
+                                    params.width = typeof params.height == 'undefined' ? 300 : null;
                                 }
 
                                 if (typeof params.height != 'undefined') {
                                     params.height = parseInt(params.height);
                                 }
 
-                                try {
-                                    const image = await fetch(params.url);
-                                    if (image.ok) {
-                                        // Create a readable stream from the response body
-                                        const imageBuffer =
-                                            await image.arrayBuffer();
-                                        const bytes = new Uint8Array(
-                                            imageBuffer
-                                        );
-                                        const imageStream = new Readable();
-                                        imageStream.push(bytes);
-                                        imageStream.push(null);
+                                const fallbackImageUrl = 'https://genie-cloud.s3.us-west-1.amazonaws.com/_assets/_img/picture-pending.jpg';
 
-                                        // Resize the image using sharp
-                                        const resizedImage = imageStream.pipe(
-                                            sharp()
-                                                .resize({
-                                                    width: params.width,
-                                                    height: params.height
-                                                })
-                                                .webp({
-                                                    effort: 3,
-                                                    quality:
-                                                        params.quality ?? 90
-                                                })
-                                        );
+                                async function fetchAndProcessImage(url) {
+                                    const controller = new AbortController();
+                                    const timeoutId = setTimeout(() => controller.abort(), 3000);  // 3 second timeout
 
-                                        // Convert the resized image to a buffer
-                                        const resizedImageBuffer =
-                                            await resizedImage.toBuffer();
+                                    try {
+                                        const image = await fetch(url, { signal: controller.signal });
+                                        clearTimeout(timeoutId);
 
-                                        response = {
-                                            statusCode: 200,
-                                            headers: {
-                                                'Content-Type': 'image/webp'
-                                            },
-                                            isBase64Encoded: true,
-                                            body: resizedImageBuffer.toString(
-                                                'base64'
-                                            )
-                                        };
-                                    } else {
-                                        response.body = {
-                                            success: false,
-                                            error: `Failed to fetch image: HTTP status ${image.status}`
-                                        };
+                                        if (image.ok) {
+                                            const imageBuffer = await image.arrayBuffer();
+                                            const bytes = new Uint8Array(imageBuffer);
+                                            const imageStream = new Readable();
+                                            imageStream.push(bytes);
+                                            imageStream.push(null);
+
+                                            const resizedImage = imageStream.pipe(
+                                                sharp()
+                                                    .resize({
+                                                        width: params.width,
+                                                        height: params.height
+                                                    })
+                                                    .webp({
+                                                        effort: 3,
+                                                        quality: params.quality ?? 90
+                                                    })
+                                            );
+
+                                            const resizedImageBuffer = await resizedImage.toBuffer();
+
+                                            return {
+                                                statusCode: 200,
+                                                headers: {
+                                                    'Content-Type': 'image/webp'
+                                                },
+                                                isBase64Encoded: true,
+                                                body: resizedImageBuffer.toString('base64')
+                                            };
+                                        } else {
+                                            throw new Error(`HTTP status ${image.status}`);
+                                        }
+                                    } catch (error) {
+                                        if (url !== fallbackImageUrl) {
+                                            console.error(`Error fetching original image: ${error.message}`);
+                                            return fetchAndProcessImage(fallbackImageUrl);
+                                        } else {
+                                            throw error;
+                                        }
                                     }
+                                }
+
+                                try {
+                                    response = await fetchAndProcessImage(params.url);
                                 } catch (error) {
+                                    console.error(`Failed to fetch both original and fallback images: ${error.message}`);
                                     response.body = {
                                         success: false,
-                                        error: `Error: ${error.message}`
+                                        error: 'Failed to fetch image'
                                     };
                                 }
                             } else {
@@ -250,48 +261,6 @@ export const api = async event => {
                             response.body = { success: true, ...qr };
                             break;
 
-                        /*
-                        case '/clear-cache':
-                            if (CLOUDFLARE_KEY) {
-                                const prefixes = [];
-
-                                if (params.renderId) {
-                                    const host =
-                                        genieGlobals.GENIE_HOST.replace(
-                                            'https://',
-                                            ''
-                                        );
-
-                                    prefixes.push(
-                                        `${host}genie-collection/${params.renderId}`
-                                    );
-                                    prefixes.push(
-                                        `${host}genie-pages/${params.renderId}`
-                                    );
-                                    prefixes.push(
-                                        `${host}genie-files/${params.renderId}`
-                                    );
-                                }
-
-                                if (prefixes.length > 0) {
-                                    const options = {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                            'X-Auth-Key': CLOUDFLARE_KEY
-                                        },
-                                        body: `{"prefixes": ["${prefixes}"}`
-                                    };
-
-                                    const r = await fetch(
-                                        'https://api.cloudflare.com/client/v4/zones/identifier/purge_cache',
-                                        options
-                                    );
-                                }
-                            }
-
-                            break;
-*/
                         case '/log':
                             if (params.renderId && params.assetId) {
                                 await toS3(
@@ -323,29 +292,7 @@ export const api = async event => {
                                 };
                             }
                             break;
-                        /*case '/change-retention':
-                            if (!params.s3Key || !params.keepFor) {
-                                response.body = {
-                                    success: false,
-                                    error: 's3Key are keepFor are required parameters'
-                                };
-                            } else {
-                                const r = await setS3Retention(
-                                    `_processing/${params.s3Key}`,
-                                    new Date(
-                                        Date.now() +
-                                            WEEK_IN_MILLISECONDS *
-                                                params.keepFor
-                                    )
-                                );
-                                response.body = {
-                                    params,
-                                    success: true,
-                                    result: r
-                                };
-                            }
-                            break;
-*/
+
                         case '/refresh-renders':
                             // Automated update of landing pages so that they don't go stale
                             let result = [];
@@ -391,7 +338,7 @@ export const api = async event => {
                                                                 renderId,
                                                                 p
                                                             );
-                                                        } catch {}
+                                                        } catch { }
                                                     }
                                                 } catch (err) {
                                                     console.log('fail', err);
@@ -414,8 +361,11 @@ export const api = async event => {
                             break;
 
                         case '/re-render':
-                            if (params.renderId) {
-                                try {
+                            try {
+                                let deletedCacheItems = 0;
+
+                                if (params.renderId) {
+                                    // Existing logic for single renderId re-render
                                     const r = await reRender(params.renderId, {
                                         ...params,
                                         skipCache: true
@@ -433,99 +383,106 @@ export const api = async event => {
                                         response.body.msg = `${params.renderId} re-render under way`;
 
                                         if (Object.keys(params).length > 1) {
-                                            response.body.msg +=
-                                                ' (with override params)';
+                                            response.body.msg += ' (with override params)';
                                         }
                                     }
 
-                                    // Get CloudFlare to empty itself
                                     await queueMsg('clear-cache', {
                                         renderId: {
                                             DataType: 'String',
                                             StringValue: params.renderId
                                         }
                                     });
-                                } catch (err) {
-                                    response.body.success = false;
-                                    response.body.msg = `Error: ${err.message}`;
-                                }
-                            } else if (
-                                params.assetId ||
-                                params.userId ||
-                                params.mlsNumber ||
-                                params.areaId
-                            ) {
-                                let reRenders = [];
+                                } else if (params.userId || params.mlsNumber || params.areaId) {
+                                    // Delete user cache if userId is provided
+                                    if (params.userId) {
+                                        deletedCacheItems = await deleteUserCache(params.userId);
+                                        // console.log(`Deleted ${deletedCacheItems} cache items for user ${params.userId}`);
+                                    }
 
-                                const r = await listS3Folder('_processing');
-                                await Promise.all(
-                                    r.map(async t => {
-                                        if (
-                                            t.Key.endsWith('render.json') &&
-                                            t.Size > 0
-                                        ) {
-                                            const json = await jsonFromS3(
-                                                t.Key
+                                    if (params.areaId) {
+                                        deletedCacheItems = await deleteAreaCache(params.areaId);
+                                        // console.log(`Deleted ${deletedCacheItems} cache items for area ${params.areaId}`);
+                                    }
+
+                                    if (params.mlsNumber) {
+                                        deletedCacheItems = await deleteListingCache(params.mlsNumber);
+                                        // console.log(`Deleted ${deletedCacheItems} cache items for listing ${params.mlsNumber}`);
+                                    }
+
+                                    let renderIds = [];
+
+                                    if (params.userId) {
+                                        // Fetch renderIds from /_lookup/users/{params.userId}
+                                        const userLookupPrefix = `_lookup/users/${params.userId}/`;
+                                        const userRenderIds = await listS3Folder(userLookupPrefix);
+                                        if (Array.isArray(userRenderIds) && userRenderIds.length > 0) {
+                                            renderIds = userRenderIds.map(item => item.Key.split('/').pop());
+
+                                            // Additional filtering based on mlsNumber or areaId if supplied
+                                            if (params.mlsNumber || params.areaId) {
+                                                renderIds = await filterRenderIds(renderIds, params);
+                                            }
+                                        } else {
+                                            console.log(`No render IDs found for user ${params.userId}`);
+                                        }
+                                    }
+
+                                    if (!params.userId && params.mlsNumber) {
+                                        const mlsLookupPrefix = `_lookup/mlsNumber/${params.mlsNumber}/`;
+                                        const mlsRenderIds = await listS3Folder(mlsLookupPrefix);
+                                        if (Array.isArray(mlsRenderIds) && mlsRenderIds.length > 0) {
+                                            renderIds = mlsRenderIds.map(item => item.Key.split('/').pop());
+                                        } else {
+                                            console.log(`No render IDs found for mlsNumber ${params.mlsNumber}`);
+                                        }
+                                    }
+
+                                    if (!params.userId && params.areaId) {
+                                        const areaLookupPrefix = `_lookup/areas/${params.areaId}/`;
+                                        const areaRenderIds = await listS3Folder(areaLookupPrefix);
+                                        if (Array.isArray(areaRenderIds) && areaRenderIds.length > 0) {
+                                            renderIds = areaRenderIds.map(item => item.Key.split('/').pop());
+                                        } else {
+                                            console.log(`No render IDs found for areaId ${params.areaId}`);
+                                        }
+                                    }
+
+                                    // console.log(`Found ${renderIds.length} renders to process`);
+
+                                    let reRenderedCount = 0;
+                                    for (const renderId of renderIds) {
+                                        try {
+                                            await reRender(renderId, {
+                                                ...params,
+                                                skipCache: false
+                                            });
+
+                                            await toS3(
+                                                `_lookup/re-render/${renderId}`,
+                                                Buffer.from('@'),
+                                                null,
+                                                TXT_MIME
                                             );
 
-                                            // Rerenders based on asset don't distinguish on user/area/mlsNumber basis
-                                            if (params.assetId) {
-                                                //ToDo
-                                            } else if (
-                                                // ToDo mlsId must match as well as as mlsNumber
-                                                (!params.userId ||
-                                                    params.userId ==
-                                                        json.userId) &&
-                                                (!params.mlsNumber ||
-                                                    params.mlsNumber ==
-                                                        json.mlsNumber) &&
-                                                (!params.areaId ||
-                                                    json.areaIds.includes(
-                                                        params.areaId
-                                                    ))
-                                            ) {
-                                                // ToDo Consider skipping collections that are single assets BUT NOT landing pages
-
-                                                // ToDo? And access.json updates in last N hours/days?
-
-                                                //Rerender: key will be `_processing/{renderId}/render.json`
-                                                reRenders.push(
-                                                    t.Key.split('/')[1]
-                                                );
-                                            }
+                                            reRenderedCount++;
+                                        } catch (reRenderError) {
+                                            console.error(`Error during reRender for ${renderId}:`, reRenderError);
                                         }
-                                    })
-                                );
-
-                                if (reRenders.length > 0) {
-                                    reRenders = reRenders.filter(
-                                        (value, index, array) =>
-                                            array.indexOf(value) === index
-                                    );
-
-                                    for (const index in reRenders) {
-                                        await reRender(reRenders[index], {
-                                            ...params,
-                                            skipCache: true
-                                        });
-
-                                        await toS3(
-                                            `_lookup/re-render/${reRenders[index]}`,
-                                            Buffer.from('@'),
-                                            null,
-                                            TXT_MIME
-                                        );
                                     }
 
                                     response.body.success = true;
-                                    response.body.msg = `${reRenders.length} re-renders underway`;
-                                    response.body.data = reRenders;
+                                    response.body.msg = `${reRenderedCount} re-renders underway. ${deletedCacheItems} cache items deleted.`;
+                                    response.body.reRenders = renderIds;
+                                } else {
+                                    throw new Error(
+                                        '[renderId] or [userId] or [mlsNumber] or [areaId] is required for a re-render'
+                                    );
                                 }
-                                break;
-                            } else {
-                                throw new Error(
-                                    '[renderId] or [userId] or [mlsNumber] is required for a re-render'
-                                );
+                            } catch (error) {
+                                console.error('Error in /re-render route:', error);
+                                response.body.success = false;
+                                response.body.error = error.message;
                             }
                             break;
 
@@ -620,14 +577,14 @@ export const api = async event => {
                                                             }
 
                                                             const assetParams =
-                                                                {
-                                                                    ...params,
-                                                                    asset: asset.asset,
-                                                                    size: asset.size,
-                                                                    lpo: asset.lpo,
-                                                                    qrDestination,
-                                                                    qrUrl
-                                                                };
+                                                            {
+                                                                ...params,
+                                                                asset: asset.asset,
+                                                                size: asset.size,
+                                                                lpo: asset.lpo,
+                                                                qrDestination,
+                                                                qrUrl
+                                                            };
 
                                                             return await prepareAsset(
                                                                 asset.asset,
@@ -654,12 +611,167 @@ export const api = async event => {
                             }
                             break;
 
+                        case '/cleanup-renders':
+                            try {
+                                const userId = params.userId;
+                                if (!userId) {
+                                    throw new Error('userId parameter is required');
+                                }
+
+                                console.log(`Starting cleanup of render.json files for user ${userId}`);
+
+                                const processRenderBatch = async (items, batchSize = 500) => {
+                                    let userAssets = {};
+                                    let filesToDelete = [];
+                                    for (let i = 0; i < items.length; i += batchSize) {
+                                        const batch = items.slice(i, i + batchSize);
+                                        await Promise.all(
+                                            batch.map(async (item) => {
+                                                try {
+                                                    const stream = await streamS3Object(item.Key);
+                                                    let jsonString = '';
+                                                    for await (const chunk of readStream(stream)) {
+                                                        jsonString += chunk;
+                                                    }
+
+                                                    try {
+                                                        const json = JSON.parse(jsonString);
+                                                        if (json.userId === userId) {
+                                                            if (!userAssets[json.userId]) {
+                                                                userAssets[json.userId] = { assetCount: 0, assets: [] };
+                                                            }
+                                                            userAssets[json.userId].assetCount++;
+                                                            userAssets[json.userId].assets.push(item.Key);
+                                                            filesToDelete.push(item.Key);
+                                                        }
+                                                    } catch (parseError) {
+                                                        console.error(`Error parsing JSON for ${item.Key}:`, parseError);
+                                                    }
+                                                } catch (streamError) {
+                                                    console.error(`Error streaming object ${item.Key}:`, streamError);
+                                                }
+                                            })
+                                        );
+                                        console.log(`Processed batch ${i / batchSize + 1}`);
+                                    }
+                                    return { userAssets, filesToDelete };
+                                };
+
+                                const renderJsonFiles = await searchS3ByPrefix('_processing', 'render.json');
+                                console.log(`Found ${renderJsonFiles.length} render.json files`);
+
+                                const { userAssets, filesToDelete } = await processRenderBatch(renderJsonFiles);
+
+                                console.log(`Found ${filesToDelete.length} files to delete for user ${userId}`);
+
+                                let deletedCount = 0;
+                                // Uncomment the following block to perform actual deletion
+
+                                for (const fileKey of filesToDelete) {
+                                    try {
+                                        await deleteObject(fileKey);
+                                        deletedCount++;
+                                    } catch (deleteError) {
+                                        console.error(`Error deleting ${fileKey}:`, deleteError);
+                                    }
+                                }
+
+
+                                const result = Object.entries(userAssets).map(([userId, data]) => ({
+                                    userId,
+                                    assetCount: data.assetCount,
+                                    assets: data.assets
+                                }));
+
+                                response.body = {
+                                    success: true,
+                                    message: `Cleanup complete for user ${userId}. ${deletedCount} files deleted.`,
+                                    userAssetsData: result,
+                                    filesToDelete: filesToDelete
+                                };
+                            } catch (error) {
+                                console.error('Error in cleanup-renders:', error);
+                                response.body = {
+                                    success: false,
+                                    error: `Failed to cleanup render.json files: ${error.message}`
+                                };
+                            }
+                            break;
+
+                        case '/inspect-renders':
+                            try {
+                                console.log('Starting inspection of render.json files');
+
+                                const processRenderBatch = async (items, batchSize = 500) => {
+                                    let userAssets = {};
+                                    for (let i = 0; i < items.length; i += batchSize) {
+                                        const batch = items.slice(i, i + batchSize);
+                                        await Promise.all(
+                                            batch.map(async (item) => {
+                                                try {
+                                                    const stream = await streamS3Object(item.Key);
+                                                    let jsonString = '';
+                                                    for await (const chunk of readStream(stream)) {
+                                                        jsonString += chunk;
+                                                    }
+
+                                                    try {
+                                                        const json = JSON.parse(jsonString);
+                                                        if (json.userId) {
+                                                            if (!userAssets[json.userId]) {
+                                                                userAssets[json.userId] = { assetCount: 0, assets: [] };
+                                                            }
+                                                            userAssets[json.userId].assetCount++;
+                                                            userAssets[json.userId].assets.push(item.Key);
+                                                        }
+                                                    } catch (parseError) {
+                                                        console.error(`Error parsing JSON for ${item.Key}:`, parseError);
+                                                    }
+                                                } catch (streamError) {
+                                                    console.error(`Error streaming object ${item.Key}:`, streamError);
+                                                }
+                                            })
+                                        );
+                                        console.log(`Processed batch ${i / batchSize + 1}`);
+                                    }
+                                    return userAssets;
+                                };
+
+                                const renderJsonFiles = await searchS3ByPrefix('_processing', 'render.json');
+                                console.log(`Found ${renderJsonFiles.length} render.json files`);
+
+                                const userAssets = await processRenderBatch(renderJsonFiles);
+
+                                const result = Object.entries(userAssets)
+                                    .map(([userId, data]) => ({
+                                        userId,
+                                        assetCount: data.assetCount,
+                                        assets: data.assets
+                                    }))
+                                    .filter(user => user.assetCount >= 100)
+                                    .sort((a, b) => b.assetCount - a.assetCount);
+
+                                response.body = {
+                                    success: true,
+                                    message: `Inspection complete. Processed ${renderJsonFiles.length} render.json files.`,
+                                    userAssetsData: result,
+                                    totalUsersWithHighAssetCount: result.length
+                                };
+                            } catch (error) {
+                                console.error('Error in inspect-renders:', error);
+                                response.body = {
+                                    success: false,
+                                    error: `Failed to inspect render.json files: ${error.message}`
+                                };
+                            }
+                            break;
+
                         case '/create':
                             try {
                                 // This line will succeed or have a error thrown that will be caught below
-                                console.log('Validating render params');
+                                // console.log('Validating render params');
                                 await validateRenderParams(params);
-                                console.log('Render params validated');
+                                // console.log('Render params validated');
 
                                 // VERY IMPORTANT LINE! Determines the uniqueness of all links
                                 params.renderId = randomUUID();
@@ -682,8 +794,8 @@ export const api = async event => {
 
                                 const { s3Key } = await getS3Key(
                                     params.asset ||
-                                        (params.assets && params.assets[0]) ||
-                                        (params.collection && 'collection'),
+                                    (params.assets && params.assets[0]) ||
+                                    (params.collection && 'collection'),
                                     params
                                 );
 
@@ -786,10 +898,9 @@ export const api = async event => {
                                     // Remove trailing index.html if it exists: S3 routing will default to that file on a folder request
                                     response.body.availableAt =
                                         response.body.availableAt ?? // Allows earlier code to set custom version of this
-                                        `${
-                                            params.isWorkFlow
-                                                ? genieGlobals.GENIE_NO_CACHE_HOST
-                                                : genieGlobals.GENIE_HOST
+                                        `${params.isWorkFlow
+                                            ? genieGlobals.GENIE_NO_CACHE_HOST
+                                            : genieGlobals.GENIE_HOST
                                         }${s3Key.replace('/index.html', '')}`;
                                     response.body.reRender = `${genieGlobals.GENIE_API}re-render?renderId=${params.renderId}`;
                                     response.body.renderId = params.renderId;
@@ -802,26 +913,44 @@ export const api = async event => {
                     }
                 }
             } catch (error) {
-                console.log('GenieAPI failed: ', error);
+                console.error('GenieAPI failed: ', error);
                 const currentDate = new Date().toISOString().split('T')[0];
                 if (params.renderId) {
                     // We don't want the embed API errors here
+                    const errorInfo = {
+                        params,
+                        error: {
+                            message: error.message,
+                            name: error.name,
+                            stack: error.stack,
+                            // Capture additional properties of the error object
+                            ...Object.getOwnPropertyNames(error).reduce((acc, key) => {
+                                acc[key] = error[key];
+                                return acc;
+                            }, {})
+                        },
+                        timestamp: new Date().toISOString(),
+                        route: route // Assuming 'route' is accessible here
+                    };
+
                     await toS3(
-                        `_errors/${currentDate}/${
-                            params.renderId
-                        }-${Date.now()}-api.json`,
-                        Buffer.from(
-                            JSON.stringify({
-                                params,
-                                error: error.toString()
-                            })
-                        ),
+                        `_errors/${currentDate}/${params.renderId}-${Date.now()}-api.json`,
+                        Buffer.from(JSON.stringify(errorInfo, null, 2)),
                         { GenieExpireFile: 'error' },
                         JSON_MIME
                     );
+
+                    // Optionally log to console for immediate visibility
+                    console.error('Detailed error:', JSON.stringify(errorInfo, null, 2));
                 }
 
-                response.body.error = error;
+                // Set a sanitized error message in the response
+                response.body.error = {
+                    message: error.message,
+                    name: error.name,
+                    // Optionally include a truncated stack trace
+                    stack: error.stack ? error.stack.split('\n').slice(0, 3).join('\n') : undefined
+                };
             } finally {
                 if (!response.isBase64Encoded) {
                     response.body = JSON.stringify(response.body);
@@ -863,7 +992,7 @@ const renderKeyParams = async params => {
             }
         }
 
-        propertyType = params.propertyType ?? listing.propertyType;
+        propertyType = params.propertyType === 9 ? 1 : (params.propertyType ?? (listing.propertyType === 9 ? 1 : listing.propertyType));
         listingStatus = params.listingStatus ?? listing.listingStatus ?? '';
     }
 
@@ -908,11 +1037,7 @@ const processAsset = async params => {
 };
 
 const prepareAsset = async (asset, params) => {
-    const settings = await assetSetting( asset, 'all' );
-    
-    //if ( typeof params.qrDestination !== 'undefined' && params.qrDestination.toString().length > 0 ) {
-        //console.log( 'Ex5', asset, settings.supports.includes( 'AsPDF' ) );
-    //}
+    const settings = await assetSetting(asset, 'all');
 
     if (Object.keys(settings).length > 0) {
         let pages, suffix, dims, size;
@@ -929,15 +1054,15 @@ const prepareAsset = async (asset, params) => {
         } else {
             pages = [{ asset: asset.trim() }];
         }
-        
-        if ( settings.supports.includes( 'AsPDF' ) ) {
+
+        if (settings.supports.includes('AsPDF')) {
             params.asPDF = true;
         }
 
         if (params.totalPages) {
             pages = pages.slice(0, params.totalPages + 1);
         }
-        
+
         size = (
             params.size ||
             (Array.isArray(settings?.sizes) && settings.sizes[0]) ||
@@ -1004,28 +1129,26 @@ const prepareAsset = async (asset, params) => {
                     );
                 }
 
-                const isA5 = ['landing-pages', 'funnels', 'embeds'].find(
+                const isA5 = asset ? ['landing-pages', 'funnels', 'embeds'].find(
                     start => asset.startsWith(start)
-                ); // The rendered output of funnels and embeds is an A5 PDF
+                ) : false; // The rendered output of funnels and embeds is an A5 PDF
 
                 const withBleed = params?.withBleed ?? false;
                 const width =
                     suffix === 'pdf'
                         ? isA5
                             ? '216mm'
-                            : `${
-                                  Math.round(dims.width) / 100 +
-                                  (withBleed ? 0.25 : 0)
-                              }in`
+                            : `${Math.round(dims.width) / 100 +
+                            (withBleed ? 0.25 : 0)
+                            }in`
                         : Math.round(dims.width);
                 const height =
                     suffix === 'pdf'
                         ? isA5
                             ? '279mm'
-                            : `${
-                                  Math.round(dims.height) / 100 +
-                                  (withBleed ? 0.25 : 0)
-                              }in`
+                            : `${Math.round(dims.height) / 100 +
+                            (withBleed ? 0.25 : 0)
+                            }in`
                         : Math.round(dims.height);
 
                 const render = {
@@ -1050,13 +1173,13 @@ const prepareAsset = async (asset, params) => {
                     cssPageSize: false, // ToDo: some decision making
 
                     /*
-						ToDo?
-						render.clip
-						render.clipX
-						render.clipY
-						render.clipWidth
-						render.clipHeight
-					*/
+                        ToDo?
+                        render.clip
+                        render.clipX
+                        render.clipY
+                        render.clipWidth
+                        render.clipHeight
+                    */
 
                     noPuppeteer: s3Key.endsWith('html'),
                     isCollection: params.collection, // Flag for use by XSLT processor
@@ -1123,25 +1246,24 @@ const prepareAsset = async (asset, params) => {
                             ...params,
                             overrideKey,
                             size: downloadSize,
-                            qrDestination: `${
-                                genieGlobals.GENIE_HOST
-                            }${render.s3Key.replace('/index.html', '')}`,
+                            qrDestination: `${genieGlobals.GENIE_HOST
+                                }${render.s3Key.replace('/index.html', '')}`,
                             parentAsset: pageParams.asset
                         });
                     }
                 }
 
                 // Save to the processing folder to trigger onward processing and final render
-                const cleanKey = basename(render.s3Key)
+                const cleanKey = decodeURIComponent(basename(render.s3Key))
                     .replaceAll(/[.\/#]|_/g, '-')
-                    .replaceAll(/[^\w\s-]|_/g, '') // Remove all non-word,number,space chars.
-                    .replaceAll('--', '-');
+                    .replaceAll(/[^\w\s-]|_/g, '')
+                    .replaceAll('--', '-')
+                    .replaceAll(/\s+/g, '-');
 
                 await toS3(
-                    `_processing/${params.renderId}/${cleanKey}${
-                        pageParams.asset.startsWith('landing-pages')
-                            ? `-${basename(pageParams.asset)}`
-                            : ''
+                    `_processing/${params.renderId}/${cleanKey}${pageParams.asset.startsWith('landing-pages')
+                        ? `-${basename(pageParams.asset)}`
+                        : ''
                     }-p${i}-prep.json`,
                     Buffer.from(JSON.stringify(render)),
                     { 'Genie-Delete': true },
@@ -1152,17 +1274,7 @@ const prepareAsset = async (asset, params) => {
     }
 };
 
-const getPropertyCaption = (id, custom = null) => {
-    if (custom) return custom;
 
-    switch (id) {
-        case 3:
-            return 'Condos';
-
-        default:
-            return 'Homes';
-    }
-};
 
 const reRender = async (renderId, params = null) => {
     // Save to the processing folder for onward processing and final render
@@ -1325,8 +1437,8 @@ export const getS3Key = async (asset, params) => {
             const fileExtension = params?.asPDF
                 ? 'pdf'
                 : params?.webp
-                ? 'webp'
-                : null;
+                    ? 'webp'
+                    : null;
             const keyParams = await renderKeyParams(params);
 
             let { renderKey, pages } = await assetSetting(asset, [
@@ -1359,9 +1471,13 @@ export const getS3Key = async (asset, params) => {
                 key => (renderKey = renderKey.replace(key, replaces[key]))
             );
 
-            s3Key = `genie-files/${params.renderId}/${
-                params.theme
-            }/${renderKey}.${fileExtension || (hasPages && 'pdf') || 'png'}`;
+            renderKey = renderKey
+                .replace(/['\/#]/g, '-')  // Replace apostrophes, slashes, and hashes with hyphens
+                .replace(/[^\w\-]/g, '')  // Remove any remaining non-word characters (except hyphens)
+                .replace(/-+/g, '-');     // Replace multiple consecutive hyphens with a single hyphen
+
+            s3Key = `genie-files/${params.renderId}/${params.theme
+                }/${renderKey}.${fileExtension || (hasPages && 'pdf') || 'png'}`;
         }
     } catch (error) {
         await toS3(

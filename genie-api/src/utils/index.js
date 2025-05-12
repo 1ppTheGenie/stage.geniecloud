@@ -1,4 +1,4 @@
-import { fromS3, jsonFromS3, headObject } from "./aws.js";
+import { fromS3, jsonFromS3, headObject, deleteObject, searchS3ByPrefix } from "./aws.js";
 
 export * from "./dates.js";
 export * from "./aws.js";
@@ -244,6 +244,14 @@ export const getDimensions = (size = null) => {
 			dims = [1080, 1920];
 			break;
 
+		case "a5":
+			dims = [2126, 2753];
+			break;
+
+		case "tabloid-flyer":
+			dims = [4253, 2753];
+		break;
+
 		case "facebook":
 		default:
 			dims = [1200, 628];
@@ -251,4 +259,37 @@ export const getDimensions = (size = null) => {
 	}
 
 	return { width: dims[0], height: dims[1] };
+};
+
+// Helper function to filter renderIds based on mlsNumber or areaId
+export const filterRenderIds = async (renderIds, params) => {
+    const filteredIds = [];
+    for (const renderId of renderIds) {
+        const renderJsonKey = `_processing/${renderId}/render.json`;
+        try {
+            const renderJson = await jsonFromS3(renderJsonKey);
+            if (renderJson) {
+                if (params.mlsNumber && renderJson.mlsNumber === params.mlsNumber) {
+                    filteredIds.push(renderId);
+                } else if (params.areaId && renderJson.areaIds && renderJson.areaIds.includes(params.areaId)) {
+                    filteredIds.push(renderId);
+                }
+            }
+        } catch (error) {
+            console.error(`Error reading render.json for ${renderId}:`, error);
+        }
+    }
+    return filteredIds;
+};
+
+export const getPropertyCaption = (id, custom = null) => {
+    if (custom) return custom;
+
+    switch (id) {
+        case 3:
+            return 'Condos';
+
+        default:
+            return 'Homes';
+    }
 };

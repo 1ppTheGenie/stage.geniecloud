@@ -51,8 +51,6 @@
 
 	<xsl:template name="break">
 		<xsl:param name="text" select="string(.)" />
-
-
 		<xsl:choose>
 			<xsl:when test="contains($text, '&#10;')">
 				<xsl:value-of select="substring-before($text, '&#10;')" />
@@ -89,16 +87,24 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template name="format-price">
-		<xsl:param name="price" />
+	<xsl:template name="safe-number">
+		<xsl:param name="value" />
 		<xsl:choose>
-			<xsl:when test="$price > 999999">
-				<xsl:value-of select="format-number( $price div 1000000, '$#.00M')" />
-			</xsl:when>
+			<xsl:when test="string($value) = '' or not(number($value))">0</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="format-number( $price, '$###,###')" />
+				<xsl:value-of select="number($value)" />
 			</xsl:otherwise>
 		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="format-price">
+		<xsl:param name="price" />
+		<xsl:variable name="safe-price">
+			<xsl:call-template name="safe-number">
+			<xsl:with-param name="value" select="$price" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:value-of select="format-number($safe-price, '$#,##0')" />
 	</xsl:template>
 
 	<xsl:template name="agent-address-line-one">
@@ -213,6 +219,8 @@
 		<dims name="letter" width="1458" height="1883" />
 		<dims name="us-letter" width="850" height="1100" />
 		<dims name="a4" width="827" height="1169" />
+		<dims name="a5" width="2126" height="2753" />
+		<dims name="tabloid-flyer" width="4253" height="2753" />
 		<!-- For sizes going to print, values should be inches * 100, eg 11" x 6" = 1100 x 600 -->
 		<!-- DO NOT CHANGE these values -->
 		<dims name="postcard" width="1100" height="600" />

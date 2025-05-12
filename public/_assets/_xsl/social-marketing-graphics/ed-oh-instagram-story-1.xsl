@@ -14,32 +14,29 @@
 
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
+		<!-- <link rel="stylesheet">
 <xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
-		</link>
+		</link> -->
 
-		<style>
+		 <style>
 			<xsl:value-of select="'
 			.open-house-fobject{
 				position: relative;
-			    font-family: var(--theme-subtitle-font);
-			    fill: var(--theme-heading-color);
+			    font-family: var(theme-subtitle-font);
+			    fill: var(theme-heading-color);
 			    font-weight: 700;
-			    font-size: 360%;
+			    font-size: 60px;
 			    height: 100%;
 			    width: 50%;
 			    transform: translate(5%,2%);
 			}
-			.open-house-div{
-				width: 450px;
-			    height: auto;
+			.open-house-div{		
 			    position: absolute;
-			    bottom: 7%;
-			    left: 7%;
-			    z-index: 999;
+			    bottom: 17.5%;
+			    left: 7%;	
 			}'" />
-		</style>
+		</style> 
 
 		<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -50,7 +47,7 @@
 
 		<!-- Gradient layer start -->
 
-		<xsl:if test="//output/@themeShade='Dark'">
+		<xsl:if test="//output/@themeHue='dark'">
 			<image x="0%" y="70%" width="100%" height="30%" preserveAspectRatio="xMidYMid slice">
 				<xsl:attribute name="href">
 					<!-- <xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/bottomlightlayer-dark.png' )" /> -->
@@ -58,7 +55,7 @@
 				</xsl:attribute>
 			</image>
 		</xsl:if>
-		<xsl:if test="//output/@themeShade='Light'">
+		<xsl:if test="//output/@themeHue='light'">
 			<image x="0%" y="60%" width="100%" height="40%" preserveAspectRatio="xMidYMid slice">
 				<xsl:attribute name="href">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/bottomlightlayer-light.png' )" />
@@ -66,32 +63,10 @@
 			</image>
 		</xsl:if>
 
-		<!-- Gradient layer End -->
-
-		<!-- <foreignObject x="7.5%" y="67%" font-family="var(theme-subtitle-font)" fill="var(theme-heading-color)" font-weight="700" font-size="360%" height="50%" width="50%">
-			<div style="width: 65%;">
-				<h2 class="upper futura-text" style="color:var(theme-heading-color);font-size: 64px;line-height: 68px;margin-bottom: 34px;">
-					<xsl:call-template name="editable">
-		                <xsl:with-param name="id" select="'areanames'" />
-		                <xsl:with-param name="default" select="concat(//single/address/street,' ')" />
-		            </xsl:call-template>
-		            <xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'areanames'" />
-							<xsl:with-param name="default" select="//area/name" />
-						</xsl:call-template>						
-		        </h2>
-			</div>
-			<div style="width: 90%;">
-				<h2 class="upper futura-text" style="color:var(theme-heading-color); font-size: 64px;line-height: 68px;margin-bottom: 34px;">
-					Open Today 1-4pm
-				</h2>				
-			</div>			
-		</foreignObject> -->
-
-		<foreignObject font-family="var(--theme-subtitle-font)" fill="var(--theme-heading-color)" font-weight="700" font-size="360%" height="50%" width="50%" class="open-house-fobject">
+		 <foreignObject font-weight="700" font-size="60" height="50%" width="50%" class="open-house-fobject">
 			<div class="open-house-div">
 				<div style="">
-					<h2 class="upper futura-text" style="color:var(--theme-heading-color);font-size: 60px;line-height: 60px;margin:0 0;">
+					<h2 class="upper" style="font-family:var(--theme-heading-font); color:var(theme-heading-color);font-size: 60px;line-height: 1;margin:0 0;">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'areanames'" />
 							<xsl:with-param name="default" select="concat(//single/address/street,' ')" />
@@ -102,11 +77,33 @@
 						</xsl:call-template>
 					</h2>
 				</div>
-				<div style="">
-					<h2 class="upper futura-text" style="color:var(--theme-heading-color); font-size: 60px;line-height: 60px;margin-top: 30px;">Open Today 1PM - 4PM</h2>
-				</div>
+				<!-- <div style="display:none">
+					<h2 class="upper" style="font-family:var(theme-heading-font); color:var(theme-heading-color); font-size: 60px;line-height: 1;margin-top: 30px;">Open Today <br/> 1PM - 4PM</h2>
+				</div> -->
 			</div>
 		</foreignObject>
+		<xsl:choose>
+      <xsl:when test="count(//openHouse/session) &gt; 0">
+		<text x="90" y="85.5%" fill="var(theme-heading-color)" font-family="var(--theme-heading-font)" font-size="60" font-weight="700" style="line-height: 1;text-transform: uppercase;">
+			<tspan>Open Today</tspan>
+		  <tspan x="90" dy="3.5%">
+            <xsl:call-template name="editable">
+              <xsl:with-param name="id" select="'Open House'" />
+              <xsl:with-param
+                name="default"
+                select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
+              />
+            </xsl:call-template>
+          </tspan>
+		</text>
+      </xsl:when>
+      <xsl:otherwise>
+        <text x="90" y="85.5%" fill="var(theme-heading-color)" font-family="var(--theme-heading-font)" font-size="60" font-weight="700" style="line-height: 1;text-transform: uppercase;">
+			<tspan>Open Today</tspan>
+			<tspan x="90" dy="3.5%">1 - 4pm</tspan>
+		</text>
+      </xsl:otherwise>
+    </xsl:choose>
 	</xsl:template>
 
 </xsl:stylesheet>

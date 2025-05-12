@@ -27,21 +27,52 @@
 				<xsl:with-param name="preferPrimary" select="'true'" />
 			</xsl:call-template>
 		</xsl:variable>
+    
+    <xsl:variable name="defaultUtmSource">
+      <xsl:value-of select="'Listing Page Hollywood'" />
+    </xsl:variable>
+    <xsl:variable name="defaultUtmCampaign">
+      <xsl:value-of select="$listingAddressLine1" />
+    </xsl:variable>    
 
 		<xsl:call-template name="standard-header">
 			<xsl:with-param name="seoImage" select="$primaryImage" />
 			<xsl:with-param name="secondaryCSS" select="'lc-hollywood'" />
 
-			<xsl:with-param name="defaultUtmSource" select="'Property (Hwood)'" />
-			<xsl:with-param name="defaultUtmCampaign" select="concat( $listingAddressLine1, ', ', $listingAddressLine2 )" />
-			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', //single/address/street, ' Property Site!')" />
+			<xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+			<xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', $listingAddressLine1, ' Listing Site!')" />
 		</xsl:call-template>
+
+    <xsl:variable name="fileDownloadTags">
+      <xsl:choose>
+        <xsl:when test="contains(lower-case(//output/@downloadUrl), 'market-insider')">
+          <xsl:text>DownloadMarketReport,ClickCta</xsl:text>          
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>DownloadPropertyBrochure,ClickCta</xsl:text>          
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="fileDownloadText">
+      <xsl:choose>
+        <xsl:when test="contains(lower-case(//output/@downloadUrl), 'market-insider')">
+          <xsl:text>Download Market Report</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>Download Property Brochure</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>  
 
 		<body>
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'lc-hollywood ', $cssThemeClass)" />
 			</xsl:attribute>
-
+			<xsl:call-template name="process-snippet">
+				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag" />
+			</xsl:call-template>
 			<div id="step1" class="steps banner-top-section-info section background">
 				<div class="mobile-header-sec">
 					<div class="tab-sec">
@@ -275,8 +306,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 					<div class="hero-details custom-container container">
 						<div class="heading-color-as-bg hero-details-inner">
 							<div class="hero-price">
-								<span class="gradient-color">
-									<!-- <xsl:value-of select="format-number( //single/price, '$###,###')" /> -->
+								<span class="gradient-color">									
 									<xsl:choose>
 										<xsl:when test="//single/soldDate!=''">
 											<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
@@ -534,17 +564,21 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/cush-pdf-bg.jpg')" />
 							</xsl:attribute>
 						</img>
-					</div>
-					<a class="pdf-btn" target="_blank" data-genie-tags="DownloadMarketReport">
+					</div>           
+					<a class="pdf-btn" target="_blank" >
 						<xsl:attribute name="href">
 							<xsl:value-of select="//output/@downloadUrl" />
+						</xsl:attribute>
+
+            <xsl:attribute name="data-genie-tags">
+							<xsl:value-of select="$fileDownloadTags" />
 						</xsl:attribute>
 
 						<div class="overlay-bg">
 							<xsl:comment/>
 						</div>
 						<span class="gradient-color">
-							<xsl:text>Download Property Brochure</xsl:text>
+							<xsl:value-of select="$fileDownloadText" />
 						</span>
 					</a>
 				</section>
@@ -574,32 +608,24 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 									</div>
 									<div class="form-field numberform">
 										<span class="wpcf7-form-control-wrap your-message">
-											<input type="text" name="contact_phone" class="form-control" placeholder="Phone" />
-
+											<input type="text" name="phoneNumber" class="form-control" placeholder="Phone" />
 										</span>
-										<input type="hidden" name="lead_id" value="0" class="lead-id" />
-										<input type="hidden" name="send_email" value="1" />
-										<input type="hidden" name="funnel_id" value="131730" />
-
-									</div>
-
+									</div>            
 									<div class="f_check preferred_contact body-font desk">
-										<div class="che_box body-font">
-											<label class="spn" for="">Preferred contact*:</label>
-											<label>
-												<input type="checkbox" name="preferred_contact" />
-
-												<xsl:text>Text</xsl:text>
-											</label>
-											<label>
-												<input type="checkbox" name="preferred_contact" required="" checked="" />
-
-												<xsl:text>Phone</xsl:text>
-											</label>
+										<!-- <div class="che_box body-font"></div> -->
+										<!--left to preserve the spacing-->
+										<div class="spn">
+											<span>Preferred contact*:</span>
+										</div>
+										<div class="che_box">
+											<label> <input type="checkbox" name="lead_meta_contact_via_text" value="yes" />Text</label>
+											<label> <input type="checkbox" name="lead_meta_contact_via_email" value="yes" checked="" />Email</label>
 										</div>
 										<div class="che_box submit-btn">
+											
+											<input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact" />
+											<input type="hidden" name="note" value="I am interested in { $listingAddressLine1 }" /> 
 											<input type="submit" value="Send" class="wpcf7-submit" />
-
 										</div>
 									</div>
 								</form>
@@ -620,7 +646,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 					</div>
 				</section>
 
-				<section class="genie-alternate" id="real_time_market_trends">
+				<section class="genie-alternate dark real-time-market" id="real_time_market_trends">
 					<div class="container">
 						<div class="col-md-12 real-time text-center">
 							<h2 class="subtitle-font subtitle-color">
@@ -747,6 +773,9 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								<textarea class="form-control" name="note" cols="40" rows="10"></textarea>
 							</div>
 							<div class="col-md-12">
+                <input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact" />
+                <input type="hidden" name="formListingAddress" value="{ $listingAddressLine1 }" />
+                <input type="hidden" name="noteFormatter" value="RequestMoreInfoMoving" />
 								<input type="submit" value="Send" class="submit-btn" />
 							</div>
 						</form>
@@ -803,6 +832,9 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								<textarea class="form-control" name="note" cols="40" rows="10"></textarea>
 							</div>
 							<div class="col-md-12">
+                <input type="hidden" name="genieTags" value="RequestShowing, OptInContact" />
+                <input type="hidden" name="formListingAddress" value="{ $listingAddressLine1 }" />
+                <input type="hidden" name="noteFormatter" value="RequestShowing" />
 								<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />
 							</div>
 						</form>
@@ -814,18 +846,33 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 				<xsl:comment/>
 			</div>
 
-			<xsl:call-template name="default-thank-you-popup" />
-
-			<div class="funnel-footer-background">
+			<xsl:call-template name="default-thank-you-popup" />      
+			
+      <div class="funnel-footer-background">
 				<xsl:call-template name="agent-details" />
 				<xsl:call-template name="copyright" />
 			</div>
+      
+      <xsl:call-template name="mobile-cta-banner" /> 
 
-			<script src="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.js' )}">
+      <xsl:call-template name="utm-page-default">            
+        <xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+        <xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+      </xsl:call-template>      
+
+			<!-- <script src="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.js' )}">
+				<xsl:comment/>
+			</script> -->
+
+			<script src="{'/_assets/landing-pages/lc-hollywood.js'}">
 				<xsl:comment/>
 			</script>
 
 			<link rel="stylesheet" href="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.css' )}" />
+			
+      <xsl:call-template name="process-snippet">
+				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag" />
+			</xsl:call-template>      
 		</body>
 	</xsl:template>
 </xsl:stylesheet>												

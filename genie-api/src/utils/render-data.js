@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 /* prettier-ignore */
 import { generateQR, endOfLastMonth, genieGlobals, MINUTE_IN_SECONDS, NOW, dateAdd, timeAgo, toS3, jsonFromS3, listS3Folder, assetSetting } from "./index.js";
 /* prettier-ignore */
-import {  areaName,openhouseByMlsNumber, getListing, agentProperties, mlsProperties, areaStatisticsMonthly, areaStatisticsWithPrevious, propertySurroundingAreas, getUser, getAreaBoundary, mlsDisplaySettings, } from "./../genieAI.js";
+import { areaName, openhouseByMlsNumber, getListing, agentProperties, mlsProperties, areaStatisticsMonthly, areaStatisticsWithPrevious, propertySurroundingAreas, getUser, getAreaBoundary, mlsDisplaySettings, } from "./../genieAI.js";
 import { getS3Key } from './../index.js';
 
 export const getRenderJSON = async params => {
@@ -155,15 +155,14 @@ export const getRenderJSON = async params => {
 
         if (mlsDisplay) {
             /* TODO!
-			let html_node = Utilities.html_2_xml(
-				mlsDisplay.mlsGroupDisplaySettings.listingPageDisclaimer,
-				"disclaimer"
-			);
-			*/
+            let html_node = Utilities.html_2_xml(
+                mlsDisplay.mlsGroupDisplaySettings.listingPageDisclaimer,
+                "disclaimer"
+            );
+            */
             //			console.log("mlsDisplay", mlsDisplay);
-            root.mlsDisplay = `<![CDATA[${
-                mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ''
-            }]]>`; // { html_node }; // ToDo?	$mlsDisplay->appendChild($dom->importNode($html_node, true));
+            root.mlsDisplay = `<![CDATA[${mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ''
+                }]]>`; // { html_node }; // ToDo?	$mlsDisplay->appendChild($dom->importNode($html_node, true));
         }
     }
 
@@ -282,7 +281,7 @@ export const areaFromMlsNumber = async (
         }
     }
     console.log(`No suitable area found for MLS number: ${mlsNumber}`);
-    
+
     return null;
 };
 
@@ -332,6 +331,8 @@ export const setRenderDefaults = async params => {
         }
     }
 
+    params.propertyType = params.propertyType === 9 ? 1 : params.propertyType;
+
     // ** AREA(s)
     if (params.areaId && !params.areaIds) {
         params.areaIds = [params.areaId];
@@ -343,7 +344,7 @@ export const setRenderDefaults = async params => {
             params.mlsId,
             params.userId
         );
-    
+
         if (params.area) {
             params.areaIds = [params.area.areaId];
         } else {
@@ -393,6 +394,18 @@ const processAgents = async agentIds => {
                     disclaimer ?? {
                         text: '',
                         url: ''
+                    }
+                );
+            };
+
+            const getSnippet = id => {
+                const snippet = marketingSettings.codeSnippets.find(
+                    d => d.marketingSnippetTypeId == id
+                );
+
+                return (
+                    snippet ?? {
+                        codeSnippet: ''
                     }
                 );
             };
@@ -451,6 +464,12 @@ const processAgents = async agentIds => {
                 disclaimerExtra: getDisclaimer(4).text, //"htmlDisclaimer"
                 disclaimerIDX: getDisclaimer(3).text, // "idxDisclaimer"
 
+                snippetHeadTag: getSnippet(1).codeSnippet,
+                snippetOpenBodyTag: getSnippet(2).codeSnippet,
+                snippetCloseBodyTag: getSnippet(3).codeSnippet,
+                googleAnalyticsId: marketingSettings.hasGoogleSettings ? marketingSettings.google.analyticsId : null,
+                facebookPixelId: marketingSettings.hasFacebookSettings ? marketingSettings.facebook.pixelId : null,
+
                 pronoun: marketingSettings.profile.isTeam
                     ? 'plural'
                     : 'singular',
@@ -500,7 +519,7 @@ const processAreas = async params => {
     const areas = [];
 
     await Promise.all(
-        params.areaIds.map(async areaId => {
+        (params.areaIds || []).map(async areaId => {
             const boundary = await getAreaBoundary(areaId);
             const statsData = await areaStatisticsWithPrevious(
                 params.userId,
@@ -511,23 +530,19 @@ const processAreas = async params => {
             params.isDebug &&
                 debugLog('areaStatisticsWithPrevious', params, statsData);
 
-            const areaName = statsData.areaName; // ToDo? Utilities::clean_html_entities(statsData.areaName);
+            const areaName = statsData?.areaName ?? 'Unknown Area';
 
             let areaImage = null;
-            const area_images = []; // ToDo (array) Users::meta('area-images', userId);
-            area_images.forEach(image => {
-                if (!Array.isArray(image)) {
-                    //					continue;
-                }
-
-                if (image.id == areaId) {
+            const area_images = [];
+            (area_images || []).forEach(image => {
+                if (Array.isArray(image) && image.id == areaId) {
                     areaImage = image.image;
                 }
             });
 
             const defaultJSON = '{"type": "FeatureCollection","features": []}';
             let geoJSON = boundary?.mapArea?.geoJSON ?? defaultJSON;
-            if (geoJSON.length > 200000) {
+            if (typeof geoJSON === 'string' && geoJSON.length > 200000) {
                 geoJSON = defaultJSON;
             }
 
@@ -538,20 +553,18 @@ const processAreas = async params => {
                     { name: areaName ?? params?.area?.name ?? 'NOT SET' },
                     { geojson: `<![CDATA[${geoJSON}]]>` },
                     { centerLat: boundary?.mapArea?.centerLatitude ?? 32.71 },
-                    {
-                        centerLng: boundary?.mapArea?.centerLongitude ?? -117.16
-                    },
+                    { centerLng: boundary?.mapArea?.centerLongitude ?? -117.16 },
                     { image: areaImage ?? '' }
                 ]
             };
 
-            if (statsData.statistics) {
+            if (statsData?.statistics) {
                 let propertyTypeData, prevData;
 
-                statsData.statistics.propertyTypeData.forEach(pData => {
-                    if (pData.type == (params.propertyType ?? 0)) {
+                statsData.statistics.propertyTypeData?.forEach(pData => {
+                    if (pData?.type == (params.propertyType ?? 0)) {
                         propertyTypeData = pData.statistics;
-                        prevData = propertyTypeData.previousPeriod;
+                        prevData = propertyTypeData?.previousPeriod;
                     }
                 });
 
@@ -568,86 +581,49 @@ const processAreas = async params => {
                 if (mls_properties && Array.isArray(mls_properties)) {
                     const agentListings = await agentMlsNumbers(params.userId);
                     const listings = [];
-/*
-                    mls_properties.sort((a, b) => {
-                        if (
-                            agentListings.includes(
-                                a.mlsNumber.toLowerCase()
-                            ) ===
-                            agentListings.includes(b.mlsNumber.toLowerCase())
-                        ) {
-                            const aDate = DateTime.fromISO(
-                                a.soldDate ?? a.listDate
-                            );
-                            const bDate = DateTime.fromISO(
-                                b.soldDate ?? b.listDate
-                            );
-
-                            return aDate === bDate ? 0 : aDate < bDate ? 1 : -1;
-                        } else {
-                            return agentListings.includes(
-                                a.mlsNumber.toLowerCase()
-                            )
-                                ? 1
-                                : -1;
-                        }
-                    });*/
 
                     mls_properties.forEach(p => {
                         if (
-                            p.propertyTypeID ==
+                            p?.propertyTypeID ==
                             (params.propertyType ?? params.propertyTypeID ?? 0)
                         ) {
                             const state =
                                 parseInt(p.statusTypeID) == 4 ||
-                                parseInt(p.statusTypeID) == 12 ||
-                                parseInt(p.statusTypeID) == 3
+                                    parseInt(p.statusTypeID) == 12 ||
+                                    parseInt(p.statusTypeID) == 3
                                     ? 'pending'
-                                    : p.statusType.toLowerCase();
+                                    : p.statusType?.toLowerCase() ?? 'unknown';
 
                             listings.push({
                                 _name: 'listing',
                                 _attrs: {
-                                    lat: p.latitude,
-                                    lon: p.longitude,
-                                    // TODO: Lookup based on statusTypeID rather than the string
-                                    /*
-								Use values:
-								1    Active
-								2    Sold
-								3    Pending
-								4    Contingent - Pending
-								12    Active With Contingency - Pending
-								13    Expired - DON@T INCLUDE */
+                                    lat: p.latitude ?? 0,
+                                    lon: p.longitude ?? 0,
                                     state: state,
                                     address: singleAddress(p),
-                                    beds: p.bedrooms,
-                                    baths: p.bathroomsTotal,
-                                    size: p.sqft,
-                                    listPrice: p.priceHigh,
+                                    beds: p.bedrooms ?? null,
+                                    baths: p.bathroomsTotal ?? null,
+                                    size: p.sqft ?? null,
+                                    listPrice: p.priceLow ?? null,
                                     salePrice: p.salePrice ?? null,
-                                    listedDate: DateTime.fromISO(
-                                        p.listDate
-                                    ).toSeconds(),
-                                    soldDate: p.soldDate
-                                        ? DateTime.fromISO(
-                                              p.soldDate
-                                          ).toSeconds()
+                                    listedDate: p.listDate
+                                        ? DateTime.fromISO(p.listDate).toSeconds()
                                         : null,
-                                    dom: p.daysOnMarket,
-                                    thumb: p.photoPrimaryUrl,
+                                    soldDate: p.soldDate
+                                        ? DateTime.fromISO(p.soldDate).toSeconds()
+                                        : null,
+                                    dom: p.daysOnMarket ?? null,
+                                    thumb: p.photoPrimaryUrl ?? '',
                                     isAgent: agentListings.includes(
-                                        p.mlsNumber.toLowerCase()
+                                        p.mlsNumber?.toLowerCase() ?? ''
                                     )
                                         ? 1
                                         : 0,
                                     sortDate: p.soldDate
-                                        ? DateTime.fromISO(
-                                              p.soldDate
-                                          ).toSeconds()
-                                        : DateTime.fromISO(
-                                              p.listDate
-                                          ).toSeconds()
+                                        ? DateTime.fromISO(p.soldDate).toSeconds()
+                                        : p.listDate
+                                            ? DateTime.fromISO(p.listDate).toSeconds()
+                                            : null
                                 }
                             });
                         }
@@ -661,36 +637,36 @@ const processAreas = async params => {
                         {
                             _name: 'previous',
                             _attrs: {
-                                totalSold: prevData?.sold,
-                                turnOver: prevData?.turnOver,
-                                avgPricePerSqFtSold: prevData?.avgPricePerSqFt,
+                                totalSold: prevData?.sold ?? 0,
+                                turnOver: prevData?.turnOver ?? 0,
+                                avgPricePerSqFtSold: prevData?.avgPricePerSqFt ?? 0,
                                 avgPricePerSqFtList:
-                                    prevData?.avgSoldListingsListPricePerSqFt,
+                                    prevData?.avgSoldListingsListPricePerSqFt ?? 0,
                                 averageListPriceForSold:
-                                    prevData?.avgListPriceForSold,
-                                averageSalePrice: prevData?.avgSalePrice,
-                                averageDaysOnMarket: prevData?.avgDaysOnMarket,
-                                medianSalePrice: prevData?.medSalePrice,
-                                maxSalePrice: prevData?.maxSale?.salePrice,
-                                minSalePrice: prevData?.minSale?.salePrice
+                                    prevData?.avgListPriceForSold ?? 0,
+                                averageSalePrice: prevData?.avgSalePrice ?? 0,
+                                averageDaysOnMarket: prevData?.avgDaysOnMarket ?? 0,
+                                medianSalePrice: prevData?.medSalePrice ?? 0,
+                                maxSalePrice: prevData?.maxSale?.salePrice ?? 0,
+                                minSalePrice: prevData?.minSale?.salePrice ?? 0
                             }
                         }
                     ];
 
                     // *** BY BEDROOM
                     const byBedroom = { _name: 'byBedroom', _content: [] };
-                    propertyTypeData.bedroomStats.forEach(stat => {
+                    propertyTypeData?.bedroomStats?.forEach(stat => {
                         byBedroom._content.push({
                             _name: 'bedroom',
                             _attrs: {
-                                number: stat.beds,
-                                sold: stat.sold,
-                                active: stat.active,
-                                pending: stat.pending,
-                                averageSalePrice: stat.avgSalePrice,
-                                averageListPrice: stat.avgListPrice,
+                                number: stat.beds ?? null,
+                                sold: stat.sold ?? 0,
+                                active: stat.active ?? 0,
+                                pending: stat.pending ?? 0,
+                                averageSalePrice: stat.avgSalePrice ?? 0,
+                                averageListPrice: stat.avgListPrice ?? 0,
                                 averageListPriceForSold:
-                                    stat.avgListPriceForSold
+                                    stat.avgListPriceForSold ?? 0
                             }
                         });
                     });
@@ -698,19 +674,19 @@ const processAreas = async params => {
 
                     // *** BY SIZE
                     const bySize = { _name: 'bySize', _content: [] };
-                    propertyTypeData.squareFootStats.forEach(stat => {
+                    propertyTypeData?.squareFootStats?.forEach(stat => {
                         bySize._content.push({
                             _name: 'size',
                             _attrs: {
-                                min: stat.min,
-                                max: stat.max,
-                                sold: stat.sold,
-                                active: stat.active,
-                                pending: stat.pending,
-                                averageSalePrice: stat.avgSalePrice,
-                                averageListPrice: stat.avgListPrice,
+                                min: stat.min ?? 0,
+                                max: stat.max ?? 0,
+                                sold: stat.sold ?? 0,
+                                active: stat.active ?? 0,
+                                pending: stat.pending ?? 0,
+                                averageSalePrice: stat.avgSalePrice ?? 0,
+                                averageListPrice: stat.avgListPrice ?? 0,
                                 averageListPriceForSold:
-                                    stat.avgListPriceForSold
+                                    stat.avgListPriceForSold ?? 0
                             }
                         });
                     });
@@ -722,7 +698,7 @@ const processAreas = async params => {
                         areaId,
                         Math.ceil(params.datePeriod / 12)
                     );
-                    if (monthly.statistics) {
+                    if (monthly?.statistics) {
                         const history = { _name: 'history', _content: [] };
                         // Only take what we need -( NB: datePeriod * 2 because both property types are in there)
                         monthly.statistics
@@ -732,23 +708,23 @@ const processAreas = async params => {
                                     history._content.push({
                                         _name: 'period',
                                         _attrs: {
-                                            period: `${m.yearPart.toString()}${m.monthPart
-                                                .toString()
-                                                .padStart(2, '0')}`,
-                                            periodName: DateTime.fromObject({
-                                                year: m.yearPart,
-                                                month: m.monthPart,
-                                                day: 1
-                                            }).toFormat('LLL yyyy'),
-                                            totalSold: m.soldCount,
+                                            period: `${m.yearPart?.toString() ?? ''}${(m.monthPart?.toString() ?? '').padStart(2, '0')}`,
+                                            periodName: m.yearPart && m.monthPart
+                                                ? DateTime.fromObject({
+                                                    year: m.yearPart,
+                                                    month: m.monthPart,
+                                                    day: 1
+                                                }).toFormat('LLL yyyy')
+                                                : 'Unknown',
+                                            totalSold: m.soldCount ?? 0,
                                             averageListPrice:
-                                                m.averageListPrice,
+                                                m.averageListPrice ?? 0,
                                             averageSalePrice:
-                                                m.averageSalePrice,
+                                                m.averageSalePrice ?? 0,
                                             averageDaysOnMarket:
-                                                m.averageDaysOnMarket,
+                                                m.averageDaysOnMarket ?? 0,
                                             averagePricePerSqFt:
-                                                m.averagePricePerSqFt
+                                                m.averagePricePerSqFt ?? 0
                                         }
                                     });
                                 }
@@ -790,7 +766,7 @@ const processAreas = async params => {
                             averageYearsInHome:
                                 propertyTypeData?.avgYearsInHome ?? 0,
                             ownerOccupancy:
-                                propertyTypeData?.ownerOccupancy ?? 0
+                                propertyTypeData?.ownerOccupancy ?? null
                         },
                         _content: statistics
                     });
@@ -847,7 +823,7 @@ const processListing = async (params, agentTimezone) => {
                 'https:'
             );
 
-            if (listing.virtualTourUrl.indexOf('youtube.com/watch')) {
+            if (listing.virtualTourUrl.indexOf('youtube.com/watch') !== -1) {
                 listing.virtualTourUrl = listing.virtualTourUrl.replace(
                     /https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
                     'https://www.youtube.com/embed/$1'
@@ -859,33 +835,24 @@ const processListing = async (params, agentTimezone) => {
             { documents: listing.genieDocuments ?? [] },
             { mlsNumber: listing.mlsNumber ?? '' },
             { mlsId: listing.mlsID ?? '' },
-
             { price: listing.lowPrice ?? 0 },
             { highPrice: listing.highPrice ?? '' },
             { salePrice: listing.salePrice ?? '' },
-
             { listed: listing.listedOn ?? Date.now() / 1000 },
             { soldDate: listing.soldDate ?? '' },
             { daysOnMarket: listing.daysOnMarket ?? '' },
-
             { type: listing.propertyType },
-
             { listingStatus: listing.listingStatus ?? '' },
             { listingAgent: listing.listingAgentName ?? '' },
             { statusTypeID: listing.statusTypeID ?? '' },
-
-            { description: listing.remarks ?? '' }, //ToDo clean entities?
-
+            { description: listing.remarks ?? '' },
             { photoPrimary: primaryPhoto },
             { listingBoundary: listingBoundary ?? '' },
-
             { squareFeet: listing.squareFeet ?? 'Enquire' },
             { lotSize: listing.lotSize ?? 'Enquire' },
             { acres: listing.acres ?? 'Enquire' },
             { built: listing.yearBuilt ?? 'Enquire' },
-
             { virtualTourUrl: listing.virtualTourUrl },
-
             { latitude: listing.latitude ?? 0 },
             { longitude: listing.longitude ?? 0 },
             { city: listing.city ?? '' }
@@ -953,10 +920,10 @@ const processListing = async (params, agentTimezone) => {
 
                     Object.keys(timeAttrbs).forEach(
                         key =>
-                            (session._attrs[key] = DateTime.fromMillis(
-                                ts1,
-                                tz
-                            ).toFormat(timeAttrbs[key]))
+                        (session._attrs[key] = DateTime.fromMillis(
+                            ts1,
+                            tz
+                        ).toFormat(timeAttrbs[key]))
                     );
 
                     [
@@ -979,7 +946,7 @@ const processListing = async (params, agentTimezone) => {
 
         single.push({
             _name: 'bedrooms',
-            _attrs: { count: listing?.bedrooms || 'n/a' }
+            _attrs: { count: listing?.bedrooms ?? null }
         });
         single.push({
             _name: 'bathrooms',
@@ -1115,15 +1082,15 @@ const processCollection = async params => {
 
                                 const tags = Array.isArray(assetData?.tags)
                                     ? assetData?.tags?.map(tag => ({
-                                          _name: 'tag',
-                                          _attrs: { name: tag.trim() }
-                                      }))
+                                        _name: 'tag',
+                                        _attrs: { name: tag.trim() }
+                                    }))
                                     : null;
 
                                 const _attrs = {
                                     stylesheet: asset.asset,
                                     size: size,
-                                    sort: parseInt( asset.sort ),
+                                    sort: parseInt(asset.sort),
                                     name:
                                         asset.name ??
                                         asset.knownAs ??
@@ -1133,7 +1100,7 @@ const processCollection = async params => {
                                     qrUrl
                                 };
 
-                                if ( assetData.pages?.length ) {
+                                if (assetData.pages?.length) {
                                     _attrs.pageCount = assetData.pages.length;
                                 }
 
@@ -1207,25 +1174,25 @@ const processCollection = async params => {
         if (params.areaIds.length) {
             // ToDo? support more than just the first area?
             /*
-			const searches = savedSearches(params.userId, params.areaIds[0]);
-			if (searches.savedSearches) {
-				const files = [];
+            const searches = savedSearches(params.userId, params.areaIds[0]);
+            if (searches.savedSearches) {
+                const files = [];
 
-				searches.savedSearches.forEach(search =>
-					search.availableFiles.forEach(file =>
-						files.push({
-							_name: "file",
-							_attrs: {
-								_name: file.fileName,
-								link: file.downLoadLink,
-								fileRecordCount: file.fileRecordCount,
-							},
-						})
-					)
-				);
+                searches.savedSearches.forEach(search =>
+                    search.availableFiles.forEach(file =>
+                        files.push({
+                            _name: "file",
+                            _attrs: {
+                                _name: file.fileName,
+                                link: file.downLoadLink,
+                                fileRecordCount: file.fileRecordCount,
+                            },
+                        })
+                    )
+                );
 
-				collection.push({ _name: "targetFiles", _content: files });
-			}*/
+                collection.push({ _name: "targetFiles", _content: files });
+            }*/
         }
 
         return collection;
@@ -1269,6 +1236,10 @@ export const preCallGenieAPIs = async params => {
             await Promise.all(
                 params.agentIds.map(async agentId => await getUser(agentId))
             );
+        }
+
+        if (params.userId){
+            await getUser(params.userId);
         }
 
         if (Array.isArray(params?.areaIds)) {

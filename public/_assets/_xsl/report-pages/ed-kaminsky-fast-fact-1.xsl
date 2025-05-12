@@ -74,10 +74,13 @@
 			</xsl:choose>
 		</xsl:variable>
 
-		<link rel="stylesheet">
+		<!-- <link rel="stylesheet">
 <xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
-		</link>
+		</link> -->
+		<style type="text/css">
+			@import url("/_assets/_css/futura-embedded.css");
+		</style>
 		<image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
 				<xsl:with-param name="id" select="'image-1'" />

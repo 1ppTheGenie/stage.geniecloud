@@ -1,0 +1,36 @@
+/*
+	Theme Name:	Forward One
+*/
+
+@import url("../_css/montserrat.css");
+@import url("../_css/roboto.css");
+
+.forward-one, .forward-one.light, .forward-one .light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #000000; /* Heading */
+	--theme-sub-heading-color: #f0ad3a; /* Subtitle */
+	--theme-body-color: #adadad; /* Body */
+	--theme-emphasis-color: #f0ad3a; /* Outline */
+	--theme-body-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Montserrat", sans-serif;
+}
+
+.forward-one.dark, .forward-one .dark {
+	--theme-body-background: #000000;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #f0ad3a; /* Subtitle */
+	--theme-body-color: #adadad; /* Body */
+	--theme-emphasis-color: #f0ad3a; /* Outline */
+}
+
+.forward-one.dark2, .forward-one .dark2 {
+    --theme-body-background: #070300;
+    --theme-heading-color: #ffffff; /* Heading */
+    --theme-sub-heading-color: #b19a55; /* Subtitle */
+    --theme-body-color: #ffffff; /* Body */
+    --theme-emphasis-color: #b19a55; /* Outline */
+    --theme-body-font: 'Roboto', sans-serif;
+    --theme-heading-font: 'Roboto', sans-serif;
+    --theme-sub-heading-font: 'Roboto', sans-serif;
+}

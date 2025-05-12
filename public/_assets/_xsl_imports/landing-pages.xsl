@@ -3,6 +3,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 	<xsl:import href="global-variables.xsl" />
 	<xsl:import href="genie-functions.xsl" />
+	<xsl:import href="snippet-processor.xsl" />
 
 	<xsl:mode on-no-match="shallow-copy" />
 
@@ -113,7 +114,7 @@
 	</xsl:template>
 
 	<xsl:template name="copyright">
-		<xsl:param name="url" select="'http://genie.ai'" />
+		<xsl:param name="url" select="'http://thegenie.ai'" />
 		<div class="bottom-bar-copyright">
 			<div id="copyright">
 				<div class="container">
@@ -561,6 +562,49 @@
 				</script>
 			</xsl:if>
 			<xsl:call-template name="landing-header-additions" />
+			<xsl:call-template name="process-snippet">
+				<xsl:with-param name="snippet" select="//agent[1]/snippetHeadTag" />
+			</xsl:call-template>
+			<xsl:if test="//agent[1]/googleAnalyticsId!=''">
+				<script async="async">
+					<xsl:attribute name="src">
+						<xsl:value-of select="concat('https://www.googletagmanager.com/gtag/js?id=', //agent[1]/googleAnalyticsId)"/>
+					</xsl:attribute>
+				</script>
+				<script> 
+					<xsl:value-of select="concat('
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag(`js`, new Date());
+						gtag(`config`, `', //agent[1]/googleAnalyticsId, '`);
+					')" />
+				</script>
+			</xsl:if>
+			<xsl:if test="//agent[1]/facebookPixelId!=''">
+				<script>
+					<xsl:value-of select="concat('
+						!function(f,b,e,v,n,t,s)
+						{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+						n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+						if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version=`2.0`;
+						n.queue=[];t=b.createElement(e);t.async=!0;
+						t.src=v;s=b.getElementsByTagName(e)[0];
+						s.parentNode.insertBefore(t,s)}(window,document,`script`,
+						`https://connect.facebook.net/en_US/fbevents.js`);
+						fbq(`init`, `', //agent[1]/facebookPixelId, '`);
+						fbq(`track`, `PageView`);
+					')" />
+				</script>
+				<noscript>
+					<xsl:element name="img">
+						<xsl:attribute name="height">1</xsl:attribute>
+						<xsl:attribute name="width">1</xsl:attribute>
+						<xsl:attribute name="src">
+							<xsl:value-of select="concat('https://www.facebook.com/tr?id=', //agent[1]/facebookPixelId, '&amp;ev=PageView&amp;noscript=1')"/>
+						</xsl:attribute>
+					</xsl:element>
+				</noscript>
+			</xsl:if>
 		</head>
 	</xsl:template>
 
@@ -683,6 +727,13 @@
 			</div>
 		</div>
 	</xsl:template>
+
+  <xsl:template name="mobile-cta-banner">
+    <div id="js-mobile-banner" class="mobile-banner">    
+        <a id="js-mobile-banner-cta"><p><span id="js-mobile-banner-text" class="gradient-color">Get Your Home Value</span></p></a>
+        <p><button id="js-mobile-banner-close" class="mobile-banner-close"><span class="gradient-color">X</span></button></p>        
+    </div>
+  </xsl:template>
 
 	<xsl:template name="default-thank-you-popup">
 		<xsl:param name="message" select="'Thank you, your request has been successfully submitted!'" />
@@ -836,6 +887,14 @@
 		</xsl:if>
 	</xsl:template>
 
+
+  <xsl:template name="utm-page-default">
+      <xsl:param name="defaultUtmSource" select="''" />
+      <xsl:param name="defaultUtmCampaign" select="''" />
+      
+      <input type="hidden" id="pageUtmSource" value="{$defaultUtmSource}" />
+      <input type="hidden" id="pageUtmCampaign" value="{$defaultUtmCampaign}" />      
+  </xsl:template>
 
 	<xsl:template name="green-red-arrow">
 		<xsl:param name="up" select="boolean(1)" />

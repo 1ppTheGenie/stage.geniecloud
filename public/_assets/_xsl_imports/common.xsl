@@ -139,6 +139,7 @@
 
 		<html lang="en">
 			<head>
+			<link href="https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet" />
 				<title>
 					<xsl:value-of select="concat( 'Presented by ', //agent[1]/marketingName, ' ' , //agent[1]/address/company  )" />
 				</title>
@@ -146,6 +147,7 @@
 					<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/_css/svg.css); ' )" />
 					<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css); ')" />
 				</style>
+				
 			</head>
 			<body>
 				<xsl:attribute name="class">
@@ -1628,14 +1630,16 @@
 		<xsl:param name="disclaimer" select="'default'" />
 
 		<g id="footer">
-			<text>
-				<tspan fill="var(--theme-heading-color)">
-					<xsl:text>SOURCE: theGenie.ai &#169; </xsl:text>
-					<xsl:value-of select="//output/@year" />
-				</tspan>
-				<tspan>
-					<xsl:text> 1parkplace, Inc.</xsl:text>
-				</tspan>
+			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#ffffff">
+				<xsl:text>Source: TheGenie.ai</xsl:text>
+			</text>
+			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#ffffff">
+				<xsl:text> Recipients to verify all information.</xsl:text>
+			</text>
+			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#ffffff">
+				<xsl:text> Copyright © </xsl:text>
+				<xsl:value-of select="//output/@year" />
+				<xsl:text> 1parkplace, Inc.</xsl:text>
 			</text>
 		</g>
 	</xsl:template>
@@ -2286,7 +2290,7 @@
 		<xsl:param name="nodes" />
 		<xsl:param name="summary" />
 
-		<xsl:if test="$isFBAd!='true'">
+		<!-- <xsl:if test="$isFBAd!='true'">
 			<text y="92%" class="align-center" style="font-size:80%" data-max-width="98%">
 				<tspan x="50%" style="font-size:75%">
 					<xsl:value-of select="concat( 'Showing the most recent ', fn:min(( $min, count($nodes) )), ' of a total of ', count($nodes), $summary, ' ', //agent[1]/address/company, ' may not be the broker of record for all properties in the list.')" />
@@ -2295,7 +2299,7 @@
 					<xsl:call-template name="agent-contact" />
 				</tspan>
 			</text>
-		</xsl:if>
+		</xsl:if> -->
 	</xsl:template>
 
 	<xsl:template name="ed-showing-listing">

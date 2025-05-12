@@ -14,43 +14,95 @@
 			</text>
 
 			<xsl:choose>
-				<xsl:when test="//output/@stylesheet='single-rear-01'">
-					<!-- when stylesheet is single rear -->
-					<text x="2%" y="1.45%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'agentname'" />
-							<xsl:with-param name="default" select="concat( 'CALL or TEXT ' , upper-case(//agent[1]/firstName), ':')" />
-						</xsl:call-template>
+				<xsl:when test="$hasMultipleAgents">
+					<text x="2%" y="2.3%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
+						<tspan x="2%" dy="0">
+							CALL or TEXT
+						</tspan>							
+						
+						<tspan x="2%" dy="1.6%">
+							<xsl:call-template name="editable">
+								<xsl:with-param name="id" select="'agentname'" />
+								<xsl:with-param name="default" select="concat(upper-case(//agent[1]/firstName), ' &amp; ', //agent[2]/firstName)" />
+							</xsl:call-template>
+						</tspan>			
+						
 					</text>
-					<text x="2%" y="4%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700">
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'agentname'" />
-							<xsl:with-param name="default" select="//agent[1]/mobile" />
-						</xsl:call-template>
+					<text x="2%" y="5.9%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="20" font-weight="700">
+						<tspan x="2%" dy="0">
+							<xsl:call-template name="editable">
+								<xsl:with-param name="id" select="'agentname'" />
+								<xsl:with-param name="default" select="//agent[1]/mobile" />
+							</xsl:call-template>
+						</tspan>
+						<tspan x="2%" dy="1%">
+							<xsl:call-template name="editable">
+								<xsl:with-param name="id" select="'agentname'" />
+								<xsl:with-param name="default" select="//agent[2]/mobile" />
+							</xsl:call-template>
+						</tspan>	
 					</text>
+					
 				</xsl:when>
 				<xsl:otherwise>
-					<text x="2%" y="3.1%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
+					<text x="2%" y="2.3%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="concat( 'CALL or TEXT ' , upper-case(//agent[1]/firstName), ':')" />
-
 						</xsl:call-template>
 					</text>
-					<text x="2%" y="5.5%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700">
+					<text x="2%" y="4.9%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="//agent[1]/mobile" />
 						</xsl:call-template>
-					</text>
+					</text>					
 				</xsl:otherwise>
 			</xsl:choose>
-	
-			<image x="22%" y="1%" width="14%" height="8%">
-				<xsl:attribute name="href">
-					<xsl:value-of select="//agent[1]/photo" />
-				</xsl:attribute>
-			</image>
+
+			<xsl:choose>
+				<xsl:when test="$hasMultipleAgents">
+					<defs>
+						<clipPath id="circleClip1">
+							<circle cx="22%" cy="3.7%" r="3.7%" />
+						</clipPath>
+						<clipPath id="circleClip2">
+							<circle cx="31.5%" cy="3.7%" r="3.7%" />
+						</clipPath>
+					</defs>
+
+					<g>
+						<!-- background circle behind image 1 -->
+						<circle cx="22%" cy="3.7%" r="3.7%" fill="#69657a" />
+
+						<!-- Circular image 1 -->
+						<image x="15%" y="0%" width="15%" height="7%" clip-path="url(#circleClip1)">
+							<xsl:attribute name="href">
+								<xsl:value-of select="//agent[1]/photo" />
+							</xsl:attribute>
+						</image>
+
+						<!-- background circle behind image 2 -->
+						<circle cx="31.5%" cy="3.7%" r="3.7%" fill="#69657a" />
+
+						<!-- Circular image 2 -->
+						<image x="25%" y="0%" width="15%" height="7%" clip-path="url(#circleClip2)">
+							<xsl:attribute name="href">
+								<xsl:value-of select="//agent[2]/photo" />
+							</xsl:attribute>
+						</image>
+					</g>					
+				</xsl:when>
+				<xsl:otherwise>
+					<g>
+						<image x="15%" y="0%" width="22%" height="9%">
+							<xsl:attribute name="href">
+								<xsl:value-of select="//agent[1]/photo" />
+							</xsl:attribute>
+						</image>
+					</g>
+				</xsl:otherwise>
+			</xsl:choose>
 
 			<text x="98%" y="0.7%" class="align-right right" font-family="var(--theme-heading-font)" font-size="125%" font-weight="100"  fill="var(--theme-body-background)">
 				<tspan x="98%">
@@ -97,26 +149,63 @@
 					<image x="40%" y="3.4%" width="25%" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
 						<xsl:attribute name="href">
 							<xsl:choose>
-								<xsl:when test="$personalLogo=''">
-									<xsl:value-of select="$companyLogoInverse" />
+								<xsl:when test="$personalLogo = ''">
+									<xsl:choose>
+										<xsl:when test="//output/@themeHue = 'dark'">
+											<xsl:value-of select="$companyLogo" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="$companyLogoInverse" />
+										</xsl:otherwise>
+									</xsl:choose>
 								</xsl:when>
 								<xsl:otherwise>
-									<xsl:value-of select="$personalLogoInverse" />
+									<xsl:choose>
+										<xsl:when test="//output/@themeHue = 'dark'">
+											<xsl:value-of select="$personalLogo" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="$personalLogoInverse" />
+										</xsl:otherwise>
+									</xsl:choose>
 								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:attribute>
+
 					</image>
 				</xsl:when>
 				<xsl:otherwise>
 					<image x="39%" y="3.4%" width="24%" height="5%" class="center" preserveAspectRatio="xMinYMid meet">
-						<xsl:attribute name="href">
+						<!-- <xsl:attribute name="href">
 							<xsl:value-of select="$personalLogoInverse" />
-						</xsl:attribute>
+						</xsl:attribute> -->
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue='dark'">
+								<xsl:attribute name="href">
+									<xsl:value-of select="$personalLogo" />
+								</xsl:attribute>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:attribute name="href">
+									<xsl:value-of select="$personalLogoInverse" />
+								</xsl:attribute>
+							</xsl:otherwise>
+						</xsl:choose>
+						
 					</image>
 					<image x="66%" y="4%" width="6%" height="3.5%" class="center" preserveAspectRatio="xMidYMid meet">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$companyLogoInverse" />
-						</xsl:attribute>
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue='dark'">
+								<xsl:attribute name="href">
+									<xsl:value-of select="$companyLogo" />
+								</xsl:attribute>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:attribute name="href">
+									<xsl:value-of select="$companyLogoInverse" />
+								</xsl:attribute>
+							</xsl:otherwise>
+						</xsl:choose>
 					</image>
 				</xsl:otherwise>
 			</xsl:choose>

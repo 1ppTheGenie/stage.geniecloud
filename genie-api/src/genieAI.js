@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import crypto from 'crypto';
 import { dateFormat, toS3, jsonFromS3, timeAgo } from './utils/index.js';
+import { fromDirectoryBucket, toDirectoryBucket} from './utils/aws.js'
 
 const API_URL = process.env.GENIE_URL ?? 'https://app.thegenie.ai/api/Data/';
 const API_PASS = process.env.GENIE_PASS ?? 'iLAE9k1P!fL3';
@@ -25,40 +26,122 @@ const from_cache = async (key, endpoint) => {
             (CACHE_FOR[endpoint.split('/')[0]] ?? HOUR_IN_SECONDS / 2)
     );
 
-    // ToDo: some "skip cache" code?
-    return await jsonFromS3(`_cache/${key}`, since);
+    try {
+        // First, try to fetch from Directory Bucket
+        const cachedData = await fromDirectoryBucket(`_cache/${key}`, since);
+        if (cachedData) {
+            const parsedData = JSON.parse(cachedData.toString());
+            if (parsedData && parsedData.response) {
+                return parsedData.response;
+            }
+        }
+    } catch (error) {
+        console.log('Error fetching from Directory Bucket, falling back to S3:', error);
+    }
+
+    // Fallback to regular S3
+    const cachedData = await jsonFromS3(`_cache/${key}`, since);
+    if (cachedData && cachedData.response) {
+        return cachedData.response;
+    }
+
+    return null;
 };
 
-const to_cache = async (data, endpoint, key, timeout_hours = 4) => {
+const to_cache = async (data, endpoint, key, params, verb, timeout_hours = 4) => {
     const timeout = CACHE_FOR[endpoint.split('/')[0]] ?? timeout_hours;
 
     if (timeout > 0) {
-        await toS3(`_cache/${key}`, Buffer.from(data), {
-            genieCache: endpoint?.toString(),
-            GenieExpireFile: 'GenieCache',
-            timeout
-        });
+        const cacheData = {
+            endpoint,
+            params,
+            verb,
+            timestamp: new Date().toISOString(),
+            response: JSON.parse(data)
+        };
+
+        const cacheBuffer = Buffer.from(JSON.stringify(cacheData));
+
+        try {
+            // For Directory Bucket, use metadata instead of tags
+            const metadata = {
+                genieCache: endpoint?.toString(),
+                GenieExpireFile: 'GenieCache',
+                timeout: timeout.toString()
+            };
+
+            await toDirectoryBucket(`_cache/${key}`, cacheBuffer, metadata);
+        } catch (error) {
+            console.log('Error saving to Directory Bucket, falling back to S3:', error);
+            
+            // Fallback to regular S3 (using tags as before)
+            const tags = {
+                genieCache: endpoint?.toString(),
+                GenieExpireFile: 'GenieCache',
+                timeout: timeout.toString()
+            };
+
+            await toS3(`_cache/${key}`, cacheBuffer, tags);
+        }
     }
 };
 
+const roundDateForCacheKey = (dateString) => {
+    const date = DateTime.fromISO(dateString);
+    return date.startOf('day').set({ hour: 12 }).toISO();
+};
+
 const cache_key = (endpoint, params, verb) => {
-    const strParams = JSON.stringify(Object.entries(params ?? {}));
+    let userId, areaId, mlsId, mlsNumber, restParams;
+
+    if (endpoint.includes("GetAreaBoundary")) {
+        // Special handling for GetAreaBoundary endpoint
+        const parts = endpoint.split('/');
+        areaId = parts.pop();
+        endpoint = parts.join('/'); // Reconstruct the endpoint without areaId
+        restParams = {};
+    } else {
+        // Normalize keys to lowercase for other cases
+        const normalizedParams = Object.entries(params ?? {}).reduce((acc, [key, value]) => {
+            if ((key.toLowerCase() === 'startdate' || key.toLowerCase() === 'enddate') && typeof value === 'string') {
+                acc[key.toLowerCase()] = roundDateForCacheKey(value);
+            } else {
+                acc[key.toLowerCase()] = value;
+            }
+            return acc;
+        }, {});
+
+        // Destructure using normalized keys
+        ({ userid: userId, areaid: areaId, mlsid: mlsId, mlsnumber: mlsNumber, ...restParams } = normalizedParams);
+    }
+
+    // Create the prefix part of the key
+    const prefixParts = [];
+    if (userId) prefixParts.push(`u_${userId}`);
+    if (areaId) prefixParts.push(`a_${areaId}`);
+    if (mlsId !== undefined && mlsId !== null) prefixParts.push(`mid_${mlsId}`);
+    if (mlsNumber) prefixParts.push(`mnum_${mlsNumber}`);
+
+    const prefix = prefixParts.length > 0 ? prefixParts.join('-') + '-' : '';
+
+    // Create the hash part
+    const strParams = JSON.stringify(Object.entries(restParams));
     const hash = crypto
         .createHash('md5')
         .update(`${endpoint}.${verb}.${strParams}`)
         .digest('hex');
 
-    return `genie-${hash}.json`;
+    return `genie-${prefix}${hash}.json`;
 };
 
-export const areaName = async (userId, areaId, skipCache = false) =>
+export const areaName = async (userId, areaId, skipCache = true) =>
     await call_api('GetAreaName', { areaId, userId }, skipCache);
 
 export const rename_area = async (
     user_id,
     area_id,
     new_name,
-    skipCache = false
+    skipCache = true
 ) =>
     await call_api(
         'RenameArea',
@@ -279,7 +362,7 @@ export const getListing = async (
     }
 };
 
-export const mlsListingLastUpdate = async (data, skipCache = false) =>
+export const mlsListingLastUpdate = async (data, skipCache = true) =>
     await call_api(`GetMlsListingLastUpdate`, data, skipCache, 'POST');
 
 export const mlsDisplaySettings = async (mls_id, skipCache = false) =>
@@ -377,10 +460,11 @@ export const propertySurroundingAreas = async (
 export const savedSearches = async (userId, areaId) =>
     await call_api('GetSavedSearches', { userId, areaId });
 
-export const getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = false) => {
+export const getShortData = async (shortUrlDataId, token, agentId = null, skipLeadCreate = false, skipCache = false) => {
     const r = await call_api(
         'GetShortUrlData',
         { shortUrlDataId: shortUrlDataId, token: token },
+        skipCache,
         'POST'
     );
 
@@ -422,15 +506,21 @@ export const getShortData = async (shortUrlDataId, token, agentId = null, skipLe
     }
 };
 
-export const updateHubAsset = async (hubAssetUrl, userId, hubAssetId) =>
+export const updateHubAsset = async (hubAssetUrl, userId, hubAssetId, skipCache = true) =>
     await call_api(
         'UpdateHubAsset',
         { userId, hubAssetId, hubAssetUrl },
+        skipCache,
         'POST'
     );
 
-export const getUser = async user_id =>
-    await call_api(`GetUserProfile/${user_id}`);
+export const getUser = async (userId, skipCache = false) =>
+    await call_api(
+        'HubCloudGetUser',
+        { userId },
+        skipCache,
+        'POST'
+    );
 
 const expiry_time = token => {
     decoded = JSON.parse(
@@ -457,10 +547,10 @@ export const getPropertyFromId = async (property_id, agent_id) => {
     }
 };
 
-export const createLead = async (userId, args) => {
+export const createLead = async (userId, args, skipCache = true) => {
     args.userId = userId;
 
-    const r = await call_api('CreateNewLead', args, 'POST');
+    const r = await call_api('CreateNewLead', args, skipCache, 'POST');
 
     if (!r) {
         console.log('Failed to create new lead: ', r);
@@ -469,8 +559,8 @@ export const createLead = async (userId, args) => {
     return r;
 };
 
-export const updateLead = async (userId, args) =>
-    await call_api('UpdateLead', { ...args, userId }, 'POST');
+export const updateLead = async (userId, args, skipCache = true) =>
+    await call_api('UpdateLead', { ...args, userId }, skipCache, 'POST');
 
 export const getQRProperty = async (qrID, token) => {
     const lead = await getQRCodeLead(qrID, token);
@@ -505,8 +595,8 @@ export const getQRProperty = async (qrID, token) => {
     }
 };
 
-export const createQRCodeLead = async args => {
-    const r = await call_api('CreateQRCodeLead', args, true, 'POST');
+export const createQRCodeLead = async (args, skipCache = true) => {
+    const r = await call_api('CreateQRCodeLead', args, skipCache, 'POST');
 
     if (!r.success) {
         console.log('Failed to capture lead: ', r);
@@ -537,12 +627,13 @@ const call_api = async ( endpoint, params, skipCache = false, verb = "POST", pre
 	let result;
 	if ( !skipCache ) {
 		result = await from_cache( cacheKey, endpoint );
+        if (result) {
+            console.log('Cache Hit', cacheKey, endpoint, params, skipCache, pre_cache);
+        }
 	}
 	
     if ( !result ) {
-        if ( endpoint.startsWith( 'GetUserProfile' ) ) {
-            console.log( 'ProfileGOT,', skipCache, params );
-        }
+        console.log('Cache Miss', cacheKey, endpoint, params, skipCache, pre_cache);
 		// Flag the API call as coming from HubCloud
 		params.consumer = 8;
 
@@ -573,7 +664,7 @@ const call_api = async ( endpoint, params, skipCache = false, verb = "POST", pre
 				result = pre_cache(result);
 			}
 
-			to_cache( JSON.stringify( result ), endpoint, cacheKey );
+			to_cache( JSON.stringify( result ), endpoint, cacheKey, params, verb );
 			//console.log( 'cache to', endpoint, cacheKey );
 		} else {
 			if (

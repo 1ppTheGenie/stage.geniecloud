@@ -820,7 +820,7 @@ section#about-section {
 }
 
 .summary {
-	line-height: 20px;
+	line-height: 26px;
 	font-size: 14px;
 }
 
@@ -880,7 +880,7 @@ body:not(.lightbox) .masonary #property-gallery-container .property-gallery {
     font-size: 16px;
 }
 
-.map-form .f_check {
+.preferred_contact {
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -890,7 +890,7 @@ body:not(.lightbox) .masonary #property-gallery-container .property-gallery {
 	flex-wrap: wrap;
 }
 
-.map-form .f_check span {
+.preferred_contact span {
 	margin-right: 21px !important;
 	text-transform: capitalize;
 	margin-top: 0;
@@ -899,19 +899,20 @@ body:not(.lightbox) .masonary #property-gallery-container .property-gallery {
 	color: #333;
 }
 
-.map-form .f_check .che_box label {
+.preferred_contact .che_box label {
 	margin-right: 21px;
 	text-transform: uppercase;
 	cursor: pointer;
 	color: #333;
 	font-size: 14px;
+	font-weight: 500;
 }
 
 .che_box input[type="checkbox"] {
 	margin-top: 0px;
 	height: 15px;
 	width: 15px;
-	margin-right: 0px;
+	margin-right: 5px;
 	position: relative;
 	top: 3px;
 	left: unset;
@@ -954,6 +955,28 @@ section#gallery-sec:before {
 	visibility: hidden;
 }
 
+section.real-time-market{
+	padding: 60px 0;
+}
+.real-time-market .real-time {
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    padding: 50px 30px;
+	border-color: #b2934e;
+}
+.real-time-market h2 {
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 34px;
+    font-weight: 400;
+	color: #fff ;
+}
+.real-time-market p{
+	font-size: 20px;
+    margin: 0px 0px 5px;
+	color: #b2934e;
+}
+
 /*
 section#about-section2:before {
     content: '';
@@ -988,6 +1011,10 @@ section#about-section:before {
 
 .genie-landing-page div div.genie-wrap.marketupdate {
 	margin-top: 0;
+}
+
+.footer-form {
+    display: inline-block !important;
 }
 
 /*19-7-2022*/

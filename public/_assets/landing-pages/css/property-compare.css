@@ -136,9 +136,15 @@
 	right: 0;
 }
 
+.banner-content-part {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1.5rem; 
+  border-radius: 8px; 
+}
+
 .banner-content-part p {
-	font-weight: 400;
-	font-size: 1.5em;
+	font-weight: 500;
+	font-size: 1.75em;  
 	margin-bottom: 2px;
 }
 

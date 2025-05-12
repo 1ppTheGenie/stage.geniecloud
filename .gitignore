@@ -11,3 +11,4 @@ temp.json
 public/genie-tools/collections/jc-testing.json
 .DS_Store
 genie-processor/output.svg
+.nosync

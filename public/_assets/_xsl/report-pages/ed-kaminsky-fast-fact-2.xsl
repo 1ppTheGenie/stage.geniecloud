@@ -10,9 +10,12 @@
 	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
+		<!-- <link rel="stylesheet">
 			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-		</link>
+		</link> -->
+		<style type="text/css">
+			@import url("/_assets/_css/futura-embedded.css");
+		</style>
 
 		<xsl:variable name="salesCountChange" select="//statistics/@soldPropertyTypeCount div //previous/@totalSold" />
 		<xsl:variable name="salesCountPercent" select="abs( 1 - $salesCountChange )" />
@@ -65,12 +68,15 @@
 			</xsl:call-template>
 		</text>
 
-		<rect xmlns="" x="0%" y="28%" width="100%" height="17.2%" fill="#0d0f30"></rect>
-		<text x="50%" y="24%" class="futura-text upper align-center" font-weight="500" fill="#383950" style="font-family: Times New Roman;font-size: 147px;line-height: 74%;">
+		<rect xmlns="" x="0%" y="28%" width="100%" height="18%" fill="#0d0f30"></rect>
+		<text x="49.7%" y="22.5%" class="upper align-center" font-weight="500" fill="#383950" style="font-size: 158px;line-height: 74%;">
+			<tspan font-family="'Brygada 1918', serif">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="'CONFIDENTIAL'" />
 			</xsl:call-template>
+			</tspan>
 		</text>
+		
 
 		<text x="50%" y="33%" class="futura-text align-center" font-size="107%" fill="#fff">
 			<tspan>

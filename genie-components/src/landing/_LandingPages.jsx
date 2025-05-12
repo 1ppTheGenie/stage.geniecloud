@@ -11,13 +11,20 @@ import {
 	useSettings,
 	Context4Settings,
 	landingPageData,
-	currency
+	currency,
+  addDynamicPopup,
+  getCtaData,
+  formatFormNote,
+  isMobileDevice,
+  formatPhoneNumber,
+  InsensitiveURLSearchParams
 } from "@/utilities";
 
 import "@/index.css";
 
 import Gallery from "@/components/_Gallery";
 import HomeValuation from "@/components/_HomeValuation";
+import LeadCtaTag from "@/components/_LeadCtaTag";
 
 const VIEWED = "Viewed Landing Page";
 
@@ -238,14 +245,20 @@ export default () => {
 		return formattedNumber.replace(/1/g, 'I').replace(/2/g, 'A').replace(/3/g, 'E').replace(/4/g, 'H').replace(/5/g, 'S').replace(/7/g, 'I').replace(/8/g, 'B').replace(/9/g, 'G');
 	}
 
+  //this was the one giving casing issues so just want to centralize it.
+  window.gHub.getPropertyIdFromUrl = () => {
+    return new InsensitiveURLSearchParams(window.location.search).get("propertyId")
+  }
+
+  window.gHub.getLeadId = (settings = useSettings(Context4Settings)) => {
+    return settings.leadId || settings.genieLeadId || window.gHub.leadId;
+  };
 
 	document.addEventListener("trigger-update-lead", async e => {
-		const settings = useSettings(Context4Settings);
-
-		if (settings.leadId || settings.genieLeadId || window.gHub.leadId) {
+    const leadId = window.gHub.getLeadId();
+		if (leadId) {
 			await updateLead({
-				genieLeadId:
-					settings.leadId || settings.genieLeadId || window.gHub.leadId,
+				genieLeadId:leadId,
 				...e.detail,
 			});
 		}
@@ -260,9 +273,85 @@ export default () => {
 		urlParams.hideAVM = window.gHub.hideAVM ?? false;
 		urlParams.skipLeadCreate = skipLeadCreate;
 
+    //since we are converting to an object here we want in format of propertyId but from url it could be either Id or id
+    const propertyId = window.gHub.getPropertyIdFromUrl();
+
+    if(propertyId) {
+      //just in case it was lower in the URL remove it to avoid confusion
+      delete urlParams.propertyid; 
+      urlParams.propertyId = propertyId;
+    }
+
 		return await landingPageData(urlParams);
 	};
 
+  window.gHub.mergeTrackingData = (postTracking = {}, settings = useSettings(Context4Settings)) =>{
+    const defaultTrackingData = window.gHub.defaults.trackingData || {};
+
+    //I think this was legacy since it is going to utm_ while our create lead expects utmX, however this should handle all utmSource, utmsource, utm_source
+    let trackingDataFromSettings = settings.trackingdata ? 
+        Object.keys(settings.trackingdata).reduce((destination, key) => {
+            destination[key.toLowerCase().replace("_", "").replace("utm", "utm_")] = settings.trackingdata[key];
+            return destination;
+        }, {}) : {};
+
+    // if we have tracking data then source will be populated
+    if (trackingDataFromSettings.utm_source) {
+      trackingDataFromSettings = {
+        utmSource: capture.utm_source ?? null,
+        utmMedium: capture.utm_medium ?? null,
+        utmCampaign: capture.utm_campaign ?? null,
+        utmTerm: capture.utm_term ?? null,
+        utmContent: capture.utm_content ?? null
+      };
+    }
+
+    postTracking = {
+    ...defaultTrackingData,
+    ...trackingDataFromSettings,
+    ...postTracking,
+    };
+
+    if (!postTracking.utmSource || postTracking.utmSource === "url") {
+      
+      //in the event someone lands on the page that was not driven by a short URL with tracking data
+      const pageUtmSource = document.getElementById("pageUtmSource");
+      const pageUtmCampaign = document.getElementById("pageUtmCampaign");
+      postTracking.utmSource = pageUtmSource?.value || window.location.href;
+      postTracking.utmCampaign = pageUtmCampaign?.value;
+    }
+
+    return postTracking;
+  };
+
+  window.gHub.formatNewLeadReferringUrl = (postedData, settings) => {
+      let referringUrl = `${window.location.origin}${window.location.pathname}?referral=true`;
+
+      if (postedData.propertyId) {
+          referringUrl += `&propertyId=${postedData.propertyId}`;
+      }
+
+      if (settings.mlsNumber) {
+          referringUrl += `&mlsNumber=${settings.mlsNumber}`;
+      }
+
+      if (settings.mlsId) {
+          referringUrl += `&mlsId=${settings.mlsId}`;
+      }
+
+      return referringUrl;
+  };
+
+  //TODO: not sure if the best spot and if we should be string stuff like this on the gHub but 
+  //setting here so the can prepop form inputs if desired.
+  window.gHub.setFormPrepopInputs = (email, phone) => {
+    if(email)
+      window.gHub.leadEmailAddress = email;
+
+    if(phone)
+      window.gHub.leadPhoneNumber = formatPhoneNumber(phone);
+  };
+  
 	window.gHub.addLead = async (note, data = null) => {
 		const settings = useSettings(Context4Settings);
 
@@ -274,8 +363,7 @@ export default () => {
 			propertyId:
 				settings.propertyId ??
 				window.gHub.defaults.leadPropertyId ??
-				new URLSearchParams(window.location.search).get("propertyId") ??
-				new URLSearchParams(window.location.search).get("propertyID"),
+        window.gHub.getPropertyIdFromUrl(),
 			firstName: settings.firstname ?? null,
 			lastName: settings.lastname ?? null,
 			fullName: window.gHub.defaults.fullName ?? null,
@@ -284,78 +372,34 @@ export default () => {
 			...data,
 		};
 
-		if (settings.leadId || settings.genieLeadId || window.gHub.leadId) {
+    const leadId = window.gHub.getLeadId(settings);
+		
+    if (leadId) {
 			if (note !== VIEWED) {
-				postedData.genieLeadId =
-					settings.leadId || settings.genieLeadId || window.gHub.leadId;
+				postedData.genieLeadId = leadId;
 				postedData.email = postedData.emailAddress;
-
+        
 				await updateLead(postedData);
 			}
 		} else {
-			postedData.referringUrl = `${window.location.origin}${window.location.pathname}?referral=true`;
-
-			postedData.referringUrl += postedData.propertyId
-				? `&propertyId=${postedData.propertyID}`
-				: "";
-			postedData.referringUrl += settings.mlsNumber
-				? `&mlsNumber=${settings.mlsNumber}`
-				: "";
-			postedData.referringUrl += settings.mlsId
-				? `&mlsId=${settings.mlsId}`
-				: "";
-
-			if (settings.trackingdata) {
-				postedData.trackingData = Object.keys(settings.trackingdata).reduce(
-					(destination, key) => {
-						destination[key.toLowerCase().replace("utm", "utm_")] =
-							settings.trackingdata[key];
-						return destination;
-					},
-					{}
-				);
-			}
+      postedData.referringUrl = window.gHub.formatNewLeadReferringUrl(postedData, settings);				
+      postedData.trackingData = window.gHub.mergeTrackingData(postedData.trackingData, settings);
 
 			// Merge in any additional default settings
-			if (
-				window.gHub.defaults.notePrompt &&
-				window.gHub.defaults.notePrompt !== ""
-			) {
+			if (window.gHub.defaults.notePrompt) {
 				postedData.note = `${window.gHub.defaults.notePrompt}: ${postedData.note}`;
-			}
-
-			postedData.trackingData = {
-				...window.gHub.defaults.trackingData,
-				...(postedData.trackingData ?? {}),
-			};
-
-			if (
-				typeof postedData.trackingData.utmSource === "undefined" ||
-				postedData.trackingData.utmSource === "url"
-			) {
-				postedData.trackingData.utmSource = window.location.href;
-			}
-
+			}     			
+      
 			const r = await createLead(postedData);
 
 			if (r.result?.key) {
 				window.gHub.leadId = r.result.key;
+        window.gHub.setFormPrepopInputs(postedData.emailAddress, postedData.phoneNumber);        
 			}
 
 			return r.result;
 		}
-	};
-
-	const urlParams = Object.fromEntries( ( window.location.search.substring( 1 ).split( '&' ).map( l => l.split( "=" ) ) ).map( ( [key, value] ) => [key.toLowerCase(), value] ) );  //new URLSearchParams(window.location.search);
-	if ( parseInt( urlParams.crlead ) === 1 ) {
-		const pid = urlParams.propertyid;
-
-		if ( pid ) {
-			window.gHub.addLead( null, { propertyId: pid } );
-		}
-	} else if ( urlParams.token ) {
-		(async () => await window.gHub.getLandingPageData())();
-	}
+	};   
 
 	/***********************
 	 *
@@ -364,21 +408,17 @@ export default () => {
 	 ***********************/
 	document.querySelectorAll(".request-home-value").forEach(el => {
 		el.addEventListener("click", event => {
-			event.preventDefault();
+			event.preventDefault();    
+      window.gHub.popHomeValue();
+		});
+	});
 
-			if (!document.getElementById("genie-homeValuePopup")) {
-				const settings = useSettings(Context4Settings);
-				document.body.classList.add("hasPopup");
-				const div = document.createElement("div");
-				div.id = "genie-homeValuePopup";
-				div.classList.add("popup-dialog", "visible");
-				document.body.appendChild(div);
-
+  window.gHub.popHomeValue = () => {
+    const dynamicPopupId = "genie-homeValuePopup";
+      
+      if(addDynamicPopup(dynamicPopupId)) {        
+        const settings = useSettings(Context4Settings);			
 				const App = () => {
-					/*const HomeValuation = lazy(() =>
-						import("@/components/_HomeValuation")
-					);*/
-
 					return (
 						<Context4Settings.Provider value={settings}>
 							<HomeValuation />
@@ -386,12 +426,177 @@ export default () => {
 					);
 				};
 
-				render(App, document.getElementById("genie-homeValuePopup"));
+				render(App, document.getElementById(dynamicPopupId));
 			}
-		});
-	});
+  };
 
-	/***********************
+  /***********************
+	 *
+	 * Opt-in popup
+	 *
+	 ***********************/
+  window.gHub.createScrollTracker = (direction, ctaData) => {
+    let lastScrollTop = 0;
+    let scrollAmount = 0;
+
+    return function checkScrollAndShowModal(scrollPercentage) {
+        function onScroll()  {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            
+            if ((direction === 'down' && scrollTop > lastScrollTop) || 
+                (direction === 'up' && scrollTop < lastScrollTop)) {
+                scrollAmount += Math.abs(scrollTop - lastScrollTop);
+                
+                let percentScrolled = (scrollAmount / scrollableHeight) * 100;
+                
+                if (percentScrolled >= scrollPercentage) {
+                    window.gHub.showOptIn(ctaData);
+                    window.removeEventListener('scroll', onScroll);                    
+                }
+            } else {
+                scrollAmount = 0;
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        };
+
+        window.addEventListener('scroll', onScroll);
+    };
+  };
+
+  window.gHub.toggleMobileBanner = (data, show) => {    
+    const mobileBanner = document.getElementById("js-mobile-banner");
+
+    if(!show && mobileBanner) {
+      mobileBanner.style.display = "none";
+      return;
+    }
+
+    const mobileBannerText = document.getElementById("js-mobile-banner-text");
+    const mobileBannerCta = document.getElementById("js-mobile-banner-cta");
+    const mobileBannerClose = document.getElementById("js-mobile-banner-close");        
+    
+    if(mobileBanner && mobileBannerCta && mobileBannerClose && mobileBannerText) {      
+      mobileBannerText.value = data.ctaMobileBannerText;
+
+      mobileBannerCta.addEventListener("click", event => {
+				event.preventDefault();
+        
+        if(window.gHub.getLeadId())  
+          window.gHub.addLead(data.ctaMobileBannerNote, { genieTags: data.ctaMobileBannerTags });
+
+        //as long as the CTA has not been accepted we allow the mobile banner to re-trigger the display
+        window.gHub.ctaDisplayed = false;
+        window.gHub.showOptIn(data);
+      });
+
+      mobileBannerClose.addEventListener("click", event => {
+				event.preventDefault();
+        mobileBanner.style.display = "none";
+      });
+      
+      mobileBanner.style.display = "block";      
+    }    
+  };
+
+  window.gHub.hookShowOptIn = (ctaIdUrlParam, ctaIdShortDataValue, hasLeadData) => { 
+    //url param will take precedence over what is supplied in short data
+    const ctaId = parseInt(ctaIdUrlParam) || parseInt(ctaIdShortDataValue);      
+    const data = getCtaData(ctaId);
+
+    if(!data.enabled)
+      return;
+    
+    if(data.showMobileBanner && isMobileDevice()) {
+      window.gHub.toggleMobileBanner(data, true);
+    }
+
+    const ctaHomeValueKey = 1; //home value has special handling and just pops an existing modal
+
+    if(ctaId === ctaHomeValueKey)
+      setTimeout(() => { window.gHub.popHomeValue() }, data.delay * 1000);
+    else if (hasLeadData){ //all the CTA's need a lead in context        
+      if(data.scrollUpPercentage > 0) {
+        const checkUpwardScrollAndShowModal = window.gHub.createScrollTracker('up', data);
+        checkUpwardScrollAndShowModal(data.scrollUpPercentage);
+      }
+
+      if(data.scrollDownPercentage > 0) {
+        const checkDownwardScrollAndShowModal = window.gHub.createScrollTracker('down', data);
+        checkDownwardScrollAndShowModal(data.scrollDownPercentage); 
+      }
+
+      if(data.delay > 0) {
+        setTimeout(() => window.gHub.showOptIn(data), (data.delay * 1000)); 
+      }      
+    } 
+  };  
+
+  window.gHub.showOptIn = (data) => { 
+    const settings = useSettings(Context4Settings);           
+    
+    if (window.gHub.getLeadId(settings) && !window.gHub.ctaDisplayed) {
+      const dynamicPopupId = "genie-leadCtaTagPopup";
+      if(addDynamicPopup(dynamicPopupId)) {         
+        window.gHub.ctaDisplayed = true;
+        const App = () => {
+          return (
+            <Context4Settings.Provider value={settings}>
+              <LeadCtaTag ctaData={data} />
+            </Context4Settings.Provider>
+          );
+        };
+  
+        render(App, document.getElementById(dynamicPopupId));
+      }
+    }
+  };
+  
+  /***********************
+	 *
+	 * Get short/qr data
+	 *
+	 ***********************/
+  window.gHub.initLandingPageData = (urlParamCtaid) => {
+    (async () => {
+      const lpData = await window.gHub.getLandingPageData();  
+            
+      if(lpData.lead && lpData.lead.genieLeadId) {         
+        const settings = useSettings(Context4Settings);
+        settings.trackingdata = lpData.lead.trackingData; //unsure on the casing descrepancy here but add lead maps it;
+        window.gHub.leadId = lpData.lead.genieLeadId;
+
+        if(lpData.address && lpData.zip)
+          window.gHub.leadAddress = `${lpData.address}, ${lpData.zip}`;
+        
+        window.gHub.setFormPrepopInputs(lpData.lead.emailAddress, lpData.lead.phoneNumber);        
+        window.gHub.hookShowOptIn(urlParamCtaid, lpData.lead.ctaId, true);
+      }     
+    })();
+  };
+
+  /***********************
+	 *
+	 * Global Url Param hook
+	 *
+	 ***********************/
+	const urlParams = new InsensitiveURLSearchParams(window.location.search).getObjectLower();   
+
+	if (parseInt(urlParams.crlead) === 1) {
+		const pid = urlParams.propertyid;
+
+		if (pid) {
+      //only found the crLead in one spot so adding an applicable note
+			window.gHub.addLead('Manually entered address property comparison', { propertyId: pid } );
+		}
+	} else if (urlParams.token) {
+    window.gHub.initLandingPageData(urlParams.ctaid);
+  } else {
+    window.gHub.hookShowOptIn(urlParams.ctaid, null, false);    
+  }    
+  
+  /***********************
 	 *
 	 * Vanilla version of the jQuery slide toggle
 	 *
@@ -476,14 +681,25 @@ export default () => {
 
 						// These really need removing and some generic event code running instead
 						const modal = document.querySelector( ".modal.in" )
-							
-						modal.classList.remove( "in" );
-						modal.style.display = "none";;
-						document.getElementById("backdrop").style.display = "none";
+						
+            if(modal) {
+              modal.classList.remove( "in" );
+              modal.style.display = "none";
+            }
+
+						const backdrop = document.getElementById("backdrop");
+
+            if(backdrop)
+              backdrop.style.display = "none";
 					};
 
 					popup.classList.add("visible");
-					document.getElementById("fl-thankyou-modal").classList.add("hide");
+
+          const thankModal = document.getElementById("fl-thankyou-modal");
+
+          if(thankModal)
+					  thankModal.classList.add("hide");
+          
 					popup
 						.querySelector(".close-popup")
 						.addEventListener("click", hidePopup);
@@ -492,12 +708,15 @@ export default () => {
 				let data = {};
 
 				new FormData(e.target).forEach((value, key) => (data[key] = value));
+        
+        //some forms are more complex so we want to format a more applicable message, if a formatter is not provided it will take what is given
+        formatFormNote(data);        
+        
+				const lead = await window.gHub.addLead(data.note, data);
 
-				const lead = await window.gHub.addLead(null, data);
-
-				document.dispatchEvent(
-					new CustomEvent("genie-lead-created", { detail: lead })
-				);
+        //window.gHub.leadId is set in addLead in success so adding a check here, a lot of hooks on this event do not have null handling
+        if(window.gHub.leadId)
+				  document.dispatchEvent(new CustomEvent("genie-lead-created", { detail: lead }));
 			})();
 		})
 	);
@@ -508,12 +727,21 @@ export default () => {
 		el.addEventListener("click", event => {
 			event.preventDefault();
 
+      let downloadedNote;
+      
 			const downloadFile = () => {
-				const anchor = document.createElement("a");
+				const anchor = document.createElement("a");         
 				anchor.href = el.getAttribute(downloadAttr);
 				anchor.target = "_blank";
 				anchor.download = el.getAttribute(downloadAttr);
 				anchor.click();
+
+        let downloadUrl = anchor.href;
+
+        if(downloadUrl && downloadUrl.startsWith("/"))
+          downloadUrl = `${window.location.origin}${downloadUrl}`;
+
+        downloadedNote =  `File Downloaded - ${downloadUrl}`;
 			};
 
 			const popup = document.getElementById("download-report");
@@ -536,12 +764,14 @@ export default () => {
 					const address = document.getElementById("popup-email").value;
 
 					if (address) {
-						window.gHub.addLead("Report download", {
+            downloadFile();
+						hidePopup();
+            
+						window.gHub.addLead(downloadedNote, {
 							emailAddress: address,
 							genieTags: el.getAttribute(tagsAttr), // Support tags on the element
 						});
-						downloadFile();
-						hidePopup();
+						
 					} else {
 						document.getElementById("popup-valid-email").style.display =
 							"block";
@@ -559,6 +789,13 @@ export default () => {
 					.addEventListener("click", submitForm);
 			} else {
 				downloadFile();
+
+        if(window.gHub.getLeadId()) {
+          //no lead capture here but we want to record the activty by passing the tags along
+          window.gHub.addLead(downloadedNote, {          
+            genieTags: el.getAttribute(tagsAttr), // Support tags on the element
+          });
+        }
 			}
 		});
 	});
@@ -567,16 +804,32 @@ export default () => {
 		// Skip if managed by the downloadUrl handler
 		if (!el.hasAttribute(downloadAttr)) {
 			el.addEventListener("click", () => {
-				window.gHub.addLead("Event Trigger", {
-					genieTags: el.getAttribute(tagsAttr),
-				});
+        
+        //the downloadUrl handler captures the email so this one is a bit different in that we MUST have lead in context
+        //to fire of the update here.
+        if(window.gHub.getLeadId()) {
+
+          //TODO: consolidate duplicate code          
+          let downloadedNote = 'File Downloaded';
+          let downloadUrl = el.getAttribute("href");
+
+          if(downloadUrl) {
+            if(downloadUrl.startsWith("/"))
+              downloadUrl = `${window.location.origin}${downloadUrl}`;          
+
+            downloadedNote = `${downloadedNote} - ${downloadUrl}`;
+          } 
+
+          window.gHub.addLead(downloadedNote, {
+            genieTags: el.getAttribute(tagsAttr),
+          });
+        }
 			});
 		}
 	} );
 	
 	document.querySelectorAll( `.genie-alternate:nth-child(odd)` ).forEach( el =>
-		el.classList.add( window.gHub.alternateShade && window.gHub.alternateShade !== '' ? window.gHub.alternateShade : 'dark' ) );
-	
+		el.classList.add( window.gHub.alternateShade && window.gHub.alternateShade !== '' ? window.gHub.alternateShade : 'dark' ) );  
 
 	window.requestAnimationFrame(() => window.gHub.lazyLoader("img.lazy"));
 
@@ -628,7 +881,6 @@ export default () => {
 			);
 	}
 
-	document.dispatchEvent(new Event("genie-landing-loaded"), true);
-
+	document.dispatchEvent(new Event("genie-landing-loaded"), true);    
 	return null;
 };

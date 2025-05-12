@@ -10,8 +10,20 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 	<xsl:import href="common.xsl" />
 	<xsl:import href="lc-oh-invite.xsl" />
-
+	
 	<xsl:template name="svg-body">
+		<style>
+			<xsl:value-of select="'
+				g#footer{
+					transform: translate(2.5%, 98%);
+				}
+				g#footer text{
+					font-size: 20px;
+					fill: var(--theme-heading-color);
+				}
+			'"/>
+		</style>
+
 		<xsl:call-template name="lc-oh-invite">
 			<xsl:with-param name="sub-heading" select="concat( 'Your New ', $singularPropertyType, ' is waiting for&#160;you!')" />
 		</xsl:call-template>

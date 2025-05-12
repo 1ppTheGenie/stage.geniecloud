@@ -1,0 +1,25 @@
+/*
+	Theme Name:	Real Brokerage 
+*/
+
+@import url("../_css/poppins.css");
+@import url("../_css/arial.css");
+
+.real-brokerage, .real-brokerage.light, .real-brokerage .light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #050e3d; /* Heading */
+	--theme-sub-heading-color: #bfdddb; /* Subtitle */
+	--theme-body-color: #1d1d1d; /* Body */
+	--theme-emphasis-color: #bfdddb; /* Outline */
+	--theme-body-font: "Arial";
+	--theme-heading-font: "Poppins", sans-serif;
+	--theme-sub-heading-font: "Poppins", sans-serif;
+}
+
+.real-brokerage.dark, .real-brokerage .dark {
+	--theme-body-background: #050e3d;
+	--theme-heading-color: #ffffff; /* Heading */
+	--theme-sub-heading-color: #bfdddb; /* Subtitle */
+	--theme-body-color: #ffffff; /* Body */
+	--theme-emphasis-color: #bfdddb; /* Outline */
+}
