@@ -90,9 +90,8 @@ export const getRenderJSON = async params => {
         // *** Agents
         agents: await processAgents([
             params.userId,
-            ...(params?.renderSettings?.additionalAgents ?? [])
+            ...(renderSettings?.additionalAgents ?? [])
         ]),
-
         // *** Areas
         areas: params.isEmbed
             ? params.areaIds.map(id => ({ id }))
@@ -857,6 +856,7 @@ const processListing = async (params, agentTimezone) => {
         }
 
         single = [
+            { documents: listing.genieDocuments ?? [] },
             { mlsNumber: listing.mlsNumber ?? '' },
             { mlsId: listing.mlsID ?? '' },
 
@@ -1053,6 +1053,7 @@ const processListing = async (params, agentTimezone) => {
         images.length && single.push({ _name: 'images', _content: images });
     }
 
+    console.log( 'single mls', params.mlsNumber, single );
     return single;
 };
 
