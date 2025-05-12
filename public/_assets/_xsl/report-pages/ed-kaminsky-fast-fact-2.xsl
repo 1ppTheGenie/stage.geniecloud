@@ -13,6 +13,9 @@
 		<!-- <link rel="stylesheet">
 			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 		</link> -->
+		<style type="text/css">
+			@import url("/_assets/_css/futura-embedded.css");
+		</style>
 
 		<xsl:variable name="salesCountChange" select="//statistics/@soldPropertyTypeCount div //previous/@totalSold" />
 		<xsl:variable name="salesCountPercent" select="abs( 1 - $salesCountChange )" />

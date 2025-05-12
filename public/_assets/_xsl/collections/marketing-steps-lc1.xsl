@@ -119,20 +119,22 @@ Version:	1.1
 					</xsl:if>
 
 					<div class="container">
-						<img class="company-logo" title="Company Logo">
-							<xsl:attribute name="src">
-								<xsl:value-of select="//agent/personalLogoDark" />
-							</xsl:attribute>
-						</img>
+						<div class="company-logo">
+							<img title="Company Logo">
+								<xsl:attribute name="src">
+									<xsl:value-of select="//agent/personalLogoDark" />
+								</xsl:attribute>
+							</img>
+						</div>	
 						<h1>
 							<span>
 								<!--<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />-->
 								<xsl:choose>
 									<xsl:when test="$hasMultipleAgents">
-										<xsl:value-of select="concat(//agent[1]/firstName, ' ', //agent[1]/lastName, ' to ', //agent[2]/firstName, ' ', //agent[2]/lastName)" />
+										<xsl:value-of select="concat(//agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's', ' &amp; ', //agent[2]/firstName, ' ', //agent[2]/lastName, $apos, 's')" />
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />
+										<xsl:value-of select="concat( //agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's' )" />
 									</xsl:otherwise>
 								</xsl:choose>
 							</span>
@@ -143,11 +145,10 @@ Version:	1.1
 							</xsl:call-template>
 						</h1>
 						<xsl:if test="$listingAddressLine1 !=''">
-							<div class="address" style="text-transform:uppercase;">
-								<span>
+							<div class="address">
+								<p>
 									<xsl:value-of select="//area/name" />
-								</span><br/>
-								<span>
+								<br/>
 									<xsl:value-of select="$listingAddressLine1" />
 									<xsl:if test="//openHouse/session[1]/@dow != ''">
 										<xsl:value-of select="concat(
@@ -158,7 +159,7 @@ Version:	1.1
 										//openHouse/session[1]/@ends
 										)" />
 									</xsl:if>									
-								</span>
+								</p>
 							</div>
 						</xsl:if>
 						<div class="genie-logo">
@@ -212,15 +213,15 @@ Version:	1.1
 					<xsl:variable name="pos" select="position()" />
 
 					<!-- Section Output -->
-					<div class="section assets-steps">
+					<div class="container section assets-steps">
 						<div class="section-heading">
 														 
 							<xsl:if test="number(@sort) = 1">
-								<p class="steps-count"> Step one </p>
+								<p class="steps-count"> Step one: </p>
 							</xsl:if>
 
 							<xsl:if test="number(@sort) = 2">
-								<p class="steps-count"> Step two </p>
+								<p class="steps-count"> Step two: </p>
 							</xsl:if>
 							
 							<h2 class="steps-heading">

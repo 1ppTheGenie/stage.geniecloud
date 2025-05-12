@@ -1,8 +1,9 @@
 :root{
-	--primary-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--primary-font: "Helvetica", Arial, sans-serif;
 	--futura: "futura";
 	--deep-blue:  #0c0e30;
 	--mid-blue: #101230;
+	--blue-2: #0d0f30;
 	--mid-black: #333333;
 	--golden: #b0914c;
 	--green: #0d6e0b;
@@ -14,14 +15,15 @@ html {
 *{
 	font-family: var(--primary-font);
 }
+
 body{
 	font-size: 16px;
 }
 .container{
-	max-width: 75rem;
+	max-width: 73.125rem;
 	width: 100%;
 	margin: auto;
-	padding: 0 1rem;
+	padding: 0 0.9375rem;
 }
 .assets-steps{
 	background: var(--white) !important;
@@ -52,8 +54,17 @@ body{
     z-index: -1;
 }
 .company-logo{
+	min-height: 8.438rem;
+}
+.company-logo img{
 	width: 15.625rem;
-    margin-bottom: 2rem;
+}
+.address p{
+	text-transform:uppercase;
+	font-weight: 500;
+	font-size: 1.125rem;
+	margin: 0 0 0.625rem;
+	line-height: 1.428;
 }
 .landing-page-banner h1{
 	font-size: 3.375rem;
@@ -113,7 +124,7 @@ body{
 .assets-steps .steps-count{
 	font-size: 2.25rem;
     font-weight: 400;
-    margin: 0;
+    margin: 2.75rem 0 0;
     letter-spacing: 0.313rem;
     color: var(--mid-blue);
 	text-transform: uppercase;
@@ -128,7 +139,9 @@ body{
 }
 .golden-border{
 	border-bottom: 0.125rem solid var(--golden) !important;
-	margin-bottom: 1.25rem;
+	width: 98.5%;
+    margin-inline: auto;
+	margin-block: 1rem 1.25rem;
 }
 .golden-border span:first-child {
     border-right: 0.0625rem solid var(--golden) !important;
@@ -168,12 +181,13 @@ body{
 	text-transform: uppercase;
 	color: var(--mid-black);
 	margin-block: 2.5rem 0.625rem;
+	line-height: 1.1;
 }
 .assets-steps .asset-container h4{
 	font-weight: 800;
 	font-family: var(--futura);
     font-size: 1.188rem !important;
-    color: var(--deep-blue);
+    color: var(--blue-2);
     margin: 0.625rem 0 !important;
     height: 2.75rem;
     overflow: hidden;
@@ -310,8 +324,12 @@ body{
 	font-weight: 400;
 	color: #333333;
 }
-.download-pdf-link a{
+.download-pdf-link a, .footer-middle a{
 	text-decoration: none;
+	color: #337ab7;
+}
+.download-pdf-link a:hover, .footer-middle a:hover{
+	text-decoration: underline;
 }
 footer{
 	padding: 0;
@@ -348,7 +366,7 @@ footer{
 }
 
 @media (max-width: 991px) {
-	.company-logo{
+	.company-logo img{
 		width: 10rem;
 	}
 	.assets-steps .section-grid {

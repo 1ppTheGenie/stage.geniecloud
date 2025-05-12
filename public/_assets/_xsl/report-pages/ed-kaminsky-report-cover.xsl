@@ -14,6 +14,9 @@
 		<!-- <link rel="stylesheet">
 			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 		</link> -->
+		<style type="text/css">
+			@import url("/_assets/_css/futura-embedded.css");
+		</style>
 
 		<image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
@@ -50,15 +53,14 @@
 			</xsl:call-template>
 		</text>
 
-		<text x="5%" y="51%" class="futura-text super-bold" font-size="280%" fill="#b0934c" style="word-spacing: -12px">
+		<text x="5%" y="51%" class="futura-text super-bold" font-size="280%" fill="#b0934c">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'12 Month Insider Report:'" />
 				<xsl:with-param name="default" select="'12 Month Insider Report:'" />
 			</xsl:call-template>
 		</text>
 
-		<text x="5%" y="60.7%" class="super-bold futura-text" fill="#fff" font-size="280%" data-max-width="50%"
-			style="word-spacing: -12px">
+		<text x="5%" y="60.7%" class="super-bold futura-text" fill="#fff" font-size="280%" data-max-width="50%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="concat(//area/name ,' ', $singularPropertyType,'s')" />
 			</xsl:call-template>

@@ -13,7 +13,7 @@
 	--max-container-width: 90%;
 }
 
-::-webkit-scrollbar {
+body:not(.marketing-steps) ::-webkit-scrollbar{	
 	display: none;
 }
 
@@ -113,8 +113,9 @@ div.profile img {
 	object-position: center;
 }
 
-div.section {
-	width: 100vw;
+body:not(.marketing-steps) div.section {
+	/* width: 100vw; */
+	width: 100%;
 	padding: 20vh calc((100vw - var(--max-container-width)) / 2);
 	background: linear-gradient(var(--background-grey), var(--white));
 }
@@ -136,7 +137,7 @@ div.section div.section-heading div.golden-border {
 
 div.section div.section-heading div.golden-border span {
 	display: block;
-	padding: 2.5rem;
+	padding: 1.92rem;
 	flex-basis: 50%;
 }
 
