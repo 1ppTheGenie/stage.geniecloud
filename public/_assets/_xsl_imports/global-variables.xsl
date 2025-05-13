@@ -219,7 +219,7 @@
 		<dims name="letter" width="1458" height="1883" />
 		<dims name="us-letter" width="850" height="1100" />
 		<dims name="a4" width="827" height="1169" />
-		<dims name="a5" width="2126" height="2753" />
+		<dims name="a5" width="2550" height="3300" />
 		<dims name="tabloid-flyer" width="4253" height="2753" />
 		<!-- For sizes going to print, values should be inches * 100, eg 11" x 6" = 1100 x 600 -->
 		<!-- DO NOT CHANGE these values -->
