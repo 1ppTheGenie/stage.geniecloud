@@ -162,73 +162,107 @@
 		<section id="about-section" class="background abt-sec">
 			<div class="container">
 				<div class="row">
-				<xsl:choose>
-					<xsl:when test="normalize-space(//agent[1]/marketingName) != ''">
-						<h1>yes</h1>
-					</xsl:when>
-					<xsl:otherwise>
-						<h1>no</h1>
-					</xsl:otherwise>
-				</xsl:choose>
-
-					
-					<div class="col-md-5 footer-form">
-						<h2 class="cld-title heading-title"><em>Get in Touch</em></h2>
-						<div role="form" class="wpcf7" id="wpcf7-f194-o1" lang="en-US" dir="ltr">
-							<form method="post" class="wpcf7-form funnel-create-lead" id="form_step1">
-								<div class="form-field">
-									<span class="wpcf7-form-control-wrap your-name">
-										<input type="text" name="fullName" class="form-control" placeholder="Name" />
+					<div class="col-12">
+						<div class="agent-details">
+							<div class="photo">
+								<span class=" f-name">
+									<xsl:value-of select="concat('Call/Text ', //agent[1]/firstName,' for your private showing:' )" />
+								</span>
+								<img>
+									<xsl:attribute name="alt">
+										<xsl:value-of select="//agent[1]/marketingName" />
+									</xsl:attribute>
+									<xsl:attribute name="src">
+										<xsl:value-of select="//agent[1]/photo" />
+									</xsl:attribute>
+								</img>
+							</div>
+							<div class="details">
+								<h3 class="agent-name heading-font body-color">
+									<xsl:value-of select="//agent[1]/marketingName" />
+								</h3>
+								<h2 class=" body-font">
+									<xsl:value-of select="//agent[1]/marketingTitle" />
+								</h2>
+								<h3 class="agent-phone">
+									<a>
+										<xsl:attribute name="href">
+											<xsl:value-of select="concat( 'tel:',//agent[1]/mobile )" />
+										</xsl:attribute>
+										<xsl:value-of select="//agent[1]/mobile" />
+									</a>
+								</h3>
+								<button class="btn subtitle-font background-as-color contact-me-btn">
+									<span class="contact-svg">
+										<svg xmlns="http://www.w3.org/2000/svg"
+											xmlns:xlink="http://www.w3.org/1999/xlink" version="3.0" id="Capa_1" x="0px" y="0px" viewBox="0 0 469.2 469.2" style="enable-background:new 0 0 469.2 469.2;" xml:space="preserve" fill="var(--theme-body-background)">
+											<g>
+												<path d="M22.202,77.023C25.888,75.657,29.832,74.8,34,74.8h401.2c4.168,0,8.112,0.857,11.798,2.224L267.24,246.364c-18.299,17.251-46.975,17.251-65.28,0L22.202,77.023z M464.188,377.944c3.114-5.135,5.012-11.098,5.012-17.544V108.8c0-4.569-0.932-8.915-2.57-12.899L298.411,254.367L464.188,377.944z M283.2,268.464c-13.961,11.961-31.253,18.027-48.6,18.027c-17.347,0-34.64-6.06-48.6-18.027L20.692,391.687c4.094,1.741,8.582,2.714,13.308,2.714h401.2c4.726,0,9.214-0.973,13.308-2.714L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12.409,5.012,17.544l165.777-123.577L2.571,95.9z"></path>
+											</g>
+										</svg>
 									</span>
-								</div>
-								<div class="form-field">
-									<span class="wpcf7-form-control-wrap your-email">
-										<input type="email" name="emailAddress" class="form-control" placeholder="Email" />
-									</span>
-								</div>
-								<div class="form-field numberform">
-									<span class="wpcf7-form-control-wrap your-message">
-										<input type="text" name="phoneNumber" class="form-control" placeholder="Phone" />
-									</span>
-								</div>            
-								<div class="f_check preferred_contact body-font desk">
-									<div class="spn">
-										<span>Preferred contact*:</span>
+                                        Contact Me
+								</button>
+								<h2 class="agent-website body-color body-font">
+									<a target="_blank">
+										<xsl:attribute name="href">
+											<xsl:choose>
+												<xsl:when test="substring( //agent[1]/website, 1, 4 ) = 'http'">
+													<xsl:value-of select="//agent[1]/website" />
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:value-of select="concat( 'https://', //agent[1]/website )" />
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:attribute>
+										<xsl:value-of select="//agent[1]/website" />
+									</a>
+								</h2>
+								<h4 class="agent-code body-color body-font">
+									<xsl:value-of select="//agent[1]/marketingLicense" />
+								</h4>
+							</div>
+							<div class="agent-logo">
+								<div class="funnel-about-company-logo">
+									<div class="funnel-personal-logo genie-logo-light">
+										<xsl:attribute name="style">
+											<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoLight, ')' )" />
+										</xsl:attribute>
 									</div>
-									<div class="che_box">
-										<label> <input type="checkbox" name="lead_meta_contact_via_text" value="yes" />Text</label>
-										<label> <input type="checkbox" name="lead_meta_contact_via_email" value="yes" checked="" />Email</label>
-									</div>
-									<div class="che_box submit-btn">
-										
-										<input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact" />
-										<input type="hidden" name="note" value="I am interested in { $listingAddressLine1 }" /> 
-										<input type="submit" value="Send" class="wpcf7-submit" />
+									<div class="funnel-personal-logo genie-logo-dark">
+										<xsl:attribute name="style">
+											<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoDark, ')' )" />
+										</xsl:attribute>
 									</div>
 								</div>
-							</form>
-						</div>
-					</div>					
-				</div>
-				
-				<xsl:if test="//agent[1]/marketingAbout != ''">
-					<div class="team-about-wrapper">
-						<h4 class="body-font body-color">About</h4>
-						<div class="personal-mission team-about">
-							<div class="summary">
-								<p class="body-font body-color">
-									<span class="full-text">
-										<xsl:copy-of select="$marketingAboutWithBreaks" />
-									</span>
-									<span class="dots" style="display: none;">... </span>
-									<span class="more-text" style="display: none;"></span>
-									<span class="toggle-link read-more" style="cursor: pointer; display: none;"> Read More</span>
-								</p>
+								<div class="funnel-about-personal-logo">
+									<div class="funnel-personal-logo genie-logo-light">
+										<xsl:attribute name="style">
+											<xsl:value-of select="concat( 'background: url(', //agent[1]/personalLogoLight, ')' )" />
+										</xsl:attribute>
+									</div>
+									<div class="funnel-personal-logo genie-logo-dark">
+										<xsl:attribute name="style">
+											<xsl:value-of select="concat( 'background: url(', //agent[1]/personalLogoDark, ')' )" />
+										</xsl:attribute>
+									</div>
+								</div>
 							</div>
 						</div>
+						<div class="team-about-wrapper">
+							<xsl:if test="//agent[1]/marketingAbout != ''">
+								<h4 class="body-font body-color">About</h4>
+								<div class="personal-mission team-about">
+									<div class="summary">
+										<p class="body-font body-color">
+											<xsl:copy-of select="$marketingAboutWithBreaks" />
+										</p>
+									</div>
+								</div>
+							</xsl:if>
+						</div>
 					</div>
-				</xsl:if>
-				
+				</div>
 			</div>
 		</section>
 
