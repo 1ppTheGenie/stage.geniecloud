@@ -120,7 +120,6 @@ Version:	1.1
 
 					<div class="container">
 						<div class="company-logo">
-						<xsl:value-of select="$hasMultipleAgents"/>
 
 							<img title="Company Logo">
 								<xsl:attribute name="src">
