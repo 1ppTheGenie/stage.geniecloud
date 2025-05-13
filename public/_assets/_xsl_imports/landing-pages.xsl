@@ -168,9 +168,8 @@
 								<div class="agent-details agent-detail-wrapper">
 									<div class="photo">
 										<span class=" f-name">
-											<xsl:call-template name="editable">
-												<xsl:with-param name="default" select="//agent[1]/firstName" />
-											</xsl:call-template>
+											<xsl:with-param name="agent" select="//agent[1]" />
+						<xsl:with-param name="idx" select="1" />
 										</span>
 										
 									</div>
