@@ -5,7 +5,7 @@
 	"sections": [
 		{
 			"sort": 1,
-			"meta": { "caption": "", "description": "", "assetTitle": "Pre marketing assets" },
+			"meta": { "caption": "", "description": "" },
 			"assets": [
 				{
 					"sort": 1,
@@ -16,37 +16,44 @@
 				{
 					"sort": 2,
 					"asset": "social-marketing-graphics/ed-oh-social-templates-2",
-					"name": "Square Post #2"
+					"name": "Square Post #2",
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 3,
 					"asset": "social-marketing-graphics/ed-oh-social-templates-3",
-					"name": "Square Post #3"
+					"name": "Square Post #3",
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 4,
 					"asset": "social-marketing-graphics/ed-oh-social-templates-4",
-					"name": "Square Post #4"
+					"name": "Square Post #4",
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 5,
 					"asset": "social-marketing-graphics/ed-oh-instagram-story-1",
-					"name": "Square Story #1"
+					"name": "Square Story #1",
+					"size": "instagram-Story"
 				},
 				{
 					"sort": 6,
 					"asset": "social-marketing-graphics/ed-oh-instagram-story-2",
-					"name": "Square Story #2"
+					"name": "Square Story #2",
+					"size": "instagram-Story"
 				},
 				{
 					"sort": 7,
 					"asset": "social-marketing-graphics/ed-oh-instagram-story-3",
-					"name": "Square Story #3"
+					"name": "Square Story #3",
+					"size": "instagram-Story"
 				},
 				{
 					"sort": 8,
 					"asset": "social-marketing-graphics/ed-oh-instagram-story-4",
-					"name": "Square Story #4"
+					"name": "Square Story #4",
+					"size": "instagram-Story"
 				},
 				{
 					"sort": 9,
@@ -65,7 +72,8 @@
 					"name": "Market Insider Report"
 				}
 			],
-			"name": "Connect with the community"
+			"name": "Connect with the community",
+			"assetTitle": "Pre marketing assets"
 		},
 		{
 			"sort": 2,
