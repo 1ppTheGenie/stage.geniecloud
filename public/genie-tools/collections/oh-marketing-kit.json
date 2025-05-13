@@ -6,6 +6,7 @@
 		{
 			"sort": 1,
 			"meta": { "caption": "", "description": "" },
+			"assetTitle": "Pre marketing assets",
 			"assets": [
 				{
 					"sort": 1,
@@ -72,8 +73,7 @@
 					"name": "Market Insider Report"
 				}
 			],
-			"name": "Connect with the community",
-			"assetTitle": "Pre marketing assets"
+			"name": "Connect with the community"
 		},
 		{
 			"sort": 2,
