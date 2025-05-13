@@ -165,7 +165,8 @@
 				<xsl:value-of select="$hasMultipleAgents"/>
 
 					<xsl:choose>
-						<xsl:when test="$hasMultipleAgents">
+						<xsl:when test="normalize-space(//agent[1]/marketingName) != '' and normalize-space(//agent[2]/marketingName) != ''">
+
 							<h1>Working test</h1>			
 						</xsl:when>
 						<xsl:otherwise>
