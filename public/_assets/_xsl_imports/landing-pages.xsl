@@ -4,6 +4,7 @@
 	<xsl:import href="global-variables.xsl" />
 	<xsl:import href="genie-functions.xsl" />
 	<xsl:import href="snippet-processor.xsl" />
+	<xsl:import href="common.xsl" />
 
 	<xsl:mode on-no-match="shallow-copy" />
 
