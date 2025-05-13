@@ -28,12 +28,12 @@
 			<xsl:choose>
 				<xsl:when test="//output/@themeHue='dark'">
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent/companyLogoDark" />
+						<xsl:value-of select="//agent[1]/companyLogoDark" />
 					</xsl:attribute>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent/companyLogoLight" />
+						<xsl:value-of select="//agent[1]/companyLogoLight" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
