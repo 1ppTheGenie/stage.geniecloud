@@ -207,7 +207,7 @@ export const getDimensions = (size = null) => {
 		case "pinterest":
 			dims = [1200, 800];
 			break;
-
+		
 		case "twitter":
 			dims = [1200, 675];
 			break;
@@ -224,12 +224,16 @@ export const getDimensions = (size = null) => {
 			dims = [827, 1169];
 			break;
 
+		// For sizes going to print, values should be inches * 100, eg 11" x 6" = 1100 x 600
+		// Please DO NOT CHANGE these values
 		case "postcard":
-			// For sizes going to print, values should be inches * 100, eg 11" x 6" = 1100 x 600
-			// Please DO NOT CHANGE these values
 			dims = [1100, 600];
 			break;
-
+		case "tabloid-flyer":
+				dims = [1100, 1700];
+			break;
+		// End of print
+	
 		case "facebook-ad":
 		case "facebook-post":
 		case "facebook-video-ad":

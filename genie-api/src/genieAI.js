@@ -336,6 +336,10 @@ export const getListing = async (
             if (listing && r.preferredAreaId) {
                 listing.preferredAreaId = r.preferredAreaId;
             }
+
+            if ( listing && r?.hasDocuments ) {
+                listing.genieDocuments = r.documents;
+            }
         } else {
             endpoint = 'GetListingByMlsNumber';
             const r = await call_api(
