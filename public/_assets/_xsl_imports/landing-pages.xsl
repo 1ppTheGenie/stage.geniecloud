@@ -162,11 +162,14 @@
 		<section id="about-section" class="background abt-sec">
 			<div class="container">
 				<div class="row">
+				<xsl:value-of select="$hasMultipleAgents"/>
+
 					<xsl:choose>
 						<xsl:when test="$hasMultipleAgents">
 							<h1>Working test</h1>			
 						</xsl:when>
 						<xsl:otherwise>
+						
 							<div class="col-md-3">
 								<div class="agent-details agent-detail-wrapper">
 									<div class="photo">

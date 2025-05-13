@@ -6,12 +6,13 @@
 	Sizes:				Landing Page
 	Supports:			Area, Listing
 	Permission: 		Funnels
-		Default Download:    area-insider-reports/market-insider
+	Default Download:   area-insider-reports/market-insider
 	Render Key:			landing-page/Open-House-Guest-Book-MLSNUMBER
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 	<xsl:import href="landing-pages.xsl" />
+	
 
 
 	<xsl:template name="landing-page">
