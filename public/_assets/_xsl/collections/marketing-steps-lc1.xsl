@@ -311,7 +311,7 @@ Version:	1.1
 					<xsl:if test="$pos = 2">
 						<section class="visitor-sec">
 							<div class="container">
-								<h1>Get contact info for every visitor,<br/> every time. No exceptions.</h1>
+								<h1>Every visitor signs in.<br/> Every time. No exceptions.</h1>
 								<span class="up-arrow">↑</span>
 								<p class="bordered-button">This isn't a button. Read the above again.</p>
 							</div>	

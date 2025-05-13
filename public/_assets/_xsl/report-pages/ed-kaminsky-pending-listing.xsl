@@ -15,10 +15,13 @@
 	<xsl:variable name="pendingListingCount" select="count($mapListingNodes)" />
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
+		<!-- <link rel="stylesheet">
 <xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
-		</link>
+		</link> -->
+		<style type="text/css">
+			@import url("/_assets/_css/futura-embedded.css");
+		</style>
 
 		<image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
@@ -54,7 +57,7 @@
 			</xsl:call-template>
 		</xsl:if>
 
-		<text x="50%" y="91%" class="center futura-text" font-size="110%" style="letter-spacing: 7px; word-spacing:6px;">
+		<text x="50%" y="91%" class="center futura-text" font-size="110%" style="letter-spacing: 5.5px; word-spacing:6px;">
 			<tspan fill="#e1e1e1">ADDRESSES  REDACTED - - - - - </tspan>
 			<tspan fill="#b2934e">LOOSE LIPS END ESCROWS</tspan>
 		</text>
