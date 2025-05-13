@@ -5,8 +5,7 @@
 	"sections": [
 		{
 			"sort": 1,
-			"meta": { "caption": "", "description": "" },
-			"assetTitle": "Pre marketing assets",
+			"meta": { "caption": "Pre marketing assets1", "description": "Pre marketing assets2", "assetTitle": "Pre marketing assets" },
 			"assets": [
 				{
 					"sort": 1,
