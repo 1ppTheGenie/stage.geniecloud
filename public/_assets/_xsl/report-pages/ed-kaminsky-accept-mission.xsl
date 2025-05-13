@@ -11,11 +11,12 @@
 <xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-
-		</link>
-
+		<!-- <link rel="stylesheet">
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+		</link> -->
+		<style type="text/css">
+			@import url("/_assets/_css/futura-embedded.css");
+		</style>
 		<image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/intel-white-bg-01.jpg' )" />
@@ -62,5 +63,6 @@
 
 			</image>
 		</a>
+		<xsl:call-template name="copyright" />
 	</xsl:template>
 </xsl:stylesheet>

@@ -14,10 +14,13 @@
 	<xsl:variable name="mapListingNodes" select="//listings/listing[@state='active']" />
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
+		<!-- <link rel="stylesheet">
 <xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
-		</link>
+		</link> -->
+		<style type="text/css">
+			@import url("/_assets/_css/futura-embedded.css");
+		</style>
 
 		<image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
@@ -34,7 +37,7 @@
 		<text x="50%" y="13.8%" class=" center futura-text super-bold" font-size="450%">
 			<tspan x="37%" fill="#e1e1e1">Currently</tspan>
 			<tspan x="58%" fill="#b0934c">For</tspan>
-			<tspan x="71.5%" fill="#b0934c">Sale</tspan>
+			<tspan x="70%" fill="#b0934c">Sale</tspan>
 		</text>
 
 		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />

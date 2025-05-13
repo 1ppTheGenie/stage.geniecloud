@@ -15,11 +15,13 @@
 	<xsl:variable name="mapListingNodes" select="//listings/listing[@state='active']" />
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+		<!-- <link rel="stylesheet">
+		<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
-		</link>
-
+		</link> -->
+		<style type="text/css">
+			@import url("/_assets/_css/futura-embedded.css");
+		</style>
 		<image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/intel-white-bg-01.jpg' )" />
@@ -31,5 +33,6 @@
 		<text x="50%" y="45%" fill="#b2934e" class="center futura-text super-bold" style="font-size:270%;">most critical piece of information.</text>
 
 		<text x="50%" y="55%" fill="#0e1232" class="center futura-text" style="font-size:110%;">(and this classified, top-secret document is useless to you without it)</text>
+		<xsl:call-template name="copyright" />
 	</xsl:template>
 </xsl:stylesheet>
