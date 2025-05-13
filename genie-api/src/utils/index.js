@@ -248,10 +248,6 @@ export const getDimensions = (size = null) => {
 			dims = [2126, 2753];
 			break;
 
-		case "tabloid-flyer":
-			dims = [4253, 2753];
-		break;
-
 		case "facebook":
 		default:
 			dims = [1200, 628];
