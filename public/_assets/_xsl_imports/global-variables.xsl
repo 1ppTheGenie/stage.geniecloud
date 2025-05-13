@@ -132,7 +132,7 @@
 	</xsl:variable>
 
 	<!-- $hasMultipleAgents -->
-	<!-- <xsl:variable name="hasMultipleAgents" select="count(//agent) &gt; 1" /> -->
+	<xsl:variable name="hasMultipleAgents" select="count(//agent) &gt; 1" />
 
 	<!-- $agentCount -->
 	<xsl:variable name="agentCount" select="count(//agent)" />
