@@ -228,11 +228,11 @@ Version:	1.1
 								<xsl:value-of select="@name" />
 							</h2>
 
-							<xsl:if test="@caption != ''">
+							<!-- <xsl:if test="@caption != ''">
 								<h3>
 									<xsl:value-of select="@caption" />
 								</h3>
-							</xsl:if>
+							</xsl:if> -->
 
 							<xsl:if test="@description != ''">
 								<p>
@@ -245,9 +245,9 @@ Version:	1.1
 								<span><xsl:comment/></span>
 							</div>
 
-							<xsl:if test="@assetTitle != ''">
+							<xsl:if test="@caption != ''">
 								<p class="asset-box-title">
-									<xsl:value-of select="@assetTitle" />
+									<xsl:value-of select="@caption" />
 								</p>
 							</xsl:if>
 
