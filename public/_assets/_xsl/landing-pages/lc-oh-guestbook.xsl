@@ -4,7 +4,7 @@
 	Version:			1.0
 	Tags:				Landing Page
 	Sizes:				Landing Page
-	Supports:			Area, Listing
+	Supports:			Area, Listing, Multi-Agent
 	Permission: 		Funnels
 	Default Download:   area-insider-reports/market-insider
 	Render Key:			landing-page/Open-House-Guest-Book-MLSNUMBER
@@ -13,8 +13,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 	<xsl:import href="landing-pages.xsl" />
 	
-
-
 	<xsl:template name="landing-page">
 		<xsl:variable name="head-description">
 			<xsl:value-of select="concat( 'The ', //area/name, ' market is shifting! View the latest market trends and grab your customized report now.' )" />
