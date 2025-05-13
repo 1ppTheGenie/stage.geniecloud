@@ -312,7 +312,7 @@
 	<!-- $isFBAd -->
 	<xsl:variable name="isFBAd">
 		<xsl:choose>
-			<xsl:when test="$svgWidth=1080 and $svgHeight=1080">
+			<xsl:when test="$svgWidth=555 and $svgHeight=555">
 				<xsl:value-of select="'true'" />
 			</xsl:when>
 			<xsl:otherwise>
