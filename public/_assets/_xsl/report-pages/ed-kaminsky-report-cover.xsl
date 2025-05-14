@@ -104,7 +104,7 @@
 						<xsl:value-of select="genie:format-date( //output/@reportDate, '[MNn] [D], [Y0001]')" />
 					</text>
 
-					<rect xmlns="" x="38.6%" y="86.2%" width="7%" height="4%" fill="#d1232a" style="
+					<rect xmlns="" x="39.4%" y="86.2%" width="7%" height="4%" fill="#d1232a" style="
               transform: translate(-25px, 15px) rotate(-3deg);
               -webkit-transform: translate(-15px, 15px) rotate(-3deg);
               width: 7%;
@@ -115,10 +115,10 @@
 					<text xmlns="" x="22.5%" y="84.3%" class="futura-text" font-size="103%" fill="#fff">
 						<tspan>Confidentially prepared for </tspan>
 					</text>
-					<text xmlns="" x="47.5%" y="84.3%" class="futura-text" font-size="103%" fill="#fff">
+					<text xmlns="" x="48.3%" y="84.3%" class="futura-text" font-size="103%" fill="#fff">
 						<tspan>by</tspan>
 					</text>
-					<text xmlns="" x="39.2%" y="86%" class="futura-text" font-size="95%" fill="#fff" style="
+					<text xmlns="" x="40.1%" y="86%" class="futura-text" font-size="95%" fill="#fff" style="
               transform: translate(-25px, 15px) rotate(-3deg);
               -webkit-transform: translate(-32px, 22px) rotate(-3deg);
             ">

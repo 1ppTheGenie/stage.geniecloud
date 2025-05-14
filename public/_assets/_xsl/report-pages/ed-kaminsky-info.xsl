@@ -224,15 +224,15 @@
       <xsl:when test="$hasMultipleAgents">
         <line
           x1="5%"
-          y1="80.5%"
+          y1="82.8%"
           x2="26%"
-          y2="80.5%"
+          y2="82.8%"
           style="stroke: #b0934c; stroke-width: 2"
         ></line>
         <text
           class="futura-text center"
           x="28%"
-          y="79%"
+          y="81.2%"
           fill="#fff"
           font-size="100%"
           style="font-weight: 800"
@@ -276,23 +276,23 @@
         </text>
         <line
           x1="75%"
-          y1="80.5%"
+          y1="82.8%"
           x2="95%"
-          y2="80.5%"
+          y2="82.8%"
           style="stroke: #b0934c; stroke-width: 2"
         ></line>
 
         <line
           x1="5%"
-          y1="84%"
+          y1="87%"
           x2="26%"
-          y2="84%"
+          y2="87%"
           style="stroke: #b0934c; stroke-width: 2"
         ></line>
         <text
           class="futura-text center"
           x="50%"
-          y="82.5%"
+          y="85.3%"
           fill="#fff"
           font-size="100%"
           style="font-weight: 800"
@@ -336,9 +336,9 @@
         </text>
         <line
           x1="75%"
-          y1="84%"
+          y1="87%"
           x2="95%"
-          y2="84%"
+          y2="87%"
           style="stroke: #b0934c; stroke-width: 2"
         ></line>
       </xsl:when>
@@ -404,7 +404,7 @@
         ></line>
       </xsl:otherwise>
     </xsl:choose>
-    <foreignObject x="5%" y="86%" width="80%" height="10%">
+    <foreignObject x="5%" y="88.2%" width="80%" height="10%">
       <div>
         <p
           class="futura-text"
@@ -438,9 +438,9 @@
 
     <image
       x="89%"
-      y="88%"
-      width="6%"
-      height="6%"
+      y="88.5%"
+      width="7%"
+      height="7%"
       preserveAspectRatio="xMidYMin slice"
     >
       <xsl:attribute name="href">
