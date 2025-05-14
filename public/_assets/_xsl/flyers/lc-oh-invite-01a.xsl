@@ -3,9 +3,9 @@
 	Asset Name: LC-OH-INVITE-01A
 	Tags:		Flyer
 	Sizes:		Letter
-	Supports:	Listing, Area, QRCode
-	Version:	1.1
+	Supports:	Listing, Area, QRCode, AsPDF
 	Pages:		flyers/lc-oh-invite-01a
+	Version:	1.1
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
@@ -19,8 +19,11 @@
 					transform: translate(2.5%, 98%);
 				}
 				g#footer text{
-					font-size: 20px;
-					fill: var(--theme-heading-color);
+					font-size: 11px;
+					fill: #94949D;
+				}
+				g#footer text a tspan{
+					fill: #337ab7;
 				}
 			'"/>
 		</style>

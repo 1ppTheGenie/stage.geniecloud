@@ -82,7 +82,7 @@
 				<!-- <xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ',//openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" /> -->
 			</xsl:call-template>
 		</text>
-		<text x="50%" y="68%" class="center" fill="var(--theme-sub-heading-color)" font-family="var(--theme-body-font)" font-size="455%" font-weight="800" style=" letter-spacing:1px;"> 
+		<text x="50%" y="68%" class="center" fill="var(--theme-sub-heading-color)" font-family="var(--theme-body-font)" font-size="455%" font-weight="800" style=" letter-spacing:1px; text-transform:lowercase"> 
 			<xsl:choose>
 				<xsl:when test="count(//openHouse/session) &gt; 0">
 					<xsl:call-template name="editable">

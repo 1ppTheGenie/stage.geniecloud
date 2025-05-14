@@ -230,14 +230,14 @@
           style="stroke: #b0934c; stroke-width: 2"
         ></line>
         <text
-          class="futura-text"
+          class="futura-text center"
           x="28%"
           y="79%"
           fill="#fff"
           font-size="100%"
           style="font-weight: 800"
         >
-          <tspan x="" dy="0%">
+          <tspan x="52%" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'marketingName'" />
               <xsl:with-param
@@ -290,8 +290,8 @@
           style="stroke: #b0934c; stroke-width: 2"
         ></line>
         <text
-          class="futura-text"
-          x="28%"
+          class="futura-text center"
+          x="52%"
           y="82.5%"
           fill="#fff"
           font-size="100%"
