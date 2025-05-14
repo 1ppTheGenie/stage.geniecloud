@@ -237,7 +237,7 @@
           font-size="100%"
           style="font-weight: 800"
         >
-          <tspan x="52%" dy="0%">
+          <tspan x="50%" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'marketingName'" />
               <xsl:with-param
@@ -291,7 +291,7 @@
         ></line>
         <text
           class="futura-text center"
-          x="52%"
+          x="50%"
           y="82.5%"
           fill="#fff"
           font-size="100%"
