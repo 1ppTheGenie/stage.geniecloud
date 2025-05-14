@@ -5,6 +5,7 @@
 	Sizes:		Letter
 	Supports:	Listing, Area, QRCode, AsPDF 
 	Version:	1.1
+	Pages:		flyers/lc-oh-invite-01a
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
