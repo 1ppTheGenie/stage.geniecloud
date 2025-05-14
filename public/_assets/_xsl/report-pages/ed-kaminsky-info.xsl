@@ -242,34 +242,34 @@
               <xsl:with-param name="id" select="'marketingName'" />
               <xsl:with-param
                 name="default"
-                select="//agent[2]/marketingName"
+                select="//agent[1]/marketingName"
               />
             </xsl:call-template>
           </tspan>
-          <tspan x="" dy="0%" fill="#b0934c">•</tspan>
-          <tspan x="38.5%" dy="0%">
+          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="2" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentmobile'" />
               <xsl:with-param
                 name="default"
-                select="translate(//agent[2]/mobile,'-','.')"
+                select="translate(//agent[1]/mobile,'-','.')"
               />
             </xsl:call-template>
           </tspan>
-          <tspan x="" dy="0%" fill="#b0934c">•</tspan>
-          <tspan x="" dy="0%">
+          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="2" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentwbsite'" />
               <xsl:with-param name="default" select="'itzsold.com'" />
             </xsl:call-template>
           </tspan>
-          <tspan x="" dy="0%" fill="#b0934c">•</tspan>
-          <tspan x="" dy="0%">
+          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="2" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentlicense'" />
               <xsl:with-param
                 name="default"
-                select="//agent[2]/marketingLicense"
+                select="//agent[1]/marketingLicense"
               />
             </xsl:call-template>
           </tspan>
@@ -281,6 +281,7 @@
           y2="80.5%"
           style="stroke: #b0934c; stroke-width: 2"
         ></line>
+
         <line
           x1="5%"
           y1="84%"
@@ -301,34 +302,34 @@
               <xsl:with-param name="id" select="'marketingName'" />
               <xsl:with-param
                 name="default"
-                select="//agent[1]/marketingName"
+                select="//agent[2]/marketingName"
               />
             </xsl:call-template>
           </tspan>
-          <tspan dy="0%" fill="#b0934c">•</tspan>
-          <tspan x="" dy="0%">
+          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="2" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentmobile'" />
               <xsl:with-param
                 name="default"
-                select="translate(//agent[1]/mobile,'-','.')"
+                select="translate(//agent[2]/mobile,'-','.')"
               />
             </xsl:call-template>
           </tspan>
-          <tspan dy="0%" fill="#b0934c">•</tspan>
-          <tspan x="" dy="0%">
+          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="2" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentwbsite'" />
               <xsl:with-param name="default" select="'itzsold.com'" />
             </xsl:call-template>
           </tspan>
-          <tspan x="" dy="0%" fill="#b0934c">•</tspan>
-          <tspan x="" dy="0%">
+          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="2" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentlicense'" />
               <xsl:with-param
                 name="default"
-                select="//agent[1]/marketingLicense"
+                select="//agent[2]/marketingLicense"
               />
             </xsl:call-template>
           </tspan>
