@@ -3,7 +3,7 @@
 	Asset Name: LC-OH-INVITE-01A
 	Tags:		Flyer
 	Sizes:		Letter
-	Supports:	Listing, Area, QRCode, AsPDF 
+	Supports:	Listing, Area, QRCode
 	Version:	1.1
 	Pages:		flyers/lc-oh-invite-01a
 -->
