@@ -125,7 +125,7 @@
 						<tspan dx="1.5%" class="bold" font-size="85%">REDACTED </tspan>
 					</text>
 
-					<text xmlns="" x="22%" y="88.6%" class="futura-text" font-size="103%" fill="#fff">
+					<text xmlns="" x="22.5%" y="88.6%" class="futura-text" font-size="103%" fill="#fff">
 						<tspan fill="#b0934c" class="bold">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentFirstName'" />
@@ -136,7 +136,7 @@
 								<xsl:with-param name="default" select="concat(' ',//agent[1]/lastName)" />
 							</xsl:call-template>
 						</tspan>
-						<tspan dx="0.5%">and </tspan>
+						<tspan dx="0%">and </tspan>
 						<tspan fill="#b0934c" class="bold">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentFirstName'" />
