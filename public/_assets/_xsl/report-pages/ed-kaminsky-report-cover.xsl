@@ -85,7 +85,7 @@
 							<!-- Circular image 1 -->
 							<image x="-5%" y="-7%" width="120" height="120" clip-path="url(#circleClip1)">
 								<xsl:attribute name="href">
-									<xsl:value-of select="//agent[2]/photo" />
+									<xsl:value-of select="//agent[1]/photo" />
 								</xsl:attribute>
 							</image>
 
@@ -95,7 +95,7 @@
 							<!-- Circular image 2 -->
 							<image x="4%" y="-7%" width="120" height="120" clip-path="url(#circleClip2)">
 								<xsl:attribute name="href">
-									<xsl:value-of select="//agent[1]/photo" />
+									<xsl:value-of select="//agent[2]/photo" />
 								</xsl:attribute>
 							</image>
 						</g>
@@ -129,22 +129,22 @@
 						<tspan fill="#b0934c" class="bold">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentFirstName'" />
-								<xsl:with-param name="default" select="//agent[2]/firstName" />
+								<xsl:with-param name="default" select="//agent[1]/firstName" />
 							</xsl:call-template>
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentLastName'" />
-								<xsl:with-param name="default" select="concat(' ',//agent[2]/lastName)" />
+								<xsl:with-param name="default" select="concat(' ',//agent[1]/lastName)" />
 							</xsl:call-template>
 						</tspan>
 						<tspan dx="0.5%">and </tspan>
 						<tspan fill="#b0934c" class="bold">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentFirstName'" />
-								<xsl:with-param name="default" select="//agent[1]/firstName" />
+								<xsl:with-param name="default" select="//agent[2]/firstName" />
 							</xsl:call-template>
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentLastName'" />
-								<xsl:with-param name="default" select="concat(' ',//agent[1]/lastName)" />
+								<xsl:with-param name="default" select="concat(' ',//agent[2]/lastName)" />
 							</xsl:call-template>
 						</tspan>
 					</text>
