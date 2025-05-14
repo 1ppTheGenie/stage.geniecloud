@@ -708,6 +708,14 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 				<section class="genie-alternate">
 					<div class="container">
 						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'MarketActivity'" />
+						</xsl:call-template>
+					</div>
+				</section>
+
+				<section class="genie-alternate">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
 							<xsl:with-param name="embed" select="'ListToSold'" />
 						</xsl:call-template>
 					</div>
