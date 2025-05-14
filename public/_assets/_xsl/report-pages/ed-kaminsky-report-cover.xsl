@@ -136,7 +136,7 @@
 								<xsl:with-param name="default" select="concat(' ',//agent[1]/lastName)" />
 							</xsl:call-template>
 						</tspan>
-						<tspan dx="0%">and </tspan>
+						<tspan dx="0.5%">and </tspan>
 						<tspan fill="#b0934c" class="bold">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentFirstName'" />
