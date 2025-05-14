@@ -246,8 +246,8 @@
               />
             </xsl:call-template>
           </tspan>
-          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
-          <tspan dx="2" dy="0%">
+          <tspan dx="4" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="4" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentmobile'" />
               <xsl:with-param
@@ -256,15 +256,15 @@
               />
             </xsl:call-template>
           </tspan>
-          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
-          <tspan dx="2" dy="0%">
+          <tspan dx="4" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="4" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentwbsite'" />
               <xsl:with-param name="default" select="'itzsold.com'" />
             </xsl:call-template>
           </tspan>
-          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
-          <tspan dx="2" dy="0%">
+          <tspan dx="4" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="4" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentlicense'" />
               <xsl:with-param
@@ -306,8 +306,8 @@
               />
             </xsl:call-template>
           </tspan>
-          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
-          <tspan dx="2" dy="0%">
+          <tspan dx="4" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="4" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentmobile'" />
               <xsl:with-param
@@ -316,15 +316,15 @@
               />
             </xsl:call-template>
           </tspan>
-          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
-          <tspan dx="2" dy="0%">
+          <tspan dx="4" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="4" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentwbsite'" />
               <xsl:with-param name="default" select="'itzsold.com'" />
             </xsl:call-template>
           </tspan>
-          <tspan dx="2" dy="0%" fill="#b0934c">•</tspan>
-          <tspan dx="2" dy="0%">
+          <tspan dx="4" dy="0%" fill="#b0934c">•</tspan>
+          <tspan dx="4" dy="0%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'agentlicense'" />
               <xsl:with-param
