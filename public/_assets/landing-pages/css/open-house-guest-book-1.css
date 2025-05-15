@@ -118,6 +118,9 @@ h3.address-part span{
 #about-section{
     padding: 80px 0 50px !important;
 }
+.disclaimer-text{
+    text-align: center;
+}
 
 @media (max-width:767px) {
 

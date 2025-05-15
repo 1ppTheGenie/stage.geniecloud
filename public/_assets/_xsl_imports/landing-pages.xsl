@@ -125,9 +125,9 @@
 								<strong>
 									<xsl:text>Copyright &#169; </xsl:text>
 									<span id="copyright-year">
-										<xsl:value-of select="concat(//output/@year, ' ')" />
+										<xsl:value-of select="concat(//output/@year, '' )" />
 									</span>
-									<a target="_blank" href="#">1parkplace, Inc.</a>.
+									<a target="_blank" href="http://www.1parkplace.com/">1parkplace, Inc.</a>.
 								</strong>
 								<xsl:text>All rights reserved.</xsl:text>
 							</p>
@@ -135,7 +135,7 @@
 						<div class="col-md-4 col-sm-4 text-center">
 							<p class="heading-font">
 								<strong>
-									<a href="#" target="_blank">TheGenie.ai.</a>
+									<a href="https://thegenie.ai/" target="_blank">TheGenie.ai.</a>
 								</strong>
 								<br/>
 								<img class="footer-middle-img" src="/_assets/_img/made-with-love.png">
@@ -638,8 +638,10 @@
 					</div>
 					<xsl:if test="string(//mlsDisplay/text())!='external'">
 						<div id="mls-disclaimer">
-							<xsl:copy-of select="//mlsDisplay/text()" />
-							<xsl:comment/>
+							<p class="disclaimer-text">
+								<xsl:copy-of select="//mlsDisplay/text()" />
+								<xsl:comment/>								
+							</p>	
 						</div>
 					</xsl:if>
 					<xsl:if test="not($isExternalPrivacy)">
