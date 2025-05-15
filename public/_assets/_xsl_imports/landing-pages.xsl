@@ -125,7 +125,7 @@
 								<strong>
 									<xsl:text>Copyright &#169; </xsl:text>
 									<span id="copyright-year">
-										<xsl:value-of select="concat(//output/@year, '' )" />
+										<xsl:value-of select="concat(//output/@year, ' ' )" />
 									</span>
 									<a target="_blank" href="http://www.1parkplace.com/">1parkplace, Inc.</a>.
 								</strong>
