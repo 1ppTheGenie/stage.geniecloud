@@ -121,6 +121,25 @@ h3.address-part span{
 .disclaimer-text{
     text-align: center;
 }
+.agent-details .photo, .agent-details .details{
+    display: block !important;
+}
+
+@media (max-width: 991px) {
+    #about-section .col-md-3 {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .bottom-bar-copyright .container{
+        width: 90%;
+    }
+    #about-section {
+        padding: 80px 0 100px !important;
+    }
+}
 
 @media (max-width:767px) {
 
@@ -131,7 +150,4 @@ h3.address-part span{
     .open-house-gust-from-details button.btn{
         width: auto;
     }
-    /* section.open-houes-guest1 .col-md-6:first-child{
-            padding: 40px 0;
-    } */
 }
