@@ -125,7 +125,7 @@
 								<strong>
 									<xsl:text>Copyright &#169; </xsl:text>
 									<span id="copyright-year">
-										<xsl:value-of select="//output/@year" />
+										<xsl:value-of select="concat(//output/@year, ' ')" />
 									</span>
 									<a target="_blank" href="#">1parkplace, Inc.</a>.
 								</strong>
@@ -163,12 +163,16 @@
 				<div class="row">
 					<xsl:choose>
 						<xsl:when test="$hasMultipleAgents">
+							<div class="col-md-12">
+								<div class="agent-details">
+									<span class=" f-name">
+										<xsl:value-of select="'For more information, contact:'" />
+									</span>
+								</div>							
+							</div>
 							<div class="col-md-3">
 								<div class="agent-details agent-detail-wrapper">
-									<div class="photo">
-										<span class=" f-name">
-											<xsl:value-of select="concat('Call/Text ', //agent[1]/firstName,' for your private showing:' )" />
-										</span>
+									<div class="photo">					
 										<img>
 											<xsl:attribute name="alt">
 												<xsl:value-of select="//agent[1]/marketingName" />
@@ -223,19 +227,7 @@
 											<xsl:value-of select="//agent[1]/marketingLicense" />
 										</h4>
 									</div>
-									<div class="agent-logo">
-										<!-- <div class="funnel-about-company-logo">
-											<div class="funnel-personal-logo genie-logo-light">
-												<xsl:attribute name="style">
-													<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoLight, ')' )" />
-												</xsl:attribute>
-											</div>
-											<div class="funnel-personal-logo genie-logo-dark">
-												<xsl:attribute name="style">
-													<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoDark, ')' )" />
-												</xsl:attribute>
-											</div>
-										</div> -->
+									<div class="agent-logo">	
 										<div class="funnel-about-personal-logo">
 											<div class="funnel-personal-logo genie-logo-light">
 												<xsl:attribute name="style">
@@ -254,9 +246,9 @@
 							<div class="col-md-3">
 								<div class="agent-details agent-detail-wrapper">
 									<div class="photo">
-										<span class=" f-name">
+										<!-- <span class=" f-name">
 											<xsl:value-of select="concat('Call/Text ', //agent[2]/firstName,' for your private showing:' )" />
-										</span>
+										</span> -->
 										<img>
 											<xsl:attribute name="alt">
 												<xsl:value-of select="//agent[2]/marketingName" />
@@ -984,13 +976,16 @@
 							<div class="fl-thumb-icon text-center subtitle-color-as-bg">
 								<div class="circle-icon background close-popup">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="var(--theme-sub-heading-color)">
-										<path d="M128 447.1V223.1c0-17.67-14.33-31.1-32-31.1H32c-17.67 0-32 14.33-32 31.1v223.1c0 17.67 14.33 31.1 32 31.1h64C113.7 479.1 128 465.6 128 447.1zM512 224.1c0-26.5-21.48-47.98-48-47.98h-146.5c22.77-37.91 34.52-80.88 34.52-96.02C352 56.52 333.5 32 302.5 32c-63.13 0-26.36 76.15-108.2 141.6L178 186.6C166.2 196.1 160.2 210 160.1 224c-.0234 .0234 0 0 0 0L160 384c0 15.1 7.113 29.33 19.2 38.39l34.14 25.59C241 468.8 274.7 480 309.3 480H368c26.52 0 48-21.47 48-47.98c0-3.635-.4805-7.143-1.246-10.55C434 415.2 448 397.4 448 376c0-9.148-2.697-17.61-7.139-24.88C463.1 347 480 327.5 480 304.1c0-12.5-4.893-23.78-12.72-32.32C492.2 270.1 512 249.5 512 224.1z" fill="var(--theme-sub-heading-color)" />
+										<path d="M104 224H24c-13.3 0-24 10.7-24 24v240c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V248c0-13.3-10.7-24-24-24zM64 472c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zM384 81.5c0 42.4-26 66.2-33.3 94.5h101.7c33.4 0 59.4 27.7 59.6 58.1 .1 17.9-7.5 37.2-19.4 49.2l-.1 .1c9.8 23.3 8.2 56-9.3 79.5 8.7 25.9-.1 57.7-16.4 74.8 4.3 17.6 2.2 32.6-6.1 44.6C440.2 511.6 389.6 512 346.8 512l-2.8 0c-48.3 0-87.8-17.6-119.6-31.7-16-7.1-36.8-15.9-52.7-16.2-6.5-.1-11.8-5.5-11.8-12v-213.8c0-3.2 1.3-6.3 3.6-8.5 39.6-39.1 56.6-80.6 89.1-113.1 14.8-14.8 20.2-37.2 25.4-58.9C282.5 39.3 291.8 0 312 0c24 0 72 8 72 81.5z" fill="var(--theme-sub-heading-color)"/>
 									</svg>
 								</div>
 							</div>
-							<h2 class="widget text-center heading-font subtitle-color">
+							<h2 class="widget text-center heading-font subtitle-color popup-heading">
 								<xsl:value-of select="$message" />
 							</h2>
+							<h4 class="genie-module-subtitle-font genie-module-heading-color popup-subheading">
+								<a class="" href="#" target="_blank">Click this LINK for the Full Property Details</a>
+							</h4>
 						</div>
 					</div>
 				</div>

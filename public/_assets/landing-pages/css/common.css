@@ -69,11 +69,12 @@ section {
 	padding: 60px 0;
 }
 
+.mt-0{
+	margin-top: 0;
+}
+
 .text-uppercase {
 	text-transform: uppercase;
-}
-.mt-0 {
-margin-top: 0;
 }
 
 .btn-primary:hover,
@@ -1132,8 +1133,8 @@ textarea.form-control {
 }
 
 .fl-thumb-icon svg {
-	width: 60px;
-	height: 60px;
+	width: 47px;
+	height: 50px;
 }
 
 .fl-thankyou-modal.modal.fade .modal-dialog {
@@ -1213,6 +1214,16 @@ textarea.form-control {
 .widget {
 	word-wrap: break-word;
 	padding: 10px;
+}
+.popup-heading{
+	font-size: 30px;
+    font-weight: 500;
+	text-transform: uppercase;
+	line-height: 1.5;
+}
+.popup-subheading a{
+	font-family: var(--theme-body-font);
+	font-weight: 500;
 }
 
 .fl-close-modal img {
@@ -1931,7 +1942,7 @@ div p#snapshot-delta {
 .popup-dialog .modal-body {
 	padding: 15px 35px 0;
 	margin: 0 !important;
-	margin-bottom: 20px !important;
+	margin-bottom: 20px;
 }
 
 .popup-dialog #download-report-submit {
@@ -3109,9 +3120,11 @@ header.header.fixed .agent-company-logo {
 		width: 750px;
 	}
 
-	.modal-dialog {
+	.modal-dialog, .popup-dialog>.modal-dialog {
 		width: 600px;
 		margin: 30px auto;
+		background-color: transparent;
+
 	}
 
 	.popup-dialog .heading-font.heading-color {

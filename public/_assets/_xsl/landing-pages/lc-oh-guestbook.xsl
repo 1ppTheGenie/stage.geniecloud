@@ -4,15 +4,16 @@
 	Version:			1.0
 	Tags:				Landing Page
 	Sizes:				Landing Page
-	Supports:			Area, Listing, Multi-Agent
+	Supports:			Area, Listing
 	Permission: 		Funnels
-	Default Download:   area-insider-reports/market-insider
+		Default Download:    area-insider-reports/market-insider
 	Render Key:			landing-page/Open-House-Guest-Book-MLSNUMBER
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 	<xsl:import href="landing-pages.xsl" />
-	
+
+
 	<xsl:template name="landing-page">
 		<xsl:variable name="head-description">
 			<xsl:value-of select="concat( 'The ', //area/name, ' market is shifting! View the latest market trends and grab your customized report now.' )" />
@@ -30,6 +31,13 @@
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( //output/@theme, ' ', //output/@themeHue  )" />
 			</xsl:attribute>
+
+			<!-- Futura Font -->
+			<link rel="stylesheet">
+				<xsl:attribute name="href">
+					<xsl:value-of select="'/_assets/_css/futura-condensed-v2.css'" />
+				</xsl:attribute>
+			</link>
 
 			<div id="step1" class="background steps funnel-open-houes-guest1">
 
@@ -62,10 +70,8 @@
 											<xsl:value-of select="concat( ' MLS #: ', //single/mlsNumber)" />
 										</h6>
 
-										<h3 class="subtitle-font heading-color" style="font-weight:700;">
-											<strong>
-												<xsl:value-of select="format-number( //single/price, '$###,###')" />
-											</strong>
+										<h3 class="subtitle-font heading-color" style="font-weight:700;">											
+												<xsl:value-of select="format-number( //single/price, '$###,###')" />			
 										</h3>
 
 										<ul class="room-details body-font body-color">
@@ -212,31 +218,23 @@
 						</div>
 					</div>
 				</section>
-
 				<xsl:call-template name="agent-about" />
-
 				<div class="funnel-footer-background">
 					<xsl:call-template name="agent-details" />
 					<xsl:call-template name="default-thank-you-popup">
-						<xsl:with-param name="message" select="'Welcome to our Open House!'" />
+						<xsl:with-param name="message" select="'Welcome to our Open Home :)'" />						
 					</xsl:call-template>
 					<xsl:call-template name="copyright" />
 				</div>
 			</div>
 			<style>
 				<xsl:value-of select="'
-				#about-section {
-				    margin-top: 150px;
-				}
 				.team-about-wrapper {
 				    display: none;
 				}
 				.agent-details{
-					border-bottom:none;
-}'" />
+					border-bottom:none;}'" />
 			</style>
-
-
 			<script type="module" crossorigin="crossorigin">
 				<xsl:attribute name="src">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/oh-guestbook.js' )" />
