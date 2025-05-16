@@ -23,7 +23,7 @@
 						<tspan x="1.4%" dy="1.6%">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentname'" />
-								<xsl:with-param name="default" select="concat(upper-case(//agent[1]/firstName), ' &amp; ', //agent[2]/firstName), ':'" />
+								<xsl:with-param name="default" select="concat(upper-case(//agent[1]/firstName), ' &amp; ', upper-case(//agent[2]/firstName)), ':'" />
 							</xsl:call-template>
 						</tspan>			
 						
