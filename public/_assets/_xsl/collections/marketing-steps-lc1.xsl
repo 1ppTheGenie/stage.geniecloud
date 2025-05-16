@@ -122,7 +122,7 @@ Version:	1.1
 						<div class="company-logo">
 							<img title="Company Logo">
 								<xsl:attribute name="src">
-									<xsl:value-of select="//agent/personalLogoDark" />
+									<xsl:value-of select="//agent[1]/personalLogoDark" />
 								</xsl:attribute>
 							</img>
 						</div>	
