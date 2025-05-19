@@ -56,7 +56,7 @@
 			</image>
 		</xsl:if>
 		<xsl:if test="//output/@themeHue='light'">
-			<image x="0%" y="60%" width="100%" height="40%" preserveAspectRatio="xMidYMid slice">
+			<image x="0%" y="50%" width="100%" height="50%" preserveAspectRatio="xMidYMid slice">
 				<xsl:attribute name="href">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/bottomlightlayer-light.png' )" />
 				</xsl:attribute>
@@ -89,10 +89,7 @@
 		  <tspan x="90" dy="3.5%">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'Open House'" />
-              <xsl:with-param
-                name="default"
-                select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
-              />
+              <xsl:with-param name="default" select="concat(//openHouse/session[1]/@starts, ' - ', //openHouse/session[1]/@ends)" />
             </xsl:call-template>
           </tspan>
 		</text>
@@ -100,7 +97,7 @@
       <xsl:otherwise>
         <text x="90" y="85.5%" fill="var(theme-heading-color)" font-family="var(--theme-heading-font)" font-size="60" font-weight="700" style="line-height: 1;text-transform: uppercase;">
 			<tspan>Open Today</tspan>
-			<tspan x="90" dy="3.5%">1 - 4pm</tspan>
+			<tspan x="90" dy="3.5%">1pm - 4pm</tspan>
 		</text>
       </xsl:otherwise>
     </xsl:choose>

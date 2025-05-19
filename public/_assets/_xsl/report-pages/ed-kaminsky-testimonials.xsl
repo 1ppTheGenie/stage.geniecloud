@@ -11,11 +11,12 @@
 <xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-
-		</link>
-
+		<!-- <link rel="stylesheet">
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+		</link> -->
+		<style type="text/css">
+			@import url("/_assets/_css/futura-embedded.css");
+		</style>
 		<style>
 			<xsl:value-of select="'
 			.testimonial-comma{
@@ -132,6 +133,6 @@
 <span style="line-height:30px; font-size:15px;">- Michael &#38; Dorothy Don</span>
 </p>
 </foreignObject>
-
+<xsl:call-template name="copyright" />
 </xsl:template>
 </xsl:stylesheet>

@@ -94,7 +94,7 @@
 
 			</clipPath>
 
-			<image x="0" y="0" width="100%" height="100%" clip-path="url(#myPolygon)" preserveAspectRatio="xMidYMin slice">
+			<image x="-5%" y="-10%" width="85%" height="110%" clip-path="url(#myPolygon)" preserveAspectRatio="xMidYMin slice">
 				<xsl:attribute name="href">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/left-bgimage-04.png' )" />
 				</xsl:attribute>

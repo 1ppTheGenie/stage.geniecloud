@@ -38,7 +38,7 @@
 			<rect x="0" y="45%" fill="var(--theme-sub-heading-color)" width="100%" height="2%" />
 
 			<g style="transform:translate(0%,43%)">
-				<rect x="13%" y="-3%" fill="var(--theme-sub-heading-color)" width="75%" height="13.5%" />
+				<rect x="10%" y="-1.8%" fill="var(--theme-sub-heading-color)" width="80%" height="11.5%" />
 
 				<text x="50%" y="-1%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="370%" font-weight="500">
 					<xsl:call-template name="editable">
@@ -68,7 +68,7 @@
 
 				
 				<foreignObject x="0" y="2.5%" width="100%" height="25%">
-					<p class="center upper" style="font-family:var(--theme-body-font);font-size:500%;font-weight:500;width: 800px; margin-inline: auto;margin-top:0;margin-bottom:12px;color:var(--theme-sub-heading-color);line-height:110%">
+					<p class="center upper" style="font-family:var(--theme-body-font);font-size:500%;font-weight:500;width: 900px; margin-inline: auto;margin-top:0;margin-bottom:12px;color:var(--theme-sub-heading-color);line-height:110%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'yourdreamhome'" />
 							<xsl:with-param name="default" select="concat('',$sub-heading)" />

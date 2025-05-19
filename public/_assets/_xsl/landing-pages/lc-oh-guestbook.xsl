@@ -32,6 +32,13 @@
 				<xsl:value-of select="concat( //output/@theme, ' ', //output/@themeHue  )" />
 			</xsl:attribute>
 
+			<!-- Futura Font -->
+			<link rel="stylesheet">
+				<xsl:attribute name="href">
+					<xsl:value-of select="'/_assets/_css/futura-condensed-v2.css'" />
+				</xsl:attribute>
+			</link>
+
 			<div id="step1" class="background steps funnel-open-houes-guest1">
 
 				<section class="open-houes-guest1">
@@ -63,10 +70,8 @@
 											<xsl:value-of select="concat( ' MLS #: ', //single/mlsNumber)" />
 										</h6>
 
-										<h3 class="subtitle-font heading-color" style="font-weight:700;">
-											<strong>
-												<xsl:value-of select="format-number( //single/price, '$###,###')" />
-											</strong>
+										<h3 class="subtitle-font heading-color" style="font-weight:700;">											
+												<xsl:value-of select="format-number( //single/price, '$###,###')" />			
 										</h3>
 
 										<ul class="room-details body-font body-color">
@@ -118,7 +123,7 @@
 										<xsl:if test="count(//openHouse/session) &gt; 0">				
 											<xsl:call-template name="editable">
 												<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
-												<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
+												<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', translate(//openHouse/session[1]/@starts, 'APM', 'apm'), ' to ', translate(//openHouse/session[1]/@ends, 'APM', 'apm'))" />
 											</xsl:call-template>
 										</xsl:if>
 									</p>
@@ -213,31 +218,23 @@
 						</div>
 					</div>
 				</section>
-
 				<xsl:call-template name="agent-about" />
-
 				<div class="funnel-footer-background">
 					<xsl:call-template name="agent-details" />
 					<xsl:call-template name="default-thank-you-popup">
-						<xsl:with-param name="message" select="'Welcome to our Open House!'" />
+						<xsl:with-param name="message" select="'Welcome to our Open Home :)'" />						
 					</xsl:call-template>
 					<xsl:call-template name="copyright" />
 				</div>
 			</div>
 			<style>
 				<xsl:value-of select="'
-				#about-section {
-				    margin-top: 150px;
-				}
 				.team-about-wrapper {
 				    display: none;
 				}
 				.agent-details{
-					border-bottom:none;
-}'" />
+					border-bottom:none;}'" />
 			</style>
-
-
 			<script type="module" crossorigin="crossorigin">
 				<xsl:attribute name="src">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/landing-pages/oh-guestbook.js' )" />

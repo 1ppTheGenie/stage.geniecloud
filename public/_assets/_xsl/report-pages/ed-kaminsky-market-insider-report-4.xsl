@@ -12,10 +12,13 @@
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
 
-		<link rel="stylesheet">
+		<!-- <link rel="stylesheet">
 			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
-		</link>
+		</link> -->
+		<style type="text/css">
+			@import url("/_assets/_css/futura-embedded.css");
+		</style>
 		<script>
 			<xsl:text>var listings=[</xsl:text>
 			<xsl:for-each select="//listings/listing">
@@ -49,7 +52,7 @@
 				  letter-spacing:6px;" data-max-width="20%">
 		         CLASSIFIED:
 			</text>
-			<text x="6%" y="25%" fill="#fff" class="futura-text" font-size="240%" font-weight="800" style=" letter-spacing:1px;" data-max-width="22%">
+			<text x="6%" y="25%" fill="#fff" class="futura-text" font-size="28" font-weight="800" style=" letter-spacing:1px;" data-max-width="22%">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'areanames'" />
 					<xsl:with-param name="default" select="//area/name" />
@@ -65,7 +68,7 @@
 				<text x="5%" y="6.6%" class="center bold" style="font-size:92%;" fill="#fff">
 					<xsl:value-of select="count($listingsTotalNew)" />
 				</text>
-				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="600" fill="#fff">
+				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="500" fill="#fff">
 					<xsl:call-template name="view-period">
 						<xsl:with-param name="prefix" select="'Listed in past '" />
 					</xsl:call-template>
@@ -76,7 +79,7 @@
 				<text x="5%" y="6.6%" class="center bold" style="font-size:92%;" fill="#fff">
 					<xsl:value-of select="count($listingsTotalActive)" />
 				</text>
-				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="600" fill="#fff">
+				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="500" fill="#fff">
 						Currently for sale
 				</text>
 			</svg>
@@ -85,7 +88,7 @@
 				<text x="5%" y="6.6%" class="center bold" style="font-size:92%;" fill="#fff">
 					<xsl:value-of select="count($listingsTotalPending)" />
 				</text>
-				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="600" fill="#fff">
+				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="500" fill="#fff">
 						Pending
 				</text>
 			</svg>
@@ -94,7 +97,7 @@
 				<text x="5%" y="6.6%" class="center bold" style="font-size:92%;" fill="#fff">
 					<xsl:value-of select="count($listingsTotalSold)" />
 				</text>
-				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="600" fill="#fff">
+				<text x="12%" y="6.6%" font-size="120%" class="futura-text" font-weight="500" fill="#fff">
 					<xsl:call-template name="view-period">
 						<xsl:with-param name="prefix" select="'Sold in past '" />
 					</xsl:call-template>

@@ -6,7 +6,7 @@
 		<rect x="0" y="87%" width="100%" height="9.9%" fill="var(--theme-heading-color)" />
 
 		<g style="transform:translate(0%,87.9%)">
-			<text x="2%" y="0.6%" class="schedule" font-family="var(--theme-heading-font)" font-size="140%" font-weight="300" fill="var(--theme-body-background)">
+			<text x="1.4%" y="0.6%" class="schedule" font-family="var(--theme-heading-font)" font-size="140%" font-weight="300" fill="var(--theme-body-background)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'Schedule'" />
 					<xsl:with-param name="default" select="'Schedule a private showing:'" />
@@ -15,27 +15,27 @@
 
 			<xsl:choose>
 				<xsl:when test="$hasMultipleAgents">
-					<text x="2%" y="2.3%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
-						<tspan x="2%" dy="0">
+					<text x="1.4%" y="2.3%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="500" data-max-width="20%">
+						<tspan x="1.4%" dy="0">
 							CALL or TEXT
 						</tspan>							
 						
-						<tspan x="2%" dy="1.6%">
+						<tspan x="1.4%" dy="1.6%">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentname'" />
-								<xsl:with-param name="default" select="concat(upper-case(//agent[1]/firstName), ' &amp; ', //agent[2]/firstName)" />
+								<xsl:with-param name="default" select="concat(upper-case(//agent[1]/firstName), ' &amp; ', upper-case(//agent[2]/firstName)), ':'" />
 							</xsl:call-template>
 						</tspan>			
 						
 					</text>
-					<text x="2%" y="5.9%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="20" font-weight="700">
-						<tspan x="2%" dy="0">
+					<text x="1.4%" y="5.8%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="20" font-weight="700">
+						<tspan x="1.4%" dy="0">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentname'" />
 								<xsl:with-param name="default" select="//agent[1]/mobile" />
 							</xsl:call-template>
 						</tspan>
-						<tspan x="2%" dy="1%">
+						<tspan x="1.4%" dy="1.3%">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentname'" />
 								<xsl:with-param name="default" select="//agent[2]/mobile" />
@@ -45,13 +45,13 @@
 					
 				</xsl:when>
 				<xsl:otherwise>
-					<text x="2%" y="2.3%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
+					<text x="1.4%" y="2.3%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700" data-max-width="20%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="concat( 'CALL or TEXT ' , upper-case(//agent[1]/firstName), ':')" />
 						</xsl:call-template>
 					</text>
-					<text x="2%" y="4.9%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700">
+					<text x="1.4%" y="4.9%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="200%" font-weight="700">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
 							<xsl:with-param name="default" select="//agent[1]/mobile" />
@@ -64,29 +64,29 @@
 				<xsl:when test="$hasMultipleAgents">
 					<defs>
 						<clipPath id="circleClip1">
-							<circle cx="22%" cy="3.7%" r="3.7%" />
+							<circle cx="19%" cy="3.5%" r="3.5%" />
 						</clipPath>
 						<clipPath id="circleClip2">
-							<circle cx="31.5%" cy="3.7%" r="3.7%" />
+							<circle cx="28.5%" cy="3.5%" r="3.5%" />
 						</clipPath>
 					</defs>
 
 					<g>
 						<!-- background circle behind image 1 -->
-						<circle cx="22%" cy="3.7%" r="3.7%" fill="#69657a" />
+						<circle cx="19%" cy="3.5%" r="3.5%" fill="#69657a" />
 
 						<!-- Circular image 1 -->
-						<image x="15%" y="0%" width="15%" height="7%" clip-path="url(#circleClip1)">
+						<image x="12%" y="0.5%" width="14.5%" height="6.5%" clip-path="url(#circleClip1)">
 							<xsl:attribute name="href">
 								<xsl:value-of select="//agent[1]/photo" />
 							</xsl:attribute>
 						</image>
 
 						<!-- background circle behind image 2 -->
-						<circle cx="31.5%" cy="3.7%" r="3.7%" fill="#69657a" />
+						<circle cx="28.5%" cy="3.5%" r="3.5%" fill="#69657a" />
 
 						<!-- Circular image 2 -->
-						<image x="25%" y="0%" width="15%" height="7%" clip-path="url(#circleClip2)">
+						<image x="21.5%" y="0.5%" width="14.5%" height="6.5%" clip-path="url(#circleClip2)">
 							<xsl:attribute name="href">
 								<xsl:value-of select="//agent[2]/photo" />
 							</xsl:attribute>
@@ -104,14 +104,14 @@
 				</xsl:otherwise>
 			</xsl:choose>
 
-			<text x="98%" y="0.7%" class="align-right right" font-family="var(--theme-heading-font)" font-size="125%" font-weight="100"  fill="var(--theme-body-background)">
+			<text x="98%" y="0.6%" class="align-right right" font-family="var(--theme-heading-font)" font-size="125%" font-weight="100"  fill="var(--theme-body-background)">
 				<tspan x="98%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentwebsite'" />
 						<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 					</xsl:call-template>
 				</tspan>
-				<tspan x="98%" dy="1.7%">
+				<tspan x="98%" dy="1.55%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmarketingEmail'" />
 						<xsl:with-param name="default" select="//agent[1]/website" />
@@ -137,7 +137,7 @@
 				<xsl:value-of select="//agent[1]/marketingLicense" />
 			</text>
 
-			<text x="51.5%" y="0.8%" class="center" font-family="var(--theme-heading-font)" font-size="130%" font-weight="300" fill="var(--theme-body-background)">
+			<text x="51.5%" y="0.6%" class="center" font-family="var(--theme-heading-font)" font-size="130%" font-weight="300" fill="var(--theme-body-background)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'presented'" />
 					<xsl:with-param name="default" select="'Presented by:'" />
@@ -146,7 +146,7 @@
 
 			<xsl:choose>
 				<xsl:when test="$companyLogo='' or $personalLogo=''">
-					<image x="40%" y="3.4%" width="25%" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
+					<image x="36%" y="3%" width="27%" height="6%" id="logo" preserveAspectRatio="xMidYMid meet">
 						<xsl:attribute name="href">
 							<xsl:choose>
 								<xsl:when test="$personalLogo = ''">
@@ -175,10 +175,7 @@
 					</image>
 				</xsl:when>
 				<xsl:otherwise>
-					<image x="39%" y="3.4%" width="24%" height="5%" class="center" preserveAspectRatio="xMinYMid meet">
-						<!-- <xsl:attribute name="href">
-							<xsl:value-of select="$personalLogoInverse" />
-						</xsl:attribute> -->
+					<image x="36%" y="3%" width="27%" height="6%" class="center" preserveAspectRatio="xMinYMid meet">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue='dark'">
 								<xsl:attribute name="href">
@@ -193,7 +190,7 @@
 						</xsl:choose>
 						
 					</image>
-					<image x="66%" y="4%" width="6%" height="3.5%" class="center" preserveAspectRatio="xMidYMid meet">
+					<image x="68%" y="4%" width="6%" height="2.8%" class="center" preserveAspectRatio="xMidYMid meet">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue='dark'">
 								<xsl:attribute name="href">

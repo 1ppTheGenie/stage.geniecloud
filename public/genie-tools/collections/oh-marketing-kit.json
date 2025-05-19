@@ -5,47 +5,55 @@
 	"sections": [
 		{
 			"sort": 1,
-			"meta": { "caption": "", "description": "" },
+			"meta": { "caption": "Pre marketing assets", "description": "" },
 			"assets": [
 				{
 					"sort": 1,
 					"asset": "social-marketing-graphics/ed-oh-social-templates-1",
-					"name": "Square Post #1"
+					"name": "Square Post #1",
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 2,
 					"asset": "social-marketing-graphics/ed-oh-social-templates-2",
-					"name": "Square Post #2"
+					"name": "Square Post #2",
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 3,
 					"asset": "social-marketing-graphics/ed-oh-social-templates-3",
-					"name": "Square Post #3"
+					"name": "Square Post #3",
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 4,
 					"asset": "social-marketing-graphics/ed-oh-social-templates-4",
-					"name": "Square Post #4"
+					"name": "Square Post #4",
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 5,
 					"asset": "social-marketing-graphics/ed-oh-instagram-story-1",
-					"name": "Square Story #1"
+					"name": "Social Story #1",
+					"size": "instagram-Story"
 				},
 				{
 					"sort": 6,
 					"asset": "social-marketing-graphics/ed-oh-instagram-story-2",
-					"name": "Square Story #2"
+					"name": "Social Story #2",
+					"size": "instagram-Story"
 				},
 				{
 					"sort": 7,
 					"asset": "social-marketing-graphics/ed-oh-instagram-story-3",
-					"name": "Square Story #3"
+					"name": "Social Story #3",
+					"size": "instagram-Story"
 				},
 				{
 					"sort": 8,
 					"asset": "social-marketing-graphics/ed-oh-instagram-story-4",
-					"name": "Square Story #4"
+					"name": "Social Story #4",
+					"size": "instagram-Story"
 				},
 				{
 					"sort": 9,

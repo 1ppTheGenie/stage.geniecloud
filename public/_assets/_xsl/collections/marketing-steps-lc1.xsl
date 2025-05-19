@@ -122,7 +122,7 @@ Version:	1.1
 						<div class="company-logo">
 							<img title="Company Logo">
 								<xsl:attribute name="src">
-									<xsl:value-of select="//agent/personalLogoDark" />
+									<xsl:value-of select="//agent[1]/personalLogoDark" />
 								</xsl:attribute>
 							</img>
 						</div>	
@@ -228,11 +228,11 @@ Version:	1.1
 								<xsl:value-of select="@name" />
 							</h2>
 
-							<xsl:if test="@caption != ''">
+							<!-- <xsl:if test="@caption != ''">
 								<h3>
 									<xsl:value-of select="@caption" />
 								</h3>
-							</xsl:if>
+							</xsl:if> -->
 
 							<xsl:if test="@description != ''">
 								<p>
@@ -245,9 +245,9 @@ Version:	1.1
 								<span><xsl:comment/></span>
 							</div>
 
-							<xsl:if test="@assetTitle != ''">
+							<xsl:if test="@caption != ''">
 								<p class="asset-box-title">
-									<xsl:value-of select="@assetTitle" />
+									<xsl:value-of select="@caption" />
 								</p>
 							</xsl:if>
 
@@ -310,7 +310,7 @@ Version:	1.1
 					<xsl:if test="$pos = 2">
 						<section class="visitor-sec">
 							<div class="container">
-								<h1>Get contact info for every visitor,<br/> every time. No exceptions.</h1>
+								<h1>Every visitor signs in.<br/> Every time. No exceptions.</h1>
 								<span class="up-arrow">↑</span>
 								<p class="bordered-button">This isn't a button. Read the above again.</p>
 							</div>	

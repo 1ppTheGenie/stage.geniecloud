@@ -18,12 +18,12 @@
 			<xsl:choose>
 				<xsl:when test="//output/@themeHue='dark'">
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent/personalLogoDark" />
+						<xsl:value-of select="//agent[1]/personalLogoDark" />
 					</xsl:attribute>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent/personalLogoLight" />
+						<xsl:value-of select="//agent[1]/personalLogoLight" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -32,12 +32,12 @@
 			<xsl:choose>
 				<xsl:when test="//output/@themeHue='dark'">
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent/companyLogoDark" />
+						<xsl:value-of select="//agent[1]/companyLogoDark" />
 					</xsl:attribute>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent/companyLogoLight" />
+						<xsl:value-of select="//agent[1]/companyLogoLight" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -82,7 +82,7 @@
 				<!-- <xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ',//openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" /> -->
 			</xsl:call-template>
 		</text>
-		<text x="50%" y="68%" class="center" fill="var(--theme-sub-heading-color)" font-family="var(--theme-body-font)" font-size="455%" font-weight="800" style=" letter-spacing:1px;"> 
+		<text x="50%" y="68%" class="center" fill="var(--theme-sub-heading-color)" font-family="var(--theme-body-font)" font-size="455%" font-weight="800" style=" letter-spacing:1px; text-transform:lowercase"> 
 			<xsl:choose>
 				<xsl:when test="count(//openHouse/session) &gt; 0">
 					<xsl:call-template name="editable">

@@ -129,7 +129,7 @@
 			<g style="transform:translateX(-1%)">
 				<image x="0" y="0" width="10%" height="13%" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/Sold.svg' )" />
+						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/sold-1.png' )" />
 					</xsl:attribute>
 				</image>
 				<text x="2%" y="0" fill="#0d0f30">
@@ -147,7 +147,7 @@
 			<g style="transform:translateX(31%)">
 				<image x="0" y="0" width="10%" height="13%" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/Active.svg' )" />
+						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/active-1.png' )" />
 					</xsl:attribute>
 				</image>
 				<text x="2%" y="0%" fill="#0d0f30">
@@ -165,7 +165,7 @@
 			<g style="transform:translateX(62%)">
 				<image x="0" y="0" width="10%" height="13%" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/Pending.svg' )" />
+						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/pending-1.png' )" />
 					</xsl:attribute>
 				</image>
 

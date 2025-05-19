@@ -1631,16 +1631,25 @@
 
 		<g id="footer">
 			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#ffffff">
-				<xsl:text>Source: TheGenie.ai</xsl:text>
+				<tspan>Source: </tspan>
+				<a xlink:href="https://thegenie.ai/" target="_blank" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<tspan fill="#ffffff">TheGenie.ai</tspan>
+				</a>
 			</text>
+
 			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#ffffff">
 				<xsl:text> Recipients to verify all information.</xsl:text>
 			</text>
 			<text font-size="9" font-weight="400" font-family="var(--theme-body-font)" fill="#ffffff">
-				<xsl:text> Copyright © </xsl:text>
-				<xsl:value-of select="//output/@year" />
-				<xsl:text> 1parkplace, Inc.</xsl:text>
+				<tspan>
+					<xsl:text> Copyright © </xsl:text>
+					<xsl:value-of select="//output/@year" />
+				</tspan>
+				<a xlink:href="https://www.1parkplace.com" target="_blank" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<tspan fill="#ffffff">1parkplace, Inc.</tspan>
+				</a>
 			</text>
+
 		</g>
 	</xsl:template>
 

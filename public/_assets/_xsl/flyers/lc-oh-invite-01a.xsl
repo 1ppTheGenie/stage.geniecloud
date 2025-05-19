@@ -3,7 +3,8 @@
 	Asset Name: LC-OH-INVITE-01A
 	Tags:		Flyer
 	Sizes:		Letter
-	Supports:	Listing, Area, QRCode
+	Supports:	Listing, Area, QRCode, AsPDF
+	Pages:		flyers/lc-oh-invite-01a
 	Version:	1.1
 -->
 
@@ -18,14 +19,17 @@
 					transform: translate(2.5%, 98%);
 				}
 				g#footer text{
-					font-size: 20px;
-					fill: var(--theme-heading-color);
+					font-size: 11px;
+					fill: #94949D;
+				}
+				g#footer text a tspan{
+					fill: #337ab7;
 				}
 			'"/>
 		</style>
 
 		<xsl:call-template name="lc-oh-invite">
-			<xsl:with-param name="sub-heading" select="concat( 'Your New ', $singularPropertyType, ' is waiting for&#160;you!')" />
+			<xsl:with-param name="sub-heading" select="concat( 'Your Dream ', $singularPropertyType, ' is waiting for&#160;you!')" />
 		</xsl:call-template>
 
 		<xsl:call-template name="copyright" />

@@ -85,7 +85,7 @@
 							<!-- Circular image 1 -->
 							<image x="-5%" y="-7%" width="120" height="120" clip-path="url(#circleClip1)">
 								<xsl:attribute name="href">
-									<xsl:value-of select="//agent[2]/photo" />
+									<xsl:value-of select="//agent[1]/photo" />
 								</xsl:attribute>
 							</image>
 
@@ -95,7 +95,7 @@
 							<!-- Circular image 2 -->
 							<image x="4%" y="-7%" width="120" height="120" clip-path="url(#circleClip2)">
 								<xsl:attribute name="href">
-									<xsl:value-of select="//agent[1]/photo" />
+									<xsl:value-of select="//agent[2]/photo" />
 								</xsl:attribute>
 							</image>
 						</g>
@@ -104,7 +104,7 @@
 						<xsl:value-of select="genie:format-date( //output/@reportDate, '[MNn] [D], [Y0001]')" />
 					</text>
 
-					<rect xmlns="" x="38.6%" y="86.2%" width="7%" height="4%" fill="#d1232a" style="
+					<rect xmlns="" x="39.4%" y="86.2%" width="7%" height="4%" fill="#d1232a" style="
               transform: translate(-25px, 15px) rotate(-3deg);
               -webkit-transform: translate(-15px, 15px) rotate(-3deg);
               width: 7%;
@@ -115,28 +115,17 @@
 					<text xmlns="" x="22.5%" y="84.3%" class="futura-text" font-size="103%" fill="#fff">
 						<tspan>Confidentially prepared for </tspan>
 					</text>
-					<text xmlns="" x="47.5%" y="84.3%" class="futura-text" font-size="103%" fill="#fff">
+					<text xmlns="" x="48.3%" y="84.3%" class="futura-text" font-size="103%" fill="#fff">
 						<tspan>by</tspan>
 					</text>
-					<text xmlns="" x="39.2%" y="86%" class="futura-text" font-size="95%" fill="#fff" style="
+					<text xmlns="" x="40.1%" y="86%" class="futura-text" font-size="95%" fill="#fff" style="
               transform: translate(-25px, 15px) rotate(-3deg);
               -webkit-transform: translate(-32px, 22px) rotate(-3deg);
             ">
 						<tspan dx="1.5%" class="bold" font-size="85%">REDACTED </tspan>
 					</text>
 
-					<text xmlns="" x="22%" y="88.6%" class="futura-text" font-size="103%" fill="#fff">
-						<tspan fill="#b0934c" class="bold">
-							<xsl:call-template name="editable">
-								<xsl:with-param name="id" select="'agentFirstName'" />
-								<xsl:with-param name="default" select="//agent[2]/firstName" />
-							</xsl:call-template>
-							<xsl:call-template name="editable">
-								<xsl:with-param name="id" select="'agentLastName'" />
-								<xsl:with-param name="default" select="concat(' ',//agent[2]/lastName)" />
-							</xsl:call-template>
-						</tspan>
-						<tspan dx="0.5%">and </tspan>
+					<text xmlns="" x="22.5%" y="88.6%" class="futura-text" font-size="103%" fill="#fff">
 						<tspan fill="#b0934c" class="bold">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentFirstName'" />
@@ -145,6 +134,17 @@
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentLastName'" />
 								<xsl:with-param name="default" select="concat(' ',//agent[1]/lastName)" />
+							</xsl:call-template>
+						</tspan>
+						<tspan dx="0.5%">and </tspan>
+						<tspan fill="#b0934c" class="bold">
+							<xsl:call-template name="editable">
+								<xsl:with-param name="id" select="'agentFirstName'" />
+								<xsl:with-param name="default" select="//agent[2]/firstName" />
+							</xsl:call-template>
+							<xsl:call-template name="editable">
+								<xsl:with-param name="id" select="'agentLastName'" />
+								<xsl:with-param name="default" select="concat(' ',//agent[2]/lastName)" />
 							</xsl:call-template>
 						</tspan>
 					</text>

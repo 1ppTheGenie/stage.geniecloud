@@ -40,14 +40,14 @@
       <xsl:when test="//output/@themeHue = 'light'">
         <image x="-33.8%" y="8%" width="27.7%" height="9.3%" id="logo" preserveAspectRatio="xMidYMid meet" style="transform: rotate(270deg); -webkit-transform: rotate(270deg);">
 			<xsl:attribute name="href">
-				<xsl:value-of select="//agent/personalLogoDark" />
+				<xsl:value-of select="//agent[1]/personalLogoDark" />
 			</xsl:attribute>
 		</image>
       </xsl:when>
       <xsl:otherwise>
         <image x="-33.8%" y="8%" width="27.7%" height="9.3%" id="logo" preserveAspectRatio="xMidYMid meet" style="transform: rotate(270deg); -webkit-transform: rotate(270deg);">
 			<xsl:attribute name="href">
-				<xsl:value-of select="//agent/personalLogoLight" />
+				<xsl:value-of select="//agent[1]/personalLogoLight" />
 			</xsl:attribute>
 		</image>
       </xsl:otherwise>
