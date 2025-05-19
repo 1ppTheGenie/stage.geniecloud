@@ -230,7 +230,7 @@ export const getDimensions = (size = null) => {
 			dims = [1100, 600];
 			break;
 		case "tabloid-flyer":
-				dims = [1100, 1700];
+				dims = [1700,1100];
 			break;
 		// End of print
 	
@@ -247,10 +247,6 @@ export const getDimensions = (size = null) => {
 		case "a5":
 			dims = [2126, 2753];
 			break;
-
-		case "tabloid-flyer":
-			dims = [4253, 2753];
-		break;
 
 		case "facebook":
 		default:
