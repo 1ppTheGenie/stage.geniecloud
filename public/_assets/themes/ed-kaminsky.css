@@ -3,7 +3,7 @@
 */
 
 @import url("../_css/lato.css");
-@import url("../_css/futura-condensed.css");
+@import url("../_css/futura-embedded.css");
 @import url("https://fonts.googleapis.com/css2?family=Smooch&display=swap");
 
 .ed-kaminsky, .ed-kaminsky.light, .ed-kaminsky .light {
@@ -13,7 +13,7 @@
 	--theme-body-color: #121849; /* Body */
 	--theme-emphasis-color: #b2934e; /* Outline */
 	--theme-body-font: "Lato", sans-serif;
-	--theme-heading-font: "Futura Condensed";
+	--theme-heading-font: "Futura" sans-serif;
 	--theme-sub-heading-font: "Lato", sans-serif;
 }
 
