@@ -728,22 +728,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 						</xsl:call-template>
 					</div>
 				</section>
-				<section id="my-home-valuation" class="inverse">
-				<div class="overlay">
-					<xsl:comment/>
-				</div>
-
-				<h2>
-					<xsl:value-of select="concat( 'What&#8217;s My ', //areas/area[1]/name, ' ', $singularPropertyType, ' Value?')" />
-				</h2>
-				<p>
-					<xsl:value-of select="concat( 'See how your home compares to other homes in ', //areas/area[1]/name, ', and find out what you can do to increase its worth. Get your personalized home report, and learn what people are looking for in a home.')" />
-				</p>
-
-				<a href="#" class="request-home-value">
-					Find what my property is worth!
-				</a>
-			</section>
+				
 
 				<section class="genie-alternate">
 					<xsl:call-template name="agent-about" />
