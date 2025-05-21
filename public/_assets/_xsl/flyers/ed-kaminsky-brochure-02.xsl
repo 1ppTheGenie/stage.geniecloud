@@ -129,13 +129,13 @@
 			<xsl:copy-of select="paras/root" /> -->
 		</foreignObject>
 
-		<image x="20%" y="92.5%" width="5.1%" height="5.1%" id="logo" preserveAspectRatio="xMidYMid meet">
+		<image x="20%" y="94.2%" width="5.1%" height="5.1%" id="logo" preserveAspectRatio="xMidYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/360-icon.png' )" />
 			</xsl:attribute>
 		</image>
 		<a href="https://www.itzsold.com/">
-			<text x="25.8%" y="93.1%" fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)" class="super-bold" font-size="220%">
+			<text x="25.8%" y="95.1%" fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)" class="super-bold" font-size="220%">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentwebsite'" />
 					<xsl:with-param name="default" select="//agent[1]/website" />
@@ -293,13 +293,18 @@
 		</xsl:choose>
 		
 		<text x="73.5%" y="88.8%" fill="var(--theme-body-background)" font-family="var(--theme-body-font)" font-size="110%">
-			<xsl:call-template name="editable">
+			<!-- <xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'listedbytext'" />
-				<xsl:with-param name="default" select="concat('Presented by ',//agent[1]/marketingName,' • ',//agent[1]/marketingLicense )" />
-			</xsl:call-template>
+				<xsl:with-param name="default" select="concat('Listed by ',//agent[1]/marketingName,' • ',//agent[1]/marketingLicense )" />
+				
+			</xsl:call-template> -->
+			<tspan><xsl:text>Listed by </xsl:text></tspan>
+			<tspan dx="5" font-weight="900"><xsl:value-of select="//agent[1]/marketingName" /></tspan>
+			<tspan dx="5"> • </tspan>
+			<tspan dx="5"><xsl:value-of select="//agent[1]/marketingLicense" /></tspan>
 		</text>
 
-		<foreignObject width="23.5%" height="6.5%" x="73.5%" y="90.6%" font-family="var(--theme-heading-font)" font-size="100%" style="color:var(--theme-body-background);">
+		<foreignObject width="23.5%" height="6.5%" x="73.5%" y="90.6%" font-family="var(--theme-sub-heading-font)" font-size="19" style="color:var(--theme-body-background); opacity:0.36">
 			<div><xsl:value-of select="concat('EXP REALTY OF CALIFORNIA, INC LICENSE ',//agent[1]/marketingLicense,'. INFORMATION IS DEEMED' )" /></div>
 			<div><xsl:value-of select="'RELIABLE, BUT NOT GUARANTEED. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY'" /></div>
 			<div><xsl:value-of select="'THE ACCURACY OF THIS INFORMATION'" /></div>
