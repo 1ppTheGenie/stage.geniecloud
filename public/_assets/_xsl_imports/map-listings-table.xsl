@@ -142,7 +142,7 @@
 								<td>
 									<!-- <xsl:value-of select="concat(@dom, ' Days')" /> -->
 									<xsl:choose>
-										<xsl:when test="@dom = '1'">
+										<xsl:when test="@dom = '0' or @dom = '1'">
 											<xsl:value-of select="concat(@dom, ' Day')" />
 										</xsl:when>
 										<xsl:otherwise>
