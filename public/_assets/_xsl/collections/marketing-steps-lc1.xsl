@@ -150,7 +150,7 @@ Version:	1.1
 									<xsl:value-of select="//area/name" />
 								<br/>
 									<xsl:value-of select="$listingAddressLine1" />
-									<xsl:if test="//openHouse/session[1]/@dow != ''">
+									<xsl:if test="count(//openHouse/session) &gt; 0">
 										<!-- Get date -->
 										<xsl:variable name="date" select="//openHouse/session[1]/@date" />
 
