@@ -12,16 +12,17 @@
     <xsl:import href="common.xsl" />
 
     <xsl:template name="svg-body">
-        <g style="font-size: 14px">
+        <rect width="100%" height="100%" fill="#ffffff"></rect>
+        <g>
             <g style="transform: translate(4%, 4%)">
-                <text font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="800"
-                    font-size="18em" class="upper">
+                <text font-family="var(--theme-heading-font)" fill="#0f1132" font-weight="800"
+                    font-size="85" class="upper">
                     <xsl:value-of select="$listingAddressLine1" />
                 </text>
                 <xsl:choose>
                     <xsl:when test="count(//openHouse/session) &gt; 0">
                         <text font-family="var(--theme-heading-font)" x="0%" y="10%"
-                            fill="var(--theme-sub-heading-color)" font-weight="800" font-size="18em">
+                            fill="#d2232a" font-weight="800" font-size="85">
                             Open House
                             <tspan style="text-transform: lowercase;">
                                 <xsl:call-template name="editable">
@@ -33,26 +34,26 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <text font-family="var(--theme-heading-font)" x="0%" y="10%"
-                            fill="var(--theme-sub-heading-color)" font-weight="800" font-size="18em">
+                            fill="#d2232a" font-weight="800" font-size="85">
                             Open House <tspan>1pm - 4pm</tspan>
                         </text>
                     </xsl:otherwise>
                 </xsl:choose>
 
-                <svg width="900" x="80%" y="0%" height="700" viewBox="0 0 110 221" fill="none"
+                <svg width="120" x="85%" y="-39.5%" viewBox="0 0 110 221" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
-                    <path d="M110 110.5L0 220.5V0.5L110 110.5Z" fill="var(--theme-sub-heading-color)" />
+                    <path d="M110 110.5L0 220.5V0.5L110 110.5Z" fill="#d2232a" />
                 </svg>
             </g>
             <g style="transform: translate(4%, 38.5%)">
-                <text font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="800"
-                    font-size="18em" class="upper">
+                <text font-family="var(--theme-heading-font)" fill="#0f1132" font-weight="800"
+                    font-size="85" class="upper">
                     <xsl:value-of select="$listingAddressLine1" />
                 </text>
                 <xsl:choose>
                     <xsl:when test="count(//openHouse/session) &gt; 0">
                         <text font-family="var(--theme-heading-font)" x="0%" y="10%"
-                            fill="var(--theme-sub-heading-color)" font-weight="800" font-size="18em">
+                            fill="#d2232a" font-weight="800" font-size="85">
                             Open House
                             <tspan style="text-transform: lowercase;">
                                 <xsl:call-template name="editable">
@@ -64,26 +65,26 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <text font-family="var(--theme-heading-font)" x="0%" y="10%"
-                            fill="var(--theme-sub-heading-color)" font-weight="800" font-size="18em">
+                            fill="#d2232a" font-weight="800" font-size="85">
                             Open House <tspan>1pm - 4pm</tspan>
                         </text>
                     </xsl:otherwise>
                 </xsl:choose>
 
-                <svg width="900" x="80%" y="0%" height="700" viewBox="0 0 110 221" fill="none"
+                <svg width="120" x="85%" y="-39.5%" viewBox="0 0 110 221" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
-                    <path d="M110 110.5L0 220.5V0.5L110 110.5Z" fill="var(--theme-sub-heading-color)" />
+                    <path d="M110 110.5L0 220.5V0.5L110 110.5Z" fill="#d2232a" />
                 </svg>
             </g>
             <g style="transform: translate(4%, 73%)">
-                <text font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="800"
-                    font-size="18em" class="upper">
+                <text font-family="var(--theme-heading-font)" fill="#0f1132" font-weight="800"
+                    font-size="85" class="upper">
                     <xsl:value-of select="$listingAddressLine1" />
                 </text>
                 <xsl:choose>
                     <xsl:when test="count(//openHouse/session) &gt; 0">
                         <text font-family="var(--theme-heading-font)" x="0%" y="10%"
-                            fill="var(--theme-sub-heading-color)" font-weight="800" font-size="18em">
+                            fill="#d2232a" font-weight="800" font-size="85">
                             Open House
                             <tspan style="text-transform: lowercase;">
                                 <xsl:call-template name="editable">
@@ -95,15 +96,15 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <text font-family="var(--theme-heading-font)" x="0%" y="10%"
-                            fill="var(--theme-sub-heading-color)" font-weight="800" font-size="18em">
+                            fill="#d2232a" font-weight="800" font-size="85">
                             Open House <tspan>1pm - 4pm</tspan>
                         </text>
                     </xsl:otherwise>
                 </xsl:choose>
 
-                <svg width="900" x="80%" y="0%" height="700" viewBox="0 0 110 221" fill="none"
+                <svg width="120" x="85%" y="-39.5%" viewBox="0 0 110 221" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
-                    <path d="M110 110.5L0 220.5V0.5L110 110.5Z" fill="var(--theme-sub-heading-color)" />
+                    <path d="M110 110.5L0 220.5V0.5L110 110.5Z" fill="#d2232a" />
                 </svg>
             </g>
         </g>
