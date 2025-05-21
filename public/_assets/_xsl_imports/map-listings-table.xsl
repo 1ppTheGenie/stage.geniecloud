@@ -107,7 +107,7 @@
 							<tr>
 								<td>
 									<xsl:if test="$status!='sold'">
-										<xsl:value-of select="listing.streetName" />
+										<xsl:value-of select="concat('test ', //single/address/streetNumber)" />
 									</xsl:if>
 									<xsl:if test="$status='sold'">
 										<xsl:value-of select="@address" />
