@@ -151,84 +151,14 @@ Version:	1.1
 								<br/>
 									<xsl:value-of select="$listingAddressLine1" />
 									<xsl:if test="count(//openHouse/session) &gt; 0">
-										<!-- Get date -->
-										<xsl:variable name="date" select="//openHouse/session[1]/@date" />
-
-										<!-- Determine suffix for date -->
-										<xsl:variable name="suffix">
-											<xsl:choose>
-												<xsl:when test="$date = 11 or $date = 12 or $date = 13">th</xsl:when>
-												<xsl:when test="$date mod 10 = 1">st</xsl:when>
-												<xsl:when test="$date mod 10 = 2">nd</xsl:when>
-												<xsl:when test="$date mod 10 = 3">rd</xsl:when>
-												<xsl:otherwise>th</xsl:otherwise>
-											</xsl:choose>
-										</xsl:variable>
-
-										<!-- Raw time values -->
-										<xsl:variable name="startTimeRaw" select="//openHouse/session[1]/@starts" />
-										<xsl:variable name="endTimeRaw" select="//openHouse/session[1]/@ends" />
-
-										<!-- Strip am/pm -->
-										<xsl:variable name="startTimeClean">
-											<xsl:choose>
-												<xsl:when test="contains($startTimeRaw, 'am')">
-													<xsl:value-of select="substring-before($startTimeRaw, 'am')" />
-												</xsl:when>
-												<xsl:when test="contains($startTimeRaw, 'pm')">
-													<xsl:value-of select="substring-before($startTimeRaw, 'pm')" />
-												</xsl:when>
-												<xsl:otherwise>
-													<xsl:value-of select="$startTimeRaw" />
-												</xsl:otherwise>
-											</xsl:choose>
-										</xsl:variable>
-
-										<xsl:variable name="endTimeClean">
-											<xsl:choose>
-												<xsl:when test="contains($endTimeRaw, 'am')">
-													<xsl:value-of select="substring-before($endTimeRaw, 'am')" />
-												</xsl:when>
-												<xsl:when test="contains($endTimeRaw, 'pm')">
-													<xsl:value-of select="substring-before($endTimeRaw, 'pm')" />
-												</xsl:when>
-												<xsl:otherwise>
-													<xsl:value-of select="$endTimeRaw" />
-												</xsl:otherwise>
-											</xsl:choose>
-										</xsl:variable>
-
-										<!-- Final time with :00 if needed -->
-										<xsl:variable name="startTime">
-											<xsl:choose>
-												<xsl:when test="contains($startTimeClean, ':')">
-													<xsl:value-of select="$startTimeClean" />
-												</xsl:when>
-												<xsl:otherwise>
-													<xsl:value-of select="concat($startTimeClean, ':00')" />
-												</xsl:otherwise>
-											</xsl:choose>
-										</xsl:variable>
-
-										<xsl:variable name="endTime">
-											<xsl:choose>
-												<xsl:when test="contains($endTimeClean, ':')">
-													<xsl:value-of select="$endTimeClean" />
-												</xsl:when>
-												<xsl:otherwise>
-													<xsl:value-of select="concat($endTimeClean, ':00')" />
-												</xsl:otherwise>
-											</xsl:choose>
-										</xsl:variable>
-
-										<!-- Final output -->
-										<xsl:value-of select="concat(
-											' • ', //openHouse/session[1]/@dow, ', ',
-											//openHouse/session[1]/@month, ' ',
-											$date, $suffix,
-											' • ', $startTime, ' - ', $endTime
-										)" />
-									</xsl:if>
+                                        <xsl:value-of select="concat(
+                                        ' • ', //openHouse/session[1]/@dow, ', ',
+                                        //openHouse/session[1]/@month, ' ',
+                                        //openHouse/session[1]/@date,
+                                        ' • ', //openHouse/session[1]/@starts, ' - ',
+                                        //openHouse/session[1]/@ends
+                                        )" />
+                                    </xsl:if>
 									
 								</p>
 							</div>
