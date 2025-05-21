@@ -106,7 +106,13 @@
 						<xsl:if test="position() &lt;= 12">
 							<tr>
 								<td>
-									<xsl:value-of select="@address" />
+									<xsl:if test="$status!='sold'">
+										<xsl:value-of select="listing.streetName" />
+									</xsl:if>
+									<xsl:if test="$status='sold'">
+										<xsl:value-of select="@address" />
+									</xsl:if>
+									<!-- <xsl:value-of select="@address" /> -->
 								</td>
 								<td>
 									<xsl:value-of select="format-number(@listPrice, '$###,###')" />
