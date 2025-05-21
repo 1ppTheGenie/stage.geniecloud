@@ -25,6 +25,3 @@
 	--theme-body-color: #e1e1e1; /* Body */
 	--theme-emphasis-color: #b2934e; /* Outline */
 }
-::-webkit-scrollbar{
-    display: none;
-}
