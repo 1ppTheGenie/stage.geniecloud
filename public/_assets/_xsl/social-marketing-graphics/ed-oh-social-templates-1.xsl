@@ -58,14 +58,13 @@
       <xsl:when test="count(//openHouse/session) &gt; 0">
         <text
         class="center"
-          x="18%"
+          x="17%"
           y="78%"
           fill="var(--theme-heading-color)"
           font-size="44"
           font-weight="700"
           font-family="var(--theme-heading-font)"
-          >Open
-          <tspan class="center" x="18%" dy="4.7%" style="text-transform: lowercase;">
+          >Open<tspan class="center" x="17%" dy="4.7%" style="text-transform: lowercase;">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'Open House'" />
               <!-- <xsl:with-param name="default"
@@ -82,15 +81,13 @@
         <text
           xmlns=""
           class="center"
-          x="18%"
+          x="17%"
           y="78%"
           fill="var(--theme-heading-color)"
           font-size="44"
           font-weight="700"
           font-family="var(--theme-heading-font)"
-        >
-          Open
-          <tspan class="center" x="18%" dy="4.7%" dy="4.7%">1-4pm</tspan>
+        >Open<tspan class="center" x="17%" dy="4.7%">1-4pm</tspan>
         </text>
       </xsl:otherwise>
     </xsl:choose>

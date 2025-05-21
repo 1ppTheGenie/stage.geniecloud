@@ -47,7 +47,7 @@
 		<xsl:choose>
       <xsl:when test="count(//openHouse/session) &gt; 0">
 		<text x="4%" y="85%" fill="var(--theme-body-background)" font-weight="800" font-family="var(--theme-heading-font)" font-size="60" style="letter-spacing:1px;word-spacing:-10px;">
-			<xsl:text>Open</xsl:text>
+		Open
           <tspan style="text-transform: lowercase;">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'Open House'" />
