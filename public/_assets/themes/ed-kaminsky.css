@@ -4,6 +4,7 @@
 
 @import url("../_css/lato.css");
 @import url("../_css/futura-embedded.css");
+@import url("../_css/futura-condensed.css");
 @import url("https://fonts.googleapis.com/css2?family=Smooch&display=swap");
 
 .ed-kaminsky, .ed-kaminsky.light, .ed-kaminsky .light {
@@ -14,7 +15,7 @@
 	--theme-emphasis-color: #b2934e; /* Outline */
 	--theme-body-font: "Lato", sans-serif;
 	--theme-heading-font: "Futura", sans-serif;
-	--theme-sub-heading-font: "Lato", sans-serif;
+	--theme-sub-heading-font: "Futura Condensed", sans-serif;
 }
 
 .ed-kaminsky.dark, .ed-kaminsky .dark {
@@ -23,4 +24,7 @@
 	--theme-sub-heading-color: #b2934e; /* Subtitle */
 	--theme-body-color: #e1e1e1; /* Body */
 	--theme-emphasis-color: #b2934e; /* Outline */
+}
+::-webkit-scrollbar{
+    display: none;
 }
