@@ -10,6 +10,9 @@
 <xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
+		<text x="1213" y="30" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="15" font-weight="400">
+			2 
+		</text>
 		<image x="19.5%" y="4.8%" width="41%" class="center" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
 			<xsl:choose>
 				<xsl:when test="//output/@themeHue='dark'">
@@ -52,7 +55,7 @@
 			<tspan x="50%" dy="2.8%">as we are?</tspan>
 		</text>
 
-		<text x="50%" y="49.5%" class="center" font-family="var(--theme-body-font)" fill="var(--theme-heading-color)" font-weight="700" font-size="480%">
+		<text x="50%" y="49.5%" class="center" font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="700" font-size="480%">
 			<tspan x="50%" dy="3%">We don’t even</tspan>
 			<tspan x="50%" dy="3%">read our own.</tspan>
 		</text>
@@ -66,7 +69,7 @@
 			</xsl:attribute>
 		</image>
 		<text x="50%" y="78.5%" class="center" font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="700" font-size="400%" style="word-spacing: -7px;">It’s time for something better:</text>
-		<text x="50%" y="81.4%" class="center" fill="var(--theme-sub-heading-color)" font-weight="700" font-size="390%" style="word-spacing: -5px;">KRG’s All-New
+		<text x="50%" y="81.4%" class="center" font-family="var(--theme-heading-font)" fill="var(--theme-sub-heading-color)" font-weight="700" font-size="390%" style="word-spacing: -5px;">KRG’s All-New
 			<tspan font-style="italic">Market Insider </tspan>
 		</text>
 

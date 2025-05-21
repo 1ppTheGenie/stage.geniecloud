@@ -83,7 +83,8 @@ body{
     letter-spacing: 0.5px;
     color: #c7c7c7;
     position: relative;
-    top: 3.125rem;
+    top: 3.05rem;
+	line-height: 1.42857143;
 }
 .genie-logo img {
     height: 12.5rem;
@@ -108,7 +109,7 @@ body{
     background: var(--white);
 }
 .multi-agent .partner-agent:first-child{
-	right: -2rem;
+	right: -1.8rem;
 	z-index: 3;
 }
 .agent-profiles img{
@@ -232,6 +233,11 @@ body{
 	gap: 0.188rem;
 	transition: 0.2s;
 }
+/* To hide share icon untill it's done */
+.share-icon{
+	display: none;
+}
+/* To hide share icon untill it's done */
 .asset-icon:hover{
 	opacity: 0.8;
 }

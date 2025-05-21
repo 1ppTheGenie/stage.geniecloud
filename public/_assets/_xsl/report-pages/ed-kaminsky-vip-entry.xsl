@@ -13,7 +13,9 @@
 	<xsl:template name="svg-body">
 		
 		<!-- <rect x="0" y="0" width="100%" height="100%" fill="var(theme-body-color)"></rect> -->
-
+		<text x="1213" y="30" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="15" font-weight="400">
+		    1 
+		</text>
 		<image x="20%" y="4.6%" width="41%" class="center" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
 			<xsl:choose>
 				<xsl:when test="//output/@themeHue='dark'">
@@ -51,11 +53,11 @@
 		<text x="50%" y="34%" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="1130%" font-weight="800" style="letter-spacing:2px">
 		    VIP ENTRY 
 		</text>
-		<line x1="18%" y1="42.3%" x2="82%" y2="42.3%" stroke="var(--theme-emphasis-color)" stroke-width="0.2%" />
+		<line x1="14%" y1="42.3%" x2="85.5%" y2="42.3%" stroke="var(--theme-emphasis-color)" stroke-width="0.12%" />
 
 		<rect x="25%" y="41.2%" width="50.2%" height="2%" fill="var(--theme-body-background)" />
 
-		<text x="50%" y="40.9%" class="center" font-family="var(--theme-sub-heading-font)" fill="var(--theme-heading-color)" font-size="400%" font-weight="400" style="letter-spacing:5px;">
+		<text x="50%" y="40.9%" class="caslon center" fill="var(--theme-heading-color)" font-size="77" font-weight="300" style="font-style:italic">
 		    to your neighbor’s
 		</text>
 		<text x="50.5%" y="43.5%" class="upper center" font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-size="856%" font-weight="400" style=" letter-spacing:10px;">
@@ -70,19 +72,19 @@
 		</image>
 		<image x="50.5%" y="50.2%" width="49.5%" height="12.8%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="id" select="'image-2'" />
-				<xsl:with-param name="idx" select="2" />
+				<xsl:with-param name="id" select="'image-3'" />
+				<xsl:with-param name="idx" select="3" />
 			</xsl:call-template>
 		</image>
 
-		<text x="50%" y="65.6%" class="center" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="385%" font-weight="800" style="letter-spacing:1px;">
+		<text x="50%" y="65.6%" class="center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="385%" font-weight="800" style="letter-spacing:1px;">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'Open house'" />
 				<xsl:with-param name="default" select="concat( 'This ' , //openHouse/session[1]/@dow)" />
 				<!-- <xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ',//openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" /> -->
 			</xsl:call-template>
 		</text>
-		<text x="50%" y="68%" class="center" fill="var(--theme-sub-heading-color)" font-family="var(--theme-body-font)" font-size="455%" font-weight="800" style=" letter-spacing:1px; text-transform:lowercase"> 
+		<text x="50%" y="68%" class="center" fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)" font-size="455%" font-weight="800" style=" letter-spacing:1px; text-transform:lowercase"> 
 			<xsl:choose>
 				<xsl:when test="count(//openHouse/session) &gt; 0">
 					<xsl:call-template name="editable">
@@ -96,7 +98,7 @@
 		</text>
 		<line x1="40%" y1="72%" x2="60%" y2="72%" stroke="var(--theme-emphasis-color)" stroke-width="0.2%" />
 
-		<text x="50%" y="73.6%" class="center" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="435%" font-weight="400" style="  letter-spacing:5px;">
+		<text x="50%" y="73.6%" class="center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="435%" font-weight="400" style="text-transform: uppercase">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'areanames'" />
 				<xsl:with-param name="default" select="$listingAddressLine1" />
@@ -105,7 +107,7 @@
 
 		<xsl:choose>
 			<xsl:when test="$hasMultipleAgents">
-				<text x="50%" y="76.7%" class="center" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="243%" style="word-spacing: 5px;">
+				<text x="50%" y="76.7%" class="center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="243%" style="word-spacing: 5px;">
 					<tspan>Presented by </tspan>
 					<tspan>
 						<xsl:call-template name="editable">
@@ -122,7 +124,7 @@
 				</text>
 			</xsl:when>
 			<xsl:otherwise>
-				<text x="50%" y="76.7%" class="center" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="243%" style="word-spacing: 5px;">
+				<text x="50%" y="76.7%" class="center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="243%" style="word-spacing: 5px;">
 					<tspan>Presented by </tspan>
 					<tspan>
 						<xsl:call-template name="editable">
@@ -137,7 +139,7 @@
 		<xsl:choose>
 			<xsl:when test="$hasMultipleAgents">
 				<!-- Agent One Data -->
-				<g style="transform: translate(27%, 83%)">
+				<g style="transform: translate(29.6%, 83.2%)">
 					<defs>
 						<clipPath id="circleClip1">
 							<circle r="3.4%" />
@@ -157,34 +159,34 @@
 					</g>
 				</g>	
 				
-				<text x="0%" y="86.3%" font-family="var(--theme-body-font)" font-size="300%" font-weight="800" style="letter-spacing:2px">
-					<tspan x="15.3%" dy="0%" fill="var(--theme-heading-color)">
+				<text class="center" x="29.5%" y="86%" font-family="var(--theme-heading-font)" font-size="42" font-weight="800">
+					<tspan dy="0%" fill="var(--theme-heading-color)">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="default" select="//agent[1]/firstName" />
 						</xsl:call-template>
 					</tspan>
-					<tspan fill="var(--theme-sub-heading-color)" font-family="var(--theme-body-font)" font-weight="800">
+					<tspan fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)" font-weight="800">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="default" select="concat(' ',//agent[1]/lastName)" />
 						</xsl:call-template>
 					</tspan>					
 				</text>
 				<!-- license number -->
-				<text x="15.3%" y="88.5%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="200%">
+				<text class="center" x="29.2%" y="87.6%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="25">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="default" select="concat(' ',//agent[1]/marketingLicense)" />
 					</xsl:call-template>
 				</text>
-				<line x1="10%" y1="91%" x2="90%" y2="91%" stroke="var(--theme-emphasis-color)" stroke-width="0.2%"></line>
+				<line x1="10%" y1="89.1%" x2="90%" y2="89.1%" stroke="var(--theme-emphasis-color)" stroke-width="0.1%"></line>
 				<!-- contact detail -->
 				<g class="center" style="transform: translateX(140px);">
-					<text x="15.3%" y="91.9%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="200%">
-						<tspan x="15.3%" dy="0%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-weight="400">
+					<text x="15.3%" y="89.8%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="27">
+						<tspan x="18%" dy="0%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="400">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="default" select="concat(' ',//agent[1]/mobile)" />
 							</xsl:call-template>
 						</tspan>
-						<tspan x="15.3%" dy="1.3%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-weight="400">
+						<tspan x="18%" dy="1.1%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="400">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="default" select="concat(' ',//agent[1]/marketingEmail)" />
 							</xsl:call-template>
@@ -193,7 +195,7 @@
 				</g>	
 
 				<!-- Agent Second -->
-				<g style="transform: translate(74%, 83%)">
+				<g style="transform: translate(70.5%, 83.2%)">
 					<defs>
 						<clipPath id="circleClip2">
 							<circle r="3.4%" />
@@ -212,8 +214,8 @@
 
 					</g>
 				</g>
-				<text x="95%" y="86.3%" font-family="var(--theme-body-font)" font-size="300%" font-weight="800" style="letter-spacing:2px">
-					<tspan x="62%" dy="0%" fill="var(--theme-heading-color)">
+				<text class="center" x="70.5%" y="86%" font-family="var(--theme-heading-font)" font-size="42" font-weight="800">
+					<tspan dy="0%" fill="var(--theme-heading-color)">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="default" select="//agent[2]/firstName" />
 						</xsl:call-template>
@@ -225,20 +227,20 @@
 					</tspan>
 				</text>
 				<!-- license number -->
-				<text x="62.3%" y="88.5%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="200%">
+				<text class="center" x="70.2%" y="87.6%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="25">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="default" select="concat(' ',//agent[2]/marketingLicense)" />
 					</xsl:call-template>
 				</text>
 				<!-- contact detail -->
 				<g class="center" style="transform: translateX(109px);">
-					<text x="95.3%" y="91.9%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="200%">
-						<tspan x="65.3%" dy="0%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-weight="400">
+					<text x="95.3%" y="89.8%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="27">
+						<tspan x="62.2%" dy="0%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="400">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="default" select="concat(' ',//agent[2]/mobile)" />
 							</xsl:call-template>
 						</tspan>
-						<tspan x="65.3%" dy="1.3%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-weight="400">
+						<tspan x="62.2%" dy="1.1%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="400">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="default" select="concat(' ',//agent[2]/marketingEmail)" />
 							</xsl:call-template>
@@ -257,16 +259,16 @@
 						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download-new.png' )" />
 					</xsl:attribute>
 				</image>
-				<text x="79.5%" y="89.5%" class="center testing" fill="var(--theme-sub-heading-color)" font-family="var(--theme-body-font)" font-size="250%" font-weight="600">
+				<text x="79.5%" y="89.5%" class="center" fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)" font-size="47" font-weight="600">
 					<xsl:text>More Info</xsl:text>
 				</text>
 			</xsl:otherwise>			
 		</xsl:choose>
 
-		<text x="12%" y="95%" font-family="var(--theme-heading-font)" fill="#8494a0" font-size="180%">
+		<text x="12%" y="92.9%" font-family="var(--theme-sub-heading-font)" fill="#8494a0" font-size="30" font-weight="400" style="word-spacing: -3px;">
 			<xsl:text>EXP REALTY OF CALIFORNIA, INC LICENSE #01878277. INFORMATION IS DEEMED RELIABLE, BUT NOT GUARANTEED.</xsl:text>
 		</text>
-		<text x="12%" y="96.5%" font-family="var(--theme-heading-font)" fill="#8494a0" font-size="180%">
+		<text x="12%" y="94.4%" font-family="var(--theme-sub-heading-font)" fill="#8494a0" font-size="30" font-weight="400" style="word-spacing: -3px;">
 			<xsl:text>BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.</xsl:text>
 		</text>
 	</xsl:template>
@@ -282,14 +284,14 @@
 			</xsl:attribute>
 		</image>
 
-		<text x="%" y="82.4%" font-family="var(--theme-body-font)" font-size="300%" font-weight="800" style="letter-spacing:2px">
+		<text x="%" y="82.4%" font-family="var(--theme-heading-font)" font-size="50" font-weight="700">
 			<tspan x="32.3%" dy="0%" fill="var(--theme-heading-color)">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="concat( 'marketingFirstName-', $idx )" />
 					<xsl:with-param name="default" select="$agent/firstName" />
 				</xsl:call-template>
 			</tspan>
-			<tspan fill="var(--theme-sub-heading-color)" font-family="var(--theme-body-font)" font-weight="800">
+			<tspan fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)" font-weight="700">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="concat( 'marketingLastName-', $idx )" />
 					<xsl:with-param name="default" select="concat(' ',$agent/lastName)" />
@@ -297,16 +299,16 @@
 			</tspan>
 		</text>
 
-		<text x="32.3%" y="84.2%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="200%">
+		<text x="32.3%" y="84.2%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="30" font-weight="600">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="concat( 'licenseno-', $idx )" />
 				<xsl:with-param name="default" select="$agent/marketingLicense" />
 			</xsl:call-template>
 		</text>
 
-		<text y="86.6%" font-family="var(--theme-body-font)" font-size="240%">
+		<text y="86.6%" font-family="var(--theme-heading-font)" font-size="36" font-weight="600">
 			<tspan x="32.3%" dy="0%" fill="var(--theme-sub-heading-color)">m</tspan>
-			<tspan x="36.4%" dy="0%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-weight="400">
+			<tspan x="36.4%" dy="0%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="500">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="concat( 'agentmobile-', $idx )" />
 					<xsl:with-param name="default" select="translate($agent/mobile,'-','.')" />
@@ -314,9 +316,9 @@
 			</tspan>
 		</text>
 
-		<text y="88.2%" font-family="var(--theme-body-font)" font-size="240%" data-max-width="50%">
+		<text y="88.2%" font-family="var(--theme-heading-font)" font-size="36" font-weight="600" data-max-width="50%">
 			<tspan x="32.3%" dy="0%" fill="var(--theme-sub-heading-color)">e</tspan>
-			<tspan x="36.4%" dy="0%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-weight="400">
+			<tspan x="36.4%" dy="0%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="500">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="concat( 'agentEmail-', $idx )" />
 					<xsl:with-param name="default" select="$agent/marketingEmail" />
@@ -324,9 +326,9 @@
 			</tspan>
 		</text>
 
-		<text y="89.7%" font-family="var(--theme-body-font)">
-			<tspan x="32.3%" dy="0%" fill="var(--theme-sub-heading-color)" font-size="235%">w</tspan>
-			<tspan x="36.4%" dy="0%" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="235%" font-weight="400">
+		<text y="89.7%" font-family="var(--theme-heading-font)" font-size="36" font-weight="600">
+			<tspan x="32.3%" dy="0%" fill="var(--theme-sub-heading-color)">w</tspan>
+			<tspan x="36.4%" dy="0%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="500">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="concat( 'agentwebsite-', $idx )" />
 					<xsl:with-param name="default" select="$agent/website" />
