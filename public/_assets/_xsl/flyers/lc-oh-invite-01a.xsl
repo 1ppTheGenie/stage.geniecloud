@@ -16,7 +16,7 @@
 		<style>
 			<xsl:value-of select="'
 				g#footer{
-					transform: translate(2.5%, 98%);
+					transform: translate(2.5%, 98.3%);
 				}
 				g#footer text{
 					font-size: 11px;

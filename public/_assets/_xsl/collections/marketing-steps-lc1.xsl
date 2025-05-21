@@ -159,7 +159,6 @@ Version:	1.1
                                         //openHouse/session[1]/@ends
                                         )" />
                                     </xsl:if>
-									
 								</p>
 							</div>
 						</xsl:if>
