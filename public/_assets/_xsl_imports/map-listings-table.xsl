@@ -106,6 +106,7 @@
 						<xsl:if test="position() &lt;= 12">
 							<tr>
 								<td>
+								<xsl:value-of select="concat('test ', //single/address/streetNumber)" />
 									<xsl:if test="$status!='sold'">
 										<xsl:value-of select="concat('test ', //single/address/streetNumber)" />
 									</xsl:if>
