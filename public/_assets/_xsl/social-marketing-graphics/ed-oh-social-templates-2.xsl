@@ -37,14 +37,14 @@
       preserveAspectRatio="xMidYMid slice"
     >
       <xsl:call-template name="switch-image">
-        <xsl:with-param name="id" select="image-2" />
-        <xsl:with-param name="idx" select="2" />
+        <xsl:with-param name="id" select="image-1" />
+        <xsl:with-param name="idx" select="1" />
       </xsl:call-template>
     </image>
 
     <text
       x="-385"
-      y="280"
+      y="290"
       transform="rotate(-90, 40, 200)"
       class="upper"
       style="
@@ -52,7 +52,7 @@
         font-family: var(--theme-heading-font);
       "
       font-size="40"
-      font-weight="600"
+      font-weight="500"
     >
       <xsl:value-of select="//area/name" />
     </text>
@@ -88,6 +88,7 @@
           fill="var(--theme-heading-color)"
           font-weight="800"
           font-size="47"
+          style="letter-spacing: 2.5px"
         >
           <xsl:text>Open</xsl:text>
           <xsl:call-template name="editable" >
@@ -107,6 +108,7 @@
           fill="var(--theme-heading-color)"
           font-weight="800"
           font-size="47"
+          style="letter-spacing: 2.5px"
         >
           Open <tspan>1-4pm</tspan>
         </text>

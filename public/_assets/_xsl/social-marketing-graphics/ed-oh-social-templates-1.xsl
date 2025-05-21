@@ -38,7 +38,7 @@
       x="7%"
       y="72.5%"
       width="39%"
-      height="20%"
+      height="20.4%"
       fill="var(--theme-body-background)"
     ></rect>
     <!-- //agent-image -->
@@ -47,7 +47,7 @@
       x="26.5%"
       y="73.8%"
       width="18.1%"
-      height="17.2%"
+      height="17.8%"
       preserveAspectRatio="xMidYMin slice"
     >
       <xsl:attribute name="href">
@@ -57,14 +57,15 @@
     <xsl:choose>
       <xsl:when test="count(//openHouse/session) &gt; 0">
         <text
-          x="12%"
+        class="center"
+          x="18%"
           y="78%"
           fill="var(--theme-heading-color)"
           font-size="44"
           font-weight="700"
           font-family="var(--theme-heading-font)"
           >Open
-          <tspan x="11%" dy="4.5%" style="text-transform: lowercase;">
+          <tspan class="center" x="18%" dy="4.7%" style="text-transform: lowercase;">
             <xsl:call-template name="editable">
               <xsl:with-param name="id" select="'Open House'" />
               <!-- <xsl:with-param name="default"
@@ -80,7 +81,8 @@
       <xsl:otherwise>
         <text
           xmlns=""
-          x="12%"
+          class="center"
+          x="18%"
           y="78%"
           fill="var(--theme-heading-color)"
           font-size="44"
@@ -88,7 +90,7 @@
           font-family="var(--theme-heading-font)"
         >
           Open
-          <tspan x="11%" dy="4.5%">1-4pm</tspan>
+          <tspan class="center" x="18%" dy="4.7%" dy="4.7%">1-4pm</tspan>
         </text>
       </xsl:otherwise>
     </xsl:choose>

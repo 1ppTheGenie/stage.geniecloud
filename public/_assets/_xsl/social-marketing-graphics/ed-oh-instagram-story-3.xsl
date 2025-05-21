@@ -32,24 +32,14 @@
       </xsl:call-template>
     </image>
 
-    <rect x="50.5%" y="41.8%" height="27.5%" fill="var(--theme-heading-color)" width="46.2%"></rect>
+    <rect x="50.5%" y="41.8%" height="27.5%" fill="var(--theme-heading-color)" width="46.5%"></rect>
     <g transform="translate(800, 1000)" text-anchor="middle">
       <xsl:choose>
         <xsl:when test="count(//openHouse/session) &gt; 0">
-          <text x="12%" y="78%" fill="var(--theme-heading-color)" font-size="44" font-weight="700"
-            font-family="var(--theme-heading-font)">Open
-            <tspan x="11%" dy="4.5%">
-              <xsl:call-template name="editable">
-                <xsl:with-param name="id" select="'Open House'" />
-                <xsl:with-param name="default"
-                  select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))" />
-              </xsl:call-template>
-            </tspan>
-          </text>
           <text x="0" y="0" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="40"
-            font-weight="900" text-anchor="middle">
+            font-weight="700" text-anchor="middle">
             <tspan x="0">Open House</tspan>
-            <tspan x="0" dy="1.2em" style="text-transform: lowercase;">
+            <tspan x="0" dy="58" style="text-transform: lowercase;">
               <xsl:call-template name="editable">
                 <xsl:with-param name="id" select="'Open House'" />
                 <xsl:with-param
@@ -62,28 +52,37 @@
         </xsl:when>
         <xsl:otherwise>
           <text x="0" y="0" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="40"
-            font-weight="900" text-anchor="middle">
+            font-weight="700" text-anchor="middle">
             <tspan x="0">Open House</tspan>
-            <tspan x="0" dy="1.2em">1–4pm</tspan>
+            <tspan x="0" dy="58">1–4pm</tspan>
           </text>
         </xsl:otherwise>
       </xsl:choose>
     </g>
 
-    <rect x="3%" y="70%" width="46.7%" height="28.5%" fill="var(--theme-body-background)"></rect>
-    <g transform="translate(280, 1530)" text-anchor="middle">
-      <text x="0" y="0">
+    <rect x="3%" y="70%" width="46.7%" height="28.2%" fill="var(--theme-body-background)"></rect>
+    <g transform="translate(285, 1540)" text-anchor="middle">
+     <text x="0" y="0">
+     <tspan id="street-text" fill="var(--theme-heading-color)" font-size="40" font-weight="900"
+          font-family="var(--theme-heading-font)" style="line-height: 1.2">
+        <xsl:call-template name="editable">
+          <xsl:with-param name="id" select="'streetname'" />
+          <xsl:with-param name="default" select="concat(//single/address/streetNumber,' ')" />
+        </xsl:call-template>
+        </tspan>
+      </text>
+      <text x="0" y="45">
         <tspan id="street-text" fill="var(--theme-heading-color)" font-size="40" font-weight="900"
           font-family="var(--theme-heading-font)" style="line-height: 1.2">
           <!-- Replace this with dynamic XSL content if needed -->
           <xsl:call-template name="editable">
             <xsl:with-param name="id" select="'areanames'" />
-            <xsl:with-param name="default" select="concat(//single/address/street,' ')" />
+            <xsl:with-param name="default" select="concat(//single/address/streetName,' ')" />
           </xsl:call-template>
         </tspan>
       </text>
 
-      <text x="0" y="50">
+      <text x="0" y="95">
         <tspan id="area-name-text" fill="var(--theme-heading-color)" font-size="40" font-weight="500"
           font-family="var(--theme-heading-font)">
           <xsl:call-template name="editable">
@@ -94,8 +93,17 @@
       </text>
     </g>
 
-    <rect x="50.5%" y="70%" width="46.7%" height="28.5%" fill="#e3e3e3"></rect>
-    <image x="50.6%" y="70.2%" width="46.6%" height="28.4%" preserveAspectRatio="xMidYMid slice">
+    <rect x="50.5%" y="70%" width="46.7%" height="28%" fill="#e3e3e3"></rect>
+    <defs>
+    <clipPath id="agentClip">
+      <rect 
+        x="50.6%" 
+        y="70.2%" 
+        width="46.6%" 
+        height="28%" />
+    </clipPath>
+  </defs>
+    <image x="50.6%" y="70.8%" width="46.6%" height="28%"  clip-path="url(#agentClip)" preserveAspectRatio="xMidYMid slice">
       <xsl:attribute name="href">
         <xsl:value-of select="//agent[1]/photo" />
       </xsl:attribute>

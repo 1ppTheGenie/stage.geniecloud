@@ -31,14 +31,14 @@
 		<xsl:if test="//output/@themeHue='dark'">
 			<image x="0%" y="70%" width="100%" height="30%" preserveAspectRatio="xMidYMid slice">
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/black-gradient-bottom.png' )" />
+					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/bottomlightlayer-light.png' )" />
 				</xsl:attribute>
 			</image>
 		</xsl:if>
 		<xsl:if test="//output/@themeHue='light'">
 			<image x="0%" y="50%" width="100%" height="50%" preserveAspectRatio="xMidYMid slice">
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/bottomlightlayer-light.png' )" />
+					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/black-gradient-bottom.png' )" />
 				</xsl:attribute>
 			</image>
 		</xsl:if>
@@ -46,7 +46,7 @@
 
 		<xsl:choose>
       <xsl:when test="count(//openHouse/session) &gt; 0">
-		<text x="4%" y="86%" fill="var(--theme-heading-color)" font-weight="800" font-family="var(--theme-heading-font)" font-size="50" style="letter-spacing:1px;word-spacing:-10px;">
+		<text x="4%" y="85%" fill="var(--theme-body-background)" font-weight="800" font-family="var(--theme-heading-font)" font-size="60" style="letter-spacing:1px;word-spacing:-10px;">
 			<xsl:text>Open</xsl:text>
           <tspan style="text-transform: lowercase;">
             <xsl:call-template name="editable">
@@ -60,29 +60,29 @@
 		</text>
       </xsl:when>
       <xsl:otherwise>
-        <text x="4%" y="86%" fill="var(--theme-heading-color)" font-weight="800" font-family="var(--theme-heading-font)" font-size="50" style="letter-spacing:1px;word-spacing:-10px;">
+        <text x="4%" y="85%" fill="var(--theme-body-background)" font-weight="800" font-family="var(--theme-heading-font)" font-size="60" style="letter-spacing:1px;word-spacing:-10px;">
 			 Open 1-4pm
 		</text>
       </xsl:otherwise>
     </xsl:choose>
-		<text x="4%" y="89.5%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="600" font-size="40" data-max-width="80%">
+		<text x="4%" y="89.5%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-weight="600" font-size="40" data-max-width="80%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'address'" />
 				<xsl:with-param name="default" select="concat(//single/address/street,' ')" />
 			</xsl:call-template>
 		</text>
 
-		<text x="4%" y="92%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="500" font-size="35" data-max-width="80%">
+		<text x="4%" y="92%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-weight="500" font-size="35" data-max-width="80%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'areanames'" />
 				<xsl:with-param name="default" select="//area/name" />
 			</xsl:call-template>
 		</text>
-		<svg x="788" y="1600">
-			<polygon points="292,11 292,326 11,326" fill="var(--theme-heading-color)" />
+		<svg x="789" y="1600">
+			<polygon points="292,11 292,326 11,326" fill="var(--theme-body-background)" />
 		</svg>
 		<svg x="78.5%" y="86.5%" width="180%" height="100%">
-			<circle cx="98" cy="99" r="89" stroke="#fff" stroke-width="8" fill="#e1e1e1"></circle>
+			<circle cx="98" cy="99" r="89" stroke="var(--theme-body-background)" stroke-width="8" fill="#e1e1e1"></circle>
 		</svg>
 
 		<g transform="rotate(7, 940, 1775)">
