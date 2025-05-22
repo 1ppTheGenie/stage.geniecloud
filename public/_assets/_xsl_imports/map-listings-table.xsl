@@ -107,32 +107,13 @@
 							<tr>
 								<td>
 								
-
-									<!-- <xsl:if test="$status!='sold'">
+									<xsl:if test="$status!='sold'">
 										<xsl:value-of select="substring-after(@address, ' ')" />
 									</xsl:if>
 									<xsl:if test="$status='sold'">
 										<xsl:value-of select="@address" />
-									</xsl:if> -->
+									</xsl:if>
 									<!-- <xsl:value-of select="@address" /> -->
-
-									<xsl:if test="$status!='sold'">
-					<span style="background-color: white">
-						<xsl:value-of select="substring-after(@address, ' ')" />
-					</span>
-					</xsl:if>
-					<xsl:if test="$status='sold'">
-					<span style="background-color: yellow">
-						<xsl:value-of select="@address" />
-						<xsl:if test="address">
-						<br/>
-						<xsl:value-of select="address/street" />,
-						<xsl:value-of select="address/city" />,
-						<xsl:value-of select="address/state" />
-						<xsl:value-of select="address/zip" />
-						</xsl:if>
-					</span>
-					</xsl:if>
 								</td>
 								<td>
 									<xsl:value-of select="format-number(@listPrice, '$###,###')" />
