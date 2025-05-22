@@ -18,7 +18,13 @@
 			@import url("/_assets/_css/futura-embedded.css");
 		</style>
 
-		<image x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+		<defs>
+			<clipPath id="bannerImg">
+				<rect x="0" y="0" width="100%" height="100%" />
+			</clipPath>
+		</defs>	
+
+		<image x="44%" y="0" width="68%" height="100%" clip-path="url(#bannerImg)" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
 				<xsl:with-param name="id" select="'image-1'" />
 				<xsl:with-param name="idx" select="1" />
