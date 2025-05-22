@@ -11,6 +11,16 @@
 <xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
+
+		<style type="text/css">
+			@import url("/_assets/_css/caslon.css");
+			
+			<xsl:value-of select="'
+				.caslon {
+					font-family: Caslon;
+				}
+			'"/>
+		</style>
 		
 		<!-- <rect x="0" y="0" width="100%" height="100%" fill="var(theme-body-color)"></rect> -->
 		<text x="1213" y="30" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="15" font-weight="400">
