@@ -59,7 +59,7 @@
 					"sort": 9,
 					"asset": "flyers/address-strip-01",
 					"name": "Address Arrows",
-					"size": "us-letter"
+					"size": "tabloid-flyer"
 				},
 				{
 					"sort": 10,
@@ -104,7 +104,8 @@
 				{
 					"sort": 4,
 					"asset": "flyers/car-oh",
-					"name": "CAR OH Form"
+					"name": "CAR OH Form",
+					"size": "us-letter"
 				}
 			],
 			"name": "Create a lasting first impression"
