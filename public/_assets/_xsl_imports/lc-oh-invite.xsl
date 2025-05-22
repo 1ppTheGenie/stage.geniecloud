@@ -103,10 +103,13 @@
 			<g style="transform:translate(0%,83.95%)">
 				<rect fill="var(--theme-body-color)" width="100%" height="4.25%" />
 
-				<g class="icon-stat" style="transform:translate(27.5%, -0.9%)">
-					<use x="0" y="1%" width="2.5%" height="3.5%" fill="var(--theme-body-background)">
+				<g class="icon-stat" style="transform:translate(31.5%, -0.9%)">
+					<use x="0" y="1.2%" width="3%" height="3%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#bed-icon' )" />
 					</use>
+					<!-- <svg x="0" y="1.2%" width="3%" height="3%" viewBox="0 0 640 512" fill="var(theme-body-background)" xmlns="http://www.w3.org/2000/svg">
+						<path d="M32 32c17.7 0 32 14.3 32 32l0 256 224 0 0-160c0-17.7 14.3-32 32-32l224 0c53 0 96 43 96 96l0 224c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-32-224 0-32 0L64 416l0 32c0 17.7-14.3 32-32 32s-32-14.3-32-32L0 64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/>
+					</svg> -->
 					<text x="3.3%" y="2%" class="narrow" fill="var(--theme-body-background)" font-family="var(--theme-sub-heading-font)" font-size="180%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'bedroomscount'" />
@@ -114,10 +117,13 @@
 						</xsl:call-template>
 					</text>
 				</g>
-				<g class="icon-stat" style="transform:translate(44.5%, -0.5%)">
-					<use x="0" y="1%" width="2%" height="2.5%" fill="var(--theme-body-background)">
+				<g class="icon-stat" style="transform:translate(43.5%, -0.5%)">
+					<use x="0.5%" y="1%" width="2.3%" height="2.8%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#bath-icon' )" />
 					</use>
+					<!-- <svg x="0.5%" y="1%" width="2.3%" height="2.8%" fill="var(theme-body-background)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+						<path d="M96 77.3c0-7.3 5.9-13.3 13.3-13.3c3.5 0 6.9 1.4 9.4 3.9l14.9 14.9C130 91.8 128 101.7 128 112c0 19.9 7.2 38 19.2 52c-5.3 9.2-4 21.1 3.8 29c9.4 9.4 24.6 9.4 33.9 0L289 89c9.4-9.4 9.4-24.6 0-33.9c-7.9-7.9-19.8-9.1-29-3.8C246 39.2 227.9 32 208 32c-10.3 0-20.2 2-29.2 5.5L163.9 22.6C149.4 8.1 129.7 0 109.3 0C66.6 0 32 34.6 32 77.3L32 256c-17.7 0-32 14.3-32 32s14.3 32 32 32l448 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 256 96 77.3zM32 352l0 16c0 28.4 12.4 54 32 71.6L64 480c0 17.7 14.3 32 32 32s32-14.3 32-32l0-16 256 0 0 16c0 17.7 14.3 32 32 32s32-14.3 32-32l0-40.4c19.6-17.6 32-43.1 32-71.6l0-16L32 352z"/>
+					</svg> -->
 					<text x="3.3%" y="1.6%" class="narrow" fill="var(--theme-body-background)" font-family="var(--theme-sub-heading-font)" font-size="180%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'bathroomscount'" />
@@ -125,10 +131,13 @@
 						</xsl:call-template>
 					</text>
 				</g>
-				<g class="icon-stat" style="transform:translate(61%, -0.7%)">
+				<g class="icon-stat" style="transform:translate(56%, -0.7%)">
 					<use x="1%" y="1.3%" width="2.5%" height="2.5%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#object-ungroup-icon' )" />
 					</use>
+					<!-- <svg x="1%" y="1.3%" width="2.5%" height="2.5%" fill="var(theme-body-background)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+						<path d="M564 224c6.6 0 12-5.4 12-12v-72c0-6.6-5.4-12-12-12h-72c-6.6 0-12 5.4-12 12v12h-88v-24h12c6.6 0 12-5.4 12-12V44c0-6.6-5.4-12-12-12h-72c-6.6 0-12 5.4-12 12v12H96V44c0-6.6-5.4-12-12-12H12C5.4 32 0 37.4 0 44v72c0 6.6 5.4 12 12 12h12v160H12c-6.6 0-12 5.4-12 12v72c0 6.6 5.4 12 12 12h72c6.6 0 12-5.4 12-12v-12h88v24h-12c-6.6 0-12 5.4-12 12v72c0 6.6 5.4 12 12 12h72c6.6 0 12-5.4 12-12v-12h224v12c0 6.6 5.4 12 12 12h72c6.6 0 12-5.4 12-12v-72c0-6.6-5.4-12-12-12h-12V224h12zM352 64h32v32h-32V64zm0 256h32v32h-32v-32zM64 352H32v-32h32v32zm0-256H32V64h32v32zm32 216v-12c0-6.6-5.4-12-12-12H72V128h12c6.6 0 12-5.4 12-12v-12h224v12c0 6.6 5.4 12 12 12h12v160h-12c-6.6 0-12 5.4-12 12v12H96zm128 136h-32v-32h32v32zm280-64h-12c-6.6 0-12 5.4-12 12v12H256v-12c0-6.6-5.4-12-12-12h-12v-24h88v12c0 6.6 5.4 12 12 12h72c6.6 0 12-5.4 12-12v-72c0-6.6-5.4-12-12-12h-12v-88h88v12c0 6.6 5.4 12 12 12h12v160zm40 64h-32v-32h32v32zm0-256h-32v-32h32v32z"/>
+					</svg> -->
 					<text x="4.3%" y="1.7%" class="narrow" fill="var(--theme-body-background)" font-family="var(--theme-sub-heading-font)" font-size="180%">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'sqft'" />
