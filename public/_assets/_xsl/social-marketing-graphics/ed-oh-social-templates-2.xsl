@@ -90,14 +90,15 @@
           font-size="47"
           style="letter-spacing: 2.5px"
         >
-          <xsl:text>Open</xsl:text>
-          <xsl:call-template name="editable" >
-            <xsl:with-param name="id" select="'Open House'" />
-            <xsl:with-param
-              name="default"
-              select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
-            />
-          </xsl:call-template>
+        Open <tspan style="text-transform: lowercase;">
+              <xsl:call-template name="editable" >
+                <xsl:with-param name="id" select="'Open House'" />
+                <xsl:with-param
+                  name="default"
+                  select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
+                />
+              </xsl:call-template>
+            </tspan>
         </text>
       </xsl:when>
       <xsl:otherwise>

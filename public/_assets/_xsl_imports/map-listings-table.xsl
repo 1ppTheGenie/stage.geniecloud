@@ -137,10 +137,18 @@
 									<xsl:value-of select="@baths" />
 								</td>
 								<td>
-									<xsl:value-of select="genie:format-date( @listedDate, '[M02]-[D]-[Y0001]')" />
+									<xsl:value-of select="genie:format-date( @listedDate, '[M02]/[D]/[Y0001]')" />
 								</td>
 								<td>
-									<xsl:value-of select="@dom" />
+									<!-- <xsl:value-of select="concat(@dom, ' Days')" /> -->
+									<xsl:choose>
+										<xsl:when test="@dom = '0' or @dom = '1'">
+											<xsl:value-of select="concat(@dom, ' Day')" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="concat(@dom, ' Days')" />
+										</xsl:otherwise>
+									</xsl:choose>
 								</td>
 							</tr>
 						</xsl:if>
