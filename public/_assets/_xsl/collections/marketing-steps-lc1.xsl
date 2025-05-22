@@ -160,27 +160,7 @@ Version:	1.1
                                         )" />
                                     </xsl:if>
 								</p>
-								<p>
-								    <xsl:value-of select="$listingAddressLine1" /> 
-
-									<xsl:if test="//openHouse/session">
-										<xsl:text> • </xsl:text>
-										<xsl:value-of select="//openHouse/session[1]/@dow" />, 
-										<xsl:value-of select="//openHouse/session[1]/@month" /> 
-										<xsl:value-of select="//openHouse/session[1]/@date" />
-										<xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
-										<xsl:choose>
-											<xsl:when test="$date mod 10 = 1 and $date != 11">st</xsl:when>
-											<xsl:when test="$date mod 10 = 2 and $date != 12">nd</xsl:when>
-											<xsl:when test="$date mod 10 = 3 and $date != 13">rd</xsl:when>
-											<xsl:otherwise>th</xsl:otherwise>
-										</xsl:choose>
-										<xsl:text> • </xsl:text>
-										<xsl:value-of select="//openHouse/session[1]/@starts" /> - 
-										<xsl:value-of select="//openHouse/session[1]/@ends" />
-									</xsl:if>
-
-								</p>
+								
 							</div>
 						</xsl:if>
 						<div class="genie-logo">
