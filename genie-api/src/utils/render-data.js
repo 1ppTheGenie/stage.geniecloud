@@ -935,7 +935,7 @@ const processListing = async (params, agentTimezone) => {
                         const v = n % 100;
                         //return n + (s[(v - 20) % 10] || s[v] || s[0]);
 
-                        session._attrs[key] = n + (s[(v - 20) % 10] || s[v] || s[0]);
+                        session._attrs[key] = DateTime.fromMillis(n + (s[(v - 20) % 10] || s[v] || s[0]));
                     } else {
                         session._attrs[key] = DateTime.fromMillis(ts1, tz).toFormat(timeAttrbs[key]);
                     }
