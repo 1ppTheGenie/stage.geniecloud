@@ -120,11 +120,13 @@ Version:	1.1
 
 					<div class="container">
 						<div class="company-logo">
-							<img title="Company Logo">
-								<xsl:attribute name="src">
-									<xsl:value-of select="//agent[1]/personalLogoDark" />
-								</xsl:attribute>
-							</img>
+							<xsl:if test="//agent[1]/personalLogoDark != ''">
+                                <img title="Company Logo">
+                                    <xsl:attribute name="src">
+                                        <xsl:value-of select="//agent[1]/personalLogoDark" />
+                                    </xsl:attribute>
+                                </img>
+                            </xsl:if>
 						</div>	
 						<h1>
 							<span>

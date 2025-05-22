@@ -405,6 +405,12 @@
       </xsl:otherwise>
     </xsl:choose>
     <foreignObject x="5%" y="88.2%" width="80%" height="10%">
+      <xsl:attribute name="y">
+        <xsl:choose>
+          <xsl:when test="$hasMultipleAgents">88.2%</xsl:when>
+          <xsl:otherwise>86%</xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
       <div>
         <p
           class="futura-text"
@@ -438,11 +444,17 @@
 
     <image
       x="89%"
-      y="88.5%"
+      
       width="7%"
       height="7%"
       preserveAspectRatio="xMidYMin slice"
     >
+      <xsl:attribute name="y">
+        <xsl:choose>
+          <xsl:when test="$hasMultipleAgents">89.5%</xsl:when>
+          <xsl:otherwise>86.8%</xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
       <xsl:attribute name="href">
         <xsl:value-of
           select="concat( //output/@siteUrl, '_assets/_img/agent-logo.png' )"

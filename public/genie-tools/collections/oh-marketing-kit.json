@@ -57,17 +57,23 @@
 				},
 				{
 					"sort": 9,
+					"asset": "flyers/address-strip-01",
+					"name": "Address Arrows",
+					"size": "us-letter"
+				},
+				{
+					"sort": 10,
 					"asset": "flyers/lc-oh-invite-01a",
 					"name": "Open House Invite",
 					"qrUrl": "lc-hollywood"
 				},
 				{
-					"sort": 10,
+					"sort": 11,
 					"asset": "report-pages/ed-kaminsky-vip-entry",
 					"name": "Door Hanger Invites"
 				},
 				{
-					"sort": 11,
+					"sort": 12,
 					"asset": "area-insider-reports/top-secret-market-insider",
 					"name": "Market Insider Report"
 				}
@@ -86,13 +92,19 @@
 				{
 					"sort": 2,
 					"asset": "landing-pages/lc-oh-guestbook",
-					"name": "Open House Guestbook",
+					"name": "Guestbook Link",
 					"lpo": "lc-hollywood"
 				},
 				{
 					"sort": 3,
 					"asset": "landing-pages/lc-hollywood",
 					"name": "Property Website"
+				},
+
+				{
+					"sort": 4,
+					"asset": "flyers/car-oh",
+					"name": "CAR OH Form"
 				}
 			],
 			"name": "Create a lasting first impression"
