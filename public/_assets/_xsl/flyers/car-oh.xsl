@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <!--
     Asset Name: Car-oh
-    Tags:        Flyer
-    Sizes:        a5
-    Supports:    Reports
+    Tags:       Flyer
+    Sizes:      a5
+    Supports:   Reports
     Version:    1.1
+    Pages:		flyers/car-oh
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:genie="https://theGenie.ai/hub" version="3.0"
