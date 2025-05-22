@@ -20,7 +20,7 @@
             <g x="20" y="20">
                 <image x="20" y="20" width="200" height="77">
                     <xsl:attribute name="href">
-                        <xsl:value-of select="'_assets/_img/car-oh-logo.png'" />
+                        <xsl:value-of select="'/_assets/_img/car-oh-logo.png'" />
                     </xsl:attribute>
                 </image>
                 <text x="433" y="33" font-family="'Lato', 'sans-serif'" font-size="17" font-weight="700" fill="#0E122F"
@@ -318,7 +318,7 @@
                 </text>
                 <image x="93%" y="65" width="40.32" height="48.51" preserveAspectRatio="xMidYMid slice">
                     <xsl:attribute name="href">
-                        <xsl:value-of select="'_assets/_img/equal-housing-opportunity.png'" />
+                        <xsl:value-of select="'/_assets/_img/equal-housing-opportunity.png'" />
                     </xsl:attribute>
                 </image>
             </g>
