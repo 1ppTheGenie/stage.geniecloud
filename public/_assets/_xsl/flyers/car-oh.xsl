@@ -3,7 +3,7 @@
     Asset Name: Car-oh
     Tags:       Flyer
     Sizes:      a5
-    Supports:   Reports
+    Supports:   Reports, AsPDF
     Version:    1.1
     Pages:		flyers/car-oh
 -->
