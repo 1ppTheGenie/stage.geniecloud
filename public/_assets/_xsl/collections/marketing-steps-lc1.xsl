@@ -162,6 +162,7 @@ Version:	1.1
                                         )" />
                                     </xsl:if>
 								</p>
+								
 							</div>
 						</xsl:if>
 						<div class="genie-logo">

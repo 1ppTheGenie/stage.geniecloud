@@ -918,13 +918,30 @@ const processListing = async (params, agentTimezone) => {
                 if (ts2 > NOW && ts1 < timeAgo({ days: 7 })) {
                     let session = { _name: 'session', _attrs: {} };
 
-                    Object.keys(timeAttrbs).forEach(
-                        key =>
-                        (session._attrs[key] = DateTime.fromMillis(
-                            ts1,
-                            tz
-                        ).toFormat(timeAttrbs[key]))
-                    );
+                    // Object.keys(timeAttrbs).forEach(
+                    //     key =>
+                    //     (session._attrs[key] = DateTime.fromMillis(
+                    //         ts1,
+                    //         tz
+                    //     ).toFormat(timeAttrbs[key]))
+                    // );
+
+                    Object.keys(timeAttrbs).forEach(key => {
+                    if (key === 'date') {
+                        const n= DateTime.fromMillis(ts1, tz).day
+                        const s = ["th", "st", "nd", "rd"];
+                        const v = n % 100;
+                        //return n + (s[(v - 20) % 10] || s[v] || s[0]);
+
+
+                        //session._attrs[key] = getOrdinal(DateTime.fromMillis(ts1, tz).day);
+                        session._attrs[key] = n + (s[(v - 20) % 10] || s[v] || s[0]);
+                    } else {
+                        session._attrs[key] = DateTime.fromMillis(ts1, tz).toFormat(timeAttrbs[key]);
+                    }
+                });
+
+
 
                     [
                         { name: 'starts', value: ts1 },
