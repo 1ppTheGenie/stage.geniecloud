@@ -2,10 +2,10 @@
 <!--
     Asset Name: Car-oh
     Tags:       Flyer
-    Sizes:      a5
+    Sizes:      us-letter
     Supports:   Reports, AsPDF
-    Version:    1.1
     Pages:		flyers/car-oh
+    Version:    1.1
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:genie="https://theGenie.ai/hub" version="3.0"
