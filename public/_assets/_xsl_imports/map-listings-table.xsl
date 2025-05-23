@@ -106,23 +106,13 @@
 						<xsl:if test="position() &lt;= 12">
 							<tr>
 								<td>
-									 <xsl:if test="$status!='sold'">
-                                        <!-- <xsl:value-of select="substring-after(@address, ' ')" /> -->
-                                        <xsl:variable name="fullAddress" select="concat($listingAddressLine1, ', ', $listingAddressLine2, ' &#124; ', //agent[1]/marketingName, ' ', //agent[1]/address/company)" />
-
-                                    </xsl:if>
-                                    <xsl:if test="$status='sold'">
-                                        <xsl:value-of select="@address" />
-                                        <!-- <xsl:variable name="fullAddress" select="concat($listingAddressLine1, ', ', $listingAddressLine2, ' &#124; ', //agent[1]/marketingName, ' ', //agent[1]/address/company)" /> -->
-
-                                    </xsl:if>
-                                    <!-- <xsl:value-of select="@address" /> -->
-									<!-- <xsl:if test="$status!='sold'">
+								
+									<xsl:if test="$status!='sold'">
 										<xsl:value-of select="substring-after(@address, ' ')" />
 									</xsl:if>
 									<xsl:if test="$status='sold'">
 										<xsl:value-of select="@address" />
-									</xsl:if> -->
+									</xsl:if>
 									<!-- <xsl:value-of select="@address" /> -->
 								</td>
 								<td>
