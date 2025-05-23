@@ -104,7 +104,7 @@
 				<rect fill="var(--theme-body-color)" width="100%" height="4.25%" />
 
 				<g class="icon-stat" style="transform:translate(31.5%, -0.9%)">
-					<use x="-0.18%" y="1.55%" width="2.8%" height="2.8%" fill="var(--theme-body-background)">
+					<use x="-0.18%" y="1.52%" width="2.8%" height="2.8%" fill="var(--theme-body-background)">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#bed-icon' )" />
 					</use>
 					<!-- <svg x="-0.18%" y="1.7%" width="2.8%" height="2.8%" viewBox="0 0 640 512" fill="var(theme-body-background)" xmlns="http://www.w3.org/2000/svg">
