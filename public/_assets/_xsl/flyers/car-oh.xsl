@@ -78,10 +78,7 @@
 								<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
 								<xsl:with-param name="default" select="concat($monthNumber, '/', $day, '/', $year)" /> 
 							</xsl:call-template>
-                        </xsl:if> 
-                        
-
-
+                        </xsl:if>                   
                     </tspan>
                 </text>
 
