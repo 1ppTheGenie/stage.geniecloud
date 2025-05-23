@@ -67,7 +67,7 @@ export default () => {
 			</Show>
 
 			<div class="fast-facts-property-icons">
-				<div>
+				{/* <div>
 					<NewIcon />
 					<ListingTableLinks
 						title="NEW"
@@ -79,7 +79,7 @@ export default () => {
 							showProperties(propertyTypeId, statusType)
 						}
 					/>
-				</div>
+				</div> */}
 				<div>
 					<ActiveIcon />
 					<ListingTableLinks
