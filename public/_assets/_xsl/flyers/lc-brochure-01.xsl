@@ -42,14 +42,15 @@
 
 			<g style="transform:translateY(0%)">
 				<foreignObject x="25%" y="7.5%" width="50%" height="20%">
-					<p class="center upper" style="font-family:var(--theme-heading-font);color:var(--theme-heading-color);margin:0;font-size:45px;line-height:100%;font-weight:300;">
+					<p class="center upper" style="font-family:var(--theme-heading-font);color:var(--theme-heading-color);margin:0;font-size:45px;line-height:100%;font-weight:600;">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'area-gem'" />
 							<xsl:with-param name="default" select="concat( genie:indefinite-article( string(//area/name) ), ' ', //area/name, '&#160;Gem' )" />
 						</xsl:call-template>
 					</p>
 
-					<p class="heading align-center" style="font-size:35px;padding-top:25px;margin:0;font-weight:300;">
+					<p class="heading align-center" style="font-size:35px;padding-top:25px;margin:0;font-weight: 600;
+    text-transform: uppercase;">
 						<span>
 							<xsl:value-of select="$listingAddressLine1" />
 						</span>
@@ -75,7 +76,7 @@
 				</foreignObject>
 			</g>
 
-			<g style="transform:translate(4%, 25.5%)">
+			<g style="transform:translate(4%, 23%)">
 				<text x="0" y="0" class="heading bold" font-size="280%">
 					<xsl:choose>
 						<xsl:when test="//single/soldDate!=''">
@@ -88,17 +89,17 @@
 				</text>
 
 				<foreignObject y="3.5%" width="60%" height="15%" id="lineDescription">
-					<p style="font-size:27px;font-family:var(--theme-body-font);color:var(--theme-body-color);margin:0;">
+					<p style="font-size:29px;font-family:var(--theme-body-font);color:var(--theme-body-color);margin:0;">
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'singledescription'" />
 							<xsl:with-param name="default" select="//single/description" />
 						</xsl:call-template>
 					</p>
 				</foreignObject>
-				<svg x="0%" y="19.4%">
+				<!-- <svg x="0%" y="19.4%">
 					<circle cx="5" cy="8" r="5" fill="black" />
-				</svg>
-				<text x="1.8%" y="19%" class="heading" font-size="165%" font-weight="400">
+				</svg> -->
+				<text x="23%" y="19%" class="heading" font-size="165%" font-weight="400">
 					Get the FULL DESCRIPTION and DETAILS by Scanning QR-CODE above
 				</text>
 			</g>
@@ -109,7 +110,7 @@
 				</xsl:call-template>
 			</g>
 
-			<g style="transform: translate(88%, 14%);">
+			<g style="transform: translate(88%, 15%);">
 				<use x="0" y="-2%" width="10%" height="5%">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/qr.svg#qr-code' )" />
 				</use>
@@ -120,7 +121,9 @@
 					<tspan x="0%" dy=".6%">camera</tspan>
 				</text>
 			</g>
-
+			<image x="90%" y="5%" width="5%" height="21%" preserveAspectRatio="xMidYMid meet">
+					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/scan-qr.svg' )" />
+			</image>
 			<svg width="11.5%" x="74%" y="-44.5%" viewBox="0 0 68 92" fill="var(--theme-heading-color)"
 				xmlns="http://www.w3.org/2000/svg">
 				<path d="M0 66.5V0H67.5V66.5L33.5 92L0 66.5Z" />
@@ -201,21 +204,21 @@
 			</xsl:if>
 
 			<g style="transform:translate(0%, 49%)">
-				<image x="2%" y="0" width="48%" height="23%" preserveAspectRatio="xMidYMid slice">
+				<image x="2%" y="0" width="47.5%" height="23%" preserveAspectRatio="xMidYMid slice">
 					<xsl:call-template name="switch-image">
 						<xsl:with-param name="id" select="'image-1'" />
 						<xsl:with-param name="idx" select="1" />
 					</xsl:call-template>
 				</image>
 
-				<image x="51%" y="0" width="47%" height="23%" preserveAspectRatio="xMidYMid slice">
+				<image x="51.5%" y="0" width="46.5%" height="23%" preserveAspectRatio="xMidYMid slice">
 					<xsl:call-template name="switch-image">
 						<xsl:with-param name="id" select="'image-2'" />
 						<xsl:with-param name="idx" select="2" />
 					</xsl:call-template>
 				</image>
 
-				<image x="2%" y="24.5%" width="48%" height="23%" preserveAspectRatio="xMidYMid slice">
+				<image x="2%" y="24.5%" width="47.5%" height="23%" preserveAspectRatio="xMidYMid slice">
 					<xsl:call-template name="switch-image">
 						<xsl:with-param name="id" select="'image-3'" />
 						<xsl:with-param name="idx" select="3" />
@@ -224,7 +227,7 @@
 
 				<g style="transform:translate(51%, 26.5%)">
 					<svg width="100%" height="100%">
-						<image x="1.6%" y="0" width="20%" height="19%" preserveAspectRatio="xMidYMid slice">
+						<image x="0.5%" y="0" width="20%" height="19%" preserveAspectRatio="xMidYMid slice">
 							<xsl:attribute name="href">
 								<xsl:value-of select="//agent[1]/photo" />
 							</xsl:attribute>
@@ -270,7 +273,7 @@
 									<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
 								</xsl:call-template>
 							</text>
-							<image x="10.5%" y="15%" width="13%" height="3%" id="logo" preserveAspectRatio="xMaxYMid meet">
+							<image x="9%" y="15%" width="14%" height="3.5%" id="logo" preserveAspectRatio="xMaxYMid meet">
 								<xsl:attribute name="href">
 									<xsl:value-of select="$companyLogo" />
 								</xsl:attribute>
