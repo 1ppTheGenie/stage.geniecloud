@@ -57,7 +57,7 @@
                         <xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
 								<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ')" /> 
-							</xsl:call-template> 
+							</xsl:call-template>
                         </xsl:if> 
                     </tspan>
                 </text>
