@@ -56,7 +56,7 @@
                         <!-- <xsl:value-of select="genie:format-date(genie:from-unix-time(@listedDate), '[M02]-D-[Y0001]')" /> -->
                         <xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
-								<xsl:with-param name="default" select="concat(//openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ')" /> 
+								<xsl:with-param name="default" select="concat(//openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@year)" /> 
 							</xsl:call-template>
                         </xsl:if> 
                     </tspan>
