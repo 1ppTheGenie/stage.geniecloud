@@ -50,15 +50,20 @@
                 <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
                     <tspan x="667">Date:</tspan>
                     <tspan x="710">
-                        <xsl:if test="count(//openHouse/session) &gt; 0">
+                        <!-- <xsl:if test="count(//openHouse/session) &gt; 0"> -->
                         <!-- <xsl:value-of select="genie:format-date( //collection/@assembled, '[M02]-[D]-[Y0001]' )" /> -->
                         <!-- <xsl:value-of select="genie:format-date( @listedDate, '[M02]-[D]-[Y0001]')" /> -->
                         <!-- <xsl:value-of select="genie:format-date(genie:from-unix-time(@listedDate), '[M02]-D-[Y0001]')" /> -->
-                        <xsl:call-template name="editable">
+                        <!-- <xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
 								<xsl:with-param name="default" select="concat(//openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@year)" /> 
 							</xsl:call-template>
-                        </xsl:if> 
+                        </xsl:if>  -->
+                        <xsl:if test="$listings">
+  <xsl:value-of select="genie:format-date( number(@listedDate), '[M02]/[D02]/[Y0001]' )" />
+</xsl:if>
+
+
                     </tspan>
                 </text>
 
