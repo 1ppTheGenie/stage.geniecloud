@@ -11,7 +11,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 <xsl:import href="common.xsl" />
 
-<xsl:if test="$asset and $asset/@pageCount!=''">
+<!-- <xsl:if test="$asset and $asset/@pageCount!=''">
     <xsl:attribute name="data-pagecount">
         <xsl:value-of select="$asset/@pageCount" />
     </xsl:attribute>
@@ -29,7 +29,7 @@
     <xsl:attribute name="data-pagecount">
         <xsl:value-of select="$asset/@pageCount" />
     </xsl:attribute>
-</xsl:if>
+</xsl:if> -->
 
 
 </xsl:stylesheet>
