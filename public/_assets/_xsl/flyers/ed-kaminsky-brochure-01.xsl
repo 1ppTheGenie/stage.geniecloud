@@ -62,11 +62,18 @@
 			</div>
 		</foreignObject>
 
-		<image x="37.2% " y="68.7%" width="14.2%" height="18.6%" preserveAspectRatio="xMidYMin slice">
+		<!-- <image x="37.2% " y="68.7%" width="14.2%" height="18.6%" preserveAspectRatio="xMidYMin slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download-new.png' )" />
 			</xsl:attribute>
-		</image>
+			
+		</image> -->
+		<g  style="transform:translate(37.2%,68.4%)">
+			<xsl:call-template name="qr-code">
+				<xsl:with-param name="width" select="'14.2%'" />
+				<xsl:with-param name="height" select="'18.6%'" />
+			</xsl:call-template>
+		</g>
 
 		<image x="82.6%" y="83%" width="13.3%" height="9%" preserveAspectRatio="xMidYMin slice">
 			<xsl:attribute name="href">
