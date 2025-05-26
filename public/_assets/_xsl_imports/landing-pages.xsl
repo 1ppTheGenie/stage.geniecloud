@@ -43,7 +43,7 @@
 
 	<xsl:template name="virtual-tour-embed">
 		<xsl:choose>
-			<xsl:when test="contains(//single/virtualTourUrl, 'player.vimeo.com') or contains(//single/virtualTourUrl, 'youtube.com/embed') or contains(//single/virtualTourUrl, 'zillow.com/embed')">
+			<xsl:when test="contains(//single/virtualTourUrl, 'player.vimeo.com') or contains(//single/virtualTourUrl, 'youtube.com/embed') or contains(//single/virtualTourUrl, 'zillow.com')">
 				<iframe height="315px" frameborder="0" allow="fullscreen;accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;" allowfullscreen="">
 					<xsl:attribute name="src">
 						<xsl:value-of select="//single/virtualTourUrl" />
