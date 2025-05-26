@@ -9,5 +9,27 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
+
+<xsl:if test="$asset and $asset/@pageCount!=''">
+    <xsl:attribute name="data-pagecount">
+        <xsl:value-of select="$asset/@pageCount" />
+    </xsl:attribute>
+</xsl:if>
+
+<xsl:if test="$asset/@pageCount and $asset/@pageCount!=''">
+    <xsl:attribute name="data-pagecount">
+        <xsl:value-of select="$asset/@pageCount" />
+    </xsl:attribute>
+</xsl:if>
+
+
+
+<xsl:if test="string($asset/@pageCount)">
+    <xsl:attribute name="data-pagecount">
+        <xsl:value-of select="$asset/@pageCount" />
+    </xsl:attribute>
+</xsl:if>
+
+
 </xsl:stylesheet>
 
