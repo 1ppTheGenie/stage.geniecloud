@@ -9,5 +9,10 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
+ <xsl:if test="contains($supports, 'PageNumbers')">
+            <xsl:attribute name="data-pagecount">
+                <xsl:value-of select="count($pages)"/>
+            </xsl:attribute>
+        </xsl:if>
 </xsl:stylesheet>
 
