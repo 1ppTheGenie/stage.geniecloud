@@ -63,11 +63,17 @@
 		<line xmlns="" x1="25%" y1="57.2%" x2="75%" y2="57.2%" stroke="red" stroke-width="0.3%" />
 
 
-		<image x="36.5% " y="66%" width="26%" height="10%" preserveAspectRatio="xMidYMin slice">
+		<!-- <image x="36.5% " y="66%" width="26%" height="10%" preserveAspectRatio="xMidYMin slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download-new.png' )" />
 			</xsl:attribute>
-		</image>
+		</image> -->
+		<g style="transform:translate(36.5%, 66%)">
+			<xsl:call-template name="qr-code">
+				<xsl:with-param name="width" select="'26%'" />
+				<xsl:with-param name="height" select="'10%'" />
+			</xsl:call-template>
+		</g>
 		<text x="50%" y="78.5%" class="center" font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="700" font-size="400%" style="word-spacing: -7px;">It’s time for something better:</text>
 		<text x="50%" y="81.4%" class="center" font-family="var(--theme-heading-font)" fill="var(--theme-sub-heading-color)" font-weight="700" font-size="390%" style="word-spacing: -5px;">KRG’s All-New
 			<tspan font-style="italic">Market Insider </tspan>

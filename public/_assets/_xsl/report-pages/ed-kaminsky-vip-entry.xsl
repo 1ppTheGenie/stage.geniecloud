@@ -264,11 +264,18 @@
 					<xsl:with-param name="agent" select="//agent[1]" />
 				</xsl:call-template>
 
-				<image x="70.5%" y="82.7%" width="18%" height="6.5%" preserveAspectRatio="xMidYMin slice">
+				<!-- <image x="70.5%" y="82.7%" width="18%" height="6.5%" preserveAspectRatio="xMidYMin slice">
 					<xsl:attribute name="href">
 						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download-new.png' )" />
 					</xsl:attribute>
-				</image>
+				</image> -->
+				<g style="transform:translate(70.5%, 82.7%)">
+					<xsl:call-template name="qr-code">
+						<xsl:with-param name="width" select="'18%'" />
+						<xsl:with-param name="height" select="'6.5%'" />
+					</xsl:call-template>
+				</g>
+				
 				<text x="79.5%" y="89.5%" class="center" fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)" font-size="47" font-weight="600">
 					<xsl:text>More Info</xsl:text>
 				</text>
