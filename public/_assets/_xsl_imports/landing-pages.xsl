@@ -1098,7 +1098,7 @@
 				</div>
 			</div>
 			<div class="property-image-show-btn text-center">
-				<button class="btn btn-value-info subtitle-font background-as-color toggle" data-container="#property-gallery">
+				<button class="btn btn-value-info subtitle-font toggle" data-container="#property-gallery">
 					<xsl:text>Show More</xsl:text>
 				</button>
 			</div>
