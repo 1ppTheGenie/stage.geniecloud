@@ -33,6 +33,28 @@ Version:	1.1
 				</xsl:attribute>
 			</xsl:if>
 
+
+						<xsl:if test="$asset and $asset/@pageCount!=''">
+    <xsl:attribute name="data-pagecount">
+        <xsl:value-of select="$asset/@pageCount" />
+    </xsl:attribute>
+</xsl:if>
+
+<xsl:if test="$asset/@pageCount and $asset/@pageCount!=''">
+    <xsl:attribute name="data-pagecount">
+        <xsl:value-of select="$asset/@pageCount" />
+    </xsl:attribute>
+</xsl:if>
+
+
+
+<xsl:if test="string($asset/@pageCount)">
+    <xsl:attribute name="data-pagecount">
+        <xsl:value-of select="$asset/@pageCount" />
+    </xsl:attribute>
+</xsl:if>
+
+
 			<h4>
 				<span class="rendering-spinner">
 					<xsl:comment/>
