@@ -93,14 +93,12 @@
 					"sort": 2,
 					"asset": "landing-pages/lc-oh-guestbook",
 					"name": "Guestbook Link",
-					"lpo": "lc-hollywood",
-					"size": "facebook"
+					"lpo": "lc-hollywood"
 				},
 				{
 					"sort": 3,
 					"asset": "landing-pages/lc-hollywood",
-					"name": "Property Website",
-					"size": "facebook"
+					"name": "Property Website"
 				},
 
 				{
