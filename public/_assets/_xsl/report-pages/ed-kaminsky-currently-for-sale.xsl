@@ -65,7 +65,7 @@
 		</xsl:if>
 
 <xsl:choose>
-    <xsl:when test="$totalCount = 1">
+    <xsl:when test="$totalCount">
         <xsl:value-of select="concat('SHOWING XSL::MIN OF ', $totalCount, ' TOTAL LISTING')" />
     </xsl:when>
     <xsl:otherwise>
