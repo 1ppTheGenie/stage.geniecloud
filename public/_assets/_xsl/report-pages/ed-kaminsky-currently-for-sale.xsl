@@ -64,31 +64,16 @@
 			</xsl:call-template>
 		</xsl:if>
 
-
-
-<xsl:variable name="activeListings" select="//listings/listing[@state='active']" />
-<xsl:variable name="activeListingCount" select="count($activeListings)" />
-
 <xsl:choose>
-    <xsl:when test="$activeListingCount = 0">
-        <xsl:call-template name="map-listings-table-header">
-            <xsl:with-param name="status" select="'active'" />
-            <xsl:with-param name="colorScheme" select="'--active-green'" />
-            <xsl:with-param name="totalCount" select="$activeListingCount" />
-            <xsl:with-param name="listings" select="$activeListings" />
-        </xsl:call-template>
-        <rect xmlns="" x="7%" y="25%" rx="10" ry="10" width="85%" height="60%" fill-opacity="0" stroke-width="2" stroke="var(--active-green)"></rect>
-        <xsl:call-template name="empty-listing-text" />
+    <xsl:when test="$totalCount = 1">
+        <xsl:value-of select="concat('SHOWING XSL::MIN OF ', $totalCount, ' TOTAL LISTING')" />
     </xsl:when>
     <xsl:otherwise>
-        <xsl:call-template name="ed-listings-table">
-            <xsl:with-param name="status" select="'active'" />
-            <xsl:with-param name="colorScheme" select="'--active-green'" />
-            <xsl:with-param name="totalCount" select="$activeListingCount" />
-            <xsl:with-param name="listings" select="$activeListings" />
-        </xsl:call-template>
+        <xsl:value-of select="concat('SHOWING XSL::MIN OF ', $totalCount, ' TOTAL LISTINGS')" />
     </xsl:otherwise>
 </xsl:choose>
+
+
 
 
 
