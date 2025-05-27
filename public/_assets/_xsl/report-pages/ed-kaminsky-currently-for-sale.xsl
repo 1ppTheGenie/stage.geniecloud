@@ -43,6 +43,7 @@
 		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
+
 		<xsl:if test="$activeListingCount = 0">
 			<xsl:call-template name="map-listings-table-header">
 				<xsl:with-param name="status" select="'active'" />
