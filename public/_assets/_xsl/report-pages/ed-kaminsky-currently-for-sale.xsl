@@ -64,21 +64,6 @@
 			</xsl:call-template>
 		</xsl:if>
 
-<xsl:choose>
-    <xsl:when test="$totalCount">
-        <xsl:value-of select="concat('SHOWING XSL::MIN OF ', $totalCount, ' TOTAL LISTING')" />
-    </xsl:when>
-    <xsl:otherwise>
-        <xsl:value-of select="concat('SHOWING XSL::MIN OF ', $totalCount, ' TOTAL LISTINGS')" />
-    </xsl:otherwise>
-</xsl:choose>
-
-
-
-
-
-
-
 		<text x="50%" y="92.1%" class="center futura-text" font-size="110%" style="letter-spacing: 5px; word-spacing:10px;">
 			<tspan fill="#e1e1e1">ADDRESSES  REDACTED - - - - - </tspan>
 			<tspan fill="#b0934c" class=" futura-text">HIGHER   SECURITY CLEARAN REQUIRED</tspan>
