@@ -400,6 +400,14 @@ Version:	1.1
 
 								<p>
 									<b>Open House Date:&#160;</b>
+									<xsl:if test="count(//openHouse/session) &gt; 0">
+                                        <xsl:value-of select="concat(
+                                        //openHouse/session[1]/@month, ' ',
+                                        //openHouse/session[1]/@date,
+                                        ' • ', //openHouse/session[1]/@starts, ' - ',
+                                        //openHouse/session[1]/@ends
+                                        )" />
+                                    </xsl:if>
 									
 								</p>
 								
