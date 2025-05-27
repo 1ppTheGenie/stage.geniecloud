@@ -330,7 +330,7 @@ Version:	1.1
 								<xsl:if test="//single/mlsNumber != ''">
 									<p>
 										<b>Property: </b>
-										<xsl:value-of select="$listingAddressLine1" />
+										<xsl:value-of select="concat($listingAddressLine1, ' ', //single/address/city)" />
 									</p>
 									<p>
 										<b>Hosted By:&#160;</b>
