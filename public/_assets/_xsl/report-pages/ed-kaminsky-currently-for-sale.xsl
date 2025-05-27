@@ -43,7 +43,6 @@
 		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
-		<xsl:value-of select="concat('SHOWING XSL::MIN OF ', $totalCount, ' TOTAL LISTING', if ($totalCount > 1) then 'S' else '')" />
 
 		<xsl:if test="$activeListingCount = 0">
 			<xsl:call-template name="map-listings-table-header">
