@@ -63,8 +63,8 @@ Version:	1.1
 				<xsl:value-of select="concat( //collection/@name, ' ', 'for', ' ' )" />
 				<xsl:value-of select="concat($listingAddressLine1, ' ', 'in' , ' ' , //area/name, ' ', 'on', ' ')" />
 				
-				<xsl:value-of select="concat(//openHouse/session[1]/@dow, ',' )" />
-				<xsl:value-of select="//openHouse/session[1]/@month" /> 
+				<xsl:value-of select="concat(//openHouse/session[1]/@dow, ',', ' ' )" />
+				<xsl:value-of select="concat(//openHouse/session[1]/@month, ' ')" /> 
 				<xsl:value-of select="//openHouse/session[1]/@date" />
 				<xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
 				<xsl:choose>
@@ -74,8 +74,8 @@ Version:	1.1
 					<xsl:otherwise>th</xsl:otherwise>
 				</xsl:choose>
 				<xsl:text> • </xsl:text>
-				<xsl:value-of select="concat(//openHouse/session[1]/@starts, '-' )" /> 
-				<xsl:value-of select="//openHouse/session[1]/@ends" />
+				<xsl:value-of select="translate(concat(//openHouse/session[1]/@starts, ' ', '-', ' '), 'APM', 'apm')" />
+				<xsl:value-of select="translate(//openHouse/session[1]/@ends, 'APM', 'apm')" />
                                     
 			</xsl:with-param>
 			<!-- <xsl:with-param name="title">
