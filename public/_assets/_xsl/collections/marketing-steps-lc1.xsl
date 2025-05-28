@@ -51,17 +51,45 @@ Version:	1.1
 		</xsl:variable>
 
 		<xsl:call-template name="standard-header">
-			<xsl:with-param name="description" select="$description" />
-			<xsl:with-param name="title">
+			<xsl:with-param name="description">
+				<xsl:choose>
+					<xsl:when test="$hasMultipleAgents">
+						<xsl:value-of select="concat(//agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's', ' &amp; ', //agent[2]/firstName, ' ', //agent[2]/lastName, $apos, 's')" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="concat( //agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's' )" />
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:value-of select="concat( //collection/@name, ' ', 'for', ' ' )" />
+				<xsl:value-of select="concat($listingAddressLine1, ' ', 'in' , ' ' , //area/name, 'on')" />
+				
+				<xsl:value-of select="//openHouse/session[1]/@dow" />, 
+				<xsl:value-of select="//openHouse/session[1]/@month" /> 
+				<xsl:value-of select="//openHouse/session[1]/@date" />
+				<xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
+				<xsl:choose>
+					<xsl:when test="$date mod 10 = 1 and $date != 11">st</xsl:when>
+					<xsl:when test="$date mod 10 = 2 and $date != 12">nd</xsl:when>
+					<xsl:when test="$date mod 10 = 3 and $date != 13">rd</xsl:when>
+					<xsl:otherwise>th</xsl:otherwise>
+				</xsl:choose>
+				<xsl:text> • </xsl:text>
+				<xsl:value-of select="//openHouse/session[1]/@starts" /> - 
+				<xsl:value-of select="//openHouse/session[1]/@ends" />
+                                    
+			</xsl:with-param>
+			<!-- <xsl:with-param name="title">
 				<xsl:choose>
 					<xsl:when test="not(//single)">
 						<xsl:value-of select="concat( //areas/area[1]/name, ' &#124; ' ,//agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="concat( $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ' , //agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
+						<xsl:value-of select="concat( $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ' , //agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
 					</xsl:otherwise>
 				</xsl:choose>
-			</xsl:with-param>
+			</xsl:with-param> -->
+			<xsl:with-param name="title" select="concat( //collection/@name, ' ', ' &#124; ', 'Powered by TheGenie.ai' )" />
 		</xsl:call-template>
 
 		<body class="marketing-steps">
@@ -143,7 +171,7 @@ Version:	1.1
 							<br/>
 							<xsl:call-template name="overridable">
 								<xsl:with-param name="id" select="'page-title'" />
-								<xsl:with-param name="default" select="'Open House Domination Kit'" />
+								<xsl:with-param name="default" select="//collection/@name" />
 							</xsl:call-template>
 						</h1>
 						<xsl:if test="$listingAddressLine1 !=''">
