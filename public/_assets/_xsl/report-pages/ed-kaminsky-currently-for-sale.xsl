@@ -44,17 +44,7 @@
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
 
-		<xsl:if test="$activeListingCount = 0">
-			<xsl:call-template name="map-listings-table-header">
-				<xsl:with-param name="status" select="'active'" />
-				<xsl:with-param name="colorScheme" select="'--active-green'" />
-				<xsl:with-param name="totalCount" select="$activeListingCount" />
-				<xsl:with-param name="listings" select="//listings/listing[@state='active']" />
-			</xsl:call-template>
-			<rect xmlns="" x="7%" y="25%" rx="10" ry="10" width="85%" height="60%" fill-opacity="0" stroke-width="2" stroke="var(--active-green)"></rect>
 
-			<!-- <xsl:call-template name="empty-listing-text" /> -->
-		</xsl:if>
 
 		<xsl:if test="$activeListingCount &gt; 0">
 			<xsl:call-template name="ed-listings-table">
