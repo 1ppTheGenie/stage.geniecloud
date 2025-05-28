@@ -56,14 +56,7 @@
 			<xsl:call-template name="empty-listing-text" />
 		</xsl:if>
 
-		<xsl:if test="$activeListingCount &gt; 0">
-			<xsl:call-template name="ed-listings-table">
-				<xsl:with-param name="status" select="'active'" />
-				<xsl:with-param name="colorScheme" select="'--active-green'" />
-				<xsl:with-param name="totalCount" select="$activeListingCount" />
-				<xsl:with-param name="listings" select="//listings/listing[@state='active']" />
-			</xsl:call-template>
-		</xsl:if>
+
 
 		<text x="50%" y="92.1%" class="center futura-text" font-size="110%" style="letter-spacing: 5px; word-spacing:10px;">
 			<tspan fill="#e1e1e1">ADDRESSES  REDACTED - - - - - </tspan>
