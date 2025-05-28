@@ -435,15 +435,20 @@ Version:	1.1
 
 								<p>
 									<b>Open House Date:&#160;</b>
-									<xsl:if test="count(//openHouse/session) &gt; 0">
-                                        <xsl:value-of select="concat(
-                                        //openHouse/session[1]/@month, ' ',
-                                        //openHouse/session[1]/@date,
-                                        ' • ', //openHouse/session[1]/@starts, ' - ',
-                                        //openHouse/session[1]/@ends
-                                        )" />
+									<xsl:if test="//openHouse/session">
+                                        <xsl:value-of select="concat(//openHouse/session[1]/@month, ' ')" /> 
+                                        <xsl:value-of select="//openHouse/session[1]/@date" />
+                                        <xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
+                                        <xsl:choose>
+                                            <xsl:when test="$date mod 10 = 1 and $date != 11">st</xsl:when>
+                                            <xsl:when test="$date mod 10 = 2 and $date != 12">nd</xsl:when>
+                                            <xsl:when test="$date mod 10 = 3 and $date != 13">rd</xsl:when>
+                                            <xsl:otherwise>th</xsl:otherwise>
+                                        </xsl:choose>
+                                        <xsl:text> • </xsl:text>
+                                        <xsl:value-of select="//openHouse/session[1]/@starts" /> - 
+                                        <xsl:value-of select="//openHouse/session[1]/@ends" />
                                     </xsl:if>
-									
 								</p>
 								
 								<p>
