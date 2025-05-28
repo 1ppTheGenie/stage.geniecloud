@@ -1,5 +1,5 @@
 <renderRoot>
-	<output apiUrl="https://cloud-api.thegenie.ai/" siteUrl="https://cloud.thegenie.ai/" year="2025" reportDate="1744721689" sinceDate="1711843140" renderId="ce2e8301-00fb-4f4b-8cd9-8448193ad3fb" mapboxKey="pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJjbHZxc2R6NDMwZncxMmlxaW41MzVrdzV2In0.fl0G_yHPzEc_rzAaJ58v6Q" googleKey="AIzaSyBNRERCDZnk-eRiCsXW4mz6XkWKMlhY2H0" areaIndex="1" areaPeriod="12" userId="4865455f-29a0-4c8f-9938-8c4bab261ef6" version="2.3.19" size="door-hanger" additionalAgents="88d2c076-981a-47ff-ae0f-ef401d62285a" theme="ed-kaminsky" themeHue="dark" propertyType="0" mapStyle="satellite-streets-v9" mapIcon="dot" mapKey="false" pricePercent="percent" listingStatus="all" listingCount="10" withBleed="false" withCrops="false" blurPrice="false" hideAVM="true" requireSignin="false" isLeadCapture="false" downloadUrl="" qrUrl="https://cloud.thegenie.ai/genie-files/ce2e8301-00fb-4f4b-8cd9-8448193ad3fb/qr.svg"/>
+	<output apiUrl="https://cloud-api.thegenie.ai/" siteUrl="https://cloud.thegenie.ai/" year="2025" reportDate="1744721689" sinceDate="1711843140" renderId="ce2e8301-00fb-4f4b-8cd9-8448193ad3fb" mapboxKey="pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJjbHZxc2R6NDMwZncxMmlxaW41MzVrdzV2In0.fl0G_yHPzEc_rzAaJ58v6Q" googleKey="AIzaSyBNRERCDZnk-eRiCsXW4mz6XkWKMlhY2H0" areaIndex="1" areaPeriod="12" userId="4865455f-29a0-4c8f-9938-8c4bab261ef6" version="2.3.19" size="letter" additionalAgents="88d2c076-981a-47ff-ae0f-ef401d62285a" theme="ed-kaminsky" themeHue="dark" propertyType="0" mapStyle="satellite-streets-v9" mapIcon="dot" mapKey="false" pricePercent="percent" listingStatus="all" listingCount="10" withBleed="false" withCrops="false" blurPrice="false" hideAVM="true" requireSignin="false" isLeadCapture="false" downloadUrl="" qrUrl="https://cloud.thegenie.ai/genie-files/ce2e8301-00fb-4f4b-8cd9-8448193ad3fb/qr.svg"/>
 	<date period="Mar `24 to Mar `25" previousPeriod="Mar `23 to Mar `24"/>
 	<xslAsset>social-marketing-graphics_lc-prop-post-01-vip</xslAsset>
 	<overrides/>
@@ -46,6 +46,7 @@
 				<zip>90252</zip>
 			</address>
 		</agent>
+		
 	</agents>
 	<areas>
 		<area>
