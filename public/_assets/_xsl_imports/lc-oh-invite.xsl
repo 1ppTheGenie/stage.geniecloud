@@ -58,35 +58,47 @@
 
 			<g style="transform:translate(0%,58%)">
 				
-		
-
-
-			<xsl:if test="count(//openHouse/session) &gt; 0">
+		<xsl:if test="count(//openHouse/session) &gt; 0">
     <text x="50%" y="0%" class="center bold" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-color)" text-anchor="middle" font-size="320%" style="dominant-baseline: middle; letter-spacing:4px;">
         <tspan>
+            <xsl:variable name="formattedDate">
+                <xsl:value-of select="//openHouse/session[1]/@dow"/>
+                <xsl:text>, </xsl:text>
+                <xsl:value-of select="//openHouse/session[1]/@month"/>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="//openHouse/session[1]/@date"/>
+                <xsl:variable name="date" select="number(//openHouse/session[1]/@date)"/>
+                <xsl:choose>
+                    <xsl:when test="$date mod 10 = 1 and $date != 11">st</xsl:when>
+                    <xsl:when test="$date mod 10 = 2 and $date != 12">nd</xsl:when>
+                    <xsl:when test="$date mod 10 = 3 and $date != 13">rd</xsl:when>
+                    <xsl:otherwise>th</xsl:otherwise>
+                </xsl:choose>
+                <xsl:text> - </xsl:text>
+            </xsl:variable>
+            
             <xsl:call-template name="editable">
-                <xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
-                <xsl:with-param name="default">
-                    <xsl:value-of select="concat(//openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date)" />
-                    <xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
-                    <xsl:choose>
-                        <xsl:when test="$date mod 10 = 1 and $date != 11">st</xsl:when>
-                        <xsl:when test="$date mod 10 = 2 and $date != 12">nd</xsl:when>
-                        <xsl:when test="$date mod 10 = 3 and $date != 13">rd</xsl:when>
-                        <xsl:otherwise>th</xsl:otherwise>
-                    </xsl:choose>
-                    <xsl:text> - </xsl:text>
-                </xsl:with-param>
+                <xsl:with-param name="id" select="'LC-OH-INVITE-01'"/>
+                <xsl:with-param name="default" select="$formattedDate"/>
             </xsl:call-template>
         </tspan>
         <tspan style="text-transform: lowercase">
+            <xsl:variable name="formattedTime">
+                <xsl:value-of select="//openHouse/session[1]/@starts"/>
+                <xsl:text> to </xsl:text>
+                <xsl:value-of select="//openHouse/session[1]/@ends"/>
+            </xsl:variable>
+            
             <xsl:call-template name="editable">
-                <xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
-                <xsl:with-param name="default" select="concat(//openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
+                <xsl:with-param name="id" select="'LC-OH-INVITE-01'"/>
+                <xsl:with-param name="default" select="$formattedTime"/>
             </xsl:call-template>
         </tspan>
     </text>
 </xsl:if>
+
+
+	
 				
 				<foreignObject x="0" y="2.5%" width="100%" height="25%">
 					<p class="center upper" style="font-family:var(--theme-body-font);font-size:500%;font-weight:500;width: 900px; margin-inline: auto;margin-top:0;margin-bottom:12px;color:var(--theme-sub-heading-color);line-height:110%">
