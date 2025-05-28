@@ -70,12 +70,18 @@
 		<xsl:param name="primaryCSS" select="'common'" />
 		<xsl:param name="secondaryCSS" select="''" />
 		<xsl:param name="includeFooterCSS" select="'true'" />
-
+		<xsl:param name="ogImage" />
 		<head>
 			<meta name="viewport" content="width=device-width" />
 			<meta name="description">
 				<xsl:attribute name="content">
 					<xsl:value-of select="$description" />
+				</xsl:attribute>
+			</meta>
+			
+			 <meta property="og:image">
+				<xsl:attribute name="content">
+				<xsl:value-of select="$ogImage" />
 				</xsl:attribute>
 			</meta>
 			<meta itemprop="description">

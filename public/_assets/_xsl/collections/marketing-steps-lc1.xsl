@@ -51,6 +51,8 @@ Version:	1.1
 		</xsl:variable>
 
 		<xsl:call-template name="standard-header">
+			
+			<xsl:with-param name="title" select="concat( //collection/@name, ' &#124; ', 'Powered by TheGenie.ai' )" />
 			<xsl:with-param name="description">
 				<xsl:choose>
 					<xsl:when test="$hasMultipleAgents">
@@ -78,18 +80,7 @@ Version:	1.1
 				<xsl:value-of select="translate(//openHouse/session[1]/@ends, 'APM', 'apm')" />
                                     
 			</xsl:with-param>
-			<!-- <xsl:with-param name="title">
-				<xsl:choose>
-					<xsl:when test="not(//single)">
-						<xsl:value-of select="concat( //areas/area[1]/name, ' &#124; ' ,//agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="concat( $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ' , //agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
-						<xsl:value-of select="concat( $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ' , //agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:with-param> -->
-			<xsl:with-param name="title" select="concat( //collection/@name, ' &#124; ', 'Powered by TheGenie.ai' )" />
+			 <xsl:with-param name="ogImage" select="'/_assets/_img/genie-logo-1.png'" />
 		</xsl:call-template>
 
 		<body class="marketing-steps">
