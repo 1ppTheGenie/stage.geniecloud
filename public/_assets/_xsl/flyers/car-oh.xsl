@@ -16,6 +16,7 @@
         <style type="text/css">
             @import url("/_assets/_css/helvetica-neue.css");
         </style>
+        <rect width="100%" height="100%" x="0" y="0" fill="#ffffff" />
         <g>
             <!-- header -->
             <g x="20" y="20">
