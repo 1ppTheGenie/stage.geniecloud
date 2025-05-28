@@ -74,6 +74,26 @@
 						</tspan>
 					</text>
 				</xsl:if>
+
+
+				   <xsl:value-of select="$listingAddressLine1" /> 
+
+                                    <xsl:if test="//openHouse/session">
+                                        <xsl:text> • </xsl:text>
+                                        <xsl:value-of select="//openHouse/session[1]/@dow" />, 
+                                        <xsl:value-of select="//openHouse/session[1]/@month" /> 
+                                        <xsl:value-of select="//openHouse/session[1]/@date" />
+                                        <xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
+                                        <xsl:choose>
+                                            <xsl:when test="$date mod 10 = 1 and $date != 11">st</xsl:when>
+                                            <xsl:when test="$date mod 10 = 2 and $date != 12">nd</xsl:when>
+                                            <xsl:when test="$date mod 10 = 3 and $date != 13">rd</xsl:when>
+                                            <xsl:otherwise>th</xsl:otherwise>
+                                        </xsl:choose>
+                                        <xsl:text> • </xsl:text>
+                                        <xsl:value-of select="//openHouse/session[1]/@starts" /> - 
+                                        <xsl:value-of select="//openHouse/session[1]/@ends" />
+                     </xsl:if>
 				
 				<foreignObject x="0" y="2.5%" width="100%" height="25%">
 					<p class="center upper" style="font-family:var(--theme-body-font);font-size:500%;font-weight:500;width: 900px; margin-inline: auto;margin-top:0;margin-bottom:12px;color:var(--theme-sub-heading-color);line-height:110%">
