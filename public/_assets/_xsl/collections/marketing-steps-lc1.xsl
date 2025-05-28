@@ -73,7 +73,7 @@ Version:	1.1
 					<xsl:when test="$date mod 10 = 3 and $date != 13">rd</xsl:when>
 					<xsl:otherwise>th</xsl:otherwise>
 				</xsl:choose>
-				<xsl:text> • </xsl:text>
+				<xsl:value-of select="concat(' ', '•', ' ' )" />
 				<xsl:value-of select="translate(concat(//openHouse/session[1]/@starts, ' ', '-', ' '), 'APM', 'apm')" />
 				<xsl:value-of select="translate(//openHouse/session[1]/@ends, 'APM', 'apm')" />
                                     
