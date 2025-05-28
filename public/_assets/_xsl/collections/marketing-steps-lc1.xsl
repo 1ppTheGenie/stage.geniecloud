@@ -183,7 +183,7 @@ Version:	1.1
 									 <xsl:if test="//openHouse/session">
                                         <xsl:text> • </xsl:text>
                                         <xsl:value-of select="//openHouse/session[1]/@dow" />, 
-                                        <xsl:value-of select="//openHouse/session[1]/@month" /> 
+                                        <xsl:value-of select="concat(//openHouse/session[1]/@month, ' ')" /> 
                                         <xsl:value-of select="//openHouse/session[1]/@date" />
                                         <xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
                                         <xsl:choose>
