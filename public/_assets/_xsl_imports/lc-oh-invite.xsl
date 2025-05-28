@@ -58,7 +58,7 @@
 
 			<g style="transform:translate(0%,58%)">
 				
-			
+		
 
 
 			<xsl:if test="count(//openHouse/session) &gt; 0">
@@ -67,7 +67,7 @@
             <xsl:call-template name="editable">
                 <xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
                 <xsl:with-param name="default">
-                    <xsl:value-of select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date)" />
+                    <xsl:value-of select="concat(//openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date)" />
                     <xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
                     <xsl:choose>
                         <xsl:when test="$date mod 10 = 1 and $date != 11">st</xsl:when>
