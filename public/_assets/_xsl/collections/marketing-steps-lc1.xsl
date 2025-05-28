@@ -54,16 +54,16 @@ Version:	1.1
 			<xsl:with-param name="description">
 				<xsl:choose>
 					<xsl:when test="$hasMultipleAgents">
-						<xsl:value-of select="concat(//agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's', ' &amp; ', //agent[2]/firstName, ' ', //agent[2]/lastName, $apos, 's')" />
+						<xsl:value-of select="concat(//agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's', ' &#38; ', //agent[2]/firstName, ' ', //agent[2]/lastName, $apos, 's' , ' ')" />
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat( //agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's' )" />
+						<xsl:value-of select="concat( //agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's', ' ' )" />
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:value-of select="concat( //collection/@name, ' ', 'for', ' ' )" />
-				<xsl:value-of select="concat($listingAddressLine1, ' ', 'in' , ' ' , //area/name, 'on')" />
+				<xsl:value-of select="concat($listingAddressLine1, ' ', 'in' , ' ' , //area/name, ' ', 'on', ' ')" />
 				
-				<xsl:value-of select="//openHouse/session[1]/@dow" />, 
+				<xsl:value-of select="concat(//openHouse/session[1]/@dow, ',' )" />
 				<xsl:value-of select="//openHouse/session[1]/@month" /> 
 				<xsl:value-of select="//openHouse/session[1]/@date" />
 				<xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
@@ -74,7 +74,7 @@ Version:	1.1
 					<xsl:otherwise>th</xsl:otherwise>
 				</xsl:choose>
 				<xsl:text> • </xsl:text>
-				<xsl:value-of select="//openHouse/session[1]/@starts" /> - 
+				<xsl:value-of select="concat(//openHouse/session[1]/@starts, '-' )" /> 
 				<xsl:value-of select="//openHouse/session[1]/@ends" />
                                     
 			</xsl:with-param>
@@ -89,7 +89,7 @@ Version:	1.1
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:with-param> -->
-			<xsl:with-param name="title" select="concat( //collection/@name, ' ', ' &#124; ', 'Powered by TheGenie.ai' )" />
+			<xsl:with-param name="title" select="concat( //collection/@name, ' &#124; ', 'Powered by TheGenie.ai' )" />
 		</xsl:call-template>
 
 		<body class="marketing-steps">
