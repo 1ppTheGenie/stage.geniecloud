@@ -21,8 +21,8 @@
 				}
 			'"/>
 		</style>
-		
-		<!-- <rect x="0" y="0" width="100%" height="100%" fill="var(theme-body-color)"></rect> -->
+		<g class="dark">
+		<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)"></rect>
 		<text x="1213" y="30" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="15" font-weight="400">
 		    1 
 		</text>
@@ -35,7 +35,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/personalLogoLight" />
+						<xsl:value-of select="//agent[1]/personalLogoDark" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -49,7 +49,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/companyLogoLight" />
+						<xsl:value-of select="//agent[1]/companyLogoDark" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -288,13 +288,14 @@
 		<text x="12%" y="94.4%" font-family="var(--theme-sub-heading-font)" fill="#8494a0" font-size="30" font-weight="400" style="word-spacing: -3px;">
 			<xsl:text>BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.</xsl:text>
 		</text>
+		</g>
 	</xsl:template>
 
 	<xsl:template name="custom-agent-details">
+	  
 		<xsl:param name="agent" />
 		<xsl:param name="idx" select="'1'" />
-
-
+	  	<g class="dark">
 		<image x="12.5% " y="82.1%" width="17.5%" height="8.8%" preserveAspectRatio="xMidYMin slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="$agent/photo" />
@@ -352,5 +353,6 @@
 				</xsl:call-template>
 			</tspan>
 		</text>
+	  </g>
 	</xsl:template>
 </xsl:stylesheet>
