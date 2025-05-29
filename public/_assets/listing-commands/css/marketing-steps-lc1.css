@@ -450,6 +450,10 @@ footer{
 	.footer{
 		padding-block: 0.5rem 2.5rem;
 	}
+	.marketing-footer>div{
+		padding: 0;
+		margin-bottom: 36px;
+	}
 }
 
 @media (max-width: 600px){
@@ -483,8 +487,25 @@ footer{
 	}
 }
 
-@media (max-width: 320px){
-	.assets-steps .section-grid {
-		grid-template-columns: repeat(1, 1fr);
+@media (max-width: 480px){
+	.assets-steps .asset-container img,
+	.assets-steps .asset-container[data-title="Door Hanger Invites"] > .overlap > a > img{
+		max-height: 120px !important;
+	}
+	.assets-steps .asset-container[data-title="Door Hanger Invites"] > .overlap > a > img{
+		margin-top: 1.5rem;
+	}
+	.assets-steps .asset-container[data-title="Address Arrows"] > .overlap > a img:first-child,
+	.assets-steps .asset-container[data-title="Property Brochure"] > .overlap > a > img:first-child{
+		max-height: 90px !important;
+	}
+	.assets-steps .asset-container:hover, 
+	.assets-steps .asset-container:focus{
+		box-shadow: none;
+		transform: none;
+	}
+	.assets-steps .asset-container[data-title="Market Insider Report"] > .overlap > a > img:first-child,
+	.assets-steps .asset-container[data-title="Market Insider Report"] > .overlap > a > img:last-child{
+		width: 90%;
 	}
 }
