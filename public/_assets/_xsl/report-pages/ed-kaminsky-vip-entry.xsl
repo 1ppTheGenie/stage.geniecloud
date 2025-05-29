@@ -9,9 +9,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 <xsl:import href="common.xsl" />
-
+<!-- This asset is needed only in dark -->
 	<xsl:template name="svg-body">
-
 		<style type="text/css">
 			@import url("/_assets/_css/caslon.css");
 			
@@ -292,7 +291,6 @@
 	</xsl:template>
 
 	<xsl:template name="custom-agent-details">
-	  
 		<xsl:param name="agent" />
 		<xsl:param name="idx" select="'1'" />
 	  	<g class="dark">

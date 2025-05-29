@@ -8,7 +8,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 <xsl:import href="common.xsl" />
-
+	<!-- This asset is needed only in dark -->
 	<xsl:template name="svg-body">
 	  <g class="dark">
 		<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)"></rect>

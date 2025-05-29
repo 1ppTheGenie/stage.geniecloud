@@ -375,16 +375,6 @@ Version:	1.1
 										<b>Area Name:&#160;</b>
 										<xsl:value-of select="//areas/area[1]/name" />
 									</p>
-									<p class="download-pdf-link">                       
-										<a href="#" target="_blank"> About this collection
-											<span class="link-icon">
-												<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path d="M6.66665 0L8.86198 2.19533L4.19531 6.862L5.13798 7.80467L9.80465 3.138L12 5.33333V0H6.66665Z" fill="#195386"></path>
-													<path d="M10.6667 10.6667H1.33333V1.33333H6L4.66667 0H1.33333C0.598 0 0 0.598 0 1.33333V10.6667C0 11.402 0.598 12 1.33333 12H10.6667C11.402 12 12 11.402 12 10.6667V7.33333L10.6667 6V10.6667Z" fill="#195386"></path>
-												</svg>
-											</span>
-										</a>
-									</p>									
 								</xsl:if>
 							</div>
 
@@ -408,17 +398,6 @@ Version:	1.1
 									<b>MLS: </b>
 									<xsl:value-of select="//single/mlsNumber" />
 								</p>
-								<p class="download-pdf-link">                       
-									<a href="#" target="_blank"> Marketing Kit
-										<span class="link-icon">
-											<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M6.66665 0L8.86198 2.19533L4.19531 6.862L5.13798 7.80467L9.80465 3.138L12 5.33333V0H6.66665Z" fill="#195386"></path>
-												<path d="M10.6667 10.6667H1.33333V1.33333H6L4.66667 0H1.33333C0.598 0 0 0.598 0 1.33333V10.6667C0 11.402 0.598 12 1.33333 12H10.6667C11.402 12 12 11.402 12 10.6667V7.33333L10.6667 6V10.6667Z" fill="#195386"></path>
-											</svg>
-										</span>
-									</a>
-								</p>
-
 								
 								<!-- <p>
 									<b>Prepared For:&#160;</b>
