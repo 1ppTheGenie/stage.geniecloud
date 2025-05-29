@@ -10,6 +10,8 @@
 <xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
+	  <g class="dark">
+		<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)"></rect>
 		<text x="1213" y="30" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="15" font-weight="400">
 			2 
 		</text>
@@ -22,7 +24,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/personalLogoLight" />
+						<xsl:value-of select="//agent[1]/personalLogoDark" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -36,7 +38,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/companyLogoLight" />
+						<xsl:value-of select="//agent[1]/companyLogoDark" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -89,5 +91,6 @@
 		</text>
 
 		<line xmlns="" x1="9%" y1="94%" x2="91%" y2="94%" stroke="var(--theme-sub-heading-color)" stroke-width="0.1%" />
+	  </g>
 	</xsl:template>
 </xsl:stylesheet>
