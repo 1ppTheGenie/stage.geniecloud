@@ -121,7 +121,7 @@
 					<div class="row">
 						<div class="col-md-4 col-sm-4 ">
 							<img alt="1parkplace" src="/_assets/_img/1pp-logo.png" />
-							<p class="heading-font ">
+							<p class="subtitle-font ">
 								<strong>
 									<xsl:text>Copyright &#169; </xsl:text>
 									<span id="copyright-year">
@@ -133,7 +133,7 @@
 							</p>
 						</div>
 						<div class="col-md-4 col-sm-4 text-center">
-							<p class="heading-font">
+							<p class="subtitle-font">
 								<strong>
 									<a href="https://thegenie.ai/" target="_blank">TheGenie.ai.</a>
 								</strong>
@@ -145,7 +145,7 @@
 								<strong>US Patent #:</strong> 10,713,325</p>
 						</div>
 						<div class="col-md-4 col-sm-4 img-min-height">
-							<p class="heading-font">
+							<p class="subtitle-font">
 								<strong>Power Tools</strong>
 								<xsl:text> for your Real Estate Business!</xsl:text>
 							</p>
@@ -183,7 +183,7 @@
 										</img>
 									</div>
 									<div class="details">
-										<h3 class="agent-name heading-font body-color">
+										<h3 class="agent-name subtitle-font body-color">
 											<xsl:value-of select="//agent[1]/marketingName" />
 										</h3>
 										<h2 class="body-font agent-desig">
@@ -259,7 +259,7 @@
 										</img>
 									</div>
 									<div class="details">
-										<h3 class="agent-name heading-font body-color">
+										<h3 class="agent-name subtitle-font body-color">
 											<xsl:value-of select="//agent[2]/marketingName" />
 										</h3>
 										<h2 class="body-font agent-desig">
@@ -349,7 +349,7 @@
 										</img>
 									</div>
 									<div class="details">
-										<h3 class="agent-name heading-font body-color">
+										<h3 class="agent-name subtitle-font body-color">
 											<xsl:value-of select="//agent[1]/marketingName" />
 										</h3>
 										<h2 class="body-font agent-desig">
@@ -554,7 +554,7 @@
 							</div>
 								
 						</div>
-						<ul class="heading-font outline" style="padding: 0;">
+						<ul class="subtitle-font outline" style="padding: 0;">
 							<xsl:if test="string(//agent[1]/marketingName)!=''">
 								<li>
 									<xsl:value-of select="//agent[1]/marketingName" />
@@ -581,7 +581,7 @@
 						</ul>
 
 						<xsl:if test="string(//agent[1]/website)!=''">
-							<p class="heading-font">
+							<p class="subtitle-font">
 								<a target="_blank">
 									<xsl:attribute name="href">
 										<xsl:value-of select="concat( 'https://', //agent[1]/website )" />
@@ -591,7 +591,7 @@
 							</p>
 						</xsl:if>
 
-						<p class="heading-font">
+						<p class="subtitle-font">
 							<xsl:call-template name="agent-address-line-one" />
 							<br/>
 							<xsl:call-template name="agent-address-line-two" />
@@ -611,12 +611,12 @@
 						<xsl:value-of select="//agent[1]/privacyPolicy='external' or //agent[1]/privacyPolicy='External Link'" />
 					</xsl:variable>
 
-					<div class="term-condition text-center heading-font">
+					<div class="term-condition text-center subtitle-font">
 						<xsl:if test="string(//mlsDisplay/text())!=''">
 							<a href="#" class="heading-font toggle" data-container="#mls-disclaimer">MLS/IDX Disclaimer</a>
 							<xsl:text>&#160;&#124;&#160;</xsl:text>
 						</xsl:if>
-						<a class="privacy-policy heading-font" target="_blank">
+						<a class="privacy-policy subtitle-font" target="_blank">
 							<xsl:if test="$isExternalPrivacy">
 								<xsl:attribute name="href">
 									<xsl:value-of select="//agent[1]/privacySource" />
@@ -627,7 +627,7 @@
 									<xsl:value-of select="'#'" />
 								</xsl:attribute>
 								<xsl:attribute name="class">
-									<xsl:value-of select="'privacy-policy heading-font toggle'" />
+									<xsl:value-of select="'privacy-policy subtitle-font toggle'" />
 								</xsl:attribute>
 								<xsl:attribute name="data-container">
 									<xsl:value-of select="'#privacy-policy'" />
@@ -638,7 +638,7 @@
 					</div>
 					<xsl:if test="string(//mlsDisplay/text())!='external'">
 						<div id="mls-disclaimer">
-							<p class="disclaimer-text">
+							<p class="disclaimer-text subtitle-font">
 								<xsl:copy-of select="//mlsDisplay/text()" />
 								<xsl:comment/>								
 							</p>	
