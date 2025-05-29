@@ -122,6 +122,10 @@ body{
 	padding-top: 4.25rem !important;
 	padding-bottom: 4.25rem !important;
 }
+body.listing-command-proof .assets-steps{
+	padding-top: 4.25rem !important;
+	padding-bottom: 0 !important;
+}
 .assets-steps .steps-count{
 	font-size: 2.25rem;
     font-weight: 400;
@@ -154,10 +158,11 @@ body{
 	display: grid !important;
     grid-template-columns: repeat(5, 1fr);
 	row-gap: 2.125rem;
-	margin-top: 1rem;
+	margin-top: -1px;
+	margin-inline: -15px;
 }
 .assets-steps .asset-container {
-	padding: 1rem;
+	padding: 17px;
 	text-align: center;
 	transition: 0.2s all;
 }
@@ -173,7 +178,7 @@ body{
 	height: 100%;
 	max-height: 9.375rem;
 	margin: auto;
-	filter: drop-shadow(0 0px 5 #333d4024);
+	box-shadow: 0 2px 12px 0 #d9d9d9;
 }
 .assets-steps .asset-box-title{
 	font-size: 1.5rem;
@@ -183,13 +188,14 @@ body{
 	color: var(--mid-black);
 	margin-block: 2.5rem 0.625rem;
 	line-height: 1.1;
+	margin-left: -5px;
 }
 .assets-steps .asset-container h4{
 	font-weight: 800;
 	font-family: var(--futura);
     font-size: 1.188rem !important;
     color: var(--blue-2);
-    margin: 0.625rem 0 !important;
+    margin-block: 10px 3px !important;
     height: 2.75rem;
     overflow: hidden;
     -webkit-line-clamp: 2;
@@ -220,9 +226,48 @@ body{
 	height: auto !important;
 }
 
+.assets-steps .asset-container[data-title="Address Arrows"] > .overlap > a img:first-child {
+	position: static;
+    transform: rotate(90deg);
+    max-height: 6.5rem !important;
+    margin-top: 1.35rem;
+}
+.assets-steps .asset-container[data-title="Address Arrows"] > .overlap > a img:last-child, 
+.assets-steps .asset-container[data-title="Property Brochure"] > .overlap > a img:last-child {
+	display: none;
+}
+
+.assets-steps .asset-container[data-title="Address Arrows"] > .overlap,
+.assets-steps .asset-container[data-title="Door Hanger Invites"] > .overlap,
+.assets-steps .asset-container[data-title="Property Brochure"] > .overlap{
+	position: static;
+	width: auto;
+}
+.assets-steps .asset-container[data-title="Door Hanger Invites"] > .overlap > a > img{
+	position: static;
+	max-height: 9rem !important;
+}
+.assets-steps .asset-container[data-title="Door Hanger Invites"] > .overlap > a > img:last-child{
+	margin-left: 5px;
+}
+
+.assets-steps .asset-container[data-title="Market Insider Report"] > .overlap{
+	width: auto;
+}
+.assets-steps .asset-container[data-title="Market Insider Report"] > .overlap > a > img:first-child{
+	left: 0 !important;
+}
+.assets-steps .asset-container[data-title="Market Insider Report"] > .overlap > a > img:last-child{
+	right: 0 !important;
+}
+
+.assets-steps .asset-container[data-title="Property Brochure"] > .overlap > a > img:first-child{
+	position: static;
+	max-height: 9rem !important;
+}
 
 .assets-steps .asset-links{
-	margin-block: 1.25rem 0.625rem;
+	margin-block: 1rem 0.625rem;
 	flex-wrap: wrap;
 	gap: 0.188rem;
 }
@@ -265,7 +310,7 @@ body{
 /* vistor section start */
 .visitor-sec {
     background: var(--golden);
-	padding-block: 2.625rem 4rem;
+	padding-block: 2.625rem 3.75rem;
 	text-align: center;
 	color: var(--white);
 }
@@ -274,7 +319,7 @@ body{
     font-size: 3.125rem;
     line-height: 1.1;
     font-weight: 700;
-	margin-block: 1.25rem 0.625rem;
+	margin-block: 1.25rem 1rem;
 }
 .visitor-sec .up-arrow{
 	font-size: 3.125rem;
@@ -325,10 +370,17 @@ body{
 .marketing-footer {
 	padding-block: 3rem 2.25rem;
 }
+.marketing-footer>div{
+	padding: 0 15px;
+}
+.marketing-footer>div:first-child{
+	padding-left: 0;
+}
 .marketing-footer p {
 	font-size: 1rem;
 	font-weight: 400;
 	color: #333333;
+	margin-top: 0;
 }
 .download-pdf-link a, .footer-middle a{
 	text-decoration: none;
