@@ -87,7 +87,7 @@
             </g>
 
             <g transform="translate(20, 143)">
-                <text font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#000">
+                <text font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0e1232">
                     <tspan x="0">Real estate agent(s) ("Agent"):</tspan>
                     <tspan x="187"><xsl:value-of select="//agent[1]/marketingName" /></tspan>
                 </text>
@@ -96,7 +96,7 @@
             </g>
 
             <g transform="translate(20, 170)">
-                <text font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#000">
+                <text font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0e1232">
                     <tspan x="0">Real estate Broker ("Broker"):</tspan>
                     <tspan x="187"><xsl:value-of select="//single[1]/listingAgents/listingAgent[1]/@broker" /></tspan>
                 </text>
