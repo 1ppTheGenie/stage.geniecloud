@@ -40,7 +40,7 @@
 			<tspan x="70%" fill="#b0934c">Sale</tspan>
 		</text>
 
-		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
+		
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
 
