@@ -37,11 +37,12 @@
 			<tspan x="70%" fill="#b2934e">12 Months</tspan>
 		</text>
 
-		<xsl:call-template name="ed-showing-listing">
-     <xsl:with-param name="nodes" select="$listingsTotalSold" />
-
-			<xsl:with-param name="min" select="number(12)" />
-		</xsl:call-template>
+		<text style="display: none;" >
+			<xsl:call-template name="ed-showing-listing">
+				<xsl:with-param name="nodes" select="$listingsTotalSold" />
+				<xsl:with-param name="min" select="number(12)" />
+			</xsl:call-template>
+		</text>
 
 		<xsl:variable name="soldListingCount" select="count($mapListingNodes)" />
 
