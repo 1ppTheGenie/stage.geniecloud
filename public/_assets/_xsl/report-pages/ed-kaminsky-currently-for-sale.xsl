@@ -41,6 +41,20 @@
 		</text>
 
 		<xsl:variable name="activeListingCount" select="count($listingsTotalSold)" />
+
+
+
+		<xsl:variable name="totalListings" 
+              select="count($listingsTotalNew) 
+                      + count($listingsTotalActive) 
+                      + count($listingsTotalActiveNotNew) 
+                      + count($listingsTotalPending) 
+                      + count($listingsTotalSold)" />
+
+SHOWING 1 OF <xsl:value-of select="$totalListings" /> TOTAL LISTINGS
+
+
+
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
 
