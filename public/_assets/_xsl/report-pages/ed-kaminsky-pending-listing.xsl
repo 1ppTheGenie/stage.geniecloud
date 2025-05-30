@@ -41,7 +41,7 @@
 		</text>
 
 		<xsl:call-template name="ed-showing-listing">
-<xsl:with-param name="nodes" select="$pendingListingCount" />
+<xsl:with-param name="nodes" select="$listingsTotalPending" />
 
 			<xsl:with-param name="min" select="number(12)" />
 		</xsl:call-template>

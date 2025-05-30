@@ -42,25 +42,6 @@
 
 		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
 
-				<!-- Calculate total listings (excluding full $listingsTotalActive to avoid double count) -->
-				<xsl:variable name="totalListings" select="
-				count($listingsTotalNew) +
-				count($listingsTotalActiveNotNew) +
-				count($listingsTotalPending) +
-				count($listingsTotalSold)
-				" />
-
-				<!-- Render message text -->
-				<text x="50%" y="35%" class="center futura-text" font-size="140%" fill="#e1e1e1">
-				<xsl:text>SHOWING 1 OF </xsl:text>
-				<xsl:value-of select="$totalListings" />
-				<xsl:text> TOTAL LISTINGS</xsl:text>
-				</text>
-
-
-
-
-
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
 
