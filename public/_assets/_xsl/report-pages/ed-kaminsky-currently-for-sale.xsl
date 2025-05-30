@@ -43,21 +43,24 @@
 		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
 
 
+<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
 
-			<text x="50%" y="25%" class="center futura-text" font-size="140%" fill="#e1e1e1">
-			<xsl:text>SHOWING 1–</xsl:text>
-			<xsl:choose>
-				<xsl:when test="$activeListingCount &lt;= 12">
-				<xsl:value-of select="$activeListingCount" />
-				</xsl:when>
-				<xsl:otherwise>
-				<xsl:value-of select="12" />
-				</xsl:otherwise>
-			</xsl:choose>
-			<xsl:text> OF </xsl:text>
-			<xsl:value-of select="$activeListingCount" />
-			<xsl:text> ACTIVE LISTINGS</xsl:text>
-			</text>
+<text x="50%" y="25%" class="center futura-text" font-size="140%" fill="#e1e1e1">
+  <xsl:text>SHOWING </xsl:text>
+  <xsl:choose>
+    <xsl:when test="$activeListingCount &lt; 12">
+      <xsl:value-of select="$activeListingCount" />
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="12" />
+    </xsl:otherwise>
+  </xsl:choose>
+  <xsl:text> OF </xsl:text>
+  <xsl:value-of select="$activeListingCount" />
+  <xsl:text> ACTIVE LISTINGS</xsl:text>
+</text>
+
+		
 
 
 
