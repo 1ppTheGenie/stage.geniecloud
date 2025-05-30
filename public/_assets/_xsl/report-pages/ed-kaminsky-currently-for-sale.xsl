@@ -40,15 +40,31 @@
 			<tspan x="70%" fill="#b0934c">Sale</tspan>
 		</text>
 
-		<xsl:variable name="activeListingCount" select="count($listingsTotalSold)" />
+		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
 
 
 
-	<xsl:value-of select="count($listingsTotalNew) 
-                     + count($listingsTotalActive) 
-                     + count($listingsTotalActiveNotNew) 
-                     + count($listingsTotalPending) 
-                     + count($listingsTotalSold)" />
+	<!-- Define individual totals -->
+<xsl:variable name="listingsTotalNew" select="//listings/listing[@state='active' and number(@dom) &lt;= $domNew]" />
+<xsl:variable name="listingsTotalActiveNotNew" select="//listings/listing[@state='active' and number(@dom) &gt; $domNew]" />
+<xsl:variable name="listingsTotalPending" select="//listings/listing[@state='pending']" />
+<xsl:variable name="listingsTotalSold" select="//listings/listing[@state='sold']" />
+
+<!-- Calculate total listings (excluding full $listingsTotalActive to avoid double count) -->
+<xsl:variable name="totalListings" select="
+  count($listingsTotalNew) +
+  count($listingsTotalActiveNotNew) +
+  count($listingsTotalPending) +
+  count($listingsTotalSold)
+" />
+
+<!-- Render message text -->
+<text x="50%" y="87%" class="center futura-text" font-size="140%" fill="#e1e1e1">
+  <xsl:text>SHOWING 1 OF </xsl:text>
+  <xsl:value-of select="$totalListings" />
+  <xsl:text> TOTAL LISTINGS</xsl:text>
+</text>
+
 
 
 
