@@ -2321,7 +2321,7 @@
 				<tspan x="50%" font-size="110%">
 					<xsl:text>Showing </xsl:text>
 					<!-- <xsl:value-of select="version="3.0":function('Genie\XSL::min', $min, number(count($nodes)) )" /> -->
-					<xsl:value-of select="'XSL::min'" />
+					<xsl:value-of select="'abc'" />
 					<xsl:text> of </xsl:text>
 					<xsl:value-of select="number(count($nodes))" />
 
