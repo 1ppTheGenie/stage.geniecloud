@@ -42,6 +42,15 @@
 
 		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
 
+				<xsl:choose>
+  <xsl:when test="$mapListingNodes &lt;= 12">
+    <xsl:value-of select="$mapListingNodes" />
+  </xsl:when>
+  <xsl:otherwise>
+    <xsl:value-of select="12" />
+  </xsl:otherwise>
+</xsl:choose>
+
 
 
 
