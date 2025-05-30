@@ -44,7 +44,7 @@
 
 
 
-			<text x="50%" y="18%" class="center futura-text" font-size="140%" fill="#e1e1e1">
+			<text x="50%" y="25%" class="center futura-text" font-size="140%" fill="#e1e1e1">
 			<xsl:text>SHOWING 1–</xsl:text>
 			<xsl:choose>
 				<xsl:when test="$activeListingCount &lt;= 12">
