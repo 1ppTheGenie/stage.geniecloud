@@ -91,7 +91,7 @@
 		</text>
 
 		<xsl:call-template name="ed-showing-listing">
-<xsl:with-param name="nodes" select="$activeListingCount" />
+			<xsl:with-param name="nodes" select="$listingsTotalActive" />
 
 			<xsl:with-param name="summary" select="' active listings.'" />
 			<xsl:with-param name="min" select="number(12)" />
