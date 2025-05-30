@@ -44,14 +44,12 @@
 
 
 
-		<xsl:variable name="totalListings" 
-              select="count($listingsTotalNew) 
-                      + count($listingsTotalActive) 
-                      + count($listingsTotalActiveNotNew) 
-                      + count($listingsTotalPending) 
-                      + count($listingsTotalSold)" />
+	<xsl:value-of select="count($listingsTotalNew) 
+                     + count($listingsTotalActive) 
+                     + count($listingsTotalActiveNotNew) 
+                     + count($listingsTotalPending) 
+                     + count($listingsTotalSold)" />
 
-SHOWING 1 OF <xsl:value-of select="$totalListings" /> TOTAL LISTINGS
 
 
 
