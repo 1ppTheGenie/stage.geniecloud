@@ -40,31 +40,25 @@
 			<tspan x="70%" fill="#b0934c">Sale</tspan>
 		</text>
 
+		<!-- <xsl:variable name="activeListingCount" select="count($mapListingNodes)" /> -->
+
+
 		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
 
-
-<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
-
 		<text x="50%" y="25%" class="center futura-text" font-size="140%" fill="#b0934c">
-		<xsl:text>SHOWING </xsl:text>
-		<xsl:choose>
-			<xsl:when test="$activeListingCount &lt; 12">
+			<xsl:text>SHOWING </xsl:text>
+			<xsl:choose>
+				<xsl:when test="$activeListingCount &lt; 12">
+					<xsl:value-of select="$activeListingCount" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="12" />
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:text> OF </xsl:text>
 			<xsl:value-of select="$activeListingCount" />
-			</xsl:when>
-			<xsl:otherwise>
-			<xsl:value-of select="12" />
-			</xsl:otherwise>
-		</xsl:choose>
-		<xsl:text> OF </xsl:text>
-		<xsl:value-of select="$activeListingCount" />
-		<xsl:text>TOTAL LISTINGS</xsl:text>
+			<xsl:text>TOTAL LISTINGS</xsl:text>
 		</text>
-
-		
-
-
-
-
 
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
@@ -95,12 +89,13 @@
 			<tspan fill="#b0934c" class=" futura-text">HIGHER   SECURITY CLEARAN REQUIRED</tspan>
 		</text>
 
+		<text style="display: none;" >
 		<xsl:call-template name="ed-showing-listing">
 			<xsl:with-param name="nodes" select="$listingsTotalActive" />
-
 			<xsl:with-param name="summary" select="' active listings.'" />
 			<xsl:with-param name="min" select="number(12)" />
 		</xsl:call-template>
+		</text>
 
 		<xsl:call-template name="copyright" />
 	</xsl:template>
