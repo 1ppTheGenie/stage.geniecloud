@@ -94,7 +94,7 @@
 			<xsl:with-param name="nodes" select="$listingsTotalActive" />
 
 			<xsl:with-param name="summary" select="' active listings.'" />
-			<xsl:with-param name="min" select="5" />
+			<xsl:with-param name="min" select="$listingsTotalActive" />
 		</xsl:call-template>
 
 		<xsl:call-template name="copyright" />
