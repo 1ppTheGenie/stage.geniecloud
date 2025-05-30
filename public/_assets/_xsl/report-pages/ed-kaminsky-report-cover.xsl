@@ -11,26 +11,20 @@
 	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
-		<!-- <link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-		</link> -->
 		<style type="text/css">
 			@import url("/_assets/_css/futura-embedded.css");
 		</style>
-
 		<defs>
 			<clipPath id="bannerImg">
 				<rect x="0" y="0" width="100%" height="100%" />
 			</clipPath>
-		</defs>	
-
+		</defs>
 		<image x="44%" y="0" width="68%" height="100%" clip-path="url(#bannerImg)" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
 				<xsl:with-param name="id" select="'image-1'" />
 				<xsl:with-param name="idx" select="1" />
 			</xsl:call-template>
 		</image>
-
 		<svg class="background-shape">
 			<clipPath id="myPolygon">
 				<polygon points="0,0 540,0 840,630 0,630" fill="#12142d" />
@@ -42,36 +36,30 @@
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/blue-back-image.jpg' )" />
 				</xsl:attribute>
 			</image>
-
 			<rect style="transform: rotate(334deg)" x="40%" y="35%" width=".5%" height="117%" fill="#fff"></rect>
 		</svg>
-
 		<image x="4.5%" y="15%" width="27%" height="13%" preserveAspectRatio="xMidYMid meet">
 			<xsl:attribute name="href">
-				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/kaminsky-white.png' )" />
+				<xsl:value-of select="//agent[1]/personalLogoDark" />
 			</xsl:attribute>
 		</image>
-
 		<text x="5%" y="46%" class="futura-text" font-size="165%" fill="#b0934c">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'FOR YOUR EYES ONLY:'" />
 				<xsl:with-param name="default" select="'FOR YOUR EYES ONLY:'" />
 			</xsl:call-template>
 		</text>
-
 		<text x="5%" y="51%" class="futura-text super-bold" font-size="280%" fill="#b0934c">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'12 Month Insider Report:'" />
 				<xsl:with-param name="default" select="'12 Month Insider Report:'" />
 			</xsl:call-template>
 		</text>
-
 		<text x="5%" y="60.7%" class="super-bold futura-text" fill="#fff" font-size="280%" data-max-width="50%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="concat(//area/name ,' ', $singularPropertyType,'s')" />
 			</xsl:call-template>
 		</text>
-
 		<xsl:choose>
 			<xsl:when test="$hasMultipleAgents">
 				<g>
@@ -85,20 +73,13 @@
 							</clipPath>
 						</defs>
 						<g>
-							<!-- background circle behind image 1 -->
 							<circle r="5%" fill="#69657a" />
-
-							<!-- Circular image 1 -->
 							<image x="-5%" y="-7%" width="120" height="120" clip-path="url(#circleClip1)">
 								<xsl:attribute name="href">
 									<xsl:value-of select="//agent[1]/photo" />
 								</xsl:attribute>
 							</image>
-
-							<!-- background circle behind image 2 -->
 							<circle cx="9%" r="5%" fill="#69657a" />
-
-							<!-- Circular image 2 -->
 							<image x="4%" y="-7%" width="120" height="120" clip-path="url(#circleClip2)">
 								<xsl:attribute name="href">
 									<xsl:value-of select="//agent[2]/photo" />
@@ -193,7 +174,6 @@
 				</g>
 			</xsl:otherwise>
 		</xsl:choose>
-
 		<xsl:call-template name="copyright" />
 	</xsl:template>
 </xsl:stylesheet>

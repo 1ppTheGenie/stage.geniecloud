@@ -12,15 +12,12 @@
   expand-text="yes"
 >
   <xsl:import href="common.xsl" />
-
   <xsl:template name="svg-scripts">
     <xsl:call-template name="map-files" />
-
     <script>
       			<xsl:text>var listings=[</xsl:text>
       			<xsl:for-each select="//listings/listing[@salePrice!='']">
       <xsl:sort select="@salePrice" data-type="number" order="descending" />
-
       				<xsl:if test="position()=1">
       					<xsl:value-of select="concat( &quot;{caption: 'HH', state:'&quot;, @state, &quot;',lat:'&quot;, @lat, &quot;',lng:'&quot;, @lon, &quot;'},&quot; )" />
       				</xsl:if>
@@ -28,11 +25,7 @@
       			<xsl:text>];</xsl:text>
     </script>
   </xsl:template>
-
   <xsl:template name="svg-body">
-    <!-- <link rel="stylesheet">
-			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-		</link> -->
     <style type="text/css">
       @import url("/_assets/_css/futura-embedded.css");
     </style>
@@ -58,9 +51,7 @@
       preserveAspectRatio="xMidYMid meet"
     >
       <xsl:attribute name="href">
-        <xsl:value-of
-          select="concat( //output/@siteUrl, '_assets/_img/kaminsky-logo.png' )"
-        />
+        <xsl:value-of select="//agent[1]/personalLogoDark" />
       </xsl:attribute>
     </image>
 
@@ -444,9 +435,8 @@
 
     <image
       x="89%"
-      
-      width="7%"
-      height="7%"
+      width="6.7%"
+      height="6.7%"
       preserveAspectRatio="xMidYMin slice"
     >
       <xsl:attribute name="y">
@@ -456,9 +446,7 @@
         </xsl:choose>
       </xsl:attribute>
       <xsl:attribute name="href">
-        <xsl:value-of
-          select="concat( //output/@siteUrl, '_assets/_img/agent-logo.png' )"
-        />
+        <xsl:value-of select="//agent[1]/companyLogoDark" />
       </xsl:attribute>
     </image>
 
