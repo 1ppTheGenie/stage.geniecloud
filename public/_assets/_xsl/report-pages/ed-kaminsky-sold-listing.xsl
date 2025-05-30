@@ -38,7 +38,7 @@
 		</text>
 
 		<xsl:call-template name="ed-showing-listing">
-<xsl:with-param name="nodes" select="$soldistingCount" />
+<xsl:with-param name="nodes" select="$listingsTotalSold" />
 
 			<xsl:with-param name="min" select="number(12)" />
 		</xsl:call-template>
