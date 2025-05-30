@@ -40,7 +40,7 @@
 			<tspan x="70%" fill="#b0934c">Sale</tspan>
 		</text>
 
-		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
+		
 
 				<!-- Calculate total listings (excluding full $listingsTotalActive to avoid double count) -->
 				<xsl:variable name="totalListings" select="
