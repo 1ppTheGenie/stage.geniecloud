@@ -40,7 +40,7 @@
 			<tspan x="70%" fill="#b0934c">Sale</tspan>
 		</text>
 
-		
+		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
 
 				<!-- Calculate total listings (excluding full $listingsTotalActive to avoid double count) -->
 				<xsl:variable name="totalListings" select="
@@ -51,7 +51,7 @@
 				" />
 
 				<!-- Render message text -->
-				<text x="50%" y="30%" class="center futura-text" font-size="140%" fill="#e1e1e1">
+				<text x="50%" y="35%" class="center futura-text" font-size="140%" fill="#e1e1e1">
 				<xsl:text>SHOWING 1 OF </xsl:text>
 				<xsl:value-of select="$totalListings" />
 				<xsl:text> TOTAL LISTINGS</xsl:text>
