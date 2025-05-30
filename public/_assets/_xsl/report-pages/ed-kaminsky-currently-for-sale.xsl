@@ -57,7 +57,7 @@
 			</xsl:choose>
 			<xsl:text> OF </xsl:text>
 			<xsl:value-of select="$activeListingCount" />
-			<xsl:text>TOTAL LISTINGS</xsl:text>
+			<xsl:text> TOTAL LISTINGS</xsl:text>
 		</text>
 
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
