@@ -46,7 +46,7 @@
 		</image>
 
 		<g style="transform:translate(51%,1.5%);">
-			<text class="medium center upper" x="6.3%" y=".5%" font-size="260%" font-family="var(--theme-heading-font)">
+			<text class="medium center upper" x="6.3%" y=".5%" font-size="260%" font-family="var(--theme-sub-heading-font)">
 				<tspan class="bold " font-size="160%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'diningroom'" />
@@ -55,7 +55,7 @@
 				</tspan>
 			</text>
 
-			<text x="22%" y="3.8%" class="heading center" font-size="220%" font-weight="400">
+			<text x="22%" y="3.8%" class="center" style="font-family:var(--theme-sub-heading-font);color:var(--theme-heading-color);"  font-size="220%" font-weight="400">
 				<tspan>
 					<xsl:value-of select="$listingAddressLine1" />
 				</tspan>
@@ -64,7 +64,7 @@
 				</tspan>
 			</text>
 
-			<text x="22%" y="24.5%" class="heading center" font-size="250%" font-weight="500">
+			<text x="22%" y="24.5%" class="center" style="font-family:var(--theme-sub-heading-font);color:var(--theme-heading-color);" font-size="250%" font-weight="500">
 				<tspan>
 					<xsl:choose>
 						<xsl:when test="//single/soldDate!=''">
@@ -291,44 +291,44 @@
 			</foreignObject>
 
 			<g style="transform: translate(48.5%, 0);">
-				<text x="0" y="0%" class="upper super-bold" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="100%">
+				<text x="0" y="0%" class="upper super-bold" fill="var(--theme-heading-color)" font-family="var(--theme-sub-heading-font)" font-size="100%">
 					<tspan class="super-bold" style="font-size: 32px;">Scan to access</tspan>
 				</text>
 				<svg height="100" width="100">
 					<circle cx="15" cy="56" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="2.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="115%">
+				<text x="2%" y="2.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" font-family="var(--theme-sub-heading-font)" font-size="115%">
 					<tspan>Floor plans</tspan>
 				</text>
 				<svg height="100" width="100">
 					<circle cx="15" cy="81" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="3.8%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="3.8%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>VIRTUAL TOUR</tspan>
 				</text>
 				<svg height="100" width="100" y="0.5%">
 					<circle cx="15" cy="98" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="5.1%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="5.1%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>HI RES PHOTO COLLECTION</tspan>
 				</text>
 				<svg height="100" width="100" y="2.2%">
 					<circle cx="15" cy="90" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="6.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="6.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>FULL DESCRIPTION</tspan>
 				</text>
 				<svg height="100" width="100" y="3.5%">
 					<circle cx="15" cy="90" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="7.8%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="7.8%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>DETAILED FEATURE LIST</tspan>
 				</text>
 
 				<svg height="100" width="100" y="4.9%">
 					<circle cx="15" cy="90" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="9.2%" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="9.2%" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>Real-Time MARKET INSIDER Report</tspan>
 					<tspan x="2%" dy="1%" class="capatilize">
 						<xsl:call-template name="editable">
@@ -339,7 +339,7 @@
 				<svg height="100" width="100" y="7.3%">
 					<circle cx="15" cy="90" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="11.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="11.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>AND MORE...</tspan>
 				</text>
 				<svg xmlns="http://www.w3.org/2000/svg" x="53%" y="36%" width="10%" height="9%" viewBox="0 0 313 348" fill="none">
@@ -387,7 +387,7 @@
 			</xsl:attribute>
 		</image>
 
-		<text x="84.5%" y="79.5%" class="heading center" fill="#074361" style="text-transform:uppercase" font-size="120%" data-max-width="16%">
+		<text x="84.5%" y="79.5%" class="center" fill="#074361" style="text-transform:uppercase; font-family:var(--theme-sub-heading-font);" font-size="120%" data-max-width="16%">
 			<tspan font-weight="700" fill="#074361">
 				<xsl:value-of select="$listingAddressLine1" />
 			</tspan>
@@ -397,7 +397,7 @@
 		</text>
 
 		<rect x="80.5%" y="83.4%" width="7%" rx="5px" ry="5px" height="2.3%" stroke-width="1" fill="#6A953E" />
-		<text x="84%" y="83.75%" class="upper center" font-size="140%" font-family="var(--theme-heading-font)" fill="#fff">
+		<text x="84%" y="83.75%" class="upper center" font-size="140%" font-family="var(--theme-sub-heading-font)" fill="#fff">
 			<tspan>DETAILS</tspan>
 		</text>
 

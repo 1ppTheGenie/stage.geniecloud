@@ -246,9 +246,6 @@
 							<div class="col-md-3">
 								<div class="agent-details agent-detail-wrapper">
 									<div class="photo">
-										<!-- <span class=" f-name">
-											<xsl:value-of select="concat('Call/Text ', //agent[2]/firstName,' for your private showing:' )" />
-										</span> -->
 										<img>
 											<xsl:attribute name="alt">
 												<xsl:value-of select="//agent[2]/marketingName" />
@@ -304,18 +301,6 @@
 										</h4>
 									</div>
 									<div class="agent-logo">
-										<!-- <div class="funnel-about-company-logo">
-											<div class="funnel-personal-logo genie-logo-light">
-												<xsl:attribute name="style">
-													<xsl:value-of select="concat( 'background: url(', //agent[2]/companyLogoLight, ')' )" />
-												</xsl:attribute>
-											</div>
-											<div class="funnel-personal-logo genie-logo-dark">
-												<xsl:attribute name="style">
-													<xsl:value-of select="concat( 'background: url(', //agent[2]/companyLogoDark, ')' )" />
-												</xsl:attribute>
-											</div>
-										</div> -->
 										<div class="funnel-about-personal-logo">
 											<div class="funnel-personal-logo genie-logo-light">
 												<xsl:attribute name="style">
@@ -394,18 +379,6 @@
 										</h4>
 									</div>
 									<div class="agent-logo">
-										<!-- <div class="funnel-about-company-logo">
-											<div class="funnel-personal-logo genie-logo-light">
-												<xsl:attribute name="style">
-													<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoLight, ')' )" />
-												</xsl:attribute>
-											</div>
-											<div class="funnel-personal-logo genie-logo-dark">
-												<xsl:attribute name="style">
-													<xsl:value-of select="concat( 'background: url(', //agent[1]/companyLogoDark, ')' )" />
-												</xsl:attribute>
-											</div>
-										</div> -->
 										<div class="funnel-about-personal-logo">
 											<div class="funnel-personal-logo genie-logo-light">
 												<xsl:attribute name="style">
@@ -600,7 +573,7 @@
 				</div>
 				<div class="col-md-12">
 					<xsl:if test="string(//agent[1]/disclaimerExtra/text())!=''">
-						<p>
+						<p class="subtitle-font">
 							<xsl:call-template name="replaceBR">
 								<xsl:with-param name="str" select="//agent[1]/disclaimerExtra/text()"/>
 							</xsl:call-template>
@@ -613,16 +586,27 @@
 
 					<div class="term-condition text-center subtitle-font">
 						<xsl:if test="string(//mlsDisplay/text())!=''">
-							<a href="#" class="heading-font toggle" data-container="#mls-disclaimer">MLS/IDX Disclaimer</a>
+							<a href="#" class="subtitle-font toggle" data-container="#mls-disclaimer">MLS/IDX Disclaimer</a>
+						</xsl:if>
+
+						<xsl:if test="string(//mlsDisplay/text())!='' and $isExternalPrivacy and //agent[1]/privacySource !=''">
 							<xsl:text>&#160;&#124;&#160;</xsl:text>
 						</xsl:if>
-						<a class="privacy-policy subtitle-font" target="_blank">
-							<xsl:if test="$isExternalPrivacy">
+						
+						<xsl:if test="$isExternalPrivacy and //agent[1]/privacySource !=''">
+							<a class="privacy-policy subtitle-font" target="_blank">
 								<xsl:attribute name="href">
 									<xsl:value-of select="//agent[1]/privacySource" />
 								</xsl:attribute>
+								<xsl:text>Privacy Policy</xsl:text>
+							</a>		
+						</xsl:if>
+
+						<xsl:if test="not($isExternalPrivacy)">
+							<xsl:if test="string(//mlsDisplay/text())!=''">
+								<xsl:text>&#160;&#124;&#160;</xsl:text>
 							</xsl:if>
-							<xsl:if test="not($isExternalPrivacy)">
+							<a class="privacy-policy subtitle-font" target="_blank">
 								<xsl:attribute name="href">
 									<xsl:value-of select="'#'" />
 								</xsl:attribute>
@@ -632,9 +616,9 @@
 								<xsl:attribute name="data-container">
 									<xsl:value-of select="'#privacy-policy'" />
 								</xsl:attribute>
-							</xsl:if>
-							<xsl:text>Privacy Policy</xsl:text>
-						</a>
+								<xsl:text>Privacy Policy</xsl:text>
+							</a>
+						</xsl:if>		
 					</div>
 					<xsl:if test="string(//mlsDisplay/text())!='external'">
 						<div id="mls-disclaimer">
@@ -645,7 +629,7 @@
 						</div>
 					</xsl:if>
 					<xsl:if test="not($isExternalPrivacy)">
-						<div id="privacy-policy">
+						<div id="privacy-policy" class="subtitle-font">
 							<xsl:copy-of select="replace(//agent[1]/privacyPolicy/text(), '\\n', '&lt;br/&gt;')" />
 							<xsl:comment/>
 						</div>
