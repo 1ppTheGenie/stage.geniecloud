@@ -46,9 +46,9 @@
 			<xsl:with-param name="min" select="number(12)" />
 		</xsl:call-template>
 
-		<text style="display:none;"><xsl:variable name="pendingListingCount" select="count($mapListingNodes)" /></text>
+		<xsl:variable name="pendingListingCount" select="count($mapListingNodes)" />
 
-		<text x="50%" y="29%" class="center futura-text" font-size="110%" fill="#b0934c" style="word-spacing:5px; text-transform: uppercase;">
+		<text x="50%" y="31%" class="center futura-text" font-size="110%" fill="#b0934c" style="word-spacing:5px; text-transform: uppercase;">
 			<xsl:text>SHOWING </xsl:text>
 			<xsl:choose>
 				<xsl:when test="$pendingListingCount &lt; 12">
