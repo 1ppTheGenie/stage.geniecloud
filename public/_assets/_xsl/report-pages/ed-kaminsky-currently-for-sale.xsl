@@ -41,8 +41,6 @@
 		</text>
 
 		<!-- <xsl:variable name="activeListingCount" select="count($mapListingNodes)" /> -->
-
-
 		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
 		
 		<text x="50%" y="29%" class="center futura-text" font-size="110%" fill="#b0934c" style="word-spacing:5px; text-transform: uppercase;">

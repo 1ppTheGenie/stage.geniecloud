@@ -43,7 +43,7 @@
 			<xsl:with-param name="min" select="number(12)" />
 		</xsl:call-template>
 
-		<xsl:variable name="soldListingCount" select="count($mapListingNodes)" />
+		<text style="display:none;"><xsl:variable name="soldListingCount" select="count($mapListingNodes)" /></text>
 
 		<text x="50%" y="29%" class="center futura-text" font-size="110%" fill="#b0934c" style="word-spacing:5px; text-transform: uppercase;">
 			<xsl:text>SHOWING </xsl:text>
@@ -59,10 +59,6 @@
 			<xsl:value-of select="$soldListingCount" />
 			<xsl:text> SOLD LISTINGS</xsl:text>
 		</text>
-
-
-
-
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
 		<xsl:if test="$soldListingCount &gt; 0">
