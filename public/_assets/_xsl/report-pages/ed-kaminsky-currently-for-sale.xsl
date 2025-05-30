@@ -41,6 +41,7 @@
 		</text>
 
 		<xsl:variable name="activeListingCount" select="count($mapListingNodes)" />
+
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
 
@@ -71,7 +72,7 @@
 		</text>
 
 		<xsl:call-template name="ed-showing-listing">
-<xsl:with-param name="nodes" select="$activeListingCount" />
+			<xsl:with-param name="nodes" select="$listingsTotalActive" />
 
 			<xsl:with-param name="summary" select="' active listings.'" />
 			<xsl:with-param name="min" select="number(12)" />
