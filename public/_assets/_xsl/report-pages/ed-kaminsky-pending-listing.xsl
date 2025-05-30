@@ -46,7 +46,7 @@
 			<xsl:with-param name="min" select="number(12)" />
 		</xsl:call-template>
 
-		<xsl:variable name="pendingListingCount" select="count($mapListingNodes)" />
+		<text style="display:none;"><xsl:variable name="pendingListingCount" select="count($mapListingNodes)" /></text>
 
 		<text x="50%" y="29%" class="center futura-text" font-size="110%" fill="#b0934c" style="word-spacing:5px; text-transform: uppercase;">
 			<xsl:text>SHOWING </xsl:text>
@@ -62,10 +62,6 @@
 			<xsl:value-of select="$pendingListingCount" />
 			<xsl:text> TOTAL LISTINGS</xsl:text>
 		</text>
-
-
-
-
 		<xsl:if test="$pendingListingCount &gt; 0">
 			<xsl:call-template name="ed-listings-table">
 				<xsl:with-param name="status" select="'pending'" />
