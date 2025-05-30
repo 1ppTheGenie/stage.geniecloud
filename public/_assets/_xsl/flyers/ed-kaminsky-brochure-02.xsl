@@ -27,7 +27,7 @@
 
 		<xsl:choose>
 			<xsl:when test="//output/@themeHue = 'light'">
-				<image x="-33.8%" y="8%" width="27.7%" height="9.3%" id="logo" preserveAspectRatio="xMidYMid meet"
+				<image x="-33.8%" y="8%" width="27.7%" id="logo" preserveAspectRatio="xMidYMin meet"
 					style="transform: rotate(270deg); -webkit-transform: rotate(270deg);">
 					<xsl:attribute name="href">
 						<xsl:value-of select="//agent[1]/personalLogoDark" />

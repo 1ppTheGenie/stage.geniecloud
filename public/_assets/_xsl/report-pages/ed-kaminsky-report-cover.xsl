@@ -38,7 +38,7 @@
 			</image>
 			<rect style="transform: rotate(334deg)" x="40%" y="35%" width=".5%" height="117%" fill="#fff"></rect>
 		</svg>
-		<image x="4.5%" y="15%" width="27%" height="13%" preserveAspectRatio="xMidYMid meet">
+		<image x="4.5%" y="15%" width="27%" preserveAspectRatio="xMidYMin meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="//agent[1]/personalLogoDark" />
 			</xsl:attribute>

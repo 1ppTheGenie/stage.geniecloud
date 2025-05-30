@@ -434,10 +434,9 @@
     </foreignObject>
 
     <image
-      x="89%"
-      width="6.7%"
-      height="6.7%"
-      preserveAspectRatio="xMidYMin slice"
+      x="90%"
+      width="5%"
+      preserveAspectRatio="xMidYMin meet"
     >
       <xsl:attribute name="y">
         <xsl:choose>

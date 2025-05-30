@@ -29,7 +29,7 @@
 				<xsl:value-of select="$primaryImage" />
 			</xsl:attribute>
 		</image>
-		<image x="64.2%" y="3%" width="30.8%" height="19%" preserveAspectRatio="xMidYMid meet">
+		<image x="64.2%" y="7%" width="30.8%" preserveAspectRatio="xMidYMin meet">
 			<xsl:choose>
 				<xsl:when test="//output/@themeHue='dark'">
 					<xsl:attribute name="href">
@@ -70,7 +70,7 @@
 				<xsl:with-param name="height" select="'18.6%'" />
 			</xsl:call-template>
 		</g>
-		<image x="82.6%" y="83%" width="13.3%" height="9%" preserveAspectRatio="xMidYMin slice">
+		<image x="82.6%" y="83%" width="13.3%" preserveAspectRatio="xMidYMin meet">
 			<xsl:choose>
 				<xsl:when test="//output/@themeHue='dark'">
 					<xsl:attribute name="href">
