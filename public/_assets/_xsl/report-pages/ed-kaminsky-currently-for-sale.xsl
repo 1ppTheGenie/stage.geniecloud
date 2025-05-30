@@ -51,7 +51,7 @@
 				" />
 
 				<!-- Render message text -->
-				<text x="50%" y="10%" class="center futura-text" font-size="140%" fill="#e1e1e1">
+				<text x="50%" y="30%" class="center futura-text" font-size="140%" fill="#e1e1e1">
 				<xsl:text>SHOWING 1 OF </xsl:text>
 				<xsl:value-of select="$totalListings" />
 				<xsl:text> TOTAL LISTINGS</xsl:text>
