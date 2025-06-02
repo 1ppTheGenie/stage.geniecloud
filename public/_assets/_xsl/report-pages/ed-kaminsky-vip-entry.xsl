@@ -9,8 +9,9 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 <xsl:import href="common.xsl" />
-<!-- This asset is needed only in dark -->
+
 	<xsl:template name="svg-body">
+
 		<style type="text/css">
 			@import url("/_assets/_css/caslon.css");
 			
@@ -20,8 +21,8 @@
 				}
 			'"/>
 		</style>
-		<g class="dark">
-		<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)"></rect>
+		
+		<!-- <rect x="0" y="0" width="100%" height="100%" fill="var(theme-body-color)"></rect> -->
 		<text x="1213" y="30" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="15" font-weight="400">
 		    1 
 		</text>
@@ -34,7 +35,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/personalLogoDark" />
+						<xsl:value-of select="//agent[1]/personalLogoLight" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -48,7 +49,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/companyLogoDark" />
+						<xsl:value-of select="//agent[1]/companyLogoLight" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -263,11 +264,6 @@
 					<xsl:with-param name="agent" select="//agent[1]" />
 				</xsl:call-template>
 
-				<!-- <image x="70.5%" y="82.7%" width="18%" height="6.5%" preserveAspectRatio="xMidYMin slice">
-					<xsl:attribute name="href">
-						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download-new.png' )" />
-					</xsl:attribute>
-				</image> -->
 				<g style="transform:translate(70.5%, 82.7%)">
 					<xsl:call-template name="qr-code">
 						<xsl:with-param name="width" select="'18%'" />
@@ -281,19 +277,26 @@
 			</xsl:otherwise>			
 		</xsl:choose>
 
-		<text x="12%" y="92.9%" font-family="var(--theme-sub-heading-font)" fill="#8494a0" font-size="30" font-weight="400" style="word-spacing: -3px;">
-			<xsl:text>EXP REALTY OF CALIFORNIA, INC LICENSE #01878277. INFORMATION IS DEEMED RELIABLE, BUT NOT GUARANTEED.</xsl:text>
-		</text>
-		<text x="12%" y="94.4%" font-family="var(--theme-sub-heading-font)" fill="#8494a0" font-size="30" font-weight="400" style="word-spacing: -3px;">
-			<xsl:text>BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.</xsl:text>
-		</text>
-		</g>
+		<foreignObject x="12%" y="92.9%" width="80%" height="10%">
+			<div xmlns="http://www.w3.org/1999/xhtml" style="
+				font-family: var(--theme-sub-heading-font);
+				color: #8494a0;
+				font-size: 30px;
+				font-weight: 400;
+				line-height: 1.4;
+				">
+				EXP REALTY OF CALIFORNIA, INC LICENSE #01878277. INFORMATION IS DEEMED RELIABLE, BUT NOT GUARANTEED.
+				BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.
+			</div>
+		</foreignObject>
+
 	</xsl:template>
 
 	<xsl:template name="custom-agent-details">
 		<xsl:param name="agent" />
 		<xsl:param name="idx" select="'1'" />
-	  	<g class="dark">
+
+
 		<image x="12.5% " y="82.1%" width="17.5%" height="8.8%" preserveAspectRatio="xMidYMin slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="$agent/photo" />
@@ -351,6 +354,5 @@
 				</xsl:call-template>
 			</tspan>
 		</text>
-	  </g>
 	</xsl:template>
 </xsl:stylesheet>
