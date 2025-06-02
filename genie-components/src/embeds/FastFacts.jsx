@@ -80,7 +80,7 @@ export default () => {
 						}
 					/>
 				</div> */}
-				<div>
+				{/* <div>
 					<ActiveIcon />
 					<ListingTableLinks
 						title="ACTIVE"
@@ -92,7 +92,7 @@ export default () => {
 							showProperties(propertyTypeId, statusType)
 						}
 					/>
-				</div>
+				</div> */}
 				<div>
 					<PendingIcon />
 					<ListingTableLinks
