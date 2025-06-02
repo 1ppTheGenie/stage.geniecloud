@@ -87,13 +87,14 @@
 			<tspan fill="#b0934c" class=" futura-text">HIGHER   SECURITY CLEARAN REQUIRED</tspan>
 		</text>
 
-		<text style="display: none;" >
+		<!-- <text style="display: none;" >
 		<xsl:call-template name="ed-showing-listing">
 			<xsl:with-param name="nodes" select="$listingsTotalActive" />
 			<xsl:with-param name="summary" select="' active listings.'" />
 			<xsl:with-param name="min" select="number(12)" />
 		</xsl:call-template>
-		</text>
+		</text> -->
+		
 
 		<xsl:call-template name="copyright" />
 	</xsl:template>

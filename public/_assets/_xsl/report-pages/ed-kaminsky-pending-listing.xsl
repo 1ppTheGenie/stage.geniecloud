@@ -12,7 +12,7 @@
 
 
 	<xsl:variable name="mapListingNodes" select="//listings/listing[@state='pending']" />
-	<xsl:variable name="pendingListingCount" select="count($mapListingNodes)" />
+	<!-- <xsl:variable name="pendingListingCount" select="count($mapListingNodes)" /> -->
 
 	<xsl:template name="svg-body">
 		<!-- <link rel="stylesheet">
@@ -40,12 +40,12 @@
 			<tspan x="65.2%" fill="#b2934e" class="futura-text">Pending</tspan>
 		</text>
 
-		<text style="display: none;" >
+		<!-- <text style="display: none;" >
 			<xsl:call-template name="ed-showing-listing">
 				<xsl:with-param name="nodes" select="$listingsTotalPending" />
 				<xsl:with-param name="min" select="number(12)" />
 			</xsl:call-template>
-		</text>
+		</text> -->
 
 		<xsl:variable name="pendingListingCount" select="count($mapListingNodes)" />
 
