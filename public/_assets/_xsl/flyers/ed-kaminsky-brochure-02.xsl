@@ -146,7 +146,7 @@
 			</xsl:call-template>
 		</image>
 
-		<rect x="72.2%" y="73.2%" width="26%" height="25%" fill="var(--theme-heading-color)" />
+		<rect x="72.2%" y="73.2%" width="26%" height="24%" fill="var(--theme-heading-color)" />
 		<xsl:choose>
 			<xsl:when test="$hasMultipleAgents">
 				<g>
@@ -291,15 +291,19 @@
 			<tspan dx="5"> • </tspan>
 			<tspan dx="5"><xsl:value-of select="//agent[1]/marketingLicense" /></tspan>
 		</text>
-		<foreignObject width="23.5%" height="7%" x="73.5%" y="90.6%" font-family="var(--theme-sub-heading-font)"
-			font-size="19" style="color:var(--theme-body-background); opacity:0.36; text-transform:uppercase;">
-			<div>
+
+		<text x="73.5%" y="90.6%" font-family="var(--theme-sub-heading-font)" font-size="118%"
+			fill="var(--theme-body-background)" opacity="0.36" text-transform="uppercase" data-max-width="40%">
+			<tspan x="73.5%" dy="0em" style="text-transform:uppercase;">
 				<xsl:value-of
 					select="concat(//single[1]/listingAgents/listingAgent[1]/@broker, ' LICENSE ', //agent[1]/marketingLicense, '. INFORMATION IS DEEMED')" />
-			</div>
-			<div><xsl:value-of
-					select="'RELIABLE, BUT NOT GUARANTEED. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY'" /></div>
-			<div><xsl:value-of select="'THE ACCURACY OF THIS INFORMATION'" /></div>
-		</foreignObject>
+			</tspan>
+			<tspan x="73.5%" dy="1.2em">
+				RELIABLE, BUT NOT GUARANTEED. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY
+			</tspan>
+			<tspan x="73.5%" dy="1.2em">
+				THE ACCURACY OF THIS INFORMATION 
+			</tspan>
+		</text>
 	</xsl:template>
 </xsl:stylesheet>
