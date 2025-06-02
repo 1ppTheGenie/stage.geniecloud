@@ -25,14 +25,14 @@
 
     <xsl:choose>
       <xsl:when test="//output/@themeHue = 'light'">
-        <image x="0%" y="55%" width="100%" height="45%" preserveAspectRatio="xMidYMid slice">
+        <image x="0%" y="35%" width="100%" height="65%" preserveAspectRatio="xMidYMid slice">
           <xsl:attribute name="href">
             <xsl:value-of select="concat(//output/@siteUrl, '_assets/_img/bottomlightlayer-dark.png')" />
           </xsl:attribute>
         </image>
       </xsl:when>
       <xsl:otherwise>
-        <image x="0%" y="60%" width="100%" height="40%" preserveAspectRatio="xMidYMid slice">
+        <image x="0%" y="30%" width="100%" height="70%" preserveAspectRatio="xMidYMid slice">
           <xsl:attribute name="href">
             <xsl:value-of select="concat(//output/@siteUrl, '_assets/_img/bottomlightlayer-light.png')" />
           </xsl:attribute>

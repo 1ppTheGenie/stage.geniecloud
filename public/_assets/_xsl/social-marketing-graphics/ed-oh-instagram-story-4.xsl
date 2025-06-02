@@ -14,11 +14,6 @@
 
 
 	<xsl:template name="svg-body">
-		<!-- <link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
-
-		</link> -->
-
 		<image x="0%" y="0%" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
 				<xsl:with-param name="id" select="image-1" />
@@ -29,14 +24,14 @@
 		<!-- Gradient layer start  -->
 
 		<xsl:if test="//output/@themeHue='dark'">
-			<image x="0%" y="70%" width="100%" height="30%" preserveAspectRatio="xMidYMid slice">
+			<image x="0%" y="35%" width="100%" height="65%" preserveAspectRatio="xMidYMid slice">
 				<xsl:attribute name="href">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/bottomlightlayer-light.png' )" />
 				</xsl:attribute>
 			</image>
 		</xsl:if>
 		<xsl:if test="//output/@themeHue='light'">
-			<image x="0%" y="50%" width="100%" height="50%" preserveAspectRatio="xMidYMid slice">
+			<image x="0%" y="30%" width="100%" height="70%" preserveAspectRatio="xMidYMid slice">
 				<xsl:attribute name="href">
 					<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/black-gradient-bottom.png' )" />
 				</xsl:attribute>
