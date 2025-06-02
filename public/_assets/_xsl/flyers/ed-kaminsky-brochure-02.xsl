@@ -146,7 +146,7 @@
 			</xsl:call-template>
 		</image>
 
-		<rect x="72.2%" y="73.2%" width="26%" height="24%" fill="var(--theme-heading-color)" />
+		<rect x="72.2%" y="73.2%" width="26%" height="25%" fill="var(--theme-heading-color)" />
 		<xsl:choose>
 			<xsl:when test="$hasMultipleAgents">
 				<g>
@@ -291,7 +291,7 @@
 			<tspan dx="5"> • </tspan>
 			<tspan dx="5"><xsl:value-of select="//agent[1]/marketingLicense" /></tspan>
 		</text>
-		<foreignObject width="23.5%" height="6.5%" x="73.5%" y="90.6%" font-family="var(--theme-sub-heading-font)"
+		<foreignObject width="23.5%" height="7%" x="73.5%" y="90.6%" font-family="var(--theme-sub-heading-font)"
 			font-size="19" style="color:var(--theme-body-background); opacity:0.36; text-transform:uppercase;">
 			<div>
 				<xsl:value-of
