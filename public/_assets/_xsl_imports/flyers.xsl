@@ -6,7 +6,7 @@
 		<rect x="0" y="88.1%" width="100%" height="9.05%" fill="var(--theme-heading-color)" />
 
 		<g style="transform:translate(0%,88.5%)">
-			<text x="1.4%" y="0.6%" class="schedule" font-family="var(--theme-sub-heading-font)" font-size="130%" font-weight="300" fill="var(--theme-body-background)">
+			<text x="1.4%" y="0.6%" class="schedule" font-family="var(--theme-sub-heading-font)" font-size="130%" font-weight="300" fill="var(--theme-body-background)" data-max-width="20%">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'Schedule'" />
 					<xsl:with-param name="default" select="'Schedule a private showing:'" />
@@ -20,7 +20,7 @@
 							CALL or TEXT
 						</tspan>							
 						
-						<tspan x="1.4%" dy="1.5%">
+						<tspan x="1.4%" dy="1.5%" data-max-width="20%">
 							<xsl:call-template name="editable">
 								<xsl:with-param name="id" select="'agentname'" />
 								<xsl:with-param name="default" select="concat(upper-case(//agent[1]/firstName), ' &amp; ', upper-case(//agent[2]/firstName)), ':'" />
