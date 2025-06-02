@@ -1,7 +1,7 @@
 {
-	"name": "Listing Command Sample",
+	"name": "Listing Command Proof Kit",
 	"version": 3,
-	"template": "marketing-steps-lc1",
+	"template": "listing-command-proof",
 	"sections": [
 		{
 			"sort": 1,
