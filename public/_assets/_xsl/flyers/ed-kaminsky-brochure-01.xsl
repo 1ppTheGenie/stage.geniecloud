@@ -14,7 +14,6 @@
 			<xsl:value-of select="'
  .areaname {
 				font-size: 33px;
-				color: #b0934c;
 				margin-top: 20px;
 				font-weight: 600;
 				margin-bottom: 0;
@@ -56,7 +55,7 @@
 			</div>
 			<div>
 				<p class="areaname"
-					style="text-transform: capitalize; margin-top:-10px; font-family:var(--theme-heading-font)">
+					style="text-transform: capitalize; margin-top:-10px; font-family:var(--theme-heading-font); color:var(--theme-sub-heading-color)">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'areanames'" />
 						<xsl:with-param name="default" select="//area/name" />
