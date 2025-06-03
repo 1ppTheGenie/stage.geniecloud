@@ -15,7 +15,7 @@
 
 			<xsl:choose>
 				<xsl:when test="$hasMultipleAgents">
-					<text x="1.4%" y="2%" fill="var(--theme-body-background)" font-family="var(--theme-sub-heading-font)" font-weight="500" font-size="180%" data-max-width="14%">
+					<text x="1.4%" y="2%" fill="var(--theme-body-background)" font-family="var(--theme-sub-heading-font)" font-weight="500" font-size="180%" data-max-width="13%">
 						<tspan x="1.4%" dy="0">
 							CALL or TEXT
 						</tspan>							
