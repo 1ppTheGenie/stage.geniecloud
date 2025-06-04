@@ -183,6 +183,7 @@ export const renderer = async params => {
 						height: render.height, // || `${Math.round(render.height / 2)}mm`,
 						printBackground: true,
 					};
+					console.log( 'pup options', render.s3Key ?? render.s3key, options, );
 
 					page.emulateMediaType("print");
 
