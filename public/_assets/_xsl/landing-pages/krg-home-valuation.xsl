@@ -11,8 +11,8 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
-<xsl:import href="landing-pages.xsl" />
-<xsl:import href="landing-pages-market-insider.xsl" />
+	<xsl:import href="landing-pages.xsl" />
+	<xsl:import href="landing-pages-market-insider.xsl" />
 
 
 	<xsl:template name="landing-page">
@@ -32,7 +32,7 @@
 		</xsl:call-template>
 
 		<link rel="stylesheet">
-<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
+			<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_css/futura-embedded.css')" />
 
 		</link>
 
@@ -71,7 +71,7 @@
 										<div class="bg-heading futura-text">
 											<h1 class="futura-text">Whoa, did you feel&#160;that?<br/>
 Your home's price just changed.</h1>
-											<div role="form" class="wpcf7" id="wpcf7-f194-o1" lang="en-US" dir="ltr">
+											<div role="form" class="wpcf7" lang="en-US" dir="ltr">
 												<form method="post" class="wpcf7-form funnel-create-lead" id="form_step1">
 													<div class="display-form">
 														<div class="form-field">
@@ -80,8 +80,7 @@ Your home's price just changed.</h1>
 															</span>
 														</div>
 														<div class="che_box submit-btn">
-<input type="submit" value="Get Report" class="title-button btn btn-warning" />
-
+															<input type="submit" value="Get Report" class="title-button btn btn-warning" />
 														</div>
 													</div>
 												</form>
@@ -127,7 +126,7 @@ Your home's price just changed.</h1>
 									<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/kaminsky-footer-logo.png' )" />
 								</xsl:attribute>
 							</image>
-<!-- <img class="logo2" src="https://myneighborhood.re/wp-content/themes/stuff-rentals/content-modules/funnels/kaminsky-home-valuation/image/logo2.png" /> -->
+							<!-- <img class="logo2" src="https://myneighborhood.re/wp-content/themes/stuff-rentals/content-modules/funnels/kaminsky-home-valuation/image/logo2.png" /> -->
 						</div>
 					</div>
 				</div>
@@ -137,7 +136,7 @@ Your home's price just changed.</h1>
 							<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/top-secret.png' )" />
 						</xsl:attribute>
 					</image>
-<!-- <img src="https://myneighborhood.re/wp-content/themes/stuff-rentals/content-modules/funnels/kaminsky-home-valuation/image/top-secret.png" /> -->
+					<!-- <img src="https://myneighborhood.re/wp-content/themes/stuff-rentals/content-modules/funnels/kaminsky-home-valuation/image/top-secret.png" /> -->
 				</div>
 				<xsl:call-template name="agent-details" />
 				<xsl:call-template name="copyright" />
