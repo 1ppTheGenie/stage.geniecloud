@@ -7587,7 +7587,7 @@ var jsonFromS3 = async (key, since = null, bucket = null) => {
       return JSON.parse(r);
     }
   } catch (err) {
-    console.log("Retrieve JSON: ", err);
+    console.log("Retrieve JSON: ", key, err);
   }
 };
 var fromS3 = async (key, since = null, bucket = null) => {
@@ -9452,14 +9452,12 @@ var getDimensions = (size = null) => {
     case "a4":
       dims = [827, 1169];
       break;
-    case "a5":
-      dims = [2126, 2753];
-      break;
     case "postcard":
       dims = [1100, 600];
       break;
     case "tabloid-flyer":
-      dims = [1100, 1700];
+      dims = [1700, 1100];
+      console.log("tabloid-flyer", dims);
       break;
     case "facebook-ad":
     case "facebook-post":
@@ -9468,6 +9466,9 @@ var getDimensions = (size = null) => {
       break;
     case "instagram-story":
       dims = [1080, 1920];
+      break;
+    case "a5":
+      dims = [2126, 2753];
       break;
     case "facebook":
     default:
@@ -10828,6 +10829,7 @@ var prepareAsset = async (asset, params) => {
             lpo: params.lpo
           }
         };
+        console.log("banana", render.s3Key, render);
         let qrCodeSVGUrl;
         if (params?.qrDestination) {
           render.qrUrl = params.qrDestination;
