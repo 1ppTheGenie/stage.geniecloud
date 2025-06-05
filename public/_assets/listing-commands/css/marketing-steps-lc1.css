@@ -278,11 +278,6 @@ body.listing-command-proof .assets-steps{
 	gap: 0.188rem;
 	transition: 0.2s;
 }
-/* To hide share icon untill it's done */
-.share-icon{
-	display: none;
-}
-/* To hide share icon untill it's done */
 .asset-icon:hover{
 	opacity: 0.8;
 }
