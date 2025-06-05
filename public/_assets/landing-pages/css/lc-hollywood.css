@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Spartan:wght@100;200;400;500;600;700;800;900&display=swap");
 
+:root{
+	--white: #ffffff;
+	--light-blue: #242736;
+	--font-1: 'Montserrat', sans-serif; 
+}
 html {
 	font-size: 16px;
 	scroll-behavior: smooth;
@@ -93,7 +98,7 @@ h6 {
 	font-size: 1.875rem;
 	letter-spacing: 0.02em;
 	line-height: 1.2;
-	color: #fff;
+	color: var(--white);
 	text-transform: uppercase;
 	font-family: "Spartan", sans-serif;
 }
@@ -121,21 +126,30 @@ h6 {
 	width: 600px;
 	max-width: 100%;
 	margin-left: auto;
-	margin-right: 2.1%;
 	padding: 50px 3.6% 42px;
+	background-color: var(--light-blue);
 }
 
 .hero-details-inner h3 {
 	color: var(--theme-background-color);
-	text-transform: uppercase;
-	font-size: 105%;
+	font-size: 30px;
+    line-height: 1;
+    font-weight: 500;
+	margin-top: 20px;
+    margin-bottom: 10px;
 }
-
-.hero-details-inner .open-house-times {
-	display: grid;
-	grid-template-columns: 2fr 1fr;
-	grid-auto-rows: 1.5rem;
-	font-size: 95%;
+.hero-details-inner .open-house{
+	color: var(--white);
+}
+.hero-details-inner .open-house-times p{
+	margin-block: 10px;
+	font-size: 18px;
+	font-family: var(--theme-body-font);
+	font-weight: 500;
+	line-height: 1.1;
+}
+.hero-details-inner .open-house-times p>span{
+	text-transform: lowercase;
 }
 
 .hero-price {
@@ -156,7 +170,7 @@ h6 {
 	line-height: 1;
 	letter-spacing: 0.02em;
 	text-transform: uppercase;
-	color: var(--theme-body-background);
+	color: var(--white);
 }
 
 .gradient-color {
@@ -512,7 +526,7 @@ a.pdf-btn span {
 	height: 100%;
 	top: 0;
 	left: 0;
-	background: var(--theme-heading-color);
+	background: var(--light-blue);
 	z-index: -1;
 	opacity: 0.84;
 }
@@ -636,8 +650,12 @@ a.pdf-btn:hover .overlay-bg {
 	justify-content: center;
 	margin-bottom: 90px;
 }
+.description{
+	font-family: var(--font-1);
+}
 
 .overview-cta-list a.cta {
+	font-family: var(--font-1);
 	text-align: center;
 	display: block;
 	font-weight: 500;
@@ -647,12 +665,14 @@ a.pdf-btn:hover .overlay-bg {
 	text-transform: uppercase;
 	padding: 34.5px 0;
 	transition: all 0.3s ease;
+	background-color: var(--light-blue);
+	color: var(--white);
 }
 
 .overview-cta-list a.cta:hover {
 	background: var(--theme-sub-heading-color);
 	border-color: var(--theme-sub-heading-color);
-	color: #fff;
+	color: var(--white);
 }
 
 .map {
@@ -844,7 +864,7 @@ span.label.listing-status {
 }
 
 .home-slider .listing-status-sold {
-	background-color: red !important;
+	background-color: #ec2227 !important;
 }
 
 /* #contact_form {
@@ -852,6 +872,12 @@ span.label.listing-status {
 } */
 body:not(.lightbox) .masonary #property-gallery-container .property-gallery {
 	max-width: 100%;
+	margin: 0 -4px;
+}
+.property-image-show-btn .btn{
+	background-color: var(--light-blue);
+	color: var(--white);
+	font-family: var(--font-1);
 }
 
 
@@ -969,12 +995,14 @@ section.real-time-market{
     text-transform: uppercase;
     font-size: 34px;
     font-weight: 400;
-	color: #fff ;
+	color: var(--white);
+	line-height: 1.1;
 }
 .real-time-market p{
 	font-size: 20px;
     margin: 0px 0px 5px;
 	color: #b2934e;
+	line-height: 1.42857143;
 }
 
 /*
@@ -986,6 +1014,15 @@ section#about-section2:before {
     visibility: hidden;
 }
 */
+
+.MarketUpdate h1.upper,
+.MarketUpdate h2,
+.snapshot-details h1, 
+.snapshot-details p, 
+.snapshot-details h3,
+.MarketUpdate select#date-period, select#date-period{
+	font-family: var(--font-1) !important;
+}
 
 section#virtualTour:before {
 	content: "";

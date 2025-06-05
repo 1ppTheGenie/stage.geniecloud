@@ -101,7 +101,7 @@
                                                     c0.224-0.309,1.65-1.575,2.87-2.596c0.778-0.463,1.312-1.151,1.546-1.995c0.311-1.123,0.082-2.444-0.652-3.731
                                                     c-0.173-0.296-4.291-7.27-8.085-9.277c-0.708-0.375-1.506-0.573-2.306-0.573c-1.318,0-2.558,0.514-3.49,1.445L4.7,3.986
                                                     c-4.014,4.013-5.467,8.562-4.321,13.52c0.956,4.132,3.742,8.529,8.282,13.068l14.705,14.705c5.746,5.746,11.224,8.66,16.282,8.66
-c0,0,0,0,0.001,0c3.72,0,7.188-1.581,10.305-4.698l2.537-2.537C54.033,45.163,54.383,42.833,53.364,40.908z" />
+													c0,0,0,0,0.001,0c3.72,0,7.188-1.581,10.305-4.698l2.537-2.537C54.033,45.163,54.383,42.833,53.364,40.908z" />
 												</svg>
 												<span class="heading-font">Call</span>
 											</a>
@@ -117,10 +117,10 @@ c0,0,0,0,0.001,0c3.72,0,7.188-1.581,10.305-4.698l2.537-2.537C54.033,45.163,54.38
 
 												<svg xmlns="http://www.w3.org/2000/svg" width="469.2px" height="469.2px" viewBox="0 0 469.2 469.2" style="enable-background:new 0 0 469.2 469.2;" fill="var(--theme-heading-color)">
 													<path d="M22.202,77.023C25.888,75.657,29.832,74.8,34,74.8h401.2c4.168,0,8.112,0.857,11.798,2.224L267.24,246.364
-                                                c-18.299,17.251-46.975,17.251-65.28,0L22.202,77.023z M464.188,377.944c3.114-5.135,5.012-11.098,5.012-17.544V108.8
-                                                c0-4.569-0.932-8.915-2.57-12.899L298.411,254.367L464.188,377.944z M283.2,268.464c-13.961,11.961-31.253,18.027-48.6,18.027
-                                                c-17.347,0-34.64-6.06-48.6-18.027L20.692,391.687c4.094,1.741,8.582,2.714,13.308,2.714h401.2c4.726,0,9.214-0.973,13.308-2.714
-L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12.409,5.012,17.544l165.777-123.577L2.571,95.9z" />
+													c-18.299,17.251-46.975,17.251-65.28,0L22.202,77.023z M464.188,377.944c3.114-5.135,5.012-11.098,5.012-17.544V108.8
+													c0-4.569-0.932-8.915-2.57-12.899L298.411,254.367L464.188,377.944z M283.2,268.464c-13.961,11.961-31.253,18.027-48.6,18.027
+													c-17.347,0-34.64-6.06-48.6-18.027L20.692,391.687c4.094,1.741,8.582,2.714,13.308,2.714h401.2c4.726,0,9.214-0.973,13.308-2.714
+													L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12.409,5.012,17.544l165.777-123.577L2.571,95.9z" />
 												</svg>
 
 												<span class="heading-font">Text</span>
@@ -304,7 +304,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 					</div>
 
 					<div class="hero-details custom-container container">
-						<div class="heading-color-as-bg hero-details-inner">
+						<div class="hero-details-inner">
 							<div class="hero-price">
 								<span class="gradient-color">									
 									<xsl:choose>
@@ -338,23 +338,19 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 							</div>
 
 							<!-- Open House -->
-							<xsl:if test="count(//openHouse/session) > 0">
-								<div class="open-house" style="color: var(--theme-body-background);">
-									<div>
+							<xsl:if test="count(//openHouse/session) &gt; 0">
+								<div class="open-house">									
 										<h3>Open House</h3>
 
 										<div class="open-house-times">
 											<xsl:for-each select="//openHouse/session">
 												<xsl:sort select="@ms" data-type="number" order="ascending"/>
-												<span>
-													<xsl:value-of select="concat( @dow, ', ', @month, ' ', @date )" />
-												</span>
-												<span>
-													<xsl:value-of select="concat( @starts, ' - ', @ends )" />
-												</span>
+												<p>
+													<xsl:value-of select="concat( @dow, ', ', @month, ' ', @date, ' - ' )" />
+													<span><xsl:value-of select="concat(@starts, ' to ', @ends )" /></span>
+												</p>
 											</xsl:for-each>
-										</div>
-									</div>
+										</div>	
 								</div>
 							</xsl:if>
 						</div>
@@ -371,7 +367,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 							</h2>
 							<div class="body-color">
 								<!-- TODO port PHP function <xsl:variable name="paras" select="genie:split-to-paras( //single/description )" /> -->
-								<xsl:copy-of select="//single/description" />
+								<p class="description"> <xsl:value-of select="//single/description" /></p>
 							</div>
 						</div>
 						<div class="overview-details">
@@ -416,15 +412,6 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 										</strong>
 										<span>
 											<xsl:value-of select="//single/bathrooms/@full" />
-
-										</span>
-									</li>
-									<li class="body-color">
-										<strong>
-											<xsl:text>BATHROOM HALF</xsl:text>
-										</strong>
-										<span>
-											<xsl:value-of select="//single/bathrooms/@half" />
 
 										</span>
 									</li>
@@ -482,7 +469,19 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 											<xsl:value-of select="//single/listingStatus" />
 
 										</span>
-									</li>
+									</li>																										
+									
+									<!-- <li class="body-color">
+										<strong>
+											<xsl:text>BATHROOM HALF</xsl:text>
+										</strong>
+										<span>
+											<xsl:value-of select="//single/bathrooms/@half" />
+
+										</span>
+									</li> -->
+																																																					
+									
 									<li class="body-color">
 										<strong>
 											<xsl:text>MLS #</xsl:text>
@@ -497,19 +496,19 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 						</div>
 						<div class="row overview-cta-list">
 							<div class="col-md-4">
-								<a class="cta subtitle-font heading-color-as-bg background-as-color" id="request-modal-btn" href="#request-modal" data-toggle="modal">
+								<a class="cta subtitle-font" id="request-modal-btn" href="#request-modal" data-toggle="modal">
 									<xsl:text>Request Details</xsl:text>
 								</a>
 							</div>
 							<xsl:if test="//single/statusTypeID != 2">
 								<div class="col-md-4">
-									<a class="cta subtitle-font heading-color-as-bg background-as-color" id="schedule-modal-btn" href="#schedule-modal" data-toggle="modal">
+									<a class="cta subtitle-font" id="schedule-modal-btn" href="#schedule-modal" data-toggle="modal">
 										<xsl:text>Schedule A Showing</xsl:text>
 									</a>
 								</div>
 							</xsl:if>
 							<div class="col-md-4">
-								<a class="cta subtitle-font heading-color-as-bg background-as-color" href="javascript:void(0);" onclick="scrollToEmbed()">Real-Time Market Stats
+								<a class="cta subtitle-font heading-color-as-bg" href="javascript:void(0);" onclick="scrollToEmbed()">Real-Time Market Stats
 								</a>
 							</div>
 						</div>
@@ -559,12 +558,13 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 				</section>
 				<section class="download-pdf">
 					<div class="download-img">
-						<img alt="Bar chart" width="100%" height="100%" style="object-fit: cover;">
-							<xsl:attribute name="src">
-								<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/cush-pdf-bg.jpg')" />
-							</xsl:attribute>
-						</img>
-					</div>           
+						<xsl:attribute name="style">
+							<xsl:text>background-image: url('</xsl:text>
+								<xsl:value-of select="concat(//output/@siteUrl, '_assets/_img/cush-pdf-bg.jpg')" />
+							<xsl:text>')</xsl:text>
+						</xsl:attribute>
+					</div>
+         
 					<a class="pdf-btn" target="_blank" >
 						<xsl:attribute name="href">
 							<xsl:value-of select="//output/@downloadUrl" />
@@ -658,7 +658,11 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 								</span>
 							</h2>
 							<p class="subtitle-font subtitle-color">
-								<xsl:value-of select="concat( '- as of ', genie:format-date( //output/@reportDate, '[MNn] [D], [Y0001] @ [h]:[m01][PN,*-2]') )" />
+								<xsl:value-of select="concat(
+									'- as of ',
+									upper-case(genie:format-date(//output/@reportDate, '[MNn] ')),
+									substring(genie:format-date(//output/@reportDate, ' [D], [Y0001] @ [h]:[m01][PN,*-2]'), 2)
+									)" />
 							</p>
 						</div>
 					</div>
@@ -727,6 +731,7 @@ L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12
 						</xsl:call-template>
 					</div>
 				</section>
+				
 
 				<section class="genie-alternate">
 					<xsl:call-template name="agent-about" />

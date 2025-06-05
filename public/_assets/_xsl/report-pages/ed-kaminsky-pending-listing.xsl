@@ -12,7 +12,7 @@
 
 
 	<xsl:variable name="mapListingNodes" select="//listings/listing[@state='pending']" />
-	<xsl:variable name="pendingListingCount" select="count($mapListingNodes)" />
+	<!-- <xsl:variable name="pendingListingCount" select="count($mapListingNodes)" /> -->
 
 	<xsl:template name="svg-body">
 		<!-- <link rel="stylesheet">
@@ -40,14 +40,29 @@
 			<tspan x="65.2%" fill="#b2934e" class="futura-text">Pending</tspan>
 		</text>
 
-		<xsl:call-template name="ed-showing-listing">
-<xsl:with-param name="nodes" select="$pendingListingCount" />
-
-			<xsl:with-param name="min" select="number(12)" />
-		</xsl:call-template>
+		<!-- <text style="display: none;" >
+			<xsl:call-template name="ed-showing-listing">
+				<xsl:with-param name="nodes" select="$listingsTotalPending" />
+				<xsl:with-param name="min" select="number(12)" />
+			</xsl:call-template>
+		</text> -->
 
 		<xsl:variable name="pendingListingCount" select="count($mapListingNodes)" />
 
+		<text x="50%" y="29%" class="center futura-text" font-size="110%" fill="#b0934c" style="word-spacing:5px; text-transform: uppercase;">
+			<xsl:text>SHOWING </xsl:text>
+			<xsl:choose>
+				<xsl:when test="$pendingListingCount &lt; 12">
+				<xsl:value-of select="$pendingListingCount" />
+				</xsl:when>
+				<xsl:otherwise>
+				<xsl:value-of select="12" />
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:text> OF </xsl:text>
+			<xsl:value-of select="$pendingListingCount" />
+			<xsl:text> TOTAL LISTINGS</xsl:text>
+		</text>
 		<xsl:if test="$pendingListingCount &gt; 0">
 			<xsl:call-template name="ed-listings-table">
 				<xsl:with-param name="status" select="'pending'" />

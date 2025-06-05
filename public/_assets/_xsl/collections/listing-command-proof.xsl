@@ -10,10 +10,6 @@ Version:	1.1
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0">
 	<xsl:import href="listing-commands.xsl" />
-
-	<xsl:template name="template-folders">
-		<xsl:value-of select="'[`Step One:`, `Step Two`]'" />
-	</xsl:template>
 	
 	<xsl:template name="asset-box">
 		<xsl:param name="asset" />
@@ -83,7 +79,7 @@ Version:	1.1
 			 <xsl:with-param name="ogImage" select="'/_assets/_img/genie-logo-1.png'" />
 		</xsl:call-template>
 
-		<body class="marketing-steps">
+		<body class="marketing-steps listing-command-proof">
 			<link href="https://fonts.googleapis.com" rel="preconnect" />
 			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
 			
@@ -149,7 +145,6 @@ Version:	1.1
 						</div>	
 						<h1>
 							<span>
-								<!--<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />-->
 								<xsl:choose>
 									<xsl:when test="$hasMultipleAgents">
 										<xsl:value-of select="concat(//agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's', ' &amp; ', //agent[2]/firstName, ' ', //agent[2]/lastName, $apos, 's')" />
@@ -171,15 +166,6 @@ Version:	1.1
 									<xsl:value-of select="//area/name" />
 								<br/>
 									<xsl:value-of select="$listingAddressLine1" />
-									<!-- <xsl:if test="count(//openHouse/session) &gt; 0">
-                                        <xsl:value-of select="concat(
-                                        ' • ', //openHouse/session[1]/@dow, ', ',
-                                        //openHouse/session[1]/@month, ' ',
-                                        //openHouse/session[1]/@date,
-                                        ' • ', //openHouse/session[1]/@starts, ' - ',
-                                        //openHouse/session[1]/@ends
-                                        )" />
-                                    </xsl:if> -->
 									 <xsl:if test="//openHouse/session">
                                         <xsl:text> • </xsl:text>
                                         <xsl:value-of select="//openHouse/session[1]/@dow" />, 
@@ -253,25 +239,9 @@ Version:	1.1
 					<!-- Section Output -->
 					<div class="container section assets-steps">
 						<div class="section-heading">
-														 
-							<xsl:if test="number(@sort) = 1">
-								<p class="steps-count"> Step one: </p>
-							</xsl:if>
-
-							<xsl:if test="number(@sort) = 2">
-								<p class="steps-count"> Step two: </p>
-							</xsl:if>
-							
 							<h2 class="steps-heading">
 								<xsl:value-of select="@name" />
 							</h2>
-
-							<!-- <xsl:if test="@caption != ''">
-								<h3>
-									<xsl:value-of select="@caption" />
-								</h3>
-							</xsl:if> -->
-
 							<xsl:if test="@description != ''">
 								<p>
 									<xsl:value-of select="@description" />
@@ -288,7 +258,6 @@ Version:	1.1
 									<xsl:value-of select="@caption" />
 								</p>
 							</xsl:if>
-
 						</div>
 
 						<div class="section-grid">
@@ -309,51 +278,6 @@ Version:	1.1
 						</div>
 					</div>
 
-					<!-- Insert Open House Checklist after the FIRST section -->
-					<xsl:if test="$pos = 1">
-						<section class="open-house-checklist">
-							<div class="container">
-								<h1>
-									<span class="text-gold">But wait, there’s more!</span>
-									<br/>Don’t forget your open house checklist.
-								</h1>
-								<div class="arrow-container">
-									<svg width="65px" height="75px" viewBox="0 0 21 21"
-										xmlns="http://www.w3.org/2000/svg">
-										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
-											<path d="m.5 9.499 4 4.001 4-4.001"></path>
-											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
-										</g>
-									</svg>
-									<svg width="65px" height="75px" viewBox="0 0 21 21"
-										xmlns="http://www.w3.org/2000/svg">
-										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
-											<path d="m.5 9.499 4 4.001 4-4.001"></path>
-											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
-										</g>
-									</svg>
-									<svg width="65px" height="75px" viewBox="0 0 21 21"
-										xmlns="http://www.w3.org/2000/svg">
-										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
-											<path d="m.5 9.499 4 4.001 4-4.001"></path>
-											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
-										</g>
-									</svg>
-								</div>
-							</div>	
-						</section>
-					</xsl:if>
-
-					<!-- Insert Visitor Section after the SECOND section -->
-					<xsl:if test="$pos = 2">
-						<section class="visitor-sec">
-							<div class="container">
-								<h1>Every visitor signs in.<br/> Every time. No exceptions.</h1>
-								<span class="up-arrow">↑</span>
-								<p class="bordered-button">This isn't a button. Read the above again.</p>
-							</div>	
-						</section>
-					</xsl:if>
 				</xsl:for-each>
 
 
@@ -374,7 +298,7 @@ Version:	1.1
 									<p>
 										<b>Area Name:&#160;</b>
 										<xsl:value-of select="//areas/area[1]/name" />
-									</p>
+									</p>								
 								</xsl:if>
 							</div>
 
@@ -397,13 +321,7 @@ Version:	1.1
 								<p>
 									<b>MLS: </b>
 									<xsl:value-of select="//single/mlsNumber" />
-								</p>
-								
-								<!-- <p>
-									<b>Prepared For:&#160;</b>
-									<xsl:value-of select="//agent[1]/marketingName" />
-								</p> -->
-								
+								</p>								
 							</div>
 
 							<div>
@@ -429,15 +347,6 @@ Version:	1.1
 									<b>Collection ID:&#160;</b>
 									<xsl:value-of select="//collection/@id" />
 								</p>
-								<!-- <p>
-									<b>Re-render this kit:&#160;</b>
-									<a>
-										<xsl:attribute name="href">
-											<xsl:value-of select="concat( //output/@apiUrl, 're-render?renderId=', //collection/@id )" />
-										</xsl:attribute>
-										<xsl:text>Click to re-render</xsl:text>
-									</a>
-								</p> -->
 							</div>
 						</div>
 					</div>	
@@ -445,22 +354,7 @@ Version:	1.1
 			</main>
 		</body>
 
-		<!-- <footer>
-			<xsl:if test="$personalLogo!=''">
-				<img>
-					<xsl:attribute name="src">
-						<xsl:value-of select="$personalLogo" />
-					</xsl:attribute>
-				</img>
-			</xsl:if>
-			<xsl:if test="$companyLogo!=''">
-				<img>
-					<xsl:attribute name="src">
-						<xsl:value-of select="$companyLogo" />
-					</xsl:attribute>
-				</img>
-			</xsl:if>
-		</footer> -->
+		
 		<footer>
 			<div class="container">
 				<div class="grid-col-3 footer">

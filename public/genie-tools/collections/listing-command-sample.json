@@ -1,7 +1,7 @@
 {
-	"name": "Listing Command Sample",
+	"name": "Listing Command Proof Kit",
 	"version": 3,
-	"template": "marketing-steps-lc1",
+	"template": "listing-command-proof",
 	"sections": [
 		{
 			"sort": 1,
@@ -47,22 +47,26 @@
 				{
 					"sort": 1,
 					"asset": "social-marketing-graphics/lc-prop-post-06",
-					"name": "Simple"
+					"name": "Simple",
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 2,
 					"asset": "social-marketing-graphics/lc-prop-post-06-vip",
-					"name": "Ready to Sell"
+					"name": "Ready to Sell",
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 3,
 					"asset": "social-marketing-graphics/lc-prop-post-03",
-					"name": "Cash Buyers"
+					"name": "Cash Buyers",
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 4,
 					"asset": "social-marketing-graphics/lc-prop-post-01-vip",
-					"name": "Modern"
+					"name": "Modern",
+					"size": "instagram-Square"
 				}
 			]
 		},

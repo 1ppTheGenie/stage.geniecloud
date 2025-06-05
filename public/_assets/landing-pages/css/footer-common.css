@@ -234,12 +234,11 @@ a {
 
 .agent-details .details h2 {
     color: var(--theme-sub-heading-color);
-    font-family: var(--theme-sub-heading-font);
 }
 
 .agent-details .agent-phone a {
     color: var(--theme-heading-color);
-    font-family: var(--theme-sub-heading-font) !important;
+    font-family: var(--theme-body-font) !important;
     font-size: 26px;
 }
 
@@ -281,7 +280,7 @@ button.btn.subtitle-font.background-as-color.contact-me-btn {
 
 .footer-style p {
     color: var(--theme-body-color);
-    font-family: var(--theme-heading-font);
+    font-family: var(--theme-sub-heading-font);
 }
 
 .footer-middle-img {
@@ -296,8 +295,8 @@ button.btn.subtitle-font.background-as-color.contact-me-btn {
 }
 
 .agent-details .f-name {
-    color: var(--theme-body-color);
-    font-family: var(--theme-heading-font);
+    color: var(--theme-sub-heading-font);
+    font-family: var(--theme-sub-heading-font);
     font-size: 18px;
     margin-bottom: 20px;
     font-weight: 400;

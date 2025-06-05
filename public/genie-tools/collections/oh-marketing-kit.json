@@ -1,5 +1,5 @@
 {
-	"name": "Open House Marketing Kit",
+	"name": "Open House Domination Kit",
 	"template": "marketing-steps-lc1",
 	"version": 3,
 	"sections": [
@@ -57,17 +57,23 @@
 				},
 				{
 					"sort": 9,
+					"asset": "flyers/address-strip-01",
+					"name": "Address Arrows",
+					"size": "tabloid-flyer"
+				},
+				{
+					"sort": 10,
 					"asset": "flyers/lc-oh-invite-01a",
 					"name": "Open House Invite",
 					"qrUrl": "lc-hollywood"
 				},
 				{
-					"sort": 10,
+					"sort": 11,
 					"asset": "report-pages/ed-kaminsky-vip-entry",
 					"name": "Door Hanger Invites"
 				},
 				{
-					"sort": 11,
+					"sort": 12,
 					"asset": "area-insider-reports/top-secret-market-insider",
 					"name": "Market Insider Report"
 				}
@@ -86,13 +92,22 @@
 				{
 					"sort": 2,
 					"asset": "landing-pages/lc-oh-guestbook",
-					"name": "Open House Guestbook",
-					"lpo": "lc-hollywood"
+					"name": "Guestbook Link",
+					"lpo": "lc-hollywood",
+					"size": "Landing Page"
 				},
 				{
 					"sort": 3,
 					"asset": "landing-pages/lc-hollywood",
-					"name": "Property Website"
+					"name": "Property Website",
+					"size": "Landing Page"
+				},
+
+				{
+					"sort": 4,
+					"asset": "flyers/car-oh",
+					"name": "CAR OH Form",
+					"size": "us-letter"
 				}
 			],
 			"name": "Create a lasting first impression"

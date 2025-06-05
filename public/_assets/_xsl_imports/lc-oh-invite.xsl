@@ -7,7 +7,7 @@
 	<xsl:template name="lc-oh-invite">
 		<xsl:param name="sub-heading" />
 		<g>
-			<image x="0" y="0" width="100%" height="45%" preserveAspectRatio="xMidYMid slice">
+			<image x="0" y="0" width="100%" height="48%" preserveAspectRatio="xMidYMid slice">
 				<xsl:call-template name="switch-image">
 					<xsl:with-param name="id" select="'image-1'" />
 					<xsl:with-param name="idx" select="1" />
@@ -25,29 +25,30 @@
 					<xsl:with-param name="height" select="'7%'" />
 				</xsl:call-template>
 
-				<text x="4.5%" y="6%" class="align-center heading" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="140%">
-					<tspan x="4.5%" dy="1%">
+				<text x="4.9%" y="6%" class="align-center heading" fill="var(--theme-heading-color)" font-family="var(--theme-sub-heading-font)" font-weight="700" font-size="120%">
+					<tspan x="4.9%" dy="1%">
 						<xsl:value-of select="'SCAN FOR'" />
 					</tspan>
-					<tspan x="4.5%" dy="1.4%">
+					<tspan x="4.6%" dy="1.1%">
 						<xsl:value-of select="'DETAILS'" />
 					</tspan>
 				</text>
 			</g>
 
-			<rect x="0" y="45%" fill="var(--theme-sub-heading-color)" width="100%" height="2%" />
+			<rect x="0" y="47.8%" fill="var(--theme-sub-heading-color)" width="100%" height="1.49%" />
 
-			<g style="transform:translate(0%,43%)">
-				<rect x="10%" y="-1.8%" fill="var(--theme-sub-heading-color)" width="80%" height="11.5%" />
+			<g style="transform:translate(0%,44.65%)">
+				<rect x="10%" y="-1.8%" fill="var(--theme-sub-heading-color)" width="80%" height="11.05%" />
 
-				<text x="50%" y="-1%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="370%" font-weight="500">
+				<text x="50%" y="-1.5%" fill="var(--theme-body-background)" font-family="var(--theme-sub-heading-font)" class="center upper" font-size="370%" font-weight="600">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'openhouse'" />
-						<xsl:with-param name="default" select="'you’re invited'" />
+						<!-- <xsl:with-param name="default" select="'you're invited'" /> -->				
 					</xsl:call-template>
+					<tspan>you're invited</tspan>
 				</text>
 
-				<text x="50%" y="2.5%" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" class="center upper" font-size="700%" font-weight="400">
+				<text x="50%" y="1.5%" fill="var(--theme-body-background)" font-family="var(--theme-sub-heading-font)" class="center upper" font-size="660%" font-weight="400">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'openhouse'" />
 						<xsl:with-param name="default" select="'Open House'" />
@@ -55,17 +56,24 @@
 				</text>			
 			</g>
 
-			<g style="transform:translate(0%,57.5%)">
+			<g style="transform:translate(0%,58%)">
 				
 				<xsl:if test="count(//openHouse/session) &gt; 0">
-					<text x="50%" y="0%" class="center bold" font-family="var(--theme-heading-font)" fill="var(--theme-body-color)" text-anchor="middle" font-size="320%" style="dominant-baseline: middle; letter-spacing:4px;">
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
-							<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ', //openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
-						</xsl:call-template>
+					<text x="50%" y="0%" class="center bold" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-color)" text-anchor="middle" font-size="320%" style="dominant-baseline: middle; letter-spacing:4px;">
+						<tspan>
+							<xsl:call-template name="editable">
+								<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
+								<xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ', ', //openHouse/session[1]/@month, ' ', //openHouse/session[1]/@date, ' - ')" />
+							</xsl:call-template>
+						</tspan>
+						<tspan style="text-transform: lowercase">
+							<xsl:call-template name="editable">
+								<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
+								<xsl:with-param name="default" select="concat(//openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" />
+							</xsl:call-template>
+						</tspan>
 					</text>
 				</xsl:if>
-
 				
 				<foreignObject x="0" y="2.5%" width="100%" height="25%">
 					<p class="center upper" style="font-family:var(--theme-body-font);font-size:500%;font-weight:500;width: 900px; margin-inline: auto;margin-top:0;margin-bottom:12px;color:var(--theme-sub-heading-color);line-height:110%">
@@ -75,16 +83,16 @@
 						</xsl:call-template>
 					</p>
 				</foreignObject>
-				<text x="50%" y="12%" class="center upper" fill="var(--theme-body-color)" font-size="350%" font-family="var(--theme-heading-font)" style="letter-spacing:2px;margin:0;" font-weight="700">
+				<text x="50%" y="12%" class="center upper" fill="var(--theme-body-color)" font-size="350%" font-family="var(--theme-sub-heading-font)" style="letter-spacing:2px;margin:0;" font-weight="700">
 					<tspan x="50%" dy="0">
 						<xsl:value-of select="$listingAddressLine1" />
 					</tspan>
-					<tspan x="50%" dy="4%">
+					<tspan x="50%" dy="4.2%">
 						<xsl:value-of select="$listingAddressLine2" />
 					</tspan>
 				</text>
 
-				<text x="98.2%" y="23%" fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)" class="right upper narrow" font-size="140%">
+				<text x="98.2%" y="24%" fill="var(--theme-sub-heading-color)" font-family="var(--theme-sub-heading-font)" class="right upper narrow" font-size="140%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'bedroomscount'" />
 						<xsl:with-param name="default" select="concat( ' MLS #: ', //single/mlsNumber)" />
@@ -92,43 +100,54 @@
 				</text>
 			</g>
 
-			<g style="transform:translate(0%,83%)">
-				<rect fill="var(--theme-body-color)" width="100%" height="5%" />
+			<g style="transform:translate(0%,83.95%)">
+				<rect fill="var(--theme-body-color)" width="100%" height="4.25%" />
+			</g>	
 
-				<g class="icon-stat" style="transform:translate(26.5%, -0.9%)">
-					<use x="0" y="1%" width="3%" height="4%" fill="var(--theme-body-background)">
-						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#bed-icon' )" />
-					</use>
-					<text x="3.5%" y="2%" class="narrow" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="180%">
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'bedroomscount'" />
-							<xsl:with-param name="default" select="concat( //single/bedrooms/@count, ' Bedrooms ')" />
-						</xsl:call-template>
-					</text>
-				</g>
-				<g class="icon-stat" style="transform:translate(44.5%, -0.5%)">
-					<use x="0" y="1%" width="2.5%" height="3%" fill="var(--theme-body-background)">
-						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#bath-icon' )" />
-					</use>
-					<text x="3.5%" y="1.6%" class="narrow" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="180%">
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'bathroomscount'" />
-							<xsl:with-param name="default" select="concat( $listingTotalBathrooms, ' Bathrooms ')" />
-						</xsl:call-template>
-					</text>
-				</g>
-				<g class="icon-stat" style="transform:translate(62%, -0.7%)">
-					<use x="1%" y="1.3%" width="3%" height="3%" fill="var(--theme-body-background)">
-						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#object-ungroup-icon' )" />
-					</use>
-					<text x="4.5%" y="1.7%" class="narrow" fill="var(--theme-body-background)" font-family="var(--theme-heading-font)" font-size="180%">
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'sqft'" />
-							<xsl:with-param name="default" select="concat ('Sq. ft.: ', format-number( //single/squareFeet, '###,###' ))" />
-						</xsl:call-template>
-					</text>
-				</g>
-			</g>
+			<foreignObject x="0" y="83.95%" width="100%" height="100%">
+				<div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; justify-content: center; gap: 2.5rem; align-items: center; transform: translateY(85%);">
+				
+				<!-- Bedrooms -->
+				<div style="display: flex; align-items: center; gap: 10px; transform: translate(2.25px, -6px);">
+					<svg width="40" height="35" fill="var(--theme-body-background)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+						<path d="M32 32c17.7 0 32 14.3 32 32l0 256 224 0 0-160c0-17.7 14.3-32 32-32l224 0c53 0 96 43 96 96l0 224c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-32-224 0-32 0L64 416l0 32c0 17.7-14.3 32-32 32s-32-14.3-32-32L0 64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/>
+					</svg>
+					<span style="font-family: var(--theme-sub-heading-font); font-size: 29px; color: var(--theme-body-background); white-space: nowrap;">
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'bedroomscount'" />
+						<xsl:with-param name="default" select="concat( //single/bedrooms/@count, ' Bedrooms ')" />
+					</xsl:call-template>
+					</span>
+				</div>
+
+				<!-- Bathrooms -->
+				<div style="display: flex; align-items: center; gap: 10px; transform: translate(-6px, -9px)">
+					<svg width="40" height="35" fill="var(--theme-body-background)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<path d="M96 77.3c0-7.3 5.9-13.3 13.3-13.3c3.5 0 6.9 1.4 9.4 3.9l14.9 14.9C130 91.8 128 101.7 128 112c0 19.9 7.2 38 19.2 52c-5.3 9.2-4 21.1 3.8 29c9.4 9.4 24.6 9.4 33.9 0L289 89c9.4-9.4 9.4-24.6 0-33.9c-7.9-7.9-19.8-9.1-29-3.8C246 39.2 227.9 32 208 32c-10.3 0-20.2 2-29.2 5.5L163.9 22.6C149.4 8.1 129.7 0 109.3 0C66.6 0 32 34.6 32 77.3L32 256c-17.7 0-32 14.3-32 32s14.3 32 32 32l448 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 256 96 77.3zM32 352l0 16c0 28.4 12.4 54 32 71.6L64 480c0 17.7 14.3 32 32 32s32-14.3 32-32l0-16 256 0 0 16c0 17.7 14.3 32 32 32s32-14.3 32-32l0-40.4c19.6-17.6 32-43.1 32-71.6l0-16L32 352z"/>
+					</svg>
+					<span style="font-family: var(--theme-sub-heading-font); font-size: 29px; color: var(--theme-body-background); white-space: nowrap; transform: translateY(3px)">
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'bathroomscount'" />
+						<xsl:with-param name="default" select="concat( $listingTotalBathrooms, ' Bathrooms ')" />
+					</xsl:call-template>
+					</span>
+				</div>
+
+				<!-- Sq. Ft. -->
+				<div style="display: flex; align-items: center; gap: 10px; transform: translate(-4px, -9px);">
+					<svg width="40" height="35" fill="var(--theme-body-background)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+						<path d="M564 224c6.6 0 12-5.4 12-12v-72c0-6.6-5.4-12-12-12h-72c-6.6 0-12 5.4-12 12v12h-88v-24h12c6.6 0 12-5.4 12-12V44c0-6.6-5.4-12-12-12h-72c-6.6 0-12 5.4-12 12v12H96V44c0-6.6-5.4-12-12-12H12C5.4 32 0 37.4 0 44v72c0 6.6 5.4 12 12 12h12v160H12c-6.6 0-12 5.4-12 12v72c0 6.6 5.4 12 12 12h72c6.6 0 12-5.4 12-12v-12h88v24h-12c-6.6 0-12 5.4-12 12v72c0 6.6 5.4 12 12 12h72c6.6 0 12-5.4 12-12v-12h224v12c0 6.6 5.4 12 12 12h72c6.6 0 12-5.4 12-12v-72c0-6.6-5.4-12-12-12h-12V224h12zM352 64h32v32h-32V64zm0 256h32v32h-32v-32zM64 352H32v-32h32v32zm0-256H32V64h32v32zm32 216v-12c0-6.6-5.4-12-12-12H72V128h12c6.6 0 12-5.4 12-12v-12h224v12c0 6.6 5.4 12 12 12h12v160h-12c-6.6 0-12 5.4-12 12v12H96zm128 136h-32v-32h32v32zm280-64h-12c-6.6 0-12 5.4-12 12v12H256v-12c0-6.6 5.4-12-12-12h-12v-24h88v12c0 6.6 5.4 12 12 12h72c6.6 0 12-5.4 12-12v-72c0-6.6-5.4-12-12-12h-12v-88h88v12c0 6.6 5.4 12 12 12h12v160zm40 64h-32v-32h32v32zm0-256h-32v-32h32v32z"/>
+					</svg>
+					<span style="font-family: var(--theme-sub-heading-font); font-size: 29px; color: var(--theme-body-background); white-space: nowrap;">
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'sqft'" />
+						<xsl:with-param name="default" select="concat ('Sq. ft.: ', format-number( //single/squareFeet, '###,###' ))" />
+					</xsl:call-template>
+					</span>
+				</div>
+
+				</div>
+			</foreignObject>
 			<xsl:call-template name="flyer-footer" />
 		</g>
 	</xsl:template>

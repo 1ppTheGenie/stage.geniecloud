@@ -30,15 +30,21 @@
     </image>
 
     <g transform="translate(810, 180)" text-anchor="middle">
-      <text y="0" font-size="35" font-weight="900" fill="var(--theme-heading-color)"
+      <text y="20" font-size="35" font-weight="900" fill="var(--theme-heading-color)"
         font-family="var(--theme-heading-font)" dominant-baseline="hanging">
         <xsl:call-template name="editable">
           <xsl:with-param name="id" select="'streetname'" />
-          <xsl:with-param name="default" select="concat(//single/address/street,' ')" />
+          <xsl:with-param name="default" select="concat(//single/address/streetNumber,' ')" />
         </xsl:call-template>
       </text>
-
-      <text y="45" font-size="40" font-weight="400" fill="var(--theme-heading-color)"
+      <text y="65" font-size="35" font-weight="900" fill="var(--theme-heading-color)"
+        font-family="var(--theme-heading-font)" dominant-baseline="hanging">
+        <xsl:call-template name="editable">
+          <xsl:with-param name="id" select="'streetname'" />
+          <xsl:with-param name="default" select="concat(//single/address/streetName,' ')" />
+        </xsl:call-template>
+      </text>
+      <text y="110" font-size="40" font-weight="400" fill="var(--theme-heading-color)"
         font-family="var(--theme-heading-font)" dominant-baseline="hanging">
         <xsl:call-template name="editable">
           <xsl:with-param name="id" select="'areaname'" />
@@ -62,9 +68,9 @@
       </xsl:when>
       <xsl:otherwise>
         <text xmlns="" fill="var(--theme-body-background)" font-size="130%">
-          <tspan x="13.5%" y="69.5%" class="upper" font-family="var(--theme-heading-font)" font-size="40"
+          <tspan x="25%" y="69.5%" class="upper center" font-family="var(--theme-heading-font)" font-size="40"
             font-weight="700">Open House</tspan>
-          <tspan x="14.4%" class="upper" y="75.5%" font-family="var(--theme-heading-font)" font-size="40"
+          <tspan x="25%" class="upper center" y="75.5%" font-family="var(--theme-heading-font)" font-size="40"
             font-weight="700">1pm - 4pm</tspan>
         </text>
       </xsl:otherwise>

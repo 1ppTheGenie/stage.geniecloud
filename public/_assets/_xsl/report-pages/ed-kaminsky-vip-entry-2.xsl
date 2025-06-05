@@ -8,8 +8,13 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 <xsl:import href="common.xsl" />
-
+	<!-- This asset is needed only in dark -->
 	<xsl:template name="svg-body">
+	  <g class="dark">
+		<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)"></rect>
+		<text x="1213" y="30" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="15" font-weight="400">
+			2 
+		</text>
 		<image x="19.5%" y="4.8%" width="41%" class="center" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
 			<xsl:choose>
 				<xsl:when test="//output/@themeHue='dark'">
@@ -19,7 +24,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/personalLogoLight" />
+						<xsl:value-of select="//agent[1]/personalLogoDark" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -33,7 +38,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/companyLogoLight" />
+						<xsl:value-of select="//agent[1]/companyLogoDark" />
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -52,7 +57,7 @@
 			<tspan x="50%" dy="2.8%">as we are?</tspan>
 		</text>
 
-		<text x="50%" y="49.5%" class="center" font-family="var(--theme-body-font)" fill="var(--theme-heading-color)" font-weight="700" font-size="480%">
+		<text x="50%" y="49.5%" class="center" font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="700" font-size="480%">
 			<tspan x="50%" dy="3%">We don’t even</tspan>
 			<tspan x="50%" dy="3%">read our own.</tspan>
 		</text>
@@ -60,13 +65,19 @@
 		<line xmlns="" x1="25%" y1="57.2%" x2="75%" y2="57.2%" stroke="red" stroke-width="0.3%" />
 
 
-		<image x="36.5% " y="66%" width="26%" height="10%" preserveAspectRatio="xMidYMin slice">
+		<!-- <image x="36.5% " y="66%" width="26%" height="10%" preserveAspectRatio="xMidYMin slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download-new.png' )" />
 			</xsl:attribute>
-		</image>
+		</image> -->
+		<g style="transform:translate(36.5%, 66%)">
+			<xsl:call-template name="qr-code">
+				<xsl:with-param name="width" select="'26%'" />
+				<xsl:with-param name="height" select="'10%'" />
+			</xsl:call-template>
+		</g>
 		<text x="50%" y="78.5%" class="center" font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="700" font-size="400%" style="word-spacing: -7px;">It’s time for something better:</text>
-		<text x="50%" y="81.4%" class="center" fill="var(--theme-sub-heading-color)" font-weight="700" font-size="390%" style="word-spacing: -5px;">KRG’s All-New
+		<text x="50%" y="81.4%" class="center" font-family="var(--theme-heading-font)" fill="var(--theme-sub-heading-color)" font-weight="700" font-size="390%" style="word-spacing: -5px;">KRG’s All-New
 			<tspan font-style="italic">Market Insider </tspan>
 		</text>
 
@@ -80,5 +91,6 @@
 		</text>
 
 		<line xmlns="" x1="9%" y1="94%" x2="91%" y2="94%" stroke="var(--theme-sub-heading-color)" stroke-width="0.1%" />
+	  </g>
 	</xsl:template>
 </xsl:stylesheet>

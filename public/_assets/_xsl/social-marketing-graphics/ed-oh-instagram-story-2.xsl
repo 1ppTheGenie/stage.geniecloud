@@ -34,51 +34,33 @@
 
 		<xsl:choose>
       <xsl:when test="count(//openHouse/session) &gt; 0">
-        <text
-          x="12%"
-          y="78%"
-          fill="var(--theme-heading-color)"
-          font-size="44"
-          font-weight="700"
-          font-family="var(--theme-heading-font)"
-          >Open
-          <tspan x="11%" dy="4.5%">
-            <xsl:call-template name="editable">
-              <xsl:with-param name="id" select="'Open House'" />
-              <!-- <xsl:with-param name="default"
-						select="concat(substring-before(//openHouse/session[1]/@starts, ':'), '-', substring-before(//openHouse/session[1]/@ends, ':'), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))" /> -->
-              <xsl:with-param
-                name="default"
-                select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
-              />
-            </xsl:call-template>
-          </tspan>
-        </text>
-		<text class="capitalize center" x="50%" y="43.2%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="70"> 
+		<text class="capitalize center" x="50%" y="43.2%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="65"> 
             Open 
-          	<xsl:call-template name="editable" >
+          	<tspan style="text-transform: lowercase;">
+			<xsl:call-template name="editable" >
             <xsl:with-param name="id" select="'Open House'" />
             <xsl:with-param
               name="default"
               select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
             />
           </xsl:call-template>
+			</tspan>
 		</text>
       </xsl:when>
       <xsl:otherwise>
-        <text class="capitalize center" x="50%" y="43.2%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="70">Open 1-4pm</text>
+        <text class="capitalize center" x="50%" y="43.2%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="65">Open 1-4pm</text>
       </xsl:otherwise>
     </xsl:choose>
 		<line xmlns="" x1="45%" y1="49%" x2="55.2%" y2="49%" style="stroke:var(--theme-body-color);stroke-width:2.5"></line>
 
-		<text class="capitalize center" x="50%" y="51%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="500" font-size="50" data-max-width="80%">
+		<text class="capitalize center" x="50%" y="51%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="500" font-size="40" data-max-width="80%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'streetaddress'" />
 				<xsl:with-param name="default" select="concat(//single/address/street,' ')" />
 			</xsl:call-template>
 		</text>
 
-		<text class="capitalize center" x="50%" y="53.7%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="60" data-max-width="80%">
+		<text class="capitalize center" x="50%" y="53.7%" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-weight="700" font-size="50" data-max-width="80%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'areaname'" />
 				<xsl:with-param name="default" select="//area/name" />

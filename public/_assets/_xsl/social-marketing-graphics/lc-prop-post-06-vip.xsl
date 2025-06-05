@@ -14,6 +14,26 @@
 	<xsl:import href="lc-prop-posts.xsl" />
 
 	<xsl:template name="svg-body">
+		<style>
+			<xsl:value-of select="'
+				#footer text tspan, #footer text {	
+					fill: var(--theme-heading-color) !important;
+					font-size: 9px;
+				}
+				g#footer text a tspan{
+					fill: #337ab7 !important;
+				}
+				g#agent-contact{
+					transform: translate(0, 8px) !important;
+				}				
+                g#footer text:first-child {
+                    transform: translate(3.6%);
+                }
+				g#footer text:last-child {
+                    transform: translate(91.2%);
+                }
+			'" />
+		</style>
 		<xsl:call-template name="lc-prop-vip-common" />
 	</xsl:template>
 
@@ -24,13 +44,13 @@
 		<xsl:param name="agentX" />
 		<xsl:param name="logoWidth" />
 
-		<rect fill-opacity="0.1" x="0%" y="73%" width="100%" height="6%" fill="var(--theme-body-color)">
+		<rect fill-opacity="0.1" x="0%" y="70.7%" width="100%" height="5.35%" fill="var(--theme-body-color)">
 			<xsl:attribute name="width">
 				<xsl:value-of select="$boxWidth" />
 			</xsl:attribute>
 		</rect>
 
-		<text class="upper center middle" fill="var(--theme-body-color)" y="76%" font-weight="700" font-size="130%" font-family="var(--theme-body-font)">
+		<text class="upper center middle" fill="var(--theme-body-color)" y="73.2%" font-weight="700" font-size="250%" font-family="var(--theme-body-font)">
 			<xsl:attribute name="x">
 				<xsl:value-of select="$agentX" />
 			</xsl:attribute>
@@ -39,48 +59,74 @@
 			</xsl:attribute>
 
 			<xsl:call-template name="editable">
-				<xsl:with-param name="default" select="concat( 'Call ', //agent[1]/marketingName ,' &#124; ', //agent[1]/mobile )" />
-
+				<xsl:with-param name="default" select="concat( 'Call ', //agent[1]/marketingName ,' &#160;&#160;&#124;&#160;&#160; ', //agent[1]/mobile )" />
 			</xsl:call-template>
 		</text>
 
 		<xsl:choose>
 			<xsl:when test="$companyLogo='' or $personalLogo=''">
-				<image x="3%" y="79.5%" width="50%" height="11%" preserveAspectRatio="xMinYMid meet">
+				<image x="13.4%" y="78.7%" height="7.4%" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="$personalLogo=''">
-								<xsl:value-of select="$companyLogo" />
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue = 'light'">
+										<xsl:value-of select="$companyLogo" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="$companyLogoInverse" />
+									</xsl:otherwise>
+								</xsl:choose>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="$personalLogo" />
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue = 'light'">
+										<xsl:value-of select="$personalLogo" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="$personalLogoInverse" />
+									</xsl:otherwise>
+								</xsl:choose>
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
 				</image>
 			</xsl:when>
 			<xsl:otherwise>
-				<!-- <text font-size="60%" font-family="var(theme-heading-font)" fill="var(theme-heading-color)" x="20%" y="81.5%" height="10%" width="31%">Presented By:</text> -->
-				<image x="3%" y="79.8%" height="10%" width="40%" preserveAspectRatio="xMinYMid meet">
+				<image x="13.4%" y="78.7%" height="7.4%" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$personalLogo" />
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'light'">
+								<xsl:value-of select="$personalLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$personalLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
 				</image>
-				<image x="45%" y="85%" height="5%" width="10%" preserveAspectRatio="xMinYMax meet">
+				<image x="52.9%" y="82.8%" height="4.1%" preserveAspectRatio="xMinYMax meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$companyLogo" />
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'light'">
+								<xsl:value-of select="$companyLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
 				</image>
 			</xsl:otherwise>
 		</xsl:choose>
 
-		<image x="70%" y="64%" width="30%" height="30%" preserveAspectRatio="xMaxYMid meet">
+		<image x="69.5%" y="58.5%" width="35%" height="35%" preserveAspectRatio="xMaxYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="//agent[1]/photo" />
 			</xsl:attribute>
 		</image>
 
-		<text x="3%" y="90.3%" font-size="40%" font-family="var(--theme-sub-heading-font)" fill="var(--theme-sub-heading-color)" data-max-width="90%">
+		<text x="3.2%" y="88.2%" font-size="88%" font-weight="300" font-family="var(--theme-body-font)" fill="var(--theme-body-color)" data-max-width="90%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'licenseno'" />
 				<xsl:with-param name="default" select="//agent[1]/marketingLicense" />

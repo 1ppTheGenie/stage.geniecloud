@@ -25,6 +25,16 @@
 			.h1 { font-size: 150%; }
 			#dimensions text {dominant-baseline: middle}
 			.schedule{display:none;}
+			g#footer{
+					transform: translate(2.5%, 98.3%);
+				}
+				g#footer text{
+					font-size: 15px;
+					fill: #94949D;
+				}
+				g#footer text a tspan{
+					fill: #337ab7;
+				}
 			'" />
 		</style>
 
@@ -36,7 +46,7 @@
 		</image>
 
 		<g style="transform:translate(51%,1.5%);">
-			<text class="medium center upper" x="6.3%" y=".5%" font-size="260%" font-family="var(--theme-heading-font)">
+			<text class="medium center upper" x="6.3%" y=".5%" font-size="260%" font-family="var(--theme-sub-heading-font)">
 				<tspan class="bold " font-size="160%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'diningroom'" />
@@ -45,7 +55,7 @@
 				</tspan>
 			</text>
 
-			<text x="22%" y="3.8%" class="heading center" font-size="220%" font-weight="400">
+			<text x="22%" y="3.8%" class="center" style="font-family:var(--theme-sub-heading-font);color:var(--theme-heading-color);"  font-size="220%" font-weight="400">
 				<tspan>
 					<xsl:value-of select="$listingAddressLine1" />
 				</tspan>
@@ -54,7 +64,7 @@
 				</tspan>
 			</text>
 
-			<text x="22%" y="24.5%" class="heading center" font-size="250%" font-weight="500">
+			<text x="22%" y="24.5%" class="center" style="font-family:var(--theme-sub-heading-font);color:var(--theme-heading-color);" font-size="250%" font-weight="500">
 				<tspan>
 					<xsl:choose>
 						<xsl:when test="//single/soldDate!=''">
@@ -162,10 +172,10 @@
 			</g>
 		</g>
 
-		<g style="transform:translate( 2%, 31.5% )">
+		<g style="transform:translate( 2%, 31% )">
 			<xsl:choose>
 				<xsl:when test="count(//single/dimensions/room) = 0">
-					<image x="0" y="0" width="47%" height="28%" preserveAspectRatio="xMidYMid slice">
+					<image x="0" y="0" width="47%" height="31%" preserveAspectRatio="xMidYMid slice">
 						<xsl:call-template name="switch-image">
 							<xsl:with-param name="id" select="'image-9'" />
 							<xsl:with-param name="idx" select="9" />
@@ -250,8 +260,8 @@
 		</g>
 
 		<g style="transform:translate(2%,64%)">
-			<foreignObject x="0" y="0" width="47%" height="22%">
-				<div style="height: 400px; width:100%;display: inline-block;">
+			<foreignObject x="0" y="0" width="47%" height="22.7%">
+				<div style="height: 425px; width:100%;display: inline-block;">
 					<xsl:call-template name="map-output">
 						<xsl:with-param name="style" select="'streets-v11'" />
 					</xsl:call-template>
@@ -281,44 +291,44 @@
 			</foreignObject>
 
 			<g style="transform: translate(48.5%, 0);">
-				<text x="0" y="0%" class="upper super-bold" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="100%">
+				<text x="0" y="0%" class="upper super-bold" fill="var(--theme-heading-color)" font-family="var(--theme-sub-heading-font)" font-size="100%">
 					<tspan class="super-bold" style="font-size: 32px;">Scan to access</tspan>
 				</text>
 				<svg height="100" width="100">
-					<circle cx="15" cy="56" r="4" fill="#a47f54" />
+					<circle cx="15" cy="56" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="2.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="115%">
+				<text x="2%" y="2.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" font-family="var(--theme-sub-heading-font)" font-size="115%">
 					<tspan>Floor plans</tspan>
 				</text>
 				<svg height="100" width="100">
-					<circle cx="15" cy="81" r="4" fill="#a47f54" />
+					<circle cx="15" cy="81" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="3.8%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="3.8%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>VIRTUAL TOUR</tspan>
 				</text>
 				<svg height="100" width="100" y="0.5%">
-					<circle cx="15" cy="98" r="4" fill="#a47f54" />
+					<circle cx="15" cy="98" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="5.1%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="5.1%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>HI RES PHOTO COLLECTION</tspan>
 				</text>
 				<svg height="100" width="100" y="2.2%">
-					<circle cx="15" cy="90" r="4" fill="#a47f54" />
+					<circle cx="15" cy="90" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="6.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="6.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>FULL DESCRIPTION</tspan>
 				</text>
 				<svg height="100" width="100" y="3.5%">
-					<circle cx="15" cy="90" r="4" fill="#a47f54" />
+					<circle cx="15" cy="90" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="7.8%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="7.8%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>DETAILED FEATURE LIST</tspan>
 				</text>
 
 				<svg height="100" width="100" y="4.9%">
-					<circle cx="15" cy="90" r="4" fill="#a47f54" />
+					<circle cx="15" cy="90" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="9.2%" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="9.2%" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>Real-Time MARKET INSIDER Report</tspan>
 					<tspan x="2%" dy="1%" class="capatilize">
 						<xsl:call-template name="editable">
@@ -327,9 +337,9 @@
 					</tspan>
 				</text>
 				<svg height="100" width="100" y="7.3%">
-					<circle cx="15" cy="90" r="4" fill="#a47f54" />
+					<circle cx="15" cy="90" r="4" fill="var(--theme-heading-color)" />
 				</svg>
-				<text x="2%" y="11.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-heading-font);font-size:115%;">
+				<text x="2%" y="11.5%" class="upper" font-weight="100" fill="var(--theme-heading-color)" style="font-family:var(--theme-sub-heading-font);font-size:115%;">
 					<tspan>AND MORE...</tspan>
 				</text>
 				<svg xmlns="http://www.w3.org/2000/svg" x="53%" y="36%" width="10%" height="9%" viewBox="0 0 313 348" fill="none">
@@ -346,7 +356,7 @@
 				</text>
 			</g>
 
-			<g style="transform:translate(49%, 13.5%)">
+			<g style="transform:translate(49%, 15%)">
 				<xsl:call-template name="qr-code">
 					<xsl:with-param name="width" select="'10%'" />
 				</xsl:call-template>
@@ -365,33 +375,37 @@
 			</g>
 		</g>
 
-		<image x="73%" y="66%" width="23%" height="21%" preserveAspectRatio="xMidYMid meet">
+		<image x="73%" y="67%" width="23%" height="21%" preserveAspectRatio="xMidYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/mobile-image1.png' )" />
 			</xsl:attribute>
 		</image>
-		<rect x="74.2%" y="68%" width="20.5%" height="19%" stroke-width="1" style="fill:#FFF;" />
-		<image x="75%" y="65%" width="18%" height="15%" preserveAspectRatio="xMidYMid meet">
+		<rect x="74.2%" y="69.5%" width="20.5%" height="19%" stroke-width="1" style="fill:#FFF;" />
+		<image x="75%" y="66.3%" width="18%" height="15%" preserveAspectRatio="xMidYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/mobile-floor-plan.jpg' )" />
 			</xsl:attribute>
 		</image>
 
-		<text x="84.5%" y="78.3%" class="heading center" font-size="190%" data-max-width="16%">
-			<tspan font-weight="700">
+		<text x="84.5%" y="79.5%" class="center" fill="#074361" style="text-transform:uppercase; font-family:var(--theme-sub-heading-font);" font-size="120%" data-max-width="16%">
+			<tspan font-weight="700" fill="#074361">
 				<xsl:value-of select="$listingAddressLine1" />
 			</tspan>
-			<tspan x="84.5%" dy="1.8%" font-weight="300">
+			<tspan x="84.5%" dy="1.5%" font-weight="300" fill="#074361">
 				<xsl:value-of select="$listingAddressLine2" />
 			</tspan>
 		</text>
 
-		<rect x="80.5%" y="83%" width="8%" rx="5px" ry="5px" height="2.5%" stroke-width="1" fill="#6A953E" />
-		<text x="84.5%" y="83.5%" class="upper center" font-size="150%" font-family="var(--theme-heading-font)" fill="#fff">
+		<rect x="80.5%" y="83.4%" width="7%" rx="5px" ry="5px" height="2.3%" stroke-width="1" fill="#6A953E" />
+		<text x="84%" y="83.75%" class="upper center" font-size="140%" font-family="var(--theme-sub-heading-font)" fill="#fff">
 			<tspan>DETAILS</tspan>
 		</text>
 
-		<xsl:call-template name="flyer-footer" />
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1883">
+  			<xsl:call-template name="flyer-footer" />
+		</svg>
+
+		<xsl:call-template name="copyright" />
 
 	</xsl:template>
 </xsl:stylesheet>

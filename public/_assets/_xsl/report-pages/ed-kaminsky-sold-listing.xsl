@@ -12,7 +12,7 @@
 
 
 	<xsl:variable name="mapListingNodes" select="//listings/listing[@state='sold']" />
-	<xsl:variable name="soldistingCount" select="count($mapListingNodes)" />
+	<!-- <xsl:variable name="soldistingCount" select="count($mapListingNodes)" /> -->
 
 	<xsl:template name="svg-body">
 		<link rel="stylesheet">
@@ -37,13 +37,29 @@
 			<tspan x="70%" fill="#b2934e">12 Months</tspan>
 		</text>
 
-		<xsl:call-template name="ed-showing-listing">
-<xsl:with-param name="nodes" select="$soldistingCount" />
-
-			<xsl:with-param name="min" select="number(12)" />
-		</xsl:call-template>
+		<!-- <text style="display: none;" >
+			<xsl:call-template name="ed-showing-listing">
+				<xsl:with-param name="nodes" select="$listingsTotalSold" />
+				<xsl:with-param name="min" select="number(12)" />
+			</xsl:call-template>
+		</text> -->
 
 		<xsl:variable name="soldListingCount" select="count($mapListingNodes)" />
+
+		<text x="50%" y="29%" class="center futura-text" font-size="110%" fill="#b0934c" style="word-spacing:5px; text-transform: uppercase;">
+			<xsl:text>SHOWING </xsl:text>
+			<xsl:choose>
+				<xsl:when test="$soldListingCount &lt; 12">
+				<xsl:value-of select="$soldListingCount" />
+				</xsl:when>
+				<xsl:otherwise>
+				<xsl:value-of select="12" />
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:text> OF </xsl:text>
+			<xsl:value-of select="$soldListingCount" />
+			<xsl:text> SOLD LISTINGS</xsl:text>
+		</text>
 		<xsl:variable name="mobile" select="//agent[1]/mobile" />
 
 		<xsl:if test="$soldListingCount &gt; 0">

@@ -57,7 +57,7 @@
 									</div>
 
 									<div class="open-house-details text-center">
-										<h2 class="subtitle-font heading-color">
+										<h2 class="body-font heading-color">
 											<span>
 												<xsl:value-of select="$listingAddressLine1" />
 											</span>
@@ -66,11 +66,11 @@
 											</span>
 										</h2>
 
-										<h6 class="subtitle-font heading-color" style="font-weight:500;">
+										<h6 class="body-font heading-color" style="font-weight:500;">
 											<xsl:value-of select="concat( ' MLS #: ', //single/mlsNumber)" />
 										</h6>
 
-										<h3 class="subtitle-font heading-color" style="font-weight:700;">											
+										<h3 class="body-font heading-color" style="font-weight:700;">											
 												<xsl:value-of select="format-number( //single/price, '$###,###')" />			
 										</h3>
 
@@ -110,14 +110,14 @@
 								<div class="open-house-form-overlay heading-color-as-bg">
 									<xsl:comment/>
 								</div>
-								<div class="open-house-gust-date text-center heading-font background-as-color">
-									<h1 class="background-as-color heading-font editable">
+								<div class="open-house-gust-date text-center subtitle-font background-as-color">
+									<h1 class="background-as-color subtitle-font editable">
 										<xsl:text>Open House Guest Book</xsl:text>
 									</h1>
-									<h3 class="address-part subtitle-font background-as-color">
+									<h3 class="address-part body-font background-as-color">
 										<xsl:copy-of select="concat($listingAddressLine1, ' ', $listingAddressLine2)" />
 									</h3>
-									<p class="background-as-color">
+									<p class="background-as-color body-font">
 										<!-- Sunday, March 13th 12 pm - 2 pm -->
 										<!-- <xsl:value-of select="//single/openHouse" /> -->
 										<xsl:if test="count(//openHouse/session) &gt; 0">				
@@ -140,26 +140,26 @@
 											<input type="tel" name="phoneNumber" class="form-control phone reset-form" placeholder="Phone Number" required="required" />
 										</div>
 										<div class="form-group">
-											<h4 class="background-as-color heading-font" style="font-weight:500;">
+											<h4 class="background-as-color subtitle-font" style="font-weight:500;">
 												<xsl:text>What best describes your visit?</xsl:text>
 											</h4>
 											<!-- <div class="custom-control custom-checkbox mb-3">
-												<ul class="background-as-color heading-font">
+												<ul class="background-as-color subtitle-font">
 													<li>
-														<label class="custom-control-label heading-font" for="customCheck1">
+														<label class="custom-control-label subtitle-font" for="customCheck1">
 															<input type="checkbox" class="custom-control-input reset-form market-insider-report" id="customCheck1" name="meta[market-insider-report]" value="Yes" />
 															<xsl:copy-of select="concat( 'The latest Market insider report for ', //area/name )" />
 														</label>
 													</li>
 													<li>
-														<label class="custom-control-label heading-font" for="customCheck2">
+														<label class="custom-control-label subtitle-font" for="customCheck2">
 															<input type="checkbox" class="custom-control-input reset-form" id="customCheck2" name="meta[notification]" value="Yes" />
 
 															<xsl:text>First notification when similar properties hit the market</xsl:text>
 														</label>
 													</li>
 													<li>
-														<label class="custom-control-label property heading-font" for="customCheck3">
+														<label class="custom-control-label property subtitle-font" for="customCheck3">
 															<input type="checkbox" class="custom-control-input reset-form" onclick="showAddressInput()" id="customCheck3" name="meta[value-assesment]" value="Yes" />
 
 															<xsl:text>A TODAY VALUE assessment of my home</xsl:text>
@@ -173,23 +173,23 @@
 											</div> -->
 											<!-- Radio-->
 											<div class="custom-control custom-radio mb-3">
-												<ul class="background-as-color heading-font mt-0">
+												<ul class="background-as-color subtitle-font mt-0">
 													<li>
-														<label class="custom-control-label heading-font" for="customCheck1">
+														<label class="custom-control-label subtitle-font" for="customCheck1">
 															<input type="radio" class="custom-control-input reset-form market-insider-report" id="customCheck1" name="option" />
 															<span class="checkmark"></span>
 															Thinking about buying
 														</label>
 													</li>
 													<li>
-														<label class="custom-control-label heading-font" for="customCheck2">
+														<label class="custom-control-label subtitle-font" for="customCheck2">
 															<input type="radio" class="custom-control-input reset-form" id="customCheck2" name="option" />
 															<span class="checkmark"></span>
 															Curious neighbor
 														</label>
 													</li>
 													<li>
-														<label class="custom-control-label property heading-font" for="customCheck3">
+														<label class="custom-control-label property subtitle-font" for="customCheck3">
 															<input type="radio" class="custom-control-input reset-form" id="customCheck3" name="option" />
 															<span class="checkmark"></span>
 															Checking the market before selling
@@ -200,11 +200,11 @@
 										</div>
 										<div class="form-group">
 											<div class="fl-btn-value text-center">
-												<button class="btn heading-font subtitle-color-as-bg background-as-color btn-submit step1-button">
+												<button class="btn subtitle-font subtitle-color-as-bg background-as-color btn-submit step1-button">
 													<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" class="headings-svg">
 														<path d="M13 18v-4h-7v-4h7v-4l6 6-6 6zm-1-16c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12z"></path>
 													</svg>
-													<span class="heading-font"> Check In </span>
+													<span class="subtitle-font"> Check In </span>
 												</button>
 											</div>
 											<span class="funnel-loader">

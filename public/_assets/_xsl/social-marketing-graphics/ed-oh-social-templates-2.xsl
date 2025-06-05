@@ -37,14 +37,14 @@
       preserveAspectRatio="xMidYMid slice"
     >
       <xsl:call-template name="switch-image">
-        <xsl:with-param name="id" select="image-2" />
-        <xsl:with-param name="idx" select="2" />
+        <xsl:with-param name="id" select="image-1" />
+        <xsl:with-param name="idx" select="1" />
       </xsl:call-template>
     </image>
 
     <text
       x="-385"
-      y="280"
+      y="290"
       transform="rotate(-90, 40, 200)"
       class="upper"
       style="
@@ -52,7 +52,7 @@
         font-family: var(--theme-heading-font);
       "
       font-size="40"
-      font-weight="600"
+      font-weight="500"
     >
       <xsl:value-of select="//area/name" />
     </text>
@@ -88,15 +88,17 @@
           fill="var(--theme-heading-color)"
           font-weight="800"
           font-size="47"
+          style="letter-spacing: 2.5px"
         >
-          <xsl:text>Open</xsl:text>
-          <xsl:call-template name="editable" >
-            <xsl:with-param name="id" select="'Open House'" />
-            <xsl:with-param
-              name="default"
-              select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
-            />
-          </xsl:call-template>
+        Open <tspan style="text-transform: lowercase;">
+              <xsl:call-template name="editable" >
+                <xsl:with-param name="id" select="'Open House'" />
+                <xsl:with-param
+                  name="default"
+                  select="concat(substring-before(//openHouse/session[1]/@starts, substring(//openHouse/session[1]/@starts, string-length(//openHouse/session[1]/@starts) - 1)), '-', substring-before(//openHouse/session[1]/@ends, substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1)), substring(//openHouse/session[1]/@ends, string-length(//openHouse/session[1]/@ends) - 1))"
+                />
+              </xsl:call-template>
+            </tspan>
         </text>
       </xsl:when>
       <xsl:otherwise>
@@ -107,6 +109,7 @@
           fill="var(--theme-heading-color)"
           font-weight="800"
           font-size="47"
+          style="letter-spacing: 2.5px"
         >
           Open <tspan>1-4pm</tspan>
         </text>
