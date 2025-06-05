@@ -89,15 +89,37 @@ document.addEventListener("DOMContentLoaded", () => {
 			a.addEventListener("click", e => {
 				e.preventDefault();
 
-				FB.ui(
-					{
-						method: "share",
-						href: linkUrl,
-						display: "popup",
-						title: "quote",
-					},
-					response => {}
-				);
+				if (typeof FB !== "undefined") {
+					const dialog = document.createElement("dialog");
+
+					dialog.classList.add("sharing-disabled");
+
+					dialog.innerHTML = `
+					<h2>Sharing is not available</h2>
+					<p>Facebook sharing has not loaded, possibly because you have an ad-blocker running.</p>
+					<p>Try disabling ad-blockers and try again.</p>
+					<button id="close-dialog">Close</button>
+					`;
+
+					document.body.appendChild(dialog);
+					dialog.showModal();
+					dialog
+						.querySelector("#close-dialog")
+						.addEventListener("click", () => {
+							dialog.close();
+							dialog.remove();
+						});
+				} else {
+					FB.ui(
+						{
+							method: "share",
+							href: window.location.origin + linkUrl,
+							display: "popup",
+							title: "quote",
+						},
+						response => {}
+					);
+				}
 			});
 			div.appendChild(a);
 
