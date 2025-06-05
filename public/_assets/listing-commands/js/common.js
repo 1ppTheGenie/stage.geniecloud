@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			a.addEventListener("click", e => {
 				e.preventDefault();
 
-				if (typeof FB !== "undefined") {
+				if (typeof FB == "undefined") {
 					const dialog = document.createElement("dialog");
 
 					dialog.classList.add("sharing-disabled");

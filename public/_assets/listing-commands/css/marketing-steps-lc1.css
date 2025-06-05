@@ -277,6 +277,7 @@ body.listing-command-proof .assets-steps{
     align-items: center;
 	gap: 0.188rem;
 	transition: 0.2s;
+	cursor:pointer;
 }
 .asset-icon:hover{
 	opacity: 0.8;
