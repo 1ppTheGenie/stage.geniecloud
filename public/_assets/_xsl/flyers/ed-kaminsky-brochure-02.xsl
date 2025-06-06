@@ -291,15 +291,12 @@
 			<tspan dx="5"> • </tspan>
 			<tspan dx="5"><xsl:value-of select="//agent[1]/marketingLicense" /></tspan>
 		</text>
-		<foreignObject width="23.5%" height="7%" x="73.5%" y="90.6%" font-family="var(--theme-sub-heading-font)"
-			font-size="19" style="color:var(--theme-body-background); opacity:0.36; text-transform:uppercase;">
-			<div>
-				<xsl:value-of
-					select="concat(//single[1]/listingAgents/listingAgent[1]/@broker, ' LICENSE ', //agent[1]/marketingLicense, '. INFORMATION IS DEEMED')" />
+		<foreignObject width="23.5%" height="7%" x="73.5%" y="90.6%">		
+			<div style="font-family:var(--theme-sub-heading-font); font-size: 19px; color:var(--theme-body-background); opacity:0.36; text-transform:uppercase;">
+				<xsl:value-of select="concat(//single[1]/listingAgents/listingAgent[1]/@broker, ' LICENSE ', //agent[1]/marketingLicense, '. INFORMATION IS DEEMED')" />
+				RELIABLE, BUT NOT GUARANTEED. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY
+				THE ACCURACY OF THIS INFORMATION
 			</div>
-			<div><xsl:value-of
-					select="'RELIABLE, BUT NOT GUARANTEED. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY'" /></div>
-			<div><xsl:value-of select="'THE ACCURACY OF THIS INFORMATION'" /></div>
 		</foreignObject>
 	</xsl:template>
 </xsl:stylesheet>
