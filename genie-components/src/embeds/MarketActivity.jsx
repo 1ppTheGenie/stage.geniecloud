@@ -48,25 +48,23 @@ export default () => {
 
 	return (
 		<>
-
-
-			<h4 class="center upper subheading-market-activity" style="margin-bottom:5px">
+			<h4 class="center upper" style="margin-bottom:0.5rem">
 				{areaDataStore.areaName}{" "}
 				{areaDataStore.propertyTypeID === 0 ? "Homes" : "Condos"}
 			</h4>
-			<h1 class="center upper heading-market-activity" style="margin:0">
-				Market Activity
+			<h1 class="center upper" style="margin:0.5rem 0">
+				Market Activity 1
 			</h1>
-
 
 			<HomeTypes
 				container={`MarketActivity-${settings.areaid}`}
-				style=""
+				style="margin:0.5rem"
 			/>
 
 			<div
-				style={`position:relative;width:100%;height:${expanded ? "650px" : `400px`
-					}`}>
+				style={`position:relative;width:100%;height:${
+					expanded ? "650px" : `400px`
+				}`}>
 				<StatusKey setStatus={setStatus} />
 				<LeafletMap
 					mapStyle={settings.mapstyle || "satellite-streets-v11"}
@@ -142,7 +140,7 @@ export default () => {
 					<span>
 						<ListingsShowing
 							pageSize={pageSize}
-							ffset={Math.max((currentPage() - 1) * pageSize(), 0)}
+							ffset={Math.max((currentPage() - 1) * pageSize(),0)}
 							len={currentListings.length}
 							mode={settings.mode}
 							period={period}
@@ -199,12 +197,12 @@ const StatusKey = ({ setStatus }) => {
 
 	return (
 		<div class="map-key" style="position: absolute; z-index: 700; top: 65px">
-			<svg style="width: 380px; height: 270px">
+			<svg style="width: 250px; height: 270px">
 				<rect width="100%" height="15%" fill="var(--theme-body-background)" />
-				<rect width="100%" height="80%" fill="#000" fill-opacity="0.57" y="15%" />
+				<rect width="100%" height="80%" fill="#000" fillOpacity="0.4" y="15%" />
 				<text
 					x="20"
-					y="27"
+					y="10"
 					style="font-size: 150%"
 					fill="var(--theme-body-color)"
 					dominantBaseline="hanging">
@@ -216,14 +214,14 @@ const StatusKey = ({ setStatus }) => {
 							key={i}
 							style={`transform: translateY(${i * 50}px)`}
 							onClick={e => setStatus(l.status)}>
-							<circle fill={`var(--${l.status})`} cx="20" cy="5" r="17" />
+							<circle fill={`var(--${l.status})`} cx="20" cy="5" r="20" />
 							<text
 								x="20"
-								y="5"
+								y="7"
 								fill="var(--theme-body-background)"
-								text-Anchor="middle"
-								dominant-Baseline="middle"
-								style="font-size: 100%; text-Shadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
+								textAnchor="middle"
+								dominantBaseline="middle"
+								style="font-size: 120%; textShadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
 								{l.total}
 							</text>
 
@@ -231,8 +229,8 @@ const StatusKey = ({ setStatus }) => {
 								x="50"
 								y="7"
 								fill="var(--theme-body-background)"
-								dominant-Baseline="middle"
-								style="font-size: 100%; font-weight: 700; text-Shadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
+								dominantBaseline="middle"
+								style="font-size: 120%; textShadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
 								{l.label}
 							</text>
 						</g>
