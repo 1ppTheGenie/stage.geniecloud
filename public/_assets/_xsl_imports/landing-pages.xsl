@@ -870,57 +870,55 @@
 		</p>
 	</xsl:template>
 
-	<xsl:template name="listing-agent-bullets">
-		<xsl:for-each select="//listingAgent">
-			<xsl:sort select="@count" order="ascending" data-type="number" />
+		<xsl:template name="listing-agent-bullets">
+	<xsl:for-each select="//listingAgent[string-length(normalize-space(@name)) > 0]">
+		<xsl:sort select="@count" order="ascending" data-type="number" />
 
-			<p class="listing-agent-bullets">
-				<xsl:if test="@name!=''">
-					<xsl:variable name="agentName">
-						<xsl:choose>
-							<xsl:when test="@email!=''">
-								<a>
-									<xsl:attribute name="href" select="concat( 'mailto:', @email )"/>
-									<xsl:value-of select="@name" />
-								</a>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="@name" />
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:variable>
+		<p class="listing-agent-bullets">
+		<!-- Only show label if name is present -->
+		<xsl:choose>
+			<xsl:when test="@count = '1'">
+			<xsl:text>Listed by: </xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+			<xsl:text>Co-Listed by: </xsl:text>
+			</xsl:otherwise>
+		</xsl:choose>
 
-					<span>
-						<xsl:choose>
-							<xsl:when test="number(@count)=1">
-								<xsl:text>Listed by: </xsl:text>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:text>Co-Listed by: </xsl:text>
-							</xsl:otherwise>
-						</xsl:choose>
+		<!-- Agent name as link or plain text -->
+		<xsl:choose>
+			<xsl:when test="string-length(normalize-space(@email)) > 0">
+			<a>
+				<xsl:attribute name="href">
+				<xsl:value-of select="concat('mailto:', @email)" />
+				</xsl:attribute>
+				<xsl:value-of select="@name" />
+			</a>
+			</xsl:when>
+			<xsl:otherwise>
+			<xsl:value-of select="@name" />
+			</xsl:otherwise>
+		</xsl:choose>
 
-						<xsl:copy-of select="$agentName" />
-					</span>
-				</xsl:if>
-				<xsl:if test="@license!=''">
-					<span>
-						<xsl:value-of select="@license" />
-					</span>
-				</xsl:if>
-				<xsl:if test="@broker!=''">
-					<span>
-						<xsl:value-of select="@broker" />
-					</span>
-				</xsl:if>
-				<xsl:if test="@phone!=''">
-					<span>
-						<xsl:value-of select="concat( 'Contact: ', @phone )" />
-					</span>
-				</xsl:if>
-			</p>
-		</xsl:for-each>
+		<!-- Optional fields -->
+		<xsl:if test="string-length(normalize-space(@license)) > 0">
+			<span><xsl:value-of select="@license" /></span>
+		</xsl:if>
+		<xsl:if test="string-length(normalize-space(@broker)) > 0">
+			<span><xsl:value-of select="@broker" /></span>
+		</xsl:if>
+		<xsl:if test="string-length(normalize-space(@phone)) > 0">
+			<span><xsl:value-of select="concat('Contact: ', @phone)" /></span>
+		</xsl:if>
+		</p>
+	</xsl:for-each>
 	</xsl:template>
+
+
+
+
+
+
 
 
 	<xsl:template name="data-access">
