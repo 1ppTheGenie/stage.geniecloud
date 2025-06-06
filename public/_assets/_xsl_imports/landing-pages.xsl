@@ -870,11 +870,13 @@
 		</p>
 	</xsl:template>
 
-<xsl:template name="listing-agent-bullets"> 
-  <xsl:for-each select="//listingAgent[@name != '']">
+<xsl:template name="listing-agent-bullets">
+  <!-- Only process agents with a name -->
+  <xsl:for-each select="//listingAgent[string-length(normalize-space(@name)) > 0]">
     <xsl:sort select="@count" order="ascending" data-type="number" />
 
     <p class="listing-agent-bullets">
+      <!-- Label based on count -->
       <xsl:choose>
         <xsl:when test="number(@count) = 1">
           <xsl:text>Listed by: </xsl:text>
@@ -886,7 +888,7 @@
 
       <!-- Agent name/email -->
       <xsl:choose>
-        <xsl:when test="@email != ''">
+        <xsl:when test="string-length(normalize-space(@email)) > 0">
           <a>
             <xsl:attribute name="href">
               <xsl:value-of select="concat('mailto:', @email)" />
@@ -900,26 +902,19 @@
       </xsl:choose>
 
       <!-- Optional fields -->
-      <xsl:if test="@license != ''">
-        <span>
-          <xsl:value-of select="@license" />
-        </span>
+      <xsl:if test="string-length(normalize-space(@license)) > 0">
+        <span><xsl:value-of select="@license" /></span>
       </xsl:if>
-
-      <xsl:if test="@broker != ''">
-        <span>
-          <xsl:value-of select="@broker" />
-        </span>
+      <xsl:if test="string-length(normalize-space(@broker)) > 0">
+        <span><xsl:value-of select="@broker" /></span>
       </xsl:if>
-
-      <xsl:if test="@phone != ''">
-        <span>
-          <xsl:value-of select="concat('Contact: ', @phone)" />
-        </span>
+      <xsl:if test="string-length(normalize-space(@phone)) > 0">
+        <span><xsl:value-of select="concat('Contact: ', @phone)" /></span>
       </xsl:if>
     </p>
   </xsl:for-each>
 </xsl:template>
+
 
 
 
