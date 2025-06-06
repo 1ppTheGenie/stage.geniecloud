@@ -277,12 +277,8 @@ body.listing-command-proof .assets-steps{
     align-items: center;
 	gap: 0.188rem;
 	transition: 0.2s;
+	cursor:pointer;
 }
-/* To hide share icon untill it's done */
-.share-icon{
-	display: none;
-}
-/* To hide share icon untill it's done */
 .asset-icon:hover{
 	opacity: 0.8;
 }

@@ -192,7 +192,7 @@ export const jsonFromS3 = async (key, since = null, bucket = null) => {
             return JSON.parse(r);
         }
     } catch (err) {
-        console.log('Retrieve JSON: ', err);
+        console.log('Retrieve JSON: ', key, err);
     }
 };
 

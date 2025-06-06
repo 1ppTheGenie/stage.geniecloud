@@ -594,7 +594,7 @@
 
 								</span>
 							</h2>
-							<div role="form" class="wpcf7" id="wpcf7-f194-o1" lang="en-US" dir="ltr">
+							<div role="form" class="wpcf7" lang="en-US" dir="ltr">
 								<form method="post" class="wpcf7-form funnel-create-lead" id="form_step1">
 									<div class="form-field">
 										<span class="wpcf7-form-control-wrap your-name">
@@ -622,7 +622,6 @@
 											<label> <input type="checkbox" name="lead_meta_contact_via_email" value="yes" checked="" />Email</label>
 										</div>
 										<div class="che_box submit-btn">
-											
 											<input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact" />
 											<input type="hidden" name="note" value="I am interested in { $listingAddressLine1 }" /> 
 											<input type="submit" value="Send" class="wpcf7-submit" />
@@ -632,13 +631,13 @@
 							</div>
 						</div>
 					</div>
+
 					<script>
 						<xsl:value-of select="concat( &quot;const listings = [{caption: 'H', state:'&quot;, //single/listingStatus, &quot;',lat:&quot;, //single/latitude, &quot;,lng:&quot;, //single/longitude, &quot;}]; &quot; )" />
 						<xsl:value-of select="concat( &quot;const options = { dragPan: false, mapStyle: `&quot;, 'streets-v11', &quot;`, zoom: 21, center: { lat:&quot;, //single/latitude, &quot;,lng:&quot;, //single/longitude, &quot;}}; &quot; )" />
 						<xsl:value-of select="concat( &quot;document.addEventListener( `genie-landing-loaded`, function() { window.gHub.makeMap( `genie-map`, options,&quot;, &quot; { listings } ); })&quot; )" />
-
-
 					</script>
+
 					<div class="map-embed">
 						<div class="map-embed-inner mapboxgl-map" id="map">
 							<div id="genie-map" />
