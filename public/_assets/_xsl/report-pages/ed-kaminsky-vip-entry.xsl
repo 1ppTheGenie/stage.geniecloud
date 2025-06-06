@@ -20,6 +20,14 @@
 				}
 			'"/>
 		</style>
+		 <script type="text/ecmascript">
+				<xsl:value-of select="'document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
+					if (document.body &amp;&amp; document.body.classList &amp;&amp; document.body.classList.contains(&quot;door-hanger&quot;)) {
+						document.body.classList.add(&quot;dark&quot;);
+					}
+				});'" disable-output-escaping="yes"/>
+    	</script>
+ 
 		<g class="dark">
 		<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)"></rect>
 		<text x="1213" y="30" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="15" font-weight="400">
