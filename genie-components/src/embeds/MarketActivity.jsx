@@ -53,7 +53,7 @@ export default () => {
 				{areaDataStore.propertyTypeID === 0 ? "Homes" : "Condos"}
 			</h4>
 			<h1 class="center upper" style="margin:0.5rem 0">
-				Market Activity
+				Market Activity 1
 			</h1>
 
 			<HomeTypes
