@@ -15,34 +15,34 @@
 		<text x="1213" y="30" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="15" font-weight="400">
 			2 
 		</text>
-		<image x="19.5%" y="4.8%" width="41%" class="center" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
-			<xsl:choose>
-				<xsl:when test="//output/@themeHue='dark'">
+		<xsl:choose>
+			<xsl:when test="$personalLogo !='' and $companyLogo !=''">
+				<image x="20%" y="4.6%" width="41%" class="center" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
 						<xsl:value-of select="//agent[1]/personalLogoDark" />
 					</xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/personalLogoDark" />
-					</xsl:attribute>
-				</xsl:otherwise>
-			</xsl:choose>
-		</image>
-		<image x="64%" y="6%" width="13%" class="center" height="3%" id="logo" preserveAspectRatio="xMidYMid meet">
-			<xsl:choose>
-				<xsl:when test="//output/@themeHue='dark'">
+				</image>
+				<image x="64.2%" y="4.6%" width="13.2%" class="center" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
 						<xsl:value-of select="//agent[1]/companyLogoDark" />
 					</xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
+				</image>
+			</xsl:when>
+			<xsl:otherwise>
+				<image x="50%" y="4.6%" width="100%" height="5%" style="transform:translate(-50%, 0%)" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/companyLogoDark" />
+						<xsl:choose>
+							<xsl:when test="$personalLogo !=''">
+								<xsl:value-of select="//agent[1]/personalLogoDark" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="//agent[1]/companyLogoDark" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
-				</xsl:otherwise>
-			</xsl:choose>
-		</image>
+				</image>
+			</xsl:otherwise>
+		</xsl:choose>
 		<svg height="100%" width="100%">
 			<circle cx="50%" cy="21.5%" r="12%" fill="#282843" />
 		</svg>
