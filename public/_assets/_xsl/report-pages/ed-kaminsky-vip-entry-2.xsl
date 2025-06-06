@@ -29,7 +29,7 @@
 				</image>
 			</xsl:when>
 			<xsl:otherwise>
-				<image x="50%" y="4.6%" width="100%" height="5%" style="transform:translate(-50%, 0%)" preserveAspectRatio="xMidYMid meet">
+				<image x="50%" y="4.6%" width="50%" height="5%" style="transform:translate(-25%, 0%)" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="$personalLogo !=''">
