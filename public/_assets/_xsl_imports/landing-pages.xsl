@@ -871,35 +871,35 @@
 	</xsl:template>
 
 <xsl:template name="listing-agent-bullets"> 
-  <xsl:for-each select="//listingAgent[@name!='']">
+  <xsl:for-each select="//listingAgent[@name != '']">
     <xsl:sort select="@count" order="ascending" data-type="number" />
 
     <p class="listing-agent-bullets">
-      <span>
-        <xsl:choose>
-          <xsl:when test="number(@count) = 1">
-            <xsl:text>Listed by: </xsl:text>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:text>Co-Listed by: </xsl:text>
-          </xsl:otherwise>
-        </xsl:choose>
+      <xsl:choose>
+        <xsl:when test="number(@count) = 1">
+          <xsl:text>Listed by: </xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>Co-Listed by: </xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
 
-        <xsl:choose>
-          <xsl:when test="@email != ''">
-            <a>
-              <xsl:attribute name="href">
-                <xsl:value-of select="concat('mailto:', @email)" />
-              </xsl:attribute>
-              <xsl:value-of select="@name" />
-            </a>
-          </xsl:when>
-          <xsl:otherwise>
+      <!-- Agent name/email -->
+      <xsl:choose>
+        <xsl:when test="@email != ''">
+          <a>
+            <xsl:attribute name="href">
+              <xsl:value-of select="concat('mailto:', @email)" />
+            </xsl:attribute>
             <xsl:value-of select="@name" />
-          </xsl:otherwise>
-        </xsl:choose>
-      </span>
+          </a>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="@name" />
+        </xsl:otherwise>
+      </xsl:choose>
 
+      <!-- Optional fields -->
       <xsl:if test="@license != ''">
         <span>
           <xsl:value-of select="@license" />
@@ -920,6 +920,8 @@
     </p>
   </xsl:for-each>
 </xsl:template>
+
+
 
 
 
