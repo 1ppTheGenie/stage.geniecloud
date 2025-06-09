@@ -27,22 +27,40 @@
 			<xsl:choose>
 				<xsl:when test="$personalLogo != ''">
 					<image x="3.5%" y="6.4%" width="25%" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$personalLogo" />
-						</xsl:attribute>
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue='dark'">
+								<xsl:attribute name="href">
+									<xsl:value-of select="//agent[1]/personalLogoDark" />
+								</xsl:attribute>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:attribute name="href">
+									<xsl:value-of select="//agent[1]/personalLogoLight" />
+								</xsl:attribute>
+							</xsl:otherwise>
+						</xsl:choose>
 					</image>
 				</xsl:when>
 				<xsl:otherwise>
 					<image x="3.5%" y="7%" width="24%" height="4%" id="logo" preserveAspectRatio="xMidYMid meet">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$companyLogo" />
-						</xsl:attribute>
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue='dark'">
+								<xsl:attribute name="href">
+									<xsl:value-of select="//agent[1]/companyLogoDark" />
+								</xsl:attribute>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:attribute name="href">
+									<xsl:value-of select="//agent[1]/companyLogoLight" />
+								</xsl:attribute>
+							</xsl:otherwise>
+						</xsl:choose>
 					</image>
 				</xsl:otherwise>
 			</xsl:choose>
 
 			<g style="transform:translateY(0%)">
-				<foreignObject x="25%" y="7.5%" width="50%" height="20%">
+				<foreignObject x="30%" y="7.5%" width="43%" height="20%">
 					<p class="center upper"
 						style="font-family:var(--theme-sub-heading-font);color:var(--theme-heading-color);margin:0;font-size:45px;line-height:100%;font-weight:600;">
 						<xsl:call-template name="editable">
@@ -52,8 +70,8 @@
 						</xsl:call-template>
 					</p>
 
-					<p class="align-center" style="font-family:var(--theme-sub-heading-font);color:var(--theme-heading-color);font-size:35px;padding-top:25px;margin:0;font-weight: 600;
-    text-transform: uppercase;">
+					<p class="align-center" style="font-family:var(--theme-sub-heading-font);color:var(--theme-heading-color);padding-top:25px;margin:0;font-weight: 600; font-size:35px;
+    text-transform: uppercase;" >
 						<span>
 							<xsl:value-of select="$listingAddressLine1" />
 						</span>
@@ -106,8 +124,8 @@
 						</xsl:call-template>
 					</p>
 				</foreignObject>
-				<text x="23%" y="19%" fill="var(--theme-heading-color)" font-family="var(--theme-sub-heading-font)"
-					font-size="165%" font-weight="400">
+				<text x="59%" y="19%" fill="var(--theme-heading-color)" font-family="var(--theme-sub-heading-font)"
+					font-size="165%" font-weight="400" data-max-width="55%" class="right">
 					Get the FULL DESCRIPTION and DETAILS by Scanning QR-CODE above
 				</text>
 			</g>
@@ -139,7 +157,7 @@
 			</svg>
 
 			<text x="79.7%" y="0%" class="bold align-center" font-family="var(--theme-sub-heading-font)"
-				fill="var(--theme-body-background)" font-size="215%" font-weight="800">
+				fill="var(--theme-body-background)" font-size="215%" font-weight="800" data-max-width="10.5%">
 				<tspan x="79.7%" dy="2.5%">
 					<xsl:value-of select="'SCAN FOR'" />
 				</tspan>
@@ -242,16 +260,25 @@
 
 				<g style="transform:translate(51%, 26.5%)">
 					<svg width="100%" height="100%">
-						<image x="0.5%" y="0" width="20%" height="19%" preserveAspectRatio="xMidYMid slice">
+						<image x="0.5%" y="0" width="20%" height="19%" preserveAspectRatio="xMidYMid meet">
 							<xsl:attribute name="href">
 								<xsl:value-of select="//agent[1]/photo" />
 							</xsl:attribute>
 						</image>
 						<g style="transform:translate(24%, 0%)">
 							<image x="4%" y="0%" width="19%" height="4%" id="logo" preserveAspectRatio="xMaxYMid meet">
-								<xsl:attribute name="href">
-									<xsl:value-of select="$personalLogo" />
-								</xsl:attribute>
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue='dark'">
+										<xsl:attribute name="href">
+											<xsl:value-of select="//agent[1]/personalLogoDark" />
+										</xsl:attribute>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:attribute name="href">
+											<xsl:value-of select="//agent[1]/personalLogoLight" />
+										</xsl:attribute>
+									</xsl:otherwise>
+								</xsl:choose>
 							</image>
 							<text class="align-right bold"
 								style="font-family:var(--theme-heading-font);color:var(--theme-sub-heading-color);"
@@ -293,9 +320,18 @@
 							</text>
 							<image x="9%" y="15%" width="14%" height="3.5%" id="logo"
 								preserveAspectRatio="xMaxYMid meet">
-								<xsl:attribute name="href">
-									<xsl:value-of select="$companyLogo" />
-								</xsl:attribute>
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue='dark'">
+										<xsl:attribute name="href">
+											<xsl:value-of select="//agent[1]/companyLogoDark" />
+										</xsl:attribute>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:attribute name="href">
+											<xsl:value-of select="//agent[1]/companyLogoLight" />
+										</xsl:attribute>
+									</xsl:otherwise>
+								</xsl:choose>
 							</image>
 						</g>
 					</svg>
