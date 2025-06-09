@@ -70,7 +70,8 @@
 				{
 					"sort": 11,
 					"asset": "report-pages/ed-kaminsky-vip-entry",
-					"name": "Door Hanger Invites"
+					"name": "Door Hanger Invites",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 12,
@@ -87,7 +88,8 @@
 				{
 					"sort": 1,
 					"asset": "flyers/property-brochure-01",
-					"name": "Property Brochure"
+					"name": "Property Brochure",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 2,
