@@ -170,8 +170,9 @@ Version:	1.1
 								<p>
 									<xsl:value-of select="//area/name" />
 								<br/>
+
 									<xsl:value-of select="$listingAddressLine1" />
-									<!-- <xsl:if test="count(//openHouse/session) &gt; 0">
+									<xsl:if test="count(//openHouse/session) &gt; 0">
                                         <xsl:value-of select="concat(
                                         ' • ', //openHouse/session[1]/@dow, ', ',
                                         //openHouse/session[1]/@month, ' ',
@@ -179,7 +180,20 @@ Version:	1.1
                                         ' • ', //openHouse/session[1]/@starts, ' - ',
                                         //openHouse/session[1]/@ends
                                         )" />
-                                    </xsl:if> -->
+                                    </xsl:if>
+									
+
+									<xsl:if test="count(.//openHouse/session) &gt; 0">
+										<xsl:value-of select="concat(
+											' • ', .//openHouse/session[1]/@dow, ', ',
+											.//openHouse/session[1]/@month, ' ',
+											.//openHouse/session[1]/@date,
+											' • ', .//openHouse/session[1]/@starts, ' - ',
+											.//openHouse/session[1]/@ends
+										)" />
+									</xsl:if>
+
+
 									 <xsl:if test="//openHouse/session">
                                         <xsl:text> • </xsl:text>
                                         <xsl:value-of select="//openHouse/session[1]/@dow" />, 
