@@ -1,11 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Spartan:wght@100;200;400;500;600;700;800;900&display=swap");
 
-:root {
+:root{
 	--white: #ffffff;
 	--light-blue: #242736;
-	--font-1: 'Montserrat', sans-serif;
+	--font-1: 'Montserrat', sans-serif; 
 }
-
 html {
 	font-size: 16px;
 	scroll-behavior: smooth;
@@ -134,25 +133,22 @@ h6 {
 .hero-details-inner h3 {
 	color: var(--theme-background-color);
 	font-size: 30px;
-	line-height: 1;
-	font-weight: 500;
+    line-height: 1;
+    font-weight: 500;
 	margin-top: 20px;
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
-
-.hero-details-inner .open-house {
+.hero-details-inner .open-house{
 	color: var(--white);
 }
-
-.hero-details-inner .open-house-times p {
+.hero-details-inner .open-house-times p{
 	margin-block: 10px;
 	font-size: 18px;
 	font-family: var(--theme-body-font);
 	font-weight: 500;
 	line-height: 1.1;
 }
-
-.hero-details-inner .open-house-times p>span {
+.hero-details-inner .open-house-times p>span{
 	text-transform: lowercase;
 }
 
@@ -178,11 +174,13 @@ h6 {
 }
 
 .gradient-color {
-	background: -webkit-gradient(linear,
-			left bottom,
-			left top,
-			color-stop(15%, #c5882a),
-			color-stop(60%, #fed887));
+	background: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(15%, #c5882a),
+		color-stop(60%, #fed887)
+	);
 	background: -o-linear-gradient(bottom, #c5882a 15%, #fed887 60%);
 	background: linear-gradient(to top, #c5882a 15%, #fed887 60%);
 	color: transparent;
@@ -244,7 +242,7 @@ h2.heading-title {
 	letter-spacing: 0.02em;
 	line-height: 24px;
 	margin: 25px 0;
-
+   
 }
 
 .overview-text p description {
@@ -393,7 +391,7 @@ h2.heading-title {
 	box-shadow: none;
 }
 
-input[type="date" i]::-webkit-calendar-picker-indicator {
+input[type="date"i]::-webkit-calendar-picker-indicator {
 	filter: invert(1);
 }
 
@@ -652,8 +650,7 @@ a.pdf-btn:hover .overlay-bg {
 	justify-content: center;
 	margin-bottom: 90px;
 }
-
-.description {
+.description{
 	font-family: var(--font-1);
 }
 
@@ -877,15 +874,14 @@ body:not(.lightbox) .masonary #property-gallery-container .property-gallery {
 	max-width: 100%;
 	margin: 0 -4px;
 }
-
-.property-image-show-btn .btn {
+.property-image-show-btn .btn{
 	background-color: var(--light-blue);
 	color: var(--white);
 	font-family: var(--font-1);
 }
 
 
-.MarketUpdate .snapshot-details h3~p span {
+.MarketUpdate .snapshot-details h3 ~ p span {
 	font-size: 13px;
 	font-weight: 400;
 }
@@ -897,7 +893,7 @@ body:not(.lightbox) .masonary #property-gallery-container .property-gallery {
 .dark-bg .markettrending h1 {
 	font-size: 20px;
 	line-height: 150%;
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .dark-bg .mr-icon .avg-value {
@@ -907,7 +903,7 @@ body:not(.lightbox) .masonary #property-gallery-container .property-gallery {
 
 .dark-bg span.graph-number {
 	font-weight: 700;
-	font-size: 16px;
+    font-size: 16px;
 }
 
 .preferred_contact {
@@ -985,29 +981,26 @@ section#gallery-sec:before {
 	visibility: hidden;
 }
 
-section.real-time-market {
+section.real-time-market{
 	padding: 60px 0;
 }
-
 .real-time-market .real-time {
-	border-bottom: 1px solid;
-	border-top: 1px solid;
-	padding: 50px 30px;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    padding: 50px 30px;
 	border-color: #b2934e;
 }
-
 .real-time-market h2 {
-	margin-bottom: 5px;
-	text-transform: uppercase;
-	font-size: 34px;
-	font-weight: 400;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 34px;
+    font-weight: 400;
 	color: var(--white);
 	line-height: 1.1;
 }
-
-.real-time-market p {
+.real-time-market p{
 	font-size: 20px;
-	margin: 0px 0px 5px;
+    margin: 0px 0px 5px;
 	color: #b2934e;
 	line-height: 1.42857143;
 }
@@ -1024,11 +1017,10 @@ section#about-section2:before {
 
 .MarketUpdate h1.upper,
 .MarketUpdate h2,
-.snapshot-details h1,
-.snapshot-details p,
+.snapshot-details h1, 
+.snapshot-details p, 
 .snapshot-details h3,
-.MarketUpdate select#date-period,
-select#date-period {
+.MarketUpdate select#date-period, select#date-period{
 	font-family: var(--font-1) !important;
 }
 
@@ -1050,7 +1042,7 @@ section#about-section:before {
 
 .market-update {
 	padding-top: 0;
-	padding-bottom: 30px;
+    padding-bottom: 30px;
 }
 
 
@@ -1059,241 +1051,10 @@ section#about-section:before {
 }
 
 .footer-form {
-	display: inline-block !important;
+    display: inline-block !important;
 }
 
 /*19-7-2022*/
-
-
-/* 2025 new css start */
-
-section.genie-alternate {
-	padding: 40px 0;
-}
-
-section.genie-alternate.real-time-market {
-	padding: 60px 0;
-}
-
-.real-time-market .real-time {
-	padding: 20px 30px;
-}
-
-.genie-embed footer {
-	margin: 0 !important;
-	padding: 25px 10px 0;
-}
-
-.genie-embed.MarketTrending .genie-wrap.markettrending {
-	margin: 11px 0 0;
-}
-
-.genie-embed.MarketHistory .genie-wrap.markethistory {
-	margin: 11px 0 0;
-}
-
-.genie-embed.FastFacts .genie-wrap.fastfacts {
-	margin: 11px 0 0;
-}
-
-.genie-embed.MarketActivity .genie-wrap.marketactivity {
-	margin: 11px 0 0;
-}
-
-.fast-facts-stats-icons span {
-	font-size: 15px;
-	line-height: 1.4;
-}
-
-.fast-facts-stats-icons-box {
-	width: 25%;
-}
-
-.genie-wrap.fastfacts footer span {
-	font-size: 9px;
-	line-height: 1.4;
-}
-
-.genie-embed.MarketTrending h2 {
-	font-size: 20px;
-	color: #b2934e;
-	line-height: 1.3;
-	font-weight: 400;
-	letter-spacing: 2px;
-}
-
-.genie-wrap.markettrending .trending-box .mr-icon {
-	width: 25%;
-}
-
-.genie-wrap.markettrending .trending-box .mr-icon .avg-value {
-	font-size: 40px;
-	line-height: 1.2;
-	font-weight: 400;
-}
-
-.genie-wrap.markettrending footer span {
-	font-size: 9px;
-	line-height: 1.4;
-}
-
-.genie-wrap.markethistory .curved-tabs span {
-	line-height: 1.4;
-}
-
-.genie-wrap.markethistory footer span {
-	font-size: 9px;
-	line-height: 1.4;
-}
-
-.genie-wrap.markethistory #hometypes-choice {
-	margin: 27px auto;
-}
-
-.genie-wrap.peoplebuying {
-	margin: 14px 0 0px !important;
-}
-
-.genie-wrap.peoplebuying .subtitle-font {
-	line-height: 1.4;
-}
-
-.genie-wrap.peoplebuying .horizontal-bars .graph-number {
-	font-size: 15px;
-	line-height: 1.4;
-	font-weight: 700;
-}
-
-.genie-wrap.peoplebuying div.horizontal-bars>div>span>span {
-	font-size: 11px;
-	line-height: 1.4;
-}
-
-.genie-wrap.peoplebuying footer span {
-	font-size: 9px;
-	line-height: 1.4;
-}
-
-.genie-wrap.marketactivity .subheading-market-activity {
-	font-size: 20px;
-	line-height: 1.1;
-	letter-spacing: 2px;
-	text-transform: uppercase;
-	font-weight: 400;
-}
-
-.genie-wrap.marketactivity .heading-market-activity {
-	font-size: 34px;
-	line-height: 1;
-	font-weight: 400;
-	letter-spacing: 2px;
-	text-transform: uppercase;
-}
-
-.genie-wrap.marketactivity #hometypes-choice {
-	width: 100%;
-	margin: 27px 0 0;
-}
-
-.genie-wrap.marketactivity #genie-map {
-	margin: 27px 0 0;
-}
-
-.genie-wrap.marketactivity footer span {
-	font-size: 9px;
-	line-height: 1.4;
-}
-
-.genie-wrap.marketactivity footer {
-	padding-bottom: 0 !important;
-	padding: 25px 10px 0;
-	margin: 0 0 35px;
-}
-
-.genie-embed.ListToSold h1 {
-	font-size: 34px;
-	line-height: 1.2;
-}
-
-.genie-embed.ListToSold tbody#list-to-sold td {
-	font-weight: 600;
-}
-
-.genie-embed.ListToSold .market-days-text {
-	font-weight: 600;
-	line-height: 1.4;
-}
-
-.genie-embed.ListToSold footer span {
-	font-size: 9px;
-	line-height: 1.4;
-}
-
-.genie-wrap.listingmapstyleone #padded .current-date {
-	line-height: 1.4;
-}
-
-.genie-wrap.listingmapstyleone #listing-table td {
-	line-height: 1.3;
-}
-
-.genie-wrap.listingmapstyleone .filterTxt {
-	color: var(--theme-body-color) !important;
-	line-height: 1.4;
-	margin-top: 5px;
-}
-
-.genie-wrap.listingmapstyleone ul.pagination {
-	margin-top: 20px 12px 0;
-}
-
-.genie-wrap.listingmapstyleone ul.pagination li {
-	padding: 5px 10px;
-	line-height: 1.4;
-}
-
-.genie-wrap.listingmapstyleone .filter-pagination-wrap {
-	display: flex;
-	justify-content: space-between;
-}
-
-.genie-wrap.listingmapstyleone #listing-map-style-one {
-	border: 4px solid #6a953f;
-	border-radius: 30px;
-	overflow: hidden;
-	position: relative;
-}
-
-.genie-wrap.listingmapstyleone #listing-table {
-	margin-bottom: 0;
-}
-
-div.genie-wrap.listingmapstyleone footer {
-	padding: 25px 10px 0 !important;
-}
-
-.overview-cta-list a.cta:hover {
-	background: #b2934e;
-	border-color: #b2934e;
-	color: #fff;
-}
-
-.property-image-show-btn .btn {
-	background: var(--light-blue) !important;
-}
-
-.property-image-show-btn .btn:hover {
-	background: #b2934e !important;
-	border-color: #b2934e;
-	color: #fff;
-	opacity: 1;
-}
-
-#listing-agents a {
-	color: var(--theme-sub-heading-color);
-}
-
-/* 2025 new css end */
 
 @media only screen and (min-width: 1471px) {
 	.custom-container {
@@ -1569,18 +1330,15 @@ div.genie-wrap.listingmapstyleone footer {
 		width: 100px;
 		height: 40px;
 	}
-
 	.map {
 		padding: 25px 15px;
 	}
-
 	.map-form {
 		padding: 10px 5%;
 	}
 }
 
 @media (max-width: 375px) {
-
 	#about-section .agent-details .photo,
 	.agent-details .details {
 		display: block;
@@ -1597,10 +1355,8 @@ div.genie-wrap.listingmapstyleone footer {
 
 
 section.genie-alternate .ListingMapStyleOne h1 {
-	color: var(--theme-body-color) !important
+	color: var(--theme-body-color)!important
 }
-
-.lc-hollywood #listing-table th,
-#listing-table td {
-	color: initial !important;
+.lc-hollywood #listing-table th, #listing-table td {
+	color: initial!important;
 }
