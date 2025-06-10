@@ -3,25 +3,27 @@
 */
 
 @import url("../_css/montserrat.css");
+@import url("../_css/raleway.css");
+@import url("../_css/playfair-display.css");
 @import url("../_css/roboto.css");
 
 .forward-one, .forward-one.light, .forward-one .light {
-	--theme-body-background: #ffffff;
-	--theme-heading-color: #000000; /* Heading */
-	--theme-sub-heading-color: #f0ad3a; /* Subtitle */
-	--theme-body-color: #adadad; /* Body */
-	--theme-emphasis-color: #f0ad3a; /* Outline */
-	--theme-body-font: "Montserrat", sans-serif;
+	--theme-body-background: #faf9f7;
+	--theme-heading-color: #333333; /* Heading */
+	--theme-sub-heading-color: #e8d8c3; /* Subtitle */
+	--theme-body-color: #556B61; /* Body */
+	--theme-emphasis-color: #e8d8c3; /* Outline */
+	--theme-body-font: "Raleway", sans-serif;
 	--theme-heading-font: "Montserrat", sans-serif;
-	--theme-sub-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Raleway", sans-serif;
 }
 
 .forward-one.dark, .forward-one .dark {
-	--theme-body-background: #000000;
-	--theme-heading-color: #ffffff; /* Heading */
-	--theme-sub-heading-color: #f0ad3a; /* Subtitle */
-	--theme-body-color: #adadad; /* Body */
-	--theme-emphasis-color: #f0ad3a; /* Outline */
+	--theme-body-background: #333333;
+	--theme-heading-color: #faf9f7; /* Heading */
+	--theme-sub-heading-color: #5C8A72; /* Subtitle */
+	--theme-body-color: #E8D8C3; /* Body */
+	--theme-emphasis-color: #e8d8c3; /* Outline */
 }
 
 .forward-one.dark2, .forward-one .dark2 {
@@ -34,3 +36,15 @@
     --theme-heading-font: 'Roboto', sans-serif;
     --theme-sub-heading-font: 'Roboto', sans-serif;
 }
+
+.forward-one.charcoal, .forward-one .charcoal {
+    --theme-body-background: #333333;
+    --theme-heading-color: #FAF9F7; /* Heading */
+    --theme-sub-heading-color: #E8D8C3; /* Subtitle */
+    --theme-body-color: #FAF9F7; /* Body */
+    --theme-emphasis-color: #5C8A72; /* Outline */
+    --theme-body-font: 'Raleway', sans-serif;
+    --theme-heading-font: 'Montserrat', sans-serif;
+    --theme-sub-heading-font: 'Montserrat', sans-serif;
+}
+
