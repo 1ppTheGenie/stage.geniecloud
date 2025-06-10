@@ -1235,6 +1235,13 @@ section.genie-alternate.real-time-market {
 
 .genie-wrap.listingmapstyleone #listing-table td {
 	line-height: 1.3;
+	color: var(--theme-body-color) !important;
+	border: 1px solid var(--theme-sub-heading-color);
+}
+
+.genie-wrap.listingmapstyleone #listing-table th {
+	color: var(--theme-sub-heading-color) !important;
+	border: 1px solid var(--theme-sub-heading-color);
 }
 
 .genie-wrap.listingmapstyleone .filterTxt {
@@ -1258,7 +1265,7 @@ section.genie-alternate.real-time-market {
 }
 
 .genie-wrap.listingmapstyleone #listing-map-style-one {
-	border: 4px solid #6a953f;
+	border: 4px solid var(--theme-sub-heading-color);
 	border-radius: 30px;
 	overflow: hidden;
 	position: relative;
@@ -1291,6 +1298,18 @@ div.genie-wrap.listingmapstyleone footer {
 
 #listing-agents a {
 	color: var(--theme-sub-heading-color);
+}
+
+#about-section .footer-form .cld-title.heading-title em {
+	color: var(--theme-heading-color);
+}
+
+#about-section .preferred_contact span {
+	color: var(--theme-heading-color);
+}
+
+#about-section .preferred_contact .che_box label {
+	color: var(--theme-heading-color);
 }
 
 /* 2025 new css end */

@@ -22,9 +22,9 @@ export default () => {
 
 	return (
 		<>
-			<h1 class="center upper">
+			<h2 class="center upper">
 				{areaDataStore.areaName} {propertyTypeCaption()}
-			</h1>
+			</h2>
 			<h4 class="center upper">Market Trending</h4>
 
 			<HomeTypes container={`MarketTrends-${areaDataStore.areaId}`} />

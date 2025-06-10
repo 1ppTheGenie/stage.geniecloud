@@ -56,12 +56,12 @@ export default () => {
 					</tbody>
 				</table>
 			</div>
-			<p style="font-size: 80%; text-align: center">
+			<p class="market-days-text" style="font-size: 80%; text-align: center">
 				*Avg DOM: Days On Market<span class="SM-hidden"> - </span>
 				<span class="SM-visible">
-					<br />
+					
 				</span>
-				Average number of days properties take to sell
+				Average number of days properties take to sell 
 			</p>
 		</>
 	);
