@@ -65,9 +65,9 @@
 		</xsl:choose>
 
 		<svg height="100%" width="100%">
-			<circle cx="50%" cy="21.3%" r="12%" fill="#282843" />
+			<circle cx="50%" cy="21.3%" r="12%" fill="var(--theme-body-background)" style="filter: hue-rotate(6.7deg) brightness(167%) saturate(45%);" />
 		</svg>
-		<line x1="0%" y1="21.5%" x2="50%" y2="21.5%" stroke="#282843" stroke-width="0.3%" />
+		<line x1="0%" y1="21.5%" x2="50%" y2="21.5%" stroke="var(--theme-body-background)" style="filter: hue-rotate(6.7deg) brightness(167%) saturate(45%);" stroke-width="0.3%" />
 
 		<text x="50%" y="34%" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="1130%" font-weight="800" style="letter-spacing:2px">
 		    VIP ENTRY 
