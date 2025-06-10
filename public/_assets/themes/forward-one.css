@@ -3,7 +3,7 @@
 */
 
 @import url("../_css/montserrat.css");
-@import url("../_css/roboto.css");
+@import url("../_css/raleway.css");
 
 .forward-one, .forward-one.light, .forward-one .light {
 	--theme-body-background: #ffffff;
@@ -34,3 +34,15 @@
     --theme-heading-font: 'Roboto', sans-serif;
     --theme-sub-heading-font: 'Roboto', sans-serif;
 }
+
+.forward-one.charcoal, .forward-one .charcoal {
+    --theme-body-background: #333333;
+    --theme-heading-color: #FAF9F7; /* Heading */
+    --theme-sub-heading-color: #E8D8C3; /* Subtitle */
+    --theme-body-color: #FAF9F7; /* Body */
+    --theme-emphasis-color: #5C8A72; /* Outline */
+    --theme-body-font: 'Raleway', sans-serif;
+    --theme-heading-font: 'Montserrat', sans-serif;
+    --theme-sub-heading-font: 'Montserrat', sans-serif;
+}
+
