@@ -362,7 +362,7 @@
 				</xsl:call-template>
 			</g>
 
-			<g style="transform: translate(59%, 13.7%);">
+			<g style="transform: translate(60%, 13.7%);">
 				<image x="3%" y="-5%" width="5%" height="21%" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/scan-qr.svg' )" />
 				</image>

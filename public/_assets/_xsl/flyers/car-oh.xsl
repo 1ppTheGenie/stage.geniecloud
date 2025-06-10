@@ -51,7 +51,7 @@
                 <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
                     <tspan x="667">Date:</tspan>
                     <tspan x="710">
-                        <xsl:if test="count(//openHouse/session) &gt; 0">
+                        <!-- <xsl:if test="count(//openHouse/session) &gt; 0">
 
                             <xsl:variable name="monthName" select="//openHouse/session[1]/@month" />
                             <xsl:variable name="day" select="format-number(//openHouse/session[1]/@date, '00')" />
@@ -79,7 +79,7 @@
 								<xsl:with-param name="id" select="'LC-OH-INVITE-01'" />
 								<xsl:with-param name="default" select="concat($monthNumber, '/', $day, '/', $year)" /> 
 							</xsl:call-template>
-                        </xsl:if>                   
+                        </xsl:if>                    -->
                     </tspan>
                 </text>
 

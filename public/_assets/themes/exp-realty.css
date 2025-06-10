@@ -7,8 +7,8 @@
 .exp-realty, .exp-realty.light {
 	--theme-body-background: #ffffff;
 	--theme-heading-color: #1b489b; /* Heading */
-	--theme-sub-heading-color: #58595b; /* Subtitle */
-	--theme-body-color: #58595b; /* Body */
+	--theme-sub-heading-color: #9b9b9b; /* Subtitle */
+	--theme-body-color: #9b9b9b; /* Body */
 	--theme-emphasis-color: #e2e3e4; /* Outline */
 	--theme-body-font: 'Roboto', sans-serif;
 	--theme-heading-font: 'Roboto', sans-serif;
@@ -18,8 +18,8 @@
 .exp-realty.dark {
 	--theme-body-background: #1b489b;
 	--theme-heading-color: #ffffff; /* Heading */
-	--theme-sub-heading-color: #e2e3e4; /* Subtitle */
-	--theme-body-color: #e2e3e4; /* Body */
+	--theme-sub-heading-color: #9b9b9b; /* Subtitle */
+	--theme-body-color: #9b9b9b; /* Body */
 	--theme-emphasis-color: #58595b; /* Outline */
 	--theme-body-font: 'Roboto', sans-serif;
 	--theme-heading-font: 'Roboto', sans-serif;

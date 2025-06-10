@@ -9,49 +9,49 @@
 			"assets": [
 				{
 					"sort": 1,
-					"asset": "social-marketing-graphics/ed-oh-social-templates-1",
+					"asset": "social-marketing-graphics/oh-social-templates-1",
 					"name": "Square Post #1",
 					"size": "instagram-Square"
 				},
 				{
 					"sort": 2,
-					"asset": "social-marketing-graphics/ed-oh-social-templates-2",
+					"asset": "social-marketing-graphics/oh-social-templates-2",
 					"name": "Square Post #2",
 					"size": "instagram-Square"
 				},
 				{
 					"sort": 3,
-					"asset": "social-marketing-graphics/ed-oh-social-templates-3",
+					"asset": "social-marketing-graphics/oh-social-templates-3",
 					"name": "Square Post #3",
 					"size": "instagram-Square"
 				},
 				{
 					"sort": 4,
-					"asset": "social-marketing-graphics/ed-oh-social-templates-4",
+					"asset": "social-marketing-graphics/oh-social-templates-4",
 					"name": "Square Post #4",
 					"size": "instagram-Square"
 				},
 				{
 					"sort": 5,
-					"asset": "social-marketing-graphics/ed-oh-instagram-story-1",
+					"asset": "social-marketing-graphics/oh-instagram-story-1",
 					"name": "Social Story #1",
 					"size": "instagram-Story"
 				},
 				{
 					"sort": 6,
-					"asset": "social-marketing-graphics/ed-oh-instagram-story-2",
+					"asset": "social-marketing-graphics/oh-instagram-story-2",
 					"name": "Social Story #2",
 					"size": "instagram-Story"
 				},
 				{
 					"sort": 7,
-					"asset": "social-marketing-graphics/ed-oh-instagram-story-3",
+					"asset": "social-marketing-graphics/oh-instagram-story-3",
 					"name": "Social Story #3",
 					"size": "instagram-Story"
 				},
 				{
 					"sort": 8,
-					"asset": "social-marketing-graphics/ed-oh-instagram-story-4",
+					"asset": "social-marketing-graphics/oh-instagram-story-4",
 					"name": "Social Story #4",
 					"size": "instagram-Story"
 				},
@@ -70,7 +70,8 @@
 				{
 					"sort": 11,
 					"asset": "report-pages/ed-kaminsky-vip-entry",
-					"name": "Door Hanger Invites"
+					"name": "Door Hanger Invites",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 12,
@@ -86,8 +87,9 @@
 			"assets": [
 				{
 					"sort": 1,
-					"asset": "flyers/ed-kaminsky-brochure-01",
-					"name": "Property Brochure"
+					"asset": "flyers/property-brochure-01",
+					"name": "Property Brochure",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 2,

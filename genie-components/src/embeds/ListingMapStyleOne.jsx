@@ -54,7 +54,7 @@ export default () => {
 		month + " " + day + ", " + year + " @ " + hour + ":" + minute + ap;
 
 	return (
-		<div id="padded" style="padding: 1rem 0; width: 100%">
+		<div id="padded" style="padding: 0rem 0; width: 100%">
 			<h1>LIVE HOT LIST OF HOMES FOR SALE</h1>
 
 			<p class="current-date">
@@ -71,7 +71,7 @@ export default () => {
 					listings={currentListings()}
 					style="margin-top: 30px"
 				/>
-
+				<div class="filter-pagination-wrap">
 				<p class="filterTxt" style="font-size:13px; color: #fff;">
 					<ListingsShowing
 						pageSize={pageSize()}
@@ -86,7 +86,7 @@ export default () => {
 					totalItems={listingsStore.listings.length}
 					currentPage={currentPage()}
 					pageChange={page => setPage(page)}
-				/>
+				/></div>
 			</Show>
 		</div>
 	);

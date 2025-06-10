@@ -12,16 +12,16 @@ Supports:	Area, Print, Listing, QRCode
 
 
 	<xsl:template name="svg-body">
-		<rect x="61%" y="0" width="39%" height="100%" fill="var(--theme-body-background)"></rect>
+		<rect x="62.2%" y="0" width="39%" height="100%" fill="var(--theme-heading-color)"></rect>
 
-		<image x="61%" y="0" width="39%" height="49.8%" preserveAspectRatio="xMidYMid slice">
+		<image x="62.38%" y="0" width="38.8%" height="49.8%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
 				<xsl:with-param name="idx" select="1" />
 				<xsl:with-param name="preferPrimary" select="'true'" />
 			</xsl:call-template>
 		</image>
 
-		<image x="61%" y="50.2%" width="39%" height="49.8%" preserveAspectRatio="xMidYMid slice">
+		<image x="62.38%" y="50.2%" width="38.8%" height="49.8%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
 				<xsl:with-param name="idx" select="2" />
 			</xsl:call-template>
@@ -33,9 +33,9 @@ Supports:	Area, Print, Listing, QRCode
 	<xsl:template name="cropped-content">
 		<xsl:call-template name="qr-code-2022-content-part-1" />
 
-		<g style="transform:translate(35%, 21%)">
+		<g style="transform:translate(39.1%, 22.1%)">
 			<xsl:call-template name="qr-code">
-				<xsl:with-param name="width" select="'30%'" />
+				<xsl:with-param name="width" select="'21.8%'" />
 			</xsl:call-template>
 		</g>
 	</xsl:template>

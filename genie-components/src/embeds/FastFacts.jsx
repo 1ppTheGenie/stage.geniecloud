@@ -80,6 +80,20 @@ export default () => {
 						}
 					/>
 				</div> */}
+
+				<div>
+					<SoldIcon />
+					<ListingTableLinks
+						title={`SOLD IN ${sharedEmbedStore.period} MOs`}
+						status="sold"
+						count={listingsSubset(listingType(), "sold")?.length}
+						propertyType={settings.propertytype}
+						propertyView={sharedEmbedStore.propertyType}
+						showProperties={(propertyTypeId, statusType) =>
+							showProperties(propertyTypeId, statusType)
+						}
+					/>
+				</div>
 				<div>
 					<ActiveIcon />
 					<ListingTableLinks
@@ -107,19 +121,7 @@ export default () => {
 					/>
 				</div>
 
-				<div>
-					<SoldIcon />
-					<ListingTableLinks
-						title={`SOLD IN ${sharedEmbedStore.period} MOs`}
-						status="sold"
-						count={listingsSubset(listingType(), "sold")?.length}
-						propertyType={settings.propertytype}
-						propertyView={sharedEmbedStore.propertyType}
-						showProperties={(propertyTypeId, statusType) =>
-							showProperties(propertyTypeId, statusType)
-						}
-					/>
-				</div>
+				
 			</div>
 			<div
 				id="ff-listing-table"
@@ -157,7 +159,7 @@ export default () => {
 			</div>
 
 			<div class="fast-facts-stats-icons">
-				<div>
+				<div class="fast-facts-stats-icons-box">
 					<Homes style="width: 85px; height: auto;" />
 					<h3>Total Homes</h3>
 					<div>
@@ -166,7 +168,7 @@ export default () => {
 						</Show>
 					</div>
 				</div>
-				<div>
+				<div class="fast-facts-stats-icons-box">
 					<TurnOverHomes style="width: 85px; height: auto;" />
 					<h3>Turnover Rate</h3>
 					<div>
@@ -175,7 +177,7 @@ export default () => {
 						</Show>
 					</div>
 				</div>
-				<div>
+				<div class="fast-facts-stats-icons-box">
 					<AvgDom style="width: 85px; height: auto;" />
 					<h3>Average Days on Market</h3>
 					<div>
@@ -184,7 +186,7 @@ export default () => {
 						</Show>
 					</div>
 				</div>
-				<div>
+				<div class="fast-facts-stats-icons-box">
 					<AvgYIH style="width: 85px; height: auto;" />
 					<h3>Average Years in Home</h3>
 					<div>

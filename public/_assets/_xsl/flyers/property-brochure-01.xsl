@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
-	Asset Name: Ed Kaminsky Brochure 01
+	Asset Name: Property Brochure 01
 	Tags:		Direct Mail
 	Sizes:		Ipad Landscape
 	Supports:	Listing, Multi-Listing
-	Pages:		flyers/ed-kaminsky-brochure-01,flyers/ed-kaminsky-brochure-02
+	Pages:		flyers/property-brochure-01,flyers/property-brochure-02
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">

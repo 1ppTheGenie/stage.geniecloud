@@ -1,0 +1,112 @@
+{
+	"name": "Open House Kit",
+	"template": "marketing-steps-lc1",
+	"version": 3,
+	"sections": [
+		{
+			"sort": 1,
+			"meta": { "caption": "Pre marketing assets", "description": "" },
+			"assets": [
+				{
+					"sort": 1,
+					"asset": "social-marketing-graphics/oh-social-templates-1",
+					"name": "Square Post #1",
+					"size": "instagram-Square"
+				},
+				{
+					"sort": 2,
+					"asset": "social-marketing-graphics/oh-social-templates-2",
+					"name": "Square Post #2",
+					"size": "instagram-Square"
+				},
+				{
+					"sort": 3,
+					"asset": "social-marketing-graphics/oh-social-templates-3",
+					"name": "Square Post #3",
+					"size": "instagram-Square"
+				},
+				{
+					"sort": 4,
+					"asset": "social-marketing-graphics/oh-social-templates-4",
+					"name": "Square Post #4",
+					"size": "instagram-Square"
+				},
+				{
+					"sort": 5,
+					"asset": "social-marketing-graphics/oh-instagram-story-1",
+					"name": "Social Story #1",
+					"size": "instagram-Story"
+				},
+				{
+					"sort": 6,
+					"asset": "social-marketing-graphics/oh-instagram-story-2",
+					"name": "Social Story #2",
+					"size": "instagram-Story"
+				},
+				{
+					"sort": 7,
+					"asset": "social-marketing-graphics/oh-instagram-story-3",
+					"name": "Social Story #3",
+					"size": "instagram-Story"
+				},
+				{
+					"sort": 8,
+					"asset": "social-marketing-graphics/oh-instagram-story-4",
+					"name": "Social Story #4",
+					"size": "instagram-Story"
+				},
+				{
+					"sort": 9,
+					"asset": "flyers/address-strip-01",
+					"name": "Address Arrows",
+					"size": "tabloid-flyer"
+				},
+				{
+					"sort": 10,
+					"asset": "flyers/lc-oh-invite-01a",
+					"name": "Open House Invite",
+					"qrUrl": "lc-hollywood"
+				},
+				{
+					"sort": 11,
+					"asset": "area-insider-reports/market-insider",
+					"name": "Market Insider Report"
+				}
+				
+			],
+			"name": "Connect with the community"
+		},
+		{
+			"sort": 2,
+			"meta": { "caption": "", "description": "" },
+			"assets": [
+				{
+					"sort": 1,
+					"asset": "flyers/ed-kaminsky-brochure-01",
+					"name": "Property Brochure"
+				},
+				{
+					"sort": 2,
+					"asset": "landing-pages/lc-oh-guestbook",
+					"name": "Guestbook Link",
+					"lpo": "lc-hollywood",
+					"size": "Landing Page"
+				},
+				{
+					"sort": 3,
+					"asset": "landing-pages/lc-hollywood",
+					"name": "Property Website",
+					"size": "Landing Page"
+				},
+
+				{
+					"sort": 4,
+					"asset": "flyers/car-oh",
+					"name": "CAR OH Form",
+					"size": "us-letter"
+				}
+			],
+			"name": "Create a lasting first impression"
+		}
+	]
+}

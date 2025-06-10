@@ -3,35 +3,29 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 
 	<xsl:template name="qr-code-2022-content-part-1">
-		<g id="qr-code-2022-content-part-1" style="transform:translateX(1.3%);">
+		<g id="qr-code-2022-content-part-1" style="transform:translateX(0.2%);">
 			<xsl:if test="number(//single/statusTypeID)=2">
-				<text x="18%" y="10%" class="center upper" fill="var(--theme-heading-color)" style="font-size: 300%; font-family:var(--theme-heading-font);letter-spacing: 1px;font-weight:800;" data-max-width="80%">
-					<tspan>
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'justlisted'" />
-							<xsl:with-param name="default" select="'just sold'" />
-						</xsl:call-template>
-					</tspan>
+				<text x="18%" y="8.7%" class="center upper" fill="var(--theme-heading-color)" font-size="340%" font-family="var(--theme-heading-font)" font-weight="800" style="letter-spacing: 2px; word-spacing: -8px" data-max-width="80%">
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'justlisted'" />
+						<xsl:with-param name="default" select="'just sold'" />
+					</xsl:call-template>
 				</text>
 			</xsl:if>
 			<xsl:if test="number(//single/statusTypeID)=1">
-				<text x="18%" y="10%" class="center upper" fill="var(--theme-heading-color)" style="font-size: 300%; font-family:var(--theme-heading-font);letter-spacing: 1px;font-weight:800;" data-max-width="80%">
-					<tspan>
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'justlisted'" />
-							<xsl:with-param name="default" select="'just listed'" />
-						</xsl:call-template>
-					</tspan>
+				<text x="18%" y="10%" class="center upper" fill="var(--theme-heading-color)" font-size="300%" font-family="var(--theme-heading-font)" font-weight="900" style="letter-spacing: 1px;" data-max-width="80%">				
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'justlisted'" />
+						<xsl:with-param name="default" select="'just listed'" />
+					</xsl:call-template>
 				</text>
 			</xsl:if>
 			<xsl:if test="(//single/statusTypeID=3) or (//single/statusTypeID=4) or (//single/statusTypeID=12)">
 				<text x="18%" y="10%" class="center upper bold" fill="var(--theme-heading-color)" style="font-size: 300%; font-family:var(--theme-heading-font);letter-spacing: 1px;font-weight:800;" data-max-width="80%">
-					<tspan>
-						<xsl:call-template name="editable">
-							<xsl:with-param name="id" select="'justlisted'" />
-							<xsl:with-param name="default" select="'In Escrow'" />
-						</xsl:call-template>
-					</tspan>
+					<xsl:call-template name="editable">
+						<xsl:with-param name="id" select="'justlisted'" />
+						<xsl:with-param name="default" select="'In Escrow'" />
+					</xsl:call-template>
 				</text>
 			</xsl:if>
 
@@ -46,20 +40,20 @@
 				</text>
 			</xsl:if>
 
-			<text x="18%" y="22%" class="center upper" fill="var(--theme-body-color)" style="font-size:140%;font-weight: 600;font-family:var(--theme-sub-heading-font);" data-max-width="35%">
+			<text x="16.8%" y="23%" class="center upper" fill="var(--theme-body-color)" font-size="130%" font-weight="600" font-family="var(--theme-heading-font)" data-max-width="35%">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'yourneighborhood'" />
 					<xsl:with-param name="default" select="concat( ' IN ', //area/name ) " />
 				</xsl:call-template>
 			</text>
 
-			<text x="18%" y="29%" class="center upper" fill="var(--theme-body-color)" style="font-size: 200%;font-weight:700;font-family:var(--theme-heading-font); letter-spacing: 1px;">
+			<text x="18%" y="29.7%" class="center upper" fill="var(--theme-body-color)" font-size="210%" font-weight="700" font-family="var(--theme-heading-font)" style="letter-spacing: 1px;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'scantosee'" />
 					<xsl:with-param name="default" select="'SCAN TO SEE'" />
 				</xsl:call-template>
 			</text>
-			<text x="18%" y="41.5%" class="center upper" style="font-size: 200%;font-weight:700;font-family:var(--theme-heading-font); letter-spacing: 1px;dominant-baseline: auto;">
+			<text x="18%" y="43.5%" class="center upper" font-size="210%" font-weight="700" font-family="var(--theme-heading-font)" style="letter-spacing: 1px;dominant-baseline: auto;">
 
 				<tspan fill="var(--theme-body-color)">
 					<xsl:call-template name="editable">
@@ -67,7 +61,7 @@
 						<xsl:with-param name="default" select="'HOW YOUR '" />
 					</xsl:call-template>
 				</tspan>
-				<tspan fill="var(--theme-sub-heading-color)" style="font-size:130%;font-weight:700;">
+				<tspan fill="var(--theme-sub-heading-color)" font-size="130%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'HOME'" />
 						<xsl:with-param name="default" select="'HOME'" />
@@ -75,7 +69,7 @@
 				</tspan>
 			</text>
 
-			<text x="18%" y="44%" class="center upper" fill="var(--theme-body-color)" style="font-size: 200%;font-weight:600;font-family:var(--theme-heading-font); letter-spacing: 1px;font-weight:700;">
+			<text x="18%" y="46%" class="center upper" fill="var(--theme-body-color)" font-size="255%" font-weight="600" font-family="var(--theme-heading-font)">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'compares'" />
@@ -85,28 +79,30 @@
 			</text>
 
 			<xsl:if test="//single/statusTypeID!=14">
-				<text x="18%" y="54%" class="center upper" fill="var(--theme-body-color)" style="font-size:100%;font-weight:600;font-family:var(--theme-sub-heading-font);">
+				<text x="18%" y="58%" class="center upper" fill="var(--theme-body-color)" font-size="115%" font-weight="500" font-family="var(--theme-sub-heading-font)" >
 					<xsl:call-template name="listing-address-line-one" />
+					<xsl:text>, </xsl:text>
+					<xsl:value-of select="concat(//single/address/state, ' ', //single/address/zip)" />
 				</text>
 
-				<text x="18%" y="58%" class="center upper" fill="var(--theme-body-color)" style="font-size:100%;font-weight:600;font-family:var(--theme-sub-heading-font);">
+				<!-- <text x="18%" y="58%" class="center upper" fill="var(-/-theme-body-color)" style="font-size:100%;font-weight:600;font-family:var(-/-theme-sub-heading-font);">
 					<xsl:call-template name="listing-address-line-two" />
-				</text>
+				</text> -->
 			</xsl:if>
 
-			<circle r="6%" cx="18%" cy="74%"></circle>
-			<rect x="13%" y="65%" width="10%" height="18%" stroke="var(--theme-body-color)" stroke-width="1" rx="70" ry="70" fill="#ffffff"></rect>
+			<circle r="6.5%" cx="18%" cy="76%"></circle>
+			<rect x="12.7%" y="66.4%" width="10.5%" height="19%" stroke="var(--theme-heading-color)" stroke-width="1" rx="70" ry="70"  fill="#ffffff"></rect>
 
 			<clipPath id="clipCircle">
-				<circle r="6%" cx="18%" cy="74%"></circle>
+				<circle r="6.35%" cx="17.95%" cy="76%"></circle>
 			</clipPath>
-			<image x="13%" y="65%" width="10%" height="21%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
+			<image x="12.8%" y="66%" width="10%" height="20%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
 				<xsl:attribute name="href">
 					<xsl:value-of select="//agent[1]/photo" />
 				</xsl:attribute>
 			</image>
 
-			<text x="18%" y="85%" class="center upper" fill="var(--theme-body-color)" style="font-size:150%;font-weight:600;font-family:var(--theme-body-font);letter-spacing:2px;" data-max-width="35%">
+			<text x="18%" y="85.5%" class="center upper" fill="var(--theme-body-color)" font-size="195%" font-weight="600" font-family="var(--theme-body-font)" data-max-width="35%">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentname'" />
@@ -114,7 +110,7 @@
 					</xsl:call-template>
 				</tspan>
 			</text>
-			<text x="18%" y="90%" class="center upper" fill="var(--theme-body-color)" style="font-size:130%;font-weight:600;font-family:var(--theme-body-font);letter-spacing:2px;">
+			<text x="18%" y="91.5%" class="center upper" fill="var(--theme-body-color)" font-size="175%" font-weight="500" font-family="var(--theme-body-font)" style="letter-spacing:1px;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'agentmobile'" />
 					<xsl:with-param name="default" select="//agent[1]/mobile" />

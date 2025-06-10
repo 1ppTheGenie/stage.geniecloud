@@ -9,6 +9,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
 <xsl:import href="common.xsl" />
+
 <!-- This asset is needed only in dark -->
 	<xsl:template name="svg-body">
 		<style type="text/css">
@@ -20,39 +21,48 @@
 				}
 			'"/>
 		</style>
+		 <script type="text/ecmascript">
+				<xsl:value-of select="'document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
+					if (document.body &amp;&amp; document.body.classList &amp;&amp; document.body.classList.contains(&quot;door-hanger&quot;)) {
+						document.body.classList.add(&quot;dark&quot;);
+					}
+				});'" disable-output-escaping="yes"/>
+    	</script>
+ 
 		<g class="dark">
 		<rect x="0" y="0" width="100%" height="100%" fill="var(--theme-body-background)"></rect>
 		<text x="1213" y="30" class="upper center" fill="var(--theme-heading-color)" font-family="var(--theme-heading-font)" font-size="15" font-weight="400">
 		    1 
 		</text>
-		<image x="20%" y="4.6%" width="41%" class="center" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
-			<xsl:choose>
-				<xsl:when test="//output/@themeHue='dark'">
+
+		<xsl:choose>
+			<xsl:when test="$personalLogo !='' and $companyLogo !=''">
+				<image x="20%" y="4.6%" width="41%" class="center" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
 						<xsl:value-of select="//agent[1]/personalLogoDark" />
 					</xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/personalLogoDark" />
-					</xsl:attribute>
-				</xsl:otherwise>
-			</xsl:choose>
-		</image>
-		<image x="64.2%" y="4.6%" width="13.2%" class="center" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
-			<xsl:choose>
-				<xsl:when test="//output/@themeHue='dark'">
+				</image>
+				<image x="64.2%" y="4.6%" width="13.2%" class="center" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
 						<xsl:value-of select="//agent[1]/companyLogoDark" />
 					</xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
+				</image>
+			</xsl:when>
+			<xsl:otherwise>
+				<image x="50%" y="4.6%" width="50%" height="5%" style="transform:translate(-25%, 0%)" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/companyLogoDark" />
+						<xsl:choose>
+							<xsl:when test="$personalLogo !=''">
+								<xsl:value-of select="//agent[1]/personalLogoDark" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="//agent[1]/companyLogoDark" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
-				</xsl:otherwise>
-			</xsl:choose>
-		</image>
+				</image>
+			</xsl:otherwise>
+		</xsl:choose>
 
 		<svg height="100%" width="100%">
 			<circle cx="50%" cy="21.3%" r="12%" fill="#282843" />
@@ -90,7 +100,6 @@
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'Open house'" />
 				<xsl:with-param name="default" select="concat( 'This ' , //openHouse/session[1]/@dow)" />
-				<!-- <xsl:with-param name="default" select="concat( //openHouse/session[1]/@dow, ',//openHouse/session[1]/@starts, ' to ',//openHouse/session[1]/@ends)" /> -->
 			</xsl:call-template>
 		</text>
 		<text x="50%" y="68%" class="center" fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)" font-size="455%" font-weight="800" style=" letter-spacing:1px; text-transform:lowercase"> 
@@ -263,11 +272,6 @@
 					<xsl:with-param name="agent" select="//agent[1]" />
 				</xsl:call-template>
 
-				<!-- <image x="70.5%" y="82.7%" width="18%" height="6.5%" preserveAspectRatio="xMidYMin slice">
-					<xsl:attribute name="href">
-						<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/qr-download-new.png' )" />
-					</xsl:attribute>
-				</image> -->
 				<g style="transform:translate(70.5%, 82.7%)">
 					<xsl:call-template name="qr-code">
 						<xsl:with-param name="width" select="'18%'" />
@@ -282,15 +286,12 @@
 		</xsl:choose>
 
 		<foreignObject x="12%" y="92.9%" width="80%" height="10%">
-			<div xmlns="http://www.w3.org/1999/xhtml" style="
-				font-family: var(--theme-sub-heading-font);
-				color: #8494a0;
-				font-size: 30px;
-				font-weight: 400;
-				line-height: 1.4;
-				">
-				EXP REALTY OF CALIFORNIA, INC LICENSE #01878277. INFORMATION IS DEEMED RELIABLE, BUT NOT GUARANTEED.
-				BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY THE ACCURACY OF THIS INFORMATION.
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p style=" font-family: var(--theme-sub-heading-font); color: #8494a0; font-size: 30px; font-weight: 400; line-height: 1.4;text-transform:uppercase ">
+					<xsl:value-of select="concat(//single[1]/listingAgents/listingAgent[1]/@broker, ' LICENSE ', //agent[1]/marketingLicense, '. INFORMATION IS DEEMED')" />
+					RELIABLE, BUT NOT GUARANTEED. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY
+					THE ACCURACY OF THIS INFORMATION
+				</p>
 			</div>
 		</foreignObject>
 		</g>

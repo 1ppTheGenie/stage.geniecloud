@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
-	Asset Name: Ed Kaminsky Brochure 02
+	Asset Name: Property Brochure 02
 	Tags:		Direct Mail
 	Sizes:		Ipad Landscape
 	Supports:	Listing, Multi-Listing
-	Pages:		flyers/ed-kaminsky-brochure-01,flyers/ed-kaminsky-brochure-02
+	Pages:		flyers/property-brochure-01,flyers/property-brochure-02
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:genie="https://theGenie.ai/hub" version="3.0"
@@ -291,15 +291,12 @@
 			<tspan dx="5"> • </tspan>
 			<tspan dx="5"><xsl:value-of select="//agent[1]/marketingLicense" /></tspan>
 		</text>
-		<foreignObject width="23.5%" height="7%" x="73.5%" y="90.6%" font-family="var(--theme-sub-heading-font)"
-			font-size="19" style="color:var(--theme-body-background); opacity:0.36; text-transform:uppercase;">
-			<div>
-				<xsl:value-of
-					select="concat(//single[1]/listingAgents/listingAgent[1]/@broker, ' LICENSE ', //agent[1]/marketingLicense, '. INFORMATION IS DEEMED')" />
+		<foreignObject width="23.5%" height="7%" x="73.5%" y="90.6%">		
+			<div style="font-family:var(--theme-sub-heading-font); font-size: 19px; color:var(--theme-body-background); opacity:0.36; text-transform:uppercase;">
+				<xsl:value-of select="concat(//single[1]/listingAgents/listingAgent[1]/@broker, ' LICENSE ', //agent[1]/marketingLicense, '. INFORMATION IS DEEMED')" />
+				RELIABLE, BUT NOT GUARANTEED. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY
+				THE ACCURACY OF THIS INFORMATION
 			</div>
-			<div><xsl:value-of
-					select="'RELIABLE, BUT NOT GUARANTEED. BROKER HAS NOT AND WILL NOT INVESTIGATE OR VERIFY'" /></div>
-			<div><xsl:value-of select="'THE ACCURACY OF THIS INFORMATION'" /></div>
 		</foreignObject>
 	</xsl:template>
 </xsl:stylesheet>
