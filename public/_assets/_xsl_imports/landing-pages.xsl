@@ -888,15 +888,21 @@
 		<!-- Agent name as link or plain text -->
 		<xsl:choose>
 			<xsl:when test="string-length(normalize-space(@email)) > 0">
+			<span>
+			
 			<a>
 				<xsl:attribute name="href">
 				<xsl:value-of select="concat('mailto:', @email)" />
 				</xsl:attribute>
 				<xsl:value-of select="@name" />
 			</a>
+			</span>
 			</xsl:when>
 			<xsl:otherwise>
+			<span>
+			
 			<xsl:value-of select="@name" />
+			</span>
 			</xsl:otherwise>
 		</xsl:choose>
 
