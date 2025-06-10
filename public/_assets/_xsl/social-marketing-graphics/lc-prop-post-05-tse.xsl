@@ -31,7 +31,7 @@
 
 					</xsl:when>
 					<xsl:otherwise>
-						<tspan class="bold">Just Listed </tspan>
+						<tspan class="bold">For Sale </tspan>
 						<tspan>
 <xsl:value-of select="format-number( //single/price , '$###,###')" />
 

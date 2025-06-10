@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-	Asset Name:	Just Listed No.1
+	Asset Name:	For Sale No.1
 	Tags:		Social Marketing Ad
 	Sizes:		Facebook, Postcard
 	Supports:	Listing

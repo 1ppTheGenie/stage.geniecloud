@@ -50,7 +50,7 @@
 								<xsl:value-of select="'Just Sold!'" />
 							</xsl:when>
 							<xsl:when test="number(//single/statusTypeID)=1">
-								<xsl:value-of select="'Just Listed!'" />
+								<xsl:value-of select="'For Sale!'" />
 							</xsl:when>
 							<xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
 								<xsl:value-of select="'In Escrow!'" />

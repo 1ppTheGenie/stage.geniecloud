@@ -93,7 +93,7 @@ Supports:	Area, Print, Listing, QRCode
 						<xsl:value-of select="'Coming Soon...'" />
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="'Just Listed...'" />
+						<xsl:value-of select="'For Sale...'" />
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>

@@ -39,7 +39,7 @@
 					<xsl:value-of select="'Coming Soon'" />
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="'Just Listed'" />
+					<xsl:value-of select="'For Sale'" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -135,7 +135,7 @@
 				<foreignObject x="5.5%" y="27%" width="80%" height="40%" style="font-size:100%;line-height:1.5; color:#(--theme-body-color);font-family: var(--theme-sub-heading-font);">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'discript'" />
-						<xsl:with-param name="default" select="concat( ' Just Listed at ', //single/address/street , '. Scan the QR code below to see how your' , ' ', lower-case($singularPropertyType),' ', 'compares with this property.')" />
+						<xsl:with-param name="default" select="concat( ' For Sale at ', //single/address/street , '. Scan the QR code below to see how your' , ' ', lower-case($singularPropertyType),' ', 'compares with this property.')" />
 					</xsl:call-template>
 				</foreignObject>
 			</xsl:if>

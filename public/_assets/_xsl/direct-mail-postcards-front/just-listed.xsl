@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-	Asset Name:	Just Listed
+	Asset Name:	For Sale
 	Tags:		Social Marketing Ad
 	Sizes:		Postcard, Print
 	Supports:	Listing
