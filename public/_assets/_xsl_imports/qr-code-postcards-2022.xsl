@@ -91,12 +91,12 @@
 			</xsl:if>
 
 			<circle r="6.5%" cx="18%" cy="76%"></circle>
-			<rect x="13%" y="67%" width="10%" height="18.5%" stroke="var(--theme-heading-color)" stroke-width="5" rx="70" ry="70" fill="var(--theme-heading-color)"></rect>
+			<rect x="12.7%" y="66.4%" width="10.5%" height="19%" stroke="var(--theme-heading-color)" stroke-width="1" rx="70" ry="70"  fill="#ffffff"></rect>
 
 			<clipPath id="clipCircle">
-				<circle r="6.5%" cx="18%" cy="76%"></circle>
+				<circle r="6.35%" cx="17.95%" cy="76%"></circle>
 			</clipPath>
-			<image x="13%" y="67%" width="10%" height="21.5%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
+			<image x="12.8%" y="66%" width="10%" height="20%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
 				<xsl:attribute name="href">
 					<xsl:value-of select="//agent[1]/photo" />
 				</xsl:attribute>

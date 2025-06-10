@@ -15,7 +15,21 @@
 	</xsl:template>
 
 	<xsl:template name="svg-body">
-		<rect x="63.5%" y="0%" width="36.5%" height="100%" fill="#fff" />
+		<style>
+			<xsl:value-of select="'
+				g#footer text{
+					fill: #94949D;
+				}
+				g#footer text a tspan{
+					fill: #337ab7;
+				}
+				g#footer text:last-child {
+					transform: translate(93.4%);
+				}
+			'"/>
+		</style>
+
+		<rect x="63.5%" y="0%" width="36.5%" height="100%" fill="var(--theme-heading-color)" />
 
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
@@ -25,7 +39,7 @@
 		<xsl:variable name="prev_min_sale_price" select="//area/statistics/previous/@medianSalePrice" />
 		<xsl:variable name="price_change" select="number(//areas/area/statistics/previous/@medianSalePrice) - number(//areas/area/statistics/@medianSalePrice)" />
 
-		<text x="4%" y="5%" width="55%" height="15%" fill="var(--theme-sub-heading-color)" style="font-family:var(--theme-body-font);font-size: 220%; font-weight: 600; letter-spacing: 3px;text-transform: uppercase;" data-max-width="48%">
+		<text class="center" x="32%" y="5%" width="55%" height="15%" fill="var(--theme-sub-heading-color)" font-family="var(--theme-body-font)" font-size="130%" font-weight="600" style="letter-spacing: 3px;text-transform: uppercase;display:none" data-max-width="48%">
 			<tspan>
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'areaname'" />
@@ -46,12 +60,33 @@
 			</tspan>
 		</text>
 
-		<image x="52%" y="81%" width="10%" height="12%" preserveAspectRatio="xMidYMid meet">
+		<foreignObject x="5%" y="5%" width="55%" height="15%" class="center">
+			<div style="font-family: var(--theme-body-font); font-size: 138%; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--theme-sub-heading-color); max-width: 100%;">
+				<xsl:call-template name="editable">
+					<xsl:with-param name="id" select="'areaname'" />
+					<xsl:with-param name="default" select="concat( //area/name , ' ' )" />
+				</xsl:call-template>
+				<xsl:call-template name="property-type-caption">
+					<xsl:with-param name="short" select="'true'" />
+					<xsl:with-param name="singular" select="'true'" />
+				</xsl:call-template>
+				VALUES ARE MOVING...
+			</div>
+		</foreignObject>
+
+		<image x="52%" y="80%" width="10%" height="12%" preserveAspectRatio="xMidYMid meet">
 			<xsl:attribute name="href">
-				<xsl:value-of select="$companyLogo" />
-			</xsl:attribute>
+				<xsl:choose>
+					<xsl:when test="//output/@themeHue = 'light'">
+						<xsl:value-of select="$companyLogo" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="$companyLogoInverse" />
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>	
 		</image>
-		<text x="57%" y="94%" data-max-width="8%" class="center" fill="var(--theme-heading-color)" style="font-size: 90%;letter-spacing: 0.5px;font-weight: 500;font-family:var(--theme-body-font);">
+		<text x="57%" y="93.5%" data-max-width="8%" class="center" fill="var(--theme-heading-color)" font-family="var(--theme-body-font)" font-size="60%" font-weight="500" style="letter-spacing: 0.5px;">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'licenseno'" />
 				<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
@@ -78,13 +113,13 @@
 			<xsl:value-of select="//agent[1]/marketingName" />
 		</text>
 		<text x="16%" y="57%">
-			<tspan x="16%" dy="5.3%" fill="var(--theme-heading-color)" style="font-size:110%;font-family:var(--theme-body-font);">
+			<tspan x="16%" dy="5.7%" fill="var(--theme-heading-color)" style="font-size:110%;font-family:var(--theme-body-font);">
 				<xsl:value-of select="//agent[1]/marketingTitle" />
 			</tspan>
 			<tspan x="16%" dy="3.8%" fill="var(--theme-heading-color)" style="font-size:110%;font-family:var(--theme-body-font);">
 				<xsl:value-of select="//agent[1]/marketingEmail" />
 			</tspan>
-			<tspan x="16%" dy="3.7%" class="bold" fill="var(--theme-sub-heading-color)" style="font-size:255%;font-family:var(--theme-body-font);">
+			<tspan x="16%" dy="3.7%" class="bold" fill="var(--theme-sub-heading-color)" font-family="var(--theme-body-font)" font-size="200%">
 				<xsl:value-of select="//agent[1]/mobile" />
 			</tspan>
 		</text>
@@ -224,7 +259,7 @@
 			</xsl:choose>
 		</svg>
 
-		<rect x="1%" y="40%" width="62%" height="14%" fill="var(--theme-heading-color)" />
+		<rect x="1%" y="40%" width="61.6%" height="14%" fill="var(--theme-heading-color)" />
 
 		<text x="3%" y="41%" class="upper bold" fill="var(--theme-body-background)" style="font-size:170%;letter-spacing:1px;font-family:var(--theme-body-font);">
 			<tspan>
@@ -298,30 +333,37 @@
 			</p>
 		</foreignObject>
 
-		<foreignObject x="4%" y="90%" width="45%" height="9%">
+		<foreignObject x="4%" y="86%" width="45%" height="9%">
 			<p class="" style="font-size:80%;margin:0;color:var(--theme-heading-color);font-family:var(--theme-body-font);">
 				<xsl:call-template name="solicitation-disclaimer" />
 			</p>
 		</foreignObject>
 
-		<image x="57.5%" y="63%" width="6.5%" height="10%" preserveAspectRatio="xMidYMid slice">
+		<image x="58.2%" y="62.5%" width="50" preserveAspectRatio="xMidYMid slice">
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/scan-qr.svg' )" />
 			</xsl:attribute>
 		</image>
 
+		<!-- <g x="57.5%" y="63%">
+			<xsl:call-template name="qr-code">
+				<xsl:with-param name="width" select="'6.5%'" />
+				<xsl:with-param name="height" select="'10%'" />
+			</xsl:call-template>
+		</g>	 -->
+
 		<text x="59.6%" y="67.4%" class="align-right" fill="var(--theme-heading-color)" style="font-size:40%;">
 			<tspan>Scan the</tspan>
 			<tspan x="59.6%" dy="1%">QR Code</tspan>
-			<tspan x="59.6%" dy="1%">with your</tspan>
-			<tspan x="59.6%" dy="1%">camera</tspan>
+			<tspan x="59.7%" dy="1%">with your</tspan>
+			<tspan x="59.2%" dy="1%">camera</tspan>
 		</text>
 
-		<text class="small" fill="#181818" style="font-weight:500;font-size:100%;font-family:var(--theme-body-font);">
+		<text fill="var(--theme-body-background)" font-family="var(--theme-body-font)" font-size="130%" font-weight="500" data-max-width="50%">
 			<tspan x="66%" y="5%">
 				<xsl:value-of select="//agent[1]/address/street" />
 			</tspan>
-			<tspan x="66%" y="8%">
+			<tspan x="66%" y="9.5%">
 				<xsl:value-of select="//agent[1]/address/city" />
 				<xsl:text>, </xsl:text>
 				<xsl:value-of select="//agent[1]/address/state" />
