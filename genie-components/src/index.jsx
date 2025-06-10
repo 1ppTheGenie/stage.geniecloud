@@ -30,7 +30,8 @@ const genericJS = () => {
 	}
 };
 
-console.log("Hello from Genie Hub");
+console.log("Hello from Genie Hub 1");
+
 
 if (
 	document.readyState === "complete" ||

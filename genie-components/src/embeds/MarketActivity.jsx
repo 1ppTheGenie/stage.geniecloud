@@ -178,6 +178,7 @@ export default () => {
 };
 
 const StatusKey = ({ setStatus }) => {
+	 console.log("areaDataStore.overall:", areaDataStore?.overall?.new,areaDataStore?.overall?.active,areaDataStore?.overall?.pending)
 	const labels = [
 		{
 			total: areaDataStore?.overall?.new,
@@ -211,7 +212,10 @@ const StatusKey = ({ setStatus }) => {
 					{areaDataStore.areaName}
 				</text>
 				<g style="transform: translate(20px, 70px)">
-					{labels.map((l, i) => (
+					{labels.map((l, i) =>{
+						  console.log(`Label ${i}:`, l.total); // Log each label's total
+
+				 return (
 						<g
 							key={i}
 							style={`transform: translateY(${i * 50}px)`}
@@ -220,23 +224,24 @@ const StatusKey = ({ setStatus }) => {
 							<text
 								x="20"
 								y="5"
-								fill="var(--theme-body-background)"
+								fill="var(--white)"
 								text-Anchor="middle"
 								dominant-Baseline="middle"
 								style="font-size: 100%; text-Shadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
 								{l.total}
 							</text>
+							
 
 							<text
 								x="50"
 								y="7"
-								fill="var(--theme-body-background)"
+								fill="var(--white)"
 								dominant-Baseline="middle"
 								style="font-size: 100%; font-weight: 700; text-Shadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
 								{l.label}
 							</text>
 						</g>
-					))}
+					)	})}
 				</g>
 			</svg>
 		</div>
