@@ -11,18 +11,18 @@
 	--theme-body-background: #faf9f7;
 	--theme-heading-color: #333333; /* Heading */
 	--theme-sub-heading-color: #e8d8c3; /* Subtitle */
-	--theme-body-color: #faf9f7; /* Body */
+	--theme-body-color: #556B61; /* Body */
 	--theme-emphasis-color: #e8d8c3; /* Outline */
 	--theme-body-font: "Raleway", sans-serif;
-	--theme-heading-font: "Playfair Display", sans-serif;
-	--theme-sub-heading-font: "Montserrat", sans-serif;
+	--theme-heading-font: "Montserrat", sans-serif;
+	--theme-sub-heading-font: "Raleway", sans-serif;
 }
 
 .forward-one.dark, .forward-one .dark {
 	--theme-body-background: #333333;
 	--theme-heading-color: #faf9f7; /* Heading */
 	--theme-sub-heading-color: #e8d8c3; /* Subtitle */
-	--theme-body-color: #333333; /* Body */
+	--theme-body-color: #FAF9F7; /* Body */
 	--theme-emphasis-color: #e8d8c3; /* Outline */
 }
 
