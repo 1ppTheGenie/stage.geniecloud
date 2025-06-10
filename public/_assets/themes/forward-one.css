@@ -9,7 +9,7 @@
 
 .forward-one, .forward-one.light, .forward-one .light {
 	--theme-body-background: #faf9f7;
-	--theme-heading-color: #556b61; /* Heading */
+	--theme-heading-color: #333333; /* Heading */
 	--theme-sub-heading-color: #e8d8c3; /* Subtitle */
 	--theme-body-color: #faf9f7; /* Body */
 	--theme-emphasis-color: #e8d8c3; /* Outline */
@@ -19,10 +19,10 @@
 }
 
 .forward-one.dark, .forward-one .dark {
-	--theme-body-background: #556b61;
+	--theme-body-background: #333333;
 	--theme-heading-color: #faf9f7; /* Heading */
 	--theme-sub-heading-color: #e8d8c3; /* Subtitle */
-	--theme-body-color: #556b61; /* Body */
+	--theme-body-color: #333333; /* Body */
 	--theme-emphasis-color: #e8d8c3; /* Outline */
 }
 
