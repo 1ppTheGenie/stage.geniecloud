@@ -52,9 +52,9 @@
                     <tspan x="667">Date:</tspan>
                     <xsl:if test="//openHouse/session[1]">
                         <tspan x="710">
-                            <xsl:value-of select="//openHouse/session[1]/@date"/>/
+                            <!-- <xsl:value-of select="//openHouse/session[1]/@date"/>/
                             <xsl:value-of select="//openHouse/session[1]/@month"/>/
-                            <xsl:value-of select="//openHouse/session[1]/@year"/>
+                            <xsl:value-of select="//openHouse/session[1]/@year"/> -->
                         </tspan>
                     </xsl:if>
                 </text>
