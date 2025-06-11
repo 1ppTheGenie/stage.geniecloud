@@ -9,7 +9,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
     <xsl:import href="common.xsl" />
     <xsl:import href="lc-social-media.xsl" />
-
+    <xsl:import href="lc-prop-posts.xsl" />
     <xsl:template name="svg-body">
     <style>
 			<xsl:value-of select="'
@@ -127,7 +127,7 @@
                 </image>
             </xsl:otherwise>
         </xsl:choose> -->
-        <image x="3.8%" y="88%" width="21.5%" class="" preserveAspectRatio="xMinYMin meet" preserveAspectRatio="xMidYMid meet">
+        <!-- <image x="3.8%" y="88%" width="21.5%" class="" preserveAspectRatio="xMinYMin meet" preserveAspectRatio="xMidYMid meet">
 			<xsl:choose>
 				<xsl:when test="//output/@themeHue='dark'">
 					<xsl:attribute name="href">
@@ -154,7 +154,63 @@
 					</xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
-		</image>    
+		</image> -->
+        <xsl:choose>
+			<xsl:when test="$companyLogo='' or $personalLogo=''">
+				<image x="3.8%" y="88%" width="21.5%" preserveAspectRatio="xMinYMid meet">
+					<xsl:attribute name="href">
+						<xsl:choose>
+							<xsl:when test="$personalLogo=''">
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue = 'light'">
+										<xsl:value-of select="$companyLogo" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="$companyLogoInverse" />
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue = 'light'">
+										<xsl:value-of select="$personalLogo" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="$personalLogoInverse" />
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</image>
+			</xsl:when>
+			<xsl:otherwise>
+				<image x="3.8%" y="88.3%" width="21.5%" preserveAspectRatio="xMinYMid meet">
+					<xsl:attribute name="href">
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue='dark'">
+								<xsl:value-of select="$personalLogoInverse" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$personalLogo" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</image>
+				<image x="32.5%" y="88.6%" width="7%" class="" preserveAspectRatio="xMidYMin meet">
+					<xsl:attribute name="href">
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue='dark'">
+								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$companyLogo" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</image>
+			</xsl:otherwise>
+		</xsl:choose>    
         <g id="agent-contact" style="transform: translate( 0%, 0.6%);">
             <xsl:call-template name="copyright" />
         </g>
