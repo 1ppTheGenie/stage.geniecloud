@@ -14,7 +14,7 @@
 	<xsl:variable name="listingStatusCaption">
 		<xsl:choose>
 			<xsl:when test="number(//single/statusTypeID)=1">
-				<xsl:value-of select="'Just Listed'" />
+				<xsl:value-of select="'For Sale'" />
 			</xsl:when>
 			<xsl:when test="number(//single/statusTypeID)=2">
 				<xsl:value-of select="'Just Sold'" />

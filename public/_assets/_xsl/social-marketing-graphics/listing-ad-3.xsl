@@ -72,7 +72,7 @@
 						<xsl:value-of select="concat( 'COMING SOON', ' ')" />
 					</xsl:when>
 					<xsl:when test="number(//single/statusTypeID)=1">
-						<xsl:value-of select="concat( 'Just Listed at ', genie:currency-format( number(//single/price), 0 ) )" />
+						<xsl:value-of select="concat( 'For Sale at ', genie:currency-format( number(//single/price), 0 ) )" />
 					</xsl:when>
 				</xsl:choose>
 			</tspan>

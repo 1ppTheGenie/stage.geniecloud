@@ -42,7 +42,7 @@
 						<xsl:text>Coming Soon </xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:text>Just Listed </xsl:text>
+						<xsl:text>For Sale </xsl:text>
 					</xsl:otherwise>
 				</xsl:choose>
 			</tspan>

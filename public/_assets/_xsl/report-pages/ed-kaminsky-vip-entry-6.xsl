@@ -79,7 +79,7 @@
 		</text>
 
 		<text x="50%" y="75.2%" class="futura-text center" fill="#fff" font-weight="400" font-size="240%">
-        	Just Listed by 
+        	For Sale by 
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'marketingName'" />
 				<xsl:with-param name="default" select="//agent[1]/marketingName" />

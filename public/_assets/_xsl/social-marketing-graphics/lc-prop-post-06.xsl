@@ -59,7 +59,7 @@
                     <xsl:value-of select="'Just Sold!'" />
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="'Just Listed!'" />
+                    <xsl:value-of select="'For Sale!'" />
                 </xsl:otherwise>
             </xsl:choose>
         </text>
