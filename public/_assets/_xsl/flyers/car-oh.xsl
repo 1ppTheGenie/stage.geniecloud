@@ -58,6 +58,9 @@
                         </tspan>
                     </xsl:if>
                 </text> -->
+
+
+                
                 <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
                 <tspan x="667">Date:</tspan>
                 <xsl:if test="//openHouse/session[1]">
