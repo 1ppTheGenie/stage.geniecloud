@@ -59,51 +59,55 @@
                     </xsl:if>
                 </text> -->
 
-
-                
                 <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
-                <tspan x="667">Date:</tspan>
-                <xsl:if test="//openHouse/session[1]">
-                    <xsl:variable name="day" select="number(//openHouse/session[1]/@date)"/>
-                    <xsl:variable name="monthName" select="//openHouse/session[1]/@month"/>
-                    <xsl:variable name="year" select="//openHouse/session[1]/@year"/>
+                    <tspan x="667">Date:</tspan>
+                    <xsl:if test="//openHouse/session[1]">
+                        <xsl:variable name="day" select="//openHouse/session[1]/@date"/>
+                        <xsl:variable name="monthName" select="//openHouse/session[1]/@month"/>
+                        <xsl:variable name="year" select="//openHouse/session[1]/@year"/>
+                        
+                        <!-- Convert day to ordinal (1st, 2nd, 3rd) -->
+                        <xsl:variable name="daySuffix">
+                            <xsl:choose>
+                                <xsl:when test="$day = 1 or $day = 21 or $day = 31">st</xsl:when>
+                                <xsl:when test="$day = 2 or $day = 22">nd</xsl:when>
+                                <xsl:when test="$day = 3 or $day = 23">rd</xsl:when>
+                                <xsl:otherwise>th</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        
+                        <!-- Case-insensitive month conversion -->
+                        <xsl:variable name="monthLower" select="translate($monthName, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
+                        <xsl:variable name="monthNumber">
+                            <xsl:choose>
+                                <xsl:when test="contains($monthLower, 'jan')">01</xsl:when>
+                                <xsl:when test="contains($monthLower, 'feb')">02</xsl:when>
+                                <xsl:when test="contains($monthLower, 'mar')">03</xsl:when>
+                                <xsl:when test="contains($monthLower, 'apr')">04</xsl:when>
+                                <xsl:when test="contains($monthLower, 'may')">05</xsl:when>
+                                <xsl:when test="contains($monthLower, 'jun')">06</xsl:when>
+                                <xsl:when test="contains($monthLower, 'jul')">07</xsl:when>
+                                <xsl:when test="contains($monthLower, 'aug')">08</xsl:when>
+                                <xsl:when test="contains($monthLower, 'sep')">09</xsl:when>
+                                <xsl:when test="contains($monthLower, 'oct')">10</xsl:when>
+                                <xsl:when test="contains($monthLower, 'nov')">11</xsl:when>
+                                <xsl:when test="contains($monthLower, 'dec')">12</xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:message>Invalid month: <xsl:value-of select="$monthName"/></xsl:message>
+                                    <xsl:text>00</xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        
+                        <tspan x="710">
+                            <xsl:value-of select="concat($day, $daySuffix, '/', $monthNumber, '/', $year)"/>
+                        </tspan>
+                    </xsl:if>
+               </text>
 
-                    <!-- Convert day to ordinal (1st, 2nd, 3rd, 4th, etc.) -->
-                    <xsl:variable name="daySuffix">
-                        <xsl:choose>
-                            <xsl:when test="$day mod 100 in (11,12,13)">th</xsl:when> <!-- 11th, 12th, 13th -->
-                            <xsl:when test="$day mod 10 = 1">st</xsl:when> <!-- 1st, 21st, 31st -->
-                            <xsl:when test="$day mod 10 = 2">nd</xsl:when> <!-- 2nd, 22nd -->
-                            <xsl:when test="$day mod 10 = 3">rd</xsl:when> <!-- 3rd, 23rd -->
-                            <xsl:otherwise>th</xsl:otherwise> <!-- 4th, 5th, ..., 20th, 24th, etc. -->
-                        </xsl:choose>
-                    </xsl:variable>
 
-                    <!-- Convert month name to two-digit number -->
-                    <xsl:variable name="monthNumber">
-                        <xsl:choose>
-                            <xsl:when test="matches($monthName, 'jan', 'i')">01</xsl:when>
-                            <xsl:when test="matches($monthName, 'feb', 'i')">02</xsl:when>
-                            <xsl:when test="matches($monthName, 'mar', 'i')">03</xsl:when>
-                            <xsl:when test="matches($monthName, 'apr', 'i')">04</xsl:when>
-                            <xsl:when test="matches($monthName, 'may', 'i')">05</xsl:when>
-                            <xsl:when test="matches($monthName, 'jun', 'i')">06</xsl:when>
-                            <xsl:when test="matches($monthName, 'jul', 'i')">07</xsl:when>
-                            <xsl:when test="matches($monthName, 'aug', 'i')">08</xsl:when>
-                            <xsl:when test="matches($monthName, 'sep', 'i')">09</xsl:when>
-                            <xsl:when test="matches($monthName, 'oct', 'i')">10</xsl:when>
-                            <xsl:when test="matches($monthName, 'nov', 'i')">11</xsl:when>
-                            <xsl:when test="matches($monthName, 'dec', 'i')">12</xsl:when>
-                            <xsl:otherwise>00</xsl:otherwise> <!-- Fallback if month not recognized -->
-                        </xsl:choose>
-                    </xsl:variable>
 
-                    <!-- Output formatted date (e.g., 15th/06/2025) -->
-                    <tspan x="710">
-                        <xsl:value-of select="concat($day, $daySuffix, '/', $monthNumber, '/', $year)"/>
-                    </tspan>
-                </xsl:if>
-                </text>
+           
 
 
 
