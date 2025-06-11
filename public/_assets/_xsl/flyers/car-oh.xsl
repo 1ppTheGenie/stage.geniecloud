@@ -60,7 +60,7 @@
                 </text>
 
 
-<text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
+<!-- <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
   <tspan x="667">Date:</tspan>
   <xsl:if test="//openHouse/session[1]">
     <xsl:variable name="day" select="format-number(//openHouse/session[1]/@date, '00')" />
@@ -88,7 +88,7 @@
       <xsl:value-of select="concat($day, '/', $monthNumber, '/', $year)" />
     </tspan>
   </xsl:if>
-</text>
+</text> -->
 
 
 
