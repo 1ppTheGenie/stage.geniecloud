@@ -173,7 +173,7 @@
 		</xsl:choose> -->
 		<xsl:choose>
 			<xsl:when test="$companyLogo='' or $personalLogo=''">
-				<image x="55.5%" y="87.7%" width="26.5%" id="logo" preserveAspectRatio="xMidYMin meet">
+				<image x="70%" y="87.7%" width="26.5%" id="logo" preserveAspectRatio="xMidYMin meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="$personalLogo=''">
