@@ -59,36 +59,35 @@
                     </xsl:if>
                 </text> -->
 
-           <xsl:if test="count(//openHouse/session) &gt; 0">
-            <xsl:variable name="monthName" select="//openHouse/session[1]/@month" />
-            <xsl:variable name="day" select="format-number(//openHouse/session[1]/@date, '00')" />
-            <xsl:variable name="year" select="//openHouse/session[1]/@year" />
-            <xsl:variable name="monthNumber">
-            <xsl:choose>
-            <xsl:when test="$monthName = 'January'">01</xsl:when>
-            <xsl:when test="$monthName = 'February'">02</xsl:when>
-            <xsl:when test="$monthName = 'March'">03</xsl:when>
-            <xsl:when test="$monthName = 'April'">04</xsl:when>
-            <xsl:when test="$monthName = 'May'">05</xsl:when>
-            <xsl:when test="$monthName = 'June'">06</xsl:when>
-            <xsl:when test="$monthName = 'July'">07</xsl:when>
-            <xsl:when test="$monthName = 'August'">08</xsl:when>
-            <xsl:when test="$monthName = 'September'">09</xsl:when>
-            <xsl:when test="$monthName = 'October'">10</xsl:when>
-            <xsl:when test="$monthName = 'November'">11</xsl:when>
-            <xsl:when test="$monthName = 'December'">12</xsl:when>
-            </xsl:choose>
-                </xsl:variable>
-        <xsl:variable name="formattedDate" select="concat($day, '/', $monthNumber, '/', $year)" />
+   <xsl:if test="count(//openHouse/session) &gt; 0">
+  <xsl:variable name="monthName" select="//openHouse/session[1]/@month" />
+  <xsl:variable name="day" select="format-number(//openHouse/session[1]/@date, '00')" />
+  <xsl:variable name="year" select="//openHouse/session[1]/@year" />
+  <xsl:variable name="monthNumber">
+    <xsl:choose>
+      <xsl:when test="$monthName = 'January'">01</xsl:when>
+      <xsl:when test="$monthName = 'February'">02</xsl:when>
+      <xsl:when test="$monthName = 'March'">03</xsl:when>
+      <xsl:when test="$monthName = 'April'">04</xsl:when>
+      <xsl:when test="$monthName = 'May'">05</xsl:when>
+      <xsl:when test="$monthName = 'June'">06</xsl:when>
+      <xsl:when test="$monthName = 'July'">07</xsl:when>
+      <xsl:when test="$monthName = 'August'">08</xsl:when>
+      <xsl:when test="$monthName = 'September'">09</xsl:when>
+      <xsl:when test="$monthName = 'October'">10</xsl:when>
+      <xsl:when test="$monthName = 'November'">11</xsl:when>
+      <xsl:when test="$monthName = 'December'">12</xsl:when>
+    </xsl:choose>
+  </xsl:variable>
+  <xsl:variable name="formattedDate" select="concat($day, '/', $monthNumber, '/', $year)" />
 
-        <!-- Now output inside <text> -->
-        <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
-            <tspan x="667">Date:</tspan>
-            <tspan x="710">
-            <xsl:value-of select="$formattedDate" />
-            </tspan>
-            </text>
-            </xsl:if>
+  <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
+    <tspan x="667">Date:</tspan>
+    <tspan x="710">
+      <xsl:value-of select="$formattedDate" />
+    </tspan>
+  </text>
+</xsl:if>
 
 
 
