@@ -77,20 +77,20 @@
 							</xsl:call-template>
                         </xsl:if>                   
                     </tspan>
-                </text> -->
-
-
-            
-
+                </text> -->       
                 <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
                     <tspan x="667">Date:</tspan>
                     <tspan x="710">
-                        <xsl:text>14/06/2025</xsl:text>
+                        	<xsl:if test="count(//openHouse/session) &gt; 0">
+                                        <xsl:value-of select="concat(
+                                        //openHouse/session[1]/@month, ' ',
+                                        //openHouse/session[1]/@date,
+                                        ' • ', //openHouse/session[1]/@starts, ' - ',
+                                        //openHouse/session[1]/@ends
+                                        )" />
+                            </xsl:if>
                     </tspan>
                 </text>
-
-
-
                 <line x1="703" y1="17" x2="800" y2="17" style="stroke: #000; stroke-width: 1"></line>
             </g>
 
