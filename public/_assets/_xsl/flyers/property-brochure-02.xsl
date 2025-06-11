@@ -117,7 +117,10 @@
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/360-icon.png' )" />
 			</xsl:attribute>
 		</image>
-		<a href="https://www.itzsold.com/">
+		<a>
+		 	<xsl:attribute name="href">
+    			<xsl:value-of select="//agent[1]/website" />
+  			</xsl:attribute>
 			<text x="25.8%" y="95.1%" fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)"
 				class="super-bold" font-size="220%">
 				<xsl:call-template name="editable">
