@@ -48,33 +48,16 @@
 
                 <line x1="180" y1="17" x2="660" y2="17" style="stroke: #000; stroke-width: 1"></line>
 
-              <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
-    <tspan x="667">Date:</tspan>
-    <xsl:if test="count(//openHouse/session) &gt; 0">
-        <xsl:variable name="monthName" select="//openHouse/session[1]/@month" />
-        <xsl:variable name="day" select="format-number(//openHouse/session[1]/@date, '00')" />
-        <xsl:variable name="year" select="//openHouse/session[1]/@year" />
-        <xsl:variable name="monthNumber">
-            <xsl:choose>
-                <xsl:when test="matches($monthName, '^January$', 'i')">01</xsl:when>
-                <xsl:when test="matches($monthName, '^February$', 'i')">02</xsl:when>
-                <xsl:when test="matches($monthName, '^March$', 'i')">03</xsl:when>
-                <xsl:when test="matches($monthName, '^April$', 'i')">04</xsl:when>
-                <xsl:when test="matches($monthName, '^May$', 'i')">05</xsl:when>
-                <xsl:when test="matches($monthName, '^June$', 'i')">06</xsl:when>
-                <xsl:when test="matches($monthName, '^July$', 'i')">07</xsl:when>
-                <xsl:when test="matches($monthName, '^August$', 'i')">08</xsl:when>
-                <xsl:when test="matches($monthName, '^September$', 'i')">09</xsl:when>
-                <xsl:when test="matches($monthName, '^October$', 'i')">10</xsl:when>
-                <xsl:when test="matches($monthName, '^November$', 'i')">11</xsl:when>
-                <xsl:when test="matches($monthName, '^December$', 'i')">12</xsl:when>
-            </xsl:choose>
-        </xsl:variable>
-        <tspan x="710">
-            <xsl:value-of select="concat($day, '/', $monthNumber, '/', $year)" />
-        </tspan>
-    </xsl:if>
-</text>
+                 <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
+                    <tspan x="667">Date:</tspan>
+                    <xsl:if test="//openHouse/session[1]">
+                        <tspan x="710">
+                            <xsl:value-of select="//openHouse/session[1]/@date"/>/
+                            <xsl:value-of select="//openHouse/session[1]/@month"/>/
+                            <xsl:value-of select="//openHouse/session[1]/@year"/>
+                        </tspan>
+                    </xsl:if>
+                </text>
 
 
 
