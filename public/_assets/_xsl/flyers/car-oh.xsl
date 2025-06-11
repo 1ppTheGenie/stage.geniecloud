@@ -48,7 +48,7 @@
 
                 <line x1="180" y1="17" x2="660" y2="17" style="stroke: #000; stroke-width: 1"></line>
 
-                 <!-- <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
+                 <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
                     <tspan x="667">Date:</tspan>
                     <xsl:if test="//openHouse/session[1]">
                         <tspan x="710">
@@ -57,9 +57,9 @@
                             <xsl:value-of select="//openHouse/session[1]/@year"/>
                         </tspan>
                     </xsl:if>
-                </text> -->
+                </text>
 
-   <xsl:if test="count(//openHouse/session) &gt; 0">
+   <!-- <xsl:if test="count(//openHouse/session) &gt; 0">
   <xsl:variable name="monthName" select="//openHouse/session[1]/@month" />
   <xsl:variable name="day" select="format-number(//openHouse/session[1]/@date, '00')" />
   <xsl:variable name="year" select="//openHouse/session[1]/@year" />
@@ -87,7 +87,7 @@
       <xsl:value-of select="$formattedDate" />
     </tspan>
   </text>
-</xsl:if>
+</xsl:if> -->
 
 
 
