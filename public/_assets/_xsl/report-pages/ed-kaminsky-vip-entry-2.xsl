@@ -46,7 +46,7 @@
 		<svg height="100%" width="100%">
 			<circle cx="50%" cy="21.5%" r="12%" fill="var(--theme-body-background)" style="filter: hue-rotate(6.7deg) brightness(167%) saturate(45%);" />
 		</svg>
-		<line xmlns="" x1="70%" y1="22.5%" x2="100%" y2="22.5%" stroke="var(--theme-body-background)" style="filter: hue-rotate(6.7deg) brightness(167%) saturate(45%);" stroke-width="0.3%" />
+		<line xmlns="" x1="73.2%" y1="22.5%" x2="100%" y2="22.5%" stroke="var(--theme-body-background)" style="filter: hue-rotate(6.7deg) brightness(167%) saturate(45%);" stroke-width="0.3%" />
 
 
 		<text x="50%" y="33%" class="center" font-family="var(--theme-heading-font)" fill="var(--theme-heading-color)" font-weight="700" font-size="480%">
