@@ -117,10 +117,7 @@
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/360-icon.png' )" />
 			</xsl:attribute>
 		</image>
-		<a>
-		 	<xsl:attribute name="href">
-    			<xsl:value-of select="//agent[1]/website" />
-  			</xsl:attribute>
+		
 			<text x="25.8%" y="95.1%" fill="var(--theme-sub-heading-color)" font-family="var(--theme-heading-font)"
 				class="super-bold" font-size="220%">
 				<xsl:call-template name="editable">
@@ -128,7 +125,7 @@
 					<xsl:with-param name="default" select="//agent[1]/website" />
 				</xsl:call-template>
 			</text>
-		</a>
+		
 		<rect x="72.2%" y="2.5%" width="26%" height="98%" fill="var(--theme-body-background)" />
 		<image x="72.2%" y="2.5%" width="26%" height="22.2%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
