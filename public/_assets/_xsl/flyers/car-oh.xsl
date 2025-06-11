@@ -48,16 +48,16 @@
 
                 <line x1="180" y1="17" x2="660" y2="17" style="stroke: #000; stroke-width: 1"></line>
 
-                 <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
+                 <!-- <text x="667" font-size="13" font-weight="800" font-family="'Lato', 'sans-serif'" fill="#0E122F">
                     <tspan x="667">Date:</tspan>
                     <xsl:if test="//openHouse/session[1]">
                         <tspan x="710">
-                            <!-- <xsl:value-of select="//openHouse/session[1]/@date"/>/
+                             <xsl:value-of select="//openHouse/session[1]/@date"/>/
                             <xsl:value-of select="//openHouse/session[1]/@month"/>/
-                            <xsl:value-of select="//openHouse/session[1]/@year"/> -->
+                            <xsl:value-of select="//openHouse/session[1]/@year"/>
                         </tspan>
                     </xsl:if>
-                </text>
+                </text> -->
 
                 <!-- <xsl:if test="//openHouse/session[1]">
                 <xsl:variable name="monthName" select="//openHouse/session[1]/@month" />
@@ -90,6 +90,51 @@
                     </tspan>
                 </text>
                 </xsl:if> -->
+
+
+                <?xml version="1.0" encoding="UTF-8"?>
+                    <xsl:stylesheet version="3.0"
+                        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                        xmlns="http://www.w3.org/2000/svg">
+
+                    <xsl:output method="xml" indent="yes"/>
+
+                    <xsl:template match="/">
+                        <svg width="400" height="100">
+                        <xsl:if test="//openHouse/session[1]">
+                            <xsl:variable name="monthName" select="//openHouse/session[1]/@month"/>
+                            <xsl:variable name="day" select="format-number(//openHouse/session[1]/@date, '00')"/>
+                            <xsl:variable name="year" select="//openHouse/session[1]/@year"/>
+                            <xsl:variable name="monthNumber">
+                            <xsl:choose>
+                                <xsl:when test="$monthName = 'January'">01</xsl:when>
+                                <xsl:when test="$monthName = 'February'">02</xsl:when>
+                                <xsl:when test="$monthName = 'March'">03</xsl:when>
+                                <xsl:when test="$monthName = 'April'">04</xsl:when>
+                                <xsl:when test="$monthName = 'May'">05</xsl:when>
+                                <xsl:when test="$monthName = 'June'">06</xsl:when>
+                                <xsl:when test="$monthName = 'July'">07</xsl:when>
+                                <xsl:when test="$monthName = 'August'">08</xsl:when>
+                                <xsl:when test="$monthName = 'September'">09</xsl:when>
+                                <xsl:when test="$monthName = 'October'">10</xsl:when>
+                                <xsl:when test="$monthName = 'November'">11</xsl:when>
+                                <xsl:when test="$monthName = 'December'">12</xsl:when>
+                            </xsl:choose>
+                            </xsl:variable>
+
+                            <xsl:variable name="formattedDate" select="concat($day, '/', $monthNumber, '/', $year)"/>
+
+                            <text x="10" y="40" font-size="20" font-family="sans-serif" fill="#000">
+                            <tspan>Date: </tspan>
+                            <tspan>
+                                <xsl:value-of select="$formattedDate"/>
+                            </tspan>
+                            </text>
+                        </xsl:if>
+                        </svg>
+                    </xsl:template>
+                    </xsl:stylesheet>
+
 
                 <line x1="703" y1="17" x2="800" y2="17" style="stroke: #000; stroke-width: 1"></line>
             </g>
