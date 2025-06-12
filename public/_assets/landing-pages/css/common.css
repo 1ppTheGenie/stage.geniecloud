@@ -2643,7 +2643,7 @@ header.header.fixed .agent-company-logo {
 		font-size: 18px;
 		font-weight: 500;
 		text-transform: capitalize;
-		color: var(--theme-heading-color);
+		color: var(--theme-body-background);
 		margin-bottom: 0;
 		white-space: nowrap;
 		line-height: 140%;
@@ -2659,7 +2659,7 @@ header.header.fixed .agent-company-logo {
 	.right-text span {
 		font-size: 18px;
 		font-weight: 500;
-		color: var(--theme-heading-color);
+		color: var(--theme-body-background);
 	}
 
 	.navbar-toggle,
@@ -2718,8 +2718,8 @@ header.header.fixed .agent-company-logo {
 		top: 0;
 		left: 0;
 		right: 0;
-		background-color: var(--theme-body-background);
-		z-index: 401;
+		background-color: var(--theme-heading-color);
+		z-index: 1011;
 	}
 
 	header.header {

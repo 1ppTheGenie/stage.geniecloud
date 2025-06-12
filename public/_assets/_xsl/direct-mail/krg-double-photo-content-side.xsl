@@ -67,7 +67,7 @@
 	</xsl:template>
 
 	<xsl:template name="cropped-content">
-		<image x="4%" y="5%" width="16%" height="13%" id="logo" preserveAspectRatio="xMinYMid meet">
+		<image x="4%" y="5%" width="16%" height="10%" id="logo" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
 				<xsl:choose>
 					<xsl:when test="//output/@themeHue = 'light'">
@@ -98,32 +98,37 @@
 				</xsl:choose>
 			</xsl:variable>
 
-			<text x="4%" y="25.5%" class="bold middle" fill="var(--theme-heading-color)" style="font-size:320%; font-family:var(--theme-heading-font);">
-				<tspan>
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'justlisted'" />
-						<xsl:with-param name="default" select="$status-caption" />
-					</xsl:call-template>
-				</tspan>
-				<tspan x="4%" dy="8%">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'buthowdoes'" />
-						<xsl:with-param name="default" select="'but how does'" />
-					</xsl:call-template>
-				</tspan>
-				<tspan x="4%" dy="8%" fill="var(--theme-sub-heading-color)">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'youhomes'" />
-						<xsl:with-param name="default" select="concat('your ', lower-case( $singularPropertyType ) )" />
-					</xsl:call-template>
-				</tspan>
-				<tspan x="4%" dy="8%">
-					<xsl:call-template name="editable">
-						<xsl:with-param name="id" select="'compare'" />
-						<xsl:with-param name="default" select="'compare?'" />
-					</xsl:call-template>
-				</tspan>
-			</text>
+			<xsl:variable name="yOffset" select="if (string-length($singularPropertyType) &lt;= 7) then 21.5 else 16" />
+
+			<foreignObject x="4%" y="{concat( $yOffset, '%')}" width="35%" height="100%">
+				<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:320%; font-family:var(--theme-heading-font); color:var(--theme-heading-color); font-weight:bold; line-height:0.94;">
+					<div>
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'justlisted'" />
+							<xsl:with-param name="default" select="$status-caption" />
+						</xsl:call-template>
+					</div>
+					<div>
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'buthowdoes'" />
+							<xsl:with-param name="default" select="'but how does'" />
+						</xsl:call-template>
+					</div>
+					<div style="color:var(--theme-sub-heading-color);">
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'youhomes'" />
+							<xsl:with-param name="default" select="concat('your ', lower-case( $singularPropertyType ) )" />
+						</xsl:call-template>
+					</div>
+					<div>
+						<xsl:call-template name="editable">
+							<xsl:with-param name="id" select="'compare'" />
+							<xsl:with-param name="default" select="'compare?'" />
+						</xsl:call-template>
+					</div>
+				</div>
+			</foreignObject>
+
 
 			<text x="4%" y="58.7%" class="bold" fill="var(--theme-heading-color)" style=" font-size:124%;font-family:var(--theme-sub-heading-font)">
 				<tspan>

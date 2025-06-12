@@ -14,24 +14,28 @@
 					"sort": 1,
 					"asset": "direct-mail/qr-code-postcard-combine-2022-2",
 					"knownAs": "Direct Mail - Active",
-					"name": "Stats & Pics Postcard"
+					"name": "Stats & Pics Postcard",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 2,
 					"asset": "direct-mail/krg-double-photo-content-combine",
 					"knownAs": "Direct Mail Pending",
-					"name": "Hungry Buyers Postcard"
+					"name": "Hungry Buyers Postcard",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 3,
 					"asset": "direct-mail/qr-code-postcard-combine-2022-1",
 					"knownAs": "Direct Mail - Sold",
-					"name": "Stats & Map Postcard"
+					"name": "Stats & Map Postcard",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 4,
 					"asset": "direct-mail/krg-single-photo-content-combine",
-					"name": "Single Photo Postcard"
+					"name": "Single Photo Postcard",
+					"qrUrl": "lc-hollywood"
 				}
 			],
 			"name": "Listing Command Proof Kit"
