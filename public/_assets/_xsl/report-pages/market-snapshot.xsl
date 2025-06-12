@@ -33,12 +33,12 @@
 		<xsl:variable name="change" select="$medianSalePrice div $previousMedianSalePrice" />
 		<xsl:variable name="formattedChange" select="format-number( abs( 1 - $change ), '#.0%' )" />
 
-		<text x="3%" y="6%" class="upper heading" font-size="270%" data-max-width="45%">
+		<text x="3%" y="6%" class="upper heading" font-size="270%" data-max-width="35%">
 			<xsl:value-of select="$areaWithPropertyType" />
 
 		</text>
 
-		<text x="3%" y="12.5%" class="upper sub-heading" font-size="180%">
+		<text x="3%" y="13.5%" class="upper sub-heading" font-size="180%">
 			Market Snapshot
 		</text>
 		<foreignObject x="3%" y="15.8%" height="25%" width="45%" class="medium">

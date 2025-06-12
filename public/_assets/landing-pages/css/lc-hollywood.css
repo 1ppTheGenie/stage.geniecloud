@@ -1252,6 +1252,7 @@ section.genie-alternate.real-time-market {
 
 .genie-wrap.listingmapstyleone ul.pagination {
 	margin-top: 20px 12px 0;
+	padding: 0;
 }
 
 .genie-wrap.listingmapstyleone ul.pagination li {
@@ -1262,6 +1263,7 @@ section.genie-alternate.real-time-market {
 .genie-wrap.listingmapstyleone .filter-pagination-wrap {
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
 .genie-wrap.listingmapstyleone #listing-map-style-one {

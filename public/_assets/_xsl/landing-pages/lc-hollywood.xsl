@@ -70,18 +70,45 @@
 			<xsl:attribute name="class">
 				<xsl:value-of select="concat( 'lc-hollywood ', $cssThemeClass)" />
 			</xsl:attribute>
+
 			<xsl:call-template name="process-snippet">
 				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag" />
 			</xsl:call-template>
+
+			<xsl:variable name="logoUrl">
+				<xsl:choose>
+					<xsl:when test="$personalLogo != ''">
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue='dark'">
+								<xsl:value-of select="$personalLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$personalLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue='dark'">
+								<xsl:value-of select="$companyLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+
 			<div id="step1" class="steps banner-top-section-info section background">
 				<div class="mobile-header-sec">
 					<div class="tab-sec">
 						<div class="tab-left-sec">
-							<a class="" href="#">
-								<xsl:attribute name="style">
-									<xsl:value-of select="concat( 'background-image: url(', $personalLogoInverse, ')' )" />
-								</xsl:attribute>
-							</a>
+							<xsl:if test="$logoUrl != ''">
+								<a href="#">
+									<div class="agent-company-logo test" style="background-image: url({$logoUrl});"></div>
+								</a>
+							</xsl:if>
 						</div>
 						<div class="tab-right-sec">
 							<div class="right-content">
@@ -95,7 +122,7 @@
 
 												</xsl:attribute>
 
-												<svg viewBox="0 0 53.942 53.942" style="enable-background:new 0 0 53.942 53.942;" fill="var(--theme-heading-color)">
+												<svg viewBox="0 0 53.942 53.942" style="enable-background:new 0 0 53.942 53.942;" fill="var(--theme-body-background)">
 													<path d="M53.364,40.908c-2.008-3.796-8.981-7.912-9.288-8.092c-0.896-0.51-1.831-0.78-2.706-0.78c-1.301,0-2.366,0.596-3.011,1.68
                                                     c-1.02,1.22-2.285,2.646-2.592,2.867c-2.376,1.612-4.236,1.429-6.294-0.629L17.987,24.467c-2.045-2.045-2.233-3.928-0.632-6.291
                                                     c0.224-0.309,1.65-1.575,2.87-2.596c0.778-0.463,1.312-1.151,1.546-1.995c0.311-1.123,0.082-2.444-0.652-3.731
@@ -115,7 +142,7 @@
 													<xsl:value-of select="concat( 'mailto:', //agent[1]/marketingEmail )" />
 												</xsl:attribute>
 
-												<svg xmlns="http://www.w3.org/2000/svg" width="469.2px" height="469.2px" viewBox="0 0 469.2 469.2" style="enable-background:new 0 0 469.2 469.2;" fill="var(--theme-heading-color)">
+												<svg xmlns="http://www.w3.org/2000/svg" width="469.2px" height="469.2px" viewBox="0 0 469.2 469.2" style="enable-background:new 0 0 469.2 469.2;" fill="var(--theme-body-background)">
 													<path d="M22.202,77.023C25.888,75.657,29.832,74.8,34,74.8h401.2c4.168,0,8.112,0.857,11.798,2.224L267.24,246.364
 													c-18.299,17.251-46.975,17.251-65.28,0L22.202,77.023z M464.188,377.944c3.114-5.135,5.012-11.098,5.012-17.544V108.8
 													c0-4.569-0.932-8.915-2.57-12.899L298.411,254.367L464.188,377.944z M283.2,268.464c-13.961,11.961-31.253,18.027-48.6,18.027
@@ -163,20 +190,14 @@
 							</div>
 						</div>
 
-						<xsl:if test="$personalLogoInverse!=''">
+						<xsl:if test="$logoUrl != ''">
 							<div class="header-logo">
 								<a href="#">
-									<div class="agent-company-logo">
-										<xsl:attribute name="style">
-											<xsl:value-of select="concat( 'background-image: url(', $personalLogoInverse, ')' )" />
-
-										</xsl:attribute>&#160;
-									</div>
-									<xsl:comment/>
-
+									<div class="agent-company-logo test" style="background-image: url({$logoUrl});"></div>
 								</a>
 							</div>
 						</xsl:if>
+
 
 						<div class="navigation-links">
 							<nav class="navbar header-navigation">

@@ -68,14 +68,14 @@
             <xsl:value-of select="$singularPropertyType" />
         </text>
 
-        <text x="3.8%" y="86%" class="" font-family="var(--theme-sub-heading-font)" font-size="18" font-weight="400" fill="var(--theme-heading-color)">
+        <text x="80.8%" class="center" y="84.5%" font-family="var(--theme-sub-heading-font)" font-size="18" font-weight="400" fill="var(--theme-heading-color)">
             <xsl:call-template name="editable">
                 <xsl:with-param name="id" select="'Presented By:'" />
                 <xsl:with-param name="default" select="'Presented By:'" />
             </xsl:call-template>
         </text>
 
-        <image x="66.5%" y="51.6%" width="28.1%" height="34.2%" preserveAspectRatio="xMidYMax">
+        <image x="66.5%" y="49.5%" width="28.1%" height="34.2%" preserveAspectRatio="xMidYMax">
             <xsl:attribute name="href">
                 <xsl:value-of select="//agent[1]/photo" />
             </xsl:attribute>
@@ -98,66 +98,9 @@
         <text x="80.6%" y="95.2%" class=" center" font-family="var(--theme-heading-font)" font-size="65%" font-weight="100" fill="var(--theme-sub-heading-color)">
             <xsl:value-of select="//agent[1]/marketingLicense" />
         </text>
-
-        <!-- <xsl:choose>
-            <xsl:when test="$companyLogo='' or $personalLogo=''">
-                <image x="3.8%" y="91%" width="20%" height="7%" id="logo" preserveAspectRatio="xMinYMid meet">
-                    <xsl:attribute name="href">
-                        <xsl:choose>
-                            <xsl:when test="$personalLogo=''">
-                                <xsl:value-of select="$companyLogo" />
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of select="$personalLogo" />
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:attribute>
-                </image>
-            </xsl:when>
-            <xsl:otherwise>
-                <image x="3.8%" y="91%" width="30%" class="" preserveAspectRatio="xMinYMin meet">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$personalLogo" />
-                    </xsl:attribute>
-                </image>
-                <image x="36%" y="90%" width="11%" class="" preserveAspectRatio="xMidYMin meet">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$companyLogo" />
-                    </xsl:attribute>
-                </image>
-            </xsl:otherwise>
-        </xsl:choose> -->
-        <!-- <image x="3.8%" y="88%" width="21.5%" class="" preserveAspectRatio="xMinYMin meet" preserveAspectRatio="xMidYMid meet">
-			<xsl:choose>
-				<xsl:when test="//output/@themeHue='dark'">
-					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/personalLogoDark" />
-					</xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/personalLogoLight" />
-					</xsl:attribute>
-				</xsl:otherwise>
-			</xsl:choose>
-		</image>
-        <image x="32.5%" y="88.6%" width="7%" class="" preserveAspectRatio="xMidYMin meet">
-			<xsl:choose>
-				<xsl:when test="//output/@themeHue='dark'">
-					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/companyLogoDark" />
-					</xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:attribute name="href">
-						<xsl:value-of select="//agent[1]/companyLogoLight" />
-					</xsl:attribute>
-				</xsl:otherwise>
-			</xsl:choose>
-		</image> -->
         <xsl:choose>
 			<xsl:when test="$companyLogo='' or $personalLogo=''">
-				<image x="3.8%" y="88%" width="21.5%" preserveAspectRatio="xMinYMid meet">
+				<image x="3.8%" y="87%" width="21.5%" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="$personalLogo=''">
@@ -185,7 +128,7 @@
 				</image>
 			</xsl:when>
 			<xsl:otherwise>
-				<image x="3.8%" y="88.7%" width="21.5%" preserveAspectRatio="xMinYMid meet">
+				<image x="3.8%" y="87.7%" width="21.5%" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue='dark'">
@@ -197,7 +140,7 @@
 						</xsl:choose>
 					</xsl:attribute>
 				</image>
-				<image x="32.5%" y="89.3%" width="7%" class="" preserveAspectRatio="xMidYMin meet">
+				<image x="32.5%" y="88.3%" width="20%" height="6.5%" class="" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue='dark'">
