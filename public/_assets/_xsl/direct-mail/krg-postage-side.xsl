@@ -10,9 +10,20 @@ Supports:	Area, Print, Listing, QRCode
 	<xsl:import href="common.xsl" />
 
 	<xsl:template name="svg-body">
+		<style>
+			<xsl:value-of select="'
+				#footer text tspan, #footer text {	
+					fill: #94949D !important;
+					font-size: 9px;
+				}
+				g#footer text a tspan{
+					fill: #337ab7 !important;
+				}
+			'" />
+		</style>
 		<rect x="0" y="0" width="51%" height="100%" fill="#fff"></rect>
 		<line xmlns="" stroke="#fff" stroke-width="0.8%" x1="51%" x2="51%" y1="0" y2="100%"></line>
-		<rect x="50%" y="0" width="50%" height="100%" fill="#fff"></rect>
+		<rect x="50%" y="0" width="50%" height="100%" fill="var(--theme-heading-color)"></rect>
 
 		<defs>
 			<linearGradient id="lgrad" x1="0%" y1="52%" x2="100%" y2="48%">
@@ -46,7 +57,14 @@ Supports:	Area, Print, Listing, QRCode
 
 		<image x="4%" y="5%" width="16%" height="13%" id="logo" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
-				<xsl:value-of select="$personalLogo" />
+				<xsl:choose>
+					<xsl:when test="//output/@themeHue = 'light'">
+						<xsl:value-of select="$personalLogo" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="$personalLogoInverse" />
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:attribute>
 		</image>
 
@@ -96,7 +114,8 @@ Supports:	Area, Print, Listing, QRCode
 			<clipPath id="clipCircle">
 				<circle r="3.7%" cx="6.5%" cy="87.4%"></circle>
 			</clipPath>
-			<image x="3%" y="82%" width="11%" height="14%" clip-path="url(#clipCircle)" preserveAspectRatio="xMinYMid meet">
+			<circle r="3.7%" cx="6.5%" cy="87.4%" fill="var(--theme-heading-color)"></circle>
+			<image x="3.5%" y="82%" width="11%" height="14%" clip-path="url(#clipCircle)" preserveAspectRatio="xMinYMid meet">
 				<xsl:attribute name="href">
 					<xsl:value-of select="//agent[1]/photo" />
 				</xsl:attribute>
@@ -150,7 +169,7 @@ Supports:	Area, Print, Listing, QRCode
 		</g>
 
 		<g style="transform: translate(54%, 5%);">
-			<text fill="#5c5c5c" style="font-family:var(--theme-body-font);font-size:100%;font-weight:500;">
+			<text fill="var(--theme-body-background)" style="font-family:var(--theme-body-font);font-size:100%;font-weight:500;">
 				<tspan>
 					<xsl:value-of select="//agent[1]/address/street" />
 				</tspan>
@@ -166,8 +185,8 @@ Supports:	Area, Print, Listing, QRCode
 			</text>
 		</g>
 
-		<foreignObject class="upper" width="44%" height="5%" x="4%" y="94%">
-			<p style="margin: 0;font-size: 6.5px;text-align:justify;opacity:0.5;font-weight: 300;font-family:var(--theme-body-font);color:var(--theme-body-color);">
+		<foreignObject class="upper" width="44%" height="5%" x="4%" y="93%">
+			<p style="margin: 0;font-size: 6.5px;text-align:justify;font-weight: 300;font-family:var(--theme-body-font);color:var(--theme-body-color);">
 				<xsl:call-template name="solicitation-disclaimer" />
 			</p>
 		</foreignObject>
@@ -262,9 +281,16 @@ Supports:	Area, Print, Listing, QRCode
 				</xsl:otherwise>
 			</xsl:choose>
 		</foreignObject>
-		<image x="32%" y="80%" width="8%" height="12%" id="logo" preserveAspectRatio="xMinYMid meet">
+		<image x="32%" y="80%" width="12%" height="9%" id="logo" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
-				<xsl:value-of select="$companyLogo" />
+				<xsl:choose>
+					<xsl:when test="//output/@themeHue = 'light'">
+						<xsl:value-of select="$companyLogo" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="$companyLogoInverse" />
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:attribute>
 		</image>
 

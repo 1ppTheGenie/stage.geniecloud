@@ -59,9 +59,9 @@
 
 		<line stroke="var(--theme-heading-color)" stroke-width="0.3%" x1="50%" x2="100%" y1="50%" y2="50%" />
 
-		<g style="transform:translate(35%, 21%)">
+		<g style="transform:translate(39.275%, 30.335%)">
 			<xsl:call-template name="qr-code">
-				<xsl:with-param name="width" select="'30%'" />
+				<xsl:with-param name="width" select="'21.45%'" />
 			</xsl:call-template>
 		</g>
 	</xsl:template>
@@ -69,7 +69,14 @@
 	<xsl:template name="cropped-content">
 		<image x="4%" y="5%" width="16%" height="13%" id="logo" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
-				<xsl:value-of select="$personalLogo" />
+				<xsl:choose>
+					<xsl:when test="//output/@themeHue = 'light'">
+						<xsl:value-of select="$personalLogo" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="$personalLogoInverse" />
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:attribute>
 		</image>
 
@@ -193,9 +200,16 @@
 				</xsl:call-template>
 			</tspan>
 		</text>
-		<image x="27%" y="83%" width="8%" height="12%" id="logo" preserveAspectRatio="xMinYMid meet">
+		<image x="26%" y="83%" width="12%" height="12%" id="logo" preserveAspectRatio="xMinYMid meet">
 			<xsl:attribute name="href">
-				<xsl:value-of select="$companyLogo" />
+				<xsl:choose>
+					<xsl:when test="//output/@themeHue = 'light'">
+						<xsl:value-of select="$companyLogo" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="$companyLogoInverse" />
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:attribute>
 		</image>
 	</xsl:template>
