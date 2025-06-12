@@ -48,23 +48,25 @@ export default () => {
 
 	return (
 		<>
-			<h4 class="center upper" style="margin-bottom:0.5rem">
+
+
+			<h4 class="center upper subheading-market-activity" style="margin-bottom:5px">
 				{areaDataStore.areaName}{" "}
 				{areaDataStore.propertyTypeID === 0 ? "Homes" : "Condos"}
 			</h4>
-			<h1 class="center upper" style="margin:0.5rem 0">
+			<h1 class="center upper heading-market-activity" style="margin:0">
 				Market Activity
 			</h1>
 
+
 			<HomeTypes
 				container={`MarketActivity-${settings.areaid}`}
-				style="margin:0.5rem"
+				style=""
 			/>
 
 			<div
-				style={`position:relative;width:100%;height:${
-					expanded ? "650px" : `400px`
-				}`}>
+				style={`position:relative;width:100%;height:${expanded ? "650px" : `400px`
+					}`}>
 				<StatusKey setStatus={setStatus} />
 				<LeafletMap
 					mapStyle={settings.mapstyle || "satellite-streets-v11"}
@@ -140,7 +142,7 @@ export default () => {
 					<span>
 						<ListingsShowing
 							pageSize={pageSize}
-							ffset={Math.max((currentPage() - 1) * pageSize(),0)}
+							ffset={Math.max((currentPage() - 1) * pageSize(), 0)}
 							len={currentListings.length}
 							mode={settings.mode}
 							period={period}
@@ -176,6 +178,7 @@ export default () => {
 };
 
 const StatusKey = ({ setStatus }) => {
+	 console.log("areaDataStore.overall:", areaDataStore?.overall?.new,areaDataStore?.overall?.active,areaDataStore?.overall?.pending)
 	const labels = [
 		{
 			total: areaDataStore?.overall?.new,
@@ -197,44 +200,48 @@ const StatusKey = ({ setStatus }) => {
 
 	return (
 		<div class="map-key" style="position: absolute; z-index: 700; top: 65px">
-			<svg style="width: 250px; height: 270px">
+			<svg style="width: 380px; height: 270px">
 				<rect width="100%" height="15%" fill="var(--theme-body-background)" />
-				<rect width="100%" height="80%" fill="#000" fillOpacity="0.4" y="15%" />
+				<rect width="100%" height="80%" fill="#000" fill-opacity="0.57" y="15%" />
 				<text
 					x="20"
-					y="10"
+					y="27"
 					style="font-size: 150%"
 					fill="var(--theme-body-color)"
 					dominantBaseline="hanging">
 					{areaDataStore.areaName}
 				</text>
 				<g style="transform: translate(20px, 70px)">
-					{labels.map((l, i) => (
+					{labels.map((l, i) =>{
+						  console.log(`Label ${i}:`, l.total); // Log each label's total
+
+				 return (
 						<g
 							key={i}
 							style={`transform: translateY(${i * 50}px)`}
 							onClick={e => setStatus(l.status)}>
-							<circle fill={`var(--${l.status})`} cx="20" cy="5" r="20" />
+							<circle fill={`var(--${l.status})`} cx="20" cy="5" r="17" />
 							<text
 								x="20"
-								y="7"
-								fill="var(--theme-body-background)"
-								textAnchor="middle"
-								dominantBaseline="middle"
-								style="font-size: 120%; textShadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
+								y="5"
+								fill="var(--white)"
+								text-Anchor="middle"
+								dominant-Baseline="middle"
+								style="font-size: 100%; text-Shadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
 								{l.total}
 							</text>
+							
 
 							<text
 								x="50"
 								y="7"
-								fill="var(--theme-body-background)"
-								dominantBaseline="middle"
-								style="font-size: 120%; textShadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
+								fill="var(--white)"
+								dominant-Baseline="middle"
+								style="font-size: 100%; font-weight: 700; text-Shadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
 								{l.label}
 							</text>
 						</g>
-					))}
+					)	})}
 				</g>
 			</svg>
 		</div>
