@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" class="genie-landing-page">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#000000" />
+		<link rel="shortcut icon" type="image/ico" href="/src/assets/favicon.ico" />
+		<title>Genie Landing Page & Embed Testing</title>
+		<script>
+			var gg = {};
+			var ggSettings = {
+				agentID: "a3523a8e-7670-45f7-8e71-1b869140319d",
+				areaID: 6766,
+				leadAreaID: ``,
+				mlsNumber: ``,
+				mlsID: ``,
+				blurPrice: true,
+				requireSignin: true,
+				propertyType: -1,
+				mapKey: "red",
+				noCopyright: false,
+				openHouseTimes: ``,
+				hideAVM: false,
+				downloadUrl: ``,
+				isLeadCapture: true,
+				marketStatus: "sold",
+				lead: { propertyId: null, firstName: ``, lastName: ``, email: `` },
+			};
+			window.gHub_funnel = true;
+			window.gHub = {
+				site_url: "https:\/\/cloud.thegenie.ai",
+				api_url: "https://dqohcd54xpkdwnueu2wn2nkxge0aboae.lambda-url.eu-west-2.on.aws/",
+				mapbox_key:"pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJ0VnNHQ0o4In0.Ju1ET8Y81mGY1Eu0l5DfRQ",
+				google_key: "AIzaSyCDbbVSQpviRaOo2iiTZxdD36y4RCkxzFM",
+				SINGLE: 0,
+				CONDO: 1,
+			};
+		</script>
+
+		<link
+			rel="stylesheet"
+			href="https://cloud.thegenie.ai/_assets/landing-pages/css/common.css"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="https://cloud.thegenie.ai/_assets/_css/genie-colors.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cloud.thegenie.ai/_assets/themes/_default-light.css"
+		/>
+		
+		<script src="/src/index.jsx" type="module"></script>
+	</head>
+	<body class="ba-2021-reversed-light">
+		<script>
+			gg.defaults = {
+				createLinkLead: NaN,
+				leadPropertyID: ``,
+				fullName: ``,
+				notePrompt: `New Lead from 12963 Sunderland St Property Site!`,
+				trackingData: {
+					utmSource: `Property (Hwood)`,
+					utmCampaign: `12963 Sunderland St Poway, CA 92064`,
+				},
+			};
+		</script>
+
+		<div class="background">
+
+			<div
+			class="genie-embed"
+			data-genie-layout="MarketHistory"
+			data-genie-agentid="a3523a8e-7670-45f7-8e71-1b869140319d"
+			data-genie-theme="_default-light"
+			data-genie-areaid="6766"
+			data-genie-areaperiod="12"
+			data-genie-propertytype="-1"
+			data-genie-marketstatus="sold"
+			data-genie-mapstyle="satellite-streets-v9"
+			data-genie-mapicon="dot"
+			data-genie-pricepercent="percent"
+		></div>
+		</div>
+	</body>
+</html>
