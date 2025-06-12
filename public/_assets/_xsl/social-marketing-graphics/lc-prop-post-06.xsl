@@ -185,7 +185,7 @@
 				</image>
 			</xsl:when>
 			<xsl:otherwise>
-				<image x="3.8%" y="88.3%" width="21.5%" preserveAspectRatio="xMinYMid meet">
+				<image x="3.8%" y="88.7%" width="21.5%" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue='dark'">
@@ -197,7 +197,7 @@
 						</xsl:choose>
 					</xsl:attribute>
 				</image>
-				<image x="32.5%" y="88.6%" width="7%" class="" preserveAspectRatio="xMidYMin meet">
+				<image x="32.5%" y="89.3%" width="7%" class="" preserveAspectRatio="xMidYMin meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue='dark'">
