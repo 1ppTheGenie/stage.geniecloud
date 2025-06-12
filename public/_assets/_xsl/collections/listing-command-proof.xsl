@@ -58,7 +58,7 @@ Version:	1.1
 						<xsl:value-of select="concat( //agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's', ' ' )" />
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:value-of select="concat( //collection/@name, ' ', 'for', ' ' )" />
+				<!-- <xsl:value-of select="concat( //collection/@name, ' ', 'for', ' ' )" />
 				<xsl:value-of select="concat($listingAddressLine1, ' ', 'in' , ' ' , //area/name, ' ', 'on', ' ')" />
 				
 				<xsl:value-of select="concat(//openHouse/session[1]/@dow, ',', ' ' )" />
@@ -73,7 +73,7 @@ Version:	1.1
 				</xsl:choose>
 				<xsl:value-of select="concat(' ', '•', ' ' )" />
 				<xsl:value-of select="translate(concat(//openHouse/session[1]/@starts, ' ', '-', ' '), 'APM', 'apm')" />
-				<xsl:value-of select="translate(//openHouse/session[1]/@ends, 'APM', 'apm')" />
+				<xsl:value-of select="translate(//openHouse/session[1]/@ends, 'APM', 'apm')" /> -->
                                     
 			</xsl:with-param>
 			 <xsl:with-param name="ogImage" select="'/_assets/_img/genie-logo-1.png'" />
