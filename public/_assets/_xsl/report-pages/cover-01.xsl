@@ -101,7 +101,18 @@
 					</xsl:if>
 				</xsl:if>
 			
-				<image x="32.5%" y="{$logoY}" width="35%" height="{$logoH}" id="logo" preserveAspectRatio="xMidYMid meet" href="{$companyLogo}" />
+				<image x="32.5%" y="{$logoY}" width="35%" height="{$logoH}" id="logo" preserveAspectRatio="xMidYMid meet">
+					<xsl:attribute name="href">
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'light'">
+								<xsl:value-of select="$companyLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</image>
 			</xsl:if>
 		</svg>
 	</xsl:template>
