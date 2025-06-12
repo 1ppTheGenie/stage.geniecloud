@@ -65,7 +65,7 @@
 
 		<xsl:choose>
 			<xsl:when test="$companyLogo='' or $personalLogo=''">
-				<image x="13.4%" y="78.7%" height="7.4%" preserveAspectRatio="xMinYMid meet">
+				<image x="13.4%" y="78.7%" width="30%" height="7.4%" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="$personalLogo=''">
@@ -93,7 +93,7 @@
 				</image>
 			</xsl:when>
 			<xsl:otherwise>
-				<image x="13.4%" y="78.7%" height="7.4%" preserveAspectRatio="xMinYMid meet">
+				<image x="13.4%" y="78.7%" width="30%" height="7.4%" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue = 'light'">
@@ -105,7 +105,7 @@
 						</xsl:choose>
 					</xsl:attribute>
 				</image>
-				<image x="52.9%" y="82.8%" height="4.1%" preserveAspectRatio="xMinYMax meet">
+				<image x="52.9%" y="82.8%" width="30%" height="4.1%" preserveAspectRatio="xMinYMax meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue = 'light'">

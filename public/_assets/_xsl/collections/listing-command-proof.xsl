@@ -166,7 +166,7 @@ Version:	1.1
 									<xsl:value-of select="//area/name" />
 								<br/>
 									<xsl:value-of select="$listingAddressLine1" />
-									 <xsl:if test="//openHouse/session">
+									 <!-- <xsl:if test="//openHouse/session">
                                         <xsl:text> • </xsl:text>
                                         <xsl:value-of select="//openHouse/session[1]/@dow" />, 
                                         <xsl:value-of select="concat(//openHouse/session[1]/@month, ' ')" /> 
@@ -181,7 +181,7 @@ Version:	1.1
                                         <xsl:text> • </xsl:text>
                                         <xsl:value-of select="//openHouse/session[1]/@starts" /> - 
                                         <xsl:value-of select="//openHouse/session[1]/@ends" />
-                                    </xsl:if>
+                                    </xsl:if> -->
 								</p>
 								
 							</div>
@@ -330,7 +330,7 @@ Version:	1.1
 									<xsl:value-of select="genie:format-date( //collection/@assembled, '[M02]-[D]-[Y0001]' )" />
 								</p>
 
-								<p>
+								<!-- <p>
 									<b>Open House Date:&#160;</b>
 									<xsl:if test="count(//openHouse/session) &gt; 0">
                                         <xsl:value-of select="concat(
@@ -341,7 +341,7 @@ Version:	1.1
                                         )" />
                                     </xsl:if>
 									
-								</p>
+								</p> -->
 								
 								<p>
 									<b>Collection ID:&#160;</b>

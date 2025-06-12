@@ -367,7 +367,14 @@
 							</h2>
 							<div class="body-color">
 								<!-- TODO port PHP function <xsl:variable name="paras" select="genie:split-to-paras( //single/description )" /> -->
-								<p class="description"> <xsl:value-of select="//single/description" /></p>
+								<!-- <p class="description"> <xsl:value-of select="//single/description" /></p> -->
+								<xsl:for-each select="tokenize(//single/description, '\.\s*')">
+									<p class="description">
+										<xsl:value-of select="normalize-space(.)" />
+										<xsl:text>.</xsl:text>
+									</p>
+								</xsl:for-each>
+
 							</div>
 						</div>
 						<div class="overview-details">
