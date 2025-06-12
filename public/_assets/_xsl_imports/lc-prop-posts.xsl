@@ -105,8 +105,8 @@
 
 		<xsl:choose>
 			<xsl:when test="$companyLogo='' or $personalLogo=''">
-				<text font-size="100%" font-family="var(--theme-sub-heading-font)" font-weight="600" fill="var(--theme-heading-color)" x="17.2%" y="81.85%" height="10%" width="31%" class="center">Presented By:</text>
-				<image x="23%" y="83.7%" width="30%" height="8%" id="logo" preserveAspectRatio="xMidYMid meet">
+				<text font-size="100%" font-family="var(--theme-sub-heading-font)" font-weight="600" fill="var(--theme-heading-color)" x="17.2%" y="81.85%" height="10%" width="31%">Presented By:</text>
+				<image x="16.8%" y="84.4%" width="30%" height="7.5%" id="logo" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="$personalLogo=''">
@@ -135,7 +135,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<text font-size="100%" font-family="var(--theme-sub-heading-font)" font-weight="600" fill="var(--theme-heading-color)" x="17.2%" y="81.85%" height="10%" width="31%">Presented By:</text>
-				<image x="16.8%" y="83.3%" height="8%" width="27.8%" id="logo" preserveAspectRatio="xMidYMid meet">
+				<image x="16.8%" y="83.3%" height="8%" width="27.8%" id="logo" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue = 'light'">
