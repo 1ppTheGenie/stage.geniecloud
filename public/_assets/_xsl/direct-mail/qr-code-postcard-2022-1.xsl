@@ -41,9 +41,9 @@
 	<xsl:template name="cropped-content">
 		<xsl:call-template name="qr-code-2022-content-part-1" />
 
-		<g style="transform:translate(35%, 21%)">
+		<g style="transform:translate(42%, 23%)">
 			<xsl:call-template name="qr-code">
-				<xsl:with-param name="width" select="'30%'" />
+				<xsl:with-param name="width" select="'21%'" />
 			</xsl:call-template>
 		</g>
 	</xsl:template>
