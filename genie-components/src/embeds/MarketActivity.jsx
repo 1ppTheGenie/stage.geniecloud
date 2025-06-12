@@ -178,7 +178,7 @@ export default () => {
 };
 
 const StatusKey = ({ setStatus }) => {
-	 console.log("areaDataStore.overall:", areaDataStore?.overall?.new,areaDataStore?.overall?.active,areaDataStore?.overall?.pending)
+	 
 	const labels = [
 		{
 			total: areaDataStore?.overall?.new,
@@ -212,9 +212,7 @@ const StatusKey = ({ setStatus }) => {
 					{areaDataStore.areaName}
 				</text>
 				<g style="transform: translate(20px, 70px)">
-					{labels.map((l, i) =>{
-						  console.log(`Label ${i}:`, l.total); // Log each label's total
-
+					{labels.map((l, i) =>{						
 				 return (
 						<g
 							key={i}
