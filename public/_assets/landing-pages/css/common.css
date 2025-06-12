@@ -2744,7 +2744,7 @@ header.header.fixed .agent-company-logo {
 @media (max-width: 768px) {
 	.tab-left-sec {
 		width: 170px;
-		height: 70px;
+		/* height: 70px; */
 	}
 
 	.tab-left-sec a {
