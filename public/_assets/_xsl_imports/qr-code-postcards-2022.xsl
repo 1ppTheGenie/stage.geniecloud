@@ -5,7 +5,7 @@
 	<xsl:template name="qr-code-2022-content-part-1">
 		<g id="qr-code-2022-content-part-1" style="transform:translateX(0.2%);">
 			<xsl:if test="number(//single/statusTypeID)=2">
-				<text x="18%" y="8.7%" class="center upper" fill="var(--theme-heading-color)" font-size="340%" font-family="var(--theme-heading-font)" font-weight="800" style="letter-spacing: 2px; word-spacing: -8px" data-max-width="80%">
+				<text x="18%" y="8.7%" class="center upper" fill="var(--theme-heading-color)" font-size="340%" font-family="var(--theme-heading-font)" font-weight="800" style="letter-spacing: 1px;" data-max-width="80%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'justlisted'" />
 						<xsl:with-param name="default" select="'just sold'" />
@@ -79,7 +79,7 @@
 			</text>
 
 			<xsl:if test="//single/statusTypeID!=14">
-				<text x="18%" y="58%" class="center upper" fill="var(--theme-body-color)" font-size="115%" font-weight="500" font-family="var(--theme-sub-heading-font)" >
+				<text x="18%" y="58%" class="center upper" fill="var(--theme-body-color)" font-size="115%" font-weight="500" font-family="var(--theme-sub-heading-font)" data-max-width="35%" >
 					<xsl:call-template name="listing-address-line-one" />
 					<xsl:text>, </xsl:text>
 					<xsl:value-of select="concat(//single/address/state, ' ', //single/address/zip)" />
