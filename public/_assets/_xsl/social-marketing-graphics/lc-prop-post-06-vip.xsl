@@ -17,7 +17,7 @@
 		<style>
 			<xsl:value-of select="'
 				#footer text tspan, #footer text {	
-					fill: var(--theme-heading-color) !important;
+					fill: var(--theme-body-background) !important;
 					font-size: 9px;
 				}
 				g#footer text a tspan{
@@ -105,7 +105,7 @@
 						</xsl:choose>
 					</xsl:attribute>
 				</image>
-				<image x="52.9%" y="82.8%" width="30%" height="4.1%" preserveAspectRatio="xMinYMax meet">
+				<image x="45.9%" y="78.7%" width="27%" height="7.4%" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue = 'light'">
