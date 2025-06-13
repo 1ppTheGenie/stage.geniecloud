@@ -137,14 +137,14 @@
 			<xsl:value-of select="//agent[1]/marketingLicense" />
 		</text>
 
-		<image x="82.3%" y="7.8%" width="13%" height="16%" preserveAspectRatio="xMidYMid meet">
+		<image x="82.3%" y="7.8%" width="13%" height="16%" preserveAspectRatio="xMidYMax meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="//agent[1]/photo" />
 			</xsl:attribute>
 		</image>
 		<xsl:choose>
 			<xsl:when test="$companyLogo='' or $personalLogo=''">
-				<image x="70%" y="87.7%" width="26.5%" id="logo" preserveAspectRatio="xMinYMax meet">
+				<image x="70%" y="87.7%" width="26.5%" id="logo" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="$personalLogo=''">
