@@ -63,7 +63,7 @@
 
 		<rect fill="var(--theme-sub-heading-color)" stroke-width="0" fill-opacity="1" x="0%" y="91.9%" width="100%" height="10%" />
 
-		<text class="upper center" x="50%" y="92.8%" fill="var(--theme-heading-color)" font-weight="600" font-size="250%" data-max-width="80%" font-family="var(--theme-body-font)">
+		<text class="upper center" x="50%" y="92.8%" fill="var(--theme-body-background)" font-weight="600" font-size="250%" data-max-width="80%" font-family="var(--theme-body-font)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="concat('Your ', //area/name, ' specialist' )" />
 			</xsl:call-template>
@@ -147,7 +147,7 @@
 						</xsl:choose>
 					</xsl:attribute>
 				</image>
-				<image x="45.5%" y="84%" height="7.1%" width="11%" id="logo" preserveAspectRatio="xMidYMid meet">
+				<image x="47%" y="84%" height="7.1%" width="21%" id="logo" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue = 'light'">

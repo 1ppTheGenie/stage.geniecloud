@@ -14,12 +14,12 @@
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'
-				#footer tspan {
-					
+				#footer text tspan, #footer text {	
+					fill: var(--theme-body-color) !important;
 					font-size: 9px;
 				}
 				g#footer text a tspan{
-					fill: #337ab7;
+					fill: #337ab7 !important;
 				}
 				g#agent-contact{
 					transform: translate(0, 10px) !important;
