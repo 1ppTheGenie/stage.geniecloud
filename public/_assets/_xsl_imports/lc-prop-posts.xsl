@@ -147,7 +147,7 @@
 						</xsl:choose>
 					</xsl:attribute>
 				</image>
-				<image x="46%" y="84%" height="7.1%" width="21%" id="logo" preserveAspectRatio="xMinYMid meet">
+				<image x="47%" y="84%" height="7.1%" width="21%" id="logo" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue = 'light'">

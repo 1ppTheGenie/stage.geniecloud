@@ -120,7 +120,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 
-		<image x="69.5%" y="58.5%" width="35%" height="35%" preserveAspectRatio="xMaxYMid meet">
+		<image x="76.5%" y="58.5%" width="28%" height="35%" preserveAspectRatio="xMaxYMid meet">
 			<xsl:attribute name="href">
 				<xsl:value-of select="//agent[1]/photo" />
 			</xsl:attribute>
