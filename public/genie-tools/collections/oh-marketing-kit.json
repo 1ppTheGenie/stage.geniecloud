@@ -77,6 +77,14 @@
 					"sort": 12,
 					"asset": "area-insider-reports/top-secret-market-insider",
 					"name": "Market Insider Report"
+				},
+							{
+					"sort": 13,
+					"asset": "landing-pages/lc-oh-guestbook",
+					"name": "Guestbook Link",
+					"size": "instagram-Square",
+					"lpo": "lc-hollywood"
+					
 				}
 			],
 			"name": "Connect with the community"
