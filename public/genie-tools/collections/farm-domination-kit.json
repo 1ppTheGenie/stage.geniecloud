@@ -27,15 +27,27 @@
 				},
 				{
 					"sort": 4,
+					"asset": "social-marketing-graphics/nc-discovery",
+					"name": "Neighborhood Market Report Ad1",
+					"size": "instagram-Square"
+				},
+				{
+					"sort": 5,
 					"asset": "social-marketing-graphics/nc-news",
 					"name": "Neighborhood Market Report Ad2",
 					"size": "instagram-Square"
 				},
 				{
-					"sort": 5,
+					"sort": 6,
 					"asset": "direct-mail/qr-code-mailer-postage-side-1",
 					"name": "QR Code Mailer Postage Side 1",
 					"size": "Postcard"
+				},
+                {
+					"sort": 7,
+					"asset": "direct-mail-postcards-front/qr-code-postcard-v3-front",
+					"name": "QR Code Mailer Content Side 2",
+                    "qrUrl": "lc-hollywood"
 				}
 				
 			],
