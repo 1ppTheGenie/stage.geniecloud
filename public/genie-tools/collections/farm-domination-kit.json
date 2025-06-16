@@ -9,83 +9,35 @@
 			"assets": [
 				{
 					"sort": 1,
-					"asset": "social-marketing-graphics/oh-social-templates-1",
-					"name": "Square Post #1",
-					"size": "instagram-Square"
+					"asset": "report-pages/ed-kaminsky-vip-entry-5",
+					"name": "KRG DH Market Insider Flyer Portrait",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 2,
-					"asset": "social-marketing-graphics/oh-social-templates-2",
-					"name": "Square Post #2",
-					"size": "instagram-Square"
+					"asset": "report-pages/ed-kaminsky-vip-entry-5",
+					"name": "Market Insider Door Hanger",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 3,
-					"asset": "social-marketing-graphics/oh-social-templates-3",
-					"name": "Square Post #3",
+					"asset": "social-marketing-graphics/nc-frisco",
+					"name": "Nc Frisco",
 					"size": "instagram-Square"
 				},
 				{
 					"sort": 4,
-					"asset": "social-marketing-graphics/oh-social-templates-4",
-					"name": "Square Post #4",
+					"asset": "social-marketing-graphics/nc-news",
+					"name": "Neighborhood Market Report Ad2",
 					"size": "instagram-Square"
 				},
 				{
 					"sort": 5,
-					"asset": "social-marketing-graphics/oh-instagram-story-1",
-					"name": "Social Story #1",
-					"size": "instagram-Story"
-				},
-				{
-					"sort": 6,
-					"asset": "social-marketing-graphics/oh-instagram-story-2",
-					"name": "Social Story #2",
-					"size": "instagram-Story"
-				},
-				{
-					"sort": 7,
-					"asset": "social-marketing-graphics/oh-instagram-story-3",
-					"name": "Social Story #3",
-					"size": "instagram-Story"
-				},
-				{
-					"sort": 8,
-					"asset": "social-marketing-graphics/oh-instagram-story-4",
-					"name": "Social Story #4",
-					"size": "instagram-Story"
-				},
-				{
-					"sort": 9,
-					"asset": "flyers/address-strip-01",
-					"name": "Address Arrows",
-					"size": "tabloid-flyer"
-				},
-				{
-					"sort": 10,
-					"asset": "flyers/lc-oh-invite-01a",
-					"name": "Open House Invite",
-					"qrUrl": "lc-hollywood"
-				},
-				{
-					"sort": 11,
-					"asset": "report-pages/ed-kaminsky-vip-entry",
-					"name": "Door Hanger Invites",
-					"qrUrl": "lc-hollywood"
-				},
-				{
-					"sort": 12,
-					"asset": "area-insider-reports/top-secret-market-insider",
-					"name": "Market Insider Report"
-				},
-							{
-					"sort": 13,
-					"asset": "landing-pages/lc-oh-guestbook",
-					"name": "Guestbook Link",
-					"size": "instagram-Square",
-					"lpo": "lc-hollywood"
-					
+					"asset": "direct-mail/qr-code-mailer-postage-side-1",
+					"name": "QR Code Mailer Postage Side 1",
+					"size": "Postcard"
 				}
+				
 			],
 			"name": "Connect with the community"
 		},
@@ -95,29 +47,14 @@
 			"assets": [
 				{
 					"sort": 1,
-					"asset": "flyers/property-brochure-01",
-					"name": "Property Brochure",
-					"qrUrl": "lc-hollywood"
+					"asset": "area-insider-reports/top-secret-market-insider",
+					"name": "Market Insider Report"
 				},
 				{
 					"sort": 2,
-					"asset": "landing-pages/lc-oh-guestbook",
-					"name": "Guestbook Link",
-					"lpo": "lc-hollywood",
+					"asset": "landing-pages/krg-market-insider",
+					"name": "Landing Page",
 					"size": "Landing Page"
-				},
-				{
-					"sort": 3,
-					"asset": "landing-pages/lc-hollywood",
-					"name": "Property Website",
-					"size": "Landing Page"
-				},
-
-				{
-					"sort": 4,
-					"asset": "flyers/car-oh",
-					"name": "CAR OH Form",
-					"size": "us-letter"
 				}
 			],
 			"name": "Create a lasting first impression"
