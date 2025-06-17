@@ -1252,7 +1252,6 @@ section.genie-alternate.real-time-market {
 
 .genie-wrap.listingmapstyleone ul.pagination {
 	margin-top: 20px 12px 0;
-	padding: 0;
 }
 
 .genie-wrap.listingmapstyleone ul.pagination li {
@@ -1263,7 +1262,6 @@ section.genie-alternate.real-time-market {
 .genie-wrap.listingmapstyleone .filter-pagination-wrap {
 	display: flex;
 	justify-content: space-between;
-	flex-wrap: wrap;
 }
 
 .genie-wrap.listingmapstyleone #listing-map-style-one {
@@ -1458,6 +1456,19 @@ div.genie-wrap.listingmapstyleone footer {
 	.first-section:after {
 		display: none;
 	}
+
+	.genie-wrap.listingmapstyleone .w-33 {
+		width: 100%;
+	}
+
+	#about-section .agent-details.agent-detail-wrapper {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.genie-wrap.fastfacts .fast-facts-stats-icons-box {
+		width: 100%;
+	}
 }
 
 @media (max-width: 768px) {
@@ -1523,7 +1534,8 @@ div.genie-wrap.listingmapstyleone footer {
 	}
 
 	.che_box.submit-btn {
-		position: absolute;
+		/* position: absolute; */
+		padding-bottom: 35px;
 		bottom: 0;
 		right: 0;
 	}
@@ -1536,6 +1548,22 @@ div.genie-wrap.listingmapstyleone footer {
 		display: block;
 		margin-bottom: 30px;
 	}
+
+	.genie-wrap.listingmapstyleone .filter-pagination-wrap,
+	.genie-wrap.listingmapstyleone ul.pagination {
+		flex-wrap: wrap;
+	}
+
+	.genie-wrap.listingmapstyleone ul.pagination {
+		margin: 0;
+		padding-left: 0;
+		justify-content: flex-start;
+	}
+
+	.genie-wrap.marketactivity .map-key svg {
+		width: 100% !important;
+	}
+
 }
 
 @media (max-width: 575px) {
@@ -1545,6 +1573,10 @@ div.genie-wrap.listingmapstyleone footer {
 
 	.form-section img.form-bg {
 		height: 800px;
+	}
+
+	.fast-facts-property-icons {
+		align-items: center;
 	}
 }
 
@@ -1575,6 +1607,10 @@ div.genie-wrap.listingmapstyleone footer {
 	.awu-field input[type="submit"] {
 		display: block;
 		margin: 0 auto;
+	}
+
+	.preferred_contact {
+		justify-content: center;
 	}
 
 	.modal.page-modal .modal-title {
