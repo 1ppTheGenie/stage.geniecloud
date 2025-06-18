@@ -1331,6 +1331,7 @@ div.genie-wrap.listingmapstyleone footer {
 }
 .home-valuation-content{
 	font-family: var(--theme-sub-heading-font);
+	color: var(--white);
 	position: relative;
 	z-index: 2 !important;
 	max-width: 49rem;
