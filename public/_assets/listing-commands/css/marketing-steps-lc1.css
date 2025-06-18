@@ -56,6 +56,9 @@ body{
 .company-logo{
 	min-height: 8.438rem;
 }
+.company-logo:empty {
+    min-height: 4.0625rem;
+}
 .company-logo img{
 	width: 15.625rem;
 }
