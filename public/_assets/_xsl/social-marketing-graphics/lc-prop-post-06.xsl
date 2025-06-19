@@ -132,22 +132,22 @@
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue='dark'">
-								<xsl:value-of select="$personalLogoInverse" />
+								<xsl:value-of select="$companyLogoInverse" />
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="$personalLogo" />
+								<xsl:value-of select="$companyLogo" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
 				</image>
 				<image x="32.5%" y="87.7%" width="20%" height="6.5%" class="" preserveAspectRatio="xMinYMid meet">
-					<xsl:attribute name="href">
+                    <xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue='dark'">
-								<xsl:value-of select="$companyLogoInverse" />
+								<xsl:value-of select="$personalLogoInverse" />
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="$companyLogo" />
+								<xsl:value-of select="$personalLogo" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>

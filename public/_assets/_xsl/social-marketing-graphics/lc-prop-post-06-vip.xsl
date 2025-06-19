@@ -97,10 +97,10 @@
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue = 'light'">
-								<xsl:value-of select="$personalLogo" />
+								<xsl:value-of select="$companyLogo" />
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="$personalLogoInverse" />
+								<xsl:value-of select="$companyLogoInverse" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
@@ -109,10 +109,10 @@
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue = 'light'">
-								<xsl:value-of select="$companyLogo" />
+								<xsl:value-of select="$personalLogo" />
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="$companyLogoInverse" />
+								<xsl:value-of select="$personalLogoInverse" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>

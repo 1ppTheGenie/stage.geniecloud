@@ -135,13 +135,22 @@ Version:	1.1
 
 					<div class="container">
 						<div class="company-logo">
-							<xsl:if test="//agent[1]/personalLogoDark != ''">
-                                <img title="Company Logo">
-                                    <xsl:attribute name="src">
-                                        <xsl:value-of select="//agent[1]/personalLogoDark" />
-                                    </xsl:attribute>
-                                </img>
-                            </xsl:if>
+							<xsl:choose>
+								<xsl:when test="//agent[1]/companyLogoDark != ''">
+									<img title="Company Logo">
+										<xsl:attribute name="src">
+											<xsl:value-of select="//agent[1]/companyLogoDark" />
+										</xsl:attribute>
+                                	</img>
+								</xsl:when>
+								<xsl:otherwise>
+									<img title="Company Logo">
+										<xsl:attribute name="src">
+											<xsl:value-of select="//agent[1]/personalLogoDark" />
+										</xsl:attribute>
+                                	</img>
+								</xsl:otherwise>
+							</xsl:choose>
 						</div>	
 						<h1>
 							<span>
