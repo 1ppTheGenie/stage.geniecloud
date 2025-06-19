@@ -61,6 +61,8 @@ body{
 }
 .company-logo img{
 	width: 15.625rem;
+	max-height: 4.5rem;
+    object-fit: contain;
 }
 .address p{
 	text-transform:uppercase;
