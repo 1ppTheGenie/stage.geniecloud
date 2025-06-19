@@ -760,10 +760,32 @@
 					</div>
 				</section>
 				
+				<section class="text-center inverse home-valuation">
+					<xsl:attribute name="style">
+						background-image: url('<xsl:value-of select="$primaryImage" />');
+					</xsl:attribute>
+
+					<div class="overlay">
+						<xsl:comment/>
+					</div>
+					
+					<div class="home-valuation-content">
+						<h2>
+							<xsl:value-of select="concat( 'What&#8217;s My ', //areas/area[1]/name, ' ', $singularPropertyType, ' Value?')" />
+						</h2>
+						<p>
+							<xsl:value-of select="concat( 'See how your home compares to other homes in ', //areas/area[1]/name, ', and find out what you can do to increase its worth. Get your personalized home report, and learn what people are looking for in a home.')" />
+						</p>
+
+						<button type="button" class="request-home-value">
+							Find what my property is worth!
+						</button>
+					</div>	
+				</section>
 
 				<section class="genie-alternate">
 					<xsl:call-template name="agent-about" />
-				</section>
+				</section>			
 			</div>
 
 			<div class="modal fade page-modal" id="request-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -813,9 +835,9 @@
 								<textarea class="form-control" name="note" cols="40" rows="10"></textarea>
 							</div>
 							<div class="col-md-12">
-                <input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact" />
-                <input type="hidden" name="formListingAddress" value="{ $listingAddressLine1 }" />
-                <input type="hidden" name="noteFormatter" value="RequestMoreInfoMoving" />
+								<input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact" />
+								<input type="hidden" name="formListingAddress" value="{ $listingAddressLine1 }" />
+								<input type="hidden" name="noteFormatter" value="RequestMoreInfoMoving" />
 								<input type="submit" value="Send" class="submit-btn" />
 							</div>
 						</form>
@@ -872,9 +894,9 @@
 								<textarea class="form-control" name="note" cols="40" rows="10"></textarea>
 							</div>
 							<div class="col-md-12">
-                <input type="hidden" name="genieTags" value="RequestShowing, OptInContact" />
-                <input type="hidden" name="formListingAddress" value="{ $listingAddressLine1 }" />
-                <input type="hidden" name="noteFormatter" value="RequestShowing" />
+								<input type="hidden" name="genieTags" value="RequestShowing, OptInContact" />
+								<input type="hidden" name="formListingAddress" value="{ $listingAddressLine1 }" />
+								<input type="hidden" name="noteFormatter" value="RequestShowing" />
 								<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />
 							</div>
 						</form>
