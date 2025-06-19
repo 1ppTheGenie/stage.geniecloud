@@ -49,7 +49,7 @@
 
 		<image x="50%" y="50%" width="50%" height="50%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="idx" select="2" />
+				<xsl:with-param name="idx" select="3" />
 			</xsl:call-template>
 		</image>
 

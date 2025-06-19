@@ -23,10 +23,16 @@ Supports:	Area, Print, Listing, QRCode
 
 		<image x="62.38%" y="50.2%" width="38.8%" height="49.8%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="idx" select="2" />
+				<xsl:with-param name="idx" select="3" />
 			</xsl:call-template>
 		</image>
-
+		<text x="82%" y="90%" data-max-width="30%" class="center upper" fill="#fff" style="font-size:135%;font-weight:600;font-family:var(--theme-body-font);">
+			<tspan>
+				<xsl:value-of select="//single/address/street" />
+				<xsl:text> &#8226; </xsl:text>
+				<xsl:value-of select="//single/address/city" />
+			</tspan>
+		</text>
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
 
