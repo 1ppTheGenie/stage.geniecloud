@@ -38,25 +38,25 @@ export default () => {
 					<StatusIcon
 						caption={`New`.toUpperCase()}
 						isLoading={areaDataStore.loading}
-						count={listingsSubset( "new")?.length}
+						count={listingsSubset("new")?.length}
 						period="0-30 days"
 					/>
 					<StatusIcon
 						caption={`Active`.toUpperCase()}
 						isLoading={areaDataStore.loading}
-						count={listingsSubset( "active")?.length}
+						count={listingsSubset("active")?.length}
 						period="Total"
 					/>
 					<StatusIcon
 						caption={`Pending`.toUpperCase()}
 						isLoading={areaDataStore.loading}
-						count={listingsSubset( "pending")?.length}
+						count={listingsSubset("pending")?.length}
 						period={`${areaDataStore.areaPeriod} months`}
 					/>
 					<StatusIcon
 						caption={`Sold`.toUpperCase()}
 						isLoading={areaDataStore.loading}
-						count={listingsSubset( "sold")?.length}
+						count={listingsSubset("sold")?.length}
 						period={`${areaDataStore.areaPeriod} months`}
 					/>
 				</Show>
@@ -76,7 +76,7 @@ export default () => {
 						icon={
 							areaDataStore.propertyStats.avgListPricePerSqFtPrevious -
 								areaDataStore.propertyStats.avgListPricePerSqFt <=
-							0 ? (
+								0 ? (
 								<DnRed />
 							) : (
 								<UpGreen />
@@ -86,8 +86,8 @@ export default () => {
 						caption={`average list price per square foot`.toUpperCase()}
 						value={currency(
 							areaDataStore.propertyStats.avgPricePerSqFt *
-								(areaDataStore.propertyStats.avgListPriceForSold /
-									areaDataStore.propertyStats.avgSalePrice)
+							(areaDataStore.propertyStats.avgListPriceForSold /
+								areaDataStore.propertyStats.avgSalePrice)
 						)}
 						color="var(--vivid-dark-4)"
 					/>
@@ -96,7 +96,7 @@ export default () => {
 						icon={
 							areaDataStore.propertyStats.avgSoldPricePerSqFtPrevious -
 								areaDataStore.propertyStats.avgSoldPricePerSqFt <=
-							0 ? (
+								0 ? (
 								<DnRed />
 							) : (
 								<UpGreen />
@@ -114,7 +114,7 @@ export default () => {
 						isLoading={areaDataStore.loading}
 						value={percent(
 							areaDataStore.propertyStats.avgSalePrice /
-								areaDataStore.propertyStats.avgListPriceForSold
+							areaDataStore.propertyStats.avgListPriceForSold
 						)}
 						color="var(--vivid-dark-4)"
 					/>
@@ -129,24 +129,16 @@ const StatusIcon = props => {
 		<svg
 			version="1.1"
 			xmlns="http://www.w3.org/2000/svg"
-			width="150px"
+			width="152px"
 			height="162px"
-			viewBox="0 0 120 120">
-			<path
-				fill={`var(--${props.caption.toLowerCase()})`}
-				d="M119.548,88c0,17.673-14.272,32-31.88,32H31.879C14.272,120,0,105.673,0,88V32C0,14.327,14.272,0,31.879,0
-		h55.789c17.605,0,31.88,14.327,31.88,32V88z"
-			/>
-			<path
-				fill="#fff4"
-				d="M115.495,15.705C110.6,7.244,101.955,1.247,91.841,0H28.204C12.45,1.942,0.249,15.411,0.249,31.75v56
-		c0,9.414,4.051,17.877,10.497,23.732C43.246,104.831,104.001,44.82,115.495,15.705z"
-			/>
+			viewBox="0 0 154 164">
+			<rect x="2" y="2" width="152" height="160" rx="20" fill={`var(--${props.caption.toLowerCase()})`}/>
+			<path fill="#fff4" d="M143 6.5C104 90.5 26.5 120 2 124C2.16667 93.3333 2.5 29.5 2.5 19.5C2.5 9.5 14.1667 3.66667 20 2C57.1667 2.16667 132.6 2.6 137 3C141.4 3.4 142.833 5.5 143 6.5Z" />
+			<rect x="2" y="2" width="152" height="160" rx="20" fill="#00000000" stroke="white" stroke-width="4" stroke-linejoin="round"/>
 
 			<text
-				x="10"
+				x="15"
 				y="20"
-				font-family="sans-serif"
 				fill="#fff"
 				class="status-type"
 				text-anchor="left"
@@ -155,8 +147,8 @@ const StatusIcon = props => {
 			</text>
 
 			<text
-				x="10"
-				font-family="sans-serif"
+				x="15"
+				y="65"
 				fill="#fff"
 				class="number-count"
 				text-anchor="left"
@@ -169,12 +161,12 @@ const StatusIcon = props => {
 
 			{props.caption == "NEW" ? (
 				<svg
-					x="80"
-					y="45"
+					x="93"
+					y="52"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 500 500"
-					width="33"
-					height="33">
+					width="50"
+					height="48">
 					<path
 						fill="#fff"
 						d="M252.81,172.92c-23.28-23.89-46.56-47.77-69.84-71.66L49.64,219.96v160.16h100.18v-93.5h28.28
@@ -210,12 +202,12 @@ const StatusIcon = props => {
 
 			{props.caption == "SOLD" ? (
 				<svg
-					x="80"
-					y="45"
+					x="93"
+					y="52"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 500 500"
-					width="33"
-					height="33">
+					width="50"
+					height="48">
 					<path
 						fill="#fff"
 						d="M252.81,172.92c-23.28-23.89-46.56-47.77-69.84-71.66L49.64,219.96v160.16h100.18v-93.5h28.28
@@ -270,13 +262,13 @@ const StatusIcon = props => {
 
 			{props.caption == "ACTIVE" ? (
 				<svg
-					x="80"
-					y="45"
+					x="93"
+					y="52"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 500 500"
 					fill="#ffffff"
-					width="33"
-					height="33">
+					width="50"
+					height="48">
 					<path
 						fill="#fff"
 						d="M252.81,172.92c-23.28-23.89-46.56-47.77-69.84-71.66L49.64,219.96v160.16h100.18v-93.5h28.28
@@ -329,12 +321,12 @@ const StatusIcon = props => {
 
 			{props.caption == "PENDING" ? (
 				<svg
-					x="80"
-					y="45"
+					x="93"
+					y="52"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 500 500"
-					width="33"
-					height="33">
+					width="50"
+					height="48">
 					<path
 						fill="#fff"
 						d="M252.81,172.92c-23.28-23.89-46.56-47.77-69.84-71.66L49.64,219.96v160.16h100.18v-93.5h28.28
@@ -371,27 +363,18 @@ const StatusIcon = props => {
 				""
 			)}
 
+
 			<g>
-				<path
-					fill="#0003"
-					d="M7.083,83.672v8.562c0,10.09,8.178,18.267,18.266,18.267h69.069c10.089,0,18.266-8.177,18.266-18.267
-			v-8.562H7.083z"
-				/>
-				<line
-					fill="none"
-					stroke="#0006"
-					stroke-width="2"
-					x1="7.083"
-					y1="82.87"
-					x2="112.527"
-					y2="82.87"
-				/>
+				<path fill="#0003" d="M17 118H138V140C138 145.523 133.523 150 128 150H27C21.4772 150 17 145.523 17 140V118Z"></path>
+				<line x1="17" y1="117" x2="138" y2="117" stroke="#0006" stroke-width="2"></line>
+	
 				<text
-					x="60"
-					y="90"
+					x="75"
+					y="125"
 					font-family="sans-serif"
-					font-size="15"
-					class="date"
+					font-size="16"
+					font-weight="600"
+					class="stats"
 					fill="#fff"
 					dominant-baseline="hanging"
 					text-anchor="middle">

@@ -7,7 +7,7 @@
     flex-wrap: nowrap;
     justify-content: center;
     margin: auto;
-    width: 70%;
+    width: 59%;
 }
 
 .MarketTrending #big-squares svg {
@@ -45,16 +45,20 @@
 }
 
 .MarketTrending #big-squares svg .status-type {
-    font-size: 18px;
+    font-size: 25px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .MarketTrending #big-squares svg .number-count {
-    font-size: 21px;
-    transform: translateY(52px);
+    font-size: 30px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.MarketTrending #big-squares svg date {
-    font-size: 13px;
+.MarketTrending #big-squares svg .stats {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: capitalize;
 }
 
 .trending-box {
@@ -77,11 +81,6 @@
 
 @media (max-width: 991px) {
     .MarketTrending #big-squares {
-        /*
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 170px;
-*/
         width: 100%;
         flex-wrap: wrap;
     }
@@ -89,7 +88,7 @@
     .MarketTrending #big-squares svg {
         margin-bottom: 20px;
         height: 120px;
-        flex-basis: 50%;
+        flex-basis: 40%;
     }
 
     .trending-box {
