@@ -525,7 +525,7 @@ export const api = async event => {
                                         {
                                             ...params,
                                             asset: `collections/${collection.template}`,
-                                            size: 'Landing Page',
+                                            size: 'video',
                                             isCollectionTemplate: true
                                         }
                                     );
