@@ -77,6 +77,13 @@
 					"sort": 12,
 					"asset": "area-insider-reports/top-secret-market-insider",
 					"name": "Market Insider Report"
+				},
+				{
+					"sort": 13,
+					"asset": "landing-pages/property-website-qr-code",
+					"name": "Property Website QR Code",
+					"size": "instagram-Square",
+					"qrUrl": "lc-hollywood"
 				}
 			],
 			"name": "Connect with the community"
