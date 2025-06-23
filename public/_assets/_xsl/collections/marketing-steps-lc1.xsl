@@ -305,11 +305,11 @@ Version:	1.1
 							</xsl:for-each>
 
 							<!-- Loop over docs -->
-							<!-- <xsl:for-each select="./doc">
+							<xsl:for-each select="./doc">
 								<xsl:call-template name="asset-box">
 									<xsl:with-param name="asset" select="." />
 								</xsl:call-template>
-							</xsl:for-each> -->
+							</xsl:for-each>
 						</div>
 					</div>
 
