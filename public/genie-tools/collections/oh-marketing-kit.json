@@ -108,8 +108,8 @@
 					"sort": 4,
 					"asset": "landing-pages/property-website-qr-code",
 					"name": "Property Website QR Code",
-					"qrUrl": "lc-hollywood",
-					"size": "instagram-Square"
+					"size": "instagram-Square",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 5,

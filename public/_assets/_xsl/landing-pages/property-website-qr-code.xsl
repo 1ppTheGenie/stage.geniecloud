@@ -2,7 +2,7 @@
 <!--
 	Asset Name: Property Website QR Code
 	Tags: 		propert qr
-	Sizes:		Instagram-Square
+	Sizes:		instagram-Square
 	Supports:	Area, Print
 -->
 
