@@ -509,4 +509,9 @@ footer{
 	.assets-steps .asset-container[data-title="Market Insider Report"] > .overlap > a > img:last-child{
 		width: 90%;
 	}
+	.assets-steps .asset-container .overlap img{
+		max-height: 4.15rem !important;
+		max-width: none !important;
+		height: auto !important;
+	}
 }
