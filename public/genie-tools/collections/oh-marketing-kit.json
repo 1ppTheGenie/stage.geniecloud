@@ -104,9 +104,15 @@
 					"name": "Property Website",
 					"size": "Landing Page"
 				},
-
 				{
 					"sort": 4,
+					"asset": "landing-pages/property-website-qr-code",
+					"name": "Property Website QR Code",
+					"qrUrl": "lc-hollywood",
+					"size": "instagram-Square"
+				},
+				{
+					"sort": 5,
 					"asset": "flyers/car-oh",
 					"name": "CAR OH Form",
 					"size": "us-letter"
