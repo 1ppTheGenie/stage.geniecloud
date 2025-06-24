@@ -28,17 +28,17 @@ Supports:	Area, Print, Listing, QRCode
 		</image>
 
 		<defs>
-			<linearGradient id="textBackgroundGradient" x1="0" y1="0" x2="0" y2="1">
-				<stop offset="0%" stop-color="black" stop-opacity="0" />
-				<stop offset="25%" stop-color="black" stop-opacity="0.2" />
-				<stop offset="50%" stop-color="black" stop-opacity="0.4" />
-				<stop offset="75%" stop-color="black" stop-opacity="0.6" />
-				<stop offset="100%" stop-color="black" stop-opacity="0.8" />
-			</linearGradient>
-		</defs>
+            <linearGradient id="textBackgroundGradient" x1="0" y1="0" x2="0" y2="1">
+               <stop offset="0%" stop-color="black" stop-opacity="0"></stop>
+               <stop offset="25%" stop-color="black" stop-opacity="0.4"></stop>
+               <stop offset="50%" stop-color="black" stop-opacity="0.6"></stop>
+               <stop offset="75%" stop-color="black" stop-opacity="0.7"></stop>
+               <stop offset="100%" stop-color="black" stop-opacity="0.8"></stop>
+            </linearGradient>
+         </defs>
 
 		<!-- Background Gradient Rectangle -->
-		<rect x="62.6%" y="84%" width="38.6%" height="16%" fill="url(#textBackgroundGradient)" />
+		<rect x="62.6%" y="54%" width="38.6%" height="50%" fill="url(#textBackgroundGradient)"></rect>
 
 		
 
