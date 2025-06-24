@@ -30,15 +30,15 @@ Supports:	Area, Print, Listing, QRCode
 		<defs>
             <linearGradient id="textBackgroundGradient" x1="0" y1="0" x2="0" y2="1">
                <stop offset="0%" stop-color="black" stop-opacity="0"></stop>
-               <stop offset="25%" stop-color="black" stop-opacity="0.4"></stop>
-               <stop offset="50%" stop-color="black" stop-opacity="0.6"></stop>
-               <stop offset="75%" stop-color="black" stop-opacity="0.7"></stop>
+               <stop offset="25%" stop-color="black" stop-opacity="0.3"></stop>
+               <stop offset="50%" stop-color="black" stop-opacity="0.55"></stop>
+               <stop offset="75%" stop-color="black" stop-opacity="0.65"></stop>
                <stop offset="100%" stop-color="black" stop-opacity="0.8"></stop>
             </linearGradient>
          </defs>
 
 		<!-- Background Gradient Rectangle -->
-		<rect x="62.6%" y="54%" width="38.6%" height="50%" fill="url(#textBackgroundGradient)"></rect>
+		<rect x="62.38%" y="64%" width="38.8%" height="40%" fill="url(#textBackgroundGradient)"></rect>
 
 		
 
