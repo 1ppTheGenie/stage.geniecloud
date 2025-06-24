@@ -26,6 +26,22 @@ Supports:	Area, Print, Listing, QRCode
 				<xsl:with-param name="idx" select="3" />
 			</xsl:call-template>
 		</image>
+
+		<defs>
+			<linearGradient id="textBackgroundGradient" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0%" stop-color="black" stop-opacity="0" />
+				<stop offset="25%" stop-color="black" stop-opacity="0.2" />
+				<stop offset="50%" stop-color="black" stop-opacity="0.4" />
+				<stop offset="75%" stop-color="black" stop-opacity="0.6" />
+				<stop offset="100%" stop-color="black" stop-opacity="0.8" />
+			</linearGradient>
+		</defs>
+
+		<!-- Background Gradient Rectangle -->
+		<rect x="62.6%" y="84%" width="38.6%" height="16%" fill="url(#textBackgroundGradient)" />
+
+		
+
 		<text x="82%" y="90%" data-max-width="30%" class="center upper" fill="#fff" style="font-size:135%;font-weight:600;font-family:var(--theme-body-font);">
 			<tspan>
 				<xsl:value-of select="//single/address/street" />
