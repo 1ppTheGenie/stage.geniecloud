@@ -53,6 +53,19 @@
 			</xsl:call-template>
 		</image>
 
+		<defs>
+            <linearGradient id="textBackgroundGradient" x1="0" y1="0" x2="0" y2="1">
+               <stop offset="0%" stop-color="black" stop-opacity="0"></stop>
+               <stop offset="25%" stop-color="black" stop-opacity="0.3"></stop>
+               <stop offset="50%" stop-color="black" stop-opacity="0.55"></stop>
+               <stop offset="75%" stop-color="black" stop-opacity="0.65"></stop>
+               <stop offset="100%" stop-color="black" stop-opacity="0.8"></stop>
+            </linearGradient>
+         </defs>
+
+		<!-- Background Gradient Rectangle -->
+		<rect x="50%" y="70%" width="50%" height="30%" fill="url(#textBackgroundGradient)"></rect>
+
 		<xsl:call-template name="cropped-container" />
 
 		<line stroke="var(--theme-heading-color)" stroke-width="0.3%" x1="50%" x2="50%" y1="0" y2="100%" />
