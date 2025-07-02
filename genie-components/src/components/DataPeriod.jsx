@@ -13,7 +13,6 @@ export const DataPeriod = () => {
 			<option value="6">Last 6 months</option>
 			<option value="9">Last 9 months</option>
 			<option value="12">Last 12 months</option>
-			<option value="24">Last 24 months</option>	
 		</select>
 	);
 };
