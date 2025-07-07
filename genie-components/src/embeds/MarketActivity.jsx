@@ -184,28 +184,25 @@ export default () => {
 };
 
 const StatusKey = ({ setStatus }) => {
-	const [labels, setLabels] = createSignal([]);
-
-	createEffect(() =>
-		setLabels([
-			{
-				total: areaDataStore?.overall?.new,
-				label: "New (active)",
-				status: "new",
-			},
-			{
-				total: areaDataStore?.overall?.active,
-				label: "Active",
-				status: "active",
-			},
-			{
-				total: areaDataStore?.overall?.pending,
-				label: "Pending",
-				status: "pending",
-			},
-			{ total: areaDataStore.overall?.sold, label: "Sold", status: "sold" },
-		])
-	);
+	 console.log("areaDataStore.overall:", areaDataStore?.overall?.new,areaDataStore?.overall?.active,areaDataStore?.overall?.pending)
+	const labels = [
+		{
+			total: areaDataStore?.overall?.new,
+			label: "New (active)",
+			status: "new",
+		},
+		{
+			total: areaDataStore?.overall?.active,
+			label: "Active",
+			status: "active",
+		},
+		{
+			total: areaDataStore?.overall?.pending,
+			label: "Pending",
+			status: "pending",
+		},
+		{ total: areaDataStore.overall?.sold, label: "Sold", status: "sold" },
+	];
 
 	return (
 		<div class="map-key" style="position: absolute; z-index: 700; top: 65px">
@@ -226,22 +223,25 @@ const StatusKey = ({ setStatus }) => {
 					{areaDataStore.areaName}
 				</text>
 				<g style="transform: translate(20px, 70px)">
-					{labels().map((l, i) => {
-						return (
-							<g
-								key={i}
-								style={`transform: translateY(${i * 50}px)`}
-								onClick={() => setStatus(l.status)}>
-								<circle fill={`var(--${l.status})`} cx="20" cy="5" r="17" />
-								<text
-									x="20"
-									y="5"
-									fill="var(--white)"
-									text-Anchor="middle"
-									dominant-Baseline="middle"
-									style="font-size: 100%; text-Shadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
-									{l.total}
-								</text>
+					{labels.map((l, i) =>{
+						  console.log(`Label ${i}:`, l.total); // Log each label's total
+
+				 return (
+						<g
+							key={i}
+							style={`transform: translateY(${i * 50}px)`}
+							onClick={e => setStatus(l.status)}>
+							<circle fill={`var(--${l.status})`} cx="20" cy="5" r="17" />
+							<text
+								x="20"
+								y="5"
+								fill="var(--white)"
+								text-Anchor="middle"
+								dominant-Baseline="middle"
+								style="font-size: 100%; text-Shadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
+								{l.total}
+							</text>
+							
 
 								<text
 									x="50"

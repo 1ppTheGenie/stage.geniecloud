@@ -16,7 +16,7 @@
         <g>
             <g style="transform: translate(4%, 4%)">
                 <text font-family="var(--theme-heading-font)" fill="#0f1132" font-weight="800"
-                    font-size="85" class="upper">
+                    font-size="85" class="upper" data-max-width="80%">
                     <xsl:value-of select="$listingAddressLine1" />
                 </text>
                 <xsl:choose>
@@ -47,7 +47,7 @@
             </g>
             <g style="transform: translate(4%, 38.5%)">
                 <text font-family="var(--theme-heading-font)" fill="#0f1132" font-weight="800"
-                    font-size="85" class="upper">
+                    font-size="85" class="upper" data-max-width="80%">
                     <xsl:value-of select="$listingAddressLine1" />
                 </text>
                 <xsl:choose>
@@ -78,7 +78,7 @@
             </g>
             <g style="transform: translate(4%, 73%)">
                 <text font-family="var(--theme-heading-font)" fill="#0f1132" font-weight="800"
-                    font-size="85" class="upper">
+                    font-size="85" class="upper" data-max-width="80%">
                     <xsl:value-of select="$listingAddressLine1" />
                 </text>
                 <xsl:choose>

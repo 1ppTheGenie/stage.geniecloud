@@ -1,0 +1,75 @@
+{
+	"name": "Agent Farm Domination Kit",
+	"template": "farm-domination-kit",
+	"version": 3,
+	"sections": [
+		{
+			"sort": 1,
+			"meta": { "caption": "Pre marketing assets", "description": "" },
+			"assets": [
+				{
+					"sort": 1,
+					"asset": "report-pages/ed-kaminsky-vip-entry-5",
+					"name": "KRG DH Market Insider Flyer Portrait",
+					"qrUrl": "lc-hollywood"
+				},
+				{
+					"sort": 2,
+					"asset": "report-pages/ed-kaminsky-vip-entry-5",
+					"name": "Market Insider Door Hanger",
+					"qrUrl": "lc-hollywood"
+				},
+				{
+					"sort": 3,
+					"asset": "social-marketing-graphics/nc-frisco",
+					"name": "Nc Frisco",
+					"size": "instagram-Square"
+				},
+				{
+					"sort": 4,
+					"asset": "social-marketing-graphics/nc-discovery",
+					"name": "Neighborhood Market Report Ad1",
+					"size": "instagram-Square"
+				},
+				{
+					"sort": 5,
+					"asset": "social-marketing-graphics/nc-news",
+					"name": "Neighborhood Market Report Ad2",
+					"size": "instagram-Square"
+				},
+				{
+					"sort": 6,
+					"asset": "direct-mail/qr-code-mailer-postage-side-1",
+					"name": "QR Code Mailer Postage Side 1",
+					"size": "Postcard"
+				},
+                {
+					"sort": 7,
+					"asset": "direct-mail-postcards-front/qr-code-postcard-v3-front",
+					"name": "QR Code Mailer Content Side 2",
+                    "qrUrl": "lc-hollywood"
+				}
+				
+			],
+			"name": "Connect with the community"
+		},
+		{
+			"sort": 2,
+			"meta": { "caption": "", "description": "" },
+			"assets": [
+				{
+					"sort": 1,
+					"asset": "area-insider-reports/top-secret-market-insider",
+					"name": "Market Insider Report"
+				},
+				{
+					"sort": 2,
+					"asset": "landing-pages/krg-home-valuation",
+					"name": "Landing Page",
+					"size": "Landing Page"
+				}
+			],
+			"name": "Create a lasting first impression"
+		}
+	]
+}

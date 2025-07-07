@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-Asset Name:	Multi-Step Area/Listing Command
+Asset Name:	Agent Farm Domination
 Size:		Landing Page
 Tags:		Listing Command, Area Command
 Supports:	Collection	
@@ -10,6 +10,10 @@ Version:	1.1
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:genie="https://theGenie.ai/hub" version="3.0">
 	<xsl:import href="listing-commands.xsl" />
+
+	<xsl:template name="template-folders">
+		<xsl:value-of select="'[`Step One:`, `Step Two`]'" />
+	</xsl:template>
 	
 	<xsl:template name="asset-box">
 		<xsl:param name="asset" />
@@ -59,27 +63,21 @@ Version:	1.1
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:value-of select="concat( //collection/@name, ' ', 'for', ' ' )" />
-				<xsl:value-of select="concat($listingAddressLine1, ' ', 'in' , ' ' , //area/name)" />
+				<xsl:value-of select="concat($listingAddressLine1, ' ', 'in' , ' ' , //area/name, ' ', 'on', ' ')" />
 				
-				<!-- <xsl:value-of select="concat(//openHouse/session[1]/@dow, ',', ' ' )" />
+				<xsl:value-of select="concat(//openHouse/session[1]/@dow, ',', ' ' )" />
 				<xsl:value-of select="concat(//openHouse/session[1]/@month, ' ')" /> 
 				<xsl:value-of select="//openHouse/session[1]/@date" />
 				<xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
-				<xsl:choose>
-					<xsl:when test="$date mod 10 = 1 and $date != 11">st</xsl:when>
-					<xsl:when test="$date mod 10 = 2 and $date != 12">nd</xsl:when>
-					<xsl:when test="$date mod 10 = 3 and $date != 13">rd</xsl:when>
-					<xsl:otherwise>th</xsl:otherwise>
-				</xsl:choose>
 				<xsl:value-of select="concat(' ', '•', ' ' )" />
 				<xsl:value-of select="translate(concat(//openHouse/session[1]/@starts, ' ', '-', ' '), 'APM', 'apm')" />
-				<xsl:value-of select="translate(//openHouse/session[1]/@ends, 'APM', 'apm')" /> -->
+				<xsl:value-of select="translate(//openHouse/session[1]/@ends, 'APM', 'apm')" />
                                     
 			</xsl:with-param>
 			 <xsl:with-param name="ogImage" select="'/_assets/_img/genie-logo-1.png'" />
 		</xsl:call-template>
 
-		<body class="marketing-steps listing-command-proof">
+		<body class="marketing-steps">
 			<link href="https://fonts.googleapis.com" rel="preconnect" />
 			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
 			
@@ -135,25 +133,17 @@ Version:	1.1
 
 					<div class="container">
 						<div class="company-logo">
-							<xsl:choose>
-								<xsl:when test="//agent[1]/companyLogoDark != ''">
-									<img title="Company Logo">
-										<xsl:attribute name="src">
-											<xsl:value-of select="//agent[1]/companyLogoDark" />
-										</xsl:attribute>
-                                	</img>
-								</xsl:when>
-								<xsl:otherwise>
-									<img title="Company Logo">
-										<xsl:attribute name="src">
-											<xsl:value-of select="//agent[1]/personalLogoDark" />
-										</xsl:attribute>
-                                	</img>
-								</xsl:otherwise>
-							</xsl:choose>
+							<xsl:if test="//agent[1]/personalLogoDark != ''">
+                                <img title="Company Logo">
+                                    <xsl:attribute name="src">
+                                        <xsl:value-of select="//agent[1]/personalLogoDark" />
+                                    </xsl:attribute>
+                                </img>
+                            </xsl:if>
 						</div>	
 						<h1>
 							<span>
+								<!--<xsl:value-of select="concat( //agent[1]/firstName, $apos, 's' )" />-->
 								<xsl:choose>
 									<xsl:when test="$hasMultipleAgents">
 										<xsl:value-of select="concat(//agent[1]/firstName, ' ', //agent[1]/lastName, $apos, 's', ' &amp; ', //agent[2]/firstName, ' ', //agent[2]/lastName, $apos, 's')" />
@@ -174,23 +164,17 @@ Version:	1.1
 								<p>
 									<xsl:value-of select="//area/name" />
 								<br/>
+
 									<xsl:value-of select="$listingAddressLine1" />
-									 <!-- <xsl:if test="//openHouse/session">
-                                        <xsl:text> • </xsl:text>
-                                        <xsl:value-of select="//openHouse/session[1]/@dow" />, 
-                                        <xsl:value-of select="concat(//openHouse/session[1]/@month, ' ')" /> 
-                                        <xsl:value-of select="//openHouse/session[1]/@date" />
-                                        <xsl:variable name="date" select="number(//openHouse/session[1]/@date)" />
-                                        <xsl:choose>
-                                            <xsl:when test="$date mod 10 = 1 and $date != 11">st</xsl:when>
-                                            <xsl:when test="$date mod 10 = 2 and $date != 12">nd</xsl:when>
-                                            <xsl:when test="$date mod 10 = 3 and $date != 13">rd</xsl:when>
-                                            <xsl:otherwise>th</xsl:otherwise>
-                                        </xsl:choose>
-                                        <xsl:text> • </xsl:text>
-                                        <xsl:value-of select="//openHouse/session[1]/@starts" /> - 
-                                        <xsl:value-of select="//openHouse/session[1]/@ends" />
-                                    </xsl:if> -->
+									<xsl:if test="count(//openHouse/session) &gt; 0">
+                                        <xsl:value-of select="concat(
+                                        ' • ', //openHouse/session[1]/@dow, ', ',
+                                        //openHouse/session[1]/@month, ' ',
+                                        //openHouse/session[1]/@date,
+                                        ' • ', //openHouse/session[1]/@starts, ' - ',
+                                        //openHouse/session[1]/@ends
+                                        )" />
+                                    </xsl:if>
 								</p>
 								
 							</div>
@@ -248,6 +232,15 @@ Version:	1.1
 					<!-- Section Output -->
 					<div class="container section assets-steps">
 						<div class="section-heading">
+														 
+							<xsl:if test="number(@sort) = 1">
+								<p class="steps-count"> Step one: </p>
+							</xsl:if>
+
+							<xsl:if test="number(@sort) = 2">
+								<p class="steps-count"> Step two: </p>
+							</xsl:if>
+							
 							<h2 class="steps-heading">
 								<xsl:value-of select="@name" />
 							</h2>
@@ -267,6 +260,7 @@ Version:	1.1
 									<xsl:value-of select="@caption" />
 								</p>
 							</xsl:if>
+
 						</div>
 
 						<div class="section-grid">
@@ -287,6 +281,51 @@ Version:	1.1
 						</div>
 					</div>
 
+					<!-- Insert Open House Checklist after the FIRST section -->
+					<xsl:if test="$pos = 1">
+						<section class="open-house-checklist">
+							<div class="container">
+								<h1>
+									<span class="text-gold">But wait, there’s more!</span>
+									<br/>Don’t forget your agent farm checklist.
+								</h1>
+								<div class="arrow-container">
+									<svg width="65px" height="75px" viewBox="0 0 21 21"
+										xmlns="http://www.w3.org/2000/svg">
+										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
+											<path d="m.5 9.499 4 4.001 4-4.001"></path>
+											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
+										</g>
+									</svg>
+									<svg width="65px" height="75px" viewBox="0 0 21 21"
+										xmlns="http://www.w3.org/2000/svg">
+										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
+											<path d="m.5 9.499 4 4.001 4-4.001"></path>
+											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
+										</g>
+									</svg>
+									<svg width="65px" height="75px" viewBox="0 0 21 21"
+										xmlns="http://www.w3.org/2000/svg">
+										<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)">
+											<path d="m.5 9.499 4 4.001 4-4.001"></path>
+											<path d="m4.5.5v13" transform="matrix(-1 0 0 -1 9 14)"></path>
+										</g>
+									</svg>
+								</div>
+							</div>	
+						</section>
+					</xsl:if>
+
+					<!-- Insert Visitor Section after the SECOND section -->
+					<xsl:if test="$pos = 2">
+						<section class="visitor-sec">
+							<div class="container">
+								<h1>Every visitor signs in.<br/> Every time. No exceptions.</h1>
+								<span class="up-arrow">↑</span>
+								<p class="bordered-button">This isn't a button. Read the above again.</p>
+							</div>	
+						</section>
+					</xsl:if>
 				</xsl:for-each>
 
 
@@ -297,17 +336,13 @@ Version:	1.1
 							<div>
 								<xsl:if test="//single/mlsNumber != ''">
 									<p>
-										<b>Property: </b>
-										<xsl:value-of select="concat($listingAddressLine1, ' ', //single/address/city)" />
-									</p>
-									<p>
 										<b>Hosted By:&#160;</b>
 										<xsl:value-of select="//agent[1]/marketingName" />
 									</p>
 									<p>
 										<b>Area Name:&#160;</b>
 										<xsl:value-of select="//areas/area[1]/name" />
-									</p>								
+									</p>
 								</xsl:if>
 							</div>
 
@@ -316,21 +351,6 @@ Version:	1.1
 									<b>Collection:&#160;</b>
 									<xsl:value-of select="//collection/@name" />
 								</p>
-								<p>
-									<b>Listing Agent: </b>
-									<xsl:choose>
-										<xsl:when test="//single/listingAgent != ''">
-											<xsl:value-of select="//single/listingAgent" />
-										</xsl:when>
-										<xsl:otherwise>
-											<xsl:value-of select="'n/a'" />
-										</xsl:otherwise>
-									</xsl:choose>
-								</p>
-								<p>
-									<b>MLS: </b>
-									<xsl:value-of select="//single/mlsNumber" />
-								</p>								
 							</div>
 
 							<div>
@@ -338,20 +358,6 @@ Version:	1.1
 									<b>Created On:&#160;</b>
 									<xsl:value-of select="genie:format-date( //collection/@assembled, '[M02]-[D]-[Y0001]' )" />
 								</p>
-
-								<!-- <p>
-									<b>Open House Date:&#160;</b>
-									<xsl:if test="count(//openHouse/session) &gt; 0">
-                                        <xsl:value-of select="concat(
-                                        //openHouse/session[1]/@month, ' ',
-                                        //openHouse/session[1]/@date,
-                                        ' • ', //openHouse/session[1]/@starts, ' - ',
-                                        //openHouse/session[1]/@ends
-                                        )" />
-                                    </xsl:if>
-									
-								</p> -->
-								
 								<p>
 									<b>Collection ID:&#160;</b>
 									<xsl:value-of select="//collection/@id" />
@@ -362,8 +368,6 @@ Version:	1.1
 				</section>
 			</main>
 		</body>
-
-		
 		<footer>
 			<div class="container">
 				<div class="grid-col-3 footer">

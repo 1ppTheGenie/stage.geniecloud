@@ -56,8 +56,13 @@ body{
 .company-logo{
 	min-height: 8.438rem;
 }
+.company-logo:empty {
+    min-height: 4.0625rem;
+}
 .company-logo img{
 	width: 15.625rem;
+	max-height: 4.5rem;
+    object-fit: contain;
 }
 .address p{
 	text-transform:uppercase;
@@ -503,5 +508,10 @@ footer{
 	.assets-steps .asset-container[data-title="Market Insider Report"] > .overlap > a > img:first-child,
 	.assets-steps .asset-container[data-title="Market Insider Report"] > .overlap > a > img:last-child{
 		width: 90%;
+	}
+	.assets-steps .asset-container .overlap img{
+		max-height: 4.15rem !important;
+		max-width: none !important;
+		height: auto !important;
 	}
 }

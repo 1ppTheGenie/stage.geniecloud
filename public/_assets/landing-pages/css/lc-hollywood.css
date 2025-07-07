@@ -1312,6 +1312,57 @@ div.genie-wrap.listingmapstyleone footer {
 	color: var(--theme-heading-color);
 }
 
+.home-valuation{
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+	padding: 9rem 1rem;
+}
+.home-valuation .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    background-color: #000000;
+    z-index: 1 !important;
+}
+.home-valuation-content{
+	font-family: var(--theme-sub-heading-font);
+	color: var(--white);
+	position: relative;
+	z-index: 2 !important;
+	max-width: 49rem;
+    margin: auto;
+}
+.home-valuation-content h2{
+	font-weight: 400;
+	font-size: 42px;
+}
+.home-valuation-content p{
+	font-size: 17px;
+	margin-bottom: 45px;
+}
+.home-valuation-content .request-home-value{
+	font-family: var(--theme-sub-heading-font);
+	color: var(--white);
+    font-size: 18px;
+    border: 2px solid #b2934e;
+    padding: 20px 25px;
+    border-radius: 35px;
+    font-weight: 600;
+    transition: all .5s;
+    background: transparent;
+	cursor: pointer;
+}
+.home-valuation-content .request-home-value:hover{
+	background: var(--white);
+    color: #337ab7 !important;
+    border: 2px solid var(--white) !important;
+}
+
 /* 2025 new css end */
 
 @media only screen and (min-width: 1471px) {
@@ -1456,6 +1507,22 @@ div.genie-wrap.listingmapstyleone footer {
 	.first-section:after {
 		display: none;
 	}
+
+	.genie-wrap.listingmapstyleone .w-33 {
+		width: 100%;
+	}
+
+	#about-section .agent-details.agent-detail-wrapper {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.genie-wrap.fastfacts .fast-facts-stats-icons-box {
+		width: 100%;
+	}
+	.home-valuation-content{
+		max-width: 34.5rem;
+	}
 }
 
 @media (max-width: 768px) {
@@ -1521,7 +1588,8 @@ div.genie-wrap.listingmapstyleone footer {
 	}
 
 	.che_box.submit-btn {
-		position: absolute;
+		/* position: absolute; */
+		padding-bottom: 35px;
 		bottom: 0;
 		right: 0;
 	}
@@ -1534,6 +1602,37 @@ div.genie-wrap.listingmapstyleone footer {
 		display: block;
 		margin-bottom: 30px;
 	}
+
+	.genie-wrap.listingmapstyleone .filter-pagination-wrap,
+	.genie-wrap.listingmapstyleone ul.pagination {
+		flex-wrap: wrap;
+	}
+
+	.genie-wrap.listingmapstyleone ul.pagination {
+		margin: 0;
+		padding-left: 0;
+		justify-content: flex-start;
+	}
+
+	.genie-wrap.marketactivity .map-key svg {
+		width: 100% !important;
+	}
+
+	.home-valuation{
+		padding: 9.9rem 1rem;
+	}
+
+	.home-valuation-content h2{
+		font-size: 21px;
+	}
+	.home-valuation-content p{
+		font-size: 13px;
+	}
+	.home-valuation-content .request-home-value{
+		font-size: 15px;
+		padding: 15px 13px
+	}
+
 }
 
 @media (max-width: 575px) {
@@ -1543,6 +1642,10 @@ div.genie-wrap.listingmapstyleone footer {
 
 	.form-section img.form-bg {
 		height: 800px;
+	}
+
+	.fast-facts-property-icons {
+		align-items: center;
 	}
 }
 
@@ -1573,6 +1676,10 @@ div.genie-wrap.listingmapstyleone footer {
 	.awu-field input[type="submit"] {
 		display: block;
 		margin: 0 auto;
+	}
+
+	.preferred_contact {
+		justify-content: center;
 	}
 
 	.modal.page-modal .modal-title {

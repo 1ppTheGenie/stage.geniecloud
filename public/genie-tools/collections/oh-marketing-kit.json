@@ -96,7 +96,7 @@
 					"asset": "landing-pages/lc-oh-guestbook",
 					"name": "Guestbook Link",
 					"lpo": "lc-hollywood",
-					"size": "Landing Page"
+					"size": "instagram-Square"
 				},
 				{
 					"sort": 3,
@@ -104,9 +104,15 @@
 					"name": "Property Website",
 					"size": "Landing Page"
 				},
-
 				{
 					"sort": 4,
+					"asset": "flyers/property-website-qr-code",
+					"name": "Property Website QR Code",
+					"size": "facebook-post",
+					"qrUrl": "lc-hollywood"
+				},
+				{
+					"sort": 5,
 					"asset": "flyers/car-oh",
 					"name": "CAR OH Form",
 					"size": "us-letter"

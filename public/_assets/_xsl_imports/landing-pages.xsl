@@ -170,7 +170,7 @@
 									</span>
 								</div>							
 							</div>
-							<div class="col-md-3">
+							<div class="col-lg-3">
 								<div class="agent-details agent-detail-wrapper">
 									<div class="photo">					
 										<img>
@@ -243,7 +243,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-lg-3">
 								<div class="agent-details agent-detail-wrapper">
 									<div class="photo">
 										<img>
@@ -396,7 +396,7 @@
 							</div>
 						</xsl:otherwise>
 					</xsl:choose>
-					<div class="col-md-5 footer-form">
+					<div class="col-lg-5 footer-form">
 						<h2 class="cld-title heading-title"><em>Get in Touch</em></h2>
 						<div role="form" class="wpcf7" lang="en-US" dir="ltr">
 							<form method="post" class="wpcf7-form funnel-create-lead" id="form_step1">

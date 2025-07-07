@@ -373,7 +373,14 @@ Version:	1.1
 									</p>
 									<p>
 										<b>Hosted By:&#160;</b>
-										<xsl:value-of select="//agent[1]/marketingName" />
+										<xsl:choose>
+											<xsl:when test="$hasMultipleAgents">
+												<xsl:value-of select="concat(//agent[1]/marketingName, ' &amp; ', //agent[2]/marketingName)" />
+											</xsl:when>
+											<otherwise>
+												<xsl:value-of select="//agent[1]/marketingName" />
+											</otherwise>
+										</xsl:choose>	
 									</p>
 									<p>
 										<b>Area Name:&#160;</b>

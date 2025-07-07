@@ -45,6 +45,19 @@
 			</xsl:call-template>
 		</image>
 
+		<defs>
+            <linearGradient id="textBackgroundGradient" x1="0" y1="0" x2="0" y2="1">
+               <stop offset="0%" stop-color="black" stop-opacity="0"></stop>
+               <stop offset="25%" stop-color="black" stop-opacity="0.3"></stop>
+               <stop offset="50%" stop-color="black" stop-opacity="0.55"></stop>
+               <stop offset="75%" stop-color="black" stop-opacity="0.65"></stop>
+               <stop offset="100%" stop-color="black" stop-opacity="0.8"></stop>
+            </linearGradient>
+         </defs>
+
+		<!-- Background Gradient Rectangle -->
+		<rect x="50%" y="70%" width="50%" height="30%" fill="url(#textBackgroundGradient)"></rect>
+
 		<line stroke="var(--theme-heading-color)" stroke-width="0.3%" x1="50%" x2="50%" y1="0" y2="100%" />
 
 		<xsl:call-template name="cropped-container" />
@@ -52,9 +65,18 @@
 
 	<xsl:template name="cropped-content">
 		<image x="4%" y="5%" width="16%" height="13%" id="logo" preserveAspectRatio="xMinYMid meet">
-			<xsl:attribute name="href">
-				<xsl:value-of select="$personalLogo" />
-			</xsl:attribute>
+			<xsl:choose>
+                    <xsl:when test="//output/@themeHue = 'light'">
+                        <xsl:attribute name="href">
+							<xsl:value-of select="$personalLogo" />
+						</xsl:attribute>
+                    </xsl:when>
+                    <xsl:otherwise>
+						<xsl:attribute name="href">
+							<xsl:value-of select="$personalLogoInverse" />
+						</xsl:attribute>
+                    </xsl:otherwise>
+                </xsl:choose>
 		</image>
 		<g>
 			<xsl:variable name="status-caption">
@@ -180,10 +202,19 @@
 			</tspan>
 		</text>
 
-		<image x="27%" y="83%" width="8%" height="12%" id="logo" preserveAspectRatio="xMinYMid meet">
-			<xsl:attribute name="href">
-				<xsl:value-of select="$companyLogo" />
-			</xsl:attribute>
+		<image x="26%" y="83%" width="12%" height="12%" id="logo" preserveAspectRatio="xMinYMid meet">
+			<xsl:choose>
+                    <xsl:when test="//output/@themeHue = 'light'">
+                        <xsl:attribute name="href">
+							<xsl:value-of select="$companyLogo" />
+						</xsl:attribute>
+                    </xsl:when>
+                    <xsl:otherwise>
+						<xsl:attribute name="href">
+							<xsl:value-of select="$companyLogoInverse" />
+						</xsl:attribute>
+                    </xsl:otherwise>
+                </xsl:choose>
 		</image>
 
 		<g style="transform:translate(39.275%, 30.335%)">

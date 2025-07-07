@@ -23,10 +23,32 @@ Supports:	Area, Print, Listing, QRCode
 
 		<image x="62.38%" y="50.2%" width="38.8%" height="49.8%" preserveAspectRatio="xMidYMid slice">
 			<xsl:call-template name="switch-image">
-				<xsl:with-param name="idx" select="2" />
+				<xsl:with-param name="idx" select="3" />
 			</xsl:call-template>
 		</image>
 
+		<defs>
+            <linearGradient id="textBackgroundGradient" x1="0" y1="0" x2="0" y2="1">
+               <stop offset="0%" stop-color="black" stop-opacity="0"></stop>
+               <stop offset="25%" stop-color="black" stop-opacity="0.3"></stop>
+               <stop offset="50%" stop-color="black" stop-opacity="0.55"></stop>
+               <stop offset="75%" stop-color="black" stop-opacity="0.65"></stop>
+               <stop offset="100%" stop-color="black" stop-opacity="0.8"></stop>
+            </linearGradient>
+         </defs>
+
+		<!-- Background Gradient Rectangle -->
+		<rect x="62.38%" y="64%" width="38.8%" height="40%" fill="url(#textBackgroundGradient)"></rect>
+
+		
+
+		<text x="82%" y="90%" data-max-width="30%" class="center upper" fill="#fff" style="font-size:135%;font-weight:600;font-family:var(--theme-body-font);">
+			<tspan>
+				<xsl:value-of select="//single/address/street" />
+				<xsl:text> &#8226; </xsl:text>
+				<xsl:value-of select="//single/address/city" />
+			</tspan>
+		</text>
 		<xsl:call-template name="cropped-container" />
 	</xsl:template>
 

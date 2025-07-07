@@ -82,8 +82,9 @@
 			"assets": [
 				{
 					"sort": 1,
-					"asset": "flyers/ed-kaminsky-brochure-01",
-					"name": "Property Brochure"
+					"asset": "flyers/property-brochure-01",
+					"name": "Property Brochure",
+					"qrUrl": "lc-hollywood"
 				},
 				{
 					"sort": 2,

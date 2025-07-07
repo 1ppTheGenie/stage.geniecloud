@@ -78,26 +78,54 @@ Supports: Agent
 			<xsl:if test="$companyLogo!='' and $personalLogo!=''">
 				<image x="40%" y="66.5%" width="20%" height="10%" id="logo" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$personalLogo" />
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'light'">
+								<xsl:value-of select="$personalLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$personalLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
 				</image>
 
 				<image x="40%" y="78.5%" width="20%" height="11%" id="logo" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$companyLogo" />
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'light'">
+								<xsl:value-of select="$companyLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
 				</image>
 			</xsl:if>
 
 			<xsl:if test="$companyLogo='' or $personalLogo=''">
-				<image x="40%" y="68.5%" width="20%" height="20%" id="logo" preserveAspectRatio="xMidYMid meet">
+				<image x="40%" y="68.5%" width="20%" height="15%" id="logo" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$companyLogo" />
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'light'">
+								<xsl:value-of select="$companyLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
 				</image>
-				<image x="40%" y="68.5%" width="20%" height="20%" id="logo" preserveAspectRatio="xMinYMid meet">
+				<image x="40%" y="68.5%" width="20%" height="15%" id="logo" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$personalLogo" />
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'light'">
+								<xsl:value-of select="$personalLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$personalLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
 				</image>
 			</xsl:if>

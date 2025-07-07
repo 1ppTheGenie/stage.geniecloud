@@ -63,7 +63,7 @@
 
 		<rect fill="var(--theme-sub-heading-color)" stroke-width="0" fill-opacity="1" x="0%" y="91.9%" width="100%" height="10%" />
 
-		<text class="upper center" x="50%" y="92.8%" fill="var(--theme-heading-color)" font-weight="600" font-size="250%" data-max-width="80%" font-family="var(--theme-body-font)">
+		<text class="upper center" x="50%" y="92.8%" fill="var(--theme-body-background)" font-weight="600" font-size="250%" data-max-width="80%" font-family="var(--theme-body-font)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="concat('Your ', //area/name, ' specialist' )" />
 			</xsl:call-template>
@@ -105,8 +105,8 @@
 
 		<xsl:choose>
 			<xsl:when test="$companyLogo='' or $personalLogo=''">
-				<text font-size="100%" font-family="var(--theme-sub-heading-font)" font-weight="600" fill="var(--theme-heading-color)" x="17.2%" y="81.85%" height="10%" width="31%" class="center">Presented By:</text>
-				<image x="23%" y="83.7%" width="30%" height="8%" id="logo" preserveAspectRatio="xMidYMid meet">
+				<text font-size="100%" font-family="var(--theme-sub-heading-font)" font-weight="600" fill="var(--theme-heading-color)" x="17.2%" y="81.85%" height="10%" width="31%">Presented By:</text>
+				<image x="17.2%" y="84.4%" width="24%" height="7.1%" id="logo" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="$personalLogo=''">
@@ -135,19 +135,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<text font-size="100%" font-family="var(--theme-sub-heading-font)" font-weight="600" fill="var(--theme-heading-color)" x="17.2%" y="81.85%" height="10%" width="31%">Presented By:</text>
-				<image x="16.8%" y="83.3%" height="8%" width="27.8%" id="logo" preserveAspectRatio="xMidYMid meet">
-					<xsl:attribute name="href">
-						<xsl:choose>
-							<xsl:when test="//output/@themeHue = 'light'">
-								<xsl:value-of select="$personalLogo" />
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="$personalLogoInverse" />
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:attribute>
-				</image>
-				<image x="45.5%" y="84%" height="7.1%" width="11%" id="logo" preserveAspectRatio="xMidYMid meet">
+				<image x="17.2%" y="84%" height="7.1%" width="24%" id="logo" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="//output/@themeHue = 'light'">
@@ -155,6 +143,18 @@
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</image>
+				<image x="45%" y="84%" height="7.1%" width="23%" id="logo" preserveAspectRatio="xMinYMid meet">
+					<xsl:attribute name="href">
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'light'">
+								<xsl:value-of select="$personalLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$personalLogoInverse" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
