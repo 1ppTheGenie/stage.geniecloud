@@ -5,6 +5,7 @@ import {
 	createEffect,
 	createResource,
 	createSignal,
+	onCleanup,
 	Show,
 } from "solid-js";
 
@@ -102,7 +103,7 @@ export const LeafletPane = props => {
 
 export const CircleMarker = ({ color, caption, position }) => {
 	const url = circleURI(color, caption);
-	/*
+	
 	const svgIcon =
 		window.L &&
 		new window.L.icon({
@@ -111,20 +112,28 @@ export const CircleMarker = ({ color, caption, position }) => {
 			iconAnchor: [12, 12],
 		});
 		
-		icon={svgIcon} 
-		*/
-
-	return <Marker position={position} />;
+	return <Marker position={position} icon={svgIcon}  />;
 };
 
 export const Marker = props => {
 	const map = useContext(MapContext);
-	const { position } = props;
-
+	//const { position } = props;
+	/*
 	createEffect(() => {
 		if (map() && position && window.L) {
 			window.L.marker(position, { ...props }).addTo(map());
 		}
+	});*/
+	createEffect(() => {
+		if (!map() || !props.position || !window.L) return;
+
+		// 1. create the layer
+		const marker = window.L.marker(props.position, { ...props }).addTo(map());
+
+		// 2. tell Solid how to dispose of it
+		onCleanup(() => {
+			map().removeLayer(marker);
+		});
 	});
 
 	return null;

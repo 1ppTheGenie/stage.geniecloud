@@ -14,30 +14,31 @@ const cssRootOverrides = {
 const DATASTUB = "data-genie-";
 const CAMELCASE = {
 	agentid: "agentId",
-	renderid: "renderId",
-	layout: "layout",
-	theme: "theme",
 	areaid: "areaId",
 	areaid: "areaID",
 	areaperiod: "areaPeriod",
-	period: "areaPeriod",
+	blurprice: "blurPrice",
+	downloadurl: "downloadUrl",
+	hideavm: "hideAVM",
+	layout: "layout",
 	leadareaid: "leadAreaId",
-	mode: "mode",
-	mapstyle: "mapStyle",
+	leadcapture: "isLeadCapture",
 	mapicon: "mapIcon",
 	mapkey: "mapKey",
-	mlsnumber: "mlsNumber",
+	mapstyle: "mapStyle",
+	marketstatus: "marketStatus",
 	mlsid: "mlsId",
-	blurprice: "blurPrice",
-	signin: "signIn",
+	mlsnumber: "mlsNumber",
+	mode: "mode",
+	nocopyright: "noCopyright",
+	nomargin: "noMargin",
+	openhouse: "openHouseTimes",
+	period: "areaPeriod",
 	pricepercent: "pricePercent",
 	propertytype: "propertyTypeId",
-	nocopyright: "noCopyright",
-	openhouse: "openHouseTimes",
-	hideavm: "hideAVM",
-	downloadurl: "downloadUrl",
-	leadcapture: "isLeadCapture",
-	nomargin: "noMargin",
+	renderid: "renderId",
+	signin: "signIn",
+	theme: "theme",
 };
 
 const defaultSettings = {
@@ -83,7 +84,9 @@ export default () => {
 					settings[CAMELCASE[name.replace(DATASTUB, "")]] =
 						genieNode.getAttribute(name);
 				}
-			});
+			} );
+			
+			
 
 			if (queryParams.shorturldataid) {
 				(async () => {
@@ -166,6 +169,8 @@ const Genie = ({ layout, nocopyright, nomargin, isLast, ...props }) => {
 
 	const Layout = lazy(() => import(`../embeds/${layout}.jsx`));
 
+	//console.log( "Genie", props.marketstatus, props.marketStatus );
+	//nsole.log("Provider’s Context4Settings is →", Context4Settings);
 	return (
 		<div
 			class={`genie-wrap ${layout.toLowerCase()}${
@@ -174,7 +179,7 @@ const Genie = ({ layout, nocopyright, nomargin, isLast, ...props }) => {
 			style={cssRootOverrides}>
 			<Context4Settings.Provider value={props}>
 				<Suspense fallback={<div>Analyzing latest market data...</div>}>
-					<Layout />
+					<Layout {...props} />
 				</Suspense>
 			</Context4Settings.Provider>
 

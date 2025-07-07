@@ -8086,116 +8086,114 @@ var userSetting = async (userId, setting) => {
 };
 var processAgents = async (agentIds) => {
   let agents = [];
-  await Promise.all(
-    agentIds.map(async (agentID) => {
-      const profile = await getUser(agentID);
-      const marketingSettings = profile.marketingSettings;
-      const findImage = (id) => {
-        const image = marketingSettings.images.find(
-          (img) => img.marketingImageTypeId == id
-        );
-        return image ? image.url : "";
-      };
-      const getDisclaimer = (id) => {
-        const disclaimer = marketingSettings.disclaimers.find(
-          (d) => d.marketingDisclaimerTypeId == id
-        );
-        return disclaimer ?? {
-          text: "",
-          url: ""
-        };
-      };
-      const getSnippet = (id) => {
-        const snippet = marketingSettings.codeSnippets.find(
-          (d) => d.marketingSnippetTypeId == id
-        );
-        return snippet ?? {
-          codeSnippet: ""
-        };
-      };
-      let timezone, tzOffset;
-      switch (marketingSettings.profile?.timeZoneId) {
-        case 1:
-          timezone = "America/New_York";
-          break;
-        case 2:
-          timezone = "America/Chicago";
-          break;
-        case 3:
-          timezone = "America/Denver";
-          break;
-        case 4:
-          timezone = "America/Los_Angeles";
-          break;
-        case 5:
-          timezone = "America/Anchorage";
-          break;
-        case 6:
-          timezone = "Pacific/Honolulu";
-          break;
-        default:
-          timezone = "America/Los_Angeles";
-          break;
-      }
-      let about = (marketingSettings.profile.about ?? "").replaceAll(
-        "\r\n",
-        "&#10;"
+  for (const agentID of agentIds) {
+    const profile = await getUser(agentID);
+    const marketingSettings = profile.marketingSettings;
+    const findImage = (id) => {
+      const image = marketingSettings.images.find(
+        (img) => img.marketingImageTypeId == id
       );
-      const agent = {
-        firstName: profile.firstName,
-        lastName: profile.lastName,
-        role: profile.roleDescription,
-        photo: findImage(1),
-        //"me"
-        // Switching the naming IS CORRECT! Light logo used on dark themes and vice versa
-        personalLogoLight: findImage(2),
-        //"personal_logo_dark"
-        personalLogoDark: findImage(3),
-        // "personal_logo_light"
-        companyLogoLight: findImage(4),
-        //"company_logo_dark"
-        companyLogoDark: findImage(6),
-        // "company_logo_light"
-        marketingName: marketingSettings.profile.displayName ?? null,
-        marketingTitle: marketingSettings.profile.title ?? null,
-        marketingEmail: marketingSettings.profile.email ?? null,
-        marketingAbout: `<![CDATA[${about}]]>`,
-        marketingLicense: marketingSettings.profile.licenseNumber ?? null,
-        privacySource: getDisclaimer(1).url,
-        // "privacy_source"
-        privacyPolicy: getDisclaimer(1).text,
-        // "privacy_text"
-        disclaimerOptin: getDisclaimer(2).text,
-        // "optin"
-        disclaimerExtra: getDisclaimer(4).text,
-        //"htmlDisclaimer"
-        disclaimerIDX: getDisclaimer(3).text,
-        // "idxDisclaimer"
-        snippetHeadTag: getSnippet(1).codeSnippet,
-        snippetOpenBodyTag: getSnippet(2).codeSnippet,
-        snippetCloseBodyTag: getSnippet(3).codeSnippet,
-        googleAnalyticsId: marketingSettings.hasGoogleSettings ? marketingSettings.google.analyticsId : null,
-        facebookPixelId: marketingSettings.hasFacebookSettings ? marketingSettings.facebook.pixelId : null,
-        pronoun: marketingSettings.profile.isTeam ? "plural" : "singular",
-        timezone,
-        tzOffset: DateTime.local().setZone(timezone).offset,
-        mobile: marketingSettings.profile.phone ?? null,
-        website: marketingSettings.profile.websiteUrl ?? null,
-        email: marketingSettings.profile.email,
-        agentId: agentID,
-        // *** AGENT ADDRESS
-        address: {
-          company: marketingSettings.office.companyName ?? "",
-          street: marketingSettings.office.address ?? "",
-          address2: marketingSettings.office.address2 ?? "",
-          city: marketingSettings.office.city ?? "",
-          state: marketingSettings.office.state ?? "",
-          zip: marketingSettings.office.zip ?? ""
-        }
+      return image ? image.url : "";
+    };
+    const getDisclaimer = (id) => {
+      const disclaimer = marketingSettings.disclaimers.find(
+        (d) => d.marketingDisclaimerTypeId == id
+      );
+      return disclaimer ?? {
+        text: "",
+        url: ""
       };
-      agents.push({ agent });
-    })
-  );
+    };
+    const getSnippet = (id) => {
+      const snippet = marketingSettings.codeSnippets.find(
+        (d) => d.marketingSnippetTypeId == id
+      );
+      return snippet ?? {
+        codeSnippet: ""
+      };
+    };
+    let timezone, tzOffset;
+    switch (marketingSettings.profile?.timeZoneId) {
+      case 1:
+        timezone = "America/New_York";
+        break;
+      case 2:
+        timezone = "America/Chicago";
+        break;
+      case 3:
+        timezone = "America/Denver";
+        break;
+      case 4:
+        timezone = "America/Los_Angeles";
+        break;
+      case 5:
+        timezone = "America/Anchorage";
+        break;
+      case 6:
+        timezone = "Pacific/Honolulu";
+        break;
+      default:
+        timezone = "America/Los_Angeles";
+        break;
+    }
+    let about = (marketingSettings.profile.about ?? "").replaceAll(
+      "\r\n",
+      "&#10;"
+    );
+    const agent = {
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      role: profile.roleDescription,
+      photo: findImage(1),
+      //"me"
+      // Switching the naming IS CORRECT! Light logo used on dark themes and vice versa
+      personalLogoLight: findImage(2),
+      //"personal_logo_dark"
+      personalLogoDark: findImage(3),
+      // "personal_logo_light"
+      companyLogoLight: findImage(4),
+      //"company_logo_dark"
+      companyLogoDark: findImage(6),
+      // "company_logo_light"
+      marketingName: marketingSettings.profile.displayName ?? null,
+      marketingTitle: marketingSettings.profile.title ?? null,
+      marketingEmail: marketingSettings.profile.email ?? null,
+      marketingAbout: `<![CDATA[${about}]]>`,
+      marketingLicense: marketingSettings.profile.licenseNumber ?? null,
+      privacySource: getDisclaimer(1).url,
+      // "privacy_source"
+      privacyPolicy: getDisclaimer(1).text,
+      // "privacy_text"
+      disclaimerOptin: getDisclaimer(2).text,
+      // "optin"
+      disclaimerExtra: getDisclaimer(4).text,
+      //"htmlDisclaimer"
+      disclaimerIDX: getDisclaimer(3).text,
+      // "idxDisclaimer"
+      snippetHeadTag: getSnippet(1).codeSnippet,
+      snippetOpenBodyTag: getSnippet(2).codeSnippet,
+      snippetCloseBodyTag: getSnippet(3).codeSnippet,
+      googleAnalyticsId: marketingSettings.hasGoogleSettings ? marketingSettings.google.analyticsId : null,
+      facebookPixelId: marketingSettings.hasFacebookSettings ? marketingSettings.facebook.pixelId : null,
+      pronoun: marketingSettings.profile.isTeam ? "plural" : "singular",
+      timezone,
+      tzOffset: DateTime.local().setZone(timezone).offset,
+      mobile: marketingSettings.profile.phone ?? null,
+      website: marketingSettings.profile.websiteUrl ?? null,
+      email: marketingSettings.profile.email,
+      agentId: agentID,
+      // *** AGENT ADDRESS
+      address: {
+        company: marketingSettings.office.companyName ?? "",
+        street: marketingSettings.office.address ?? "",
+        address2: marketingSettings.office.address2 ?? "",
+        city: marketingSettings.office.city ?? "",
+        state: marketingSettings.office.state ?? "",
+        zip: marketingSettings.office.zip ?? ""
+      }
+    };
+    agents.push({ agent });
+  }
   return agents;
 };
 var processCustomizations = (customizations) => {
@@ -8241,7 +8239,9 @@ var processAreas = async (params) => {
           { name: areaName2 ?? params?.area?.name ?? "NOT SET" },
           { geojson: `<![CDATA[${geoJSON}]]>` },
           { centerLat: boundary?.mapArea?.centerLatitude ?? 32.71 },
-          { centerLng: boundary?.mapArea?.centerLongitude ?? -117.16 },
+          {
+            centerLng: boundary?.mapArea?.centerLongitude ?? -117.16
+          },
           { image: areaImage ?? "" }
         ]
       };
@@ -8277,14 +8277,22 @@ var processAreas = async (params) => {
                   size: p.sqft ?? null,
                   listPrice: p.priceLow ?? null,
                   salePrice: p.salePrice ?? null,
-                  listedDate: p.listDate ? DateTime.fromISO(p.listDate).toSeconds() : null,
-                  soldDate: p.soldDate ? DateTime.fromISO(p.soldDate).toSeconds() : null,
+                  listedDate: p.listDate ? DateTime.fromISO(
+                    p.listDate
+                  ).toSeconds() : null,
+                  soldDate: p.soldDate ? DateTime.fromISO(
+                    p.soldDate
+                  ).toSeconds() : null,
                   dom: p.daysOnMarket ?? null,
                   thumb: p.photoPrimaryUrl ?? "",
                   isAgent: agentListings.includes(
                     p.mlsNumber?.toLowerCase() ?? ""
                   ) ? 1 : 0,
-                  sortDate: p.soldDate ? DateTime.fromISO(p.soldDate).toSeconds() : p.listDate ? DateTime.fromISO(p.listDate).toSeconds() : null
+                  sortDate: p.soldDate ? DateTime.fromISO(
+                    p.soldDate
+                  ).toSeconds() : p.listDate ? DateTime.fromISO(
+                    p.listDate
+                  ).toSeconds() : null
                 }
               });
             }
@@ -8512,28 +8520,19 @@ var processListing = async (params, agentTimezone) => {
         const ts2 = params.openHouseTimes[i + 1];
         if (ts2 > NOW && ts1 < timeAgo({ days: 7 })) {
           let session = { _name: "session", _attrs: {} };
-          // Object.keys(timeAttrbs).forEach(
-          //   (key) => session._attrs[key] = DateTime.fromMillis(
-          //     ts1,
-          //     tz
-          //   ).toFormat(timeAttrbs[key])
-          // );/
-
-                     Object.keys(timeAttrbs).forEach(key => {
-                              if (key === 'date') {
-                                  const n= DateTime.fromMillis(ts1, tz).day
-                                  const s = ["th", "st", "nd", "rd"];
-                                  const v = n % 100;
-                                  //return n + (s[(v - 20) % 10] || s[v] || s[0]);
-          
-          
-                                  //session._attrs[key] = getOrdinal(DateTime.fromMillis(ts1, tz).day);
-                                  session._attrs[key] = n + (s[(v - 20) % 10] || s[v] || s[0]);
-                              } else {
-                                  session._attrs[key] = DateTime.fromMillis(ts1, tz).toFormat(timeAttrbs[key]);
-                              }
-                          });
-          
+          Object.keys(timeAttrbs).forEach((key) => {
+            if (key === "date") {
+              const n2 = DateTime.fromMillis(ts1, tz).day;
+              const s2 = ["th", "st", "nd", "rd"];
+              const v = n2 % 100;
+              session._attrs[key] = n2 + (s2[(v - 20) % 10] || s2[v] || s2[0]);
+            } else {
+              session._attrs[key] = DateTime.fromMillis(
+                ts1,
+                tz
+              ).toFormat(timeAttrbs[key]);
+            }
+          });
           [
             { name: "starts", value: ts1 },
             { name: "ends", value: ts2 }
@@ -9473,7 +9472,6 @@ var getDimensions = (size = null) => {
       break;
     case "tabloid-flyer":
       dims = [1700, 1100];
-      console.log("tabloid-flyer", dims);
       break;
     case "facebook-ad":
     case "facebook-post":
@@ -10845,7 +10843,6 @@ var prepareAsset = async (asset, params) => {
             lpo: params.lpo
           }
         };
-        console.log("banana", render.s3Key, render);
         let qrCodeSVGUrl;
         if (params?.qrDestination) {
           render.qrUrl = params.qrDestination;

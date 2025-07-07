@@ -161,8 +161,9 @@ export const getRenderJSON = async params => {
             );
             */
             //			console.log("mlsDisplay", mlsDisplay);
-            root.mlsDisplay = `<![CDATA[${mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ''
-                }]]>`; // { html_node }; // ToDo?	$mlsDisplay->appendChild($dom->importNode($html_node, true));
+            root.mlsDisplay = `<![CDATA[${
+                mlsDisplay?.mlsGroupDisplaySettings?.listingPageDisclaimer ?? ''
+            }]]>`; // { html_node }; // ToDo?	$mlsDisplay->appendChild($dom->importNode($html_node, true));
         }
     }
 
@@ -348,7 +349,7 @@ export const setRenderDefaults = async params => {
         if (params.area) {
             params.areaIds = [params.area.areaId];
         } else {
-            throw new Error(  // Changed from Exception to Error
+            throw new Error( // Changed from Exception to Error
                 `Failed to get areaId: ${JSON.stringify(params)}`
             );
         }
@@ -371,131 +372,130 @@ export const userSetting = async (userId, setting) => {
 const processAgents = async agentIds => {
     let agents = [];
 
-    await Promise.all(
-        agentIds.map(async agentID => {
-            const profile = await getUser(agentID);
+    for (const agentID of agentIds) {
+        const profile = await getUser(agentID);
 
-            const marketingSettings = profile.marketingSettings;
+        const marketingSettings = profile.marketingSettings;
 
-            const findImage = id => {
-                const image = marketingSettings.images.find(
-                    img => img.marketingImageTypeId == id
-                );
-
-                return image ? image.url : '';
-            };
-
-            const getDisclaimer = id => {
-                const disclaimer = marketingSettings.disclaimers.find(
-                    d => d.marketingDisclaimerTypeId == id
-                );
-
-                return (
-                    disclaimer ?? {
-                        text: '',
-                        url: ''
-                    }
-                );
-            };
-
-            const getSnippet = id => {
-                const snippet = marketingSettings.codeSnippets.find(
-                    d => d.marketingSnippetTypeId == id
-                );
-
-                return (
-                    snippet ?? {
-                        codeSnippet: ''
-                    }
-                );
-            };
-
-            let timezone, tzOffset;
-            switch (marketingSettings.profile?.timeZoneId) {
-                case 1:
-                    timezone = 'America/New_York';
-                    break;
-                case 2:
-                    timezone = 'America/Chicago';
-                    break;
-                case 3:
-                    timezone = 'America/Denver';
-                    break;
-                case 4:
-                    timezone = 'America/Los_Angeles';
-                    break;
-                case 5:
-                    timezone = 'America/Anchorage';
-                    break;
-                case 6:
-                    timezone = 'Pacific/Honolulu';
-                    break;
-                default:
-                    timezone = 'America/Los_Angeles';
-                    break;
-            }
-            let about = (marketingSettings.profile.about ?? '').replaceAll(
-                '\r\n',
-                '&#10;'
+        const findImage = id => {
+            const image = marketingSettings.images.find(
+                img => img.marketingImageTypeId == id
             );
 
-            const agent = {
-                firstName: profile.firstName,
-                lastName: profile.lastName,
-                role: profile.roleDescription,
-                photo: findImage(1), //"me"
+            return image ? image.url : '';
+        };
 
-                // Switching the naming IS CORRECT! Light logo used on dark themes and vice versa
-                personalLogoLight: findImage(2), //"personal_logo_dark"
-                personalLogoDark: findImage(3), // "personal_logo_light"
-                companyLogoLight: findImage(4), //"company_logo_dark"
-                companyLogoDark: findImage(6), // "company_logo_light"
+        const getDisclaimer = id => {
+            const disclaimer = marketingSettings.disclaimers.find(
+                d => d.marketingDisclaimerTypeId == id
+            );
 
-                marketingName: marketingSettings.profile.displayName ?? null,
-                marketingTitle: marketingSettings.profile.title ?? null,
-                marketingEmail: marketingSettings.profile.email ?? null,
-                marketingAbout: `<![CDATA[${about}]]>`,
-                marketingLicense:
-                    marketingSettings.profile.licenseNumber ?? null,
-
-                privacySource: getDisclaimer(1).url, // "privacy_source"
-                privacyPolicy: getDisclaimer(1).text, // "privacy_text"
-                disclaimerOptin: getDisclaimer(2).text, // "optin"
-                disclaimerExtra: getDisclaimer(4).text, //"htmlDisclaimer"
-                disclaimerIDX: getDisclaimer(3).text, // "idxDisclaimer"
-
-                snippetHeadTag: getSnippet(1).codeSnippet,
-                snippetOpenBodyTag: getSnippet(2).codeSnippet,
-                snippetCloseBodyTag: getSnippet(3).codeSnippet,
-                googleAnalyticsId: marketingSettings.hasGoogleSettings ? marketingSettings.google.analyticsId : null,
-                facebookPixelId: marketingSettings.hasFacebookSettings ? marketingSettings.facebook.pixelId : null,
-
-                pronoun: marketingSettings.profile.isTeam
-                    ? 'plural'
-                    : 'singular',
-                timezone,
-                tzOffset: DateTime.local().setZone(timezone).offset,
-
-                mobile: marketingSettings.profile.phone ?? null,
-                website: marketingSettings.profile.websiteUrl ?? null,
-                email: marketingSettings.profile.email,
-                agentId: agentID,
-
-                // *** AGENT ADDRESS
-                address: {
-                    company: marketingSettings.office.companyName ?? '',
-                    street: marketingSettings.office.address ?? '',
-                    address2: marketingSettings.office.address2 ?? '',
-                    city: marketingSettings.office.city ?? '',
-                    state: marketingSettings.office.state ?? '',
-                    zip: marketingSettings.office.zip ?? ''
+            return (
+                disclaimer ?? {
+                    text: '',
+                    url: ''
                 }
-            };
+            );
+        };
 
-            agents.push({ agent });
-        })
-    );
+        const getSnippet = id => {
+            const snippet = marketingSettings.codeSnippets.find(
+                d => d.marketingSnippetTypeId == id
+            );
 
+            return (
+                snippet ?? {
+                    codeSnippet: ''
+                }
+            );
+        };
+
+        let timezone, tzOffset;
+        switch (marketingSettings.profile?.timeZoneId) {
+            case 1:
+                timezone = 'America/New_York';
+                break;
+            case 2:
+                timezone = 'America/Chicago';
+                break;
+            case 3:
+                timezone = 'America/Denver';
+                break;
+            case 4:
+                timezone = 'America/Los_Angeles';
+                break;
+            case 5:
+                timezone = 'America/Anchorage';
+                break;
+            case 6:
+                timezone = 'Pacific/Honolulu';
+                break;
+            default:
+                timezone = 'America/Los_Angeles';
+                break;
+        }
+        let about = (marketingSettings.profile.about ?? '').replaceAll(
+            '\r\n',
+            '&#10;'
+        );
+
+        const agent = {
+            firstName: profile.firstName,
+            lastName: profile.lastName,
+            role: profile.roleDescription,
+            photo: findImage(1), //"me"
+
+            // Switching the naming IS CORRECT! Light logo used on dark themes and vice versa
+            personalLogoLight: findImage(2), //"personal_logo_dark"
+            personalLogoDark: findImage(3), // "personal_logo_light"
+            companyLogoLight: findImage(4), //"company_logo_dark"
+            companyLogoDark: findImage(6), // "company_logo_light"
+
+            marketingName: marketingSettings.profile.displayName ?? null,
+            marketingTitle: marketingSettings.profile.title ?? null,
+            marketingEmail: marketingSettings.profile.email ?? null,
+            marketingAbout: `<![CDATA[${about}]]>`,
+            marketingLicense: marketingSettings.profile.licenseNumber ?? null,
+
+            privacySource: getDisclaimer(1).url, // "privacy_source"
+            privacyPolicy: getDisclaimer(1).text, // "privacy_text"
+            disclaimerOptin: getDisclaimer(2).text, // "optin"
+            disclaimerExtra: getDisclaimer(4).text, //"htmlDisclaimer"
+            disclaimerIDX: getDisclaimer(3).text, // "idxDisclaimer"
+
+            snippetHeadTag: getSnippet(1).codeSnippet,
+            snippetOpenBodyTag: getSnippet(2).codeSnippet,
+            snippetCloseBodyTag: getSnippet(3).codeSnippet,
+            googleAnalyticsId: marketingSettings.hasGoogleSettings
+                ? marketingSettings.google.analyticsId
+                : null,
+            facebookPixelId: marketingSettings.hasFacebookSettings
+                ? marketingSettings.facebook.pixelId
+                : null,
+
+            pronoun: marketingSettings.profile.isTeam ? 'plural' : 'singular',
+            timezone,
+            tzOffset: DateTime.local().setZone(timezone).offset,
+
+            mobile: marketingSettings.profile.phone ?? null,
+            website: marketingSettings.profile.websiteUrl ?? null,
+            email: marketingSettings.profile.email,
+            agentId: agentID,
+
+            // *** AGENT ADDRESS
+            address: {
+                company: marketingSettings.office.companyName ?? '',
+                street: marketingSettings.office.address ?? '',
+                address2: marketingSettings.office.address2 ?? '',
+                city: marketingSettings.office.city ?? '',
+                state: marketingSettings.office.state ?? '',
+                zip: marketingSettings.office.zip ?? ''
+            }
+        };
+
+        agents.push({ agent });
+    }
+    
     return agents;
 };
 
@@ -553,7 +553,9 @@ const processAreas = async params => {
                     { name: areaName ?? params?.area?.name ?? 'NOT SET' },
                     { geojson: `<![CDATA[${geoJSON}]]>` },
                     { centerLat: boundary?.mapArea?.centerLatitude ?? 32.71 },
-                    { centerLng: boundary?.mapArea?.centerLongitude ?? -117.16 },
+                    {
+                        centerLng: boundary?.mapArea?.centerLongitude ?? -117.16
+                    },
                     { image: areaImage ?? '' }
                 ]
             };
@@ -589,8 +591,8 @@ const processAreas = async params => {
                         ) {
                             const state =
                                 parseInt(p.statusTypeID) == 4 ||
-                                    parseInt(p.statusTypeID) == 12 ||
-                                    parseInt(p.statusTypeID) == 3
+                                parseInt(p.statusTypeID) == 12 ||
+                                parseInt(p.statusTypeID) == 3
                                     ? 'pending'
                                     : p.statusType?.toLowerCase() ?? 'unknown';
 
@@ -607,10 +609,14 @@ const processAreas = async params => {
                                     listPrice: p.priceLow ?? null,
                                     salePrice: p.salePrice ?? null,
                                     listedDate: p.listDate
-                                        ? DateTime.fromISO(p.listDate).toSeconds()
+                                        ? DateTime.fromISO(
+                                              p.listDate
+                                          ).toSeconds()
                                         : null,
                                     soldDate: p.soldDate
-                                        ? DateTime.fromISO(p.soldDate).toSeconds()
+                                        ? DateTime.fromISO(
+                                              p.soldDate
+                                          ).toSeconds()
                                         : null,
                                     dom: p.daysOnMarket ?? null,
                                     thumb: p.photoPrimaryUrl ?? '',
@@ -620,10 +626,14 @@ const processAreas = async params => {
                                         ? 1
                                         : 0,
                                     sortDate: p.soldDate
-                                        ? DateTime.fromISO(p.soldDate).toSeconds()
+                                        ? DateTime.fromISO(
+                                              p.soldDate
+                                          ).toSeconds()
                                         : p.listDate
-                                            ? DateTime.fromISO(p.listDate).toSeconds()
-                                            : null
+                                        ? DateTime.fromISO(
+                                              p.listDate
+                                          ).toSeconds()
+                                        : null
                                 }
                             });
                         }
@@ -639,13 +649,16 @@ const processAreas = async params => {
                             _attrs: {
                                 totalSold: prevData?.sold ?? 0,
                                 turnOver: prevData?.turnOver ?? 0,
-                                avgPricePerSqFtSold: prevData?.avgPricePerSqFt ?? 0,
+                                avgPricePerSqFtSold:
+                                    prevData?.avgPricePerSqFt ?? 0,
                                 avgPricePerSqFtList:
-                                    prevData?.avgSoldListingsListPricePerSqFt ?? 0,
+                                    prevData?.avgSoldListingsListPricePerSqFt ??
+                                    0,
                                 averageListPriceForSold:
                                     prevData?.avgListPriceForSold ?? 0,
                                 averageSalePrice: prevData?.avgSalePrice ?? 0,
-                                averageDaysOnMarket: prevData?.avgDaysOnMarket ?? 0,
+                                averageDaysOnMarket:
+                                    prevData?.avgDaysOnMarket ?? 0,
                                 medianSalePrice: prevData?.medSalePrice ?? 0,
                                 maxSalePrice: prevData?.maxSale?.salePrice ?? 0,
                                 minSalePrice: prevData?.minSale?.salePrice ?? 0
@@ -708,14 +721,19 @@ const processAreas = async params => {
                                     history._content.push({
                                         _name: 'period',
                                         _attrs: {
-                                            period: `${m.yearPart?.toString() ?? ''}${(m.monthPart?.toString() ?? '').padStart(2, '0')}`,
-                                            periodName: m.yearPart && m.monthPart
-                                                ? DateTime.fromObject({
-                                                    year: m.yearPart,
-                                                    month: m.monthPart,
-                                                    day: 1
-                                                }).toFormat('LLL yyyy')
-                                                : 'Unknown',
+                                            period: `${
+                                                m.yearPart?.toString() ?? ''
+                                            }${(
+                                                m.monthPart?.toString() ?? ''
+                                            ).padStart(2, '0')}`,
+                                            periodName:
+                                                m.yearPart && m.monthPart
+                                                    ? DateTime.fromObject({
+                                                          year: m.yearPart,
+                                                          month: m.monthPart,
+                                                          day: 1
+                                                      }).toFormat('LLL yyyy')
+                                                    : 'Unknown',
                                             totalSold: m.soldCount ?? 0,
                                             averageListPrice:
                                                 m.averageListPrice ?? 0,
@@ -927,21 +945,22 @@ const processListing = async (params, agentTimezone) => {
                     // );
 
                     Object.keys(timeAttrbs).forEach(key => {
-                    if (key === 'date') {
-                        const n= DateTime.fromMillis(ts1, tz).day
-                        const s = ["th", "st", "nd", "rd"];
-                        const v = n % 100;
-                        //return n + (s[(v - 20) % 10] || s[v] || s[0]);
+                        if (key === 'date') {
+                            const n = DateTime.fromMillis(ts1, tz).day;
+                            const s = ['th', 'st', 'nd', 'rd'];
+                            const v = n % 100;
+                            //return n + (s[(v - 20) % 10] || s[v] || s[0]);
 
-
-                        //session._attrs[key] = getOrdinal(DateTime.fromMillis(ts1, tz).day);
-                        session._attrs[key] = n + (s[(v - 20) % 10] || s[v] || s[0]);
-                    } else {
-                        session._attrs[key] = DateTime.fromMillis(ts1, tz).toFormat(timeAttrbs[key]);
-                    }
-                });
-
-
+                            //session._attrs[key] = getOrdinal(DateTime.fromMillis(ts1, tz).day);
+                            session._attrs[key] =
+                                n + (s[(v - 20) % 10] || s[v] || s[0]);
+                        } else {
+                            session._attrs[key] = DateTime.fromMillis(
+                                ts1,
+                                tz
+                            ).toFormat(timeAttrbs[key]);
+                        }
+                    });
 
                     [
                         { name: 'starts', value: ts1 },
@@ -1037,7 +1056,7 @@ const processListing = async (params, agentTimezone) => {
         images.length && single.push({ _name: 'images', _content: images });
     }
 
-    console.log( 'single mls', params.mlsNumber, single );
+    console.log('single mls', params.mlsNumber, single);
     return single;
 };
 
@@ -1099,9 +1118,9 @@ const processCollection = async params => {
 
                                 const tags = Array.isArray(assetData?.tags)
                                     ? assetData?.tags?.map(tag => ({
-                                        _name: 'tag',
-                                        _attrs: { name: tag.trim() }
-                                    }))
+                                          _name: 'tag',
+                                          _attrs: { name: tag.trim() }
+                                      }))
                                     : null;
 
                                 const _attrs = {
@@ -1255,7 +1274,7 @@ export const preCallGenieAPIs = async params => {
             );
         }
 
-        if (params.userId){
+        if (params.userId) {
             await getUser(params.userId);
         }
 

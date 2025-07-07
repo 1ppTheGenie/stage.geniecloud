@@ -8,25 +8,25 @@ import {
 	Context4Settings,
 } from "@/utilities";
 
-export const MapListings = props => {
+export const MapListings = ( { marketStatus, ...props }) => {
 	const settings = useSettings(Context4Settings);
 
 	let headings;
 
+	/*
 	const Markers = () => {
 		<For each={props.listings}>
 			{(l, i) => (
 				<CircleMarker
 					key={`${l.mlsNumber}:${l.latitude}:${l.longitude}`}
-					color={getCssVar(`--${settings.marketstatus}`, document.body).trim()}
+					color={getCssVar(`--${marketStatus}`, document.body).trim()}
 					caption={i + 1}
 					position={[l.latitude, l.longitude]}
 				/>
 			)}
 		</For>;
-	};
-
-	switch (settings.marketstatus) {
+	};*/
+	switch (marketStatus) {
 		case "sold":
 			headings = [
 				"Address",
@@ -72,7 +72,7 @@ export const MapListings = props => {
 							<CircleMarker
 								key={`${l.mlsNumber}:${l.latitude}:${l.longitude}`}
 								color={getCssVar(
-									`--${settings.marketstatus}`,
+									`--${marketStatus}`,
 									document.body
 								).trim()}
 								caption={i + 1}
@@ -107,7 +107,7 @@ export const MapListings = props => {
 							</tr>
 						</thead>
 						<tbody>
-							<Show when={settings.marketstatus === "sold"}>
+							<Show when={marketStatus === "sold"}>
 								<For each={props.listings}>
 									{l => (
 										<tr
@@ -127,7 +127,7 @@ export const MapListings = props => {
 									)}
 								</For>
 							</Show>
-							<Show when={settings.marketstatus !== "sold"}>
+							<Show when={marketStatus !== "sold"}>
 								<For each={props.listings}>
 									{l => (
 										<tr

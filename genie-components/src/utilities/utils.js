@@ -115,19 +115,28 @@ export const filterListings = (
 	mode = "active",
 	sortBy
 ) => {
-	let subset, descending;
+	let subset;
 	const timeCutOff = new Date();
 	timeCutOff.setMonth(timeCutOff.getMonth() - period);
 	const now = new Date();
 
+
+	const isSold = String(mode).toLowerCase() === "sold";
+	const priceProp = isSold ? "soldPrice" : "listPrice";
+	const dateProp = isSold ? "soldDate" : "listDate";
+
+	const comparators = {
+		"Price High": (a, b) => b[priceProp] - a[priceProp],
+		"Price Low": (a, b) => a[priceProp] - b[priceProp],
+		"Days on Market": (a, b) => a.dom - b.dom,
+		default: (a, b) => Date.parse(b[dateProp]) - Date.parse(a[dateProp]),
+	};
+
+	// use the one that matches (falls back to the date sort)
+	const sorting = comparators[sortBy] || comparators.default;
+
 	switch (mode.toString().toLocaleLowerCase()) {
 		case "sold":
-			descending = (l1, l2) => {
-				const a = Date.parse(l1.soldDate);
-				const b = Date.parse(l2.soldDate);
-
-				return a < b ? 1 : a > b ? -1 : 0;
-			};
 			subset = listings.filter(
 				p =>
 					p.statusType.toLowerCase() === "sold" &&
@@ -145,22 +154,9 @@ export const filterListings = (
 						-30 &&
 					p.propertyTypeID === propertyTypeID
 			);
-
-			descending = (l1, l2) => {
-				const a = Date.parse(l1.listDate);
-				const b = Date.parse(l2.listDate);
-
-				return a > b ? -1 : a < b ? 1 : 0;
-			};
 			break;
 
 		case "pending":
-			descending = (l1, l2) => {
-				const a = Date.parse(l1.listDate);
-				const b = Date.parse(l2.listDate);
-
-				return a < b ? 1 : a > b ? -1 : 0;
-			};
 			subset = listings.filter(
 				p =>
 					(p.statusType.toLowerCase() === "pending" ||
@@ -171,21 +167,15 @@ export const filterListings = (
 
 		case "active":
 		default:
-			descending = (l1, l2) => {
-				const a = Date.parse(l1.listDate);
-				const b = Date.parse(l2.listDate);
-
-				return a < b ? 1 : a > b ? -1 : 0;
-			};
 			subset = listings.filter(
 				p =>
-					p.statusType.toLowerCase() === mode.toLowerCase() &&
+					(p.statusType.toLowerCase() === mode.toLowerCase() || mode == "") &&
 					p.propertyTypeID === propertyTypeID
 			);
 			break;
 	}
 
-	subset.sort(descending);
+	subset.sort(sorting);
 
 	return subset;
 };
@@ -225,472 +215,534 @@ export const useAgentData = () => {
 	return agent;
 };
 
-export const addDynamicPopup = (popupId) => {  
-  if (document.getElementById(popupId))
-    return false; //already exists
+export const addDynamicPopup = popupId => {
+	if (document.getElementById(popupId)) return false; //already exists
 
-  document.body.classList.add("hasPopup");
-  const div = document.createElement("div");
-  div.id = popupId;
-  div.classList.add("popup-dialog", "visible");
-  document.body.appendChild(div);
-  return true;
+	document.body.classList.add("hasPopup");
+	const div = document.createElement("div");
+	div.id = popupId;
+	div.classList.add("popup-dialog", "visible");
+	document.body.appendChild(div);
+	return true;
 };
 
 //TODO: I think we can expose api endpoint that will deliver options but just mocking till we have a clear plan
-export const getCtaData = (ctaId) => {
-  switch(ctaId) {
-    case 1:
-      //the home value pops an existing modal so just need the delay and enabled properties available
-      return {       
-        delay: 2,
-        showMobileBanner: false,
-        enabled: false
-      };
-    case 2:    //CTA GROUP 1
-      return {
-        ctaTitle: "Personalized Home Value Estimate",
-        ctaSubTitle: "Discover Your Home's True Worth",
-        ctaBody: "Interested in a personalized valuation of your home?",
-        ctaTags: `RequestCustomValuation, OptInContact, Cta${ ctaId }Accept`,
-        ctaDisplayTags: `Cta${ ctaId }Display`,
-        ctaDisplayNote: "Prompt for a home valuation was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a home evaluation",
-        ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/025d77d8-0d14-47d0-3ec9-71e68d9cd400/public",
-        ctaNote: "I would like a custom home valuation",
-        ctaNoteIncludeArea: false,
-        ctaNoteIncludeAddress: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "Great! Your request has been submitted!",
-        ctaSubmitButtonText: "Absolutely!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Please confirm or update your contact information to ensure you receive accurate updates.",
-        ctaContactFormResponse: "Thanks for confirming, you're all set!",
-        ctaVerifyButtonText: "Confirm",
-        ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
-        ctaMobileBannerText: 'Get Your Home Value',
-        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
-        ctaMobileBannerTags: "ClickCtaMobileBanner",
-        delay: 1,
-        scrollUpPercentage: 0,
-        scrollDownPercentage: 0,        
-        showMobileBanner: true,       
-        enabled: true
-      };
-    case 3: //CTA GROUP 1
-      return {
-        ctaTitle: "Accurate Home Valuation",
-        ctaSubTitle: "Uncover Your Property's Market Value",
-        ctaBody: "Would you like to get an accurate valuation for your home?",
-        ctaTags: `RequestCustomValuation, OptInContact, Cta${ ctaId }Accept`,
-        ctaDisplayTags: `Cta${ ctaId }Display`,
-        ctaDisplayNote: "Prompt for a home valuation was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a home evaluation",
-        ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
-        ctaNote: "I would like a custom home valuation",
-        ctaNoteIncludeArea: false,
-        ctaNoteIncludeAddress: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "Awesome! We've received your request!",
-        ctaSubmitButtonText: "Yes, please!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Ensure your contact details are correct so we can keep you informed.",
-        ctaContactFormResponse: "Thanks for updating, you're all set!",
-        ctaVerifyButtonText: "Verify",
-        ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
-        ctaMobileBannerText: 'Get Your Home Value',
-        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
-        ctaMobileBannerTags: "ClickCtaMobileBanner",
-        delay: 2,
-        scrollUpPercentage: 0,
-        scrollDownPercentage: 0,
-        showMobileBanner: true,
-        enabled: true
-      };
-    case 4:    //CTA GROUP 2
-      return {
-        ctaTitle: "Personalized Home Value Estimate",
-        ctaSubTitle: "Discover Your Home's True Worth",
-        ctaBody: "Interested in a personalized valuation of your home?",
-        ctaTags: `RequestCustomValuation, OptInContact, Cta${ ctaId }Accept`,
-        ctaDisplayTags: `Cta${ ctaId }Display`,
-        ctaDisplayNote: "Prompt for a home valuation was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a home evaluation",
-        ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/025d77d8-0d14-47d0-3ec9-71e68d9cd400/public",
-        ctaNote: "I would like a custom home valuation",
-        ctaNoteIncludeArea: false,
-        ctaNoteIncludeAddress: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "Great! Your request has been submitted!",
-        ctaSubmitButtonText: "Absolutely!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Please confirm or update your contact information to ensure you receive accurate updates.",
-        ctaContactFormResponse: "Thanks for confirming, you're all set!",
-        ctaVerifyButtonText: "Confirm",
-        ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
-        ctaMobileBannerText: 'Get Your Home Value',
-        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
-        ctaMobileBannerTags: "ClickCtaMobileBanner",
-        delay: 1,
-        scrollUpPercentage: 0,
-        scrollDownPercentage: 0,
-        showMobileBanner: true,
-        enabled: true
-      };
-    case 5: //CTA GROUP 2
-      return {
-        ctaTitle: "Accurate Home Valuation",
-        ctaSubTitle: "Uncover Your Property's Market Value",
-        ctaBody: "Would you like to get an accurate valuation for your home?",
-        ctaTags: `RequestCustomValuation, OptInContact, Cta${ ctaId }Accept`,
-        ctaDisplayTags: `Cta${ ctaId }Display`,
-        ctaDisplayNote: "Prompt for a home valuation was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a home evaluation",
-        ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
-        ctaNote: "I would like a custom home valuation",
-        ctaNoteIncludeArea: false,
-        ctaNoteIncludeAddress: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "Awesome! We've received your request!",
-        ctaSubmitButtonText: "Yes, please!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Ensure your contact details are correct so we can keep you informed.",
-        ctaContactFormResponse: "Thanks for updating, you're all set!",
-        ctaVerifyButtonText: "Verify",
-        ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
-        ctaMobileBannerText: 'Get Your Home Value',
-        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
-        ctaMobileBannerTags: "ClickCtaMobileBanner",
-        delay: 2,
-        scrollUpPercentage: 0,
-        scrollDownPercentage: 0,
-        showMobileBanner: true,
-        enabled: true
-      };
-      case 6:    //CTA GROUP 1 scroll triggers
-      return {
-        ctaTitle: "Personalized Home Value Estimate",
-        ctaSubTitle: "Discover Your Home's True Worth",
-        ctaBody: "Interested in a personalized valuation of your home?",
-        ctaTags: `RequestCustomValuation, OptInContact, Cta${ ctaId }Accept`,
-        ctaDisplayTags: `Cta${ ctaId }Display`,
-        ctaDisplayNote: "Prompt for a home valuation was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a home evaluation",
-        ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/025d77d8-0d14-47d0-3ec9-71e68d9cd400/public",
-        ctaNote: "I would like a custom home valuation",
-        ctaNoteIncludeArea: false,
-        ctaNoteIncludeAddress: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "Great! Your request has been submitted!",
-        ctaSubmitButtonText: "Absolutely!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Please confirm or update your contact information to ensure you receive accurate updates.",
-        ctaContactFormResponse: "Thanks for confirming, you're all set!",
-        ctaVerifyButtonText: "Confirm",
-        ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
-        ctaMobileBannerText: 'Get Your Home Value',
-        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
-        ctaMobileBannerTags: "ClickCtaMobileBanner",
-        delay: 5,
-        scrollUpPercentage: 15,
-        scrollDownPercentage: 60,
-        showMobileBanner: true,
-        enabled: true
-      };
-    case 7: //CTA GROUP 1 scroll triggers
-      return {
-        ctaTitle: "Accurate Home Valuation",
-        ctaSubTitle: "Uncover Your Property's Market Value",
-        ctaBody: "Would you like to get an accurate valuation for your home?",
-        ctaTags: `RequestCustomValuation, OptInContact, Cta${ ctaId }Accept`,
-        ctaDisplayTags: `Cta${ ctaId }Display`,
-        ctaDisplayNote: "Prompt for a home valuation was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a home evaluation",
-        ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
-        ctaNote: "I would like a custom home valuation",
-        ctaNoteIncludeArea: false,
-        ctaNoteIncludeAddress: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "Awesome! We've received your request!",
-        ctaSubmitButtonText: "Yes, please!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Ensure your contact details are correct so we can keep you informed.",
-        ctaContactFormResponse: "Thanks for updating, you're all set!",
-        ctaVerifyButtonText: "Verify",
-        ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
-        ctaMobileBannerText: 'Get Your Home Value',
-        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
-        ctaMobileBannerTags: "ClickCtaMobileBanner",
-        delay: 5,
-        scrollUpPercentage: 15,
-        scrollDownPercentage: 60,
-        showMobileBanner: true,
-        enabled: true
-      };
-      case 8: //CTA GROUP 2 scroll triggers
-      return {
-        ctaTitle: "Personalized Home Value Estimate",
-        ctaSubTitle: "Discover Your Home's True Worth",
-        ctaBody: "Interested in a personalized valuation of your home?",
-        ctaTags: `RequestCustomValuation, OptInContact, Cta${ ctaId }Accept`,
-        ctaDisplayTags: `Cta${ ctaId }Display`,
-        ctaDisplayNote: "Prompt for a home valuation was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a home evaluation",
-        ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/025d77d8-0d14-47d0-3ec9-71e68d9cd400/public",
-        ctaNote: "I would like a custom home valuation",
-        ctaNoteIncludeArea: false,
-        ctaNoteIncludeAddress: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "Great! Your request has been submitted!",
-        ctaSubmitButtonText: "Absolutely!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Please confirm or update your contact information to ensure you receive accurate updates.",
-        ctaContactFormResponse: "Thanks for confirming, you're all set!",
-        ctaVerifyButtonText: "Confirm",
-        ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
-        ctaMobileBannerText: 'Get Your Home Value',
-        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
-        ctaMobileBannerTags: "ClickCtaMobileBanner",
-        delay: 5,
-        scrollUpPercentage: 15,
-        scrollDownPercentage: 60,
-        showMobileBanner: true,
-        enabled: true
-      };
-    case 9: //CTA GROUP 2 scroll triggers
-      return {
-        ctaTitle: "Accurate Home Valuation",
-        ctaSubTitle: "Uncover Your Property's Market Value",
-        ctaBody: "Would you like to get an accurate valuation for your home?",
-        ctaTags: `RequestCustomValuation, OptInContact, Cta${ ctaId }Accept`,
-        ctaDisplayTags: `Cta${ ctaId }Display`,
-        ctaDisplayNote: "Prompt for a home valuation was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a home evaluation",
-        ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
-        ctaNote: "I would like a custom home valuation",
-        ctaNoteIncludeArea: false,
-        ctaNoteIncludeAddress: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "Awesome! We've received your request!",
-        ctaSubmitButtonText: "Yes, please!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Ensure your contact details are correct so we can keep you informed.",
-        ctaContactFormResponse: "Thanks for updating, you're all set!",
-        ctaVerifyButtonText: "Verify",
-        ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
-        ctaMobileBannerText: 'Get Your Home Value',
-        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
-        ctaMobileBannerTags: "ClickCtaMobileBanner",
-        delay: 5,
-        scrollUpPercentage: 15,
-        scrollDownPercentage: 60,
-        showMobileBanner: true,
-        enabled: true
-      };
-    case 10:    //CTA GROUP 3
-      return {
-        ctaTitle: "Personalized Home Value Estimate",
-        ctaSubTitle: "Discover Your Home's True Worth",
-        ctaBody: "Interested in a personalized valuation of your home?",
-        ctaTags: `RequestCustomValuation, OptInContact, Cta${ ctaId }Accept`,
-        ctaDisplayTags: `Cta${ ctaId }Display`,
-        ctaDisplayNote: "Prompt for a home valuation was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a home evaluation",
-        ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/025d77d8-0d14-47d0-3ec9-71e68d9cd400/public",
-        ctaNote: "I would like a custom home valuation",
-        ctaNoteIncludeArea: false,
-        ctaNoteIncludeAddress: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "Great! Your request has been submitted!",
-        ctaSubmitButtonText: "Absolutely!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Please confirm or update your contact information to ensure you receive accurate updates.",
-        ctaContactFormResponse: "Thanks for confirming, you're all set!",
-        ctaVerifyButtonText: "Confirm",
-        ctaContactMeMessage: "If you need further assistance, please don't hesitate to reach out.",
-        ctaMobileBannerText: 'Get Your Home Value',
-        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
-        ctaMobileBannerTags: "ClickCtaMobileBanner",
-        delay: 1,
-        scrollUpPercentage: 0,
-        scrollDownPercentage: 0,        
-        showMobileBanner: true,       
-        enabled: true
-      };
-    case 11: //CTA GROUP 3
-      return {
-        ctaTitle: "Accurate Home Valuation",
-        ctaSubTitle: "Uncover Your Property's Market Value",
-        ctaBody: "Would you like to get an accurate valuation for your home?",
-        ctaTags: `RequestCustomValuation, OptInContact, Cta${ ctaId }Accept`,
-        ctaDisplayTags: `Cta${ ctaId }Display`,
-        ctaDisplayNote: "Prompt for a home valuation was displayed",
-        ctaVerifiedNote: "Contact information was confirmed after requesting a home evaluation",
-        ctaVerifyTags: "CtaContactVerfied",
-        ctaImage: "https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
-        ctaNote: "I would like a custom home valuation",
-        ctaNoteIncludeArea: false,
-        ctaNoteIncludeAddress: true,
-        ctaDisclaimer: ["By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent."],
-        ctaResponse: "Awesome! We've received your request!",
-        ctaSubmitButtonText: "Yes, please!", 
-        ctaShowContactForm: true,
-        ctaContactFormBody: "Ensure your contact details are correct so we can keep you informed.",
-        ctaContactFormResponse: "Thanks for updating, you're all set!",
-        ctaVerifyButtonText: "Verify",
-        ctaContactMeMessage: "Need more information? Feel free to contact me anytime.",
-        ctaMobileBannerText: 'Get Your Home Value',
-        ctaMobileBannerNote: 'Mobile banner for home value clicked.',
-        ctaMobileBannerTags: "ClickCtaMobileBanner",
-        delay: 2,
-        scrollUpPercentage: 0,
-        scrollDownPercentage: 0,
-        showMobileBanner: true,
-        enabled: true
-      };
-    default:
-      return {     
-        //if it is not a mapped cta then just mark disabled and nothing will pop   
-        enabled: false
-      };
-  }
+export const getCtaData = ctaId => {
+	switch (ctaId) {
+		case 1:
+			//the home value pops an existing modal so just need the delay and enabled properties available
+			return {
+				delay: 2,
+				showMobileBanner: false,
+				enabled: false,
+			};
+		case 2: //CTA GROUP 1
+			return {
+				ctaTitle: "Personalized Home Value Estimate",
+				ctaSubTitle: "Discover Your Home's True Worth",
+				ctaBody: "Interested in a personalized valuation of your home?",
+				ctaTags: `RequestCustomValuation, OptInContact, Cta${ctaId}Accept`,
+				ctaDisplayTags: `Cta${ctaId}Display`,
+				ctaDisplayNote: "Prompt for a home valuation was displayed",
+				ctaVerifiedNote:
+					"Contact information was confirmed after requesting a home evaluation",
+				ctaVerifyTags: "CtaContactVerfied",
+				ctaImage:
+					"https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/025d77d8-0d14-47d0-3ec9-71e68d9cd400/public",
+				ctaNote: "I would like a custom home valuation",
+				ctaNoteIncludeArea: false,
+				ctaNoteIncludeAddress: true,
+				ctaDisclaimer: [
+					"By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent.",
+				],
+				ctaResponse: "Great! Your request has been submitted!",
+				ctaSubmitButtonText: "Absolutely!",
+				ctaShowContactForm: true,
+				ctaContactFormBody:
+					"Please confirm or update your contact information to ensure you receive accurate updates.",
+				ctaContactFormResponse: "Thanks for confirming, you're all set!",
+				ctaVerifyButtonText: "Confirm",
+				ctaContactMeMessage:
+					"If you need further assistance, please don't hesitate to reach out.",
+				ctaMobileBannerText: "Get Your Home Value",
+				ctaMobileBannerNote: "Mobile banner for home value clicked.",
+				ctaMobileBannerTags: "ClickCtaMobileBanner",
+				delay: 1,
+				scrollUpPercentage: 0,
+				scrollDownPercentage: 0,
+				showMobileBanner: true,
+				enabled: true,
+			};
+		case 3: //CTA GROUP 1
+			return {
+				ctaTitle: "Accurate Home Valuation",
+				ctaSubTitle: "Uncover Your Property's Market Value",
+				ctaBody: "Would you like to get an accurate valuation for your home?",
+				ctaTags: `RequestCustomValuation, OptInContact, Cta${ctaId}Accept`,
+				ctaDisplayTags: `Cta${ctaId}Display`,
+				ctaDisplayNote: "Prompt for a home valuation was displayed",
+				ctaVerifiedNote:
+					"Contact information was confirmed after requesting a home evaluation",
+				ctaVerifyTags: "CtaContactVerfied",
+				ctaImage:
+					"https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
+				ctaNote: "I would like a custom home valuation",
+				ctaNoteIncludeArea: false,
+				ctaNoteIncludeAddress: true,
+				ctaDisclaimer: [
+					"By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent.",
+				],
+				ctaResponse: "Awesome! We've received your request!",
+				ctaSubmitButtonText: "Yes, please!",
+				ctaShowContactForm: true,
+				ctaContactFormBody:
+					"Ensure your contact details are correct so we can keep you informed.",
+				ctaContactFormResponse: "Thanks for updating, you're all set!",
+				ctaVerifyButtonText: "Verify",
+				ctaContactMeMessage:
+					"Need more information? Feel free to contact me anytime.",
+				ctaMobileBannerText: "Get Your Home Value",
+				ctaMobileBannerNote: "Mobile banner for home value clicked.",
+				ctaMobileBannerTags: "ClickCtaMobileBanner",
+				delay: 2,
+				scrollUpPercentage: 0,
+				scrollDownPercentage: 0,
+				showMobileBanner: true,
+				enabled: true,
+			};
+		case 4: //CTA GROUP 2
+			return {
+				ctaTitle: "Personalized Home Value Estimate",
+				ctaSubTitle: "Discover Your Home's True Worth",
+				ctaBody: "Interested in a personalized valuation of your home?",
+				ctaTags: `RequestCustomValuation, OptInContact, Cta${ctaId}Accept`,
+				ctaDisplayTags: `Cta${ctaId}Display`,
+				ctaDisplayNote: "Prompt for a home valuation was displayed",
+				ctaVerifiedNote:
+					"Contact information was confirmed after requesting a home evaluation",
+				ctaVerifyTags: "CtaContactVerfied",
+				ctaImage:
+					"https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/025d77d8-0d14-47d0-3ec9-71e68d9cd400/public",
+				ctaNote: "I would like a custom home valuation",
+				ctaNoteIncludeArea: false,
+				ctaNoteIncludeAddress: true,
+				ctaDisclaimer: [
+					"By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent.",
+				],
+				ctaResponse: "Great! Your request has been submitted!",
+				ctaSubmitButtonText: "Absolutely!",
+				ctaShowContactForm: true,
+				ctaContactFormBody:
+					"Please confirm or update your contact information to ensure you receive accurate updates.",
+				ctaContactFormResponse: "Thanks for confirming, you're all set!",
+				ctaVerifyButtonText: "Confirm",
+				ctaContactMeMessage:
+					"If you need further assistance, please don't hesitate to reach out.",
+				ctaMobileBannerText: "Get Your Home Value",
+				ctaMobileBannerNote: "Mobile banner for home value clicked.",
+				ctaMobileBannerTags: "ClickCtaMobileBanner",
+				delay: 1,
+				scrollUpPercentage: 0,
+				scrollDownPercentage: 0,
+				showMobileBanner: true,
+				enabled: true,
+			};
+		case 5: //CTA GROUP 2
+			return {
+				ctaTitle: "Accurate Home Valuation",
+				ctaSubTitle: "Uncover Your Property's Market Value",
+				ctaBody: "Would you like to get an accurate valuation for your home?",
+				ctaTags: `RequestCustomValuation, OptInContact, Cta${ctaId}Accept`,
+				ctaDisplayTags: `Cta${ctaId}Display`,
+				ctaDisplayNote: "Prompt for a home valuation was displayed",
+				ctaVerifiedNote:
+					"Contact information was confirmed after requesting a home evaluation",
+				ctaVerifyTags: "CtaContactVerfied",
+				ctaImage:
+					"https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
+				ctaNote: "I would like a custom home valuation",
+				ctaNoteIncludeArea: false,
+				ctaNoteIncludeAddress: true,
+				ctaDisclaimer: [
+					"By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent.",
+				],
+				ctaResponse: "Awesome! We've received your request!",
+				ctaSubmitButtonText: "Yes, please!",
+				ctaShowContactForm: true,
+				ctaContactFormBody:
+					"Ensure your contact details are correct so we can keep you informed.",
+				ctaContactFormResponse: "Thanks for updating, you're all set!",
+				ctaVerifyButtonText: "Verify",
+				ctaContactMeMessage:
+					"Need more information? Feel free to contact me anytime.",
+				ctaMobileBannerText: "Get Your Home Value",
+				ctaMobileBannerNote: "Mobile banner for home value clicked.",
+				ctaMobileBannerTags: "ClickCtaMobileBanner",
+				delay: 2,
+				scrollUpPercentage: 0,
+				scrollDownPercentage: 0,
+				showMobileBanner: true,
+				enabled: true,
+			};
+		case 6: //CTA GROUP 1 scroll triggers
+			return {
+				ctaTitle: "Personalized Home Value Estimate",
+				ctaSubTitle: "Discover Your Home's True Worth",
+				ctaBody: "Interested in a personalized valuation of your home?",
+				ctaTags: `RequestCustomValuation, OptInContact, Cta${ctaId}Accept`,
+				ctaDisplayTags: `Cta${ctaId}Display`,
+				ctaDisplayNote: "Prompt for a home valuation was displayed",
+				ctaVerifiedNote:
+					"Contact information was confirmed after requesting a home evaluation",
+				ctaVerifyTags: "CtaContactVerfied",
+				ctaImage:
+					"https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/025d77d8-0d14-47d0-3ec9-71e68d9cd400/public",
+				ctaNote: "I would like a custom home valuation",
+				ctaNoteIncludeArea: false,
+				ctaNoteIncludeAddress: true,
+				ctaDisclaimer: [
+					"By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent.",
+				],
+				ctaResponse: "Great! Your request has been submitted!",
+				ctaSubmitButtonText: "Absolutely!",
+				ctaShowContactForm: true,
+				ctaContactFormBody:
+					"Please confirm or update your contact information to ensure you receive accurate updates.",
+				ctaContactFormResponse: "Thanks for confirming, you're all set!",
+				ctaVerifyButtonText: "Confirm",
+				ctaContactMeMessage:
+					"If you need further assistance, please don't hesitate to reach out.",
+				ctaMobileBannerText: "Get Your Home Value",
+				ctaMobileBannerNote: "Mobile banner for home value clicked.",
+				ctaMobileBannerTags: "ClickCtaMobileBanner",
+				delay: 5,
+				scrollUpPercentage: 15,
+				scrollDownPercentage: 60,
+				showMobileBanner: true,
+				enabled: true,
+			};
+		case 7: //CTA GROUP 1 scroll triggers
+			return {
+				ctaTitle: "Accurate Home Valuation",
+				ctaSubTitle: "Uncover Your Property's Market Value",
+				ctaBody: "Would you like to get an accurate valuation for your home?",
+				ctaTags: `RequestCustomValuation, OptInContact, Cta${ctaId}Accept`,
+				ctaDisplayTags: `Cta${ctaId}Display`,
+				ctaDisplayNote: "Prompt for a home valuation was displayed",
+				ctaVerifiedNote:
+					"Contact information was confirmed after requesting a home evaluation",
+				ctaVerifyTags: "CtaContactVerfied",
+				ctaImage:
+					"https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
+				ctaNote: "I would like a custom home valuation",
+				ctaNoteIncludeArea: false,
+				ctaNoteIncludeAddress: true,
+				ctaDisclaimer: [
+					"By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent.",
+				],
+				ctaResponse: "Awesome! We've received your request!",
+				ctaSubmitButtonText: "Yes, please!",
+				ctaShowContactForm: true,
+				ctaContactFormBody:
+					"Ensure your contact details are correct so we can keep you informed.",
+				ctaContactFormResponse: "Thanks for updating, you're all set!",
+				ctaVerifyButtonText: "Verify",
+				ctaContactMeMessage:
+					"Need more information? Feel free to contact me anytime.",
+				ctaMobileBannerText: "Get Your Home Value",
+				ctaMobileBannerNote: "Mobile banner for home value clicked.",
+				ctaMobileBannerTags: "ClickCtaMobileBanner",
+				delay: 5,
+				scrollUpPercentage: 15,
+				scrollDownPercentage: 60,
+				showMobileBanner: true,
+				enabled: true,
+			};
+		case 8: //CTA GROUP 2 scroll triggers
+			return {
+				ctaTitle: "Personalized Home Value Estimate",
+				ctaSubTitle: "Discover Your Home's True Worth",
+				ctaBody: "Interested in a personalized valuation of your home?",
+				ctaTags: `RequestCustomValuation, OptInContact, Cta${ctaId}Accept`,
+				ctaDisplayTags: `Cta${ctaId}Display`,
+				ctaDisplayNote: "Prompt for a home valuation was displayed",
+				ctaVerifiedNote:
+					"Contact information was confirmed after requesting a home evaluation",
+				ctaVerifyTags: "CtaContactVerfied",
+				ctaImage:
+					"https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/025d77d8-0d14-47d0-3ec9-71e68d9cd400/public",
+				ctaNote: "I would like a custom home valuation",
+				ctaNoteIncludeArea: false,
+				ctaNoteIncludeAddress: true,
+				ctaDisclaimer: [
+					"By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent.",
+				],
+				ctaResponse: "Great! Your request has been submitted!",
+				ctaSubmitButtonText: "Absolutely!",
+				ctaShowContactForm: true,
+				ctaContactFormBody:
+					"Please confirm or update your contact information to ensure you receive accurate updates.",
+				ctaContactFormResponse: "Thanks for confirming, you're all set!",
+				ctaVerifyButtonText: "Confirm",
+				ctaContactMeMessage:
+					"If you need further assistance, please don't hesitate to reach out.",
+				ctaMobileBannerText: "Get Your Home Value",
+				ctaMobileBannerNote: "Mobile banner for home value clicked.",
+				ctaMobileBannerTags: "ClickCtaMobileBanner",
+				delay: 5,
+				scrollUpPercentage: 15,
+				scrollDownPercentage: 60,
+				showMobileBanner: true,
+				enabled: true,
+			};
+		case 9: //CTA GROUP 2 scroll triggers
+			return {
+				ctaTitle: "Accurate Home Valuation",
+				ctaSubTitle: "Uncover Your Property's Market Value",
+				ctaBody: "Would you like to get an accurate valuation for your home?",
+				ctaTags: `RequestCustomValuation, OptInContact, Cta${ctaId}Accept`,
+				ctaDisplayTags: `Cta${ctaId}Display`,
+				ctaDisplayNote: "Prompt for a home valuation was displayed",
+				ctaVerifiedNote:
+					"Contact information was confirmed after requesting a home evaluation",
+				ctaVerifyTags: "CtaContactVerfied",
+				ctaImage:
+					"https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
+				ctaNote: "I would like a custom home valuation",
+				ctaNoteIncludeArea: false,
+				ctaNoteIncludeAddress: true,
+				ctaDisclaimer: [
+					"By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent.",
+				],
+				ctaResponse: "Awesome! We've received your request!",
+				ctaSubmitButtonText: "Yes, please!",
+				ctaShowContactForm: true,
+				ctaContactFormBody:
+					"Ensure your contact details are correct so we can keep you informed.",
+				ctaContactFormResponse: "Thanks for updating, you're all set!",
+				ctaVerifyButtonText: "Verify",
+				ctaContactMeMessage:
+					"Need more information? Feel free to contact me anytime.",
+				ctaMobileBannerText: "Get Your Home Value",
+				ctaMobileBannerNote: "Mobile banner for home value clicked.",
+				ctaMobileBannerTags: "ClickCtaMobileBanner",
+				delay: 5,
+				scrollUpPercentage: 15,
+				scrollDownPercentage: 60,
+				showMobileBanner: true,
+				enabled: true,
+			};
+		case 10: //CTA GROUP 3
+			return {
+				ctaTitle: "Personalized Home Value Estimate",
+				ctaSubTitle: "Discover Your Home's True Worth",
+				ctaBody: "Interested in a personalized valuation of your home?",
+				ctaTags: `RequestCustomValuation, OptInContact, Cta${ctaId}Accept`,
+				ctaDisplayTags: `Cta${ctaId}Display`,
+				ctaDisplayNote: "Prompt for a home valuation was displayed",
+				ctaVerifiedNote:
+					"Contact information was confirmed after requesting a home evaluation",
+				ctaVerifyTags: "CtaContactVerfied",
+				ctaImage:
+					"https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/025d77d8-0d14-47d0-3ec9-71e68d9cd400/public",
+				ctaNote: "I would like a custom home valuation",
+				ctaNoteIncludeArea: false,
+				ctaNoteIncludeAddress: true,
+				ctaDisclaimer: [
+					"By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent.",
+				],
+				ctaResponse: "Great! Your request has been submitted!",
+				ctaSubmitButtonText: "Absolutely!",
+				ctaShowContactForm: true,
+				ctaContactFormBody:
+					"Please confirm or update your contact information to ensure you receive accurate updates.",
+				ctaContactFormResponse: "Thanks for confirming, you're all set!",
+				ctaVerifyButtonText: "Confirm",
+				ctaContactMeMessage:
+					"If you need further assistance, please don't hesitate to reach out.",
+				ctaMobileBannerText: "Get Your Home Value",
+				ctaMobileBannerNote: "Mobile banner for home value clicked.",
+				ctaMobileBannerTags: "ClickCtaMobileBanner",
+				delay: 1,
+				scrollUpPercentage: 0,
+				scrollDownPercentage: 0,
+				showMobileBanner: true,
+				enabled: true,
+			};
+		case 11: //CTA GROUP 3
+			return {
+				ctaTitle: "Accurate Home Valuation",
+				ctaSubTitle: "Uncover Your Property's Market Value",
+				ctaBody: "Would you like to get an accurate valuation for your home?",
+				ctaTags: `RequestCustomValuation, OptInContact, Cta${ctaId}Accept`,
+				ctaDisplayTags: `Cta${ctaId}Display`,
+				ctaDisplayNote: "Prompt for a home valuation was displayed",
+				ctaVerifiedNote:
+					"Contact information was confirmed after requesting a home evaluation",
+				ctaVerifyTags: "CtaContactVerfied",
+				ctaImage:
+					"https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/1595044b-819f-45b5-892f-0a55704e3c00/public",
+				ctaNote: "I would like a custom home valuation",
+				ctaNoteIncludeArea: false,
+				ctaNoteIncludeAddress: true,
+				ctaDisclaimer: [
+					"By continuing, you consent to receive communications from us, including but not limited to updates, promotional offers, and other marketing materials. We value your privacy and will use your information solely for the purpose of contacting you as per your request or interest. You can opt out of these communications at any time by following the unsubscribe instructions provided in our emails or by contacting us directly. Your information will not be shared with third parties without your explicit consent.",
+				],
+				ctaResponse: "Awesome! We've received your request!",
+				ctaSubmitButtonText: "Yes, please!",
+				ctaShowContactForm: true,
+				ctaContactFormBody:
+					"Ensure your contact details are correct so we can keep you informed.",
+				ctaContactFormResponse: "Thanks for updating, you're all set!",
+				ctaVerifyButtonText: "Verify",
+				ctaContactMeMessage:
+					"Need more information? Feel free to contact me anytime.",
+				ctaMobileBannerText: "Get Your Home Value",
+				ctaMobileBannerNote: "Mobile banner for home value clicked.",
+				ctaMobileBannerTags: "ClickCtaMobileBanner",
+				delay: 2,
+				scrollUpPercentage: 0,
+				scrollDownPercentage: 0,
+				showMobileBanner: true,
+				enabled: true,
+			};
+		default:
+			return {
+				//if it is not a mapped cta then just mark disabled and nothing will pop
+				enabled: false,
+			};
+	}
 };
 
 export const isMobileDevice = () => {
-  let hasTouchScreen = false;
-  
-  try {  
-    if ("maxTouchPoints" in navigator) {
-      hasTouchScreen = navigator.maxTouchPoints > 0;
-    } else if ("msMaxTouchPoints" in navigator) {
-      hasTouchScreen = navigator.msMaxTouchPoints > 0;
-    } else {
-      const mQ = matchMedia?.("(pointer:coarse)");
-      if (mQ?.media === "(pointer:coarse)") {
-        hasTouchScreen = !!mQ.matches;
-      } else if ("orientation" in window) {
-        hasTouchScreen = true; // deprecated, but good fallback
-      } else {
-        // Only as a last resort, fall back to basic user agent sniffing
-        // * I opted to see what our results look like before adding something like bowser for more robust user agent parsing since our need is pretty basic
-        const UA = navigator.userAgent;
-        hasTouchScreen =
-          /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
-          /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
-      }
-    }
-  } catch (error) {
-    console.error("Error detecting mobile device:", error);    
-  }
-  
-  return hasTouchScreen;
+	let hasTouchScreen = false;
+
+	try {
+		if ("maxTouchPoints" in navigator) {
+			hasTouchScreen = navigator.maxTouchPoints > 0;
+		} else if ("msMaxTouchPoints" in navigator) {
+			hasTouchScreen = navigator.msMaxTouchPoints > 0;
+		} else {
+			const mQ = matchMedia?.("(pointer:coarse)");
+			if (mQ?.media === "(pointer:coarse)") {
+				hasTouchScreen = !!mQ.matches;
+			} else if ("orientation" in window) {
+				hasTouchScreen = true; // deprecated, but good fallback
+			} else {
+				// Only as a last resort, fall back to basic user agent sniffing
+				// * I opted to see what our results look like before adding something like bowser for more robust user agent parsing since our need is pretty basic
+				const UA = navigator.userAgent;
+				hasTouchScreen =
+					/\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+					/\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
+			}
+		}
+	} catch (error) {
+		console.error("Error detecting mobile device:", error);
+	}
+
+	return hasTouchScreen;
 };
 
 // I suspect we my have a mask lib but did not find it, so going this route for the moment
-export const formatPhoneNumber = (phoneNumber) => {
-  if(!phoneNumber)
-    return phoneNumber;
+export const formatPhoneNumber = phoneNumber => {
+	if (!phoneNumber) return phoneNumber;
 
-  // Remove any non-digit characters
-  const cleaned = phoneNumber.replace(/\D/g, '');
-  
-  // Check if it's a 10-digit number
-  if (cleaned.length === 10) {
-    return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
-  }
-  
-  // If it's not 10 digits, return the original input
-  return phoneNumber;
+	// Remove any non-digit characters
+	const cleaned = phoneNumber.replace(/\D/g, "");
+
+	// Check if it's a 10-digit number
+	if (cleaned.length === 10) {
+		return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(
+			6
+		)}`;
+	}
+
+	// If it's not 10 digits, return the original input
+	return phoneNumber;
 };
 
-export const formatFormNote = (data) => {
+export const formatFormNote = data => {
+	if (!data.noteFormatter) {
+		data.note = data.note || "Form Submission";
+		return;
+	}
 
-  if(!data.noteFormatter) {
-    data.note = data.note || 'Form Submission';
-    return;
-  }
-  
-  //since we are formatting it here we can remove the meta data so you will see a few "delete data.meta[xx]", that will prevent duplicate info in notes.
-  
-  const formatterType = data.noteFormatter.toLowerCase();    
+	//since we are formatting it here we can remove the meta data so you will see a few "delete data.meta[xx]", that will prevent duplicate info in notes.
 
-  switch(formatterType) {
-    case "RequestShowing".toLowerCase():
-      let formatted = `Showing request for ${data.formListingAddress}`;
+	const formatterType = data.noteFormatter.toLowerCase();
 
-      const option1 = data["meta[availableDate]"];
-      const option2 = data["meta[alternativeDate]"];
-      if(option1 || option2) {
-        const dates = [];
-        
-        if (option1) 
-          dates.push(option1);      
+	switch (formatterType) {
+		case "RequestShowing".toLowerCase():
+			let formatted = `Showing request for ${data.formListingAddress}`;
 
-        if (option2)
-          dates.push(option2);
+			const option1 = data["meta[availableDate]"];
+			const option2 = data["meta[alternativeDate]"];
+			if (option1 || option2) {
+				const dates = [];
 
-        formatted += ` availability: ${dates.join(", ")}`;         
+				if (option1) dates.push(option1);
 
-        delete data["meta[availableDate]"];
-        delete data["meta[alternativeDate]"];
-      } 
+				if (option2) dates.push(option2);
 
-      if(!data.note) {
-        data.note = formatted;
-      } else {
-        data.note = `${formatted}.  Message: ${data.note}`;
-      }
-      
-    break;
+				formatted += ` availability: ${dates.join(", ")}`;
 
-    case "RequestMoreInfoMoving".toLowerCase():
-      const movingDate = data["meta[movingDate]"] || 'not moving';
-      const contactPreference = data["meta[reachMe]"];      
-      const movingFormatted = `More information requested for ${data.formListingAddress} \nMoving Date: ${ movingDate } \nBest way to reach: ${ contactPreference } \nMessage: ${ data.note || 'please follow up'} `;
+				delete data["meta[availableDate]"];
+				delete data["meta[alternativeDate]"];
+			}
 
-      data.note = movingFormatted;        
-      
-      delete data["meta[movingDate]"];
-      delete data["meta[reachMe]"];
-    break;
+			if (!data.note) {
+				data.note = formatted;
+			} else {
+				data.note = `${formatted}.  Message: ${data.note}`;
+			}
 
-    case "RequestCustomValuation".toLowerCase():
-      data.note = `Custom valuation request for ${data.notePropertyAddress}.\n\nAdditional property details: ${ data.note || 'none provided'} `;
-    break;
-    
-    default:
-    break;
-  }
+			break;
+
+		case "RequestMoreInfoMoving".toLowerCase():
+			const movingDate = data["meta[movingDate]"] || "not moving";
+			const contactPreference = data["meta[reachMe]"];
+			const movingFormatted = `More information requested for ${
+				data.formListingAddress
+			} \nMoving Date: ${movingDate} \nBest way to reach: ${contactPreference} \nMessage: ${
+				data.note || "please follow up"
+			} `;
+
+			data.note = movingFormatted;
+
+			delete data["meta[movingDate]"];
+			delete data["meta[reachMe]"];
+			break;
+
+		case "RequestCustomValuation".toLowerCase():
+			data.note = `Custom valuation request for ${
+				data.notePropertyAddress
+			}.\n\nAdditional property details: ${data.note || "none provided"} `;
+			break;
+
+		default:
+			break;
+	}
 };
 
 //TODO: check w/ John on location of this class
 export class InsensitiveURLSearchParams {
-  constructor(queryString) {
-    this.params = new URLSearchParams(queryString);
-    this.map = new Map();
+	constructor(queryString) {
+		this.params = new URLSearchParams(queryString);
+		this.map = new Map();
 
-    // Populate the map with lowercase keys
-    for (const [key, value] of this.params.entries()) {
-      this.map.set(key.toLowerCase(), value);
-    }
-  }
+		// Populate the map with lowercase keys
+		for (const [key, value] of this.params.entries()) {
+			this.map.set(key.toLowerCase(), value);
+		}
+	}
 
-  get(key) {
-    return this.map.get(key.toLowerCase());
-  }
-  
-  //returns an object where all property names are lowercase (values remain untouched)
-  getObjectLower() {
-    return Object.fromEntries(this.map);
-  }
+	get(key) {
+		return this.map.get(key.toLowerCase());
+	}
+
+	//returns an object where all property names are lowercase (values remain untouched)
+	getObjectLower() {
+		return Object.fromEntries(this.map);
+	}
 }
-

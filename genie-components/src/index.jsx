@@ -30,7 +30,7 @@ const genericJS = () => {
 	}
 };
 
-console.log("Hello from Genie Hub 1");
+console.log("Hello from Genie Cloud");
 
 
 if (
