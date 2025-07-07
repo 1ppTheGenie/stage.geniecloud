@@ -1,23 +1,23 @@
-import { Show, createSignal, createEffect } from "solid-js";
+import { Show, createSignal, createEffect, createMemo } from "solid-js";
 
 import "@/assets/css/pagination.css";
 
 export const Pagination = props => {
 	const [buttons, setButtons] = createSignal();
-	const [totalPages, setTotalPages] = createSignal(0);
 	const { pageChange, maxButtons = 10, withPrevNext = true } = props;
-	const pageSize = props.pageSize || 10;
+	const pageSize = createMemo( ()=> props.pageSize() || 10 );
+	const totalItems = createMemo( () => props.data().length );
+	const totalPages = createMemo( () => Math.ceil( totalItems() / pageSize() ) );	
 
-	createEffect(() => setTotalPages(Math.ceil(props.totalItems / pageSize)));
 
 	createEffect(() => {
 		let startPage, endPage;
-		let currentPage = props.currentPage;
+		let currentPage = props.currentPage();
 
 		// ensure current page isn't out of range
-		if (props.currentPage < 1) {
+		if (props.currentPage() < 1) {
 			currentPage = 1;
-		} else if (props.currentPage > totalPages()) {
+		} else if (props.currentPage() > totalPages()) {
 			currentPage = totalPages();
 		}
 
@@ -30,7 +30,7 @@ export const Pagination = props => {
 			const maxPagesBeforeCurrentPage = Math.floor(maxButtons / 2);
 			const maxPagesAfterCurrentPage = Math.ceil(maxButtons / 2) - 1;
 
-			if (props.currentPage <= maxPagesBeforeCurrentPage) {
+			if (props.currentPage() <= maxPagesBeforeCurrentPage) {
 				// current page near the start
 				startPage = 1;
 				endPage = maxButtons;
@@ -53,22 +53,22 @@ export const Pagination = props => {
 	});
 
 	return (
-		<ul class="pagination" {...props}>
-			<Show when={props.totalItems > 0}>
-				{props.currentPage > 1 && withPrevNext && (
-					<li onClick={() => pageChange(props.currentPage - 1)}>&laquo; Prev</li>
+		<ul class="pagination">
+			<Show when={totalItems() > 0}>
+				{props.currentPage() > 1 && withPrevNext && (
+					<li onClick={() => pageChange(props.currentPage() - 1)}>&laquo; Prev</li>
 				)}
 				<For each={buttons()}>
 					{p => (
 						<li
 							onClick={() => pageChange(p)} // +1 because pages are 1-based
-							classList={{ active: p === props.currentPage }}>
+							classList={{ active: p === props.currentPage() }}>
 							{p}
 						</li>
 					)}
 				</For>
-				{props.currentPage < totalPages() && withPrevNext && (
-					<li onClick={() => pageChange(props.currentPage + 1)}>Next &raquo;</li>
+				{props.currentPage() < totalPages() && withPrevNext && (
+					<li onClick={() => pageChange(props.currentPage() + 1)}>Next &raquo;</li>
 				)}
 			</Show>
 		</ul>

@@ -1,12 +1,20 @@
-export const ListingsShowing = props => (
+import { createMemo } from "solid-js";
+
+export const ListingsShowing = props => {
+	const len = createMemo( () => props.data().length )
+	const mode = createMemo( () => props.mode().toLowerCase() );
+	const offset = createMemo( () => props.pageOffset() );
+
+	return (
 		<>
 			Showing
-			<span style="font-weight: bold">{` ${props.offset + 1}${ props.offset + 1 == Math.min( props.offset + props.pageSize, props.len) ? '':  `-${Math.min( props.offset + props.pageSize, props.len)}`} `}</span>
+			<span style="font-weight: bold">{` ${offset() + 1}${offset() + 1 == Math.min( offset() + props.pageSize(), len() ) ? '' : `-${Math.min( offset() + props.pageSize(), len() )}`} `}</span>
 			of
-			<span style="font-weight: bold">{` ${props.len} `}</span>
-			{props.mode === "sold"
+			<span style="font-weight: bold">{` ${len()} `}</span>
+			{mode() === "sold"
 				? `sold listings in the last ${props.period} months`
-				: `${props.mode} listings`}
+				: `${mode()} listings`}
 			. DOM: Days On Market
 		</>
 	);
+}

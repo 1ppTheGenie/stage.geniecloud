@@ -38,7 +38,7 @@ export default () => {
 		const subset = listingsSubset(listingType(), listingsMode());
 
 		if (subset) {
-			const offset = Math.max((currentPage() - 1) * pageSize(),0);
+			const offset = Math.max((currentPage() - 1) * pageSize(), 0);
 			setAvailableListings(subset.length);
 			setListings(subset.slice(offset, offset + pageSize()));
 		}
@@ -52,7 +52,7 @@ export default () => {
 		setPage(0);
 		setListingType(propertyTypeId);
 		setListingsMode(statusType.toLowerCase());
-		setListingsVisible( true );
+		setListingsVisible(true);
 	};
 
 	return (
@@ -120,8 +120,6 @@ export default () => {
 						}
 					/>
 				</div>
-
-				
 			</div>
 			<div
 				id="ff-listing-table"
@@ -132,28 +130,29 @@ export default () => {
 						onClick={() => setListingsVisible(false)}
 					/>
 					<ListingsTable
-						mode={listingsMode()}
-						listings={listings()}
+						mode={listingsMode}
+						listings={listings}
 						style="width: 100%; color: var(--theme-body-color)"
 						withIcon={true}
 					/>
 					<div style="display: flex; justify-content: space-between">
 						<div style="margin-top: 1em">
 							<ListingsShowing
-								pageSize={pageSize()}
-								offset={Math.max((currentPage() - 1) * pageSize(),0)}
-								len={availableListings()}
-								mode={listingsMode()}
+								pageSize={pageSize}
+								pageOffset={pageOffset}
+								data={availableListings}
+								mode={availableListings}
 								period={areaDataStore.areaPeriod}
 							/>
 						</div>
 
 						<Pagination
-							totalItems={availableListings()}
-							currentPage={currentPage()}
+							data={availableListings}
+							currentPage={currentPage}
 							pageChange={page => setPage(page)}
 							style="align-self: center"
 						/>
+
 					</div>
 				</div>
 			</div>

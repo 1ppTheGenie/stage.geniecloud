@@ -1,22 +1,10 @@
 import { format } from "date-fns";
-import {
-	HomeTypes,
-	LeafletMap,
-	GeoArea,
-	ListingsTable,
-	ListingsShowing,
-	Pagination,
-	CircleMarker,
-} from "@/components";
-import {
-	areaDataStore,
-	listingsStore,
-	usePagination,
-	filterListings,
-} from "@/utilities";
+/* prettier-ignore */
+import { HomeTypes, LeafletMap,GeoArea,	ListingsTable, ListingsShowing, Pagination,CircleMarker } from "@/components";
+import { usePagination, filterListings } from "@/utilities";
 
 export default () => {
-	const { currentPage, setPage, pageOffset, pageSize } = usePagination({});
+	const { currentPage, setPage, pageOffset, pageSize } = usePagination();
 
 	useEffect(() => {
 		setPage(1);
@@ -192,7 +180,7 @@ export default () => {
 						))}
 				</LeafletMap>
 				<ListingsTable
-					mode={settings.mode}
+					mode={() => settings.mode}
 					listings={visibleListings}
 					style={{
 						width: "100%",
@@ -213,17 +201,15 @@ export default () => {
 				<div style="font-size:80%">
 					<ListingsShowing
 						pageSize={pageSize}
-						ffset={Math.max((currentPage() - 1) * pageSize(),0)}
-						len={currentListings.length}
-						mode={settings.mode}
+						pageOffset={pageOffset}
+						data={currentListings}
+						mode={() => settings.mode}
 						period={period}
 					/>
-					<br />
-					DOM: Days On Market
 				</div>
 				<Pagination
-					totalItems={currentListings.length}
-					currentPage={currentPage()}
+					data={() => currentListings.length}
+					currentPage={currentPage}
 					pageChange={page => setPage(page)}
 					style="align-self:flex-end; margin: 0.25rem 0"
 				/>

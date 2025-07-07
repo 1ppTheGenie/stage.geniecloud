@@ -1,12 +1,7 @@
-import { createSignal, Show, For } from "solid-js";
+import { createSignal, Show, For, createMemo  } from "solid-js";
 import { format } from "date-fns";
-import {
-	address,
-	currency,
-	useSettings,
-	Context4Settings,
-	signedInAtom,
-} from "@/utilities";
+/* prettier-ignore */
+import { address, currency, useSettings, Context4Settings, signedInAtom } from "@/utilities";
 import { DataAccess } from "@/components";
 
 import SoldIcon from "@/assets/icon-sold-small.svg";
@@ -68,20 +63,21 @@ export const ListingsTable = props => {
 		setSignedIn(bool);
 	};
 
+	const viewMode = createMemo(() => props.mode().toLowerCase());
+
 	return (
 		<>
 			{showSignIn && <DataAccess signedin={signInComplete} />}
-			<table id="listing-table" style={style} class={`mode-${props.mode}`}>
+			<table id="listing-table" style={style} class={`mode-${viewMode()}`}>
 				<thead>
-					<Show when={props.mode}>
+					<Show when={viewMode()}>
 						<tr>
 							{headings[
-								props.mode.substring(0, 4) !== "sold"
+								viewMode() !== "sold"
 									? "default"
 									: "soldextended"
 							].map((caption, i) => (
 								<th
-									key={i}
 									title={
 										caption === "BR"
 											? "Bedrooms"
@@ -96,8 +92,8 @@ export const ListingsTable = props => {
 					</Show>
 				</thead>
 				<tbody>
-					<Show when={props.mode == "sold"}>
-						<For each={props.listings}>
+					<Show when={viewMode() == "sold"}>
+						<For each={props.listings()}>
 							{(l, index) => {
 								return (
 									<tr>
@@ -152,8 +148,8 @@ export const ListingsTable = props => {
 						</For>
 					</Show>
 
-					<Show when={props.mode != "sold"}>
-						<For each={props.listings}>
+					<Show when={viewMode() != "sold"}>
+						<For each={props.listings()}>
 							{(l, index) => {
 								return (
 									<tr>
@@ -161,7 +157,7 @@ export const ListingsTable = props => {
 											<Show when={withIcon}>
 												<SmallIcon marketstatus={props.marketstatus} />
 											</Show>
-											{props.mode === "sold" &&
+											{viewMode() === "sold" &&
 												settings.signin &&
 												!signedIn && (
 													<span
@@ -170,13 +166,13 @@ export const ListingsTable = props => {
 														Sign in to see Address
 													</span>
 												)}
-											{(props.mode !== "sold" ||
+											{(viewMode() !== "sold" ||
 												!settings.signin ||
 												signedIn) &&
 												address(l)}
 										</td>
 
-										<Show when={props.mode !== "sold"}>
+										<Show when={viewMode() !== "sold"}>
 											<td>{currency(l.priceHigh)}</td>
 										</Show>
 

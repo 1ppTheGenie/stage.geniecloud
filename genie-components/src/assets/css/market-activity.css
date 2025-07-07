@@ -1,0 +1,18 @@
+div#listing-grid-view {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1vh 0;
+}
+
+#listing-grid-view svg {
+	flex-basis: 24%;
+	margin-bottom: 1vh;
+}
+
+
+#listing-table  {
+	th,td {
+		text-align: left;
+	}
+}

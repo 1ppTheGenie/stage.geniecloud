@@ -1,17 +1,8 @@
 import { Show } from "solid-js";
-import {
-	areaDataStore,
-	listingsStore,
-	usePagination,
-	useSettings,
-	Context4Settings,
-} from "@/utilities";
-import {
-	HomeTypes,
-	MapListings,
-	Pagination,
-	ListingsShowing,
-} from "@/components";
+/* prettier-ignore */
+import { areaDataStore, listingsStore, usePagination, useSettings, Context4Settings } from "@/utilities";
+/* prettier-ignore */
+import { HomeTypes, MapListings, Pagination, ListingsShowing } from "@/components";
 
 import "@/assets/css/listing-map-style-one.css";
 
@@ -72,21 +63,22 @@ export default () => {
 					style="margin-top: 30px"
 				/>
 				<div class="filter-pagination-wrap">
-				<p class="filterTxt" style="font-size:13px; color: #fff;">
-					<ListingsShowing
-						pageSize={pageSize()}
-						offset={Math.max((currentPage() - 1) * pageSize(),0)}
-						len={listingsStore.listings.length}
-						mode={settings.marketstatus ?? "active"}
-						period={areaDataStore.areaPeriod}
-					/>
-				</p>
+					<p class="filterTxt" style="font-size:13px; color: #fff;">
+						<ListingsShowing
+							pageSize={pageSize}
+							pageOffset={pageOffset}
+							data={() => listingsStore.listings}
+							mode={() => settings.marketstatus ?? "active"}
+							period={areaDataStore.areaPeriod}
+						/>
+					</p>
 
-				<Pagination
-					totalItems={listingsStore.listings.length}
-					currentPage={currentPage()}
-					pageChange={page => setPage(page)}
-				/></div>
+					<Pagination
+						data={() => listingsStore.listings}
+						currentPage={currentPage}
+						pageChange={page => setPage(page)}
+					/>
+				</div>
 			</Show>
 		</div>
 	);
