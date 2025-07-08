@@ -59,8 +59,9 @@ export default () => {
 			<Show when={listingsStore.listings.length > 0}>
 				<MapListings
 					id="listing-map-style-one"
-					listings={currentListings()}
+					listings={currentListings}
 					style="margin-top: 30px"
+					container="listingmapstyleone"
 				/>
 				<div class="filter-pagination-wrap">
 					<p class="filterTxt" style="font-size:13px; color: #fff;">

@@ -8,24 +8,11 @@ import {
 	Context4Settings,
 } from "@/utilities";
 
-export const MapListings = ( { marketStatus, ...props }) => {
+export const MapListings = ({ marketStatus, ...props }) => {
 	const settings = useSettings(Context4Settings);
 
 	let headings;
 
-	/*
-	const Markers = () => {
-		<For each={props.listings}>
-			{(l, i) => (
-				<CircleMarker
-					key={`${l.mlsNumber}:${l.latitude}:${l.longitude}`}
-					color={getCssVar(`--${marketStatus}`, document.body).trim()}
-					caption={i + 1}
-					position={[l.latitude, l.longitude]}
-				/>
-			)}
-		</For>;
-	};*/
 	switch (marketStatus) {
 		case "sold":
 			headings = [
@@ -67,19 +54,23 @@ export const MapListings = ( { marketStatus, ...props }) => {
 						areaId={settings.areaid}
 						style=" color: #feff00; fill-opacity: 0"
 					/>
-					<For each={props.listings}>
-						{(l, i) => (
-							<CircleMarker
-								key={`${l.mlsNumber}:${l.latitude}:${l.longitude}`}
-								color={getCssVar(
-									`--${marketStatus}`,
-									document.body
-								).trim()}
-								caption={i + 1}
-								position={[l.latitude, l.longitude]}
-							/>
-						)}
-					</For>
+					<Show when={props.listings().length}>
+						<For each={props.listings()}>
+							{(l, i) => (
+								<CircleMarker
+									color={getCssVar(
+										`--${marketStatus}`,
+										document.getElementsByClassName(
+											`genie-wrap ${props.container}`
+										)[0]
+									).trim()}
+									caption={i + 1}
+									key={i + pageOffset * pageSize}
+									position={[l.latitude, l.longitude]}
+								/>
+							)}
+						</For>
+					</Show>
 				</LeafletMap>
 			</div>
 			<div class="w-66">
