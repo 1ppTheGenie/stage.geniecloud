@@ -11,22 +11,23 @@ import "@/assets/css/market-activity.css";
 
 export default () => {
 	const settings = useSettings(Context4Settings);
-	
-	const [sortBy, setSortBy] = createSignal( "Most Recent" );
+
+	const [sortBy, setSortBy] = createSignal("Most Recent");
 	const [view, setView] = createSignal("List");
 	const [currentListings, setCurrentListings] = createSignal([]);
 	const [visibleListings, setVisibleListings] = createSignal([]);
 	const [expanded] = createSignal(false);
-	
-	const { currentPage, setPage, pageOffset, pageSize, setPageSize } = usePagination( 8 );
-	
+
+	const { currentPage, setPage, pageOffset, pageSize, setPageSize } =
+		usePagination(8);
+
 	const [status, setStatus] = createSignal(
 		settings.mode
 			? settings.mode.charAt(0).toUpperCase() + settings.mode.slice(1)
 			: "New"
 	);
 
-	createEffect( () => status() && setPage( 1 ) );
+	createEffect(() => status() && setPage(1));
 
 	createEffect(() =>
 		setCurrentListings(
@@ -79,8 +80,10 @@ export default () => {
 						{visibleListings().map((l, i) => (
 							<CircleMarker
 								color={getCssVar(
-									`--${status().toLowerCase()}`, 
-									document.getElementsByClassName("genie-wrap marketactivity")[0]
+									`--${status().toLowerCase()}`,
+									document.getElementsByClassName(
+										"genie-wrap marketactivity"
+									)[0]
 								).trim()}
 								caption={i + 1}
 								key={i + pageOffset * pageSize}
@@ -120,7 +123,7 @@ export default () => {
 						value={status()}
 						style="padding:0.25rem 0.5rem">
 						{["Pending", "New", "Active", "Sold"].map(key => (
-							<option value={key}  style="text-transform:capitalize">
+							<option value={key} style="text-transform:capitalize">
 								{key}
 							</option>
 						))}
@@ -184,7 +187,6 @@ export default () => {
 };
 
 const StatusKey = ({ setStatus }) => {
-	 console.log("areaDataStore.overall:", areaDataStore?.overall?.new,areaDataStore?.overall?.active,areaDataStore?.overall?.pending)
 	const labels = [
 		{
 			total: areaDataStore?.overall?.new,
@@ -223,25 +225,22 @@ const StatusKey = ({ setStatus }) => {
 					{areaDataStore.areaName}
 				</text>
 				<g style="transform: translate(20px, 70px)">
-					{labels.map((l, i) =>{
-						  console.log(`Label ${i}:`, l.total); // Log each label's total
-
-				 return (
-						<g
-							key={i}
-							style={`transform: translateY(${i * 50}px)`}
-							onClick={e => setStatus(l.status)}>
-							<circle fill={`var(--${l.status})`} cx="20" cy="5" r="17" />
-							<text
-								x="20"
-								y="5"
-								fill="var(--white)"
-								text-Anchor="middle"
-								dominant-Baseline="middle"
-								style="font-size: 100%; text-Shadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
-								{l.total}
-							</text>
-							
+					{labels.map((l, i) => {
+						return (
+							<g
+								key={i}
+								style={`transform: translateY(${i * 50}px)`}
+								onClick={e => setStatus(l.status)}>
+								<circle fill={`var(--${l.status})`} cx="20" cy="5" r="17" />
+								<text
+									x="20"
+									y="5"
+									fill="var(--white)"
+									text-Anchor="middle"
+									dominant-Baseline="middle"
+									style="font-size: 100%; text-Shadow: 4px 4px 5px rgba(44, 44, 44, 0.5)">
+									{l.total}
+								</text>
 
 								<text
 									x="50"

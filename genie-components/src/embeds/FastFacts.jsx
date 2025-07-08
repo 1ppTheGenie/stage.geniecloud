@@ -24,7 +24,7 @@ export default () => {
 	const [listings, setListings] = createSignal([]);
 	const [listingsMode, setListingsMode] = createSignal();
 	const [listingsVisible, setListingsVisible] = createSignal(false);
-	const { currentPage, setPage, pageSize } = usePagination();
+	const { currentPage, setPage, pageOffset, pageSize } = usePagination();
 
 	const listingsSubset = (lType, lMode) => {
 		if (!listingsStore.loading && listingsStore.listings) {

@@ -3,7 +3,7 @@ import { createMemo } from "solid-js";
 export const ListingsShowing = props => {
 	const len = createMemo( () => props.data().length )
 	const mode = createMemo( () => props.mode().toLowerCase() );
-	const offset = createMemo( () => props.pageOffset() );
+	const offset = createMemo( () => props?.pageOffset() ??  1 );
 
 	return (
 		<>
