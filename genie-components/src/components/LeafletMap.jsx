@@ -103,7 +103,7 @@ export const LeafletPane = props => {
 
 export const CircleMarker = ({ color, caption, position }) => {
 	const url = circleURI(color, caption);
-	
+
 	const svgIcon =
 		window.L &&
 		new window.L.icon({

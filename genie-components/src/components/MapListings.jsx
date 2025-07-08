@@ -64,7 +64,7 @@ export const MapListings = ({ marketStatus, ...props }) => {
 											`genie-wrap ${props.container}`
 										)[0]
 									).trim()}
-									caption={i + 1}
+									caption={i() + 1}
 									key={i}
 									position={[l.latitude, l.longitude]}
 								/>
@@ -99,10 +99,9 @@ export const MapListings = ({ marketStatus, ...props }) => {
 						</thead>
 						<tbody>
 							<Show when={marketStatus === "sold"}>
-								<For each={props.listings}>
+								<For each={props.listings()}>
 									{l => (
-										<tr
-											key={`tr${l.streetNumber}:${l.latitude}:${l.longitude}`}>
+										<tr>
 											<td>{address(l)}</td>
 											<td>{l.bedrooms}</td>
 											<td>{l.bathroomsTotal}</td>
@@ -119,10 +118,9 @@ export const MapListings = ({ marketStatus, ...props }) => {
 								</For>
 							</Show>
 							<Show when={marketStatus !== "sold"}>
-								<For each={props.listings}>
+								<For each={props.listings()}>
 									{l => (
-										<tr
-											key={`tr${l.streetNumber}:${l.latitude}:${l.longitude}`}>
+										<tr>
 											<td>{address(l)}</td>
 											<td>{currency(l.priceHigh)}</td>
 											<td>{l.bedrooms}</td>

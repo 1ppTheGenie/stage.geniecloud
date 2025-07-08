@@ -121,7 +121,7 @@ export const [areaMonthlyStore, setAreaMonthlyStore] = createStore({
 	stats: {},
 });
 
-const [area, areaMonthly, areaListings, setPeriod] = createRoot(() => {
+const [area, areaMonthly, areaListings, setPeriod] = createRoot( () => {
 	const [period, setPeriod] = createSignal(sharedEmbedStore.period);
 	const [area] = createResource( period, async p => {
 		if (!isNaN(p)) {

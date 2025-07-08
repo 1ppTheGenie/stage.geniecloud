@@ -7,7 +7,7 @@ import { HomeTypes, MapListings, Pagination, ListingsShowing } from "@/component
 import "@/assets/css/listing-map-style-one.css";
 
 export default () => {
-	const { currentPage, setPage, pageOffset, pageSize } = usePagination();
+	const { currentPage, setPage, pageOffset, pageSize } = usePagination( 10 );
 	const settings = useSettings(Context4Settings);
 	const currentListings = () =>
 		listingsStore.listings.slice(pageOffset(), pageOffset() + pageSize());
@@ -58,6 +58,7 @@ export default () => {
 			/>
 			<Show when={listingsStore.listings.length > 0}>
 				<MapListings
+					marketStatus='active'
 					id="listing-map-style-one"
 					listings={currentListings}
 					style="margin-top: 30px"
@@ -66,7 +67,7 @@ export default () => {
 				<div class="filter-pagination-wrap">
 					<p class="filterTxt" style="font-size:13px; color: #fff;">
 						<ListingsShowing
-							pageSize={pageSize}
+							pageSize={()=>10}
 							pageOffset={pageOffset}
 							data={() => listingsStore.listings}
 							mode={() => settings.marketstatus ?? "active"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"Editable.js","sources":["../../../../../../genie-components/src/components/Editable.jsx"],"sourcesContent":["export const Editable = props => {\r\n\treturn <>{props.children}</>;\r\n};\r\n"],"names":["Editable","props","_$memo","children"],"mappings":"+BAAaA,MAAAA,EAAWC,GACvBC,EAAA,IAAUD,EAAME,QAAQ"}
