@@ -22,7 +22,7 @@ export default () => {
 	const [availableListings, setAvailableListings] = createSignal(0);
 	const [listingType, setListingType] = createSignal(0);
 	const [listings, setListings] = createSignal([]);
-	const [listingsMode, setListingsMode] = createSignal();
+	const [listingsMode, setListingsMode] = createSignal('Active');
 	const [listingsVisible, setListingsVisible] = createSignal(false);
 	const { currentPage, setPage, pageOffset, pageSize } = usePagination();
 
@@ -141,7 +141,7 @@ export default () => {
 								pageSize={pageSize}
 								pageOffset={pageOffset}
 								data={availableListings}
-								mode={availableListings}
+								mode={listingsMode}
 								period={areaDataStore.areaPeriod}
 							/>
 						</div>
@@ -210,7 +210,7 @@ const ListingTableLinks = props => (
 					areaDataStore.propertyStats[props.status] > 0 &&
 					props.showProperties(props.propertyView, props.status)
 				}>
-				{`${props.title}: ${props.count}`}
+				{`${props.title}: ${props.count ?? ''}`}
 				<Show when={areaDataStore.loading}>
 					<Spinner
 						style={{
