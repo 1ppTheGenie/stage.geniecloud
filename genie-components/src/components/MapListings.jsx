@@ -65,7 +65,7 @@ export const MapListings = ({ marketStatus, ...props }) => {
 										)[0]
 									).trim()}
 									caption={i + 1}
-									key={i + pageOffset * pageSize}
+									key={i}
 									position={[l.latitude, l.longitude]}
 								/>
 							)}
