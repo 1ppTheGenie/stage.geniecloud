@@ -76,7 +76,8 @@ export default () => {
 					<Pagination
 						data={() => listingsStore.listings}
 						currentPage={currentPage}
-						pageChange={page => setPage(page)}
+						pageChange={page => setPage( page )}
+						pageSize={pageSize}
 					/>
 				</div>
 			</Show>

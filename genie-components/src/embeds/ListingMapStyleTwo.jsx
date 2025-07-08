@@ -208,6 +208,7 @@ export default () => {
 					/>
 				</div>
 				<Pagination
+					pageSize={pageSize}
 					data={() => currentListings.length}
 					currentPage={currentPage}
 					pageChange={page => setPage(page)}

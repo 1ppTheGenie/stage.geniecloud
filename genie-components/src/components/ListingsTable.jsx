@@ -63,7 +63,7 @@ export const ListingsTable = props => {
 		setSignedIn(bool);
 	};
 
-	const viewMode = createMemo(() => props.mode().toLowerCase());
+	const viewMode = createMemo(() => props?.mode()?.toLowerCase() ?? 'active');
 
 	return (
 		<>

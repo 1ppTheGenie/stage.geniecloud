@@ -148,6 +148,7 @@ export default () => {
 
 						<Pagination
 							data={availableListings}
+							pageSize={pageSize}
 							currentPage={currentPage}
 							pageChange={page => setPage(page)}
 							style="align-self: center"
