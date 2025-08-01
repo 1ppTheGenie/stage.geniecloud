@@ -47,10 +47,7 @@
 				</xsl:call-template>
 			</tspan>
 			<tspan>
-				<xsl:call-template name="property-type-caption">
-					<xsl:with-param name="short" select="'true'" />
-					<xsl:with-param name="singular" select="'true'" />
-				</xsl:call-template>
+				<xsl:value-of select="$singularPropertyType" />
 			</tspan>
 			<tspan>
 				<xsl:call-template name="editable">
