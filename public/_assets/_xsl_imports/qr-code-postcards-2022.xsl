@@ -66,10 +66,7 @@
 						<xsl:with-param name="id" select="'HOME'" />
 						<xsl:with-param name="default" select="'HOME'" />
 					</xsl:call-template> -->
-					<xsl:call-template name="property-type-caption">
-			                        <xsl:with-param name="short" select="'true'" />
-			                        <xsl:with-param name="singular" select="'true'" />
-		                   	 </xsl:call-template>
+					<xsl:value-of select="$singularPropertyType" />
 				</tspan>
 			</text>
 
