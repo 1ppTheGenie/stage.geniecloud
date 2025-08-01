@@ -286,6 +286,6 @@ export const getPropertyCaption = (id, custom = null) => {
             return 'Condos';
 
         default:
-            return 'Homes';
+            return 'Home';
     }
 };
