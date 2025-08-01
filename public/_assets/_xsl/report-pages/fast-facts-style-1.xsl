@@ -45,7 +45,7 @@
 	
 		<text x="50%" y="23.3%" class="center medium">
 			<tspan>
-				<xsl:value-of select="concat( 'The number of ', //areas/area/name, ' individual' , ' ', lower-case($singularPropertyType), ' ', 'sales ', $salesCountChangeTerm, ' by ', format-number( $salesCountPercent, '#%' ), ' in')" />
+				<xsl:value-of select="concat( 'The turn over rate of ', //areas/area/name, ' individual' , ' ', lower-case($singularPropertyType), ' ', 'sales ', $salesCountChangeTerm, ' by ', format-number( $salesCountPercent, '#%' ), ' in')" />
 			</tspan>
 			<tspan x="50%" dy="6.4%">
 				<xsl:value-of select="concat( ' this period, with ', //statistics/@soldPropertyTypeCount, ' sold vs ', //previous/@totalSold, ' in the previous ', $month_type,'.' )" />
