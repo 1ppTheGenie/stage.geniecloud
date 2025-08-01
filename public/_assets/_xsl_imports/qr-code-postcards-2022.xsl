@@ -62,10 +62,14 @@
 					</xsl:call-template>
 				</tspan>
 				<tspan fill="var(--theme-sub-heading-color)" font-size="130%">
-					<xsl:call-template name="editable">
+<!-- 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'HOME'" />
 						<xsl:with-param name="default" select="'HOME'" />
-					</xsl:call-template>
+					</xsl:call-template> -->
+					<xsl:call-template name="property-type-caption">
+			                        <xsl:with-param name="short" select="'true'" />
+			                        <xsl:with-param name="singular" select="'true'" />
+		                   	 </xsl:call-template>
 				</tspan>
 			</text>
 
