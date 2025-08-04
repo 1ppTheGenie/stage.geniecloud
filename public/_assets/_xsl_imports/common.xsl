@@ -145,8 +145,7 @@
 				</title>
 				<style>
 					<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/_css/svg.css); ' )" />
-					<!-- <xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css); ')" /> -->
-					<xsl:value-of select="concat('@import url(''_assets/themes/', //output/@theme, '.css'');')" />
+					<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css); ')" />
 				</style>
 				
 			</head>
@@ -179,8 +178,7 @@
 					</defs>
 
 					<script>
-						<!-- <xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/genie-global.js') " /> -->
-						<xsl:attribute name="href" select="'_assets/_js/genie-global.js'" />
+						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/genie-global.js') " />
 						<xsl:comment />
 					</script>
 
