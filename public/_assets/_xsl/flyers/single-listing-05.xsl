@@ -23,21 +23,30 @@
 
 			font-weight-normal{
 				font-weight: 600;
-			} '" />
+			} 
+			g#footer {transform: translate(2.5%, 98.6%);}
+			g#footer text, g#footer text tspan{fill: #94949D;}'" />
 		</style>
 
 		<g>
 			<rect x="0" y="0" width="100%" height="7%" style="fill:var(--theme-body-color);" />
 
-			<text x="3%" y="2.5%" fill="var(--theme-body-background)" style="font-size:250%;">
+			<text x="3%" y="2.5%" fill="var(--theme-body-background)" style="font-size:230%;" data-max-width="80%">
 				<tspan class="bold upper">
 					<xsl:value-of select="concat(//agent/address/company, ' ', //area[1]/name )" />
 				</tspan>
 			</text>
 			<image x="88%" y="1%" width="11%" height="5%" id="logo" preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
-					<xsl:value-of select="$companyLogo" />
-				</xsl:attribute>
+					<xsl:choose>
+						<xsl:when test="//output/@themeHue = 'dark'">
+							<xsl:value-of select="$companyLogo" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="$companyLogoInverse" />
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:attribute>	
 			</image>
 		</g>
 
@@ -100,28 +109,28 @@
 					</xsl:call-template>
 				</text>
 
-				<text x="23.5%" y="8%" fill="var(--theme-body-background)" style="font-size:220%;">
+				<text x="23.5%" y="8%" fill="var(--theme-body-background)" style="font-size:210%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmobile'" />
 						<xsl:with-param name="default" select="//agent[1]/mobile" />
 					</xsl:call-template>
 				</text>
 
-				<text x="23.5%" y="12%" fill="var(--theme-body-background)" style="font-size:220%; dominant-baseline: middle;" class="central" data-max-width="25%">
+				<text x="23.5%" y="11.6%" fill="var(--theme-body-background)" style="font-size:210%; dominant-baseline: middle;" class="central" data-max-width="25%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmarketingEmail'" />
 						<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 					</xsl:call-template>
 				</text>
 
-				<text x="23.5%" y="15%" fill="var(--theme-body-background)" style="font-size:220%; dominant-baseline: middle;" class="central" data-max-width="25%">
+				<text x="23.5%" y="14.1%" fill="var(--theme-body-background)" style="font-size:210%; dominant-baseline: middle;" class="central" data-max-width="25%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentwebsite'" />
 						<xsl:with-param name="default" select="//agent[1]/website" />
 					</xsl:call-template>
 				</text>
 
-				<text x="23.5%" y="16.7%" fill="var(--theme-body-background)" style="font-size:210%;" data-max-width="17%">
+				<text x="23.5%" y="15.4%" fill="var(--theme-body-background)" style="font-size:210%;" data-max-width="17%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'licenseno'" />
 						<xsl:with-param name="default" select="//agent[1]/marketingLicense" />
@@ -133,8 +142,8 @@
 		<g style="transform:translate(59.9%,45.2%)">
 			<rect x="0" y="0" width="40.2%" height="100%" style="fill:var(--theme-body-color);" />
 
-			<g class="upper sub-heading bold" style="font-size: 250%;transform: translate(3%,1.2%);">
-				<text x="0" y="0" data-max-width="42.5%" fill="var(--theme-body-background)">
+			<g class="upper sub-heading bold" style="font-size: 212%;transform: translate(3%,1.2%);">
+				<text x="0" y="0" data-max-width="42%" fill="var(--theme-body-background)">
 					<tspan>
 						<xsl:value-of select="$listingAddressLine1" />
 					</tspan>
@@ -170,7 +179,7 @@
 
 				</text>
 			</g>
-			<g style="transform: translate(1%,12%);">
+			<g style="transform: translate(1%,11.9%);">
 				<use x="1%" y="0.9%" width="2%" height="2%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-navigation' )" />
 				</use>
@@ -183,7 +192,7 @@
 
 				</text>
 			</g>
-			<g style="transform: translate(1%,15%);">
+			<g style="transform: translate(1%,14.7%);">
 				<use x="1%" y="0.9%" width="2%" height="2%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-navigation' )" />
 				</use>
@@ -197,7 +206,7 @@
 				</text>
 			</g>
 
-			<g style="transform: translate(1%,18%);">
+			<g style="transform: translate(1%,17.4%);">
 				<use x="1%" y="0.9%" width="2%" height="2%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-navigation' )" />
 				</use>
@@ -209,7 +218,7 @@
 				</text>
 			</g>
 
-			<g style="transform: translate(1%,21%);">
+			<g style="transform: translate(1%,20.1%);">
 				<use x="1%" y="0.9%" width="2%" height="2%" fill="var(--theme-body-background)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-navigation' )" />
 				</use>
@@ -223,12 +232,12 @@
 				</xsl:if>
 			</g>
 
-			<g style="transform:translate(3%,25.8%);">
-				<text class="upper sub-heading bold" style="font-size: 250%;fill: var(--theme-body-background);letter-spacing: 4px;">Features</text>
+			<g style="transform:translate(3%,24.8%);">
+				<text class="upper bold" style="font-size: 250%;fill: var(--theme-body-background);letter-spacing: 4px;">Features</text>
 				<foreignObject x="0" y="3%" width="34%" height="25%" style="font-size:100%;">
 					<xsl:for-each select="//features/feature">
 						<xsl:if test="position() &lt;= 7">
-							<p style="line-height:130%; margin:1.5% 0; font-size:170%;">
+							<p style="line-height:130%; margin:1.4% 0; font-size:170%;">
 								<span class="bold" style="color:var(--theme-body-background)">
 									<xsl:value-of select="@category" />
 								</span>

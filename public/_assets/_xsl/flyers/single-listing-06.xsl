@@ -13,7 +13,9 @@
 
 	<xsl:template name="svg-body">
 		<style>
-			<xsl:value-of select="'.icon-stat tspan { font-weight: 600 }'" />
+			<xsl:value-of select="'
+			.icon-stat tspan { font-weight: 600 }
+			g#footer {transform: translate(2.5%, 98.3%);}'" />
 		</style>
 
 		<g>
@@ -22,13 +24,27 @@
 
 				<image x="2%" y="1%" width="10%" height="5%" class="center" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$companyLogo" />
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'dark'">
+								<xsl:value-of select="$companyLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
 				</image>
 
-				<image x="87.5%" y="1%" width="10%" height="5%" id="logo" preserveAspectRatio="xMaxYMid meet">
+				<image x="85.5%" y="1%" width="12%" height="5%" id="logo" preserveAspectRatio="xMaxYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$personalLogo" />
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'dark'">
+								<xsl:value-of select="$personalLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$personalLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
 				</image>
 			</g>

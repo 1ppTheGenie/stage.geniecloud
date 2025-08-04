@@ -15,7 +15,7 @@
 		<style>
 			<xsl:value-of select="'
 			foreignObject#description p {--description-line-limit:12}
-			font-weight-normal{font-weight: 600} 
+			font-weight-normal{font-weight: 600} g#footer text, g#footer text tspan{fill: #94949D;} 
 			'" />
 		</style>
 
@@ -99,7 +99,7 @@
 			</text>
 
 			<g style="fill: var(--theme-body-color);transform: translate(-1%,4.5%);">
-				<use x="1%" y="0.5%" width="2%" height="2%" fill="#000">
+				<use x="1%" y="0.5%" width="2%" height="2%" fill="var(--theme-body-color)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-right-icon' )" />
 				</use>
 				<text class="" x="4%" y="0.5%" style="font-size:180%;">
@@ -112,7 +112,7 @@
 				</text>
 			</g>
 			<g style="fill: var(--theme-body-color);transform: translate(-1%,6.5%);">
-				<use x="1%" y="0.5%" width="2%" height="2%" fill="#000">
+				<use x="1%" y="0.5%" width="2%" height="2%" fill="var(--theme-body-color)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-right-icon' )" />
 				</use>
 				<text class="" x="4%" y="0.5%" style="font-size:180%;">
@@ -125,7 +125,7 @@
 				</text>
 			</g>
 			<g style="fill: var(--theme-body-color);transform: translate(-1%,8.5%);">
-				<use x="1%" y="0.5%" width="2%" height="2%" fill="#000">
+				<use x="1%" y="0.5%" width="2%" height="2%" fill="var(--theme-body-color)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-right-icon' )" />
 				</use>
 				<text class="" x="4%" y="0.5%" style="font-size:180%;">
@@ -138,7 +138,7 @@
 				</text>
 			</g>
 			<g style="fill: var(--theme-body-color);transform: translate(-1%,10.5%);">
-				<use x="1%" y="0.5%" width="2%" height="2%" fill="#000">
+				<use x="1%" y="0.5%" width="2%" height="2%" fill="var(--theme-body-color)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-right-icon' )" />
 				</use>
 				<text class="" x="4%" y="0.5%" style="font-size:180%;">
@@ -152,7 +152,7 @@
 			</g>
 
 			<g style="fill: var(--theme-body-color);transform: translate(-1%,12.5%);">
-				<use x="1%" y="0.5%" width="2%" height="2%" fill="#000">
+				<use x="1%" y="0.5%" width="2%" height="2%" fill="var(--theme-body-color)">
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-right-icon' )" />
 				</use>
 				<xsl:if test="//single/mlsNumber!=''">
@@ -222,7 +222,14 @@
 			</svg>
 			<image x="60%" y="1%" width="35%" height="12%" id="logo" preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
-					<xsl:value-of select="$companyLogo" />
+					<xsl:choose>
+						<xsl:when test="//output/@themeHue = 'dark'">
+							<xsl:value-of select="$companyLogoInverse" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="$companyLogo" />
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:attribute>
 			</image>
 		</g>

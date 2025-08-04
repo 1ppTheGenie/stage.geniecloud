@@ -29,7 +29,7 @@
 					transform: translate(2.5%, 98.3%);
 				}
 				g#footer text{
-					font-size: 15px;
+					<!-- font-size: 15px; -->
 					fill: #94949D;
 				}
 				g#footer text a tspan{
