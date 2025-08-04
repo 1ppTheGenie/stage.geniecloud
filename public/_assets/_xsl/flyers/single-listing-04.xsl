@@ -12,16 +12,23 @@
 
 	<xsl:template name="svg-body">
 		<style>
-			<xsl:value-of select="'.icon-stat tspan {font-weight: 600;}'" />
+			<xsl:value-of select="'.icon-stat tspan {font-weight: 600;} g#footer {transform: translate(2.5%, 98.6%);}'" />
 		</style>
 
 		<g>
 			<g>
 				<rect fill="var(--theme-body-color)" width="100%" height="9%" />
 
-				<image x="43%" y="0" class="center" width="16%" height="8.7%" id="logo" preserveAspectRatio="xMidYMid meet">
+				<image x="43%" y="0.5%" class="center" width="16%" height="8%" id="logo" preserveAspectRatio="xMidYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$companyLogo" />
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'dark'">
+								<xsl:value-of select="$companyLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:attribute>
 				</image>
 			</g>
@@ -114,7 +121,7 @@
 				<g style="fill: var(--theme-body-color);transform: translate(3%,1%);">
 
 					<g style="fill: var(--theme-body-color);transform: translate(-1%,4.5%);">
-						<use x="1%" y="0.5%" width="2%" height="2%" fill="#000">
+						<use x="1%" y="0.5%" width="2%" height="2%" fill="var(--theme-body-color)0">
 							<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-right-icon' )" />
 						</use>
 						<text class="" x="4%" y="0.5%" style="font-size:180%;">
@@ -127,7 +134,7 @@
 						</text>
 					</g>
 					<g style="fill: var(--theme-body-color);transform: translate(-1%,6.7%);">
-						<use x="1%" y="0.5%" width="2%" height="2%" fill="#000">
+						<use x="1%" y="0.5%" width="2%" height="2%" fill="var(--theme-body-color)">
 							<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-right-icon' )" />
 						</use>
 						<text class="" x="4%" y="0.5%" style="font-size:180%;">
@@ -140,7 +147,7 @@
 						</text>
 					</g>
 					<g style="fill: var(--theme-body-color);transform: translate(-1%,8.7%);">
-						<use x="1%" y="0.5%" width="2%" height="2%" fill="#000">
+						<use x="1%" y="0.5%" width="2%" height="2%" fill="var(--theme-body-color)">
 							<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-right-icon' )" />
 						</use>
 						<text class="" x="4%" y="0.5%" style="font-size:180%;">
@@ -153,7 +160,7 @@
 						</text>
 					</g>
 					<g style="fill: var(--theme-body-color);transform: translate(-1%,10.9%);">
-						<use x="1%" y="0.5%" width="2%" height="2%" fill="#000">
+						<use x="1%" y="0.5%" width="2%" height="2%" fill="var(--theme-body-color)">
 							<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-right-icon' )" />
 						</use>
 						<text class="" x="4%" y="0.5%" style="font-size:180%;">
@@ -167,7 +174,7 @@
 					</g>
 
 					<g style="fill: var(--theme-body-color);transform: translate(-1%,13.1%);">
-						<use x="1%" y="0.5%" width="2%" height="2%" fill="#000">
+						<use x="1%" y="0.5%" width="2%" height="2%" fill="var(--theme-body-color)">
 							<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#flyer-right-icon' )" />
 						</use>
 						<xsl:if test="//single/mlsNumber!=''">
@@ -217,7 +224,7 @@
 						<xsl:value-of select="//agent[1]/photo" />
 					</xsl:attribute>
 				</image>
-				<text x="30%" y="2.5%" fill="var(--theme-body-background)" style="font-size: 180%;">
+				<text x="30%" y="1.6%" fill="var(--theme-body-background)" style="font-size: 180%;">
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentname'" />
@@ -225,7 +232,7 @@
 						</xsl:call-template>
 					</tspan>
 				</text>
-				<text x="30%" y="4.6%" fill="var(--theme-body-background)" style="font-size: 180%;" data-max-width="40%">
+				<text x="30%" y="3.3%" fill="var(--theme-body-background)" style="font-size: 180%;" data-max-width="40%">
 					<tspan>
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'agentmobile'" />
@@ -240,13 +247,13 @@
 						</xsl:call-template>
 					</tspan>
 				</text>
-				<text x="30%" y="6.5%" fill="var(--theme-body-background)" style="font-size: 180%;" data-max-width="35%">
+				<text x="30%" y="4.8%" fill="var(--theme-body-background)" style="font-size: 180%;" data-max-width="35%">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentwebsite'" />
 						<xsl:with-param name="default" select="//agent[1]/website" />
 					</xsl:call-template>
 				</text>
-				<text x="30%" y="8.5%" fill="var(--theme-body-background)" style="font-size: 180%;">
+				<text x="30%" y="6.5%" fill="var(--theme-body-background)" style="font-size: 180%;">
 					<tspan >
 						<xsl:call-template name="editable">
 							<xsl:with-param name="id" select="'licenseno'" />
@@ -254,9 +261,9 @@
 						</xsl:call-template>
 					</tspan>
 				</text>
-				<image x="74%" y="2%" width="11%" height="8%" preserveAspectRatio="xMaxYMid meet">
+				<image x="74%" y="2%" width="15%" height="7%" preserveAspectRatio="xMaxYMid meet">
 					<xsl:attribute name="href">
-						<xsl:value-of select="$personalLogo" />
+						<xsl:value-of select="$personalLogoInverse" />
 					</xsl:attribute>
 				</image>
 			</g>

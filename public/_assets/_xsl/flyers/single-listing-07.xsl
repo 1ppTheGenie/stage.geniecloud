@@ -14,7 +14,8 @@
 		<style>
 			<xsl:value-of select="'
 			.h1 { font-size: 150%; }
-			font-weight-normal{ font-weight: 600; }'" />
+			font-weight-normal{ font-weight: 600; }
+			g#footer {transform: translate(2.5%, 98.3%);}'" />
 		</style>
 
 		<g>
@@ -26,7 +27,7 @@
 			</image>
 			<rect x="0" y="0" width="100%" height="28%" style="fill:var(--theme-body-color);" fill-opacity="0.01" />
 
-			<text x="50%" y="1.5%" class="upper center sub-heading" style="font-size: 220%;font-weight: 600;" data-max-width="40%">
+			<text x="50%" y="1.5%" class="upper center" style="font-size: 220%;font-weight: 600;" data-max-width="40%">
 				<xsl:variable name="customListingStatus">
 					<xsl:choose>
 						<xsl:when test="(number(//single/statusTypeID)=3) or (number(//single/statusTypeID)=4) or (number(//single/statusTypeID)=12)">
@@ -63,7 +64,14 @@
 		<g style="transform: translate(5.5%,37%);">
 			<image x="0" y="1%" width="23%" height="10%" id="logo" preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
-					<xsl:value-of select="$companyLogo" />
+					<xsl:choose>
+						<xsl:when test="//output/@themeHue = 'dark'">
+							<xsl:value-of select="$companyLogoInverse" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="$companyLogo" />
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:attribute>
 			</image>
 			<text x="12%" y="13%" class="center bold" fill="var(--theme-body-color)" style="font-size:240%" data-max-width="20%">
@@ -161,13 +169,13 @@
 					<xsl:with-param name="default" select="concat( //agent[1]/marketingName, '&#160;' )" />
 				</xsl:call-template>
 			</text>
-			<text x="24%" y="4%" fill="var(--theme-body-background)" style="font-size: 140%;">
+			<text x="24%" y="3.7%" fill="var(--theme-body-background)" style="font-size: 140%;">
 				<xsl:call-template name="editable">
 					<xsl:with-param name="id" select="'innovatorrealto'" />
 					<xsl:with-param name="default" select="'Innovator REALTOR'" />
 				</xsl:call-template>
 			</text>
-			<text x="24%" y="6.5%" fill="var(--theme-body-background)" style="font-size: 140%;">
+			<text x="24%" y="5.7%" fill="var(--theme-body-background)" style="font-size: 140%;">
 				<tspan>
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmobile'" />
@@ -189,8 +197,8 @@
 					</xsl:call-template>
 				</tspan>
 			</text>
-			<foreignObject x="24%" y="8%" width="70%" height="10%" style='font-size: 140%;'>
-				<p style="color:var(--theme-body-background);-webkit-line-clamp:3; line-height:150%">
+			<foreignObject x="24%" y="6.5%" width="70%" height="10%" style='font-size: 140%;'>
+				<p style="color:var(--theme-body-background);-webkit-line-clamp:3; line-height:135%; margin-bottom:0;">
 					<xsl:value-of select="concat( 'The information contained herein has been obtained through sources deemed reliable by ',//agent[1]/marketingName, ', but cannot be guaranteed for its accuracy. We recommend to the buyer that any information, which is of special interest, should be obtained through independent verification. ALL MEASUREMENTS ARE APPROXIMATE.')"/>
 				</p>
 			</foreignObject>

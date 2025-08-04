@@ -1,7 +1,7 @@
 {
 	"name": "Just Listed Kit",
 	"version": 3,
-	"template": "marketing-steps-lc1",
+	"template": "just-listed-kit",
 	"sections": [
 		{
 			"sort": 1,
@@ -60,37 +60,43 @@
 					"sort": 9,
 					"asset": "social-marketing-graphics/single-listing-01",
 					"knownAs": "Social 9",
-					"name": "Social Story 9"
+					"name": "Social Story 9",
+					"size": "facebook"
 				},
 				{
 					"sort": 10,
 					"asset": "social-marketing-graphics/single-listing-02",
 					"knownAs": "Social 10",
-					"name": "Social Story 10"
+					"name": "Social Story 10",
+					"size": "facebook"
 				},
 				{
 					"sort": 11,
 					"asset": "social-marketing-graphics/single-listing-03",
 					"knownAs": "Social 11",
-					"name": "Social Story 11"
+					"name": "Social Story 11",
+					"size": "facebook"
 				},
 				{
 					"sort": 12,
 					"asset": "social-marketing-graphics/single-listing-04",
 					"knownAs": "Social 12",
-					"name": "Social Story 12"
+					"name": "Social Story 12",
+					"size": "facebook"
 				},
 				{
 					"sort": 13,
 					"asset": "social-marketing-graphics/single-listing-05",
 					"knownAs": "Social 13",
-					"name": "Social Story 13"
+					"name": "Social Story 13",
+					"size": "facebook"
 				},
 				{
 					"sort": 14,
 					"asset": "social-marketing-graphics/single-listing-07",
 					"knownAs": "Social 14",
-					"name": "Social Story 14"
+					"name": "Social Story 14",
+					"size": "facebook"
 				}
 			],
 			"name": "EMAIL GRAPHICS"
@@ -103,49 +109,71 @@
 					"sort": 1,
 					"asset": "flyers/single-listing-02",
 					"knownAs": "Listing Flyer 1",
-					"name": "Listing Flyer 1"
+					"name": "Listing Flyer 1",
+					"qrUrl": "lc-hollywood",
+					"size": "letter"
 				},
 				{
 					"sort": 2,
 					"asset": "flyers/single-listing-03",
 					"knownAs": "Listing Flyer 2",
-					"name": "Listing Flyer 2"
+					"name": "Listing Flyer 2",
+					"qrUrl": "lc-hollywood",
+					"size": "letter"
 				},
 				{
 					"sort": 3,
 					"asset": "flyers/single-listing-04",
 					"knownAs": "Listing Flyer 3",
-					"name": "Listing Flyer 3"
+					"name": "Listing Flyer 3",
+					"qrUrl": "lc-hollywood",
+					"size": "letter"
 				},
 				{
 					"sort": 4,
 					"asset": "flyers/lc-brochure-01",
 					"knownAs": "Listing Flyer 4",
-					"name": "Listing Flyer 4"
+					"name": "Listing Flyer 4",
+					"qrUrl": "lc-hollywood",
+					"size": "letter"
 				},
 				{
 					"sort": 5,
 					"asset": "flyers/single-listing-05",
 					"knownAs": "Listing Flyer 5",
-					"name": "Listing Flyer 5"
+					"name": "Listing Flyer 5",
+					"qrUrl": "lc-hollywood",
+					"size": "letter"
 				},
 				{
 					"sort": 6,
 					"asset": "flyers/single-listing-06",
 					"knownAs": "Listing Flyer 6",
-					"name": "Listing Flyer 6"
+					"name": "Listing Flyer 6",
+					"qrUrl": "lc-hollywood",
+					"size": "letter"
 				},
 				{
 					"sort": 7,
 					"asset": "flyers/single-listing-07",
 					"knownAs": "Listing Flyer 7",
-					"name": "Listing Flyer 7"
+					"name": "Listing Flyer 7",
+					"qrUrl": "lc-hollywood",
+					"size": "letter"
 				},
 				{
 					"sort": 8,
 					"asset": "area-insider-reports/market-insider",
 					"knownAs": "Market Insider",
-					"name": "Market Insider"
+					"name": "Market Insider",
+					"size": "facebook"
+				},
+				{
+					"sort": 9,
+					"asset": "landing-pages/lc-hollywood",
+					"knownAs": "Property Website",
+					"name": "Property Website",
+					"size": "Landing Page"
 				}
 			],
 			"name": "PROPERTY FLYERS"
