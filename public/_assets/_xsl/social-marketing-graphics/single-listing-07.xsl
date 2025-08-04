@@ -41,7 +41,14 @@
 
 		<image x="80%" y="1%" width="18%" height="12%" id="logo" preserveAspectRatio="xMidYMid meet">
 			<xsl:attribute name="href">
-				<xsl:value-of select="$companyLogo" />
+				<xsl:choose>
+						<xsl:when test="//output/@themeHue = 'light'">
+							<xsl:value-of select="$companyLogo" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="$companyLogoInverse" />
+						</xsl:otherwise>
+					</xsl:choose>
 			</xsl:attribute>
 		</image>
 

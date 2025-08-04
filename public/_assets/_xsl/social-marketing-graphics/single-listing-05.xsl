@@ -45,7 +45,7 @@
 				<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/active-tag.png' )" />
 			</xsl:attribute>
 		</image>
-		<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" width="98%" height="96%" x="1%" y="1%" />
+		<rect stroke="var(--theme-body-color)" stroke-width="1" fill-opacity="0" width="98%" height="95%" x="1%" y="1.5%" />
 
 		<g style="transform: translate(65%,76%);">
 			<svg width="33%" height="17.5%">
@@ -61,12 +61,12 @@
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#email-icon' )" />
 				</use>
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".3500" cx=".5" cy=".5" />
+					<circle r=".3500" cx=".5" cy=".4" />
 
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
-					<image x="-2%" y="-10.5%" width="35%" height="120%" clip-path="url(#clipCircle)">
+					<image x="-2%" y="4" width="35%" height="120%" clip-path="url(#clipCircle)">
 						<xsl:attribute name="href">
 							<xsl:copy-of select="//agent[1]/photo" />
 						</xsl:attribute>

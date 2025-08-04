@@ -63,11 +63,11 @@
 				</use>
 
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".3500" cx=".5" cy=".5" />
+					<circle r=".3500" cx=".45" cy=".4" />
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
-					<image x="-2%" y="-10.5%" width="35%" height="120%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
+					<image x="0.4" y="0.4" width="35%" height="120%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
 						<xsl:attribute name="href">
 							<xsl:copy-of select="//agent[1]/photo" />
 						</xsl:attribute>

@@ -55,12 +55,12 @@
 					<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#email-icon' )" />
 				</use>
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".3500" cx=".5" cy=".5" />
+					<circle r=".3900" cx=".45" cy=".4" />
 
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
-					<image x="2%" y="5.5%" width="27%" height="90%" clip-path="url(#clipCircle)">
+					<image x="0.4" y="20" width="27%" height="90%" clip-path="url(#clipCircle)">
 						<xsl:attribute name="href">
 							<xsl:copy-of select="//agent[1]/photo" />
 						</xsl:attribute>
@@ -207,12 +207,12 @@
 					</xsl:choose>
 				</text>
 
-				<text x="0" y="7%" class="medium">
+				<text x="0" style="fill:var(--theme-body-background);" y="7%" class="medium">
 					<xsl:call-template name="listing-address-line-one" />
 
 				</text>
 
-				<text x="0" y="12%" class="medium">
+				<text x="0" style="fill:var(--theme-body-background);" y="12%" class="medium">
 					<xsl:call-template name="listing-address-line-two" />
 
 				</text>

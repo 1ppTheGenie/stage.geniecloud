@@ -145,7 +145,8 @@
 				</title>
 				<style>
 					<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/_css/svg.css); ' )" />
-					<xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css); ')" />
+					<!-- <xsl:value-of select="concat( '@import url(', //output/@siteUrl, '_assets/themes/', //output/@theme, '.css); ')" /> -->
+					<xsl:value-of select="concat('@import url(''_assets/themes/', //output/@theme, '.css'');')" />
 				</style>
 				
 			</head>
@@ -178,7 +179,8 @@
 					</defs>
 
 					<script>
-						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/genie-global.js') " />
+						<!-- <xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_js/genie-global.js') " /> -->
+						<xsl:attribute name="href" select="'_assets/_js/genie-global.js'" />
 						<xsl:comment />
 					</script>
 
@@ -858,7 +860,7 @@
 				<circle r="13%" cx="12.5%" cy="50%" />
 
 			</clipPath>
-			<image x="2%" y="10%" width="20%" height="80%" preserveAspectRatio="xMidYMid slice">
+			<image x="2%" y="10%" width="20%" height="80%" preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
 					<xsl:value-of select="//agent[1]/photo" />
 
