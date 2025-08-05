@@ -177,6 +177,9 @@ body.listing-command-proof .assets-steps{
     border-radius: 0.313rem;
     transform: scale(1.1);
 }
+.assets-steps .asset-container > a{
+	display: flex;
+}
 
 .assets-steps .asset-container img{
 	width: auto;
