@@ -82,21 +82,21 @@
 				<feComposite in="SourceGraphic" operator="xor" />
 			</filter>
 			<text x="0" y="0" filter="url(#transparent)">
-				<tspan x="1%" y="2%" class="medium sub-heading">
+				<tspan x="1%" y="2%" class="medium sub-heading" style="fill: var(--theme-heading-color) !important;">
 <xsl:call-template name="listing-address-line-one" />
 
 				</tspan>
-				<tspan x="1%" y="7%" class="medium sub-heading">
+				<tspan x="1%" y="7%" class="medium sub-heading" style="fill: var(--theme-heading-color) !important;">
 <xsl:call-template name="listing-address-line-two" />
 
 				</tspan>
 			</text>
 			<text x="0" y="0">
-				<tspan x="1%" y="2%" class="medium sub-heading">
+				<tspan x="1%" y="2%" class="medium sub-heading" style="fill: var(--theme-heading-color) !important;">
 <xsl:call-template name="listing-address-line-one" />
 
 				</tspan>
-				<tspan x="1%" y="7%" class="medium sub-heading">
+				<tspan x="1%" y="7%" class="medium sub-heading" style="fill: var(--theme-heading-color) !important;">
 <xsl:call-template name="listing-address-line-two" />
 
 				</tspan>
@@ -108,7 +108,7 @@
 
 				<feComposite in="SourceGraphic" operator="xor" />
 			</filter>
-			<text x="1%" y="3%" filter="url(#solid)" class="medium align-right upper sub-heading">
+			<text x="1%" y="3%" filter="url(#solid)" class="medium align-right upper sub-heading" style="fill: var(--theme-heading-color) !important;">
 				<xsl:choose>
 					<xsl:when test="//single/soldDate!=''">
 						<tspan class="">Sold For </tspan>
@@ -122,7 +122,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</text>
-			<text x="1%" y="3%" class="medium align-right upper sub-heading">
+			<text x="1%" y="3%" class="medium align-right upper sub-heading" style="fill: var(--theme-heading-color) !important;">
 				<xsl:choose>
 					<xsl:when test="//single/soldDate!=''">
 						<tspan class="">Sold For </tspan>

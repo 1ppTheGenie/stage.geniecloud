@@ -79,21 +79,21 @@
 					</xsl:call-template>
 				</text>
 
-				<text x="37%" y="32%" fill="var(--theme-sub-heading-color)" style="font-size:90%;">
+				<text x="37%" y="32%" fill="var(--theme-heading-color)" style="font-size:90%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmobile'" />
 						<xsl:with-param name="default" select="//agent[1]/mobile" />
 					</xsl:call-template>
 				</text>
 
-				<text x="37%" y="47%" fill="var(--theme-sub-heading-color)" style="font-size:90%;">
+				<text x="37%" y="47%" fill="var(--theme-heading-color)" style="font-size:90%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentwebsite'" />
 						<xsl:with-param name="default" select="//agent[1]/website" />
 					</xsl:call-template>
 				</text>
 
-				<text x="37%" y="63%" fill="var(--theme-sub-heading-color)" style="font-size:90%;">
+				<text x="37%" y="63%" fill="var(--theme-heading-color)" style="font-size:90%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmarketingEmail'" />
 						<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
