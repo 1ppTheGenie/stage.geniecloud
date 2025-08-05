@@ -1646,7 +1646,7 @@
 					<xsl:value-of select="//output/@year" />
 				</tspan>
 				<a xlink:href="https://www.1parkplace.com" target="_blank" xmlns:xlink="http://www.w3.org/1999/xlink">
-					<tspan fill="#ffffff">1parkplace, Inc.</tspan>
+					<tspan fill="#ffffff"> 1parkplace, Inc.</tspan>
 				</a>
 			</text>
 
