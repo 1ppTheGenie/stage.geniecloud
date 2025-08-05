@@ -50,52 +50,52 @@
 					"size": "instagram-Square"
 				},
 				{
-					"sort": 8,
+					"sort": 7,
 					"asset": "social-marketing-graphics/lc-brand-post-01-vip",
-					"knownAs": "Social 8",
-					"name": "Social Story 8",
+					"knownAs": "Social 7",
+					"name": "Social Story 7",
 					"size": "instagram-Square"
 				},
 				{
-					"sort": 9,
+					"sort": 8,
 					"asset": "social-marketing-graphics/single-listing-01",
+					"knownAs": "Social 8",
+					"name": "Social Story 8",
+					"size": "facebook"
+				},
+				{
+					"sort": 9,
+					"asset": "social-marketing-graphics/single-listing-02",
 					"knownAs": "Social 9",
 					"name": "Social Story 9",
 					"size": "facebook"
 				},
 				{
 					"sort": 10,
-					"asset": "social-marketing-graphics/single-listing-02",
+					"asset": "social-marketing-graphics/single-listing-03",
 					"knownAs": "Social 10",
 					"name": "Social Story 10",
 					"size": "facebook"
 				},
 				{
 					"sort": 11,
-					"asset": "social-marketing-graphics/single-listing-03",
+					"asset": "social-marketing-graphics/single-listing-04",
 					"knownAs": "Social 11",
 					"name": "Social Story 11",
 					"size": "facebook"
 				},
 				{
 					"sort": 12,
-					"asset": "social-marketing-graphics/single-listing-04",
+					"asset": "social-marketing-graphics/single-listing-05",
 					"knownAs": "Social 12",
 					"name": "Social Story 12",
 					"size": "facebook"
 				},
 				{
 					"sort": 13,
-					"asset": "social-marketing-graphics/single-listing-05",
+					"asset": "social-marketing-graphics/single-listing-07",
 					"knownAs": "Social 13",
 					"name": "Social Story 13",
-					"size": "facebook"
-				},
-				{
-					"sort": 14,
-					"asset": "social-marketing-graphics/single-listing-07",
-					"knownAs": "Social 14",
-					"name": "Social Story 14",
 					"size": "facebook"
 				}
 			],

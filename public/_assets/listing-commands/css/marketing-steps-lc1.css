@@ -418,6 +418,20 @@ footer{
 .footer div:last-child{
 	text-align: right;
 }
+/* just-listed kit start */
+body.just-listed .assets-steps .asset-container > a{
+	display: flex;
+}
+body.just-listed .assets-steps .asset-container[data-title="Social Story 8"] > a,
+body.just-listed .assets-steps .asset-container[data-title="Social Story 9"] > a,
+body.just-listed .assets-steps .asset-container[data-title="Social Story 10"] > a,
+body.just-listed .assets-steps .asset-container[data-title="Social Story 11"] > a,
+body.just-listed .assets-steps .asset-container[data-title="Social Story 12"] > a,
+body.just-listed .assets-steps .asset-container[data-title="Social Story 13"] > a
+{
+	min-height: 9.375rem;
+}
+/* just listed kit end */
 
 @media (max-width: 1024px){
 	.assets-steps .section-grid {
@@ -493,6 +507,15 @@ footer{
 	.assets-steps .asset-container img,
 	.assets-steps .asset-container[data-title="Door Hanger Invites"] > .overlap > a > img{
 		max-height: 120px !important;
+	}
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 8"] > a,
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 9"] > a,
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 10"] > a,
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 11"] > a,
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 12"] > a,
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 13"] > a
+	{
+		min-height: 7.5rem !important;
 	}
 	.assets-steps .asset-container[data-title="Door Hanger Invites"] > .overlap > a > img{
 		margin-top: 1.5rem;

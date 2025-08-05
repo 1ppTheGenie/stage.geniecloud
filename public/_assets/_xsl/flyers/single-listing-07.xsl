@@ -19,13 +19,41 @@
 		</style>
 
 		<g>
+			<xsl:choose>
+				<xsl:when test="//output/@themeHue = 'dark'">
+					<!-- dark gradient -->
+					<defs>
+						<linearGradient id="textBackgroundGradient" x1="0" y1="0" x2="0" y2="1">
+						<stop offset="0%" stop-color="#000000" stop-opacity="0.8"></stop>
+						<stop offset="25%" stop-color="#000000" stop-opacity="0.65"></stop>
+						<stop offset="50%" stop-color="#000000" stop-opacity="0.55"></stop>
+						<stop offset="75%" stop-color="#000000" stop-opacity="0.3"></stop>
+						<stop offset="100%" stop-color="#000000" stop-opacity="0"></stop>
+						</linearGradient>
+					</defs>
+				</xsl:when>
+				<xsl:otherwise>
+					<!-- light gradient -->
+					<defs>
+						<linearGradient id="textBackgroundGradient" x1="0" y1="0" x2="0" y2="1">
+						<stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"></stop>
+						<stop offset="25%" stop-color="#ffffff" stop-opacity="0.65"></stop>
+						<stop offset="50%" stop-color="#ffffff" stop-opacity="0.55"></stop>
+						<stop offset="75%" stop-color="#ffffff" stop-opacity="0.3"></stop>
+						<stop offset="100%" stop-color="#ffffff" stop-opacity="0"></stop>
+						</linearGradient>
+					</defs>
+				</xsl:otherwise>
+			</xsl:choose>
+
 			<image x="0" y="0" width="100%" height="28%" preserveAspectRatio="xMidYMid slice">
 				<xsl:call-template name="switch-image">
 					<xsl:with-param name="id" select="'image-1'" />
 					<xsl:with-param name="idx" select="1" />
 				</xsl:call-template>
 			</image>
-			<rect x="0" y="0" width="100%" height="28%" style="fill:var(--theme-body-color);" fill-opacity="0.01" />
+			<!-- Background Gradient Rectangle -->
+			<rect x="0" y="0" width="100%" height="28%" fill="url(#textBackgroundGradient)" />
 
 			<text x="50%" y="1.5%" class="upper center" style="font-size: 220%;font-weight: 600;" data-max-width="40%">
 				<xsl:variable name="customListingStatus">
@@ -158,7 +186,7 @@
 			<clipPath id="clipCircle">
 				<circle r="6%" cx="12%" cy="7.5%"></circle>
 			</clipPath>
-			<image x="3.5%" y="1%" width="17%" height="13%" clip-path="url(#clipCircle)" preserveAspectRatio="xMidYMid meet">
+			<image x="3.5%" y="2%" width="17%" height="12%" clip-path="url(#clipCircle)" preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
 					<xsl:value-of select="//agent[1]/photo" />
 				</xsl:attribute>
