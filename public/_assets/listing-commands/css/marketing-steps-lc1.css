@@ -509,6 +509,15 @@ footer{
 	.assets-steps .asset-container[data-title="Door Hanger Invites"] > .overlap > a > img{
 		max-height: 120px !important;
 	}
+	.assets-steps .asset-container[data-title="Social Story 9"] > a,
+	.assets-steps .asset-container[data-title="Social Story 10"] > a,
+	.assets-steps .asset-container[data-title="Social Story 11"] > a,
+	.assets-steps .asset-container[data-title="Social Story 12"] > a,
+	.assets-steps .asset-container[data-title="Social Story 13"] > a,
+	.assets-steps .asset-container[data-title="Social Story 14"] > a
+	{
+		min-height: 7.5rem !important;
+	}
 	.assets-steps .asset-container[data-title="Door Hanger Invites"] > .overlap > a > img{
 		margin-top: 1.5rem;
 	}
