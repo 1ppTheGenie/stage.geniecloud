@@ -418,6 +418,18 @@ footer{
 .footer div:last-child{
 	text-align: right;
 }
+/* just-listed kit start */
+.assets-steps .asset-container[data-title="Social Story 9"] a,
+.assets-steps .asset-container[data-title="Social Story 10"] a,
+.assets-steps .asset-container[data-title="Social Story 11"] a,
+.assets-steps .asset-container[data-title="Social Story 12"] a,
+.assets-steps .asset-container[data-title="Social Story 13"] a,
+.assets-steps .asset-container[data-title="Social Story 14"] a
+{
+	display: flex;
+	min-height: 9.375rem;
+}
+/* just listed kit end */
 
 @media (max-width: 1024px){
 	.assets-steps .section-grid {
