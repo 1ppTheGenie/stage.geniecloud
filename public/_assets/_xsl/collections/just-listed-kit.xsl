@@ -83,7 +83,7 @@ Version:	1.1
 			 <xsl:with-param name="ogImage" select="'/_assets/_img/genie-logo-1.png'" />
 		</xsl:call-template>
 
-		<body class="marketing-steps">
+		<body class="marketing-steps just-listed">
 			<link href="https://fonts.googleapis.com" rel="preconnect" />
 			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
 			

@@ -177,9 +177,6 @@ body.listing-command-proof .assets-steps{
     border-radius: 0.313rem;
     transform: scale(1.1);
 }
-.assets-steps .asset-container > a{
-	display: flex;
-}
 
 .assets-steps .asset-container img{
 	width: auto;
@@ -422,14 +419,16 @@ footer{
 	text-align: right;
 }
 /* just-listed kit start */
-.assets-steps .asset-container[data-title="Social Story 9"] > a,
-.assets-steps .asset-container[data-title="Social Story 10"] > a,
-.assets-steps .asset-container[data-title="Social Story 11"] > a,
-.assets-steps .asset-container[data-title="Social Story 12"] > a,
-.assets-steps .asset-container[data-title="Social Story 13"] > a,
-.assets-steps .asset-container[data-title="Social Story 14"] > a
-{
+body.just-listed .assets-steps .asset-container > a{
 	display: flex;
+}
+body.just-listed .assets-steps .asset-container[data-title="Social Story 9"] > a,
+body.just-listed .assets-steps .asset-container[data-title="Social Story 10"] > a,
+body.just-listed .assets-steps .asset-container[data-title="Social Story 11"] > a,
+body.just-listed .assets-steps .asset-container[data-title="Social Story 12"] > a,
+body.just-listed .assets-steps .asset-container[data-title="Social Story 13"] > a,
+body.just-listed .assets-steps .asset-container[data-title="Social Story 14"] > a
+{
 	min-height: 9.375rem;
 }
 /* just listed kit end */
@@ -509,12 +508,12 @@ footer{
 	.assets-steps .asset-container[data-title="Door Hanger Invites"] > .overlap > a > img{
 		max-height: 120px !important;
 	}
-	.assets-steps .asset-container[data-title="Social Story 9"] > a,
-	.assets-steps .asset-container[data-title="Social Story 10"] > a,
-	.assets-steps .asset-container[data-title="Social Story 11"] > a,
-	.assets-steps .asset-container[data-title="Social Story 12"] > a,
-	.assets-steps .asset-container[data-title="Social Story 13"] > a,
-	.assets-steps .asset-container[data-title="Social Story 14"] > a
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 9"] > a,
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 10"] > a,
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 11"] > a,
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 12"] > a,
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 13"] > a,
+	body.just-listed .assets-steps .asset-container[data-title="Social Story 14"] > a
 	{
 		min-height: 7.5rem !important;
 	}
