@@ -68,7 +68,7 @@ export const ListingsTable = props => {
 	return (
 		<>
 			{showSignIn && <DataAccess signedin={signInComplete} />}
-			<table id="listing-table" style={style} class={`mode-${viewMode()}`}>
+			<table id="listing-table" style={style} class={`active-table mode-${viewMode()}`}>
 				<thead>
 					<Show when={viewMode()}>
 						<tr>
