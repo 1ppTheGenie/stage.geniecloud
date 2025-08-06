@@ -1727,7 +1727,10 @@ section.genie-alternate .ListingMapStyleOne h1 {
 	color: var(--theme-body-color) !important
 }
 
-.lc-hollywood #listing-table th,
+/* .lc-hollywood #listing-table th,
 #listing-table td {
 	color: initial !important;
-}
+} */
+ #listing-table.active-table.mode-new {
+	margin-left: 0;
+ }
