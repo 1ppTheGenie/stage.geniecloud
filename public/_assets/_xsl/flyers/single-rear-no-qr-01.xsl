@@ -245,13 +245,13 @@
 					<xsl:with-param name="idx" select="6" />
 				</xsl:call-template>
 			</image>
-			<image x="0" y="16%" width="23%" height="15%" preserveAspectRatio="xMidYMid slice">
+			<image x="0" y="15.8%" width="23%" height="15.2%" preserveAspectRatio="xMidYMid slice">
 				<xsl:call-template name="switch-image">
 					<xsl:with-param name="id" select="'image-7'" />
 					<xsl:with-param name="idx" select="7" />
 				</xsl:call-template>
 			</image>
-			<image x="24%" y="16%" width="23%" height="15%" preserveAspectRatio="xMidYMid slice">
+			<image x="24%" y="15.8%" width="23%" height="15.2%" preserveAspectRatio="xMidYMid slice">
 				<xsl:call-template name="switch-image">
 					<xsl:with-param name="id" select="'image-8'" />
 					<xsl:with-param name="idx" select="8" />
