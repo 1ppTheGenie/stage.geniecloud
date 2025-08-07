@@ -4,7 +4,7 @@
 	Tags:		Report, Direct Mail
 	Sizes:		Letter
 	Supports:	Listing, QRCode
-	Pages:		flyers/single-listing-03, flyers/single-rear-no-qr-01
+	Pages:		flyers/single-listing-no-qr-03, flyers/single-rear-no-qr-01
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" expand-text="yes">
