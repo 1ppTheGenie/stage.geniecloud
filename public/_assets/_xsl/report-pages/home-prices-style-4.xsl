@@ -70,7 +70,7 @@
 		<xsl:variable name="priceChangeTerm">
 			<xsl:choose>
 				<xsl:when test="$priceChange > 0">
-					<xsl:value-of select="'increased'" />
+					<xsl:value-of select="'adjusted'" />
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="'fell'" />

@@ -13,8 +13,10 @@
 	<xsl:import href="lc-prop-posts.xsl" />
 
 	<xsl:template name="svg-body">
+	
 		<xsl:call-template name="lc-prop-vip-common">
 			<xsl:with-param name="status" select="'false'" />
 		</xsl:call-template>
 	</xsl:template>
+	
 </xsl:stylesheet>

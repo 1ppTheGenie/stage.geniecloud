@@ -72,8 +72,30 @@
 		<style>
 			<xsl:value-of select="'#footer tspan {fill:var(--theme-body-background)!important;}'" />
 		</style>
-
-		<g id="agent-contact" style="transform: translateX(-31.5%);">
+ <style>
+			<xsl:value-of select="'
+				g#agent-contact{
+					transform: translate(2.5%, 97.8%);
+				}
+				g#agent-contact text{
+					font-size: 11px;
+					fill: #94949D;
+				}
+				g#agent-contact text a tspan{
+					fill: #337ab7;
+				}
+                g#footer {
+                    transform: translate(3.8%, 97.3%);
+                }
+                g#footer text:last-child {
+                    transform: translate(93.4%);
+                }
+                g#footer text:nth-child(2) {
+                    transform: translate(45.5%);
+                }
+			'"/>
+		</style>
+		<g id="agent-contact" style="transform: translateX(0%);">
 			<xsl:call-template name="copyright" />
 		</g>
 	</xsl:template>

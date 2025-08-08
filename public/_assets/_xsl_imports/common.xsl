@@ -858,7 +858,7 @@
 				<circle r="13%" cx="12.5%" cy="50%" />
 
 			</clipPath>
-			<image x="2%" y="10%" width="20%" height="80%" preserveAspectRatio="xMidYMid slice">
+			<image x="2%" y="10%" width="20%" height="80%" preserveAspectRatio="xMidYMid meet">
 				<xsl:attribute name="href">
 					<xsl:value-of select="//agent[1]/photo" />
 
@@ -1646,7 +1646,7 @@
 					<xsl:value-of select="//output/@year" />
 				</tspan>
 				<a xlink:href="https://www.1parkplace.com" target="_blank" xmlns:xlink="http://www.w3.org/1999/xlink">
-					<tspan fill="#ffffff">1parkplace, Inc.</tspan>
+					<tspan fill="#ffffff"> 1parkplace, Inc.</tspan>
 				</a>
 			</text>
 

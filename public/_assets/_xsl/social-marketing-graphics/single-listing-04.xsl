@@ -126,7 +126,7 @@
 					<use x="19%" y="65%" fill="var(--theme-sub-heading-color)" width="10%" height="10%">
 						<xsl:attribute name="href" select="concat( //output/@siteUrl, '_assets/_img/icons.svg#email-icon' )" />
 					</use>
-					<image x="0" y="0" width="20%" height="80%" preserveAspectRatio="xMidYMid slice">
+					<image x="0" y="0" width="20%" height="80%" preserveAspectRatio="xMidYMid meet">
 						<xsl:attribute name="href">
 							<xsl:value-of select="//agent[1]/photo" />
 						</xsl:attribute>

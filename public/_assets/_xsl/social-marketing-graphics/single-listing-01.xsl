@@ -63,11 +63,11 @@
 				</use>
 
 				<clipPath id="clipCircle" clipPathUnits="objectBoundingBox">
-					<circle r=".3500" cx=".5" cy=".5" />
+					<circle r=".3500" cx=".45" cy=".4" />
 				</clipPath>
 
 				<xsl:if test="//agent[1]/photo">
-					<image x="-2%" y="-10.5%" width="35%" height="120%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
+					<image x="0.4" y="0.4" width="35%" height="120%" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipCircle)">
 						<xsl:attribute name="href">
 							<xsl:copy-of select="//agent[1]/photo" />
 						</xsl:attribute>
@@ -81,28 +81,28 @@
 					</xsl:call-template>
 				</text>
 
-				<text x="37%" y="32%" fill="var(--theme-sub-heading-color)" font-size="90%;">
+				<text x="37%" y="32%" fill="var(--theme-heading-color)" font-size="90%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmobile'" />
 						<xsl:with-param name="default" select="//agent[1]/mobile" />
 					</xsl:call-template>
 				</text>
 
-				<text x="37%" y="47%" fill="var(--theme-sub-heading-color)" font-size="90%;">
+				<text x="37%" y="47%" fill="var(--theme-heading-color)" font-size="90%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentwebsite'" />
 						<xsl:with-param name="default" select="//agent[1]/website" />
 					</xsl:call-template>
 				</text>
 
-				<text x="37%" y="63%" fill="var(--theme-sub-heading-color)" font-size="90%;">
+				<text x="37%" y="63%" fill="var(--theme-heading-color)" font-size="90%;">
 					<xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'agentmarketingEmail'" />
 						<xsl:with-param name="default" select="//agent[1]/marketingEmail" />
 					</xsl:call-template>
 				</text>
 
-				<text x="37%" y="78%" font-size="80%" fill="var(--theme-sub-heading-color)">
+				<text x="37%" y="78%" font-size="80%" fill="var(--theme-heading-color)">
 					<xsl:value-of select="//agent[1]/marketingLicense" />
 				</text>
 			</svg>

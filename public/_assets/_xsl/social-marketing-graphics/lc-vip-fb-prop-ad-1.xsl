@@ -13,13 +13,26 @@
 	<xsl:template name="svg-body">
 		<style>
 			<xsl:value-of select="'
-			g#footer{
-				font-size:35%;
-				transform:translate(2.5%,98.5%);
-			}
-			text {
-			    dominant-baseline: middle;
-			}'" />
+				g#agent-contact{
+					transform: translate(2.5%, 97.8%);
+				}
+				g#agent-contact text{
+					font-size: 11px;
+					fill: #94949D;
+				}
+				g#agent-contact text a tspan{
+					fill: #337ab7;
+				}
+                g#footer {
+                    transform: translate(3.8%, 96.8%);
+                }
+                g#footer text:last-child {
+                    transform: translate(93.4%);
+                }
+                g#footer text:nth-child(2) {
+                    transform: translate(45.5%);
+                }
+			'"/>
 		</style>
 
 		<image x="0" y="0" width="100%" height="81%" preserveAspectRatio="xMidYMid slice">
@@ -82,16 +95,30 @@
 		</text>
 		<rect fill="var(--theme-body-background)" x="0%" y="80%" width="100%" height="20%" />
 
-		<xsl:choose>
+		<!-- <xsl:choose>
 			<xsl:when test="$companyLogo='' or $personalLogo=''">
 				<image x="70%" y="86%" width="25%" height="10%" id="logo" preserveAspectRatio="xMaxYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
 							<xsl:when test="$personalLogo=''">
-								<xsl:value-of select="$companyLogo" />
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue = 'light'">
+										<xsl:value-of select="$companyLogo" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="$companyLogoInverse" />
+									</xsl:otherwise>
+								</xsl:choose>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="$personalLogo" />
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue = 'light'">
+										<xsl:value-of select="$personalLogo" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="$personalLogoInverse" />
+									</xsl:otherwise>
+								</xsl:choose>
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
@@ -109,8 +136,63 @@
 					</xsl:attribute>
 				</image>
 			</xsl:otherwise>
+		</xsl:choose> -->
+		<xsl:choose>
+			<xsl:when test="$companyLogo='' or $personalLogo=''">
+				<image x="70%" y="87.7%" width="25%" height="6.5%" id="logo" preserveAspectRatio="xMinYMid meet">
+					<xsl:attribute name="href">
+						<xsl:choose>
+							<xsl:when test="$personalLogo=''">
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue = 'light'">
+										<xsl:value-of select="$companyLogo" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="$companyLogoInverse" />
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:choose>
+									<xsl:when test="//output/@themeHue = 'light'">
+										<xsl:value-of select="$personalLogo" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="$personalLogoInverse" />
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</image>
+			</xsl:when>
+			<xsl:otherwise>
+				<image x="46%" y="87.4%" height="6.5%" width="25%" id="logo" preserveAspectRatio="xMinYMid meet">
+					<xsl:attribute name="href">
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'light'">
+								<xsl:value-of select="$companyLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</image>
+				<image x="75%" y="87.4%" height="6.5%" width="22%" id="logo" preserveAspectRatio="xMaxYMid meet">
+					<xsl:attribute name="href">
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue = 'light'">
+								<xsl:value-of select="$personalLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$personalLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</image>
+			</xsl:otherwise>
 		</xsl:choose>
-
 		<text x="95%" y="84%" class="align-right" fill="var(--theme-sub-heading-color)" data-max-width="50%" font-weight="600" font-size="115%" letter-spacing="0.25">
 			<tspan>
 				<xsl:value-of select="//single/address/street" />
@@ -162,7 +244,7 @@
 				<xsl:value-of select="//agent[1]/photo" />
 			</xsl:attribute>
 		</image>
-		<g id="agent-contact" style="transform: translateX(-37.5%);">
+		<g id="agent-contact" style="transform: translateX(0%);">
 			<xsl:call-template name="copyright" />
 		</g>
 	</xsl:template>
