@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 /* prettier-ignore */
 import { generateQR, endOfLastMonth, genieGlobals, MINUTE_IN_SECONDS, NOW, dateAdd, timeAgo, toS3, jsonFromS3, listS3Folder, assetSetting } from "./index.js";
 /* prettier-ignore */
-import { areaName, openhouseByMlsNumber, getListing, agentProperties, mlsProperties, areaStatisticsMonthly, areaStatisticsWithPrevious, propertySurroundingAreas, getUser, getAreaBoundary, mlsDisplaySettings, } from "./../genieAI.js";
+import { areaName, openhouseByMlsNumber, getListing,agentMlsNumbers, agentProperties, mlsProperties, areaStatisticsMonthly, areaStatisticsWithPrevious, propertySurroundingAreas, getUser, getAreaBoundary, mlsDisplaySettings, } from "./../genieAI.js";
 import { getS3Key } from './../index.js';
 
 export const getRenderJSON = async params => {
@@ -284,12 +284,6 @@ export const areaFromMlsNumber = async (
     console.log(`No suitable area found for MLS number: ${mlsNumber}`);
 
     return null;
-};
-
-const agentMlsNumbers = async userId => {
-    const r = await agentProperties(userId, false);
-
-    return r.properties.map(p => p.mlsNumber.toLowerCase());
 };
 
 const singleAddress = listing => {

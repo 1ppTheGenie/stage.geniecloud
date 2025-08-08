@@ -37,7 +37,7 @@ const CAMELCASE = {
 	pricepercent: "pricePercent",
 	propertytype: "propertyTypeId",
 	renderid: "renderId",
-	signin: "signIn",
+	requiresignin: "requireSignin",
 	theme: "theme",
 };
 
@@ -51,7 +51,7 @@ const defaultSettings = {
 	blurPrice: false,
 	hideAVM: false,
 	pricePercent: "percent",
-	signIn: false,
+	requireSignin: false,
 	noCopyright: true,
 	noMargin: true,
 };

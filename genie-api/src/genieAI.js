@@ -309,7 +309,13 @@ export const available_areas = async (agent_id, skipCache = false) =>
     );
 
 export const getAreaBoundary = async (areaId, skipCache = false) =>
-    await call_api(`GetAreaBoundary/${areaId}`, null, skipCache, 'POST');
+    await call_api( `GetAreaBoundary/${areaId}`, null, skipCache, 'POST' );
+
+export const agentMlsNumbers = async userId => {
+    const r = await agentProperties(userId, false);
+
+    return r.properties.map(p => p.mlsNumber.toLowerCase());
+};
 
 export const getListing = async (
     user_id,

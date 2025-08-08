@@ -1,19 +1,20 @@
 // prettier-ignore
 import { stat } from "fs";
 import {
-	getUser,
-	areaStatisticsMonthly,
+    getUser,
+    areaStatisticsMonthly,
     areaName,
-	getShortData,
-	areaStatisticsWithPrevious,
-	mlsProperties,
-	getAreaBoundary,
-	getAssessorPropertiesDetail,
-	getQRProperty,
-	getPropertyFromId,
-	createLead,
-	updateLead,
-} from "../genieAI.js";
+    agentMlsNumbers,
+    getShortData,
+    areaStatisticsWithPrevious,
+    mlsProperties,
+    getAreaBoundary,
+    getAssessorPropertiesDetail,
+    getQRProperty,
+    getPropertyFromId,
+    createLead,
+    updateLead
+} from '../genieAI.js';
 
 export const embedsAPI = async (route, params) => {
     let result = {};
@@ -63,9 +64,9 @@ export const embedsAPI = async (route, params) => {
                 result = await get_mls_display(params);
                 break;
             default:
-                throw new Error(`Unknown route: ${route}`)
+                throw new Error(`Unknown route: ${route}`);
         }
-    
+
         if (result) {
             result.route = `Embed: ${route}`;
         } else {
@@ -95,7 +96,12 @@ export const getLandingPageData = async params => {
                 salutation: property.ownerDisplayName
             };
         } else if (typeof shortUrlDataId !== 'undefined') {
-            lead = await getShortData(parseInt(shortUrlDataId), token, agentId, params.skipLeadCreate);
+            lead = await getShortData(
+                parseInt(shortUrlDataId),
+                token,
+                agentId,
+                params.skipLeadCreate
+            );
 
             if (!propertyId) {
                 propertyId = lead.propertyId;
@@ -230,25 +236,28 @@ const add_lead = async params => {
             }
         }
 
-        if (params.hasOwnProperty('fullName') && params.fullName ) {                    
-          //I was seeing leads coming through with a double first name and empty last name so the assumption was a user
-          //inputting something like 'John Doe '.  This should clean that up and instances where multiple spaces are found anywhere in the input.
-          //It is probably worth prototyping to something like String.prototype.splitRemoveEmpty at some point if it gets more usage.
-          var split = params?.fullName?.split(' ')?.filter(Boolean);
+        if (params.hasOwnProperty('fullName') && params.fullName) {
+            //I was seeing leads coming through with a double first name and empty last name so the assumption was a user
+            //inputting something like 'John Doe '.  This should clean that up and instances where multiple spaces are found anywhere in the input.
+            //It is probably worth prototyping to something like String.prototype.splitRemoveEmpty at some point if it gets more usage.
+            var split = params?.fullName?.split(' ')?.filter(Boolean);
 
-          if (split && split.length > 1) {
-              var last = split.pop();
+            if (split && split.length > 1) {
+                var last = split.pop();
 
-              args['lastName'] = last;
-              args['firstName'] = split.join(' ');
-          } else {
-              args['firstName'] = params.fullName;
-          }
+                args['lastName'] = last;
+                args['firstName'] = split.join(' ');
+            } else {
+                args['firstName'] = params.fullName;
+            }
         }
 
-        if (params.hasOwnProperty('meta[message]') && params.hasOwnProperty('meta[message]') != null) {
-            args['note'] = 'Message: ' + params?.meta["message"];
-            delete params.meta["message"];
+        if (
+            params.hasOwnProperty('meta[message]') &&
+            params.hasOwnProperty('meta[message]') != null
+        ) {
+            args['note'] = 'Message: ' + params?.meta['message'];
+            delete params.meta['message'];
         } else {
             args['note'] = args['note'] || '';
         }
@@ -260,11 +269,11 @@ const add_lead = async params => {
             return m;
         }, []);
 
-        if ( meta_keys ) {
-            for ( var j = 0; j < meta_keys.length; j++ ) {
+        if (meta_keys) {
+            for (var j = 0; j < meta_keys.length; j++) {
                 var key = meta_keys[j];
 
-                if ( !args.note ) args.note = '';
+                if (!args.note) args.note = '';
 
                 args['note'] += `\n${key}: ${params[`meta[${key}]`]}`;
             }
@@ -400,6 +409,7 @@ const get_mls_display = async params => {
 const get_area_properties = async params => {
     const profile = await getUser(params.agentId);
     const mlsGroupId = profile.mlsGroupId ?? 0;
+    const agentListings = await agentMlsNumbers(params.agentId);
 
     const r = await mlsProperties(
         mlsGroupId,
@@ -430,8 +440,12 @@ const get_area_properties = async params => {
             ...remainder
         } = p;
 
-        return remainder;
-    });
+        const isAgent = agentListings.includes(p.mlsNumber?.toLowerCase() ?? '') ? 1 : 0;
+
+        return { ...remainder, isAgent };
+    } );
+    
+    properties.sort((a, b) => b.isAgent - a.isAgent);
 
     return Array.isArray(properties)
         ? success(properties)
@@ -445,7 +459,10 @@ const get_area_monthly = async params => {
         Math.ceil((params.areaPeriod ?? 12) / 12)
     );
 
-    const areaNameResult = await areaName(params.agentId, parseInt(params.areaId));
+    const areaNameResult = await areaName(
+        params.agentId,
+        parseInt(params.areaId)
+    );
 
     if (statistics.success && areaNameResult.areaName !== statistics.areaName) {
         statistics = { ...statistics, areaName: areaNameResult.areaName };
@@ -461,7 +478,10 @@ const get_area_data = async params => {
         parseInt(params.areaPeriod || 12)
     );
 
-    const areaNameResult = await areaName(params.agentId, parseInt(params.areaId));
+    const areaNameResult = await areaName(
+        params.agentId,
+        parseInt(params.areaId)
+    );
 
     if (areaNameResult.areaName !== statistics.areaName) {
         statistics = { ...statistics, areaName: areaNameResult.areaName };

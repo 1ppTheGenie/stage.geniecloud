@@ -1,4 +1,4 @@
-#genie-leadCtaTagPopup.popup-dialog {
+#genie-leadCtaTagPopup.Xpopup-dialog {
 	justify-content: flex-start;
 }
 
@@ -81,7 +81,7 @@
 }
 
 @media (max-width: 960px) {
-	.popup-dialog > * {
+	.Xpopup-dialog > * {
 		max-width: 100vw;
 		width: 96vw;
 	}	

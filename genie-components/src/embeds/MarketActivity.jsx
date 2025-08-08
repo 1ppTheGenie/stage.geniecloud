@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from "solid-js";
+import { createSignal, createEffect, createMemo } from "solid-js";
 /* prettier-ignore */
 import { HomeTypes, LeafletMap, GeoArea, ListingsTable, ListingsGrid, ListingsShowing, Pagination, CircleMarker } from "@/components";
 /* prettier-ignore */
@@ -187,7 +187,7 @@ export default () => {
 };
 
 const StatusKey = ({ setStatus }) => {
-	const labels = [
+	const labels = createMemo( () => [
 		{
 			total: areaDataStore?.overall?.new,
 			label: "New (active)",
@@ -204,7 +204,7 @@ const StatusKey = ({ setStatus }) => {
 			status: "pending",
 		},
 		{ total: areaDataStore.overall?.sold, label: "Sold", status: "sold" },
-	];
+	]);
 
 	return (
 		<div class="map-key" style="position: absolute; z-index: 700; top: 65px">
@@ -225,10 +225,9 @@ const StatusKey = ({ setStatus }) => {
 					{areaDataStore.areaName}
 				</text>
 				<g style="transform: translate(20px, 70px)">
-					{labels.map((l, i) => {
+					{labels().map((l, i) => {
 						return (
 							<g
-								key={i}
 								style={`transform: translateY(${i * 50}px)`}
 								onClick={e => setStatus(l.status)}>
 								<circle fill={`var(--${l.status})`} cx="20" cy="5" r="17" />

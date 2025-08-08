@@ -1,6 +1,6 @@
 .lead-capture-form {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
@@ -26,12 +26,12 @@
 
 .lead-capture-form input[type="text"],
 .lead-capture-form input[type="email"] {
-	flex: 0 0 47.5%;
+	width:80%;
 	padding: 1rem;
 	box-sizing: border-box;
 	background-color: var(--theme-heading-color);
 	color: var(--theme-body-background);
-	border-style: none;
+	border: 1px solid var(--theme-body-background);
 	border-radius: 5px;
 	outline: none;
 	margin-left: 0;
