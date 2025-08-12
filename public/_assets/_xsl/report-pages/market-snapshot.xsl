@@ -32,7 +32,6 @@
 		<xsl:variable name="previousMedianSalePrice" select="number(//previous/@medianSalePrice)" />
 		<xsl:variable name="change" select="$medianSalePrice div $previousMedianSalePrice" />
 		<xsl:variable name="formattedChange" select="format-number( abs( 1 - $change ), '#.0%' )" />
-
 		<text x="3%" y="6%" class="upper heading" font-size="270%" data-max-width="35%">
 			<xsl:value-of select="$areaWithPropertyType" />
 
@@ -46,8 +45,8 @@
 				<xsl:value-of select="concat( 'The ', //areas/area/name, ' area has had the median sale price ')" />
 
 				<xsl:choose>
-					<xsl:when test="$change = .0">
-						<xsl:value-of select="stable" />
+					<xsl:when test="$change = 1">
+						<xsl:value-of select="'stable'" />
 					</xsl:when>
 					<xsl:when test="$change > 1">
 						<xsl:value-of select="concat( ' increase by ', $formattedChange )" />
@@ -120,9 +119,9 @@
 				</xsl:variable>
 
 				<xsl:choose>
-					<xsl:when test="$change = .0">
+					<xsl:when test="$change = 1">
 						<tspan>
-							<xsl:value-of select="since" />
+							<xsl:value-of select="'Since'" />
 						</tspan>
 						<tspan x="30%" dy="4.5%">
 							<xsl:value-of select="concat(' ', $since)" />
