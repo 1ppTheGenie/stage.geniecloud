@@ -1,4 +1,11 @@
-import { createSignal, Show, For, createMemo  } from "solid-js";
+import {
+	createSignal,
+	Show,
+	For,
+	createMemo,
+	Switch,
+	Match,
+} from "solid-js";
 import { format } from "date-fns";
 /* prettier-ignore */
 import { address, currency, useSettings, Context4Settings, signedInAtom } from "@/utilities";
@@ -8,6 +15,7 @@ import SoldIcon from "@/assets/icon-sold-small.svg";
 import ActiveIcon from "@/assets/icon-active-small.svg";
 import PendingIcon from "@/assets/icon-pending-small.svg";
 import NewIcon from "@/assets/icon-new-small.svg";
+
 const bgColors = {
 	active: "--active-green",
 	new: "--new-blue",
@@ -62,63 +70,58 @@ export const ListingsTable = props => {
 		setShowSignin(false);
 		setSignedIn(bool);
 	};
-
-	const viewMode = createMemo(() => props?.mode()?.toLowerCase() ?? 'active');
+	const viewMode = createMemo(() => props?.mode()?.toLowerCase() ?? "active");
 
 	return (
 		<>
-			{showSignIn && <DataAccess signedin={signInComplete} />}
-			<table id="listing-table" style={style} class={`active-table mode-${viewMode()}`}>
+			<Show when={showSignIn()}>
+				<DataAccess signedin={signInComplete} />
+			</Show>
+			<table id="listing-table" style={style} class={`mode-${viewMode()}`}>
 				<thead>
 					<Show when={viewMode()}>
 						<tr>
-							{headings[
-								viewMode() !== "sold"
-									? "default"
-									: "soldextended"
-							].map((caption, i) => (
-								<th
-									title={
-										caption === "BR"
-											? "Bedrooms"
-											: caption === "BA"
-											? "Bathrooms"
-											: ""
-									}>
-									{caption}
-								</th>
-							))}
+							{headings[viewMode() !== "sold" ? "default" : "soldextended"].map(
+								caption => (
+									<th
+										title={
+											caption === "BR"
+												? "Bedrooms"
+												: caption === "BA"
+												? "Bathrooms"
+												: ""
+										}>
+										{caption}
+									</th>
+								)
+							)}
 						</tr>
 					</Show>
 				</thead>
 				<tbody>
 					<Show when={viewMode() == "sold"}>
 						<For each={props.listings()}>
-							{(l, index) => {
+							{l => {
 								return (
 									<tr>
 										<td style="text-align: left">
 											<Show when={withIcon}>
 												<SmallIcon marketstatus={props.marketstatus} />
 											</Show>
-											{props.marketstatus === "sold" &&
-												settings.signin &&
-												!signedIn && (
+											<Switch fallback={<span innerHTML={address(l)} />}>
+												<Match when={settings.requiresignin && !signedIn()}>
 													<span
 														style="cursor: pointer; margin-left: 0.5rem"
 														onClick={() => setShowSignin(true)}>
-														Sign in to see Address
+														Sign in to see address
 													</span>
-												)}
-											{(props.marketstatus !== "sold" ||
-												!settings.signin ||
-												signedIn) &&
-												address(l)}
+												</Match>
+											</Switch>
 										</td>
 										<td>{currency(parseInt(l.priceHigh))}</td>
 										<td
 											classList={{
-												blurText: settings.blurPrice && !signedIn,
+												blurText: settings.blurPrice && !signedIn(),
 											}}>
 											{currency(parseInt(l.salePrice))}
 										</td>
@@ -136,7 +139,7 @@ export const ListingsTable = props => {
 
 										<td
 											classList={{
-												blurText: settings.blurPrice && !signedIn,
+												blurText: settings.blurPrice && !signedIn(),
 											}}>
 											{currency(parseInt(l.salePrice) / parseInt(l.sqft))}
 										</td>
@@ -150,7 +153,7 @@ export const ListingsTable = props => {
 
 					<Show when={viewMode() != "sold"}>
 						<For each={props.listings()}>
-							{(l, index) => {
+							{l => {
 								return (
 									<tr>
 										<td style="text-align: left">
@@ -158,8 +161,8 @@ export const ListingsTable = props => {
 												<SmallIcon marketstatus={props.marketstatus} />
 											</Show>
 											{viewMode() === "sold" &&
-												settings.signin &&
-												!signedIn && (
+												settings.requiresignin &&
+												!signedIn() && (
 													<span
 														style="cursor: pointer; margin-left: 0.5rem"
 														onClick={() => setShowSignin(true)}>
@@ -167,8 +170,8 @@ export const ListingsTable = props => {
 													</span>
 												)}
 											{(viewMode() !== "sold" ||
-												!settings.signin ||
-												signedIn) &&
+												!settings.requiresignin ||
+												signedIn()) &&
 												address(l)}
 										</td>
 

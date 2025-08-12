@@ -8023,10 +8023,6 @@ var areaFromMlsNumber = async (mlsNumber, mlsId, userId, skipCache = false) => {
   console.log(`No suitable area found for MLS number: ${mlsNumber}`);
   return null;
 };
-var agentMlsNumbers = async (userId) => {
-  const r = await agentProperties(userId, false);
-  return r.properties.map((p) => p.mlsNumber.toLowerCase());
-};
 var singleAddress = (listing) => {
   let address = `${listing.streetNumber} ${listing.streetName}`;
   if (listing.unitNumber && listing.unitNumber !== "") {
@@ -9001,7 +8997,12 @@ var getLandingPageData = async (params) => {
         salutation: property.ownerDisplayName
       };
     } else if (typeof shortUrlDataId !== "undefined") {
-      lead = await getShortData(parseInt(shortUrlDataId), token, agentId, params.skipLeadCreate);
+      lead = await getShortData(
+        parseInt(shortUrlDataId),
+        token,
+        agentId,
+        params.skipLeadCreate
+      );
       if (!propertyId) {
         propertyId = lead.propertyId;
       }
@@ -9251,6 +9252,7 @@ var get_mls_display = async (params) => {
 var get_area_properties = async (params) => {
   const profile = await getUser(params.agentId);
   const mlsGroupId = profile.mlsGroupId ?? 0;
+  const agentListings = await agentMlsNumbers(params.agentId);
   const r = await mlsProperties(
     mlsGroupId,
     params.areaId,
@@ -9277,8 +9279,10 @@ var get_area_properties = async (params) => {
       city,
       ...remainder
     } = p;
-    return remainder;
+    const isAgent = agentListings.includes(p.mlsNumber?.toLowerCase() ?? "") ? 1 : 0;
+    return { ...remainder, isAgent };
   });
+  properties.sort((a, b) => b.isAgent - a.isAgent);
   return Array.isArray(properties) ? success(properties) : error({ noProps: true });
 };
 var get_area_monthly = async (params) => {
@@ -9287,7 +9291,10 @@ var get_area_monthly = async (params) => {
     parseInt(params.areaId),
     Math.ceil((params.areaPeriod ?? 12) / 12)
   );
-  const areaNameResult = await areaName(params.agentId, parseInt(params.areaId));
+  const areaNameResult = await areaName(
+    params.agentId,
+    parseInt(params.areaId)
+  );
   if (statistics.success && areaNameResult.areaName !== statistics.areaName) {
     statistics = { ...statistics, areaName: areaNameResult.areaName };
   }
@@ -9299,7 +9306,10 @@ var get_area_data = async (params) => {
     parseInt(params.areaId),
     parseInt(params.areaPeriod || 12)
   );
-  const areaNameResult = await areaName(params.agentId, parseInt(params.areaId));
+  const areaNameResult = await areaName(
+    params.agentId,
+    parseInt(params.areaId)
+  );
   if (areaNameResult.areaName !== statistics.areaName) {
     statistics = { ...statistics, areaName: areaNameResult.areaName };
   }
@@ -9686,6 +9696,10 @@ var getAssessorPropertiesDetail = async (address_id, skipCache = false) => await
   skipCache
 );
 var getAreaBoundary = async (areaId, skipCache = false) => await call_api(`GetAreaBoundary/${areaId}`, null, skipCache, "POST");
+var agentMlsNumbers = async (userId) => {
+  const r = await agentProperties(userId, false);
+  return r.properties.map((p) => p.mlsNumber.toLowerCase());
+};
 var getListing = async (user_id, mls_number, mls_id, skipCache = false) => {
   mls_id = mls_id ?? -1;
   let listing;

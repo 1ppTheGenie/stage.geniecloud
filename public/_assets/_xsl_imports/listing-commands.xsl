@@ -60,8 +60,7 @@
 	</xsl:template>
 
 	<xsl:template name="standard-header">
-<xsl:param name="title" select="concat( $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ', //agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
-
+		<xsl:param name="title" select="concat( $listingAddressLine1, ', ' , $listingAddressLine2, ' &#124; ', //agent[1]/marketingName, ' ' , //agent[1]/address/company )" />
 
 		<xsl:param name="description" select="substring(concat( 'View details, pricing, photos, floorplan, for ',  $listingAddressLine1, '. ' , //single/description, '...') ,0, 373 )" />
 
@@ -89,8 +88,7 @@
 					<xsl:value-of select="$description" />
 				</xsl:attribute>
 			</meta>
-<meta charset="utf-8" />
-
+			<meta charset="utf-8" />
 
 			<title>
 				<xsl:value-of select="$title" />

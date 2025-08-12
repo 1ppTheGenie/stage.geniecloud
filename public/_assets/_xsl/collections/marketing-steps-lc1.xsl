@@ -51,7 +51,6 @@ Version:	1.1
 		</xsl:variable>
 
 		<xsl:call-template name="standard-header">
-			
 			<xsl:with-param name="title" select="concat( //collection/@name, ' &#124; ', 'Powered by TheGenie.ai' )" />
 			<xsl:with-param name="description">
 				<xsl:choose>
@@ -169,7 +168,8 @@ Version:	1.1
 							<div class="address">
 								<p>
 									<xsl:value-of select="//area/name" />
-								<br/>
+									
+									<br/>
 
 									<xsl:value-of select="$listingAddressLine1" />
 									<xsl:if test="count(//openHouse/session) &gt; 0">
@@ -182,8 +182,6 @@ Version:	1.1
                                         )" />
                                     </xsl:if>
 							
-
-
 									 <!-- <xsl:if test="//openHouse/session">
                                         <xsl:text> • </xsl:text>
                                         <xsl:value-of select="//openHouse/session[1]/@dow" />, 
@@ -201,7 +199,6 @@ Version:	1.1
                                         <xsl:value-of select="//openHouse/session[1]/@ends" />
                                     </xsl:if> -->
 								</p>
-								
 							</div>
 						</xsl:if>
 						<div class="genie-logo">

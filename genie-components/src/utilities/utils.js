@@ -59,7 +59,7 @@ export const hex2rgba = (hex, alpha = 1) => {
 export const address = listing =>
 	`${listing.streetNumber} ${listing.streetName}`;
 
-export const signedInAtom = () => {};
+export const signedInAtom = false;
 
 export const periodName = period =>
 	`${period} ${period > 1 ? "months" : "month"}`;
@@ -133,7 +133,13 @@ export const filterListings = (
 	};
 
 	// use the one that matches (falls back to the date sort)
-	const sorting = comparators[sortBy] || comparators.default;
+	const baseSorting = comparators[sortBy] || comparators.default;
+
+	  // Wrap the chosen comparator to prioritize isAgent first
+  const sorting = (a, b) => {
+    if (b.isAgent !== a.isAgent) return b.isAgent - a.isAgent;
+    return baseSorting(a, b);
+  };
 
 	switch (mode.toString().toLocaleLowerCase()) {
 		case "sold":

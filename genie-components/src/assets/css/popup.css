@@ -1,4 +1,4 @@
-div.popup-dialog {
+div.Xpopup-dialog {
 	position: fixed;
 	background-color: #000d;
 	width: 100%;
@@ -15,7 +15,7 @@ div.popup-dialog.visible {
 	display: flex;
 }
 
-div.popup-dialog > div {
+.popup-dialog  {
 	background-color: var(--theme-body-background);
 	border-radius: 10px 10px 0 0;
 	position: relative;

@@ -145,7 +145,6 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="concat( 'last ', //areas/area[1]/statistics/@lookbackMonths, ' months')" />
-
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
@@ -224,7 +223,6 @@
 		<!-- DO NOT CHANGE these values -->
 		<dims name="postcard" width="1100" height="600" />
 		<dims name="tabloid-flyer" width="1700" height="1100" />
-
 		<dims name="facebook-ad" width="555" height="555" />
 		<dims name="facebook-post" width="555" height="555" />
 		<dims name="facebook-video-ad" width="555" height="555" />
@@ -245,7 +243,6 @@
 				<xsl:choose>
 					<xsl:when test="$dims/dims[@name=$assetSize]">
 						<xsl:value-of select="number($dims/dims[@name=$assetSize]/@width) + 25" />
-
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="number( $dims/dims[last()]/@width ) + 25" />
@@ -256,7 +253,6 @@
 				<xsl:choose>
 					<xsl:when test="$dims/dims[@name=$assetSize]">
 						<xsl:value-of select="number($dims/dims[@name=$assetSize]/@width)" />
-
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="number( $dims/dims[last()]/@width )" />
@@ -273,7 +269,6 @@
 				<xsl:choose>
 					<xsl:when test="$dims/dims[@name=$assetSize]">
 						<xsl:value-of select="number($dims/dims[@name=$assetSize]/@height) + 25" />
-
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="number( $dims/dims[last()]/@height ) + 25" />
@@ -284,7 +279,6 @@
 				<xsl:choose>
 					<xsl:when test="$dims/dims[@name=$assetSize]">
 						<xsl:value-of select="number($dims/dims[@name=$assetSize]/@height)" />
-
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="number( $dims/dims[last()]/@height )" />

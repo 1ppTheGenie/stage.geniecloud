@@ -22,7 +22,7 @@ div.genie-wrap footer {
 	color: var(--theme-heading-color);
 }
 
-.popup-dialog {
+.Xpopup-dialog {
 	display: none;
 	background-color: #000c;
 	position: fixed;
@@ -35,13 +35,13 @@ div.genie-wrap footer {
 	align-items: center;
 }
 
-.popup-dialog.visible {
+.Xpopup-dialog.visible {
 	display: flex;
 	flex-direction: column;
 	overflow-y: scroll;
 }
 
-.popup-dialog > * {
+.popup-dialog  {
 	width: 40vw;
 	min-height: 20vh;
 	text-align: center;
@@ -159,4 +159,9 @@ div.genie-map {
 	color: var(--theme-body-background);
 	border: 1px solid var(--theme-body-background);
 	opacity: 0.8 !important;
+}
+
+
+.blurText {
+	filter: blur(3px);
 }

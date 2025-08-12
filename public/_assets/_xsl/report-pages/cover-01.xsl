@@ -12,7 +12,6 @@
 
 	<xsl:template name="svg-scripts">
 		<xsl:call-template name="map-files" />
-
 		<xsl:call-template name="mixed-listings" />
 	</xsl:template>
 
