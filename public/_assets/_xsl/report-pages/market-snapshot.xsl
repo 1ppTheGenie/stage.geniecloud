@@ -46,7 +46,7 @@
 				<xsl:value-of select="concat( 'The ', //areas/area/name, ' area has had the median sale price ')" />
 
 				<xsl:choose>
-					<xsl:when test="$change = 0">
+					<xsl:when test="$change = .0">
 						<xsl:value-of select="stable" />
 					</xsl:when>
 					<xsl:when test="$change > 1">
@@ -120,7 +120,7 @@
 				</xsl:variable>
 
 				<xsl:choose>
-					<xsl:when test="$change = 0">
+					<xsl:when test="$change = .0">
 						<tspan>
 							<xsl:value-of select="since" />
 						</tspan>
