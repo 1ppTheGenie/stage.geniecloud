@@ -103,6 +103,9 @@
 			<use class="bold" x="15.8%" y="80%" width="25%" height="3%" fill="transparent" stroke="var(--theme-heading-color)" stroke-width="15">
 				<xsl:attribute name="href">
 					<xsl:choose>
+					<xsl:when test="$change = 1">
+							<xsl:value-of select="''" />
+						</xsl:when>
 						<xsl:when test="$change > 1">
 							<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#arrow-up' )" />
 						</xsl:when>
@@ -121,7 +124,7 @@
 				<xsl:choose>
 					<xsl:when test="$change = 1">
 						<tspan>
-							<xsl:value-of select="'Since'" />
+							<xsl:value-of select="' Since'" />
 						</tspan>
 						<tspan x="30%" dy="4.5%">
 							<xsl:value-of select="concat(' ', $since)" />
