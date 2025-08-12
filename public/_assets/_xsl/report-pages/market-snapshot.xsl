@@ -46,11 +46,14 @@
 				<xsl:value-of select="concat( 'The ', //areas/area/name, ' area has had the median sale price ')" />
 
 				<xsl:choose>
+					<xsl:when test="$change = 0">
+						<xsl:value-of select="stable" />
+					</xsl:when>
 					<xsl:when test="$change > 1">
 						<xsl:value-of select="concat( ' increase by ', $formattedChange )" />
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat( ' decrease by ', $formattedChange )" />
+						<xsl:value-of select="concat( ' adjusted by ', $formattedChange )" />
 					</xsl:otherwise>
 				</xsl:choose>
 
@@ -117,6 +120,14 @@
 				</xsl:variable>
 
 				<xsl:choose>
+					<xsl:when test="$change = 0">
+						<tspan>
+							<xsl:value-of select="since" />
+						</tspan>
+						<tspan x="30%" dy="4.5%">
+							<xsl:value-of select="concat(' ', $since)" />
+						</tspan>
+					</xsl:when>
 					<xsl:when test="$change > 1">
 						<tspan>
 							<xsl:value-of select="concat( ' Up ', $formattedChange, ' since '  )" />
