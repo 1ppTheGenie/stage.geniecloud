@@ -73,10 +73,10 @@
 					<xsl:value-of select="'stable'" />
 				</xsl:when>
 				<xsl:when test="$priceChange > 0">
-					<xsl:value-of select="'adjusted'" />
+					<xsl:value-of select="'increase'" />
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="'increase'" />
+					<xsl:value-of select="'adjusted'" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
