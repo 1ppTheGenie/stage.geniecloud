@@ -42,8 +42,15 @@
 		</text>
 		<foreignObject x="3%" y="15.8%" height="25%" width="45%" class="medium">
 			<p style="font-size:100%;line-height:150%; color:var(--theme-body-color); font-family: var(--theme-body-font);">
-				<xsl:value-of select="concat( 'The ', //areas/area/name, ' area has had the median sale price ')" />
-
+				<!-- <xsl:value-of select="concat( 'The ', //areas/area/name, ' area has had the median sale price ')" /> -->
+				<xsl:choose>
+				<xsl:when test="$change != 1">
+					<xsl:value-of select="concat( 'The ', //areas/area/name, ' area has had the median sale price ')" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="concat( 'The ', //areas/area/name, ' area median sale price has been ')" />
+				</xsl:otherwise>
+			</xsl:choose>
 				<xsl:choose>
 					<xsl:when test="$change = 1">
 						<xsl:value-of select="'stable'" />
