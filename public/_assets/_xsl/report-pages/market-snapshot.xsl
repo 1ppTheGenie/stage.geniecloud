@@ -124,10 +124,7 @@
 				<xsl:choose>
 					<xsl:when test="$change = 1">
 						<tspan>
-							<xsl:value-of select="'Since'" />
-						</tspan>
-						<tspan x="30%" dy="4.5%">
-							<xsl:value-of select="$since" />
+							<xsl:value-of select="''" />
 						</tspan>
 					</xsl:when>
 					<xsl:when test="$change > 1">
