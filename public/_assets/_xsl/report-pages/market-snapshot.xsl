@@ -144,7 +144,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<tspan>
-							<xsl:value-of select="concat( ' Down ', $formattedChange, ' since '  )" />
+							<xsl:value-of select="concat( ' Adjusted ', $formattedChange, ' since '  )" />
 						</tspan>
 						<tspan x="30%" dy="4.5%">
 							<xsl:value-of select="concat( ' ', $since )" />
