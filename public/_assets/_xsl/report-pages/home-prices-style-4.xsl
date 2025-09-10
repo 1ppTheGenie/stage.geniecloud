@@ -69,14 +69,18 @@
 		<xsl:variable name="priceChangeFormat" select="format-number( number( abs( number($priceChange) ) ), '#.0%' )" />
 		<xsl:variable name="priceChangeTerm">
 			<xsl:choose>
+				<xsl:when test="$priceChange = 0">
+					<xsl:value-of select="'stable'" />
+				</xsl:when>
 				<xsl:when test="$priceChange > 0">
-					<xsl:value-of select="'adjusted'" />
+					<xsl:value-of select="'increase'" />
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="'fell'" />
+					<xsl:value-of select="'adjusted'" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
+			
 
 		<xsl:variable name="reportDate">
 			<xsl:value-of select="genie:format-date( //output/@reportDate, '[MNn] [D], [Y0001]')" />
@@ -93,11 +97,34 @@
 		</xsl:variable>
 
 		<text x="50%" y="36%" class="center medium" font-family="var(--theme-body-font)" fill="var(--theme-body-color)">
-			<tspan>
-				<xsl:value-of select="concat( 'As of ', $reportDate, ', ', //areas/area/name, ' median sales price for',' ', lower-case( $propertyType ) )" />
-			</tspan>
-			<tspan x="50%" y="43%">
+			<xsl:choose>
+				<xsl:when test="$priceChange != 0">
+					<tspan>
+						<xsl:value-of select="concat( 'As of ', $reportDate, ', ', //areas/area/name, ' median sales price for',' ', lower-case( $propertyType ) )" />
+					</tspan>
+				</xsl:when>
+				<xsl:otherwise>
+					<tspan>
+					<xsl:value-of 
+						select="concat(//areas/area/name, ' median sales price for ', lower-case($propertyType), ' has been')" 
+					/>
+				</tspan>
+				</xsl:otherwise>
+			</xsl:choose>
+			<!-- <tspan x="50%" y="43%">
 				<xsl:value-of select="concat( $priceChangeTerm, ' by ', $priceChangeFormat , ' over the last ', $month_type, '. Take a look at the details below!' )" />
+			</tspan> -->
+			<tspan x="50%" y="43%">
+				<xsl:value-of select="$priceChangeTerm" />
+				<xsl:text> </xsl:text>
+				<xsl:if test="$priceChange != 0">
+					<xsl:text>by </xsl:text>
+					<xsl:value-of select="$priceChangeFormat" />
+					<xsl:text> </xsl:text>
+				</xsl:if>
+				<xsl:text>over the last </xsl:text>
+				<xsl:value-of select="$month_type" />
+				<xsl:text>. Take a look at the details below!</xsl:text>
 			</tspan>
 		</text>
 

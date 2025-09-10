@@ -32,7 +32,6 @@
 		<xsl:variable name="previousMedianSalePrice" select="number(//previous/@medianSalePrice)" />
 		<xsl:variable name="change" select="$medianSalePrice div $previousMedianSalePrice" />
 		<xsl:variable name="formattedChange" select="format-number( abs( 1 - $change ), '#.0%' )" />
-
 		<text x="3%" y="6%" class="upper heading" font-size="270%" data-max-width="35%">
 			<xsl:value-of select="$areaWithPropertyType" />
 
@@ -43,14 +42,24 @@
 		</text>
 		<foreignObject x="3%" y="15.8%" height="25%" width="45%" class="medium">
 			<p style="font-size:100%;line-height:150%; color:var(--theme-body-color); font-family: var(--theme-body-font);">
-				<xsl:value-of select="concat( 'The ', //areas/area/name, ' area has had the median sale price ')" />
-
+				<!-- <xsl:value-of select="concat( 'The ', //areas/area/name, ' area has had the median sale price ')" /> -->
 				<xsl:choose>
+				<xsl:when test="$change != 1">
+					<xsl:value-of select="concat( 'The ', //areas/area/name, ' area has had the median sale price ')" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="concat( 'The ', //areas/area/name, ' area median sale price has been ')" />
+				</xsl:otherwise>
+			</xsl:choose>
+				<xsl:choose>
+					<xsl:when test="$change = 1">
+						<xsl:value-of select="'stable'" />
+					</xsl:when>
 					<xsl:when test="$change > 1">
 						<xsl:value-of select="concat( ' increase by ', $formattedChange )" />
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat( ' decrease by ', $formattedChange )" />
+						<xsl:value-of select="concat( ' adjusted by ', $formattedChange )" />
 					</xsl:otherwise>
 				</xsl:choose>
 
@@ -101,6 +110,9 @@
 			<use class="bold" x="15.8%" y="80%" width="25%" height="3%" fill="transparent" stroke="var(--theme-heading-color)" stroke-width="15">
 				<xsl:attribute name="href">
 					<xsl:choose>
+					<xsl:when test="$change = 1">
+							<xsl:value-of select="''" />
+						</xsl:when>
 						<xsl:when test="$change > 1">
 							<xsl:value-of select="concat( //output/@siteUrl, '_assets/_img/icons.svg#arrow-up' )" />
 						</xsl:when>
@@ -117,6 +129,11 @@
 				</xsl:variable>
 
 				<xsl:choose>
+					<xsl:when test="$change = 1">
+						<tspan>
+							<xsl:value-of select="''" />
+						</tspan>
+					</xsl:when>
 					<xsl:when test="$change > 1">
 						<tspan>
 							<xsl:value-of select="concat( ' Up ', $formattedChange, ' since '  )" />
@@ -127,7 +144,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<tspan>
-							<xsl:value-of select="concat( ' Down ', $formattedChange, ' since '  )" />
+							<xsl:value-of select="concat( ' Adjusted ', $formattedChange, ' since '  )" />
 						</tspan>
 						<tspan x="30%" dy="4.5%">
 							<xsl:value-of select="concat( ' ', $since )" />
