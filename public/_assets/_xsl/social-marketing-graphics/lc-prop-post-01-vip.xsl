@@ -143,7 +143,7 @@
 			</xsl:attribute>
 		</image>
 		<xsl:choose>
-			<xsl:when test="$companyLogo='' or $personalLogo=''">
+			<!-- <xsl:when test="$companyLogo='' or $personalLogo=''">
 				<image x="70%" y="87.7%" width="25%" height="6.5%" id="logo" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
@@ -170,8 +170,8 @@
 						</xsl:choose>
 					</xsl:attribute>
 				</image>
-			</xsl:when>
-			<xsl:otherwise>
+			</xsl:when> -->
+			<!-- <xsl:otherwise>
 				<image x="46%" y="87.4%" height="6.5%" width="25%" id="logo" preserveAspectRatio="xMinYMid meet">
 					<xsl:attribute name="href">
 						<xsl:choose>
@@ -196,7 +196,7 @@
 						</xsl:choose>
 					</xsl:attribute>
 				</image>
-			</xsl:otherwise>
+			</xsl:otherwise> -->
 		</xsl:choose>
 		<g id="agent-contact" style="transform: translateX(0%);">
 			<xsl:call-template name="copyright" />
