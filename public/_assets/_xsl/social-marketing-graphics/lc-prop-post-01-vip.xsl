@@ -51,28 +51,28 @@
 
 			<text x="3%" y="7.7%" font-size="250%" fill="var(--theme-sub-heading-color)" font-weight="500" font-family="var(--theme-body-font)">
 				<tspan>
-					<xsl:call-template name="editable">
+					<!-- <xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'singlebedroomscount'" />
 						<xsl:with-param name="default" select="//single/bedrooms/@count" />
-					</xsl:call-template>
+					</xsl:call-template> -->
 				</tspan>
 				<tspan dx="0%">
-					<xsl:call-template name="editable">
+					<!-- <xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'beds'" />
 						<xsl:with-param name="default" select="'Beds &#124; '" />
-					</xsl:call-template>
+					</xsl:call-template> -->
 				</tspan>
 				<tspan dx="0%">
-					<xsl:call-template name="editable">
+					<!-- <xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'singlebathrooms'" />
 						<xsl:with-param name="default" select="$listingTotalBathrooms" />
-					</xsl:call-template>
+					</xsl:call-template> -->
 				</tspan>
 				<tspan dx="0%">
-					<xsl:call-template name="editable">
+					<!-- <xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'baths'" />
 						<xsl:with-param name="default" select="'Baths &#124; '" />
-					</xsl:call-template>
+					</xsl:call-template> -->
 				</tspan>
 				<tspan dx="0%">
 					<xsl:call-template name="editable">
