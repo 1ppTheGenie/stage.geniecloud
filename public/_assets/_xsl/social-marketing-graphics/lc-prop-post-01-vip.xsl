@@ -106,11 +106,11 @@
 			</xsl:choose>
 		</text>
 
-		<text x="17%" y="15.9%" data-max-width="60%" fill="var(--theme-sub-heading-color)" font-weight="600" font-size="294%" font-family="var(--theme-body-font)">
+		<!-- <text x="17%" y="15.9%" data-max-width="60%" fill="var(--theme-sub-heading-color)" font-weight="600" font-size="294%" font-family="var(--theme-body-font)">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="default" select="concat( genie:indefinite-article( string(//area/name) ), ' ', //area/name, ' Gem')" />
 			</xsl:call-template>
-		</text>
+		</text> -->
 
 		<text x="60.7%" y="5.7%" class="left" font-size="27" font-weight="400" font-family="var(--theme-sub-heading-font)">
 			<xsl:call-template name="editable">
@@ -126,16 +126,16 @@
 			</xsl:call-template>
 		</text>
 
-		<text x="60.7%" y="12.3%" class="left" font-size="206%" font-weight="400" fill="var(--theme-sub-heading-color)" font-family="var(--theme-sub-heading-font)" data-max-width="20%">
+		<!-- <text x="60.7%" y="12.3%" class="left" font-size="206%" font-weight="400" fill="var(--theme-sub-heading-color)" font-family="var(--theme-sub-heading-font)" data-max-width="20%">
 			<xsl:call-template name="editable">
 				<xsl:with-param name="id" select="'mobile'" />
 				<xsl:with-param name="default" select="translate(//agent[1]/mobile, '-', '.')" />
 			</xsl:call-template>
-		</text>
+		</text> -->
 
-		<text x="4.3%" y="1%" font-size="17" font-weight="600" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-color)" data-max-width="25%" class="left align-left upper">
+		<!-- <text x="4.3%" y="1%" font-size="17" font-weight="600" font-family="var(--theme-sub-heading-font)" fill="var(--theme-body-color)" data-max-width="25%" class="left align-left upper">
 			<xsl:value-of select="//agent[1]/marketingLicense" />
-		</text>
+		</text> -->
 
 		<image x="82.3%" y="7.8%" width="13%" height="16%" preserveAspectRatio="xMidYMax meet">
 			<xsl:attribute name="href">
