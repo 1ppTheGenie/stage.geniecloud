@@ -40,7 +40,7 @@
 				<xsl:with-param name="idx" select="1" />
 			</xsl:call-template>
 		</image>
-
+<!-- 
 		<g style="transform-origin: 0; transform: rotate(-90deg) translate(-35%, 54%);">
 			<text x="3%" y="-0.7%" style="font-family:var(--theme-sub-heading-font); fill:var(--theme-heading-color)" font-weight="700" font-size="325%" data-max-width="80%">
 				<xsl:call-template name="editable">
@@ -87,7 +87,7 @@
 					</xsl:call-template>
 				</tspan>
 			</text>
-		</g>
+		</g> -->
 
 		<text x="17%" y="4.7%" style="font-size: 488%; font-weight:600; font-family:var(--theme-sub-heading-font)" data-max-width="45%">
 			<xsl:choose>
