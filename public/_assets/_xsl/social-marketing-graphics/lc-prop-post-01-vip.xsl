@@ -75,19 +75,19 @@
 					</xsl:call-template> -->
 				</tspan>
 				<tspan dx="0%">
-					<xsl:call-template name="editable">
+					<!-- <xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'singlesquareFeet'" />
 						<xsl:with-param name="default" select="format-number( //single/squareFeet, '###,###' )" />
-					</xsl:call-template>
+					</xsl:call-template> -->
 				</tspan>
 				<tspan dx="0%">
-					<xsl:call-template name="editable">
+					<!-- <xsl:call-template name="editable">
 						<xsl:with-param name="id" select="'SF'" />
 						<xsl:with-param name="default" select="'SF'" />
-					</xsl:call-template>
+					</xsl:call-template> -->
 				</tspan>
 			</text>
-		</g>
+		</g> 
 
 		<text x="17%" y="4.7%" style="font-size: 488%; font-weight:600; font-family:var(--theme-sub-heading-font)" data-max-width="45%">
 			<xsl:choose>
