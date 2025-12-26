@@ -431,7 +431,10 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🧞 TheGenie.ai Project Universe</h1>
+            <div style="margin-bottom: 15px;">
+                <img src="https://cloud.thegenie.ai/_assets/_img/genie-logo-1.png" alt="TheGenie.ai Logo" style="height: 60px; width: auto;">
+            </div>
+            <h1 style="margin-top: 0;">TheGenie.ai Project Universe</h1>
             <p class="subtitle">Master Dashboard for Title Genie, Paisley 2.0, Pre-Listing Command & Engagement Center</p>
             <p class="updated">Last Updated: December 25, 2025 | Version 1.0</p>
         </div>
@@ -1306,8 +1309,138 @@
             </table>
         </div>
         
+        <!-- PROMPT CATALOG -->
+        <div class="project-section" style="border-left: 4px solid #e67e22;">
+            <h2>
+                <span class="icon">💬</span>
+                <span class="title">Prompt Catalog - AI Session Starters</span>
+                <span class="badge" style="background: #e67e22;">QUICK START</span>
+            </h2>
+            
+            <div class="intro-text" style="background: #fef5e7; border: 1px solid #e67e22;">
+                <p>
+                    <strong>Copy & paste these prompts to start focused sessions.</strong> Bookmark this page for quick access. 
+                    Each prompt is designed to give the AI the right context for specific tasks.
+                </p>
+            </div>
+            
+            <h4 style="color: #e67e22; margin: 20px 0 15px 0;">🏠 10037 Rebecca Place - Quick Updates</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Task</th>
+                        <th>Prompt (Copy & Paste)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Update Price</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Open the 10037 Rebecca Place PLS-Hollywood page. I need to update the listing price from $750,000 to [NEW PRICE]. Update both the hero section and any other price references. Deploy to production."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Update Remarks/Description</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Open the 10037 Rebecca Place PLS-Hollywood page. I need to update the property description/remarks. Here's the new copy: [PASTE NEW DESCRIPTION]. Update and deploy to production."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Update Photos</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Open the 10037 Rebecca Place PLS-Hollywood page. I have new professional photos to add. The photos are in [FOLDER PATH]. Upload to S3, update the gallery section, and deploy."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Full Update (Price + Remarks + Photos)</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Open the 10037 Rebecca Place PLS-Hollywood page for a full update. New price: [PRICE]. New remarks: [DESCRIPTION]. New photos in: [FOLDER]. Update everything and deploy to production."
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="color: #e67e22; margin: 25px 0 15px 0;">🚀 Project Work - Starting New Sessions</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Project</th>
+                        <th>Prompt (Copy & Paste)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>PLS Phase 1: XML Interface</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Open the Project Universe Dashboard and let's work on Phase 1: XML Interface"
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>GenieCloud Development</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Open the Project Universe Dashboard. I want to work on GenieCloud - review the architecture and current XSL templates."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title Genie Discovery</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Open the Title Genie MVP Roadmap (TITLEGENIE_MVP_ROADMAP_GTM_PLAN_v2.md) and let's continue discovery for title rep features."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Create New Coming Soon Page</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "I need to create a new Coming Soon page for a property. Address: [ADDRESS]. Agent: [AGENT NAME]. Let's use the PLS-Hollywood template."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Paisley Prototype Review</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Open the Paisley HTML Inventory (HTML_FILES_INVENTORY_v1.html) and let's review the prototype files."
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="color: #e67e22; margin: 25px 0 15px 0;">🔧 Utility Prompts</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Task</th>
+                        <th>Prompt (Copy & Paste)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Database Query</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Connect to the MLS database (192.168.29.45, cursor user) and run this query: [YOUR QUERY]"
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Check Attom Data</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Look up Attom property data for: [ADDRESS]. Return all available fields from TitleData database."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>S3 Upload</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Upload this file to S3 genie-cloud bucket: [FILE PATH] to [S3 PATH]. Use genie-hub-active profile."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Git Backup Before Deploy</strong></td>
+                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
+                            "Before we deploy anything, commit all current changes to Git with message: [COMMIT MESSAGE]"
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
         <div class="footer">
-            <p>TheGenie.ai Project Universe Dashboard v1.2 (Light Theme - Easy to Read)</p>
+            <p>TheGenie.ai Project Universe Dashboard v1.3 (Light Theme + Prompt Catalog)</p>
             <p>Created: December 25, 2025 | Last Updated: December 26, 2025 | Location: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html</p>
             <p style="margin-top: 10px;">💡 <strong>Tip:</strong> Open this file in Chrome for best experience. Links open in new tabs.</p>
         </div>
