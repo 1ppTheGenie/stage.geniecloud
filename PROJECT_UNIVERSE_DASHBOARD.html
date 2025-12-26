@@ -1314,133 +1314,222 @@
             <h2>
                 <span class="icon">💬</span>
                 <span class="title">Prompt Catalog - AI Session Starters</span>
-                <span class="badge" style="background: #e67e22;">QUICK START</span>
+                <span class="badge" style="background: #e67e22;">CLICK TO COPY</span>
             </h2>
             
             <div class="intro-text" style="background: #fef5e7; border: 1px solid #e67e22;">
                 <p>
-                    <strong>Copy & paste these prompts to start focused sessions.</strong> Bookmark this page for quick access. 
-                    Each prompt is designed to give the AI the right context for specific tasks.
+                    <strong>Click any prompt to copy it to your clipboard.</strong> Each prompt includes a hidden preamble 
+                    that reminds the AI to check the Dashboard, Memory Logs, and Credentials first - so you always start 
+                    with full context, even in a fresh chat.
                 </p>
             </div>
             
-            <h4 style="color: #e67e22; margin: 20px 0 15px 0;">🏠 10037 Rebecca Place - Quick Updates</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 25%;">Task</th>
-                        <th>Prompt (Copy & Paste)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Update Price</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Open the 10037 Rebecca Place PLS-Hollywood page. I need to update the listing price from $750,000 to [NEW PRICE]. Update both the hero section and any other price references. Deploy to production."
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Update Remarks/Description</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Open the 10037 Rebecca Place PLS-Hollywood page. I need to update the property description/remarks. Here's the new copy: [PASTE NEW DESCRIPTION]. Update and deploy to production."
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Update Photos</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Open the 10037 Rebecca Place PLS-Hollywood page. I have new professional photos to add. The photos are in [FOLDER PATH]. Upload to S3, update the gallery section, and deploy."
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Full Update (Price + Remarks + Photos)</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Open the 10037 Rebecca Place PLS-Hollywood page for a full update. New price: [PRICE]. New remarks: [DESCRIPTION]. New photos in: [FOLDER]. Update everything and deploy to production."
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <style>
+                .prompt-row {
+                    display: flex;
+                    align-items: stretch;
+                    margin-bottom: 12px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    background: white;
+                }
+                .prompt-label {
+                    flex: 0 0 200px;
+                    padding: 15px;
+                    background: #f8f9fa;
+                    border-right: 1px solid #e0e0e0;
+                    display: flex;
+                    align-items: center;
+                    font-weight: 600;
+                    color: #2c3e50;
+                }
+                .prompt-text {
+                    flex: 1;
+                    padding: 15px;
+                    font-family: 'Consolas', 'Monaco', monospace;
+                    font-size: 13px;
+                    color: #333;
+                    line-height: 1.5;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                }
+                .prompt-text:hover {
+                    background: #e8f4f8;
+                }
+                .prompt-copy-btn {
+                    flex: 0 0 100px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #e67e22;
+                    color: white;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                    border: none;
+                    font-size: 13px;
+                }
+                .prompt-copy-btn:hover {
+                    background: #d35400;
+                }
+                .prompt-copy-btn.copied {
+                    background: #27ae60;
+                }
+                .prompt-section-header {
+                    color: #e67e22;
+                    margin: 25px 0 15px 0;
+                    padding-bottom: 10px;
+                    border-bottom: 2px solid #fef5e7;
+                    font-size: 16px;
+                }
+            </style>
             
-            <h4 style="color: #e67e22; margin: 25px 0 15px 0;">🚀 Project Work - Starting New Sessions</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 25%;">Project</th>
-                        <th>Prompt (Copy & Paste)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>PLS Phase 1: XML Interface</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Open the Project Universe Dashboard and let's work on Phase 1: XML Interface"
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>GenieCloud Development</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Open the Project Universe Dashboard. I want to work on GenieCloud - review the architecture and current XSL templates."
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Title Genie Discovery</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Open the Title Genie MVP Roadmap (TITLEGENIE_MVP_ROADMAP_GTM_PLAN_v2.md) and let's continue discovery for title rep features."
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Create New Coming Soon Page</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "I need to create a new Coming Soon page for a property. Address: [ADDRESS]. Agent: [AGENT NAME]. Let's use the PLS-Hollywood template."
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Paisley Prototype Review</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Open the Paisley HTML Inventory (HTML_FILES_INVENTORY_v1.html) and let's review the prototype files."
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <script>
+                // Hidden preamble that gets prepended to every prompt
+                const PROMPT_PREAMBLE = `BEFORE YOU BEGIN: Read these foundational documents first:
+1. Project Universe Dashboard: D:\\Cursor\\TheGenie.ai\\Development\\PROJECT_UNIVERSE_DASHBOARD_v1.html
+2. Master Credentials: G:\\My Drive\\Master_Credential_Tracker_v4.md  
+3. Memory Logs: D:\\Cursor\\TheGenie.ai\\MemoryLogs\\
+
+Database: 192.168.29.45 (user: cursor, pass: 1ppINSAyay$)
+S3 Bucket: genie-cloud (us-west-1), Profile: genie-hub-active
+GitHub: 1ppTheGenie/stage.geniecloud
+
+---
+
+NOW FOR MY REQUEST:
+
+`;
+
+                function copyPrompt(element) {
+                    const promptText = element.getAttribute('data-prompt');
+                    const fullPrompt = PROMPT_PREAMBLE + promptText;
+                    
+                    navigator.clipboard.writeText(fullPrompt).then(() => {
+                        const btn = element.querySelector('.prompt-copy-btn');
+                        const originalText = btn.textContent;
+                        btn.textContent = '✓ Copied!';
+                        btn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            btn.textContent = originalText;
+                            btn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            </script>
             
-            <h4 style="color: #e67e22; margin: 25px 0 15px 0;">🔧 Utility Prompts</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 25%;">Task</th>
-                        <th>Prompt (Copy & Paste)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Database Query</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Connect to the MLS database (192.168.29.45, cursor user) and run this query: [YOUR QUERY]"
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Check Attom Data</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Look up Attom property data for: [ADDRESS]. Return all available fields from TitleData database."
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>S3 Upload</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Upload this file to S3 genie-cloud bucket: [FILE PATH] to [S3 PATH]. Use genie-hub-active profile."
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Git Backup Before Deploy</strong></td>
-                        <td style="font-family: monospace; background: #f8f9fa; font-size: 13px;">
-                            "Before we deploy anything, commit all current changes to Git with message: [COMMIT MESSAGE]"
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <h4 class="prompt-section-header">🏠 10037 Rebecca Place - Quick Updates</h4>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Open the 10037 Rebecca Place PLS-Hollywood page. I need to update the listing price from $750,000 to [NEW PRICE]. Update both the hero section and any other price references. Create a backup first, then deploy to production.">
+                <div class="prompt-label">Update Price</div>
+                <div class="prompt-text">Update the listing price from $750,000 to [NEW PRICE]. Update hero + all references. Backup first, then deploy.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Open the 10037 Rebecca Place PLS-Hollywood page. I need to update the property description/remarks. Here's the new copy: [PASTE NEW DESCRIPTION]. Create a backup first, then update and deploy to production.">
+                <div class="prompt-label">Update Remarks</div>
+                <div class="prompt-text">Update property description/remarks with new copy. Backup first, then deploy.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Open the 10037 Rebecca Place PLS-Hollywood page. I have new professional photos to add. The photos are in [FOLDER PATH]. Upload to S3, update the gallery section, create a backup first, then deploy.">
+                <div class="prompt-label">Update Photos</div>
+                <div class="prompt-text">Add new photos from [FOLDER PATH]. Upload to S3, update gallery, backup, deploy.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Open the 10037 Rebecca Place PLS-Hollywood page for a full update. New price: [PRICE]. New remarks: [DESCRIPTION]. New photos in: [FOLDER]. Create a backup first, update everything, then deploy to production.">
+                <div class="prompt-label">Full Update</div>
+                <div class="prompt-text">Full update: Price + Remarks + Photos. Backup first, then deploy everything.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <h4 class="prompt-section-header">🚀 Project Work - Starting New Sessions</h4>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Open the Project Universe Dashboard (D:\\Cursor\\TheGenie.ai\\Development\\PROJECT_UNIVERSE_DASHBOARD_v1.html) and let's work on Phase 1: XML Interface. Review the PLS Feature Backlog first.">
+                <div class="prompt-label">PLS Phase 1: XML Interface</div>
+                <div class="prompt-text">Work on Phase 1: XML Interface - web form, agent selector, photo uploader, AI description.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Open the Project Universe Dashboard. I want to work on GenieCloud - review the architecture and current XSL templates in D:\\Cursor\\_SourceCode\\stage.geniecloud\\public\\_assets\\_xsl\\">
+                <div class="prompt-label">GenieCloud Development</div>
+                <div class="prompt-text">Work on GenieCloud architecture and XSL templates.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Open the Title Genie MVP Roadmap (D:\\Cursor\\TheGenie.ai\\Development\\TitleGenie\\TITLEGENIE_MVP_ROADMAP_GTM_PLAN_v2.md) and let's continue discovery for title rep features.">
+                <div class="prompt-label">Title Genie Discovery</div>
+                <div class="prompt-text">Continue Title Genie discovery - MVP roadmap and title rep features.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="I need to create a new Coming Soon page for a property. Address: [ADDRESS]. Agent: [AGENT NAME]. Use the PLS-Hollywood template. Reference the existing 10037 Rebecca Place page as the model.">
+                <div class="prompt-label">Create Coming Soon Page</div>
+                <div class="prompt-text">Create new Coming Soon page for [ADDRESS] using PLS-Hollywood template.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Open the Paisley HTML Inventory (D:\\Cursor\\TheGenie.ai\\Development\\Paisley\\Paisley2.0\\HTML_FILES_INVENTORY_v1.html) and let's review the prototype files to identify good spots for the final system.">
+                <div class="prompt-label">Paisley Prototype Review</div>
+                <div class="prompt-text">Review Paisley HTML prototypes and identify best features from each version.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <h4 class="prompt-section-header">🔧 Utility Prompts</h4>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Connect to the MLS database (192.168.29.45, user: cursor, password in credentials file) and run this query: [YOUR QUERY]">
+                <div class="prompt-label">Database Query</div>
+                <div class="prompt-text">Run SQL query on MLS database (192.168.29.45).</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Look up Attom property data for: [ADDRESS]. Query the TitleData database and return all available fields from AssessorData and related tables.">
+                <div class="prompt-label">Check Attom Data</div>
+                <div class="prompt-text">Look up Attom property data for [ADDRESS] from TitleData database.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Upload this file to S3 genie-cloud bucket (us-west-1): [FILE PATH] to [S3 PATH]. Use AWS profile genie-hub-active. Set appropriate ContentType.">
+                <div class="prompt-label">S3 Upload</div>
+                <div class="prompt-text">Upload file to S3 genie-cloud bucket using genie-hub-active profile.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-row" onclick="copyPrompt(this)" data-prompt="Before we deploy anything, commit all current changes to the stage.geniecloud Git repository (D:\\Cursor\\_SourceCode\\stage.geniecloud) with commit message: [COMMIT MESSAGE]. Push to origin main.">
+                <div class="prompt-label">Git Backup Before Deploy</div>
+                <div class="prompt-text">Commit all changes to Git before deploying. Push to origin main.</div>
+                <button class="prompt-copy-btn">📋 Copy</button>
+            </div>
+            
+            <!-- Preamble Preview -->
+            <div style="margin-top: 30px; background: #2c3e50; border-radius: 8px; padding: 20px;">
+                <h4 style="color: #f39c12; margin-bottom: 15px;">📝 What Gets Copied (Preamble Preview)</h4>
+                <p style="color: #bdc3c7; font-size: 13px; margin-bottom: 15px;">
+                    When you click "Copy", this preamble is automatically prepended to give the AI full context:
+                </p>
+                <pre style="background: #1a1a2e; color: #2ecc71; padding: 15px; border-radius: 6px; font-size: 12px; overflow-x: auto; white-space: pre-wrap;">BEFORE YOU BEGIN: Read these foundational documents first:
+1. Project Universe Dashboard: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html
+2. Master Credentials: G:\My Drive\Master_Credential_Tracker_v4.md  
+3. Memory Logs: D:\Cursor\TheGenie.ai\MemoryLogs\
+
+Database: 192.168.29.45 (user: cursor, pass: 1ppINSAyay$)
+S3 Bucket: genie-cloud (us-west-1), Profile: genie-hub-active
+GitHub: 1ppTheGenie/stage.geniecloud
+
+---
+
+NOW FOR MY REQUEST:
+
+[Your specific prompt goes here]</pre>
+            </div>
         </div>
         
         <div class="footer">
-            <p>TheGenie.ai Project Universe Dashboard v1.3 (Light Theme + Prompt Catalog)</p>
+            <p>TheGenie.ai Project Universe Dashboard v1.4 (Light Theme + Click-to-Copy Prompts)</p>
             <p>Created: December 25, 2025 | Last Updated: December 26, 2025 | Location: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html</p>
             <p style="margin-top: 10px;">💡 <strong>Tip:</strong> Open this file in Chrome for best experience. Links open in new tabs.</p>
         </div>
