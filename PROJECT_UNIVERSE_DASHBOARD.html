@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheGenie.ai - Project Universe Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #888;
+            font-size: 16px;
+        }
+        
+        .header .updated {
+            color: #666;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .ecosystem-map {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .ecosystem-map h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .ecosystem-box {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .ecosystem-box.title-genie {
+            border-color: #e74c3c;
+        }
+        
+        .ecosystem-box.paisley {
+            border-color: #9b59b6;
+        }
+        
+        .ecosystem-box.pls {
+            border-color: #3498db;
+        }
+        
+        .ecosystem-box.engagement {
+            border-color: #2ecc71;
+        }
+        
+        .ecosystem-box h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .ecosystem-box p {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .ecosystem-box .status {
+            margin-top: 10px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .status-active { background: #2ecc71; color: white; }
+        .status-mvp { background: #f39c12; color: white; }
+        .status-planning { background: #3498db; color: white; }
+        .status-discovery { background: #9b59b6; color: white; }
+        
+        .start-here {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(241, 196, 15, 0.1) 100%);
+            border: 2px solid #e74c3c;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .start-here h2 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .start-here-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .start-step {
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .start-step .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e74c3c;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .start-step h4 {
+            color: #f1c40f;
+            margin: 15px 0 10px 0;
+            font-size: 16px;
+        }
+        
+        .start-step p {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+        
+        .start-step a {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        .start-step a:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .intro-text {
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .intro-text p {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .intro-text strong {
+            color: #f1c40f;
+        }
+        
+        .project-section {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .project-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .project-section h2 .icon {
+            font-size: 28px;
+        }
+        
+        .project-section h2 .title {
+            font-size: 22px;
+        }
+        
+        .project-section h2 .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        thead {
+            background: rgba(102, 126, 234, 0.2);
+        }
+        
+        th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #667eea;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .file-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .file-link:hover {
+            text-decoration: underline;
+            color: #8fa4f3;
+        }
+        
+        .type-badge {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .type-sop { background: #27ae60; color: white; }
+        .type-spec { background: #3498db; color: white; }
+        .type-memory { background: #9b59b6; color: white; }
+        .type-discovery { background: #e67e22; color: white; }
+        .type-roadmap { background: #e74c3c; color: white; }
+        .type-data { background: #1abc9c; color: white; }
+        .type-prototype { background: #f39c12; color: white; }
+        .type-live { background: #2ecc71; color: white; }
+        
+        .notes {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .quick-links {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .quick-links h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .quick-link {
+            background: rgba(255,255,255,0.05);
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: #e0e0e0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+        
+        .quick-link:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .phase-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .phase-list li {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .phase-list li strong {
+            color: #667eea;
+        }
+        
+        @media (max-width: 1200px) {
+            .ecosystem-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .ecosystem-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧞 TheGenie.ai Project Universe</h1>
+            <p class="subtitle">Master Dashboard for Title Genie, Paisley 2.0, Pre-Listing Command & Engagement Center</p>
+            <p class="updated">Last Updated: December 25, 2025 | Version 1.0</p>
+        </div>
+        
+        <!-- START HERE - INTRODUCTION -->
+        <div class="start-here">
+            <h2>🚀 START HERE - New to the Project?</h2>
+            
+            <div class="intro-text">
+                <p>
+                    <strong>Welcome to TheGenie.ai Project Universe.</strong> This is the ecosystem we're building to revolutionize how real estate agents 
+                    generate leads, market properties, and manage pre-listing activities. The system connects property data (Title Genie), 
+                    content generation (Paisley), private listing pages (Pre-Listing Command), and lead tracking (Engagement Center).
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Before you do anything else</strong>, read the three documents below in order. They contain the rules, context, 
+                    and credentials you'll need to work effectively in this codebase.
+                </p>
+            </div>
+            
+            <div class="start-here-steps">
+                <div class="start-step">
+                    <span class="step-number">1</span>
+                    <h4>📜 Master Rules</h4>
+                    <p>The non-negotiable rules for working in this codebase. Versioning, date formats, file naming, and documentation standards.</p>
+                    <a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/MASTER_RULES_v1.md" target="_blank">Read Master Rules →</a>
+                </div>
+                
+                <div class="start-step">
+                    <span class="step-number">2</span>
+                    <h4>📚 Master Index</h4>
+                    <p>The complete index of all projects, their status, and how they connect. Your roadmap to understanding the ecosystem.</p>
+                    <a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/MASTER_INDEX_v1.md" target="_blank">Read Master Index →</a>
+                </div>
+                
+                <div class="start-step">
+                    <span class="step-number">3</span>
+                    <h4>🔑 Credentials</h4>
+                    <p>All API keys, database credentials, and system access. You'll need this for any development work.</p>
+                    <a href="file:///G:/My Drive/Master_Credential_Tracker_v4.md" target="_blank">Get Credentials →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- WHAT DO YOU WANT TO DO -->
+        <div class="quick-links" style="background: rgba(46, 204, 113, 0.1); border-color: rgba(46, 204, 113, 0.3);">
+            <h3 style="color: #2ecc71;">🎯 What Do You Want To Do?</h3>
+            <div class="quick-links-grid">
+                <a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/MASTER_FEATURE_BACKLOG_PLS_v1.md" target="_blank" class="quick-link" style="border-left: 3px solid #3498db;">
+                    🏠 Build a Private Listing Page → PLS Feature Backlog
+                </a>
+                <a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Paisley2.0/HTML_FILES_INVENTORY_v1.html" target="_blank" class="quick-link" style="border-left: 3px solid #9b59b6;">
+                    🎨 Work on Paisley Prototypes → HTML Inventory
+                </a>
+                <a href="file:///D:/Cursor/TheGenie.ai/Development/TitleGenie/TITLEGENIE_MVP_ROADMAP_GTM_PLAN_v2.md" target="_blank" class="quick-link" style="border-left: 3px solid #e74c3c;">
+                    📋 Work on Title Genie → MVP Roadmap
+                </a>
+                <a href="file:///D:/Cursor/TheGenie.ai/Development/CompetitionCommand/ROADMAP_CompetitionCommand_Features_v1.md" target="_blank" class="quick-link" style="border-left: 3px solid #f39c12;">
+                    🎯 Work on Competition Command → Feature Roadmap
+                </a>
+                <a href="file:///G:/My Drive/Master_Credential_Tracker_v4.md" target="_blank" class="quick-link" style="border-left: 3px solid #1abc9c;">
+                    🔑 Need Database/API Access → Credentials
+                </a>
+                <a href="#geniecloud-section" class="quick-link" style="border-left: 3px solid #f39c12;">
+                    ☁️ Learn GenieCloud (Content Engine) → Scroll Down
+                </a>
+                <a href="https://cloud.thegenie.ai/genie-pages/pls-10037-rebecca-place/pls-hollywood/index.html" target="_blank" class="quick-link" style="border-left: 3px solid #2ecc71;">
+                    👀 See a Live Example → 10037 Rebecca Place
+                </a>
+                <a href="file:///D:/Cursor/_SourceCode/stage.geniecloud/" target="_blank" class="quick-link" style="border-left: 3px solid #e67e22;">
+                    💻 Browse GenieCloud Source Code → Local Repo
+                </a>
+            </div>
+        </div>
+        
+        <!-- ECOSYSTEM MAP -->
+        <div class="ecosystem-map">
+            <h2>🗺️ Ecosystem Architecture</h2>
+            <div class="ecosystem-grid">
+                <div class="ecosystem-box title-genie">
+                    <h3 style="color: #e74c3c;">📋 Title Genie</h3>
+                    <p>Property research, Attom/MLS data integration, title rep tools</p>
+                    <span class="status status-discovery">DISCOVERY</span>
+                </div>
+                <div class="ecosystem-box paisley">
+                    <h3 style="color: #9b59b6;">🎨 Paisley 2.0</h3>
+                    <p>Content generation, marketing assets, collections, reports</p>
+                    <span class="status status-active">ACTIVE</span>
+                </div>
+                <div class="ecosystem-box pls">
+                    <h3 style="color: #3498db;">🏠 Pre-Listing Command</h3>
+                    <p>Coming Soon & Private Listing pages, PLS-Hollywood template</p>
+                    <span class="status status-mvp">MVP LIVE</span>
+                </div>
+                <div class="ecosystem-box engagement">
+                    <h3 style="color: #2ecc71;">📊 Engagement Center</h3>
+                    <p>Lead capture, UTM tracking, data append, workflows</p>
+                    <span class="status status-planning">INTEGRATION</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- GENIE CLOUD - THE CONTENT ENGINE -->
+        <div id="geniecloud-section" class="project-section" style="border: 2px solid #f39c12; background: rgba(243, 156, 18, 0.05);">
+            <h2>
+                <span class="icon">☁️</span>
+                <span class="title">GenieCloud - The Content Engine</span>
+                <span class="badge" style="background: #f39c12;">CRITICAL INFRASTRUCTURE</span>
+            </h2>
+            
+            <div class="intro-text" style="background: rgba(243, 156, 18, 0.1); border: 1px solid rgba(243, 156, 18, 0.3);">
+                <p>
+                    <strong>GenieCloud is the heart of content rendering.</strong> It takes XML data + XSL templates and transforms them into 
+                    HTML pages, PDF brochures, and marketing assets. All content flows through GenieCloud. Understanding this system 
+                    is essential for building new features.
+                </p>
+            </div>
+            
+            <h4 style="color: #f39c12; margin: 20px 0 15px 0;">🏗️ Architecture Overview</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Location</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>XSL Templates</strong></td>
+                        <td><code>public/_assets/_xsl/</code></td>
+                        <td>XSLT stylesheets that transform XML into HTML/SVG. Templates for landing pages, flyers, brochures, etc.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CSS Themes</strong></td>
+                        <td><code>public/_assets/themes/</code></td>
+                        <td>Theme files like <code>compass.css</code>. Use <code>theme="compass"</code> + <code>themeHue="dark"</code> (not compass-dark.css)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Genie API</strong></td>
+                        <td><code>genie-api/src/</code></td>
+                        <td>Node.js Lambda functions that handle rendering, PDF generation, and S3 uploads</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Genie Processor</strong></td>
+                        <td><code>genie-processor/</code></td>
+                        <td>XSLT transformation engine (has module issues locally - use post-processing approach)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S3 Bucket</strong></td>
+                        <td><code>genie-cloud</code> (us-west-1)</td>
+                        <td>Production hosting for all rendered content. AWS Profile: <code>genie-hub-active</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="color: #f39c12; margin: 25px 0 15px 0;">🔗 Critical URLs & Endpoints</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>What</th>
+                        <th>URL</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Production Site</strong></td>
+                        <td><code>https://cloud.thegenie.ai/</code></td>
+                        <td>✅ CORRECT - All pages, assets, CSS served from here</td>
+                    </tr>
+                    <tr>
+                        <td><strong>API Endpoint</strong></td>
+                        <td><code>https://cloud-api.thegenie.ai/</code></td>
+                        <td>✅ CORRECT - Use this for all API calls</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #e74c3c;">DEPRECATED API</strong></td>
+                        <td><code style="color: #e74c3c;">genie-api.dynamicarray.co.uk</code></td>
+                        <td>❌ BROKEN - Never use this. Found in old code, causes failures.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #e74c3c;">DEPRECATED Bucket</strong></td>
+                        <td><code style="color: #e74c3c;">genie-hub-2 (eu-west-2)</code></td>
+                        <td>❌ NO ACCESS - Old EU bucket. Use <code>genie-cloud</code> (us-west-1) instead.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="color: #f39c12; margin: 25px 0 15px 0;">📁 S3 Folder Structure We Created</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S3 Path</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>genie-pages/pls-10037-rebecca-place/pls-hollywood/</code></td>
+                        <td>10037 Rebecca Place landing page (index.html)</td>
+                    </tr>
+                    <tr>
+                        <td><code>genie-pages/pls-10037-rebecca-place/lc-hollywood/</code></td>
+                        <td>Legacy path (also works - both point to same content)</td>
+                    </tr>
+                    <tr>
+                        <td><code>genie-cloud-stage/genie-pages/10037-rebecca-coming-soon/photos/</code></td>
+                        <td>Property photos (staging bucket)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="color: #f39c12; margin: 25px 0 15px 0;">🧪 Key Learnings from 12/25/2025 Session</h4>
+            <ul class="phase-list">
+                <li><strong>XML → XSL → HTML:</strong> The rendering pipeline takes XML data, applies XSL templates, outputs HTML/PDF. All content uses this flow.</li>
+                <li><strong>Spoofing for Widgets:</strong> To get live widget data, set <code>userId</code> in XML to an agent with active MLS data. Display info comes from agent block, API calls use userId.</li>
+                <li><strong>Theme Configuration:</strong> Use <code>theme="compass"</code> with <code>themeHue="dark"</code>. There's no separate <code>compass-dark.css</code> file.</li>
+                <li><strong>Brochure Generation:</strong> PDF brochures are auto-generated when pages render through genie-api. Manual deploys bypass this - need to trigger separately.</li>
+                <li><strong>Post-Processing Approach:</strong> For manual deploys, download rendered HTML, fix URLs/encoding with Python, upload to S3. Works around local XSLT issues.</li>
+                <li><strong>Encoding Issues:</strong> UTF-8 characters (smart quotes, Â) need post-processing. Use Python to replace before deploying.</li>
+            </ul>
+            
+            <h4 style="color: #f39c12; margin: 25px 0 15px 0;">📂 Source Code Location</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Repository</th>
+                        <th>Local Path</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/stage.geniecloud" class="file-link" target="_blank">stage.geniecloud</a></td>
+                        <td><code>D:\Cursor\_SourceCode\stage.geniecloud\</code></td>
+                        <td>Development repo - XSL templates, genie-api, all cloud infrastructure</td>
+                    </tr>
+                    <tr>
+                        <td>1parkplace/genie-cloud</td>
+                        <td>READ ONLY</td>
+                        <td>Production repo - different owner, we don't have write access</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- QUICK LINKS -->
+        <div class="quick-links">
+            <h3>⚡ Quick Links - Live Assets</h3>
+            <div class="quick-links-grid">
+                <a href="https://cloud.thegenie.ai/genie-pages/pls-10037-rebecca-place/pls-hollywood/index.html" target="_blank" class="quick-link">
+                    🏠 10037 Rebecca Place (LIVE)
+                </a>
+                <a href="https://cloud.thegenie.ai/genie-collection/15a521b8-3fbf-4042-bce3-58e378cd9a52" target="_blank" class="quick-link">
+                    📦 Dainelle Scott Collection
+                </a>
+                <a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Paisley2.0/HTML_FILES_INVENTORY_v1.html" target="_blank" class="quick-link">
+                    📋 Paisley HTML Inventory
+                </a>
+                <a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/MASTER_FEATURE_BACKLOG_PLS_v1.md" target="_blank" class="quick-link">
+                    📝 PLS Feature Backlog
+                </a>
+            </div>
+        </div>
+        
+        <!-- PRE-LISTING COMMAND -->
+        <div class="project-section">
+            <h2>
+                <span class="icon">🏠</span>
+                <span class="title">Pre-Listing Command (PLS)</span>
+                <span class="badge status-mvp">MVP COMPLETE 12/25/2025</span>
+            </h2>
+            
+            <h4 style="color: #667eea; margin-bottom: 15px;">Feature Phases</h4>
+            <ul class="phase-list">
+                <li><strong>Phase 1:</strong> XML Interface - Web form to generate XML, agent selector, photo uploader, AI description writer</li>
+                <li><strong>Phase 2:</strong> Brochure Auto-Generation - Trigger genie-api render for PDF</li>
+                <li><strong>Phase 3:</strong> Engagement Center Integration - UTM, source labeling, CTA tagging, Versium append</li>
+                <li><strong>Phase 4:</strong> Genie Navigation Integration - Add to agent dashboard, list/edit/delete pages</li>
+                <li><strong>Phase 5:</strong> Advanced Features - Multiple templates, custom themes, open house, virtual tours</li>
+            </ul>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/MASTER_FEATURE_BACKLOG_PLS_v1.md" class="file-link" target="_blank">MASTER_FEATURE_BACKLOG_PLS_v1.md</a></td>
+                        <td><span class="type-badge type-roadmap">ROADMAP</span></td>
+                        <td>Complete feature backlog with phases, priorities, and ecosystem context</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_Hollywood_Workspace_Memory_Log_v1.md" class="file-link" target="_blank">PLS_Hollywood_Workspace_Memory_Log_v1.md</a></td>
+                        <td><span class="type-badge type-memory">MEMORY</span></td>
+                        <td>Complete technical documentation - IDs, spoofing, themes, API endpoints</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/SOP_PLS_Hollywood_MVP_Creation_v1.md" class="file-link" target="_blank">SOP_PLS_Hollywood_MVP_Creation_v1.md</a></td>
+                        <td><span class="type-badge type-sop">SOP</span></td>
+                        <td>Step-by-step guide to create a new PLS page manually</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/XML/pls-10037-rebecca.xml" class="file-link" target="_blank">pls-10037-rebecca.xml</a></td>
+                        <td><span class="type-badge type-data">DATA</span></td>
+                        <td>Sample XML file with all required fields for PLS page</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://cloud.thegenie.ai/genie-pages/pls-10037-rebecca-place/pls-hollywood/index.html" class="file-link" target="_blank">10037 Rebecca Place (LIVE)</a></td>
+                        <td><span class="type-badge type-live">LIVE</span></td>
+                        <td>Production page - Boerne, TX 78006 - Private Listing MVP</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- PAISLEY 2.0 -->
+        <div class="project-section">
+            <h2>
+                <span class="icon">🎨</span>
+                <span class="title">Paisley 2.0</span>
+                <span class="badge status-active">ACTIVE DEVELOPMENT</span>
+            </h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Paisley2.0/HTML_FILES_INVENTORY_v1.html" class="file-link" target="_blank">HTML_FILES_INVENTORY_v1.html</a></td>
+                        <td><span class="type-badge type-prototype">INVENTORY</span></td>
+                        <td>Complete catalog of all HTML prototype files with status notes</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/PAISLEY_WORKSPACE_MEMORY_LOG_v1.md" class="file-link" target="_blank">PAISLEY_WORKSPACE_MEMORY_LOG_v1.md</a></td>
+                        <td><span class="type-badge type-memory">MEMORY</span></td>
+                        <td>Workspace memory log for Paisley development</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/PAISLEY_PROJECT_SCOPE_BLUEPRINT_v1.md" class="file-link" target="_blank">PAISLEY_PROJECT_SCOPE_BLUEPRINT_v1.md</a></td>
+                        <td><span class="type-badge type-spec">SPEC</span></td>
+                        <td>Project scope and blueprint document</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/PAISLEY_COMPLETE_REVERSE_ENGINEERING_v1.md" class="file-link" target="_blank">PAISLEY_COMPLETE_REVERSE_ENGINEERING_v1.md</a></td>
+                        <td><span class="type-badge type-discovery">DISCOVERY</span></td>
+                        <td>Complete reverse engineering of Paisley system</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/PAISLEY_PRELISTING_DATA_CATALOG_v2.md" class="file-link" target="_blank">PAISLEY_PRELISTING_DATA_CATALOG_v2.md</a></td>
+                        <td><span class="type-badge type-data">DATA</span></td>
+                        <td>Pre-listing data field catalog</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/VERSIUM_API_DOCUMENTATION_v1.md" class="file-link" target="_blank">VERSIUM_API_DOCUMENTATION_v1.md</a></td>
+                        <td><span class="type-badge type-spec">SPEC</span></td>
+                        <td>Versium API integration documentation</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/SOP_PRELISTING_COMMAND_MASTER_v2.md" class="file-link" target="_blank">SOP_PRELISTING_COMMAND_MASTER_v2.md</a></td>
+                        <td><span class="type-badge type-sop">SOP</span></td>
+                        <td>Master SOP for pre-listing command execution</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- TITLE GENIE -->
+        <div class="project-section">
+            <h2>
+                <span class="icon">📋</span>
+                <span class="title">Title Genie</span>
+                <span class="badge status-discovery">DISCOVERY PHASE</span>
+            </h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/TitleGenie/TITLEGENIE_COMPLETE_STRATEGY_COMPILATION_v1.md" class="file-link" target="_blank">TITLEGENIE_COMPLETE_STRATEGY_COMPILATION_v1.md</a></td>
+                        <td><span class="type-badge type-spec">SPEC</span></td>
+                        <td>Complete strategy compilation for Title Genie</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/TitleGenie/TITLEGENIE_MVP_ROADMAP_GTM_PLAN_v2.md" class="file-link" target="_blank">TITLEGENIE_MVP_ROADMAP_GTM_PLAN_v2.md</a></td>
+                        <td><span class="type-badge type-roadmap">ROADMAP</span></td>
+                        <td>MVP roadmap and go-to-market plan</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/TitleGenie/TITLEGENIE_PAISLEY_DASHBOARD_DESIGN_v1.md" class="file-link" target="_blank">TITLEGENIE_PAISLEY_DASHBOARD_DESIGN_v1.md</a></td>
+                        <td><span class="type-badge type-spec">SPEC</span></td>
+                        <td>Dashboard design spec connecting Title Genie to Paisley</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/TitleGenie/MemoryLogs/WORKSPACE_MEMORY_LOG_TitleGenie_Session_2025-12-22_v1.md" class="file-link" target="_blank">WORKSPACE_MEMORY_LOG_TitleGenie_Session_2025-12-22_v1.md</a></td>
+                        <td><span class="type-badge type-memory">MEMORY</span></td>
+                        <td>Latest workspace memory log for Title Genie</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/TitleGenie/SOPs/TITLEGENIE_ONBOARDING_SOP_v1.md" class="file-link" target="_blank">TITLEGENIE_ONBOARDING_SOP_v1.md</a></td>
+                        <td><span class="type-badge type-sop">SOP</span></td>
+                        <td>Title rep onboarding process</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/TitleGenie/GTM/TITLEGENIE_OUTREACH_EMAIL_SEQUENCE_v1.md" class="file-link" target="_blank">TITLEGENIE_OUTREACH_EMAIL_SEQUENCE_v1.md</a></td>
+                        <td><span class="type-badge type-spec">SPEC</span></td>
+                        <td>Email outreach sequence for title reps</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- COMPETITION COMMAND -->
+        <div class="project-section">
+            <h2>
+                <span class="icon">🎯</span>
+                <span class="title">Competition Command</span>
+                <span class="badge status-active">ACTIVE</span>
+            </h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/CompetitionCommand/ROADMAP_CompetitionCommand_Features_v1.md" class="file-link" target="_blank">ROADMAP_CompetitionCommand_Features_v1.md</a></td>
+                        <td><span class="type-badge type-roadmap">ROADMAP</span></td>
+                        <td>Feature roadmap for Competition Command</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- DATA & INTEGRATIONS -->
+        <div class="project-section">
+            <h2>
+                <span class="icon">🔌</span>
+                <span class="title">Data Sources & Integrations</span>
+                <span class="badge status-active">ACTIVE</span>
+            </h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Integrations/README_v1.md" class="file-link" target="_blank">Integrations/README_v1.md</a></td>
+                        <td><span class="type-badge type-spec">SPEC</span></td>
+                        <td>Integration overview - Asana, AWS, Dropbox, Google Drive, Intercom, WHMCS</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/DataMigrations/Versium_Cache_Fix_For_Ankit_v1.md" class="file-link" target="_blank">Versium_Cache_Fix_For_Ankit_v1.md</a></td>
+                        <td><span class="type-badge type-spec">SPEC</span></td>
+                        <td>Versium cache migration documentation</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///G:/My Drive/Master_Credential_Tracker_v4.md" class="file-link" target="_blank">Master_Credential_Tracker_v4.md</a></td>
+                        <td><span class="type-badge type-data">CREDENTIALS</span></td>
+                        <td>Master credential tracker - all API keys, database access</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- CROSS-PROJECT MEMORY LOGS -->
+        <div class="project-section">
+            <h2>
+                <span class="icon">🧠</span>
+                <span class="title">Cross-Project Workspace Memory Logs</span>
+            </h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/WORKSPACE_MEMORY_LOG_TitleGenie_Paisley_Discovery_2025-12-18_v1.md" class="file-link" target="_blank">TitleGenie_Paisley_Discovery_2025-12-18_v1.md</a></td>
+                        <td>12/18/2025</td>
+                        <td>Title Genie + Paisley discovery session</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/WORKSPACE_MEMORY_LOG_TitleGenie_Paisley_Discovery_Session_2025-12-19_v2.md" class="file-link" target="_blank">TitleGenie_Paisley_Discovery_Session_2025-12-19_v2.md</a></td>
+                        <td>12/19/2025</td>
+                        <td>Title Genie + Paisley discovery session v2</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/WORKSPACE_MEMORY_LOG_PreListing_Command_Handoff_v1.md" class="file-link" target="_blank">PreListing_Command_Handoff_v1.md</a></td>
+                        <td>12/25/2025</td>
+                        <td>Pre-Listing Command project handoff</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/WORKSPACE_MEMORY_LOG_PreListing_Command_v3_2025-12-25.md" class="file-link" target="_blank">PreListing_Command_v3_2025-12-25.md</a></td>
+                        <td>12/25/2025</td>
+                        <td>Pre-Listing Command session notes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- COMING SOON KIT / GENIECLOUD COLLECTION -->
+        <div class="project-section" style="border-left: 4px solid #9b59b6;">
+            <h2>
+                <span class="icon">📦</span>
+                <span class="title">Coming Soon Kit - GenieCloud Collection Development</span>
+                <span class="badge status-mvp">IN PROGRESS</span>
+            </h2>
+            
+            <div class="intro-text" style="background: rgba(155, 89, 182, 0.1); border: 1px solid rgba(155, 89, 182, 0.3);">
+                <p>
+                    <strong>Coming Soon Kit = Just Listed Kit structure, but with manual data entry replacing MLS feed.</strong>
+                    This project creates the marketing asset collection for pre-MLS properties. Distribution: Title Reps → TitleGenie → Pre-Listing Command → Agents → Coming Soon Kit.
+                </p>
+            </div>
+            
+            <!-- FEATURES - What's Being Built -->
+            <h4 style="color: #9b59b6; margin: 20px 0 15px 0;">✨ FEATURES - Kit Components</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asset Type</th>
+                        <th>Count</th>
+                        <th>Format</th>
+                        <th>Data Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>EMAIL GRAPHICS (Social Stories)</td>
+                        <td>13</td>
+                        <td>PNG</td>
+                        <td>GenieCloud generator</td>
+                    </tr>
+                    <tr>
+                        <td>PROPERTY FLYERS</td>
+                        <td>7</td>
+                        <td>PDF (2-page)</td>
+                        <td>GenieCloud generator</td>
+                    </tr>
+                    <tr>
+                        <td>MARKET INSIDER</td>
+                        <td>1</td>
+                        <td>PDF</td>
+                        <td>GenieCloud generator</td>
+                    </tr>
+                    <tr>
+                        <td>PROPERTY WEBSITE (Hollywood Template)</td>
+                        <td>1</td>
+                        <td>HTML</td>
+                        <td>GenieCloud + APIs</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- HOLLYWOOD TEMPLATE SECTIONS -->
+            <h4 style="color: #9b59b6; margin: 25px 0 15px 0;">🎬 Hollywood Template Sections (20+ sections)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Section</th>
+                        <th>Just Listed Source</th>
+                        <th>Coming Soon Modification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Header/Nav</td><td>Agent Genie Profile</td><td>Same</td></tr>
+                    <tr><td>Hero</td><td>MLS Feed</td><td><strong>Manual Entry + Attom</strong></td></tr>
+                    <tr><td>Overview</td><td>MLS Remarks</td><td><strong>Manual Entry</strong></td></tr>
+                    <tr><td>Property Details</td><td>MLS Feed</td><td><strong>Attom + Manual</strong></td></tr>
+                    <tr><td>Gallery</td><td>MLS Photos</td><td><strong>Manual Upload</strong></td></tr>
+                    <tr><td>Lead Capture Form</td><td>Built-in</td><td>Same</td></tr>
+                    <tr><td>Map</td><td>MLS Coordinates</td><td><strong>Attom Coordinates</strong></td></tr>
+                    <tr><td>Market Snapshot / Fast Facts / Trending</td><td>TheGenie APIs</td><td>Same (area-based)</td></tr>
+                    <tr><td>Agent Contact</td><td>Agent Genie Profile</td><td>Same</td></tr>
+                </tbody>
+            </table>
+            
+            <!-- WISHLIST / STRETCH GOALS -->
+            <h4 style="color: #e74c3c; margin: 25px 0 15px 0;">🎯 WISHLIST - Stretch Goals</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🔥 Popup Lead Capture</strong></td>
+                        <td>Modal popup on page load: "Get the brochure texted to you" with phone number field. Replace clunky contact form with clean SMS opt-in. Mobile-first design.</td>
+                        <td><span class="type-badge" style="background: #e74c3c;">HIGH PRIORITY</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>SMS/Text Brochure Delivery</strong></td>
+                        <td>Twilio integration to auto-text PDF brochure when lead submits phone number</td>
+                        <td><span class="type-badge type-spec">PLANNED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>MLS Coming Soon Status</strong></td>
+                        <td>Check if RTK parses "Coming Soon" status → Auto-populate kit from MLS Coming Soon listings</td>
+                        <td><span class="type-badge type-discovery">INVESTIGATE</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>List Miner Integration</strong></td>
+                        <td>Generate kit → Select audience via List Miner → Push to GeoSocial → Track engagements</td>
+                        <td><span class="type-badge type-spec">PLANNED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Foreclosure Data</strong></td>
+                        <td>Add AttomDataForeclosure table (103 fields) for distressed property opportunities</td>
+                        <td><span class="type-badge type-roadmap">DBA NEEDED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>AVM Data</strong></td>
+                        <td>Add AttomDataAVM table (10 fields: EstimatedValue, ConfidenceScore) for valuation display</td>
+                        <td><span class="type-badge type-roadmap">DBA NEEDED</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- SOPs / RULES -->
+            <h4 style="color: #27ae60; margin: 25px 0 15px 0;">📋 SOPs - Data Normalization Rules</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rule</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Text Casing</strong></td>
+                        <td>Attom data often ALL CAPS → Convert to Title Case before display (e.g., "STEPHEN HUNDLEY" → "Stephen Hundley")</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lot Size Display</strong></td>
+                        <td>LotSizeAcres = acres × 1000 (e.g., 209 = 0.209 acres). Use LotSizeSqFt as accurate value. Display: "9,100 sq ft (0.21 acres)"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Theme System</strong></td>
+                        <td>Themes are <strong>customer-specific</strong> not template-specific. If theme is wrong, fix in system NOT template.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Collection ID</strong></td>
+                        <td>GUID auto-generated by GenieCloud API. We don't create manually - API handles it.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- BLOCKERS -->
+            <h4 style="color: #e74c3c; margin: 25px 0 15px 0;">🚧 BLOCKERS - Open Items</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Status</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>New Kit Type registration in database</td>
+                        <td>⏳ Pending</td>
+                        <td>DBA approval needed - "Coming Soon Kit" type</td>
+                    </tr>
+                    <tr>
+                        <td>New LeadTagTypeIds for Coming Soon</td>
+                        <td>⏳ Pending</td>
+                        <td>For engagement tracking</td>
+                    </tr>
+                    <tr>
+                        <td>API endpoint for Coming Soon collections</td>
+                        <td>⏳ Pending</td>
+                        <td>Spec needed</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- TEST PROPERTY -->
+            <h4 style="color: #3498db; margin: 25px 0 15px 0;">🏠 Test Property: 10037 Rebecca Place</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Value</th>
+                        <th>Field</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Address</strong></td><td>10037 Rebecca Place, Boerne, TX 78006</td>
+                        <td><strong>PropertyID</strong></td><td>174267273</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Beds/Baths</strong></td><td>4 bed, 3 bath</td>
+                        <td><strong>Living SqFt</strong></td><td>3,018</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Year Built</strong></td><td>2022</td>
+                        <td><strong>AVM</strong></td><td>$766,123</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Subdivision</strong></td><td>Balcones Creek Ranch</td>
+                        <td><strong>Texas Genie ASP ID</strong></td><td><code>a8436051-333d-4725-b8ce-88bf5262d26a</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- PROTOTYPES -->
+            <h4 style="color: #f39c12; margin: 25px 0 15px 0;">🔨 PROTOTYPES - Files Created</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/iCloudDrive/Desktop/2Desktop Folder/House/Texas Home/Rebecca Place/10037 Rebecca Pl/lc-hollywood_10037_rebecca_v9.html" class="file-link" target="_blank">lc-hollywood_10037_rebecca_v9.html</a></td>
+                        <td><span class="type-badge type-prototype">PROTOTYPE</span></td>
+                        <td>Latest local prototype (v9) - Inspired RE branding</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/prototype/coming_soon_admin_v1.html" class="file-link" target="_blank">coming_soon_admin_v1.html</a></td>
+                        <td><span class="type-badge type-prototype">PROTOTYPE</span></td>
+                        <td>Admin interface for Coming Soon input</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/iCloudDrive/Desktop/2Desktop Folder/House/Texas Home/Rebecca Place/10037 Rebecca Pl/10037_Rebecca_All_Fields_v1.csv" class="file-link" target="_blank">10037_Rebecca_All_Fields_v1.csv</a></td>
+                        <td><span class="type-badge type-data">DATA</span></td>
+                        <td>370 fields from MLS + Attom</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- MEMORY LOGS -->
+            <h4 style="color: #9b59b6; margin: 25px 0 15px 0;">🧠 MEMORY LOGS - Related Sessions</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Date</th>
+                        <th>Focus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_ComingSoon_Kit_GenieCloud_2025-12-25_v1.md" class="file-link" target="_blank">ComingSoon_Kit_GenieCloud_2025-12-25_v1.md</a></td>
+                        <td>12/25/2025</td>
+                        <td><strong>PRIMARY</strong> - This project, Hollywood template, data flow</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/WORKSPACE_MEMORY_LOG_PreListing_Command_v3_2025-12-25.md" class="file-link" target="_blank">PreListing_Command_v3_2025-12-25.md</a></td>
+                        <td>12/25/2025</td>
+                        <td>Parallel session - APIs, 855 Attom fields, SFTP gap analysis</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/WORKSPACE_MEMORY_LOG_Paisley_PreListing_Kit_2025-12-23_v1.md" class="file-link" target="_blank">PreListing_Kit_2025-12-23_v1.md</a></td>
+                        <td>12/23/2025</td>
+                        <td>Hundley portfolio, data quality SOP</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- LIVE REFERENCES -->
+            <h4 style="color: #2ecc71; margin: 25px 0 15px 0;">🔗 LIVE REFERENCES</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Type</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://cloud.thegenie.ai/genie-pages/pls-10037-rebecca-place/pls-hollywood/index.html" class="file-link" target="_blank">10037 Rebecca Place (LIVE)</a></td>
+                        <td><span class="type-badge type-live">LIVE</span></td>
+                        <td>Production PLS-Hollywood page</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://cloud.thegenie.ai/genie-collection/6ec4a5be-a7ce-4e3d-a0ac-bfb30e6b8f66" class="file-link" target="_blank">Just Listed Kit Example</a></td>
+                        <td><span class="type-badge type-live">LIVE</span></td>
+                        <td>Reference - Kit structure to mirror for Coming Soon</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- NEW SESSION PROMPT -->
+        <div class="project-section" style="border: 2px dashed #2ecc71; background: rgba(46, 204, 113, 0.05);">
+            <h2>
+                <span class="icon">🚀</span>
+                <span class="title">Starting a New Session?</span>
+            </h2>
+            
+            <div class="intro-text" style="background: rgba(46, 204, 113, 0.15); border: 1px solid rgba(46, 204, 113, 0.4); font-size: 16px;">
+                <p><strong>Copy and paste this into a new Cursor chat to continue development:</strong></p>
+                <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; margin-top: 15px; font-family: monospace; color: #2ecc71; font-size: 14px;">
+                    "Open the Project Universe Dashboard and let's work on Phase 1: XML Interface"
+                </div>
+                <p style="margin-top: 15px; color: #888; font-size: 13px;">
+                    <strong>Dashboard Location:</strong> D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html
+                </p>
+            </div>
+            
+            <h4 style="color: #2ecc71; margin: 20px 0 15px 0;">📌 PLS Phase 1: XML Interface - What We're Building</h4>
+            <ul class="phase-list">
+                <li><strong>Web Form:</strong> Agent selects property, enters details (price, description, photos)</li>
+                <li><strong>Agent Selector:</strong> Dropdown to choose which agent's branding to use</li>
+                <li><strong>Photo Uploader:</strong> Upload property photos to S3, generate gallery</li>
+                <li><strong>AI Description Writer:</strong> Generate property description from Attom data</li>
+                <li><strong>XML Generator:</strong> Output valid XML for GenieCloud transformation</li>
+            </ul>
+            
+            <h4 style="color: #2ecc71; margin: 20px 0 15px 0;">📚 Key References for Phase 1</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/MASTER_FEATURE_BACKLOG_PLS_v1.md" class="file-link" target="_blank">MASTER_FEATURE_BACKLOG_PLS_v1.md</a></td>
+                        <td>Full Phase 1 requirements</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/XML/pls-10037-rebecca.xml" class="file-link" target="_blank">pls-10037-rebecca.xml</a></td>
+                        <td>Sample XML structure to generate</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_ComingSoon_Kit_GenieCloud_2025-12-25_v1.md" class="file-link" target="_blank">Coming Soon Kit Memory Log</a></td>
+                        <td>Technical context, Hollywood template sections</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="footer">
+            <p>TheGenie.ai Project Universe Dashboard v1.1</p>
+            <p>Created: December 25, 2025 | Last Updated: December 26, 2025 | Location: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html</p>
+            <p style="margin-top: 10px;">💡 <strong>Tip:</strong> Open this file in Chrome for best experience. Links open in new tabs.</p>
+        </div>
+    </div>
+</body>
+</html>
+
