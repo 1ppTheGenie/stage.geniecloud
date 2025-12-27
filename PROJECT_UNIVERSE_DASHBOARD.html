@@ -1178,8 +1178,13 @@
                     </tr>
                     <tr>
                         <td>Theme → Organization Mapping</td>
-                        <td>⏳ Investigate</td>
-                        <td>Themes appear tied to Organizations. Need to understand how to create new org-specific themes.</td>
+                        <td>✅ DOCUMENTED</td>
+                        <td>Reverse engineered! See <code>THEME_SYSTEM_REVERSE_ENGINEERING_v1.md</code>. Themes stored in <code>dbo.HubTheme</code>, availability in <code>dbo.HubThemeAvailability</code> (RoleId, AspNetUserId, OrganizationId).</td>
+                    </tr>
+                    <tr>
+                        <td>Apple Black Theme SQL Ready</td>
+                        <td>✅ READY</td>
+                        <td>SQL script created: <code>INSERT_AppleBlack_Theme_v1.sql</code>. CSS already on S3. Just needs database INSERT and Hub Sync.</td>
                     </tr>
                 </tbody>
             </table>
