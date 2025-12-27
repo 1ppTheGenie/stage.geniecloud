@@ -1,0 +1,133 @@
+/*
+	Theme Name:	Apple Black v2
+	Description: Apple-inspired theme - NO gradients, pure Apple aesthetic
+	Author: TheGenie.ai
+	Created: 2025-12-26
+	Version: 2.0
+	
+	CHANGE LOG:
+	v1.0 - Initial Apple Black theme
+	v2.0 - Removed gold/gradient colors, added gradient override rules
+*/
+
+/* ============================================
+   APPLE BLACK LIGHT MODE
+   ============================================ */
+.apple-black-v2, .apple-black-v2.light, .apple-black-v2 .light {
+	/* Background */
+	--theme-body-background: #ffffff;
+	
+	/* Text Colors - Apple's signature near-black */
+	--theme-heading-color: #1d1d1f;
+	--theme-sub-heading-color: #86868b;
+	--theme-body-color: #1d1d1f;
+	
+	/* Accent - Apple Blue */
+	--theme-emphasis-color: #0071e3;
+	
+	/* Fonts - San Francisco system stack */
+	--theme-body-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--theme-heading-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--theme-sub-heading-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* ============================================
+   APPLE BLACK DARK MODE
+   ============================================ */
+.apple-black-v2.dark, .apple-black-v2 .dark {
+	/* Background - Pure black like Apple */
+	--theme-body-background: #000000;
+	
+	/* Text Colors */
+	--theme-heading-color: #f5f5f7;
+	--theme-sub-heading-color: #86868b;
+	--theme-body-color: #f5f5f7;
+	
+	/* Accent - Apple Blue (dark mode variant) */
+	--theme-emphasis-color: #2997ff;
+}
+
+/* ============================================
+   GRADIENT OVERRIDES - Remove all gold/gradient
+   These rules ensure template gradients don't 
+   override our clean Apple colors
+   ============================================ */
+
+/* Override gradient-color class used in templates */
+.apple-black-v2 .gradient-color,
+.apple-black-v2.dark .gradient-color,
+.apple-black-v2.light .gradient-color {
+	background: none !important;
+	-webkit-background-clip: unset !important;
+	background-clip: unset !important;
+	-webkit-text-fill-color: inherit !important;
+}
+
+/* Dark mode - white text, no gradient */
+.apple-black-v2.dark .gradient-color {
+	color: #f5f5f7 !important;
+	-webkit-text-fill-color: #f5f5f7 !important;
+}
+
+/* Light mode - dark text, no gradient */
+.apple-black-v2.light .gradient-color,
+.apple-black-v2 .light .gradient-color {
+	color: #1d1d1f !important;
+	-webkit-text-fill-color: #1d1d1f !important;
+}
+
+/* Price specifically - make it prominent */
+.apple-black-v2 .hero-price,
+.apple-black-v2 .hero-price span {
+	font-weight: 600 !important;
+}
+
+.apple-black-v2.dark .hero-price,
+.apple-black-v2.dark .hero-price span,
+.apple-black-v2.dark .hero-price .gradient-color {
+	color: #f5f5f7 !important;
+	-webkit-text-fill-color: #f5f5f7 !important;
+}
+
+/* Headings - clean, no gradient */
+.apple-black-v2 .heading-title .gradient-color {
+	background: none !important;
+	-webkit-background-clip: unset !important;
+	background-clip: unset !important;
+}
+
+.apple-black-v2.dark .heading-title .gradient-color {
+	color: #f5f5f7 !important;
+	-webkit-text-fill-color: #f5f5f7 !important;
+}
+
+.apple-black-v2.light .heading-title .gradient-color {
+	color: #1d1d1f !important;
+	-webkit-text-fill-color: #1d1d1f !important;
+}
+
+/* Links and CTAs - Apple Blue */
+.apple-black-v2.dark a:not(.btn),
+.apple-black-v2.dark .cta-link {
+	color: #2997ff !important;
+}
+
+.apple-black-v2.light a:not(.btn),
+.apple-black-v2.light .cta-link {
+	color: #0071e3 !important;
+}
+
+/* Buttons - Apple style */
+.apple-black-v2 .btn-primary,
+.apple-black-v2 .btn-success {
+	background: #0071e3 !important;
+	border-color: #0071e3 !important;
+	color: #ffffff !important;
+}
+
+.apple-black-v2 .btn-primary:hover,
+.apple-black-v2 .btn-success:hover {
+	background: #0077ed !important;
+	border-color: #0077ed !important;
+}
+

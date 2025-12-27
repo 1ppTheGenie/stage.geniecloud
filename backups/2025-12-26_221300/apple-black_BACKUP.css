@@ -1,0 +1,27 @@
+/*
+	Theme Name:	Apple Black
+	Description: Apple-inspired dark theme with San Francisco font
+	Author: TheGenie.ai
+	Created: 2025-12-26
+*/
+
+/* Apple San Francisco font - uses system font stack */
+.apple-black, .apple-black.light, .apple-black .light {
+	--theme-body-background: #ffffff;
+	--theme-heading-color: #1d1d1f; /* Apple's near-black */
+	--theme-sub-heading-color: #86868b; /* Apple gray */
+	--theme-body-color: #1d1d1f;
+	--theme-emphasis-color: #0071e3; /* Apple blue */
+	--theme-body-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--theme-heading-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--theme-sub-heading-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.apple-black.dark, .apple-black .dark {
+	--theme-body-background: #000000; /* Pure black like Apple */
+	--theme-heading-color: #f5f5f7; /* Apple's off-white */
+	--theme-sub-heading-color: #86868b; /* Apple gray */
+	--theme-body-color: #f5f5f7;
+	--theme-emphasis-color: #2997ff; /* Apple blue (dark mode) */
+}
+
