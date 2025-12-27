@@ -1,0 +1,984 @@
+<?xml version="1.0"?>
+<!--
+	Asset Name:			PLS-Hollywood (Pre-Listing Command - Hollywood Template)
+	Version:			1.0
+	Tags:				Landing Page, Coming Soon, Pre-Listing
+	Sizes:				Landing Page
+	Supports:			Listing, Area
+	Permission: 		Funnels
+	Default Download:	flyers/lc-brochure-01
+	Render Key:			landing-page/TheGenie-PLS-Hollywood-PLSNUMBER
+	
+	CHANGE LOG:
+	v1.0 - 12/25/2025 - Initial PLS-Hollywood template
+	     - Cloned from lc-hollywood.xsl v1.2
+	     - Changed MLS# to PLS# (Paisley Listing Service)
+	     - Added "Coming Soon" status support
+	     - Hard-coded 10037 Rebecca Place data for prototype
+-->
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:genie="https://theGenie.ai/hub" version="3.0" expand-text="yes">
+	<xsl:import href="landing-pages.xsl" />
+	<xsl:import href="landing-pages-market-insider.xsl" />
+
+	<xsl:template name="landing-page">
+		<xsl:variable name="description">
+			<xsl:value-of select="concat( 'The ', //area/name, ' market is shifting! View the latest market trends and grab your customized report now.' )" />
+		</xsl:variable>
+
+		<xsl:variable name="primaryImage">
+			<xsl:call-template name="listing-image">
+				<xsl:with-param name="index" select="number(1)" />
+				<xsl:with-param name="preferPrimary" select="'true'" />
+			</xsl:call-template>
+		</xsl:variable>
+    
+    <xsl:variable name="defaultUtmSource">
+      <xsl:value-of select="'Pre-Listing Page Hollywood'" />
+    </xsl:variable>
+    <xsl:variable name="defaultUtmCampaign">
+      <xsl:value-of select="$listingAddressLine1" />
+    </xsl:variable>    
+
+		<xsl:call-template name="standard-header">
+			<xsl:with-param name="seoImage" select="$primaryImage" />
+			<xsl:with-param name="secondaryCSS" select="'lc-hollywood'" />
+
+			<xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+			<xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+			<xsl:with-param name="leadNotePrompt" select="concat( 'New Lead from ', $listingAddressLine1, ' Coming Soon Site!')" />
+		</xsl:call-template>
+
+    <xsl:variable name="fileDownloadTags">
+      <xsl:choose>
+        <xsl:when test="contains(lower-case(//output/@downloadUrl), 'market-insider')">
+          <xsl:text>DownloadMarketReport,ClickCta</xsl:text>          
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>DownloadPropertyBrochure,ClickCta</xsl:text>          
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="fileDownloadText">
+      <xsl:choose>
+        <xsl:when test="contains(lower-case(//output/@downloadUrl), 'market-insider')">
+          <xsl:text>Download Market Report</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>Download Property Brochure</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>  
+
+		<body>
+			<xsl:attribute name="class">
+				<xsl:value-of select="concat( 'lc-hollywood pls-hollywood ', $cssThemeClass)" />
+			</xsl:attribute>
+
+			<xsl:call-template name="process-snippet">
+				<xsl:with-param name="snippet" select="//agent[1]/snippetOpenBodyTag" />
+			</xsl:call-template>
+
+			<xsl:variable name="logoUrl">
+				<xsl:choose>
+					<xsl:when test="$personalLogo != ''">
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue='dark'">
+								<xsl:value-of select="$personalLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$personalLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:choose>
+							<xsl:when test="//output/@themeHue='dark'">
+								<xsl:value-of select="$companyLogo" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$companyLogoInverse" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+
+			<div id="step1" class="steps banner-top-section-info section background">
+				<div class="mobile-header-sec">
+					<div class="tab-sec">
+						<div class="tab-left-sec">
+							<xsl:if test="$logoUrl != ''">
+								<a href="#">
+									<div class="agent-company-logo test" style="background-image: url({$logoUrl});"></div>
+								</a>
+							</xsl:if>
+						</div>
+						<div class="tab-right-sec">
+							<div class="right-content">
+								<p class="connect heading-font">let's connect</p>
+								<div class="call-text">
+									<div class="left-text">
+										<div class="phone-btn mobile-icon">
+											<a>
+												<xsl:attribute name="href">
+													<xsl:value-of select="concat('tel:' , translate(//agent[1]/mobile , '.', '') )" />
+
+												</xsl:attribute>
+
+												<svg viewBox="0 0 53.942 53.942" style="enable-background:new 0 0 53.942 53.942;" fill="var(--theme-body-background)">
+													<path d="M53.364,40.908c-2.008-3.796-8.981-7.912-9.288-8.092c-0.896-0.51-1.831-0.78-2.706-0.78c-1.301,0-2.366,0.596-3.011,1.68
+                                                    c-1.02,1.22-2.285,2.646-2.592,2.867c-2.376,1.612-4.236,1.429-6.294-0.629L17.987,24.467c-2.045-2.045-2.233-3.928-0.632-6.291
+                                                    c0.224-0.309,1.65-1.575,2.87-2.596c0.778-0.463,1.312-1.151,1.546-1.995c0.311-1.123,0.082-2.444-0.652-3.731
+                                                    c-0.173-0.296-4.291-7.27-8.085-9.277c-0.708-0.375-1.506-0.573-2.306-0.573c-1.318,0-2.558,0.514-3.49,1.445L4.7,3.986
+                                                    c-4.014,4.013-5.467,8.562-4.321,13.52c0.956,4.132,3.742,8.529,8.282,13.068l14.705,14.705c5.746,5.746,11.224,8.66,16.282,8.66
+													c0,0,0,0,0.001,0c3.72,0,7.188-1.581,10.305-4.698l2.537-2.537C54.033,45.163,54.383,42.833,53.364,40.908z" />
+												</svg>
+												<span class="heading-font">Call</span>
+											</a>
+										</div>
+									</div>
+
+									<div class="left-text">
+										<div class="phone-btn mail-icon">
+											<a>
+												<xsl:attribute name="href">
+													<xsl:value-of select="concat( 'mailto:', //agent[1]/marketingEmail )" />
+												</xsl:attribute>
+
+												<svg xmlns="http://www.w3.org/2000/svg" width="469.2px" height="469.2px" viewBox="0 0 469.2 469.2" style="enable-background:new 0 0 469.2 469.2;" fill="var(--theme-body-background)">
+													<path d="M22.202,77.023C25.888,75.657,29.832,74.8,34,74.8h401.2c4.168,0,8.112,0.857,11.798,2.224L267.24,246.364
+													c-18.299,17.251-46.975,17.251-65.28,0L22.202,77.023z M464.188,377.944c3.114-5.135,5.012-11.098,5.012-17.544V108.8
+													c0-4.569-0.932-8.915-2.57-12.899L298.411,254.367L464.188,377.944z M283.2,268.464c-13.961,11.961-31.253,18.027-48.6,18.027
+													c-17.347,0-34.64-6.06-48.6-18.027L20.692,391.687c4.094,1.741,8.582,2.714,13.308,2.714h401.2c4.726,0,9.214-0.973,13.308-2.714
+													L283.2,268.464z M2.571,95.9C0.932,99.885,0,104.23,0,108.8V360.4c0,6.446,1.897,12.409,5.012,17.544l165.777-123.577L2.571,95.9z" />
+												</svg>
+
+												<span class="heading-font">Text</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<header class="header">
+					<div class="container custom-container">
+						<div class="mob-user-deta">
+							<div class="mob-user-deta-img">
+								<svg width="100%" height="100%">
+									<image x="1.6%" y="8%" width="100%" height="80px" preserveAspectRatio="xMidYMid slice">
+										<xsl:attribute name="href">
+											<xsl:value-of select="//agent[1]/photo" />
+										</xsl:attribute>
+									</image>
+								</svg>
+							</div>
+							<div class="mob-user-deta-content">
+								<h3>Presented By</h3>
+								<h4>
+									<xsl:value-of select="concat( //agent[1]/firstName, '&#160;', //agent[1]/lastName )" />
+								</h4>
+							</div>
+						</div>
+
+						<div class="nav-hamburger">
+							<div class="svg_icon">
+								<svg width="33" height="26" viewBox="0 0 33 26" fill="#fff"
+									xmlns="http://www.w3.org/2000/svg">
+									<path d="M0.895577 2.28888C0.400964 2.28888 0 1.7765 0 1.14444C0 0.512384 0.400964 0 0.895577 0H31.3452C31.8398 0 32.2408 0.512384 32.2408 1.14444C32.2408 1.7765 31.8398 2.28888 31.3452 2.28888H0.895577ZM0.895577 13.7333C0.400964 13.7333 0 13.2209 0 12.5889C0 11.9568 0.400964 11.4444 0.895577 11.4444H31.3452C31.8398 11.4444 32.2408 11.9568 32.2408 12.5889C32.2408 13.2209 31.8398 13.7333 31.3452 13.7333H0.895577ZM0.895577 25.1777C0.400964 25.1777 0 24.6653 0 24.0333C0 23.4012 0.400964 22.8888 0.895577 22.8888H31.3452C31.8398 22.8888 32.2408 23.4012 32.2408 24.0333C32.2408 24.6653 31.8398 25.1777 31.3452 25.1777H0.895577Z" class="
+									background-svg"></path>
+								</svg>
+							</div>
+						</div>
+
+						<xsl:if test="$logoUrl != ''">
+							<div class="header-logo">
+								<a href="#">
+									<div class="agent-company-logo test" style="background-image: url({$logoUrl});"></div>
+								</a>
+							</div>
+						</xsl:if>
+
+
+						<div class="navigation-links">
+							<nav class="navbar header-navigation">
+								<div class="menu-list" id="navbarNav">
+									<div class="funnel-menu main-navbar">
+										<div class="navbar-header">
+											<button type="button" class="navbar-toggle collapsed toggler-btn" data-toggle="collapse" data-target="#sidebarMain">
+												<span class="icon-bar">
+													<xsl:comment/>
+												</span>
+												<span class="icon-bar">
+													<xsl:comment/>
+												</span>
+												<span class="icon-bar">
+													<xsl:comment/>
+												</span>
+											</button>
+										</div>
+										<div class="navbar-collapse" id="#sidebarMain">
+											<div class="">
+												<ul class="nav">
+													<a href="javascript:void(0)" class="closebtn">×</a>
+
+													<li class="nav-item">
+														<a class="nav-link heading-color" href="#home-slider">Home</a>
+													</li>
+
+													<li class="nav-item open_about_modal">
+														<a class="nav-link heading-color" href="#about-section2">Description</a>
+													</li>
+
+													<xsl:if test="//single/virtualTourUrl !=''">
+														<li class="nav-item">
+															<a class="nav-link open_lead_form" href="#virtualTour">Virtual Tour</a>
+														</li>
+													</xsl:if>
+
+													<li class="nav-item">
+														<a class="nav-link open_lead_form" href="#galary-sec">Gallery</a>
+													</li>
+
+													<li class="nav-item">
+														<a class="nav-link open_lead_form" href="#real_time_market_trends">Market Trends</a>
+													</li>
+
+													<li class="nav-item">
+														<a class="nav-link open_lead_form" href="#about-section">Contact</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</nav>
+						</div>
+
+						<div class="navigation-content-right">
+							<div class="user-details">
+								<span class=" f-name ">
+									<xsl:value-of select="//agent[1]/marketingName" />
+								</span>
+
+								<h3 class="agent-phone">
+									<a>
+										<xsl:attribute name="href">
+											<xsl:value-of select="concat('tel:' , translate(//agent[1]/mobile , '.', '') )" />
+										</xsl:attribute>
+										<xsl:value-of select="//agent[1]/mobile" />
+									</a>
+								</h3>
+							</div>
+							<div class="agent-photo">
+								<img style="max-height: 100px;" title="Agent Photo" alt="Agent Photo">
+									<xsl:attribute name="src">
+										<xsl:value-of select="//agent[1]/photo" />
+									</xsl:attribute>
+								</img>
+							</div>
+						</div>
+					</div>
+				</header>
+
+				<section class="home-slider" id="home-slider">
+					<div class="first-section">
+						<img width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+							<xsl:attribute name="src">
+								<xsl:value-of select="$primaryImage" />
+							</xsl:attribute>
+						</img>
+						<div class="address-1 container">
+							<xsl:call-template name="listing-address-line-one" />
+
+							<span>
+								<xsl:call-template name="listing-address-line-two" />
+
+							</span>
+							<!-- PLS Status Badge - Coming Soon by default -->
+							<span>
+								<xsl:choose>
+									<xsl:when test="number(//single/statusTypeID) = 2">
+										<xsl:attribute name="class">
+											<xsl:value-of select="'label label-success listing-status listing-status-sold'" />
+										</xsl:attribute>
+										<xsl:text>Sold</xsl:text>
+									</xsl:when>
+									<xsl:when test="number(//single/statusTypeID) = 1">
+										<xsl:attribute name="class">
+											<xsl:value-of select="'label label-success listing-status listing-status-listed'" />
+										</xsl:attribute>
+										<xsl:text>Active</xsl:text>
+									</xsl:when>
+								<xsl:when test="number(//single/statusTypeID) = 5">
+									<!-- PLS Coming Soon Status -->
+									<xsl:attribute name="class">
+										<xsl:value-of select="'label label-success listing-status listing-status-coming-soon'" />
+									</xsl:attribute>
+									<xsl:text>Coming Soon</xsl:text>
+								</xsl:when>
+								<xsl:when test="number(//single/statusTypeID) = 6">
+									<!-- PLS Private Listing Status -->
+									<xsl:attribute name="class">
+										<xsl:value-of select="'label label-success listing-status listing-status-private'" />
+									</xsl:attribute>
+									<xsl:text>Private Listing</xsl:text>
+								</xsl:when>
+								<xsl:otherwise>
+										<xsl:attribute name="class">
+											<xsl:value-of select="'label label-success listing-status listing-status-pending'" />
+										</xsl:attribute>
+										<xsl:text>Pending</xsl:text>
+									</xsl:otherwise>
+								</xsl:choose>
+							</span>
+						</div>
+						<!-- heading -->
+					</div>
+
+					<div class="address-1 container">
+						<xsl:comment/>
+					</div>
+
+					<div class="hero-details custom-container container">
+						<div class="hero-details-inner">
+							<div class="hero-price">
+								<span class="gradient-color">									
+									<xsl:choose>
+										<xsl:when test="//single/soldDate!=''">
+											<xsl:value-of select="format-number( //single/salePrice, '$###,###')" />
+										</xsl:when>
+										<xsl:when test="//single/price!='' and //single/price &gt; 0">
+											<xsl:value-of select="format-number( //single/price, '$###,###')" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:text>Contact for Price</xsl:text>
+										</xsl:otherwise>
+									</xsl:choose>
+								</span>
+							</div>
+							<div class="hero-amenities">
+								<span>
+									<xsl:value-of select="//single/bedrooms/@count" />
+
+									<xsl:text> Beds</xsl:text>
+								</span>
+								<span>
+									<xsl:value-of select="$listingTotalBathrooms" />
+
+									<xsl:text> Baths</xsl:text>
+								</span>
+								<span>
+									<xsl:value-of select="//single/squareFeet" />
+
+									<xsl:text> sq. ft</xsl:text>
+								</span>
+							</div>
+
+							<!-- Open House - Not typically shown for Coming Soon -->
+							<xsl:if test="count(//openHouse/session) &gt; 0">
+								<div class="open-house">									
+										<h3>Private Showing</h3>
+
+										<div class="open-house-times">
+											<xsl:for-each select="//openHouse/session">
+												<xsl:sort select="@ms" data-type="number" order="ascending"/>
+												<p>
+													<xsl:value-of select="concat( @dow, ', ', @month, ' ', @date, ' - ' )" />
+													<span><xsl:value-of select="concat(@starts, ' to ', @ends )" /></span>
+												</p>
+											</xsl:for-each>
+										</div>	
+								</div>
+							</xsl:if>
+						</div>
+					</div>
+				</section>
+
+				<section class="about-section" id="about-section2">
+					<div class="container">
+						<div class="overview-text">
+							<h2 class="heading-title">
+								<span class="gradient-color">
+									<xsl:text>Overview</xsl:text>
+								</span>
+							</h2>
+							<div class="body-color">
+								<xsl:for-each select="tokenize(//single/description, '\.\s*')">
+									<p class="description">
+										<xsl:value-of select="normalize-space(.)" />
+										<xsl:text>.</xsl:text>
+									</p>
+								</xsl:for-each>
+
+							</div>
+						</div>
+						<div class="overview-details">
+							<h2 class="heading-title">
+								<span class="gradient-color">
+									<xsl:text>Property Details</xsl:text>
+								</span>
+							</h2>
+							<div class="overview-details-list">
+								<ul>
+									<li class="body-color">
+										<strong>
+											<xsl:text>YEAR BUILT</xsl:text>
+										</strong>
+										<span>
+											<xsl:value-of select="//single/built" />
+
+										</span>
+									</li>
+									<li class="body-color">
+										<strong>
+											<xsl:text>sq. ft</xsl:text>
+										</strong>
+										<span>
+											<xsl:value-of select="format-number(//single/squareFeet, '###,###')" />
+
+										</span>
+									</li>
+									<li class="body-color">
+
+										<strong>
+											<xsl:text>Beds</xsl:text>
+										</strong>
+										<span>
+											<xsl:value-of select="//single/bedrooms/@count" />
+
+										</span>
+									</li>
+									<li class="body-color">
+										<strong>
+											<xsl:text>BATHROOM FULL</xsl:text>
+										</strong>
+										<span>
+											<xsl:value-of select="//single/bathrooms/@full" />
+
+										</span>
+									</li>
+									<xsl:if test="//single/lotSize!=''">
+										<li class="body-color">
+											<strong>
+												<xsl:text>LOT SQ. FT.</xsl:text>
+											</strong>
+											<span>
+												<xsl:call-template name="lot-size" />
+											</span>
+										</li>
+									</xsl:if>
+									<li class="body-color">
+										<strong>
+											<xsl:text>Garage Spaces</xsl:text>
+										</strong>
+										<span>
+											<xsl:value-of select="(//single/parking/@garage)" />
+
+										</span>
+									</li>
+									<li class="body-color">
+										<strong>
+											<xsl:text>PARKING SPACES</xsl:text>
+										</strong>
+										<span>
+											<xsl:value-of select="//single/parking/@spaces" />
+
+										</span>
+									</li>
+									<xsl:if test="//single/price &gt; 0 and //single/squareFeet &gt; 0">
+										<li class="body-color">
+											<strong>
+												<xsl:text>PRICE PER SQ. FT.</xsl:text>
+											</strong>
+											<span>
+												<xsl:value-of select="format-number( //single/price div //single/squareFeet, '$###,###')" />
+											</span>
+										</li>
+									</xsl:if>
+								<li class="body-color">
+									<strong>
+										<xsl:text>Type</xsl:text>
+									</strong>
+									<span>
+										<xsl:choose>
+											<xsl:when test="//single/homeCondition != ''">
+												<xsl:value-of select="//single/homeCondition" />
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="$singularPropertyType" />
+											</xsl:otherwise>
+										</xsl:choose>
+									</span>
+								</li>
+									<li class="body-color">
+										<strong>
+											<xsl:text>Status</xsl:text>
+										</strong>
+										<span>
+											<xsl:choose>
+												<xsl:when test="number(//single/statusTypeID) = 5">
+													<xsl:text>Coming Soon</xsl:text>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:value-of select="//single/listingStatus" />
+												</xsl:otherwise>
+											</xsl:choose>
+										</span>
+									</li>																										
+									
+								<!-- School District (PLS enhancement) -->
+								<xsl:if test="//single/schoolDistrict != ''">
+									<li class="body-color">
+										<strong>
+											<xsl:text>School District</xsl:text>
+										</strong>
+										<span>
+											<xsl:value-of select="//single/schoolDistrict" />
+										</span>
+									</li>
+								</xsl:if>
+								
+								<!-- Private Listing Number instead of MLS Number -->
+								<li class="body-color">
+									<strong>
+										<xsl:text>PRIVATE LISTING #</xsl:text>
+									</strong>
+									<span>
+										<xsl:value-of select="//single/mlsNumber" />
+									</span>
+								</li>
+								
+								<!-- Neighborhood (PLS enhancement) -->
+								<xsl:if test="//single/neighborhood != ''">
+									<li class="body-color">
+										<strong>
+											<xsl:text>Neighborhood</xsl:text>
+										</strong>
+										<span>
+											<xsl:value-of select="//single/neighborhood" />
+										</span>
+									</li>
+								</xsl:if>
+							</ul>
+							</div>
+						</div>
+						<div class="row overview-cta-list">
+							<div class="col-md-4">
+								<a class="cta subtitle-font" id="request-modal-btn" href="#request-modal" data-toggle="modal">
+									<xsl:text>Request Details</xsl:text>
+								</a>
+							</div>
+							<xsl:if test="//single/statusTypeID != 2">
+								<div class="col-md-4">
+									<a class="cta subtitle-font" id="schedule-modal-btn" href="#schedule-modal" data-toggle="modal">
+										<xsl:text>Schedule A Showing</xsl:text>
+									</a>
+								</div>
+							</xsl:if>
+							<div class="col-md-4">
+								<a class="cta subtitle-font heading-color-as-bg" href="javascript:void(0);" onclick="scrollToEmbed()">Real-Time Market Stats
+								</a>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<xsl:if test="//single/virtualTourUrl !=''">
+					<section class="video-section" id="virtualTour">
+						<div class="container">
+							<div class="row">
+								<div class="col-12">
+									<h2 class="heading-title px-10">
+										<span class="gradient-color">
+											<xsl:text>Virtual Tour</xsl:text>
+										</span>
+									</h2>
+									<div class="virtual-tour-embed">
+										<xsl:call-template name="virtual-tour-embed" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</xsl:if>
+
+				<section id="listing-agents">
+					<div class="container">
+						<xsl:call-template name="listing-agent-bullets" />
+					</div>
+				</section>
+
+				<section class="gallery" id="galary-sec">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<h2 class="heading-title px-10">
+									<span class="gradient-color">
+										<xsl:text>Gallery</xsl:text>
+									</span>
+								</h2>
+							</div>
+							<div class="col-md-12 masonary">
+								<xsl:call-template name="gallery" />
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="download-pdf">
+					<div class="download-img">
+						<xsl:attribute name="style">
+							<xsl:text>background-image: url('</xsl:text>
+								<xsl:value-of select="concat(//output/@siteUrl, '_assets/_img/cush-pdf-bg.jpg')" />
+							<xsl:text>')</xsl:text>
+						</xsl:attribute>
+					</div>
+         
+					<a class="pdf-btn" target="_blank" >
+						<xsl:attribute name="href">
+							<xsl:value-of select="//output/@downloadUrl" />
+						</xsl:attribute>
+
+            <xsl:attribute name="data-genie-tags">
+							<xsl:value-of select="$fileDownloadTags" />
+						</xsl:attribute>
+
+						<div class="overlay-bg">
+							<xsl:comment/>
+						</div>
+						<span class="gradient-color">
+							<xsl:value-of select="$fileDownloadText" />
+						</span>
+					</a>
+				</section>
+				<section class="map container">
+					<div class="map-form">
+						<div class="map-form-inner">
+							<h2 class="cld-title heading-title">
+								<em>
+									<xsl:text>I'm interested in</xsl:text>
+								</em>
+								<span class="gradient-color">
+									<xsl:call-template name="listing-address-line-one" />
+
+								</span>
+							</h2>
+							<div role="form" class="wpcf7" lang="en-US" dir="ltr">
+								<form method="post" class="wpcf7-form funnel-create-lead" id="form_step1">
+									<div class="form-field">
+										<span class="wpcf7-form-control-wrap your-name">
+											<input type="text" name="fullName" class="form-control" placeholder="Name" />
+										</span>
+									</div>
+									<div class="form-field">
+										<span class="wpcf7-form-control-wrap your-email">
+											<input type="email" name="emailAddress" class="form-control" placeholder="Email" />
+										</span>
+									</div>
+									<div class="form-field numberform">
+										<span class="wpcf7-form-control-wrap your-message">
+											<input type="text" name="phoneNumber" class="form-control" placeholder="Phone" />
+										</span>
+									</div>            
+									<div class="f_check preferred_contact body-font desk">
+										<!-- <div class="che_box body-font"></div> -->
+										<!--left to preserve the spacing-->
+										<div class="spn">
+											<span>Preferred contact*:</span>
+										</div>
+										<div class="che_box">
+											<label> <input type="checkbox" name="lead_meta_contact_via_text" value="yes" />Text</label>
+											<label> <input type="checkbox" name="lead_meta_contact_via_email" value="yes" checked="" />Email</label>
+										</div>
+										<div class="che_box submit-btn">
+											<input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact, ComingSoon" />
+											<input type="hidden" name="note" value="I am interested in { $listingAddressLine1 } (Coming Soon)" /> 
+											<input type="submit" value="Send" class="wpcf7-submit" />
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<script>
+						<xsl:value-of select="concat( &quot;const listings = [{caption: 'H', state:'&quot;, //single/listingStatus, &quot;',lat:&quot;, //single/latitude, &quot;,lng:&quot;, //single/longitude, &quot;}]; &quot; )" />
+						<xsl:value-of select="concat( &quot;const options = { dragPan: false, mapStyle: `&quot;, 'streets-v11', &quot;`, zoom: 21, center: { lat:&quot;, //single/latitude, &quot;,lng:&quot;, //single/longitude, &quot;}}; &quot; )" />
+						<xsl:value-of select="concat( &quot;document.addEventListener( `genie-landing-loaded`, function() { window.gHub.makeMap( `genie-map`, options,&quot;, &quot; { listings } ); })&quot; )" />
+					</script>
+
+					<div class="map-embed">
+						<div class="map-embed-inner mapboxgl-map" id="map">
+							<div id="genie-map" />
+						</div>
+					</div>
+				</section>
+
+				<section class="genie-alternate dark real-time-market" id="real_time_market_trends">
+					<div class="container">
+						<div class="col-md-12 real-time text-center">
+							<h2 class="subtitle-font subtitle-color">
+								<span>
+									<xsl:value-of select="concat('REAL-TIME ' , //area/name )" />
+								</span>
+								<br/>
+								<span>
+									<xsl:value-of select="' Neighborhood Snapshot'" />
+								</span>
+							</h2>
+							<p class="subtitle-font subtitle-color">
+								<xsl:value-of select="concat(
+									'- as of ',
+									upper-case(genie:format-date(//output/@reportDate, '[MNn] ')),
+									substring(genie:format-date(//output/@reportDate, ' [D], [Y0001] @ [h]:[m01][PN,*-2]'), 2)
+									)" />
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section class="genie-alternate market-update">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'MarketUpdate'" />
+						</xsl:call-template>
+					</div>
+				</section>
+
+				<section class="genie-alternate">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'FastFacts'" />
+						</xsl:call-template>
+					</div>
+				</section>
+
+				<section class="genie-alternate">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'MarketTrending'" />
+						</xsl:call-template>
+					</div>
+				</section>
+
+				<section class="genie-alternate">
+					<div class="container ">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'MarketHistory'" />
+						</xsl:call-template>
+					</div>
+				</section>
+
+				<section class="genie-alternate">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'PeopleBuying'" />
+						</xsl:call-template>
+					</div>
+				</section>
+
+				<section class="genie-alternate">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'MarketActivity'" />
+						</xsl:call-template>
+					</div>
+				</section>
+
+				<section class="genie-alternate">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'ListToSold'" />
+						</xsl:call-template>
+					</div>
+				</section>
+
+				<section class="genie-alternate">
+					<div class="container">
+						<xsl:call-template name="add-genie-embed">
+							<xsl:with-param name="embed" select="'ListingMapStyleOne'" />
+						</xsl:call-template>
+					</div>
+				</section>
+				
+				<section class="text-center inverse home-valuation">
+					<xsl:attribute name="style">
+						background-image: url('<xsl:value-of select="$primaryImage" />');
+					</xsl:attribute>
+
+					<div class="overlay">
+						<xsl:comment/>
+					</div>
+					
+					<div class="home-valuation-content">
+						<h2>
+							<xsl:value-of select="concat( 'What&#8217;s My ', //areas/area[1]/name, ' ', $singularPropertyType, ' Value?')" />
+						</h2>
+						<p>
+							<xsl:value-of select="concat( 'See how your home compares to other homes in ', //areas/area[1]/name, ', and find out what you can do to increase its worth. Get your personalized home report, and learn what people are looking for in a home.')" />
+						</p>
+
+						<button type="button" class="request-home-value">
+							Find what my property is worth!
+						</button>
+					</div>	
+				</section>
+
+				<section class="genie-alternate">
+					<xsl:call-template name="agent-about" />
+				</section>			
+			</div>
+
+			<div class="modal fade page-modal" id="request-modal" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<button type="button" class="close" id="request-modal-close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<div class="modal-body">
+						<h5 class="modal-title">
+							<xsl:text>Request Info</xsl:text>
+						</h5>
+						<!-- Lead Form -->
+						<form id="form_step1" class="funnel-create-lead">
+							<p>
+								<xsl:text>Tell us how to reach you and we'll get back in touch.</xsl:text>
+							</p>
+							<div class="awu-field col-md-6">
+								<label for="">First Name*</label>
+								<input type="text" name="firstName" class="form-control" />
+							</div>
+							<div class="awu-field col-md-6">
+								<label for="">Last Name*</label>
+								<input type="text" name="lastName" class="form-control" />
+							</div>
+							<div class="awu-field col-md-6">
+								<label for="">Email Address*</label>
+								<input type="text" name="emailAddress" class="form-control" />
+							</div>
+							<div class="awu-field col-md-6">
+								<label for="">Phone Number*</label>
+								<input type="text" name="phoneNumber" class="form-control" />
+							</div>
+							<div class="awu-field col-md-6">
+								<label for="">When are you moving?</label>
+								<input type="date" name="meta[movingDate]" class="form-control" placeholder="MM/DD/YYYY" />
+							</div>
+							<div class="awu-field col-md-6">
+								<label for="">Best way to reach you?</label>
+								<select class="form-control" name="meta[reachMe]">
+									<option value="email and phone">Email and Phone</option>
+									<option value="email">Email</option>
+									<option value="phone">Phone</option>
+								</select>
+							</div>
+							<div class="awu-field col-md-12">
+								<label for="">Your Message</label>
+								<textarea class="form-control" name="note" cols="40" rows="10"></textarea>
+							</div>
+							<div class="col-md-12">
+								<input type="hidden" name="genieTags" value="RequestMoreInfo, OptInContact, ComingSoon" />
+								<input type="hidden" name="formListingAddress" value="{ $listingAddressLine1 }" />
+								<input type="hidden" name="noteFormatter" value="RequestMoreInfoMoving" />
+								<input type="submit" value="Send" class="submit-btn" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade page-modal" id="schedule-modal" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<button type="button" class="close" id="schedule-modal-close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<div class="modal-body">
+						<h5 class="modal-title">
+							<xsl:text>Schedule A Private Showing</xsl:text>
+						</h5>
+						<!-- Lead Form -->
+						<form id="form_step1" class="funnel-create-lead">
+							<p>
+								<xsl:text>This property is coming soon! Tell us how to reach you for a private showing.</xsl:text>
+							</p>
+							<div class="awu-field col-md-6">
+								<label for="">First Name*</label>
+								<input type="text" name="firstName" class="form-control" />
+
+							</div>
+							<div class="awu-field col-md-6">
+								<label for="">Last Name*</label>
+								<input type="text" name="lastName" class="form-control" />
+
+							</div>
+							<div class="awu-field col-md-6">
+								<label for="">Email Address*</label>
+								<input type="text" name="emailAddress" class="form-control" />
+
+							</div>
+							<div class="awu-field col-md-6">
+								<label for="">Phone Number*</label>
+								<input type="text" name="phoneNumber" class="form-control" />
+
+							</div>
+							<div class="awu-field col-md-6">
+								<label for="">When are you available?</label>
+								<input type="date" class="form-control" name="meta[availableDate]" placeholder="MM/DD/YYYY" />
+
+							</div>
+							<div class="awu-field col-md-6">
+								<label for="">Are you available at another time?</label>
+								<input type="date" name="meta[alternativeDate]" class="form-control" placeholder="MM/DD/YYYY" />
+
+							</div>
+							<div class="awu-field col-md-12">
+								<label for="">Your Message</label>
+								<textarea class="form-control" name="note" cols="40" rows="10"></textarea>
+							</div>
+							<div class="col-md-12">
+								<input type="hidden" name="genieTags" value="RequestShowing, OptInContact, ComingSoon" />
+								<input type="hidden" name="formListingAddress" value="{ $listingAddressLine1 }" />
+								<input type="hidden" name="noteFormatter" value="RequestShowing" />
+								<input type="submit" value="Send" class="submit-btn step1-button" id="schedule-modal-btn" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-backdrop fade show" id="backdrop" style="display: none;">
+				<xsl:comment/>
+			</div>
+
+			<xsl:call-template name="default-thank-you-popup" />      
+			
+      <div class="funnel-footer-background">
+				<xsl:call-template name="agent-details" />
+				<xsl:call-template name="copyright" />
+			</div>
+      
+      <xsl:call-template name="mobile-cta-banner" /> 
+
+      <xsl:call-template name="utm-page-default">            
+        <xsl:with-param name="defaultUtmSource" select="$defaultUtmSource" />
+        <xsl:with-param name="defaultUtmCampaign" select="$defaultUtmCampaign" />
+      </xsl:call-template>      
+
+			<script src="{'/_assets/landing-pages/lc-hollywood.js'}">
+				<xsl:comment/>
+			</script>
+
+			<link rel="stylesheet" href="{concat( //output/@siteUrl, '_assets/landing-pages/lc-hollywood.css' )}" />
+			
+      <xsl:call-template name="process-snippet">
+				<xsl:with-param name="snippet" select="//agent[1]/snippetCloseBodyTag" />
+			</xsl:call-template>      
+		</body>
+	</xsl:template>
+</xsl:stylesheet>												
+

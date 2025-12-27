@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PLS XML Data File - 10037 Rebecca Place
+    Version: 1.0
+    Created: 12/25/2025
+    Author: Cursor AI
+    
+    CHANGE LOG:
+    v1.0 - 12/25/2025 - Initial PLS XML with Texas Genie Marketing Settings
+         - Status: Private Listing (statusTypeID=6)
+         - Price: $749,000
+         - Data sourced from: Attom Tax Records, Texas Genie Marketing Profile
+-->
+<renderRoot>
+    <output 
+        apiUrl="https://cloud-api.thegenie.ai/" 
+        siteUrl="https://cloud.thegenie.ai/" 
+        year="2025" 
+        reportDate="1735171200" 
+        sinceDate="1703635200" 
+        renderId="pls-10037-rebecca-place"
+        mapboxKey="pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJjbHZxc2R6NDMwZncxMmlxaW41MzVrdzV2In0.fl0G_yHPzEc_rzAaJ58v6Q" 
+        googleKey="AIzaSyBNRERCDZnk-eRiCsXW4mz6XkWKMlhY2H0" 
+        areaIndex="1" 
+        areaPeriod="12" 
+        userId="9f750957-4d66-4151-bd37-9588d17d4fb8"
+        agentCode="671645"
+        version="1.0.0" 
+        size="landing-page" 
+        theme="compass" 
+        themeHue="light" 
+        propertyType="0" 
+        mapStyle="satellite-v9" 
+        mapIcon="dot" 
+        mapKey="false" 
+        pricePercent="" 
+        listingStatus="all" 
+        listingCount="10" 
+        withBleed="false" 
+        withCrops="false" 
+        blurPrice="false" 
+        hideAVM="true" 
+        requireSignin="false" 
+        isLeadCapture="false" 
+        downloadUrl=""
+        qrUrl=""
+    />
+    <date period="Dec 2024 to Dec 2025" previousPeriod="Dec 2023 to Dec 2024"/>
+    <xslAsset>landing-pages/pls-hollywood</xslAsset>
+    <overrides/>
+    
+    <!-- AGENT DATA - From Texas Genie Marketing Settings -->
+    <agents>
+        <agent>
+            <firstName>Steve</firstName>
+            <lastName>Hundley</lastName>
+            <role>Luxury Specialist</role>
+            <photo>https://imagedelivery.net/C4KZEiOQLExN0SnSaqUP4A/d3ca3df9-5c57-4c5a-7300-8b9bda930d00/public</photo>
+            <personalLogoLight></personalLogoLight>
+            <personalLogoDark></personalLogoDark>
+            <companyLogoLight></companyLogoLight>
+            <companyLogoDark></companyLogoDark>
+            <marketingName>Steve Hundley</marketingName>
+            <marketingTitle>Luxury Specialist</marketingTitle>
+            <marketingEmail>steve@hundley.com</marketingEmail>
+            <marketingAbout><![CDATA[Steve Hundley is a luxury real estate specialist serving the greater San Antonio area. With deep expertise in the Balcones Creek and surrounding Hill Country communities, Steve provides personalized service for buyers and sellers of distinctive properties.]]></marketingAbout>
+            <marketingLicense></marketingLicense>
+            <privacySource>https://www.inspired.re/privacy-policy</privacySource>
+            <privacyPolicy>External Link</privacyPolicy>
+            <disclaimerOptin><![CDATA[We are committed to keeping your e-mail address and phone number confidential. We do not sell, rent, or lease our lists to third parties. We will use your contact information solely to provide timely information about real estate services. If at any time you would like to unsubscribe from receiving future communications, simply let us know.]]></disclaimerOptin>
+            <disclaimerExtra></disclaimerExtra>
+            <disclaimerIDX></disclaimerIDX>
+            <snippetHeadTag></snippetHeadTag>
+            <snippetOpenBodyTag></snippetOpenBodyTag>
+            <snippetCloseBodyTag></snippetCloseBodyTag>
+            <pronoun>singular</pronoun>
+            <timezone>CT</timezone>
+            <mobile>619.507.4404</mobile>
+            <website>www.Inspired.RE</website>
+            <email>steve@hundley.com</email>
+            <agentId>a8436051-333d-4725-b8ce-88bf5262d26a</agentId>
+            <address>
+                <company>Inspired Real Estate</company>
+                <street></street>
+                <address2></address2>
+                <city>San Antonio</city>
+                <state>TX</state>
+                <zip>78254</zip>
+            </address>
+        </agent>
+    </agents>
+    
+    <!-- AREA DATA - Balcones Creek - All Neighborhoods (Area ID 407559) -->
+    <!-- Using Dainelle Scott's userId so widgets pull live data for this area -->
+    <areas>
+        <area>
+            <id>407559</id>
+            <name>Balcones Creek - All Neighborhoods</name>
+            <geojson><![CDATA[]]></geojson>
+            <centerLat>29.6547</centerLat>
+            <centerLng>-98.4936</centerLng>
+            <image/>
+            <listings/>
+            <statistics lookbackMonths="12" propertyType="0"/>
+        </area>
+    </areas>
+    
+    <!-- SINGLE LISTING DATA - 10037 Rebecca Place -->
+    <single>
+        <mlsNumber>PLS-2025-001</mlsNumber>
+        <mlsId>68</mlsId>
+        <price>749000</price>
+        <highPrice></highPrice>
+        <salePrice></salePrice>
+        <listed>12/25/2025</listed>
+        <soldDate></soldDate>
+        <daysOnMarket>0</daysOnMarket>
+        <type>Single Family</type>
+        <listingStatus>Private Listing</listingStatus>
+        <listingAgent>Steve Hundley</listingAgent>
+        <statusTypeID>6</statusTypeID>
+        <description><![CDATA[Welcome to this stunning 2022-built home in the highly sought-after Balcones Creek community. This beautifully maintained 4-bedroom, 3-bathroom residence offers 3,018 square feet of thoughtfully designed living space. The open-concept layout features a gourmet kitchen with modern finishes, perfect for entertaining. Enjoy the Texas Hill Country lifestyle with a spacious backyard ideal for outdoor gatherings. Located in an excellent school district with easy access to local amenities while maintaining a peaceful, neighborhood feel. This private listing represents a rare opportunity to own in one of San Antonio's premier communities.]]></description>
+        <photoPrimary>https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/front-of-home.jpg</photoPrimary>
+        <listingBoundary></listingBoundary>
+        <squareFeet>3018</squareFeet>
+        <lotSize>7405</lotSize>
+        <acres>0.17</acres>
+        <built>2022</built>
+        <virtualTourUrl></virtualTourUrl>
+        <latitude>29.654321</latitude>
+        <longitude>-98.493456</longitude>
+        <city>San Antonio</city>
+        <bedrooms count="4"/>
+        <bathrooms total="3" full="2" half="1"/>
+        <parking spaces="2" garage="2"/>
+        <address>
+            <streetNumber>10037</streetNumber>
+            <unitNumber></unitNumber>
+            <street>10037 Rebecca Place</street>
+            <city>San Antonio</city>
+            <state>TX</state>
+            <zip>78254</zip>
+            <streetName>Rebecca Place</streetName>
+        </address>
+        <dimensions/>
+        <features/>
+        <images>
+            <image src="https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/front-of-home.jpg"/>
+            <image src="https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/kitchen-1.jpg"/>
+            <image src="https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/kitchen-2.jpg"/>
+            <image src="https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/backyard-1.jpg"/>
+            <image src="https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/backyard-2.jpg"/>
+        </images>
+    </single>
+    
+    <mlsDisplay><![CDATA[This is a private listing presented by Inspired Real Estate. Property information is deemed reliable but not guaranteed. Contact the listing agent for the most current information.]]></mlsDisplay>
+</renderRoot>
+
