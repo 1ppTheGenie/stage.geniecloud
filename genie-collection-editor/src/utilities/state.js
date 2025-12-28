@@ -87,16 +87,19 @@ export const app = createRoot(() => {
 
 (async () => {
 	let result = await getCollections();
-	app.setStore("allCollections", result.collections);
+	app.setStore("allCollections", result.collections || []);
 
 	result = await getAssets();
 
 	const excludes = ["cush", "funn", "embe"];
-	Object.keys(result.assets).map(asset => {
-		if (excludes.includes(asset.substring(0, 4))) {
-			delete result.assets[asset];
-		}
-	});
-
-	app.setStore("allAssets", result.assets);
+	if (result && result.assets) {
+		Object.keys(result.assets).map(asset => {
+			if (excludes.includes(asset.substring(0, 4))) {
+				delete result.assets[asset];
+			}
+		});
+		app.setStore("allAssets", result.assets);
+	} else {
+		app.setStore("allAssets", {});
+	}
 })();
