@@ -7,7 +7,7 @@ import path from "path";
 
 const __BASE__ =
 	process.env.NODE_ENV === "production"
-		? "/genie-tools/collection-editor/"
+		? "/genie-tools/monitor/"  // FIXED: Was incorrectly set to /collection-editor/
 		: "";
 const __BUILD_VERSION__ = process.env.npm_package_version;
 
@@ -17,8 +17,8 @@ const appendVersion = () => {
 		transformIndexHtml(html) {
 			["js", "css"].forEach(suffix => {
 				html = html.replace(
-					`/genie-tools/collection-editor/index.${suffix}`,
-					`/genie-tools/collection-editor/index.${suffix}?v=${__BUILD_VERSION__}`
+					`/genie-tools/monitor/index.${suffix}`,  // FIXED: Was /collection-editor/
+					`/genie-tools/monitor/index.${suffix}?v=${__BUILD_VERSION__}`
 				);
 			});
 
@@ -39,7 +39,7 @@ export default defineConfig({
 	},
 	base: __BASE__,
 	build: {
-		outDir: `../public/genie-tools/collection-editor/`,
+		outDir: `../public/genie-tools/monitor/`,  // FIXED: Was overwriting collection-editor
 		sourcemap: true,
 		minify: false,
 		target: "esnext",

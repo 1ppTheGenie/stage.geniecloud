@@ -58,6 +58,33 @@
             margin-top: 10px;
         }
         
+        /* NEW: Highlight badge for new items */
+        .badge-new {
+            background: #e74c3c !important;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .type-badge.type-figma {
+            background: #9b59b6;
+            color: white;
+        }
+        
+        .type-badge.type-contract {
+            background: #3498db;
+            color: white;
+        }
+        
+        .type-badge.type-admin {
+            background: #e67e22;
+            color: white;
+        }
+        
         .ecosystem-map {
             background: #ecf0f1;
             border: 1px solid #bdc3c7;
@@ -436,7 +463,7 @@
             </div>
             <h1 style="margin-top: 0;">TheGenie.ai Project Universe</h1>
             <p class="subtitle">Master Dashboard for Title Genie, Paisley 2.0, Pre-Listing Command & Engagement Center</p>
-            <p class="updated">Last Updated: December 26, 2025 | Version 2.0</p>
+            <p class="updated">Last Updated: December 28, 2025 | Version 3.0 - GenieCloud Asset Management</p>
         </div>
         
         <!-- START HERE - INTRODUCTION -->
@@ -680,6 +707,117 @@
                     </tr>
                 </tbody>
             </table>
+            
+            <!-- NEW: GENIECLOUD MASTER DOCUMENTATION -->
+            <h4 style="color: #e74c3c; margin: 25px 0 15px 0;">📚 GenieCloud Master Documentation <span class="badge badge-new" style="font-size: 11px; padding: 3px 8px; border-radius: 4px;">NEW 12/28</span></h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/CONTRACT_PLS_to_GenieCloud_v4.md" class="file-link" target="_blank">CONTRACT_PLS_to_GenieCloud_v4.md</a></td>
+                        <td><span class="type-badge type-contract">CONTRACT</span></td>
+                        <td><strong>THE BRIDGE DOC</strong> - PLS↔GenieCloud data contract, XML spec, asset selection, Collection Editor integration</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/_SourceCode/stage.geniecloud/GENIECLOUD_ASSET_DEVELOPMENT_v1.md" class="file-link" target="_blank">GENIECLOUD_ASSET_DEVELOPMENT_v1.md</a></td>
+                        <td><span class="type-badge type-spec">SPEC</span></td>
+                        <td>Master spec for GenieCloud asset development - rendering pipeline, themes, XSL templates</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/CUSTOMER_ASSET_CONFIGURATOR_SPEC_v1.html" class="file-link" target="_blank">CUSTOMER_ASSET_CONFIGURATOR_SPEC_v1.html</a></td>
+                        <td><span class="type-badge type-figma">FIGMA</span></td>
+                        <td><strong>NEW!</strong> Customer Configurator vision + Figma walkthrough - Theme/Collection/Service management UI</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/COLLECTION_EDITOR_ADMIN_INTEGRATION_v1.md" class="file-link" target="_blank">COLLECTION_EDITOR_ADMIN_INTEGRATION_v1.md</a></td>
+                        <td><span class="type-badge type-admin">ADMIN</span></td>
+                        <td>4-phase iteration path to integrate Collection Editor into Genie Dashboard</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/COLLECTION_MANAGER_ANALYSIS_v1.md" class="file-link" target="_blank">COLLECTION_MANAGER_ANALYSIS_v1.md</a></td>
+                        <td><span class="type-badge type-discovery">ANALYSIS</span></td>
+                        <td>Gap analysis of existing Collection Editor - what works, what's broken, what's missing</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/MASTER_PRODUCTION_REFERENCE_INDEX_v1.md" class="file-link" target="_blank">MASTER_PRODUCTION_REFERENCE_INDEX_v1.md</a></td>
+                        <td><span class="type-badge type-data">REFERENCE</span></td>
+                        <td>Index of all live production examples - Dainelle Scott's kit, 10037 Rebecca, asset URLs</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- NEW: ASSET MANAGEMENT TOOLS -->
+            <h4 style="color: #9b59b6; margin: 25px 0 15px 0;">🎨 Asset Management Tools</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>URL</th>
+                        <th>Status</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Collection Editor</strong></td>
+                        <td><a href="https://main.d2jn91nws05uwp.amplifyapp.com/collections" class="file-link" target="_blank">Amplify App</a></td>
+                        <td><span class="type-badge" style="background: #f39c12;">PARTIAL</span></td>
+                        <td>John's SolidJS tool - lists/views collections. Save button exists but untested. No auth.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Theme Editor</strong></td>
+                        <td><code>genie-theme-editor/</code></td>
+                        <td><span class="type-badge" style="background: #95a5a6;">UNVERIFIED</span></td>
+                        <td>May exist in stage.geniecloud - needs investigation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer Configurator</strong></td>
+                        <td><em>Proposed</em></td>
+                        <td><span class="type-badge" style="background: #e74c3c;">NOT BUILT</span></td>
+                        <td>The wrapper UI that combines Theme Editor + Collection Editor + Customer lookup</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- NEW: ASSET SELECTION SYSTEM -->
+            <h4 style="color: #3498db; margin: 25px 0 15px 0;">🔗 Asset Selection System (How Collections Are Chosen)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Table/Location</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>HubAssetSetting</strong></td>
+                        <td><code>FarmGenie.dbo</code></td>
+                        <td>Master asset definitions - links ID to folder/stylesheet or collection name</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HubAssetSettingOverride</strong></td>
+                        <td><code>FarmGenie.dbo</code></td>
+                        <td>User/Role-specific overrides - "User X gets collection Y instead of default"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PropertyCastWorkflowAction</strong></td>
+                        <td><code>FarmGenie.dbo</code></td>
+                        <td>ConfigurationJson contains AssetMap linking StatusId → HubAssetSettingId</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Collection JSON Files</strong></td>
+                        <td><code>S3: genie-tools/collections/*.json</code></td>
+                        <td>Actual collection definitions - sections, assets, qrUrl links to landing pages</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         
         <!-- QUICK LINKS -->
@@ -751,6 +889,94 @@
                         <td><a href="https://cloud.thegenie.ai/genie-pages/pls-10037-rebecca-place/pls-hollywood/index.html" class="file-link" target="_blank">10037 Rebecca Place (LIVE)</a></td>
                         <td><span class="type-badge type-live">LIVE</span></td>
                         <td>Production page - Boerne, TX 78006 - Private Listing MVP</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- NEW: PLS MASTER DOCUMENTATION -->
+            <h4 style="color: #667eea; margin: 25px 0 15px 0;">📚 PLS Master Documentation <span class="badge badge-new" style="font-size: 11px; padding: 3px 8px; border-radius: 4px;">NEW 12/28</span></h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_MASTER_SPECIFICATION_v3.md" class="file-link" target="_blank">PLS_MASTER_SPECIFICATION_v3.md</a></td>
+                        <td><span class="type-badge type-spec">SPEC</span></td>
+                        <td><strong>THE PLS BIBLE</strong> - Complete spec with database schemas, role/permissions, workflow diagrams</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/CONTRACT_PLS_to_GenieCloud_v4.md" class="file-link" target="_blank">CONTRACT_PLS_to_GenieCloud_v4.md</a></td>
+                        <td><span class="type-badge type-contract">CONTRACT</span></td>
+                        <td><strong>BRIDGE DOC</strong> - PLS↔GenieCloud interface, XML format, API endpoints, collection system</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_WIREFRAMES_AND_SCHEMA_v1.html" class="file-link" target="_blank">PLS_WIREFRAMES_AND_SCHEMA_v1.html</a></td>
+                        <td><span class="type-badge type-figma">FIGMA</span></td>
+                        <td>Interactive wireframes for PLS workflow + visual schema diagram</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/CUSTOMER_ASSET_CONFIGURATOR_SPEC_v1.html" class="file-link" target="_blank">CUSTOMER_ASSET_CONFIGURATOR_SPEC_v1.html</a></td>
+                        <td><span class="type-badge type-figma">FIGMA</span></td>
+                        <td><strong>NEW!</strong> Admin UI for theme/collection/service management per customer</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_Hollywood_Workspace_Memory_Log_v1.md" class="file-link" target="_blank">PLS_Hollywood_Workspace_Memory_Log_v1.md</a></td>
+                        <td><span class="type-badge type-memory">MEMORY</span></td>
+                        <td>MVP build session - technical details, spoofing, theme issues, API endpoints</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/SOP_PLS_Hollywood_MVP_Creation_v1.md" class="file-link" target="_blank">SOP_PLS_Hollywood_MVP_Creation_v1.md</a></td>
+                        <td><span class="type-badge type-sop">SOP</span></td>
+                        <td>Step-by-step guide to manually create a PLS page</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- PLS DATABASE STATUS -->
+            <h4 style="color: #2ecc71; margin: 25px 0 15px 0;">🗄️ PLS Database Status</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>StatusTypeID 14 (Coming Soon)</td>
+                        <td><span style="color: #2ecc71;">✅ EXISTS</span></td>
+                        <td>Already in MlsListing.dbo.StatusType</td>
+                    </tr>
+                    <tr>
+                        <td>StatusTypeID 6 (Private Listing)</td>
+                        <td><span style="color: #e74c3c;">❌ NEEDS INSERT</span></td>
+                        <td>SQL ready in PLS_MASTER_SPECIFICATION_v3</td>
+                    </tr>
+                    <tr>
+                        <td>MlsID 999 (PLS)</td>
+                        <td><span style="color: #e74c3c;">❌ NEEDS INSERT</span></td>
+                        <td>New MLS source for Paisley Listing Service</td>
+                    </tr>
+                    <tr>
+                        <td>PropertyCastTypeId 4 (PLS)</td>
+                        <td><span style="color: #e74c3c;">❌ NEEDS INSERT</span></td>
+                        <td>New workflow type for PLS</td>
+                    </tr>
+                    <tr>
+                        <td>PlsListingOwnership table</td>
+                        <td><span style="color: #f39c12;">⏳ PROPOSED</span></td>
+                        <td>Links AspNetUserId to PLS listings</td>
+                    </tr>
+                    <tr>
+                        <td>PlsNumberSequence table</td>
+                        <td><span style="color: #f39c12;">⏳ PROPOSED</span></td>
+                        <td>Generates PLS-YYYY-NNNNN identifiers</td>
                     </tr>
                 </tbody>
             </table>
@@ -1900,7 +2126,7 @@ NOW FOR MY REQUEST:
         
         <div class="footer">
             <p>TheGenie.ai Project Universe Dashboard v1.5 (Knowledge Vault + Distilled Memory Logs)</p>
-            <p>Created: December 25, 2025 | Last Updated: December 26, 2025 | Location: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html</p>
+            <p>Created: December 25, 2025 | Last Updated: December 28, 2025 | Location: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html</p>
             <p style="margin-top: 10px;">💡 <strong>Tip:</strong> Open this file in Chrome for best experience. Links open in new tabs.</p>
         </div>
     </div>
