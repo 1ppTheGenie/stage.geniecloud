@@ -316,12 +316,14 @@ export const setRenderDefaults = async params => {
                 params.mlsId
             );
 
-            if (!params.areaId && listing.preferedAreaId) {
-                params.areaId = listing.preferedAreaId;
-            }
+            if (listing) {
+                if (!params.areaId && listing.preferedAreaId) {
+                    params.areaId = listing.preferedAreaId;
+                }
 
-            if (!params.propertyType) {
-                params.propertyType = parseInt(listing.propertyTypeID ?? 0);
+                if (!params.propertyType) {
+                    params.propertyType = parseInt(listing.propertyTypeID ?? 0);
+                }
             }
         }
     }
