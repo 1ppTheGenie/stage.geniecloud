@@ -1119,6 +1119,81 @@ const processListing = async (params, agentTimezone) => {
         
         // Always add images array (even if empty, though we now ensure it has at least fallback)
         single.push({ _name: 'images', _content: images });
+    } else {
+        // Handle PLS listings where getListing() returns null
+        // Photos should be passed in params.listingPhotos from the payload
+        let primaryPhoto = null;
+        
+        // Helper function to validate and normalize image URL
+        const addValidImage = (url) => {
+            if (!url || typeof url !== 'string' || url.trim() === '') {
+                return null; // Skip invalid URLs
+            }
+            
+            let normalizedUrl = url.trim();
+            
+            // Fix protocol-relative URLs
+            if (normalizedUrl.substring(0, 2) === '//') {
+                normalizedUrl = `https:${normalizedUrl}`;
+            }
+            
+            // Validate URL format
+            try {
+                new URL(normalizedUrl);
+                return normalizedUrl;
+            } catch (e) {
+                console.warn('Invalid image URL skipped:', normalizedUrl);
+                return null;
+            }
+        };
+        
+        const images = [];
+        
+        // Process photos from params.listingPhotos (passed in payload)
+        if (params.listingPhotos && Array.isArray(params.listingPhotos) && params.listingPhotos.length > 0) {
+            params.listingPhotos.forEach((src, index) => {
+                const normalizedUrl = addValidImage(src);
+                if (normalizedUrl) {
+                    images.push({
+                        _name: 'image',
+                        _attrs: { src: normalizedUrl }
+                    });
+                    // Set first valid photo as primary
+                    if (index === 0) {
+                        primaryPhoto = normalizedUrl;
+                    }
+                }
+            });
+        }
+        
+        // If no valid images found, use fallback placeholder
+        const fallbackImageUrl = 'https://genie-cloud.s3.us-west-1.amazonaws.com/_assets/_img/picture-pending.jpg';
+        if (images.length === 0) {
+            images.push({
+                _name: 'image',
+                _attrs: { src: fallbackImageUrl }
+            });
+            primaryPhoto = fallbackImageUrl;
+        } else if (!primaryPhoto && images.length > 0) {
+            primaryPhoto = images[0]._attrs.src;
+        }
+        
+        // Build minimal single array for PLS listings
+        single = [
+            { mlsNumber: params.mlsNumber ?? '' },
+            { mlsId: params.mlsId ?? '' },
+            { photoPrimary: primaryPhoto },
+            { _name: 'images', _content: images }
+        ];
+        
+        // Add other params if available
+        if (params.price) single.push({ price: params.price });
+        if (params.propertyType) single.push({ type: params.propertyType });
+        if (params.listingStatus) single.push({ listingStatus: params.listingStatus });
+        if (params.description) single.push({ description: params.description });
+        if (params.city) single.push({ city: params.city });
+        if (params.latitude) single.push({ latitude: params.latitude });
+        if (params.longitude) single.push({ longitude: params.longitude });
     }
 
     console.log('single mls', params.mlsNumber, single);
