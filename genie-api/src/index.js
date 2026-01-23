@@ -976,8 +976,10 @@ const renderKeyParams = async params => {
                 params.mlsId
             );
 
-            if (!params.areaId && listing.preferedAreaId) {
-                params.areaId = listing.preferedAreaId;
+            if (listing) {
+                if (!params.areaId && listing.preferedAreaId) {
+                    params.areaId = listing.preferedAreaId;
+                }
             }
         }
 
@@ -992,8 +994,13 @@ const renderKeyParams = async params => {
             }
         }
 
-        propertyType = params.propertyType === 9 ? 1 : (params.propertyType ?? (listing.propertyType === 9 ? 1 : listing.propertyType));
-        listingStatus = params.listingStatus ?? listing.listingStatus ?? '';
+        if (listing) {
+            propertyType = params.propertyType === 9 ? 1 : (params.propertyType ?? (listing.propertyType === 9 ? 1 : listing.propertyType));
+            listingStatus = params.listingStatus ?? listing.listingStatus ?? '';
+        } else {
+            propertyType = params.propertyType === 9 ? 1 : (params.propertyType ?? 0);
+            listingStatus = params.listingStatus ?? '';
+        }
     }
 
     const area = await areaName(params.userId, areaId);
