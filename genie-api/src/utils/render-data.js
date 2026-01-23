@@ -27,13 +27,16 @@ export const getRenderJSON = async params => {
             ? await listingPropertyTypeId(params)
             : 0;
 
+        // If listingPropertyTypeId returns null (e.g., PLS listing not found), use 0 as default
+        const finalPropertyType = propertyTypeId ?? 0;
+
         console.log(
-            `Forced propertyType switch from ${params.propertyType} to ${propertyTypeId}.`
+            `Forced propertyType switch from ${params.propertyType} to ${finalPropertyType}.`
         );
         warnings.push({
-            warning: `Forced propertyType switch from ${params.propertyType} to ${propertyTypeId}.`
+            warning: `Forced propertyType switch from ${params.propertyType} to ${finalPropertyType}.`
         });
-        params.propertyType = propertyTypeId;
+        params.propertyType = finalPropertyType;
     }
 
     let renderSettings = filteredMerge(defaultRenderSettings, params);
@@ -800,6 +803,11 @@ const listingPropertyTypeId = async params => {
         params.mlsNumber,
         params.mlsId
     );
+
+    // Handle null listing (e.g., PLS listings that don't exist in database)
+    if (!listing) {
+        return null;
+    }
 
     return listing.propertyTypeID;
 };
