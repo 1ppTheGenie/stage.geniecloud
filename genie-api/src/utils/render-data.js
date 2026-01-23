@@ -1085,12 +1085,26 @@ const processListing = async (params, agentTimezone) => {
         }
         
         // If no valid images found, use fallback placeholder
+        const fallbackImageUrl = 'https://genie-cloud.s3.us-west-1.amazonaws.com/_assets/_img/picture-pending.jpg';
         if (images.length === 0) {
-            const fallbackImageUrl = 'https://genie-cloud.s3.us-west-1.amazonaws.com/_assets/_img/picture-pending.jpg';
             images.push({
                 _name: 'image',
                 _attrs: { src: fallbackImageUrl }
             });
+        }
+        
+        // CRITICAL: Ensure photoPrimary always has a valid URL
+        // If primaryPhoto was null/empty, update it to use the first image from images array
+        // This ensures templates using //single/photoPrimary always get a valid image URL
+        // (either the actual primary photo or the fallback placeholder)
+        if (!primaryPhoto && images.length > 0) {
+            primaryPhoto = images[0]._attrs.src;
+            // Update the photoPrimary in the single array (it was set earlier at line 861)
+            // The single array contains objects like { photoPrimary: value }, so we need to find and update it
+            const photoPrimaryIndex = single.findIndex(item => item.hasOwnProperty('photoPrimary'));
+            if (photoPrimaryIndex !== -1) {
+                single[photoPrimaryIndex].photoPrimary = primaryPhoto;
+            }
         }
         
         // Always add images array (even if empty, though we now ensure it has at least fallback)
