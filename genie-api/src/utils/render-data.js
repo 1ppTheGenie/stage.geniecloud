@@ -1038,16 +1038,63 @@ const processListing = async (params, agentTimezone) => {
             single.push({ _name: 'features', _content: features });
 
         const images = [];
-        listing?.listingPhotos.forEach(src => {
-            if (src.substring(0, 2) == '//') {
-                src = `https:${src}`;
+        
+        // Helper function to validate and normalize image URL
+        const addValidImage = (url) => {
+            if (!url || typeof url !== 'string' || url.trim() === '') {
+                return false; // Skip invalid URLs
             }
+            
+            let normalizedUrl = url.trim();
+            
+            // Fix protocol-relative URLs
+            if (normalizedUrl.substring(0, 2) === '//') {
+                normalizedUrl = `https:${normalizedUrl}`;
+            }
+            
+            // Validate URL format
+            try {
+                new URL(normalizedUrl);
+                images.push({
+                    _name: 'image',
+                    _attrs: { src: normalizedUrl }
+                });
+                return true;
+            } catch (e) {
+                console.warn('Invalid image URL skipped:', normalizedUrl);
+                return false;
+            }
+        };
+        
+        // CRITICAL: Add primaryPhoto FIRST to ensure it's at index 0 in the images array
+        // This ensures XSLT templates can find it at //single/images/image[1]/@src
+        // The hero section uses //single/photoPrimary directly, but individual assets
+        // like single-listing-05.png use the images array
+        if (primaryPhoto) {
+            addValidImage(primaryPhoto);
+        }
+        
+        // Then add all other valid photos from listingPhotos array (skip duplicates)
+        if (listing.listingPhotos && Array.isArray(listing.listingPhotos)) {
+            listing.listingPhotos.forEach(src => {
+                // Skip if this is the same as primaryPhoto (already added)
+                if (src && src.trim() !== '' && src.trim() !== primaryPhoto?.trim()) {
+                    addValidImage(src);
+                }
+            });
+        }
+        
+        // If no valid images found, use fallback placeholder
+        if (images.length === 0) {
+            const fallbackImageUrl = 'https://genie-cloud.s3.us-west-1.amazonaws.com/_assets/_img/picture-pending.jpg';
             images.push({
                 _name: 'image',
-                _attrs: { src }
+                _attrs: { src: fallbackImageUrl }
             });
-        });
-        images.length && single.push({ _name: 'images', _content: images });
+        }
+        
+        // Always add images array (even if empty, though we now ensure it has at least fallback)
+        single.push({ _name: 'images', _content: images });
     }
 
     console.log('single mls', params.mlsNumber, single);
