@@ -365,3 +365,46 @@ svg#genie-wrapper .ct-grid {
 	font-size: inherit;
 	line-height: inherit;
 }
+
+/* ============================
+   Map Explorer — Draw Area visibility fixes
+   Ensure draw/toolbar/indicator and save/cancel labels use visible text color
+   Works for both Mapbox GL Draw and Leaflet.Draw toolbars
+   ============================ */
+
+/* Mapbox GL controls and Draw buttons/indicators */
+.mapboxgl-ctrl,
+.mapboxgl-ctrl button,
+.mapboxgl-ctrl-group button,
+.mapbox-gl-draw_ctrl-draw-btn,
+.mapbox-gl-draw_info,
+.mapbox-gl-draw_actions button,
+.mapbox-gl-draw_actions a {
+	color: #222 !important;
+	fill: currentColor !important;
+}
+
+/* Leaflet controls and Leaflet.Draw actions */
+.leaflet-bar a,
+.leaflet-bar a:hover,
+.leaflet-control a,
+.leaflet-draw-toolbar a,
+.leaflet-draw-toolbar a:hover,
+.leaflet-draw-actions li a,
+.leaflet-draw-actions li a:hover {
+	color: #222 !important;
+	fill: currentColor !important;
+}
+
+/* Save/Cancel explicit aliases when present */
+.leaflet-draw-actions .leaflet-draw-actions-save,
+.leaflet-draw-actions .leaflet-draw-actions-cancel {
+	color: #222 !important;
+}
+
+/* Optional: tighten default button contrast on very light chrome */
+.mapboxgl-ctrl button,
+.mapboxgl-ctrl-group button,
+.leaflet-bar a {
+	border-color: rgba(0, 0, 0, 0.15);
+}
